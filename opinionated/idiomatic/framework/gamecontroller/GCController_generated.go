@@ -43,8 +43,8 @@ func (x *Controller) WithControllerPausedHandler(controllerPausedHandler func(*r
 }
 
 // WithPlayerIndex sets the playerIndex property and returns the receiver for chaining.
-func (x *Controller) WithPlayerIndex(playerIndex raw.GCControllerPlayerIndex) *Controller {
-	x.inner.SetPlayerIndex(playerIndex)
+func (x *Controller) WithPlayerIndex(playerIndex GCControllerPlayerIndex) *Controller {
+	x.inner.SetPlayerIndex(raw.GCControllerPlayerIndex(playerIndex))
 	return x
 }
 
@@ -82,13 +82,13 @@ func (x *Controller) IsAttachedToDevice() bool {
 }
 
 // PlayerIndex calls the underlying PlayerIndex.
-func (x *Controller) PlayerIndex() raw.GCControllerPlayerIndex {
-	return x.inner.PlayerIndex()
+func (x *Controller) PlayerIndex() GCControllerPlayerIndex {
+	return GCControllerPlayerIndex(x.inner.PlayerIndex())
 }
 
 // SetPlayerIndex calls the underlying SetPlayerIndex.
-func (x *Controller) SetPlayerIndex(playerIndex raw.GCControllerPlayerIndex) {
-	x.inner.SetPlayerIndex(playerIndex)
+func (x *Controller) SetPlayerIndex(playerIndex GCControllerPlayerIndex) {
+	x.inner.SetPlayerIndex(raw.GCControllerPlayerIndex(playerIndex))
 }
 
 // Input calls the underlying Input.
@@ -190,12 +190,12 @@ func (x *Controller) IsSnapshot() bool {
 type Controllerable interface {
 	Unwrap() *raw.GCController
 	WithControllerPausedHandler(controllerPausedHandler func(*raw.GCController)) *Controller
-	WithPlayerIndex(playerIndex raw.GCControllerPlayerIndex) *Controller
+	WithPlayerIndex(playerIndex GCControllerPlayerIndex) *Controller
 	ControllerPausedHandler() objc.Block
 	SetControllerPausedHandler(ctx context.Context) (*Controller, error)
 	IsAttachedToDevice() bool
-	PlayerIndex() raw.GCControllerPlayerIndex
-	SetPlayerIndex(playerIndex raw.GCControllerPlayerIndex)
+	PlayerIndex() GCControllerPlayerIndex
+	SetPlayerIndex(playerIndex GCControllerPlayerIndex)
 	Input() *ControllerLiveInput
 	Battery() *DeviceBattery
 	PhysicalInputProfile() *PhysicalInputProfile

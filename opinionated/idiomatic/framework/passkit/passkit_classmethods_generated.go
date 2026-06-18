@@ -49,13 +49,13 @@ func PreviewWithPassThumbnailLocalizedDescription(passThumbnail unsafe.Pointer, 
 }
 
 // ConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion blocks until the operation completes or ctx is cancelled.
-func ConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion(ctx context.Context, passMetadata *foundation.NSArray[*raw.PKShareablePassMetadata], provisioningPolicyIdentifier string, action raw.PKAddShareablePassConfigurationPrimaryAction) (*AddShareablePassConfiguration, error) {
+func ConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion(ctx context.Context, passMetadata *foundation.NSArray[*raw.PKShareablePassMetadata], provisioningPolicyIdentifier string, action PKAddShareablePassConfigurationPrimaryAction) (*AddShareablePassConfiguration, error) {
 	type _result struct {
 		val *AddShareablePassConfiguration
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.PKAddShareablePassConfigurationConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion(passMetadata, foundation.NSStringStringWithUTF8String(provisioningPolicyIdentifier), action, func(_p0 *raw.PKAddShareablePassConfiguration, _p1 unsafe.Pointer) {
+	raw.PKAddShareablePassConfigurationConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionCompletion(passMetadata, foundation.NSStringStringWithUTF8String(provisioningPolicyIdentifier), raw.PKAddShareablePassConfigurationPrimaryAction(action), func(_p0 *raw.PKAddShareablePassConfiguration, _p1 unsafe.Pointer) {
 		var _o _result
 		if uintptr(_p1) != 0 {
 			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
@@ -75,13 +75,13 @@ func ConfigurationForPassMetadataProvisioningPolicyIdentifierPrimaryActionComple
 }
 
 // ConfigurationForPassMetadataPrimaryActionCompletion blocks until the operation completes or ctx is cancelled.
-func ConfigurationForPassMetadataPrimaryActionCompletion(ctx context.Context, passMetadata *foundation.NSArray[*raw.PKShareablePassMetadata], action raw.PKAddShareablePassConfigurationPrimaryAction) (*AddShareablePassConfiguration, error) {
+func ConfigurationForPassMetadataPrimaryActionCompletion(ctx context.Context, passMetadata *foundation.NSArray[*raw.PKShareablePassMetadata], action PKAddShareablePassConfigurationPrimaryAction) (*AddShareablePassConfiguration, error) {
 	type _result struct {
 		val *AddShareablePassConfiguration
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.PKAddShareablePassConfigurationConfigurationForPassMetadataPrimaryActionCompletion(passMetadata, action, func(_p0 *raw.PKAddShareablePassConfiguration, _p1 unsafe.Pointer) {
+	raw.PKAddShareablePassConfigurationConfigurationForPassMetadataPrimaryActionCompletion(passMetadata, raw.PKAddShareablePassConfigurationPrimaryAction(action), func(_p0 *raw.PKAddShareablePassConfiguration, _p1 unsafe.Pointer) {
 		var _o _result
 		if uintptr(_p1) != 0 {
 			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
@@ -116,8 +116,10 @@ func IsPassLibraryAvailable() bool {
 }
 
 // RequestAutomaticPassPresentationSuppressionWithResponseHandler calls the underlying PKPassLibraryRequestAutomaticPassPresentationSuppressionWithResponseHandler.
-func RequestAutomaticPassPresentationSuppressionWithResponseHandler(responseHandler func(raw.PKAutomaticPassPresentationSuppressionResult)) uint {
-	return raw.PKPassLibraryRequestAutomaticPassPresentationSuppressionWithResponseHandler(responseHandler)
+func RequestAutomaticPassPresentationSuppressionWithResponseHandler(responseHandler func(PKAutomaticPassPresentationSuppressionResult)) uint {
+	return raw.PKPassLibraryRequestAutomaticPassPresentationSuppressionWithResponseHandler(func(_a0 raw.PKAutomaticPassPresentationSuppressionResult) {
+		responseHandler(PKAutomaticPassPresentationSuppressionResult(_a0))
+	})
 }
 
 // EndAutomaticPassPresentationSuppressionWithRequestToken calls the underlying PKPassLibraryEndAutomaticPassPresentationSuppressionWithRequestToken.
@@ -146,8 +148,8 @@ func CanMakePaymentsUsingNetworks(supportedNetworks *foundation.NSArray[*foundat
 }
 
 // CanMakePaymentsUsingNetworksCapabilities calls the underlying PKPaymentAuthorizationControllerCanMakePaymentsUsingNetworksCapabilities.
-func CanMakePaymentsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilties raw.PKMerchantCapability) bool {
-	return raw.PKPaymentAuthorizationControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks, capabilties)
+func CanMakePaymentsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilties PKMerchantCapability) bool {
+	return raw.PKPaymentAuthorizationControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks, raw.PKMerchantCapability(capabilties))
 }
 
 // SupportsDisbursements calls the underlying PKPaymentAuthorizationControllerSupportsDisbursements.
@@ -161,8 +163,8 @@ func SupportsDisbursementsUsingNetworks(supportedNetworks *foundation.NSArray[*f
 }
 
 // SupportsDisbursementsUsingNetworksCapabilities calls the underlying PKPaymentAuthorizationControllerSupportsDisbursementsUsingNetworksCapabilities.
-func SupportsDisbursementsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilties raw.PKMerchantCapability) bool {
-	return raw.PKPaymentAuthorizationControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks, capabilties)
+func SupportsDisbursementsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilties PKMerchantCapability) bool {
+	return raw.PKPaymentAuthorizationControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks, raw.PKMerchantCapability(capabilties))
 }
 
 // PKPaymentAuthorizationViewControllerCanMakePayments calls the underlying PKPaymentAuthorizationViewControllerCanMakePayments.
@@ -176,8 +178,8 @@ func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworks(supportedN
 }
 
 // PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities calls the underlying PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities.
-func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilties raw.PKMerchantCapability) bool {
-	return raw.PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks, capabilties)
+func PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilties PKMerchantCapability) bool {
+	return raw.PKPaymentAuthorizationViewControllerCanMakePaymentsUsingNetworksCapabilities(supportedNetworks, raw.PKMerchantCapability(capabilties))
 }
 
 // PKPaymentAuthorizationViewControllerSupportsDisbursements calls the underlying PKPaymentAuthorizationViewControllerSupportsDisbursements.
@@ -191,13 +193,13 @@ func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworks(supp
 }
 
 // PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities calls the underlying PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities.
-func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilities raw.PKMerchantCapability) bool {
-	return raw.PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks, capabilities)
+func PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks *foundation.NSArray[*foundation.NSString], capabilities PKMerchantCapability) bool {
+	return raw.PKPaymentAuthorizationViewControllerSupportsDisbursementsUsingNetworksCapabilities(supportedNetworks, raw.PKMerchantCapability(capabilities))
 }
 
 // ButtonWithTypeStyle calls the underlying PKPaymentButtonButtonWithTypeStyle.
-func ButtonWithTypeStyle(buttonType raw.PKPaymentButtonType, buttonStyle raw.PKPaymentButtonStyle) *PaymentButton {
-	_r := raw.PKPaymentButtonButtonWithTypeStyle(buttonType, buttonStyle)
+func ButtonWithTypeStyle(buttonType PKPaymentButtonType, buttonStyle PKPaymentButtonStyle) *PaymentButton {
+	_r := raw.PKPaymentButtonButtonWithTypeStyle(raw.PKPaymentButtonType(buttonType), raw.PKPaymentButtonStyle(buttonStyle))
 	if _r == nil {
 		return nil
 	}
@@ -255,8 +257,8 @@ func SummaryItemWithLabelAmount(label string, amount *foundation.NSDecimalNumber
 }
 
 // SummaryItemWithLabelAmountType calls the underlying PKPaymentSummaryItemSummaryItemWithLabelAmountType.
-func SummaryItemWithLabelAmountType(label string, amount *foundation.NSDecimalNumber, type_ raw.PKPaymentSummaryItemType) *PaymentSummaryItem {
-	_r := raw.PKPaymentSummaryItemSummaryItemWithLabelAmountType(foundation.NSStringStringWithUTF8String(label), amount, type_)
+func SummaryItemWithLabelAmountType(label string, amount *foundation.NSDecimalNumber, type_ PKPaymentSummaryItemType) *PaymentSummaryItem {
+	_r := raw.PKPaymentSummaryItemSummaryItemWithLabelAmountType(foundation.NSStringStringWithUTF8String(label), amount, raw.PKPaymentSummaryItemType(type_))
 	if _r == nil {
 		return nil
 	}

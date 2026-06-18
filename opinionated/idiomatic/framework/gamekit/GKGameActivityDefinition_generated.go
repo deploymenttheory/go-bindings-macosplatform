@@ -159,13 +159,13 @@ func (x *GameActivityDefinition) SupportsUnlimitedPlayers() bool {
 }
 
 // PlayStyle calls the underlying PlayStyle.
-func (x *GameActivityDefinition) PlayStyle() raw.GKGameActivityPlayStyle {
-	return x.inner.PlayStyle()
+func (x *GameActivityDefinition) PlayStyle() GKGameActivityPlayStyle {
+	return GKGameActivityPlayStyle(x.inner.PlayStyle())
 }
 
 // ReleaseState calls the underlying ReleaseState.
-func (x *GameActivityDefinition) ReleaseState() raw.GKReleaseState {
-	return x.inner.ReleaseState()
+func (x *GameActivityDefinition) ReleaseState() GKReleaseState {
+	return GKReleaseState(x.inner.ReleaseState())
 }
 
 // GameActivityDefinitionable is the interface implemented by [GameActivityDefinition], for mocking and DI.
@@ -184,8 +184,8 @@ type GameActivityDefinitionable interface {
 	MaxPlayers() *foundation.NSNumber
 	MinPlayers() *foundation.NSNumber
 	SupportsUnlimitedPlayers() bool
-	PlayStyle() raw.GKGameActivityPlayStyle
-	ReleaseState() raw.GKReleaseState
+	PlayStyle() GKGameActivityPlayStyle
+	ReleaseState() GKReleaseState
 }
 
 var _ GameActivityDefinitionable = (*GameActivityDefinition)(nil)

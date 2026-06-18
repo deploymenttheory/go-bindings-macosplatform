@@ -37,8 +37,8 @@ func NewDetectFaceLandmarksRequest() *DetectFaceLandmarksRequest {
 }
 
 // WithConstellation sets the constellation property and returns the receiver for chaining.
-func (x *DetectFaceLandmarksRequest) WithConstellation(constellation raw.VNRequestFaceLandmarksConstellation) *DetectFaceLandmarksRequest {
-	x.inner.SetConstellation(constellation)
+func (x *DetectFaceLandmarksRequest) WithConstellation(constellation VNRequestFaceLandmarksConstellation) *DetectFaceLandmarksRequest {
+	x.inner.SetConstellation(raw.VNRequestFaceLandmarksConstellation(constellation))
 	return x
 }
 
@@ -67,13 +67,13 @@ func (x *DetectFaceLandmarksRequest) WithRevision(revision uint) *DetectFaceLand
 }
 
 // Constellation calls the underlying Constellation.
-func (x *DetectFaceLandmarksRequest) Constellation() raw.VNRequestFaceLandmarksConstellation {
-	return x.inner.Constellation()
+func (x *DetectFaceLandmarksRequest) Constellation() VNRequestFaceLandmarksConstellation {
+	return VNRequestFaceLandmarksConstellation(x.inner.Constellation())
 }
 
 // SetConstellation calls the underlying SetConstellation.
-func (x *DetectFaceLandmarksRequest) SetConstellation(constellation raw.VNRequestFaceLandmarksConstellation) {
-	x.inner.SetConstellation(constellation)
+func (x *DetectFaceLandmarksRequest) SetConstellation(constellation VNRequestFaceLandmarksConstellation) {
+	x.inner.SetConstellation(raw.VNRequestFaceLandmarksConstellation(constellation))
 }
 
 func (x *DetectFaceLandmarksRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
@@ -87,13 +87,13 @@ func (x *DetectFaceLandmarksRequest) asRequest() *raw.VNRequest {
 // DetectFaceLandmarksRequestable is the interface implemented by [DetectFaceLandmarksRequest], for mocking and DI.
 type DetectFaceLandmarksRequestable interface {
 	Unwrap() *raw.VNDetectFaceLandmarksRequest
-	WithConstellation(constellation raw.VNRequestFaceLandmarksConstellation) *DetectFaceLandmarksRequest
+	WithConstellation(constellation VNRequestFaceLandmarksConstellation) *DetectFaceLandmarksRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceLandmarksRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceLandmarksRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceLandmarksRequest
 	WithRevision(revision uint) *DetectFaceLandmarksRequest
-	Constellation() raw.VNRequestFaceLandmarksConstellation
-	SetConstellation(constellation raw.VNRequestFaceLandmarksConstellation)
+	Constellation() VNRequestFaceLandmarksConstellation
+	SetConstellation(constellation VNRequestFaceLandmarksConstellation)
 }
 
 var _ DetectFaceLandmarksRequestable = (*DetectFaceLandmarksRequest)(nil)

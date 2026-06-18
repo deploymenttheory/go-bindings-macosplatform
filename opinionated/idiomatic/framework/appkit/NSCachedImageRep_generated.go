@@ -39,9 +39,9 @@ func NewCachedImageRepWithWindowRect(win *raw.NSWindow, rect corefoundation.CGRe
 }
 
 // NewCachedImageRepWithSizeDepthSeparateAlpha creates a new [CachedImageRep].
-func NewCachedImageRepWithSizeDepthSeparateAlpha(size corefoundation.CGSize, depth raw.NSWindowDepth, flag bool, alpha bool) *CachedImageRep {
+func NewCachedImageRepWithSizeDepthSeparateAlpha(size corefoundation.CGSize, depth NSWindowDepth, flag bool, alpha bool) *CachedImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:depth:separate:alpha:"), size, depth, flag, alpha)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:depth:separate:alpha:"), size, raw.NSWindowDepth(depth), flag, alpha)
 	return &CachedImageRep{inner: raw.NSCachedImageRepFromID(_id)}
 }
 
@@ -88,8 +88,8 @@ func (x *CachedImageRep) WithPixelsHigh(pixelsHigh int) *CachedImageRep {
 }
 
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *CachedImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CachedImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+func (x *CachedImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CachedImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
@@ -119,7 +119,7 @@ type CachedImageRepable interface {
 	WithBitsPerSample(bitsPerSample int) *CachedImageRep
 	WithPixelsWide(pixelsWide int) *CachedImageRep
 	WithPixelsHigh(pixelsHigh int) *CachedImageRep
-	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CachedImageRep
+	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CachedImageRep
 	Window() *Window
 	Rect() corefoundation.CGRect
 }

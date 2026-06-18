@@ -83,13 +83,13 @@ func (x *WorkoutSession) EndCurrentActivityOnDate(date *foundation.NSDate) {
 }
 
 // ActivityType calls the underlying ActivityType.
-func (x *WorkoutSession) ActivityType() raw.HKWorkoutActivityType {
-	return x.inner.ActivityType()
+func (x *WorkoutSession) ActivityType() HKWorkoutActivityType {
+	return HKWorkoutActivityType(x.inner.ActivityType())
 }
 
 // LocationType calls the underlying LocationType.
-func (x *WorkoutSession) LocationType() raw.HKWorkoutSessionLocationType {
-	return x.inner.LocationType()
+func (x *WorkoutSession) LocationType() HKWorkoutSessionLocationType {
+	return HKWorkoutSessionLocationType(x.inner.LocationType())
 }
 
 // WorkoutConfiguration calls the underlying WorkoutConfiguration.
@@ -112,13 +112,13 @@ func (x *WorkoutSession) SetDelegate(delegate raw.HKWorkoutSessionDelegate) {
 }
 
 // State calls the underlying State.
-func (x *WorkoutSession) State() raw.HKWorkoutSessionState {
-	return x.inner.State()
+func (x *WorkoutSession) State() HKWorkoutSessionState {
+	return HKWorkoutSessionState(x.inner.State())
 }
 
 // Type calls the underlying Type.
-func (x *WorkoutSession) Type() raw.HKWorkoutSessionType {
-	return x.inner.Type()
+func (x *WorkoutSession) Type() HKWorkoutSessionType {
+	return HKWorkoutSessionType(x.inner.Type())
 }
 
 // StartDate calls the underlying StartDate.
@@ -152,13 +152,13 @@ type WorkoutSessionable interface {
 	Resume()
 	BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID])
 	EndCurrentActivityOnDate(date *foundation.NSDate)
-	ActivityType() raw.HKWorkoutActivityType
-	LocationType() raw.HKWorkoutSessionLocationType
+	ActivityType() HKWorkoutActivityType
+	LocationType() HKWorkoutSessionLocationType
 	WorkoutConfiguration() *WorkoutConfiguration
 	Delegate() raw.HKWorkoutSessionDelegate
 	SetDelegate(delegate raw.HKWorkoutSessionDelegate)
-	State() raw.HKWorkoutSessionState
-	Type() raw.HKWorkoutSessionType
+	State() HKWorkoutSessionState
+	Type() HKWorkoutSessionType
 	StartDate() *foundation.NSDate
 	EndDate() *foundation.NSDate
 	CurrentActivity() *WorkoutActivity

@@ -61,10 +61,10 @@ func NewDataWithBytesNoCopyLengthDeallocator(bytes_ unsafe.Pointer, length uint,
 }
 
 // NewDataWithContentsOfFileOptionsError creates a new [Data].
-func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask raw.NSDataReadingOptions) (*Data, error) {
+func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask NSDataReadingOptions) (*Data, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:options:error:"), foundation.NSStringStringWithUTF8String(path).Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:options:error:"), foundation.NSStringStringWithUTF8String(path).Ptr(), raw.NSDataReadingOptions(readOptionsMask), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -72,10 +72,10 @@ func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask raw.NSDa
 }
 
 // NewDataWithContentsOfURLOptionsError creates a new [Data].
-func NewDataWithContentsOfURLOptionsError(url string, readOptionsMask raw.NSDataReadingOptions) (*Data, error) {
+func NewDataWithContentsOfURLOptionsError(url string, readOptionsMask NSDataReadingOptions) (*Data, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), readOptionsMask, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), raw.NSDataReadingOptions(readOptionsMask), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -104,16 +104,16 @@ func NewDataWithData(data *raw.NSData) *Data {
 }
 
 // NewDataWithBase64EncodedStringOptions creates a new [Data].
-func NewDataWithBase64EncodedStringOptions(base64String string, options raw.NSDataBase64DecodingOptions) *Data {
+func NewDataWithBase64EncodedStringOptions(base64String string, options NSDataBase64DecodingOptions) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase64EncodedString:options:"), foundation.NSStringStringWithUTF8String(base64String).Ptr(), options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase64EncodedString:options:"), foundation.NSStringStringWithUTF8String(base64String).Ptr(), raw.NSDataBase64DecodingOptions(options))
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
 // NewDataWithBase64EncodedDataOptions creates a new [Data].
-func NewDataWithBase64EncodedDataOptions(base64Data *raw.NSData, options raw.NSDataBase64DecodingOptions) *Data {
+func NewDataWithBase64EncodedDataOptions(base64Data *raw.NSData, options NSDataBase64DecodingOptions) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase64EncodedData:options:"), base64Data.Ptr(), options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase64EncodedData:options:"), base64Data.Ptr(), raw.NSDataBase64DecodingOptions(options))
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
@@ -182,18 +182,18 @@ func (x *Data) WriteToURLAtomically(url string, atomically bool) bool {
 }
 
 // WriteToFileOptionsError calls the underlying WriteToFileOptionsError.
-func (x *Data) WriteToFileOptionsError(path string, writeOptionsMask raw.NSDataWritingOptions) (bool, error) {
-	return x.inner.WriteToFileOptionsError(foundation.NSStringStringWithUTF8String(path), writeOptionsMask)
+func (x *Data) WriteToFileOptionsError(path string, writeOptionsMask NSDataWritingOptions) (bool, error) {
+	return x.inner.WriteToFileOptionsError(foundation.NSStringStringWithUTF8String(path), raw.NSDataWritingOptions(writeOptionsMask))
 }
 
 // WriteToURLOptionsError calls the underlying WriteToURLOptionsError.
-func (x *Data) WriteToURLOptionsError(url string, writeOptionsMask raw.NSDataWritingOptions) (bool, error) {
-	return x.inner.WriteToURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), writeOptionsMask)
+func (x *Data) WriteToURLOptionsError(url string, writeOptionsMask NSDataWritingOptions) (bool, error) {
+	return x.inner.WriteToURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSDataWritingOptions(writeOptionsMask))
 }
 
 // RangeOfDataOptionsRange calls the underlying RangeOfDataOptionsRange.
-func (x *Data) RangeOfDataOptionsRange(dataToFind *raw.NSData, mask raw.NSDataSearchOptions, searchRange raw.NSRange) raw.NSRange {
-	return x.inner.RangeOfDataOptionsRange(dataToFind, mask, searchRange)
+func (x *Data) RangeOfDataOptionsRange(dataToFind *raw.NSData, mask NSDataSearchOptions, searchRange raw.NSRange) raw.NSRange {
+	return x.inner.RangeOfDataOptionsRange(dataToFind, raw.NSDataSearchOptions(mask), searchRange)
 }
 
 // EnumerateByteRangesUsing calls the underlying EnumerateByteRangesUsing.
@@ -202,8 +202,8 @@ func (x *Data) EnumerateByteRangesUsing(block objc.Block) {
 }
 
 // Base64EncodedStringWithOptions calls the underlying Base64EncodedStringWithOptions.
-func (x *Data) Base64EncodedStringWithOptions(options raw.NSDataBase64EncodingOptions) *String {
-	_r := x.inner.Base64EncodedStringWithOptions(options)
+func (x *Data) Base64EncodedStringWithOptions(options NSDataBase64EncodingOptions) *String {
+	_r := x.inner.Base64EncodedStringWithOptions(raw.NSDataBase64EncodingOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -211,8 +211,8 @@ func (x *Data) Base64EncodedStringWithOptions(options raw.NSDataBase64EncodingOp
 }
 
 // Base64EncodedDataWithOptions calls the underlying Base64EncodedDataWithOptions.
-func (x *Data) Base64EncodedDataWithOptions(options raw.NSDataBase64EncodingOptions) *Data {
-	_r := x.inner.Base64EncodedDataWithOptions(options)
+func (x *Data) Base64EncodedDataWithOptions(options NSDataBase64EncodingOptions) *Data {
+	_r := x.inner.Base64EncodedDataWithOptions(raw.NSDataBase64EncodingOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -220,8 +220,8 @@ func (x *Data) Base64EncodedDataWithOptions(options raw.NSDataBase64EncodingOpti
 }
 
 // DecompressedDataUsingAlgorithmError calls the underlying DecompressedDataUsingAlgorithmError.
-func (x *Data) DecompressedDataUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (*Data, error) {
-	_r, _err := x.inner.DecompressedDataUsingAlgorithmError(algorithm)
+func (x *Data) DecompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (*Data, error) {
+	_r, _err := x.inner.DecompressedDataUsingAlgorithmError(raw.NSDataCompressionAlgorithm(algorithm))
 	if _err != nil {
 		return nil, _err
 	}
@@ -232,8 +232,8 @@ func (x *Data) DecompressedDataUsingAlgorithmError(algorithm raw.NSDataCompressi
 }
 
 // CompressedDataUsingAlgorithmError calls the underlying CompressedDataUsingAlgorithmError.
-func (x *Data) CompressedDataUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (*Data, error) {
-	_r, _err := x.inner.CompressedDataUsingAlgorithmError(algorithm)
+func (x *Data) CompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (*Data, error) {
+	_r, _err := x.inner.CompressedDataUsingAlgorithmError(raw.NSDataCompressionAlgorithm(algorithm))
 	if _err != nil {
 		return nil, _err
 	}
@@ -273,14 +273,14 @@ type Dataable interface {
 	SubdataWithRange(range_ raw.NSRange) *Data
 	WriteToFileAtomically(path string, useAuxiliaryFile bool) bool
 	WriteToURLAtomically(url string, atomically bool) bool
-	WriteToFileOptionsError(path string, writeOptionsMask raw.NSDataWritingOptions) (bool, error)
-	WriteToURLOptionsError(url string, writeOptionsMask raw.NSDataWritingOptions) (bool, error)
-	RangeOfDataOptionsRange(dataToFind *raw.NSData, mask raw.NSDataSearchOptions, searchRange raw.NSRange) raw.NSRange
+	WriteToFileOptionsError(path string, writeOptionsMask NSDataWritingOptions) (bool, error)
+	WriteToURLOptionsError(url string, writeOptionsMask NSDataWritingOptions) (bool, error)
+	RangeOfDataOptionsRange(dataToFind *raw.NSData, mask NSDataSearchOptions, searchRange raw.NSRange) raw.NSRange
 	EnumerateByteRangesUsing(block objc.Block)
-	Base64EncodedStringWithOptions(options raw.NSDataBase64EncodingOptions) *String
-	Base64EncodedDataWithOptions(options raw.NSDataBase64EncodingOptions) *Data
-	DecompressedDataUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (*Data, error)
-	CompressedDataUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (*Data, error)
+	Base64EncodedStringWithOptions(options NSDataBase64EncodingOptions) *String
+	Base64EncodedDataWithOptions(options NSDataBase64EncodingOptions) *Data
+	DecompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (*Data, error)
+	CompressedDataUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (*Data, error)
 	GetBytes(buffer unsafe.Pointer)
 	Base64Encoding() *String
 }

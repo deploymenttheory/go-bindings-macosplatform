@@ -58,8 +58,8 @@ func (x *Toolbar) WithVisible(visible bool) *Toolbar {
 }
 
 // WithDisplayMode sets the displayMode property and returns the receiver for chaining.
-func (x *Toolbar) WithDisplayMode(displayMode raw.NSToolbarDisplayMode) *Toolbar {
-	x.inner.SetDisplayMode(displayMode)
+func (x *Toolbar) WithDisplayMode(displayMode NSToolbarDisplayMode) *Toolbar {
+	x.inner.SetDisplayMode(raw.NSToolbarDisplayMode(displayMode))
 	return x
 }
 
@@ -118,8 +118,8 @@ func (x *Toolbar) WithAllowsExtensionItems(allowsExtensionItems bool) *Toolbar {
 }
 
 // WithSizeMode sets the sizeMode property and returns the receiver for chaining.
-func (x *Toolbar) WithSizeMode(sizeMode raw.NSToolbarSizeMode) *Toolbar {
-	x.inner.SetSizeMode(sizeMode)
+func (x *Toolbar) WithSizeMode(sizeMode NSToolbarSizeMode) *Toolbar {
+	x.inner.SetSizeMode(raw.NSToolbarSizeMode(sizeMode))
 	return x
 }
 
@@ -204,13 +204,13 @@ func (x *Toolbar) CustomizationPaletteIsRunning() bool {
 }
 
 // DisplayMode calls the underlying DisplayMode.
-func (x *Toolbar) DisplayMode() raw.NSToolbarDisplayMode {
-	return x.inner.DisplayMode()
+func (x *Toolbar) DisplayMode() NSToolbarDisplayMode {
+	return NSToolbarDisplayMode(x.inner.DisplayMode())
 }
 
 // SetDisplayMode calls the underlying SetDisplayMode.
-func (x *Toolbar) SetDisplayMode(displayMode raw.NSToolbarDisplayMode) {
-	x.inner.SetDisplayMode(displayMode)
+func (x *Toolbar) SetDisplayMode(displayMode NSToolbarDisplayMode) {
+	x.inner.SetDisplayMode(raw.NSToolbarDisplayMode(displayMode))
 }
 
 // SelectedItemIdentifier calls the underlying SelectedItemIdentifier.
@@ -330,13 +330,13 @@ func (x *Toolbar) SetConfigurationFromDictionary(configDict *foundation.NSDictio
 }
 
 // SizeMode calls the underlying SizeMode.
-func (x *Toolbar) SizeMode() raw.NSToolbarSizeMode {
-	return x.inner.SizeMode()
+func (x *Toolbar) SizeMode() NSToolbarSizeMode {
+	return NSToolbarSizeMode(x.inner.SizeMode())
 }
 
 // SetSizeMode calls the underlying SetSizeMode.
-func (x *Toolbar) SetSizeMode(sizeMode raw.NSToolbarSizeMode) {
-	x.inner.SetSizeMode(sizeMode)
+func (x *Toolbar) SetSizeMode(sizeMode NSToolbarSizeMode) {
+	x.inner.SetSizeMode(raw.NSToolbarSizeMode(sizeMode))
 }
 
 // CenteredItemIdentifier calls the underlying CenteredItemIdentifier.
@@ -407,7 +407,7 @@ type Toolbarable interface {
 	Unwrap() *raw.NSToolbar
 	WithDelegate(delegate raw.NSToolbarDelegate) *Toolbar
 	WithVisible(visible bool) *Toolbar
-	WithDisplayMode(displayMode raw.NSToolbarDisplayMode) *Toolbar
+	WithDisplayMode(displayMode NSToolbarDisplayMode) *Toolbar
 	WithSelectedItemIdentifier(selectedItemIdentifier *foundation.NSString) *Toolbar
 	WithAllowsUserCustomization(allowsUserCustomization bool) *Toolbar
 	WithAllowsDisplayModeCustomization(allowsDisplayModeCustomization bool) *Toolbar
@@ -415,7 +415,7 @@ type Toolbarable interface {
 	WithCenteredItemIdentifiers(centeredItemIdentifiers *foundation.NSSet[*foundation.NSString]) *Toolbar
 	WithAutosavesConfiguration(autosavesConfiguration bool) *Toolbar
 	WithAllowsExtensionItems(allowsExtensionItems bool) *Toolbar
-	WithSizeMode(sizeMode raw.NSToolbarSizeMode) *Toolbar
+	WithSizeMode(sizeMode NSToolbarSizeMode) *Toolbar
 	WithCenteredItemIdentifier(centeredItemIdentifier *foundation.NSString) *Toolbar
 	WithFullScreenAccessoryView(fullScreenAccessoryView ViewProvider) *Toolbar
 	WithFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight float64) *Toolbar
@@ -431,8 +431,8 @@ type Toolbarable interface {
 	IsVisible() bool
 	SetVisible(visible bool)
 	CustomizationPaletteIsRunning() bool
-	DisplayMode() raw.NSToolbarDisplayMode
-	SetDisplayMode(displayMode raw.NSToolbarDisplayMode)
+	DisplayMode() NSToolbarDisplayMode
+	SetDisplayMode(displayMode NSToolbarDisplayMode)
 	SelectedItemIdentifier() string
 	SetSelectedItemIdentifier(selectedItemIdentifier *foundation.NSString)
 	AllowsUserCustomization() bool
@@ -451,8 +451,8 @@ type Toolbarable interface {
 	AllowsExtensionItems() bool
 	SetAllowsExtensionItems(allowsExtensionItems bool)
 	SetConfigurationFromDictionary(configDict *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	SizeMode() raw.NSToolbarSizeMode
-	SetSizeMode(sizeMode raw.NSToolbarSizeMode)
+	SizeMode() NSToolbarSizeMode
+	SetSizeMode(sizeMode NSToolbarSizeMode)
 	CenteredItemIdentifier() string
 	SetCenteredItemIdentifier(centeredItemIdentifier *foundation.NSString)
 	FullScreenAccessoryView() *View

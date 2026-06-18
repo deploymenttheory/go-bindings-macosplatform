@@ -32,37 +32,37 @@ func CallRecordFromID(id objc.ID) *CallRecord {
 }
 
 // NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked creates a new [CallRecord].
-func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked(identifier string, dateCreated *foundation.NSDate, callRecordType raw.INCallRecordType, callCapability raw.INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, participants *foundation.NSArray[*raw.INPerson], numberOfCalls *foundation.NSNumber, isCallerIdBlocked *foundation.NSNumber) *CallRecord {
+func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenParticipantsNumberOfCallsIsCallerIdBlocked(identifier string, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, participants *foundation.NSArray[*raw.INPerson], numberOfCalls *foundation.NSNumber, isCallerIdBlocked *foundation.NSNumber) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:participants:numberOfCalls:isCallerIdBlocked:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), dateCreated.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr(), participants.Ptr(), numberOfCalls.Ptr(), isCallerIdBlocked.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:participants:numberOfCalls:isCallerIdBlocked:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), dateCreated.Ptr(), raw.INCallRecordType(callRecordType), raw.INCallCapability(callCapability), callDuration.Ptr(), unseen.Ptr(), participants.Ptr(), numberOfCalls.Ptr(), isCallerIdBlocked.Ptr())
 	return &CallRecord{inner: raw.INCallRecordFromID(_id)}
 }
 
 // NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen creates a new [CallRecord].
-func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen(identifier string, dateCreated *foundation.NSDate, callRecordType raw.INCallRecordType, callCapability raw.INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber) *CallRecord {
+func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseen(identifier string, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), dateCreated.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), dateCreated.Ptr(), raw.INCallRecordType(callRecordType), raw.INCallCapability(callCapability), callDuration.Ptr(), unseen.Ptr())
 	return &CallRecord{inner: raw.INCallRecordFromID(_id)}
 }
 
 // NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls creates a new [CallRecord].
-func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls(identifier string, dateCreated *foundation.NSDate, callRecordType raw.INCallRecordType, callCapability raw.INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, numberOfCalls *foundation.NSNumber) *CallRecord {
+func NewCallRecordWithIdentifierDateCreatedCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls(identifier string, dateCreated *foundation.NSDate, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, numberOfCalls *foundation.NSNumber) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:numberOfCalls:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), dateCreated.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr(), numberOfCalls.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:callRecordType:callCapability:callDuration:unseen:numberOfCalls:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), dateCreated.Ptr(), raw.INCallRecordType(callRecordType), raw.INCallCapability(callCapability), callDuration.Ptr(), unseen.Ptr(), numberOfCalls.Ptr())
 	return &CallRecord{inner: raw.INCallRecordFromID(_id)}
 }
 
 // NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen creates a new [CallRecord].
-func NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen(identifier string, dateCreated *foundation.NSDate, caller *raw.INPerson, callRecordType raw.INCallRecordType, callCapability raw.INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber) *CallRecord {
+func NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseen(identifier string, dateCreated *foundation.NSDate, caller *raw.INPerson, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:caller:callRecordType:callCapability:callDuration:unseen:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), dateCreated.Ptr(), caller.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:caller:callRecordType:callCapability:callDuration:unseen:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), dateCreated.Ptr(), caller.Ptr(), raw.INCallRecordType(callRecordType), raw.INCallCapability(callCapability), callDuration.Ptr(), unseen.Ptr())
 	return &CallRecord{inner: raw.INCallRecordFromID(_id)}
 }
 
 // NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls creates a new [CallRecord].
-func NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls(identifier string, dateCreated *foundation.NSDate, caller *raw.INPerson, callRecordType raw.INCallRecordType, callCapability raw.INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, numberOfCalls *foundation.NSNumber) *CallRecord {
+func NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCallDurationUnseenNumberOfCalls(identifier string, dateCreated *foundation.NSDate, caller *raw.INPerson, callRecordType INCallRecordType, callCapability INCallCapability, callDuration *foundation.NSNumber, unseen *foundation.NSNumber, numberOfCalls *foundation.NSNumber) *CallRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:caller:callRecordType:callCapability:callDuration:unseen:numberOfCalls:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), dateCreated.Ptr(), caller.Ptr(), callRecordType, callCapability, callDuration.Ptr(), unseen.Ptr(), numberOfCalls.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:dateCreated:caller:callRecordType:callCapability:callDuration:unseen:numberOfCalls:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), dateCreated.Ptr(), caller.Ptr(), raw.INCallRecordType(callRecordType), raw.INCallCapability(callCapability), callDuration.Ptr(), unseen.Ptr(), numberOfCalls.Ptr())
 	return &CallRecord{inner: raw.INCallRecordFromID(_id)}
 }
 
@@ -81,8 +81,8 @@ func (x *CallRecord) DateCreated() *foundation.NSDate {
 }
 
 // CallRecordType calls the underlying CallRecordType.
-func (x *CallRecord) CallRecordType() raw.INCallRecordType {
-	return x.inner.CallRecordType()
+func (x *CallRecord) CallRecordType() INCallRecordType {
+	return INCallRecordType(x.inner.CallRecordType())
 }
 
 // CallDuration calls the underlying CallDuration.
@@ -96,8 +96,8 @@ func (x *CallRecord) Unseen() *foundation.NSNumber {
 }
 
 // CallCapability calls the underlying CallCapability.
-func (x *CallRecord) CallCapability() raw.INCallCapability {
-	return x.inner.CallCapability()
+func (x *CallRecord) CallCapability() INCallCapability {
+	return INCallCapability(x.inner.CallCapability())
 }
 
 // NumberOfCalls calls the underlying NumberOfCalls.
@@ -135,10 +135,10 @@ type CallRecordable interface {
 	Unwrap() *raw.INCallRecord
 	Identifier() string
 	DateCreated() *foundation.NSDate
-	CallRecordType() raw.INCallRecordType
+	CallRecordType() INCallRecordType
 	CallDuration() *foundation.NSNumber
 	Unseen() *foundation.NSNumber
-	CallCapability() raw.INCallCapability
+	CallCapability() INCallCapability
 	NumberOfCalls() *foundation.NSNumber
 	IsCallerIdBlocked() *foundation.NSNumber
 	Participants() []*Person

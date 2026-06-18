@@ -93,13 +93,13 @@ func (x *AuthorizationAppleIDCredential) FullName() *foundation.NSPersonNameComp
 }
 
 // RealUserStatus calls the underlying RealUserStatus.
-func (x *AuthorizationAppleIDCredential) RealUserStatus() raw.ASUserDetectionStatus {
-	return x.inner.RealUserStatus()
+func (x *AuthorizationAppleIDCredential) RealUserStatus() ASUserDetectionStatus {
+	return ASUserDetectionStatus(x.inner.RealUserStatus())
 }
 
 // UserAgeRange calls the underlying UserAgeRange.
-func (x *AuthorizationAppleIDCredential) UserAgeRange() raw.ASUserAgeRange {
-	return x.inner.UserAgeRange()
+func (x *AuthorizationAppleIDCredential) UserAgeRange() ASUserAgeRange {
+	return ASUserAgeRange(x.inner.UserAgeRange())
 }
 
 // AuthorizationAppleIDCredentialable is the interface implemented by [AuthorizationAppleIDCredential], for mocking and DI.
@@ -112,8 +112,8 @@ type AuthorizationAppleIDCredentialable interface {
 	IdentityToken() *foundation.NSData
 	Email() string
 	FullName() *foundation.NSPersonNameComponents
-	RealUserStatus() raw.ASUserDetectionStatus
-	UserAgeRange() raw.ASUserAgeRange
+	RealUserStatus() ASUserDetectionStatus
+	UserAgeRange() ASUserAgeRange
 }
 
 var _ AuthorizationAppleIDCredentialable = (*AuthorizationAppleIDCredential)(nil)

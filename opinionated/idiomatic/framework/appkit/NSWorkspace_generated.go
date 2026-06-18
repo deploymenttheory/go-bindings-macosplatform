@@ -177,8 +177,8 @@ func (x *Workspace) IconForContentType(contentType *uniformtypeidentifiers.UTTyp
 }
 
 // SetIconForFileOptions calls the underlying SetIconForFileOptions.
-func (x *Workspace) SetIconForFileOptions(image *raw.NSImage, fullPath string, options raw.NSWorkspaceIconCreationOptions) bool {
-	return x.inner.SetIconForFileOptions(image, foundation.NSStringStringWithUTF8String(fullPath), options)
+func (x *Workspace) SetIconForFileOptions(image *raw.NSImage, fullPath string, options NSWorkspaceIconCreationOptions) bool {
+	return x.inner.SetIconForFileOptions(image, foundation.NSStringStringWithUTF8String(fullPath), raw.NSWorkspaceIconCreationOptions(options))
 }
 
 // RecycleURLsCompletionHandler calls the underlying RecycleURLsCompletionHandler.
@@ -379,13 +379,13 @@ func (x *Workspace) DesktopImageOptionsForScreen(screen *raw.NSScreen) *foundati
 }
 
 // RequestAuthorizationOfType blocks until the operation completes or ctx is cancelled.
-func (x *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ raw.NSWorkspaceAuthorizationType) (*WorkspaceAuthorization, error) {
+func (x *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ NSWorkspaceAuthorizationType) (*WorkspaceAuthorization, error) {
 	type _result struct {
 		val *WorkspaceAuthorization
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RequestAuthorizationOfTypeCompletionHandler(type_, func(_p0 *raw.NSWorkspaceAuthorization, _p1 unsafe.Pointer) {
+	x.inner.RequestAuthorizationOfTypeCompletionHandler(raw.NSWorkspaceAuthorizationType(type_), func(_p0 *raw.NSWorkspaceAuthorization, _p1 unsafe.Pointer) {
 		var _o _result
 		if uintptr(_p1) != 0 {
 			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
@@ -425,8 +425,8 @@ func (x *Workspace) LaunchApplication(appName string) bool {
 }
 
 // LaunchApplicationAtURLOptionsConfigurationError calls the underlying LaunchApplicationAtURLOptionsConfigurationError.
-func (x *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, options raw.NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error) {
-	_r, _err := x.inner.LaunchApplicationAtURLOptionsConfigurationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, configuration)
+func (x *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error) {
+	_r, _err := x.inner.LaunchApplicationAtURLOptionsConfigurationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSWorkspaceLaunchOptions(options), configuration)
 	if _err != nil {
 		return nil, _err
 	}
@@ -437,8 +437,8 @@ func (x *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, 
 }
 
 // OpenURLOptionsConfigurationError calls the underlying OpenURLOptionsConfigurationError.
-func (x *Workspace) OpenURLOptionsConfigurationError(url string, options raw.NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error) {
-	_r, _err := x.inner.OpenURLOptionsConfigurationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, configuration)
+func (x *Workspace) OpenURLOptionsConfigurationError(url string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error) {
+	_r, _err := x.inner.OpenURLOptionsConfigurationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSWorkspaceLaunchOptions(options), configuration)
 	if _err != nil {
 		return nil, _err
 	}
@@ -449,8 +449,8 @@ func (x *Workspace) OpenURLOptionsConfigurationError(url string, options raw.NSW
 }
 
 // OpenURLsWithApplicationAtURLOptionsConfigurationError calls the underlying OpenURLsWithApplicationAtURLOptionsConfigurationError.
-func (x *Workspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls *foundation.NSArray[*foundation.NSURL], applicationURL string, options raw.NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error) {
-	_r, _err := x.inner.OpenURLsWithApplicationAtURLOptionsConfigurationError(urls, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), options, configuration)
+func (x *Workspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls *foundation.NSArray[*foundation.NSURL], applicationURL string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error) {
+	_r, _err := x.inner.OpenURLsWithApplicationAtURLOptionsConfigurationError(urls, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(applicationURL)), raw.NSWorkspaceLaunchOptions(options), configuration)
 	if _err != nil {
 		return nil, _err
 	}
@@ -484,13 +484,13 @@ func (x *Workspace) AbsolutePathForAppBundleWithIdentifier(bundleIdentifier stri
 }
 
 // LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier calls the underlying LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier.
-func (x *Workspace) LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options raw.NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifier *foundation.NSNumber) bool {
-	return x.inner.LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier), options, descriptor, identifier)
+func (x *Workspace) LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifier *foundation.NSNumber) bool {
+	return x.inner.LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier), raw.NSWorkspaceLaunchOptions(options), descriptor, identifier)
 }
 
 // OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers calls the underlying OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers.
-func (x *Workspace) OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls *foundation.NSArray[*foundation.NSURL], bundleIdentifier string, options raw.NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifiers *foundation.NSArray[*foundation.NSNumber]) bool {
-	return x.inner.OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls, foundation.NSStringStringWithUTF8String(bundleIdentifier), options, descriptor, identifiers)
+func (x *Workspace) OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls *foundation.NSArray[*foundation.NSURL], bundleIdentifier string, options NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifiers *foundation.NSArray[*foundation.NSNumber]) bool {
+	return x.inner.OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls, foundation.NSStringStringWithUTF8String(bundleIdentifier), raw.NSWorkspaceLaunchOptions(options), descriptor, identifiers)
 }
 
 // OpenTempFile calls the underlying OpenTempFile.
@@ -683,7 +683,7 @@ type Workspaceable interface {
 	IconForFile(fullPath string) *Image
 	IconForFiles(fullPaths *foundation.NSArray[*foundation.NSString]) *Image
 	IconForContentType(contentType *uniformtypeidentifiers.UTType) *Image
-	SetIconForFileOptions(image *raw.NSImage, fullPath string, options raw.NSWorkspaceIconCreationOptions) bool
+	SetIconForFileOptions(image *raw.NSImage, fullPath string, options NSWorkspaceIconCreationOptions) bool
 	RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler objc.Block)
 	DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler objc.Block)
 	GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, removableFlag *bool, writableFlag *bool, unmountableFlag *bool, description string, fileSystemType string) bool
@@ -709,19 +709,19 @@ type Workspaceable interface {
 	SetDesktopImageURLForScreenOptionsError(url string, screen *raw.NSScreen, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
 	DesktopImageURLForScreen(screen *raw.NSScreen) *foundation.NSURL
 	DesktopImageOptionsForScreen(screen *raw.NSScreen) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	RequestAuthorizationOfType(ctx context.Context, type_ raw.NSWorkspaceAuthorizationType) (*WorkspaceAuthorization, error)
+	RequestAuthorizationOfType(ctx context.Context, type_ NSWorkspaceAuthorizationType) (*WorkspaceAuthorization, error)
 	OpenFile(fullPath string) bool
 	OpenFileWithApplication(fullPath string, appName string) bool
 	OpenFileWithApplicationAndDeactivate(fullPath string, appName string, flag bool) bool
 	LaunchApplication(appName string) bool
-	LaunchApplicationAtURLOptionsConfigurationError(url string, options raw.NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error)
-	OpenURLOptionsConfigurationError(url string, options raw.NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error)
-	OpenURLsWithApplicationAtURLOptionsConfigurationError(urls *foundation.NSArray[*foundation.NSURL], applicationURL string, options raw.NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error)
+	LaunchApplicationAtURLOptionsConfigurationError(url string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error)
+	OpenURLOptionsConfigurationError(url string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error)
+	OpenURLsWithApplicationAtURLOptionsConfigurationError(urls *foundation.NSArray[*foundation.NSURL], applicationURL string, options NSWorkspaceLaunchOptions, configuration *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*RunningApplication, error)
 	LaunchApplicationShowIconAutolaunch(appName string, showIcon bool, autolaunch bool) bool
 	FullPathForApplication(appName string) string
 	AbsolutePathForAppBundleWithIdentifier(bundleIdentifier string) string
-	LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options raw.NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifier *foundation.NSNumber) bool
-	OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls *foundation.NSArray[*foundation.NSURL], bundleIdentifier string, options raw.NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifiers *foundation.NSArray[*foundation.NSNumber]) bool
+	LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifier(bundleIdentifier string, options NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifier *foundation.NSNumber) bool
+	OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls *foundation.NSArray[*foundation.NSURL], bundleIdentifier string, options NSWorkspaceLaunchOptions, descriptor *foundation.NSAppleEventDescriptor, identifiers *foundation.NSArray[*foundation.NSNumber]) bool
 	OpenTempFile(fullPath string) bool
 	FindApplications()
 	NoteUserDefaultsChanged()

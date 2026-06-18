@@ -48,8 +48,8 @@ func (x *QuadrilateralAccelerationStructure) WithQuadrilateralCount(quadrilatera
 }
 
 // WithPolygonType sets the polygonType property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithPolygonType(polygonType raw.MPSPolygonType) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetPolygonType(polygonType)
+func (x *QuadrilateralAccelerationStructure) WithPolygonType(polygonType MPSPolygonType) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetPolygonType(raw.MPSPolygonType(polygonType))
 	return x
 }
 
@@ -126,8 +126,8 @@ func (x *QuadrilateralAccelerationStructure) WithPolygonBuffers(items ...*raw.MP
 }
 
 // WithUsage sets the usage property and returns the receiver for chaining.
-func (x *QuadrilateralAccelerationStructure) WithUsage(usage raw.MPSAccelerationStructureUsage) *QuadrilateralAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.SetUsage(usage)
+func (x *QuadrilateralAccelerationStructure) WithUsage(usage MPSAccelerationStructureUsage) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.SetUsage(raw.MPSAccelerationStructureUsage(usage))
 	return x
 }
 
@@ -153,7 +153,7 @@ func (x *QuadrilateralAccelerationStructure) asAccelerationStructure() *raw.MPSA
 type QuadrilateralAccelerationStructureable interface {
 	Unwrap() *raw.MPSQuadrilateralAccelerationStructure
 	WithQuadrilateralCount(quadrilateralCount uint) *QuadrilateralAccelerationStructure
-	WithPolygonType(polygonType raw.MPSPolygonType) *QuadrilateralAccelerationStructure
+	WithPolygonType(polygonType MPSPolygonType) *QuadrilateralAccelerationStructure
 	WithVertexStride(vertexStride uint) *QuadrilateralAccelerationStructure
 	WithIndexType(indexType mpscore.MPSDataType) *QuadrilateralAccelerationStructure
 	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure
@@ -164,7 +164,7 @@ type QuadrilateralAccelerationStructureable interface {
 	WithMaskBufferOffset(maskBufferOffset uint) *QuadrilateralAccelerationStructure
 	WithPolygonCount(polygonCount uint) *QuadrilateralAccelerationStructure
 	WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *QuadrilateralAccelerationStructure
-	WithUsage(usage raw.MPSAccelerationStructureUsage) *QuadrilateralAccelerationStructure
+	WithUsage(usage MPSAccelerationStructureUsage) *QuadrilateralAccelerationStructure
 	QuadrilateralCount() uint
 	SetQuadrilateralCount(quadrilateralCount uint)
 }

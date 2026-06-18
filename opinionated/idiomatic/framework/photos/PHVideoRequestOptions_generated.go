@@ -42,8 +42,8 @@ func (x *VideoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool
 }
 
 // WithDeliveryMode sets the deliveryMode property and returns the receiver for chaining.
-func (x *VideoRequestOptions) WithDeliveryMode(deliveryMode raw.PHVideoRequestOptionsDeliveryMode) *VideoRequestOptions {
-	x.inner.SetDeliveryMode(deliveryMode)
+func (x *VideoRequestOptions) WithDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode) *VideoRequestOptions {
+	x.inner.SetDeliveryMode(raw.PHVideoRequestOptionsDeliveryMode(deliveryMode))
 	return x
 }
 
@@ -64,13 +64,13 @@ func (x *VideoRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool)
 }
 
 // DeliveryMode calls the underlying DeliveryMode.
-func (x *VideoRequestOptions) DeliveryMode() raw.PHVideoRequestOptionsDeliveryMode {
-	return x.inner.DeliveryMode()
+func (x *VideoRequestOptions) DeliveryMode() PHVideoRequestOptionsDeliveryMode {
+	return PHVideoRequestOptionsDeliveryMode(x.inner.DeliveryMode())
 }
 
 // SetDeliveryMode calls the underlying SetDeliveryMode.
-func (x *VideoRequestOptions) SetDeliveryMode(deliveryMode raw.PHVideoRequestOptionsDeliveryMode) {
-	x.inner.SetDeliveryMode(deliveryMode)
+func (x *VideoRequestOptions) SetDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode) {
+	x.inner.SetDeliveryMode(raw.PHVideoRequestOptionsDeliveryMode(deliveryMode))
 }
 
 // ProgressHandler calls the underlying ProgressHandler.
@@ -87,12 +87,12 @@ func (x *VideoRequestOptions) SetProgressHandler(progressHandler objc.Block) {
 type VideoRequestOptionsable interface {
 	Unwrap() *raw.PHVideoRequestOptions
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *VideoRequestOptions
-	WithDeliveryMode(deliveryMode raw.PHVideoRequestOptionsDeliveryMode) *VideoRequestOptions
+	WithDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode) *VideoRequestOptions
 	WithProgressHandler(progressHandler objc.Block) *VideoRequestOptions
 	IsNetworkAccessAllowed() bool
 	SetNetworkAccessAllowed(networkAccessAllowed bool)
-	DeliveryMode() raw.PHVideoRequestOptionsDeliveryMode
-	SetDeliveryMode(deliveryMode raw.PHVideoRequestOptionsDeliveryMode)
+	DeliveryMode() PHVideoRequestOptionsDeliveryMode
+	SetDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode)
 	ProgressHandler() objc.Block
 	SetProgressHandler(progressHandler objc.Block)
 }

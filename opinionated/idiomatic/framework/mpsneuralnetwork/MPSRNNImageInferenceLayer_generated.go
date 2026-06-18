@@ -66,8 +66,8 @@ func (x *RNNImageInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermed
 }
 
 // WithBidirectionalCombineMode sets the bidirectionalCombineMode property and returns the receiver for chaining.
-func (x *RNNImageInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) *RNNImageInferenceLayer {
-	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
+func (x *RNNImageInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombineMode MPSRNNBidirectionalCombineMode) *RNNImageInferenceLayer {
+	x.inner.SetBidirectionalCombineMode(raw.MPSRNNBidirectionalCombineMode(bidirectionalCombineMode))
 	return x
 }
 
@@ -165,13 +165,13 @@ func (x *RNNImageInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermedi
 }
 
 // BidirectionalCombineMode calls the underlying BidirectionalCombineMode.
-func (x *RNNImageInferenceLayer) BidirectionalCombineMode() raw.MPSRNNBidirectionalCombineMode {
-	return x.inner.BidirectionalCombineMode()
+func (x *RNNImageInferenceLayer) BidirectionalCombineMode() MPSRNNBidirectionalCombineMode {
+	return MPSRNNBidirectionalCombineMode(x.inner.BidirectionalCombineMode())
 }
 
 // SetBidirectionalCombineMode calls the underlying SetBidirectionalCombineMode.
-func (x *RNNImageInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) {
-	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
+func (x *RNNImageInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode MPSRNNBidirectionalCombineMode) {
+	x.inner.SetBidirectionalCombineMode(raw.MPSRNNBidirectionalCombineMode(bidirectionalCombineMode))
 }
 
 func (x *RNNImageInferenceLayer) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
@@ -181,7 +181,7 @@ type RNNImageInferenceLayerable interface {
 	Unwrap() *raw.MPSRNNImageInferenceLayer
 	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNImageInferenceLayer
 	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNImageInferenceLayer
-	WithBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) *RNNImageInferenceLayer
+	WithBidirectionalCombineMode(bidirectionalCombineMode MPSRNNBidirectionalCombineMode) *RNNImageInferenceLayer
 	WithOffset(offset mpscore.MPSOffset) *RNNImageInferenceLayer
 	WithClipRect(clipRect metal.MTLRegion) *RNNImageInferenceLayer
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *RNNImageInferenceLayer
@@ -199,8 +199,8 @@ type RNNImageInferenceLayerable interface {
 	SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool)
 	StoreAllIntermediateStates() bool
 	SetStoreAllIntermediateStates(storeAllIntermediateStates bool)
-	BidirectionalCombineMode() raw.MPSRNNBidirectionalCombineMode
-	SetBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode)
+	BidirectionalCombineMode() MPSRNNBidirectionalCombineMode
+	SetBidirectionalCombineMode(bidirectionalCombineMode MPSRNNBidirectionalCombineMode)
 }
 
 var _ RNNImageInferenceLayerable = (*RNNImageInferenceLayer)(nil)

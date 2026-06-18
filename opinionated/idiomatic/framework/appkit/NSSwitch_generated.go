@@ -95,8 +95,8 @@ func (x *Switch) WithHighlighted(highlighted bool) *Switch {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Switch) WithControlSize(controlSize raw.NSControlSize) *Switch {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *Switch) WithControlSize(controlSize NSControlSize) *Switch {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -161,20 +161,20 @@ func (x *Switch) WithUsesSingleLineMode(usesSingleLineMode bool) *Switch {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Switch) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Switch {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *Switch) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Switch {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Switch) WithAlignment(alignment raw.NSTextAlignment) *Switch {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *Switch) WithAlignment(alignment NSTextAlignment) *Switch {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Switch) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Switch {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *Switch) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Switch {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -227,8 +227,8 @@ func (x *Switch) WithAutoresizesSubviews(autoresizesSubviews bool) *Switch {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Switch) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Switch {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Switch) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Switch {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -287,14 +287,14 @@ func (x *Switch) WithWantsRestingTouches(wantsRestingTouches bool) *Switch {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Switch) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Switch {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Switch) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Switch {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Switch) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Switch {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Switch) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Switch {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -401,8 +401,8 @@ func (x *Switch) WithToolTip(toolTip string) *Switch {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Switch) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Switch {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Switch) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Switch {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -419,8 +419,8 @@ func (x *Switch) WithNextKeyView(nextKeyView ViewProvider) *Switch {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Switch) WithFocusRingType(focusRingType raw.NSFocusRingType) *Switch {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *Switch) WithFocusRingType(focusRingType NSFocusRingType) *Switch {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -443,8 +443,8 @@ func (x *Switch) WithGestureRecognizers(items ...GestureRecognizerProvider) *Swi
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Switch) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Switch {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Switch) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Switch {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -560,7 +560,7 @@ type Switchable interface {
 	WithEnabled(enabled bool) *Switch
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Switch
 	WithHighlighted(highlighted bool) *Switch
-	WithControlSize(controlSize raw.NSControlSize) *Switch
+	WithControlSize(controlSize NSControlSize) *Switch
 	WithFormatter(formatter *foundation.NSFormatter) *Switch
 	WithObjectValue(objectValue objc.ID) *Switch
 	WithStringValue(stringValue string) *Switch
@@ -571,16 +571,16 @@ type Switchable interface {
 	WithDoubleValue(doubleValue float64) *Switch
 	WithFont(font *Font) *Switch
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Switch
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Switch
-	WithAlignment(alignment raw.NSTextAlignment) *Switch
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Switch
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Switch
+	WithAlignment(alignment NSTextAlignment) *Switch
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Switch
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Switch
 	WithCell(cell CellProvider) *Switch
 	WithSubviews(items ...ViewProvider) *Switch
 	WithHidden(hidden bool) *Switch
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Switch
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Switch
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Switch
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Switch
 	WithFrame(frame corefoundation.CGRect) *Switch
 	WithFrameRotation(frameRotation float64) *Switch
 	WithFrameCenterRotation(frameCenterRotation float64) *Switch
@@ -590,8 +590,8 @@ type Switchable interface {
 	WithNeedsDisplay(needsDisplay bool) *Switch
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Switch
 	WithWantsRestingTouches(wantsRestingTouches bool) *Switch
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Switch
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Switch
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Switch
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Switch
 	WithWantsLayer(wantsLayer bool) *Switch
 	WithLayer(layer *quartzcore.CALayer) *Switch
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Switch
@@ -605,12 +605,12 @@ type Switchable interface {
 	WithClipsToBounds(clipsToBounds bool) *Switch
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Switch
 	WithToolTip(toolTip string) *Switch
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Switch
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Switch
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Switch
 	WithNextKeyView(nextKeyView ViewProvider) *Switch
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Switch
+	WithFocusRingType(focusRingType NSFocusRingType) *Switch
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Switch
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Switch
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Switch
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Switch
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Switch

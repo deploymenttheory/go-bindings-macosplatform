@@ -129,8 +129,8 @@ func (x *PreferencePane) MainNibName() string {
 }
 
 // ShouldUnselect calls the underlying ShouldUnselect.
-func (x *PreferencePane) ShouldUnselect() raw.NSPreferencePaneUnselectReply {
-	return x.inner.ShouldUnselect()
+func (x *PreferencePane) ShouldUnselect() NSPreferencePaneUnselectReply {
+	return NSPreferencePaneUnselectReply(x.inner.ShouldUnselect())
 }
 
 // MainView calls the underlying MainView.
@@ -196,7 +196,7 @@ type PreferencePaneable interface {
 	UpdateHelpMenuWithArray(inArrayOfMenuItems *foundation.NSArray[objc.ID])
 	Bundle() *foundation.NSBundle
 	MainNibName() string
-	ShouldUnselect() raw.NSPreferencePaneUnselectReply
+	ShouldUnselect() NSPreferencePaneUnselectReply
 	MainView() *appkit.NSView
 	SetMainView(mainView *appkit.NSView)
 	SetInitialKeyView(initialKeyView *appkit.NSView)

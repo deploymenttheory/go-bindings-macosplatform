@@ -36,26 +36,26 @@ func NewStencilDescriptor() *StencilDescriptor {
 }
 
 // WithStencilCompareFunction sets the stencilCompareFunction property and returns the receiver for chaining.
-func (x *StencilDescriptor) WithStencilCompareFunction(stencilCompareFunction raw.MTLCompareFunction) *StencilDescriptor {
-	x.inner.SetStencilCompareFunction(stencilCompareFunction)
+func (x *StencilDescriptor) WithStencilCompareFunction(stencilCompareFunction MTLCompareFunction) *StencilDescriptor {
+	x.inner.SetStencilCompareFunction(raw.MTLCompareFunction(stencilCompareFunction))
 	return x
 }
 
 // WithStencilFailureOperation sets the stencilFailureOperation property and returns the receiver for chaining.
-func (x *StencilDescriptor) WithStencilFailureOperation(stencilFailureOperation raw.MTLStencilOperation) *StencilDescriptor {
-	x.inner.SetStencilFailureOperation(stencilFailureOperation)
+func (x *StencilDescriptor) WithStencilFailureOperation(stencilFailureOperation MTLStencilOperation) *StencilDescriptor {
+	x.inner.SetStencilFailureOperation(raw.MTLStencilOperation(stencilFailureOperation))
 	return x
 }
 
 // WithDepthFailureOperation sets the depthFailureOperation property and returns the receiver for chaining.
-func (x *StencilDescriptor) WithDepthFailureOperation(depthFailureOperation raw.MTLStencilOperation) *StencilDescriptor {
-	x.inner.SetDepthFailureOperation(depthFailureOperation)
+func (x *StencilDescriptor) WithDepthFailureOperation(depthFailureOperation MTLStencilOperation) *StencilDescriptor {
+	x.inner.SetDepthFailureOperation(raw.MTLStencilOperation(depthFailureOperation))
 	return x
 }
 
 // WithDepthStencilPassOperation sets the depthStencilPassOperation property and returns the receiver for chaining.
-func (x *StencilDescriptor) WithDepthStencilPassOperation(depthStencilPassOperation raw.MTLStencilOperation) *StencilDescriptor {
-	x.inner.SetDepthStencilPassOperation(depthStencilPassOperation)
+func (x *StencilDescriptor) WithDepthStencilPassOperation(depthStencilPassOperation MTLStencilOperation) *StencilDescriptor {
+	x.inner.SetDepthStencilPassOperation(raw.MTLStencilOperation(depthStencilPassOperation))
 	return x
 }
 
@@ -72,43 +72,43 @@ func (x *StencilDescriptor) WithWriteMask(writeMask uint32) *StencilDescriptor {
 }
 
 // StencilCompareFunction calls the underlying StencilCompareFunction.
-func (x *StencilDescriptor) StencilCompareFunction() raw.MTLCompareFunction {
-	return x.inner.StencilCompareFunction()
+func (x *StencilDescriptor) StencilCompareFunction() MTLCompareFunction {
+	return MTLCompareFunction(x.inner.StencilCompareFunction())
 }
 
 // SetStencilCompareFunction calls the underlying SetStencilCompareFunction.
-func (x *StencilDescriptor) SetStencilCompareFunction(stencilCompareFunction raw.MTLCompareFunction) {
-	x.inner.SetStencilCompareFunction(stencilCompareFunction)
+func (x *StencilDescriptor) SetStencilCompareFunction(stencilCompareFunction MTLCompareFunction) {
+	x.inner.SetStencilCompareFunction(raw.MTLCompareFunction(stencilCompareFunction))
 }
 
 // StencilFailureOperation calls the underlying StencilFailureOperation.
-func (x *StencilDescriptor) StencilFailureOperation() raw.MTLStencilOperation {
-	return x.inner.StencilFailureOperation()
+func (x *StencilDescriptor) StencilFailureOperation() MTLStencilOperation {
+	return MTLStencilOperation(x.inner.StencilFailureOperation())
 }
 
 // SetStencilFailureOperation calls the underlying SetStencilFailureOperation.
-func (x *StencilDescriptor) SetStencilFailureOperation(stencilFailureOperation raw.MTLStencilOperation) {
-	x.inner.SetStencilFailureOperation(stencilFailureOperation)
+func (x *StencilDescriptor) SetStencilFailureOperation(stencilFailureOperation MTLStencilOperation) {
+	x.inner.SetStencilFailureOperation(raw.MTLStencilOperation(stencilFailureOperation))
 }
 
 // DepthFailureOperation calls the underlying DepthFailureOperation.
-func (x *StencilDescriptor) DepthFailureOperation() raw.MTLStencilOperation {
-	return x.inner.DepthFailureOperation()
+func (x *StencilDescriptor) DepthFailureOperation() MTLStencilOperation {
+	return MTLStencilOperation(x.inner.DepthFailureOperation())
 }
 
 // SetDepthFailureOperation calls the underlying SetDepthFailureOperation.
-func (x *StencilDescriptor) SetDepthFailureOperation(depthFailureOperation raw.MTLStencilOperation) {
-	x.inner.SetDepthFailureOperation(depthFailureOperation)
+func (x *StencilDescriptor) SetDepthFailureOperation(depthFailureOperation MTLStencilOperation) {
+	x.inner.SetDepthFailureOperation(raw.MTLStencilOperation(depthFailureOperation))
 }
 
 // DepthStencilPassOperation calls the underlying DepthStencilPassOperation.
-func (x *StencilDescriptor) DepthStencilPassOperation() raw.MTLStencilOperation {
-	return x.inner.DepthStencilPassOperation()
+func (x *StencilDescriptor) DepthStencilPassOperation() MTLStencilOperation {
+	return MTLStencilOperation(x.inner.DepthStencilPassOperation())
 }
 
 // SetDepthStencilPassOperation calls the underlying SetDepthStencilPassOperation.
-func (x *StencilDescriptor) SetDepthStencilPassOperation(depthStencilPassOperation raw.MTLStencilOperation) {
-	x.inner.SetDepthStencilPassOperation(depthStencilPassOperation)
+func (x *StencilDescriptor) SetDepthStencilPassOperation(depthStencilPassOperation MTLStencilOperation) {
+	x.inner.SetDepthStencilPassOperation(raw.MTLStencilOperation(depthStencilPassOperation))
 }
 
 // ReadMask calls the underlying ReadMask.
@@ -134,20 +134,20 @@ func (x *StencilDescriptor) SetWriteMask(writeMask uint32) {
 // StencilDescriptorable is the interface implemented by [StencilDescriptor], for mocking and DI.
 type StencilDescriptorable interface {
 	Unwrap() *raw.MTLStencilDescriptor
-	WithStencilCompareFunction(stencilCompareFunction raw.MTLCompareFunction) *StencilDescriptor
-	WithStencilFailureOperation(stencilFailureOperation raw.MTLStencilOperation) *StencilDescriptor
-	WithDepthFailureOperation(depthFailureOperation raw.MTLStencilOperation) *StencilDescriptor
-	WithDepthStencilPassOperation(depthStencilPassOperation raw.MTLStencilOperation) *StencilDescriptor
+	WithStencilCompareFunction(stencilCompareFunction MTLCompareFunction) *StencilDescriptor
+	WithStencilFailureOperation(stencilFailureOperation MTLStencilOperation) *StencilDescriptor
+	WithDepthFailureOperation(depthFailureOperation MTLStencilOperation) *StencilDescriptor
+	WithDepthStencilPassOperation(depthStencilPassOperation MTLStencilOperation) *StencilDescriptor
 	WithReadMask(readMask uint32) *StencilDescriptor
 	WithWriteMask(writeMask uint32) *StencilDescriptor
-	StencilCompareFunction() raw.MTLCompareFunction
-	SetStencilCompareFunction(stencilCompareFunction raw.MTLCompareFunction)
-	StencilFailureOperation() raw.MTLStencilOperation
-	SetStencilFailureOperation(stencilFailureOperation raw.MTLStencilOperation)
-	DepthFailureOperation() raw.MTLStencilOperation
-	SetDepthFailureOperation(depthFailureOperation raw.MTLStencilOperation)
-	DepthStencilPassOperation() raw.MTLStencilOperation
-	SetDepthStencilPassOperation(depthStencilPassOperation raw.MTLStencilOperation)
+	StencilCompareFunction() MTLCompareFunction
+	SetStencilCompareFunction(stencilCompareFunction MTLCompareFunction)
+	StencilFailureOperation() MTLStencilOperation
+	SetStencilFailureOperation(stencilFailureOperation MTLStencilOperation)
+	DepthFailureOperation() MTLStencilOperation
+	SetDepthFailureOperation(depthFailureOperation MTLStencilOperation)
+	DepthStencilPassOperation() MTLStencilOperation
+	SetDepthStencilPassOperation(depthStencilPassOperation MTLStencilOperation)
 	ReadMask() uint32
 	SetReadMask(readMask uint32)
 	WriteMask() uint32

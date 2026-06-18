@@ -67,8 +67,8 @@ func (x *DeviceBrowserView) WithDisplaysNetworkScanners(displaysNetworkScanners 
 }
 
 // WithMode sets the mode property and returns the receiver for chaining.
-func (x *DeviceBrowserView) WithMode(mode raw.IKDeviceBrowserViewDisplayMode) *DeviceBrowserView {
-	x.inner.SetMode(mode)
+func (x *DeviceBrowserView) WithMode(mode IKDeviceBrowserViewDisplayMode) *DeviceBrowserView {
+	x.inner.SetMode(raw.IKDeviceBrowserViewDisplayMode(mode))
 	return x
 }
 
@@ -123,13 +123,13 @@ func (x *DeviceBrowserView) SetDisplaysNetworkScanners(displaysNetworkScanners b
 }
 
 // Mode calls the underlying Mode.
-func (x *DeviceBrowserView) Mode() raw.IKDeviceBrowserViewDisplayMode {
-	return x.inner.Mode()
+func (x *DeviceBrowserView) Mode() IKDeviceBrowserViewDisplayMode {
+	return IKDeviceBrowserViewDisplayMode(x.inner.Mode())
 }
 
 // SetMode calls the underlying SetMode.
-func (x *DeviceBrowserView) SetMode(mode raw.IKDeviceBrowserViewDisplayMode) {
-	x.inner.SetMode(mode)
+func (x *DeviceBrowserView) SetMode(mode IKDeviceBrowserViewDisplayMode) {
+	x.inner.SetMode(raw.IKDeviceBrowserViewDisplayMode(mode))
 }
 
 // SelectedDevice calls the underlying SelectedDevice.
@@ -145,7 +145,7 @@ type DeviceBrowserViewable interface {
 	WithDisplaysNetworkCameras(displaysNetworkCameras bool) *DeviceBrowserView
 	WithDisplaysLocalScanners(displaysLocalScanners bool) *DeviceBrowserView
 	WithDisplaysNetworkScanners(displaysNetworkScanners bool) *DeviceBrowserView
-	WithMode(mode raw.IKDeviceBrowserViewDisplayMode) *DeviceBrowserView
+	WithMode(mode IKDeviceBrowserViewDisplayMode) *DeviceBrowserView
 	Delegate() raw.IKDeviceBrowserViewDelegate
 	SetDelegate(delegate raw.IKDeviceBrowserViewDelegate)
 	DisplaysLocalCameras() bool
@@ -156,8 +156,8 @@ type DeviceBrowserViewable interface {
 	SetDisplaysLocalScanners(displaysLocalScanners bool)
 	DisplaysNetworkScanners() bool
 	SetDisplaysNetworkScanners(displaysNetworkScanners bool)
-	Mode() raw.IKDeviceBrowserViewDisplayMode
-	SetMode(mode raw.IKDeviceBrowserViewDisplayMode)
+	Mode() IKDeviceBrowserViewDisplayMode
+	SetMode(mode IKDeviceBrowserViewDisplayMode)
 	SelectedDevice() *imagecapturecore.ICDevice
 }
 

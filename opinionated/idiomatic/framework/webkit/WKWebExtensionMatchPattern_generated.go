@@ -60,8 +60,8 @@ func (x *WKWebExtensionMatchPattern) MatchesURL(url string) bool {
 }
 
 // MatchesURLOptions calls the underlying MatchesURLOptions.
-func (x *WKWebExtensionMatchPattern) MatchesURLOptions(url string, options raw.WKWebExtensionMatchPatternOptions) bool {
-	return x.inner.MatchesURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+func (x *WKWebExtensionMatchPattern) MatchesURLOptions(url string, options WKWebExtensionMatchPatternOptions) bool {
+	return x.inner.MatchesURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.WKWebExtensionMatchPatternOptions(options))
 }
 
 // MatchesPattern calls the underlying MatchesPattern.
@@ -70,8 +70,8 @@ func (x *WKWebExtensionMatchPattern) MatchesPattern(pattern *raw.WKWebExtensionM
 }
 
 // MatchesPatternOptions calls the underlying MatchesPatternOptions.
-func (x *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *raw.WKWebExtensionMatchPattern, options raw.WKWebExtensionMatchPatternOptions) bool {
-	return x.inner.MatchesPatternOptions(pattern, options)
+func (x *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *raw.WKWebExtensionMatchPattern, options WKWebExtensionMatchPatternOptions) bool {
+	return x.inner.MatchesPatternOptions(pattern, raw.WKWebExtensionMatchPatternOptions(options))
 }
 
 // String calls the underlying String.
@@ -124,9 +124,9 @@ func (x *WKWebExtensionMatchPattern) MatchesAllHosts() bool {
 type WKWebExtensionMatchPatternable interface {
 	Unwrap() *raw.WKWebExtensionMatchPattern
 	MatchesURL(url string) bool
-	MatchesURLOptions(url string, options raw.WKWebExtensionMatchPatternOptions) bool
+	MatchesURLOptions(url string, options WKWebExtensionMatchPatternOptions) bool
 	MatchesPattern(pattern *raw.WKWebExtensionMatchPattern) bool
-	MatchesPatternOptions(pattern *raw.WKWebExtensionMatchPattern, options raw.WKWebExtensionMatchPatternOptions) bool
+	MatchesPatternOptions(pattern *raw.WKWebExtensionMatchPattern, options WKWebExtensionMatchPatternOptions) bool
 	String() string
 	Scheme() string
 	Host() string

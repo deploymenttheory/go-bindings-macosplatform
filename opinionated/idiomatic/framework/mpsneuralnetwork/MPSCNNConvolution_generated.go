@@ -41,9 +41,9 @@ func NewCNNConvolutionWithDeviceWeights(device metal.MTLDevice, weights raw.MPSC
 }
 
 // NewCNNConvolutionWithDeviceConvolutionDescriptorKernelWeightsBiasTermsFlags creates a new [CNNConvolution].
-func NewCNNConvolutionWithDeviceConvolutionDescriptorKernelWeightsBiasTermsFlags(device metal.MTLDevice, convolutionDescriptor *raw.MPSCNNConvolutionDescriptor, kernelWeights *float32, biasTerms *float32, flags raw.MPSCNNConvolutionFlags) *CNNConvolution {
+func NewCNNConvolutionWithDeviceConvolutionDescriptorKernelWeightsBiasTermsFlags(device metal.MTLDevice, convolutionDescriptor *raw.MPSCNNConvolutionDescriptor, kernelWeights *float32, biasTerms *float32, flags MPSCNNConvolutionFlags) *CNNConvolution {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolution")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionDescriptor:kernelWeights:biasTerms:flags:"), device, convolutionDescriptor.Ptr(), kernelWeights, biasTerms, flags)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionDescriptor:kernelWeights:biasTerms:flags:"), device, convolutionDescriptor.Ptr(), kernelWeights, biasTerms, raw.MPSCNNConvolutionFlags(flags))
 	return &CNNConvolution{inner: raw.MPSCNNConvolutionFromID(_id)}
 }
 
@@ -55,8 +55,8 @@ func NewCNNConvolutionWithCoderDevice(aDecoder *foundation.NSCoder, device metal
 }
 
 // WithAccumulatorPrecisionOption sets the accumulatorPrecisionOption property and returns the receiver for chaining.
-func (x *CNNConvolution) WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolution {
-	x.inner.SetAccumulatorPrecisionOption(accumulatorPrecisionOption)
+func (x *CNNConvolution) WithAccumulatorPrecisionOption(accumulatorPrecisionOption MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolution {
+	x.inner.SetAccumulatorPrecisionOption(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecisionOption))
 	return x
 }
 
@@ -163,8 +163,8 @@ func (x *CNNConvolution) Neuron() unsafe.Pointer {
 }
 
 // NeuronType calls the underlying NeuronType.
-func (x *CNNConvolution) NeuronType() raw.MPSCNNNeuronType {
-	return x.inner.NeuronType()
+func (x *CNNConvolution) NeuronType() MPSCNNNeuronType {
+	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
 // NeuronParameterA calls the underlying NeuronParameterA.
@@ -197,13 +197,13 @@ func (x *CNNConvolution) ChannelMultiplier() uint {
 }
 
 // AccumulatorPrecisionOption calls the underlying AccumulatorPrecisionOption.
-func (x *CNNConvolution) AccumulatorPrecisionOption() raw.MPSNNConvolutionAccumulatorPrecisionOption {
-	return x.inner.AccumulatorPrecisionOption()
+func (x *CNNConvolution) AccumulatorPrecisionOption() MPSNNConvolutionAccumulatorPrecisionOption {
+	return MPSNNConvolutionAccumulatorPrecisionOption(x.inner.AccumulatorPrecisionOption())
 }
 
 // SetAccumulatorPrecisionOption calls the underlying SetAccumulatorPrecisionOption.
-func (x *CNNConvolution) SetAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) {
-	x.inner.SetAccumulatorPrecisionOption(accumulatorPrecisionOption)
+func (x *CNNConvolution) SetAccumulatorPrecisionOption(accumulatorPrecisionOption MPSNNConvolutionAccumulatorPrecisionOption) {
+	x.inner.SetAccumulatorPrecisionOption(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecisionOption))
 }
 
 func (x *CNNConvolution) asCNNConvolution() *raw.MPSCNNConvolution { return x.inner }
@@ -213,7 +213,7 @@ func (x *CNNConvolution) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCN
 // CNNConvolutionable is the interface implemented by [CNNConvolution], for mocking and DI.
 type CNNConvolutionable interface {
 	Unwrap() *raw.MPSCNNConvolution
-	WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolution
+	WithAccumulatorPrecisionOption(accumulatorPrecisionOption MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolution
 	WithOffset(offset mpscore.MPSOffset) *CNNConvolution
 	WithClipRect(clipRect metal.MTLRegion) *CNNConvolution
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolution
@@ -232,14 +232,14 @@ type CNNConvolutionable interface {
 	DataSource() raw.MPSCNNConvolutionDataSource
 	SubPixelScaleFactor() uint
 	Neuron() unsafe.Pointer
-	NeuronType() raw.MPSCNNNeuronType
+	NeuronType() MPSCNNNeuronType
 	NeuronParameterA() float32
 	NeuronParameterB() float32
 	NeuronParameterC() float32
 	FusedNeuronDescriptor() *NNNeuronDescriptor
 	ChannelMultiplier() uint
-	AccumulatorPrecisionOption() raw.MPSNNConvolutionAccumulatorPrecisionOption
-	SetAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption)
+	AccumulatorPrecisionOption() MPSNNConvolutionAccumulatorPrecisionOption
+	SetAccumulatorPrecisionOption(accumulatorPrecisionOption MPSNNConvolutionAccumulatorPrecisionOption)
 }
 
 var _ CNNConvolutionable = (*CNNConvolution)(nil)

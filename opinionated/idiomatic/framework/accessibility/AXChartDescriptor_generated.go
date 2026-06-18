@@ -80,8 +80,8 @@ func (x *ChartDescriptor) WithSummary(summary string) *ChartDescriptor {
 }
 
 // WithContentDirection sets the contentDirection property and returns the receiver for chaining.
-func (x *ChartDescriptor) WithContentDirection(contentDirection raw.AXChartDescriptorContentDirection) *ChartDescriptor {
-	x.inner.SetContentDirection(contentDirection)
+func (x *ChartDescriptor) WithContentDirection(contentDirection AXChartDescriptorContentDirection) *ChartDescriptor {
+	x.inner.SetContentDirection(raw.AXChartDescriptorContentDirection(contentDirection))
 	return x
 }
 
@@ -160,13 +160,13 @@ func (x *ChartDescriptor) SetSummary(summary string) {
 }
 
 // ContentDirection calls the underlying ContentDirection.
-func (x *ChartDescriptor) ContentDirection() raw.AXChartDescriptorContentDirection {
-	return x.inner.ContentDirection()
+func (x *ChartDescriptor) ContentDirection() AXChartDescriptorContentDirection {
+	return AXChartDescriptorContentDirection(x.inner.ContentDirection())
 }
 
 // SetContentDirection calls the underlying SetContentDirection.
-func (x *ChartDescriptor) SetContentDirection(contentDirection raw.AXChartDescriptorContentDirection) {
-	x.inner.SetContentDirection(contentDirection)
+func (x *ChartDescriptor) SetContentDirection(contentDirection AXChartDescriptorContentDirection) {
+	x.inner.SetContentDirection(raw.AXChartDescriptorContentDirection(contentDirection))
 }
 
 // ContentFrame calls the underlying ContentFrame.
@@ -235,7 +235,7 @@ type ChartDescriptorable interface {
 	WithTitle(title string) *ChartDescriptor
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ChartDescriptor
 	WithSummary(summary string) *ChartDescriptor
-	WithContentDirection(contentDirection raw.AXChartDescriptorContentDirection) *ChartDescriptor
+	WithContentDirection(contentDirection AXChartDescriptorContentDirection) *ChartDescriptor
 	WithContentFrame(contentFrame corefoundation.CGRect) *ChartDescriptor
 	WithSeries(items ...*raw.AXDataSeriesDescriptor) *ChartDescriptor
 	WithXAxis(xAxis raw.AXDataAxisDescriptor) *ChartDescriptor
@@ -246,8 +246,8 @@ type ChartDescriptorable interface {
 	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
 	Summary() string
 	SetSummary(summary string)
-	ContentDirection() raw.AXChartDescriptorContentDirection
-	SetContentDirection(contentDirection raw.AXChartDescriptorContentDirection)
+	ContentDirection() AXChartDescriptorContentDirection
+	SetContentDirection(contentDirection AXChartDescriptorContentDirection)
 	ContentFrame() corefoundation.CGRect
 	SetContentFrame(contentFrame corefoundation.CGRect)
 	Series() []*DataSeriesDescriptor

@@ -52,8 +52,8 @@ func (x *TrackObjectRequest) WithInputObservation(inputObservation DetectedObjec
 }
 
 // WithTrackingLevel sets the trackingLevel property and returns the receiver for chaining.
-func (x *TrackObjectRequest) WithTrackingLevel(trackingLevel raw.VNRequestTrackingLevel) *TrackObjectRequest {
-	x.inner.VNTrackingRequest.SetTrackingLevel(trackingLevel)
+func (x *TrackObjectRequest) WithTrackingLevel(trackingLevel VNRequestTrackingLevel) *TrackObjectRequest {
+	x.inner.VNTrackingRequest.SetTrackingLevel(raw.VNRequestTrackingLevel(trackingLevel))
 	return x
 }
 
@@ -103,7 +103,7 @@ func (x *TrackObjectRequest) asRequest() *raw.VNRequest {
 type TrackObjectRequestable interface {
 	Unwrap() *raw.VNTrackObjectRequest
 	WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackObjectRequest
-	WithTrackingLevel(trackingLevel raw.VNRequestTrackingLevel) *TrackObjectRequest
+	WithTrackingLevel(trackingLevel VNRequestTrackingLevel) *TrackObjectRequest
 	WithLastFrame(lastFrame bool) *TrackObjectRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackObjectRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackObjectRequest

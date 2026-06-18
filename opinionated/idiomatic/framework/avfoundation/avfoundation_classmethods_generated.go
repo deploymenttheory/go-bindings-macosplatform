@@ -479,8 +479,8 @@ func DeviceWithUniqueID(deviceUniqueID string) *CaptureDevice {
 }
 
 // DefaultDeviceWithDeviceTypeMediaTypePosition calls the underlying AVCaptureDeviceDefaultDeviceWithDeviceTypeMediaTypePosition.
-func DefaultDeviceWithDeviceTypeMediaTypePosition(deviceType *foundation.NSString, mediaType *foundation.NSString, position raw.AVCaptureDevicePosition) *CaptureDevice {
-	_r := raw.AVCaptureDeviceDefaultDeviceWithDeviceTypeMediaTypePosition(deviceType, mediaType, position)
+func DefaultDeviceWithDeviceTypeMediaTypePosition(deviceType *foundation.NSString, mediaType *foundation.NSString, position AVCaptureDevicePosition) *CaptureDevice {
+	_r := raw.AVCaptureDeviceDefaultDeviceWithDeviceTypeMediaTypePosition(deviceType, mediaType, raw.AVCaptureDevicePosition(position))
 	if _r == nil {
 		return nil
 	}
@@ -511,8 +511,8 @@ func SystemPreferredCamera() *CaptureDevice {
 }
 
 // AuthorizationStatusForMediaType calls the underlying AVCaptureDeviceAuthorizationStatusForMediaType.
-func AuthorizationStatusForMediaType(mediaType *foundation.NSString) raw.AVAuthorizationStatus {
-	return raw.AVCaptureDeviceAuthorizationStatusForMediaType(mediaType)
+func AuthorizationStatusForMediaType(mediaType *foundation.NSString) AVAuthorizationStatus {
+	return AVAuthorizationStatus(raw.AVCaptureDeviceAuthorizationStatusForMediaType(mediaType))
 }
 
 // RequestAccessForMediaTypeCompletionHandler calls the underlying AVCaptureDeviceRequestAccessForMediaTypeCompletionHandler.
@@ -521,13 +521,13 @@ func RequestAccessForMediaTypeCompletionHandler(mediaType *foundation.NSString, 
 }
 
 // CenterStageControlMode calls the underlying AVCaptureDeviceCenterStageControlMode.
-func CenterStageControlMode() raw.AVCaptureCenterStageControlMode {
-	return raw.AVCaptureDeviceCenterStageControlMode()
+func CenterStageControlMode() AVCaptureCenterStageControlMode {
+	return AVCaptureCenterStageControlMode(raw.AVCaptureDeviceCenterStageControlMode())
 }
 
 // SetCenterStageControlMode calls the underlying AVCaptureDeviceSetCenterStageControlMode.
-func SetCenterStageControlMode(centerStageControlMode raw.AVCaptureCenterStageControlMode) {
-	raw.AVCaptureDeviceSetCenterStageControlMode(centerStageControlMode)
+func SetCenterStageControlMode(centerStageControlMode AVCaptureCenterStageControlMode) {
+	raw.AVCaptureDeviceSetCenterStageControlMode(raw.AVCaptureCenterStageControlMode(centerStageControlMode))
 }
 
 // IsCenterStageEnabled calls the underlying AVCaptureDeviceIsCenterStageEnabled.
@@ -561,18 +561,18 @@ func IsBackgroundReplacementEnabled() bool {
 }
 
 // PreferredMicrophoneMode calls the underlying AVCaptureDevicePreferredMicrophoneMode.
-func PreferredMicrophoneMode() raw.AVCaptureMicrophoneMode {
-	return raw.AVCaptureDevicePreferredMicrophoneMode()
+func PreferredMicrophoneMode() AVCaptureMicrophoneMode {
+	return AVCaptureMicrophoneMode(raw.AVCaptureDevicePreferredMicrophoneMode())
 }
 
 // ActiveMicrophoneMode calls the underlying AVCaptureDeviceActiveMicrophoneMode.
-func ActiveMicrophoneMode() raw.AVCaptureMicrophoneMode {
-	return raw.AVCaptureDeviceActiveMicrophoneMode()
+func ActiveMicrophoneMode() AVCaptureMicrophoneMode {
+	return AVCaptureMicrophoneMode(raw.AVCaptureDeviceActiveMicrophoneMode())
 }
 
 // ShowSystemUserInterface calls the underlying AVCaptureDeviceShowSystemUserInterface.
-func ShowSystemUserInterface(systemUserInterface raw.AVCaptureSystemUserInterface) {
-	raw.AVCaptureDeviceShowSystemUserInterface(systemUserInterface)
+func ShowSystemUserInterface(systemUserInterface AVCaptureSystemUserInterface) {
+	raw.AVCaptureDeviceShowSystemUserInterface(raw.AVCaptureSystemUserInterface(systemUserInterface))
 }
 
 // IsStudioLightEnabled calls the underlying AVCaptureDeviceIsStudioLightEnabled.
@@ -591,8 +591,8 @@ func IsEdgeLightActive() bool {
 }
 
 // DiscoverySessionWithDeviceTypesMediaTypePosition calls the underlying AVCaptureDeviceDiscoverySessionDiscoverySessionWithDeviceTypesMediaTypePosition.
-func DiscoverySessionWithDeviceTypesMediaTypePosition(deviceTypes *foundation.NSArray[*foundation.NSString], mediaType *foundation.NSString, position raw.AVCaptureDevicePosition) *CaptureDeviceDiscoverySession {
-	_r := raw.AVCaptureDeviceDiscoverySessionDiscoverySessionWithDeviceTypesMediaTypePosition(deviceTypes, mediaType, position)
+func DiscoverySessionWithDeviceTypesMediaTypePosition(deviceTypes *foundation.NSArray[*foundation.NSString], mediaType *foundation.NSString, position AVCaptureDevicePosition) *CaptureDeviceDiscoverySession {
+	_r := raw.AVCaptureDeviceDiscoverySessionDiscoverySessionWithDeviceTypesMediaTypePosition(deviceTypes, mediaType, raw.AVCaptureDevicePosition(position))
 	if _r == nil {
 		return nil
 	}
@@ -848,8 +848,8 @@ func RequestAccessWithCompletionHandler(handler func(bool)) {
 }
 
 // AuthorizationStatus calls the underlying AVExternalStorageDeviceAuthorizationStatus.
-func AuthorizationStatus() raw.AVAuthorizationStatus {
-	return raw.AVExternalStorageDeviceAuthorizationStatus()
+func AuthorizationStatus() AVAuthorizationStatus {
+	return AVAuthorizationStatus(raw.AVExternalStorageDeviceAuthorizationStatus())
 }
 
 // SharedSession calls the underlying AVExternalStorageDeviceDiscoverySessionSharedSession.
@@ -1321,8 +1321,8 @@ func SetObservationEnabled(observationEnabled bool) {
 }
 
 // InterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes calls the underlying AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes.
-func InterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem *raw.AVPlayerItem, identifier string, time_ coremedia.CMTime, templateItems *foundation.NSArray[*raw.AVPlayerItem], restrictions raw.AVPlayerInterstitialEventRestrictions, resumptionOffset coremedia.CMTime, playoutLimit coremedia.CMTime, userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *PlayerInterstitialEvent {
-	_r := raw.AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem, foundation.NSStringStringWithUTF8String(identifier), time_, templateItems, restrictions, resumptionOffset, playoutLimit, userDefinedAttributes)
+func InterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem *raw.AVPlayerItem, identifier string, time_ coremedia.CMTime, templateItems *foundation.NSArray[*raw.AVPlayerItem], restrictions AVPlayerInterstitialEventRestrictions, resumptionOffset coremedia.CMTime, playoutLimit coremedia.CMTime, userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *PlayerInterstitialEvent {
+	_r := raw.AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem, foundation.NSStringStringWithUTF8String(identifier), time_, templateItems, raw.AVPlayerInterstitialEventRestrictions(restrictions), resumptionOffset, playoutLimit, userDefinedAttributes)
 	if _r == nil {
 		return nil
 	}
@@ -1330,8 +1330,8 @@ func InterstitialEventWithPrimaryItemIdentifierTimeTemplateItemsRestrictionsResu
 }
 
 // InterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes calls the underlying AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes.
-func InterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem *raw.AVPlayerItem, identifier string, date *foundation.NSDate, templateItems *foundation.NSArray[*raw.AVPlayerItem], restrictions raw.AVPlayerInterstitialEventRestrictions, resumptionOffset coremedia.CMTime, playoutLimit coremedia.CMTime, userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *PlayerInterstitialEvent {
-	_r := raw.AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem, foundation.NSStringStringWithUTF8String(identifier), date, templateItems, restrictions, resumptionOffset, playoutLimit, userDefinedAttributes)
+func InterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem *raw.AVPlayerItem, identifier string, date *foundation.NSDate, templateItems *foundation.NSArray[*raw.AVPlayerItem], restrictions AVPlayerInterstitialEventRestrictions, resumptionOffset coremedia.CMTime, playoutLimit coremedia.CMTime, userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *PlayerInterstitialEvent {
+	_r := raw.AVPlayerInterstitialEventInterstitialEventWithPrimaryItemIdentifierDateTemplateItemsRestrictionsResumptionOffsetPlayoutLimitUserDefinedAttributes(primaryItem, foundation.NSStringStringWithUTF8String(identifier), date, templateItems, raw.AVPlayerInterstitialEventRestrictions(restrictions), resumptionOffset, playoutLimit, userDefinedAttributes)
 	if _r == nil {
 		return nil
 	}

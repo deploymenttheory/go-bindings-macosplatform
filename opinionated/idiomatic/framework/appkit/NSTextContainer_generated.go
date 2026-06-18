@@ -61,8 +61,8 @@ func (x *TextContainer) WithSize(size corefoundation.CGSize) *TextContainer {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TextContainer) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextContainer {
-	x.inner.SetLineBreakMode(lineBreakMode)
+func (x *TextContainer) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextContainer {
+	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -127,8 +127,8 @@ func (x *TextContainer) WithContainerSize(containerSize corefoundation.CGSize) *
 }
 
 // LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect calls the underlying LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect.
-func (x *TextContainer) LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection raw.NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect, characterIndex, baseWritingDirection, remainingRect)
+func (x *TextContainer) LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect, characterIndex, raw.NSWritingDirection(baseWritingDirection), remainingRect)
 }
 
 // TextLayoutManager calls the underlying TextLayoutManager.
@@ -151,13 +151,13 @@ func (x *TextContainer) SetSize(size corefoundation.CGSize) {
 }
 
 // LineBreakMode calls the underlying LineBreakMode.
-func (x *TextContainer) LineBreakMode() raw.NSLineBreakMode {
-	return x.inner.LineBreakMode()
+func (x *TextContainer) LineBreakMode() NSLineBreakMode {
+	return NSLineBreakMode(x.inner.LineBreakMode())
 }
 
 // SetLineBreakMode calls the underlying SetLineBreakMode.
-func (x *TextContainer) SetLineBreakMode(lineBreakMode raw.NSLineBreakMode) {
-	x.inner.SetLineBreakMode(lineBreakMode)
+func (x *TextContainer) SetLineBreakMode(lineBreakMode NSLineBreakMode) {
+	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 }
 
 // LineFragmentPadding calls the underlying LineFragmentPadding.
@@ -255,8 +255,8 @@ func (x *TextContainer) SetTextView(textView *raw.NSTextView) {
 }
 
 // LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect calls the underlying LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect.
-func (x *TextContainer) LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection raw.NSLineSweepDirection, movementDirection raw.NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect, sweepDirection, movementDirection, remainingRect)
+func (x *TextContainer) LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection NSLineSweepDirection, movementDirection NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect, raw.NSLineSweepDirection(sweepDirection), raw.NSLineMovementDirection(movementDirection), remainingRect)
 }
 
 // ContainsPoint calls the underlying ContainsPoint.
@@ -278,7 +278,7 @@ func (x *TextContainer) SetContainerSize(containerSize corefoundation.CGSize) {
 type TextContainerable interface {
 	Unwrap() *raw.NSTextContainer
 	WithSize(size corefoundation.CGSize) *TextContainer
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextContainer
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextContainer
 	WithLineFragmentPadding(lineFragmentPadding float64) *TextContainer
 	WithMaximumNumberOfLines(maximumNumberOfLines uint) *TextContainer
 	WithWidthTracksTextView(widthTracksTextView bool) *TextContainer
@@ -287,12 +287,12 @@ type TextContainerable interface {
 	WithExclusionPaths(items ...*raw.NSBezierPath) *TextContainer
 	WithTextView(textView *TextView) *TextContainer
 	WithContainerSize(containerSize corefoundation.CGSize) *TextContainer
-	LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection raw.NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect
+	LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect
 	TextLayoutManager() *TextLayoutManager
 	Size() corefoundation.CGSize
 	SetSize(size corefoundation.CGSize)
-	LineBreakMode() raw.NSLineBreakMode
-	SetLineBreakMode(lineBreakMode raw.NSLineBreakMode)
+	LineBreakMode() NSLineBreakMode
+	SetLineBreakMode(lineBreakMode NSLineBreakMode)
 	LineFragmentPadding() float64
 	SetLineFragmentPadding(lineFragmentPadding float64)
 	MaximumNumberOfLines() uint
@@ -309,7 +309,7 @@ type TextContainerable interface {
 	SetExclusionPaths(exclusionPaths *foundation.NSArray[*raw.NSBezierPath])
 	TextView() *TextView
 	SetTextView(textView *raw.NSTextView)
-	LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection raw.NSLineSweepDirection, movementDirection raw.NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect
+	LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection NSLineSweepDirection, movementDirection NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect
 	ContainsPoint(point corefoundation.CGPoint) bool
 	ContainerSize() corefoundation.CGSize
 	SetContainerSize(containerSize corefoundation.CGSize)

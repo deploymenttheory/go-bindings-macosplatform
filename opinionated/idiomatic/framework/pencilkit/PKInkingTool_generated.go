@@ -94,8 +94,8 @@ func (x *InkingTool) Ink() *Ink {
 }
 
 // RequiredContentVersion calls the underlying RequiredContentVersion.
-func (x *InkingTool) RequiredContentVersion() raw.PKContentVersion {
-	return x.inner.RequiredContentVersion()
+func (x *InkingTool) RequiredContentVersion() PKContentVersion {
+	return PKContentVersion(x.inner.RequiredContentVersion())
 }
 
 func (x *InkingTool) asTool() *raw.PKTool { return &x.inner.PKTool }
@@ -108,7 +108,7 @@ type InkingToolable interface {
 	Width() float64
 	Azimuth() float64
 	Ink() *Ink
-	RequiredContentVersion() raw.PKContentVersion
+	RequiredContentVersion() PKContentVersion
 }
 
 var _ InkingToolable = (*InkingTool)(nil)

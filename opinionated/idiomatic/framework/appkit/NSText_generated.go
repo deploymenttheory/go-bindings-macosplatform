@@ -128,14 +128,14 @@ func (x *Text) WithTextColor(textColor *Color) *Text {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Text) WithAlignment(alignment raw.NSTextAlignment) *Text {
-	x.inner.SetAlignment(alignment)
+func (x *Text) WithAlignment(alignment NSTextAlignment) *Text {
+	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Text) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Text {
-	x.inner.SetBaseWritingDirection(baseWritingDirection)
+func (x *Text) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Text {
+	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -200,8 +200,8 @@ func (x *Text) WithAutoresizesSubviews(autoresizesSubviews bool) *Text {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Text) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Text {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Text) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Text {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -260,14 +260,14 @@ func (x *Text) WithWantsRestingTouches(wantsRestingTouches bool) *Text {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Text) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Text {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Text) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Text {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Text) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Text {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Text) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Text {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -374,8 +374,8 @@ func (x *Text) WithToolTip(toolTip string) *Text {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Text) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Text {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Text) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Text {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -392,8 +392,8 @@ func (x *Text) WithNextKeyView(nextKeyView ViewProvider) *Text {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Text) WithFocusRingType(focusRingType raw.NSFocusRingType) *Text {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *Text) WithFocusRingType(focusRingType NSFocusRingType) *Text {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -416,8 +416,8 @@ func (x *Text) WithGestureRecognizers(items ...GestureRecognizerProvider) *Text 
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Text) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Text {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Text) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Text {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -812,23 +812,23 @@ func (x *Text) SetTextColor(textColor *raw.NSColor) {
 }
 
 // Alignment calls the underlying Alignment.
-func (x *Text) Alignment() raw.NSTextAlignment {
-	return x.inner.Alignment()
+func (x *Text) Alignment() NSTextAlignment {
+	return NSTextAlignment(x.inner.Alignment())
 }
 
 // SetAlignment calls the underlying SetAlignment.
-func (x *Text) SetAlignment(alignment raw.NSTextAlignment) {
-	x.inner.SetAlignment(alignment)
+func (x *Text) SetAlignment(alignment NSTextAlignment) {
+	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
 }
 
 // BaseWritingDirection calls the underlying BaseWritingDirection.
-func (x *Text) BaseWritingDirection() raw.NSWritingDirection {
-	return x.inner.BaseWritingDirection()
+func (x *Text) BaseWritingDirection() NSWritingDirection {
+	return NSWritingDirection(x.inner.BaseWritingDirection())
 }
 
 // SetBaseWritingDirection calls the underlying SetBaseWritingDirection.
-func (x *Text) SetBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) {
-	x.inner.SetBaseWritingDirection(baseWritingDirection)
+func (x *Text) SetBaseWritingDirection(baseWritingDirection NSWritingDirection) {
+	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 }
 
 // MaxSize calls the underlying MaxSize.
@@ -893,8 +893,8 @@ type Textable interface {
 	WithSelectedRange(selectedRange foundation.NSRange) *Text
 	WithFont(font *Font) *Text
 	WithTextColor(textColor *Color) *Text
-	WithAlignment(alignment raw.NSTextAlignment) *Text
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Text
+	WithAlignment(alignment NSTextAlignment) *Text
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Text
 	WithMaxSize(maxSize corefoundation.CGSize) *Text
 	WithMinSize(minSize corefoundation.CGSize) *Text
 	WithHorizontallyResizable(horizontallyResizable bool) *Text
@@ -903,7 +903,7 @@ type Textable interface {
 	WithHidden(hidden bool) *Text
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Text
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Text
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Text
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Text
 	WithFrame(frame corefoundation.CGRect) *Text
 	WithFrameRotation(frameRotation float64) *Text
 	WithFrameCenterRotation(frameCenterRotation float64) *Text
@@ -913,8 +913,8 @@ type Textable interface {
 	WithNeedsDisplay(needsDisplay bool) *Text
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Text
 	WithWantsRestingTouches(wantsRestingTouches bool) *Text
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Text
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Text
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Text
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Text
 	WithWantsLayer(wantsLayer bool) *Text
 	WithLayer(layer *quartzcore.CALayer) *Text
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Text
@@ -928,12 +928,12 @@ type Textable interface {
 	WithClipsToBounds(clipsToBounds bool) *Text
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Text
 	WithToolTip(toolTip string) *Text
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Text
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Text
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Text
 	WithNextKeyView(nextKeyView ViewProvider) *Text
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Text
+	WithFocusRingType(focusRingType NSFocusRingType) *Text
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Text
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Text
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Text
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Text
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Text
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Text
@@ -1006,10 +1006,10 @@ type Textable interface {
 	SetFont(font *raw.NSFont)
 	TextColor() *Color
 	SetTextColor(textColor *raw.NSColor)
-	Alignment() raw.NSTextAlignment
-	SetAlignment(alignment raw.NSTextAlignment)
-	BaseWritingDirection() raw.NSWritingDirection
-	SetBaseWritingDirection(baseWritingDirection raw.NSWritingDirection)
+	Alignment() NSTextAlignment
+	SetAlignment(alignment NSTextAlignment)
+	BaseWritingDirection() NSWritingDirection
+	SetBaseWritingDirection(baseWritingDirection NSWritingDirection)
 	MaxSize() corefoundation.CGSize
 	SetMaxSize(maxSize corefoundation.CGSize)
 	MinSize() corefoundation.CGSize

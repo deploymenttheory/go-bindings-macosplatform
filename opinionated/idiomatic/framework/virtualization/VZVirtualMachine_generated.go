@@ -191,8 +191,8 @@ func (x *VirtualMachine) Queue() *foundation.NSObject {
 }
 
 // State calls the underlying State.
-func (x *VirtualMachine) State() raw.VZVirtualMachineState {
-	return x.inner.State()
+func (x *VirtualMachine) State() VZVirtualMachineState {
+	return VZVirtualMachineState(x.inner.State())
 }
 
 // Delegate calls the underlying Delegate.
@@ -320,7 +320,7 @@ type VirtualMachineable interface {
 	SaveMachineStateToURL(ctx context.Context, saveFileURL string) error
 	RequestStop() error
 	Queue() *foundation.NSObject
-	State() raw.VZVirtualMachineState
+	State() VZVirtualMachineState
 	Delegate() raw.VZVirtualMachineDelegate
 	SetDelegate(delegate raw.VZVirtualMachineDelegate)
 	CanStart() bool

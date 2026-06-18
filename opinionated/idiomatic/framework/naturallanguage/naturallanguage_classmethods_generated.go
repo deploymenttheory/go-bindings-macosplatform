@@ -169,21 +169,23 @@ func ModelWithMLModelError(mlModel *coreml.MLModel) (*Model, error) {
 }
 
 // SupportedRevisionsForType calls the underlying NLModelConfigurationSupportedRevisionsForType.
-func SupportedRevisionsForType(type_ raw.NLModelType) *foundation.NSIndexSet {
-	return raw.NLModelConfigurationSupportedRevisionsForType(type_)
+func SupportedRevisionsForType(type_ NLModelType) *foundation.NSIndexSet {
+	return raw.NLModelConfigurationSupportedRevisionsForType(raw.NLModelType(type_))
 }
 
 // CurrentRevisionForType calls the underlying NLModelConfigurationCurrentRevisionForType.
-func CurrentRevisionForType(type_ raw.NLModelType) uint {
-	return raw.NLModelConfigurationCurrentRevisionForType(type_)
+func CurrentRevisionForType(type_ NLModelType) uint {
+	return raw.NLModelConfigurationCurrentRevisionForType(raw.NLModelType(type_))
 }
 
 // AvailableTagSchemesForUnitLanguage calls the underlying NLTaggerAvailableTagSchemesForUnitLanguage.
-func AvailableTagSchemesForUnitLanguage(unit raw.NLTokenUnit, language *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
-	return raw.NLTaggerAvailableTagSchemesForUnitLanguage(unit, language)
+func AvailableTagSchemesForUnitLanguage(unit NLTokenUnit, language *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
+	return raw.NLTaggerAvailableTagSchemesForUnitLanguage(raw.NLTokenUnit(unit), language)
 }
 
 // RequestAssetsForLanguageTagSchemeCompletionHandler calls the underlying NLTaggerRequestAssetsForLanguageTagSchemeCompletionHandler.
-func RequestAssetsForLanguageTagSchemeCompletionHandler(language *foundation.NSString, tagScheme *foundation.NSString, completionHandler func(raw.NLTaggerAssetsResult, unsafe.Pointer)) {
-	raw.NLTaggerRequestAssetsForLanguageTagSchemeCompletionHandler(language, tagScheme, completionHandler)
+func RequestAssetsForLanguageTagSchemeCompletionHandler(language *foundation.NSString, tagScheme *foundation.NSString, completionHandler func(NLTaggerAssetsResult, unsafe.Pointer)) {
+	raw.NLTaggerRequestAssetsForLanguageTagSchemeCompletionHandler(language, tagScheme, func(_a0 raw.NLTaggerAssetsResult, _a1 unsafe.Pointer) {
+		completionHandler(NLTaggerAssetsResult(_a0), _a1)
+	})
 }

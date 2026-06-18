@@ -48,14 +48,14 @@ func NewPickerConfigurationWithPhotoLibrary(photoLibrary *photos.PHPhotoLibrary)
 }
 
 // WithPreferredAssetRepresentationMode sets the preferredAssetRepresentationMode property and returns the receiver for chaining.
-func (x *PickerConfiguration) WithPreferredAssetRepresentationMode(preferredAssetRepresentationMode raw.PHPickerConfigurationAssetRepresentationMode) *PickerConfiguration {
-	x.inner.SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode)
+func (x *PickerConfiguration) WithPreferredAssetRepresentationMode(preferredAssetRepresentationMode PHPickerConfigurationAssetRepresentationMode) *PickerConfiguration {
+	x.inner.SetPreferredAssetRepresentationMode(raw.PHPickerConfigurationAssetRepresentationMode(preferredAssetRepresentationMode))
 	return x
 }
 
 // WithSelection sets the selection property and returns the receiver for chaining.
-func (x *PickerConfiguration) WithSelection(selection raw.PHPickerConfigurationSelection) *PickerConfiguration {
-	x.inner.SetSelection(selection)
+func (x *PickerConfiguration) WithSelection(selection PHPickerConfigurationSelection) *PickerConfiguration {
+	x.inner.SetSelection(raw.PHPickerConfigurationSelection(selection))
 	return x
 }
 
@@ -90,8 +90,8 @@ func (x *PickerConfiguration) WithPreselectedAssetIdentifiers(items ...*foundati
 }
 
 // WithMode sets the mode property and returns the receiver for chaining.
-func (x *PickerConfiguration) WithMode(mode raw.PHPickerMode) *PickerConfiguration {
-	x.inner.SetMode(mode)
+func (x *PickerConfiguration) WithMode(mode PHPickerMode) *PickerConfiguration {
+	x.inner.SetMode(raw.PHPickerMode(mode))
 	return x
 }
 
@@ -102,29 +102,29 @@ func (x *PickerConfiguration) WithEdgesWithoutContentMargins(edgesWithoutContent
 }
 
 // WithDisabledCapabilities sets the disabledCapabilities property and returns the receiver for chaining.
-func (x *PickerConfiguration) WithDisabledCapabilities(disabledCapabilities raw.PHPickerCapabilities) *PickerConfiguration {
-	x.inner.SetDisabledCapabilities(disabledCapabilities)
+func (x *PickerConfiguration) WithDisabledCapabilities(disabledCapabilities PHPickerCapabilities) *PickerConfiguration {
+	x.inner.SetDisabledCapabilities(raw.PHPickerCapabilities(disabledCapabilities))
 	return x
 }
 
 // PreferredAssetRepresentationMode calls the underlying PreferredAssetRepresentationMode.
-func (x *PickerConfiguration) PreferredAssetRepresentationMode() raw.PHPickerConfigurationAssetRepresentationMode {
-	return x.inner.PreferredAssetRepresentationMode()
+func (x *PickerConfiguration) PreferredAssetRepresentationMode() PHPickerConfigurationAssetRepresentationMode {
+	return PHPickerConfigurationAssetRepresentationMode(x.inner.PreferredAssetRepresentationMode())
 }
 
 // SetPreferredAssetRepresentationMode calls the underlying SetPreferredAssetRepresentationMode.
-func (x *PickerConfiguration) SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode raw.PHPickerConfigurationAssetRepresentationMode) {
-	x.inner.SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode)
+func (x *PickerConfiguration) SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode PHPickerConfigurationAssetRepresentationMode) {
+	x.inner.SetPreferredAssetRepresentationMode(raw.PHPickerConfigurationAssetRepresentationMode(preferredAssetRepresentationMode))
 }
 
 // Selection calls the underlying Selection.
-func (x *PickerConfiguration) Selection() raw.PHPickerConfigurationSelection {
-	return x.inner.Selection()
+func (x *PickerConfiguration) Selection() PHPickerConfigurationSelection {
+	return PHPickerConfigurationSelection(x.inner.Selection())
 }
 
 // SetSelection calls the underlying SetSelection.
-func (x *PickerConfiguration) SetSelection(selection raw.PHPickerConfigurationSelection) {
-	x.inner.SetSelection(selection)
+func (x *PickerConfiguration) SetSelection(selection PHPickerConfigurationSelection) {
+	x.inner.SetSelection(raw.PHPickerConfigurationSelection(selection))
 }
 
 // SelectionLimit calls the underlying SelectionLimit.
@@ -168,13 +168,13 @@ func (x *PickerConfiguration) SetPreselectedAssetIdentifiers(preselectedAssetIde
 }
 
 // Mode calls the underlying Mode.
-func (x *PickerConfiguration) Mode() raw.PHPickerMode {
-	return x.inner.Mode()
+func (x *PickerConfiguration) Mode() PHPickerMode {
+	return PHPickerMode(x.inner.Mode())
 }
 
 // SetMode calls the underlying SetMode.
-func (x *PickerConfiguration) SetMode(mode raw.PHPickerMode) {
-	x.inner.SetMode(mode)
+func (x *PickerConfiguration) SetMode(mode PHPickerMode) {
+	x.inner.SetMode(raw.PHPickerMode(mode))
 }
 
 // EdgesWithoutContentMargins calls the underlying EdgesWithoutContentMargins.
@@ -188,42 +188,42 @@ func (x *PickerConfiguration) SetEdgesWithoutContentMargins(edgesWithoutContentM
 }
 
 // DisabledCapabilities calls the underlying DisabledCapabilities.
-func (x *PickerConfiguration) DisabledCapabilities() raw.PHPickerCapabilities {
-	return x.inner.DisabledCapabilities()
+func (x *PickerConfiguration) DisabledCapabilities() PHPickerCapabilities {
+	return PHPickerCapabilities(x.inner.DisabledCapabilities())
 }
 
 // SetDisabledCapabilities calls the underlying SetDisabledCapabilities.
-func (x *PickerConfiguration) SetDisabledCapabilities(disabledCapabilities raw.PHPickerCapabilities) {
-	x.inner.SetDisabledCapabilities(disabledCapabilities)
+func (x *PickerConfiguration) SetDisabledCapabilities(disabledCapabilities PHPickerCapabilities) {
+	x.inner.SetDisabledCapabilities(raw.PHPickerCapabilities(disabledCapabilities))
 }
 
 // PickerConfigurationable is the interface implemented by [PickerConfiguration], for mocking and DI.
 type PickerConfigurationable interface {
 	Unwrap() *raw.PHPickerConfiguration
-	WithPreferredAssetRepresentationMode(preferredAssetRepresentationMode raw.PHPickerConfigurationAssetRepresentationMode) *PickerConfiguration
-	WithSelection(selection raw.PHPickerConfigurationSelection) *PickerConfiguration
+	WithPreferredAssetRepresentationMode(preferredAssetRepresentationMode PHPickerConfigurationAssetRepresentationMode) *PickerConfiguration
+	WithSelection(selection PHPickerConfigurationSelection) *PickerConfiguration
 	WithSelectionLimit(selectionLimit int) *PickerConfiguration
 	WithFilter(filter *PickerFilter) *PickerConfiguration
 	WithPreselectedAssetIdentifiers(items ...*foundation.NSString) *PickerConfiguration
-	WithMode(mode raw.PHPickerMode) *PickerConfiguration
+	WithMode(mode PHPickerMode) *PickerConfiguration
 	WithEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) *PickerConfiguration
-	WithDisabledCapabilities(disabledCapabilities raw.PHPickerCapabilities) *PickerConfiguration
-	PreferredAssetRepresentationMode() raw.PHPickerConfigurationAssetRepresentationMode
-	SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode raw.PHPickerConfigurationAssetRepresentationMode)
-	Selection() raw.PHPickerConfigurationSelection
-	SetSelection(selection raw.PHPickerConfigurationSelection)
+	WithDisabledCapabilities(disabledCapabilities PHPickerCapabilities) *PickerConfiguration
+	PreferredAssetRepresentationMode() PHPickerConfigurationAssetRepresentationMode
+	SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode PHPickerConfigurationAssetRepresentationMode)
+	Selection() PHPickerConfigurationSelection
+	SetSelection(selection PHPickerConfigurationSelection)
 	SelectionLimit() int
 	SetSelectionLimit(selectionLimit int)
 	Filter() *PickerFilter
 	SetFilter(filter *raw.PHPickerFilter)
 	PreselectedAssetIdentifiers() []string
 	SetPreselectedAssetIdentifiers(preselectedAssetIdentifiers *foundation.NSArray[*foundation.NSString])
-	Mode() raw.PHPickerMode
-	SetMode(mode raw.PHPickerMode)
+	Mode() PHPickerMode
+	SetMode(mode PHPickerMode)
 	EdgesWithoutContentMargins() appkit.NSDirectionalRectEdge
 	SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge)
-	DisabledCapabilities() raw.PHPickerCapabilities
-	SetDisabledCapabilities(disabledCapabilities raw.PHPickerCapabilities)
+	DisabledCapabilities() PHPickerCapabilities
+	SetDisabledCapabilities(disabledCapabilities PHPickerCapabilities)
 }
 
 var _ PickerConfigurationable = (*PickerConfiguration)(nil)

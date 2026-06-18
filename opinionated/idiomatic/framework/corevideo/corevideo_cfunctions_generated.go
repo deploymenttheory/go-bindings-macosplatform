@@ -12,23 +12,33 @@ import (
 )
 
 // CVBufferCopyAttachment calls [raw.CVBufferCopyAttachment] (C function CVBufferCopyAttachment).
-func CVBufferCopyAttachment(buffer unsafe.Pointer, key unsafe.Pointer, attachmentMode *raw.CVAttachmentMode) unsafe.Pointer {
-	return raw.CVBufferCopyAttachment(buffer, key, attachmentMode)
+func CVBufferCopyAttachment(buffer unsafe.Pointer, key unsafe.Pointer, attachmentMode *CVAttachmentMode) unsafe.Pointer {
+	var _attachmentMode raw.CVAttachmentMode
+	_ret := raw.CVBufferCopyAttachment(buffer, key, &_attachmentMode)
+	if attachmentMode != nil {
+		*attachmentMode = CVAttachmentMode(_attachmentMode)
+	}
+	return _ret
 }
 
 // CVBufferCopyAttachments calls [raw.CVBufferCopyAttachments] (C function CVBufferCopyAttachments).
-func CVBufferCopyAttachments(buffer unsafe.Pointer, attachmentMode raw.CVAttachmentMode) unsafe.Pointer {
-	return raw.CVBufferCopyAttachments(buffer, attachmentMode)
+func CVBufferCopyAttachments(buffer unsafe.Pointer, attachmentMode CVAttachmentMode) unsafe.Pointer {
+	return raw.CVBufferCopyAttachments(buffer, raw.CVAttachmentMode(attachmentMode))
 }
 
 // CVBufferGetAttachment calls [raw.CVBufferGetAttachment] (C function CVBufferGetAttachment).
-func CVBufferGetAttachment(buffer unsafe.Pointer, key unsafe.Pointer, attachmentMode *raw.CVAttachmentMode) unsafe.Pointer {
-	return raw.CVBufferGetAttachment(buffer, key, attachmentMode)
+func CVBufferGetAttachment(buffer unsafe.Pointer, key unsafe.Pointer, attachmentMode *CVAttachmentMode) unsafe.Pointer {
+	var _attachmentMode raw.CVAttachmentMode
+	_ret := raw.CVBufferGetAttachment(buffer, key, &_attachmentMode)
+	if attachmentMode != nil {
+		*attachmentMode = CVAttachmentMode(_attachmentMode)
+	}
+	return _ret
 }
 
 // CVBufferGetAttachments calls [raw.CVBufferGetAttachments] (C function CVBufferGetAttachments).
-func CVBufferGetAttachments(buffer unsafe.Pointer, attachmentMode raw.CVAttachmentMode) unsafe.Pointer {
-	return raw.CVBufferGetAttachments(buffer, attachmentMode)
+func CVBufferGetAttachments(buffer unsafe.Pointer, attachmentMode CVAttachmentMode) unsafe.Pointer {
+	return raw.CVBufferGetAttachments(buffer, raw.CVAttachmentMode(attachmentMode))
 }
 
 // CVBufferHasAttachment calls [raw.CVBufferHasAttachment] (C function CVBufferHasAttachment).
@@ -62,13 +72,13 @@ func CVBufferRetain(buffer unsafe.Pointer) unsafe.Pointer {
 }
 
 // CVBufferSetAttachment calls [raw.CVBufferSetAttachment] (C function CVBufferSetAttachment).
-func CVBufferSetAttachment(buffer unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer, attachmentMode raw.CVAttachmentMode) {
-	raw.CVBufferSetAttachment(buffer, key, value, attachmentMode)
+func CVBufferSetAttachment(buffer unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer, attachmentMode CVAttachmentMode) {
+	raw.CVBufferSetAttachment(buffer, key, value, raw.CVAttachmentMode(attachmentMode))
 }
 
 // CVBufferSetAttachments calls [raw.CVBufferSetAttachments] (C function CVBufferSetAttachments).
-func CVBufferSetAttachments(buffer unsafe.Pointer, theAttachments unsafe.Pointer, attachmentMode raw.CVAttachmentMode) {
-	raw.CVBufferSetAttachments(buffer, theAttachments, attachmentMode)
+func CVBufferSetAttachments(buffer unsafe.Pointer, theAttachments unsafe.Pointer, attachmentMode CVAttachmentMode) {
+	raw.CVBufferSetAttachments(buffer, theAttachments, raw.CVAttachmentMode(attachmentMode))
 }
 
 // CVColorPrimariesGetIntegerCodePointForString calls [raw.CVColorPrimariesGetIntegerCodePointForString] (C function CVColorPrimariesGetIntegerCodePointForString).
@@ -547,8 +557,8 @@ func CVPixelBufferIsPlanar(pixelBuffer unsafe.Pointer) uint8 {
 }
 
 // CVPixelBufferLockBaseAddress calls [raw.CVPixelBufferLockBaseAddress] (C function CVPixelBufferLockBaseAddress).
-func CVPixelBufferLockBaseAddress(pixelBuffer unsafe.Pointer, lockFlags raw.CVPixelBufferLockFlags) int32 {
-	return raw.CVPixelBufferLockBaseAddress(pixelBuffer, lockFlags)
+func CVPixelBufferLockBaseAddress(pixelBuffer unsafe.Pointer, lockFlags CVPixelBufferLockFlags) int32 {
+	return raw.CVPixelBufferLockBaseAddress(pixelBuffer, raw.CVPixelBufferLockFlags(lockFlags))
 }
 
 // CVPixelBufferPoolCreate calls [raw.CVPixelBufferPoolCreate] (C function CVPixelBufferPoolCreate).
@@ -567,8 +577,8 @@ func CVPixelBufferPoolCreatePixelBufferWithAuxAttributes(allocator unsafe.Pointe
 }
 
 // CVPixelBufferPoolFlush calls [raw.CVPixelBufferPoolFlush] (C function CVPixelBufferPoolFlush).
-func CVPixelBufferPoolFlush(pool unsafe.Pointer, options raw.CVPixelBufferPoolFlushFlags) {
-	raw.CVPixelBufferPoolFlush(pool, options)
+func CVPixelBufferPoolFlush(pool unsafe.Pointer, options CVPixelBufferPoolFlushFlags) {
+	raw.CVPixelBufferPoolFlush(pool, raw.CVPixelBufferPoolFlushFlags(options))
 }
 
 // CVPixelBufferPoolGetAttributes calls [raw.CVPixelBufferPoolGetAttributes] (C function CVPixelBufferPoolGetAttributes).
@@ -607,8 +617,8 @@ func CVPixelBufferRetain(texture unsafe.Pointer) unsafe.Pointer {
 }
 
 // CVPixelBufferUnlockBaseAddress calls [raw.CVPixelBufferUnlockBaseAddress] (C function CVPixelBufferUnlockBaseAddress).
-func CVPixelBufferUnlockBaseAddress(pixelBuffer unsafe.Pointer, unlockFlags raw.CVPixelBufferLockFlags) int32 {
-	return raw.CVPixelBufferUnlockBaseAddress(pixelBuffer, unlockFlags)
+func CVPixelBufferUnlockBaseAddress(pixelBuffer unsafe.Pointer, unlockFlags CVPixelBufferLockFlags) int32 {
+	return raw.CVPixelBufferUnlockBaseAddress(pixelBuffer, raw.CVPixelBufferLockFlags(unlockFlags))
 }
 
 // CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes calls [raw.CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes] (C function CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes).

@@ -98,13 +98,13 @@ func (x *LayoutConstraint) SecondItem() objc.ID {
 }
 
 // FirstAttribute calls the underlying FirstAttribute.
-func (x *LayoutConstraint) FirstAttribute() raw.NSLayoutAttribute {
-	return x.inner.FirstAttribute()
+func (x *LayoutConstraint) FirstAttribute() NSLayoutAttribute {
+	return NSLayoutAttribute(x.inner.FirstAttribute())
 }
 
 // SecondAttribute calls the underlying SecondAttribute.
-func (x *LayoutConstraint) SecondAttribute() raw.NSLayoutAttribute {
-	return x.inner.SecondAttribute()
+func (x *LayoutConstraint) SecondAttribute() NSLayoutAttribute {
+	return NSLayoutAttribute(x.inner.SecondAttribute())
 }
 
 // FirstAnchor calls the underlying FirstAnchor.
@@ -118,8 +118,8 @@ func (x *LayoutConstraint) SecondAnchor() *raw.NSLayoutAnchor[objc.ID] {
 }
 
 // Relation calls the underlying Relation.
-func (x *LayoutConstraint) Relation() raw.NSLayoutRelation {
-	return x.inner.Relation()
+func (x *LayoutConstraint) Relation() NSLayoutRelation {
+	return NSLayoutRelation(x.inner.Relation())
 }
 
 // Multiplier calls the underlying Multiplier.
@@ -175,11 +175,11 @@ type LayoutConstraintable interface {
 	SetShouldBeArchived(shouldBeArchived bool)
 	FirstItem() objc.ID
 	SecondItem() objc.ID
-	FirstAttribute() raw.NSLayoutAttribute
-	SecondAttribute() raw.NSLayoutAttribute
+	FirstAttribute() NSLayoutAttribute
+	SecondAttribute() NSLayoutAttribute
 	FirstAnchor() *raw.NSLayoutAnchor[objc.ID]
 	SecondAnchor() *raw.NSLayoutAnchor[objc.ID]
-	Relation() raw.NSLayoutRelation
+	Relation() NSLayoutRelation
 	Multiplier() float64
 	Constant() float64
 	SetConstant(constant float64)

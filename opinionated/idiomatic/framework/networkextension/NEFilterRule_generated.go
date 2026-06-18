@@ -30,9 +30,9 @@ func NEFilterRuleFromID(id objc.ID) *NEFilterRule {
 }
 
 // NewNEFilterRuleWithNetworkRuleAction creates a new [NEFilterRule].
-func NewNEFilterRuleWithNetworkRuleAction(networkRule *raw.NENetworkRule, action raw.NEFilterAction) *NEFilterRule {
+func NewNEFilterRuleWithNetworkRuleAction(networkRule *raw.NENetworkRule, action NEFilterAction) *NEFilterRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkRule:action:"), networkRule.Ptr(), action)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkRule:action:"), networkRule.Ptr(), raw.NEFilterAction(action))
 	return &NEFilterRule{inner: raw.NEFilterRuleFromID(_id)}
 }
 
@@ -46,15 +46,15 @@ func (x *NEFilterRule) NetworkRule() *NENetworkRule {
 }
 
 // Action calls the underlying Action.
-func (x *NEFilterRule) Action() raw.NEFilterAction {
-	return x.inner.Action()
+func (x *NEFilterRule) Action() NEFilterAction {
+	return NEFilterAction(x.inner.Action())
 }
 
 // NEFilterRuleable is the interface implemented by [NEFilterRule], for mocking and DI.
 type NEFilterRuleable interface {
 	Unwrap() *raw.NEFilterRule
 	NetworkRule() *NENetworkRule
-	Action() raw.NEFilterAction
+	Action() NEFilterAction
 }
 
 var _ NEFilterRuleable = (*NEFilterRule)(nil)

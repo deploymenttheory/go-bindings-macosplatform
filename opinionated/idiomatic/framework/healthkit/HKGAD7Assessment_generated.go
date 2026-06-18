@@ -49,8 +49,8 @@ func (x *GAD7Assessment) Answers() []*foundation.NSNumber {
 }
 
 // Risk calls the underlying Risk.
-func (x *GAD7Assessment) Risk() raw.HKGAD7AssessmentRisk {
-	return x.inner.Risk()
+func (x *GAD7Assessment) Risk() HKGAD7AssessmentRisk {
+	return HKGAD7AssessmentRisk(x.inner.Risk())
 }
 
 func (x *GAD7Assessment) asScoredAssessment() *raw.HKScoredAssessment {
@@ -67,7 +67,7 @@ func (x *GAD7Assessment) asObject() *raw.HKObject {
 type GAD7Assessmentable interface {
 	Unwrap() *raw.HKGAD7Assessment
 	Answers() []*foundation.NSNumber
-	Risk() raw.HKGAD7AssessmentRisk
+	Risk() HKGAD7AssessmentRisk
 }
 
 var _ GAD7Assessmentable = (*GAD7Assessment)(nil)

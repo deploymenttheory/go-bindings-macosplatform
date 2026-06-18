@@ -41,8 +41,8 @@ func NewSpeechAudioBufferRecognitionRequest() *SpeechAudioBufferRecognitionReque
 }
 
 // WithTaskHint sets the taskHint property and returns the receiver for chaining.
-func (x *SpeechAudioBufferRecognitionRequest) WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetTaskHint(taskHint)
+func (x *SpeechAudioBufferRecognitionRequest) WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetTaskHint(raw.SFSpeechRecognitionTaskHint(taskHint))
 	return x
 }
 
@@ -121,7 +121,7 @@ func (x *SpeechAudioBufferRecognitionRequest) asSpeechRecognitionRequest() *raw.
 // SpeechAudioBufferRecognitionRequestable is the interface implemented by [SpeechAudioBufferRecognitionRequest], for mocking and DI.
 type SpeechAudioBufferRecognitionRequestable interface {
 	Unwrap() *raw.SFSpeechAudioBufferRecognitionRequest
-	WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest
+	WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest
 	WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechAudioBufferRecognitionRequest
 	WithContextualStrings(items ...*foundation.NSString) *SpeechAudioBufferRecognitionRequest
 	WithInteractionIdentifier(interactionIdentifier string) *SpeechAudioBufferRecognitionRequest

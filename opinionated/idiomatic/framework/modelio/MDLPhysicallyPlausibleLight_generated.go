@@ -68,8 +68,8 @@ func (x *PhysicallyPlausibleLight) WithAttenuationEndDistance(attenuationEndDist
 }
 
 // WithLightType sets the lightType property and returns the receiver for chaining.
-func (x *PhysicallyPlausibleLight) WithLightType(lightType raw.MDLLightType) *PhysicallyPlausibleLight {
-	x.inner.MDLLight.SetLightType(lightType)
+func (x *PhysicallyPlausibleLight) WithLightType(lightType MDLLightType) *PhysicallyPlausibleLight {
+	x.inner.MDLLight.SetLightType(raw.MDLLightType(lightType))
 	return x
 }
 
@@ -190,7 +190,7 @@ type PhysicallyPlausibleLightable interface {
 	WithOuterConeAngle(outerConeAngle float32) *PhysicallyPlausibleLight
 	WithAttenuationStartDistance(attenuationStartDistance float32) *PhysicallyPlausibleLight
 	WithAttenuationEndDistance(attenuationEndDistance float32) *PhysicallyPlausibleLight
-	WithLightType(lightType raw.MDLLightType) *PhysicallyPlausibleLight
+	WithLightType(lightType MDLLightType) *PhysicallyPlausibleLight
 	WithColorSpace(colorSpace string) *PhysicallyPlausibleLight
 	WithParent(parent ObjectProvider) *PhysicallyPlausibleLight
 	WithInstance(instance ObjectProvider) *PhysicallyPlausibleLight

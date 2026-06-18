@@ -81,8 +81,8 @@ func (x *ArrayType) ElementTensorReferenceType() *TensorReferenceType {
 }
 
 // ElementType calls the underlying ElementType.
-func (x *ArrayType) ElementType() raw.MTLDataType {
-	return x.inner.ElementType()
+func (x *ArrayType) ElementType() MTLDataType {
+	return MTLDataType(x.inner.ElementType())
 }
 
 // ArrayLength calls the underlying ArrayLength.
@@ -110,7 +110,7 @@ type ArrayTypeable interface {
 	ElementTextureReferenceType() *TextureReferenceType
 	ElementPointerType() *PointerType
 	ElementTensorReferenceType() *TensorReferenceType
-	ElementType() raw.MTLDataType
+	ElementType() MTLDataType
 	ArrayLength() uint
 	Stride() uint
 	ArgumentIndexStride() uint

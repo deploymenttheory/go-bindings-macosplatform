@@ -15,8 +15,8 @@ func MAAudibleMediaCopyPreferredCharacteristics() unsafe.Pointer {
 }
 
 // MACaptionAppearanceAddSelectedLanguage calls [raw.MACaptionAppearanceAddSelectedLanguage] (C function MACaptionAppearanceAddSelectedLanguage).
-func MACaptionAppearanceAddSelectedLanguage(domain raw.MACaptionAppearanceDomain, language unsafe.Pointer) bool {
-	return raw.MACaptionAppearanceAddSelectedLanguage(domain, language)
+func MACaptionAppearanceAddSelectedLanguage(domain MACaptionAppearanceDomain, language unsafe.Pointer) bool {
+	return raw.MACaptionAppearanceAddSelectedLanguage(raw.MACaptionAppearanceDomain(domain), language)
 }
 
 // MACaptionAppearanceCopyActiveProfileID calls [raw.MACaptionAppearanceCopyActiveProfileID] (C function MACaptionAppearanceCopyActiveProfileID).
@@ -25,23 +25,38 @@ func MACaptionAppearanceCopyActiveProfileID() unsafe.Pointer {
 }
 
 // MACaptionAppearanceCopyBackgroundColor calls [raw.MACaptionAppearanceCopyBackgroundColor] (C function MACaptionAppearanceCopyBackgroundColor).
-func MACaptionAppearanceCopyBackgroundColor(domain raw.MACaptionAppearanceDomain, behavior *raw.MACaptionAppearanceBehavior) unsafe.Pointer {
-	return raw.MACaptionAppearanceCopyBackgroundColor(domain, behavior)
+func MACaptionAppearanceCopyBackgroundColor(domain MACaptionAppearanceDomain, behavior *MACaptionAppearanceBehavior) unsafe.Pointer {
+	var _behavior raw.MACaptionAppearanceBehavior
+	_ret := raw.MACaptionAppearanceCopyBackgroundColor(raw.MACaptionAppearanceDomain(domain), &_behavior)
+	if behavior != nil {
+		*behavior = MACaptionAppearanceBehavior(_behavior)
+	}
+	return _ret
 }
 
 // MACaptionAppearanceCopyFontDescriptorForStyle calls [raw.MACaptionAppearanceCopyFontDescriptorForStyle] (C function MACaptionAppearanceCopyFontDescriptorForStyle).
-func MACaptionAppearanceCopyFontDescriptorForStyle(domain raw.MACaptionAppearanceDomain, behavior *raw.MACaptionAppearanceBehavior, fontStyle raw.MACaptionAppearanceFontStyle) unsafe.Pointer {
-	return raw.MACaptionAppearanceCopyFontDescriptorForStyle(domain, behavior, fontStyle)
+func MACaptionAppearanceCopyFontDescriptorForStyle(domain MACaptionAppearanceDomain, behavior *MACaptionAppearanceBehavior, fontStyle MACaptionAppearanceFontStyle) unsafe.Pointer {
+	var _behavior raw.MACaptionAppearanceBehavior
+	_ret := raw.MACaptionAppearanceCopyFontDescriptorForStyle(raw.MACaptionAppearanceDomain(domain), &_behavior, raw.MACaptionAppearanceFontStyle(fontStyle))
+	if behavior != nil {
+		*behavior = MACaptionAppearanceBehavior(_behavior)
+	}
+	return _ret
 }
 
 // MACaptionAppearanceCopyForegroundColor calls [raw.MACaptionAppearanceCopyForegroundColor] (C function MACaptionAppearanceCopyForegroundColor).
-func MACaptionAppearanceCopyForegroundColor(domain raw.MACaptionAppearanceDomain, behavior *raw.MACaptionAppearanceBehavior) unsafe.Pointer {
-	return raw.MACaptionAppearanceCopyForegroundColor(domain, behavior)
+func MACaptionAppearanceCopyForegroundColor(domain MACaptionAppearanceDomain, behavior *MACaptionAppearanceBehavior) unsafe.Pointer {
+	var _behavior raw.MACaptionAppearanceBehavior
+	_ret := raw.MACaptionAppearanceCopyForegroundColor(raw.MACaptionAppearanceDomain(domain), &_behavior)
+	if behavior != nil {
+		*behavior = MACaptionAppearanceBehavior(_behavior)
+	}
+	return _ret
 }
 
 // MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics calls [raw.MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics] (C function MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics).
-func MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(domain raw.MACaptionAppearanceDomain) unsafe.Pointer {
-	return raw.MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(domain)
+func MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(domain MACaptionAppearanceDomain) unsafe.Pointer {
+	return raw.MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(raw.MACaptionAppearanceDomain(domain))
 }
 
 // MACaptionAppearanceCopyProfileIDs calls [raw.MACaptionAppearanceCopyProfileIDs] (C function MACaptionAppearanceCopyProfileIDs).
@@ -55,13 +70,18 @@ func MACaptionAppearanceCopyProfileName(profileID unsafe.Pointer) unsafe.Pointer
 }
 
 // MACaptionAppearanceCopySelectedLanguages calls [raw.MACaptionAppearanceCopySelectedLanguages] (C function MACaptionAppearanceCopySelectedLanguages).
-func MACaptionAppearanceCopySelectedLanguages(domain raw.MACaptionAppearanceDomain) unsafe.Pointer {
-	return raw.MACaptionAppearanceCopySelectedLanguages(domain)
+func MACaptionAppearanceCopySelectedLanguages(domain MACaptionAppearanceDomain) unsafe.Pointer {
+	return raw.MACaptionAppearanceCopySelectedLanguages(raw.MACaptionAppearanceDomain(domain))
 }
 
 // MACaptionAppearanceCopyWindowColor calls [raw.MACaptionAppearanceCopyWindowColor] (C function MACaptionAppearanceCopyWindowColor).
-func MACaptionAppearanceCopyWindowColor(domain raw.MACaptionAppearanceDomain, behavior *raw.MACaptionAppearanceBehavior) unsafe.Pointer {
-	return raw.MACaptionAppearanceCopyWindowColor(domain, behavior)
+func MACaptionAppearanceCopyWindowColor(domain MACaptionAppearanceDomain, behavior *MACaptionAppearanceBehavior) unsafe.Pointer {
+	var _behavior raw.MACaptionAppearanceBehavior
+	_ret := raw.MACaptionAppearanceCopyWindowColor(raw.MACaptionAppearanceDomain(domain), &_behavior)
+	if behavior != nil {
+		*behavior = MACaptionAppearanceBehavior(_behavior)
+	}
+	return _ret
 }
 
 // MACaptionAppearanceDidDisplayCaptions calls [raw.MACaptionAppearanceDidDisplayCaptions] (C function MACaptionAppearanceDidDisplayCaptions).
@@ -75,43 +95,73 @@ func MACaptionAppearanceExecuteBlockForProfileID(profileID unsafe.Pointer, aBloc
 }
 
 // MACaptionAppearanceGetBackgroundOpacity calls [raw.MACaptionAppearanceGetBackgroundOpacity] (C function MACaptionAppearanceGetBackgroundOpacity).
-func MACaptionAppearanceGetBackgroundOpacity(domain raw.MACaptionAppearanceDomain, behavior *raw.MACaptionAppearanceBehavior) float64 {
-	return raw.MACaptionAppearanceGetBackgroundOpacity(domain, behavior)
+func MACaptionAppearanceGetBackgroundOpacity(domain MACaptionAppearanceDomain, behavior *MACaptionAppearanceBehavior) float64 {
+	var _behavior raw.MACaptionAppearanceBehavior
+	_ret := raw.MACaptionAppearanceGetBackgroundOpacity(raw.MACaptionAppearanceDomain(domain), &_behavior)
+	if behavior != nil {
+		*behavior = MACaptionAppearanceBehavior(_behavior)
+	}
+	return _ret
 }
 
 // MACaptionAppearanceGetDisplayType calls [raw.MACaptionAppearanceGetDisplayType] (C function MACaptionAppearanceGetDisplayType).
-func MACaptionAppearanceGetDisplayType(domain raw.MACaptionAppearanceDomain) raw.MACaptionAppearanceDisplayType {
-	return raw.MACaptionAppearanceGetDisplayType(domain)
+func MACaptionAppearanceGetDisplayType(domain MACaptionAppearanceDomain) MACaptionAppearanceDisplayType {
+	return MACaptionAppearanceDisplayType(raw.MACaptionAppearanceGetDisplayType(raw.MACaptionAppearanceDomain(domain)))
 }
 
 // MACaptionAppearanceGetForegroundOpacity calls [raw.MACaptionAppearanceGetForegroundOpacity] (C function MACaptionAppearanceGetForegroundOpacity).
-func MACaptionAppearanceGetForegroundOpacity(domain raw.MACaptionAppearanceDomain, behavior *raw.MACaptionAppearanceBehavior) float64 {
-	return raw.MACaptionAppearanceGetForegroundOpacity(domain, behavior)
+func MACaptionAppearanceGetForegroundOpacity(domain MACaptionAppearanceDomain, behavior *MACaptionAppearanceBehavior) float64 {
+	var _behavior raw.MACaptionAppearanceBehavior
+	_ret := raw.MACaptionAppearanceGetForegroundOpacity(raw.MACaptionAppearanceDomain(domain), &_behavior)
+	if behavior != nil {
+		*behavior = MACaptionAppearanceBehavior(_behavior)
+	}
+	return _ret
 }
 
 // MACaptionAppearanceGetRelativeCharacterSize calls [raw.MACaptionAppearanceGetRelativeCharacterSize] (C function MACaptionAppearanceGetRelativeCharacterSize).
-func MACaptionAppearanceGetRelativeCharacterSize(domain raw.MACaptionAppearanceDomain, behavior *raw.MACaptionAppearanceBehavior) float64 {
-	return raw.MACaptionAppearanceGetRelativeCharacterSize(domain, behavior)
+func MACaptionAppearanceGetRelativeCharacterSize(domain MACaptionAppearanceDomain, behavior *MACaptionAppearanceBehavior) float64 {
+	var _behavior raw.MACaptionAppearanceBehavior
+	_ret := raw.MACaptionAppearanceGetRelativeCharacterSize(raw.MACaptionAppearanceDomain(domain), &_behavior)
+	if behavior != nil {
+		*behavior = MACaptionAppearanceBehavior(_behavior)
+	}
+	return _ret
 }
 
 // MACaptionAppearanceGetTextEdgeStyle calls [raw.MACaptionAppearanceGetTextEdgeStyle] (C function MACaptionAppearanceGetTextEdgeStyle).
-func MACaptionAppearanceGetTextEdgeStyle(domain raw.MACaptionAppearanceDomain, behavior *raw.MACaptionAppearanceBehavior) raw.MACaptionAppearanceTextEdgeStyle {
-	return raw.MACaptionAppearanceGetTextEdgeStyle(domain, behavior)
+func MACaptionAppearanceGetTextEdgeStyle(domain MACaptionAppearanceDomain, behavior *MACaptionAppearanceBehavior) MACaptionAppearanceTextEdgeStyle {
+	var _behavior raw.MACaptionAppearanceBehavior
+	_ret := MACaptionAppearanceTextEdgeStyle(raw.MACaptionAppearanceGetTextEdgeStyle(raw.MACaptionAppearanceDomain(domain), &_behavior))
+	if behavior != nil {
+		*behavior = MACaptionAppearanceBehavior(_behavior)
+	}
+	return _ret
 }
 
 // MACaptionAppearanceGetWindowOpacity calls [raw.MACaptionAppearanceGetWindowOpacity] (C function MACaptionAppearanceGetWindowOpacity).
-func MACaptionAppearanceGetWindowOpacity(domain raw.MACaptionAppearanceDomain, behavior *raw.MACaptionAppearanceBehavior) float64 {
-	return raw.MACaptionAppearanceGetWindowOpacity(domain, behavior)
+func MACaptionAppearanceGetWindowOpacity(domain MACaptionAppearanceDomain, behavior *MACaptionAppearanceBehavior) float64 {
+	var _behavior raw.MACaptionAppearanceBehavior
+	_ret := raw.MACaptionAppearanceGetWindowOpacity(raw.MACaptionAppearanceDomain(domain), &_behavior)
+	if behavior != nil {
+		*behavior = MACaptionAppearanceBehavior(_behavior)
+	}
+	return _ret
 }
 
 // MACaptionAppearanceGetWindowRoundedCornerRadius calls [raw.MACaptionAppearanceGetWindowRoundedCornerRadius] (C function MACaptionAppearanceGetWindowRoundedCornerRadius).
-func MACaptionAppearanceGetWindowRoundedCornerRadius(domain raw.MACaptionAppearanceDomain, behavior *raw.MACaptionAppearanceBehavior) float64 {
-	return raw.MACaptionAppearanceGetWindowRoundedCornerRadius(domain, behavior)
+func MACaptionAppearanceGetWindowRoundedCornerRadius(domain MACaptionAppearanceDomain, behavior *MACaptionAppearanceBehavior) float64 {
+	var _behavior raw.MACaptionAppearanceBehavior
+	_ret := raw.MACaptionAppearanceGetWindowRoundedCornerRadius(raw.MACaptionAppearanceDomain(domain), &_behavior)
+	if behavior != nil {
+		*behavior = MACaptionAppearanceBehavior(_behavior)
+	}
+	return _ret
 }
 
 // MACaptionAppearanceIsCustomized calls [raw.MACaptionAppearanceIsCustomized] (C function MACaptionAppearanceIsCustomized).
-func MACaptionAppearanceIsCustomized(domain raw.MACaptionAppearanceDomain) bool {
-	return raw.MACaptionAppearanceIsCustomized(domain)
+func MACaptionAppearanceIsCustomized(domain MACaptionAppearanceDomain) bool {
+	return raw.MACaptionAppearanceIsCustomized(raw.MACaptionAppearanceDomain(domain))
 }
 
 // MACaptionAppearanceSetActiveProfileID calls [raw.MACaptionAppearanceSetActiveProfileID] (C function MACaptionAppearanceSetActiveProfileID).
@@ -120,8 +170,8 @@ func MACaptionAppearanceSetActiveProfileID(profileID unsafe.Pointer) {
 }
 
 // MACaptionAppearanceSetDisplayType calls [raw.MACaptionAppearanceSetDisplayType] (C function MACaptionAppearanceSetDisplayType).
-func MACaptionAppearanceSetDisplayType(domain raw.MACaptionAppearanceDomain, displayType raw.MACaptionAppearanceDisplayType) {
-	raw.MACaptionAppearanceSetDisplayType(domain, displayType)
+func MACaptionAppearanceSetDisplayType(domain MACaptionAppearanceDomain, displayType MACaptionAppearanceDisplayType) {
+	raw.MACaptionAppearanceSetDisplayType(raw.MACaptionAppearanceDomain(domain), raw.MACaptionAppearanceDisplayType(displayType))
 }
 
 // MADimFlashingLightsEnabled calls [raw.MADimFlashingLightsEnabled] (C function MADimFlashingLightsEnabled).

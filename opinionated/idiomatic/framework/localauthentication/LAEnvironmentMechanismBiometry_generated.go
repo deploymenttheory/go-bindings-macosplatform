@@ -37,8 +37,8 @@ func NewEnvironmentMechanismBiometry() *EnvironmentMechanismBiometry {
 }
 
 // BiometryType calls the underlying BiometryType.
-func (x *EnvironmentMechanismBiometry) BiometryType() raw.LABiometryType {
-	return x.inner.BiometryType()
+func (x *EnvironmentMechanismBiometry) BiometryType() LABiometryType {
+	return LABiometryType(x.inner.BiometryType())
 }
 
 // IsEnrolled calls the underlying IsEnrolled.
@@ -68,7 +68,7 @@ func (x *EnvironmentMechanismBiometry) asEnvironmentMechanism() *raw.LAEnvironme
 // EnvironmentMechanismBiometryable is the interface implemented by [EnvironmentMechanismBiometry], for mocking and DI.
 type EnvironmentMechanismBiometryable interface {
 	Unwrap() *raw.LAEnvironmentMechanismBiometry
-	BiometryType() raw.LABiometryType
+	BiometryType() LABiometryType
 	IsEnrolled() bool
 	IsLockedOut() bool
 	StateHash() *foundation.NSData

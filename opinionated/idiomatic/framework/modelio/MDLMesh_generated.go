@@ -54,58 +54,58 @@ func NewMeshWithVertexBuffersVertexCountDescriptorSubmeshes(vertexBuffers *found
 }
 
 // NewMeshBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator creates a new [Mesh].
-func NewMeshBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, geometryType raw.MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
+func NewMeshBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initBoxWithExtent:segments:inwardNormals:geometryType:allocator:"), extent, segments, inwardNormals, geometryType, allocator)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initBoxWithExtent:segments:inwardNormals:geometryType:allocator:"), extent, segments, inwardNormals, raw.MDLGeometryType(geometryType), allocator)
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
 // NewMeshSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator creates a new [Mesh].
-func NewMeshSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, geometryType raw.MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
+func NewMeshSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initSphereWithExtent:segments:inwardNormals:geometryType:allocator:"), extent, segments, inwardNormals, geometryType, allocator)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initSphereWithExtent:segments:inwardNormals:geometryType:allocator:"), extent, segments, inwardNormals, raw.MDLGeometryType(geometryType), allocator)
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
 // NewMeshHemisphereWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator creates a new [Mesh].
-func NewMeshHemisphereWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, cap_ bool, geometryType raw.MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
+func NewMeshHemisphereWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, cap_ bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initHemisphereWithExtent:segments:inwardNormals:cap:geometryType:allocator:"), extent, segments, inwardNormals, cap_, geometryType, allocator)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initHemisphereWithExtent:segments:inwardNormals:cap:geometryType:allocator:"), extent, segments, inwardNormals, cap_, raw.MDLGeometryType(geometryType), allocator)
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
 // NewMeshCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAllocator creates a new [Mesh].
-func NewMeshCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, topCap bool, bottomCap bool, geometryType raw.MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
+func NewMeshCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, topCap bool, bottomCap bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCylinderWithExtent:segments:inwardNormals:topCap:bottomCap:geometryType:allocator:"), extent, segments, inwardNormals, topCap, bottomCap, geometryType, allocator)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCylinderWithExtent:segments:inwardNormals:topCap:bottomCap:geometryType:allocator:"), extent, segments, inwardNormals, topCap, bottomCap, raw.MDLGeometryType(geometryType), allocator)
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
 // NewMeshCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeometryTypeAllocator creates a new [Mesh].
-func NewMeshCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, hemisphereSegments int, inwardNormals bool, geometryType raw.MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
+func NewMeshCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, hemisphereSegments int, inwardNormals bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCapsuleWithExtent:cylinderSegments:hemisphereSegments:inwardNormals:geometryType:allocator:"), extent, segments, hemisphereSegments, inwardNormals, geometryType, allocator)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCapsuleWithExtent:cylinderSegments:hemisphereSegments:inwardNormals:geometryType:allocator:"), extent, segments, hemisphereSegments, inwardNormals, raw.MDLGeometryType(geometryType), allocator)
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
 // NewMeshConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator creates a new [Mesh].
-func NewMeshConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, cap_ bool, geometryType raw.MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
+func NewMeshConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, cap_ bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initConeWithExtent:segments:inwardNormals:cap:geometryType:allocator:"), extent, segments, inwardNormals, cap_, geometryType, allocator)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initConeWithExtent:segments:inwardNormals:cap:geometryType:allocator:"), extent, segments, inwardNormals, cap_, raw.MDLGeometryType(geometryType), allocator)
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
 // NewMeshPlaneWithExtentSegmentsGeometryTypeAllocator creates a new [Mesh].
-func NewMeshPlaneWithExtentSegmentsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, geometryType raw.MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
+func NewMeshPlaneWithExtentSegmentsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initPlaneWithExtent:segments:geometryType:allocator:"), extent, segments, geometryType, allocator)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initPlaneWithExtent:segments:geometryType:allocator:"), extent, segments, raw.MDLGeometryType(geometryType), allocator)
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
 // NewMeshIcosahedronWithExtentInwardNormalsGeometryTypeAllocator creates a new [Mesh].
-func NewMeshIcosahedronWithExtentInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, inwardNormals bool, geometryType raw.MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
+func NewMeshIcosahedronWithExtentInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, inwardNormals bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIcosahedronWithExtent:inwardNormals:geometryType:allocator:"), extent, inwardNormals, geometryType, allocator)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIcosahedronWithExtent:inwardNormals:geometryType:allocator:"), extent, inwardNormals, raw.MDLGeometryType(geometryType), allocator)
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
@@ -186,8 +186,8 @@ func (x *Mesh) VertexAttributeDataForAttributeNamed(name string) *VertexAttribut
 }
 
 // VertexAttributeDataForAttributeNamedAsFormat calls the underlying VertexAttributeDataForAttributeNamedAsFormat.
-func (x *Mesh) VertexAttributeDataForAttributeNamedAsFormat(name string, format raw.MDLVertexFormat) *VertexAttributeData {
-	_r := x.inner.VertexAttributeDataForAttributeNamedAsFormat(foundation.NSStringStringWithUTF8String(name), format)
+func (x *Mesh) VertexAttributeDataForAttributeNamedAsFormat(name string, format MDLVertexFormat) *VertexAttributeData {
+	_r := x.inner.VertexAttributeDataForAttributeNamedAsFormat(foundation.NSStringStringWithUTF8String(name), raw.MDLVertexFormat(format))
 	if _r == nil {
 		return nil
 	}
@@ -255,18 +255,18 @@ func (x *Mesh) Allocator() raw.MDLMeshBufferAllocator {
 }
 
 // AddAttributeWithNameFormat calls the underlying AddAttributeWithNameFormat.
-func (x *Mesh) AddAttributeWithNameFormat(name string, format raw.MDLVertexFormat) {
-	x.inner.AddAttributeWithNameFormat(foundation.NSStringStringWithUTF8String(name), format)
+func (x *Mesh) AddAttributeWithNameFormat(name string, format MDLVertexFormat) {
+	x.inner.AddAttributeWithNameFormat(foundation.NSStringStringWithUTF8String(name), raw.MDLVertexFormat(format))
 }
 
 // AddAttributeWithNameFormatTypeDataStride calls the underlying AddAttributeWithNameFormatTypeDataStride.
-func (x *Mesh) AddAttributeWithNameFormatTypeDataStride(name string, format raw.MDLVertexFormat, type_ string, data *foundation.NSData, stride int) {
-	x.inner.AddAttributeWithNameFormatTypeDataStride(foundation.NSStringStringWithUTF8String(name), format, foundation.NSStringStringWithUTF8String(type_), data, stride)
+func (x *Mesh) AddAttributeWithNameFormatTypeDataStride(name string, format MDLVertexFormat, type_ string, data *foundation.NSData, stride int) {
+	x.inner.AddAttributeWithNameFormatTypeDataStride(foundation.NSStringStringWithUTF8String(name), raw.MDLVertexFormat(format), foundation.NSStringStringWithUTF8String(type_), data, stride)
 }
 
 // AddAttributeWithNameFormatTypeDataStrideTime calls the underlying AddAttributeWithNameFormatTypeDataStrideTime.
-func (x *Mesh) AddAttributeWithNameFormatTypeDataStrideTime(name string, format raw.MDLVertexFormat, type_ string, data *foundation.NSData, stride int, time_ float64) {
-	x.inner.AddAttributeWithNameFormatTypeDataStrideTime(foundation.NSStringStringWithUTF8String(name), format, foundation.NSStringStringWithUTF8String(type_), data, stride, time_)
+func (x *Mesh) AddAttributeWithNameFormatTypeDataStrideTime(name string, format MDLVertexFormat, type_ string, data *foundation.NSData, stride int, time_ float64) {
+	x.inner.AddAttributeWithNameFormatTypeDataStrideTime(foundation.NSStringStringWithUTF8String(name), raw.MDLVertexFormat(format), foundation.NSStringStringWithUTF8String(type_), data, stride, time_)
 }
 
 // AddNormalsWithAttributeNamedCreaseThreshold calls the underlying AddNormalsWithAttributeNamedCreaseThreshold.
@@ -374,7 +374,7 @@ type Meshable interface {
 	WithChildren(children raw.MDLObjectContainerComponent) *Mesh
 	WithHidden(hidden bool) *Mesh
 	VertexAttributeDataForAttributeNamed(name string) *VertexAttributeData
-	VertexAttributeDataForAttributeNamedAsFormat(name string, format raw.MDLVertexFormat) *VertexAttributeData
+	VertexAttributeDataForAttributeNamedAsFormat(name string, format MDLVertexFormat) *VertexAttributeData
 	BoundingBox() raw.MDLAxisAlignedBoundingBox
 	VertexDescriptor() *VertexDescriptor
 	SetVertexDescriptor(vertexDescriptor *raw.MDLVertexDescriptor)
@@ -385,9 +385,9 @@ type Meshable interface {
 	Submeshes() []*Submesh
 	SetSubmeshes(submeshes *foundation.NSMutableArray[*raw.MDLSubmesh])
 	Allocator() raw.MDLMeshBufferAllocator
-	AddAttributeWithNameFormat(name string, format raw.MDLVertexFormat)
-	AddAttributeWithNameFormatTypeDataStride(name string, format raw.MDLVertexFormat, type_ string, data *foundation.NSData, stride int)
-	AddAttributeWithNameFormatTypeDataStrideTime(name string, format raw.MDLVertexFormat, type_ string, data *foundation.NSData, stride int, time_ float64)
+	AddAttributeWithNameFormat(name string, format MDLVertexFormat)
+	AddAttributeWithNameFormatTypeDataStride(name string, format MDLVertexFormat, type_ string, data *foundation.NSData, stride int)
+	AddAttributeWithNameFormatTypeDataStrideTime(name string, format MDLVertexFormat, type_ string, data *foundation.NSData, stride int, time_ float64)
 	AddNormalsWithAttributeNamedCreaseThreshold(attributeName string, creaseThreshold float32)
 	AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed(textureCoordinateAttributeName string, tangentAttributeName string, bitangentAttributeName string)
 	AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(textureCoordinateAttributeName string, normalAttributeName string, tangentAttributeName string)

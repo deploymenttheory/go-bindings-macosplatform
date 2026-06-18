@@ -45,8 +45,8 @@ func NewRecordZoneWithZoneID(zoneID *raw.CKRecordZoneID) *RecordZone {
 }
 
 // WithEncryptionScope sets the encryptionScope property and returns the receiver for chaining.
-func (x *RecordZone) WithEncryptionScope(encryptionScope raw.CKRecordZoneEncryptionScope) *RecordZone {
-	x.inner.SetEncryptionScope(encryptionScope)
+func (x *RecordZone) WithEncryptionScope(encryptionScope CKRecordZoneEncryptionScope) *RecordZone {
+	x.inner.SetEncryptionScope(raw.CKRecordZoneEncryptionScope(encryptionScope))
 	return x
 }
 
@@ -60,8 +60,8 @@ func (x *RecordZone) ZoneID() *RecordZoneID {
 }
 
 // Capabilities calls the underlying Capabilities.
-func (x *RecordZone) Capabilities() raw.CKRecordZoneCapabilities {
-	return x.inner.Capabilities()
+func (x *RecordZone) Capabilities() CKRecordZoneCapabilities {
+	return CKRecordZoneCapabilities(x.inner.Capabilities())
 }
 
 // Share calls the underlying Share.
@@ -74,24 +74,24 @@ func (x *RecordZone) Share() *Reference {
 }
 
 // EncryptionScope calls the underlying EncryptionScope.
-func (x *RecordZone) EncryptionScope() raw.CKRecordZoneEncryptionScope {
-	return x.inner.EncryptionScope()
+func (x *RecordZone) EncryptionScope() CKRecordZoneEncryptionScope {
+	return CKRecordZoneEncryptionScope(x.inner.EncryptionScope())
 }
 
 // SetEncryptionScope calls the underlying SetEncryptionScope.
-func (x *RecordZone) SetEncryptionScope(encryptionScope raw.CKRecordZoneEncryptionScope) {
-	x.inner.SetEncryptionScope(encryptionScope)
+func (x *RecordZone) SetEncryptionScope(encryptionScope CKRecordZoneEncryptionScope) {
+	x.inner.SetEncryptionScope(raw.CKRecordZoneEncryptionScope(encryptionScope))
 }
 
 // RecordZoneable is the interface implemented by [RecordZone], for mocking and DI.
 type RecordZoneable interface {
 	Unwrap() *raw.CKRecordZone
-	WithEncryptionScope(encryptionScope raw.CKRecordZoneEncryptionScope) *RecordZone
+	WithEncryptionScope(encryptionScope CKRecordZoneEncryptionScope) *RecordZone
 	ZoneID() *RecordZoneID
-	Capabilities() raw.CKRecordZoneCapabilities
+	Capabilities() CKRecordZoneCapabilities
 	Share() *Reference
-	EncryptionScope() raw.CKRecordZoneEncryptionScope
-	SetEncryptionScope(encryptionScope raw.CKRecordZoneEncryptionScope)
+	EncryptionScope() CKRecordZoneEncryptionScope
+	SetEncryptionScope(encryptionScope CKRecordZoneEncryptionScope)
 }
 
 var _ RecordZoneable = (*RecordZone)(nil)

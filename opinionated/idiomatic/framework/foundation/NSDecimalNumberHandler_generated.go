@@ -30,9 +30,9 @@ func DecimalNumberHandlerFromID(id objc.ID) *DecimalNumberHandler {
 }
 
 // NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero creates a new [DecimalNumberHandler].
-func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode raw.NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *DecimalNumberHandler {
+func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *DecimalNumberHandler {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumberHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:"), roundingMode, scale, exact, overflow, underflow, divideByZero)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:"), raw.NSRoundingMode(roundingMode), scale, exact, overflow, underflow, divideByZero)
 	return &DecimalNumberHandler{inner: raw.NSDecimalNumberHandlerFromID(_id)}
 }
 

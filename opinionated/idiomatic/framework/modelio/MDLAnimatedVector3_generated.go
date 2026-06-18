@@ -37,8 +37,8 @@ func NewAnimatedVector3() *AnimatedVector3 {
 }
 
 // WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedVector3) WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedVector3 {
-	x.inner.MDLAnimatedValue.SetInterpolation(interpolation)
+func (x *AnimatedVector3) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector3 {
+	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
 	return x
 }
 
@@ -87,7 +87,7 @@ func (x *AnimatedVector3) asAnimatedValue() *raw.MDLAnimatedValue { return &x.in
 // AnimatedVector3able is the interface implemented by [AnimatedVector3], for mocking and DI.
 type AnimatedVector3able interface {
 	Unwrap() *raw.MDLAnimatedVector3
-	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedVector3
+	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector3
 	SetFloat3AtTime(value unsafe.Pointer, time_ float64)
 	SetDouble3AtTime(value unsafe.Pointer, time_ float64)
 	Float3AtTime(time_ float64) unsafe.Pointer

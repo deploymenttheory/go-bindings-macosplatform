@@ -42,8 +42,8 @@ func (x *MassFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *M
 }
 
 // WithUnitStyle sets the unitStyle property and returns the receiver for chaining.
-func (x *MassFormatter) WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *MassFormatter {
-	x.inner.SetUnitStyle(unitStyle)
+func (x *MassFormatter) WithUnitStyle(unitStyle NSFormattingUnitStyle) *MassFormatter {
+	x.inner.SetUnitStyle(raw.NSFormattingUnitStyle(unitStyle))
 	return x
 }
 
@@ -60,8 +60,8 @@ func (x *MassFormatter) WithScriptingProperties(scriptingProperties *raw.NSDicti
 }
 
 // StringFromValueUnit calls the underlying StringFromValueUnit.
-func (x *MassFormatter) StringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String {
-	_r := x.inner.StringFromValueUnit(value, unit)
+func (x *MassFormatter) StringFromValueUnit(value float64, unit NSMassFormatterUnit) *String {
+	_r := x.inner.StringFromValueUnit(value, raw.NSMassFormatterUnit(unit))
 	if _r == nil {
 		return nil
 	}
@@ -78,8 +78,8 @@ func (x *MassFormatter) StringFromKilograms(numberInKilograms float64) *String {
 }
 
 // UnitStringFromValueUnit calls the underlying UnitStringFromValueUnit.
-func (x *MassFormatter) UnitStringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String {
-	_r := x.inner.UnitStringFromValueUnit(value, unit)
+func (x *MassFormatter) UnitStringFromValueUnit(value float64, unit NSMassFormatterUnit) *String {
+	_r := x.inner.UnitStringFromValueUnit(value, raw.NSMassFormatterUnit(unit))
 	if _r == nil {
 		return nil
 	}
@@ -110,13 +110,13 @@ func (x *MassFormatter) SetNumberFormatter(numberFormatter *raw.NSNumberFormatte
 }
 
 // UnitStyle calls the underlying UnitStyle.
-func (x *MassFormatter) UnitStyle() raw.NSFormattingUnitStyle {
-	return x.inner.UnitStyle()
+func (x *MassFormatter) UnitStyle() NSFormattingUnitStyle {
+	return NSFormattingUnitStyle(x.inner.UnitStyle())
 }
 
 // SetUnitStyle calls the underlying SetUnitStyle.
-func (x *MassFormatter) SetUnitStyle(unitStyle raw.NSFormattingUnitStyle) {
-	x.inner.SetUnitStyle(unitStyle)
+func (x *MassFormatter) SetUnitStyle(unitStyle NSFormattingUnitStyle) {
+	x.inner.SetUnitStyle(raw.NSFormattingUnitStyle(unitStyle))
 }
 
 // IsForPersonMassUse calls the underlying IsForPersonMassUse.
@@ -137,17 +137,17 @@ func (x *MassFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.N
 type MassFormatterable interface {
 	Unwrap() *raw.NSMassFormatter
 	WithNumberFormatter(numberFormatter *NumberFormatter) *MassFormatter
-	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *MassFormatter
+	WithUnitStyle(unitStyle NSFormattingUnitStyle) *MassFormatter
 	WithForPersonMassUse(forPersonMassUse bool) *MassFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MassFormatter
-	StringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String
+	StringFromValueUnit(value float64, unit NSMassFormatterUnit) *String
 	StringFromKilograms(numberInKilograms float64) *String
-	UnitStringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String
+	UnitStringFromValueUnit(value float64, unit NSMassFormatterUnit) *String
 	UnitStringFromKilogramsUsedUnit(numberInKilograms float64, unitp *raw.NSMassFormatterUnit) *String
 	NumberFormatter() *NumberFormatter
 	SetNumberFormatter(numberFormatter *raw.NSNumberFormatter)
-	UnitStyle() raw.NSFormattingUnitStyle
-	SetUnitStyle(unitStyle raw.NSFormattingUnitStyle)
+	UnitStyle() NSFormattingUnitStyle
+	SetUnitStyle(unitStyle NSFormattingUnitStyle)
 	IsForPersonMassUse() bool
 	SetForPersonMassUse(forPersonMassUse bool)
 }

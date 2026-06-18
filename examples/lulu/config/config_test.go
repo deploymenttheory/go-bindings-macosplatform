@@ -92,17 +92,23 @@ func TestApplyIdempotent(t *testing.T) {
 	}
 }
 
-func TestApplyPrunesOnlyManaged(t *testing.T) {
+func TestApplyIsAuthoritative(t *testing.T) {
 	eng := rules.New("")
-	// A hand-added (unmanaged) rule.
+	// A rule added out-of-band (e.g. interactively, or by an XPC client trying to
+	// punch a hole in the policy).
 	eng.Add(&shared.Rule{UUID: "hand-1", Key: "/usr/bin/ssh", Path: "/usr/bin/ssh", Action: shared.RuleStateAllow})
 
 	cfg, _ := Parse([]byte(`{"rules":[{"path":"/usr/bin/curl","action":"allow"}]}`), FormatJSON)
-	Apply(cfg, eng)
-	// Re-applying a config that omits ssh must NOT remove the hand-added rule.
-	Apply(cfg, eng)
-	if eng.Find("/usr/bin/ssh", "x", "1") != shared.RuleStateAllow {
-		t.Error("hand-added rule was pruned by apply (should be preserved)")
+	added, deleted := Apply(cfg, eng)
+	if added != 1 || deleted != 1 {
+		t.Fatalf("authoritative apply: +%d -%d, want +1 -1 (ssh pruned, curl added)", added, deleted)
+	}
+	// The out-of-band rule must be gone: the config is the complete firewall state.
+	if eng.Find("/usr/bin/ssh", "x", "1") != shared.RuleStateNotFound {
+		t.Error("out-of-band rule survived an authoritative apply (policy is bypassable)")
+	}
+	if eng.Find("/usr/bin/curl", "x", "1") != shared.RuleStateAllow {
+		t.Error("config rule should be present after apply")
 	}
 }
 

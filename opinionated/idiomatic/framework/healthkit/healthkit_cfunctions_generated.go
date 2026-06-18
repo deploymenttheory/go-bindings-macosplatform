@@ -16,23 +16,28 @@ func HKAppleSleepingBreathingDisturbancesClassificationForQuantity(value *raw.HK
 }
 
 // HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification calls [raw.HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification] (C function HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification).
-func HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(classification raw.HKAppleSleepingBreathingDisturbancesClassification) *raw.HKQuantity {
-	return raw.HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(classification)
+func HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(classification HKAppleSleepingBreathingDisturbancesClassification) *raw.HKQuantity {
+	return raw.HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(raw.HKAppleSleepingBreathingDisturbancesClassification(classification))
 }
 
 // HKAppleWalkingSteadinessClassificationForQuantity calls [raw.HKAppleWalkingSteadinessClassificationForQuantity] (C function HKAppleWalkingSteadinessClassificationForQuantity).
-func HKAppleWalkingSteadinessClassificationForQuantity(value *raw.HKQuantity, classificationOut *raw.HKAppleWalkingSteadinessClassification, errorOut unsafe.Pointer) bool {
-	return raw.HKAppleWalkingSteadinessClassificationForQuantity(value, classificationOut, errorOut)
+func HKAppleWalkingSteadinessClassificationForQuantity(value *raw.HKQuantity, classificationOut *HKAppleWalkingSteadinessClassification, errorOut unsafe.Pointer) bool {
+	var _classificationOut raw.HKAppleWalkingSteadinessClassification
+	_ret := raw.HKAppleWalkingSteadinessClassificationForQuantity(value, &_classificationOut, errorOut)
+	if classificationOut != nil {
+		*classificationOut = HKAppleWalkingSteadinessClassification(_classificationOut)
+	}
+	return _ret
 }
 
 // HKAppleWalkingSteadinessMaximumQuantityForClassification calls [raw.HKAppleWalkingSteadinessMaximumQuantityForClassification] (C function HKAppleWalkingSteadinessMaximumQuantityForClassification).
-func HKAppleWalkingSteadinessMaximumQuantityForClassification(classification raw.HKAppleWalkingSteadinessClassification) *raw.HKQuantity {
-	return raw.HKAppleWalkingSteadinessMaximumQuantityForClassification(classification)
+func HKAppleWalkingSteadinessMaximumQuantityForClassification(classification HKAppleWalkingSteadinessClassification) *raw.HKQuantity {
+	return raw.HKAppleWalkingSteadinessMaximumQuantityForClassification(raw.HKAppleWalkingSteadinessClassification(classification))
 }
 
 // HKAppleWalkingSteadinessMinimumQuantityForClassification calls [raw.HKAppleWalkingSteadinessMinimumQuantityForClassification] (C function HKAppleWalkingSteadinessMinimumQuantityForClassification).
-func HKAppleWalkingSteadinessMinimumQuantityForClassification(classification raw.HKAppleWalkingSteadinessClassification) *raw.HKQuantity {
-	return raw.HKAppleWalkingSteadinessMinimumQuantityForClassification(classification)
+func HKAppleWalkingSteadinessMinimumQuantityForClassification(classification HKAppleWalkingSteadinessClassification) *raw.HKQuantity {
+	return raw.HKAppleWalkingSteadinessMinimumQuantityForClassification(raw.HKAppleWalkingSteadinessClassification(classification))
 }
 
 // HKCategoryValueSleepAnalysisAsleepValues calls [raw.HKCategoryValueSleepAnalysisAsleepValues] (C function HKCategoryValueSleepAnalysisAsleepValues).

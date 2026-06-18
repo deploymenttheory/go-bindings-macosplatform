@@ -120,8 +120,8 @@ func (x *Graph) SelectWithSourcesCondition(sources *foundation.NSArray[*raw.MLCT
 }
 
 // ScatterWithDimensionSourceIndicesCopyFromReductionType calls the underlying ScatterWithDimensionSourceIndicesCopyFromReductionType.
-func (x *Graph) ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor, copyFrom *raw.MLCTensor, reductionType raw.MLCReductionType) *Tensor {
-	_r := x.inner.ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension, source, indices, copyFrom, reductionType)
+func (x *Graph) ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor, copyFrom *raw.MLCTensor, reductionType MLCReductionType) *Tensor {
+	_r := x.inner.ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension, source, indices, copyFrom, raw.MLCReductionType(reductionType))
 	if _r == nil {
 		return nil
 	}
@@ -201,7 +201,7 @@ type Graphable interface {
 	ReshapeWithShapeSource(shape *foundation.NSArray[*foundation.NSNumber], source *raw.MLCTensor) *Tensor
 	TransposeWithDimensionsSource(dimensions *foundation.NSArray[*foundation.NSNumber], source *raw.MLCTensor) *Tensor
 	SelectWithSourcesCondition(sources *foundation.NSArray[*raw.MLCTensor], condition *raw.MLCTensor) *Tensor
-	ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor, copyFrom *raw.MLCTensor, reductionType raw.MLCReductionType) *Tensor
+	ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor, copyFrom *raw.MLCTensor, reductionType MLCReductionType) *Tensor
 	GatherWithDimensionSourceIndices(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor) *Tensor
 	BindAndWriteDataForInputsToDeviceBatchSizeSynchronous(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], device *raw.MLCDevice, batchSize uint, synchronous bool) bool
 	BindAndWriteDataForInputsToDeviceSynchronous(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], device *raw.MLCDevice, synchronous bool) bool

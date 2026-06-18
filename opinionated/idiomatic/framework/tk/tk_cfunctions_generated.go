@@ -196,8 +196,8 @@ func Tk_CollapseMotionEvents(display *raw.Display, collapse int) int {
 }
 
 // Tk_ComputeTextLayout calls [raw.Tk_ComputeTextLayout] (C function Tk_ComputeTextLayout).
-func Tk_ComputeTextLayout(font unsafe.Pointer, str string, numChars int, wrapLength int, justify raw.Tk_Justify, flags int, widthPtr *int32, heightPtr *int32) unsafe.Pointer {
-	return raw.Tk_ComputeTextLayout(font, str, numChars, wrapLength, justify, flags, widthPtr, heightPtr)
+func Tk_ComputeTextLayout(font unsafe.Pointer, str string, numChars int, wrapLength int, justify Tk_Justify, flags int, widthPtr *int32, heightPtr *int32) unsafe.Pointer {
+	return raw.Tk_ComputeTextLayout(font, str, numChars, wrapLength, raw.Tk_Justify(justify), flags, widthPtr, heightPtr)
 }
 
 // Tk_ConfigOutlineGC calls [raw.Tk_ConfigOutlineGC] (C function Tk_ConfigOutlineGC).
@@ -596,13 +596,23 @@ func Tk_GetAllBindings(interp *tcl.Tcl_Interp, bindingTable *int32, object unsaf
 }
 
 // Tk_GetAnchor calls [raw.Tk_GetAnchor] (C function Tk_GetAnchor).
-func Tk_GetAnchor(interp *tcl.Tcl_Interp, str string, anchorPtr *raw.Tk_Anchor) int {
-	return raw.Tk_GetAnchor(interp, str, anchorPtr)
+func Tk_GetAnchor(interp *tcl.Tcl_Interp, str string, anchorPtr *Tk_Anchor) int {
+	var _anchorPtr raw.Tk_Anchor
+	_ret := raw.Tk_GetAnchor(interp, str, &_anchorPtr)
+	if anchorPtr != nil {
+		*anchorPtr = Tk_Anchor(_anchorPtr)
+	}
+	return _ret
 }
 
 // Tk_GetAnchorFromObj calls [raw.Tk_GetAnchorFromObj] (C function Tk_GetAnchorFromObj).
-func Tk_GetAnchorFromObj(interp *tcl.Tcl_Interp, objPtr *tcl.Tcl_Obj, anchorPtr *raw.Tk_Anchor) int {
-	return raw.Tk_GetAnchorFromObj(interp, objPtr, anchorPtr)
+func Tk_GetAnchorFromObj(interp *tcl.Tcl_Interp, objPtr *tcl.Tcl_Obj, anchorPtr *Tk_Anchor) int {
+	var _anchorPtr raw.Tk_Anchor
+	_ret := raw.Tk_GetAnchorFromObj(interp, objPtr, &_anchorPtr)
+	if anchorPtr != nil {
+		*anchorPtr = Tk_Anchor(_anchorPtr)
+	}
+	return _ret
 }
 
 // Tk_GetAtomName calls [raw.Tk_GetAtomName] (C function Tk_GetAtomName).
@@ -736,13 +746,23 @@ func Tk_GetJoinStyle(interp *tcl.Tcl_Interp, str string, joinPtr *int32) int {
 }
 
 // Tk_GetJustify calls [raw.Tk_GetJustify] (C function Tk_GetJustify).
-func Tk_GetJustify(interp *tcl.Tcl_Interp, str string, justifyPtr *raw.Tk_Justify) int {
-	return raw.Tk_GetJustify(interp, str, justifyPtr)
+func Tk_GetJustify(interp *tcl.Tcl_Interp, str string, justifyPtr *Tk_Justify) int {
+	var _justifyPtr raw.Tk_Justify
+	_ret := raw.Tk_GetJustify(interp, str, &_justifyPtr)
+	if justifyPtr != nil {
+		*justifyPtr = Tk_Justify(_justifyPtr)
+	}
+	return _ret
 }
 
 // Tk_GetJustifyFromObj calls [raw.Tk_GetJustifyFromObj] (C function Tk_GetJustifyFromObj).
-func Tk_GetJustifyFromObj(interp *tcl.Tcl_Interp, objPtr *tcl.Tcl_Obj, justifyPtr *raw.Tk_Justify) int {
-	return raw.Tk_GetJustifyFromObj(interp, objPtr, justifyPtr)
+func Tk_GetJustifyFromObj(interp *tcl.Tcl_Interp, objPtr *tcl.Tcl_Obj, justifyPtr *Tk_Justify) int {
+	var _justifyPtr raw.Tk_Justify
+	_ret := raw.Tk_GetJustifyFromObj(interp, objPtr, &_justifyPtr)
+	if justifyPtr != nil {
+		*justifyPtr = Tk_Justify(_justifyPtr)
+	}
+	return _ret
 }
 
 // Tk_GetMMFromObj calls [raw.Tk_GetMMFromObj] (C function Tk_GetMMFromObj).
@@ -971,8 +991,8 @@ func Tk_NameOf3DBorder(border unsafe.Pointer) string {
 }
 
 // Tk_NameOfAnchor calls [raw.Tk_NameOfAnchor] (C function Tk_NameOfAnchor).
-func Tk_NameOfAnchor(anchor raw.Tk_Anchor) string {
-	return raw.Tk_NameOfAnchor(anchor)
+func Tk_NameOfAnchor(anchor Tk_Anchor) string {
+	return raw.Tk_NameOfAnchor(raw.Tk_Anchor(anchor))
 }
 
 // Tk_NameOfBitmap calls [raw.Tk_NameOfBitmap] (C function Tk_NameOfBitmap).
@@ -1011,8 +1031,8 @@ func Tk_NameOfJoinStyle(join int) string {
 }
 
 // Tk_NameOfJustify calls [raw.Tk_NameOfJustify] (C function Tk_NameOfJustify).
-func Tk_NameOfJustify(justify raw.Tk_Justify) string {
-	return raw.Tk_NameOfJustify(justify)
+func Tk_NameOfJustify(justify Tk_Justify) string {
+	return raw.Tk_NameOfJustify(raw.Tk_Justify(justify))
 }
 
 // Tk_NameOfRelief calls [raw.Tk_NameOfRelief] (C function Tk_NameOfRelief).

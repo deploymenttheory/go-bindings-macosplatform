@@ -88,8 +88,8 @@ func (x *AudioConverter) WithSampleRateConverterAlgorithm(sampleRateConverterAlg
 }
 
 // WithPrimeMethod sets the primeMethod property and returns the receiver for chaining.
-func (x *AudioConverter) WithPrimeMethod(primeMethod raw.AVAudioConverterPrimeMethod) *AudioConverter {
-	x.inner.SetPrimeMethod(primeMethod)
+func (x *AudioConverter) WithPrimeMethod(primeMethod AVAudioConverterPrimeMethod) *AudioConverter {
+	x.inner.SetPrimeMethod(raw.AVAudioConverterPrimeMethod(primeMethod))
 	return x
 }
 
@@ -106,14 +106,14 @@ func (x *AudioConverter) WithAudioSyncPacketFrequency(audioSyncPacketFrequency i
 }
 
 // WithContentSource sets the contentSource property and returns the receiver for chaining.
-func (x *AudioConverter) WithContentSource(contentSource raw.AVAudioContentSource) *AudioConverter {
-	x.inner.SetContentSource(contentSource)
+func (x *AudioConverter) WithContentSource(contentSource AVAudioContentSource) *AudioConverter {
+	x.inner.SetContentSource(raw.AVAudioContentSource(contentSource))
 	return x
 }
 
 // WithDynamicRangeControlConfiguration sets the dynamicRangeControlConfiguration property and returns the receiver for chaining.
-func (x *AudioConverter) WithDynamicRangeControlConfiguration(dynamicRangeControlConfiguration raw.AVAudioDynamicRangeControlConfiguration) *AudioConverter {
-	x.inner.SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration)
+func (x *AudioConverter) WithDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AVAudioDynamicRangeControlConfiguration) *AudioConverter {
+	x.inner.SetDynamicRangeControlConfiguration(raw.AVAudioDynamicRangeControlConfiguration(dynamicRangeControlConfiguration))
 	return x
 }
 
@@ -140,8 +140,8 @@ func (x *AudioConverter) ConvertToBufferFromBufferError(outputBuffer *raw.AVAudi
 }
 
 // ConvertToBufferErrorWithInputFromBlock calls the underlying ConvertToBufferErrorWithInputFromBlock.
-func (x *AudioConverter) ConvertToBufferErrorWithInputFromBlock(outputBuffer *raw.AVAudioBuffer, outError unsafe.Pointer, inputBlock objc.Block) raw.AVAudioConverterOutputStatus {
-	return x.inner.ConvertToBufferErrorWithInputFromBlock(outputBuffer, outError, inputBlock)
+func (x *AudioConverter) ConvertToBufferErrorWithInputFromBlock(outputBuffer *raw.AVAudioBuffer, outError unsafe.Pointer, inputBlock objc.Block) AVAudioConverterOutputStatus {
+	return AVAudioConverterOutputStatus(x.inner.ConvertToBufferErrorWithInputFromBlock(outputBuffer, outError, inputBlock))
 }
 
 // InputFormat calls the underlying InputFormat.
@@ -233,13 +233,13 @@ func (x *AudioConverter) SetSampleRateConverterAlgorithm(sampleRateConverterAlgo
 }
 
 // PrimeMethod calls the underlying PrimeMethod.
-func (x *AudioConverter) PrimeMethod() raw.AVAudioConverterPrimeMethod {
-	return x.inner.PrimeMethod()
+func (x *AudioConverter) PrimeMethod() AVAudioConverterPrimeMethod {
+	return AVAudioConverterPrimeMethod(x.inner.PrimeMethod())
 }
 
 // SetPrimeMethod calls the underlying SetPrimeMethod.
-func (x *AudioConverter) SetPrimeMethod(primeMethod raw.AVAudioConverterPrimeMethod) {
-	x.inner.SetPrimeMethod(primeMethod)
+func (x *AudioConverter) SetPrimeMethod(primeMethod AVAudioConverterPrimeMethod) {
+	x.inner.SetPrimeMethod(raw.AVAudioConverterPrimeMethod(primeMethod))
 }
 
 // PrimeInfo calls the underlying PrimeInfo.
@@ -263,23 +263,23 @@ func (x *AudioConverter) SetAudioSyncPacketFrequency(audioSyncPacketFrequency in
 }
 
 // ContentSource calls the underlying ContentSource.
-func (x *AudioConverter) ContentSource() raw.AVAudioContentSource {
-	return x.inner.ContentSource()
+func (x *AudioConverter) ContentSource() AVAudioContentSource {
+	return AVAudioContentSource(x.inner.ContentSource())
 }
 
 // SetContentSource calls the underlying SetContentSource.
-func (x *AudioConverter) SetContentSource(contentSource raw.AVAudioContentSource) {
-	x.inner.SetContentSource(contentSource)
+func (x *AudioConverter) SetContentSource(contentSource AVAudioContentSource) {
+	x.inner.SetContentSource(raw.AVAudioContentSource(contentSource))
 }
 
 // DynamicRangeControlConfiguration calls the underlying DynamicRangeControlConfiguration.
-func (x *AudioConverter) DynamicRangeControlConfiguration() raw.AVAudioDynamicRangeControlConfiguration {
-	return x.inner.DynamicRangeControlConfiguration()
+func (x *AudioConverter) DynamicRangeControlConfiguration() AVAudioDynamicRangeControlConfiguration {
+	return AVAudioDynamicRangeControlConfiguration(x.inner.DynamicRangeControlConfiguration())
 }
 
 // SetDynamicRangeControlConfiguration calls the underlying SetDynamicRangeControlConfiguration.
-func (x *AudioConverter) SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration raw.AVAudioDynamicRangeControlConfiguration) {
-	x.inner.SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration)
+func (x *AudioConverter) SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AVAudioDynamicRangeControlConfiguration) {
+	x.inner.SetDynamicRangeControlConfiguration(raw.AVAudioDynamicRangeControlConfiguration(dynamicRangeControlConfiguration))
 }
 
 // BitRate calls the underlying BitRate.
@@ -375,16 +375,16 @@ type AudioConverterable interface {
 	WithDither(dither bool) *AudioConverter
 	WithSampleRateConverterQuality(sampleRateConverterQuality int) *AudioConverter
 	WithSampleRateConverterAlgorithm(sampleRateConverterAlgorithm string) *AudioConverter
-	WithPrimeMethod(primeMethod raw.AVAudioConverterPrimeMethod) *AudioConverter
+	WithPrimeMethod(primeMethod AVAudioConverterPrimeMethod) *AudioConverter
 	WithPrimeInfo(primeInfo raw.AVAudioConverterPrimeInfo) *AudioConverter
 	WithAudioSyncPacketFrequency(audioSyncPacketFrequency int) *AudioConverter
-	WithContentSource(contentSource raw.AVAudioContentSource) *AudioConverter
-	WithDynamicRangeControlConfiguration(dynamicRangeControlConfiguration raw.AVAudioDynamicRangeControlConfiguration) *AudioConverter
+	WithContentSource(contentSource AVAudioContentSource) *AudioConverter
+	WithDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AVAudioDynamicRangeControlConfiguration) *AudioConverter
 	WithBitRate(bitRate int) *AudioConverter
 	WithBitRateStrategy(bitRateStrategy string) *AudioConverter
 	Reset()
 	ConvertToBufferFromBufferError(outputBuffer *raw.AVAudioPCMBuffer, inputBuffer *raw.AVAudioPCMBuffer) (bool, error)
-	ConvertToBufferErrorWithInputFromBlock(outputBuffer *raw.AVAudioBuffer, outError unsafe.Pointer, inputBlock objc.Block) raw.AVAudioConverterOutputStatus
+	ConvertToBufferErrorWithInputFromBlock(outputBuffer *raw.AVAudioBuffer, outError unsafe.Pointer, inputBlock objc.Block) AVAudioConverterOutputStatus
 	InputFormat() *AudioFormat
 	OutputFormat() *AudioFormat
 	ChannelMap() []*foundation.NSNumber
@@ -399,16 +399,16 @@ type AudioConverterable interface {
 	SetSampleRateConverterQuality(sampleRateConverterQuality int)
 	SampleRateConverterAlgorithm() string
 	SetSampleRateConverterAlgorithm(sampleRateConverterAlgorithm string)
-	PrimeMethod() raw.AVAudioConverterPrimeMethod
-	SetPrimeMethod(primeMethod raw.AVAudioConverterPrimeMethod)
+	PrimeMethod() AVAudioConverterPrimeMethod
+	SetPrimeMethod(primeMethod AVAudioConverterPrimeMethod)
 	PrimeInfo() raw.AVAudioConverterPrimeInfo
 	SetPrimeInfo(primeInfo raw.AVAudioConverterPrimeInfo)
 	AudioSyncPacketFrequency() int
 	SetAudioSyncPacketFrequency(audioSyncPacketFrequency int)
-	ContentSource() raw.AVAudioContentSource
-	SetContentSource(contentSource raw.AVAudioContentSource)
-	DynamicRangeControlConfiguration() raw.AVAudioDynamicRangeControlConfiguration
-	SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration raw.AVAudioDynamicRangeControlConfiguration)
+	ContentSource() AVAudioContentSource
+	SetContentSource(contentSource AVAudioContentSource)
+	DynamicRangeControlConfiguration() AVAudioDynamicRangeControlConfiguration
+	SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AVAudioDynamicRangeControlConfiguration)
 	BitRate() int
 	SetBitRate(bitRate int)
 	BitRateStrategy() string

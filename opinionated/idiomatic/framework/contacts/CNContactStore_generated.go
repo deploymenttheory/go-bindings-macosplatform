@@ -39,8 +39,8 @@ func NewContactStore() *ContactStore {
 }
 
 // RequestAccessForEntityTypeCompletionHandler calls the underlying RequestAccessForEntityTypeCompletionHandler.
-func (x *ContactStore) RequestAccessForEntityTypeCompletionHandler(entityType raw.CNEntityType, completionHandler func(bool, unsafe.Pointer)) {
-	x.inner.RequestAccessForEntityTypeCompletionHandler(entityType, completionHandler)
+func (x *ContactStore) RequestAccessForEntityTypeCompletionHandler(entityType CNEntityType, completionHandler func(bool, unsafe.Pointer)) {
+	x.inner.RequestAccessForEntityTypeCompletionHandler(raw.CNEntityType(entityType), completionHandler)
 }
 
 // UnifiedContactsMatchingPredicateKeysToFetchError calls the underlying UnifiedContactsMatchingPredicateKeysToFetchError.
@@ -119,7 +119,7 @@ func (x *ContactStore) CurrentHistoryToken() *foundation.NSData {
 // ContactStoreable is the interface implemented by [ContactStore], for mocking and DI.
 type ContactStoreable interface {
 	Unwrap() *raw.CNContactStore
-	RequestAccessForEntityTypeCompletionHandler(entityType raw.CNEntityType, completionHandler func(bool, unsafe.Pointer))
+	RequestAccessForEntityTypeCompletionHandler(entityType CNEntityType, completionHandler func(bool, unsafe.Pointer))
 	UnifiedContactsMatchingPredicateKeysToFetchError(predicate *foundation.NSPredicate, keys *foundation.NSArray[raw.CNKeyDescriptor]) (*foundation.NSArray[*raw.CNContact], error)
 	UnifiedContactWithIdentifierKeysToFetchError(identifier string, keys *foundation.NSArray[raw.CNKeyDescriptor]) (*Contact, error)
 	UnifiedMeContactWithKeysToFetchError(keys *foundation.NSArray[raw.CNKeyDescriptor]) (*Contact, error)

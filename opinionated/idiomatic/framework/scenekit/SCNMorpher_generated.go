@@ -75,8 +75,8 @@ func (x *Morpher) WithWeights(items ...*foundation.NSNumber) *Morpher {
 }
 
 // WithCalculationMode sets the calculationMode property and returns the receiver for chaining.
-func (x *Morpher) WithCalculationMode(calculationMode raw.SCNMorpherCalculationMode) *Morpher {
-	x.inner.SetCalculationMode(calculationMode)
+func (x *Morpher) WithCalculationMode(calculationMode SCNMorpherCalculationMode) *Morpher {
+	x.inner.SetCalculationMode(raw.SCNMorpherCalculationMode(calculationMode))
 	return x
 }
 
@@ -139,13 +139,13 @@ func (x *Morpher) SetWeights(weights *foundation.NSArray[*foundation.NSNumber]) 
 }
 
 // CalculationMode calls the underlying CalculationMode.
-func (x *Morpher) CalculationMode() raw.SCNMorpherCalculationMode {
-	return x.inner.CalculationMode()
+func (x *Morpher) CalculationMode() SCNMorpherCalculationMode {
+	return SCNMorpherCalculationMode(x.inner.CalculationMode())
 }
 
 // SetCalculationMode calls the underlying SetCalculationMode.
-func (x *Morpher) SetCalculationMode(calculationMode raw.SCNMorpherCalculationMode) {
-	x.inner.SetCalculationMode(calculationMode)
+func (x *Morpher) SetCalculationMode(calculationMode SCNMorpherCalculationMode) {
+	x.inner.SetCalculationMode(raw.SCNMorpherCalculationMode(calculationMode))
 }
 
 // UnifiesNormals calls the underlying UnifiesNormals.
@@ -163,7 +163,7 @@ type Morpherable interface {
 	Unwrap() *raw.SCNMorpher
 	WithTargets(items ...GeometryProvider) *Morpher
 	WithWeights(items ...*foundation.NSNumber) *Morpher
-	WithCalculationMode(calculationMode raw.SCNMorpherCalculationMode) *Morpher
+	WithCalculationMode(calculationMode SCNMorpherCalculationMode) *Morpher
 	WithUnifiesNormals(unifiesNormals bool) *Morpher
 	SetWeightForTargetAtIndex(weight float64, targetIndex uint)
 	WeightForTargetAtIndex(targetIndex uint) float64
@@ -173,8 +173,8 @@ type Morpherable interface {
 	SetTargets(targets *foundation.NSArray[*raw.SCNGeometry])
 	Weights() []*foundation.NSNumber
 	SetWeights(weights *foundation.NSArray[*foundation.NSNumber])
-	CalculationMode() raw.SCNMorpherCalculationMode
-	SetCalculationMode(calculationMode raw.SCNMorpherCalculationMode)
+	CalculationMode() SCNMorpherCalculationMode
+	SetCalculationMode(calculationMode SCNMorpherCalculationMode)
 	UnifiesNormals() bool
 	SetUnifiesNormals(unifiesNormals bool)
 }

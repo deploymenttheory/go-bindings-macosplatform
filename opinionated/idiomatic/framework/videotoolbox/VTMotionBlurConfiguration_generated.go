@@ -32,9 +32,9 @@ func MotionBlurConfigurationFromID(id objc.ID) *MotionBlurConfiguration {
 }
 
 // NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision creates a new [MotionBlurConfiguration].
-func NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization raw.VTMotionBlurConfigurationQualityPrioritization, revision raw.VTMotionBlurConfigurationRevision) *MotionBlurConfiguration {
+func NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTMotionBlurConfigurationQualityPrioritization, revision VTMotionBlurConfigurationRevision) *MotionBlurConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTMotionBlurConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, usePrecomputedFlow, qualityPrioritization, revision)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, usePrecomputedFlow, raw.VTMotionBlurConfigurationQualityPrioritization(qualityPrioritization), raw.VTMotionBlurConfigurationRevision(revision))
 	return &MotionBlurConfiguration{inner: raw.VTMotionBlurConfigurationFromID(_id)}
 }
 
@@ -54,13 +54,13 @@ func (x *MotionBlurConfiguration) UsePrecomputedFlow() bool {
 }
 
 // QualityPrioritization calls the underlying QualityPrioritization.
-func (x *MotionBlurConfiguration) QualityPrioritization() raw.VTMotionBlurConfigurationQualityPrioritization {
-	return x.inner.QualityPrioritization()
+func (x *MotionBlurConfiguration) QualityPrioritization() VTMotionBlurConfigurationQualityPrioritization {
+	return VTMotionBlurConfigurationQualityPrioritization(x.inner.QualityPrioritization())
 }
 
 // Revision calls the underlying Revision.
-func (x *MotionBlurConfiguration) Revision() raw.VTMotionBlurConfigurationRevision {
-	return x.inner.Revision()
+func (x *MotionBlurConfiguration) Revision() VTMotionBlurConfigurationRevision {
+	return VTMotionBlurConfigurationRevision(x.inner.Revision())
 }
 
 // FrameSupportedPixelFormats returns the collection as a Go slice.
@@ -90,8 +90,8 @@ type MotionBlurConfigurationable interface {
 	FrameWidth() int
 	FrameHeight() int
 	UsePrecomputedFlow() bool
-	QualityPrioritization() raw.VTMotionBlurConfigurationQualityPrioritization
-	Revision() raw.VTMotionBlurConfigurationRevision
+	QualityPrioritization() VTMotionBlurConfigurationQualityPrioritization
+	Revision() VTMotionBlurConfigurationRevision
 	FrameSupportedPixelFormats() []*foundation.NSNumber
 	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]

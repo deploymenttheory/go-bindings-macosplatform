@@ -30,9 +30,9 @@ func PositionalSpecifierFromID(id objc.ID) *PositionalSpecifier {
 }
 
 // NewPositionalSpecifierWithPositionObjectSpecifier creates a new [PositionalSpecifier].
-func NewPositionalSpecifierWithPositionObjectSpecifier(position raw.NSInsertionPosition, specifier *raw.NSScriptObjectSpecifier) *PositionalSpecifier {
+func NewPositionalSpecifierWithPositionObjectSpecifier(position NSInsertionPosition, specifier *raw.NSScriptObjectSpecifier) *PositionalSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPositionalSpecifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPosition:objectSpecifier:"), position, specifier.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPosition:objectSpecifier:"), raw.NSInsertionPosition(position), specifier.Ptr())
 	return &PositionalSpecifier{inner: raw.NSPositionalSpecifierFromID(_id)}
 }
 
@@ -53,8 +53,8 @@ func (x *PositionalSpecifier) Evaluate() {
 }
 
 // Position calls the underlying Position.
-func (x *PositionalSpecifier) Position() raw.NSInsertionPosition {
-	return x.inner.Position()
+func (x *PositionalSpecifier) Position() NSInsertionPosition {
+	return NSInsertionPosition(x.inner.Position())
 }
 
 // InsertionContainer calls the underlying InsertionContainer.
@@ -89,7 +89,7 @@ type PositionalSpecifierable interface {
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PositionalSpecifier
 	SetInsertionClassDescription(classDescription *raw.NSScriptClassDescription)
 	Evaluate()
-	Position() raw.NSInsertionPosition
+	Position() NSInsertionPosition
 	InsertionContainer() objc.ID
 	InsertionKey() *String
 	InsertionIndex() int

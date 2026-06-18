@@ -113,20 +113,20 @@ func (x *AnnotationStamp) WithEndPoint(endPoint corefoundation.CGPoint) *Annotat
 }
 
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationStamp) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationStamp {
-	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+func (x *AnnotationStamp) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationStamp) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationStamp {
-	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+func (x *AnnotationStamp) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
 // WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationStamp) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationStamp {
-	x.inner.PDFAnnotation.SetIconType(iconType)
+func (x *AnnotationStamp) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
@@ -149,14 +149,14 @@ func (x *AnnotationStamp) WithQuadrilateralPoints(items ...*foundation.NSValue) 
 }
 
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationStamp) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationStamp {
-	x.inner.PDFAnnotation.SetMarkupType(markupType)
+func (x *AnnotationStamp) WithMarkupType(markupType PDFMarkupType) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationStamp) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationStamp {
-	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+func (x *AnnotationStamp) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
@@ -251,8 +251,8 @@ func (x *AnnotationStamp) WithValues(items ...*foundation.NSString) *AnnotationS
 }
 
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationStamp) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationStamp {
-	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+func (x *AnnotationStamp) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationStamp {
+	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
@@ -335,12 +335,12 @@ type AnnotationStampable interface {
 	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationStamp
 	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationStamp
 	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationStamp
-	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationStamp
-	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationStamp
-	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationStamp
+	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationStamp
+	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationStamp
+	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationStamp
 	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationStamp
-	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationStamp
-	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationStamp
+	WithMarkupType(markupType PDFMarkupType) *AnnotationStamp
+	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationStamp
 	WithMultiline(multiline bool) *AnnotationStamp
 	WithComb(comb bool) *AnnotationStamp
 	WithMaximumLength(maximumLength int) *AnnotationStamp
@@ -352,7 +352,7 @@ type AnnotationStampable interface {
 	WithListChoice(listChoice bool) *AnnotationStamp
 	WithChoices(items ...*foundation.NSString) *AnnotationStamp
 	WithValues(items ...*foundation.NSString) *AnnotationStamp
-	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationStamp
+	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationStamp
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationStamp
 	WithOpen(open bool) *AnnotationStamp
 	WithDestination(destination *Destination) *AnnotationStamp

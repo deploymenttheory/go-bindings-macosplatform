@@ -32,9 +32,9 @@ func HostInterfaceFromID(id objc.ID) *HostInterface {
 }
 
 // NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler creates a new [HostInterface].
-func NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler(ioService uint, options raw.IOUSBHostObjectInitOptions, queue *foundation.NSObject, error_ unsafe.Pointer, interestHandler func(*raw.IOUSBHostObject, uint32, unsafe.Pointer)) *HostInterface {
+func NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler(ioService uint, options IOUSBHostObjectInitOptions, queue *foundation.NSObject, error_ unsafe.Pointer, interestHandler func(*raw.IOUSBHostObject, uint32, unsafe.Pointer)) *HostInterface {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostInterface")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:options:queue:error:interestHandler:"), ioService, options, queue.Ptr(), error_, interestHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:options:queue:error:interestHandler:"), ioService, raw.IOUSBHostObjectInitOptions(options), queue.Ptr(), error_, interestHandler)
 	return &HostInterface{inner: raw.IOUSBHostInterfaceFromID(_id)}
 }
 

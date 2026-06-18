@@ -38,8 +38,8 @@ func NewMultiArrayShapeConstraint() *MultiArrayShapeConstraint {
 }
 
 // Type calls the underlying Type.
-func (x *MultiArrayShapeConstraint) Type() raw.MLMultiArrayShapeConstraintType {
-	return x.inner.Type()
+func (x *MultiArrayShapeConstraint) Type() MLMultiArrayShapeConstraintType {
+	return MLMultiArrayShapeConstraintType(x.inner.Type())
 }
 
 // SizeRangeForDimension returns the collection as a Go slice.
@@ -61,7 +61,7 @@ func (x *MultiArrayShapeConstraint) EnumeratedShapes() *foundation.NSArray[objc.
 // MultiArrayShapeConstraintable is the interface implemented by [MultiArrayShapeConstraint], for mocking and DI.
 type MultiArrayShapeConstraintable interface {
 	Unwrap() *raw.MLMultiArrayShapeConstraint
-	Type() raw.MLMultiArrayShapeConstraintType
+	Type() MLMultiArrayShapeConstraintType
 	SizeRangeForDimension() []*foundation.NSValue
 	EnumeratedShapes() *foundation.NSArray[objc.ID]
 }

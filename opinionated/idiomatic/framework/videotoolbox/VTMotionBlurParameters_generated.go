@@ -30,9 +30,9 @@ func MotionBlurParametersFromID(id objc.ID) *MotionBlurParameters {
 }
 
 // NewMotionBlurParametersWithSourceFrameNextFramePreviousFrameNextOpticalFlowPreviousOpticalFlowMotionBlurStrengthSubmissionModeDestinationFrame creates a new [MotionBlurParameters].
-func NewMotionBlurParametersWithSourceFrameNextFramePreviousFrameNextOpticalFlowPreviousOpticalFlowMotionBlurStrengthSubmissionModeDestinationFrame(sourceFrame *raw.VTFrameProcessorFrame, nextFrame *raw.VTFrameProcessorFrame, previousFrame *raw.VTFrameProcessorFrame, nextOpticalFlow *raw.VTFrameProcessorOpticalFlow, previousOpticalFlow *raw.VTFrameProcessorOpticalFlow, motionBlurStrength int, submissionMode raw.VTMotionBlurParametersSubmissionMode, destinationFrame *raw.VTFrameProcessorFrame) *MotionBlurParameters {
+func NewMotionBlurParametersWithSourceFrameNextFramePreviousFrameNextOpticalFlowPreviousOpticalFlowMotionBlurStrengthSubmissionModeDestinationFrame(sourceFrame *raw.VTFrameProcessorFrame, nextFrame *raw.VTFrameProcessorFrame, previousFrame *raw.VTFrameProcessorFrame, nextOpticalFlow *raw.VTFrameProcessorOpticalFlow, previousOpticalFlow *raw.VTFrameProcessorOpticalFlow, motionBlurStrength int, submissionMode VTMotionBlurParametersSubmissionMode, destinationFrame *raw.VTFrameProcessorFrame) *MotionBlurParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTMotionBlurParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:previousFrame:nextOpticalFlow:previousOpticalFlow:motionBlurStrength:submissionMode:destinationFrame:"), sourceFrame.Ptr(), nextFrame.Ptr(), previousFrame.Ptr(), nextOpticalFlow.Ptr(), previousOpticalFlow.Ptr(), motionBlurStrength, submissionMode, destinationFrame.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:previousFrame:nextOpticalFlow:previousOpticalFlow:motionBlurStrength:submissionMode:destinationFrame:"), sourceFrame.Ptr(), nextFrame.Ptr(), previousFrame.Ptr(), nextOpticalFlow.Ptr(), previousOpticalFlow.Ptr(), motionBlurStrength, raw.VTMotionBlurParametersSubmissionMode(submissionMode), destinationFrame.Ptr())
 	return &MotionBlurParameters{inner: raw.VTMotionBlurParametersFromID(_id)}
 }
 
@@ -87,8 +87,8 @@ func (x *MotionBlurParameters) MotionBlurStrength() int {
 }
 
 // SubmissionMode calls the underlying SubmissionMode.
-func (x *MotionBlurParameters) SubmissionMode() raw.VTMotionBlurParametersSubmissionMode {
-	return x.inner.SubmissionMode()
+func (x *MotionBlurParameters) SubmissionMode() VTMotionBlurParametersSubmissionMode {
+	return VTMotionBlurParametersSubmissionMode(x.inner.SubmissionMode())
 }
 
 // DestinationFrame calls the underlying DestinationFrame.
@@ -109,7 +109,7 @@ type MotionBlurParametersable interface {
 	NextOpticalFlow() *FrameProcessorOpticalFlow
 	PreviousOpticalFlow() *FrameProcessorOpticalFlow
 	MotionBlurStrength() int
-	SubmissionMode() raw.VTMotionBlurParametersSubmissionMode
+	SubmissionMode() VTMotionBlurParametersSubmissionMode
 	DestinationFrame() *FrameProcessorFrame
 }
 

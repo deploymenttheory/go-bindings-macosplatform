@@ -37,8 +37,8 @@ func NewVisionPrescription() *VisionPrescription {
 }
 
 // PrescriptionType calls the underlying PrescriptionType.
-func (x *VisionPrescription) PrescriptionType() raw.HKVisionPrescriptionType {
-	return x.inner.PrescriptionType()
+func (x *VisionPrescription) PrescriptionType() HKVisionPrescriptionType {
+	return HKVisionPrescriptionType(x.inner.PrescriptionType())
 }
 
 // DateIssued calls the underlying DateIssued.
@@ -60,7 +60,7 @@ func (x *VisionPrescription) asObject() *raw.HKObject { return &x.inner.HKSample
 // VisionPrescriptionable is the interface implemented by [VisionPrescription], for mocking and DI.
 type VisionPrescriptionable interface {
 	Unwrap() *raw.HKVisionPrescription
-	PrescriptionType() raw.HKVisionPrescriptionType
+	PrescriptionType() HKVisionPrescriptionType
 	DateIssued() *foundation.NSDate
 	ExpirationDate() *foundation.NSDate
 }

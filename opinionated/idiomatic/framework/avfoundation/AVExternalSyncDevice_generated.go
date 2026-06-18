@@ -45,8 +45,8 @@ func (x *ExternalSyncDevice) WithSignalCompensationDelay(signalCompensationDelay
 }
 
 // Status calls the underlying Status.
-func (x *ExternalSyncDevice) Status() raw.AVExternalSyncDeviceStatus {
-	return x.inner.Status()
+func (x *ExternalSyncDevice) Status() AVExternalSyncDeviceStatus {
+	return AVExternalSyncDeviceStatus(x.inner.Status())
 }
 
 // Clock calls the underlying Clock.
@@ -83,7 +83,7 @@ func (x *ExternalSyncDevice) ProductID() uint {
 type ExternalSyncDeviceable interface {
 	Unwrap() *raw.AVExternalSyncDevice
 	WithSignalCompensationDelay(signalCompensationDelay coremedia.CMTime) *ExternalSyncDevice
-	Status() raw.AVExternalSyncDeviceStatus
+	Status() AVExternalSyncDeviceStatus
 	Clock() unsafe.Pointer
 	SignalCompensationDelay() coremedia.CMTime
 	SetSignalCompensationDelay(signalCompensationDelay coremedia.CMTime)

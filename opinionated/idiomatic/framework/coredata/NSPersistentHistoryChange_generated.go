@@ -51,8 +51,8 @@ func (x *PersistentHistoryChange) ChangedObjectID() *ManagedObjectID {
 }
 
 // ChangeType calls the underlying ChangeType.
-func (x *PersistentHistoryChange) ChangeType() raw.NSPersistentHistoryChangeType {
-	return x.inner.ChangeType()
+func (x *PersistentHistoryChange) ChangeType() NSPersistentHistoryChangeType {
+	return NSPersistentHistoryChangeType(x.inner.ChangeType())
 }
 
 // Tombstone calls the underlying Tombstone.
@@ -79,7 +79,7 @@ type PersistentHistoryChangeable interface {
 	Unwrap() *raw.NSPersistentHistoryChange
 	ChangeID() int64
 	ChangedObjectID() *ManagedObjectID
-	ChangeType() raw.NSPersistentHistoryChangeType
+	ChangeType() NSPersistentHistoryChangeType
 	Tombstone() *foundation.NSDictionary[objc.ID, objc.ID]
 	Transaction() *PersistentHistoryTransaction
 	UpdatedProperties() *foundation.NSSet[*raw.NSPropertyDescription]

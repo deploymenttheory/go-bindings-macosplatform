@@ -48,8 +48,8 @@ func (x *PageLayout) RemoveAccessoryController(accessoryController *raw.NSViewCo
 }
 
 // BeginSheetUsingPrintInfoOnWindowCompletionHandler calls the underlying BeginSheetUsingPrintInfoOnWindowCompletionHandler.
-func (x *PageLayout) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(raw.NSPageLayoutResult)) {
-	x.inner.BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo, parentWindow, handler)
+func (x *PageLayout) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(NSPageLayoutResult)) {
+	x.inner.BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo, parentWindow, func(_a0 raw.NSPageLayoutResult) { handler(NSPageLayoutResult(_a0)) })
 }
 
 // BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo calls the underlying BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo.
@@ -116,7 +116,7 @@ type PageLayoutable interface {
 	Unwrap() *raw.NSPageLayout
 	AddAccessoryController(accessoryController *raw.NSViewController)
 	RemoveAccessoryController(accessoryController *raw.NSViewController)
-	BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(raw.NSPageLayoutResult))
+	BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(NSPageLayoutResult))
 	BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *raw.NSPrintInfo, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
 	RunModalWithPrintInfo(printInfo *raw.NSPrintInfo) int
 	RunModal() int

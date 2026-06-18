@@ -42,8 +42,8 @@ func (x *Touch) Identity() objc.ID {
 }
 
 // Phase calls the underlying Phase.
-func (x *Touch) Phase() raw.NSTouchPhase {
-	return x.inner.Phase()
+func (x *Touch) Phase() NSTouchPhase {
+	return NSTouchPhase(x.inner.Phase())
 }
 
 // NormalizedPosition calls the underlying NormalizedPosition.
@@ -77,22 +77,22 @@ func (x *Touch) PreviousLocationInView(view *raw.NSView) corefoundation.CGPoint 
 }
 
 // Type calls the underlying Type.
-func (x *Touch) Type() raw.NSTouchType {
-	return x.inner.Type()
+func (x *Touch) Type() NSTouchType {
+	return NSTouchType(x.inner.Type())
 }
 
 // Touchable is the interface implemented by [Touch], for mocking and DI.
 type Touchable interface {
 	Unwrap() *raw.NSTouch
 	Identity() objc.ID
-	Phase() raw.NSTouchPhase
+	Phase() NSTouchPhase
 	NormalizedPosition() corefoundation.CGPoint
 	IsResting() bool
 	Device() objc.ID
 	DeviceSize() corefoundation.CGSize
 	LocationInView(view *raw.NSView) corefoundation.CGPoint
 	PreviousLocationInView(view *raw.NSView) corefoundation.CGPoint
-	Type() raw.NSTouchType
+	Type() NSTouchType
 }
 
 var _ Touchable = (*Touch)(nil)

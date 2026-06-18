@@ -128,14 +128,14 @@ func (x *MeshRenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVertex
 }
 
 // WithDepthAttachmentPixelFormat sets the depthAttachmentPixelFormat property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat) *MeshRenderPipelineDescriptor {
-	x.inner.SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat)
+func (x *MeshRenderPipelineDescriptor) WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) *MeshRenderPipelineDescriptor {
+	x.inner.SetDepthAttachmentPixelFormat(raw.MTLPixelFormat(depthAttachmentPixelFormat))
 	return x
 }
 
 // WithStencilAttachmentPixelFormat sets the stencilAttachmentPixelFormat property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat) *MeshRenderPipelineDescriptor {
-	x.inner.SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat)
+func (x *MeshRenderPipelineDescriptor) WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) *MeshRenderPipelineDescriptor {
+	x.inner.SetStencilAttachmentPixelFormat(raw.MTLPixelFormat(stencilAttachmentPixelFormat))
 	return x
 }
 
@@ -164,8 +164,8 @@ func (x *MeshRenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinke
 }
 
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
-func (x *MeshRenderPipelineDescriptor) WithShaderValidation(shaderValidation raw.MTLShaderValidation) *MeshRenderPipelineDescriptor {
-	x.inner.SetShaderValidation(shaderValidation)
+func (x *MeshRenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *MeshRenderPipelineDescriptor {
+	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 	return x
 }
 
@@ -377,23 +377,23 @@ func (x *MeshRenderPipelineDescriptor) ColorAttachments() *RenderPipelineColorAt
 }
 
 // DepthAttachmentPixelFormat calls the underlying DepthAttachmentPixelFormat.
-func (x *MeshRenderPipelineDescriptor) DepthAttachmentPixelFormat() raw.MTLPixelFormat {
-	return x.inner.DepthAttachmentPixelFormat()
+func (x *MeshRenderPipelineDescriptor) DepthAttachmentPixelFormat() MTLPixelFormat {
+	return MTLPixelFormat(x.inner.DepthAttachmentPixelFormat())
 }
 
 // SetDepthAttachmentPixelFormat calls the underlying SetDepthAttachmentPixelFormat.
-func (x *MeshRenderPipelineDescriptor) SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat) {
-	x.inner.SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat)
+func (x *MeshRenderPipelineDescriptor) SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) {
+	x.inner.SetDepthAttachmentPixelFormat(raw.MTLPixelFormat(depthAttachmentPixelFormat))
 }
 
 // StencilAttachmentPixelFormat calls the underlying StencilAttachmentPixelFormat.
-func (x *MeshRenderPipelineDescriptor) StencilAttachmentPixelFormat() raw.MTLPixelFormat {
-	return x.inner.StencilAttachmentPixelFormat()
+func (x *MeshRenderPipelineDescriptor) StencilAttachmentPixelFormat() MTLPixelFormat {
+	return MTLPixelFormat(x.inner.StencilAttachmentPixelFormat())
 }
 
 // SetStencilAttachmentPixelFormat calls the underlying SetStencilAttachmentPixelFormat.
-func (x *MeshRenderPipelineDescriptor) SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat) {
-	x.inner.SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat)
+func (x *MeshRenderPipelineDescriptor) SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) {
+	x.inner.SetStencilAttachmentPixelFormat(raw.MTLPixelFormat(stencilAttachmentPixelFormat))
 }
 
 // SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
@@ -459,13 +459,13 @@ func (x *MeshRenderPipelineDescriptor) SetFragmentLinkedFunctions(fragmentLinked
 }
 
 // ShaderValidation calls the underlying ShaderValidation.
-func (x *MeshRenderPipelineDescriptor) ShaderValidation() raw.MTLShaderValidation {
-	return x.inner.ShaderValidation()
+func (x *MeshRenderPipelineDescriptor) ShaderValidation() MTLShaderValidation {
+	return MTLShaderValidation(x.inner.ShaderValidation())
 }
 
 // SetShaderValidation calls the underlying SetShaderValidation.
-func (x *MeshRenderPipelineDescriptor) SetShaderValidation(shaderValidation raw.MTLShaderValidation) {
-	x.inner.SetShaderValidation(shaderValidation)
+func (x *MeshRenderPipelineDescriptor) SetShaderValidation(shaderValidation MTLShaderValidation) {
+	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 }
 
 // RequiredThreadsPerObjectThreadgroup calls the underlying RequiredThreadsPerObjectThreadgroup.
@@ -506,13 +506,13 @@ type MeshRenderPipelineDescriptorable interface {
 	WithAlphaToOneEnabled(alphaToOneEnabled bool) *MeshRenderPipelineDescriptor
 	WithRasterizationEnabled(rasterizationEnabled bool) *MeshRenderPipelineDescriptor
 	WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *MeshRenderPipelineDescriptor
-	WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat) *MeshRenderPipelineDescriptor
-	WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat) *MeshRenderPipelineDescriptor
+	WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) *MeshRenderPipelineDescriptor
+	WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) *MeshRenderPipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *MeshRenderPipelineDescriptor
 	WithObjectLinkedFunctions(objectLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor
 	WithMeshLinkedFunctions(meshLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor
 	WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *MeshRenderPipelineDescriptor
-	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *MeshRenderPipelineDescriptor
+	WithShaderValidation(shaderValidation MTLShaderValidation) *MeshRenderPipelineDescriptor
 	WithRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize) *MeshRenderPipelineDescriptor
 	WithRequiredThreadsPerMeshThreadgroup(requiredThreadsPerMeshThreadgroup raw.MTLSize) *MeshRenderPipelineDescriptor
 	Reset()
@@ -550,10 +550,10 @@ type MeshRenderPipelineDescriptorable interface {
 	MaxVertexAmplificationCount() uint
 	SetMaxVertexAmplificationCount(maxVertexAmplificationCount uint)
 	ColorAttachments() *RenderPipelineColorAttachmentDescriptorArray
-	DepthAttachmentPixelFormat() raw.MTLPixelFormat
-	SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat)
-	StencilAttachmentPixelFormat() raw.MTLPixelFormat
-	SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat)
+	DepthAttachmentPixelFormat() MTLPixelFormat
+	SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat)
+	StencilAttachmentPixelFormat() MTLPixelFormat
+	SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat)
 	SupportIndirectCommandBuffers() bool
 	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool)
 	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
@@ -564,8 +564,8 @@ type MeshRenderPipelineDescriptorable interface {
 	SetMeshLinkedFunctions(meshLinkedFunctions *raw.MTLLinkedFunctions)
 	FragmentLinkedFunctions() *LinkedFunctions
 	SetFragmentLinkedFunctions(fragmentLinkedFunctions *raw.MTLLinkedFunctions)
-	ShaderValidation() raw.MTLShaderValidation
-	SetShaderValidation(shaderValidation raw.MTLShaderValidation)
+	ShaderValidation() MTLShaderValidation
+	SetShaderValidation(shaderValidation MTLShaderValidation)
 	RequiredThreadsPerObjectThreadgroup() raw.MTLSize
 	SetRequiredThreadsPerObjectThreadgroup(requiredThreadsPerObjectThreadgroup raw.MTLSize)
 	RequiredThreadsPerMeshThreadgroup() raw.MTLSize

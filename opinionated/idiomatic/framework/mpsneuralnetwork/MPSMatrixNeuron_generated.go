@@ -65,13 +65,13 @@ func (x *MatrixNeuron) WithAlpha(alpha float64) *MatrixNeuron {
 }
 
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
-func (x *MatrixNeuron) SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+func (x *MatrixNeuron) SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	x.inner.SetNeuronTypeParameterAParameterBParameterC(raw.MPSCNNNeuronType(neuronType), parameterA, parameterB, parameterC)
 }
 
 // NeuronType calls the underlying NeuronType.
-func (x *MatrixNeuron) NeuronType() raw.MPSCNNNeuronType {
-	return x.inner.NeuronType()
+func (x *MatrixNeuron) NeuronType() MPSCNNNeuronType {
+	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
 // NeuronParameterA calls the underlying NeuronParameterA.
@@ -135,8 +135,8 @@ type MatrixNeuronable interface {
 	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixNeuron
 	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixNeuron
 	WithAlpha(alpha float64) *MatrixNeuron
-	SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() raw.MPSCNNNeuronType
+	SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() MPSCNNNeuronType
 	NeuronParameterA() float32
 	NeuronParameterB() float32
 	NeuronParameterC() float32

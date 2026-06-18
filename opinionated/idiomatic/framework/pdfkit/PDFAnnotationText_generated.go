@@ -112,20 +112,20 @@ func (x *AnnotationText) WithEndPoint(endPoint corefoundation.CGPoint) *Annotati
 }
 
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationText) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationText {
-	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+func (x *AnnotationText) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationText {
+	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationText) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationText {
-	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+func (x *AnnotationText) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationText {
+	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
 // WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationText) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationText {
-	x.inner.PDFAnnotation.SetIconType(iconType)
+func (x *AnnotationText) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationText {
+	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
@@ -148,14 +148,14 @@ func (x *AnnotationText) WithQuadrilateralPoints(items ...*foundation.NSValue) *
 }
 
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationText) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationText {
-	x.inner.PDFAnnotation.SetMarkupType(markupType)
+func (x *AnnotationText) WithMarkupType(markupType PDFMarkupType) *AnnotationText {
+	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationText) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationText {
-	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+func (x *AnnotationText) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationText {
+	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
@@ -250,8 +250,8 @@ func (x *AnnotationText) WithValues(items ...*foundation.NSString) *AnnotationTe
 }
 
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationText) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationText {
-	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+func (x *AnnotationText) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationText {
+	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
@@ -320,12 +320,12 @@ type AnnotationTextable interface {
 	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationText
 	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationText
 	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationText
-	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationText
-	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationText
-	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationText
+	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationText
+	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationText
+	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationText
 	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationText
-	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationText
-	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationText
+	WithMarkupType(markupType PDFMarkupType) *AnnotationText
+	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationText
 	WithMultiline(multiline bool) *AnnotationText
 	WithComb(comb bool) *AnnotationText
 	WithMaximumLength(maximumLength int) *AnnotationText
@@ -337,7 +337,7 @@ type AnnotationTextable interface {
 	WithListChoice(listChoice bool) *AnnotationText
 	WithChoices(items ...*foundation.NSString) *AnnotationText
 	WithValues(items ...*foundation.NSString) *AnnotationText
-	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationText
+	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationText
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationText
 	WithOpen(open bool) *AnnotationText
 	WithDestination(destination *Destination) *AnnotationText

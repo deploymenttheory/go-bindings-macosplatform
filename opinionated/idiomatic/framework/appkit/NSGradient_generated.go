@@ -67,8 +67,8 @@ func NewGradientWithCoder(coder *foundation.NSCoder) *Gradient {
 }
 
 // DrawFromPointToPointOptions calls the underlying DrawFromPointToPointOptions.
-func (x *Gradient) DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options raw.NSGradientDrawingOptions) {
-	x.inner.DrawFromPointToPointOptions(startingPoint, endingPoint, options)
+func (x *Gradient) DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options NSGradientDrawingOptions) {
+	x.inner.DrawFromPointToPointOptions(startingPoint, endingPoint, raw.NSGradientDrawingOptions(options))
 }
 
 // DrawInRectAngle calls the underlying DrawInRectAngle.
@@ -82,8 +82,8 @@ func (x *Gradient) DrawInBezierPathAngle(path *raw.NSBezierPath, angle float64) 
 }
 
 // DrawFromCenterRadiusToCenterRadiusOptions calls the underlying DrawFromCenterRadiusToCenterRadiusOptions.
-func (x *Gradient) DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options raw.NSGradientDrawingOptions) {
-	x.inner.DrawFromCenterRadiusToCenterRadiusOptions(startCenter, startRadius, endCenter, endRadius, options)
+func (x *Gradient) DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options NSGradientDrawingOptions) {
+	x.inner.DrawFromCenterRadiusToCenterRadiusOptions(startCenter, startRadius, endCenter, endRadius, raw.NSGradientDrawingOptions(options))
 }
 
 // DrawInRectRelativeCenterPosition calls the underlying DrawInRectRelativeCenterPosition.
@@ -127,10 +127,10 @@ func (x *Gradient) NumberOfColorStops() int {
 // Gradientable is the interface implemented by [Gradient], for mocking and DI.
 type Gradientable interface {
 	Unwrap() *raw.NSGradient
-	DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options raw.NSGradientDrawingOptions)
+	DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options NSGradientDrawingOptions)
 	DrawInRectAngle(rect corefoundation.CGRect, angle float64)
 	DrawInBezierPathAngle(path *raw.NSBezierPath, angle float64)
-	DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options raw.NSGradientDrawingOptions)
+	DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options NSGradientDrawingOptions)
 	DrawInRectRelativeCenterPosition(rect corefoundation.CGRect, relativeCenterPosition corefoundation.CGPoint)
 	DrawInBezierPathRelativeCenterPosition(path *raw.NSBezierPath, relativeCenterPosition corefoundation.CGPoint)
 	GetColorLocationAtIndex(color *raw.NSColor, location *float64, index int)

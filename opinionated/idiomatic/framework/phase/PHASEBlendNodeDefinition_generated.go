@@ -59,18 +59,18 @@ func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition(spatialMixerD
 }
 
 // AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree calls the underlying AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree.
-func (x *BlendNodeDefinition) AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
-	x.inner.AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value, fullGainAtValue, fadeCurveType, subtree)
+func (x *BlendNodeDefinition) AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
+	x.inner.AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value, fullGainAtValue, raw.PHASECurveType(fadeCurveType), subtree)
 }
 
 // AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree calls the underlying AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree.
-func (x *BlendNodeDefinition) AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType raw.PHASECurveType, highFadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
-	x.inner.AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue, highValue, fullGainAtLowValue, fullGainAtHighValue, lowFadeCurveType, highFadeCurveType, subtree)
+func (x *BlendNodeDefinition) AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType PHASECurveType, highFadeCurveType PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
+	x.inner.AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue, highValue, fullGainAtLowValue, fullGainAtHighValue, raw.PHASECurveType(lowFadeCurveType), raw.PHASECurveType(highFadeCurveType), subtree)
 }
 
 // AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree calls the underlying AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree.
-func (x *BlendNodeDefinition) AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
-	x.inner.AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value, fullGainAtValue, fadeCurveType, subtree)
+func (x *BlendNodeDefinition) AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
+	x.inner.AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value, fullGainAtValue, raw.PHASECurveType(fadeCurveType), subtree)
 }
 
 // AddRangeWithEnvelopeSubtree calls the underlying AddRangeWithEnvelopeSubtree.
@@ -107,9 +107,9 @@ func (x *BlendNodeDefinition) asDefinition() *raw.PHASEDefinition {
 // BlendNodeDefinitionable is the interface implemented by [BlendNodeDefinition], for mocking and DI.
 type BlendNodeDefinitionable interface {
 	Unwrap() *raw.PHASEBlendNodeDefinition
-	AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition)
-	AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType raw.PHASECurveType, highFadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition)
-	AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition)
+	AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition)
+	AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType PHASECurveType, highFadeCurveType PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition)
+	AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition)
 	AddRangeWithEnvelopeSubtree(envelope *raw.PHASEEnvelope, subtree *raw.PHASESoundEventNodeDefinition)
 	BlendParameterDefinition() *NumberMetaParameterDefinition
 	SpatialMixerDefinitionForDistance() *SpatialMixerDefinition

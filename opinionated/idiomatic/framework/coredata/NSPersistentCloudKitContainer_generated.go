@@ -33,10 +33,10 @@ func PersistentCloudKitContainerFromID(id objc.ID) *PersistentCloudKitContainer 
 }
 
 // NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError creates a new [PersistentCloudKitContainer].
-func NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError(options raw.NSPersistentCloudKitContainerSchemaInitializationOptions) (*PersistentCloudKitContainer, error) {
+func NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError(options NSPersistentCloudKitContainerSchemaInitializationOptions) (*PersistentCloudKitContainer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentCloudKitContainer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initializeCloudKitSchemaWithOptions:error:"), options, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initializeCloudKitSchemaWithOptions:error:"), raw.NSPersistentCloudKitContainerSchemaInitializationOptions(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

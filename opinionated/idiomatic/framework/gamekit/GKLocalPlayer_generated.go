@@ -286,8 +286,10 @@ func (x *LocalPlayer) Friends() []string {
 }
 
 // LoadFriendsAuthorizationStatus calls the underlying LoadFriendsAuthorizationStatus.
-func (x *LocalPlayer) LoadFriendsAuthorizationStatus(completionHandler func(raw.GKFriendsAuthorizationStatus, unsafe.Pointer)) {
-	x.inner.LoadFriendsAuthorizationStatus(completionHandler)
+func (x *LocalPlayer) LoadFriendsAuthorizationStatus(completionHandler func(GKFriendsAuthorizationStatus, unsafe.Pointer)) {
+	x.inner.LoadFriendsAuthorizationStatus(func(_a0 raw.GKFriendsAuthorizationStatus, _a1 unsafe.Pointer) {
+		completionHandler(GKFriendsAuthorizationStatus(_a0), _a1)
+	})
 }
 
 // LoadFriends blocks until the operation completes or ctx is cancelled.
@@ -496,7 +498,7 @@ type LocalPlayerable interface {
 	SetDefaultLeaderboardIdentifier(ctx context.Context, leaderboardIdentifier string) error
 	LoadFriendsWithCompletionHandler(completionHandler objc.Block)
 	Friends() []string
-	LoadFriendsAuthorizationStatus(completionHandler func(raw.GKFriendsAuthorizationStatus, unsafe.Pointer))
+	LoadFriendsAuthorizationStatus(completionHandler func(GKFriendsAuthorizationStatus, unsafe.Pointer))
 	LoadFriends(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error)
 	LoadFriendsWithIdentifiers(ctx context.Context, identifiers *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.GKPlayer], error)
 	PresentFriendRequestCreatorFromWindowError(window *appkit.NSWindow) (bool, error)

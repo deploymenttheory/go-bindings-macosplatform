@@ -65,8 +65,8 @@ func (x *TextFieldCell) WithTextColor(textColor *Color) *TextFieldCell {
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *TextFieldCell) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TextFieldCell {
-	x.inner.SetBezelStyle(bezelStyle)
+func (x *TextFieldCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TextFieldCell {
+	x.inner.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -107,8 +107,8 @@ func (x *TextFieldCell) WithControlView(controlView ViewProvider) *TextFieldCell
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *TextFieldCell) WithType(type_ raw.NSCellType) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetType(type_)
+func (x *TextFieldCell) WithType(type_ NSCellType) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -191,8 +191,8 @@ func (x *TextFieldCell) WithHighlighted(highlighted bool) *TextFieldCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *TextFieldCell) WithAlignment(alignment raw.NSTextAlignment) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *TextFieldCell) WithAlignment(alignment NSTextAlignment) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -257,8 +257,8 @@ func (x *TextFieldCell) WithImage(image *Image) *TextFieldCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *TextFieldCell) WithControlSize(controlSize raw.NSControlSize) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *TextFieldCell) WithControlSize(controlSize NSControlSize) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -281,14 +281,14 @@ func (x *TextFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *TextFieldCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *TextFieldCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TextFieldCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *TextFieldCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -305,8 +305,8 @@ func (x *TextFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bo
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -329,8 +329,8 @@ func (x *TextFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *TextF
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TextFieldCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *TextFieldCell) WithFocusRingType(focusRingType NSFocusRingType) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -359,14 +359,14 @@ func (x *TextFieldCell) WithAllowsMixedState(allowsMixedState bool) *TextFieldCe
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *TextFieldCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *TextFieldCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *TextFieldCell) WithControlTint(controlTint raw.NSControlTint) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *TextFieldCell) WithControlTint(controlTint NSControlTint) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -414,13 +414,13 @@ func (x *TextFieldCell) SetTextColor(textColor *raw.NSColor) {
 }
 
 // BezelStyle calls the underlying BezelStyle.
-func (x *TextFieldCell) BezelStyle() raw.NSTextFieldBezelStyle {
-	return x.inner.BezelStyle()
+func (x *TextFieldCell) BezelStyle() NSTextFieldBezelStyle {
+	return NSTextFieldBezelStyle(x.inner.BezelStyle())
 }
 
 // SetBezelStyle calls the underlying SetBezelStyle.
-func (x *TextFieldCell) SetBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) {
-	x.inner.SetBezelStyle(bezelStyle)
+func (x *TextFieldCell) SetBezelStyle(bezelStyle NSTextFieldBezelStyle) {
+	x.inner.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 }
 
 // PlaceholderString calls the underlying PlaceholderString.
@@ -475,12 +475,12 @@ type TextFieldCellable interface {
 	WithBackgroundColor(backgroundColor *Color) *TextFieldCell
 	WithDrawsBackground(drawsBackground bool) *TextFieldCell
 	WithTextColor(textColor *Color) *TextFieldCell
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TextFieldCell
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TextFieldCell
 	WithPlaceholderString(placeholderString string) *TextFieldCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TextFieldCell
 	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextFieldCell
 	WithControlView(controlView ViewProvider) *TextFieldCell
-	WithType(type_ raw.NSCellType) *TextFieldCell
+	WithType(type_ NSCellType) *TextFieldCell
 	WithState(state int) *TextFieldCell
 	WithTarget(target objc.ID) *TextFieldCell
 	WithAction(action objc.SEL) *TextFieldCell
@@ -494,7 +494,7 @@ type TextFieldCellable interface {
 	WithBezeled(bezeled bool) *TextFieldCell
 	WithScrollable(scrollable bool) *TextFieldCell
 	WithHighlighted(highlighted bool) *TextFieldCell
-	WithAlignment(alignment raw.NSTextAlignment) *TextFieldCell
+	WithAlignment(alignment NSTextAlignment) *TextFieldCell
 	WithWraps(wraps bool) *TextFieldCell
 	WithFont(font *Font) *TextFieldCell
 	WithFormatter(formatter *foundation.NSFormatter) *TextFieldCell
@@ -505,25 +505,25 @@ type TextFieldCellable interface {
 	WithDoubleValue(doubleValue float64) *TextFieldCell
 	WithIntegerValue(integerValue int) *TextFieldCell
 	WithImage(image *Image) *TextFieldCell
-	WithControlSize(controlSize raw.NSControlSize) *TextFieldCell
+	WithControlSize(controlSize NSControlSize) *TextFieldCell
 	WithRepresentedObject(representedObject objc.ID) *TextFieldCell
 	WithMenu(menu *Menu) *TextFieldCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextFieldCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextFieldCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextFieldCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextFieldCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextFieldCell
 	WithAllowsUndo(allowsUndo bool) *TextFieldCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextFieldCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextFieldCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextFieldCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TextFieldCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *TextFieldCell
 	WithShowsFirstResponder(showsFirstResponder bool) *TextFieldCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TextFieldCell
+	WithFocusRingType(focusRingType NSFocusRingType) *TextFieldCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextFieldCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextFieldCell
 	WithImportsGraphics(importsGraphics bool) *TextFieldCell
 	WithAllowsMixedState(allowsMixedState bool) *TextFieldCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TextFieldCell
-	WithControlTint(controlTint raw.NSControlTint) *TextFieldCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TextFieldCell
+	WithControlTint(controlTint NSControlTint) *TextFieldCell
 	SetWantsNotificationForMarkedText(flag bool)
 	BackgroundColor() *Color
 	SetBackgroundColor(backgroundColor *raw.NSColor)
@@ -531,8 +531,8 @@ type TextFieldCellable interface {
 	SetDrawsBackground(drawsBackground bool)
 	TextColor() *Color
 	SetTextColor(textColor *raw.NSColor)
-	BezelStyle() raw.NSTextFieldBezelStyle
-	SetBezelStyle(bezelStyle raw.NSTextFieldBezelStyle)
+	BezelStyle() NSTextFieldBezelStyle
+	SetBezelStyle(bezelStyle NSTextFieldBezelStyle)
 	PlaceholderString() string
 	SetPlaceholderString(placeholderString string)
 	PlaceholderAttributedString() *foundation.NSAttributedString

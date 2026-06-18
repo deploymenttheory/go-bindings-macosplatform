@@ -38,16 +38,16 @@ func NewXMLNode() *XMLNode {
 }
 
 // NewXMLNodeWithKind creates a new [XMLNode].
-func NewXMLNodeWithKind(kind raw.NSXMLNodeKind) *XMLNode {
+func NewXMLNodeWithKind(kind NSXMLNodeKind) *XMLNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:"), kind)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:"), raw.NSXMLNodeKind(kind))
 	return &XMLNode{inner: raw.NSXMLNodeFromID(_id)}
 }
 
 // NewXMLNodeWithKindOptions creates a new [XMLNode].
-func NewXMLNodeWithKindOptions(kind raw.NSXMLNodeKind, options raw.NSXMLNodeOptions) *XMLNode {
+func NewXMLNodeWithKindOptions(kind NSXMLNodeKind, options NSXMLNodeOptions) *XMLNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:options:"), kind, options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:options:"), raw.NSXMLNodeKind(kind), raw.NSXMLNodeOptions(options))
 	return &XMLNode{inner: raw.NSXMLNodeFromID(_id)}
 }
 
@@ -101,8 +101,8 @@ func (x *XMLNode) Detach() {
 }
 
 // XMLStringWithOptions calls the underlying XMLStringWithOptions.
-func (x *XMLNode) XMLStringWithOptions(options raw.NSXMLNodeOptions) *String {
-	_r := x.inner.XMLStringWithOptions(options)
+func (x *XMLNode) XMLStringWithOptions(options NSXMLNodeOptions) *String {
+	_r := x.inner.XMLStringWithOptions(raw.NSXMLNodeOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -134,8 +134,8 @@ func (x *XMLNode) ObjectsForXQueryError(xquery string) (*raw.NSArray[objc.ID], e
 }
 
 // Kind calls the underlying Kind.
-func (x *XMLNode) Kind() raw.NSXMLNodeKind {
-	return x.inner.Kind()
+func (x *XMLNode) Kind() NSXMLNodeKind {
+	return NSXMLNodeKind(x.inner.Kind())
 }
 
 // Name calls the underlying Name.
@@ -321,12 +321,12 @@ type XMLNodeable interface {
 	SetStringValueResolvingEntities(string_ string, resolve bool)
 	ChildAtIndex(index uint) *XMLNode
 	Detach()
-	XMLStringWithOptions(options raw.NSXMLNodeOptions) *String
+	XMLStringWithOptions(options NSXMLNodeOptions) *String
 	CanonicalXMLStringPreservingComments(comments bool) *String
 	NodesForXPathError(xpath string) (*raw.NSArray[*raw.NSXMLNode], error)
 	ObjectsForXQueryConstantsError(xquery string, constants *raw.NSDictionary[*raw.NSString, objc.ID]) (*raw.NSArray[objc.ID], error)
 	ObjectsForXQueryError(xquery string) (*raw.NSArray[objc.ID], error)
-	Kind() raw.NSXMLNodeKind
+	Kind() NSXMLNodeKind
 	Name() *String
 	SetName(name string)
 	ObjectValue() objc.ID

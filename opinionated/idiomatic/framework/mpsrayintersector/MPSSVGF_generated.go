@@ -64,8 +64,8 @@ func (x *SVGF) WithLuminanceWeight(luminanceWeight float32) *SVGF {
 }
 
 // WithTemporalWeighting sets the temporalWeighting property and returns the receiver for chaining.
-func (x *SVGF) WithTemporalWeighting(temporalWeighting raw.MPSTemporalWeighting) *SVGF {
-	x.inner.SetTemporalWeighting(temporalWeighting)
+func (x *SVGF) WithTemporalWeighting(temporalWeighting MPSTemporalWeighting) *SVGF {
+	x.inner.SetTemporalWeighting(raw.MPSTemporalWeighting(temporalWeighting))
 	return x
 }
 
@@ -201,13 +201,13 @@ func (x *SVGF) SetLuminanceWeight(luminanceWeight float32) {
 }
 
 // TemporalWeighting calls the underlying TemporalWeighting.
-func (x *SVGF) TemporalWeighting() raw.MPSTemporalWeighting {
-	return x.inner.TemporalWeighting()
+func (x *SVGF) TemporalWeighting() MPSTemporalWeighting {
+	return MPSTemporalWeighting(x.inner.TemporalWeighting())
 }
 
 // SetTemporalWeighting calls the underlying SetTemporalWeighting.
-func (x *SVGF) SetTemporalWeighting(temporalWeighting raw.MPSTemporalWeighting) {
-	x.inner.SetTemporalWeighting(temporalWeighting)
+func (x *SVGF) SetTemporalWeighting(temporalWeighting MPSTemporalWeighting) {
+	x.inner.SetTemporalWeighting(raw.MPSTemporalWeighting(temporalWeighting))
 }
 
 // TemporalReprojectionBlendFactor calls the underlying TemporalReprojectionBlendFactor.
@@ -326,7 +326,7 @@ type SVGFable interface {
 	WithDepthWeight(depthWeight float32) *SVGF
 	WithNormalWeight(normalWeight float32) *SVGF
 	WithLuminanceWeight(luminanceWeight float32) *SVGF
-	WithTemporalWeighting(temporalWeighting raw.MPSTemporalWeighting) *SVGF
+	WithTemporalWeighting(temporalWeighting MPSTemporalWeighting) *SVGF
 	WithTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor float32) *SVGF
 	WithReprojectionThreshold(reprojectionThreshold float32) *SVGF
 	WithMinimumFramesForVarianceEstimation(minimumFramesForVarianceEstimation uint) *SVGF
@@ -351,8 +351,8 @@ type SVGFable interface {
 	SetNormalWeight(normalWeight float32)
 	LuminanceWeight() float32
 	SetLuminanceWeight(luminanceWeight float32)
-	TemporalWeighting() raw.MPSTemporalWeighting
-	SetTemporalWeighting(temporalWeighting raw.MPSTemporalWeighting)
+	TemporalWeighting() MPSTemporalWeighting
+	SetTemporalWeighting(temporalWeighting MPSTemporalWeighting)
 	TemporalReprojectionBlendFactor() float32
 	SetTemporalReprojectionBlendFactor(temporalReprojectionBlendFactor float32)
 	ReprojectionThreshold() float32

@@ -51,8 +51,8 @@ func (x *CollectionLayoutSection) WithInterGroupSpacing(interGroupSpacing float6
 }
 
 // WithOrthogonalScrollingBehavior sets the orthogonalScrollingBehavior property and returns the receiver for chaining.
-func (x *CollectionLayoutSection) WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection {
-	x.inner.SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior)
+func (x *CollectionLayoutSection) WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior NSCollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection {
+	x.inner.SetOrthogonalScrollingBehavior(raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior(orthogonalScrollingBehavior))
 	return x
 }
 
@@ -125,13 +125,13 @@ func (x *CollectionLayoutSection) SetInterGroupSpacing(interGroupSpacing float64
 }
 
 // OrthogonalScrollingBehavior calls the underlying OrthogonalScrollingBehavior.
-func (x *CollectionLayoutSection) OrthogonalScrollingBehavior() raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior {
-	return x.inner.OrthogonalScrollingBehavior()
+func (x *CollectionLayoutSection) OrthogonalScrollingBehavior() NSCollectionLayoutSectionOrthogonalScrollingBehavior {
+	return NSCollectionLayoutSectionOrthogonalScrollingBehavior(x.inner.OrthogonalScrollingBehavior())
 }
 
 // SetOrthogonalScrollingBehavior calls the underlying SetOrthogonalScrollingBehavior.
-func (x *CollectionLayoutSection) SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior) {
-	x.inner.SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior)
+func (x *CollectionLayoutSection) SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior NSCollectionLayoutSectionOrthogonalScrollingBehavior) {
+	x.inner.SetOrthogonalScrollingBehavior(raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior(orthogonalScrollingBehavior))
 }
 
 // BoundarySupplementaryItems returns the collection as a Go slice.
@@ -191,7 +191,7 @@ type CollectionLayoutSectionable interface {
 	Unwrap() *raw.NSCollectionLayoutSection
 	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutSection
 	WithInterGroupSpacing(interGroupSpacing float64) *CollectionLayoutSection
-	WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection
+	WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior NSCollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection
 	WithBoundarySupplementaryItems(items ...*raw.NSCollectionLayoutBoundarySupplementaryItem) *CollectionLayoutSection
 	WithSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool) *CollectionLayoutSection
 	WithVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler objc.Block) *CollectionLayoutSection
@@ -200,8 +200,8 @@ type CollectionLayoutSectionable interface {
 	SetContentInsets(contentInsets raw.NSDirectionalEdgeInsets)
 	InterGroupSpacing() float64
 	SetInterGroupSpacing(interGroupSpacing float64)
-	OrthogonalScrollingBehavior() raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior
-	SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior)
+	OrthogonalScrollingBehavior() NSCollectionLayoutSectionOrthogonalScrollingBehavior
+	SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior NSCollectionLayoutSectionOrthogonalScrollingBehavior)
 	BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem
 	SetBoundarySupplementaryItems(boundarySupplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutBoundarySupplementaryItem])
 	SupplementariesFollowContentInsets() bool

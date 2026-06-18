@@ -134,8 +134,8 @@ func (x *SearchToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) 
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *SearchToolbarItem) WithStyle(style raw.NSToolbarItemStyle) *SearchToolbarItem {
-	x.inner.NSToolbarItem.SetStyle(style)
+func (x *SearchToolbarItem) WithStyle(style NSToolbarItemStyle) *SearchToolbarItem {
+	x.inner.NSToolbarItem.SetStyle(raw.NSToolbarItemStyle(style))
 	return x
 }
 
@@ -252,7 +252,7 @@ type SearchToolbarItemable interface {
 	WithTitle(title string) *SearchToolbarItem
 	WithBordered(bordered bool) *SearchToolbarItem
 	WithBackgroundTintColor(backgroundTintColor *Color) *SearchToolbarItem
-	WithStyle(style raw.NSToolbarItemStyle) *SearchToolbarItem
+	WithStyle(style NSToolbarItemStyle) *SearchToolbarItem
 	WithNavigational(navigational bool) *SearchToolbarItem
 	WithView(view ViewProvider) *SearchToolbarItem
 	WithHidden(hidden bool) *SearchToolbarItem

@@ -60,8 +60,8 @@ func (x *AssetPackManifest) AllDownloads() *foundation.NSSet[*raw.BADownload] {
 }
 
 // AllDownloadsForContentRequest calls the underlying AllDownloadsForContentRequest.
-func (x *AssetPackManifest) AllDownloadsForContentRequest(contentRequest raw.BAContentRequest) *foundation.NSSet[*raw.BADownload] {
-	return x.inner.AllDownloadsForContentRequest(contentRequest)
+func (x *AssetPackManifest) AllDownloadsForContentRequest(contentRequest BAContentRequest) *foundation.NSSet[*raw.BADownload] {
+	return x.inner.AllDownloadsForContentRequest(raw.BAContentRequest(contentRequest))
 }
 
 // AssetPacks calls the underlying AssetPacks.
@@ -73,7 +73,7 @@ func (x *AssetPackManifest) AssetPacks() *foundation.NSSet[*raw.BAAssetPack] {
 type AssetPackManifestable interface {
 	Unwrap() *raw.BAAssetPackManifest
 	AllDownloads() *foundation.NSSet[*raw.BADownload]
-	AllDownloadsForContentRequest(contentRequest raw.BAContentRequest) *foundation.NSSet[*raw.BADownload]
+	AllDownloadsForContentRequest(contentRequest BAContentRequest) *foundation.NSSet[*raw.BADownload]
 	AssetPacks() *foundation.NSSet[*raw.BAAssetPack]
 }
 

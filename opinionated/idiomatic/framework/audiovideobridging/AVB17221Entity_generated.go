@@ -63,8 +63,8 @@ func (x *AVB17221Entity) WithEntityModelID(entityModelID uint64) *AVB17221Entity
 }
 
 // WithEntityCapabilities sets the entityCapabilities property and returns the receiver for chaining.
-func (x *AVB17221Entity) WithEntityCapabilities(entityCapabilities raw.AVB17221ADPEntityCapabilities) *AVB17221Entity {
-	x.inner.SetEntityCapabilities(entityCapabilities)
+func (x *AVB17221Entity) WithEntityCapabilities(entityCapabilities AVB17221ADPEntityCapabilities) *AVB17221Entity {
+	x.inner.SetEntityCapabilities(raw.AVB17221ADPEntityCapabilities(entityCapabilities))
 	return x
 }
 
@@ -75,8 +75,8 @@ func (x *AVB17221Entity) WithTalkerStreamSources(talkerStreamSources uint16) *AV
 }
 
 // WithTalkerCapabilities sets the talkerCapabilities property and returns the receiver for chaining.
-func (x *AVB17221Entity) WithTalkerCapabilities(talkerCapabilities raw.AVB17221ADPTalkerCapabilities) *AVB17221Entity {
-	x.inner.SetTalkerCapabilities(talkerCapabilities)
+func (x *AVB17221Entity) WithTalkerCapabilities(talkerCapabilities AVB17221ADPTalkerCapabilities) *AVB17221Entity {
+	x.inner.SetTalkerCapabilities(raw.AVB17221ADPTalkerCapabilities(talkerCapabilities))
 	return x
 }
 
@@ -87,14 +87,14 @@ func (x *AVB17221Entity) WithListenerStreamSinks(listenerStreamSinks uint16) *AV
 }
 
 // WithListenerCapabilities sets the listenerCapabilities property and returns the receiver for chaining.
-func (x *AVB17221Entity) WithListenerCapabilities(listenerCapabilities raw.AVB17221ADPListenerCapabilities) *AVB17221Entity {
-	x.inner.SetListenerCapabilities(listenerCapabilities)
+func (x *AVB17221Entity) WithListenerCapabilities(listenerCapabilities AVB17221ADPListenerCapabilities) *AVB17221Entity {
+	x.inner.SetListenerCapabilities(raw.AVB17221ADPListenerCapabilities(listenerCapabilities))
 	return x
 }
 
 // WithControllerCapabilities sets the controllerCapabilities property and returns the receiver for chaining.
-func (x *AVB17221Entity) WithControllerCapabilities(controllerCapabilities raw.AVB17221ADPControllerCapabilities) *AVB17221Entity {
-	x.inner.SetControllerCapabilities(controllerCapabilities)
+func (x *AVB17221Entity) WithControllerCapabilities(controllerCapabilities AVB17221ADPControllerCapabilities) *AVB17221Entity {
+	x.inner.SetControllerCapabilities(raw.AVB17221ADPControllerCapabilities(controllerCapabilities))
 	return x
 }
 
@@ -205,13 +205,13 @@ func (x *AVB17221Entity) SetEntityModelID(entityModelID uint64) {
 }
 
 // EntityCapabilities calls the underlying EntityCapabilities.
-func (x *AVB17221Entity) EntityCapabilities() raw.AVB17221ADPEntityCapabilities {
-	return x.inner.EntityCapabilities()
+func (x *AVB17221Entity) EntityCapabilities() AVB17221ADPEntityCapabilities {
+	return AVB17221ADPEntityCapabilities(x.inner.EntityCapabilities())
 }
 
 // SetEntityCapabilities calls the underlying SetEntityCapabilities.
-func (x *AVB17221Entity) SetEntityCapabilities(entityCapabilities raw.AVB17221ADPEntityCapabilities) {
-	x.inner.SetEntityCapabilities(entityCapabilities)
+func (x *AVB17221Entity) SetEntityCapabilities(entityCapabilities AVB17221ADPEntityCapabilities) {
+	x.inner.SetEntityCapabilities(raw.AVB17221ADPEntityCapabilities(entityCapabilities))
 }
 
 // TalkerStreamSources calls the underlying TalkerStreamSources.
@@ -225,13 +225,13 @@ func (x *AVB17221Entity) SetTalkerStreamSources(talkerStreamSources uint16) {
 }
 
 // TalkerCapabilities calls the underlying TalkerCapabilities.
-func (x *AVB17221Entity) TalkerCapabilities() raw.AVB17221ADPTalkerCapabilities {
-	return x.inner.TalkerCapabilities()
+func (x *AVB17221Entity) TalkerCapabilities() AVB17221ADPTalkerCapabilities {
+	return AVB17221ADPTalkerCapabilities(x.inner.TalkerCapabilities())
 }
 
 // SetTalkerCapabilities calls the underlying SetTalkerCapabilities.
-func (x *AVB17221Entity) SetTalkerCapabilities(talkerCapabilities raw.AVB17221ADPTalkerCapabilities) {
-	x.inner.SetTalkerCapabilities(talkerCapabilities)
+func (x *AVB17221Entity) SetTalkerCapabilities(talkerCapabilities AVB17221ADPTalkerCapabilities) {
+	x.inner.SetTalkerCapabilities(raw.AVB17221ADPTalkerCapabilities(talkerCapabilities))
 }
 
 // ListenerStreamSinks calls the underlying ListenerStreamSinks.
@@ -245,23 +245,23 @@ func (x *AVB17221Entity) SetListenerStreamSinks(listenerStreamSinks uint16) {
 }
 
 // ListenerCapabilities calls the underlying ListenerCapabilities.
-func (x *AVB17221Entity) ListenerCapabilities() raw.AVB17221ADPListenerCapabilities {
-	return x.inner.ListenerCapabilities()
+func (x *AVB17221Entity) ListenerCapabilities() AVB17221ADPListenerCapabilities {
+	return AVB17221ADPListenerCapabilities(x.inner.ListenerCapabilities())
 }
 
 // SetListenerCapabilities calls the underlying SetListenerCapabilities.
-func (x *AVB17221Entity) SetListenerCapabilities(listenerCapabilities raw.AVB17221ADPListenerCapabilities) {
-	x.inner.SetListenerCapabilities(listenerCapabilities)
+func (x *AVB17221Entity) SetListenerCapabilities(listenerCapabilities AVB17221ADPListenerCapabilities) {
+	x.inner.SetListenerCapabilities(raw.AVB17221ADPListenerCapabilities(listenerCapabilities))
 }
 
 // ControllerCapabilities calls the underlying ControllerCapabilities.
-func (x *AVB17221Entity) ControllerCapabilities() raw.AVB17221ADPControllerCapabilities {
-	return x.inner.ControllerCapabilities()
+func (x *AVB17221Entity) ControllerCapabilities() AVB17221ADPControllerCapabilities {
+	return AVB17221ADPControllerCapabilities(x.inner.ControllerCapabilities())
 }
 
 // SetControllerCapabilities calls the underlying SetControllerCapabilities.
-func (x *AVB17221Entity) SetControllerCapabilities(controllerCapabilities raw.AVB17221ADPControllerCapabilities) {
-	x.inner.SetControllerCapabilities(controllerCapabilities)
+func (x *AVB17221Entity) SetControllerCapabilities(controllerCapabilities AVB17221ADPControllerCapabilities) {
+	x.inner.SetControllerCapabilities(raw.AVB17221ADPControllerCapabilities(controllerCapabilities))
 }
 
 // AvailableIndex calls the underlying AvailableIndex.
@@ -371,12 +371,12 @@ type AVB17221Entityable interface {
 	WithTimeToLive(timeToLive uint8) *AVB17221Entity
 	WithEntityID(entityID uint64) *AVB17221Entity
 	WithEntityModelID(entityModelID uint64) *AVB17221Entity
-	WithEntityCapabilities(entityCapabilities raw.AVB17221ADPEntityCapabilities) *AVB17221Entity
+	WithEntityCapabilities(entityCapabilities AVB17221ADPEntityCapabilities) *AVB17221Entity
 	WithTalkerStreamSources(talkerStreamSources uint16) *AVB17221Entity
-	WithTalkerCapabilities(talkerCapabilities raw.AVB17221ADPTalkerCapabilities) *AVB17221Entity
+	WithTalkerCapabilities(talkerCapabilities AVB17221ADPTalkerCapabilities) *AVB17221Entity
 	WithListenerStreamSinks(listenerStreamSinks uint16) *AVB17221Entity
-	WithListenerCapabilities(listenerCapabilities raw.AVB17221ADPListenerCapabilities) *AVB17221Entity
-	WithControllerCapabilities(controllerCapabilities raw.AVB17221ADPControllerCapabilities) *AVB17221Entity
+	WithListenerCapabilities(listenerCapabilities AVB17221ADPListenerCapabilities) *AVB17221Entity
+	WithControllerCapabilities(controllerCapabilities AVB17221ADPControllerCapabilities) *AVB17221Entity
 	WithAvailableIndex(availableIndex uint32) *AVB17221Entity
 	WithGPTPGrandmasterID(gPTPGrandmasterID uint64) *AVB17221Entity
 	WithGPTPDomainNumber(gPTPDomainNumber uint8) *AVB17221Entity
@@ -394,18 +394,18 @@ type AVB17221Entityable interface {
 	SetEntityID(entityID uint64)
 	EntityModelID() uint64
 	SetEntityModelID(entityModelID uint64)
-	EntityCapabilities() raw.AVB17221ADPEntityCapabilities
-	SetEntityCapabilities(entityCapabilities raw.AVB17221ADPEntityCapabilities)
+	EntityCapabilities() AVB17221ADPEntityCapabilities
+	SetEntityCapabilities(entityCapabilities AVB17221ADPEntityCapabilities)
 	TalkerStreamSources() uint16
 	SetTalkerStreamSources(talkerStreamSources uint16)
-	TalkerCapabilities() raw.AVB17221ADPTalkerCapabilities
-	SetTalkerCapabilities(talkerCapabilities raw.AVB17221ADPTalkerCapabilities)
+	TalkerCapabilities() AVB17221ADPTalkerCapabilities
+	SetTalkerCapabilities(talkerCapabilities AVB17221ADPTalkerCapabilities)
 	ListenerStreamSinks() uint16
 	SetListenerStreamSinks(listenerStreamSinks uint16)
-	ListenerCapabilities() raw.AVB17221ADPListenerCapabilities
-	SetListenerCapabilities(listenerCapabilities raw.AVB17221ADPListenerCapabilities)
-	ControllerCapabilities() raw.AVB17221ADPControllerCapabilities
-	SetControllerCapabilities(controllerCapabilities raw.AVB17221ADPControllerCapabilities)
+	ListenerCapabilities() AVB17221ADPListenerCapabilities
+	SetListenerCapabilities(listenerCapabilities AVB17221ADPListenerCapabilities)
+	ControllerCapabilities() AVB17221ADPControllerCapabilities
+	SetControllerCapabilities(controllerCapabilities AVB17221ADPControllerCapabilities)
 	AvailableIndex() uint32
 	SetAvailableIndex(availableIndex uint32)
 	GPTPGrandmasterID() uint64

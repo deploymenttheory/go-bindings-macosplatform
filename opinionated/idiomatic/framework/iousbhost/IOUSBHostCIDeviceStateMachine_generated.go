@@ -48,18 +48,18 @@ func (x *HostCIDeviceStateMachine) InspectCommandError(command *raw.IOUSBHostCIM
 }
 
 // RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
-func (x *HostCIDeviceStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error) {
-	return x.inner.RespondToCommandStatusError(command, status)
+func (x *HostCIDeviceStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error) {
+	return x.inner.RespondToCommandStatusError(command, raw.IOUSBHostCIMessageStatus(status))
 }
 
 // RespondToCommandStatusDeviceAddressError calls the underlying RespondToCommandStatusDeviceAddressError.
-func (x *HostCIDeviceStateMachine) RespondToCommandStatusDeviceAddressError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus, deviceAddress uint) (bool, error) {
-	return x.inner.RespondToCommandStatusDeviceAddressError(command, status, deviceAddress)
+func (x *HostCIDeviceStateMachine) RespondToCommandStatusDeviceAddressError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus, deviceAddress uint) (bool, error) {
+	return x.inner.RespondToCommandStatusDeviceAddressError(command, raw.IOUSBHostCIMessageStatus(status), deviceAddress)
 }
 
 // DeviceState calls the underlying DeviceState.
-func (x *HostCIDeviceStateMachine) DeviceState() raw.IOUSBHostCIDeviceState {
-	return x.inner.DeviceState()
+func (x *HostCIDeviceStateMachine) DeviceState() IOUSBHostCIDeviceState {
+	return IOUSBHostCIDeviceState(x.inner.DeviceState())
 }
 
 // CompleteRoute calls the underlying CompleteRoute.
@@ -85,9 +85,9 @@ func (x *HostCIDeviceStateMachine) ControllerInterface() *HostControllerInterfac
 type HostCIDeviceStateMachineable interface {
 	Unwrap() *raw.IOUSBHostCIDeviceStateMachine
 	InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error)
-	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error)
-	RespondToCommandStatusDeviceAddressError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus, deviceAddress uint) (bool, error)
-	DeviceState() raw.IOUSBHostCIDeviceState
+	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error)
+	RespondToCommandStatusDeviceAddressError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus, deviceAddress uint) (bool, error)
+	DeviceState() IOUSBHostCIDeviceState
 	CompleteRoute() uint
 	DeviceAddress() uint
 	ControllerInterface() *HostControllerInterface

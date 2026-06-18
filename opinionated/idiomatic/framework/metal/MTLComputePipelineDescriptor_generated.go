@@ -92,8 +92,8 @@ func (x *ComputePipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth uint
 }
 
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
-func (x *ComputePipelineDescriptor) WithShaderValidation(shaderValidation raw.MTLShaderValidation) *ComputePipelineDescriptor {
-	x.inner.SetShaderValidation(shaderValidation)
+func (x *ComputePipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *ComputePipelineDescriptor {
+	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 	return x
 }
 
@@ -250,13 +250,13 @@ func (x *ComputePipelineDescriptor) SetMaxCallStackDepth(maxCallStackDepth uint)
 }
 
 // ShaderValidation calls the underlying ShaderValidation.
-func (x *ComputePipelineDescriptor) ShaderValidation() raw.MTLShaderValidation {
-	return x.inner.ShaderValidation()
+func (x *ComputePipelineDescriptor) ShaderValidation() MTLShaderValidation {
+	return MTLShaderValidation(x.inner.ShaderValidation())
 }
 
 // SetShaderValidation calls the underlying SetShaderValidation.
-func (x *ComputePipelineDescriptor) SetShaderValidation(shaderValidation raw.MTLShaderValidation) {
-	x.inner.SetShaderValidation(shaderValidation)
+func (x *ComputePipelineDescriptor) SetShaderValidation(shaderValidation MTLShaderValidation) {
+	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 }
 
 // RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
@@ -281,7 +281,7 @@ type ComputePipelineDescriptorable interface {
 	WithLinkedFunctions(linkedFunctions *LinkedFunctions) *ComputePipelineDescriptor
 	WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *ComputePipelineDescriptor
 	WithMaxCallStackDepth(maxCallStackDepth uint) *ComputePipelineDescriptor
-	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *ComputePipelineDescriptor
+	WithShaderValidation(shaderValidation MTLShaderValidation) *ComputePipelineDescriptor
 	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *ComputePipelineDescriptor
 	Reset()
 	Label() string
@@ -309,8 +309,8 @@ type ComputePipelineDescriptorable interface {
 	SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool)
 	MaxCallStackDepth() uint
 	SetMaxCallStackDepth(maxCallStackDepth uint)
-	ShaderValidation() raw.MTLShaderValidation
-	SetShaderValidation(shaderValidation raw.MTLShaderValidation)
+	ShaderValidation() MTLShaderValidation
+	SetShaderValidation(shaderValidation MTLShaderValidation)
 	RequiredThreadsPerThreadgroup() raw.MTLSize
 	SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize)
 }

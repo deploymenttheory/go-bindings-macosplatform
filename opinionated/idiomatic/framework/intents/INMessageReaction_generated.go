@@ -32,15 +32,15 @@ func MessageReactionFromID(id objc.ID) *MessageReaction {
 }
 
 // NewMessageReactionWithReactionTypeReactionDescriptionEmoji creates a new [MessageReaction].
-func NewMessageReactionWithReactionTypeReactionDescriptionEmoji(reactionType raw.INMessageReactionType, reactionDescription string, emoji string) *MessageReaction {
+func NewMessageReactionWithReactionTypeReactionDescriptionEmoji(reactionType INMessageReactionType, reactionDescription string, emoji string) *MessageReaction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INMessageReaction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReactionType:reactionDescription:emoji:"), reactionType, foundation.NSStringStringWithUTF8String(reactionDescription).Ptr(), foundation.NSStringStringWithUTF8String(emoji).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReactionType:reactionDescription:emoji:"), raw.INMessageReactionType(reactionType), foundation.NSStringStringWithUTF8String(reactionDescription).Ptr(), foundation.NSStringStringWithUTF8String(emoji).Ptr())
 	return &MessageReaction{inner: raw.INMessageReactionFromID(_id)}
 }
 
 // ReactionType calls the underlying ReactionType.
-func (x *MessageReaction) ReactionType() raw.INMessageReactionType {
-	return x.inner.ReactionType()
+func (x *MessageReaction) ReactionType() INMessageReactionType {
+	return INMessageReactionType(x.inner.ReactionType())
 }
 
 // ReactionDescription calls the underlying ReactionDescription.
@@ -64,7 +64,7 @@ func (x *MessageReaction) Emoji() string {
 // MessageReactionable is the interface implemented by [MessageReaction], for mocking and DI.
 type MessageReactionable interface {
 	Unwrap() *raw.INMessageReaction
-	ReactionType() raw.INMessageReactionType
+	ReactionType() INMessageReactionType
 	ReactionDescription() string
 	Emoji() string
 }

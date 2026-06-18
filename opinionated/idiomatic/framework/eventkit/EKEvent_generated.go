@@ -63,8 +63,8 @@ func (x *Event) WithStructuredLocation(structuredLocation *StructuredLocation) *
 }
 
 // WithAvailability sets the availability property and returns the receiver for chaining.
-func (x *Event) WithAvailability(availability raw.EKEventAvailability) *Event {
-	x.inner.SetAvailability(availability)
+func (x *Event) WithAvailability(availability EKEventAvailability) *Event {
+	x.inner.SetAvailability(raw.EKEventAvailability(availability))
 	return x
 }
 
@@ -208,18 +208,18 @@ func (x *Event) Organizer() *Participant {
 }
 
 // Availability calls the underlying Availability.
-func (x *Event) Availability() raw.EKEventAvailability {
-	return x.inner.Availability()
+func (x *Event) Availability() EKEventAvailability {
+	return EKEventAvailability(x.inner.Availability())
 }
 
 // SetAvailability calls the underlying SetAvailability.
-func (x *Event) SetAvailability(availability raw.EKEventAvailability) {
-	x.inner.SetAvailability(availability)
+func (x *Event) SetAvailability(availability EKEventAvailability) {
+	x.inner.SetAvailability(raw.EKEventAvailability(availability))
 }
 
 // Status calls the underlying Status.
-func (x *Event) Status() raw.EKEventStatus {
-	return x.inner.Status()
+func (x *Event) Status() EKEventStatus {
+	return EKEventStatus(x.inner.Status())
 }
 
 // IsDetached calls the underlying IsDetached.
@@ -261,7 +261,7 @@ type Eventable interface {
 	WithStartDate(startDate *foundation.NSDate) *Event
 	WithEndDate(endDate *foundation.NSDate) *Event
 	WithStructuredLocation(structuredLocation *StructuredLocation) *Event
-	WithAvailability(availability raw.EKEventAvailability) *Event
+	WithAvailability(availability EKEventAvailability) *Event
 	WithCalendar(calendar *Calendar) *Event
 	WithTitle(title string) *Event
 	WithLocation(location string) *Event
@@ -281,9 +281,9 @@ type Eventable interface {
 	StructuredLocation() *StructuredLocation
 	SetStructuredLocation(structuredLocation *raw.EKStructuredLocation)
 	Organizer() *Participant
-	Availability() raw.EKEventAvailability
-	SetAvailability(availability raw.EKEventAvailability)
-	Status() raw.EKEventStatus
+	Availability() EKEventAvailability
+	SetAvailability(availability EKEventAvailability)
+	Status() EKEventStatus
 	IsDetached() bool
 	OccurrenceDate() *foundation.NSDate
 	BirthdayContactIdentifier() string

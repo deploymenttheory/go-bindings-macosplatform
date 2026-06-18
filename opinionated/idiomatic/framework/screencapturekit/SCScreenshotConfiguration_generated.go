@@ -87,14 +87,14 @@ func (x *ScreenshotConfiguration) WithIncludeChildWindows(includeChildWindows bo
 }
 
 // WithDisplayIntent sets the displayIntent property and returns the receiver for chaining.
-func (x *ScreenshotConfiguration) WithDisplayIntent(displayIntent raw.SCScreenshotDisplayIntent) *ScreenshotConfiguration {
-	x.inner.SetDisplayIntent(displayIntent)
+func (x *ScreenshotConfiguration) WithDisplayIntent(displayIntent SCScreenshotDisplayIntent) *ScreenshotConfiguration {
+	x.inner.SetDisplayIntent(raw.SCScreenshotDisplayIntent(displayIntent))
 	return x
 }
 
 // WithDynamicRange sets the dynamicRange property and returns the receiver for chaining.
-func (x *ScreenshotConfiguration) WithDynamicRange(dynamicRange raw.SCScreenshotDynamicRange) *ScreenshotConfiguration {
-	x.inner.SetDynamicRange(dynamicRange)
+func (x *ScreenshotConfiguration) WithDynamicRange(dynamicRange SCScreenshotDynamicRange) *ScreenshotConfiguration {
+	x.inner.SetDynamicRange(raw.SCScreenshotDynamicRange(dynamicRange))
 	return x
 }
 
@@ -191,23 +191,23 @@ func (x *ScreenshotConfiguration) SetIncludeChildWindows(includeChildWindows boo
 }
 
 // DisplayIntent calls the underlying DisplayIntent.
-func (x *ScreenshotConfiguration) DisplayIntent() raw.SCScreenshotDisplayIntent {
-	return x.inner.DisplayIntent()
+func (x *ScreenshotConfiguration) DisplayIntent() SCScreenshotDisplayIntent {
+	return SCScreenshotDisplayIntent(x.inner.DisplayIntent())
 }
 
 // SetDisplayIntent calls the underlying SetDisplayIntent.
-func (x *ScreenshotConfiguration) SetDisplayIntent(displayIntent raw.SCScreenshotDisplayIntent) {
-	x.inner.SetDisplayIntent(displayIntent)
+func (x *ScreenshotConfiguration) SetDisplayIntent(displayIntent SCScreenshotDisplayIntent) {
+	x.inner.SetDisplayIntent(raw.SCScreenshotDisplayIntent(displayIntent))
 }
 
 // DynamicRange calls the underlying DynamicRange.
-func (x *ScreenshotConfiguration) DynamicRange() raw.SCScreenshotDynamicRange {
-	return x.inner.DynamicRange()
+func (x *ScreenshotConfiguration) DynamicRange() SCScreenshotDynamicRange {
+	return SCScreenshotDynamicRange(x.inner.DynamicRange())
 }
 
 // SetDynamicRange calls the underlying SetDynamicRange.
-func (x *ScreenshotConfiguration) SetDynamicRange(dynamicRange raw.SCScreenshotDynamicRange) {
-	x.inner.SetDynamicRange(dynamicRange)
+func (x *ScreenshotConfiguration) SetDynamicRange(dynamicRange SCScreenshotDynamicRange) {
+	x.inner.SetDynamicRange(raw.SCScreenshotDynamicRange(dynamicRange))
 }
 
 // ContentType calls the underlying ContentType.
@@ -241,8 +241,8 @@ type ScreenshotConfigurationable interface {
 	WithIgnoreShadows(ignoreShadows bool) *ScreenshotConfiguration
 	WithIgnoreClipping(ignoreClipping bool) *ScreenshotConfiguration
 	WithIncludeChildWindows(includeChildWindows bool) *ScreenshotConfiguration
-	WithDisplayIntent(displayIntent raw.SCScreenshotDisplayIntent) *ScreenshotConfiguration
-	WithDynamicRange(dynamicRange raw.SCScreenshotDynamicRange) *ScreenshotConfiguration
+	WithDisplayIntent(displayIntent SCScreenshotDisplayIntent) *ScreenshotConfiguration
+	WithDynamicRange(dynamicRange SCScreenshotDynamicRange) *ScreenshotConfiguration
 	WithContentType(contentType *uniformtypeidentifiers.UTType) *ScreenshotConfiguration
 	WithFileURL(fileURL string) *ScreenshotConfiguration
 	Width() int
@@ -261,10 +261,10 @@ type ScreenshotConfigurationable interface {
 	SetIgnoreClipping(ignoreClipping bool)
 	IncludeChildWindows() bool
 	SetIncludeChildWindows(includeChildWindows bool)
-	DisplayIntent() raw.SCScreenshotDisplayIntent
-	SetDisplayIntent(displayIntent raw.SCScreenshotDisplayIntent)
-	DynamicRange() raw.SCScreenshotDynamicRange
-	SetDynamicRange(dynamicRange raw.SCScreenshotDynamicRange)
+	DisplayIntent() SCScreenshotDisplayIntent
+	SetDisplayIntent(displayIntent SCScreenshotDisplayIntent)
+	DynamicRange() SCScreenshotDynamicRange
+	SetDynamicRange(dynamicRange SCScreenshotDynamicRange)
 	ContentType() *uniformtypeidentifiers.UTType
 	SetContentType(contentType *uniformtypeidentifiers.UTType)
 	FileURL() *foundation.NSURL

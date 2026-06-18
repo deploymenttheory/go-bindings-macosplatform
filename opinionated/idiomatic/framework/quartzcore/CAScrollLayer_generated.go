@@ -238,8 +238,8 @@ func (x *ScrollLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *ScrollL
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *ScrollLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *ScrollLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *ScrollLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *ScrollLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -256,8 +256,8 @@ func (x *ScrollLayer) WithCornerRadius(cornerRadius float64) *ScrollLayer {
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *ScrollLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *ScrollLayer {
-	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+func (x *ScrollLayer) WithMaskedCorners(maskedCorners CACornerMask) *ScrollLayer {
+	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -322,8 +322,8 @@ func (x *ScrollLayer) WithShadowRadius(shadowRadius float64) *ScrollLayer {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ScrollLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *ScrollLayer {
-	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+func (x *ScrollLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *ScrollLayer {
+	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -435,10 +435,10 @@ type ScrollLayerable interface {
 	WithOpaque(opaque bool) *ScrollLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ScrollLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *ScrollLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *ScrollLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *ScrollLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ScrollLayer
 	WithCornerRadius(cornerRadius float64) *ScrollLayer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *ScrollLayer
+	WithMaskedCorners(maskedCorners CACornerMask) *ScrollLayer
 	WithCornerCurve(cornerCurve *foundation.NSString) *ScrollLayer
 	WithBorderWidth(borderWidth float64) *ScrollLayer
 	WithOpacity(opacity float32) *ScrollLayer
@@ -449,7 +449,7 @@ type ScrollLayerable interface {
 	WithShadowOpacity(shadowOpacity float32) *ScrollLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *ScrollLayer
 	WithShadowRadius(shadowRadius float64) *ScrollLayer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *ScrollLayer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *ScrollLayer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *ScrollLayer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *ScrollLayer
 	WithName(name string) *ScrollLayer

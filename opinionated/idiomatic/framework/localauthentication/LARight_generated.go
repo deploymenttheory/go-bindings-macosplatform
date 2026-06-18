@@ -103,8 +103,8 @@ func (x *Right) DeauthorizeWithCompletion(ctx context.Context) error {
 }
 
 // State calls the underlying State.
-func (x *Right) State() raw.LARightState {
-	return x.inner.State()
+func (x *Right) State() LARightState {
+	return LARightState(x.inner.State())
 }
 
 // Tag calls the underlying Tag.
@@ -126,7 +126,7 @@ type Rightable interface {
 	AuthorizeWithLocalizedReasonCompletion(ctx context.Context, localizedReason string) error
 	CheckCanAuthorizeWithCompletion(ctx context.Context) error
 	DeauthorizeWithCompletion(ctx context.Context) error
-	State() raw.LARightState
+	State() LARightState
 	Tag() int
 	SetTag(tag int)
 }

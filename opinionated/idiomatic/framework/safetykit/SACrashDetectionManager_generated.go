@@ -43,13 +43,13 @@ func (x *CrashDetectionManager) WithDelegate(delegate raw.SACrashDetectionDelega
 }
 
 // RequestAuthorizationWithCompletionHandler calls the underlying RequestAuthorizationWithCompletionHandler.
-func (x *CrashDetectionManager) RequestAuthorizationWithCompletionHandler(handler func(raw.SAAuthorizationStatus, unsafe.Pointer)) {
-	x.inner.RequestAuthorizationWithCompletionHandler(handler)
+func (x *CrashDetectionManager) RequestAuthorizationWithCompletionHandler(handler func(SAAuthorizationStatus, unsafe.Pointer)) {
+	x.inner.RequestAuthorizationWithCompletionHandler(func(_a0 raw.SAAuthorizationStatus, _a1 unsafe.Pointer) { handler(SAAuthorizationStatus(_a0), _a1) })
 }
 
 // AuthorizationStatus calls the underlying AuthorizationStatus.
-func (x *CrashDetectionManager) AuthorizationStatus() raw.SAAuthorizationStatus {
-	return x.inner.AuthorizationStatus()
+func (x *CrashDetectionManager) AuthorizationStatus() SAAuthorizationStatus {
+	return SAAuthorizationStatus(x.inner.AuthorizationStatus())
 }
 
 // Delegate calls the underlying Delegate.
@@ -66,8 +66,8 @@ func (x *CrashDetectionManager) SetDelegate(delegate raw.SACrashDetectionDelegat
 type CrashDetectionManagerable interface {
 	Unwrap() *raw.SACrashDetectionManager
 	WithDelegate(delegate raw.SACrashDetectionDelegate) *CrashDetectionManager
-	RequestAuthorizationWithCompletionHandler(handler func(raw.SAAuthorizationStatus, unsafe.Pointer))
-	AuthorizationStatus() raw.SAAuthorizationStatus
+	RequestAuthorizationWithCompletionHandler(handler func(SAAuthorizationStatus, unsafe.Pointer))
+	AuthorizationStatus() SAAuthorizationStatus
 	Delegate() raw.SACrashDetectionDelegate
 	SetDelegate(delegate raw.SACrashDetectionDelegate)
 }

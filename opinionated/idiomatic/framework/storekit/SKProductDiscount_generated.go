@@ -71,13 +71,13 @@ func (x *ProductDiscount) NumberOfPeriods() uint {
 }
 
 // PaymentMode calls the underlying PaymentMode.
-func (x *ProductDiscount) PaymentMode() raw.SKProductDiscountPaymentMode {
-	return x.inner.PaymentMode()
+func (x *ProductDiscount) PaymentMode() SKProductDiscountPaymentMode {
+	return SKProductDiscountPaymentMode(x.inner.PaymentMode())
 }
 
 // Type calls the underlying Type.
-func (x *ProductDiscount) Type() raw.SKProductDiscountType {
-	return x.inner.Type()
+func (x *ProductDiscount) Type() SKProductDiscountType {
+	return SKProductDiscountType(x.inner.Type())
 }
 
 // ProductDiscountable is the interface implemented by [ProductDiscount], for mocking and DI.
@@ -88,8 +88,8 @@ type ProductDiscountable interface {
 	Identifier() string
 	SubscriptionPeriod() *ProductSubscriptionPeriod
 	NumberOfPeriods() uint
-	PaymentMode() raw.SKProductDiscountPaymentMode
-	Type() raw.SKProductDiscountType
+	PaymentMode() SKProductDiscountPaymentMode
+	Type() SKProductDiscountType
 }
 
 var _ ProductDiscountable = (*ProductDiscount)(nil)

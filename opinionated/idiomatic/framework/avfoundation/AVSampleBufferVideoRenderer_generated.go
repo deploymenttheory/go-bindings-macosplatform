@@ -54,8 +54,8 @@ func (x *SampleBufferVideoRenderer) FlushWithRemovalOfDisplayedImage(ctx context
 }
 
 // Status calls the underlying Status.
-func (x *SampleBufferVideoRenderer) Status() raw.AVQueuedSampleBufferRenderingStatus {
-	return x.inner.Status()
+func (x *SampleBufferVideoRenderer) Status() AVQueuedSampleBufferRenderingStatus {
+	return AVQueuedSampleBufferRenderingStatus(x.inner.Status())
 }
 
 // Error calls the underlying Error.
@@ -102,7 +102,7 @@ func (x *SampleBufferVideoRenderer) LoadVideoPerformanceMetricsWithCompletionHan
 type SampleBufferVideoRendererable interface {
 	Unwrap() *raw.AVSampleBufferVideoRenderer
 	FlushWithRemovalOfDisplayedImage(ctx context.Context, removeDisplayedImage bool) error
-	Status() raw.AVQueuedSampleBufferRenderingStatus
+	Status() AVQueuedSampleBufferRenderingStatus
 	Error() unsafe.Pointer
 	RequiresFlushToResumeDecoding() bool
 	CopyDisplayedPixelBuffer() unsafe.Pointer

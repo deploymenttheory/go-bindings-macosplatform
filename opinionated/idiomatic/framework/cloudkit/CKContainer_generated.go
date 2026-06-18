@@ -54,8 +54,8 @@ func (x *Container) ContainerIdentifier() string {
 }
 
 // DatabaseWithDatabaseScope calls the underlying DatabaseWithDatabaseScope.
-func (x *Container) DatabaseWithDatabaseScope(databaseScope raw.CKDatabaseScope) *Database {
-	_r := x.inner.DatabaseWithDatabaseScope(databaseScope)
+func (x *Container) DatabaseWithDatabaseScope(databaseScope CKDatabaseScope) *Database {
+	_r := x.inner.DatabaseWithDatabaseScope(raw.CKDatabaseScope(databaseScope))
 	if _r == nil {
 		return nil
 	}
@@ -90,18 +90,22 @@ func (x *Container) SharedCloudDatabase() *Database {
 }
 
 // AccountStatusWithCompletionHandler calls the underlying AccountStatusWithCompletionHandler.
-func (x *Container) AccountStatusWithCompletionHandler(completionHandler func(raw.CKAccountStatus, unsafe.Pointer)) {
-	x.inner.AccountStatusWithCompletionHandler(completionHandler)
+func (x *Container) AccountStatusWithCompletionHandler(completionHandler func(CKAccountStatus, unsafe.Pointer)) {
+	x.inner.AccountStatusWithCompletionHandler(func(_a0 raw.CKAccountStatus, _a1 unsafe.Pointer) { completionHandler(CKAccountStatus(_a0), _a1) })
 }
 
 // StatusForApplicationPermissionCompletionHandler calls the underlying StatusForApplicationPermissionCompletionHandler.
-func (x *Container) StatusForApplicationPermissionCompletionHandler(applicationPermission raw.CKApplicationPermissions, completionHandler func(raw.CKApplicationPermissionStatus, unsafe.Pointer)) {
-	x.inner.StatusForApplicationPermissionCompletionHandler(applicationPermission, completionHandler)
+func (x *Container) StatusForApplicationPermissionCompletionHandler(applicationPermission CKApplicationPermissions, completionHandler func(CKApplicationPermissionStatus, unsafe.Pointer)) {
+	x.inner.StatusForApplicationPermissionCompletionHandler(raw.CKApplicationPermissions(applicationPermission), func(_a0 raw.CKApplicationPermissionStatus, _a1 unsafe.Pointer) {
+		completionHandler(CKApplicationPermissionStatus(_a0), _a1)
+	})
 }
 
 // RequestApplicationPermissionCompletionHandler calls the underlying RequestApplicationPermissionCompletionHandler.
-func (x *Container) RequestApplicationPermissionCompletionHandler(applicationPermission raw.CKApplicationPermissions, completionHandler func(raw.CKApplicationPermissionStatus, unsafe.Pointer)) {
-	x.inner.RequestApplicationPermissionCompletionHandler(applicationPermission, completionHandler)
+func (x *Container) RequestApplicationPermissionCompletionHandler(applicationPermission CKApplicationPermissions, completionHandler func(CKApplicationPermissionStatus, unsafe.Pointer)) {
+	x.inner.RequestApplicationPermissionCompletionHandler(raw.CKApplicationPermissions(applicationPermission), func(_a0 raw.CKApplicationPermissionStatus, _a1 unsafe.Pointer) {
+		completionHandler(CKApplicationPermissionStatus(_a0), _a1)
+	})
 }
 
 // FetchUserRecordID blocks until the operation completes or ctx is cancelled.
@@ -314,13 +318,13 @@ type Containerable interface {
 	Unwrap() *raw.CKContainer
 	AddOperation(operation *raw.CKOperation)
 	ContainerIdentifier() string
-	DatabaseWithDatabaseScope(databaseScope raw.CKDatabaseScope) *Database
+	DatabaseWithDatabaseScope(databaseScope CKDatabaseScope) *Database
 	PrivateCloudDatabase() *Database
 	PublicCloudDatabase() *Database
 	SharedCloudDatabase() *Database
-	AccountStatusWithCompletionHandler(completionHandler func(raw.CKAccountStatus, unsafe.Pointer))
-	StatusForApplicationPermissionCompletionHandler(applicationPermission raw.CKApplicationPermissions, completionHandler func(raw.CKApplicationPermissionStatus, unsafe.Pointer))
-	RequestApplicationPermissionCompletionHandler(applicationPermission raw.CKApplicationPermissions, completionHandler func(raw.CKApplicationPermissionStatus, unsafe.Pointer))
+	AccountStatusWithCompletionHandler(completionHandler func(CKAccountStatus, unsafe.Pointer))
+	StatusForApplicationPermissionCompletionHandler(applicationPermission CKApplicationPermissions, completionHandler func(CKApplicationPermissionStatus, unsafe.Pointer))
+	RequestApplicationPermissionCompletionHandler(applicationPermission CKApplicationPermissions, completionHandler func(CKApplicationPermissionStatus, unsafe.Pointer))
 	FetchUserRecordID(ctx context.Context) (*RecordID, error)
 	DiscoverAllIdentities(ctx context.Context) (*foundation.NSArray[*raw.CKUserIdentity], error)
 	DiscoverUserIdentityWithEmailAddressCompletionHandler(email string, completionHandler func(unsafe.Pointer, unsafe.Pointer))

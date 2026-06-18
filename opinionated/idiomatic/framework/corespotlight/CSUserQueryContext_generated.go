@@ -110,8 +110,8 @@ func (x *UserQueryContext) WithKeyboardLanguage(keyboardLanguage string) *UserQu
 }
 
 // WithSourceOptions sets the sourceOptions property and returns the receiver for chaining.
-func (x *UserQueryContext) WithSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions) *UserQueryContext {
-	x.inner.CSSearchQueryContext.SetSourceOptions(sourceOptions)
+func (x *UserQueryContext) WithSourceOptions(sourceOptions CSSearchQuerySourceOptions) *UserQueryContext {
+	x.inner.CSSearchQueryContext.SetSourceOptions(raw.CSSearchQuerySourceOptions(sourceOptions))
 	return x
 }
 
@@ -180,7 +180,7 @@ type UserQueryContextable interface {
 	WithFetchAttributes(items ...*foundation.NSString) *UserQueryContext
 	WithFilterQueries(items ...*foundation.NSString) *UserQueryContext
 	WithKeyboardLanguage(keyboardLanguage string) *UserQueryContext
-	WithSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions) *UserQueryContext
+	WithSourceOptions(sourceOptions CSSearchQuerySourceOptions) *UserQueryContext
 	EnableRankedResults() bool
 	SetEnableRankedResults(enableRankedResults bool)
 	DisableSemanticSearch() bool

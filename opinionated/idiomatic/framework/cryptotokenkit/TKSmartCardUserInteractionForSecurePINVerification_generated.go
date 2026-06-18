@@ -40,8 +40,8 @@ func NewSmartCardUserInteractionForSecurePINVerification() *SmartCardUserInterac
 }
 
 // WithPINCompletion sets the pINCompletion property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification {
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINCompletion(pINCompletion)
+func (x *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification {
+	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
 	return x
 }
 
@@ -110,7 +110,7 @@ func (x *SmartCardUserInteractionForSecurePINVerification) asSmartCardUserIntera
 // SmartCardUserInteractionForSecurePINVerificationable is the interface implemented by [SmartCardUserInteractionForSecurePINVerification], for mocking and DI.
 type SmartCardUserInteractionForSecurePINVerificationable interface {
 	Unwrap() *raw.TKSmartCardUserInteractionForSecurePINVerification
-	WithPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification
+	WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification
 	WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINVerification
 	WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForSecurePINVerification
 	WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINVerification

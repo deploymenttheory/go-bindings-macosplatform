@@ -231,8 +231,8 @@ func (x *TransformLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *Tran
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *TransformLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *TransformLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *TransformLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TransformLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -249,8 +249,8 @@ func (x *TransformLayer) WithCornerRadius(cornerRadius float64) *TransformLayer 
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *TransformLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *TransformLayer {
-	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+func (x *TransformLayer) WithMaskedCorners(maskedCorners CACornerMask) *TransformLayer {
+	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -315,8 +315,8 @@ func (x *TransformLayer) WithShadowRadius(shadowRadius float64) *TransformLayer 
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TransformLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *TransformLayer {
-	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+func (x *TransformLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TransformLayer {
+	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -403,10 +403,10 @@ type TransformLayerable interface {
 	WithOpaque(opaque bool) *TransformLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TransformLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *TransformLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *TransformLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TransformLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TransformLayer
 	WithCornerRadius(cornerRadius float64) *TransformLayer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *TransformLayer
+	WithMaskedCorners(maskedCorners CACornerMask) *TransformLayer
 	WithCornerCurve(cornerCurve *foundation.NSString) *TransformLayer
 	WithBorderWidth(borderWidth float64) *TransformLayer
 	WithOpacity(opacity float32) *TransformLayer
@@ -417,7 +417,7 @@ type TransformLayerable interface {
 	WithShadowOpacity(shadowOpacity float32) *TransformLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *TransformLayer
 	WithShadowRadius(shadowRadius float64) *TransformLayer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *TransformLayer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TransformLayer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *TransformLayer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TransformLayer
 	WithName(name string) *TransformLayer

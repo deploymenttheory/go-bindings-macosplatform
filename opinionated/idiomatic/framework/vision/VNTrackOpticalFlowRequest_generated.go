@@ -45,8 +45,8 @@ func NewTrackOpticalFlowRequestWithCompletionHandler(completionHandler func(*raw
 }
 
 // WithComputationAccuracy sets the computationAccuracy property and returns the receiver for chaining.
-func (x *TrackOpticalFlowRequest) WithComputationAccuracy(computationAccuracy raw.VNTrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest {
-	x.inner.SetComputationAccuracy(computationAccuracy)
+func (x *TrackOpticalFlowRequest) WithComputationAccuracy(computationAccuracy VNTrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest {
+	x.inner.SetComputationAccuracy(raw.VNTrackOpticalFlowRequestComputationAccuracy(computationAccuracy))
 	return x
 }
 
@@ -87,13 +87,13 @@ func (x *TrackOpticalFlowRequest) WithRevision(revision uint) *TrackOpticalFlowR
 }
 
 // ComputationAccuracy calls the underlying ComputationAccuracy.
-func (x *TrackOpticalFlowRequest) ComputationAccuracy() raw.VNTrackOpticalFlowRequestComputationAccuracy {
-	return x.inner.ComputationAccuracy()
+func (x *TrackOpticalFlowRequest) ComputationAccuracy() VNTrackOpticalFlowRequestComputationAccuracy {
+	return VNTrackOpticalFlowRequestComputationAccuracy(x.inner.ComputationAccuracy())
 }
 
 // SetComputationAccuracy calls the underlying SetComputationAccuracy.
-func (x *TrackOpticalFlowRequest) SetComputationAccuracy(computationAccuracy raw.VNTrackOpticalFlowRequestComputationAccuracy) {
-	x.inner.SetComputationAccuracy(computationAccuracy)
+func (x *TrackOpticalFlowRequest) SetComputationAccuracy(computationAccuracy VNTrackOpticalFlowRequestComputationAccuracy) {
+	x.inner.SetComputationAccuracy(raw.VNTrackOpticalFlowRequestComputationAccuracy(computationAccuracy))
 }
 
 // OutputPixelFormat calls the underlying OutputPixelFormat.
@@ -131,15 +131,15 @@ func (x *TrackOpticalFlowRequest) asRequest() *raw.VNRequest {
 // TrackOpticalFlowRequestable is the interface implemented by [TrackOpticalFlowRequest], for mocking and DI.
 type TrackOpticalFlowRequestable interface {
 	Unwrap() *raw.VNTrackOpticalFlowRequest
-	WithComputationAccuracy(computationAccuracy raw.VNTrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest
+	WithComputationAccuracy(computationAccuracy VNTrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest
 	WithOutputPixelFormat(outputPixelFormat uint) *TrackOpticalFlowRequest
 	WithKeepNetworkOutput(keepNetworkOutput bool) *TrackOpticalFlowRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackOpticalFlowRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackOpticalFlowRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *TrackOpticalFlowRequest
 	WithRevision(revision uint) *TrackOpticalFlowRequest
-	ComputationAccuracy() raw.VNTrackOpticalFlowRequestComputationAccuracy
-	SetComputationAccuracy(computationAccuracy raw.VNTrackOpticalFlowRequestComputationAccuracy)
+	ComputationAccuracy() VNTrackOpticalFlowRequestComputationAccuracy
+	SetComputationAccuracy(computationAccuracy VNTrackOpticalFlowRequestComputationAccuracy)
 	OutputPixelFormat() uint
 	SetOutputPixelFormat(outputPixelFormat uint)
 	KeepNetworkOutput() bool

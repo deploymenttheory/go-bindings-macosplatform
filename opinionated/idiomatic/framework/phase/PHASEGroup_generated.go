@@ -61,13 +61,13 @@ func (x *Group) UnregisterFromEngine() {
 }
 
 // FadeGainDurationCurveType calls the underlying FadeGainDurationCurveType.
-func (x *Group) FadeGainDurationCurveType(gain float64, duration float64, curveType raw.PHASECurveType) {
-	x.inner.FadeGainDurationCurveType(gain, duration, curveType)
+func (x *Group) FadeGainDurationCurveType(gain float64, duration float64, curveType PHASECurveType) {
+	x.inner.FadeGainDurationCurveType(gain, duration, raw.PHASECurveType(curveType))
 }
 
 // FadeRateDurationCurveType calls the underlying FadeRateDurationCurveType.
-func (x *Group) FadeRateDurationCurveType(rate float64, duration float64, curveType raw.PHASECurveType) {
-	x.inner.FadeRateDurationCurveType(rate, duration, curveType)
+func (x *Group) FadeRateDurationCurveType(rate float64, duration float64, curveType PHASECurveType) {
+	x.inner.FadeRateDurationCurveType(rate, duration, raw.PHASECurveType(curveType))
 }
 
 // Mute calls the underlying Mute.
@@ -136,8 +136,8 @@ type Groupable interface {
 	WithRate(rate float64) *Group
 	RegisterWithEngine(engine *raw.PHASEEngine)
 	UnregisterFromEngine()
-	FadeGainDurationCurveType(gain float64, duration float64, curveType raw.PHASECurveType)
-	FadeRateDurationCurveType(rate float64, duration float64, curveType raw.PHASECurveType)
+	FadeGainDurationCurveType(gain float64, duration float64, curveType PHASECurveType)
+	FadeRateDurationCurveType(rate float64, duration float64, curveType PHASECurveType)
 	Mute()
 	Unmute()
 	Solo()

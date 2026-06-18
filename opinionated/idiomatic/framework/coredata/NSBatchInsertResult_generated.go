@@ -41,8 +41,8 @@ func (x *BatchInsertResult) Result() objc.ID {
 }
 
 // ResultType calls the underlying ResultType.
-func (x *BatchInsertResult) ResultType() raw.NSBatchInsertRequestResultType {
-	return x.inner.ResultType()
+func (x *BatchInsertResult) ResultType() NSBatchInsertRequestResultType {
+	return NSBatchInsertRequestResultType(x.inner.ResultType())
 }
 
 func (x *BatchInsertResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
@@ -53,7 +53,7 @@ func (x *BatchInsertResult) asPersistentStoreResult() *raw.NSPersistentStoreResu
 type BatchInsertResultable interface {
 	Unwrap() *raw.NSBatchInsertResult
 	Result() objc.ID
-	ResultType() raw.NSBatchInsertRequestResultType
+	ResultType() NSBatchInsertRequestResultType
 }
 
 var _ BatchInsertResultable = (*BatchInsertResult)(nil)

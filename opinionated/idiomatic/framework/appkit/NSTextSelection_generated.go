@@ -32,9 +32,9 @@ func TextSelectionFromID(id objc.ID) *TextSelection {
 }
 
 // NewTextSelectionWithRangesAffinityGranularity creates a new [TextSelection].
-func NewTextSelectionWithRangesAffinityGranularity(textRanges *foundation.NSArray[*raw.NSTextRange], affinity raw.NSTextSelectionAffinity, granularity raw.NSTextSelectionGranularity) *TextSelection {
+func NewTextSelectionWithRangesAffinityGranularity(textRanges *foundation.NSArray[*raw.NSTextRange], affinity NSTextSelectionAffinity, granularity NSTextSelectionGranularity) *TextSelection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextSelection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRanges:affinity:granularity:"), textRanges.Ptr(), affinity, granularity)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRanges:affinity:granularity:"), textRanges.Ptr(), raw.NSTextSelectionAffinity(affinity), raw.NSTextSelectionGranularity(granularity))
 	return &TextSelection{inner: raw.NSTextSelectionFromID(_id)}
 }
 
@@ -46,16 +46,16 @@ func NewTextSelectionWithCoder(coder *foundation.NSCoder) *TextSelection {
 }
 
 // NewTextSelectionWithRangeAffinityGranularity creates a new [TextSelection].
-func NewTextSelectionWithRangeAffinityGranularity(range_ *raw.NSTextRange, affinity raw.NSTextSelectionAffinity, granularity raw.NSTextSelectionGranularity) *TextSelection {
+func NewTextSelectionWithRangeAffinityGranularity(range_ *raw.NSTextRange, affinity NSTextSelectionAffinity, granularity NSTextSelectionGranularity) *TextSelection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextSelection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRange:affinity:granularity:"), range_.Ptr(), affinity, granularity)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRange:affinity:granularity:"), range_.Ptr(), raw.NSTextSelectionAffinity(affinity), raw.NSTextSelectionGranularity(granularity))
 	return &TextSelection{inner: raw.NSTextSelectionFromID(_id)}
 }
 
 // NewTextSelectionWithLocationAffinity creates a new [TextSelection].
-func NewTextSelectionWithLocationAffinity(location raw.NSTextLocation, affinity raw.NSTextSelectionAffinity) *TextSelection {
+func NewTextSelectionWithLocationAffinity(location raw.NSTextLocation, affinity NSTextSelectionAffinity) *TextSelection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextSelection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:affinity:"), location, affinity)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:affinity:"), location, raw.NSTextSelectionAffinity(affinity))
 	return &TextSelection{inner: raw.NSTextSelectionFromID(_id)}
 }
 
@@ -104,13 +104,13 @@ func (x *TextSelection) TextRanges() []*TextRange {
 }
 
 // Granularity calls the underlying Granularity.
-func (x *TextSelection) Granularity() raw.NSTextSelectionGranularity {
-	return x.inner.Granularity()
+func (x *TextSelection) Granularity() NSTextSelectionGranularity {
+	return NSTextSelectionGranularity(x.inner.Granularity())
 }
 
 // Affinity calls the underlying Affinity.
-func (x *TextSelection) Affinity() raw.NSTextSelectionAffinity {
-	return x.inner.Affinity()
+func (x *TextSelection) Affinity() NSTextSelectionAffinity {
+	return NSTextSelectionAffinity(x.inner.Affinity())
 }
 
 // IsTransient calls the underlying IsTransient.
@@ -167,8 +167,8 @@ type TextSelectionable interface {
 	WithTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextSelection
 	TextSelectionWithTextRanges(textRanges *foundation.NSArray[*raw.NSTextRange]) *TextSelection
 	TextRanges() []*TextRange
-	Granularity() raw.NSTextSelectionGranularity
-	Affinity() raw.NSTextSelectionAffinity
+	Granularity() NSTextSelectionGranularity
+	Affinity() NSTextSelectionAffinity
 	IsTransient() bool
 	AnchorPositionOffset() float64
 	SetAnchorPositionOffset(anchorPositionOffset float64)

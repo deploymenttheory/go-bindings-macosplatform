@@ -32,9 +32,9 @@ func NowPlayingInfoLanguageOptionFromID(id objc.ID) *NowPlayingInfoLanguageOptio
 }
 
 // NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNameIdentifier creates a new [NowPlayingInfoLanguageOption].
-func NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNameIdentifier(languageOptionType raw.MPNowPlayingInfoLanguageOptionType, languageTag string, languageOptionCharacteristics *foundation.NSArray[*foundation.NSString], displayName string, identifier string) *NowPlayingInfoLanguageOption {
+func NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNameIdentifier(languageOptionType MPNowPlayingInfoLanguageOptionType, languageTag string, languageOptionCharacteristics *foundation.NSArray[*foundation.NSString], displayName string, identifier string) *NowPlayingInfoLanguageOption {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPNowPlayingInfoLanguageOption")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:languageTag:characteristics:displayName:identifier:"), languageOptionType, foundation.NSStringStringWithUTF8String(languageTag).Ptr(), languageOptionCharacteristics.Ptr(), foundation.NSStringStringWithUTF8String(displayName).Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:languageTag:characteristics:displayName:identifier:"), raw.MPNowPlayingInfoLanguageOptionType(languageOptionType), foundation.NSStringStringWithUTF8String(languageTag).Ptr(), languageOptionCharacteristics.Ptr(), foundation.NSStringStringWithUTF8String(displayName).Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
 	return &NowPlayingInfoLanguageOption{inner: raw.MPNowPlayingInfoLanguageOptionFromID(_id)}
 }
 
@@ -49,8 +49,8 @@ func (x *NowPlayingInfoLanguageOption) IsAutomaticAudibleLanguageOption() bool {
 }
 
 // LanguageOptionType calls the underlying LanguageOptionType.
-func (x *NowPlayingInfoLanguageOption) LanguageOptionType() raw.MPNowPlayingInfoLanguageOptionType {
-	return x.inner.LanguageOptionType()
+func (x *NowPlayingInfoLanguageOption) LanguageOptionType() MPNowPlayingInfoLanguageOptionType {
+	return MPNowPlayingInfoLanguageOptionType(x.inner.LanguageOptionType())
 }
 
 // LanguageTag calls the underlying LanguageTag.
@@ -96,7 +96,7 @@ type NowPlayingInfoLanguageOptionable interface {
 	Unwrap() *raw.MPNowPlayingInfoLanguageOption
 	IsAutomaticLegibleLanguageOption() bool
 	IsAutomaticAudibleLanguageOption() bool
-	LanguageOptionType() raw.MPNowPlayingInfoLanguageOptionType
+	LanguageOptionType() MPNowPlayingInfoLanguageOptionType
 	LanguageTag() string
 	LanguageOptionCharacteristics() []string
 	DisplayName() string

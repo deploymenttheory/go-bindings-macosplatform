@@ -78,8 +78,8 @@ func (x *PlayerInterstitialEventMonitor) CurrentEvent() *PlayerInterstitialEvent
 }
 
 // CurrentEventSkippableState calls the underlying CurrentEventSkippableState.
-func (x *PlayerInterstitialEventMonitor) CurrentEventSkippableState() raw.AVPlayerInterstitialEventSkippableEventState {
-	return x.inner.CurrentEventSkippableState()
+func (x *PlayerInterstitialEventMonitor) CurrentEventSkippableState() AVPlayerInterstitialEventSkippableEventState {
+	return AVPlayerInterstitialEventSkippableEventState(x.inner.CurrentEventSkippableState())
 }
 
 // CurrentEventSkipControlLabel calls the underlying CurrentEventSkipControlLabel.
@@ -102,7 +102,7 @@ type PlayerInterstitialEventMonitorable interface {
 	InterstitialPlayer() *QueuePlayer
 	Events() []*PlayerInterstitialEvent
 	CurrentEvent() *PlayerInterstitialEvent
-	CurrentEventSkippableState() raw.AVPlayerInterstitialEventSkippableEventState
+	CurrentEventSkippableState() AVPlayerInterstitialEventSkippableEventState
 	CurrentEventSkipControlLabel() string
 }
 

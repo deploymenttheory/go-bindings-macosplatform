@@ -113,20 +113,20 @@ func (x *AnnotationButtonWidget) WithEndPoint(endPoint corefoundation.CGPoint) *
 }
 
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationButtonWidget) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationButtonWidget {
-	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+func (x *AnnotationButtonWidget) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationButtonWidget {
+	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationButtonWidget) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationButtonWidget {
-	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+func (x *AnnotationButtonWidget) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationButtonWidget {
+	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
 // WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationButtonWidget) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationButtonWidget {
-	x.inner.PDFAnnotation.SetIconType(iconType)
+func (x *AnnotationButtonWidget) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationButtonWidget {
+	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
@@ -149,14 +149,14 @@ func (x *AnnotationButtonWidget) WithQuadrilateralPoints(items ...*foundation.NS
 }
 
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationButtonWidget) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationButtonWidget {
-	x.inner.PDFAnnotation.SetMarkupType(markupType)
+func (x *AnnotationButtonWidget) WithMarkupType(markupType PDFMarkupType) *AnnotationButtonWidget {
+	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationButtonWidget) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationButtonWidget {
-	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+func (x *AnnotationButtonWidget) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationButtonWidget {
+	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
@@ -251,8 +251,8 @@ func (x *AnnotationButtonWidget) WithValues(items ...*foundation.NSString) *Anno
 }
 
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationButtonWidget) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationButtonWidget {
-	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+func (x *AnnotationButtonWidget) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationButtonWidget {
+	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
@@ -305,13 +305,13 @@ func (x *AnnotationButtonWidget) WithStampName(stampName string) *AnnotationButt
 }
 
 // ControlType calls the underlying ControlType.
-func (x *AnnotationButtonWidget) ControlType() raw.PDFWidgetControlType {
-	return x.inner.ControlType()
+func (x *AnnotationButtonWidget) ControlType() PDFWidgetControlType {
+	return PDFWidgetControlType(x.inner.ControlType())
 }
 
 // SetControlType calls the underlying SetControlType.
-func (x *AnnotationButtonWidget) SetControlType(type_ raw.PDFWidgetControlType) {
-	x.inner.SetControlType(type_)
+func (x *AnnotationButtonWidget) SetControlType(type_ PDFWidgetControlType) {
+	x.inner.SetControlType(raw.PDFWidgetControlType(type_))
 }
 
 // State calls the underlying State.
@@ -355,12 +355,12 @@ type AnnotationButtonWidgetable interface {
 	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationButtonWidget
 	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationButtonWidget
 	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationButtonWidget
-	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationButtonWidget
-	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationButtonWidget
-	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationButtonWidget
+	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationButtonWidget
+	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationButtonWidget
+	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationButtonWidget
 	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationButtonWidget
-	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationButtonWidget
-	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationButtonWidget
+	WithMarkupType(markupType PDFMarkupType) *AnnotationButtonWidget
+	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationButtonWidget
 	WithMultiline(multiline bool) *AnnotationButtonWidget
 	WithComb(comb bool) *AnnotationButtonWidget
 	WithMaximumLength(maximumLength int) *AnnotationButtonWidget
@@ -372,7 +372,7 @@ type AnnotationButtonWidgetable interface {
 	WithListChoice(listChoice bool) *AnnotationButtonWidget
 	WithChoices(items ...*foundation.NSString) *AnnotationButtonWidget
 	WithValues(items ...*foundation.NSString) *AnnotationButtonWidget
-	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationButtonWidget
+	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationButtonWidget
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationButtonWidget
 	WithOpen(open bool) *AnnotationButtonWidget
 	WithDestination(destination *Destination) *AnnotationButtonWidget
@@ -381,8 +381,8 @@ type AnnotationButtonWidgetable interface {
 	WithCaption(caption string) *AnnotationButtonWidget
 	WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationButtonWidget
 	WithStampName(stampName string) *AnnotationButtonWidget
-	ControlType() raw.PDFWidgetControlType
-	SetControlType(type_ raw.PDFWidgetControlType)
+	ControlType() PDFWidgetControlType
+	SetControlType(type_ PDFWidgetControlType)
 	State() int
 	SetState(value int)
 	OnStateValue() string

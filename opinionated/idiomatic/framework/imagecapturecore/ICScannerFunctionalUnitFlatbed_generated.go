@@ -38,26 +38,26 @@ func NewScannerFunctionalUnitFlatbed() *ScannerFunctionalUnitFlatbed {
 }
 
 // WithDocumentType sets the documentType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithDocumentType(documentType raw.ICScannerDocumentType) *ScannerFunctionalUnitFlatbed {
-	x.inner.SetDocumentType(documentType)
+func (x *ScannerFunctionalUnitFlatbed) WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitFlatbed {
+	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
 	return x
 }
 
 // WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithPixelDataType(pixelDataType raw.ICScannerPixelDataType) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetPixelDataType(pixelDataType)
+func (x *ScannerFunctionalUnitFlatbed) WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitFlatbed {
+	x.inner.ICScannerFunctionalUnit.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
 	return x
 }
 
 // WithBitDepth sets the bitDepth property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithBitDepth(bitDepth raw.ICScannerBitDepth) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetBitDepth(bitDepth)
+func (x *ScannerFunctionalUnitFlatbed) WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitFlatbed {
+	x.inner.ICScannerFunctionalUnit.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
 	return x
 }
 
 // WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(measurementUnit)
+func (x *ScannerFunctionalUnitFlatbed) WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitFlatbed {
+	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
 	return x
 }
 
@@ -80,8 +80,8 @@ func (x *ScannerFunctionalUnitFlatbed) WithScanArea(scanArea corefoundation.CGRe
 }
 
 // WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(scanAreaOrientation)
+func (x *ScannerFunctionalUnitFlatbed) WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitFlatbed {
+	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
 	return x
 }
 
@@ -109,13 +109,13 @@ func (x *ScannerFunctionalUnitFlatbed) SupportedDocumentTypes() *foundation.NSIn
 }
 
 // DocumentType calls the underlying DocumentType.
-func (x *ScannerFunctionalUnitFlatbed) DocumentType() raw.ICScannerDocumentType {
-	return x.inner.DocumentType()
+func (x *ScannerFunctionalUnitFlatbed) DocumentType() ICScannerDocumentType {
+	return ICScannerDocumentType(x.inner.DocumentType())
 }
 
 // SetDocumentType calls the underlying SetDocumentType.
-func (x *ScannerFunctionalUnitFlatbed) SetDocumentType(documentType raw.ICScannerDocumentType) {
-	x.inner.SetDocumentType(documentType)
+func (x *ScannerFunctionalUnitFlatbed) SetDocumentType(documentType ICScannerDocumentType) {
+	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
 }
 
 // DocumentSize calls the underlying DocumentSize.
@@ -130,20 +130,20 @@ func (x *ScannerFunctionalUnitFlatbed) asScannerFunctionalUnit() *raw.ICScannerF
 // ScannerFunctionalUnitFlatbedable is the interface implemented by [ScannerFunctionalUnitFlatbed], for mocking and DI.
 type ScannerFunctionalUnitFlatbedable interface {
 	Unwrap() *raw.ICScannerFunctionalUnitFlatbed
-	WithDocumentType(documentType raw.ICScannerDocumentType) *ScannerFunctionalUnitFlatbed
-	WithPixelDataType(pixelDataType raw.ICScannerPixelDataType) *ScannerFunctionalUnitFlatbed
-	WithBitDepth(bitDepth raw.ICScannerBitDepth) *ScannerFunctionalUnitFlatbed
-	WithMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) *ScannerFunctionalUnitFlatbed
+	WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitFlatbed
+	WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitFlatbed
+	WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitFlatbed
+	WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitFlatbed
 	WithResolution(resolution uint) *ScannerFunctionalUnitFlatbed
 	WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitFlatbed
 	WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitFlatbed
-	WithScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitFlatbed
+	WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitFlatbed
 	WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitFlatbed
 	WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitFlatbed
 	WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitFlatbed
 	SupportedDocumentTypes() *foundation.NSIndexSet
-	DocumentType() raw.ICScannerDocumentType
-	SetDocumentType(documentType raw.ICScannerDocumentType)
+	DocumentType() ICScannerDocumentType
+	SetDocumentType(documentType ICScannerDocumentType)
 	DocumentSize() corefoundation.CGSize
 }
 

@@ -165,63 +165,63 @@ func IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor(bosDescriptor unsafe.Point
 }
 
 // IOUSBHostCIControllerStateToString calls [raw.IOUSBHostCIControllerStateToString] (C function IOUSBHostCIControllerStateToString).
-func IOUSBHostCIControllerStateToString(controllerState raw.IOUSBHostCIControllerState) string {
-	return raw.IOUSBHostCIControllerStateToString(controllerState)
+func IOUSBHostCIControllerStateToString(controllerState IOUSBHostCIControllerState) string {
+	return raw.IOUSBHostCIControllerStateToString(raw.IOUSBHostCIControllerState(controllerState))
 }
 
 // IOUSBHostCIDeviceSpeedToString calls [raw.IOUSBHostCIDeviceSpeedToString] (C function IOUSBHostCIDeviceSpeedToString).
-func IOUSBHostCIDeviceSpeedToString(speed raw.IOUSBHostCIDeviceSpeed) string {
-	return raw.IOUSBHostCIDeviceSpeedToString(speed)
+func IOUSBHostCIDeviceSpeedToString(speed IOUSBHostCIDeviceSpeed) string {
+	return raw.IOUSBHostCIDeviceSpeedToString(raw.IOUSBHostCIDeviceSpeed(speed))
 }
 
 // IOUSBHostCIDeviceStateToString calls [raw.IOUSBHostCIDeviceStateToString] (C function IOUSBHostCIDeviceStateToString).
-func IOUSBHostCIDeviceStateToString(deviceState raw.IOUSBHostCIDeviceState) string {
-	return raw.IOUSBHostCIDeviceStateToString(deviceState)
+func IOUSBHostCIDeviceStateToString(deviceState IOUSBHostCIDeviceState) string {
+	return raw.IOUSBHostCIDeviceStateToString(raw.IOUSBHostCIDeviceState(deviceState))
 }
 
 // IOUSBHostCIEndpointStateToString calls [raw.IOUSBHostCIEndpointStateToString] (C function IOUSBHostCIEndpointStateToString).
-func IOUSBHostCIEndpointStateToString(endpointState raw.IOUSBHostCIEndpointState) string {
-	return raw.IOUSBHostCIEndpointStateToString(endpointState)
+func IOUSBHostCIEndpointStateToString(endpointState IOUSBHostCIEndpointState) string {
+	return raw.IOUSBHostCIEndpointStateToString(raw.IOUSBHostCIEndpointState(endpointState))
 }
 
 // IOUSBHostCIExceptionTypeToString calls [raw.IOUSBHostCIExceptionTypeToString] (C function IOUSBHostCIExceptionTypeToString).
-func IOUSBHostCIExceptionTypeToString(exceptionType raw.IOUSBHostCIExceptionType) string {
-	return raw.IOUSBHostCIExceptionTypeToString(exceptionType)
+func IOUSBHostCIExceptionTypeToString(exceptionType IOUSBHostCIExceptionType) string {
+	return raw.IOUSBHostCIExceptionTypeToString(raw.IOUSBHostCIExceptionType(exceptionType))
 }
 
 // IOUSBHostCILinkStateEnabled calls [raw.IOUSBHostCILinkStateEnabled] (C function IOUSBHostCILinkStateEnabled).
-func IOUSBHostCILinkStateEnabled(linkState raw.IOUSBHostCILinkState) bool {
-	return raw.IOUSBHostCILinkStateEnabled(linkState)
+func IOUSBHostCILinkStateEnabled(linkState IOUSBHostCILinkState) bool {
+	return raw.IOUSBHostCILinkStateEnabled(raw.IOUSBHostCILinkState(linkState))
 }
 
 // IOUSBHostCILinkStateToString calls [raw.IOUSBHostCILinkStateToString] (C function IOUSBHostCILinkStateToString).
-func IOUSBHostCILinkStateToString(linkState raw.IOUSBHostCILinkState) string {
-	return raw.IOUSBHostCILinkStateToString(linkState)
+func IOUSBHostCILinkStateToString(linkState IOUSBHostCILinkState) string {
+	return raw.IOUSBHostCILinkStateToString(raw.IOUSBHostCILinkState(linkState))
 }
 
 // IOUSBHostCIMessageStatusFromIOReturn calls [raw.IOUSBHostCIMessageStatusFromIOReturn] (C function IOUSBHostCIMessageStatusFromIOReturn).
-func IOUSBHostCIMessageStatusFromIOReturn(status int) raw.IOUSBHostCIMessageStatus {
-	return raw.IOUSBHostCIMessageStatusFromIOReturn(status)
+func IOUSBHostCIMessageStatusFromIOReturn(status int) IOUSBHostCIMessageStatus {
+	return IOUSBHostCIMessageStatus(raw.IOUSBHostCIMessageStatusFromIOReturn(status))
 }
 
 // IOUSBHostCIMessageStatusToIOReturn calls [raw.IOUSBHostCIMessageStatusToIOReturn] (C function IOUSBHostCIMessageStatusToIOReturn).
-func IOUSBHostCIMessageStatusToIOReturn(status raw.IOUSBHostCIMessageStatus) int {
-	return raw.IOUSBHostCIMessageStatusToIOReturn(status)
+func IOUSBHostCIMessageStatusToIOReturn(status IOUSBHostCIMessageStatus) int {
+	return raw.IOUSBHostCIMessageStatusToIOReturn(raw.IOUSBHostCIMessageStatus(status))
 }
 
 // IOUSBHostCIMessageStatusToString calls [raw.IOUSBHostCIMessageStatusToString] (C function IOUSBHostCIMessageStatusToString).
-func IOUSBHostCIMessageStatusToString(status raw.IOUSBHostCIMessageStatus) string {
-	return raw.IOUSBHostCIMessageStatusToString(status)
+func IOUSBHostCIMessageStatusToString(status IOUSBHostCIMessageStatus) string {
+	return raw.IOUSBHostCIMessageStatusToString(raw.IOUSBHostCIMessageStatus(status))
 }
 
 // IOUSBHostCIMessageTypeToString calls [raw.IOUSBHostCIMessageTypeToString] (C function IOUSBHostCIMessageTypeToString).
-func IOUSBHostCIMessageTypeToString(type_ raw.IOUSBHostCIMessageType) string {
-	return raw.IOUSBHostCIMessageTypeToString(type_)
+func IOUSBHostCIMessageTypeToString(type_ IOUSBHostCIMessageType) string {
+	return raw.IOUSBHostCIMessageTypeToString(raw.IOUSBHostCIMessageType(type_))
 }
 
 // IOUSBHostCIPortStateToString calls [raw.IOUSBHostCIPortStateToString] (C function IOUSBHostCIPortStateToString).
-func IOUSBHostCIPortStateToString(portState raw.IOUSBHostCIPortState) string {
-	return raw.IOUSBHostCIPortStateToString(portState)
+func IOUSBHostCIPortStateToString(portState IOUSBHostCIPortState) string {
+	return raw.IOUSBHostCIPortStateToString(raw.IOUSBHostCIPortState(portState))
 }
 
 // IOUSBHostDeviceRequestType calls [raw.IOUSBHostDeviceRequestType] (C function IOUSBHostDeviceRequestType).

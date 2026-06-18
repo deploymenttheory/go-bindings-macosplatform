@@ -38,8 +38,8 @@ func NewBackgroundActivitySchedulerWithIdentifier(identifier string) *Background
 }
 
 // WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *BackgroundActivityScheduler) WithQualityOfService(qualityOfService raw.NSQualityOfService) *BackgroundActivityScheduler {
-	x.inner.SetQualityOfService(qualityOfService)
+func (x *BackgroundActivityScheduler) WithQualityOfService(qualityOfService NSQualityOfService) *BackgroundActivityScheduler {
+	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 	return x
 }
 
@@ -87,13 +87,13 @@ func (x *BackgroundActivityScheduler) Identifier() *String {
 }
 
 // QualityOfService calls the underlying QualityOfService.
-func (x *BackgroundActivityScheduler) QualityOfService() raw.NSQualityOfService {
-	return x.inner.QualityOfService()
+func (x *BackgroundActivityScheduler) QualityOfService() NSQualityOfService {
+	return NSQualityOfService(x.inner.QualityOfService())
 }
 
 // SetQualityOfService calls the underlying SetQualityOfService.
-func (x *BackgroundActivityScheduler) SetQualityOfService(qualityOfService raw.NSQualityOfService) {
-	x.inner.SetQualityOfService(qualityOfService)
+func (x *BackgroundActivityScheduler) SetQualityOfService(qualityOfService NSQualityOfService) {
+	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 }
 
 // Repeats calls the underlying Repeats.
@@ -136,7 +136,7 @@ func (x *BackgroundActivityScheduler) asObject() *raw.NSObject { return &x.inner
 // BackgroundActivitySchedulerable is the interface implemented by [BackgroundActivityScheduler], for mocking and DI.
 type BackgroundActivitySchedulerable interface {
 	Unwrap() *raw.NSBackgroundActivityScheduler
-	WithQualityOfService(qualityOfService raw.NSQualityOfService) *BackgroundActivityScheduler
+	WithQualityOfService(qualityOfService NSQualityOfService) *BackgroundActivityScheduler
 	WithRepeats(repeats bool) *BackgroundActivityScheduler
 	WithInterval(interval float64) *BackgroundActivityScheduler
 	WithTolerance(tolerance float64) *BackgroundActivityScheduler
@@ -144,8 +144,8 @@ type BackgroundActivitySchedulerable interface {
 	ScheduleWith(block func(objc.Block))
 	Invalidate()
 	Identifier() *String
-	QualityOfService() raw.NSQualityOfService
-	SetQualityOfService(qualityOfService raw.NSQualityOfService)
+	QualityOfService() NSQualityOfService
+	SetQualityOfService(qualityOfService NSQualityOfService)
 	Repeats() bool
 	SetRepeats(repeats bool)
 	Interval() float64

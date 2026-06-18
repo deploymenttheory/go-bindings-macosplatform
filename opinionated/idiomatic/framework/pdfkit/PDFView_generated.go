@@ -46,14 +46,14 @@ func (x *View) WithDocument(document *Document) *View {
 }
 
 // WithDisplayMode sets the displayMode property and returns the receiver for chaining.
-func (x *View) WithDisplayMode(displayMode raw.PDFDisplayMode) *View {
-	x.inner.SetDisplayMode(displayMode)
+func (x *View) WithDisplayMode(displayMode PDFDisplayMode) *View {
+	x.inner.SetDisplayMode(raw.PDFDisplayMode(displayMode))
 	return x
 }
 
 // WithDisplayDirection sets the displayDirection property and returns the receiver for chaining.
-func (x *View) WithDisplayDirection(displayDirection raw.PDFDisplayDirection) *View {
-	x.inner.SetDisplayDirection(displayDirection)
+func (x *View) WithDisplayDirection(displayDirection PDFDisplayDirection) *View {
+	x.inner.SetDisplayDirection(raw.PDFDisplayDirection(displayDirection))
 	return x
 }
 
@@ -70,8 +70,8 @@ func (x *View) WithPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) *V
 }
 
 // WithDisplayBox sets the displayBox property and returns the receiver for chaining.
-func (x *View) WithDisplayBox(displayBox raw.PDFDisplayBox) *View {
-	x.inner.SetDisplayBox(displayBox)
+func (x *View) WithDisplayBox(displayBox PDFDisplayBox) *View {
+	x.inner.SetDisplayBox(raw.PDFDisplayBox(displayBox))
 	return x
 }
 
@@ -94,8 +94,8 @@ func (x *View) WithBackgroundColor(backgroundColor *appkit.NSColor) *View {
 }
 
 // WithInterpolationQuality sets the interpolationQuality property and returns the receiver for chaining.
-func (x *View) WithInterpolationQuality(interpolationQuality raw.PDFInterpolationQuality) *View {
-	x.inner.SetInterpolationQuality(interpolationQuality)
+func (x *View) WithInterpolationQuality(interpolationQuality PDFInterpolationQuality) *View {
+	x.inner.SetInterpolationQuality(raw.PDFInterpolationQuality(interpolationQuality))
 	return x
 }
 
@@ -238,18 +238,18 @@ func (x *View) ZoomOut(sender objc.ID) {
 }
 
 // AreaOfInterestForMouse calls the underlying AreaOfInterestForMouse.
-func (x *View) AreaOfInterestForMouse(event *appkit.NSEvent) raw.PDFAreaOfInterest {
-	return x.inner.AreaOfInterestForMouse(event)
+func (x *View) AreaOfInterestForMouse(event *appkit.NSEvent) PDFAreaOfInterest {
+	return PDFAreaOfInterest(x.inner.AreaOfInterestForMouse(event))
 }
 
 // AreaOfInterestForPoint calls the underlying AreaOfInterestForPoint.
-func (x *View) AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) raw.PDFAreaOfInterest {
-	return x.inner.AreaOfInterestForPoint(cursorLocation)
+func (x *View) AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) PDFAreaOfInterest {
+	return PDFAreaOfInterest(x.inner.AreaOfInterestForPoint(cursorLocation))
 }
 
 // SetCursorForAreaOfInterest calls the underlying SetCursorForAreaOfInterest.
-func (x *View) SetCursorForAreaOfInterest(area raw.PDFAreaOfInterest) {
-	x.inner.SetCursorForAreaOfInterest(area)
+func (x *View) SetCursorForAreaOfInterest(area PDFAreaOfInterest) {
+	x.inner.SetCursorForAreaOfInterest(raw.PDFAreaOfInterest(area))
 }
 
 // PerformAction calls the underlying PerformAction.
@@ -298,8 +298,8 @@ func (x *View) PrintWithInfoAutoRotate(printInfo *appkit.NSPrintInfo, doRotate b
 }
 
 // PrintWithInfoAutoRotatePageScaling calls the underlying PrintWithInfoAutoRotatePageScaling.
-func (x *View) PrintWithInfoAutoRotatePageScaling(printInfo *appkit.NSPrintInfo, doRotate bool, scale raw.PDFPrintScalingMode) {
-	x.inner.PrintWithInfoAutoRotatePageScaling(printInfo, doRotate, scale)
+func (x *View) PrintWithInfoAutoRotatePageScaling(printInfo *appkit.NSPrintInfo, doRotate bool, scale PDFPrintScalingMode) {
+	x.inner.PrintWithInfoAutoRotatePageScaling(printInfo, doRotate, raw.PDFPrintScalingMode(scale))
 }
 
 // PageForPointNearest calls the underlying PageForPointNearest.
@@ -409,23 +409,23 @@ func (x *View) CurrentDestination() *Destination {
 }
 
 // DisplayMode calls the underlying DisplayMode.
-func (x *View) DisplayMode() raw.PDFDisplayMode {
-	return x.inner.DisplayMode()
+func (x *View) DisplayMode() PDFDisplayMode {
+	return PDFDisplayMode(x.inner.DisplayMode())
 }
 
 // SetDisplayMode calls the underlying SetDisplayMode.
-func (x *View) SetDisplayMode(displayMode raw.PDFDisplayMode) {
-	x.inner.SetDisplayMode(displayMode)
+func (x *View) SetDisplayMode(displayMode PDFDisplayMode) {
+	x.inner.SetDisplayMode(raw.PDFDisplayMode(displayMode))
 }
 
 // DisplayDirection calls the underlying DisplayDirection.
-func (x *View) DisplayDirection() raw.PDFDisplayDirection {
-	return x.inner.DisplayDirection()
+func (x *View) DisplayDirection() PDFDisplayDirection {
+	return PDFDisplayDirection(x.inner.DisplayDirection())
 }
 
 // SetDisplayDirection calls the underlying SetDisplayDirection.
-func (x *View) SetDisplayDirection(displayDirection raw.PDFDisplayDirection) {
-	x.inner.SetDisplayDirection(displayDirection)
+func (x *View) SetDisplayDirection(displayDirection PDFDisplayDirection) {
+	x.inner.SetDisplayDirection(raw.PDFDisplayDirection(displayDirection))
 }
 
 // DisplaysPageBreaks calls the underlying DisplaysPageBreaks.
@@ -449,13 +449,13 @@ func (x *View) SetPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) {
 }
 
 // DisplayBox calls the underlying DisplayBox.
-func (x *View) DisplayBox() raw.PDFDisplayBox {
-	return x.inner.DisplayBox()
+func (x *View) DisplayBox() PDFDisplayBox {
+	return PDFDisplayBox(x.inner.DisplayBox())
 }
 
 // SetDisplayBox calls the underlying SetDisplayBox.
-func (x *View) SetDisplayBox(displayBox raw.PDFDisplayBox) {
-	x.inner.SetDisplayBox(displayBox)
+func (x *View) SetDisplayBox(displayBox PDFDisplayBox) {
+	x.inner.SetDisplayBox(raw.PDFDisplayBox(displayBox))
 }
 
 // DisplaysAsBook calls the underlying DisplaysAsBook.
@@ -489,13 +489,13 @@ func (x *View) SetBackgroundColor(backgroundColor *appkit.NSColor) {
 }
 
 // InterpolationQuality calls the underlying InterpolationQuality.
-func (x *View) InterpolationQuality() raw.PDFInterpolationQuality {
-	return x.inner.InterpolationQuality()
+func (x *View) InterpolationQuality() PDFInterpolationQuality {
+	return PDFInterpolationQuality(x.inner.InterpolationQuality())
 }
 
 // SetInterpolationQuality calls the underlying SetInterpolationQuality.
-func (x *View) SetInterpolationQuality(interpolationQuality raw.PDFInterpolationQuality) {
-	x.inner.SetInterpolationQuality(interpolationQuality)
+func (x *View) SetInterpolationQuality(interpolationQuality PDFInterpolationQuality) {
+	x.inner.SetInterpolationQuality(raw.PDFInterpolationQuality(interpolationQuality))
 }
 
 // PageShadowsEnabled calls the underlying PageShadowsEnabled.
@@ -701,15 +701,15 @@ func (x *View) SetAllowsDragging(allowsDragging bool) {
 type Viewable interface {
 	Unwrap() *raw.PDFView
 	WithDocument(document *Document) *View
-	WithDisplayMode(displayMode raw.PDFDisplayMode) *View
-	WithDisplayDirection(displayDirection raw.PDFDisplayDirection) *View
+	WithDisplayMode(displayMode PDFDisplayMode) *View
+	WithDisplayDirection(displayDirection PDFDisplayDirection) *View
 	WithDisplaysPageBreaks(displaysPageBreaks bool) *View
 	WithPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) *View
-	WithDisplayBox(displayBox raw.PDFDisplayBox) *View
+	WithDisplayBox(displayBox PDFDisplayBox) *View
 	WithDisplaysAsBook(displaysAsBook bool) *View
 	WithDisplaysRTL(displaysRTL bool) *View
 	WithBackgroundColor(backgroundColor *appkit.NSColor) *View
-	WithInterpolationQuality(interpolationQuality raw.PDFInterpolationQuality) *View
+	WithInterpolationQuality(interpolationQuality PDFInterpolationQuality) *View
 	WithPageShadowsEnabled(pageShadowsEnabled bool) *View
 	WithDelegate(delegate raw.PDFViewDelegate) *View
 	WithScaleFactor(scaleFactor float64) *View
@@ -735,9 +735,9 @@ type Viewable interface {
 	GoToRectOnPage(rect corefoundation.CGRect, page *raw.PDFPage)
 	ZoomIn(sender objc.ID)
 	ZoomOut(sender objc.ID)
-	AreaOfInterestForMouse(event *appkit.NSEvent) raw.PDFAreaOfInterest
-	AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) raw.PDFAreaOfInterest
-	SetCursorForAreaOfInterest(area raw.PDFAreaOfInterest)
+	AreaOfInterestForMouse(event *appkit.NSEvent) PDFAreaOfInterest
+	AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) PDFAreaOfInterest
+	SetCursorForAreaOfInterest(area PDFAreaOfInterest)
 	PerformAction(action *raw.PDFAction)
 	SetCurrentSelectionAnimate(selection *raw.PDFSelection, animate bool)
 	ClearSelection()
@@ -747,7 +747,7 @@ type Viewable interface {
 	DrawPagePostToContext(page *raw.PDFPage, context_ unsafe.Pointer)
 	Copy(sender objc.ID)
 	PrintWithInfoAutoRotate(printInfo *appkit.NSPrintInfo, doRotate bool)
-	PrintWithInfoAutoRotatePageScaling(printInfo *appkit.NSPrintInfo, doRotate bool, scale raw.PDFPrintScalingMode)
+	PrintWithInfoAutoRotatePageScaling(printInfo *appkit.NSPrintInfo, doRotate bool, scale PDFPrintScalingMode)
 	PageForPointNearest(point corefoundation.CGPoint, nearest bool) *Page
 	ConvertPointToPage(point corefoundation.CGPoint, page *raw.PDFPage) corefoundation.CGPoint
 	ConvertRectToPage(rect corefoundation.CGRect, page *raw.PDFPage) corefoundation.CGRect
@@ -766,24 +766,24 @@ type Viewable interface {
 	CanGoForward() bool
 	CurrentPage() *Page
 	CurrentDestination() *Destination
-	DisplayMode() raw.PDFDisplayMode
-	SetDisplayMode(displayMode raw.PDFDisplayMode)
-	DisplayDirection() raw.PDFDisplayDirection
-	SetDisplayDirection(displayDirection raw.PDFDisplayDirection)
+	DisplayMode() PDFDisplayMode
+	SetDisplayMode(displayMode PDFDisplayMode)
+	DisplayDirection() PDFDisplayDirection
+	SetDisplayDirection(displayDirection PDFDisplayDirection)
 	DisplaysPageBreaks() bool
 	SetDisplaysPageBreaks(displaysPageBreaks bool)
 	PageBreakMargins() foundation.NSEdgeInsets
 	SetPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets)
-	DisplayBox() raw.PDFDisplayBox
-	SetDisplayBox(displayBox raw.PDFDisplayBox)
+	DisplayBox() PDFDisplayBox
+	SetDisplayBox(displayBox PDFDisplayBox)
 	DisplaysAsBook() bool
 	SetDisplaysAsBook(displaysAsBook bool)
 	DisplaysRTL() bool
 	SetDisplaysRTL(displaysRTL bool)
 	BackgroundColor() *appkit.NSColor
 	SetBackgroundColor(backgroundColor *appkit.NSColor)
-	InterpolationQuality() raw.PDFInterpolationQuality
-	SetInterpolationQuality(interpolationQuality raw.PDFInterpolationQuality)
+	InterpolationQuality() PDFInterpolationQuality
+	SetInterpolationQuality(interpolationQuality PDFInterpolationQuality)
 	PageShadowsEnabled() bool
 	EnablePageShadows(pageShadowsEnabled bool)
 	Delegate() raw.PDFViewDelegate

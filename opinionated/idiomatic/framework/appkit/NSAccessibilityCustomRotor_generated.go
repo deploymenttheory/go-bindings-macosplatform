@@ -39,15 +39,15 @@ func NewAccessibilityCustomRotorWithLabelItemSearchDelegate(label string, itemSe
 }
 
 // NewAccessibilityCustomRotorWithRotorTypeItemSearchDelegate creates a new [AccessibilityCustomRotor].
-func NewAccessibilityCustomRotorWithRotorTypeItemSearchDelegate(rotorType raw.NSAccessibilityCustomRotorType, itemSearchDelegate raw.NSAccessibilityCustomRotorItemSearchDelegate) *AccessibilityCustomRotor {
+func NewAccessibilityCustomRotorWithRotorTypeItemSearchDelegate(rotorType NSAccessibilityCustomRotorType, itemSearchDelegate raw.NSAccessibilityCustomRotorItemSearchDelegate) *AccessibilityCustomRotor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityCustomRotor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRotorType:itemSearchDelegate:"), rotorType, itemSearchDelegate)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRotorType:itemSearchDelegate:"), raw.NSAccessibilityCustomRotorType(rotorType), itemSearchDelegate)
 	return &AccessibilityCustomRotor{inner: raw.NSAccessibilityCustomRotorFromID(_id)}
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *AccessibilityCustomRotor) WithType(type_ raw.NSAccessibilityCustomRotorType) *AccessibilityCustomRotor {
-	x.inner.SetType(type_)
+func (x *AccessibilityCustomRotor) WithType(type_ NSAccessibilityCustomRotorType) *AccessibilityCustomRotor {
+	x.inner.SetType(raw.NSAccessibilityCustomRotorType(type_))
 	return x
 }
 
@@ -70,13 +70,13 @@ func (x *AccessibilityCustomRotor) WithItemLoadingDelegate(itemLoadingDelegate r
 }
 
 // Type calls the underlying Type.
-func (x *AccessibilityCustomRotor) Type() raw.NSAccessibilityCustomRotorType {
-	return x.inner.Type()
+func (x *AccessibilityCustomRotor) Type() NSAccessibilityCustomRotorType {
+	return NSAccessibilityCustomRotorType(x.inner.Type())
 }
 
 // SetType calls the underlying SetType.
-func (x *AccessibilityCustomRotor) SetType(type_ raw.NSAccessibilityCustomRotorType) {
-	x.inner.SetType(type_)
+func (x *AccessibilityCustomRotor) SetType(type_ NSAccessibilityCustomRotorType) {
+	x.inner.SetType(raw.NSAccessibilityCustomRotorType(type_))
 }
 
 // Label calls the underlying Label.
@@ -116,12 +116,12 @@ func (x *AccessibilityCustomRotor) SetItemLoadingDelegate(itemLoadingDelegate ra
 // AccessibilityCustomRotorable is the interface implemented by [AccessibilityCustomRotor], for mocking and DI.
 type AccessibilityCustomRotorable interface {
 	Unwrap() *raw.NSAccessibilityCustomRotor
-	WithType(type_ raw.NSAccessibilityCustomRotorType) *AccessibilityCustomRotor
+	WithType(type_ NSAccessibilityCustomRotorType) *AccessibilityCustomRotor
 	WithLabel(label string) *AccessibilityCustomRotor
 	WithItemSearchDelegate(itemSearchDelegate raw.NSAccessibilityCustomRotorItemSearchDelegate) *AccessibilityCustomRotor
 	WithItemLoadingDelegate(itemLoadingDelegate raw.NSAccessibilityElementLoading) *AccessibilityCustomRotor
-	Type() raw.NSAccessibilityCustomRotorType
-	SetType(type_ raw.NSAccessibilityCustomRotorType)
+	Type() NSAccessibilityCustomRotorType
+	SetType(type_ NSAccessibilityCustomRotorType)
 	Label() string
 	SetLabel(label string)
 	ItemSearchDelegate() raw.NSAccessibilityCustomRotorItemSearchDelegate

@@ -37,8 +37,8 @@ func NewAVB17221AECPAEMMessage() *AVB17221AECPAEMMessage {
 }
 
 // WithCommandType sets the commandType property and returns the receiver for chaining.
-func (x *AVB17221AECPAEMMessage) WithCommandType(commandType raw.AVB17221AEMCommandType) *AVB17221AECPAEMMessage {
-	x.inner.SetCommandType(commandType)
+func (x *AVB17221AECPAEMMessage) WithCommandType(commandType AVB17221AEMCommandType) *AVB17221AECPAEMMessage {
+	x.inner.SetCommandType(raw.AVB17221AEMCommandType(commandType))
 	return x
 }
 
@@ -61,14 +61,14 @@ func (x *AVB17221AECPAEMMessage) WithCommandSpecificData(commandSpecificData *fo
 }
 
 // WithMessageType sets the messageType property and returns the receiver for chaining.
-func (x *AVB17221AECPAEMMessage) WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPAEMMessage {
-	x.inner.AVB17221AECPMessage.SetMessageType(messageType)
+func (x *AVB17221AECPAEMMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAEMMessage {
+	x.inner.AVB17221AECPMessage.SetMessageType(raw.AVB17221AECPMessageType(messageType))
 	return x
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *AVB17221AECPAEMMessage) WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPAEMMessage {
-	x.inner.AVB17221AECPMessage.SetStatus(status)
+func (x *AVB17221AECPAEMMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAEMMessage {
+	x.inner.AVB17221AECPMessage.SetStatus(raw.AVB17221AECPStatusCode(status))
 	return x
 }
 
@@ -97,13 +97,13 @@ func (x *AVB17221AECPAEMMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221A
 }
 
 // CommandType calls the underlying CommandType.
-func (x *AVB17221AECPAEMMessage) CommandType() raw.AVB17221AEMCommandType {
-	return x.inner.CommandType()
+func (x *AVB17221AECPAEMMessage) CommandType() AVB17221AEMCommandType {
+	return AVB17221AEMCommandType(x.inner.CommandType())
 }
 
 // SetCommandType calls the underlying SetCommandType.
-func (x *AVB17221AECPAEMMessage) SetCommandType(commandType raw.AVB17221AEMCommandType) {
-	x.inner.SetCommandType(commandType)
+func (x *AVB17221AECPAEMMessage) SetCommandType(commandType AVB17221AEMCommandType) {
+	x.inner.SetCommandType(raw.AVB17221AEMCommandType(commandType))
 }
 
 // IsUnsolicited calls the underlying IsUnsolicited.
@@ -143,18 +143,18 @@ func (x *AVB17221AECPAEMMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessag
 // AVB17221AECPAEMMessageable is the interface implemented by [AVB17221AECPAEMMessage], for mocking and DI.
 type AVB17221AECPAEMMessageable interface {
 	Unwrap() *raw.AVB17221AECPAEMMessage
-	WithCommandType(commandType raw.AVB17221AEMCommandType) *AVB17221AECPAEMMessage
+	WithCommandType(commandType AVB17221AEMCommandType) *AVB17221AECPAEMMessage
 	WithUnsolicited(unsolicited bool) *AVB17221AECPAEMMessage
 	WithControllerRequest(controllerRequest bool) *AVB17221AECPAEMMessage
 	WithCommandSpecificData(commandSpecificData *foundation.NSData) *AVB17221AECPAEMMessage
-	WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPAEMMessage
-	WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPAEMMessage
+	WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAEMMessage
+	WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAEMMessage
 	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAEMMessage
 	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAEMMessage
 	WithSequenceID(sequenceID uint16) *AVB17221AECPAEMMessage
 	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAEMMessage
-	CommandType() raw.AVB17221AEMCommandType
-	SetCommandType(commandType raw.AVB17221AEMCommandType)
+	CommandType() AVB17221AEMCommandType
+	SetCommandType(commandType AVB17221AEMCommandType)
 	IsUnsolicited() bool
 	SetUnsolicited(unsolicited bool)
 	IsControllerRequest() bool

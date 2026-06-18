@@ -39,8 +39,8 @@ func NewHTTPCookieStorage() *HTTPCookieStorage {
 }
 
 // WithCookieAcceptPolicy sets the cookieAcceptPolicy property and returns the receiver for chaining.
-func (x *HTTPCookieStorage) WithCookieAcceptPolicy(cookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy) *HTTPCookieStorage {
-	x.inner.SetCookieAcceptPolicy(cookieAcceptPolicy)
+func (x *HTTPCookieStorage) WithCookieAcceptPolicy(cookieAcceptPolicy NSHTTPCookieAcceptPolicy) *HTTPCookieStorage {
+	x.inner.SetCookieAcceptPolicy(raw.NSHTTPCookieAcceptPolicy(cookieAcceptPolicy))
 	return x
 }
 
@@ -92,13 +92,13 @@ func (x *HTTPCookieStorage) Cookies() []*HTTPCookie {
 }
 
 // CookieAcceptPolicy calls the underlying CookieAcceptPolicy.
-func (x *HTTPCookieStorage) CookieAcceptPolicy() raw.NSHTTPCookieAcceptPolicy {
-	return x.inner.CookieAcceptPolicy()
+func (x *HTTPCookieStorage) CookieAcceptPolicy() NSHTTPCookieAcceptPolicy {
+	return NSHTTPCookieAcceptPolicy(x.inner.CookieAcceptPolicy())
 }
 
 // SetCookieAcceptPolicy calls the underlying SetCookieAcceptPolicy.
-func (x *HTTPCookieStorage) SetCookieAcceptPolicy(cookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy) {
-	x.inner.SetCookieAcceptPolicy(cookieAcceptPolicy)
+func (x *HTTPCookieStorage) SetCookieAcceptPolicy(cookieAcceptPolicy NSHTTPCookieAcceptPolicy) {
+	x.inner.SetCookieAcceptPolicy(raw.NSHTTPCookieAcceptPolicy(cookieAcceptPolicy))
 }
 
 // StoreCookiesForTask calls the underlying StoreCookiesForTask.
@@ -132,7 +132,7 @@ func (x *HTTPCookieStorage) asObject() *raw.NSObject { return &x.inner.NSObject 
 // HTTPCookieStorageable is the interface implemented by [HTTPCookieStorage], for mocking and DI.
 type HTTPCookieStorageable interface {
 	Unwrap() *raw.NSHTTPCookieStorage
-	WithCookieAcceptPolicy(cookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy) *HTTPCookieStorage
+	WithCookieAcceptPolicy(cookieAcceptPolicy NSHTTPCookieAcceptPolicy) *HTTPCookieStorage
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPCookieStorage
 	SetCookie(cookie *raw.NSHTTPCookie)
 	DeleteCookie(cookie *raw.NSHTTPCookie)
@@ -141,8 +141,8 @@ type HTTPCookieStorageable interface {
 	SetCookiesForURLMainDocumentURL(cookies *raw.NSArray[*raw.NSHTTPCookie], uRL string, mainDocumentURL string)
 	SortedCookiesUsingDescriptors(sortOrder *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[*raw.NSHTTPCookie]
 	Cookies() []*HTTPCookie
-	CookieAcceptPolicy() raw.NSHTTPCookieAcceptPolicy
-	SetCookieAcceptPolicy(cookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy)
+	CookieAcceptPolicy() NSHTTPCookieAcceptPolicy
+	SetCookieAcceptPolicy(cookieAcceptPolicy NSHTTPCookieAcceptPolicy)
 	StoreCookiesForTask(cookies *raw.NSArray[*raw.NSHTTPCookie], task *raw.NSURLSessionTask)
 	GetCookiesForTask(ctx context.Context, task *raw.NSURLSessionTask) (*raw.NSArray[*raw.NSHTTPCookie], error)
 }

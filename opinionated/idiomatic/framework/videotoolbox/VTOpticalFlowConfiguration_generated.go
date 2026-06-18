@@ -32,9 +32,9 @@ func OpticalFlowConfigurationFromID(id objc.ID) *OpticalFlowConfiguration {
 }
 
 // NewOpticalFlowConfigurationWithFrameWidthFrameHeightQualityPrioritizationRevision creates a new [OpticalFlowConfiguration].
-func NewOpticalFlowConfigurationWithFrameWidthFrameHeightQualityPrioritizationRevision(frameWidth int, frameHeight int, qualityPrioritization raw.VTOpticalFlowConfigurationQualityPrioritization, revision raw.VTOpticalFlowConfigurationRevision) *OpticalFlowConfiguration {
+func NewOpticalFlowConfigurationWithFrameWidthFrameHeightQualityPrioritizationRevision(frameWidth int, frameHeight int, qualityPrioritization VTOpticalFlowConfigurationQualityPrioritization, revision VTOpticalFlowConfigurationRevision) *OpticalFlowConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTOpticalFlowConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:qualityPrioritization:revision:"), frameWidth, frameHeight, qualityPrioritization, revision)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:qualityPrioritization:revision:"), frameWidth, frameHeight, raw.VTOpticalFlowConfigurationQualityPrioritization(qualityPrioritization), raw.VTOpticalFlowConfigurationRevision(revision))
 	return &OpticalFlowConfiguration{inner: raw.VTOpticalFlowConfigurationFromID(_id)}
 }
 
@@ -49,13 +49,13 @@ func (x *OpticalFlowConfiguration) FrameHeight() int {
 }
 
 // QualityPrioritization calls the underlying QualityPrioritization.
-func (x *OpticalFlowConfiguration) QualityPrioritization() raw.VTOpticalFlowConfigurationQualityPrioritization {
-	return x.inner.QualityPrioritization()
+func (x *OpticalFlowConfiguration) QualityPrioritization() VTOpticalFlowConfigurationQualityPrioritization {
+	return VTOpticalFlowConfigurationQualityPrioritization(x.inner.QualityPrioritization())
 }
 
 // Revision calls the underlying Revision.
-func (x *OpticalFlowConfiguration) Revision() raw.VTOpticalFlowConfigurationRevision {
-	return x.inner.Revision()
+func (x *OpticalFlowConfiguration) Revision() VTOpticalFlowConfigurationRevision {
+	return VTOpticalFlowConfigurationRevision(x.inner.Revision())
 }
 
 // FrameSupportedPixelFormats returns the collection as a Go slice.
@@ -84,8 +84,8 @@ type OpticalFlowConfigurationable interface {
 	Unwrap() *raw.VTOpticalFlowConfiguration
 	FrameWidth() int
 	FrameHeight() int
-	QualityPrioritization() raw.VTOpticalFlowConfigurationQualityPrioritization
-	Revision() raw.VTOpticalFlowConfigurationRevision
+	QualityPrioritization() VTOpticalFlowConfigurationQualityPrioritization
+	Revision() VTOpticalFlowConfigurationRevision
 	FrameSupportedPixelFormats() []*foundation.NSNumber
 	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]

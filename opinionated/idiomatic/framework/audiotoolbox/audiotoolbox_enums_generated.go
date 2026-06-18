@@ -27,36 +27,6 @@ func (e AUAudioUnitBusType) String() string {
 	}
 }
 
-// Bitmask — values may be combined with |.
-type AUHostTransportStateFlags uint64
-
-const (
-	AUHostTransportStateChanged   AUHostTransportStateFlags = 1
-	AUHostTransportStateMoving    AUHostTransportStateFlags = 2
-	AUHostTransportStateRecording AUHostTransportStateFlags = 4
-	AUHostTransportStateCycling   AUHostTransportStateFlags = 8
-)
-
-func (e AUHostTransportStateFlags) String() string {
-	var parts []string
-	if e&AUHostTransportStateChanged != 0 {
-		parts = append(parts, "AUHostTransportStateChanged")
-	}
-	if e&AUHostTransportStateMoving != 0 {
-		parts = append(parts, "AUHostTransportStateMoving")
-	}
-	if e&AUHostTransportStateRecording != 0 {
-		parts = append(parts, "AUHostTransportStateRecording")
-	}
-	if e&AUHostTransportStateCycling != 0 {
-		parts = append(parts, "AUHostTransportStateCycling")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
 type AUParameterAutomationEventType int64
 
 const (

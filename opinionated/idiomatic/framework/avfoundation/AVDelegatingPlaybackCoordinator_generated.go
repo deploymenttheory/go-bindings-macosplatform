@@ -65,13 +65,13 @@ func (x *DelegatingPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pa
 }
 
 // CoordinateRateChangeToRateOptions calls the underlying CoordinateRateChangeToRateOptions.
-func (x *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options raw.AVDelegatingPlaybackCoordinatorRateChangeOptions) {
-	x.inner.CoordinateRateChangeToRateOptions(rate, options)
+func (x *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options AVDelegatingPlaybackCoordinatorRateChangeOptions) {
+	x.inner.CoordinateRateChangeToRateOptions(rate, raw.AVDelegatingPlaybackCoordinatorRateChangeOptions(options))
 }
 
 // CoordinateSeekToTimeOptions calls the underlying CoordinateSeekToTimeOptions.
-func (x *DelegatingPlaybackCoordinator) CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options raw.AVDelegatingPlaybackCoordinatorSeekOptions) {
-	x.inner.CoordinateSeekToTimeOptions(time_, options)
+func (x *DelegatingPlaybackCoordinator) CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options AVDelegatingPlaybackCoordinatorSeekOptions) {
+	x.inner.CoordinateSeekToTimeOptions(time_, raw.AVDelegatingPlaybackCoordinatorSeekOptions(options))
 }
 
 // TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase calls the underlying TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase.
@@ -107,8 +107,8 @@ type DelegatingPlaybackCoordinatorable interface {
 	Unwrap() *raw.AVDelegatingPlaybackCoordinator
 	WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *DelegatingPlaybackCoordinator
 	WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *DelegatingPlaybackCoordinator
-	CoordinateRateChangeToRateOptions(rate float32, options raw.AVDelegatingPlaybackCoordinatorRateChangeOptions)
-	CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options raw.AVDelegatingPlaybackCoordinatorSeekOptions)
+	CoordinateRateChangeToRateOptions(rate float32, options AVDelegatingPlaybackCoordinatorRateChangeOptions)
+	CoordinateSeekToTimeOptions(time_ coremedia.CMTime, options AVDelegatingPlaybackCoordinatorSeekOptions)
 	TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase unsafe.Pointer)
 	ReapplyCurrentItemStateToPlaybackControlDelegate()
 	PlaybackControlDelegate() raw.AVPlaybackCoordinatorPlaybackControlDelegate

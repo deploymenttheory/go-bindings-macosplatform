@@ -37,8 +37,8 @@ func NewNNComparisonNode() *NNComparisonNode {
 }
 
 // WithComparisonType sets the comparisonType property and returns the receiver for chaining.
-func (x *NNComparisonNode) WithComparisonType(comparisonType raw.MPSNNComparisonType) *NNComparisonNode {
-	x.inner.SetComparisonType(comparisonType)
+func (x *NNComparisonNode) WithComparisonType(comparisonType MPSNNComparisonType) *NNComparisonNode {
+	x.inner.SetComparisonType(raw.MPSNNComparisonType(comparisonType))
 	return x
 }
 
@@ -121,13 +121,13 @@ func (x *NNComparisonNode) WithLabel(label string) *NNComparisonNode {
 }
 
 // ComparisonType calls the underlying ComparisonType.
-func (x *NNComparisonNode) ComparisonType() raw.MPSNNComparisonType {
-	return x.inner.ComparisonType()
+func (x *NNComparisonNode) ComparisonType() MPSNNComparisonType {
+	return MPSNNComparisonType(x.inner.ComparisonType())
 }
 
 // SetComparisonType calls the underlying SetComparisonType.
-func (x *NNComparisonNode) SetComparisonType(comparisonType raw.MPSNNComparisonType) {
-	x.inner.SetComparisonType(comparisonType)
+func (x *NNComparisonNode) SetComparisonType(comparisonType MPSNNComparisonType) {
+	x.inner.SetComparisonType(raw.MPSNNComparisonType(comparisonType))
 }
 
 func (x *NNComparisonNode) asNNBinaryArithmeticNode() *raw.MPSNNBinaryArithmeticNode {
@@ -141,7 +141,7 @@ func (x *NNComparisonNode) asNNFilterNode() *raw.MPSNNFilterNode {
 // NNComparisonNodeable is the interface implemented by [NNComparisonNode], for mocking and DI.
 type NNComparisonNodeable interface {
 	Unwrap() *raw.MPSNNComparisonNode
-	WithComparisonType(comparisonType raw.MPSNNComparisonType) *NNComparisonNode
+	WithComparisonType(comparisonType MPSNNComparisonType) *NNComparisonNode
 	WithPrimaryScale(primaryScale float32) *NNComparisonNode
 	WithSecondaryScale(secondaryScale float32) *NNComparisonNode
 	WithBias(bias float32) *NNComparisonNode
@@ -155,8 +155,8 @@ type NNComparisonNodeable interface {
 	WithMaximumValue(maximumValue float32) *NNComparisonNode
 	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNComparisonNode
 	WithLabel(label string) *NNComparisonNode
-	ComparisonType() raw.MPSNNComparisonType
-	SetComparisonType(comparisonType raw.MPSNNComparisonType)
+	ComparisonType() MPSNNComparisonType
+	SetComparisonType(comparisonType MPSNNComparisonType)
 }
 
 var _ NNComparisonNodeable = (*NNComparisonNode)(nil)

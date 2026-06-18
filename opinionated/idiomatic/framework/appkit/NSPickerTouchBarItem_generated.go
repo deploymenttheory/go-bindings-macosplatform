@@ -38,8 +38,8 @@ func NewPickerTouchBarItem() *PickerTouchBarItem {
 }
 
 // WithControlRepresentation sets the controlRepresentation property and returns the receiver for chaining.
-func (x *PickerTouchBarItem) WithControlRepresentation(controlRepresentation raw.NSPickerTouchBarItemControlRepresentation) *PickerTouchBarItem {
-	x.inner.SetControlRepresentation(controlRepresentation)
+func (x *PickerTouchBarItem) WithControlRepresentation(controlRepresentation NSPickerTouchBarItemControlRepresentation) *PickerTouchBarItem {
+	x.inner.SetControlRepresentation(raw.NSPickerTouchBarItemControlRepresentation(controlRepresentation))
 	return x
 }
 
@@ -68,8 +68,8 @@ func (x *PickerTouchBarItem) WithSelectionColor(selectionColor *Color) *PickerTo
 }
 
 // WithSelectionMode sets the selectionMode property and returns the receiver for chaining.
-func (x *PickerTouchBarItem) WithSelectionMode(selectionMode raw.NSPickerTouchBarItemSelectionMode) *PickerTouchBarItem {
-	x.inner.SetSelectionMode(selectionMode)
+func (x *PickerTouchBarItem) WithSelectionMode(selectionMode NSPickerTouchBarItemSelectionMode) *PickerTouchBarItem {
+	x.inner.SetSelectionMode(raw.NSPickerTouchBarItemSelectionMode(selectionMode))
 	return x
 }
 
@@ -148,13 +148,13 @@ func (x *PickerTouchBarItem) IsEnabledAtIndex(index int) bool {
 }
 
 // ControlRepresentation calls the underlying ControlRepresentation.
-func (x *PickerTouchBarItem) ControlRepresentation() raw.NSPickerTouchBarItemControlRepresentation {
-	return x.inner.ControlRepresentation()
+func (x *PickerTouchBarItem) ControlRepresentation() NSPickerTouchBarItemControlRepresentation {
+	return NSPickerTouchBarItemControlRepresentation(x.inner.ControlRepresentation())
 }
 
 // SetControlRepresentation calls the underlying SetControlRepresentation.
-func (x *PickerTouchBarItem) SetControlRepresentation(controlRepresentation raw.NSPickerTouchBarItemControlRepresentation) {
-	x.inner.SetControlRepresentation(controlRepresentation)
+func (x *PickerTouchBarItem) SetControlRepresentation(controlRepresentation NSPickerTouchBarItemControlRepresentation) {
+	x.inner.SetControlRepresentation(raw.NSPickerTouchBarItemControlRepresentation(controlRepresentation))
 }
 
 // CollapsedRepresentationLabel calls the underlying CollapsedRepresentationLabel.
@@ -210,13 +210,13 @@ func (x *PickerTouchBarItem) SetSelectionColor(selectionColor *raw.NSColor) {
 }
 
 // SelectionMode calls the underlying SelectionMode.
-func (x *PickerTouchBarItem) SelectionMode() raw.NSPickerTouchBarItemSelectionMode {
-	return x.inner.SelectionMode()
+func (x *PickerTouchBarItem) SelectionMode() NSPickerTouchBarItemSelectionMode {
+	return NSPickerTouchBarItemSelectionMode(x.inner.SelectionMode())
 }
 
 // SetSelectionMode calls the underlying SetSelectionMode.
-func (x *PickerTouchBarItem) SetSelectionMode(selectionMode raw.NSPickerTouchBarItemSelectionMode) {
-	x.inner.SetSelectionMode(selectionMode)
+func (x *PickerTouchBarItem) SetSelectionMode(selectionMode NSPickerTouchBarItemSelectionMode) {
+	x.inner.SetSelectionMode(raw.NSPickerTouchBarItemSelectionMode(selectionMode))
 }
 
 // NumberOfOptions calls the underlying NumberOfOptions.
@@ -269,12 +269,12 @@ func (x *PickerTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.in
 // PickerTouchBarItemable is the interface implemented by [PickerTouchBarItem], for mocking and DI.
 type PickerTouchBarItemable interface {
 	Unwrap() *raw.NSPickerTouchBarItem
-	WithControlRepresentation(controlRepresentation raw.NSPickerTouchBarItemControlRepresentation) *PickerTouchBarItem
+	WithControlRepresentation(controlRepresentation NSPickerTouchBarItemControlRepresentation) *PickerTouchBarItem
 	WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PickerTouchBarItem
 	WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PickerTouchBarItem
 	WithSelectedIndex(selectedIndex int) *PickerTouchBarItem
 	WithSelectionColor(selectionColor *Color) *PickerTouchBarItem
-	WithSelectionMode(selectionMode raw.NSPickerTouchBarItemSelectionMode) *PickerTouchBarItem
+	WithSelectionMode(selectionMode NSPickerTouchBarItemSelectionMode) *PickerTouchBarItem
 	WithNumberOfOptions(numberOfOptions int) *PickerTouchBarItem
 	WithTarget(target objc.ID) *PickerTouchBarItem
 	WithAction(action objc.SEL) *PickerTouchBarItem
@@ -287,8 +287,8 @@ type PickerTouchBarItemable interface {
 	LabelAtIndex(index int) string
 	SetEnabledAtIndex(enabled bool, index int)
 	IsEnabledAtIndex(index int) bool
-	ControlRepresentation() raw.NSPickerTouchBarItemControlRepresentation
-	SetControlRepresentation(controlRepresentation raw.NSPickerTouchBarItemControlRepresentation)
+	ControlRepresentation() NSPickerTouchBarItemControlRepresentation
+	SetControlRepresentation(controlRepresentation NSPickerTouchBarItemControlRepresentation)
 	CollapsedRepresentationLabel() string
 	SetCollapsedRepresentationLabel(collapsedRepresentationLabel string)
 	CollapsedRepresentationImage() *Image
@@ -297,8 +297,8 @@ type PickerTouchBarItemable interface {
 	SetSelectedIndex(selectedIndex int)
 	SelectionColor() *Color
 	SetSelectionColor(selectionColor *raw.NSColor)
-	SelectionMode() raw.NSPickerTouchBarItemSelectionMode
-	SetSelectionMode(selectionMode raw.NSPickerTouchBarItemSelectionMode)
+	SelectionMode() NSPickerTouchBarItemSelectionMode
+	SetSelectionMode(selectionMode NSPickerTouchBarItemSelectionMode)
 	NumberOfOptions() int
 	SetNumberOfOptions(numberOfOptions int)
 	Target() objc.ID

@@ -37,8 +37,8 @@ func NewScannerFeature() *ScannerFeature {
 }
 
 // Type calls the underlying Type.
-func (x *ScannerFeature) Type() raw.ICScannerFeatureType {
-	return x.inner.Type()
+func (x *ScannerFeature) Type() ICScannerFeatureType {
+	return ICScannerFeatureType(x.inner.Type())
 }
 
 // InternalName calls the underlying InternalName.
@@ -73,7 +73,7 @@ func (x *ScannerFeature) asScannerFeature() *raw.ICScannerFeature { return x.inn
 // ScannerFeatureable is the interface implemented by [ScannerFeature], for mocking and DI.
 type ScannerFeatureable interface {
 	Unwrap() *raw.ICScannerFeature
-	Type() raw.ICScannerFeatureType
+	Type() ICScannerFeatureType
 	InternalName() string
 	HumanReadableName() string
 	Tooltip() string

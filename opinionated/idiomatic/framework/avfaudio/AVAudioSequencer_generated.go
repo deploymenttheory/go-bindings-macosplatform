@@ -63,13 +63,13 @@ func (x *AudioSequencer) WithRate(rate float32) *AudioSequencer {
 }
 
 // LoadFromURLOptionsError calls the underlying LoadFromURLOptionsError.
-func (x *AudioSequencer) LoadFromURLOptionsError(fileURL string, options raw.AVMusicSequenceLoadOptions) (bool, error) {
-	return x.inner.LoadFromURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options)
+func (x *AudioSequencer) LoadFromURLOptionsError(fileURL string, options AVMusicSequenceLoadOptions) (bool, error) {
+	return x.inner.LoadFromURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), raw.AVMusicSequenceLoadOptions(options))
 }
 
 // LoadFromDataOptionsError calls the underlying LoadFromDataOptionsError.
-func (x *AudioSequencer) LoadFromDataOptionsError(data *foundation.NSData, options raw.AVMusicSequenceLoadOptions) (bool, error) {
-	return x.inner.LoadFromDataOptionsError(data, options)
+func (x *AudioSequencer) LoadFromDataOptionsError(data *foundation.NSData, options AVMusicSequenceLoadOptions) (bool, error) {
+	return x.inner.LoadFromDataOptionsError(data, raw.AVMusicSequenceLoadOptions(options))
 }
 
 // WriteToURLSMPTEResolutionReplaceExistingError calls the underlying WriteToURLSMPTEResolutionReplaceExistingError.
@@ -208,8 +208,8 @@ type AudioSequencerable interface {
 	WithCurrentPositionInSeconds(currentPositionInSeconds float64) *AudioSequencer
 	WithCurrentPositionInBeats(currentPositionInBeats float64) *AudioSequencer
 	WithRate(rate float32) *AudioSequencer
-	LoadFromURLOptionsError(fileURL string, options raw.AVMusicSequenceLoadOptions) (bool, error)
-	LoadFromDataOptionsError(data *foundation.NSData, options raw.AVMusicSequenceLoadOptions) (bool, error)
+	LoadFromURLOptionsError(fileURL string, options AVMusicSequenceLoadOptions) (bool, error)
+	LoadFromDataOptionsError(data *foundation.NSData, options AVMusicSequenceLoadOptions) (bool, error)
 	WriteToURLSMPTEResolutionReplaceExistingError(fileURL string, resolution int, replace bool) (bool, error)
 	DataWithSMPTEResolutionError(sMPTEResolution int) (*foundation.NSData, error)
 	SecondsForBeats(beats float64) float64

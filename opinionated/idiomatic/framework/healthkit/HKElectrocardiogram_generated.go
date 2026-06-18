@@ -50,8 +50,8 @@ func (x *Electrocardiogram) SamplingFrequency() *Quantity {
 }
 
 // Classification calls the underlying Classification.
-func (x *Electrocardiogram) Classification() raw.HKElectrocardiogramClassification {
-	return x.inner.Classification()
+func (x *Electrocardiogram) Classification() HKElectrocardiogramClassification {
+	return HKElectrocardiogramClassification(x.inner.Classification())
 }
 
 // AverageHeartRate calls the underlying AverageHeartRate.
@@ -64,8 +64,8 @@ func (x *Electrocardiogram) AverageHeartRate() *Quantity {
 }
 
 // SymptomsStatus calls the underlying SymptomsStatus.
-func (x *Electrocardiogram) SymptomsStatus() raw.HKElectrocardiogramSymptomsStatus {
-	return x.inner.SymptomsStatus()
+func (x *Electrocardiogram) SymptomsStatus() HKElectrocardiogramSymptomsStatus {
+	return HKElectrocardiogramSymptomsStatus(x.inner.SymptomsStatus())
 }
 
 func (x *Electrocardiogram) asSample() *raw.HKSample { return &x.inner.HKSample }
@@ -77,9 +77,9 @@ type Electrocardiogramable interface {
 	Unwrap() *raw.HKElectrocardiogram
 	NumberOfVoltageMeasurements() int
 	SamplingFrequency() *Quantity
-	Classification() raw.HKElectrocardiogramClassification
+	Classification() HKElectrocardiogramClassification
 	AverageHeartRate() *Quantity
-	SymptomsStatus() raw.HKElectrocardiogramSymptomsStatus
+	SymptomsStatus() HKElectrocardiogramSymptomsStatus
 }
 
 var _ Electrocardiogramable = (*Electrocardiogram)(nil)

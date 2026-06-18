@@ -41,18 +41,22 @@ func (x *AudioPlayerNode) ScheduleBufferCompletionHandler(buffer *raw.AVAudioPCM
 }
 
 // ScheduleBufferCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferCompletionCallbackTypeCompletionHandler.
-func (x *AudioPlayerNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, callbackType raw.AVAudioPlayerNodeCompletionCallbackType, completionHandler func(raw.AVAudioPlayerNodeCompletionCallbackType)) {
-	x.inner.ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer, callbackType, completionHandler)
+func (x *AudioPlayerNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
+	x.inner.ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer, raw.AVAudioPlayerNodeCompletionCallbackType(callbackType), func(_a0 raw.AVAudioPlayerNodeCompletionCallbackType) {
+		completionHandler(AVAudioPlayerNodeCompletionCallbackType(_a0))
+	})
 }
 
 // ScheduleBufferAtTimeOptionsCompletionHandler calls the underlying ScheduleBufferAtTimeOptionsCompletionHandler.
-func (x *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options raw.AVAudioPlayerNodeBufferOptions, completionHandler func()) {
-	x.inner.ScheduleBufferAtTimeOptionsCompletionHandler(buffer, when, options, completionHandler)
+func (x *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options AVAudioPlayerNodeBufferOptions, completionHandler func()) {
+	x.inner.ScheduleBufferAtTimeOptionsCompletionHandler(buffer, when, raw.AVAudioPlayerNodeBufferOptions(options), completionHandler)
 }
 
 // ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler.
-func (x *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options raw.AVAudioPlayerNodeBufferOptions, callbackType raw.AVAudioPlayerNodeCompletionCallbackType, completionHandler func(raw.AVAudioPlayerNodeCompletionCallbackType)) {
-	x.inner.ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer, when, options, callbackType, completionHandler)
+func (x *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options AVAudioPlayerNodeBufferOptions, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
+	x.inner.ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer, when, raw.AVAudioPlayerNodeBufferOptions(options), raw.AVAudioPlayerNodeCompletionCallbackType(callbackType), func(_a0 raw.AVAudioPlayerNodeCompletionCallbackType) {
+		completionHandler(AVAudioPlayerNodeCompletionCallbackType(_a0))
+	})
 }
 
 // ScheduleFileAtTimeCompletionHandler calls the underlying ScheduleFileAtTimeCompletionHandler.
@@ -61,8 +65,10 @@ func (x *AudioPlayerNode) ScheduleFileAtTimeCompletionHandler(file *raw.AVAudioF
 }
 
 // ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler calls the underlying ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler.
-func (x *AudioPlayerNode) ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, when *raw.AVAudioTime, callbackType raw.AVAudioPlayerNodeCompletionCallbackType, completionHandler func(raw.AVAudioPlayerNodeCompletionCallbackType)) {
-	x.inner.ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file, when, callbackType, completionHandler)
+func (x *AudioPlayerNode) ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, when *raw.AVAudioTime, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
+	x.inner.ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file, when, raw.AVAudioPlayerNodeCompletionCallbackType(callbackType), func(_a0 raw.AVAudioPlayerNodeCompletionCallbackType) {
+		completionHandler(AVAudioPlayerNodeCompletionCallbackType(_a0))
+	})
 }
 
 // ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler calls the underlying ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler.
@@ -71,8 +77,10 @@ func (x *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletion
 }
 
 // ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler calls the underlying ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler.
-func (x *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, startFrame int64, numberFrames uint32, when *raw.AVAudioTime, callbackType raw.AVAudioPlayerNodeCompletionCallbackType, completionHandler func(raw.AVAudioPlayerNodeCompletionCallbackType)) {
-	x.inner.ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file, startFrame, numberFrames, when, callbackType, completionHandler)
+func (x *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, startFrame int64, numberFrames uint32, when *raw.AVAudioTime, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
+	x.inner.ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file, startFrame, numberFrames, when, raw.AVAudioPlayerNodeCompletionCallbackType(callbackType), func(_a0 raw.AVAudioPlayerNodeCompletionCallbackType) {
+		completionHandler(AVAudioPlayerNodeCompletionCallbackType(_a0))
+	})
 }
 
 // Stop calls the underlying Stop.
@@ -129,13 +137,13 @@ func (x *AudioPlayerNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAud
 type AudioPlayerNodeable interface {
 	Unwrap() *raw.AVAudioPlayerNode
 	ScheduleBufferCompletionHandler(buffer *raw.AVAudioPCMBuffer, completionHandler func())
-	ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, callbackType raw.AVAudioPlayerNodeCompletionCallbackType, completionHandler func(raw.AVAudioPlayerNodeCompletionCallbackType))
-	ScheduleBufferAtTimeOptionsCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options raw.AVAudioPlayerNodeBufferOptions, completionHandler func())
-	ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options raw.AVAudioPlayerNodeBufferOptions, callbackType raw.AVAudioPlayerNodeCompletionCallbackType, completionHandler func(raw.AVAudioPlayerNodeCompletionCallbackType))
+	ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType))
+	ScheduleBufferAtTimeOptionsCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options AVAudioPlayerNodeBufferOptions, completionHandler func())
+	ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options AVAudioPlayerNodeBufferOptions, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType))
 	ScheduleFileAtTimeCompletionHandler(file *raw.AVAudioFile, when *raw.AVAudioTime, completionHandler func())
-	ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, when *raw.AVAudioTime, callbackType raw.AVAudioPlayerNodeCompletionCallbackType, completionHandler func(raw.AVAudioPlayerNodeCompletionCallbackType))
+	ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, when *raw.AVAudioTime, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType))
 	ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *raw.AVAudioFile, startFrame int64, numberFrames uint32, when *raw.AVAudioTime, completionHandler func())
-	ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, startFrame int64, numberFrames uint32, when *raw.AVAudioTime, callbackType raw.AVAudioPlayerNodeCompletionCallbackType, completionHandler func(raw.AVAudioPlayerNodeCompletionCallbackType))
+	ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, startFrame int64, numberFrames uint32, when *raw.AVAudioTime, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType))
 	Stop()
 	PrepareWithFrameCount(frameCount uint32)
 	Play()

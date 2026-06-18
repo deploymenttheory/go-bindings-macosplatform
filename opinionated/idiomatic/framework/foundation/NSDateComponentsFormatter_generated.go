@@ -36,20 +36,20 @@ func NewDateComponentsFormatter() *DateComponentsFormatter {
 }
 
 // WithUnitsStyle sets the unitsStyle property and returns the receiver for chaining.
-func (x *DateComponentsFormatter) WithUnitsStyle(unitsStyle raw.NSDateComponentsFormatterUnitsStyle) *DateComponentsFormatter {
-	x.inner.SetUnitsStyle(unitsStyle)
+func (x *DateComponentsFormatter) WithUnitsStyle(unitsStyle NSDateComponentsFormatterUnitsStyle) *DateComponentsFormatter {
+	x.inner.SetUnitsStyle(raw.NSDateComponentsFormatterUnitsStyle(unitsStyle))
 	return x
 }
 
 // WithAllowedUnits sets the allowedUnits property and returns the receiver for chaining.
-func (x *DateComponentsFormatter) WithAllowedUnits(allowedUnits raw.NSCalendarUnit) *DateComponentsFormatter {
-	x.inner.SetAllowedUnits(allowedUnits)
+func (x *DateComponentsFormatter) WithAllowedUnits(allowedUnits NSCalendarUnit) *DateComponentsFormatter {
+	x.inner.SetAllowedUnits(raw.NSCalendarUnit(allowedUnits))
 	return x
 }
 
 // WithZeroFormattingBehavior sets the zeroFormattingBehavior property and returns the receiver for chaining.
-func (x *DateComponentsFormatter) WithZeroFormattingBehavior(zeroFormattingBehavior raw.NSDateComponentsFormatterZeroFormattingBehavior) *DateComponentsFormatter {
-	x.inner.SetZeroFormattingBehavior(zeroFormattingBehavior)
+func (x *DateComponentsFormatter) WithZeroFormattingBehavior(zeroFormattingBehavior NSDateComponentsFormatterZeroFormattingBehavior) *DateComponentsFormatter {
+	x.inner.SetZeroFormattingBehavior(raw.NSDateComponentsFormatterZeroFormattingBehavior(zeroFormattingBehavior))
 	return x
 }
 
@@ -96,8 +96,8 @@ func (x *DateComponentsFormatter) WithIncludesTimeRemainingPhrase(includesTimeRe
 }
 
 // WithFormattingContext sets the formattingContext property and returns the receiver for chaining.
-func (x *DateComponentsFormatter) WithFormattingContext(formattingContext raw.NSFormattingContext) *DateComponentsFormatter {
-	x.inner.SetFormattingContext(formattingContext)
+func (x *DateComponentsFormatter) WithFormattingContext(formattingContext NSFormattingContext) *DateComponentsFormatter {
+	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
 	return x
 }
 
@@ -135,33 +135,33 @@ func (x *DateComponentsFormatter) StringFromTimeInterval(ti float64) *String {
 }
 
 // UnitsStyle calls the underlying UnitsStyle.
-func (x *DateComponentsFormatter) UnitsStyle() raw.NSDateComponentsFormatterUnitsStyle {
-	return x.inner.UnitsStyle()
+func (x *DateComponentsFormatter) UnitsStyle() NSDateComponentsFormatterUnitsStyle {
+	return NSDateComponentsFormatterUnitsStyle(x.inner.UnitsStyle())
 }
 
 // SetUnitsStyle calls the underlying SetUnitsStyle.
-func (x *DateComponentsFormatter) SetUnitsStyle(unitsStyle raw.NSDateComponentsFormatterUnitsStyle) {
-	x.inner.SetUnitsStyle(unitsStyle)
+func (x *DateComponentsFormatter) SetUnitsStyle(unitsStyle NSDateComponentsFormatterUnitsStyle) {
+	x.inner.SetUnitsStyle(raw.NSDateComponentsFormatterUnitsStyle(unitsStyle))
 }
 
 // AllowedUnits calls the underlying AllowedUnits.
-func (x *DateComponentsFormatter) AllowedUnits() raw.NSCalendarUnit {
-	return x.inner.AllowedUnits()
+func (x *DateComponentsFormatter) AllowedUnits() NSCalendarUnit {
+	return NSCalendarUnit(x.inner.AllowedUnits())
 }
 
 // SetAllowedUnits calls the underlying SetAllowedUnits.
-func (x *DateComponentsFormatter) SetAllowedUnits(allowedUnits raw.NSCalendarUnit) {
-	x.inner.SetAllowedUnits(allowedUnits)
+func (x *DateComponentsFormatter) SetAllowedUnits(allowedUnits NSCalendarUnit) {
+	x.inner.SetAllowedUnits(raw.NSCalendarUnit(allowedUnits))
 }
 
 // ZeroFormattingBehavior calls the underlying ZeroFormattingBehavior.
-func (x *DateComponentsFormatter) ZeroFormattingBehavior() raw.NSDateComponentsFormatterZeroFormattingBehavior {
-	return x.inner.ZeroFormattingBehavior()
+func (x *DateComponentsFormatter) ZeroFormattingBehavior() NSDateComponentsFormatterZeroFormattingBehavior {
+	return NSDateComponentsFormatterZeroFormattingBehavior(x.inner.ZeroFormattingBehavior())
 }
 
 // SetZeroFormattingBehavior calls the underlying SetZeroFormattingBehavior.
-func (x *DateComponentsFormatter) SetZeroFormattingBehavior(zeroFormattingBehavior raw.NSDateComponentsFormatterZeroFormattingBehavior) {
-	x.inner.SetZeroFormattingBehavior(zeroFormattingBehavior)
+func (x *DateComponentsFormatter) SetZeroFormattingBehavior(zeroFormattingBehavior NSDateComponentsFormatterZeroFormattingBehavior) {
+	x.inner.SetZeroFormattingBehavior(raw.NSDateComponentsFormatterZeroFormattingBehavior(zeroFormattingBehavior))
 }
 
 // Calendar calls the underlying Calendar.
@@ -243,13 +243,13 @@ func (x *DateComponentsFormatter) SetIncludesTimeRemainingPhrase(includesTimeRem
 }
 
 // FormattingContext calls the underlying FormattingContext.
-func (x *DateComponentsFormatter) FormattingContext() raw.NSFormattingContext {
-	return x.inner.FormattingContext()
+func (x *DateComponentsFormatter) FormattingContext() NSFormattingContext {
+	return NSFormattingContext(x.inner.FormattingContext())
 }
 
 // SetFormattingContext calls the underlying SetFormattingContext.
-func (x *DateComponentsFormatter) SetFormattingContext(formattingContext raw.NSFormattingContext) {
-	x.inner.SetFormattingContext(formattingContext)
+func (x *DateComponentsFormatter) SetFormattingContext(formattingContext NSFormattingContext) {
+	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
 }
 
 func (x *DateComponentsFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
@@ -259,9 +259,9 @@ func (x *DateComponentsFormatter) asObject() *raw.NSObject { return &x.inner.NSF
 // DateComponentsFormatterable is the interface implemented by [DateComponentsFormatter], for mocking and DI.
 type DateComponentsFormatterable interface {
 	Unwrap() *raw.NSDateComponentsFormatter
-	WithUnitsStyle(unitsStyle raw.NSDateComponentsFormatterUnitsStyle) *DateComponentsFormatter
-	WithAllowedUnits(allowedUnits raw.NSCalendarUnit) *DateComponentsFormatter
-	WithZeroFormattingBehavior(zeroFormattingBehavior raw.NSDateComponentsFormatterZeroFormattingBehavior) *DateComponentsFormatter
+	WithUnitsStyle(unitsStyle NSDateComponentsFormatterUnitsStyle) *DateComponentsFormatter
+	WithAllowedUnits(allowedUnits NSCalendarUnit) *DateComponentsFormatter
+	WithZeroFormattingBehavior(zeroFormattingBehavior NSDateComponentsFormatterZeroFormattingBehavior) *DateComponentsFormatter
 	WithCalendar(calendar *Calendar) *DateComponentsFormatter
 	WithReferenceDate(referenceDate DateProvider) *DateComponentsFormatter
 	WithAllowsFractionalUnits(allowsFractionalUnits bool) *DateComponentsFormatter
@@ -269,17 +269,17 @@ type DateComponentsFormatterable interface {
 	WithCollapsesLargestUnit(collapsesLargestUnit bool) *DateComponentsFormatter
 	WithIncludesApproximationPhrase(includesApproximationPhrase bool) *DateComponentsFormatter
 	WithIncludesTimeRemainingPhrase(includesTimeRemainingPhrase bool) *DateComponentsFormatter
-	WithFormattingContext(formattingContext raw.NSFormattingContext) *DateComponentsFormatter
+	WithFormattingContext(formattingContext NSFormattingContext) *DateComponentsFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateComponentsFormatter
 	StringFromDateComponents(components *raw.NSDateComponents) *String
 	StringFromDateToDate(startDate *raw.NSDate, endDate *raw.NSDate) *String
 	StringFromTimeInterval(ti float64) *String
-	UnitsStyle() raw.NSDateComponentsFormatterUnitsStyle
-	SetUnitsStyle(unitsStyle raw.NSDateComponentsFormatterUnitsStyle)
-	AllowedUnits() raw.NSCalendarUnit
-	SetAllowedUnits(allowedUnits raw.NSCalendarUnit)
-	ZeroFormattingBehavior() raw.NSDateComponentsFormatterZeroFormattingBehavior
-	SetZeroFormattingBehavior(zeroFormattingBehavior raw.NSDateComponentsFormatterZeroFormattingBehavior)
+	UnitsStyle() NSDateComponentsFormatterUnitsStyle
+	SetUnitsStyle(unitsStyle NSDateComponentsFormatterUnitsStyle)
+	AllowedUnits() NSCalendarUnit
+	SetAllowedUnits(allowedUnits NSCalendarUnit)
+	ZeroFormattingBehavior() NSDateComponentsFormatterZeroFormattingBehavior
+	SetZeroFormattingBehavior(zeroFormattingBehavior NSDateComponentsFormatterZeroFormattingBehavior)
 	Calendar() *Calendar
 	SetCalendar(calendar *raw.NSCalendar)
 	ReferenceDate() *Date
@@ -294,8 +294,8 @@ type DateComponentsFormatterable interface {
 	SetIncludesApproximationPhrase(includesApproximationPhrase bool)
 	IncludesTimeRemainingPhrase() bool
 	SetIncludesTimeRemainingPhrase(includesTimeRemainingPhrase bool)
-	FormattingContext() raw.NSFormattingContext
-	SetFormattingContext(formattingContext raw.NSFormattingContext)
+	FormattingContext() NSFormattingContext
+	SetFormattingContext(formattingContext NSFormattingContext)
 }
 
 var _ DateComponentsFormatterable = (*DateComponentsFormatter)(nil)

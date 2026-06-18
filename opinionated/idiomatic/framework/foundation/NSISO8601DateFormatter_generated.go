@@ -43,8 +43,8 @@ func (x *ISO8601DateFormatter) WithTimeZone(timeZone *TimeZone) *ISO8601DateForm
 }
 
 // WithFormatOptions sets the formatOptions property and returns the receiver for chaining.
-func (x *ISO8601DateFormatter) WithFormatOptions(formatOptions raw.NSISO8601DateFormatOptions) *ISO8601DateFormatter {
-	x.inner.SetFormatOptions(formatOptions)
+func (x *ISO8601DateFormatter) WithFormatOptions(formatOptions NSISO8601DateFormatOptions) *ISO8601DateFormatter {
+	x.inner.SetFormatOptions(raw.NSISO8601DateFormatOptions(formatOptions))
 	return x
 }
 
@@ -87,13 +87,13 @@ func (x *ISO8601DateFormatter) SetTimeZone(timeZone *raw.NSTimeZone) {
 }
 
 // FormatOptions calls the underlying FormatOptions.
-func (x *ISO8601DateFormatter) FormatOptions() raw.NSISO8601DateFormatOptions {
-	return x.inner.FormatOptions()
+func (x *ISO8601DateFormatter) FormatOptions() NSISO8601DateFormatOptions {
+	return NSISO8601DateFormatOptions(x.inner.FormatOptions())
 }
 
 // SetFormatOptions calls the underlying SetFormatOptions.
-func (x *ISO8601DateFormatter) SetFormatOptions(formatOptions raw.NSISO8601DateFormatOptions) {
-	x.inner.SetFormatOptions(formatOptions)
+func (x *ISO8601DateFormatter) SetFormatOptions(formatOptions NSISO8601DateFormatOptions) {
+	x.inner.SetFormatOptions(raw.NSISO8601DateFormatOptions(formatOptions))
 }
 
 func (x *ISO8601DateFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
@@ -104,14 +104,14 @@ func (x *ISO8601DateFormatter) asObject() *raw.NSObject { return &x.inner.NSForm
 type ISO8601DateFormatterable interface {
 	Unwrap() *raw.NSISO8601DateFormatter
 	WithTimeZone(timeZone *TimeZone) *ISO8601DateFormatter
-	WithFormatOptions(formatOptions raw.NSISO8601DateFormatOptions) *ISO8601DateFormatter
+	WithFormatOptions(formatOptions NSISO8601DateFormatOptions) *ISO8601DateFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ISO8601DateFormatter
 	StringFromDate(date *raw.NSDate) *String
 	DateFromString(string_ string) *Date
 	TimeZone() *TimeZone
 	SetTimeZone(timeZone *raw.NSTimeZone)
-	FormatOptions() raw.NSISO8601DateFormatOptions
-	SetFormatOptions(formatOptions raw.NSISO8601DateFormatOptions)
+	FormatOptions() NSISO8601DateFormatOptions
+	SetFormatOptions(formatOptions NSISO8601DateFormatOptions)
 }
 
 var _ ISO8601DateFormatterable = (*ISO8601DateFormatter)(nil)

@@ -58,13 +58,13 @@ func (x *TrainingGraph) StopGradientForTensors(tensors *foundation.NSArray[*raw.
 }
 
 // CompileWithOptionsDevice calls the underlying CompileWithOptionsDevice.
-func (x *TrainingGraph) CompileWithOptionsDevice(options raw.MLCGraphCompilationOptions, device *raw.MLCDevice) bool {
-	return x.inner.CompileWithOptionsDevice(options, device)
+func (x *TrainingGraph) CompileWithOptionsDevice(options MLCGraphCompilationOptions, device *raw.MLCDevice) bool {
+	return x.inner.CompileWithOptionsDevice(raw.MLCGraphCompilationOptions(options), device)
 }
 
 // CompileWithOptionsDeviceInputTensorsInputTensorsData calls the underlying CompileWithOptionsDeviceInputTensorsInputTensorsData.
-func (x *TrainingGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options raw.MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool {
-	return x.inner.CompileWithOptionsDeviceInputTensorsInputTensorsData(options, device, inputTensors, inputTensorsData)
+func (x *TrainingGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool {
+	return x.inner.CompileWithOptionsDeviceInputTensorsInputTensorsData(raw.MLCGraphCompilationOptions(options), device, inputTensors, inputTensorsData)
 }
 
 // CompileOptimizer calls the underlying CompileOptimizer.
@@ -111,38 +111,38 @@ func (x *TrainingGraph) AllocateUserGradientForTensor(tensor *raw.MLCTensor) *Te
 }
 
 // ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler.
-func (x *TrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, batchSize, options, completionHandler)
+func (x *TrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
 // ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler.
-func (x *TrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, outputsData, batchSize, options, completionHandler)
+func (x *TrainingGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, outputsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
 // ExecuteForwardWithBatchSizeOptionsCompletionHandler calls the underlying ExecuteForwardWithBatchSizeOptionsCompletionHandler.
-func (x *TrainingGraph) ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize, options, completionHandler)
+func (x *TrainingGraph) ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
 // ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler calls the underlying ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler.
-func (x *TrainingGraph) ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options raw.MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize, options, outputsData, completionHandler)
+func (x *TrainingGraph) ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize, raw.MLCExecutionOptions(options), outputsData, completionHandler)
 }
 
 // ExecuteGradientWithBatchSizeOptionsCompletionHandler calls the underlying ExecuteGradientWithBatchSizeOptionsCompletionHandler.
-func (x *TrainingGraph) ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize, options, completionHandler)
+func (x *TrainingGraph) ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
 // ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler calls the underlying ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler.
-func (x *TrainingGraph) ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options raw.MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize, options, outputsData, completionHandler)
+func (x *TrainingGraph) ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize, raw.MLCExecutionOptions(options), outputsData, completionHandler)
 }
 
 // ExecuteOptimizerUpdateWithOptionsCompletionHandler calls the underlying ExecuteOptimizerUpdateWithOptionsCompletionHandler.
-func (x *TrainingGraph) ExecuteOptimizerUpdateWithOptionsCompletionHandler(options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteOptimizerUpdateWithOptionsCompletionHandler(options, completionHandler)
+func (x *TrainingGraph) ExecuteOptimizerUpdateWithOptionsCompletionHandler(options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteOptimizerUpdateWithOptionsCompletionHandler(raw.MLCExecutionOptions(options), completionHandler)
 }
 
 // SynchronizeUpdates calls the underlying SynchronizeUpdates.
@@ -183,8 +183,8 @@ type TrainingGraphable interface {
 	AddInputsLossLabelsLossLabelWeights(inputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabels *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabelWeights *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool
 	AddOutputs(outputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool
 	StopGradientForTensors(tensors *foundation.NSArray[*raw.MLCTensor]) bool
-	CompileWithOptionsDevice(options raw.MLCGraphCompilationOptions, device *raw.MLCDevice) bool
-	CompileWithOptionsDeviceInputTensorsInputTensorsData(options raw.MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool
+	CompileWithOptionsDevice(options MLCGraphCompilationOptions, device *raw.MLCDevice) bool
+	CompileWithOptionsDeviceInputTensorsInputTensorsData(options MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool
 	CompileOptimizer(optimizer *raw.MLCOptimizer) bool
 	LinkWithGraphs(graphs *foundation.NSArray[*raw.MLCTrainingGraph]) bool
 	GradientTensorForInput(input *raw.MLCTensor) *Tensor
@@ -192,13 +192,13 @@ type TrainingGraphable interface {
 	ResultGradientTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor]
 	GradientDataForParameterLayer(parameter *raw.MLCTensor, layer *raw.MLCLayer) *foundation.NSData
 	AllocateUserGradientForTensor(tensor *raw.MLCTensor) *Tensor
-	ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options raw.MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options raw.MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteOptimizerUpdateWithOptionsCompletionHandler(options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteForwardWithBatchSizeOptionsCompletionHandler(batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteForwardWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteGradientWithBatchSizeOptionsCompletionHandler(batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteGradientWithBatchSizeOptionsOutputsDataCompletionHandler(batchSize uint, options MLCExecutionOptions, outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteOptimizerUpdateWithOptionsCompletionHandler(options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
 	SynchronizeUpdates()
 	SetTrainingTensorParameters(parameters *foundation.NSArray[*raw.MLCTensorParameter]) bool
 	BindOptimizerDataDeviceDataWithTensor(data *foundation.NSArray[*raw.MLCTensorData], deviceData *foundation.NSArray[*raw.MLCTensorOptimizerDeviceData], tensor *raw.MLCTensor) bool

@@ -178,10 +178,13 @@ type RuleStore interface {
 	Delete(key, uuid string) bool
 }
 
-// Diff computes the reconciliation between the desired managed rule set and the
-// current rules: rules to add (in desired, not current) and managed rules to
-// delete (current and managed, not in desired). Unmanaged (hand-added) rules are
-// never selected for deletion.
+// Diff computes the authoritative reconciliation between the desired rule set and
+// the current rules: the document is the complete firewall state. It returns the
+// rules to add (in desired, not current) and the rules to delete (current, not in
+// desired — every one of them, regardless of origin). Pruning is unconditional:
+// a rule added out-of-band (interactively or by any XPC client) that the document
+// does not sanction is removed, so the policy cannot be circumvented by adding
+// local rules.
 func Diff(desired, current []*shared.Rule) (toAdd, toDelete []*shared.Rule) {
 	desiredByUUID := make(map[string]*shared.Rule, len(desired))
 	for _, r := range desired {
@@ -197,9 +200,6 @@ func Diff(desired, current []*shared.Rule) (toAdd, toDelete []*shared.Rule) {
 		}
 	}
 	for uuid, r := range currentByUUID {
-		if !r.Managed {
-			continue // never prune hand-added rules
-		}
 		if _, ok := desiredByUUID[uuid]; !ok {
 			toDelete = append(toDelete, r)
 		}
@@ -207,9 +207,10 @@ func Diff(desired, current []*shared.Rule) (toAdd, toDelete []*shared.Rule) {
 	return toAdd, toDelete
 }
 
-// Apply reconciles store to match cfg, returning how many rules were added and
-// deleted. It is idempotent: applying the same config twice changes nothing the
-// second time.
+// Apply authoritatively reconciles store to match cfg, returning how many rules
+// were added and deleted. The config is the single source of truth: any rule not
+// in the document is removed. It is idempotent: applying the same config twice
+// changes nothing the second time.
 func Apply(cfg *Config, store RuleStore) (added, deleted int) {
 	toAdd, toDelete := Diff(cfg.Desired(), store.All())
 	for _, r := range toAdd {

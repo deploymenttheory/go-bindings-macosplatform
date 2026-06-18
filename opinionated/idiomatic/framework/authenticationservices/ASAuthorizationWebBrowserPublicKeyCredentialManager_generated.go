@@ -40,8 +40,10 @@ func NewAuthorizationWebBrowserPublicKeyCredentialManager() *AuthorizationWebBro
 }
 
 // RequestAuthorizationForPublicKeyCredentials calls the underlying RequestAuthorizationForPublicKeyCredentials.
-func (x *AuthorizationWebBrowserPublicKeyCredentialManager) RequestAuthorizationForPublicKeyCredentials(completionHandler func(raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState)) {
-	x.inner.RequestAuthorizationForPublicKeyCredentials(completionHandler)
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) RequestAuthorizationForPublicKeyCredentials(completionHandler func(ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState)) {
+	x.inner.RequestAuthorizationForPublicKeyCredentials(func(_a0 raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) {
+		completionHandler(ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState(_a0))
+	})
 }
 
 // PlatformCredentialsForRelyingParty blocks until the operation completes or ctx is cancelled.
@@ -66,16 +68,16 @@ func (x *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCredentialsF
 }
 
 // AuthorizationStateForPlatformCredentials calls the underlying AuthorizationStateForPlatformCredentials.
-func (x *AuthorizationWebBrowserPublicKeyCredentialManager) AuthorizationStateForPlatformCredentials() raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState {
-	return x.inner.AuthorizationStateForPlatformCredentials()
+func (x *AuthorizationWebBrowserPublicKeyCredentialManager) AuthorizationStateForPlatformCredentials() ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState {
+	return ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState(x.inner.AuthorizationStateForPlatformCredentials())
 }
 
 // AuthorizationWebBrowserPublicKeyCredentialManagerable is the interface implemented by [AuthorizationWebBrowserPublicKeyCredentialManager], for mocking and DI.
 type AuthorizationWebBrowserPublicKeyCredentialManagerable interface {
 	Unwrap() *raw.ASAuthorizationWebBrowserPublicKeyCredentialManager
-	RequestAuthorizationForPublicKeyCredentials(completionHandler func(raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState))
+	RequestAuthorizationForPublicKeyCredentials(completionHandler func(ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState))
 	PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (*foundation.NSArray[*raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential], error)
-	AuthorizationStateForPlatformCredentials() raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState
+	AuthorizationStateForPlatformCredentials() ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState
 }
 
 var _ AuthorizationWebBrowserPublicKeyCredentialManagerable = (*AuthorizationWebBrowserPublicKeyCredentialManager)(nil)

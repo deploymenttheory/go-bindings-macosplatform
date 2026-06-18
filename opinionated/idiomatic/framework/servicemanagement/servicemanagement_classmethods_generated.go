@@ -37,8 +37,8 @@ func DaemonServiceWithPlistName(plistName string) *AppService {
 }
 
 // StatusForLegacyURL calls the underlying SMAppServiceStatusForLegacyURL.
-func StatusForLegacyURL(url string) raw.SMAppServiceStatus {
-	return raw.SMAppServiceStatusForLegacyURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+func StatusForLegacyURL(url string) SMAppServiceStatus {
+	return SMAppServiceStatus(raw.SMAppServiceStatusForLegacyURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url))))
 }
 
 // OpenSystemSettingsLoginItems calls the underlying SMAppServiceOpenSystemSettingsLoginItems.

@@ -30,9 +30,9 @@ func OpticalFlowParametersFromID(id objc.ID) *OpticalFlowParameters {
 }
 
 // NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow creates a new [OpticalFlowParameters].
-func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow(sourceFrame *raw.VTFrameProcessorFrame, nextFrame *raw.VTFrameProcessorFrame, submissionMode raw.VTOpticalFlowParametersSubmissionMode, destinationOpticalFlow *raw.VTFrameProcessorOpticalFlow) *OpticalFlowParameters {
+func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow(sourceFrame *raw.VTFrameProcessorFrame, nextFrame *raw.VTFrameProcessorFrame, submissionMode VTOpticalFlowParametersSubmissionMode, destinationOpticalFlow *raw.VTFrameProcessorOpticalFlow) *OpticalFlowParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTOpticalFlowParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:submissionMode:destinationOpticalFlow:"), sourceFrame.Ptr(), nextFrame.Ptr(), submissionMode, destinationOpticalFlow.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:submissionMode:destinationOpticalFlow:"), sourceFrame.Ptr(), nextFrame.Ptr(), raw.VTOpticalFlowParametersSubmissionMode(submissionMode), destinationOpticalFlow.Ptr())
 	return &OpticalFlowParameters{inner: raw.VTOpticalFlowParametersFromID(_id)}
 }
 
@@ -55,8 +55,8 @@ func (x *OpticalFlowParameters) NextFrame() *FrameProcessorFrame {
 }
 
 // SubmissionMode calls the underlying SubmissionMode.
-func (x *OpticalFlowParameters) SubmissionMode() raw.VTOpticalFlowParametersSubmissionMode {
-	return x.inner.SubmissionMode()
+func (x *OpticalFlowParameters) SubmissionMode() VTOpticalFlowParametersSubmissionMode {
+	return VTOpticalFlowParametersSubmissionMode(x.inner.SubmissionMode())
 }
 
 // DestinationOpticalFlow calls the underlying DestinationOpticalFlow.
@@ -73,7 +73,7 @@ type OpticalFlowParametersable interface {
 	Unwrap() *raw.VTOpticalFlowParameters
 	SourceFrame() *FrameProcessorFrame
 	NextFrame() *FrameProcessorFrame
-	SubmissionMode() raw.VTOpticalFlowParametersSubmissionMode
+	SubmissionMode() VTOpticalFlowParametersSubmissionMode
 	DestinationOpticalFlow() *FrameProcessorOpticalFlow
 }
 

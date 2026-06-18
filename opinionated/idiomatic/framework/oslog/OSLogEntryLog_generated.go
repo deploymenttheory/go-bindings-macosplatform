@@ -36,8 +36,8 @@ func NewLogEntryLog() *LogEntryLog {
 }
 
 // Level calls the underlying Level.
-func (x *LogEntryLog) Level() raw.OSLogEntryLogLevel {
-	return x.inner.Level()
+func (x *LogEntryLog) Level() OSLogEntryLogLevel {
+	return OSLogEntryLogLevel(x.inner.Level())
 }
 
 func (x *LogEntryLog) asLogEntry() *raw.OSLogEntry { return &x.inner.OSLogEntry }
@@ -45,7 +45,7 @@ func (x *LogEntryLog) asLogEntry() *raw.OSLogEntry { return &x.inner.OSLogEntry 
 // LogEntryLogable is the interface implemented by [LogEntryLog], for mocking and DI.
 type LogEntryLogable interface {
 	Unwrap() *raw.OSLogEntryLog
-	Level() raw.OSLogEntryLogLevel
+	Level() OSLogEntryLogLevel
 }
 
 var _ LogEntryLogable = (*LogEntryLog)(nil)

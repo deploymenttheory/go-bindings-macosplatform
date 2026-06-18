@@ -110,13 +110,13 @@ func MIDI2EndpointInfoNotificationMessage(versionMajor uint8, versionMinor uint8
 }
 
 // MIDI2EndpointNameNotificationMessage calls [raw.MIDI2EndpointNameNotificationMessage] (C function MIDI2EndpointNameNotificationMessage).
-func MIDI2EndpointNameNotificationMessage(format raw.UMPStreamMessageFormat, data string, length uint) raw.MIDIMessage_128 {
-	return raw.MIDI2EndpointNameNotificationMessage(format, data, length)
+func MIDI2EndpointNameNotificationMessage(format UMPStreamMessageFormat, data string, length uint) raw.MIDIMessage_128 {
+	return raw.MIDI2EndpointNameNotificationMessage(raw.UMPStreamMessageFormat(format), data, length)
 }
 
 // MIDI2EndpointProductInstanceIDNotificationMessage calls [raw.MIDI2EndpointProductInstanceIDNotificationMessage] (C function MIDI2EndpointProductInstanceIDNotificationMessage).
-func MIDI2EndpointProductInstanceIDNotificationMessage(format raw.UMPStreamMessageFormat, data string, length uint) raw.MIDIMessage_128 {
-	return raw.MIDI2EndpointProductInstanceIDNotificationMessage(format, data, length)
+func MIDI2EndpointProductInstanceIDNotificationMessage(format UMPStreamMessageFormat, data string, length uint) raw.MIDIMessage_128 {
+	return raw.MIDI2EndpointProductInstanceIDNotificationMessage(raw.UMPStreamMessageFormat(format), data, length)
 }
 
 // MIDI2FlexDataMessage calls [raw.MIDI2FlexDataMessage] (C function MIDI2FlexDataMessage).
@@ -130,13 +130,13 @@ func MIDI2FunctionBlockDiscoveryMessage(functionBlockNumber uint8, infoRequest b
 }
 
 // MIDI2FunctionBlockInfoNotificationMessage calls [raw.MIDI2FunctionBlockInfoNotificationMessage] (C function MIDI2FunctionBlockInfoNotificationMessage).
-func MIDI2FunctionBlockInfoNotificationMessage(active bool, blockNumber uint8, uIHint raw.MIDIUMPFunctionBlockUIHint, mIDI1 raw.MIDIUMPFunctionBlockMIDI1Info, direction raw.MIDIUMPFunctionBlockDirection, firstGroup uint8, numberOfGroupsSpanned uint8, cIVersion uint8, maxSysex8Streams uint8) raw.MIDIMessage_128 {
-	return raw.MIDI2FunctionBlockInfoNotificationMessage(active, blockNumber, uIHint, mIDI1, direction, firstGroup, numberOfGroupsSpanned, cIVersion, maxSysex8Streams)
+func MIDI2FunctionBlockInfoNotificationMessage(active bool, blockNumber uint8, uIHint MIDIUMPFunctionBlockUIHint, mIDI1 MIDIUMPFunctionBlockMIDI1Info, direction MIDIUMPFunctionBlockDirection, firstGroup uint8, numberOfGroupsSpanned uint8, cIVersion uint8, maxSysex8Streams uint8) raw.MIDIMessage_128 {
+	return raw.MIDI2FunctionBlockInfoNotificationMessage(active, blockNumber, raw.MIDIUMPFunctionBlockUIHint(uIHint), raw.MIDIUMPFunctionBlockMIDI1Info(mIDI1), raw.MIDIUMPFunctionBlockDirection(direction), firstGroup, numberOfGroupsSpanned, cIVersion, maxSysex8Streams)
 }
 
 // MIDI2FunctionBlockNameNotificationMessage calls [raw.MIDI2FunctionBlockNameNotificationMessage] (C function MIDI2FunctionBlockNameNotificationMessage).
-func MIDI2FunctionBlockNameNotificationMessage(format raw.UMPStreamMessageFormat, blockNumber uint8, data string, length uint) raw.MIDIMessage_128 {
-	return raw.MIDI2FunctionBlockNameNotificationMessage(format, blockNumber, data, length)
+func MIDI2FunctionBlockNameNotificationMessage(format UMPStreamMessageFormat, blockNumber uint8, data string, length uint) raw.MIDIMessage_128 {
+	return raw.MIDI2FunctionBlockNameNotificationMessage(raw.UMPStreamMessageFormat(format), blockNumber, data, length)
 }
 
 // MIDI2NoteOff calls [raw.MIDI2NoteOff] (C function MIDI2NoteOff).
@@ -210,13 +210,13 @@ func MIDI2StreamConfigurationRequestMessage(protocol uint8, receiveJRTimestamp b
 }
 
 // MIDI2StreamMessage calls [raw.MIDI2StreamMessage] (C function MIDI2StreamMessage).
-func MIDI2StreamMessage(format raw.UMPStreamMessageFormat, status raw.UMPStreamMessageStatus, data1 uint16, data2 uint, data3 uint, data4 uint) raw.MIDIMessage_128 {
-	return raw.MIDI2StreamMessage(format, status, data1, data2, data3, data4)
+func MIDI2StreamMessage(format UMPStreamMessageFormat, status UMPStreamMessageStatus, data1 uint16, data2 uint, data3 uint, data4 uint) raw.MIDIMessage_128 {
+	return raw.MIDI2StreamMessage(raw.UMPStreamMessageFormat(format), raw.UMPStreamMessageStatus(status), data1, data2, data3, data4)
 }
 
 // MIDI2StreamMessageFromData calls [raw.MIDI2StreamMessageFromData] (C function MIDI2StreamMessageFromData).
-func MIDI2StreamMessageFromData(format raw.UMPStreamMessageFormat, status raw.UMPStreamMessageStatus, data *uint8, length uint) raw.MIDIMessage_128 {
-	return raw.MIDI2StreamMessageFromData(format, status, data, length)
+func MIDI2StreamMessageFromData(format UMPStreamMessageFormat, status UMPStreamMessageStatus, data *uint8, length uint) raw.MIDIMessage_128 {
+	return raw.MIDI2StreamMessageFromData(raw.UMPStreamMessageFormat(format), raw.UMPStreamMessageStatus(status), data, length)
 }
 
 // MIDIClientCreate calls [raw.MIDIClientCreate] (C function MIDIClientCreate).
@@ -245,8 +245,8 @@ func MIDIDestinationCreateWithBlock(client uint, name unsafe.Pointer, outDest *u
 }
 
 // MIDIDestinationCreateWithProtocol calls [raw.MIDIDestinationCreateWithProtocol] (C function MIDIDestinationCreateWithProtocol).
-func MIDIDestinationCreateWithProtocol(client uint, name unsafe.Pointer, protocol raw.MIDIProtocolID, outDest *uint, readBlock func(*raw.MIDIEventList, unsafe.Pointer)) int {
-	return raw.MIDIDestinationCreateWithProtocol(client, name, protocol, outDest, readBlock)
+func MIDIDestinationCreateWithProtocol(client uint, name unsafe.Pointer, protocol MIDIProtocolID, outDest *uint, readBlock func(*raw.MIDIEventList, unsafe.Pointer)) int {
+	return raw.MIDIDestinationCreateWithProtocol(client, name, raw.MIDIProtocolID(protocol), outDest, readBlock)
 }
 
 // MIDIDeviceGetEntity calls [raw.MIDIDeviceGetEntity] (C function MIDIDeviceGetEntity).
@@ -310,8 +310,8 @@ func MIDIEventListForEachEvent(evtlist *raw.MIDIEventList, visitor unsafe.Pointe
 }
 
 // MIDIEventListInit calls [raw.MIDIEventListInit] (C function MIDIEventListInit).
-func MIDIEventListInit(evtlist *raw.MIDIEventList, protocol raw.MIDIProtocolID) *raw.MIDIEventPacket {
-	return raw.MIDIEventListInit(evtlist, protocol)
+func MIDIEventListInit(evtlist *raw.MIDIEventList, protocol MIDIProtocolID) *raw.MIDIEventPacket {
+	return raw.MIDIEventListInit(evtlist, raw.MIDIProtocolID(protocol))
 }
 
 // MIDIEventPacketNext calls [raw.MIDIEventPacketNext] (C function MIDIEventPacketNext).
@@ -380,8 +380,8 @@ func MIDIInputPortCreateWithBlock(client uint, portName unsafe.Pointer, outPort 
 }
 
 // MIDIInputPortCreateWithProtocol calls [raw.MIDIInputPortCreateWithProtocol] (C function MIDIInputPortCreateWithProtocol).
-func MIDIInputPortCreateWithProtocol(client uint, portName unsafe.Pointer, protocol raw.MIDIProtocolID, outPort *uint, receiveBlock func(*raw.MIDIEventList, unsafe.Pointer)) int {
-	return raw.MIDIInputPortCreateWithProtocol(client, portName, protocol, outPort, receiveBlock)
+func MIDIInputPortCreateWithProtocol(client uint, portName unsafe.Pointer, protocol MIDIProtocolID, outPort *uint, receiveBlock func(*raw.MIDIEventList, unsafe.Pointer)) int {
+	return raw.MIDIInputPortCreateWithProtocol(client, portName, raw.MIDIProtocolID(protocol), outPort, receiveBlock)
 }
 
 // MIDIJitterReductionClockMessage calls [raw.MIDIJitterReductionClockMessage] (C function MIDIJitterReductionClockMessage).
@@ -395,8 +395,8 @@ func MIDIJitterReductionTimestampMessage(senderClockTimestamp uint16) uint {
 }
 
 // MIDIMessageTypeForUPWord calls [raw.MIDIMessageTypeForUPWord] (C function MIDIMessageTypeForUPWord).
-func MIDIMessageTypeForUPWord(word uint) raw.MIDIMessageType {
-	return raw.MIDIMessageTypeForUPWord(word)
+func MIDIMessageTypeForUPWord(word uint) MIDIMessageType {
+	return MIDIMessageType(raw.MIDIMessageTypeForUPWord(word))
 }
 
 // MIDINoOpMessage calls [raw.MIDINoOpMessage] (C function MIDINoOpMessage).

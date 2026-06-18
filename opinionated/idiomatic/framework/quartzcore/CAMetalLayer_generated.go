@@ -292,8 +292,8 @@ func (x *MetalLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *MetalLay
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *MetalLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *MetalLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *MetalLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *MetalLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -310,8 +310,8 @@ func (x *MetalLayer) WithCornerRadius(cornerRadius float64) *MetalLayer {
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *MetalLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *MetalLayer {
-	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+func (x *MetalLayer) WithMaskedCorners(maskedCorners CACornerMask) *MetalLayer {
+	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -376,8 +376,8 @@ func (x *MetalLayer) WithShadowRadius(shadowRadius float64) *MetalLayer {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *MetalLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *MetalLayer {
-	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+func (x *MetalLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *MetalLayer {
+	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -603,10 +603,10 @@ type MetalLayerable interface {
 	WithOpaque(opaque bool) *MetalLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *MetalLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *MetalLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *MetalLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *MetalLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *MetalLayer
 	WithCornerRadius(cornerRadius float64) *MetalLayer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *MetalLayer
+	WithMaskedCorners(maskedCorners CACornerMask) *MetalLayer
 	WithCornerCurve(cornerCurve *foundation.NSString) *MetalLayer
 	WithBorderWidth(borderWidth float64) *MetalLayer
 	WithOpacity(opacity float32) *MetalLayer
@@ -617,7 +617,7 @@ type MetalLayerable interface {
 	WithShadowOpacity(shadowOpacity float32) *MetalLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *MetalLayer
 	WithShadowRadius(shadowRadius float64) *MetalLayer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *MetalLayer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *MetalLayer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *MetalLayer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *MetalLayer
 	WithName(name string) *MetalLayer

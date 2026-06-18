@@ -82,8 +82,8 @@ func (x *LookAroundViewController) WithPointOfInterestFilter(pointOfInterestFilt
 }
 
 // WithBadgePosition sets the badgePosition property and returns the receiver for chaining.
-func (x *LookAroundViewController) WithBadgePosition(badgePosition raw.MKLookAroundBadgePosition) *LookAroundViewController {
-	x.inner.SetBadgePosition(badgePosition)
+func (x *LookAroundViewController) WithBadgePosition(badgePosition MKLookAroundBadgePosition) *LookAroundViewController {
+	x.inner.SetBadgePosition(raw.MKLookAroundBadgePosition(badgePosition))
 	return x
 }
 
@@ -146,13 +146,13 @@ func (x *LookAroundViewController) SetPointOfInterestFilter(pointOfInterestFilte
 }
 
 // BadgePosition calls the underlying BadgePosition.
-func (x *LookAroundViewController) BadgePosition() raw.MKLookAroundBadgePosition {
-	return x.inner.BadgePosition()
+func (x *LookAroundViewController) BadgePosition() MKLookAroundBadgePosition {
+	return MKLookAroundBadgePosition(x.inner.BadgePosition())
 }
 
 // SetBadgePosition calls the underlying SetBadgePosition.
-func (x *LookAroundViewController) SetBadgePosition(badgePosition raw.MKLookAroundBadgePosition) {
-	x.inner.SetBadgePosition(badgePosition)
+func (x *LookAroundViewController) SetBadgePosition(badgePosition MKLookAroundBadgePosition) {
+	x.inner.SetBadgePosition(raw.MKLookAroundBadgePosition(badgePosition))
 }
 
 // LookAroundViewControllerable is the interface implemented by [LookAroundViewController], for mocking and DI.
@@ -163,7 +163,7 @@ type LookAroundViewControllerable interface {
 	WithNavigationEnabled(navigationEnabled bool) *LookAroundViewController
 	WithShowsRoadLabels(showsRoadLabels bool) *LookAroundViewController
 	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundViewController
-	WithBadgePosition(badgePosition raw.MKLookAroundBadgePosition) *LookAroundViewController
+	WithBadgePosition(badgePosition MKLookAroundBadgePosition) *LookAroundViewController
 	Delegate() raw.MKLookAroundViewControllerDelegate
 	SetDelegate(delegate raw.MKLookAroundViewControllerDelegate)
 	Scene() *LookAroundScene
@@ -174,8 +174,8 @@ type LookAroundViewControllerable interface {
 	SetShowsRoadLabels(showsRoadLabels bool)
 	PointOfInterestFilter() *PointOfInterestFilter
 	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
-	BadgePosition() raw.MKLookAroundBadgePosition
-	SetBadgePosition(badgePosition raw.MKLookAroundBadgePosition)
+	BadgePosition() MKLookAroundBadgePosition
+	SetBadgePosition(badgePosition MKLookAroundBadgePosition)
 }
 
 var _ LookAroundViewControllerable = (*LookAroundViewController)(nil)

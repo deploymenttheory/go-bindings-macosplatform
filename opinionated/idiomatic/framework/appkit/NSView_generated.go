@@ -86,8 +86,8 @@ func (x *View) WithAutoresizesSubviews(autoresizesSubviews bool) *View {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *View) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *View {
-	x.inner.SetAutoresizingMask(autoresizingMask)
+func (x *View) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *View {
+	x.inner.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -146,14 +146,14 @@ func (x *View) WithWantsRestingTouches(wantsRestingTouches bool) *View {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *View) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *View {
-	x.inner.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *View) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *View {
+	x.inner.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *View) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *View {
-	x.inner.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *View) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *View {
+	x.inner.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -260,8 +260,8 @@ func (x *View) WithToolTip(toolTip string) *View {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *View) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *View {
-	x.inner.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *View) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *View {
+	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -278,8 +278,8 @@ func (x *View) WithNextKeyView(nextKeyView ViewProvider) *View {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *View) WithFocusRingType(focusRingType raw.NSFocusRingType) *View {
-	x.inner.SetFocusRingType(focusRingType)
+func (x *View) WithFocusRingType(focusRingType NSFocusRingType) *View {
+	x.inner.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -302,8 +302,8 @@ func (x *View) WithGestureRecognizers(items ...GestureRecognizerProvider) *View 
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *View) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *View {
-	x.inner.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *View) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *View {
+	x.inner.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -431,8 +431,8 @@ func (x *View) AddSubview(view *raw.NSView) {
 }
 
 // AddSubviewPositionedRelativeTo calls the underlying AddSubviewPositionedRelativeTo.
-func (x *View) AddSubviewPositionedRelativeTo(view *raw.NSView, place raw.NSWindowOrderingMode, otherView *raw.NSView) {
-	x.inner.AddSubviewPositionedRelativeTo(view, place, otherView)
+func (x *View) AddSubviewPositionedRelativeTo(view *raw.NSView, place NSWindowOrderingMode, otherView *raw.NSView) {
+	x.inner.AddSubviewPositionedRelativeTo(view, raw.NSWindowOrderingMode(place), otherView)
 }
 
 // SortSubviewsUsingFunctionContext calls the underlying SortSubviewsUsingFunctionContext.
@@ -960,13 +960,13 @@ func (x *View) SetAutoresizesSubviews(autoresizesSubviews bool) {
 }
 
 // AutoresizingMask calls the underlying AutoresizingMask.
-func (x *View) AutoresizingMask() raw.NSAutoresizingMaskOptions {
-	return x.inner.AutoresizingMask()
+func (x *View) AutoresizingMask() NSAutoresizingMaskOptions {
+	return NSAutoresizingMaskOptions(x.inner.AutoresizingMask())
 }
 
 // SetAutoresizingMask calls the underlying SetAutoresizingMask.
-func (x *View) SetAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) {
-	x.inner.SetAutoresizingMask(autoresizingMask)
+func (x *View) SetAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) {
+	x.inner.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 }
 
 // Frame calls the underlying Frame.
@@ -1105,23 +1105,23 @@ func (x *View) SetWantsRestingTouches(wantsRestingTouches bool) {
 }
 
 // LayerContentsRedrawPolicy calls the underlying LayerContentsRedrawPolicy.
-func (x *View) LayerContentsRedrawPolicy() raw.NSViewLayerContentsRedrawPolicy {
-	return x.inner.LayerContentsRedrawPolicy()
+func (x *View) LayerContentsRedrawPolicy() NSViewLayerContentsRedrawPolicy {
+	return NSViewLayerContentsRedrawPolicy(x.inner.LayerContentsRedrawPolicy())
 }
 
 // SetLayerContentsRedrawPolicy calls the underlying SetLayerContentsRedrawPolicy.
-func (x *View) SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) {
-	x.inner.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *View) SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) {
+	x.inner.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 }
 
 // LayerContentsPlacement calls the underlying LayerContentsPlacement.
-func (x *View) LayerContentsPlacement() raw.NSViewLayerContentsPlacement {
-	return x.inner.LayerContentsPlacement()
+func (x *View) LayerContentsPlacement() NSViewLayerContentsPlacement {
+	return NSViewLayerContentsPlacement(x.inner.LayerContentsPlacement())
 }
 
 // SetLayerContentsPlacement calls the underlying SetLayerContentsPlacement.
-func (x *View) SetLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) {
-	x.inner.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *View) SetLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) {
+	x.inner.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 }
 
 // WantsLayer calls the underlying WantsLayer.
@@ -1313,13 +1313,13 @@ func (x *View) InputContext() *TextInputContext {
 }
 
 // UserInterfaceLayoutDirection calls the underlying UserInterfaceLayoutDirection.
-func (x *View) UserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection {
-	return x.inner.UserInterfaceLayoutDirection()
+func (x *View) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
+	return NSUserInterfaceLayoutDirection(x.inner.UserInterfaceLayoutDirection())
 }
 
 // SetUserInterfaceLayoutDirection calls the underlying SetUserInterfaceLayoutDirection.
-func (x *View) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) {
-	x.inner.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *View) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) {
+	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 }
 
 // PreparedContentRect calls the underlying PreparedContentRect.
@@ -1399,13 +1399,13 @@ func (x *View) CanBecomeKeyView() bool {
 }
 
 // FocusRingType calls the underlying FocusRingType.
-func (x *View) FocusRingType() raw.NSFocusRingType {
-	return x.inner.FocusRingType()
+func (x *View) FocusRingType() NSFocusRingType {
+	return NSFocusRingType(x.inner.FocusRingType())
 }
 
 // SetFocusRingType calls the underlying SetFocusRingType.
-func (x *View) SetFocusRingType(focusRingType raw.NSFocusRingType) {
-	x.inner.SetFocusRingType(focusRingType)
+func (x *View) SetFocusRingType(focusRingType NSFocusRingType) {
+	x.inner.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 }
 
 // FocusRingMaskBounds calls the underlying FocusRingMaskBounds.
@@ -1609,13 +1609,13 @@ func (x *View) SetGestureRecognizers(gestureRecognizers *foundation.NSArray[*raw
 }
 
 // AllowedTouchTypes calls the underlying AllowedTouchTypes.
-func (x *View) AllowedTouchTypes() raw.NSTouchTypeMask {
-	return x.inner.AllowedTouchTypes()
+func (x *View) AllowedTouchTypes() NSTouchTypeMask {
+	return NSTouchTypeMask(x.inner.AllowedTouchTypes())
 }
 
 // SetAllowedTouchTypes calls the underlying SetAllowedTouchTypes.
-func (x *View) SetAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) {
-	x.inner.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *View) SetAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) {
+	x.inner.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 }
 
 // SafeAreaInsets calls the underlying SafeAreaInsets.
@@ -2025,23 +2025,23 @@ func (x *View) InvalidateIntrinsicContentSize() {
 }
 
 // ContentHuggingPriorityForOrientation calls the underlying ContentHuggingPriorityForOrientation.
-func (x *View) ContentHuggingPriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32 {
-	return x.inner.ContentHuggingPriorityForOrientation(orientation)
+func (x *View) ContentHuggingPriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
+	return x.inner.ContentHuggingPriorityForOrientation(raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // SetContentHuggingPriorityForOrientation calls the underlying SetContentHuggingPriorityForOrientation.
-func (x *View) SetContentHuggingPriorityForOrientation(priority float32, orientation raw.NSLayoutConstraintOrientation) {
-	x.inner.SetContentHuggingPriorityForOrientation(priority, orientation)
+func (x *View) SetContentHuggingPriorityForOrientation(priority float32, orientation NSLayoutConstraintOrientation) {
+	x.inner.SetContentHuggingPriorityForOrientation(priority, raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // ContentCompressionResistancePriorityForOrientation calls the underlying ContentCompressionResistancePriorityForOrientation.
-func (x *View) ContentCompressionResistancePriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32 {
-	return x.inner.ContentCompressionResistancePriorityForOrientation(orientation)
+func (x *View) ContentCompressionResistancePriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
+	return x.inner.ContentCompressionResistancePriorityForOrientation(raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // SetContentCompressionResistancePriorityForOrientation calls the underlying SetContentCompressionResistancePriorityForOrientation.
-func (x *View) SetContentCompressionResistancePriorityForOrientation(priority float32, orientation raw.NSLayoutConstraintOrientation) {
-	x.inner.SetContentCompressionResistancePriorityForOrientation(priority, orientation)
+func (x *View) SetContentCompressionResistancePriorityForOrientation(priority float32, orientation NSLayoutConstraintOrientation) {
+	x.inner.SetContentCompressionResistancePriorityForOrientation(priority, raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // AlignmentRectInsets calls the underlying AlignmentRectInsets.
@@ -2095,8 +2095,8 @@ func (x *View) FittingSize() corefoundation.CGSize {
 }
 
 // ConstraintsAffectingLayoutForOrientation calls the underlying ConstraintsAffectingLayoutForOrientation.
-func (x *View) ConstraintsAffectingLayoutForOrientation(orientation raw.NSLayoutConstraintOrientation) *foundation.NSArray[*raw.NSLayoutConstraint] {
-	return x.inner.ConstraintsAffectingLayoutForOrientation(orientation)
+func (x *View) ConstraintsAffectingLayoutForOrientation(orientation NSLayoutConstraintOrientation) *foundation.NSArray[*raw.NSLayoutConstraint] {
+	return x.inner.ConstraintsAffectingLayoutForOrientation(raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // ExerciseAmbiguityInLayout calls the underlying ExerciseAmbiguityInLayout.
@@ -2254,7 +2254,7 @@ type Viewable interface {
 	WithHidden(hidden bool) *View
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *View
 	WithAutoresizesSubviews(autoresizesSubviews bool) *View
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *View
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *View
 	WithFrame(frame corefoundation.CGRect) *View
 	WithFrameRotation(frameRotation float64) *View
 	WithFrameCenterRotation(frameCenterRotation float64) *View
@@ -2264,8 +2264,8 @@ type Viewable interface {
 	WithNeedsDisplay(needsDisplay bool) *View
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *View
 	WithWantsRestingTouches(wantsRestingTouches bool) *View
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *View
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *View
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *View
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *View
 	WithWantsLayer(wantsLayer bool) *View
 	WithLayer(layer *quartzcore.CALayer) *View
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *View
@@ -2279,12 +2279,12 @@ type Viewable interface {
 	WithClipsToBounds(clipsToBounds bool) *View
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *View
 	WithToolTip(toolTip string) *View
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *View
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *View
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *View
 	WithNextKeyView(nextKeyView ViewProvider) *View
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *View
+	WithFocusRingType(focusRingType NSFocusRingType) *View
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *View
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *View
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *View
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *View
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *View
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *View
@@ -2306,7 +2306,7 @@ type Viewable interface {
 	ViewDidHide()
 	ViewDidUnhide()
 	AddSubview(view *raw.NSView)
-	AddSubviewPositionedRelativeTo(view *raw.NSView, place raw.NSWindowOrderingMode, otherView *raw.NSView)
+	AddSubviewPositionedRelativeTo(view *raw.NSView, place NSWindowOrderingMode, otherView *raw.NSView)
 	SortSubviewsUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer)
 	ViewWillMoveToWindow(newWindow *raw.NSWindow)
 	ViewDidMoveToWindow()
@@ -2405,8 +2405,8 @@ type Viewable interface {
 	SetPostsFrameChangedNotifications(postsFrameChangedNotifications bool)
 	AutoresizesSubviews() bool
 	SetAutoresizesSubviews(autoresizesSubviews bool)
-	AutoresizingMask() raw.NSAutoresizingMaskOptions
-	SetAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions)
+	AutoresizingMask() NSAutoresizingMaskOptions
+	SetAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions)
 	Frame() corefoundation.CGRect
 	SetFrame(frame corefoundation.CGRect)
 	FrameRotation() float64
@@ -2434,10 +2434,10 @@ type Viewable interface {
 	SetAcceptsTouchEvents(acceptsTouchEvents bool)
 	WantsRestingTouches() bool
 	SetWantsRestingTouches(wantsRestingTouches bool)
-	LayerContentsRedrawPolicy() raw.NSViewLayerContentsRedrawPolicy
-	SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy)
-	LayerContentsPlacement() raw.NSViewLayerContentsPlacement
-	SetLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement)
+	LayerContentsRedrawPolicy() NSViewLayerContentsRedrawPolicy
+	SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy)
+	LayerContentsPlacement() NSViewLayerContentsPlacement
+	SetLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement)
 	WantsLayer() bool
 	SetWantsLayer(wantsLayer bool)
 	Layer() *quartzcore.CALayer
@@ -2470,8 +2470,8 @@ type Viewable interface {
 	PreservesContentDuringLiveResize() bool
 	RectPreservedDuringLiveResize() corefoundation.CGRect
 	InputContext() *TextInputContext
-	UserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection
-	SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection)
+	UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection
+	SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection)
 	PreparedContentRect() corefoundation.CGRect
 	SetPreparedContentRect(preparedContentRect corefoundation.CGRect)
 	AllowsVibrancy() bool
@@ -2484,8 +2484,8 @@ type Viewable interface {
 	NextValidKeyView() *View
 	PreviousValidKeyView() *View
 	CanBecomeKeyView() bool
-	FocusRingType() raw.NSFocusRingType
-	SetFocusRingType(focusRingType raw.NSFocusRingType)
+	FocusRingType() NSFocusRingType
+	SetFocusRingType(focusRingType NSFocusRingType)
 	FocusRingMaskBounds() corefoundation.CGRect
 	WriteEPSInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *raw.NSPasteboard)
 	DataWithEPSInsideRect(rect corefoundation.CGRect) *foundation.NSData
@@ -2522,8 +2522,8 @@ type Viewable interface {
 	RemoveGestureRecognizer(gestureRecognizer *raw.NSGestureRecognizer)
 	GestureRecognizers() []*GestureRecognizer
 	SetGestureRecognizers(gestureRecognizers *foundation.NSArray[*raw.NSGestureRecognizer])
-	AllowedTouchTypes() raw.NSTouchTypeMask
-	SetAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask)
+	AllowedTouchTypes() NSTouchTypeMask
+	SetAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask)
 	SafeAreaInsets() foundation.NSEdgeInsets
 	AdditionalSafeAreaInsets() foundation.NSEdgeInsets
 	SetAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets)
@@ -2590,10 +2590,10 @@ type Viewable interface {
 	AlignmentRectForFrame(frame corefoundation.CGRect) corefoundation.CGRect
 	FrameForAlignmentRect(alignmentRect corefoundation.CGRect) corefoundation.CGRect
 	InvalidateIntrinsicContentSize()
-	ContentHuggingPriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32
-	SetContentHuggingPriorityForOrientation(priority float32, orientation raw.NSLayoutConstraintOrientation)
-	ContentCompressionResistancePriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32
-	SetContentCompressionResistancePriorityForOrientation(priority float32, orientation raw.NSLayoutConstraintOrientation)
+	ContentHuggingPriorityForOrientation(orientation NSLayoutConstraintOrientation) float32
+	SetContentHuggingPriorityForOrientation(priority float32, orientation NSLayoutConstraintOrientation)
+	ContentCompressionResistancePriorityForOrientation(orientation NSLayoutConstraintOrientation) float32
+	SetContentCompressionResistancePriorityForOrientation(priority float32, orientation NSLayoutConstraintOrientation)
 	AlignmentRectInsets() foundation.NSEdgeInsets
 	FirstBaselineOffsetFromTop() float64
 	LastBaselineOffsetFromBottom() float64
@@ -2604,7 +2604,7 @@ type Viewable interface {
 	IsVerticalContentSizeConstraintActive() bool
 	SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool)
 	FittingSize() corefoundation.CGSize
-	ConstraintsAffectingLayoutForOrientation(orientation raw.NSLayoutConstraintOrientation) *foundation.NSArray[*raw.NSLayoutConstraint]
+	ConstraintsAffectingLayoutForOrientation(orientation NSLayoutConstraintOrientation) *foundation.NSArray[*raw.NSLayoutConstraint]
 	ExerciseAmbiguityInLayout()
 	HasAmbiguousLayout() bool
 	AddLayoutGuide(guide *raw.NSLayoutGuide)

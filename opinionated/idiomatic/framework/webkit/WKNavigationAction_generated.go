@@ -56,8 +56,8 @@ func (x *WKNavigationAction) TargetFrame() *WKFrameInfo {
 }
 
 // NavigationType calls the underlying NavigationType.
-func (x *WKNavigationAction) NavigationType() raw.WKNavigationType {
-	return x.inner.NavigationType()
+func (x *WKNavigationAction) NavigationType() WKNavigationType {
+	return WKNavigationType(x.inner.NavigationType())
 }
 
 // Request calls the underlying Request.
@@ -90,7 +90,7 @@ type WKNavigationActionable interface {
 	Unwrap() *raw.WKNavigationAction
 	SourceFrame() *WKFrameInfo
 	TargetFrame() *WKFrameInfo
-	NavigationType() raw.WKNavigationType
+	NavigationType() WKNavigationType
 	Request() *foundation.NSURLRequest
 	ShouldPerformDownload() bool
 	IsContentRuleListRedirect() bool

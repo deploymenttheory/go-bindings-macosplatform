@@ -33,8 +33,8 @@ func ConfirmationRequiredWithValueToConfirm(valueToConfirm *foundation.NSNumber)
 }
 
 // SuccessWithResolvedCallCapability calls the underlying INCallCapabilityResolutionResultSuccessWithResolvedCallCapability.
-func SuccessWithResolvedCallCapability(resolvedCallCapability raw.INCallCapability) *CallCapabilityResolutionResult {
-	_r := raw.INCallCapabilityResolutionResultSuccessWithResolvedCallCapability(resolvedCallCapability)
+func SuccessWithResolvedCallCapability(resolvedCallCapability INCallCapability) *CallCapabilityResolutionResult {
+	_r := raw.INCallCapabilityResolutionResultSuccessWithResolvedCallCapability(raw.INCallCapability(resolvedCallCapability))
 	if _r == nil {
 		return nil
 	}
@@ -42,8 +42,8 @@ func SuccessWithResolvedCallCapability(resolvedCallCapability raw.INCallCapabili
 }
 
 // ConfirmationRequiredWithCallCapabilityToConfirm calls the underlying INCallCapabilityResolutionResultConfirmationRequiredWithCallCapabilityToConfirm.
-func ConfirmationRequiredWithCallCapabilityToConfirm(callCapabilityToConfirm raw.INCallCapability) *CallCapabilityResolutionResult {
-	_r := raw.INCallCapabilityResolutionResultConfirmationRequiredWithCallCapabilityToConfirm(callCapabilityToConfirm)
+func ConfirmationRequiredWithCallCapabilityToConfirm(callCapabilityToConfirm INCallCapability) *CallCapabilityResolutionResult {
+	_r := raw.INCallCapabilityResolutionResultConfirmationRequiredWithCallCapabilityToConfirm(raw.INCallCapability(callCapabilityToConfirm))
 	if _r == nil {
 		return nil
 	}
@@ -51,8 +51,8 @@ func ConfirmationRequiredWithCallCapabilityToConfirm(callCapabilityToConfirm raw
 }
 
 // SuccessWithResolvedCallDestinationType calls the underlying INCallDestinationTypeResolutionResultSuccessWithResolvedCallDestinationType.
-func SuccessWithResolvedCallDestinationType(resolvedCallDestinationType raw.INCallDestinationType) *CallDestinationTypeResolutionResult {
-	_r := raw.INCallDestinationTypeResolutionResultSuccessWithResolvedCallDestinationType(resolvedCallDestinationType)
+func SuccessWithResolvedCallDestinationType(resolvedCallDestinationType INCallDestinationType) *CallDestinationTypeResolutionResult {
+	_r := raw.INCallDestinationTypeResolutionResultSuccessWithResolvedCallDestinationType(raw.INCallDestinationType(resolvedCallDestinationType))
 	if _r == nil {
 		return nil
 	}
@@ -60,8 +60,8 @@ func SuccessWithResolvedCallDestinationType(resolvedCallDestinationType raw.INCa
 }
 
 // ConfirmationRequiredWithCallDestinationTypeToConfirm calls the underlying INCallDestinationTypeResolutionResultConfirmationRequiredWithCallDestinationTypeToConfirm.
-func ConfirmationRequiredWithCallDestinationTypeToConfirm(callDestinationTypeToConfirm raw.INCallDestinationType) *CallDestinationTypeResolutionResult {
-	_r := raw.INCallDestinationTypeResolutionResultConfirmationRequiredWithCallDestinationTypeToConfirm(callDestinationTypeToConfirm)
+func ConfirmationRequiredWithCallDestinationTypeToConfirm(callDestinationTypeToConfirm INCallDestinationType) *CallDestinationTypeResolutionResult {
+	_r := raw.INCallDestinationTypeResolutionResultConfirmationRequiredWithCallDestinationTypeToConfirm(raw.INCallDestinationType(callDestinationTypeToConfirm))
 	if _r == nil {
 		return nil
 	}
@@ -96,8 +96,8 @@ func ConfirmationRequiredWithCallRecordToConfirm(callRecordToConfirm *raw.INCall
 }
 
 // SuccessWithResolvedCallRecordTypeOptions calls the underlying INCallRecordTypeOptionsResolutionResultSuccessWithResolvedCallRecordTypeOptions.
-func SuccessWithResolvedCallRecordTypeOptions(resolvedCallRecordTypeOptions raw.INCallRecordTypeOptions) *CallRecordTypeOptionsResolutionResult {
-	_r := raw.INCallRecordTypeOptionsResolutionResultSuccessWithResolvedCallRecordTypeOptions(resolvedCallRecordTypeOptions)
+func SuccessWithResolvedCallRecordTypeOptions(resolvedCallRecordTypeOptions INCallRecordTypeOptions) *CallRecordTypeOptionsResolutionResult {
+	_r := raw.INCallRecordTypeOptionsResolutionResultSuccessWithResolvedCallRecordTypeOptions(raw.INCallRecordTypeOptions(resolvedCallRecordTypeOptions))
 	if _r == nil {
 		return nil
 	}
@@ -105,8 +105,8 @@ func SuccessWithResolvedCallRecordTypeOptions(resolvedCallRecordTypeOptions raw.
 }
 
 // ConfirmationRequiredWithCallRecordTypeOptionsToConfirm calls the underlying INCallRecordTypeOptionsResolutionResultConfirmationRequiredWithCallRecordTypeOptionsToConfirm.
-func ConfirmationRequiredWithCallRecordTypeOptionsToConfirm(callRecordTypeOptionsToConfirm raw.INCallRecordTypeOptions) *CallRecordTypeOptionsResolutionResult {
-	_r := raw.INCallRecordTypeOptionsResolutionResultConfirmationRequiredWithCallRecordTypeOptionsToConfirm(callRecordTypeOptionsToConfirm)
+func ConfirmationRequiredWithCallRecordTypeOptionsToConfirm(callRecordTypeOptionsToConfirm INCallRecordTypeOptions) *CallRecordTypeOptionsResolutionResult {
+	_r := raw.INCallRecordTypeOptionsResolutionResultConfirmationRequiredWithCallRecordTypeOptionsToConfirm(raw.INCallRecordTypeOptions(callRecordTypeOptionsToConfirm))
 	if _r == nil {
 		return nil
 	}
@@ -114,8 +114,8 @@ func ConfirmationRequiredWithCallRecordTypeOptionsToConfirm(callRecordTypeOption
 }
 
 // SuccessWithResolvedCallRecordType calls the underlying INCallRecordTypeResolutionResultSuccessWithResolvedCallRecordType.
-func SuccessWithResolvedCallRecordType(resolvedCallRecordType raw.INCallRecordType) *CallRecordTypeResolutionResult {
-	_r := raw.INCallRecordTypeResolutionResultSuccessWithResolvedCallRecordType(resolvedCallRecordType)
+func SuccessWithResolvedCallRecordType(resolvedCallRecordType INCallRecordType) *CallRecordTypeResolutionResult {
+	_r := raw.INCallRecordTypeResolutionResultSuccessWithResolvedCallRecordType(raw.INCallRecordType(resolvedCallRecordType))
 	if _r == nil {
 		return nil
 	}
@@ -123,8 +123,8 @@ func SuccessWithResolvedCallRecordType(resolvedCallRecordType raw.INCallRecordTy
 }
 
 // ConfirmationRequiredWithCallRecordTypeToConfirm calls the underlying INCallRecordTypeResolutionResultConfirmationRequiredWithCallRecordTypeToConfirm.
-func ConfirmationRequiredWithCallRecordTypeToConfirm(callRecordTypeToConfirm raw.INCallRecordType) *CallRecordTypeResolutionResult {
-	_r := raw.INCallRecordTypeResolutionResultConfirmationRequiredWithCallRecordTypeToConfirm(callRecordTypeToConfirm)
+func ConfirmationRequiredWithCallRecordTypeToConfirm(callRecordTypeToConfirm INCallRecordType) *CallRecordTypeResolutionResult {
+	_r := raw.INCallRecordTypeResolutionResultConfirmationRequiredWithCallRecordTypeToConfirm(raw.INCallRecordType(callRecordTypeToConfirm))
 	if _r == nil {
 		return nil
 	}
@@ -510,8 +510,8 @@ func ConfirmationRequiredWithObjectToConfirm(objectToConfirm *raw.INObject) *Obj
 }
 
 // SuccessWithResolvedOutgoingMessageType calls the underlying INOutgoingMessageTypeResolutionResultSuccessWithResolvedOutgoingMessageType.
-func SuccessWithResolvedOutgoingMessageType(resolvedOutgoingMessageType raw.INOutgoingMessageType) *OutgoingMessageTypeResolutionResult {
-	_r := raw.INOutgoingMessageTypeResolutionResultSuccessWithResolvedOutgoingMessageType(resolvedOutgoingMessageType)
+func SuccessWithResolvedOutgoingMessageType(resolvedOutgoingMessageType INOutgoingMessageType) *OutgoingMessageTypeResolutionResult {
+	_r := raw.INOutgoingMessageTypeResolutionResultSuccessWithResolvedOutgoingMessageType(raw.INOutgoingMessageType(resolvedOutgoingMessageType))
 	if _r == nil {
 		return nil
 	}
@@ -519,8 +519,8 @@ func SuccessWithResolvedOutgoingMessageType(resolvedOutgoingMessageType raw.INOu
 }
 
 // ConfirmationRequiredWithOutgoingMessageTypeToConfirm calls the underlying INOutgoingMessageTypeResolutionResultConfirmationRequiredWithOutgoingMessageTypeToConfirm.
-func ConfirmationRequiredWithOutgoingMessageTypeToConfirm(outgoingMessageTypeToConfirm raw.INOutgoingMessageType) *OutgoingMessageTypeResolutionResult {
-	_r := raw.INOutgoingMessageTypeResolutionResultConfirmationRequiredWithOutgoingMessageTypeToConfirm(outgoingMessageTypeToConfirm)
+func ConfirmationRequiredWithOutgoingMessageTypeToConfirm(outgoingMessageTypeToConfirm INOutgoingMessageType) *OutgoingMessageTypeResolutionResult {
+	_r := raw.INOutgoingMessageTypeResolutionResultConfirmationRequiredWithOutgoingMessageTypeToConfirm(raw.INOutgoingMessageType(outgoingMessageTypeToConfirm))
 	if _r == nil {
 		return nil
 	}
@@ -627,8 +627,8 @@ func AttachmentWithAudioMessageFile(audioMessageFile *raw.INFile) *SendMessageAt
 }
 
 // UnsupportedForReason calls the underlying INSendMessageRecipientResolutionResultUnsupportedForReason.
-func UnsupportedForReason(reason raw.INSendMessageRecipientUnsupportedReason) *SendMessageRecipientResolutionResult {
-	_r := raw.INSendMessageRecipientResolutionResultUnsupportedForReason(reason)
+func UnsupportedForReason(reason INSendMessageRecipientUnsupportedReason) *SendMessageRecipientResolutionResult {
+	_r := raw.INSendMessageRecipientResolutionResultUnsupportedForReason(raw.INSendMessageRecipientUnsupportedReason(reason))
 	if _r == nil {
 		return nil
 	}
@@ -663,8 +663,8 @@ func ConfirmationRequiredWithSpeedToConfirm(speedToConfirm *foundation.NSMeasure
 }
 
 // INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason calls the underlying INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason.
-func INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason(reason raw.INStartCallCallRecordToCallBackUnsupportedReason) *StartCallCallRecordToCallBackResolutionResult {
-	_r := raw.INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason(reason)
+func INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason(reason INStartCallCallRecordToCallBackUnsupportedReason) *StartCallCallRecordToCallBackResolutionResult {
+	_r := raw.INStartCallCallRecordToCallBackResolutionResultUnsupportedForReason(raw.INStartCallCallRecordToCallBackUnsupportedReason(reason))
 	if _r == nil {
 		return nil
 	}

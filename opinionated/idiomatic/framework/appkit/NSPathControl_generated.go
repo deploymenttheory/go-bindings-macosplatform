@@ -90,8 +90,8 @@ func (x *PathControl) WithDoubleAction(doubleAction objc.SEL) *PathControl {
 }
 
 // WithPathStyle sets the pathStyle property and returns the receiver for chaining.
-func (x *PathControl) WithPathStyle(pathStyle raw.NSPathStyle) *PathControl {
-	x.inner.SetPathStyle(pathStyle)
+func (x *PathControl) WithPathStyle(pathStyle NSPathStyle) *PathControl {
+	x.inner.SetPathStyle(raw.NSPathStyle(pathStyle))
 	return x
 }
 
@@ -174,8 +174,8 @@ func (x *PathControl) WithHighlighted(highlighted bool) *PathControl {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *PathControl) WithControlSize(controlSize raw.NSControlSize) *PathControl {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *PathControl) WithControlSize(controlSize NSControlSize) *PathControl {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -240,20 +240,20 @@ func (x *PathControl) WithUsesSingleLineMode(usesSingleLineMode bool) *PathContr
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *PathControl) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathControl {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *PathControl) WithLineBreakMode(lineBreakMode NSLineBreakMode) *PathControl {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *PathControl) WithAlignment(alignment raw.NSTextAlignment) *PathControl {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *PathControl) WithAlignment(alignment NSTextAlignment) *PathControl {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *PathControl) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PathControl {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *PathControl) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PathControl {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -306,8 +306,8 @@ func (x *PathControl) WithAutoresizesSubviews(autoresizesSubviews bool) *PathCon
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *PathControl) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *PathControl {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *PathControl) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *PathControl {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -366,14 +366,14 @@ func (x *PathControl) WithWantsRestingTouches(wantsRestingTouches bool) *PathCon
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *PathControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *PathControl {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *PathControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *PathControl {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *PathControl) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *PathControl {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *PathControl) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *PathControl {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -480,8 +480,8 @@ func (x *PathControl) WithToolTip(toolTip string) *PathControl {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *PathControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PathControl {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *PathControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PathControl {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -498,8 +498,8 @@ func (x *PathControl) WithNextKeyView(nextKeyView ViewProvider) *PathControl {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *PathControl) WithFocusRingType(focusRingType raw.NSFocusRingType) *PathControl {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *PathControl) WithFocusRingType(focusRingType NSFocusRingType) *PathControl {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -522,8 +522,8 @@ func (x *PathControl) WithGestureRecognizers(items ...GestureRecognizerProvider)
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *PathControl) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PathControl {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *PathControl) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PathControl {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -612,8 +612,8 @@ func (x *PathControl) WithTouchBar(touchBar *TouchBar) *PathControl {
 }
 
 // SetDraggingSourceOperationMaskForLocal calls the underlying SetDraggingSourceOperationMaskForLocal.
-func (x *PathControl) SetDraggingSourceOperationMaskForLocal(mask raw.NSDragOperation, isLocal bool) {
-	x.inner.SetDraggingSourceOperationMaskForLocal(mask, isLocal)
+func (x *PathControl) SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool) {
+	x.inner.SetDraggingSourceOperationMaskForLocal(raw.NSDragOperation(mask), isLocal)
 }
 
 // IsEditable calls the underlying IsEditable.
@@ -687,13 +687,13 @@ func (x *PathControl) SetDoubleAction(doubleAction objc.SEL) {
 }
 
 // PathStyle calls the underlying PathStyle.
-func (x *PathControl) PathStyle() raw.NSPathStyle {
-	return x.inner.PathStyle()
+func (x *PathControl) PathStyle() NSPathStyle {
+	return NSPathStyle(x.inner.PathStyle())
 }
 
 // SetPathStyle calls the underlying SetPathStyle.
-func (x *PathControl) SetPathStyle(pathStyle raw.NSPathStyle) {
-	x.inner.SetPathStyle(pathStyle)
+func (x *PathControl) SetPathStyle(pathStyle NSPathStyle) {
+	x.inner.SetPathStyle(raw.NSPathStyle(pathStyle))
 }
 
 // ClickedPathItem calls the underlying ClickedPathItem.
@@ -785,7 +785,7 @@ type PathControlable interface {
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *PathControl
 	WithURL(uRL string) *PathControl
 	WithDoubleAction(doubleAction objc.SEL) *PathControl
-	WithPathStyle(pathStyle raw.NSPathStyle) *PathControl
+	WithPathStyle(pathStyle NSPathStyle) *PathControl
 	WithPathItems(items ...*raw.NSPathControlItem) *PathControl
 	WithBackgroundColor(backgroundColor *Color) *PathControl
 	WithDelegate(delegate raw.NSPathControlDelegate) *PathControl
@@ -797,7 +797,7 @@ type PathControlable interface {
 	WithEnabled(enabled bool) *PathControl
 	WithRefusesFirstResponder(refusesFirstResponder bool) *PathControl
 	WithHighlighted(highlighted bool) *PathControl
-	WithControlSize(controlSize raw.NSControlSize) *PathControl
+	WithControlSize(controlSize NSControlSize) *PathControl
 	WithFormatter(formatter *foundation.NSFormatter) *PathControl
 	WithObjectValue(objectValue objc.ID) *PathControl
 	WithStringValue(stringValue string) *PathControl
@@ -808,16 +808,16 @@ type PathControlable interface {
 	WithDoubleValue(doubleValue float64) *PathControl
 	WithFont(font *Font) *PathControl
 	WithUsesSingleLineMode(usesSingleLineMode bool) *PathControl
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathControl
-	WithAlignment(alignment raw.NSTextAlignment) *PathControl
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PathControl
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *PathControl
+	WithAlignment(alignment NSTextAlignment) *PathControl
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PathControl
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PathControl
 	WithCell(cell CellProvider) *PathControl
 	WithSubviews(items ...ViewProvider) *PathControl
 	WithHidden(hidden bool) *PathControl
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PathControl
 	WithAutoresizesSubviews(autoresizesSubviews bool) *PathControl
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *PathControl
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *PathControl
 	WithFrame(frame corefoundation.CGRect) *PathControl
 	WithFrameRotation(frameRotation float64) *PathControl
 	WithFrameCenterRotation(frameCenterRotation float64) *PathControl
@@ -827,8 +827,8 @@ type PathControlable interface {
 	WithNeedsDisplay(needsDisplay bool) *PathControl
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *PathControl
 	WithWantsRestingTouches(wantsRestingTouches bool) *PathControl
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *PathControl
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *PathControl
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *PathControl
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *PathControl
 	WithWantsLayer(wantsLayer bool) *PathControl
 	WithLayer(layer *quartzcore.CALayer) *PathControl
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PathControl
@@ -842,12 +842,12 @@ type PathControlable interface {
 	WithClipsToBounds(clipsToBounds bool) *PathControl
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PathControl
 	WithToolTip(toolTip string) *PathControl
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PathControl
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PathControl
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PathControl
 	WithNextKeyView(nextKeyView ViewProvider) *PathControl
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *PathControl
+	WithFocusRingType(focusRingType NSFocusRingType) *PathControl
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *PathControl
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PathControl
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PathControl
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PathControl
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PathControl
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PathControl
@@ -862,7 +862,7 @@ type PathControlable interface {
 	WithMenu(menu *Menu) *PathControl
 	WithUserActivity(userActivity *foundation.NSUserActivity) *PathControl
 	WithTouchBar(touchBar *TouchBar) *PathControl
-	SetDraggingSourceOperationMaskForLocal(mask raw.NSDragOperation, isLocal bool)
+	SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool)
 	IsEditable() bool
 	SetEditable(editable bool)
 	AllowedTypes() []string
@@ -875,8 +875,8 @@ type PathControlable interface {
 	SetURL(uRL string)
 	DoubleAction() objc.SEL
 	SetDoubleAction(doubleAction objc.SEL)
-	PathStyle() raw.NSPathStyle
-	SetPathStyle(pathStyle raw.NSPathStyle)
+	PathStyle() NSPathStyle
+	SetPathStyle(pathStyle NSPathStyle)
 	ClickedPathItem() *PathControlItem
 	PathItems() []*PathControlItem
 	SetPathItems(pathItems *foundation.NSArray[*raw.NSPathControlItem])

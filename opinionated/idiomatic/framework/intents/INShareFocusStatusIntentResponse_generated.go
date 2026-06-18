@@ -33,9 +33,9 @@ func ShareFocusStatusIntentResponseFromID(id objc.ID) *ShareFocusStatusIntentRes
 }
 
 // NewShareFocusStatusIntentResponseWithCodeUserActivity creates a new [ShareFocusStatusIntentResponse].
-func NewShareFocusStatusIntentResponseWithCodeUserActivity(code raw.INShareFocusStatusIntentResponseCode, userActivity *foundation.NSUserActivity) *ShareFocusStatusIntentResponse {
+func NewShareFocusStatusIntentResponseWithCodeUserActivity(code INShareFocusStatusIntentResponseCode, userActivity *foundation.NSUserActivity) *ShareFocusStatusIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INShareFocusStatusIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, userActivity.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INShareFocusStatusIntentResponseCode(code), userActivity.Ptr())
 	return &ShareFocusStatusIntentResponse{inner: raw.INShareFocusStatusIntentResponseFromID(_id)}
 }
 
@@ -46,8 +46,8 @@ func (x *ShareFocusStatusIntentResponse) WithUserActivity(userActivity *foundati
 }
 
 // Code calls the underlying Code.
-func (x *ShareFocusStatusIntentResponse) Code() raw.INShareFocusStatusIntentResponseCode {
-	return x.inner.Code()
+func (x *ShareFocusStatusIntentResponse) Code() INShareFocusStatusIntentResponseCode {
+	return INShareFocusStatusIntentResponseCode(x.inner.Code())
 }
 
 func (x *ShareFocusStatusIntentResponse) asIntentResponse() *raw.INIntentResponse {
@@ -58,7 +58,7 @@ func (x *ShareFocusStatusIntentResponse) asIntentResponse() *raw.INIntentRespons
 type ShareFocusStatusIntentResponseable interface {
 	Unwrap() *raw.INShareFocusStatusIntentResponse
 	WithUserActivity(userActivity *foundation.NSUserActivity) *ShareFocusStatusIntentResponse
-	Code() raw.INShareFocusStatusIntentResponseCode
+	Code() INShareFocusStatusIntentResponseCode
 }
 
 var _ ShareFocusStatusIntentResponseable = (*ShareFocusStatusIntentResponse)(nil)

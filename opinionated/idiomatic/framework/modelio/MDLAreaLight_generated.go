@@ -80,8 +80,8 @@ func (x *AreaLight) WithAttenuationEndDistance(attenuationEndDistance float32) *
 }
 
 // WithLightType sets the lightType property and returns the receiver for chaining.
-func (x *AreaLight) WithLightType(lightType raw.MDLLightType) *AreaLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetLightType(lightType)
+func (x *AreaLight) WithLightType(lightType MDLLightType) *AreaLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetLightType(raw.MDLLightType(lightType))
 	return x
 }
 
@@ -171,7 +171,7 @@ type AreaLightable interface {
 	WithOuterConeAngle(outerConeAngle float32) *AreaLight
 	WithAttenuationStartDistance(attenuationStartDistance float32) *AreaLight
 	WithAttenuationEndDistance(attenuationEndDistance float32) *AreaLight
-	WithLightType(lightType raw.MDLLightType) *AreaLight
+	WithLightType(lightType MDLLightType) *AreaLight
 	WithColorSpace(colorSpace string) *AreaLight
 	WithParent(parent ObjectProvider) *AreaLight
 	WithInstance(instance ObjectProvider) *AreaLight

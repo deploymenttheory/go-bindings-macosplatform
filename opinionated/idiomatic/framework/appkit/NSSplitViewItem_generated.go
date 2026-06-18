@@ -57,8 +57,8 @@ func (x *SplitViewItem) WithCanCollapse(canCollapse bool) *SplitViewItem {
 }
 
 // WithCollapseBehavior sets the collapseBehavior property and returns the receiver for chaining.
-func (x *SplitViewItem) WithCollapseBehavior(collapseBehavior raw.NSSplitViewItemCollapseBehavior) *SplitViewItem {
-	x.inner.SetCollapseBehavior(collapseBehavior)
+func (x *SplitViewItem) WithCollapseBehavior(collapseBehavior NSSplitViewItemCollapseBehavior) *SplitViewItem {
+	x.inner.SetCollapseBehavior(raw.NSSplitViewItemCollapseBehavior(collapseBehavior))
 	return x
 }
 
@@ -111,8 +111,8 @@ func (x *SplitViewItem) WithAllowsFullHeightLayout(allowsFullHeightLayout bool) 
 }
 
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
-func (x *SplitViewItem) WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *SplitViewItem {
-	x.inner.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+func (x *SplitViewItem) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *SplitViewItem {
+	x.inner.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 	return x
 }
 
@@ -189,8 +189,8 @@ func (x *SplitViewItem) RemoveBottomAlignedAccessoryViewControllerAtIndex(index 
 }
 
 // Behavior calls the underlying Behavior.
-func (x *SplitViewItem) Behavior() raw.NSSplitViewItemBehavior {
-	return x.inner.Behavior()
+func (x *SplitViewItem) Behavior() NSSplitViewItemBehavior {
+	return NSSplitViewItemBehavior(x.inner.Behavior())
 }
 
 // ViewController calls the underlying ViewController.
@@ -228,13 +228,13 @@ func (x *SplitViewItem) SetCanCollapse(canCollapse bool) {
 }
 
 // CollapseBehavior calls the underlying CollapseBehavior.
-func (x *SplitViewItem) CollapseBehavior() raw.NSSplitViewItemCollapseBehavior {
-	return x.inner.CollapseBehavior()
+func (x *SplitViewItem) CollapseBehavior() NSSplitViewItemCollapseBehavior {
+	return NSSplitViewItemCollapseBehavior(x.inner.CollapseBehavior())
 }
 
 // SetCollapseBehavior calls the underlying SetCollapseBehavior.
-func (x *SplitViewItem) SetCollapseBehavior(collapseBehavior raw.NSSplitViewItemCollapseBehavior) {
-	x.inner.SetCollapseBehavior(collapseBehavior)
+func (x *SplitViewItem) SetCollapseBehavior(collapseBehavior NSSplitViewItemCollapseBehavior) {
+	x.inner.SetCollapseBehavior(raw.NSSplitViewItemCollapseBehavior(collapseBehavior))
 }
 
 // MinimumThickness calls the underlying MinimumThickness.
@@ -318,13 +318,13 @@ func (x *SplitViewItem) SetAllowsFullHeightLayout(allowsFullHeightLayout bool) {
 }
 
 // TitlebarSeparatorStyle calls the underlying TitlebarSeparatorStyle.
-func (x *SplitViewItem) TitlebarSeparatorStyle() raw.NSTitlebarSeparatorStyle {
-	return x.inner.TitlebarSeparatorStyle()
+func (x *SplitViewItem) TitlebarSeparatorStyle() NSTitlebarSeparatorStyle {
+	return NSTitlebarSeparatorStyle(x.inner.TitlebarSeparatorStyle())
 }
 
 // SetTitlebarSeparatorStyle calls the underlying SetTitlebarSeparatorStyle.
-func (x *SplitViewItem) SetTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) {
-	x.inner.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+func (x *SplitViewItem) SetTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) {
+	x.inner.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 }
 
 // AutomaticallyAdjustsSafeAreaInsets calls the underlying AutomaticallyAdjustsSafeAreaInsets.
@@ -375,7 +375,7 @@ type SplitViewItemable interface {
 	WithViewController(viewController ViewControllerProvider) *SplitViewItem
 	WithCollapsed(collapsed bool) *SplitViewItem
 	WithCanCollapse(canCollapse bool) *SplitViewItem
-	WithCollapseBehavior(collapseBehavior raw.NSSplitViewItemCollapseBehavior) *SplitViewItem
+	WithCollapseBehavior(collapseBehavior NSSplitViewItemCollapseBehavior) *SplitViewItem
 	WithMinimumThickness(minimumThickness float64) *SplitViewItem
 	WithMaximumThickness(maximumThickness float64) *SplitViewItem
 	WithPreferredThicknessFraction(preferredThicknessFraction float64) *SplitViewItem
@@ -384,7 +384,7 @@ type SplitViewItemable interface {
 	WithSpringLoaded(springLoaded bool) *SplitViewItem
 	WithCanCollapseFromWindowResize(canCollapseFromWindowResize bool) *SplitViewItem
 	WithAllowsFullHeightLayout(allowsFullHeightLayout bool) *SplitViewItem
-	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *SplitViewItem
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *SplitViewItem
 	WithAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjustsSafeAreaInsets bool) *SplitViewItem
 	WithTopAlignedAccessoryViewControllers(items ...*raw.NSSplitViewItemAccessoryViewController) *SplitViewItem
 	WithBottomAlignedAccessoryViewControllers(items ...*raw.NSSplitViewItemAccessoryViewController) *SplitViewItem
@@ -394,15 +394,15 @@ type SplitViewItemable interface {
 	AddBottomAlignedAccessoryViewController(childViewController *raw.NSSplitViewItemAccessoryViewController)
 	InsertBottomAlignedAccessoryViewControllerAtIndex(childViewController *raw.NSSplitViewItemAccessoryViewController, index int)
 	RemoveBottomAlignedAccessoryViewControllerAtIndex(index int)
-	Behavior() raw.NSSplitViewItemBehavior
+	Behavior() NSSplitViewItemBehavior
 	ViewController() *ViewController
 	SetViewController(viewController *raw.NSViewController)
 	IsCollapsed() bool
 	SetCollapsed(collapsed bool)
 	CanCollapse() bool
 	SetCanCollapse(canCollapse bool)
-	CollapseBehavior() raw.NSSplitViewItemCollapseBehavior
-	SetCollapseBehavior(collapseBehavior raw.NSSplitViewItemCollapseBehavior)
+	CollapseBehavior() NSSplitViewItemCollapseBehavior
+	SetCollapseBehavior(collapseBehavior NSSplitViewItemCollapseBehavior)
 	MinimumThickness() float64
 	SetMinimumThickness(minimumThickness float64)
 	MaximumThickness() float64
@@ -419,8 +419,8 @@ type SplitViewItemable interface {
 	SetCanCollapseFromWindowResize(canCollapseFromWindowResize bool)
 	AllowsFullHeightLayout() bool
 	SetAllowsFullHeightLayout(allowsFullHeightLayout bool)
-	TitlebarSeparatorStyle() raw.NSTitlebarSeparatorStyle
-	SetTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle)
+	TitlebarSeparatorStyle() NSTitlebarSeparatorStyle
+	SetTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle)
 	AutomaticallyAdjustsSafeAreaInsets() bool
 	SetAutomaticallyAdjustsSafeAreaInsets(automaticallyAdjustsSafeAreaInsets bool)
 	TopAlignedAccessoryViewControllers() []*SplitViewItemAccessoryViewController

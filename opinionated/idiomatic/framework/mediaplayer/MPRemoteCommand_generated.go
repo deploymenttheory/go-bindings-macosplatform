@@ -57,8 +57,10 @@ func (x *RemoteCommand) RemoveTarget(target objc.ID) {
 }
 
 // AddTargetWithHandler calls the underlying AddTargetWithHandler.
-func (x *RemoteCommand) AddTargetWithHandler(handler func(*raw.MPRemoteCommandEvent) raw.MPRemoteCommandHandlerStatus) objc.ID {
-	return x.inner.AddTargetWithHandler(handler)
+func (x *RemoteCommand) AddTargetWithHandler(handler func(*raw.MPRemoteCommandEvent) MPRemoteCommandHandlerStatus) objc.ID {
+	return x.inner.AddTargetWithHandler(func(_a0 *raw.MPRemoteCommandEvent) raw.MPRemoteCommandHandlerStatus {
+		return raw.MPRemoteCommandHandlerStatus(handler(_a0))
+	})
 }
 
 // IsEnabled calls the underlying IsEnabled.
@@ -80,7 +82,7 @@ type RemoteCommandable interface {
 	AddTargetAction(target objc.ID, action objc.SEL)
 	RemoveTargetAction(target objc.ID, action objc.SEL)
 	RemoveTarget(target objc.ID)
-	AddTargetWithHandler(handler func(*raw.MPRemoteCommandEvent) raw.MPRemoteCommandHandlerStatus) objc.ID
+	AddTargetWithHandler(handler func(*raw.MPRemoteCommandEvent) MPRemoteCommandHandlerStatus) objc.ID
 	IsEnabled() bool
 	SetEnabled(enabled bool)
 }

@@ -66,8 +66,8 @@ func (x *Cell) WithControlView(controlView ViewProvider) *Cell {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *Cell) WithType(type_ raw.NSCellType) *Cell {
-	x.inner.SetType(type_)
+func (x *Cell) WithType(type_ NSCellType) *Cell {
+	x.inner.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -150,8 +150,8 @@ func (x *Cell) WithHighlighted(highlighted bool) *Cell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Cell) WithAlignment(alignment raw.NSTextAlignment) *Cell {
-	x.inner.SetAlignment(alignment)
+func (x *Cell) WithAlignment(alignment NSTextAlignment) *Cell {
+	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -216,8 +216,8 @@ func (x *Cell) WithImage(image *Image) *Cell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Cell) WithControlSize(controlSize raw.NSControlSize) *Cell {
-	x.inner.SetControlSize(controlSize)
+func (x *Cell) WithControlSize(controlSize NSControlSize) *Cell {
+	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -240,14 +240,14 @@ func (x *Cell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *Cell {
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Cell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Cell {
-	x.inner.SetBaseWritingDirection(baseWritingDirection)
+func (x *Cell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Cell {
+	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Cell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Cell {
-	x.inner.SetLineBreakMode(lineBreakMode)
+func (x *Cell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Cell {
+	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -264,8 +264,8 @@ func (x *Cell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *Cell
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Cell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Cell {
-	x.inner.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Cell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Cell {
+	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -288,8 +288,8 @@ func (x *Cell) WithShowsFirstResponder(showsFirstResponder bool) *Cell {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Cell) WithFocusRingType(focusRingType raw.NSFocusRingType) *Cell {
-	x.inner.SetFocusRingType(focusRingType)
+func (x *Cell) WithFocusRingType(focusRingType NSFocusRingType) *Cell {
+	x.inner.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -318,20 +318,20 @@ func (x *Cell) WithAllowsMixedState(allowsMixedState bool) *Cell {
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *Cell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *Cell {
-	x.inner.SetBackgroundStyle(backgroundStyle)
+func (x *Cell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *Cell {
+	x.inner.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *Cell) WithControlTint(controlTint raw.NSControlTint) *Cell {
-	x.inner.SetControlTint(controlTint)
+func (x *Cell) WithControlTint(controlTint NSControlTint) *Cell {
+	x.inner.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
 // SendActionOn calls the underlying SendActionOn.
-func (x *Cell) SendActionOn(mask raw.NSEventMask) int {
-	return x.inner.SendActionOn(mask)
+func (x *Cell) SendActionOn(mask NSEventMask) int {
+	return x.inner.SendActionOn(raw.NSEventMask(mask))
 }
 
 // Compare calls the underlying Compare.
@@ -370,13 +370,13 @@ func (x *Cell) TakeIntegerValueFrom(sender objc.ID) {
 }
 
 // CellAttribute calls the underlying CellAttribute.
-func (x *Cell) CellAttribute(parameter raw.NSCellAttribute) int {
-	return x.inner.CellAttribute(parameter)
+func (x *Cell) CellAttribute(parameter NSCellAttribute) int {
+	return x.inner.CellAttribute(raw.NSCellAttribute(parameter))
 }
 
 // SetCellAttributeTo calls the underlying SetCellAttributeTo.
-func (x *Cell) SetCellAttributeTo(parameter raw.NSCellAttribute, value int) {
-	x.inner.SetCellAttributeTo(parameter, value)
+func (x *Cell) SetCellAttributeTo(parameter NSCellAttribute, value int) {
+	x.inner.SetCellAttributeTo(raw.NSCellAttribute(parameter), value)
 }
 
 // ImageRectForBounds calls the underlying ImageRectForBounds.
@@ -520,13 +520,13 @@ func (x *Cell) SetControlView(controlView *raw.NSView) {
 }
 
 // Type calls the underlying Type.
-func (x *Cell) Type() raw.NSCellType {
-	return x.inner.Type()
+func (x *Cell) Type() NSCellType {
+	return NSCellType(x.inner.Type())
 }
 
 // SetType calls the underlying SetType.
-func (x *Cell) SetType(type_ raw.NSCellType) {
-	x.inner.SetType(type_)
+func (x *Cell) SetType(type_ NSCellType) {
+	x.inner.SetType(raw.NSCellType(type_))
 }
 
 // State calls the underlying State.
@@ -669,13 +669,13 @@ func (x *Cell) SetHighlighted(highlighted bool) {
 }
 
 // Alignment calls the underlying Alignment.
-func (x *Cell) Alignment() raw.NSTextAlignment {
-	return x.inner.Alignment()
+func (x *Cell) Alignment() NSTextAlignment {
+	return NSTextAlignment(x.inner.Alignment())
 }
 
 // SetAlignment calls the underlying SetAlignment.
-func (x *Cell) SetAlignment(alignment raw.NSTextAlignment) {
-	x.inner.SetAlignment(alignment)
+func (x *Cell) SetAlignment(alignment NSTextAlignment) {
+	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
 }
 
 // Wraps calls the underlying Wraps.
@@ -805,13 +805,13 @@ func (x *Cell) SetImage(image *raw.NSImage) {
 }
 
 // ControlSize calls the underlying ControlSize.
-func (x *Cell) ControlSize() raw.NSControlSize {
-	return x.inner.ControlSize()
+func (x *Cell) ControlSize() NSControlSize {
+	return NSControlSize(x.inner.ControlSize())
 }
 
 // SetControlSize calls the underlying SetControlSize.
-func (x *Cell) SetControlSize(controlSize raw.NSControlSize) {
-	x.inner.SetControlSize(controlSize)
+func (x *Cell) SetControlSize(controlSize NSControlSize) {
+	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 }
 
 // RepresentedObject calls the underlying RepresentedObject.
@@ -859,23 +859,23 @@ func (x *Cell) SetSendsActionOnEndEditing(sendsActionOnEndEditing bool) {
 }
 
 // BaseWritingDirection calls the underlying BaseWritingDirection.
-func (x *Cell) BaseWritingDirection() raw.NSWritingDirection {
-	return x.inner.BaseWritingDirection()
+func (x *Cell) BaseWritingDirection() NSWritingDirection {
+	return NSWritingDirection(x.inner.BaseWritingDirection())
 }
 
 // SetBaseWritingDirection calls the underlying SetBaseWritingDirection.
-func (x *Cell) SetBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) {
-	x.inner.SetBaseWritingDirection(baseWritingDirection)
+func (x *Cell) SetBaseWritingDirection(baseWritingDirection NSWritingDirection) {
+	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 }
 
 // LineBreakMode calls the underlying LineBreakMode.
-func (x *Cell) LineBreakMode() raw.NSLineBreakMode {
-	return x.inner.LineBreakMode()
+func (x *Cell) LineBreakMode() NSLineBreakMode {
+	return NSLineBreakMode(x.inner.LineBreakMode())
 }
 
 // SetLineBreakMode calls the underlying SetLineBreakMode.
-func (x *Cell) SetLineBreakMode(lineBreakMode raw.NSLineBreakMode) {
-	x.inner.SetLineBreakMode(lineBreakMode)
+func (x *Cell) SetLineBreakMode(lineBreakMode NSLineBreakMode) {
+	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 }
 
 // AllowsUndo calls the underlying AllowsUndo.
@@ -899,13 +899,13 @@ func (x *Cell) SetTruncatesLastVisibleLine(truncatesLastVisibleLine bool) {
 }
 
 // UserInterfaceLayoutDirection calls the underlying UserInterfaceLayoutDirection.
-func (x *Cell) UserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection {
-	return x.inner.UserInterfaceLayoutDirection()
+func (x *Cell) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
+	return NSUserInterfaceLayoutDirection(x.inner.UserInterfaceLayoutDirection())
 }
 
 // SetUserInterfaceLayoutDirection calls the underlying SetUserInterfaceLayoutDirection.
-func (x *Cell) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) {
-	x.inner.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Cell) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) {
+	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 }
 
 // UsesSingleLineMode calls the underlying UsesSingleLineMode.
@@ -959,13 +959,13 @@ func (x *Cell) SetShowsFirstResponder(showsFirstResponder bool) {
 }
 
 // FocusRingType calls the underlying FocusRingType.
-func (x *Cell) FocusRingType() raw.NSFocusRingType {
-	return x.inner.FocusRingType()
+func (x *Cell) FocusRingType() NSFocusRingType {
+	return NSFocusRingType(x.inner.FocusRingType())
 }
 
 // SetFocusRingType calls the underlying SetFocusRingType.
-func (x *Cell) SetFocusRingType(focusRingType raw.NSFocusRingType) {
-	x.inner.SetFocusRingType(focusRingType)
+func (x *Cell) SetFocusRingType(focusRingType NSFocusRingType) {
+	x.inner.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 }
 
 // WantsNotificationForMarkedText calls the underlying WantsNotificationForMarkedText.
@@ -1024,8 +1024,8 @@ func (x *Cell) NextState() int {
 }
 
 // HitTestForEventInRectOfView calls the underlying HitTestForEventInRectOfView.
-func (x *Cell) HitTestForEventInRectOfView(event *raw.NSEvent, cellFrame corefoundation.CGRect, controlView *raw.NSView) raw.NSCellHitResult {
-	return x.inner.HitTestForEventInRectOfView(event, cellFrame, controlView)
+func (x *Cell) HitTestForEventInRectOfView(event *raw.NSEvent, cellFrame corefoundation.CGRect, controlView *raw.NSView) NSCellHitResult {
+	return NSCellHitResult(x.inner.HitTestForEventInRectOfView(event, cellFrame, controlView))
 }
 
 // ExpansionFrameWithFrameInView calls the underlying ExpansionFrameWithFrameInView.
@@ -1039,18 +1039,18 @@ func (x *Cell) DrawWithExpansionFrameInView(cellFrame corefoundation.CGRect, vie
 }
 
 // BackgroundStyle calls the underlying BackgroundStyle.
-func (x *Cell) BackgroundStyle() raw.NSBackgroundStyle {
-	return x.inner.BackgroundStyle()
+func (x *Cell) BackgroundStyle() NSBackgroundStyle {
+	return NSBackgroundStyle(x.inner.BackgroundStyle())
 }
 
 // SetBackgroundStyle calls the underlying SetBackgroundStyle.
-func (x *Cell) SetBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) {
-	x.inner.SetBackgroundStyle(backgroundStyle)
+func (x *Cell) SetBackgroundStyle(backgroundStyle NSBackgroundStyle) {
+	x.inner.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 }
 
 // InteriorBackgroundStyle calls the underlying InteriorBackgroundStyle.
-func (x *Cell) InteriorBackgroundStyle() raw.NSBackgroundStyle {
-	return x.inner.InteriorBackgroundStyle()
+func (x *Cell) InteriorBackgroundStyle() NSBackgroundStyle {
+	return NSBackgroundStyle(x.inner.InteriorBackgroundStyle())
 }
 
 // EntryType calls the underlying EntryType.
@@ -1098,13 +1098,13 @@ func (x *Cell) SetTitleWithMnemonic(stringWithAmpersand string) {
 }
 
 // ControlTint calls the underlying ControlTint.
-func (x *Cell) ControlTint() raw.NSControlTint {
-	return x.inner.ControlTint()
+func (x *Cell) ControlTint() NSControlTint {
+	return NSControlTint(x.inner.ControlTint())
 }
 
 // SetControlTint calls the underlying SetControlTint.
-func (x *Cell) SetControlTint(controlTint raw.NSControlTint) {
-	x.inner.SetControlTint(controlTint)
+func (x *Cell) SetControlTint(controlTint NSControlTint) {
+	x.inner.SetControlTint(raw.NSControlTint(controlTint))
 }
 
 func (x *Cell) asCell() *raw.NSCell { return x.inner }
@@ -1113,7 +1113,7 @@ func (x *Cell) asCell() *raw.NSCell { return x.inner }
 type Cellable interface {
 	Unwrap() *raw.NSCell
 	WithControlView(controlView ViewProvider) *Cell
-	WithType(type_ raw.NSCellType) *Cell
+	WithType(type_ NSCellType) *Cell
 	WithState(state int) *Cell
 	WithTarget(target objc.ID) *Cell
 	WithAction(action objc.SEL) *Cell
@@ -1127,7 +1127,7 @@ type Cellable interface {
 	WithBezeled(bezeled bool) *Cell
 	WithScrollable(scrollable bool) *Cell
 	WithHighlighted(highlighted bool) *Cell
-	WithAlignment(alignment raw.NSTextAlignment) *Cell
+	WithAlignment(alignment NSTextAlignment) *Cell
 	WithWraps(wraps bool) *Cell
 	WithFont(font *Font) *Cell
 	WithFormatter(formatter *foundation.NSFormatter) *Cell
@@ -1138,26 +1138,26 @@ type Cellable interface {
 	WithDoubleValue(doubleValue float64) *Cell
 	WithIntegerValue(integerValue int) *Cell
 	WithImage(image *Image) *Cell
-	WithControlSize(controlSize raw.NSControlSize) *Cell
+	WithControlSize(controlSize NSControlSize) *Cell
 	WithRepresentedObject(representedObject objc.ID) *Cell
 	WithMenu(menu *Menu) *Cell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *Cell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Cell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Cell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Cell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Cell
 	WithAllowsUndo(allowsUndo bool) *Cell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *Cell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Cell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Cell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Cell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Cell
 	WithShowsFirstResponder(showsFirstResponder bool) *Cell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Cell
+	WithFocusRingType(focusRingType NSFocusRingType) *Cell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Cell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *Cell
 	WithImportsGraphics(importsGraphics bool) *Cell
 	WithAllowsMixedState(allowsMixedState bool) *Cell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *Cell
-	WithControlTint(controlTint raw.NSControlTint) *Cell
-	SendActionOn(mask raw.NSEventMask) int
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *Cell
+	WithControlTint(controlTint NSControlTint) *Cell
+	SendActionOn(mask NSEventMask) int
 	Compare(otherCell objc.ID) foundation.NSComparisonResult
 	TakeIntValueFrom(sender objc.ID)
 	TakeFloatValueFrom(sender objc.ID)
@@ -1165,8 +1165,8 @@ type Cellable interface {
 	TakeStringValueFrom(sender objc.ID)
 	TakeObjectValueFrom(sender objc.ID)
 	TakeIntegerValueFrom(sender objc.ID)
-	CellAttribute(parameter raw.NSCellAttribute) int
-	SetCellAttributeTo(parameter raw.NSCellAttribute, value int)
+	CellAttribute(parameter NSCellAttribute) int
+	SetCellAttributeTo(parameter NSCellAttribute, value int)
 	ImageRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
 	TitleRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
 	DrawingRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
@@ -1191,8 +1191,8 @@ type Cellable interface {
 	DraggingImageComponentsWithFrameInView(frame corefoundation.CGRect, view *raw.NSView) *foundation.NSArray[*raw.NSDraggingImageComponent]
 	ControlView() *View
 	SetControlView(controlView *raw.NSView)
-	Type() raw.NSCellType
-	SetType(type_ raw.NSCellType)
+	Type() NSCellType
+	SetType(type_ NSCellType)
 	State() int
 	SetState(state int)
 	Target() objc.ID
@@ -1220,8 +1220,8 @@ type Cellable interface {
 	SetScrollable(scrollable bool)
 	IsHighlighted() bool
 	SetHighlighted(highlighted bool)
-	Alignment() raw.NSTextAlignment
-	SetAlignment(alignment raw.NSTextAlignment)
+	Alignment() NSTextAlignment
+	SetAlignment(alignment NSTextAlignment)
 	Wraps() bool
 	SetWraps(wraps bool)
 	Font() *Font
@@ -1244,8 +1244,8 @@ type Cellable interface {
 	SetIntegerValue(integerValue int)
 	Image() *Image
 	SetImage(image *raw.NSImage)
-	ControlSize() raw.NSControlSize
-	SetControlSize(controlSize raw.NSControlSize)
+	ControlSize() NSControlSize
+	SetControlSize(controlSize NSControlSize)
 	RepresentedObject() objc.ID
 	SetRepresentedObject(representedObject objc.ID)
 	CellSize() corefoundation.CGSize
@@ -1254,16 +1254,16 @@ type Cellable interface {
 	SetMenu(menu *raw.NSMenu)
 	SendsActionOnEndEditing() bool
 	SetSendsActionOnEndEditing(sendsActionOnEndEditing bool)
-	BaseWritingDirection() raw.NSWritingDirection
-	SetBaseWritingDirection(baseWritingDirection raw.NSWritingDirection)
-	LineBreakMode() raw.NSLineBreakMode
-	SetLineBreakMode(lineBreakMode raw.NSLineBreakMode)
+	BaseWritingDirection() NSWritingDirection
+	SetBaseWritingDirection(baseWritingDirection NSWritingDirection)
+	LineBreakMode() NSLineBreakMode
+	SetLineBreakMode(lineBreakMode NSLineBreakMode)
 	AllowsUndo() bool
 	SetAllowsUndo(allowsUndo bool)
 	TruncatesLastVisibleLine() bool
 	SetTruncatesLastVisibleLine(truncatesLastVisibleLine bool)
-	UserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection
-	SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection)
+	UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection
+	SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection)
 	UsesSingleLineMode() bool
 	SetUsesSingleLineMode(usesSingleLineMode bool)
 	PerformClick(sender objc.ID)
@@ -1274,8 +1274,8 @@ type Cellable interface {
 	AcceptsFirstResponder() bool
 	ShowsFirstResponder() bool
 	SetShowsFirstResponder(showsFirstResponder bool)
-	FocusRingType() raw.NSFocusRingType
-	SetFocusRingType(focusRingType raw.NSFocusRingType)
+	FocusRingType() NSFocusRingType
+	SetFocusRingType(focusRingType NSFocusRingType)
 	WantsNotificationForMarkedText() bool
 	AttributedStringValue() *foundation.NSAttributedString
 	SetAttributedStringValue(attributedStringValue *foundation.NSAttributedString)
@@ -1287,12 +1287,12 @@ type Cellable interface {
 	AllowsMixedState() bool
 	SetAllowsMixedState(allowsMixedState bool)
 	NextState() int
-	HitTestForEventInRectOfView(event *raw.NSEvent, cellFrame corefoundation.CGRect, controlView *raw.NSView) raw.NSCellHitResult
+	HitTestForEventInRectOfView(event *raw.NSEvent, cellFrame corefoundation.CGRect, controlView *raw.NSView) NSCellHitResult
 	ExpansionFrameWithFrameInView(cellFrame corefoundation.CGRect, view *raw.NSView) corefoundation.CGRect
 	DrawWithExpansionFrameInView(cellFrame corefoundation.CGRect, view *raw.NSView)
-	BackgroundStyle() raw.NSBackgroundStyle
-	SetBackgroundStyle(backgroundStyle raw.NSBackgroundStyle)
-	InteriorBackgroundStyle() raw.NSBackgroundStyle
+	BackgroundStyle() NSBackgroundStyle
+	SetBackgroundStyle(backgroundStyle NSBackgroundStyle)
+	InteriorBackgroundStyle() NSBackgroundStyle
 	EntryType() int
 	SetEntryType(type_ int)
 	IsEntryAcceptable(string_ string) bool
@@ -1301,8 +1301,8 @@ type Cellable interface {
 	MnemonicLocation() uint
 	Mnemonic() string
 	SetTitleWithMnemonic(stringWithAmpersand string)
-	ControlTint() raw.NSControlTint
-	SetControlTint(controlTint raw.NSControlTint)
+	ControlTint() NSControlTint
+	SetControlTint(controlTint NSControlTint)
 }
 
 var _ Cellable = (*Cell)(nil)

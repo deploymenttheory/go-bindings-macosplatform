@@ -46,13 +46,13 @@ func (x *Argument) Name() string {
 }
 
 // Type calls the underlying Type.
-func (x *Argument) Type() raw.MTLArgumentType {
-	return x.inner.Type()
+func (x *Argument) Type() MTLArgumentType {
+	return MTLArgumentType(x.inner.Type())
 }
 
 // Access calls the underlying Access.
-func (x *Argument) Access() raw.MTLBindingAccess {
-	return x.inner.Access()
+func (x *Argument) Access() MTLBindingAccess {
+	return MTLBindingAccess(x.inner.Access())
 }
 
 // Index calls the underlying Index.
@@ -76,8 +76,8 @@ func (x *Argument) BufferDataSize() uint {
 }
 
 // BufferDataType calls the underlying BufferDataType.
-func (x *Argument) BufferDataType() raw.MTLDataType {
-	return x.inner.BufferDataType()
+func (x *Argument) BufferDataType() MTLDataType {
+	return MTLDataType(x.inner.BufferDataType())
 }
 
 // BufferStructType calls the underlying BufferStructType.
@@ -109,13 +109,13 @@ func (x *Argument) ThreadgroupMemoryDataSize() uint {
 }
 
 // TextureType calls the underlying TextureType.
-func (x *Argument) TextureType() raw.MTLTextureType {
-	return x.inner.TextureType()
+func (x *Argument) TextureType() MTLTextureType {
+	return MTLTextureType(x.inner.TextureType())
 }
 
 // TextureDataType calls the underlying TextureDataType.
-func (x *Argument) TextureDataType() raw.MTLDataType {
-	return x.inner.TextureDataType()
+func (x *Argument) TextureDataType() MTLDataType {
+	return MTLDataType(x.inner.TextureDataType())
 }
 
 // IsDepthTexture calls the underlying IsDepthTexture.
@@ -132,19 +132,19 @@ func (x *Argument) ArrayLength() uint {
 type Argumentable interface {
 	Unwrap() *raw.MTLArgument
 	Name() string
-	Type() raw.MTLArgumentType
-	Access() raw.MTLBindingAccess
+	Type() MTLArgumentType
+	Access() MTLBindingAccess
 	Index() uint
 	IsActive() bool
 	BufferAlignment() uint
 	BufferDataSize() uint
-	BufferDataType() raw.MTLDataType
+	BufferDataType() MTLDataType
 	BufferStructType() *StructType
 	BufferPointerType() *PointerType
 	ThreadgroupMemoryAlignment() uint
 	ThreadgroupMemoryDataSize() uint
-	TextureType() raw.MTLTextureType
-	TextureDataType() raw.MTLDataType
+	TextureType() MTLTextureType
+	TextureDataType() MTLDataType
 	IsDepthTexture() bool
 	ArrayLength() uint
 }

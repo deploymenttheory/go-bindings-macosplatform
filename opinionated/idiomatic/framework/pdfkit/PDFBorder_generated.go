@@ -38,8 +38,8 @@ func NewBorder() *Border {
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *Border) WithStyle(style raw.PDFBorderStyle) *Border {
-	x.inner.SetStyle(style)
+func (x *Border) WithStyle(style PDFBorderStyle) *Border {
+	x.inner.SetStyle(raw.PDFBorderStyle(style))
 	return x
 }
 
@@ -55,13 +55,13 @@ func (x *Border) DrawInRect(rect corefoundation.CGRect) {
 }
 
 // Style calls the underlying Style.
-func (x *Border) Style() raw.PDFBorderStyle {
-	return x.inner.Style()
+func (x *Border) Style() PDFBorderStyle {
+	return PDFBorderStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *Border) SetStyle(style raw.PDFBorderStyle) {
-	x.inner.SetStyle(style)
+func (x *Border) SetStyle(style PDFBorderStyle) {
+	x.inner.SetStyle(raw.PDFBorderStyle(style))
 }
 
 // LineWidth calls the underlying LineWidth.
@@ -92,11 +92,11 @@ func (x *Border) BorderKeyValues() *foundation.NSDictionary[objc.ID, objc.ID] {
 // Borderable is the interface implemented by [Border], for mocking and DI.
 type Borderable interface {
 	Unwrap() *raw.PDFBorder
-	WithStyle(style raw.PDFBorderStyle) *Border
+	WithStyle(style PDFBorderStyle) *Border
 	WithLineWidth(lineWidth float64) *Border
 	DrawInRect(rect corefoundation.CGRect)
-	Style() raw.PDFBorderStyle
-	SetStyle(style raw.PDFBorderStyle)
+	Style() PDFBorderStyle
+	SetStyle(style PDFBorderStyle)
 	LineWidth() float64
 	SetLineWidth(lineWidth float64)
 	DashPattern() *foundation.NSArray[objc.ID]

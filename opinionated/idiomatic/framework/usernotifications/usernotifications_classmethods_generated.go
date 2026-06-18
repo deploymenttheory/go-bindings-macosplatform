@@ -21,8 +21,8 @@ func TriggerWithDateMatchingComponentsRepeats(dateComponents *foundation.NSDateC
 }
 
 // ActionWithIdentifierTitleOptions calls the underlying UNNotificationActionActionWithIdentifierTitleOptions.
-func ActionWithIdentifierTitleOptions(identifier string, title string, options raw.UNNotificationActionOptions) *NotificationAction {
-	_r := raw.UNNotificationActionActionWithIdentifierTitleOptions(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), options)
+func ActionWithIdentifierTitleOptions(identifier string, title string, options UNNotificationActionOptions) *NotificationAction {
+	_r := raw.UNNotificationActionActionWithIdentifierTitleOptions(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), raw.UNNotificationActionOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -30,8 +30,8 @@ func ActionWithIdentifierTitleOptions(identifier string, title string, options r
 }
 
 // ActionWithIdentifierTitleOptionsIcon calls the underlying UNNotificationActionActionWithIdentifierTitleOptionsIcon.
-func ActionWithIdentifierTitleOptionsIcon(identifier string, title string, options raw.UNNotificationActionOptions, icon *raw.UNNotificationActionIcon) *NotificationAction {
-	_r := raw.UNNotificationActionActionWithIdentifierTitleOptionsIcon(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), options, icon)
+func ActionWithIdentifierTitleOptionsIcon(identifier string, title string, options UNNotificationActionOptions, icon *raw.UNNotificationActionIcon) *NotificationAction {
+	_r := raw.UNNotificationActionActionWithIdentifierTitleOptionsIcon(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), raw.UNNotificationActionOptions(options), icon)
 	if _r == nil {
 		return nil
 	}
@@ -78,8 +78,8 @@ func ContextWithSendMessageIntentAttributedContent(sendMessageIntent *intents.IN
 }
 
 // CategoryWithIdentifierActionsIntentIdentifiersOptions calls the underlying UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersOptions.
-func CategoryWithIdentifierActionsIntentIdentifiersOptions(identifier string, actions *foundation.NSArray[*raw.UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], options raw.UNNotificationCategoryOptions) *NotificationCategory {
-	_r := raw.UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersOptions(foundation.NSStringStringWithUTF8String(identifier), actions, intentIdentifiers, options)
+func CategoryWithIdentifierActionsIntentIdentifiersOptions(identifier string, actions *foundation.NSArray[*raw.UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], options UNNotificationCategoryOptions) *NotificationCategory {
+	_r := raw.UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersOptions(foundation.NSStringStringWithUTF8String(identifier), actions, intentIdentifiers, raw.UNNotificationCategoryOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -87,8 +87,8 @@ func CategoryWithIdentifierActionsIntentIdentifiersOptions(identifier string, ac
 }
 
 // CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions calls the underlying UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions.
-func CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions(identifier string, actions *foundation.NSArray[*raw.UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], hiddenPreviewsBodyPlaceholder string, options raw.UNNotificationCategoryOptions) *NotificationCategory {
-	_r := raw.UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions(foundation.NSStringStringWithUTF8String(identifier), actions, intentIdentifiers, foundation.NSStringStringWithUTF8String(hiddenPreviewsBodyPlaceholder), options)
+func CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions(identifier string, actions *foundation.NSArray[*raw.UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], hiddenPreviewsBodyPlaceholder string, options UNNotificationCategoryOptions) *NotificationCategory {
+	_r := raw.UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderOptions(foundation.NSStringStringWithUTF8String(identifier), actions, intentIdentifiers, foundation.NSStringStringWithUTF8String(hiddenPreviewsBodyPlaceholder), raw.UNNotificationCategoryOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -96,8 +96,8 @@ func CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholder
 }
 
 // CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions calls the underlying UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions.
-func CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions(identifier string, actions *foundation.NSArray[*raw.UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], hiddenPreviewsBodyPlaceholder string, categorySummaryFormat string, options raw.UNNotificationCategoryOptions) *NotificationCategory {
-	_r := raw.UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions(foundation.NSStringStringWithUTF8String(identifier), actions, intentIdentifiers, foundation.NSStringStringWithUTF8String(hiddenPreviewsBodyPlaceholder), foundation.NSStringStringWithUTF8String(categorySummaryFormat), options)
+func CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions(identifier string, actions *foundation.NSArray[*raw.UNNotificationAction], intentIdentifiers *foundation.NSArray[*foundation.NSString], hiddenPreviewsBodyPlaceholder string, categorySummaryFormat string, options UNNotificationCategoryOptions) *NotificationCategory {
+	_r := raw.UNNotificationCategoryCategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholderCategorySummaryFormatOptions(foundation.NSStringStringWithUTF8String(identifier), actions, intentIdentifiers, foundation.NSStringStringWithUTF8String(hiddenPreviewsBodyPlaceholder), foundation.NSStringStringWithUTF8String(categorySummaryFormat), raw.UNNotificationCategoryOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -150,8 +150,8 @@ func DefaultSound() *NotificationSound {
 }
 
 // ActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder calls the underlying UNTextInputNotificationActionActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder.
-func ActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(identifier string, title string, options raw.UNNotificationActionOptions, textInputButtonTitle string, textInputPlaceholder string) *TextInputNotificationAction {
-	_r := raw.UNTextInputNotificationActionActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), options, foundation.NSStringStringWithUTF8String(textInputButtonTitle), foundation.NSStringStringWithUTF8String(textInputPlaceholder))
+func ActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(identifier string, title string, options UNNotificationActionOptions, textInputButtonTitle string, textInputPlaceholder string) *TextInputNotificationAction {
+	_r := raw.UNTextInputNotificationActionActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), raw.UNNotificationActionOptions(options), foundation.NSStringStringWithUTF8String(textInputButtonTitle), foundation.NSStringStringWithUTF8String(textInputPlaceholder))
 	if _r == nil {
 		return nil
 	}
@@ -159,8 +159,8 @@ func ActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(id
 }
 
 // ActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder calls the underlying UNTextInputNotificationActionActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder.
-func ActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder(identifier string, title string, options raw.UNNotificationActionOptions, icon *raw.UNNotificationActionIcon, textInputButtonTitle string, textInputPlaceholder string) *TextInputNotificationAction {
-	_r := raw.UNTextInputNotificationActionActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), options, icon, foundation.NSStringStringWithUTF8String(textInputButtonTitle), foundation.NSStringStringWithUTF8String(textInputPlaceholder))
+func ActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder(identifier string, title string, options UNNotificationActionOptions, icon *raw.UNNotificationActionIcon, textInputButtonTitle string, textInputPlaceholder string) *TextInputNotificationAction {
+	_r := raw.UNTextInputNotificationActionActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(title), raw.UNNotificationActionOptions(options), icon, foundation.NSStringStringWithUTF8String(textInputButtonTitle), foundation.NSStringStringWithUTF8String(textInputPlaceholder))
 	if _r == nil {
 		return nil
 	}

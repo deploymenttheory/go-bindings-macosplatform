@@ -93,8 +93,8 @@ func ScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint6
 }
 
 // StreamWithLocalizedNameStreamIDDirectionClockTypeSource calls the underlying CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionClockTypeSource.
-func StreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName string, streamID *foundation.NSUUID, direction raw.CMIOExtensionStreamDirection, clockType raw.CMIOExtensionStreamClockType, source raw.CMIOExtensionStreamSource) *ExtensionStream {
-	_r := raw.CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionClockTypeSource(foundation.NSStringStringWithUTF8String(localizedName), streamID, direction, clockType, source)
+func StreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, clockType CMIOExtensionStreamClockType, source raw.CMIOExtensionStreamSource) *ExtensionStream {
+	_r := raw.CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionClockTypeSource(foundation.NSStringStringWithUTF8String(localizedName), streamID, raw.CMIOExtensionStreamDirection(direction), raw.CMIOExtensionStreamClockType(clockType), source)
 	if _r == nil {
 		return nil
 	}
@@ -102,8 +102,8 @@ func StreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName strin
 }
 
 // StreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource calls the underlying CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource.
-func StreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName string, streamID *foundation.NSUUID, direction raw.CMIOExtensionStreamDirection, customClockConfiguration *raw.CMIOExtensionStreamCustomClockConfiguration, source raw.CMIOExtensionStreamSource) *ExtensionStream {
-	_r := raw.CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(foundation.NSStringStringWithUTF8String(localizedName), streamID, direction, customClockConfiguration, source)
+func StreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, customClockConfiguration *raw.CMIOExtensionStreamCustomClockConfiguration, source raw.CMIOExtensionStreamSource) *ExtensionStream {
+	_r := raw.CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(foundation.NSStringStringWithUTF8String(localizedName), streamID, raw.CMIOExtensionStreamDirection(direction), customClockConfiguration, source)
 	if _r == nil {
 		return nil
 	}

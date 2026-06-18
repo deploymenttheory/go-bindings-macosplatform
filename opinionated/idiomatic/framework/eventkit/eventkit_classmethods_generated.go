@@ -29,8 +29,8 @@ func AlarmWithRelativeOffset(offset float64) *Alarm {
 }
 
 // CalendarForEntityTypeEventStore calls the underlying EKCalendarCalendarForEntityTypeEventStore.
-func CalendarForEntityTypeEventStore(entityType raw.EKEntityType, eventStore *raw.EKEventStore) *Calendar {
-	_r := raw.EKCalendarCalendarForEntityTypeEventStore(entityType, eventStore)
+func CalendarForEntityTypeEventStore(entityType EKEntityType, eventStore *raw.EKEventStore) *Calendar {
+	_r := raw.EKCalendarCalendarForEntityTypeEventStore(raw.EKEntityType(entityType), eventStore)
 	if _r == nil {
 		return nil
 	}
@@ -47,13 +47,13 @@ func EventWithEventStore(eventStore *raw.EKEventStore) *Event {
 }
 
 // AuthorizationStatusForEntityType calls the underlying EKEventStoreAuthorizationStatusForEntityType.
-func AuthorizationStatusForEntityType(entityType raw.EKEntityType) raw.EKAuthorizationStatus {
-	return raw.EKEventStoreAuthorizationStatusForEntityType(entityType)
+func AuthorizationStatusForEntityType(entityType EKEntityType) EKAuthorizationStatus {
+	return EKAuthorizationStatus(raw.EKEventStoreAuthorizationStatusForEntityType(raw.EKEntityType(entityType)))
 }
 
 // DayOfWeek calls the underlying EKRecurrenceDayOfWeekDayOfWeek.
-func DayOfWeek(dayOfTheWeek raw.EKWeekday) *RecurrenceDayOfWeek {
-	_r := raw.EKRecurrenceDayOfWeekDayOfWeek(dayOfTheWeek)
+func DayOfWeek(dayOfTheWeek EKWeekday) *RecurrenceDayOfWeek {
+	_r := raw.EKRecurrenceDayOfWeekDayOfWeek(raw.EKWeekday(dayOfTheWeek))
 	if _r == nil {
 		return nil
 	}
@@ -61,8 +61,8 @@ func DayOfWeek(dayOfTheWeek raw.EKWeekday) *RecurrenceDayOfWeek {
 }
 
 // DayOfWeekWeekNumber calls the underlying EKRecurrenceDayOfWeekDayOfWeekWeekNumber.
-func DayOfWeekWeekNumber(dayOfTheWeek raw.EKWeekday, weekNumber int) *RecurrenceDayOfWeek {
-	_r := raw.EKRecurrenceDayOfWeekDayOfWeekWeekNumber(dayOfTheWeek, weekNumber)
+func DayOfWeekWeekNumber(dayOfTheWeek EKWeekday, weekNumber int) *RecurrenceDayOfWeek {
+	_r := raw.EKRecurrenceDayOfWeekDayOfWeekWeekNumber(raw.EKWeekday(dayOfTheWeek), weekNumber)
 	if _r == nil {
 		return nil
 	}

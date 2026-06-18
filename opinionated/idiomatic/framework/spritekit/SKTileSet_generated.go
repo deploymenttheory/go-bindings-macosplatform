@@ -41,9 +41,9 @@ func NewTileSetWithTileGroups(tileGroups *foundation.NSArray[*raw.SKTileGroup]) 
 }
 
 // NewTileSetWithTileGroupsTileSetType creates a new [TileSet].
-func NewTileSetWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*raw.SKTileGroup], tileSetType raw.SKTileSetType) *TileSet {
+func NewTileSetWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*raw.SKTileGroup], tileSetType SKTileSetType) *TileSet {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTileSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileGroups:tileSetType:"), tileGroups.Ptr(), tileSetType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileGroups:tileSetType:"), tileGroups.Ptr(), raw.SKTileSetType(tileSetType))
 	return &TileSet{inner: raw.SKTileSetFromID(_id)}
 }
 
@@ -72,8 +72,8 @@ func (x *TileSet) WithName(name string) *TileSet {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *TileSet) WithType(type_ raw.SKTileSetType) *TileSet {
-	x.inner.SetType(type_)
+func (x *TileSet) WithType(type_ SKTileSetType) *TileSet {
+	x.inner.SetType(raw.SKTileSetType(type_))
 	return x
 }
 
@@ -120,13 +120,13 @@ func (x *TileSet) SetName(name string) {
 }
 
 // Type calls the underlying Type.
-func (x *TileSet) Type() raw.SKTileSetType {
-	return x.inner.Type()
+func (x *TileSet) Type() SKTileSetType {
+	return SKTileSetType(x.inner.Type())
 }
 
 // SetType calls the underlying SetType.
-func (x *TileSet) SetType(type_ raw.SKTileSetType) {
-	x.inner.SetType(type_)
+func (x *TileSet) SetType(type_ SKTileSetType) {
+	x.inner.SetType(raw.SKTileSetType(type_))
 }
 
 // DefaultTileGroup calls the underlying DefaultTileGroup.
@@ -158,15 +158,15 @@ type TileSetable interface {
 	Unwrap() *raw.SKTileSet
 	WithTileGroups(items ...*raw.SKTileGroup) *TileSet
 	WithName(name string) *TileSet
-	WithType(type_ raw.SKTileSetType) *TileSet
+	WithType(type_ SKTileSetType) *TileSet
 	WithDefaultTileGroup(defaultTileGroup *TileGroup) *TileSet
 	WithDefaultTileSize(defaultTileSize corefoundation.CGSize) *TileSet
 	TileGroups() []*TileGroup
 	SetTileGroups(tileGroups *foundation.NSArray[*raw.SKTileGroup])
 	Name() string
 	SetName(name string)
-	Type() raw.SKTileSetType
-	SetType(type_ raw.SKTileSetType)
+	Type() SKTileSetType
+	SetType(type_ SKTileSetType)
 	DefaultTileGroup() *TileGroup
 	SetDefaultTileGroup(defaultTileGroup *raw.SKTileGroup)
 	DefaultTileSize() corefoundation.CGSize

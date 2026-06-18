@@ -36,8 +36,8 @@ func NewPoolingDescriptor() *PoolingDescriptor {
 }
 
 // PoolingType calls the underlying PoolingType.
-func (x *PoolingDescriptor) PoolingType() raw.MLCPoolingType {
-	return x.inner.PoolingType()
+func (x *PoolingDescriptor) PoolingType() MLCPoolingType {
+	return MLCPoolingType(x.inner.PoolingType())
 }
 
 // KernelWidth calls the underlying KernelWidth.
@@ -71,8 +71,8 @@ func (x *PoolingDescriptor) DilationRateInY() uint {
 }
 
 // PaddingPolicy calls the underlying PaddingPolicy.
-func (x *PoolingDescriptor) PaddingPolicy() raw.MLCPaddingPolicy {
-	return x.inner.PaddingPolicy()
+func (x *PoolingDescriptor) PaddingPolicy() MLCPaddingPolicy {
+	return MLCPaddingPolicy(x.inner.PaddingPolicy())
 }
 
 // PaddingSizeInX calls the underlying PaddingSizeInX.
@@ -93,14 +93,14 @@ func (x *PoolingDescriptor) CountIncludesPadding() bool {
 // PoolingDescriptorable is the interface implemented by [PoolingDescriptor], for mocking and DI.
 type PoolingDescriptorable interface {
 	Unwrap() *raw.MLCPoolingDescriptor
-	PoolingType() raw.MLCPoolingType
+	PoolingType() MLCPoolingType
 	KernelWidth() uint
 	KernelHeight() uint
 	StrideInX() uint
 	StrideInY() uint
 	DilationRateInX() uint
 	DilationRateInY() uint
-	PaddingPolicy() raw.MLCPaddingPolicy
+	PaddingPolicy() MLCPaddingPolicy
 	PaddingSizeInX() uint
 	PaddingSizeInY() uint
 	CountIncludesPadding() bool

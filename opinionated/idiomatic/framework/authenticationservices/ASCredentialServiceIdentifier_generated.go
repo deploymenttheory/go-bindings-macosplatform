@@ -32,16 +32,16 @@ func CredentialServiceIdentifierFromID(id objc.ID) *CredentialServiceIdentifier 
 }
 
 // NewCredentialServiceIdentifierWithIdentifierType creates a new [CredentialServiceIdentifier].
-func NewCredentialServiceIdentifierWithIdentifierType(identifier string, type_ raw.ASCredentialServiceIdentifierType) *CredentialServiceIdentifier {
+func NewCredentialServiceIdentifierWithIdentifierType(identifier string, type_ ASCredentialServiceIdentifierType) *CredentialServiceIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASCredentialServiceIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), type_)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), raw.ASCredentialServiceIdentifierType(type_))
 	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(_id)}
 }
 
 // NewCredentialServiceIdentifierWithIdentifierTypeDisplayName creates a new [CredentialServiceIdentifier].
-func NewCredentialServiceIdentifierWithIdentifierTypeDisplayName(identifier string, type_ raw.ASCredentialServiceIdentifierType, displayName string) *CredentialServiceIdentifier {
+func NewCredentialServiceIdentifierWithIdentifierTypeDisplayName(identifier string, type_ ASCredentialServiceIdentifierType, displayName string) *CredentialServiceIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASCredentialServiceIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:displayName:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), type_, foundation.NSStringStringWithUTF8String(displayName).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:displayName:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), raw.ASCredentialServiceIdentifierType(type_), foundation.NSStringStringWithUTF8String(displayName).Ptr())
 	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(_id)}
 }
 
@@ -64,8 +64,8 @@ func (x *CredentialServiceIdentifier) Identifier() string {
 }
 
 // Type calls the underlying Type.
-func (x *CredentialServiceIdentifier) Type() raw.ASCredentialServiceIdentifierType {
-	return x.inner.Type()
+func (x *CredentialServiceIdentifier) Type() ASCredentialServiceIdentifierType {
+	return ASCredentialServiceIdentifierType(x.inner.Type())
 }
 
 // CredentialServiceIdentifierable is the interface implemented by [CredentialServiceIdentifier], for mocking and DI.
@@ -73,7 +73,7 @@ type CredentialServiceIdentifierable interface {
 	Unwrap() *raw.ASCredentialServiceIdentifier
 	DisplayName() string
 	Identifier() string
-	Type() raw.ASCredentialServiceIdentifierType
+	Type() ASCredentialServiceIdentifierType
 }
 
 var _ CredentialServiceIdentifierable = (*CredentialServiceIdentifier)(nil)

@@ -31,9 +31,9 @@ func UMPMutableFunctionBlockFromID(id objc.ID) *UMPMutableFunctionBlock {
 }
 
 // NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled creates a new [UMPMutableFunctionBlock].
-func NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled(name string, direction raw.MIDIUMPFunctionBlockDirection, firstGroup uint8, totalGroupsSpanned uint8, maxSysEx8Streams uint8, mIDI1Info raw.MIDIUMPFunctionBlockMIDI1Info, uIHint raw.MIDIUMPFunctionBlockUIHint, isEnabled bool) *UMPMutableFunctionBlock {
+func NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled(name string, direction MIDIUMPFunctionBlockDirection, firstGroup uint8, totalGroupsSpanned uint8, maxSysEx8Streams uint8, mIDI1Info MIDIUMPFunctionBlockMIDI1Info, uIHint MIDIUMPFunctionBlockUIHint, isEnabled bool) *UMPMutableFunctionBlock {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDIUMPMutableFunctionBlock")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:direction:firstGroup:totalGroupsSpanned:maxSysEx8Streams:MIDI1Info:UIHint:isEnabled:"), foundation.NSStringStringWithUTF8String(name).Ptr(), direction, firstGroup, totalGroupsSpanned, maxSysEx8Streams, mIDI1Info, uIHint, isEnabled)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:direction:firstGroup:totalGroupsSpanned:maxSysEx8Streams:MIDI1Info:UIHint:isEnabled:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MIDIUMPFunctionBlockDirection(direction), firstGroup, totalGroupsSpanned, maxSysEx8Streams, raw.MIDIUMPFunctionBlockMIDI1Info(mIDI1Info), raw.MIDIUMPFunctionBlockUIHint(uIHint), isEnabled)
 	return &UMPMutableFunctionBlock{inner: raw.MIDIUMPMutableFunctionBlockFromID(_id)}
 }
 
@@ -48,8 +48,8 @@ func (x *UMPMutableFunctionBlock) SetNameError(name string) (bool, error) {
 }
 
 // ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError calls the underlying ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError.
-func (x *UMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup uint8, direction raw.MIDIUMPFunctionBlockDirection, mIDI1Info raw.MIDIUMPFunctionBlockMIDI1Info, uIHint raw.MIDIUMPFunctionBlockUIHint) (bool, error) {
-	return x.inner.ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup, direction, mIDI1Info, uIHint)
+func (x *UMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup uint8, direction MIDIUMPFunctionBlockDirection, mIDI1Info MIDIUMPFunctionBlockMIDI1Info, uIHint MIDIUMPFunctionBlockUIHint) (bool, error) {
+	return x.inner.ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup, raw.MIDIUMPFunctionBlockDirection(direction), raw.MIDIUMPFunctionBlockMIDI1Info(mIDI1Info), raw.MIDIUMPFunctionBlockUIHint(uIHint))
 }
 
 func (x *UMPMutableFunctionBlock) asUMPFunctionBlock() *raw.MIDIUMPFunctionBlock {
@@ -61,7 +61,7 @@ type UMPMutableFunctionBlockable interface {
 	Unwrap() *raw.MIDIUMPMutableFunctionBlock
 	SetEnabledError(isEnabled bool) (bool, error)
 	SetNameError(name string) (bool, error)
-	ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup uint8, direction raw.MIDIUMPFunctionBlockDirection, mIDI1Info raw.MIDIUMPFunctionBlockMIDI1Info, uIHint raw.MIDIUMPFunctionBlockUIHint) (bool, error)
+	ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup uint8, direction MIDIUMPFunctionBlockDirection, mIDI1Info MIDIUMPFunctionBlockMIDI1Info, uIHint MIDIUMPFunctionBlockUIHint) (bool, error)
 }
 
 var _ UMPMutableFunctionBlockable = (*UMPMutableFunctionBlock)(nil)

@@ -30,9 +30,9 @@ func GroupPresetSettingFromID(id objc.ID) *GroupPresetSetting {
 }
 
 // NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType creates a new [GroupPresetSetting].
-func NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType(gain float64, rate float64, gainCurveType raw.PHASECurveType, rateCurveType raw.PHASECurveType) *GroupPresetSetting {
+func NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType(gain float64, rate float64, gainCurveType PHASECurveType, rateCurveType PHASECurveType) *GroupPresetSetting {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEGroupPresetSetting")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGain:rate:gainCurveType:rateCurveType:"), gain, rate, gainCurveType, rateCurveType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGain:rate:gainCurveType:rateCurveType:"), gain, rate, raw.PHASECurveType(gainCurveType), raw.PHASECurveType(rateCurveType))
 	return &GroupPresetSetting{inner: raw.PHASEGroupPresetSettingFromID(_id)}
 }
 
@@ -47,13 +47,13 @@ func (x *GroupPresetSetting) Rate() float64 {
 }
 
 // GainCurveType calls the underlying GainCurveType.
-func (x *GroupPresetSetting) GainCurveType() raw.PHASECurveType {
-	return x.inner.GainCurveType()
+func (x *GroupPresetSetting) GainCurveType() PHASECurveType {
+	return PHASECurveType(x.inner.GainCurveType())
 }
 
 // RateCurveType calls the underlying RateCurveType.
-func (x *GroupPresetSetting) RateCurveType() raw.PHASECurveType {
-	return x.inner.RateCurveType()
+func (x *GroupPresetSetting) RateCurveType() PHASECurveType {
+	return PHASECurveType(x.inner.RateCurveType())
 }
 
 // GroupPresetSettingable is the interface implemented by [GroupPresetSetting], for mocking and DI.
@@ -61,8 +61,8 @@ type GroupPresetSettingable interface {
 	Unwrap() *raw.PHASEGroupPresetSetting
 	Gain() float64
 	Rate() float64
-	GainCurveType() raw.PHASECurveType
-	RateCurveType() raw.PHASECurveType
+	GainCurveType() PHASECurveType
+	RateCurveType() PHASECurveType
 }
 
 var _ GroupPresetSettingable = (*GroupPresetSetting)(nil)

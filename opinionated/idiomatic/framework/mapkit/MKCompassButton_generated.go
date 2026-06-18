@@ -42,8 +42,8 @@ func (x *CompassButton) WithMapView(mapView *MapView) *CompassButton {
 }
 
 // WithCompassVisibility sets the compassVisibility property and returns the receiver for chaining.
-func (x *CompassButton) WithCompassVisibility(compassVisibility raw.MKFeatureVisibility) *CompassButton {
-	x.inner.SetCompassVisibility(compassVisibility)
+func (x *CompassButton) WithCompassVisibility(compassVisibility MKFeatureVisibility) *CompassButton {
+	x.inner.SetCompassVisibility(raw.MKFeatureVisibility(compassVisibility))
 	return x
 }
 
@@ -62,24 +62,24 @@ func (x *CompassButton) SetMapView(mapView *raw.MKMapView) {
 }
 
 // CompassVisibility calls the underlying CompassVisibility.
-func (x *CompassButton) CompassVisibility() raw.MKFeatureVisibility {
-	return x.inner.CompassVisibility()
+func (x *CompassButton) CompassVisibility() MKFeatureVisibility {
+	return MKFeatureVisibility(x.inner.CompassVisibility())
 }
 
 // SetCompassVisibility calls the underlying SetCompassVisibility.
-func (x *CompassButton) SetCompassVisibility(compassVisibility raw.MKFeatureVisibility) {
-	x.inner.SetCompassVisibility(compassVisibility)
+func (x *CompassButton) SetCompassVisibility(compassVisibility MKFeatureVisibility) {
+	x.inner.SetCompassVisibility(raw.MKFeatureVisibility(compassVisibility))
 }
 
 // CompassButtonable is the interface implemented by [CompassButton], for mocking and DI.
 type CompassButtonable interface {
 	Unwrap() *raw.MKCompassButton
 	WithMapView(mapView *MapView) *CompassButton
-	WithCompassVisibility(compassVisibility raw.MKFeatureVisibility) *CompassButton
+	WithCompassVisibility(compassVisibility MKFeatureVisibility) *CompassButton
 	MapView() *MapView
 	SetMapView(mapView *raw.MKMapView)
-	CompassVisibility() raw.MKFeatureVisibility
-	SetCompassVisibility(compassVisibility raw.MKFeatureVisibility)
+	CompassVisibility() MKFeatureVisibility
+	SetCompassVisibility(compassVisibility MKFeatureVisibility)
 }
 
 var _ CompassButtonable = (*CompassButton)(nil)

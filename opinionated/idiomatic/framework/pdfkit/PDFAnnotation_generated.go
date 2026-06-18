@@ -128,20 +128,20 @@ func (x *Annotation) WithEndPoint(endPoint corefoundation.CGPoint) *Annotation {
 }
 
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *Annotation) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *Annotation {
-	x.inner.SetStartLineStyle(startLineStyle)
+func (x *Annotation) WithStartLineStyle(startLineStyle PDFLineStyle) *Annotation {
+	x.inner.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *Annotation) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *Annotation {
-	x.inner.SetEndLineStyle(endLineStyle)
+func (x *Annotation) WithEndLineStyle(endLineStyle PDFLineStyle) *Annotation {
+	x.inner.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
 // WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *Annotation) WithIconType(iconType raw.PDFTextAnnotationIconType) *Annotation {
-	x.inner.SetIconType(iconType)
+func (x *Annotation) WithIconType(iconType PDFTextAnnotationIconType) *Annotation {
+	x.inner.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
@@ -164,14 +164,14 @@ func (x *Annotation) WithQuadrilateralPoints(items ...*foundation.NSValue) *Anno
 }
 
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *Annotation) WithMarkupType(markupType raw.PDFMarkupType) *Annotation {
-	x.inner.SetMarkupType(markupType)
+func (x *Annotation) WithMarkupType(markupType PDFMarkupType) *Annotation {
+	x.inner.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *Annotation) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *Annotation {
-	x.inner.SetWidgetControlType(widgetControlType)
+func (x *Annotation) WithWidgetControlType(widgetControlType PDFWidgetControlType) *Annotation {
+	x.inner.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
@@ -266,8 +266,8 @@ func (x *Annotation) WithValues(items ...*foundation.NSString) *Annotation {
 }
 
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *Annotation) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *Annotation {
-	x.inner.SetButtonWidgetState(buttonWidgetState)
+func (x *Annotation) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *Annotation {
+	x.inner.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
@@ -320,8 +320,8 @@ func (x *Annotation) WithStampName(stampName string) *Annotation {
 }
 
 // DrawWithBoxInContext calls the underlying DrawWithBoxInContext.
-func (x *Annotation) DrawWithBoxInContext(box raw.PDFDisplayBox, context_ unsafe.Pointer) {
-	x.inner.DrawWithBoxInContext(box, context_)
+func (x *Annotation) DrawWithBoxInContext(box PDFDisplayBox, context_ unsafe.Pointer) {
+	x.inner.DrawWithBoxInContext(raw.PDFDisplayBox(box), context_)
 }
 
 // SetValueForAnnotationKey calls the underlying SetValueForAnnotationKey.
@@ -503,8 +503,8 @@ func (x *Annotation) RemoveAllAppearanceStreams() {
 }
 
 // DrawWithBox calls the underlying DrawWithBox.
-func (x *Annotation) DrawWithBox(box raw.PDFDisplayBox) {
-	x.inner.DrawWithBox(box)
+func (x *Annotation) DrawWithBox(box PDFDisplayBox) {
+	x.inner.DrawWithBox(raw.PDFDisplayBox(box))
 }
 
 // ToolTip calls the underlying ToolTip.
@@ -593,33 +593,33 @@ func (x *Annotation) SetEndPoint(endPoint corefoundation.CGPoint) {
 }
 
 // StartLineStyle calls the underlying StartLineStyle.
-func (x *Annotation) StartLineStyle() raw.PDFLineStyle {
-	return x.inner.StartLineStyle()
+func (x *Annotation) StartLineStyle() PDFLineStyle {
+	return PDFLineStyle(x.inner.StartLineStyle())
 }
 
 // SetStartLineStyle calls the underlying SetStartLineStyle.
-func (x *Annotation) SetStartLineStyle(startLineStyle raw.PDFLineStyle) {
-	x.inner.SetStartLineStyle(startLineStyle)
+func (x *Annotation) SetStartLineStyle(startLineStyle PDFLineStyle) {
+	x.inner.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 }
 
 // EndLineStyle calls the underlying EndLineStyle.
-func (x *Annotation) EndLineStyle() raw.PDFLineStyle {
-	return x.inner.EndLineStyle()
+func (x *Annotation) EndLineStyle() PDFLineStyle {
+	return PDFLineStyle(x.inner.EndLineStyle())
 }
 
 // SetEndLineStyle calls the underlying SetEndLineStyle.
-func (x *Annotation) SetEndLineStyle(endLineStyle raw.PDFLineStyle) {
-	x.inner.SetEndLineStyle(endLineStyle)
+func (x *Annotation) SetEndLineStyle(endLineStyle PDFLineStyle) {
+	x.inner.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 }
 
 // IconType calls the underlying IconType.
-func (x *Annotation) IconType() raw.PDFTextAnnotationIconType {
-	return x.inner.IconType()
+func (x *Annotation) IconType() PDFTextAnnotationIconType {
+	return PDFTextAnnotationIconType(x.inner.IconType())
 }
 
 // SetIconType calls the underlying SetIconType.
-func (x *Annotation) SetIconType(iconType raw.PDFTextAnnotationIconType) {
-	x.inner.SetIconType(iconType)
+func (x *Annotation) SetIconType(iconType PDFTextAnnotationIconType) {
+	x.inner.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 }
 
 // QuadrilateralPoints returns the collection as a Go slice.
@@ -639,13 +639,13 @@ func (x *Annotation) SetQuadrilateralPoints(quadrilateralPoints *foundation.NSAr
 }
 
 // MarkupType calls the underlying MarkupType.
-func (x *Annotation) MarkupType() raw.PDFMarkupType {
-	return x.inner.MarkupType()
+func (x *Annotation) MarkupType() PDFMarkupType {
+	return PDFMarkupType(x.inner.MarkupType())
 }
 
 // SetMarkupType calls the underlying SetMarkupType.
-func (x *Annotation) SetMarkupType(markupType raw.PDFMarkupType) {
-	x.inner.SetMarkupType(markupType)
+func (x *Annotation) SetMarkupType(markupType PDFMarkupType) {
+	x.inner.SetMarkupType(raw.PDFMarkupType(markupType))
 }
 
 // WidgetFieldType calls the underlying WidgetFieldType.
@@ -663,13 +663,13 @@ func (x *Annotation) SetWidgetFieldType(widgetFieldType string) {
 }
 
 // WidgetControlType calls the underlying WidgetControlType.
-func (x *Annotation) WidgetControlType() raw.PDFWidgetControlType {
-	return x.inner.WidgetControlType()
+func (x *Annotation) WidgetControlType() PDFWidgetControlType {
+	return PDFWidgetControlType(x.inner.WidgetControlType())
 }
 
 // SetWidgetControlType calls the underlying SetWidgetControlType.
-func (x *Annotation) SetWidgetControlType(widgetControlType raw.PDFWidgetControlType) {
-	x.inner.SetWidgetControlType(widgetControlType)
+func (x *Annotation) SetWidgetControlType(widgetControlType PDFWidgetControlType) {
+	x.inner.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 }
 
 // IsMultiline calls the underlying IsMultiline.
@@ -813,13 +813,13 @@ func (x *Annotation) SetValues(values *foundation.NSArray[*foundation.NSString])
 }
 
 // ButtonWidgetState calls the underlying ButtonWidgetState.
-func (x *Annotation) ButtonWidgetState() raw.PDFWidgetCellState {
-	return x.inner.ButtonWidgetState()
+func (x *Annotation) ButtonWidgetState() PDFWidgetCellState {
+	return PDFWidgetCellState(x.inner.ButtonWidgetState())
 }
 
 // SetButtonWidgetState calls the underlying SetButtonWidgetState.
-func (x *Annotation) SetButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) {
-	x.inner.SetButtonWidgetState(buttonWidgetState)
+func (x *Annotation) SetButtonWidgetState(buttonWidgetState PDFWidgetCellState) {
+	x.inner.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 }
 
 // ButtonWidgetStateString calls the underlying ButtonWidgetStateString.
@@ -950,12 +950,12 @@ type Annotationable interface {
 	WithAlignment(alignment appkit.NSTextAlignment) *Annotation
 	WithStartPoint(startPoint corefoundation.CGPoint) *Annotation
 	WithEndPoint(endPoint corefoundation.CGPoint) *Annotation
-	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *Annotation
-	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *Annotation
-	WithIconType(iconType raw.PDFTextAnnotationIconType) *Annotation
+	WithStartLineStyle(startLineStyle PDFLineStyle) *Annotation
+	WithEndLineStyle(endLineStyle PDFLineStyle) *Annotation
+	WithIconType(iconType PDFTextAnnotationIconType) *Annotation
 	WithQuadrilateralPoints(items ...*foundation.NSValue) *Annotation
-	WithMarkupType(markupType raw.PDFMarkupType) *Annotation
-	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *Annotation
+	WithMarkupType(markupType PDFMarkupType) *Annotation
+	WithWidgetControlType(widgetControlType PDFWidgetControlType) *Annotation
 	WithMultiline(multiline bool) *Annotation
 	WithComb(comb bool) *Annotation
 	WithMaximumLength(maximumLength int) *Annotation
@@ -967,7 +967,7 @@ type Annotationable interface {
 	WithListChoice(listChoice bool) *Annotation
 	WithChoices(items ...*foundation.NSString) *Annotation
 	WithValues(items ...*foundation.NSString) *Annotation
-	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *Annotation
+	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *Annotation
 	WithButtonWidgetStateString(buttonWidgetStateString string) *Annotation
 	WithOpen(open bool) *Annotation
 	WithDestination(destination *Destination) *Annotation
@@ -976,7 +976,7 @@ type Annotationable interface {
 	WithCaption(caption string) *Annotation
 	WithBackgroundColor(backgroundColor *appkit.NSColor) *Annotation
 	WithStampName(stampName string) *Annotation
-	DrawWithBoxInContext(box raw.PDFDisplayBox, context_ unsafe.Pointer)
+	DrawWithBoxInContext(box PDFDisplayBox, context_ unsafe.Pointer)
 	SetValueForAnnotationKey(value objc.ID, key unsafe.Pointer) bool
 	SetBooleanForAnnotationKey(value bool, key unsafe.Pointer) bool
 	SetRectForAnnotationKey(value corefoundation.CGRect, key unsafe.Pointer) bool
@@ -1011,7 +1011,7 @@ type Annotationable interface {
 	SetHighlighted(highlighted bool)
 	AnnotationKeyValues() unsafe.Pointer
 	RemoveAllAppearanceStreams()
-	DrawWithBox(box raw.PDFDisplayBox)
+	DrawWithBox(box PDFDisplayBox)
 	ToolTip() unsafe.Pointer
 	MouseUpAction() unsafe.Pointer
 	SetMouseUpAction(mouseUpAction unsafe.Pointer)
@@ -1029,20 +1029,20 @@ type Annotationable interface {
 	SetStartPoint(startPoint corefoundation.CGPoint)
 	EndPoint() corefoundation.CGPoint
 	SetEndPoint(endPoint corefoundation.CGPoint)
-	StartLineStyle() raw.PDFLineStyle
-	SetStartLineStyle(startLineStyle raw.PDFLineStyle)
-	EndLineStyle() raw.PDFLineStyle
-	SetEndLineStyle(endLineStyle raw.PDFLineStyle)
-	IconType() raw.PDFTextAnnotationIconType
-	SetIconType(iconType raw.PDFTextAnnotationIconType)
+	StartLineStyle() PDFLineStyle
+	SetStartLineStyle(startLineStyle PDFLineStyle)
+	EndLineStyle() PDFLineStyle
+	SetEndLineStyle(endLineStyle PDFLineStyle)
+	IconType() PDFTextAnnotationIconType
+	SetIconType(iconType PDFTextAnnotationIconType)
 	QuadrilateralPoints() []*foundation.NSValue
 	SetQuadrilateralPoints(quadrilateralPoints *foundation.NSArray[*foundation.NSValue])
-	MarkupType() raw.PDFMarkupType
-	SetMarkupType(markupType raw.PDFMarkupType)
+	MarkupType() PDFMarkupType
+	SetMarkupType(markupType PDFMarkupType)
 	WidgetFieldType() string
 	SetWidgetFieldType(widgetFieldType string)
-	WidgetControlType() raw.PDFWidgetControlType
-	SetWidgetControlType(widgetControlType raw.PDFWidgetControlType)
+	WidgetControlType() PDFWidgetControlType
+	SetWidgetControlType(widgetControlType PDFWidgetControlType)
 	IsMultiline() bool
 	SetMultiline(multiline bool)
 	IsActivatableTextField() bool
@@ -1067,8 +1067,8 @@ type Annotationable interface {
 	SetChoices(choices *foundation.NSArray[*foundation.NSString])
 	Values() []string
 	SetValues(values *foundation.NSArray[*foundation.NSString])
-	ButtonWidgetState() raw.PDFWidgetCellState
-	SetButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState)
+	ButtonWidgetState() PDFWidgetCellState
+	SetButtonWidgetState(buttonWidgetState PDFWidgetCellState)
 	ButtonWidgetStateString() string
 	SetButtonWidgetStateString(buttonWidgetStateString string)
 	IsOpen() bool

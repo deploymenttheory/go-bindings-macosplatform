@@ -55,8 +55,8 @@ func (x *NotificationAction) Title() string {
 }
 
 // Options calls the underlying Options.
-func (x *NotificationAction) Options() raw.UNNotificationActionOptions {
-	return x.inner.Options()
+func (x *NotificationAction) Options() UNNotificationActionOptions {
+	return UNNotificationActionOptions(x.inner.Options())
 }
 
 // Icon calls the underlying Icon.
@@ -75,7 +75,7 @@ type NotificationActionable interface {
 	Unwrap() *raw.UNNotificationAction
 	Identifier() string
 	Title() string
-	Options() raw.UNNotificationActionOptions
+	Options() UNNotificationActionOptions
 	Icon() *NotificationActionIcon
 }
 

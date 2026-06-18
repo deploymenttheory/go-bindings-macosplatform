@@ -57,8 +57,8 @@ func (x *CompositeAttributeDescription) WithElements(items ...AttributeDescripti
 }
 
 // WithAttributeType sets the attributeType property and returns the receiver for chaining.
-func (x *CompositeAttributeDescription) WithAttributeType(attributeType raw.NSAttributeType) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.SetAttributeType(attributeType)
+func (x *CompositeAttributeDescription) WithAttributeType(attributeType NSAttributeType) *CompositeAttributeDescription {
+	x.inner.NSAttributeDescription.SetAttributeType(raw.NSAttributeType(attributeType))
 	return x
 }
 
@@ -180,7 +180,7 @@ func (x *CompositeAttributeDescription) asPropertyDescription() *raw.NSPropertyD
 type CompositeAttributeDescriptionable interface {
 	Unwrap() *raw.NSCompositeAttributeDescription
 	WithElements(items ...AttributeDescriptionProvider) *CompositeAttributeDescription
-	WithAttributeType(attributeType raw.NSAttributeType) *CompositeAttributeDescription
+	WithAttributeType(attributeType NSAttributeType) *CompositeAttributeDescription
 	WithAttributeValueClassName(attributeValueClassName string) *CompositeAttributeDescription
 	WithDefaultValue(defaultValue objc.ID) *CompositeAttributeDescription
 	WithValueTransformerName(valueTransformerName string) *CompositeAttributeDescription

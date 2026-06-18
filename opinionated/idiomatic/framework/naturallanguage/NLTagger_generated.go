@@ -45,23 +45,23 @@ func (x *Tagger) WithString(string_ string) *Tagger {
 }
 
 // TokenRangeAtIndexUnit calls the underlying TokenRangeAtIndexUnit.
-func (x *Tagger) TokenRangeAtIndexUnit(characterIndex uint, unit raw.NLTokenUnit) foundation.NSRange {
-	return x.inner.TokenRangeAtIndexUnit(characterIndex, unit)
+func (x *Tagger) TokenRangeAtIndexUnit(characterIndex uint, unit NLTokenUnit) foundation.NSRange {
+	return x.inner.TokenRangeAtIndexUnit(characterIndex, raw.NLTokenUnit(unit))
 }
 
 // TokenRangeForRangeUnit calls the underlying TokenRangeForRangeUnit.
-func (x *Tagger) TokenRangeForRangeUnit(range_ foundation.NSRange, unit raw.NLTokenUnit) foundation.NSRange {
-	return x.inner.TokenRangeForRangeUnit(range_, unit)
+func (x *Tagger) TokenRangeForRangeUnit(range_ foundation.NSRange, unit NLTokenUnit) foundation.NSRange {
+	return x.inner.TokenRangeForRangeUnit(range_, raw.NLTokenUnit(unit))
 }
 
 // EnumerateTagsInRangeUnitSchemeOptionsUsing calls the underlying EnumerateTagsInRangeUnitSchemeOptionsUsing.
-func (x *Tagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ foundation.NSRange, unit raw.NLTokenUnit, scheme *foundation.NSString, options raw.NLTaggerOptions, block objc.Block) {
-	x.inner.EnumerateTagsInRangeUnitSchemeOptionsUsing(range_, unit, scheme, options, block)
+func (x *Tagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ foundation.NSRange, unit NLTokenUnit, scheme *foundation.NSString, options NLTaggerOptions, block objc.Block) {
+	x.inner.EnumerateTagsInRangeUnitSchemeOptionsUsing(range_, raw.NLTokenUnit(unit), scheme, raw.NLTaggerOptions(options), block)
 }
 
 // TagAtIndexUnitSchemeTokenRange calls the underlying TagAtIndexUnitSchemeTokenRange.
-func (x *Tagger) TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit raw.NLTokenUnit, scheme *foundation.NSString, tokenRange *foundation.NSRange) string {
-	_r := x.inner.TagAtIndexUnitSchemeTokenRange(characterIndex, unit, scheme, tokenRange)
+func (x *Tagger) TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit NLTokenUnit, scheme *foundation.NSString, tokenRange *foundation.NSRange) string {
+	_r := x.inner.TagAtIndexUnitSchemeTokenRange(characterIndex, raw.NLTokenUnit(unit), scheme, tokenRange)
 	if _r == nil {
 		return ""
 	}
@@ -69,13 +69,13 @@ func (x *Tagger) TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit raw.NL
 }
 
 // TagsInRangeUnitSchemeOptionsTokenRanges calls the underlying TagsInRangeUnitSchemeOptionsTokenRanges.
-func (x *Tagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit raw.NLTokenUnit, scheme *foundation.NSString, options raw.NLTaggerOptions, tokenRanges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, unit, scheme, options, tokenRanges)
+func (x *Tagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit NLTokenUnit, scheme *foundation.NSString, options NLTaggerOptions, tokenRanges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, raw.NLTokenUnit(unit), scheme, raw.NLTaggerOptions(options), tokenRanges)
 }
 
 // TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange calls the underlying TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange.
-func (x *Tagger) TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex uint, unit raw.NLTokenUnit, scheme *foundation.NSString, maximumCount uint, tokenRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
-	return x.inner.TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex, unit, scheme, maximumCount, tokenRange)
+func (x *Tagger) TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex uint, unit NLTokenUnit, scheme *foundation.NSString, maximumCount uint, tokenRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
+	return x.inner.TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex, raw.NLTokenUnit(unit), scheme, maximumCount, tokenRange)
 }
 
 // SetLanguageRange calls the underlying SetLanguageRange.
@@ -146,12 +146,12 @@ func (x *Tagger) DominantLanguage() string {
 type Taggerable interface {
 	Unwrap() *raw.NLTagger
 	WithString(string_ string) *Tagger
-	TokenRangeAtIndexUnit(characterIndex uint, unit raw.NLTokenUnit) foundation.NSRange
-	TokenRangeForRangeUnit(range_ foundation.NSRange, unit raw.NLTokenUnit) foundation.NSRange
-	EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ foundation.NSRange, unit raw.NLTokenUnit, scheme *foundation.NSString, options raw.NLTaggerOptions, block objc.Block)
-	TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit raw.NLTokenUnit, scheme *foundation.NSString, tokenRange *foundation.NSRange) string
-	TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit raw.NLTokenUnit, scheme *foundation.NSString, options raw.NLTaggerOptions, tokenRanges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[*foundation.NSString]
-	TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex uint, unit raw.NLTokenUnit, scheme *foundation.NSString, maximumCount uint, tokenRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]
+	TokenRangeAtIndexUnit(characterIndex uint, unit NLTokenUnit) foundation.NSRange
+	TokenRangeForRangeUnit(range_ foundation.NSRange, unit NLTokenUnit) foundation.NSRange
+	EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ foundation.NSRange, unit NLTokenUnit, scheme *foundation.NSString, options NLTaggerOptions, block objc.Block)
+	TagAtIndexUnitSchemeTokenRange(characterIndex uint, unit NLTokenUnit, scheme *foundation.NSString, tokenRange *foundation.NSRange) string
+	TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit NLTokenUnit, scheme *foundation.NSString, options NLTaggerOptions, tokenRanges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[*foundation.NSString]
+	TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex uint, unit NLTokenUnit, scheme *foundation.NSString, maximumCount uint, tokenRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]
 	SetLanguageRange(language *foundation.NSString, range_ foundation.NSRange)
 	SetOrthographyRange(orthography *foundation.NSOrthography, range_ foundation.NSRange)
 	SetModelsForTagScheme(models *foundation.NSArray[*raw.NLModel], tagScheme *foundation.NSString)

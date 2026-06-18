@@ -126,8 +126,8 @@ func (x *SampleBufferDisplayLayer) Timebase() unsafe.Pointer {
 }
 
 // Status calls the underlying Status.
-func (x *SampleBufferDisplayLayer) Status() raw.AVQueuedSampleBufferRenderingStatus {
-	return x.inner.Status()
+func (x *SampleBufferDisplayLayer) Status() AVQueuedSampleBufferRenderingStatus {
+	return AVQueuedSampleBufferRenderingStatus(x.inner.Status())
 }
 
 // Error calls the underlying Error.
@@ -201,7 +201,7 @@ type SampleBufferDisplayLayerable interface {
 	RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue *foundation.NSObject) error
 	StopRequestingMediaData()
 	Timebase() unsafe.Pointer
-	Status() raw.AVQueuedSampleBufferRenderingStatus
+	Status() AVQueuedSampleBufferRenderingStatus
 	Error() unsafe.Pointer
 	RequiresFlushToResumeDecoding() bool
 	IsReadyForMoreMediaData() bool

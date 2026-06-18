@@ -32,15 +32,15 @@ func LevelIndicatorCellFromID(id objc.ID) *LevelIndicatorCell {
 }
 
 // NewLevelIndicatorCellWithLevelIndicatorStyle creates a new [LevelIndicatorCell].
-func NewLevelIndicatorCellWithLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle) *LevelIndicatorCell {
+func NewLevelIndicatorCellWithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *LevelIndicatorCell {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLevelIndicatorCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLevelIndicatorStyle:"), levelIndicatorStyle)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLevelIndicatorStyle:"), raw.NSLevelIndicatorStyle(levelIndicatorStyle))
 	return &LevelIndicatorCell{inner: raw.NSLevelIndicatorCellFromID(_id)}
 }
 
 // WithLevelIndicatorStyle sets the levelIndicatorStyle property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle) *LevelIndicatorCell {
-	x.inner.SetLevelIndicatorStyle(levelIndicatorStyle)
+func (x *LevelIndicatorCell) WithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *LevelIndicatorCell {
+	x.inner.SetLevelIndicatorStyle(raw.NSLevelIndicatorStyle(levelIndicatorStyle))
 	return x
 }
 
@@ -69,8 +69,8 @@ func (x *LevelIndicatorCell) WithCriticalValue(criticalValue float64) *LevelIndi
 }
 
 // WithTickMarkPosition sets the tickMarkPosition property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *LevelIndicatorCell {
-	x.inner.SetTickMarkPosition(tickMarkPosition)
+func (x *LevelIndicatorCell) WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *LevelIndicatorCell {
+	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 	return x
 }
 
@@ -93,8 +93,8 @@ func (x *LevelIndicatorCell) WithControlView(controlView ViewProvider) *LevelInd
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithType(type_ raw.NSCellType) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetType(type_)
+func (x *LevelIndicatorCell) WithType(type_ NSCellType) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -177,8 +177,8 @@ func (x *LevelIndicatorCell) WithHighlighted(highlighted bool) *LevelIndicatorCe
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithAlignment(alignment raw.NSTextAlignment) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *LevelIndicatorCell) WithAlignment(alignment NSTextAlignment) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -243,8 +243,8 @@ func (x *LevelIndicatorCell) WithImage(image *Image) *LevelIndicatorCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithControlSize(controlSize raw.NSControlSize) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *LevelIndicatorCell) WithControlSize(controlSize NSControlSize) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -267,14 +267,14 @@ func (x *LevelIndicatorCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *LevelIndicatorCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *LevelIndicatorCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -291,8 +291,8 @@ func (x *LevelIndicatorCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLi
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *LevelIndicatorCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -315,8 +315,8 @@ func (x *LevelIndicatorCell) WithShowsFirstResponder(showsFirstResponder bool) *
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *LevelIndicatorCell) WithFocusRingType(focusRingType NSFocusRingType) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -345,14 +345,14 @@ func (x *LevelIndicatorCell) WithAllowsMixedState(allowsMixedState bool) *LevelI
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *LevelIndicatorCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *LevelIndicatorCell) WithControlTint(controlTint raw.NSControlTint) *LevelIndicatorCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *LevelIndicatorCell) WithControlTint(controlTint NSControlTint) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -367,13 +367,13 @@ func (x *LevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
 }
 
 // LevelIndicatorStyle calls the underlying LevelIndicatorStyle.
-func (x *LevelIndicatorCell) LevelIndicatorStyle() raw.NSLevelIndicatorStyle {
-	return x.inner.LevelIndicatorStyle()
+func (x *LevelIndicatorCell) LevelIndicatorStyle() NSLevelIndicatorStyle {
+	return NSLevelIndicatorStyle(x.inner.LevelIndicatorStyle())
 }
 
 // SetLevelIndicatorStyle calls the underlying SetLevelIndicatorStyle.
-func (x *LevelIndicatorCell) SetLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle) {
-	x.inner.SetLevelIndicatorStyle(levelIndicatorStyle)
+func (x *LevelIndicatorCell) SetLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) {
+	x.inner.SetLevelIndicatorStyle(raw.NSLevelIndicatorStyle(levelIndicatorStyle))
 }
 
 // MinValue calls the underlying MinValue.
@@ -417,13 +417,13 @@ func (x *LevelIndicatorCell) SetCriticalValue(criticalValue float64) {
 }
 
 // TickMarkPosition calls the underlying TickMarkPosition.
-func (x *LevelIndicatorCell) TickMarkPosition() raw.NSTickMarkPosition {
-	return x.inner.TickMarkPosition()
+func (x *LevelIndicatorCell) TickMarkPosition() NSTickMarkPosition {
+	return NSTickMarkPosition(x.inner.TickMarkPosition())
 }
 
 // SetTickMarkPosition calls the underlying SetTickMarkPosition.
-func (x *LevelIndicatorCell) SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) {
-	x.inner.SetTickMarkPosition(tickMarkPosition)
+func (x *LevelIndicatorCell) SetTickMarkPosition(tickMarkPosition NSTickMarkPosition) {
+	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 }
 
 // NumberOfTickMarks calls the underlying NumberOfTickMarks.
@@ -453,16 +453,16 @@ func (x *LevelIndicatorCell) asCell() *raw.NSCell { return &x.inner.NSActionCell
 // LevelIndicatorCellable is the interface implemented by [LevelIndicatorCell], for mocking and DI.
 type LevelIndicatorCellable interface {
 	Unwrap() *raw.NSLevelIndicatorCell
-	WithLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle) *LevelIndicatorCell
+	WithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *LevelIndicatorCell
 	WithMinValue(minValue float64) *LevelIndicatorCell
 	WithMaxValue(maxValue float64) *LevelIndicatorCell
 	WithWarningValue(warningValue float64) *LevelIndicatorCell
 	WithCriticalValue(criticalValue float64) *LevelIndicatorCell
-	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *LevelIndicatorCell
+	WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *LevelIndicatorCell
 	WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicatorCell
 	WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicatorCell
 	WithControlView(controlView ViewProvider) *LevelIndicatorCell
-	WithType(type_ raw.NSCellType) *LevelIndicatorCell
+	WithType(type_ NSCellType) *LevelIndicatorCell
 	WithState(state int) *LevelIndicatorCell
 	WithTarget(target objc.ID) *LevelIndicatorCell
 	WithAction(action objc.SEL) *LevelIndicatorCell
@@ -476,7 +476,7 @@ type LevelIndicatorCellable interface {
 	WithBezeled(bezeled bool) *LevelIndicatorCell
 	WithScrollable(scrollable bool) *LevelIndicatorCell
 	WithHighlighted(highlighted bool) *LevelIndicatorCell
-	WithAlignment(alignment raw.NSTextAlignment) *LevelIndicatorCell
+	WithAlignment(alignment NSTextAlignment) *LevelIndicatorCell
 	WithWraps(wraps bool) *LevelIndicatorCell
 	WithFont(font *Font) *LevelIndicatorCell
 	WithFormatter(formatter *foundation.NSFormatter) *LevelIndicatorCell
@@ -487,29 +487,29 @@ type LevelIndicatorCellable interface {
 	WithDoubleValue(doubleValue float64) *LevelIndicatorCell
 	WithIntegerValue(integerValue int) *LevelIndicatorCell
 	WithImage(image *Image) *LevelIndicatorCell
-	WithControlSize(controlSize raw.NSControlSize) *LevelIndicatorCell
+	WithControlSize(controlSize NSControlSize) *LevelIndicatorCell
 	WithRepresentedObject(representedObject objc.ID) *LevelIndicatorCell
 	WithMenu(menu *Menu) *LevelIndicatorCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *LevelIndicatorCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *LevelIndicatorCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *LevelIndicatorCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *LevelIndicatorCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *LevelIndicatorCell
 	WithAllowsUndo(allowsUndo bool) *LevelIndicatorCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *LevelIndicatorCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *LevelIndicatorCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *LevelIndicatorCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicatorCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicatorCell
 	WithShowsFirstResponder(showsFirstResponder bool) *LevelIndicatorCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *LevelIndicatorCell
+	WithFocusRingType(focusRingType NSFocusRingType) *LevelIndicatorCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *LevelIndicatorCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *LevelIndicatorCell
 	WithImportsGraphics(importsGraphics bool) *LevelIndicatorCell
 	WithAllowsMixedState(allowsMixedState bool) *LevelIndicatorCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *LevelIndicatorCell
-	WithControlTint(controlTint raw.NSControlTint) *LevelIndicatorCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *LevelIndicatorCell
+	WithControlTint(controlTint NSControlTint) *LevelIndicatorCell
 	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
 	TickMarkValueAtIndex(index int) float64
-	LevelIndicatorStyle() raw.NSLevelIndicatorStyle
-	SetLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle)
+	LevelIndicatorStyle() NSLevelIndicatorStyle
+	SetLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle)
 	MinValue() float64
 	SetMinValue(minValue float64)
 	MaxValue() float64
@@ -518,8 +518,8 @@ type LevelIndicatorCellable interface {
 	SetWarningValue(warningValue float64)
 	CriticalValue() float64
 	SetCriticalValue(criticalValue float64)
-	TickMarkPosition() raw.NSTickMarkPosition
-	SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition)
+	TickMarkPosition() NSTickMarkPosition
+	SetTickMarkPosition(tickMarkPosition NSTickMarkPosition)
 	NumberOfTickMarks() int
 	SetNumberOfTickMarks(numberOfTickMarks int)
 	NumberOfMajorTickMarks() int

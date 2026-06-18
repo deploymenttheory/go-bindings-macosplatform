@@ -42,8 +42,8 @@ func (x *ArrayQuantizationDescriptor) QuantizationDataType() mpscore.MPSDataType
 }
 
 // QuantizationScheme calls the underlying QuantizationScheme.
-func (x *ArrayQuantizationDescriptor) QuantizationScheme() raw.MPSNDArrayQuantizationScheme {
-	return x.inner.QuantizationScheme()
+func (x *ArrayQuantizationDescriptor) QuantizationScheme() MPSNDArrayQuantizationScheme {
+	return MPSNDArrayQuantizationScheme(x.inner.QuantizationScheme())
 }
 
 func (x *ArrayQuantizationDescriptor) asArrayQuantizationDescriptor() *raw.MPSNDArrayQuantizationDescriptor {
@@ -54,7 +54,7 @@ func (x *ArrayQuantizationDescriptor) asArrayQuantizationDescriptor() *raw.MPSND
 type ArrayQuantizationDescriptorable interface {
 	Unwrap() *raw.MPSNDArrayQuantizationDescriptor
 	QuantizationDataType() mpscore.MPSDataType
-	QuantizationScheme() raw.MPSNDArrayQuantizationScheme
+	QuantizationScheme() MPSNDArrayQuantizationScheme
 }
 
 var _ ArrayQuantizationDescriptorable = (*ArrayQuantizationDescriptor)(nil)

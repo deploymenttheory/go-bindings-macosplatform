@@ -43,8 +43,8 @@ func (x *CaptureDescriptor) WithCaptureObject(captureObject objc.ID) *CaptureDes
 }
 
 // WithDestination sets the destination property and returns the receiver for chaining.
-func (x *CaptureDescriptor) WithDestination(destination raw.MTLCaptureDestination) *CaptureDescriptor {
-	x.inner.SetDestination(destination)
+func (x *CaptureDescriptor) WithDestination(destination MTLCaptureDestination) *CaptureDescriptor {
+	x.inner.SetDestination(raw.MTLCaptureDestination(destination))
 	return x
 }
 
@@ -65,13 +65,13 @@ func (x *CaptureDescriptor) SetCaptureObject(captureObject objc.ID) {
 }
 
 // Destination calls the underlying Destination.
-func (x *CaptureDescriptor) Destination() raw.MTLCaptureDestination {
-	return x.inner.Destination()
+func (x *CaptureDescriptor) Destination() MTLCaptureDestination {
+	return MTLCaptureDestination(x.inner.Destination())
 }
 
 // SetDestination calls the underlying SetDestination.
-func (x *CaptureDescriptor) SetDestination(destination raw.MTLCaptureDestination) {
-	x.inner.SetDestination(destination)
+func (x *CaptureDescriptor) SetDestination(destination MTLCaptureDestination) {
+	x.inner.SetDestination(raw.MTLCaptureDestination(destination))
 }
 
 // OutputURL calls the underlying OutputURL.
@@ -88,12 +88,12 @@ func (x *CaptureDescriptor) SetOutputURL(outputURL string) {
 type CaptureDescriptorable interface {
 	Unwrap() *raw.MTLCaptureDescriptor
 	WithCaptureObject(captureObject objc.ID) *CaptureDescriptor
-	WithDestination(destination raw.MTLCaptureDestination) *CaptureDescriptor
+	WithDestination(destination MTLCaptureDestination) *CaptureDescriptor
 	WithOutputURL(outputURL string) *CaptureDescriptor
 	CaptureObject() objc.ID
 	SetCaptureObject(captureObject objc.ID)
-	Destination() raw.MTLCaptureDestination
-	SetDestination(destination raw.MTLCaptureDestination)
+	Destination() MTLCaptureDestination
+	SetDestination(destination MTLCaptureDestination)
 	OutputURL() *foundation.NSURL
 	SetOutputURL(outputURL string)
 }

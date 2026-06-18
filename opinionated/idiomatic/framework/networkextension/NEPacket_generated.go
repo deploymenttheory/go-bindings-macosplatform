@@ -48,8 +48,8 @@ func (x *NEPacket) ProtocolFamily() uint8 {
 }
 
 // Direction calls the underlying Direction.
-func (x *NEPacket) Direction() raw.NETrafficDirection {
-	return x.inner.Direction()
+func (x *NEPacket) Direction() NETrafficDirection {
+	return NETrafficDirection(x.inner.Direction())
 }
 
 // Metadata calls the underlying Metadata.
@@ -66,7 +66,7 @@ type NEPacketable interface {
 	Unwrap() *raw.NEPacket
 	Data() *foundation.NSData
 	ProtocolFamily() uint8
-	Direction() raw.NETrafficDirection
+	Direction() NETrafficDirection
 	Metadata() *NEFlowMetaData
 }
 

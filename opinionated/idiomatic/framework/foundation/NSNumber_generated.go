@@ -148,8 +148,8 @@ func (x *Number) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*
 }
 
 // Compare calls the underlying Compare.
-func (x *Number) Compare(otherNumber *raw.NSNumber) raw.NSComparisonResult {
-	return x.inner.Compare(otherNumber)
+func (x *Number) Compare(otherNumber *raw.NSNumber) NSComparisonResult {
+	return NSComparisonResult(x.inner.Compare(otherNumber))
 }
 
 // IsEqualToNumber calls the underlying IsEqualToNumber.
@@ -265,7 +265,7 @@ func (x *Number) asObject() *raw.NSObject { return &x.inner.NSValue.NSObject }
 type Numberable interface {
 	Unwrap() *raw.NSNumber
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Number
-	Compare(otherNumber *raw.NSNumber) raw.NSComparisonResult
+	Compare(otherNumber *raw.NSNumber) NSComparisonResult
 	IsEqualToNumber(number *raw.NSNumber) bool
 	DescriptionWithLocale(locale objc.ID) *String
 	CharValue() int8

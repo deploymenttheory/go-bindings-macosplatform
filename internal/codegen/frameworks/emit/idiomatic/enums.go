@@ -5,9 +5,7 @@ package idiomatic
 import (
 	"bytes"
 	"fmt"
-	"os"
 	"path/filepath"
-	"regexp"
 	"sort"
 	"strings"
 
@@ -64,40 +62,21 @@ func emitEnums(
 		return nil
 	}
 
-	// Find which enum types the rest of the generated package references.
-	referenced := make(map[string]bool)
-	matchers := make(map[string]*regexp.Regexp, len(enumsByGoType))
-	for goType := range enumsByGoType {
-		matchers[goType] = regexp.MustCompile(regexp.QuoteMeta(rawPkgAlias+"."+goType) + `\b`)
-	}
-	enumsFile := pkgName + "_enums_generated.go"
-	entries, err := os.ReadDir(outDir)
-	if err != nil {
-		return err
-	}
-	for _, ent := range entries {
-		name := ent.Name()
-		if ent.IsDir() || name == enumsFile || !strings.HasSuffix(name, "_generated.go") {
-			continue
-		}
-		data, err := os.ReadFile(filepath.Join(outDir, name))
-		if err != nil {
-			return err
-		}
-		text := string(data)
-		for goType, re := range matchers {
-			if !referenced[goType] && re.MatchString(text) {
-				referenced[goType] = true
-			}
-		}
-	}
+	// The enums the generated signatures localized — and therefore need a
+	// concrete local definition — were accumulated into the per-framework
+	// referenced set during the build passes (see localizeEnumType). emitEnums
+	// runs after those passes, so the set is complete here.
+	referenced := referencedEnums(fw)
 	if len(referenced) == 0 {
 		return nil
 	}
+	enumsFile := pkgName + "_enums_generated.go"
 
 	refNames := make([]string, 0, len(referenced))
 	for goType := range referenced {
-		refNames = append(refNames, goType)
+		if _, ok := enumsByGoType[goType]; ok {
+			refNames = append(refNames, goType)
+		}
 	}
 	sort.Strings(refNames)
 

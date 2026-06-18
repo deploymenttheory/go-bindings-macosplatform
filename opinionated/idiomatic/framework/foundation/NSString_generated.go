@@ -315,43 +315,43 @@ func (x *String) GetCharactersRange(buffer *uint16, range_ raw.NSRange) {
 }
 
 // Compare calls the underlying Compare.
-func (x *String) Compare(string_ string) raw.NSComparisonResult {
-	return x.inner.Compare(foundation.NSStringStringWithUTF8String(string_))
+func (x *String) Compare(string_ string) NSComparisonResult {
+	return NSComparisonResult(x.inner.Compare(foundation.NSStringStringWithUTF8String(string_)))
 }
 
 // CompareOptions calls the underlying CompareOptions.
-func (x *String) CompareOptions(string_ string, mask raw.NSStringCompareOptions) raw.NSComparisonResult {
-	return x.inner.CompareOptions(foundation.NSStringStringWithUTF8String(string_), mask)
+func (x *String) CompareOptions(string_ string, mask NSStringCompareOptions) NSComparisonResult {
+	return NSComparisonResult(x.inner.CompareOptions(foundation.NSStringStringWithUTF8String(string_), raw.NSStringCompareOptions(mask)))
 }
 
 // CompareOptionsRange calls the underlying CompareOptionsRange.
-func (x *String) CompareOptionsRange(string_ string, mask raw.NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange) raw.NSComparisonResult {
-	return x.inner.CompareOptionsRange(foundation.NSStringStringWithUTF8String(string_), mask, rangeOfReceiverToCompare)
+func (x *String) CompareOptionsRange(string_ string, mask NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange) NSComparisonResult {
+	return NSComparisonResult(x.inner.CompareOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSStringCompareOptions(mask), rangeOfReceiverToCompare))
 }
 
 // CompareOptionsRangeLocale calls the underlying CompareOptionsRangeLocale.
-func (x *String) CompareOptionsRangeLocale(string_ string, mask raw.NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange, locale objc.ID) raw.NSComparisonResult {
-	return x.inner.CompareOptionsRangeLocale(foundation.NSStringStringWithUTF8String(string_), mask, rangeOfReceiverToCompare, locale)
+func (x *String) CompareOptionsRangeLocale(string_ string, mask NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange, locale objc.ID) NSComparisonResult {
+	return NSComparisonResult(x.inner.CompareOptionsRangeLocale(foundation.NSStringStringWithUTF8String(string_), raw.NSStringCompareOptions(mask), rangeOfReceiverToCompare, locale))
 }
 
 // CaseInsensitiveCompare calls the underlying CaseInsensitiveCompare.
-func (x *String) CaseInsensitiveCompare(string_ string) raw.NSComparisonResult {
-	return x.inner.CaseInsensitiveCompare(foundation.NSStringStringWithUTF8String(string_))
+func (x *String) CaseInsensitiveCompare(string_ string) NSComparisonResult {
+	return NSComparisonResult(x.inner.CaseInsensitiveCompare(foundation.NSStringStringWithUTF8String(string_)))
 }
 
 // LocalizedCompare calls the underlying LocalizedCompare.
-func (x *String) LocalizedCompare(string_ string) raw.NSComparisonResult {
-	return x.inner.LocalizedCompare(foundation.NSStringStringWithUTF8String(string_))
+func (x *String) LocalizedCompare(string_ string) NSComparisonResult {
+	return NSComparisonResult(x.inner.LocalizedCompare(foundation.NSStringStringWithUTF8String(string_)))
 }
 
 // LocalizedCaseInsensitiveCompare calls the underlying LocalizedCaseInsensitiveCompare.
-func (x *String) LocalizedCaseInsensitiveCompare(string_ string) raw.NSComparisonResult {
-	return x.inner.LocalizedCaseInsensitiveCompare(foundation.NSStringStringWithUTF8String(string_))
+func (x *String) LocalizedCaseInsensitiveCompare(string_ string) NSComparisonResult {
+	return NSComparisonResult(x.inner.LocalizedCaseInsensitiveCompare(foundation.NSStringStringWithUTF8String(string_)))
 }
 
 // LocalizedStandardCompare calls the underlying LocalizedStandardCompare.
-func (x *String) LocalizedStandardCompare(string_ string) raw.NSComparisonResult {
-	return x.inner.LocalizedStandardCompare(foundation.NSStringStringWithUTF8String(string_))
+func (x *String) LocalizedStandardCompare(string_ string) NSComparisonResult {
+	return NSComparisonResult(x.inner.LocalizedStandardCompare(foundation.NSStringStringWithUTF8String(string_)))
 }
 
 // IsEqualToString calls the underlying IsEqualToString.
@@ -370,8 +370,8 @@ func (x *String) HasSuffix(str string) bool {
 }
 
 // CommonPrefixWithStringOptions calls the underlying CommonPrefixWithStringOptions.
-func (x *String) CommonPrefixWithStringOptions(str string, mask raw.NSStringCompareOptions) *String {
-	_r := x.inner.CommonPrefixWithStringOptions(foundation.NSStringStringWithUTF8String(str), mask)
+func (x *String) CommonPrefixWithStringOptions(str string, mask NSStringCompareOptions) *String {
+	_r := x.inner.CommonPrefixWithStringOptions(foundation.NSStringStringWithUTF8String(str), raw.NSStringCompareOptions(mask))
 	if _r == nil {
 		return nil
 	}
@@ -404,18 +404,18 @@ func (x *String) RangeOfString(searchString string) raw.NSRange {
 }
 
 // RangeOfStringOptions calls the underlying RangeOfStringOptions.
-func (x *String) RangeOfStringOptions(searchString string, mask raw.NSStringCompareOptions) raw.NSRange {
-	return x.inner.RangeOfStringOptions(foundation.NSStringStringWithUTF8String(searchString), mask)
+func (x *String) RangeOfStringOptions(searchString string, mask NSStringCompareOptions) raw.NSRange {
+	return x.inner.RangeOfStringOptions(foundation.NSStringStringWithUTF8String(searchString), raw.NSStringCompareOptions(mask))
 }
 
 // RangeOfStringOptionsRange calls the underlying RangeOfStringOptionsRange.
-func (x *String) RangeOfStringOptionsRange(searchString string, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange {
-	return x.inner.RangeOfStringOptionsRange(foundation.NSStringStringWithUTF8String(searchString), mask, rangeOfReceiverToSearch)
+func (x *String) RangeOfStringOptionsRange(searchString string, mask NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange {
+	return x.inner.RangeOfStringOptionsRange(foundation.NSStringStringWithUTF8String(searchString), raw.NSStringCompareOptions(mask), rangeOfReceiverToSearch)
 }
 
 // RangeOfStringOptionsRangeLocale calls the underlying RangeOfStringOptionsRangeLocale.
-func (x *String) RangeOfStringOptionsRangeLocale(searchString string, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange, locale *raw.NSLocale) raw.NSRange {
-	return x.inner.RangeOfStringOptionsRangeLocale(foundation.NSStringStringWithUTF8String(searchString), mask, rangeOfReceiverToSearch, locale)
+func (x *String) RangeOfStringOptionsRangeLocale(searchString string, mask NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange, locale *raw.NSLocale) raw.NSRange {
+	return x.inner.RangeOfStringOptionsRangeLocale(foundation.NSStringStringWithUTF8String(searchString), raw.NSStringCompareOptions(mask), rangeOfReceiverToSearch, locale)
 }
 
 // RangeOfCharacterFromSet calls the underlying RangeOfCharacterFromSet.
@@ -424,13 +424,13 @@ func (x *String) RangeOfCharacterFromSet(searchSet *raw.NSCharacterSet) raw.NSRa
 }
 
 // RangeOfCharacterFromSetOptions calls the underlying RangeOfCharacterFromSetOptions.
-func (x *String) RangeOfCharacterFromSetOptions(searchSet *raw.NSCharacterSet, mask raw.NSStringCompareOptions) raw.NSRange {
-	return x.inner.RangeOfCharacterFromSetOptions(searchSet, mask)
+func (x *String) RangeOfCharacterFromSetOptions(searchSet *raw.NSCharacterSet, mask NSStringCompareOptions) raw.NSRange {
+	return x.inner.RangeOfCharacterFromSetOptions(searchSet, raw.NSStringCompareOptions(mask))
 }
 
 // RangeOfCharacterFromSetOptionsRange calls the underlying RangeOfCharacterFromSetOptionsRange.
-func (x *String) RangeOfCharacterFromSetOptionsRange(searchSet *raw.NSCharacterSet, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange {
-	return x.inner.RangeOfCharacterFromSetOptionsRange(searchSet, mask, rangeOfReceiverToSearch)
+func (x *String) RangeOfCharacterFromSetOptionsRange(searchSet *raw.NSCharacterSet, mask NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange {
+	return x.inner.RangeOfCharacterFromSetOptionsRange(searchSet, raw.NSStringCompareOptions(mask), rangeOfReceiverToSearch)
 }
 
 // RangeOfComposedCharacterSequenceAtIndex calls the underlying RangeOfComposedCharacterSequenceAtIndex.
@@ -509,8 +509,8 @@ func (x *String) ParagraphRangeForRange(range_ raw.NSRange) raw.NSRange {
 }
 
 // EnumerateSubstringsInRangeOptionsUsing calls the underlying EnumerateSubstringsInRangeOptionsUsing.
-func (x *String) EnumerateSubstringsInRangeOptionsUsing(range_ raw.NSRange, opts raw.NSStringEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateSubstringsInRangeOptionsUsing(range_, opts, block)
+func (x *String) EnumerateSubstringsInRangeOptionsUsing(range_ raw.NSRange, opts NSStringEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateSubstringsInRangeOptionsUsing(range_, raw.NSStringEnumerationOptions(opts), block)
 }
 
 // EnumerateLinesUsing calls the underlying EnumerateLinesUsing.
@@ -552,8 +552,8 @@ func (x *String) GetCStringMaxLengthEncoding(buffer string, maxBufferCount uint,
 }
 
 // GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange calls the underlying GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange.
-func (x *String) GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer unsafe.Pointer, maxBufferCount uint, usedBufferCount *uint, encoding uint, options raw.NSStringEncodingConversionOptions, range_ raw.NSRange, leftover *raw.NSRange) bool {
-	return x.inner.GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer, maxBufferCount, usedBufferCount, encoding, options, range_, leftover)
+func (x *String) GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer unsafe.Pointer, maxBufferCount uint, usedBufferCount *uint, encoding uint, options NSStringEncodingConversionOptions, range_ raw.NSRange, leftover *raw.NSRange) bool {
+	return x.inner.GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer, maxBufferCount, usedBufferCount, encoding, raw.NSStringEncodingConversionOptions(options), range_, leftover)
 }
 
 // MaximumLengthOfBytesUsingEncoding calls the underlying MaximumLengthOfBytesUsingEncoding.
@@ -595,8 +595,8 @@ func (x *String) StringByPaddingToLengthWithStringStartingAtIndex(newLength uint
 }
 
 // StringByFoldingWithOptionsLocale calls the underlying StringByFoldingWithOptionsLocale.
-func (x *String) StringByFoldingWithOptionsLocale(options raw.NSStringCompareOptions, locale *raw.NSLocale) *String {
-	_r := x.inner.StringByFoldingWithOptionsLocale(options, locale)
+func (x *String) StringByFoldingWithOptionsLocale(options NSStringCompareOptions, locale *raw.NSLocale) *String {
+	_r := x.inner.StringByFoldingWithOptionsLocale(raw.NSStringCompareOptions(options), locale)
 	if _r == nil {
 		return nil
 	}
@@ -604,8 +604,8 @@ func (x *String) StringByFoldingWithOptionsLocale(options raw.NSStringCompareOpt
 }
 
 // StringByReplacingOccurrencesOfStringWithStringOptionsRange calls the underlying StringByReplacingOccurrencesOfStringWithStringOptionsRange.
-func (x *String) StringByReplacingOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options raw.NSStringCompareOptions, searchRange raw.NSRange) *String {
-	_r := x.inner.StringByReplacingOccurrencesOfStringWithStringOptionsRange(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement), options, searchRange)
+func (x *String) StringByReplacingOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options NSStringCompareOptions, searchRange raw.NSRange) *String {
+	_r := x.inner.StringByReplacingOccurrencesOfStringWithStringOptionsRange(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement), raw.NSStringCompareOptions(options), searchRange)
 	if _r == nil {
 		return nil
 	}
@@ -1011,13 +1011,13 @@ func (x *String) StringByRemovingPercentEncoding() *String {
 }
 
 // LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges calls the underlying LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges.
-func (x *String) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
-	return x.inner.LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_, scheme, options, orthography, tokenRanges)
+func (x *String) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
+	return x.inner.LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_, scheme, raw.NSLinguisticTaggerOptions(options), orthography, tokenRanges)
 }
 
 // EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing calls the underlying EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing.
-func (x *String) EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_ raw.NSRange, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block) {
-	x.inner.EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_, scheme, options, orthography, block)
+func (x *String) EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block) {
+	x.inner.EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_, scheme, raw.NSLinguisticTaggerOptions(options), orthography, block)
 }
 
 func (x *String) asString() *raw.NSString { return x.inner }
@@ -1034,29 +1034,29 @@ type Stringable interface {
 	SubstringToIndex(to uint) *String
 	SubstringWithRange(range_ raw.NSRange) *String
 	GetCharactersRange(buffer *uint16, range_ raw.NSRange)
-	Compare(string_ string) raw.NSComparisonResult
-	CompareOptions(string_ string, mask raw.NSStringCompareOptions) raw.NSComparisonResult
-	CompareOptionsRange(string_ string, mask raw.NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange) raw.NSComparisonResult
-	CompareOptionsRangeLocale(string_ string, mask raw.NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange, locale objc.ID) raw.NSComparisonResult
-	CaseInsensitiveCompare(string_ string) raw.NSComparisonResult
-	LocalizedCompare(string_ string) raw.NSComparisonResult
-	LocalizedCaseInsensitiveCompare(string_ string) raw.NSComparisonResult
-	LocalizedStandardCompare(string_ string) raw.NSComparisonResult
+	Compare(string_ string) NSComparisonResult
+	CompareOptions(string_ string, mask NSStringCompareOptions) NSComparisonResult
+	CompareOptionsRange(string_ string, mask NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange) NSComparisonResult
+	CompareOptionsRangeLocale(string_ string, mask NSStringCompareOptions, rangeOfReceiverToCompare raw.NSRange, locale objc.ID) NSComparisonResult
+	CaseInsensitiveCompare(string_ string) NSComparisonResult
+	LocalizedCompare(string_ string) NSComparisonResult
+	LocalizedCaseInsensitiveCompare(string_ string) NSComparisonResult
+	LocalizedStandardCompare(string_ string) NSComparisonResult
 	IsEqualToString(aString string) bool
 	HasPrefix(str string) bool
 	HasSuffix(str string) bool
-	CommonPrefixWithStringOptions(str string, mask raw.NSStringCompareOptions) *String
+	CommonPrefixWithStringOptions(str string, mask NSStringCompareOptions) *String
 	ContainsString(str string) bool
 	LocalizedCaseInsensitiveContainsString(str string) bool
 	LocalizedStandardContainsString(str string) bool
 	LocalizedStandardRangeOfString(str string) raw.NSRange
 	RangeOfString(searchString string) raw.NSRange
-	RangeOfStringOptions(searchString string, mask raw.NSStringCompareOptions) raw.NSRange
-	RangeOfStringOptionsRange(searchString string, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange
-	RangeOfStringOptionsRangeLocale(searchString string, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange, locale *raw.NSLocale) raw.NSRange
+	RangeOfStringOptions(searchString string, mask NSStringCompareOptions) raw.NSRange
+	RangeOfStringOptionsRange(searchString string, mask NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange
+	RangeOfStringOptionsRangeLocale(searchString string, mask NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange, locale *raw.NSLocale) raw.NSRange
 	RangeOfCharacterFromSet(searchSet *raw.NSCharacterSet) raw.NSRange
-	RangeOfCharacterFromSetOptions(searchSet *raw.NSCharacterSet, mask raw.NSStringCompareOptions) raw.NSRange
-	RangeOfCharacterFromSetOptionsRange(searchSet *raw.NSCharacterSet, mask raw.NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange
+	RangeOfCharacterFromSetOptions(searchSet *raw.NSCharacterSet, mask NSStringCompareOptions) raw.NSRange
+	RangeOfCharacterFromSetOptionsRange(searchSet *raw.NSCharacterSet, mask NSStringCompareOptions, rangeOfReceiverToSearch raw.NSRange) raw.NSRange
 	RangeOfComposedCharacterSequenceAtIndex(index uint) raw.NSRange
 	RangeOfComposedCharacterSequencesForRange(range_ raw.NSRange) raw.NSRange
 	StringByAppendingString(aString string) *String
@@ -1068,22 +1068,22 @@ type Stringable interface {
 	LineRangeForRange(range_ raw.NSRange) raw.NSRange
 	GetParagraphStartEndContentsEndForRange(startPtr *uint, parEndPtr *uint, contentsEndPtr *uint, range_ raw.NSRange)
 	ParagraphRangeForRange(range_ raw.NSRange) raw.NSRange
-	EnumerateSubstringsInRangeOptionsUsing(range_ raw.NSRange, opts raw.NSStringEnumerationOptions, block objc.Block)
+	EnumerateSubstringsInRangeOptionsUsing(range_ raw.NSRange, opts NSStringEnumerationOptions, block objc.Block)
 	EnumerateLinesUsing(block func(*raw.NSString, *bool))
 	DataUsingEncodingAllowLossyConversion(encoding uint, lossy bool) *Data
 	DataUsingEncoding(encoding uint) *Data
 	CanBeConvertedToEncoding(encoding uint) bool
 	CStringUsingEncoding(encoding uint) string
 	GetCStringMaxLengthEncoding(buffer string, maxBufferCount uint, encoding uint) bool
-	GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer unsafe.Pointer, maxBufferCount uint, usedBufferCount *uint, encoding uint, options raw.NSStringEncodingConversionOptions, range_ raw.NSRange, leftover *raw.NSRange) bool
+	GetBytesMaxLengthUsedLengthEncodingOptionsRangeRemainingRange(buffer unsafe.Pointer, maxBufferCount uint, usedBufferCount *uint, encoding uint, options NSStringEncodingConversionOptions, range_ raw.NSRange, leftover *raw.NSRange) bool
 	MaximumLengthOfBytesUsingEncoding(enc uint) uint
 	LengthOfBytesUsingEncoding(enc uint) uint
 	ComponentsSeparatedByString(separator string) *raw.NSArray[*raw.NSString]
 	ComponentsSeparatedByCharactersInSet(separator *raw.NSCharacterSet) *raw.NSArray[*raw.NSString]
 	StringByTrimmingCharactersInSet(set *raw.NSCharacterSet) *String
 	StringByPaddingToLengthWithStringStartingAtIndex(newLength uint, padString string, padIndex uint) *String
-	StringByFoldingWithOptionsLocale(options raw.NSStringCompareOptions, locale *raw.NSLocale) *String
-	StringByReplacingOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options raw.NSStringCompareOptions, searchRange raw.NSRange) *String
+	StringByFoldingWithOptionsLocale(options NSStringCompareOptions, locale *raw.NSLocale) *String
+	StringByReplacingOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options NSStringCompareOptions, searchRange raw.NSRange) *String
 	StringByReplacingOccurrencesOfStringWithString(target string, replacement string) *String
 	StringByReplacingCharactersInRangeWithString(range_ raw.NSRange, replacement string) *String
 	StringByApplyingTransformReverse(transform *raw.NSString, reverse bool) *String
@@ -1140,8 +1140,8 @@ type Stringable interface {
 	StringByAddingPercentEscapesUsingEncoding(enc uint) *String
 	StringByReplacingPercentEscapesUsingEncoding(enc uint) *String
 	StringByRemovingPercentEncoding() *String
-	LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
-	EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_ raw.NSRange, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block)
+	LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
+	EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block)
 }
 
 var _ Stringable = (*String)(nil)

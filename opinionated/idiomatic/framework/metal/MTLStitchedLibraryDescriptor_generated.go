@@ -57,8 +57,8 @@ func (x *StitchedLibraryDescriptor) WithFunctionGraphs(items ...*raw.MTLFunction
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *StitchedLibraryDescriptor) WithOptions(options raw.MTLStitchedLibraryOptions) *StitchedLibraryDescriptor {
-	x.inner.SetOptions(options)
+func (x *StitchedLibraryDescriptor) WithOptions(options MTLStitchedLibraryOptions) *StitchedLibraryDescriptor {
+	x.inner.SetOptions(raw.MTLStitchedLibraryOptions(options))
 	return x
 }
 
@@ -99,28 +99,28 @@ func (x *StitchedLibraryDescriptor) SetBinaryArchives(binaryArchives *foundation
 }
 
 // Options calls the underlying Options.
-func (x *StitchedLibraryDescriptor) Options() raw.MTLStitchedLibraryOptions {
-	return x.inner.Options()
+func (x *StitchedLibraryDescriptor) Options() MTLStitchedLibraryOptions {
+	return MTLStitchedLibraryOptions(x.inner.Options())
 }
 
 // SetOptions calls the underlying SetOptions.
-func (x *StitchedLibraryDescriptor) SetOptions(options raw.MTLStitchedLibraryOptions) {
-	x.inner.SetOptions(options)
+func (x *StitchedLibraryDescriptor) SetOptions(options MTLStitchedLibraryOptions) {
+	x.inner.SetOptions(raw.MTLStitchedLibraryOptions(options))
 }
 
 // StitchedLibraryDescriptorable is the interface implemented by [StitchedLibraryDescriptor], for mocking and DI.
 type StitchedLibraryDescriptorable interface {
 	Unwrap() *raw.MTLStitchedLibraryDescriptor
 	WithFunctionGraphs(items ...*raw.MTLFunctionStitchingGraph) *StitchedLibraryDescriptor
-	WithOptions(options raw.MTLStitchedLibraryOptions) *StitchedLibraryDescriptor
+	WithOptions(options MTLStitchedLibraryOptions) *StitchedLibraryDescriptor
 	FunctionGraphs() []*FunctionStitchingGraph
 	SetFunctionGraphs(functionGraphs *foundation.NSArray[*raw.MTLFunctionStitchingGraph])
 	Functions() *foundation.NSArray[raw.MTLFunction]
 	SetFunctions(functions *foundation.NSArray[raw.MTLFunction])
 	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
 	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
-	Options() raw.MTLStitchedLibraryOptions
-	SetOptions(options raw.MTLStitchedLibraryOptions)
+	Options() MTLStitchedLibraryOptions
+	SetOptions(options MTLStitchedLibraryOptions)
 }
 
 var _ StitchedLibraryDescriptorable = (*StitchedLibraryDescriptor)(nil)

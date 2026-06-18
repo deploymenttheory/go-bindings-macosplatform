@@ -38,8 +38,8 @@ func NewLeaderboardViewController() *LeaderboardViewController {
 }
 
 // WithTimeScope sets the timeScope property and returns the receiver for chaining.
-func (x *LeaderboardViewController) WithTimeScope(timeScope raw.GKLeaderboardTimeScope) *LeaderboardViewController {
-	x.inner.SetTimeScope(timeScope)
+func (x *LeaderboardViewController) WithTimeScope(timeScope GKLeaderboardTimeScope) *LeaderboardViewController {
+	x.inner.SetTimeScope(raw.GKLeaderboardTimeScope(timeScope))
 	return x
 }
 
@@ -62,14 +62,14 @@ func (x *LeaderboardViewController) WithGameCenterDelegate(gameCenterDelegate ra
 }
 
 // WithViewState sets the viewState property and returns the receiver for chaining.
-func (x *LeaderboardViewController) WithViewState(viewState raw.GKGameCenterViewControllerState) *LeaderboardViewController {
-	x.inner.GKGameCenterViewController.SetViewState(viewState)
+func (x *LeaderboardViewController) WithViewState(viewState GKGameCenterViewControllerState) *LeaderboardViewController {
+	x.inner.GKGameCenterViewController.SetViewState(raw.GKGameCenterViewControllerState(viewState))
 	return x
 }
 
 // WithLeaderboardTimeScope sets the leaderboardTimeScope property and returns the receiver for chaining.
-func (x *LeaderboardViewController) WithLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) *LeaderboardViewController {
-	x.inner.GKGameCenterViewController.SetLeaderboardTimeScope(leaderboardTimeScope)
+func (x *LeaderboardViewController) WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *LeaderboardViewController {
+	x.inner.GKGameCenterViewController.SetLeaderboardTimeScope(raw.GKLeaderboardTimeScope(leaderboardTimeScope))
 	return x
 }
 
@@ -86,13 +86,13 @@ func (x *LeaderboardViewController) WithLeaderboardCategory(leaderboardCategory 
 }
 
 // TimeScope calls the underlying TimeScope.
-func (x *LeaderboardViewController) TimeScope() raw.GKLeaderboardTimeScope {
-	return x.inner.TimeScope()
+func (x *LeaderboardViewController) TimeScope() GKLeaderboardTimeScope {
+	return GKLeaderboardTimeScope(x.inner.TimeScope())
 }
 
 // SetTimeScope calls the underlying SetTimeScope.
-func (x *LeaderboardViewController) SetTimeScope(timeScope raw.GKLeaderboardTimeScope) {
-	x.inner.SetTimeScope(timeScope)
+func (x *LeaderboardViewController) SetTimeScope(timeScope GKLeaderboardTimeScope) {
+	x.inner.SetTimeScope(raw.GKLeaderboardTimeScope(timeScope))
 }
 
 // Category calls the underlying Category.
@@ -126,16 +126,16 @@ func (x *LeaderboardViewController) asGameCenterViewController() *raw.GKGameCent
 // LeaderboardViewControllerable is the interface implemented by [LeaderboardViewController], for mocking and DI.
 type LeaderboardViewControllerable interface {
 	Unwrap() *raw.GKLeaderboardViewController
-	WithTimeScope(timeScope raw.GKLeaderboardTimeScope) *LeaderboardViewController
+	WithTimeScope(timeScope GKLeaderboardTimeScope) *LeaderboardViewController
 	WithCategory(category string) *LeaderboardViewController
 	WithLeaderboardDelegate(leaderboardDelegate raw.GKLeaderboardViewControllerDelegate) *LeaderboardViewController
 	WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *LeaderboardViewController
-	WithViewState(viewState raw.GKGameCenterViewControllerState) *LeaderboardViewController
-	WithLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) *LeaderboardViewController
+	WithViewState(viewState GKGameCenterViewControllerState) *LeaderboardViewController
+	WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *LeaderboardViewController
 	WithLeaderboardIdentifier(leaderboardIdentifier string) *LeaderboardViewController
 	WithLeaderboardCategory(leaderboardCategory string) *LeaderboardViewController
-	TimeScope() raw.GKLeaderboardTimeScope
-	SetTimeScope(timeScope raw.GKLeaderboardTimeScope)
+	TimeScope() GKLeaderboardTimeScope
+	SetTimeScope(timeScope GKLeaderboardTimeScope)
 	Category() string
 	SetCategory(category string)
 	LeaderboardDelegate() raw.GKLeaderboardViewControllerDelegate

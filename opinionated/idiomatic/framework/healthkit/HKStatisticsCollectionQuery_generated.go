@@ -38,9 +38,9 @@ func NewStatisticsCollectionQuery() *StatisticsCollectionQuery {
 }
 
 // NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents creates a new [StatisticsCollectionQuery].
-func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents(quantityType *raw.HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options raw.HKStatisticsOptions, anchorDate *foundation.NSDate, intervalComponents *foundation.NSDateComponents) *StatisticsCollectionQuery {
+func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents(quantityType *raw.HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options HKStatisticsOptions, anchorDate *foundation.NSDate, intervalComponents *foundation.NSDateComponents) *StatisticsCollectionQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKStatisticsCollectionQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:anchorDate:intervalComponents:"), quantityType.Ptr(), quantitySamplePredicate.Ptr(), options, anchorDate.Ptr(), intervalComponents.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:anchorDate:intervalComponents:"), quantityType.Ptr(), quantitySamplePredicate.Ptr(), raw.HKStatisticsOptions(options), anchorDate.Ptr(), intervalComponents.Ptr())
 	return &StatisticsCollectionQuery{inner: raw.HKStatisticsCollectionQueryFromID(_id)}
 }
 
@@ -62,8 +62,8 @@ func (x *StatisticsCollectionQuery) AnchorDate() *foundation.NSDate {
 }
 
 // Options calls the underlying Options.
-func (x *StatisticsCollectionQuery) Options() raw.HKStatisticsOptions {
-	return x.inner.Options()
+func (x *StatisticsCollectionQuery) Options() HKStatisticsOptions {
+	return HKStatisticsOptions(x.inner.Options())
 }
 
 // IntervalComponents calls the underlying IntervalComponents.
@@ -94,7 +94,7 @@ type StatisticsCollectionQueryable interface {
 	WithInitialResultsHandler(initialResultsHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatisticsCollection, unsafe.Pointer)) *StatisticsCollectionQuery
 	WithStatisticsUpdateHandler(statisticsUpdateHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatistics, *raw.HKStatisticsCollection, unsafe.Pointer)) *StatisticsCollectionQuery
 	AnchorDate() *foundation.NSDate
-	Options() raw.HKStatisticsOptions
+	Options() HKStatisticsOptions
 	IntervalComponents() *foundation.NSDateComponents
 	SetInitialResultsHandler(initialResultsHandler func(*raw.HKStatisticsCollectionQuery, *raw.HKStatisticsCollection, unsafe.Pointer))
 	StatisticsUpdateHandler() objc.Block

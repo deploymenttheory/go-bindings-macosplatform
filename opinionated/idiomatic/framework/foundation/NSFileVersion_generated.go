@@ -55,8 +55,8 @@ func (x *FileVersion) WithScriptingProperties(scriptingProperties *raw.NSDiction
 }
 
 // ReplaceItemAtURLOptionsError calls the underlying ReplaceItemAtURLOptionsError.
-func (x *FileVersion) ReplaceItemAtURLOptionsError(url string, options raw.NSFileVersionReplacingOptions) (*URL, error) {
-	_r, _err := x.inner.ReplaceItemAtURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+func (x *FileVersion) ReplaceItemAtURLOptionsError(url string, options NSFileVersionReplacingOptions) (*URL, error) {
+	_r, _err := x.inner.ReplaceItemAtURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileVersionReplacingOptions(options))
 	if _err != nil {
 		return nil, _err
 	}
@@ -165,7 +165,7 @@ type FileVersionable interface {
 	WithResolved(resolved bool) *FileVersion
 	WithDiscardable(discardable bool) *FileVersion
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileVersion
-	ReplaceItemAtURLOptionsError(url string, options raw.NSFileVersionReplacingOptions) (*URL, error)
+	ReplaceItemAtURLOptionsError(url string, options NSFileVersionReplacingOptions) (*URL, error)
 	RemoveAndReturnError() error
 	URL() *URL
 	LocalizedName() *String

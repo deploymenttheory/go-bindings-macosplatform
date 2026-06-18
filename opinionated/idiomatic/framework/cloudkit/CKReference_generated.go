@@ -30,22 +30,22 @@ func ReferenceFromID(id objc.ID) *Reference {
 }
 
 // NewReferenceWithRecordIDAction creates a new [Reference].
-func NewReferenceWithRecordIDAction(recordID *raw.CKRecordID, action raw.CKReferenceAction) *Reference {
+func NewReferenceWithRecordIDAction(recordID *raw.CKRecordID, action CKReferenceAction) *Reference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKReference")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordID:action:"), recordID.Ptr(), action)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordID:action:"), recordID.Ptr(), raw.CKReferenceAction(action))
 	return &Reference{inner: raw.CKReferenceFromID(_id)}
 }
 
 // NewReferenceWithRecordAction creates a new [Reference].
-func NewReferenceWithRecordAction(record *raw.CKRecord, action raw.CKReferenceAction) *Reference {
+func NewReferenceWithRecordAction(record *raw.CKRecord, action CKReferenceAction) *Reference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKReference")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecord:action:"), record.Ptr(), action)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecord:action:"), record.Ptr(), raw.CKReferenceAction(action))
 	return &Reference{inner: raw.CKReferenceFromID(_id)}
 }
 
 // ReferenceAction calls the underlying ReferenceAction.
-func (x *Reference) ReferenceAction() raw.CKReferenceAction {
-	return x.inner.ReferenceAction()
+func (x *Reference) ReferenceAction() CKReferenceAction {
+	return CKReferenceAction(x.inner.ReferenceAction())
 }
 
 // RecordID calls the underlying RecordID.
@@ -60,7 +60,7 @@ func (x *Reference) RecordID() *RecordID {
 // Referenceable is the interface implemented by [Reference], for mocking and DI.
 type Referenceable interface {
 	Unwrap() *raw.CKReference
-	ReferenceAction() raw.CKReferenceAction
+	ReferenceAction() CKReferenceAction
 	RecordID() *RecordID
 }
 

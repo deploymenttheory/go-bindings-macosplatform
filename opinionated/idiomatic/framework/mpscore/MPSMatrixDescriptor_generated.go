@@ -48,8 +48,8 @@ func (x *MatrixDescriptor) WithColumns(columns uint) *MatrixDescriptor {
 }
 
 // WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *MatrixDescriptor) WithDataType(dataType raw.MPSDataType) *MatrixDescriptor {
-	x.inner.SetDataType(dataType)
+func (x *MatrixDescriptor) WithDataType(dataType MPSDataType) *MatrixDescriptor {
+	x.inner.SetDataType(raw.MPSDataType(dataType))
 	return x
 }
 
@@ -85,13 +85,13 @@ func (x *MatrixDescriptor) Matrices() uint {
 }
 
 // DataType calls the underlying DataType.
-func (x *MatrixDescriptor) DataType() raw.MPSDataType {
-	return x.inner.DataType()
+func (x *MatrixDescriptor) DataType() MPSDataType {
+	return MPSDataType(x.inner.DataType())
 }
 
 // SetDataType calls the underlying SetDataType.
-func (x *MatrixDescriptor) SetDataType(dataType raw.MPSDataType) {
-	x.inner.SetDataType(dataType)
+func (x *MatrixDescriptor) SetDataType(dataType MPSDataType) {
+	x.inner.SetDataType(raw.MPSDataType(dataType))
 }
 
 // RowBytes calls the underlying RowBytes.
@@ -114,15 +114,15 @@ type MatrixDescriptorable interface {
 	Unwrap() *raw.MPSMatrixDescriptor
 	WithRows(rows uint) *MatrixDescriptor
 	WithColumns(columns uint) *MatrixDescriptor
-	WithDataType(dataType raw.MPSDataType) *MatrixDescriptor
+	WithDataType(dataType MPSDataType) *MatrixDescriptor
 	WithRowBytes(rowBytes uint) *MatrixDescriptor
 	Rows() uint
 	SetRows(rows uint)
 	Columns() uint
 	SetColumns(columns uint)
 	Matrices() uint
-	DataType() raw.MPSDataType
-	SetDataType(dataType raw.MPSDataType)
+	DataType() MPSDataType
+	SetDataType(dataType MPSDataType)
 	RowBytes() uint
 	SetRowBytes(rowBytes uint)
 	MatrixBytes() uint

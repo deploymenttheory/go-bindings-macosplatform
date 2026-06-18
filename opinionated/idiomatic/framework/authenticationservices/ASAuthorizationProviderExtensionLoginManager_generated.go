@@ -58,28 +58,28 @@ func (x *AuthorizationProviderExtensionLoginManager) SaveLoginConfigurationError
 }
 
 // SaveCertificateKeyType calls the underlying SaveCertificateKeyType.
-func (x *AuthorizationProviderExtensionLoginManager) SaveCertificateKeyType(certificate unsafe.Pointer, keyType raw.ASAuthorizationProviderExtensionKeyType) {
-	x.inner.SaveCertificateKeyType(certificate, keyType)
+func (x *AuthorizationProviderExtensionLoginManager) SaveCertificateKeyType(certificate unsafe.Pointer, keyType ASAuthorizationProviderExtensionKeyType) {
+	x.inner.SaveCertificateKeyType(certificate, raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
 // CopyKeyForKeyType calls the underlying CopyKeyForKeyType.
-func (x *AuthorizationProviderExtensionLoginManager) CopyKeyForKeyType(keyType raw.ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
-	return x.inner.CopyKeyForKeyType(keyType)
+func (x *AuthorizationProviderExtensionLoginManager) CopyKeyForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
+	return x.inner.CopyKeyForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
 // CopyIdentityForKeyType calls the underlying CopyIdentityForKeyType.
-func (x *AuthorizationProviderExtensionLoginManager) CopyIdentityForKeyType(keyType raw.ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
-	return x.inner.CopyIdentityForKeyType(keyType)
+func (x *AuthorizationProviderExtensionLoginManager) CopyIdentityForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
+	return x.inner.CopyIdentityForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
 // BeginKeyRotationForKeyType calls the underlying BeginKeyRotationForKeyType.
-func (x *AuthorizationProviderExtensionLoginManager) BeginKeyRotationForKeyType(keyType raw.ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
-	return x.inner.BeginKeyRotationForKeyType(keyType)
+func (x *AuthorizationProviderExtensionLoginManager) BeginKeyRotationForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
+	return x.inner.BeginKeyRotationForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
 // CompleteKeyRotationForKeyType calls the underlying CompleteKeyRotationForKeyType.
-func (x *AuthorizationProviderExtensionLoginManager) CompleteKeyRotationForKeyType(keyType raw.ASAuthorizationProviderExtensionKeyType) {
-	x.inner.CompleteKeyRotationForKeyType(keyType)
+func (x *AuthorizationProviderExtensionLoginManager) CompleteKeyRotationForKeyType(keyType ASAuthorizationProviderExtensionKeyType) {
+	x.inner.CompleteKeyRotationForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
 // UserNeedsReauthenticationWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -131,13 +131,13 @@ func (x *AuthorizationProviderExtensionLoginManager) ResetUserSecureEnclaveKey()
 }
 
 // AttestKeyClientDataHashCompletion calls the underlying AttestKeyClientDataHashCompletion.
-func (x *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(keyType raw.ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block) {
-	x.inner.AttestKeyClientDataHashCompletion(keyType, clientDataHash, completion)
+func (x *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block) {
+	x.inner.AttestKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, completion)
 }
 
 // AttestPendingKeyClientDataHashCompletion calls the underlying AttestPendingKeyClientDataHashCompletion.
-func (x *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(keyType raw.ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block) {
-	x.inner.AttestPendingKeyClientDataHashCompletion(keyType, clientDataHash, completion)
+func (x *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block) {
+	x.inner.AttestPendingKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, completion)
 }
 
 // PresentRegistrationViewControllerWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -178,8 +178,8 @@ func (x *AuthorizationProviderExtensionLoginManager) RegistrationToken() string 
 }
 
 // AuthenticationMethod calls the underlying AuthenticationMethod.
-func (x *AuthorizationProviderExtensionLoginManager) AuthenticationMethod() raw.ASAuthorizationProviderExtensionAuthenticationMethod {
-	return x.inner.AuthenticationMethod()
+func (x *AuthorizationProviderExtensionLoginManager) AuthenticationMethod() ASAuthorizationProviderExtensionAuthenticationMethod {
+	return ASAuthorizationProviderExtensionAuthenticationMethod(x.inner.AuthenticationMethod())
 }
 
 // ExtensionData calls the underlying ExtensionData.
@@ -231,11 +231,11 @@ type AuthorizationProviderExtensionLoginManagerable interface {
 	WithSsoTokens(ssoTokens *foundation.NSDictionary[objc.ID, objc.ID]) *AuthorizationProviderExtensionLoginManager
 	SaveUserLoginConfigurationError(userLoginConfiguration *raw.ASAuthorizationProviderExtensionUserLoginConfiguration) (bool, error)
 	SaveLoginConfigurationError(loginConfiguration *raw.ASAuthorizationProviderExtensionLoginConfiguration) (bool, error)
-	SaveCertificateKeyType(certificate unsafe.Pointer, keyType raw.ASAuthorizationProviderExtensionKeyType)
-	CopyKeyForKeyType(keyType raw.ASAuthorizationProviderExtensionKeyType) unsafe.Pointer
-	CopyIdentityForKeyType(keyType raw.ASAuthorizationProviderExtensionKeyType) unsafe.Pointer
-	BeginKeyRotationForKeyType(keyType raw.ASAuthorizationProviderExtensionKeyType) unsafe.Pointer
-	CompleteKeyRotationForKeyType(keyType raw.ASAuthorizationProviderExtensionKeyType)
+	SaveCertificateKeyType(certificate unsafe.Pointer, keyType ASAuthorizationProviderExtensionKeyType)
+	CopyKeyForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer
+	CopyIdentityForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer
+	BeginKeyRotationForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer
+	CompleteKeyRotationForKeyType(keyType ASAuthorizationProviderExtensionKeyType)
 	UserNeedsReauthenticationWithCompletion(ctx context.Context) error
 	DeviceRegistrationsNeedsRepair()
 	UserRegistrationsNeedsRepair()
@@ -243,13 +243,13 @@ type AuthorizationProviderExtensionLoginManagerable interface {
 	ResetKeys()
 	ResetDeviceKeys()
 	ResetUserSecureEnclaveKey()
-	AttestKeyClientDataHashCompletion(keyType raw.ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block)
-	AttestPendingKeyClientDataHashCompletion(keyType raw.ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block)
+	AttestKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block)
+	AttestPendingKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block)
 	PresentRegistrationViewControllerWithCompletion(ctx context.Context) error
 	IsDeviceRegistered() bool
 	IsUserRegistered() bool
 	RegistrationToken() string
-	AuthenticationMethod() raw.ASAuthorizationProviderExtensionAuthenticationMethod
+	AuthenticationMethod() ASAuthorizationProviderExtensionAuthenticationMethod
 	ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID]
 	LoginUserName() unsafe.Pointer
 	SetLoginUserName(loginUserName unsafe.Pointer)

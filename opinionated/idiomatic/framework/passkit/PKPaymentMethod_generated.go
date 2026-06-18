@@ -56,8 +56,8 @@ func (x *PaymentMethod) Network() string {
 }
 
 // Type calls the underlying Type.
-func (x *PaymentMethod) Type() raw.PKPaymentMethodType {
-	return x.inner.Type()
+func (x *PaymentMethod) Type() PKPaymentMethodType {
+	return PKPaymentMethodType(x.inner.Type())
 }
 
 // PaymentPass calls the underlying PaymentPass.
@@ -88,7 +88,7 @@ type PaymentMethodable interface {
 	Unwrap() *raw.PKPaymentMethod
 	DisplayName() string
 	Network() string
-	Type() raw.PKPaymentMethodType
+	Type() PKPaymentMethodType
 	PaymentPass() *PaymentPass
 	SecureElementPass() *SecureElementPass
 	BillingAddress() *contacts.CNContact

@@ -54,14 +54,14 @@ func (x *ComboButton) WithImage(image *Image) *ComboButton {
 }
 
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *ComboButton) WithImageScaling(imageScaling raw.NSImageScaling) *ComboButton {
-	x.inner.SetImageScaling(imageScaling)
+func (x *ComboButton) WithImageScaling(imageScaling NSImageScaling) *ComboButton {
+	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *ComboButton) WithStyle(style raw.NSComboButtonStyle) *ComboButton {
-	x.inner.SetStyle(style)
+func (x *ComboButton) WithStyle(style NSComboButtonStyle) *ComboButton {
+	x.inner.SetStyle(raw.NSComboButtonStyle(style))
 	return x
 }
 
@@ -114,8 +114,8 @@ func (x *ComboButton) WithHighlighted(highlighted bool) *ComboButton {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ComboButton) WithControlSize(controlSize raw.NSControlSize) *ComboButton {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *ComboButton) WithControlSize(controlSize NSControlSize) *ComboButton {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -180,20 +180,20 @@ func (x *ComboButton) WithUsesSingleLineMode(usesSingleLineMode bool) *ComboButt
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ComboButton) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ComboButton {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *ComboButton) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboButton {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ComboButton) WithAlignment(alignment raw.NSTextAlignment) *ComboButton {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *ComboButton) WithAlignment(alignment NSTextAlignment) *ComboButton {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ComboButton) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ComboButton {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *ComboButton) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboButton {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -246,8 +246,8 @@ func (x *ComboButton) WithAutoresizesSubviews(autoresizesSubviews bool) *ComboBu
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ComboButton) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ComboButton {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *ComboButton) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ComboButton {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -306,14 +306,14 @@ func (x *ComboButton) WithWantsRestingTouches(wantsRestingTouches bool) *ComboBu
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ComboButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ComboButton {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *ComboButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ComboButton {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ComboButton) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ComboButton {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *ComboButton) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ComboButton {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -420,8 +420,8 @@ func (x *ComboButton) WithToolTip(toolTip string) *ComboButton {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ComboButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ComboButton {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ComboButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ComboButton {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -438,8 +438,8 @@ func (x *ComboButton) WithNextKeyView(nextKeyView ViewProvider) *ComboButton {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ComboButton) WithFocusRingType(focusRingType raw.NSFocusRingType) *ComboButton {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *ComboButton) WithFocusRingType(focusRingType NSFocusRingType) *ComboButton {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -462,8 +462,8 @@ func (x *ComboButton) WithGestureRecognizers(items ...GestureRecognizerProvider)
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ComboButton) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ComboButton {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ComboButton) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ComboButton {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -580,23 +580,23 @@ func (x *ComboButton) SetImage(image *raw.NSImage) {
 }
 
 // ImageScaling calls the underlying ImageScaling.
-func (x *ComboButton) ImageScaling() raw.NSImageScaling {
-	return x.inner.ImageScaling()
+func (x *ComboButton) ImageScaling() NSImageScaling {
+	return NSImageScaling(x.inner.ImageScaling())
 }
 
 // SetImageScaling calls the underlying SetImageScaling.
-func (x *ComboButton) SetImageScaling(imageScaling raw.NSImageScaling) {
-	x.inner.SetImageScaling(imageScaling)
+func (x *ComboButton) SetImageScaling(imageScaling NSImageScaling) {
+	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 }
 
 // Style calls the underlying Style.
-func (x *ComboButton) Style() raw.NSComboButtonStyle {
-	return x.inner.Style()
+func (x *ComboButton) Style() NSComboButtonStyle {
+	return NSComboButtonStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *ComboButton) SetStyle(style raw.NSComboButtonStyle) {
-	x.inner.SetStyle(style)
+func (x *ComboButton) SetStyle(style NSComboButtonStyle) {
+	x.inner.SetStyle(raw.NSComboButtonStyle(style))
 }
 
 func (x *ComboButton) asControl() *raw.NSControl { return &x.inner.NSControl }
@@ -610,8 +610,8 @@ type ComboButtonable interface {
 	Unwrap() *raw.NSComboButton
 	WithTitle(title string) *ComboButton
 	WithImage(image *Image) *ComboButton
-	WithImageScaling(imageScaling raw.NSImageScaling) *ComboButton
-	WithStyle(style raw.NSComboButtonStyle) *ComboButton
+	WithImageScaling(imageScaling NSImageScaling) *ComboButton
+	WithStyle(style NSComboButtonStyle) *ComboButton
 	WithTarget(target objc.ID) *ComboButton
 	WithAction(action objc.SEL) *ComboButton
 	WithTag(tag int) *ComboButton
@@ -620,7 +620,7 @@ type ComboButtonable interface {
 	WithEnabled(enabled bool) *ComboButton
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ComboButton
 	WithHighlighted(highlighted bool) *ComboButton
-	WithControlSize(controlSize raw.NSControlSize) *ComboButton
+	WithControlSize(controlSize NSControlSize) *ComboButton
 	WithFormatter(formatter *foundation.NSFormatter) *ComboButton
 	WithObjectValue(objectValue objc.ID) *ComboButton
 	WithStringValue(stringValue string) *ComboButton
@@ -631,16 +631,16 @@ type ComboButtonable interface {
 	WithDoubleValue(doubleValue float64) *ComboButton
 	WithFont(font *Font) *ComboButton
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ComboButton
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ComboButton
-	WithAlignment(alignment raw.NSTextAlignment) *ComboButton
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ComboButton
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboButton
+	WithAlignment(alignment NSTextAlignment) *ComboButton
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboButton
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ComboButton
 	WithCell(cell CellProvider) *ComboButton
 	WithSubviews(items ...ViewProvider) *ComboButton
 	WithHidden(hidden bool) *ComboButton
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboButton
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ComboButton
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ComboButton
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ComboButton
 	WithFrame(frame corefoundation.CGRect) *ComboButton
 	WithFrameRotation(frameRotation float64) *ComboButton
 	WithFrameCenterRotation(frameCenterRotation float64) *ComboButton
@@ -650,8 +650,8 @@ type ComboButtonable interface {
 	WithNeedsDisplay(needsDisplay bool) *ComboButton
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboButton
 	WithWantsRestingTouches(wantsRestingTouches bool) *ComboButton
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ComboButton
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ComboButton
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ComboButton
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ComboButton
 	WithWantsLayer(wantsLayer bool) *ComboButton
 	WithLayer(layer *quartzcore.CALayer) *ComboButton
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboButton
@@ -665,12 +665,12 @@ type ComboButtonable interface {
 	WithClipsToBounds(clipsToBounds bool) *ComboButton
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboButton
 	WithToolTip(toolTip string) *ComboButton
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ComboButton
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ComboButton
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboButton
 	WithNextKeyView(nextKeyView ViewProvider) *ComboButton
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ComboButton
+	WithFocusRingType(focusRingType NSFocusRingType) *ComboButton
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboButton
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ComboButton
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ComboButton
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboButton
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboButton
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboButton
@@ -689,10 +689,10 @@ type ComboButtonable interface {
 	SetTitle(title string)
 	Image() *Image
 	SetImage(image *raw.NSImage)
-	ImageScaling() raw.NSImageScaling
-	SetImageScaling(imageScaling raw.NSImageScaling)
-	Style() raw.NSComboButtonStyle
-	SetStyle(style raw.NSComboButtonStyle)
+	ImageScaling() NSImageScaling
+	SetImageScaling(imageScaling NSImageScaling)
+	Style() NSComboButtonStyle
+	SetStyle(style NSComboButtonStyle)
 }
 
 var _ ComboButtonable = (*ComboButton)(nil)

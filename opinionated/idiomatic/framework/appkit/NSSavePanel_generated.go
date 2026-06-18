@@ -221,8 +221,8 @@ func (x *SavePanel) WithSubtitle(subtitle string) *SavePanel {
 }
 
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
-func (x *SavePanel) WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetTitleVisibility(titleVisibility)
+func (x *SavePanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
 	return x
 }
 
@@ -233,8 +233,8 @@ func (x *SavePanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bo
 }
 
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
-func (x *SavePanel) WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetToolbarStyle(toolbarStyle)
+func (x *SavePanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
 	return x
 }
 
@@ -287,8 +287,8 @@ func (x *SavePanel) WithDelegate(delegate raw.NSWindowDelegate) *SavePanel {
 }
 
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
-func (x *SavePanel) WithStyleMask(styleMask raw.NSWindowStyleMask) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetStyleMask(styleMask)
+func (x *SavePanel) WithStyleMask(styleMask NSWindowStyleMask) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetStyleMask(raw.NSWindowStyleMask(styleMask))
 	return x
 }
 
@@ -395,8 +395,8 @@ func (x *SavePanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWh
 }
 
 // WithBackingType sets the backingType property and returns the receiver for chaining.
-func (x *SavePanel) WithBackingType(backingType raw.NSBackingStoreType) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetBackingType(backingType)
+func (x *SavePanel) WithBackingType(backingType NSBackingStoreType) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
@@ -407,8 +407,8 @@ func (x *SavePanel) WithLevel(level int) *SavePanel {
 }
 
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
-func (x *SavePanel) WithDepthLimit(depthLimit raw.NSWindowDepth) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetDepthLimit(depthLimit)
+func (x *SavePanel) WithDepthLimit(depthLimit NSWindowDepth) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
@@ -431,8 +431,8 @@ func (x *SavePanel) WithOpaque(opaque bool) *SavePanel {
 }
 
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
-func (x *SavePanel) WithSharingType(sharingType raw.NSWindowSharingType) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetSharingType(sharingType)
+func (x *SavePanel) WithSharingType(sharingType NSWindowSharingType) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetSharingType(raw.NSWindowSharingType(sharingType))
 	return x
 }
 
@@ -455,14 +455,14 @@ func (x *SavePanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogi
 }
 
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
-func (x *SavePanel) WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetCollectionBehavior(collectionBehavior)
+func (x *SavePanel) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
-func (x *SavePanel) WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetAnimationBehavior(animationBehavior)
+func (x *SavePanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
 	return x
 }
 
@@ -533,8 +533,8 @@ func (x *SavePanel) WithColorSpace(colorSpace *ColorSpace) *SavePanel {
 }
 
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
-func (x *SavePanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+func (x *SavePanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 	return x
 }
 
@@ -575,8 +575,8 @@ func (x *SavePanel) WithShowsToolbarButton(showsToolbarButton bool) *SavePanel {
 }
 
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
-func (x *SavePanel) WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetTabbingMode(tabbingMode)
+func (x *SavePanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
 	return x
 }
 
@@ -611,8 +611,8 @@ func (x *SavePanel) WithOneShot(oneShot bool) *SavePanel {
 }
 
 // WithPreferredBackingLocation sets the preferredBackingLocation property and returns the receiver for chaining.
-func (x *SavePanel) WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *SavePanel {
-	x.inner.NSPanel.NSWindow.SetPreferredBackingLocation(preferredBackingLocation)
+func (x *SavePanel) WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *SavePanel {
+	x.inner.NSPanel.NSWindow.SetPreferredBackingLocation(raw.NSWindowBackingLocation(preferredBackingLocation))
 	return x
 }
 
@@ -1017,16 +1017,16 @@ type SavePanelable interface {
 	WithWorksWhenModal(worksWhenModal bool) *SavePanel
 	WithTitle(title string) *SavePanel
 	WithSubtitle(subtitle string) *SavePanel
-	WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *SavePanel
+	WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *SavePanel
 	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *SavePanel
-	WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *SavePanel
+	WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *SavePanel
 	WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *SavePanel
 	WithRepresentedURL(representedURL string) *SavePanel
 	WithRepresentedFilename(representedFilename string) *SavePanel
 	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *SavePanel
 	WithContentView(contentView ViewProvider) *SavePanel
 	WithDelegate(delegate raw.NSWindowDelegate) *SavePanel
-	WithStyleMask(styleMask raw.NSWindowStyleMask) *SavePanel
+	WithStyleMask(styleMask NSWindowStyleMask) *SavePanel
 	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *SavePanel
 	WithAspectRatio(aspectRatio corefoundation.CGSize) *SavePanel
 	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *SavePanel
@@ -1044,18 +1044,18 @@ type SavePanelable interface {
 	WithDocumentEdited(documentEdited bool) *SavePanel
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *SavePanel
 	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *SavePanel
-	WithBackingType(backingType raw.NSBackingStoreType) *SavePanel
+	WithBackingType(backingType NSBackingStoreType) *SavePanel
 	WithLevel(level int) *SavePanel
-	WithDepthLimit(depthLimit raw.NSWindowDepth) *SavePanel
+	WithDepthLimit(depthLimit NSWindowDepth) *SavePanel
 	WithHasShadow(hasShadow bool) *SavePanel
 	WithAlphaValue(alphaValue float64) *SavePanel
 	WithOpaque(opaque bool) *SavePanel
-	WithSharingType(sharingType raw.NSWindowSharingType) *SavePanel
+	WithSharingType(sharingType NSWindowSharingType) *SavePanel
 	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *SavePanel
 	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *SavePanel
 	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *SavePanel
-	WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *SavePanel
-	WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *SavePanel
+	WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *SavePanel
+	WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *SavePanel
 	WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *SavePanel
 	WithMinSize(minSize corefoundation.CGSize) *SavePanel
 	WithMaxSize(maxSize corefoundation.CGSize) *SavePanel
@@ -1067,20 +1067,20 @@ type SavePanelable interface {
 	WithParentWindow(parentWindow WindowProvider) *SavePanel
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *SavePanel
 	WithColorSpace(colorSpace *ColorSpace) *SavePanel
-	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *SavePanel
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *SavePanel
 	WithContentViewController(contentViewController ViewControllerProvider) *SavePanel
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *SavePanel
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *SavePanel
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *SavePanel
 	WithToolbar(toolbar *Toolbar) *SavePanel
 	WithShowsToolbarButton(showsToolbarButton bool) *SavePanel
-	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *SavePanel
+	WithTabbingMode(tabbingMode NSWindowTabbingMode) *SavePanel
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *SavePanel
 	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *SavePanel
 	WithIgnoresMouseEvents(ignoresMouseEvents bool) *SavePanel
 	WithAutodisplay(autodisplay bool) *SavePanel
 	WithOneShot(oneShot bool) *SavePanel
-	WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *SavePanel
+	WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *SavePanel
 	WithShowsResizeIndicator(showsResizeIndicator bool) *SavePanel
 	WithOrderedIndex(orderedIndex int) *SavePanel
 	WithRestorable(restorable bool) *SavePanel

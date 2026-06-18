@@ -14,13 +14,13 @@ import (
 )
 
 // InstantiateWithComponentDescriptionOptions blocks until the operation completes or ctx is cancelled.
-func InstantiateWithComponentDescriptionOptions(ctx context.Context, componentDescription raw.AudioComponentDescription, options raw.AudioComponentInstantiationOptions) (*AudioUnit, error) {
+func InstantiateWithComponentDescriptionOptions(ctx context.Context, componentDescription raw.AudioComponentDescription, options AudioComponentInstantiationOptions) (*AudioUnit, error) {
 	type _result struct {
 		val *AudioUnit
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.AUAudioUnitInstantiateWithComponentDescriptionOptionsCompletionHandler(componentDescription, options, func(_p0 *raw.AUAudioUnit, _p1 unsafe.Pointer) {
+	raw.AUAudioUnitInstantiateWithComponentDescriptionOptionsCompletionHandler(componentDescription, raw.AudioComponentInstantiationOptions(options), func(_p0 *raw.AUAudioUnit, _p1 unsafe.Pointer) {
 		var _o _result
 		if uintptr(_p1) != 0 {
 			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
@@ -45,8 +45,8 @@ func RegisterSubclassAsComponentDescriptionNameVersion(cls objc.Class, component
 }
 
 // CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters calls the underlying AUParameterTreeCreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters.
-func CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(identifier string, name string, address uint64, min float32, max float32, unit raw.AudioUnitParameterUnit, unitName string, flags raw.AudioUnitParameterOptions, valueStrings *foundation.NSArray[*foundation.NSString], dependentParameters *foundation.NSArray[*foundation.NSNumber]) *Parameter {
-	_r := raw.AUParameterTreeCreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(name), address, min, max, unit, foundation.NSStringStringWithUTF8String(unitName), flags, valueStrings, dependentParameters)
+func CreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(identifier string, name string, address uint64, min float32, max float32, unit AudioUnitParameterUnit, unitName string, flags AudioUnitParameterOptions, valueStrings *foundation.NSArray[*foundation.NSString], dependentParameters *foundation.NSArray[*foundation.NSNumber]) *Parameter {
+	_r := raw.AUParameterTreeCreateParameterWithIdentifierNameAddressMinMaxUnitUnitNameFlagsValueStringsDependentParameters(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(name), address, min, max, raw.AudioUnitParameterUnit(unit), foundation.NSStringStringWithUTF8String(unitName), raw.AudioUnitParameterOptions(flags), valueStrings, dependentParameters)
 	if _r == nil {
 		return nil
 	}

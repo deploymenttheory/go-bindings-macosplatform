@@ -112,20 +112,20 @@ func (x *AnnotationCircle) WithEndPoint(endPoint corefoundation.CGPoint) *Annota
 }
 
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationCircle) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationCircle {
-	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+func (x *AnnotationCircle) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationCircle) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationCircle {
-	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+func (x *AnnotationCircle) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
 // WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationCircle) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationCircle {
-	x.inner.PDFAnnotation.SetIconType(iconType)
+func (x *AnnotationCircle) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
@@ -148,14 +148,14 @@ func (x *AnnotationCircle) WithQuadrilateralPoints(items ...*foundation.NSValue)
 }
 
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationCircle) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationCircle {
-	x.inner.PDFAnnotation.SetMarkupType(markupType)
+func (x *AnnotationCircle) WithMarkupType(markupType PDFMarkupType) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationCircle) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationCircle {
-	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+func (x *AnnotationCircle) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
@@ -250,8 +250,8 @@ func (x *AnnotationCircle) WithValues(items ...*foundation.NSString) *Annotation
 }
 
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationCircle) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationCircle {
-	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+func (x *AnnotationCircle) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
@@ -320,12 +320,12 @@ type AnnotationCircleable interface {
 	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationCircle
 	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationCircle
 	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationCircle
-	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationCircle
-	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationCircle
-	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationCircle
+	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationCircle
+	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationCircle
+	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationCircle
 	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationCircle
-	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationCircle
-	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationCircle
+	WithMarkupType(markupType PDFMarkupType) *AnnotationCircle
+	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationCircle
 	WithMultiline(multiline bool) *AnnotationCircle
 	WithComb(comb bool) *AnnotationCircle
 	WithMaximumLength(maximumLength int) *AnnotationCircle
@@ -337,7 +337,7 @@ type AnnotationCircleable interface {
 	WithListChoice(listChoice bool) *AnnotationCircle
 	WithChoices(items ...*foundation.NSString) *AnnotationCircle
 	WithValues(items ...*foundation.NSString) *AnnotationCircle
-	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationCircle
+	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationCircle
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationCircle
 	WithOpen(open bool) *AnnotationCircle
 	WithDestination(destination *Destination) *AnnotationCircle

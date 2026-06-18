@@ -26,13 +26,13 @@ func AXNameFromColor(color unsafe.Pointer) *foundation.NSString {
 }
 
 // AXOpenSettingsFeature calls [raw.AXOpenSettingsFeature] (C function AXOpenSettingsFeature).
-func AXOpenSettingsFeature(feature raw.AXSettingsFeature, completionHandler func(unsafe.Pointer)) {
-	raw.AXOpenSettingsFeature(feature, completionHandler)
+func AXOpenSettingsFeature(feature AXSettingsFeature, completionHandler func(unsafe.Pointer)) {
+	raw.AXOpenSettingsFeature(raw.AXSettingsFeature(feature), completionHandler)
 }
 
 // AXOpenSettingsFeatureIsSupported calls [raw.AXOpenSettingsFeatureIsSupported] (C function AXOpenSettingsFeatureIsSupported).
-func AXOpenSettingsFeatureIsSupported(feature raw.AXSettingsFeature) uint8 {
-	return raw.AXOpenSettingsFeatureIsSupported(feature)
+func AXOpenSettingsFeatureIsSupported(feature AXSettingsFeature) uint8 {
+	return raw.AXOpenSettingsFeatureIsSupported(raw.AXSettingsFeature(feature))
 }
 
 // AXPrefersActionSliderAlternative calls [raw.AXPrefersActionSliderAlternative] (C function AXPrefersActionSliderAlternative).

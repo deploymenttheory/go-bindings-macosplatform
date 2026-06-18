@@ -47,15 +47,17 @@ func (x *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDRequ
 }
 
 // GetCredentialStateForUserIDCompletion calls the underlying GetCredentialStateForUserIDCompletion.
-func (x *AuthorizationAppleIDProvider) GetCredentialStateForUserIDCompletion(userID string, completion func(raw.ASAuthorizationAppleIDProviderCredentialState, unsafe.Pointer)) {
-	x.inner.GetCredentialStateForUserIDCompletion(foundation.NSStringStringWithUTF8String(userID), completion)
+func (x *AuthorizationAppleIDProvider) GetCredentialStateForUserIDCompletion(userID string, completion func(ASAuthorizationAppleIDProviderCredentialState, unsafe.Pointer)) {
+	x.inner.GetCredentialStateForUserIDCompletion(foundation.NSStringStringWithUTF8String(userID), func(_a0 raw.ASAuthorizationAppleIDProviderCredentialState, _a1 unsafe.Pointer) {
+		completion(ASAuthorizationAppleIDProviderCredentialState(_a0), _a1)
+	})
 }
 
 // AuthorizationAppleIDProviderable is the interface implemented by [AuthorizationAppleIDProvider], for mocking and DI.
 type AuthorizationAppleIDProviderable interface {
 	Unwrap() *raw.ASAuthorizationAppleIDProvider
 	CreateRequest() *AuthorizationAppleIDRequest
-	GetCredentialStateForUserIDCompletion(userID string, completion func(raw.ASAuthorizationAppleIDProviderCredentialState, unsafe.Pointer))
+	GetCredentialStateForUserIDCompletion(userID string, completion func(ASAuthorizationAppleIDProviderCredentialState, unsafe.Pointer))
 }
 
 var _ AuthorizationAppleIDProviderable = (*AuthorizationAppleIDProvider)(nil)

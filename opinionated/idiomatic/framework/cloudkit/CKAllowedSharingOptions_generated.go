@@ -30,21 +30,21 @@ func AllowedSharingOptionsFromID(id objc.ID) *AllowedSharingOptions {
 }
 
 // NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions creates a new [AllowedSharingOptions].
-func NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions(allowedParticipantPermissionOptions raw.CKSharingParticipantPermissionOption, allowedParticipantAccessOptions raw.CKSharingParticipantAccessOption) *AllowedSharingOptions {
+func NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption, allowedParticipantAccessOptions CKSharingParticipantAccessOption) *AllowedSharingOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKAllowedSharingOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAllowedParticipantPermissionOptions:allowedParticipantAccessOptions:"), allowedParticipantPermissionOptions, allowedParticipantAccessOptions)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAllowedParticipantPermissionOptions:allowedParticipantAccessOptions:"), raw.CKSharingParticipantPermissionOption(allowedParticipantPermissionOptions), raw.CKSharingParticipantAccessOption(allowedParticipantAccessOptions))
 	return &AllowedSharingOptions{inner: raw.CKAllowedSharingOptionsFromID(_id)}
 }
 
 // WithAllowedParticipantPermissionOptions sets the allowedParticipantPermissionOptions property and returns the receiver for chaining.
-func (x *AllowedSharingOptions) WithAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions raw.CKSharingParticipantPermissionOption) *AllowedSharingOptions {
-	x.inner.SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions)
+func (x *AllowedSharingOptions) WithAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption) *AllowedSharingOptions {
+	x.inner.SetAllowedParticipantPermissionOptions(raw.CKSharingParticipantPermissionOption(allowedParticipantPermissionOptions))
 	return x
 }
 
 // WithAllowedParticipantAccessOptions sets the allowedParticipantAccessOptions property and returns the receiver for chaining.
-func (x *AllowedSharingOptions) WithAllowedParticipantAccessOptions(allowedParticipantAccessOptions raw.CKSharingParticipantAccessOption) *AllowedSharingOptions {
-	x.inner.SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions)
+func (x *AllowedSharingOptions) WithAllowedParticipantAccessOptions(allowedParticipantAccessOptions CKSharingParticipantAccessOption) *AllowedSharingOptions {
+	x.inner.SetAllowedParticipantAccessOptions(raw.CKSharingParticipantAccessOption(allowedParticipantAccessOptions))
 	return x
 }
 
@@ -61,23 +61,23 @@ func (x *AllowedSharingOptions) WithAllowsAccessRequests(allowsAccessRequests bo
 }
 
 // AllowedParticipantPermissionOptions calls the underlying AllowedParticipantPermissionOptions.
-func (x *AllowedSharingOptions) AllowedParticipantPermissionOptions() raw.CKSharingParticipantPermissionOption {
-	return x.inner.AllowedParticipantPermissionOptions()
+func (x *AllowedSharingOptions) AllowedParticipantPermissionOptions() CKSharingParticipantPermissionOption {
+	return CKSharingParticipantPermissionOption(x.inner.AllowedParticipantPermissionOptions())
 }
 
 // SetAllowedParticipantPermissionOptions calls the underlying SetAllowedParticipantPermissionOptions.
-func (x *AllowedSharingOptions) SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions raw.CKSharingParticipantPermissionOption) {
-	x.inner.SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions)
+func (x *AllowedSharingOptions) SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption) {
+	x.inner.SetAllowedParticipantPermissionOptions(raw.CKSharingParticipantPermissionOption(allowedParticipantPermissionOptions))
 }
 
 // AllowedParticipantAccessOptions calls the underlying AllowedParticipantAccessOptions.
-func (x *AllowedSharingOptions) AllowedParticipantAccessOptions() raw.CKSharingParticipantAccessOption {
-	return x.inner.AllowedParticipantAccessOptions()
+func (x *AllowedSharingOptions) AllowedParticipantAccessOptions() CKSharingParticipantAccessOption {
+	return CKSharingParticipantAccessOption(x.inner.AllowedParticipantAccessOptions())
 }
 
 // SetAllowedParticipantAccessOptions calls the underlying SetAllowedParticipantAccessOptions.
-func (x *AllowedSharingOptions) SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions raw.CKSharingParticipantAccessOption) {
-	x.inner.SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions)
+func (x *AllowedSharingOptions) SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions CKSharingParticipantAccessOption) {
+	x.inner.SetAllowedParticipantAccessOptions(raw.CKSharingParticipantAccessOption(allowedParticipantAccessOptions))
 }
 
 // AllowsParticipantsToInviteOthers calls the underlying AllowsParticipantsToInviteOthers.
@@ -103,14 +103,14 @@ func (x *AllowedSharingOptions) SetAllowsAccessRequests(allowsAccessRequests boo
 // AllowedSharingOptionsable is the interface implemented by [AllowedSharingOptions], for mocking and DI.
 type AllowedSharingOptionsable interface {
 	Unwrap() *raw.CKAllowedSharingOptions
-	WithAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions raw.CKSharingParticipantPermissionOption) *AllowedSharingOptions
-	WithAllowedParticipantAccessOptions(allowedParticipantAccessOptions raw.CKSharingParticipantAccessOption) *AllowedSharingOptions
+	WithAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption) *AllowedSharingOptions
+	WithAllowedParticipantAccessOptions(allowedParticipantAccessOptions CKSharingParticipantAccessOption) *AllowedSharingOptions
 	WithAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool) *AllowedSharingOptions
 	WithAllowsAccessRequests(allowsAccessRequests bool) *AllowedSharingOptions
-	AllowedParticipantPermissionOptions() raw.CKSharingParticipantPermissionOption
-	SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions raw.CKSharingParticipantPermissionOption)
-	AllowedParticipantAccessOptions() raw.CKSharingParticipantAccessOption
-	SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions raw.CKSharingParticipantAccessOption)
+	AllowedParticipantPermissionOptions() CKSharingParticipantPermissionOption
+	SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption)
+	AllowedParticipantAccessOptions() CKSharingParticipantAccessOption
+	SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions CKSharingParticipantAccessOption)
 	AllowsParticipantsToInviteOthers() bool
 	SetAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool)
 	AllowsAccessRequests() bool

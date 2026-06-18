@@ -52,8 +52,8 @@ func (x *Suggestion) LocalizedAttributedSuggestion() *foundation.NSAttributedStr
 }
 
 // SuggestionKind calls the underlying SuggestionKind.
-func (x *Suggestion) SuggestionKind() raw.CSSuggestionKind {
-	return x.inner.SuggestionKind()
+func (x *Suggestion) SuggestionKind() CSSuggestionKind {
+	return CSSuggestionKind(x.inner.SuggestionKind())
 }
 
 // Suggestionable is the interface implemented by [Suggestion], for mocking and DI.
@@ -62,7 +62,7 @@ type Suggestionable interface {
 	CompareByRank(other *raw.CSSuggestion) foundation.NSComparisonResult
 	Compare(other *raw.CSSuggestion) foundation.NSComparisonResult
 	LocalizedAttributedSuggestion() *foundation.NSAttributedString
-	SuggestionKind() raw.CSSuggestionKind
+	SuggestionKind() CSSuggestionKind
 }
 
 var _ Suggestionable = (*Suggestion)(nil)

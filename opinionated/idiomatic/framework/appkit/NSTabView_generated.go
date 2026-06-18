@@ -48,20 +48,20 @@ func (x *TabView) WithFont(font *Font) *TabView {
 }
 
 // WithTabViewType sets the tabViewType property and returns the receiver for chaining.
-func (x *TabView) WithTabViewType(tabViewType raw.NSTabViewType) *TabView {
-	x.inner.SetTabViewType(tabViewType)
+func (x *TabView) WithTabViewType(tabViewType NSTabViewType) *TabView {
+	x.inner.SetTabViewType(raw.NSTabViewType(tabViewType))
 	return x
 }
 
 // WithTabPosition sets the tabPosition property and returns the receiver for chaining.
-func (x *TabView) WithTabPosition(tabPosition raw.NSTabPosition) *TabView {
-	x.inner.SetTabPosition(tabPosition)
+func (x *TabView) WithTabPosition(tabPosition NSTabPosition) *TabView {
+	x.inner.SetTabPosition(raw.NSTabPosition(tabPosition))
 	return x
 }
 
 // WithTabViewBorderType sets the tabViewBorderType property and returns the receiver for chaining.
-func (x *TabView) WithTabViewBorderType(tabViewBorderType raw.NSTabViewBorderType) *TabView {
-	x.inner.SetTabViewBorderType(tabViewBorderType)
+func (x *TabView) WithTabViewBorderType(tabViewBorderType NSTabViewBorderType) *TabView {
+	x.inner.SetTabViewBorderType(raw.NSTabViewBorderType(tabViewBorderType))
 	return x
 }
 
@@ -96,8 +96,8 @@ func (x *TabView) WithDrawsBackground(drawsBackground bool) *TabView {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *TabView) WithControlSize(controlSize raw.NSControlSize) *TabView {
-	x.inner.SetControlSize(controlSize)
+func (x *TabView) WithControlSize(controlSize NSControlSize) *TabView {
+	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -108,8 +108,8 @@ func (x *TabView) WithDelegate(delegate raw.NSTabViewDelegate) *TabView {
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *TabView) WithControlTint(controlTint raw.NSControlTint) *TabView {
-	x.inner.SetControlTint(controlTint)
+func (x *TabView) WithControlTint(controlTint NSControlTint) *TabView {
+	x.inner.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -150,8 +150,8 @@ func (x *TabView) WithAutoresizesSubviews(autoresizesSubviews bool) *TabView {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TabView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TabView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *TabView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TabView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -210,14 +210,14 @@ func (x *TabView) WithWantsRestingTouches(wantsRestingTouches bool) *TabView {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *TabView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TabView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *TabView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TabView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *TabView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TabView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *TabView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TabView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -324,8 +324,8 @@ func (x *TabView) WithToolTip(toolTip string) *TabView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TabView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TabView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TabView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TabView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -342,8 +342,8 @@ func (x *TabView) WithNextKeyView(nextKeyView ViewProvider) *TabView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TabView) WithFocusRingType(focusRingType raw.NSFocusRingType) *TabView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *TabView) WithFocusRingType(focusRingType NSFocusRingType) *TabView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -366,8 +366,8 @@ func (x *TabView) WithGestureRecognizers(items ...GestureRecognizerProvider) *Ta
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *TabView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TabView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *TabView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TabView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -562,33 +562,33 @@ func (x *TabView) SetFont(font *raw.NSFont) {
 }
 
 // TabViewType calls the underlying TabViewType.
-func (x *TabView) TabViewType() raw.NSTabViewType {
-	return x.inner.TabViewType()
+func (x *TabView) TabViewType() NSTabViewType {
+	return NSTabViewType(x.inner.TabViewType())
 }
 
 // SetTabViewType calls the underlying SetTabViewType.
-func (x *TabView) SetTabViewType(tabViewType raw.NSTabViewType) {
-	x.inner.SetTabViewType(tabViewType)
+func (x *TabView) SetTabViewType(tabViewType NSTabViewType) {
+	x.inner.SetTabViewType(raw.NSTabViewType(tabViewType))
 }
 
 // TabPosition calls the underlying TabPosition.
-func (x *TabView) TabPosition() raw.NSTabPosition {
-	return x.inner.TabPosition()
+func (x *TabView) TabPosition() NSTabPosition {
+	return NSTabPosition(x.inner.TabPosition())
 }
 
 // SetTabPosition calls the underlying SetTabPosition.
-func (x *TabView) SetTabPosition(tabPosition raw.NSTabPosition) {
-	x.inner.SetTabPosition(tabPosition)
+func (x *TabView) SetTabPosition(tabPosition NSTabPosition) {
+	x.inner.SetTabPosition(raw.NSTabPosition(tabPosition))
 }
 
 // TabViewBorderType calls the underlying TabViewBorderType.
-func (x *TabView) TabViewBorderType() raw.NSTabViewBorderType {
-	return x.inner.TabViewBorderType()
+func (x *TabView) TabViewBorderType() NSTabViewBorderType {
+	return NSTabViewBorderType(x.inner.TabViewBorderType())
 }
 
 // SetTabViewBorderType calls the underlying SetTabViewBorderType.
-func (x *TabView) SetTabViewBorderType(tabViewBorderType raw.NSTabViewBorderType) {
-	x.inner.SetTabViewBorderType(tabViewBorderType)
+func (x *TabView) SetTabViewBorderType(tabViewBorderType NSTabViewBorderType) {
+	x.inner.SetTabViewBorderType(raw.NSTabViewBorderType(tabViewBorderType))
 }
 
 // TabViewItems returns the collection as a Go slice.
@@ -633,13 +633,13 @@ func (x *TabView) SetDrawsBackground(drawsBackground bool) {
 }
 
 // ControlSize calls the underlying ControlSize.
-func (x *TabView) ControlSize() raw.NSControlSize {
-	return x.inner.ControlSize()
+func (x *TabView) ControlSize() NSControlSize {
+	return NSControlSize(x.inner.ControlSize())
 }
 
 // SetControlSize calls the underlying SetControlSize.
-func (x *TabView) SetControlSize(controlSize raw.NSControlSize) {
-	x.inner.SetControlSize(controlSize)
+func (x *TabView) SetControlSize(controlSize NSControlSize) {
+	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 }
 
 // Delegate calls the underlying Delegate.
@@ -663,13 +663,13 @@ func (x *TabView) NumberOfTabViewItems() int {
 }
 
 // ControlTint calls the underlying ControlTint.
-func (x *TabView) ControlTint() raw.NSControlTint {
-	return x.inner.ControlTint()
+func (x *TabView) ControlTint() NSControlTint {
+	return NSControlTint(x.inner.ControlTint())
 }
 
 // SetControlTint calls the underlying SetControlTint.
-func (x *TabView) SetControlTint(controlTint raw.NSControlTint) {
-	x.inner.SetControlTint(controlTint)
+func (x *TabView) SetControlTint(controlTint NSControlTint) {
+	x.inner.SetControlTint(raw.NSControlTint(controlTint))
 }
 
 func (x *TabView) asView() *raw.NSView { return &x.inner.NSView }
@@ -680,20 +680,20 @@ func (x *TabView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResp
 type TabViewable interface {
 	Unwrap() *raw.NSTabView
 	WithFont(font *Font) *TabView
-	WithTabViewType(tabViewType raw.NSTabViewType) *TabView
-	WithTabPosition(tabPosition raw.NSTabPosition) *TabView
-	WithTabViewBorderType(tabViewBorderType raw.NSTabViewBorderType) *TabView
+	WithTabViewType(tabViewType NSTabViewType) *TabView
+	WithTabPosition(tabPosition NSTabPosition) *TabView
+	WithTabViewBorderType(tabViewBorderType NSTabViewBorderType) *TabView
 	WithTabViewItems(items ...*raw.NSTabViewItem) *TabView
 	WithAllowsTruncatedLabels(allowsTruncatedLabels bool) *TabView
 	WithDrawsBackground(drawsBackground bool) *TabView
-	WithControlSize(controlSize raw.NSControlSize) *TabView
+	WithControlSize(controlSize NSControlSize) *TabView
 	WithDelegate(delegate raw.NSTabViewDelegate) *TabView
-	WithControlTint(controlTint raw.NSControlTint) *TabView
+	WithControlTint(controlTint NSControlTint) *TabView
 	WithSubviews(items ...ViewProvider) *TabView
 	WithHidden(hidden bool) *TabView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TabView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TabView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TabView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TabView
 	WithFrame(frame corefoundation.CGRect) *TabView
 	WithFrameRotation(frameRotation float64) *TabView
 	WithFrameCenterRotation(frameCenterRotation float64) *TabView
@@ -703,8 +703,8 @@ type TabViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *TabView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TabView
 	WithWantsRestingTouches(wantsRestingTouches bool) *TabView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TabView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TabView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TabView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TabView
 	WithWantsLayer(wantsLayer bool) *TabView
 	WithLayer(layer *quartzcore.CALayer) *TabView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TabView
@@ -718,12 +718,12 @@ type TabViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *TabView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TabView
 	WithToolTip(toolTip string) *TabView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TabView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TabView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TabView
 	WithNextKeyView(nextKeyView ViewProvider) *TabView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TabView
+	WithFocusRingType(focusRingType NSFocusRingType) *TabView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TabView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TabView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TabView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TabView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TabView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TabView
@@ -756,12 +756,12 @@ type TabViewable interface {
 	SelectedTabViewItem() *TabViewItem
 	Font() *Font
 	SetFont(font *raw.NSFont)
-	TabViewType() raw.NSTabViewType
-	SetTabViewType(tabViewType raw.NSTabViewType)
-	TabPosition() raw.NSTabPosition
-	SetTabPosition(tabPosition raw.NSTabPosition)
-	TabViewBorderType() raw.NSTabViewBorderType
-	SetTabViewBorderType(tabViewBorderType raw.NSTabViewBorderType)
+	TabViewType() NSTabViewType
+	SetTabViewType(tabViewType NSTabViewType)
+	TabPosition() NSTabPosition
+	SetTabPosition(tabPosition NSTabPosition)
+	TabViewBorderType() NSTabViewBorderType
+	SetTabViewBorderType(tabViewBorderType NSTabViewBorderType)
 	TabViewItems() []*TabViewItem
 	SetTabViewItems(tabViewItems *foundation.NSArray[*raw.NSTabViewItem])
 	AllowsTruncatedLabels() bool
@@ -769,14 +769,14 @@ type TabViewable interface {
 	MinimumSize() corefoundation.CGSize
 	DrawsBackground() bool
 	SetDrawsBackground(drawsBackground bool)
-	ControlSize() raw.NSControlSize
-	SetControlSize(controlSize raw.NSControlSize)
+	ControlSize() NSControlSize
+	SetControlSize(controlSize NSControlSize)
 	Delegate() raw.NSTabViewDelegate
 	SetDelegate(delegate raw.NSTabViewDelegate)
 	ContentRect() corefoundation.CGRect
 	NumberOfTabViewItems() int
-	ControlTint() raw.NSControlTint
-	SetControlTint(controlTint raw.NSControlTint)
+	ControlTint() NSControlTint
+	SetControlTint(controlTint NSControlTint)
 }
 
 var _ TabViewable = (*TabView)(nil)

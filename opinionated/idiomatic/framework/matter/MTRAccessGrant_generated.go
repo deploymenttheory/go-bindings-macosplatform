@@ -42,21 +42,21 @@ func (x *MTRAccessGrant) SubjectID() *foundation.NSNumber {
 }
 
 // GrantedPrivilege calls the underlying GrantedPrivilege.
-func (x *MTRAccessGrant) GrantedPrivilege() raw.MTRAccessControlEntryPrivilege {
-	return x.inner.GrantedPrivilege()
+func (x *MTRAccessGrant) GrantedPrivilege() MTRAccessControlEntryPrivilege {
+	return MTRAccessControlEntryPrivilege(x.inner.GrantedPrivilege())
 }
 
 // AuthenticationMode calls the underlying AuthenticationMode.
-func (x *MTRAccessGrant) AuthenticationMode() raw.MTRAccessControlEntryAuthMode {
-	return x.inner.AuthenticationMode()
+func (x *MTRAccessGrant) AuthenticationMode() MTRAccessControlEntryAuthMode {
+	return MTRAccessControlEntryAuthMode(x.inner.AuthenticationMode())
 }
 
 // MTRAccessGrantable is the interface implemented by [MTRAccessGrant], for mocking and DI.
 type MTRAccessGrantable interface {
 	Unwrap() *raw.MTRAccessGrant
 	SubjectID() *foundation.NSNumber
-	GrantedPrivilege() raw.MTRAccessControlEntryPrivilege
-	AuthenticationMode() raw.MTRAccessControlEntryAuthMode
+	GrantedPrivilege() MTRAccessControlEntryPrivilege
+	AuthenticationMode() MTRAccessControlEntryAuthMode
 }
 
 var _ MTRAccessGrantable = (*MTRAccessGrant)(nil)

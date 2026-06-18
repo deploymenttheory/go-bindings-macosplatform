@@ -180,8 +180,8 @@ func (x *URLSessionTaskTransactionMetrics) IsReusedConnection() bool {
 }
 
 // ResourceFetchType calls the underlying ResourceFetchType.
-func (x *URLSessionTaskTransactionMetrics) ResourceFetchType() raw.NSURLSessionTaskMetricsResourceFetchType {
-	return x.inner.ResourceFetchType()
+func (x *URLSessionTaskTransactionMetrics) ResourceFetchType() NSURLSessionTaskMetricsResourceFetchType {
+	return NSURLSessionTaskMetricsResourceFetchType(x.inner.ResourceFetchType())
 }
 
 // CountOfRequestHeaderBytesSent calls the underlying CountOfRequestHeaderBytesSent.
@@ -289,8 +289,8 @@ func (x *URLSessionTaskTransactionMetrics) IsMultipath() bool {
 }
 
 // DomainResolutionProtocol calls the underlying DomainResolutionProtocol.
-func (x *URLSessionTaskTransactionMetrics) DomainResolutionProtocol() raw.NSURLSessionTaskMetricsDomainResolutionProtocol {
-	return x.inner.DomainResolutionProtocol()
+func (x *URLSessionTaskTransactionMetrics) DomainResolutionProtocol() NSURLSessionTaskMetricsDomainResolutionProtocol {
+	return NSURLSessionTaskMetricsDomainResolutionProtocol(x.inner.DomainResolutionProtocol())
 }
 
 func (x *URLSessionTaskTransactionMetrics) asObject() *raw.NSObject { return &x.inner.NSObject }
@@ -315,7 +315,7 @@ type URLSessionTaskTransactionMetricsable interface {
 	NetworkProtocolName() *String
 	IsProxyConnection() bool
 	IsReusedConnection() bool
-	ResourceFetchType() raw.NSURLSessionTaskMetricsResourceFetchType
+	ResourceFetchType() NSURLSessionTaskMetricsResourceFetchType
 	CountOfRequestHeaderBytesSent() int64
 	CountOfRequestBodyBytesSent() int64
 	CountOfRequestBodyBytesBeforeEncoding() int64
@@ -332,7 +332,7 @@ type URLSessionTaskTransactionMetricsable interface {
 	IsExpensive() bool
 	IsConstrained() bool
 	IsMultipath() bool
-	DomainResolutionProtocol() raw.NSURLSessionTaskMetricsDomainResolutionProtocol
+	DomainResolutionProtocol() NSURLSessionTaskMetricsDomainResolutionProtocol
 }
 
 var _ URLSessionTaskTransactionMetricsable = (*URLSessionTaskTransactionMetrics)(nil)

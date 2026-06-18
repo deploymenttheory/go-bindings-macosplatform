@@ -36,122 +36,122 @@ func NewTextureFilter() *TextureFilter {
 }
 
 // WithSWrapMode sets the sWrapMode property and returns the receiver for chaining.
-func (x *TextureFilter) WithSWrapMode(sWrapMode raw.MDLMaterialTextureWrapMode) *TextureFilter {
-	x.inner.SetSWrapMode(sWrapMode)
+func (x *TextureFilter) WithSWrapMode(sWrapMode MDLMaterialTextureWrapMode) *TextureFilter {
+	x.inner.SetSWrapMode(raw.MDLMaterialTextureWrapMode(sWrapMode))
 	return x
 }
 
 // WithTWrapMode sets the tWrapMode property and returns the receiver for chaining.
-func (x *TextureFilter) WithTWrapMode(tWrapMode raw.MDLMaterialTextureWrapMode) *TextureFilter {
-	x.inner.SetTWrapMode(tWrapMode)
+func (x *TextureFilter) WithTWrapMode(tWrapMode MDLMaterialTextureWrapMode) *TextureFilter {
+	x.inner.SetTWrapMode(raw.MDLMaterialTextureWrapMode(tWrapMode))
 	return x
 }
 
 // WithRWrapMode sets the rWrapMode property and returns the receiver for chaining.
-func (x *TextureFilter) WithRWrapMode(rWrapMode raw.MDLMaterialTextureWrapMode) *TextureFilter {
-	x.inner.SetRWrapMode(rWrapMode)
+func (x *TextureFilter) WithRWrapMode(rWrapMode MDLMaterialTextureWrapMode) *TextureFilter {
+	x.inner.SetRWrapMode(raw.MDLMaterialTextureWrapMode(rWrapMode))
 	return x
 }
 
 // WithMinFilter sets the minFilter property and returns the receiver for chaining.
-func (x *TextureFilter) WithMinFilter(minFilter raw.MDLMaterialTextureFilterMode) *TextureFilter {
-	x.inner.SetMinFilter(minFilter)
+func (x *TextureFilter) WithMinFilter(minFilter MDLMaterialTextureFilterMode) *TextureFilter {
+	x.inner.SetMinFilter(raw.MDLMaterialTextureFilterMode(minFilter))
 	return x
 }
 
 // WithMagFilter sets the magFilter property and returns the receiver for chaining.
-func (x *TextureFilter) WithMagFilter(magFilter raw.MDLMaterialTextureFilterMode) *TextureFilter {
-	x.inner.SetMagFilter(magFilter)
+func (x *TextureFilter) WithMagFilter(magFilter MDLMaterialTextureFilterMode) *TextureFilter {
+	x.inner.SetMagFilter(raw.MDLMaterialTextureFilterMode(magFilter))
 	return x
 }
 
 // WithMipFilter sets the mipFilter property and returns the receiver for chaining.
-func (x *TextureFilter) WithMipFilter(mipFilter raw.MDLMaterialMipMapFilterMode) *TextureFilter {
-	x.inner.SetMipFilter(mipFilter)
+func (x *TextureFilter) WithMipFilter(mipFilter MDLMaterialMipMapFilterMode) *TextureFilter {
+	x.inner.SetMipFilter(raw.MDLMaterialMipMapFilterMode(mipFilter))
 	return x
 }
 
 // SWrapMode calls the underlying SWrapMode.
-func (x *TextureFilter) SWrapMode() raw.MDLMaterialTextureWrapMode {
-	return x.inner.SWrapMode()
+func (x *TextureFilter) SWrapMode() MDLMaterialTextureWrapMode {
+	return MDLMaterialTextureWrapMode(x.inner.SWrapMode())
 }
 
 // SetSWrapMode calls the underlying SetSWrapMode.
-func (x *TextureFilter) SetSWrapMode(sWrapMode raw.MDLMaterialTextureWrapMode) {
-	x.inner.SetSWrapMode(sWrapMode)
+func (x *TextureFilter) SetSWrapMode(sWrapMode MDLMaterialTextureWrapMode) {
+	x.inner.SetSWrapMode(raw.MDLMaterialTextureWrapMode(sWrapMode))
 }
 
 // TWrapMode calls the underlying TWrapMode.
-func (x *TextureFilter) TWrapMode() raw.MDLMaterialTextureWrapMode {
-	return x.inner.TWrapMode()
+func (x *TextureFilter) TWrapMode() MDLMaterialTextureWrapMode {
+	return MDLMaterialTextureWrapMode(x.inner.TWrapMode())
 }
 
 // SetTWrapMode calls the underlying SetTWrapMode.
-func (x *TextureFilter) SetTWrapMode(tWrapMode raw.MDLMaterialTextureWrapMode) {
-	x.inner.SetTWrapMode(tWrapMode)
+func (x *TextureFilter) SetTWrapMode(tWrapMode MDLMaterialTextureWrapMode) {
+	x.inner.SetTWrapMode(raw.MDLMaterialTextureWrapMode(tWrapMode))
 }
 
 // RWrapMode calls the underlying RWrapMode.
-func (x *TextureFilter) RWrapMode() raw.MDLMaterialTextureWrapMode {
-	return x.inner.RWrapMode()
+func (x *TextureFilter) RWrapMode() MDLMaterialTextureWrapMode {
+	return MDLMaterialTextureWrapMode(x.inner.RWrapMode())
 }
 
 // SetRWrapMode calls the underlying SetRWrapMode.
-func (x *TextureFilter) SetRWrapMode(rWrapMode raw.MDLMaterialTextureWrapMode) {
-	x.inner.SetRWrapMode(rWrapMode)
+func (x *TextureFilter) SetRWrapMode(rWrapMode MDLMaterialTextureWrapMode) {
+	x.inner.SetRWrapMode(raw.MDLMaterialTextureWrapMode(rWrapMode))
 }
 
 // MinFilter calls the underlying MinFilter.
-func (x *TextureFilter) MinFilter() raw.MDLMaterialTextureFilterMode {
-	return x.inner.MinFilter()
+func (x *TextureFilter) MinFilter() MDLMaterialTextureFilterMode {
+	return MDLMaterialTextureFilterMode(x.inner.MinFilter())
 }
 
 // SetMinFilter calls the underlying SetMinFilter.
-func (x *TextureFilter) SetMinFilter(minFilter raw.MDLMaterialTextureFilterMode) {
-	x.inner.SetMinFilter(minFilter)
+func (x *TextureFilter) SetMinFilter(minFilter MDLMaterialTextureFilterMode) {
+	x.inner.SetMinFilter(raw.MDLMaterialTextureFilterMode(minFilter))
 }
 
 // MagFilter calls the underlying MagFilter.
-func (x *TextureFilter) MagFilter() raw.MDLMaterialTextureFilterMode {
-	return x.inner.MagFilter()
+func (x *TextureFilter) MagFilter() MDLMaterialTextureFilterMode {
+	return MDLMaterialTextureFilterMode(x.inner.MagFilter())
 }
 
 // SetMagFilter calls the underlying SetMagFilter.
-func (x *TextureFilter) SetMagFilter(magFilter raw.MDLMaterialTextureFilterMode) {
-	x.inner.SetMagFilter(magFilter)
+func (x *TextureFilter) SetMagFilter(magFilter MDLMaterialTextureFilterMode) {
+	x.inner.SetMagFilter(raw.MDLMaterialTextureFilterMode(magFilter))
 }
 
 // MipFilter calls the underlying MipFilter.
-func (x *TextureFilter) MipFilter() raw.MDLMaterialMipMapFilterMode {
-	return x.inner.MipFilter()
+func (x *TextureFilter) MipFilter() MDLMaterialMipMapFilterMode {
+	return MDLMaterialMipMapFilterMode(x.inner.MipFilter())
 }
 
 // SetMipFilter calls the underlying SetMipFilter.
-func (x *TextureFilter) SetMipFilter(mipFilter raw.MDLMaterialMipMapFilterMode) {
-	x.inner.SetMipFilter(mipFilter)
+func (x *TextureFilter) SetMipFilter(mipFilter MDLMaterialMipMapFilterMode) {
+	x.inner.SetMipFilter(raw.MDLMaterialMipMapFilterMode(mipFilter))
 }
 
 // TextureFilterable is the interface implemented by [TextureFilter], for mocking and DI.
 type TextureFilterable interface {
 	Unwrap() *raw.MDLTextureFilter
-	WithSWrapMode(sWrapMode raw.MDLMaterialTextureWrapMode) *TextureFilter
-	WithTWrapMode(tWrapMode raw.MDLMaterialTextureWrapMode) *TextureFilter
-	WithRWrapMode(rWrapMode raw.MDLMaterialTextureWrapMode) *TextureFilter
-	WithMinFilter(minFilter raw.MDLMaterialTextureFilterMode) *TextureFilter
-	WithMagFilter(magFilter raw.MDLMaterialTextureFilterMode) *TextureFilter
-	WithMipFilter(mipFilter raw.MDLMaterialMipMapFilterMode) *TextureFilter
-	SWrapMode() raw.MDLMaterialTextureWrapMode
-	SetSWrapMode(sWrapMode raw.MDLMaterialTextureWrapMode)
-	TWrapMode() raw.MDLMaterialTextureWrapMode
-	SetTWrapMode(tWrapMode raw.MDLMaterialTextureWrapMode)
-	RWrapMode() raw.MDLMaterialTextureWrapMode
-	SetRWrapMode(rWrapMode raw.MDLMaterialTextureWrapMode)
-	MinFilter() raw.MDLMaterialTextureFilterMode
-	SetMinFilter(minFilter raw.MDLMaterialTextureFilterMode)
-	MagFilter() raw.MDLMaterialTextureFilterMode
-	SetMagFilter(magFilter raw.MDLMaterialTextureFilterMode)
-	MipFilter() raw.MDLMaterialMipMapFilterMode
-	SetMipFilter(mipFilter raw.MDLMaterialMipMapFilterMode)
+	WithSWrapMode(sWrapMode MDLMaterialTextureWrapMode) *TextureFilter
+	WithTWrapMode(tWrapMode MDLMaterialTextureWrapMode) *TextureFilter
+	WithRWrapMode(rWrapMode MDLMaterialTextureWrapMode) *TextureFilter
+	WithMinFilter(minFilter MDLMaterialTextureFilterMode) *TextureFilter
+	WithMagFilter(magFilter MDLMaterialTextureFilterMode) *TextureFilter
+	WithMipFilter(mipFilter MDLMaterialMipMapFilterMode) *TextureFilter
+	SWrapMode() MDLMaterialTextureWrapMode
+	SetSWrapMode(sWrapMode MDLMaterialTextureWrapMode)
+	TWrapMode() MDLMaterialTextureWrapMode
+	SetTWrapMode(tWrapMode MDLMaterialTextureWrapMode)
+	RWrapMode() MDLMaterialTextureWrapMode
+	SetRWrapMode(rWrapMode MDLMaterialTextureWrapMode)
+	MinFilter() MDLMaterialTextureFilterMode
+	SetMinFilter(minFilter MDLMaterialTextureFilterMode)
+	MagFilter() MDLMaterialTextureFilterMode
+	SetMagFilter(magFilter MDLMaterialTextureFilterMode)
+	MipFilter() MDLMaterialMipMapFilterMode
+	SetMipFilter(mipFilter MDLMaterialMipMapFilterMode)
 }
 
 var _ TextureFilterable = (*TextureFilter)(nil)

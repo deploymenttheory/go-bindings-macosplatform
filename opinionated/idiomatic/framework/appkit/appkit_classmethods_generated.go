@@ -55,8 +55,8 @@ func AlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextW
 }
 
 // InputEventMask calls the underlying NSAlignmentFeedbackFilterInputEventMask.
-func InputEventMask() raw.NSEventMask {
-	return raw.NSAlignmentFeedbackFilterInputEventMask()
+func InputEventMask() NSEventMask {
+	return NSEventMask(raw.NSAlignmentFeedbackFilterInputEventMask())
 }
 
 // RunAnimationGroup blocks until the operation completes or ctx is cancelled.
@@ -252,33 +252,33 @@ func SetDefaultFlatness(defaultFlatness float64) {
 }
 
 // DefaultWindingRule calls the underlying NSBezierPathDefaultWindingRule.
-func DefaultWindingRule() raw.NSWindingRule {
-	return raw.NSBezierPathDefaultWindingRule()
+func DefaultWindingRule() NSWindingRule {
+	return NSWindingRule(raw.NSBezierPathDefaultWindingRule())
 }
 
 // SetDefaultWindingRule calls the underlying NSBezierPathSetDefaultWindingRule.
-func SetDefaultWindingRule(defaultWindingRule raw.NSWindingRule) {
-	raw.NSBezierPathSetDefaultWindingRule(defaultWindingRule)
+func SetDefaultWindingRule(defaultWindingRule NSWindingRule) {
+	raw.NSBezierPathSetDefaultWindingRule(raw.NSWindingRule(defaultWindingRule))
 }
 
 // DefaultLineCapStyle calls the underlying NSBezierPathDefaultLineCapStyle.
-func DefaultLineCapStyle() raw.NSLineCapStyle {
-	return raw.NSBezierPathDefaultLineCapStyle()
+func DefaultLineCapStyle() NSLineCapStyle {
+	return NSLineCapStyle(raw.NSBezierPathDefaultLineCapStyle())
 }
 
 // SetDefaultLineCapStyle calls the underlying NSBezierPathSetDefaultLineCapStyle.
-func SetDefaultLineCapStyle(defaultLineCapStyle raw.NSLineCapStyle) {
-	raw.NSBezierPathSetDefaultLineCapStyle(defaultLineCapStyle)
+func SetDefaultLineCapStyle(defaultLineCapStyle NSLineCapStyle) {
+	raw.NSBezierPathSetDefaultLineCapStyle(raw.NSLineCapStyle(defaultLineCapStyle))
 }
 
 // DefaultLineJoinStyle calls the underlying NSBezierPathDefaultLineJoinStyle.
-func DefaultLineJoinStyle() raw.NSLineJoinStyle {
-	return raw.NSBezierPathDefaultLineJoinStyle()
+func DefaultLineJoinStyle() NSLineJoinStyle {
+	return NSLineJoinStyle(raw.NSBezierPathDefaultLineJoinStyle())
 }
 
 // SetDefaultLineJoinStyle calls the underlying NSBezierPathSetDefaultLineJoinStyle.
-func SetDefaultLineJoinStyle(defaultLineJoinStyle raw.NSLineJoinStyle) {
-	raw.NSBezierPathSetDefaultLineJoinStyle(defaultLineJoinStyle)
+func SetDefaultLineJoinStyle(defaultLineJoinStyle NSLineJoinStyle) {
+	raw.NSBezierPathSetDefaultLineJoinStyle(raw.NSLineJoinStyle(defaultLineJoinStyle))
 }
 
 // DefaultLineWidth calls the underlying NSBezierPathDefaultLineWidth.
@@ -348,8 +348,8 @@ func TIFFRepresentationOfImageRepsInArray(array *foundation.NSArray[*raw.NSImage
 }
 
 // TIFFRepresentationOfImageRepsInArrayUsingCompressionFactor calls the underlying NSBitmapImageRepTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor.
-func TIFFRepresentationOfImageRepsInArrayUsingCompressionFactor(array *foundation.NSArray[*raw.NSImageRep], comp raw.NSTIFFCompression, factor float32) *foundation.NSData {
-	return raw.NSBitmapImageRepTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor(array, comp, factor)
+func TIFFRepresentationOfImageRepsInArrayUsingCompressionFactor(array *foundation.NSArray[*raw.NSImageRep], comp NSTIFFCompression, factor float32) *foundation.NSData {
+	return raw.NSBitmapImageRepTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor(array, raw.NSTIFFCompression(comp), factor)
 }
 
 // GetTIFFCompressionTypesCount calls the underlying NSBitmapImageRepGetTIFFCompressionTypesCount.
@@ -358,8 +358,8 @@ func GetTIFFCompressionTypesCount(list *raw.NSTIFFCompression, numTypes *int64) 
 }
 
 // LocalizedNameForTIFFCompressionType calls the underlying NSBitmapImageRepLocalizedNameForTIFFCompressionType.
-func LocalizedNameForTIFFCompressionType(compression raw.NSTIFFCompression) string {
-	_r := raw.NSBitmapImageRepLocalizedNameForTIFFCompressionType(compression)
+func LocalizedNameForTIFFCompressionType(compression NSTIFFCompression) string {
+	_r := raw.NSBitmapImageRepLocalizedNameForTIFFCompressionType(raw.NSTIFFCompression(compression))
 	if _r == nil {
 		return ""
 	}
@@ -367,8 +367,8 @@ func LocalizedNameForTIFFCompressionType(compression raw.NSTIFFCompression) stri
 }
 
 // RepresentationOfImageRepsInArrayUsingTypeProperties calls the underlying NSBitmapImageRepRepresentationOfImageRepsInArrayUsingTypeProperties.
-func RepresentationOfImageRepsInArrayUsingTypeProperties(imageReps *foundation.NSArray[*raw.NSImageRep], storageType raw.NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
-	return raw.NSBitmapImageRepRepresentationOfImageRepsInArrayUsingTypeProperties(imageReps, storageType, properties)
+func RepresentationOfImageRepsInArrayUsingTypeProperties(imageReps *foundation.NSArray[*raw.NSImageRep], storageType NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
+	return raw.NSBitmapImageRepRepresentationOfImageRepsInArrayUsingTypeProperties(imageReps, raw.NSBitmapImageFileType(storageType), properties)
 }
 
 // RemoveSavedColumnsWithAutosaveName calls the underlying NSBrowserRemoveSavedColumnsWithAutosaveName.
@@ -504,13 +504,13 @@ func DefaultMenu() *Menu {
 }
 
 // DefaultFocusRingType calls the underlying NSCellDefaultFocusRingType.
-func DefaultFocusRingType() raw.NSFocusRingType {
-	return raw.NSCellDefaultFocusRingType()
+func DefaultFocusRingType() NSFocusRingType {
+	return NSFocusRingType(raw.NSCellDefaultFocusRingType())
 }
 
 // LayoutAnchorWithEdges calls the underlying NSCollectionLayoutAnchorLayoutAnchorWithEdges.
-func LayoutAnchorWithEdges(edges raw.NSDirectionalRectEdge) *CollectionLayoutAnchor {
-	_r := raw.NSCollectionLayoutAnchorLayoutAnchorWithEdges(edges)
+func LayoutAnchorWithEdges(edges NSDirectionalRectEdge) *CollectionLayoutAnchor {
+	_r := raw.NSCollectionLayoutAnchorLayoutAnchorWithEdges(raw.NSDirectionalRectEdge(edges))
 	if _r == nil {
 		return nil
 	}
@@ -518,8 +518,8 @@ func LayoutAnchorWithEdges(edges raw.NSDirectionalRectEdge) *CollectionLayoutAnc
 }
 
 // LayoutAnchorWithEdgesAbsoluteOffset calls the underlying NSCollectionLayoutAnchorLayoutAnchorWithEdgesAbsoluteOffset.
-func LayoutAnchorWithEdgesAbsoluteOffset(edges raw.NSDirectionalRectEdge, absoluteOffset corefoundation.CGPoint) *CollectionLayoutAnchor {
-	_r := raw.NSCollectionLayoutAnchorLayoutAnchorWithEdgesAbsoluteOffset(edges, absoluteOffset)
+func LayoutAnchorWithEdgesAbsoluteOffset(edges NSDirectionalRectEdge, absoluteOffset corefoundation.CGPoint) *CollectionLayoutAnchor {
+	_r := raw.NSCollectionLayoutAnchorLayoutAnchorWithEdgesAbsoluteOffset(raw.NSDirectionalRectEdge(edges), absoluteOffset)
 	if _r == nil {
 		return nil
 	}
@@ -527,8 +527,8 @@ func LayoutAnchorWithEdgesAbsoluteOffset(edges raw.NSDirectionalRectEdge, absolu
 }
 
 // LayoutAnchorWithEdgesFractionalOffset calls the underlying NSCollectionLayoutAnchorLayoutAnchorWithEdgesFractionalOffset.
-func LayoutAnchorWithEdgesFractionalOffset(edges raw.NSDirectionalRectEdge, fractionalOffset corefoundation.CGPoint) *CollectionLayoutAnchor {
-	_r := raw.NSCollectionLayoutAnchorLayoutAnchorWithEdgesFractionalOffset(edges, fractionalOffset)
+func LayoutAnchorWithEdgesFractionalOffset(edges NSDirectionalRectEdge, fractionalOffset corefoundation.CGPoint) *CollectionLayoutAnchor {
+	_r := raw.NSCollectionLayoutAnchorLayoutAnchorWithEdgesFractionalOffset(raw.NSDirectionalRectEdge(edges), fractionalOffset)
 	if _r == nil {
 		return nil
 	}
@@ -536,8 +536,8 @@ func LayoutAnchorWithEdgesFractionalOffset(edges raw.NSDirectionalRectEdge, frac
 }
 
 // BoundarySupplementaryItemWithLayoutSizeElementKindAlignment calls the underlying NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignment.
-func BoundarySupplementaryItemWithLayoutSizeElementKindAlignment(layoutSize *raw.NSCollectionLayoutSize, elementKind string, alignment raw.NSRectAlignment) *CollectionLayoutBoundarySupplementaryItem {
-	_r := raw.NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignment(layoutSize, foundation.NSStringStringWithUTF8String(elementKind), alignment)
+func BoundarySupplementaryItemWithLayoutSizeElementKindAlignment(layoutSize *raw.NSCollectionLayoutSize, elementKind string, alignment NSRectAlignment) *CollectionLayoutBoundarySupplementaryItem {
+	_r := raw.NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignment(layoutSize, foundation.NSStringStringWithUTF8String(elementKind), raw.NSRectAlignment(alignment))
 	if _r == nil {
 		return nil
 	}
@@ -545,8 +545,8 @@ func BoundarySupplementaryItemWithLayoutSizeElementKindAlignment(layoutSize *raw
 }
 
 // BoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset calls the underlying NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset.
-func BoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset(layoutSize *raw.NSCollectionLayoutSize, elementKind string, alignment raw.NSRectAlignment, absoluteOffset corefoundation.CGPoint) *CollectionLayoutBoundarySupplementaryItem {
-	_r := raw.NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset(layoutSize, foundation.NSStringStringWithUTF8String(elementKind), alignment, absoluteOffset)
+func BoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset(layoutSize *raw.NSCollectionLayoutSize, elementKind string, alignment NSRectAlignment, absoluteOffset corefoundation.CGPoint) *CollectionLayoutBoundarySupplementaryItem {
+	_r := raw.NSCollectionLayoutBoundarySupplementaryItemBoundarySupplementaryItemWithLayoutSizeElementKindAlignmentAbsoluteOffset(layoutSize, foundation.NSStringStringWithUTF8String(elementKind), raw.NSRectAlignment(alignment), absoluteOffset)
 	if _r == nil {
 		return nil
 	}
@@ -987,8 +987,8 @@ func ColorWithRedGreenBlueAlphaLinearExposure(red float64, green float64, blue f
 }
 
 // ColorForControlTint calls the underlying NSColorColorForControlTint.
-func ColorForControlTint(controlTint raw.NSControlTint) *Color {
-	_r := raw.NSColorColorForControlTint(controlTint)
+func ColorForControlTint(controlTint NSControlTint) *Color {
+	_r := raw.NSColorColorForControlTint(raw.NSControlTint(controlTint))
 	if _r == nil {
 		return nil
 	}
@@ -1628,8 +1628,8 @@ func ControlAccentColor() *Color {
 }
 
 // CurrentControlTint calls the underlying NSColorCurrentControlTint.
-func CurrentControlTint() raw.NSControlTint {
-	return raw.NSColorCurrentControlTint()
+func CurrentControlTint() NSControlTint {
+	return NSControlTint(raw.NSColorCurrentControlTint())
 }
 
 // HighlightColor calls the underlying NSColorHighlightColor.
@@ -1800,13 +1800,13 @@ func DragColorWithEventFromView(color *raw.NSColor, event *raw.NSEvent, sourceVi
 }
 
 // SetPickerMask calls the underlying NSColorPanelSetPickerMask.
-func SetPickerMask(mask raw.NSColorPanelOptions) {
-	raw.NSColorPanelSetPickerMask(mask)
+func SetPickerMask(mask NSColorPanelOptions) {
+	raw.NSColorPanelSetPickerMask(raw.NSColorPanelOptions(mask))
 }
 
 // SetPickerMode calls the underlying NSColorPanelSetPickerMode.
-func SetPickerMode(mode raw.NSColorPanelMode) {
-	raw.NSColorPanelSetPickerMode(mode)
+func SetPickerMode(mode NSColorPanelMode) {
+	raw.NSColorPanelSetPickerMode(raw.NSColorPanelMode(mode))
 }
 
 // SharedColorPanel calls the underlying NSColorPanelSharedColorPanel.
@@ -1860,8 +1860,8 @@ func ColorPickerWithIdentifierButtonImage(identifier *foundation.NSString, image
 }
 
 // AvailableColorSpacesWithModel calls the underlying NSColorSpaceAvailableColorSpacesWithModel.
-func AvailableColorSpacesWithModel(model raw.NSColorSpaceModel) *foundation.NSArray[*raw.NSColorSpace] {
-	return raw.NSColorSpaceAvailableColorSpacesWithModel(model)
+func AvailableColorSpacesWithModel(model NSColorSpaceModel) *foundation.NSArray[*raw.NSColorSpace] {
+	return raw.NSColorSpaceAvailableColorSpacesWithModel(raw.NSColorSpaceModel(model))
 }
 
 // SRGBColorSpace calls the underlying NSColorSpaceSRGBColorSpace.
@@ -1973,8 +1973,8 @@ func DeviceCMYKColorSpace() *ColorSpace {
 }
 
 // ColorWellWithStyle calls the underlying NSColorWellColorWellWithStyle.
-func ColorWellWithStyle(style raw.NSColorWellStyle) *ColorWell {
-	_r := raw.NSColorWellColorWellWithStyle(style)
+func ColorWellWithStyle(style NSColorWellStyle) *ColorWell {
+	_r := raw.NSColorWellColorWellWithStyle(raw.NSColorWellStyle(style))
 	if _r == nil {
 		return nil
 	}
@@ -2039,8 +2039,8 @@ func Pop() {
 }
 
 // ColumnResizeCursorInDirections calls the underlying NSCursorColumnResizeCursorInDirections.
-func ColumnResizeCursorInDirections(directions raw.NSHorizontalDirections) *Cursor {
-	_r := raw.NSCursorColumnResizeCursorInDirections(directions)
+func ColumnResizeCursorInDirections(directions NSHorizontalDirections) *Cursor {
+	_r := raw.NSCursorColumnResizeCursorInDirections(raw.NSHorizontalDirections(directions))
 	if _r == nil {
 		return nil
 	}
@@ -2048,8 +2048,8 @@ func ColumnResizeCursorInDirections(directions raw.NSHorizontalDirections) *Curs
 }
 
 // RowResizeCursorInDirections calls the underlying NSCursorRowResizeCursorInDirections.
-func RowResizeCursorInDirections(directions raw.NSVerticalDirections) *Cursor {
-	_r := raw.NSCursorRowResizeCursorInDirections(directions)
+func RowResizeCursorInDirections(directions NSVerticalDirections) *Cursor {
+	_r := raw.NSCursorRowResizeCursorInDirections(raw.NSVerticalDirections(directions))
 	if _r == nil {
 		return nil
 	}
@@ -2057,8 +2057,8 @@ func RowResizeCursorInDirections(directions raw.NSVerticalDirections) *Cursor {
 }
 
 // FrameResizeCursorFromPositionInDirections calls the underlying NSCursorFrameResizeCursorFromPositionInDirections.
-func FrameResizeCursorFromPositionInDirections(position raw.NSCursorFrameResizePosition, directions raw.NSCursorFrameResizeDirections) *Cursor {
-	_r := raw.NSCursorFrameResizeCursorFromPositionInDirections(position, directions)
+func FrameResizeCursorFromPositionInDirections(position NSCursorFrameResizePosition, directions NSCursorFrameResizeDirections) *Cursor {
+	_r := raw.NSCursorFrameResizeCursorFromPositionInDirections(raw.NSCursorFrameResizePosition(position), raw.NSCursorFrameResizeDirections(directions))
 	if _r == nil {
 		return nil
 	}
@@ -2405,8 +2405,8 @@ func StopPeriodicEvents() {
 }
 
 // MouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure calls the underlying NSEventMouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure.
-func MouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure(type_ raw.NSEventType, location corefoundation.CGPoint, flags raw.NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *raw.NSGraphicsContext, eNum int, cNum int, pressure float32) *Event {
-	_r := raw.NSEventMouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure(type_, location, flags, time_, wNum, unusedPassNil, eNum, cNum, pressure)
+func MouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *raw.NSGraphicsContext, eNum int, cNum int, pressure float32) *Event {
+	_r := raw.NSEventMouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberClickCountPressure(raw.NSEventType(type_), location, raw.NSEventModifierFlags(flags), time_, wNum, unusedPassNil, eNum, cNum, pressure)
 	if _r == nil {
 		return nil
 	}
@@ -2414,8 +2414,8 @@ func MouseEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNum
 }
 
 // KeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode calls the underlying NSEventKeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode.
-func KeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode(type_ raw.NSEventType, location corefoundation.CGPoint, flags raw.NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *raw.NSGraphicsContext, keys string, ukeys string, flag bool, code uint16) *Event {
-	_r := raw.NSEventKeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode(type_, location, flags, time_, wNum, unusedPassNil, foundation.NSStringStringWithUTF8String(keys), foundation.NSStringStringWithUTF8String(ukeys), flag, code)
+func KeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *raw.NSGraphicsContext, keys string, ukeys string, flag bool, code uint16) *Event {
+	_r := raw.NSEventKeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharactersCharactersIgnoringModifiersIsARepeatKeyCode(raw.NSEventType(type_), location, raw.NSEventModifierFlags(flags), time_, wNum, unusedPassNil, foundation.NSStringStringWithUTF8String(keys), foundation.NSStringStringWithUTF8String(ukeys), flag, code)
 	if _r == nil {
 		return nil
 	}
@@ -2423,8 +2423,8 @@ func KeyEventWithTypeLocationModifierFlagsTimestampWindowNumberContextCharacters
 }
 
 // EnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData calls the underlying NSEventEnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData.
-func EnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData(type_ raw.NSEventType, location corefoundation.CGPoint, flags raw.NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *raw.NSGraphicsContext, eNum int, tNum int, data unsafe.Pointer) *Event {
-	_r := raw.NSEventEnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData(type_, location, flags, time_, wNum, unusedPassNil, eNum, tNum, data)
+func EnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *raw.NSGraphicsContext, eNum int, tNum int, data unsafe.Pointer) *Event {
+	_r := raw.NSEventEnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEventNumberTrackingNumberUserData(raw.NSEventType(type_), location, raw.NSEventModifierFlags(flags), time_, wNum, unusedPassNil, eNum, tNum, data)
 	if _r == nil {
 		return nil
 	}
@@ -2432,8 +2432,8 @@ func EnterExitEventWithTypeLocationModifierFlagsTimestampWindowNumberContextEven
 }
 
 // OtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2 calls the underlying NSEventOtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2.
-func OtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2(type_ raw.NSEventType, location corefoundation.CGPoint, flags raw.NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *raw.NSGraphicsContext, subtype int16, d1 int, d2 int) *Event {
-	_r := raw.NSEventOtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2(type_, location, flags, time_, wNum, unusedPassNil, subtype, d1, d2)
+func OtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2(type_ NSEventType, location corefoundation.CGPoint, flags NSEventModifierFlags, time_ float64, wNum int, unusedPassNil *raw.NSGraphicsContext, subtype int16, d1 int, d2 int) *Event {
+	_r := raw.NSEventOtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeData1Data2(raw.NSEventType(type_), location, raw.NSEventModifierFlags(flags), time_, wNum, unusedPassNil, subtype, d1, d2)
 	if _r == nil {
 		return nil
 	}
@@ -2441,13 +2441,13 @@ func OtherEventWithTypeLocationModifierFlagsTimestampWindowNumberContextSubtypeD
 }
 
 // AddGlobalMonitorForEventsMatchingMaskHandler calls the underlying NSEventAddGlobalMonitorForEventsMatchingMaskHandler.
-func AddGlobalMonitorForEventsMatchingMaskHandler(mask raw.NSEventMask, block func(*raw.NSEvent)) objc.ID {
-	return raw.NSEventAddGlobalMonitorForEventsMatchingMaskHandler(mask, block)
+func AddGlobalMonitorForEventsMatchingMaskHandler(mask NSEventMask, block func(*raw.NSEvent)) objc.ID {
+	return raw.NSEventAddGlobalMonitorForEventsMatchingMaskHandler(raw.NSEventMask(mask), block)
 }
 
 // AddLocalMonitorForEventsMatchingMaskHandler calls the underlying NSEventAddLocalMonitorForEventsMatchingMaskHandler.
-func AddLocalMonitorForEventsMatchingMaskHandler(mask raw.NSEventMask, block objc.Block) objc.ID {
-	return raw.NSEventAddLocalMonitorForEventsMatchingMaskHandler(mask, block)
+func AddLocalMonitorForEventsMatchingMaskHandler(mask NSEventMask, block objc.Block) objc.ID {
+	return raw.NSEventAddLocalMonitorForEventsMatchingMaskHandler(raw.NSEventMask(mask), block)
 }
 
 // RemoveMonitor calls the underlying NSEventRemoveMonitor.
@@ -2476,8 +2476,8 @@ func MouseLocation() corefoundation.CGPoint {
 }
 
 // ModifierFlagsClass calls the underlying NSEventModifierFlagsClass.
-func ModifierFlagsClass() raw.NSEventModifierFlags {
-	return raw.NSEventModifierFlagsClass()
+func ModifierFlagsClass() NSEventModifierFlags {
+	return NSEventModifierFlags(raw.NSEventModifierFlagsClass())
 }
 
 // PressedMouseButtons calls the underlying NSEventPressedMouseButtons.
@@ -2702,8 +2702,8 @@ func MonospacedSystemFontOfSizeWeight(fontSize float64, weight float64) *Font {
 }
 
 // SystemFontSizeForControlSize calls the underlying NSFontSystemFontSizeForControlSize.
-func SystemFontSizeForControlSize(controlSize raw.NSControlSize) float64 {
-	return raw.NSFontSystemFontSizeForControlSize(controlSize)
+func SystemFontSizeForControlSize(controlSize NSControlSize) float64 {
+	return raw.NSFontSystemFontSizeForControlSize(raw.NSControlSize(controlSize))
 }
 
 // SystemFontSize calls the underlying NSFontSystemFontSize.
@@ -2749,18 +2749,18 @@ func FontCollectionWithLocale(locale *foundation.NSLocale) *FontCollection {
 }
 
 // ShowFontCollectionWithNameVisibilityError calls the underlying NSFontCollectionShowFontCollectionWithNameVisibilityError.
-func ShowFontCollectionWithNameVisibilityError(collection *raw.NSFontCollection, name *foundation.NSString, visibility raw.NSFontCollectionVisibility) (bool, error) {
-	return raw.NSFontCollectionShowFontCollectionWithNameVisibilityError(collection, name, visibility)
+func ShowFontCollectionWithNameVisibilityError(collection *raw.NSFontCollection, name *foundation.NSString, visibility NSFontCollectionVisibility) (bool, error) {
+	return raw.NSFontCollectionShowFontCollectionWithNameVisibilityError(collection, name, raw.NSFontCollectionVisibility(visibility))
 }
 
 // HideFontCollectionWithNameVisibilityError calls the underlying NSFontCollectionHideFontCollectionWithNameVisibilityError.
-func HideFontCollectionWithNameVisibilityError(name *foundation.NSString, visibility raw.NSFontCollectionVisibility) (bool, error) {
-	return raw.NSFontCollectionHideFontCollectionWithNameVisibilityError(name, visibility)
+func HideFontCollectionWithNameVisibilityError(name *foundation.NSString, visibility NSFontCollectionVisibility) (bool, error) {
+	return raw.NSFontCollectionHideFontCollectionWithNameVisibilityError(name, raw.NSFontCollectionVisibility(visibility))
 }
 
 // RenameFontCollectionWithNameVisibilityToNameError calls the underlying NSFontCollectionRenameFontCollectionWithNameVisibilityToNameError.
-func RenameFontCollectionWithNameVisibilityToNameError(oldName *foundation.NSString, visibility raw.NSFontCollectionVisibility, newName *foundation.NSString) (bool, error) {
-	return raw.NSFontCollectionRenameFontCollectionWithNameVisibilityToNameError(oldName, visibility, newName)
+func RenameFontCollectionWithNameVisibilityToNameError(oldName *foundation.NSString, visibility NSFontCollectionVisibility, newName *foundation.NSString) (bool, error) {
+	return raw.NSFontCollectionRenameFontCollectionWithNameVisibilityToNameError(oldName, raw.NSFontCollectionVisibility(visibility), newName)
 }
 
 // FontCollectionWithName calls the underlying NSFontCollectionFontCollectionWithName.
@@ -2773,8 +2773,8 @@ func FontCollectionWithName(name *foundation.NSString) *FontCollection {
 }
 
 // FontCollectionWithNameVisibility calls the underlying NSFontCollectionFontCollectionWithNameVisibility.
-func FontCollectionWithNameVisibility(name *foundation.NSString, visibility raw.NSFontCollectionVisibility) *FontCollection {
-	_r := raw.NSFontCollectionFontCollectionWithNameVisibility(name, visibility)
+func FontCollectionWithNameVisibility(name *foundation.NSString, visibility NSFontCollectionVisibility) *FontCollection {
+	_r := raw.NSFontCollectionFontCollectionWithNameVisibility(name, raw.NSFontCollectionVisibility(visibility))
 	if _r == nil {
 		return nil
 	}
@@ -2907,8 +2907,8 @@ func GlyphInfoWithGlyphForFontBaseString(glyph uint, font *raw.NSFont, string_ s
 }
 
 // GlyphInfoWithCharacterIdentifierCollectionBaseString calls the underlying NSGlyphInfoGlyphInfoWithCharacterIdentifierCollectionBaseString.
-func GlyphInfoWithCharacterIdentifierCollectionBaseString(cid uint, characterCollection raw.NSCharacterCollection, string_ string) *GlyphInfo {
-	_r := raw.NSGlyphInfoGlyphInfoWithCharacterIdentifierCollectionBaseString(cid, characterCollection, foundation.NSStringStringWithUTF8String(string_))
+func GlyphInfoWithCharacterIdentifierCollectionBaseString(cid uint, characterCollection NSCharacterCollection, string_ string) *GlyphInfo {
+	_r := raw.NSGlyphInfoGlyphInfoWithCharacterIdentifierCollectionBaseString(cid, raw.NSCharacterCollection(characterCollection), foundation.NSStringStringWithUTF8String(string_))
 	if _r == nil {
 		return nil
 	}
@@ -3351,8 +3351,8 @@ func NSImageRepImageTypes() []string {
 }
 
 // ConfigurationWithPointSizeWeightScale calls the underlying NSImageSymbolConfigurationConfigurationWithPointSizeWeightScale.
-func ConfigurationWithPointSizeWeightScale(pointSize float64, weight float64, scale raw.NSImageSymbolScale) *ImageSymbolConfiguration {
-	_r := raw.NSImageSymbolConfigurationConfigurationWithPointSizeWeightScale(pointSize, weight, scale)
+func ConfigurationWithPointSizeWeightScale(pointSize float64, weight float64, scale NSImageSymbolScale) *ImageSymbolConfiguration {
+	_r := raw.NSImageSymbolConfigurationConfigurationWithPointSizeWeightScale(pointSize, weight, raw.NSImageSymbolScale(scale))
 	if _r == nil {
 		return nil
 	}
@@ -3369,8 +3369,8 @@ func ConfigurationWithPointSizeWeight(pointSize float64, weight float64) *ImageS
 }
 
 // ConfigurationWithTextStyleScale calls the underlying NSImageSymbolConfigurationConfigurationWithTextStyleScale.
-func ConfigurationWithTextStyleScale(style *foundation.NSString, scale raw.NSImageSymbolScale) *ImageSymbolConfiguration {
-	_r := raw.NSImageSymbolConfigurationConfigurationWithTextStyleScale(style, scale)
+func ConfigurationWithTextStyleScale(style *foundation.NSString, scale NSImageSymbolScale) *ImageSymbolConfiguration {
+	_r := raw.NSImageSymbolConfigurationConfigurationWithTextStyleScale(style, raw.NSImageSymbolScale(scale))
 	if _r == nil {
 		return nil
 	}
@@ -3387,8 +3387,8 @@ func ConfigurationWithTextStyle(style *foundation.NSString) *ImageSymbolConfigur
 }
 
 // ConfigurationWithScale calls the underlying NSImageSymbolConfigurationConfigurationWithScale.
-func ConfigurationWithScale(scale raw.NSImageSymbolScale) *ImageSymbolConfiguration {
-	_r := raw.NSImageSymbolConfigurationConfigurationWithScale(scale)
+func ConfigurationWithScale(scale NSImageSymbolScale) *ImageSymbolConfiguration {
+	_r := raw.NSImageSymbolConfigurationConfigurationWithScale(raw.NSImageSymbolScale(scale))
 	if _r == nil {
 		return nil
 	}
@@ -3441,8 +3441,8 @@ func ConfigurationPreferringMulticolor() *ImageSymbolConfiguration {
 }
 
 // ConfigurationWithVariableValueMode calls the underlying NSImageSymbolConfigurationConfigurationWithVariableValueMode.
-func ConfigurationWithVariableValueMode(variableValueMode raw.NSImageSymbolVariableValueMode) *ImageSymbolConfiguration {
-	_r := raw.NSImageSymbolConfigurationConfigurationWithVariableValueMode(variableValueMode)
+func ConfigurationWithVariableValueMode(variableValueMode NSImageSymbolVariableValueMode) *ImageSymbolConfiguration {
+	_r := raw.NSImageSymbolConfigurationConfigurationWithVariableValueMode(raw.NSImageSymbolVariableValueMode(variableValueMode))
 	if _r == nil {
 		return nil
 	}
@@ -3450,8 +3450,8 @@ func ConfigurationWithVariableValueMode(variableValueMode raw.NSImageSymbolVaria
 }
 
 // ConfigurationWithColorRenderingMode calls the underlying NSImageSymbolConfigurationConfigurationWithColorRenderingMode.
-func ConfigurationWithColorRenderingMode(mode raw.NSImageSymbolColorRenderingMode) *ImageSymbolConfiguration {
-	_r := raw.NSImageSymbolConfigurationConfigurationWithColorRenderingMode(mode)
+func ConfigurationWithColorRenderingMode(mode NSImageSymbolColorRenderingMode) *ImageSymbolConfiguration {
+	_r := raw.NSImageSymbolConfigurationConfigurationWithColorRenderingMode(raw.NSImageSymbolColorRenderingMode(mode))
 	if _r == nil {
 		return nil
 	}
@@ -3468,13 +3468,13 @@ func ImageViewWithImage(image *raw.NSImage) *ImageView {
 }
 
 // DefaultPreferredImageDynamicRange calls the underlying NSImageViewDefaultPreferredImageDynamicRange.
-func DefaultPreferredImageDynamicRange() raw.NSImageDynamicRange {
-	return raw.NSImageViewDefaultPreferredImageDynamicRange()
+func DefaultPreferredImageDynamicRange() NSImageDynamicRange {
+	return NSImageDynamicRange(raw.NSImageViewDefaultPreferredImageDynamicRange())
 }
 
 // SetDefaultPreferredImageDynamicRange calls the underlying NSImageViewSetDefaultPreferredImageDynamicRange.
-func SetDefaultPreferredImageDynamicRange(defaultPreferredImageDynamicRange raw.NSImageDynamicRange) {
-	raw.NSImageViewSetDefaultPreferredImageDynamicRange(defaultPreferredImageDynamicRange)
+func SetDefaultPreferredImageDynamicRange(defaultPreferredImageDynamicRange NSImageDynamicRange) {
+	raw.NSImageViewSetDefaultPreferredImageDynamicRange(raw.NSImageDynamicRange(defaultPreferredImageDynamicRange))
 }
 
 // CurrentInputManager calls the underlying NSInputManagerCurrentInputManager.
@@ -3524,13 +3524,13 @@ func IndicatorBadge() *ItemBadge {
 }
 
 // ConstraintsWithVisualFormatOptionsMetricsViews calls the underlying NSLayoutConstraintConstraintsWithVisualFormatOptionsMetricsViews.
-func ConstraintsWithVisualFormatOptionsMetricsViews(format string, opts raw.NSLayoutFormatOptions, metrics *foundation.NSDictionary[*foundation.NSString, objc.ID], views *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.NSLayoutConstraint] {
-	return raw.NSLayoutConstraintConstraintsWithVisualFormatOptionsMetricsViews(foundation.NSStringStringWithUTF8String(format), opts, metrics, views)
+func ConstraintsWithVisualFormatOptionsMetricsViews(format string, opts NSLayoutFormatOptions, metrics *foundation.NSDictionary[*foundation.NSString, objc.ID], views *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.NSLayoutConstraint] {
+	return raw.NSLayoutConstraintConstraintsWithVisualFormatOptionsMetricsViews(foundation.NSStringStringWithUTF8String(format), raw.NSLayoutFormatOptions(opts), metrics, views)
 }
 
 // ConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant calls the underlying NSLayoutConstraintConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant.
-func ConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant(view1 objc.ID, attr1 raw.NSLayoutAttribute, relation raw.NSLayoutRelation, view2 objc.ID, attr2 raw.NSLayoutAttribute, multiplier float64, c float64) *LayoutConstraint {
-	_r := raw.NSLayoutConstraintConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant(view1, attr1, relation, view2, attr2, multiplier, c)
+func ConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant(view1 objc.ID, attr1 NSLayoutAttribute, relation NSLayoutRelation, view2 objc.ID, attr2 NSLayoutAttribute, multiplier float64, c float64) *LayoutConstraint {
+	_r := raw.NSLayoutConstraintConstraintWithItemAttributeRelatedByToItemAttributeMultiplierConstant(view1, raw.NSLayoutAttribute(attr1), raw.NSLayoutRelation(relation), view2, raw.NSLayoutAttribute(attr2), multiplier, c)
 	if _r == nil {
 		return nil
 	}
@@ -3698,8 +3698,8 @@ func NSMutableFontCollectionFontCollectionWithName(name *foundation.NSString) *M
 }
 
 // NSMutableFontCollectionFontCollectionWithNameVisibility calls the underlying NSMutableFontCollectionFontCollectionWithNameVisibility.
-func NSMutableFontCollectionFontCollectionWithNameVisibility(name *foundation.NSString, visibility raw.NSFontCollectionVisibility) *MutableFontCollection {
-	_r := raw.NSMutableFontCollectionFontCollectionWithNameVisibility(name, visibility)
+func NSMutableFontCollectionFontCollectionWithNameVisibility(name *foundation.NSString, visibility NSFontCollectionVisibility) *MutableFontCollection {
+	_r := raw.NSMutableFontCollectionFontCollectionWithNameVisibility(name, raw.NSFontCollectionVisibility(visibility))
 	if _r == nil {
 		return nil
 	}
@@ -3784,8 +3784,8 @@ func NSPageLayoutPageLayout() *PageLayout {
 }
 
 // DefaultWritingDirectionForLanguage calls the underlying NSParagraphStyleDefaultWritingDirectionForLanguage.
-func DefaultWritingDirectionForLanguage(languageName string) raw.NSWritingDirection {
-	return raw.NSParagraphStyleDefaultWritingDirectionForLanguage(foundation.NSStringStringWithUTF8String(languageName))
+func DefaultWritingDirectionForLanguage(languageName string) NSWritingDirection {
+	return NSWritingDirection(raw.NSParagraphStyleDefaultWritingDirectionForLanguage(foundation.NSStringStringWithUTF8String(languageName)))
 }
 
 // DefaultParagraphStyle calls the underlying NSParagraphStyleDefaultParagraphStyle.
@@ -3862,8 +3862,8 @@ func PathComponentCellClass() objc.Class {
 }
 
 // PickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction calls the underlying NSPickerTouchBarItemPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction.
-func PickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction(identifier *foundation.NSString, labels *foundation.NSArray[*foundation.NSString], selectionMode raw.NSPickerTouchBarItemSelectionMode, target objc.ID, action objc.SEL) *PickerTouchBarItem {
-	_r := raw.NSPickerTouchBarItemPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction(identifier, labels, selectionMode, target, action)
+func PickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction(identifier *foundation.NSString, labels *foundation.NSArray[*foundation.NSString], selectionMode NSPickerTouchBarItemSelectionMode, target objc.ID, action objc.SEL) *PickerTouchBarItem {
+	_r := raw.NSPickerTouchBarItemPickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction(identifier, labels, raw.NSPickerTouchBarItemSelectionMode(selectionMode), target, action)
 	if _r == nil {
 		return nil
 	}
@@ -3871,8 +3871,8 @@ func PickerTouchBarItemWithIdentifierLabelsSelectionModeTargetAction(identifier 
 }
 
 // PickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction calls the underlying NSPickerTouchBarItemPickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction.
-func PickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction(identifier *foundation.NSString, images *foundation.NSArray[*raw.NSImage], selectionMode raw.NSPickerTouchBarItemSelectionMode, target objc.ID, action objc.SEL) *PickerTouchBarItem {
-	_r := raw.NSPickerTouchBarItemPickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction(identifier, images, selectionMode, target, action)
+func PickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction(identifier *foundation.NSString, images *foundation.NSArray[*raw.NSImage], selectionMode NSPickerTouchBarItemSelectionMode, target objc.ID, action objc.SEL) *PickerTouchBarItem {
+	_r := raw.NSPickerTouchBarItemPickerTouchBarItemWithIdentifierImagesSelectionModeTargetAction(identifier, images, raw.NSPickerTouchBarItemSelectionMode(selectionMode), target, action)
 	if _r == nil {
 		return nil
 	}
@@ -4217,23 +4217,23 @@ func HardStyle() *ScrollEdgeEffectStyle {
 }
 
 // FrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle calls the underlying NSScrollViewFrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle.
-func FrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(cSize corefoundation.CGSize, horizontalScrollerClass objc.Class, verticalScrollerClass objc.Class, type_ raw.NSBorderType, controlSize raw.NSControlSize, scrollerStyle raw.NSScrollerStyle) corefoundation.CGSize {
-	return raw.NSScrollViewFrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(cSize, horizontalScrollerClass, verticalScrollerClass, type_, controlSize, scrollerStyle)
+func FrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(cSize corefoundation.CGSize, horizontalScrollerClass objc.Class, verticalScrollerClass objc.Class, type_ NSBorderType, controlSize NSControlSize, scrollerStyle NSScrollerStyle) corefoundation.CGSize {
+	return raw.NSScrollViewFrameSizeForContentSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(cSize, horizontalScrollerClass, verticalScrollerClass, raw.NSBorderType(type_), raw.NSControlSize(controlSize), raw.NSScrollerStyle(scrollerStyle))
 }
 
 // ContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle calls the underlying NSScrollViewContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle.
-func ContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(fSize corefoundation.CGSize, horizontalScrollerClass objc.Class, verticalScrollerClass objc.Class, type_ raw.NSBorderType, controlSize raw.NSControlSize, scrollerStyle raw.NSScrollerStyle) corefoundation.CGSize {
-	return raw.NSScrollViewContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(fSize, horizontalScrollerClass, verticalScrollerClass, type_, controlSize, scrollerStyle)
+func ContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(fSize corefoundation.CGSize, horizontalScrollerClass objc.Class, verticalScrollerClass objc.Class, type_ NSBorderType, controlSize NSControlSize, scrollerStyle NSScrollerStyle) corefoundation.CGSize {
+	return raw.NSScrollViewContentSizeForFrameSizeHorizontalScrollerClassVerticalScrollerClassBorderTypeControlSizeScrollerStyle(fSize, horizontalScrollerClass, verticalScrollerClass, raw.NSBorderType(type_), raw.NSControlSize(controlSize), raw.NSScrollerStyle(scrollerStyle))
 }
 
 // FrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType calls the underlying NSScrollViewFrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType.
-func FrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType(cSize corefoundation.CGSize, hFlag bool, vFlag bool, type_ raw.NSBorderType) corefoundation.CGSize {
-	return raw.NSScrollViewFrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType(cSize, hFlag, vFlag, type_)
+func FrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType(cSize corefoundation.CGSize, hFlag bool, vFlag bool, type_ NSBorderType) corefoundation.CGSize {
+	return raw.NSScrollViewFrameSizeForContentSizeHasHorizontalScrollerHasVerticalScrollerBorderType(cSize, hFlag, vFlag, raw.NSBorderType(type_))
 }
 
 // ContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType calls the underlying NSScrollViewContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType.
-func ContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType(fSize corefoundation.CGSize, hFlag bool, vFlag bool, type_ raw.NSBorderType) corefoundation.CGSize {
-	return raw.NSScrollViewContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType(fSize, hFlag, vFlag, type_)
+func ContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType(fSize corefoundation.CGSize, hFlag bool, vFlag bool, type_ NSBorderType) corefoundation.CGSize {
+	return raw.NSScrollViewContentSizeForFrameSizeHasHorizontalScrollerHasVerticalScrollerBorderType(fSize, hFlag, vFlag, raw.NSBorderType(type_))
 }
 
 // RulerViewClass calls the underlying NSScrollViewRulerViewClass.
@@ -4247,8 +4247,8 @@ func SetRulerViewClass(rulerViewClass objc.Class) {
 }
 
 // ScrollerWidthForControlSizeScrollerStyle calls the underlying NSScrollerScrollerWidthForControlSizeScrollerStyle.
-func ScrollerWidthForControlSizeScrollerStyle(controlSize raw.NSControlSize, scrollerStyle raw.NSScrollerStyle) float64 {
-	return raw.NSScrollerScrollerWidthForControlSizeScrollerStyle(controlSize, scrollerStyle)
+func ScrollerWidthForControlSizeScrollerStyle(controlSize NSControlSize, scrollerStyle NSScrollerStyle) float64 {
+	return raw.NSScrollerScrollerWidthForControlSizeScrollerStyle(raw.NSControlSize(controlSize), raw.NSScrollerStyle(scrollerStyle))
 }
 
 // IsCompatibleWithOverlayScrollers calls the underlying NSScrollerIsCompatibleWithOverlayScrollers.
@@ -4257,13 +4257,13 @@ func IsCompatibleWithOverlayScrollers() bool {
 }
 
 // PreferredScrollerStyle calls the underlying NSScrollerPreferredScrollerStyle.
-func PreferredScrollerStyle() raw.NSScrollerStyle {
-	return raw.NSScrollerPreferredScrollerStyle()
+func PreferredScrollerStyle() NSScrollerStyle {
+	return NSScrollerStyle(raw.NSScrollerPreferredScrollerStyle())
 }
 
 // ScrollerWidthForControlSize calls the underlying NSScrollerScrollerWidthForControlSize.
-func ScrollerWidthForControlSize(controlSize raw.NSControlSize) float64 {
-	return raw.NSScrollerScrollerWidthForControlSize(controlSize)
+func ScrollerWidthForControlSize(controlSize NSControlSize) float64 {
+	return raw.NSScrollerScrollerWidthForControlSize(raw.NSControlSize(controlSize))
 }
 
 // ScrollerWidth calls the underlying NSScrollerScrollerWidth.
@@ -4304,8 +4304,8 @@ func RoundedBackgroundStyle() *ScrubberSelectionStyle {
 }
 
 // SegmentedControlWithLabelsTrackingModeTargetAction calls the underlying NSSegmentedControlSegmentedControlWithLabelsTrackingModeTargetAction.
-func SegmentedControlWithLabelsTrackingModeTargetAction(labels *foundation.NSArray[*foundation.NSString], trackingMode raw.NSSegmentSwitchTracking, target objc.ID, action objc.SEL) *SegmentedControl {
-	_r := raw.NSSegmentedControlSegmentedControlWithLabelsTrackingModeTargetAction(labels, trackingMode, target, action)
+func SegmentedControlWithLabelsTrackingModeTargetAction(labels *foundation.NSArray[*foundation.NSString], trackingMode NSSegmentSwitchTracking, target objc.ID, action objc.SEL) *SegmentedControl {
+	_r := raw.NSSegmentedControlSegmentedControlWithLabelsTrackingModeTargetAction(labels, raw.NSSegmentSwitchTracking(trackingMode), target, action)
 	if _r == nil {
 		return nil
 	}
@@ -4313,8 +4313,8 @@ func SegmentedControlWithLabelsTrackingModeTargetAction(labels *foundation.NSArr
 }
 
 // SegmentedControlWithImagesTrackingModeTargetAction calls the underlying NSSegmentedControlSegmentedControlWithImagesTrackingModeTargetAction.
-func SegmentedControlWithImagesTrackingModeTargetAction(images *foundation.NSArray[*raw.NSImage], trackingMode raw.NSSegmentSwitchTracking, target objc.ID, action objc.SEL) *SegmentedControl {
-	_r := raw.NSSegmentedControlSegmentedControlWithImagesTrackingModeTargetAction(images, trackingMode, target, action)
+func SegmentedControlWithImagesTrackingModeTargetAction(images *foundation.NSArray[*raw.NSImage], trackingMode NSSegmentSwitchTracking, target objc.ID, action objc.SEL) *SegmentedControl {
+	_r := raw.NSSegmentedControlSegmentedControlWithImagesTrackingModeTargetAction(images, raw.NSSegmentSwitchTracking(trackingMode), target, action)
 	if _r == nil {
 		return nil
 	}
@@ -4645,8 +4645,8 @@ func TabViewItemWithViewController(viewController *raw.NSViewController) *TabVie
 }
 
 // RowActionWithStyleTitleHandler calls the underlying NSTableViewRowActionRowActionWithStyleTitleHandler.
-func RowActionWithStyleTitleHandler(style raw.NSTableViewRowActionStyle, title string, handler func(*raw.NSTableViewRowAction, int)) *TableViewRowAction {
-	_r := raw.NSTableViewRowActionRowActionWithStyleTitleHandler(style, foundation.NSStringStringWithUTF8String(title), handler)
+func RowActionWithStyleTitleHandler(style NSTableViewRowActionStyle, title string, handler func(*raw.NSTableViewRowAction, int)) *TableViewRowAction {
+	_r := raw.NSTableViewRowActionRowActionWithStyleTitleHandler(raw.NSTableViewRowActionStyle(style), foundation.NSStringStringWithUTF8String(title), handler)
 	if _r == nil {
 		return nil
 	}
@@ -4867,8 +4867,8 @@ func NSTokenFieldCellDefaultTokenizingCharacterSet() *foundation.NSCharacterSet 
 }
 
 // GroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction calls the underlying NSToolbarItemGroupGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction.
-func GroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction(itemIdentifier *foundation.NSString, titles *foundation.NSArray[*foundation.NSString], selectionMode raw.NSToolbarItemGroupSelectionMode, labels *foundation.NSArray[*foundation.NSString], target objc.ID, action objc.SEL) *ToolbarItemGroup {
-	_r := raw.NSToolbarItemGroupGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction(itemIdentifier, titles, selectionMode, labels, target, action)
+func GroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction(itemIdentifier *foundation.NSString, titles *foundation.NSArray[*foundation.NSString], selectionMode NSToolbarItemGroupSelectionMode, labels *foundation.NSArray[*foundation.NSString], target objc.ID, action objc.SEL) *ToolbarItemGroup {
+	_r := raw.NSToolbarItemGroupGroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction(itemIdentifier, titles, raw.NSToolbarItemGroupSelectionMode(selectionMode), labels, target, action)
 	if _r == nil {
 		return nil
 	}
@@ -4876,8 +4876,8 @@ func GroupWithItemIdentifierTitlesSelectionModeLabelsTargetAction(itemIdentifier
 }
 
 // GroupWithItemIdentifierImagesSelectionModeLabelsTargetAction calls the underlying NSToolbarItemGroupGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction.
-func GroupWithItemIdentifierImagesSelectionModeLabelsTargetAction(itemIdentifier *foundation.NSString, images *foundation.NSArray[*raw.NSImage], selectionMode raw.NSToolbarItemGroupSelectionMode, labels *foundation.NSArray[*foundation.NSString], target objc.ID, action objc.SEL) *ToolbarItemGroup {
-	_r := raw.NSToolbarItemGroupGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction(itemIdentifier, images, selectionMode, labels, target, action)
+func GroupWithItemIdentifierImagesSelectionModeLabelsTargetAction(itemIdentifier *foundation.NSString, images *foundation.NSArray[*raw.NSImage], selectionMode NSToolbarItemGroupSelectionMode, labels *foundation.NSArray[*foundation.NSString], target objc.ID, action objc.SEL) *ToolbarItemGroup {
+	_r := raw.NSToolbarItemGroupGroupWithItemIdentifierImagesSelectionModeLabelsTargetAction(itemIdentifier, images, raw.NSToolbarItemGroupSelectionMode(selectionMode), labels, target, action)
 	if _r == nil {
 		return nil
 	}
@@ -4918,8 +4918,8 @@ func PrintingAdjustmentInLayoutManagerForNominallySpacedGlyphRangePackedGlyphsCo
 }
 
 // SharedSystemTypesetterForBehavior calls the underlying NSTypesetterSharedSystemTypesetterForBehavior.
-func SharedSystemTypesetterForBehavior(behavior raw.NSTypesetterBehavior) objc.ID {
-	return raw.NSTypesetterSharedSystemTypesetterForBehavior(behavior)
+func SharedSystemTypesetterForBehavior(behavior NSTypesetterBehavior) objc.ID {
+	return raw.NSTypesetterSharedSystemTypesetterForBehavior(raw.NSTypesetterBehavior(behavior))
 }
 
 // SharedSystemTypesetter calls the underlying NSTypesetterSharedSystemTypesetter.
@@ -4932,8 +4932,8 @@ func SharedSystemTypesetter() *Typesetter {
 }
 
 // DefaultTypesetterBehavior calls the underlying NSTypesetterDefaultTypesetterBehavior.
-func DefaultTypesetterBehavior() raw.NSTypesetterBehavior {
-	return raw.NSTypesetterDefaultTypesetterBehavior()
+func DefaultTypesetterBehavior() NSTypesetterBehavior {
+	return NSTypesetterBehavior(raw.NSTypesetterDefaultTypesetterBehavior())
 }
 
 // SharedUserDefaultsController calls the underlying NSUserDefaultsControllerSharedUserDefaultsController.
@@ -5014,8 +5014,8 @@ func IsCompatibleWithResponsiveScrolling() bool {
 }
 
 // NSViewDefaultFocusRingType calls the underlying NSViewDefaultFocusRingType.
-func NSViewDefaultFocusRingType() raw.NSFocusRingType {
-	return raw.NSViewDefaultFocusRingType()
+func NSViewDefaultFocusRingType() NSFocusRingType {
+	return NSFocusRingType(raw.NSViewDefaultFocusRingType())
 }
 
 // RequiresConstraintBasedLayout calls the underlying NSViewRequiresConstraintBasedLayout.
@@ -5024,8 +5024,8 @@ func RequiresConstraintBasedLayout() bool {
 }
 
 // SafeAreaLayoutRegionWithCornerAdaptation calls the underlying NSViewLayoutRegionSafeAreaLayoutRegionWithCornerAdaptation.
-func SafeAreaLayoutRegionWithCornerAdaptation(adaptivityAxis raw.NSViewLayoutRegionAdaptivityAxis) *ViewLayoutRegion {
-	_r := raw.NSViewLayoutRegionSafeAreaLayoutRegionWithCornerAdaptation(adaptivityAxis)
+func SafeAreaLayoutRegionWithCornerAdaptation(adaptivityAxis NSViewLayoutRegionAdaptivityAxis) *ViewLayoutRegion {
+	_r := raw.NSViewLayoutRegionSafeAreaLayoutRegionWithCornerAdaptation(raw.NSViewLayoutRegionAdaptivityAxis(adaptivityAxis))
 	if _r == nil {
 		return nil
 	}
@@ -5033,8 +5033,8 @@ func SafeAreaLayoutRegionWithCornerAdaptation(adaptivityAxis raw.NSViewLayoutReg
 }
 
 // MarginsLayoutRegionWithCornerAdaptation calls the underlying NSViewLayoutRegionMarginsLayoutRegionWithCornerAdaptation.
-func MarginsLayoutRegionWithCornerAdaptation(adaptivityAxis raw.NSViewLayoutRegionAdaptivityAxis) *ViewLayoutRegion {
-	_r := raw.NSViewLayoutRegionMarginsLayoutRegionWithCornerAdaptation(adaptivityAxis)
+func MarginsLayoutRegionWithCornerAdaptation(adaptivityAxis NSViewLayoutRegionAdaptivityAxis) *ViewLayoutRegion {
+	_r := raw.NSViewLayoutRegionMarginsLayoutRegionWithCornerAdaptation(raw.NSViewLayoutRegionAdaptivityAxis(adaptivityAxis))
 	if _r == nil {
 		return nil
 	}
@@ -5042,18 +5042,18 @@ func MarginsLayoutRegionWithCornerAdaptation(adaptivityAxis raw.NSViewLayoutRegi
 }
 
 // FrameRectForContentRectStyleMask calls the underlying NSWindowFrameRectForContentRectStyleMask.
-func FrameRectForContentRectStyleMask(cRect corefoundation.CGRect, style raw.NSWindowStyleMask) corefoundation.CGRect {
-	return raw.NSWindowFrameRectForContentRectStyleMask(cRect, style)
+func FrameRectForContentRectStyleMask(cRect corefoundation.CGRect, style NSWindowStyleMask) corefoundation.CGRect {
+	return raw.NSWindowFrameRectForContentRectStyleMask(cRect, raw.NSWindowStyleMask(style))
 }
 
 // ContentRectForFrameRectStyleMask calls the underlying NSWindowContentRectForFrameRectStyleMask.
-func ContentRectForFrameRectStyleMask(fRect corefoundation.CGRect, style raw.NSWindowStyleMask) corefoundation.CGRect {
-	return raw.NSWindowContentRectForFrameRectStyleMask(fRect, style)
+func ContentRectForFrameRectStyleMask(fRect corefoundation.CGRect, style NSWindowStyleMask) corefoundation.CGRect {
+	return raw.NSWindowContentRectForFrameRectStyleMask(fRect, raw.NSWindowStyleMask(style))
 }
 
 // MinFrameWidthWithTitleStyleMask calls the underlying NSWindowMinFrameWidthWithTitleStyleMask.
-func MinFrameWidthWithTitleStyleMask(title string, style raw.NSWindowStyleMask) float64 {
-	return raw.NSWindowMinFrameWidthWithTitleStyleMask(foundation.NSStringStringWithUTF8String(title), style)
+func MinFrameWidthWithTitleStyleMask(title string, style NSWindowStyleMask) float64 {
+	return raw.NSWindowMinFrameWidthWithTitleStyleMask(foundation.NSStringStringWithUTF8String(title), raw.NSWindowStyleMask(style))
 }
 
 // RemoveFrameUsingName calls the underlying NSWindowRemoveFrameUsingName.
@@ -5062,8 +5062,8 @@ func RemoveFrameUsingName(name *foundation.NSString) {
 }
 
 // StandardWindowButtonForStyleMask calls the underlying NSWindowStandardWindowButtonForStyleMask.
-func StandardWindowButtonForStyleMask(b raw.NSWindowButton, styleMask raw.NSWindowStyleMask) *Button {
-	_r := raw.NSWindowStandardWindowButtonForStyleMask(b, styleMask)
+func StandardWindowButtonForStyleMask(b NSWindowButton, styleMask NSWindowStyleMask) *Button {
+	_r := raw.NSWindowStandardWindowButtonForStyleMask(raw.NSWindowButton(b), raw.NSWindowStyleMask(styleMask))
 	if _r == nil {
 		return nil
 	}
@@ -5071,8 +5071,8 @@ func StandardWindowButtonForStyleMask(b raw.NSWindowButton, styleMask raw.NSWind
 }
 
 // WindowNumbersWithOptions calls the underlying NSWindowWindowNumbersWithOptions.
-func WindowNumbersWithOptions(options raw.NSWindowNumberListOptions) *foundation.NSArray[*foundation.NSNumber] {
-	return raw.NSWindowWindowNumbersWithOptions(options)
+func WindowNumbersWithOptions(options NSWindowNumberListOptions) *foundation.NSArray[*foundation.NSNumber] {
+	return raw.NSWindowWindowNumbersWithOptions(raw.NSWindowNumberListOptions(options))
 }
 
 // WindowNumberAtPointBelowWindowWithWindowNumber calls the underlying NSWindowWindowNumberAtPointBelowWindowWithWindowNumber.
@@ -5090,8 +5090,8 @@ func WindowWithContentViewController(contentViewController *raw.NSViewController
 }
 
 // DefaultDepthLimit calls the underlying NSWindowDefaultDepthLimit.
-func DefaultDepthLimit() raw.NSWindowDepth {
-	return raw.NSWindowDefaultDepthLimit()
+func DefaultDepthLimit() NSWindowDepth {
+	return NSWindowDepth(raw.NSWindowDefaultDepthLimit())
 }
 
 // AllowsAutomaticWindowTabbing calls the underlying NSWindowAllowsAutomaticWindowTabbing.
@@ -5105,8 +5105,8 @@ func SetAllowsAutomaticWindowTabbing(allowsAutomaticWindowTabbing bool) {
 }
 
 // UserTabbingPreferenceClass calls the underlying NSWindowUserTabbingPreferenceClass.
-func UserTabbingPreferenceClass() raw.NSWindowUserTabbingPreference {
-	return raw.NSWindowUserTabbingPreferenceClass()
+func UserTabbingPreferenceClass() NSWindowUserTabbingPreference {
+	return NSWindowUserTabbingPreference(raw.NSWindowUserTabbingPreferenceClass())
 }
 
 // MenuChanged calls the underlying NSWindowMenuChanged.

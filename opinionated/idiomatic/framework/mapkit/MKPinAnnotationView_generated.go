@@ -51,8 +51,8 @@ func (x *PinAnnotationView) WithAnimatesDrop(animatesDrop bool) *PinAnnotationVi
 }
 
 // WithPinColor sets the pinColor property and returns the receiver for chaining.
-func (x *PinAnnotationView) WithPinColor(pinColor raw.MKPinAnnotationColor) *PinAnnotationView {
-	x.inner.SetPinColor(pinColor)
+func (x *PinAnnotationView) WithPinColor(pinColor MKPinAnnotationColor) *PinAnnotationView {
+	x.inner.SetPinColor(raw.MKPinAnnotationColor(pinColor))
 	return x
 }
 
@@ -147,8 +147,8 @@ func (x *PinAnnotationView) WithDraggable(draggable bool) *PinAnnotationView {
 }
 
 // WithDragState sets the dragState property and returns the receiver for chaining.
-func (x *PinAnnotationView) WithDragState(dragState raw.MKAnnotationViewDragState) *PinAnnotationView {
-	x.inner.MKAnnotationView.SetDragState(dragState)
+func (x *PinAnnotationView) WithDragState(dragState MKAnnotationViewDragState) *PinAnnotationView {
+	x.inner.MKAnnotationView.SetDragState(raw.MKAnnotationViewDragState(dragState))
 	return x
 }
 
@@ -177,8 +177,8 @@ func (x *PinAnnotationView) WithSelectedZPriority(selectedZPriority float32) *Pi
 }
 
 // WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
-func (x *PinAnnotationView) WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *PinAnnotationView {
-	x.inner.MKAnnotationView.SetCollisionMode(collisionMode)
+func (x *PinAnnotationView) WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *PinAnnotationView {
+	x.inner.MKAnnotationView.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))
 	return x
 }
 
@@ -203,13 +203,13 @@ func (x *PinAnnotationView) SetAnimatesDrop(animatesDrop bool) {
 }
 
 // PinColor calls the underlying PinColor.
-func (x *PinAnnotationView) PinColor() raw.MKPinAnnotationColor {
-	return x.inner.PinColor()
+func (x *PinAnnotationView) PinColor() MKPinAnnotationColor {
+	return MKPinAnnotationColor(x.inner.PinColor())
 }
 
 // SetPinColor calls the underlying SetPinColor.
-func (x *PinAnnotationView) SetPinColor(pinColor raw.MKPinAnnotationColor) {
-	x.inner.SetPinColor(pinColor)
+func (x *PinAnnotationView) SetPinColor(pinColor MKPinAnnotationColor) {
+	x.inner.SetPinColor(raw.MKPinAnnotationColor(pinColor))
 }
 
 func (x *PinAnnotationView) asAnnotationView() *raw.MKAnnotationView {
@@ -221,7 +221,7 @@ type PinAnnotationViewable interface {
 	Unwrap() *raw.MKPinAnnotationView
 	WithPinTintColor(pinTintColor *appkit.NSColor) *PinAnnotationView
 	WithAnimatesDrop(animatesDrop bool) *PinAnnotationView
-	WithPinColor(pinColor raw.MKPinAnnotationColor) *PinAnnotationView
+	WithPinColor(pinColor MKPinAnnotationColor) *PinAnnotationView
 	WithAnnotation(annotation raw.MKAnnotation) *PinAnnotationView
 	WithImage(image *appkit.NSImage) *PinAnnotationView
 	WithCenterOffset(centerOffset corefoundation.CGPoint) *PinAnnotationView
@@ -237,18 +237,18 @@ type PinAnnotationViewable interface {
 	WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *PinAnnotationView
 	WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *PinAnnotationView
 	WithDraggable(draggable bool) *PinAnnotationView
-	WithDragState(dragState raw.MKAnnotationViewDragState) *PinAnnotationView
+	WithDragState(dragState MKAnnotationViewDragState) *PinAnnotationView
 	WithClusteringIdentifier(clusteringIdentifier string) *PinAnnotationView
 	WithDisplayPriority(displayPriority float32) *PinAnnotationView
 	WithZPriority(zPriority float32) *PinAnnotationView
 	WithSelectedZPriority(selectedZPriority float32) *PinAnnotationView
-	WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *PinAnnotationView
+	WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *PinAnnotationView
 	PinTintColor() *appkit.NSColor
 	SetPinTintColor(pinTintColor *appkit.NSColor)
 	AnimatesDrop() bool
 	SetAnimatesDrop(animatesDrop bool)
-	PinColor() raw.MKPinAnnotationColor
-	SetPinColor(pinColor raw.MKPinAnnotationColor)
+	PinColor() MKPinAnnotationColor
+	SetPinColor(pinColor MKPinAnnotationColor)
 }
 
 var _ PinAnnotationViewable = (*PinAnnotationView)(nil)

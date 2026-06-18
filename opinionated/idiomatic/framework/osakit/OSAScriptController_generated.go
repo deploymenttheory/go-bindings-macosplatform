@@ -133,8 +133,8 @@ func (x *ScriptController) SetLanguage(language *raw.OSALanguage) {
 }
 
 // ScriptState calls the underlying ScriptState.
-func (x *ScriptController) ScriptState() raw.OSAScriptState {
-	return x.inner.ScriptState()
+func (x *ScriptController) ScriptState() OSAScriptState {
+	return OSAScriptState(x.inner.ScriptState())
 }
 
 // IsCompiling calls the underlying IsCompiling.
@@ -161,7 +161,7 @@ type ScriptControllerable interface {
 	SetScript(script *raw.OSAScript)
 	Language() *Language
 	SetLanguage(language *raw.OSALanguage)
-	ScriptState() raw.OSAScriptState
+	ScriptState() OSAScriptState
 	IsCompiling() bool
 }
 

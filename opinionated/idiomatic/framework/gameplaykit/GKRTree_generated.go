@@ -45,8 +45,8 @@ func (x *RTree) WithQueryReserve(queryReserve uint) *RTree {
 }
 
 // AddElementBoundingRectMinBoundingRectMaxSplitStrategy calls the underlying AddElementBoundingRectMinBoundingRectMaxSplitStrategy.
-func (x *RTree) AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy raw.GKRTreeSplitStrategy) {
-	x.inner.AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element, boundingRectMin, boundingRectMax, splitStrategy)
+func (x *RTree) AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy GKRTreeSplitStrategy) {
+	x.inner.AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element, boundingRectMin, boundingRectMax, raw.GKRTreeSplitStrategy(splitStrategy))
 }
 
 // RemoveElementBoundingRectMinBoundingRectMax calls the underlying RemoveElementBoundingRectMinBoundingRectMax.
@@ -73,7 +73,7 @@ func (x *RTree) SetQueryReserve(queryReserve uint) {
 type RTreeable interface {
 	Unwrap() *raw.GKRTree[objc.ID]
 	WithQueryReserve(queryReserve uint) *RTree
-	AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy raw.GKRTreeSplitStrategy)
+	AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy GKRTreeSplitStrategy)
 	RemoveElementBoundingRectMinBoundingRectMax(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer)
 	ElementsInBoundingRectMinRectMax(rectMin unsafe.Pointer, rectMax unsafe.Pointer) *foundation.NSArray[objc.ID]
 	QueryReserve() uint

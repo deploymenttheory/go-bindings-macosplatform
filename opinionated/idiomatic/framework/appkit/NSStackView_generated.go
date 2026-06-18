@@ -48,14 +48,14 @@ func (x *StackView) WithDelegate(delegate raw.NSStackViewDelegate) *StackView {
 }
 
 // WithOrientation sets the orientation property and returns the receiver for chaining.
-func (x *StackView) WithOrientation(orientation raw.NSUserInterfaceLayoutOrientation) *StackView {
-	x.inner.SetOrientation(orientation)
+func (x *StackView) WithOrientation(orientation NSUserInterfaceLayoutOrientation) *StackView {
+	x.inner.SetOrientation(raw.NSUserInterfaceLayoutOrientation(orientation))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *StackView) WithAlignment(alignment raw.NSLayoutAttribute) *StackView {
-	x.inner.SetAlignment(alignment)
+func (x *StackView) WithAlignment(alignment NSLayoutAttribute) *StackView {
+	x.inner.SetAlignment(raw.NSLayoutAttribute(alignment))
 	return x
 }
 
@@ -66,8 +66,8 @@ func (x *StackView) WithEdgeInsets(edgeInsets foundation.NSEdgeInsets) *StackVie
 }
 
 // WithDistribution sets the distribution property and returns the receiver for chaining.
-func (x *StackView) WithDistribution(distribution raw.NSStackViewDistribution) *StackView {
-	x.inner.SetDistribution(distribution)
+func (x *StackView) WithDistribution(distribution NSStackViewDistribution) *StackView {
+	x.inner.SetDistribution(raw.NSStackViewDistribution(distribution))
 	return x
 }
 
@@ -126,8 +126,8 @@ func (x *StackView) WithAutoresizesSubviews(autoresizesSubviews bool) *StackView
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *StackView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *StackView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *StackView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *StackView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -186,14 +186,14 @@ func (x *StackView) WithWantsRestingTouches(wantsRestingTouches bool) *StackView
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *StackView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *StackView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *StackView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *StackView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *StackView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *StackView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *StackView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *StackView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -300,8 +300,8 @@ func (x *StackView) WithToolTip(toolTip string) *StackView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *StackView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StackView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *StackView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StackView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -318,8 +318,8 @@ func (x *StackView) WithNextKeyView(nextKeyView ViewProvider) *StackView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *StackView) WithFocusRingType(focusRingType raw.NSFocusRingType) *StackView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *StackView) WithFocusRingType(focusRingType NSFocusRingType) *StackView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -342,8 +342,8 @@ func (x *StackView) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *StackView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *StackView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *StackView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *StackView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -467,23 +467,23 @@ func (x *StackView) VisibilityPriorityForView(view *raw.NSView) float32 {
 }
 
 // ClippingResistancePriorityForOrientation calls the underlying ClippingResistancePriorityForOrientation.
-func (x *StackView) ClippingResistancePriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32 {
-	return x.inner.ClippingResistancePriorityForOrientation(orientation)
+func (x *StackView) ClippingResistancePriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
+	return x.inner.ClippingResistancePriorityForOrientation(raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // SetClippingResistancePriorityForOrientation calls the underlying SetClippingResistancePriorityForOrientation.
-func (x *StackView) SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation raw.NSLayoutConstraintOrientation) {
-	x.inner.SetClippingResistancePriorityForOrientation(clippingResistancePriority, orientation)
+func (x *StackView) SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation NSLayoutConstraintOrientation) {
+	x.inner.SetClippingResistancePriorityForOrientation(clippingResistancePriority, raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // HuggingPriorityForOrientation calls the underlying HuggingPriorityForOrientation.
-func (x *StackView) HuggingPriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32 {
-	return x.inner.HuggingPriorityForOrientation(orientation)
+func (x *StackView) HuggingPriorityForOrientation(orientation NSLayoutConstraintOrientation) float32 {
+	return x.inner.HuggingPriorityForOrientation(raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // SetHuggingPriorityForOrientation calls the underlying SetHuggingPriorityForOrientation.
-func (x *StackView) SetHuggingPriorityForOrientation(huggingPriority float32, orientation raw.NSLayoutConstraintOrientation) {
-	x.inner.SetHuggingPriorityForOrientation(huggingPriority, orientation)
+func (x *StackView) SetHuggingPriorityForOrientation(huggingPriority float32, orientation NSLayoutConstraintOrientation) {
+	x.inner.SetHuggingPriorityForOrientation(huggingPriority, raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // Delegate calls the underlying Delegate.
@@ -497,23 +497,23 @@ func (x *StackView) SetDelegate(delegate raw.NSStackViewDelegate) {
 }
 
 // Orientation calls the underlying Orientation.
-func (x *StackView) Orientation() raw.NSUserInterfaceLayoutOrientation {
-	return x.inner.Orientation()
+func (x *StackView) Orientation() NSUserInterfaceLayoutOrientation {
+	return NSUserInterfaceLayoutOrientation(x.inner.Orientation())
 }
 
 // SetOrientation calls the underlying SetOrientation.
-func (x *StackView) SetOrientation(orientation raw.NSUserInterfaceLayoutOrientation) {
-	x.inner.SetOrientation(orientation)
+func (x *StackView) SetOrientation(orientation NSUserInterfaceLayoutOrientation) {
+	x.inner.SetOrientation(raw.NSUserInterfaceLayoutOrientation(orientation))
 }
 
 // Alignment calls the underlying Alignment.
-func (x *StackView) Alignment() raw.NSLayoutAttribute {
-	return x.inner.Alignment()
+func (x *StackView) Alignment() NSLayoutAttribute {
+	return NSLayoutAttribute(x.inner.Alignment())
 }
 
 // SetAlignment calls the underlying SetAlignment.
-func (x *StackView) SetAlignment(alignment raw.NSLayoutAttribute) {
-	x.inner.SetAlignment(alignment)
+func (x *StackView) SetAlignment(alignment NSLayoutAttribute) {
+	x.inner.SetAlignment(raw.NSLayoutAttribute(alignment))
 }
 
 // EdgeInsets calls the underlying EdgeInsets.
@@ -527,13 +527,13 @@ func (x *StackView) SetEdgeInsets(edgeInsets foundation.NSEdgeInsets) {
 }
 
 // Distribution calls the underlying Distribution.
-func (x *StackView) Distribution() raw.NSStackViewDistribution {
-	return x.inner.Distribution()
+func (x *StackView) Distribution() NSStackViewDistribution {
+	return NSStackViewDistribution(x.inner.Distribution())
 }
 
 // SetDistribution calls the underlying SetDistribution.
-func (x *StackView) SetDistribution(distribution raw.NSStackViewDistribution) {
-	x.inner.SetDistribution(distribution)
+func (x *StackView) SetDistribution(distribution NSStackViewDistribution) {
+	x.inner.SetDistribution(raw.NSStackViewDistribution(distribution))
 }
 
 // Spacing calls the underlying Spacing.
@@ -579,13 +579,13 @@ func (x *StackView) DetachedViews() []*View {
 }
 
 // AddViewInGravity calls the underlying AddViewInGravity.
-func (x *StackView) AddViewInGravity(view *raw.NSView, gravity raw.NSStackViewGravity) {
-	x.inner.AddViewInGravity(view, gravity)
+func (x *StackView) AddViewInGravity(view *raw.NSView, gravity NSStackViewGravity) {
+	x.inner.AddViewInGravity(view, raw.NSStackViewGravity(gravity))
 }
 
 // InsertViewAtIndexInGravity calls the underlying InsertViewAtIndexInGravity.
-func (x *StackView) InsertViewAtIndexInGravity(view *raw.NSView, index uint, gravity raw.NSStackViewGravity) {
-	x.inner.InsertViewAtIndexInGravity(view, index, gravity)
+func (x *StackView) InsertViewAtIndexInGravity(view *raw.NSView, index uint, gravity NSStackViewGravity) {
+	x.inner.InsertViewAtIndexInGravity(view, index, raw.NSStackViewGravity(gravity))
 }
 
 // RemoveView calls the underlying RemoveView.
@@ -594,13 +594,13 @@ func (x *StackView) RemoveView(view *raw.NSView) {
 }
 
 // ViewsInGravity calls the underlying ViewsInGravity.
-func (x *StackView) ViewsInGravity(gravity raw.NSStackViewGravity) *foundation.NSArray[*raw.NSView] {
-	return x.inner.ViewsInGravity(gravity)
+func (x *StackView) ViewsInGravity(gravity NSStackViewGravity) *foundation.NSArray[*raw.NSView] {
+	return x.inner.ViewsInGravity(raw.NSStackViewGravity(gravity))
 }
 
 // SetViewsInGravity calls the underlying SetViewsInGravity.
-func (x *StackView) SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gravity raw.NSStackViewGravity) {
-	x.inner.SetViewsInGravity(views, gravity)
+func (x *StackView) SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gravity NSStackViewGravity) {
+	x.inner.SetViewsInGravity(views, raw.NSStackViewGravity(gravity))
 }
 
 // Views returns the collection as a Go slice.
@@ -632,10 +632,10 @@ func (x *StackView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSRe
 type StackViewable interface {
 	Unwrap() *raw.NSStackView
 	WithDelegate(delegate raw.NSStackViewDelegate) *StackView
-	WithOrientation(orientation raw.NSUserInterfaceLayoutOrientation) *StackView
-	WithAlignment(alignment raw.NSLayoutAttribute) *StackView
+	WithOrientation(orientation NSUserInterfaceLayoutOrientation) *StackView
+	WithAlignment(alignment NSLayoutAttribute) *StackView
 	WithEdgeInsets(edgeInsets foundation.NSEdgeInsets) *StackView
-	WithDistribution(distribution raw.NSStackViewDistribution) *StackView
+	WithDistribution(distribution NSStackViewDistribution) *StackView
 	WithSpacing(spacing float64) *StackView
 	WithDetachesHiddenViews(detachesHiddenViews bool) *StackView
 	WithHasEqualSpacing(hasEqualSpacing bool) *StackView
@@ -643,7 +643,7 @@ type StackViewable interface {
 	WithHidden(hidden bool) *StackView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StackView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *StackView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *StackView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *StackView
 	WithFrame(frame corefoundation.CGRect) *StackView
 	WithFrameRotation(frameRotation float64) *StackView
 	WithFrameCenterRotation(frameCenterRotation float64) *StackView
@@ -653,8 +653,8 @@ type StackViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *StackView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *StackView
 	WithWantsRestingTouches(wantsRestingTouches bool) *StackView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *StackView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *StackView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *StackView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *StackView
 	WithWantsLayer(wantsLayer bool) *StackView
 	WithLayer(layer *quartzcore.CALayer) *StackView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StackView
@@ -668,12 +668,12 @@ type StackViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *StackView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StackView
 	WithToolTip(toolTip string) *StackView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StackView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StackView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StackView
 	WithNextKeyView(nextKeyView ViewProvider) *StackView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *StackView
+	WithFocusRingType(focusRingType NSFocusRingType) *StackView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *StackView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *StackView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *StackView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StackView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StackView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StackView
@@ -695,31 +695,31 @@ type StackViewable interface {
 	RemoveArrangedSubview(view *raw.NSView)
 	SetVisibilityPriorityForView(priority float32, view *raw.NSView)
 	VisibilityPriorityForView(view *raw.NSView) float32
-	ClippingResistancePriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32
-	SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation raw.NSLayoutConstraintOrientation)
-	HuggingPriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32
-	SetHuggingPriorityForOrientation(huggingPriority float32, orientation raw.NSLayoutConstraintOrientation)
+	ClippingResistancePriorityForOrientation(orientation NSLayoutConstraintOrientation) float32
+	SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation NSLayoutConstraintOrientation)
+	HuggingPriorityForOrientation(orientation NSLayoutConstraintOrientation) float32
+	SetHuggingPriorityForOrientation(huggingPriority float32, orientation NSLayoutConstraintOrientation)
 	Delegate() raw.NSStackViewDelegate
 	SetDelegate(delegate raw.NSStackViewDelegate)
-	Orientation() raw.NSUserInterfaceLayoutOrientation
-	SetOrientation(orientation raw.NSUserInterfaceLayoutOrientation)
-	Alignment() raw.NSLayoutAttribute
-	SetAlignment(alignment raw.NSLayoutAttribute)
+	Orientation() NSUserInterfaceLayoutOrientation
+	SetOrientation(orientation NSUserInterfaceLayoutOrientation)
+	Alignment() NSLayoutAttribute
+	SetAlignment(alignment NSLayoutAttribute)
 	EdgeInsets() foundation.NSEdgeInsets
 	SetEdgeInsets(edgeInsets foundation.NSEdgeInsets)
-	Distribution() raw.NSStackViewDistribution
-	SetDistribution(distribution raw.NSStackViewDistribution)
+	Distribution() NSStackViewDistribution
+	SetDistribution(distribution NSStackViewDistribution)
 	Spacing() float64
 	SetSpacing(spacing float64)
 	DetachesHiddenViews() bool
 	SetDetachesHiddenViews(detachesHiddenViews bool)
 	ArrangedSubviews() []*View
 	DetachedViews() []*View
-	AddViewInGravity(view *raw.NSView, gravity raw.NSStackViewGravity)
-	InsertViewAtIndexInGravity(view *raw.NSView, index uint, gravity raw.NSStackViewGravity)
+	AddViewInGravity(view *raw.NSView, gravity NSStackViewGravity)
+	InsertViewAtIndexInGravity(view *raw.NSView, index uint, gravity NSStackViewGravity)
 	RemoveView(view *raw.NSView)
-	ViewsInGravity(gravity raw.NSStackViewGravity) *foundation.NSArray[*raw.NSView]
-	SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gravity raw.NSStackViewGravity)
+	ViewsInGravity(gravity NSStackViewGravity) *foundation.NSArray[*raw.NSView]
+	SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gravity NSStackViewGravity)
 	Views() []*View
 	HasEqualSpacing() bool
 	SetHasEqualSpacing(hasEqualSpacing bool)

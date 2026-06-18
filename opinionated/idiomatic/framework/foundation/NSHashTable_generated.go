@@ -30,9 +30,9 @@ func HashTableFromID(id objc.ID) *HashTable {
 }
 
 // NewHashTableWithOptionsCapacity creates a new [HashTable].
-func NewHashTableWithOptionsCapacity(options raw.NSPointerFunctionsOptions, initialCapacity uint) *HashTable {
+func NewHashTableWithOptionsCapacity(options NSPointerFunctionsOptions, initialCapacity uint) *HashTable {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSHashTable")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:capacity:"), options, initialCapacity)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:capacity:"), raw.NSPointerFunctionsOptions(options), initialCapacity)
 	return &HashTable{inner: raw.NSHashTableFromID[objc.ID](_id)}
 }
 

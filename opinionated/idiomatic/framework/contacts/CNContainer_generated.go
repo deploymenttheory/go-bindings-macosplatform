@@ -55,8 +55,8 @@ func (x *Container) Name() string {
 }
 
 // Type calls the underlying Type.
-func (x *Container) Type() raw.CNContainerType {
-	return x.inner.Type()
+func (x *Container) Type() CNContainerType {
+	return CNContainerType(x.inner.Type())
 }
 
 // Containerable is the interface implemented by [Container], for mocking and DI.
@@ -64,7 +64,7 @@ type Containerable interface {
 	Unwrap() *raw.CNContainer
 	Identifier() string
 	Name() string
-	Type() raw.CNContainerType
+	Type() CNContainerType
 }
 
 var _ Containerable = (*Container)(nil)

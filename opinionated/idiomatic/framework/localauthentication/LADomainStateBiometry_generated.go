@@ -37,8 +37,8 @@ func NewDomainStateBiometry() *DomainStateBiometry {
 }
 
 // BiometryType calls the underlying BiometryType.
-func (x *DomainStateBiometry) BiometryType() raw.LABiometryType {
-	return x.inner.BiometryType()
+func (x *DomainStateBiometry) BiometryType() LABiometryType {
+	return LABiometryType(x.inner.BiometryType())
 }
 
 // StateHash calls the underlying StateHash.
@@ -49,7 +49,7 @@ func (x *DomainStateBiometry) StateHash() *foundation.NSData {
 // DomainStateBiometryable is the interface implemented by [DomainStateBiometry], for mocking and DI.
 type DomainStateBiometryable interface {
 	Unwrap() *raw.LADomainStateBiometry
-	BiometryType() raw.LABiometryType
+	BiometryType() LABiometryType
 	StateHash() *foundation.NSData
 }
 

@@ -49,8 +49,8 @@ func NewCNNConvolutionTransposeGradientWithCoderDevice(aDecoder *foundation.NSCo
 }
 
 // WithGradientOption sets the gradientOption property and returns the receiver for chaining.
-func (x *CNNConvolutionTransposeGradient) WithGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) *CNNConvolutionTransposeGradient {
-	x.inner.SetGradientOption(gradientOption)
+func (x *CNNConvolutionTransposeGradient) WithGradientOption(gradientOption MPSCNNConvolutionGradientOption) *CNNConvolutionTransposeGradient {
+	x.inner.SetGradientOption(raw.MPSCNNConvolutionGradientOption(gradientOption))
 	return x
 }
 
@@ -193,13 +193,13 @@ func (x *CNNConvolutionTransposeGradient) DataSource() raw.MPSCNNConvolutionData
 }
 
 // GradientOption calls the underlying GradientOption.
-func (x *CNNConvolutionTransposeGradient) GradientOption() raw.MPSCNNConvolutionGradientOption {
-	return x.inner.GradientOption()
+func (x *CNNConvolutionTransposeGradient) GradientOption() MPSCNNConvolutionGradientOption {
+	return MPSCNNConvolutionGradientOption(x.inner.GradientOption())
 }
 
 // SetGradientOption calls the underlying SetGradientOption.
-func (x *CNNConvolutionTransposeGradient) SetGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) {
-	x.inner.SetGradientOption(gradientOption)
+func (x *CNNConvolutionTransposeGradient) SetGradientOption(gradientOption MPSCNNConvolutionGradientOption) {
+	x.inner.SetGradientOption(raw.MPSCNNConvolutionGradientOption(gradientOption))
 }
 
 func (x *CNNConvolutionTransposeGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
@@ -213,7 +213,7 @@ func (x *CNNConvolutionTransposeGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryK
 // CNNConvolutionTransposeGradientable is the interface implemented by [CNNConvolutionTransposeGradient], for mocking and DI.
 type CNNConvolutionTransposeGradientable interface {
 	Unwrap() *raw.MPSCNNConvolutionTransposeGradient
-	WithGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) *CNNConvolutionTransposeGradient
+	WithGradientOption(gradientOption MPSCNNConvolutionGradientOption) *CNNConvolutionTransposeGradient
 	WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionTransposeGradient
 	WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionTransposeGradient
 	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNConvolutionTransposeGradient
@@ -238,8 +238,8 @@ type CNNConvolutionTransposeGradientable interface {
 	SourceImageFeatureChannels() uint
 	Groups() uint
 	DataSource() raw.MPSCNNConvolutionDataSource
-	GradientOption() raw.MPSCNNConvolutionGradientOption
-	SetGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption)
+	GradientOption() MPSCNNConvolutionGradientOption
+	SetGradientOption(gradientOption MPSCNNConvolutionGradientOption)
 }
 
 var _ CNNConvolutionTransposeGradientable = (*CNNConvolutionTransposeGradient)(nil)

@@ -75,13 +75,13 @@ func (x *Context) WithInteractionNotAllowed(interactionNotAllowed bool) *Context
 }
 
 // CanEvaluatePolicyError calls the underlying CanEvaluatePolicyError.
-func (x *Context) CanEvaluatePolicyError(policy raw.LAPolicy) (bool, error) {
-	return x.inner.CanEvaluatePolicyError(policy)
+func (x *Context) CanEvaluatePolicyError(policy LAPolicy) (bool, error) {
+	return x.inner.CanEvaluatePolicyError(raw.LAPolicy(policy))
 }
 
 // EvaluatePolicyLocalizedReasonReply calls the underlying EvaluatePolicyLocalizedReasonReply.
-func (x *Context) EvaluatePolicyLocalizedReasonReply(policy raw.LAPolicy, localizedReason string, reply func(bool, unsafe.Pointer)) {
-	x.inner.EvaluatePolicyLocalizedReasonReply(policy, foundation.NSStringStringWithUTF8String(localizedReason), reply)
+func (x *Context) EvaluatePolicyLocalizedReasonReply(policy LAPolicy, localizedReason string, reply func(bool, unsafe.Pointer)) {
+	x.inner.EvaluatePolicyLocalizedReasonReply(raw.LAPolicy(policy), foundation.NSStringStringWithUTF8String(localizedReason), reply)
 }
 
 // Invalidate calls the underlying Invalidate.
@@ -90,18 +90,18 @@ func (x *Context) Invalidate() {
 }
 
 // SetCredentialType calls the underlying SetCredentialType.
-func (x *Context) SetCredentialType(credential *foundation.NSData, type_ raw.LACredentialType) bool {
-	return x.inner.SetCredentialType(credential, type_)
+func (x *Context) SetCredentialType(credential *foundation.NSData, type_ LACredentialType) bool {
+	return x.inner.SetCredentialType(credential, raw.LACredentialType(type_))
 }
 
 // IsCredentialSet calls the underlying IsCredentialSet.
-func (x *Context) IsCredentialSet(type_ raw.LACredentialType) bool {
-	return x.inner.IsCredentialSet(type_)
+func (x *Context) IsCredentialSet(type_ LACredentialType) bool {
+	return x.inner.IsCredentialSet(raw.LACredentialType(type_))
 }
 
 // EvaluateAccessControlOperationLocalizedReasonReply calls the underlying EvaluateAccessControlOperationLocalizedReasonReply.
-func (x *Context) EvaluateAccessControlOperationLocalizedReasonReply(accessControl unsafe.Pointer, operation raw.LAAccessControlOperation, localizedReason string, reply func(bool, unsafe.Pointer)) {
-	x.inner.EvaluateAccessControlOperationLocalizedReasonReply(accessControl, operation, foundation.NSStringStringWithUTF8String(localizedReason), reply)
+func (x *Context) EvaluateAccessControlOperationLocalizedReasonReply(accessControl unsafe.Pointer, operation LAAccessControlOperation, localizedReason string, reply func(bool, unsafe.Pointer)) {
+	x.inner.EvaluateAccessControlOperationLocalizedReasonReply(accessControl, raw.LAAccessControlOperation(operation), foundation.NSStringStringWithUTF8String(localizedReason), reply)
 }
 
 // LocalizedFallbackTitle calls the underlying LocalizedFallbackTitle.
@@ -177,8 +177,8 @@ func (x *Context) SetInteractionNotAllowed(interactionNotAllowed bool) {
 }
 
 // BiometryType calls the underlying BiometryType.
-func (x *Context) BiometryType() raw.LABiometryType {
-	return x.inner.BiometryType()
+func (x *Context) BiometryType() LABiometryType {
+	return LABiometryType(x.inner.BiometryType())
 }
 
 // EvaluatedPolicyDomainState calls the underlying EvaluatedPolicyDomainState.
@@ -204,12 +204,12 @@ type Contextable interface {
 	WithTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenticationAllowableReuseDuration float64) *Context
 	WithLocalizedReason(localizedReason string) *Context
 	WithInteractionNotAllowed(interactionNotAllowed bool) *Context
-	CanEvaluatePolicyError(policy raw.LAPolicy) (bool, error)
-	EvaluatePolicyLocalizedReasonReply(policy raw.LAPolicy, localizedReason string, reply func(bool, unsafe.Pointer))
+	CanEvaluatePolicyError(policy LAPolicy) (bool, error)
+	EvaluatePolicyLocalizedReasonReply(policy LAPolicy, localizedReason string, reply func(bool, unsafe.Pointer))
 	Invalidate()
-	SetCredentialType(credential *foundation.NSData, type_ raw.LACredentialType) bool
-	IsCredentialSet(type_ raw.LACredentialType) bool
-	EvaluateAccessControlOperationLocalizedReasonReply(accessControl unsafe.Pointer, operation raw.LAAccessControlOperation, localizedReason string, reply func(bool, unsafe.Pointer))
+	SetCredentialType(credential *foundation.NSData, type_ LACredentialType) bool
+	IsCredentialSet(type_ LACredentialType) bool
+	EvaluateAccessControlOperationLocalizedReasonReply(accessControl unsafe.Pointer, operation LAAccessControlOperation, localizedReason string, reply func(bool, unsafe.Pointer))
 	LocalizedFallbackTitle() string
 	SetLocalizedFallbackTitle(localizedFallbackTitle string)
 	MaxBiometryFailures() *foundation.NSNumber
@@ -222,7 +222,7 @@ type Contextable interface {
 	SetLocalizedReason(localizedReason string)
 	InteractionNotAllowed() bool
 	SetInteractionNotAllowed(interactionNotAllowed bool)
-	BiometryType() raw.LABiometryType
+	BiometryType() LABiometryType
 	EvaluatedPolicyDomainState() *foundation.NSData
 	DomainState() *DomainState
 }

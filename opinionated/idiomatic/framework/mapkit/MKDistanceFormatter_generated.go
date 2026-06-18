@@ -45,14 +45,14 @@ func (x *DistanceFormatter) WithLocale(locale *foundation.NSLocale) *DistanceFor
 }
 
 // WithUnits sets the units property and returns the receiver for chaining.
-func (x *DistanceFormatter) WithUnits(units raw.MKDistanceFormatterUnits) *DistanceFormatter {
-	x.inner.SetUnits(units)
+func (x *DistanceFormatter) WithUnits(units MKDistanceFormatterUnits) *DistanceFormatter {
+	x.inner.SetUnits(raw.MKDistanceFormatterUnits(units))
 	return x
 }
 
 // WithUnitStyle sets the unitStyle property and returns the receiver for chaining.
-func (x *DistanceFormatter) WithUnitStyle(unitStyle raw.MKDistanceFormatterUnitStyle) *DistanceFormatter {
-	x.inner.SetUnitStyle(unitStyle)
+func (x *DistanceFormatter) WithUnitStyle(unitStyle MKDistanceFormatterUnitStyle) *DistanceFormatter {
+	x.inner.SetUnitStyle(raw.MKDistanceFormatterUnitStyle(unitStyle))
 	return x
 }
 
@@ -81,39 +81,39 @@ func (x *DistanceFormatter) SetLocale(locale *foundation.NSLocale) {
 }
 
 // Units calls the underlying Units.
-func (x *DistanceFormatter) Units() raw.MKDistanceFormatterUnits {
-	return x.inner.Units()
+func (x *DistanceFormatter) Units() MKDistanceFormatterUnits {
+	return MKDistanceFormatterUnits(x.inner.Units())
 }
 
 // SetUnits calls the underlying SetUnits.
-func (x *DistanceFormatter) SetUnits(units raw.MKDistanceFormatterUnits) {
-	x.inner.SetUnits(units)
+func (x *DistanceFormatter) SetUnits(units MKDistanceFormatterUnits) {
+	x.inner.SetUnits(raw.MKDistanceFormatterUnits(units))
 }
 
 // UnitStyle calls the underlying UnitStyle.
-func (x *DistanceFormatter) UnitStyle() raw.MKDistanceFormatterUnitStyle {
-	return x.inner.UnitStyle()
+func (x *DistanceFormatter) UnitStyle() MKDistanceFormatterUnitStyle {
+	return MKDistanceFormatterUnitStyle(x.inner.UnitStyle())
 }
 
 // SetUnitStyle calls the underlying SetUnitStyle.
-func (x *DistanceFormatter) SetUnitStyle(unitStyle raw.MKDistanceFormatterUnitStyle) {
-	x.inner.SetUnitStyle(unitStyle)
+func (x *DistanceFormatter) SetUnitStyle(unitStyle MKDistanceFormatterUnitStyle) {
+	x.inner.SetUnitStyle(raw.MKDistanceFormatterUnitStyle(unitStyle))
 }
 
 // DistanceFormatterable is the interface implemented by [DistanceFormatter], for mocking and DI.
 type DistanceFormatterable interface {
 	Unwrap() *raw.MKDistanceFormatter
 	WithLocale(locale *foundation.NSLocale) *DistanceFormatter
-	WithUnits(units raw.MKDistanceFormatterUnits) *DistanceFormatter
-	WithUnitStyle(unitStyle raw.MKDistanceFormatterUnitStyle) *DistanceFormatter
+	WithUnits(units MKDistanceFormatterUnits) *DistanceFormatter
+	WithUnitStyle(unitStyle MKDistanceFormatterUnitStyle) *DistanceFormatter
 	StringFromDistance(distance unsafe.Pointer) string
 	DistanceFromString(distance string) unsafe.Pointer
 	Locale() *foundation.NSLocale
 	SetLocale(locale *foundation.NSLocale)
-	Units() raw.MKDistanceFormatterUnits
-	SetUnits(units raw.MKDistanceFormatterUnits)
-	UnitStyle() raw.MKDistanceFormatterUnitStyle
-	SetUnitStyle(unitStyle raw.MKDistanceFormatterUnitStyle)
+	Units() MKDistanceFormatterUnits
+	SetUnits(units MKDistanceFormatterUnits)
+	UnitStyle() MKDistanceFormatterUnitStyle
+	SetUnitStyle(unitStyle MKDistanceFormatterUnitStyle)
 }
 
 var _ DistanceFormatterable = (*DistanceFormatter)(nil)

@@ -37,8 +37,8 @@ func NewGraphRandomOpDescriptor() *GraphRandomOpDescriptor {
 }
 
 // WithDistribution sets the distribution property and returns the receiver for chaining.
-func (x *GraphRandomOpDescriptor) WithDistribution(distribution raw.MPSGraphRandomDistribution) *GraphRandomOpDescriptor {
-	x.inner.SetDistribution(distribution)
+func (x *GraphRandomOpDescriptor) WithDistribution(distribution MPSGraphRandomDistribution) *GraphRandomOpDescriptor {
+	x.inner.SetDistribution(raw.MPSGraphRandomDistribution(distribution))
 	return x
 }
 
@@ -85,19 +85,19 @@ func (x *GraphRandomOpDescriptor) WithStandardDeviation(standardDeviation float3
 }
 
 // WithSamplingMethod sets the samplingMethod property and returns the receiver for chaining.
-func (x *GraphRandomOpDescriptor) WithSamplingMethod(samplingMethod raw.MPSGraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor {
-	x.inner.SetSamplingMethod(samplingMethod)
+func (x *GraphRandomOpDescriptor) WithSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor {
+	x.inner.SetSamplingMethod(raw.MPSGraphRandomNormalSamplingMethod(samplingMethod))
 	return x
 }
 
 // Distribution calls the underlying Distribution.
-func (x *GraphRandomOpDescriptor) Distribution() raw.MPSGraphRandomDistribution {
-	return x.inner.Distribution()
+func (x *GraphRandomOpDescriptor) Distribution() MPSGraphRandomDistribution {
+	return MPSGraphRandomDistribution(x.inner.Distribution())
 }
 
 // SetDistribution calls the underlying SetDistribution.
-func (x *GraphRandomOpDescriptor) SetDistribution(distribution raw.MPSGraphRandomDistribution) {
-	x.inner.SetDistribution(distribution)
+func (x *GraphRandomOpDescriptor) SetDistribution(distribution MPSGraphRandomDistribution) {
+	x.inner.SetDistribution(raw.MPSGraphRandomDistribution(distribution))
 }
 
 // DataType calls the underlying DataType.
@@ -171,13 +171,13 @@ func (x *GraphRandomOpDescriptor) SetStandardDeviation(standardDeviation float32
 }
 
 // SamplingMethod calls the underlying SamplingMethod.
-func (x *GraphRandomOpDescriptor) SamplingMethod() raw.MPSGraphRandomNormalSamplingMethod {
-	return x.inner.SamplingMethod()
+func (x *GraphRandomOpDescriptor) SamplingMethod() MPSGraphRandomNormalSamplingMethod {
+	return MPSGraphRandomNormalSamplingMethod(x.inner.SamplingMethod())
 }
 
 // SetSamplingMethod calls the underlying SetSamplingMethod.
-func (x *GraphRandomOpDescriptor) SetSamplingMethod(samplingMethod raw.MPSGraphRandomNormalSamplingMethod) {
-	x.inner.SetSamplingMethod(samplingMethod)
+func (x *GraphRandomOpDescriptor) SetSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod) {
+	x.inner.SetSamplingMethod(raw.MPSGraphRandomNormalSamplingMethod(samplingMethod))
 }
 
 func (x *GraphRandomOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
@@ -185,7 +185,7 @@ func (x *GraphRandomOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &
 // GraphRandomOpDescriptorable is the interface implemented by [GraphRandomOpDescriptor], for mocking and DI.
 type GraphRandomOpDescriptorable interface {
 	Unwrap() *raw.MPSGraphRandomOpDescriptor
-	WithDistribution(distribution raw.MPSGraphRandomDistribution) *GraphRandomOpDescriptor
+	WithDistribution(distribution MPSGraphRandomDistribution) *GraphRandomOpDescriptor
 	WithDataType(dataType mpscore.MPSDataType) *GraphRandomOpDescriptor
 	WithMin(min float32) *GraphRandomOpDescriptor
 	WithMax(max float32) *GraphRandomOpDescriptor
@@ -193,9 +193,9 @@ type GraphRandomOpDescriptorable interface {
 	WithMaxInteger(maxInteger int) *GraphRandomOpDescriptor
 	WithMean(mean float32) *GraphRandomOpDescriptor
 	WithStandardDeviation(standardDeviation float32) *GraphRandomOpDescriptor
-	WithSamplingMethod(samplingMethod raw.MPSGraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor
-	Distribution() raw.MPSGraphRandomDistribution
-	SetDistribution(distribution raw.MPSGraphRandomDistribution)
+	WithSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor
+	Distribution() MPSGraphRandomDistribution
+	SetDistribution(distribution MPSGraphRandomDistribution)
 	DataType() mpscore.MPSDataType
 	SetDataType(dataType mpscore.MPSDataType)
 	Min() float32
@@ -210,8 +210,8 @@ type GraphRandomOpDescriptorable interface {
 	SetMean(mean float32)
 	StandardDeviation() float32
 	SetStandardDeviation(standardDeviation float32)
-	SamplingMethod() raw.MPSGraphRandomNormalSamplingMethod
-	SetSamplingMethod(samplingMethod raw.MPSGraphRandomNormalSamplingMethod)
+	SamplingMethod() MPSGraphRandomNormalSamplingMethod
+	SetSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod)
 }
 
 var _ GraphRandomOpDescriptorable = (*GraphRandomOpDescriptor)(nil)

@@ -89,8 +89,8 @@ func (x *BackgroundExtensionView) WithAutoresizesSubviews(autoresizesSubviews bo
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *BackgroundExtensionView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *BackgroundExtensionView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *BackgroundExtensionView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -149,14 +149,14 @@ func (x *BackgroundExtensionView) WithWantsRestingTouches(wantsRestingTouches bo
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *BackgroundExtensionView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *BackgroundExtensionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *BackgroundExtensionView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *BackgroundExtensionView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *BackgroundExtensionView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *BackgroundExtensionView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -263,8 +263,8 @@ func (x *BackgroundExtensionView) WithToolTip(toolTip string) *BackgroundExtensi
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *BackgroundExtensionView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *BackgroundExtensionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *BackgroundExtensionView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -281,8 +281,8 @@ func (x *BackgroundExtensionView) WithNextKeyView(nextKeyView ViewProvider) *Bac
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithFocusRingType(focusRingType raw.NSFocusRingType) *BackgroundExtensionView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *BackgroundExtensionView) WithFocusRingType(focusRingType NSFocusRingType) *BackgroundExtensionView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -305,8 +305,8 @@ func (x *BackgroundExtensionView) WithGestureRecognizers(items ...GestureRecogni
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *BackgroundExtensionView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *BackgroundExtensionView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *BackgroundExtensionView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *BackgroundExtensionView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -431,7 +431,7 @@ type BackgroundExtensionViewable interface {
 	WithHidden(hidden bool) *BackgroundExtensionView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *BackgroundExtensionView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *BackgroundExtensionView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *BackgroundExtensionView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *BackgroundExtensionView
 	WithFrame(frame corefoundation.CGRect) *BackgroundExtensionView
 	WithFrameRotation(frameRotation float64) *BackgroundExtensionView
 	WithFrameCenterRotation(frameCenterRotation float64) *BackgroundExtensionView
@@ -441,8 +441,8 @@ type BackgroundExtensionViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *BackgroundExtensionView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *BackgroundExtensionView
 	WithWantsRestingTouches(wantsRestingTouches bool) *BackgroundExtensionView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *BackgroundExtensionView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *BackgroundExtensionView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *BackgroundExtensionView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *BackgroundExtensionView
 	WithWantsLayer(wantsLayer bool) *BackgroundExtensionView
 	WithLayer(layer *quartzcore.CALayer) *BackgroundExtensionView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *BackgroundExtensionView
@@ -456,12 +456,12 @@ type BackgroundExtensionViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *BackgroundExtensionView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *BackgroundExtensionView
 	WithToolTip(toolTip string) *BackgroundExtensionView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *BackgroundExtensionView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *BackgroundExtensionView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *BackgroundExtensionView
 	WithNextKeyView(nextKeyView ViewProvider) *BackgroundExtensionView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *BackgroundExtensionView
+	WithFocusRingType(focusRingType NSFocusRingType) *BackgroundExtensionView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *BackgroundExtensionView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *BackgroundExtensionView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *BackgroundExtensionView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *BackgroundExtensionView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *BackgroundExtensionView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *BackgroundExtensionView

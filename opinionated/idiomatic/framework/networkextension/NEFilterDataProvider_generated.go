@@ -108,8 +108,8 @@ func (x *NEFilterDataProvider) ResumeFlowWithVerdict(flow *raw.NEFilterFlow, ver
 }
 
 // UpdateFlowUsingVerdictForDirection calls the underlying UpdateFlowUsingVerdictForDirection.
-func (x *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *raw.NEFilterSocketFlow, verdict *raw.NEFilterDataVerdict, direction raw.NETrafficDirection) {
-	x.inner.UpdateFlowUsingVerdictForDirection(flow, verdict, direction)
+func (x *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *raw.NEFilterSocketFlow, verdict *raw.NEFilterDataVerdict, direction NETrafficDirection) {
+	x.inner.UpdateFlowUsingVerdictForDirection(flow, verdict, raw.NETrafficDirection(direction))
 }
 
 func (x *NEFilterDataProvider) asNEFilterProvider() *raw.NEFilterProvider {
@@ -130,7 +130,7 @@ type NEFilterDataProviderable interface {
 	HandleOutboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict
 	ApplySettings(ctx context.Context, settings *raw.NEFilterSettings) error
 	ResumeFlowWithVerdict(flow *raw.NEFilterFlow, verdict *raw.NEFilterVerdict)
-	UpdateFlowUsingVerdictForDirection(flow *raw.NEFilterSocketFlow, verdict *raw.NEFilterDataVerdict, direction raw.NETrafficDirection)
+	UpdateFlowUsingVerdictForDirection(flow *raw.NEFilterSocketFlow, verdict *raw.NEFilterDataVerdict, direction NETrafficDirection)
 }
 
 var _ NEFilterDataProviderable = (*NEFilterDataProvider)(nil)

@@ -53,8 +53,8 @@ func (x *LegibleMediaOptionsMenuController) WithDelegate(delegate raw.AVLegibleM
 }
 
 // MenuWithContents calls the underlying MenuWithContents.
-func (x *LegibleMediaOptionsMenuController) MenuWithContents(contents raw.AVLegibleMediaOptionsMenuContents) *appkit.NSMenu {
-	return x.inner.MenuWithContents(contents)
+func (x *LegibleMediaOptionsMenuController) MenuWithContents(contents AVLegibleMediaOptionsMenuContents) *appkit.NSMenu {
+	return x.inner.MenuWithContents(raw.AVLegibleMediaOptionsMenuContents(contents))
 }
 
 // Player calls the underlying Player.
@@ -87,7 +87,7 @@ type LegibleMediaOptionsMenuControllerable interface {
 	Unwrap() *raw.AVLegibleMediaOptionsMenuController
 	WithPlayer(player *avfoundation.AVPlayer) *LegibleMediaOptionsMenuController
 	WithDelegate(delegate raw.AVLegibleMediaOptionsMenuControllerDelegate) *LegibleMediaOptionsMenuController
-	MenuWithContents(contents raw.AVLegibleMediaOptionsMenuContents) *appkit.NSMenu
+	MenuWithContents(contents AVLegibleMediaOptionsMenuContents) *appkit.NSMenu
 	Player() *avfoundation.AVPlayer
 	SetPlayer(player *avfoundation.AVPlayer)
 	Delegate() raw.AVLegibleMediaOptionsMenuControllerDelegate

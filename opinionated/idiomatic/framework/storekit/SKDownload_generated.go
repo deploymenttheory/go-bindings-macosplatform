@@ -39,8 +39,8 @@ func NewDownload() *Download {
 }
 
 // State calls the underlying State.
-func (x *Download) State() raw.SKDownloadState {
-	return x.inner.State()
+func (x *Download) State() SKDownloadState {
+	return SKDownloadState(x.inner.State())
 }
 
 // ContentLength calls the underlying ContentLength.
@@ -103,7 +103,7 @@ func (x *Download) Transaction() *PaymentTransaction {
 // Downloadable is the interface implemented by [Download], for mocking and DI.
 type Downloadable interface {
 	Unwrap() *raw.SKDownload
-	State() raw.SKDownloadState
+	State() SKDownloadState
 	ContentLength() unsafe.Pointer
 	ExpectedContentLength() int64
 	ContentIdentifier() string

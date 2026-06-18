@@ -49,8 +49,8 @@ func (x *ArithmeticLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Arith
 }
 
 // Operation calls the underlying Operation.
-func (x *ArithmeticLayer) Operation() raw.MLCArithmeticOperation {
-	return x.inner.Operation()
+func (x *ArithmeticLayer) Operation() MLCArithmeticOperation {
+	return MLCArithmeticOperation(x.inner.Operation())
 }
 
 func (x *ArithmeticLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
@@ -60,7 +60,7 @@ type ArithmeticLayerable interface {
 	Unwrap() *raw.MLCArithmeticLayer
 	WithLabel(label string) *ArithmeticLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ArithmeticLayer
-	Operation() raw.MLCArithmeticOperation
+	Operation() MLCArithmeticOperation
 }
 
 var _ ArithmeticLayerable = (*ArithmeticLayer)(nil)

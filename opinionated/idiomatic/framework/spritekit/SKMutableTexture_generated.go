@@ -46,8 +46,8 @@ func NewMutableTextureWithSizePixelFormat(size corefoundation.CGSize, format int
 }
 
 // WithFilteringMode sets the filteringMode property and returns the receiver for chaining.
-func (x *MutableTexture) WithFilteringMode(filteringMode raw.SKTextureFilteringMode) *MutableTexture {
-	x.inner.SKTexture.SetFilteringMode(filteringMode)
+func (x *MutableTexture) WithFilteringMode(filteringMode SKTextureFilteringMode) *MutableTexture {
+	x.inner.SKTexture.SetFilteringMode(raw.SKTextureFilteringMode(filteringMode))
 	return x
 }
 
@@ -67,7 +67,7 @@ func (x *MutableTexture) asTexture() *raw.SKTexture { return &x.inner.SKTexture 
 // MutableTextureable is the interface implemented by [MutableTexture], for mocking and DI.
 type MutableTextureable interface {
 	Unwrap() *raw.SKMutableTexture
-	WithFilteringMode(filteringMode raw.SKTextureFilteringMode) *MutableTexture
+	WithFilteringMode(filteringMode SKTextureFilteringMode) *MutableTexture
 	WithUsesMipmaps(usesMipmaps bool) *MutableTexture
 	ModifyPixelDataWith(block func(unsafe.Pointer, uint))
 }

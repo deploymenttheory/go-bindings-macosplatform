@@ -36,19 +36,19 @@ func NewMapConfiguration() *MapConfiguration {
 }
 
 // WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
-func (x *MapConfiguration) WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *MapConfiguration {
-	x.inner.SetElevationStyle(elevationStyle)
+func (x *MapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *MapConfiguration {
+	x.inner.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))
 	return x
 }
 
 // ElevationStyle calls the underlying ElevationStyle.
-func (x *MapConfiguration) ElevationStyle() raw.MKMapElevationStyle {
-	return x.inner.ElevationStyle()
+func (x *MapConfiguration) ElevationStyle() MKMapElevationStyle {
+	return MKMapElevationStyle(x.inner.ElevationStyle())
 }
 
 // SetElevationStyle calls the underlying SetElevationStyle.
-func (x *MapConfiguration) SetElevationStyle(elevationStyle raw.MKMapElevationStyle) {
-	x.inner.SetElevationStyle(elevationStyle)
+func (x *MapConfiguration) SetElevationStyle(elevationStyle MKMapElevationStyle) {
+	x.inner.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))
 }
 
 func (x *MapConfiguration) asMapConfiguration() *raw.MKMapConfiguration { return x.inner }
@@ -56,9 +56,9 @@ func (x *MapConfiguration) asMapConfiguration() *raw.MKMapConfiguration { return
 // MapConfigurationable is the interface implemented by [MapConfiguration], for mocking and DI.
 type MapConfigurationable interface {
 	Unwrap() *raw.MKMapConfiguration
-	WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *MapConfiguration
-	ElevationStyle() raw.MKMapElevationStyle
-	SetElevationStyle(elevationStyle raw.MKMapElevationStyle)
+	WithElevationStyle(elevationStyle MKMapElevationStyle) *MapConfiguration
+	ElevationStyle() MKMapElevationStyle
+	SetElevationStyle(elevationStyle MKMapElevationStyle)
 }
 
 var _ MapConfigurationable = (*MapConfiguration)(nil)

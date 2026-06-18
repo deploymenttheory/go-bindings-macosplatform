@@ -110,10 +110,10 @@ func NewURLAbsoluteURLWithDataRepresentationRelativeToURL(data *raw.NSData, base
 }
 
 // NewURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError creates a new [URL].
-func NewURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *raw.NSData, options raw.NSURLBookmarkResolutionOptions, relativeURL string, isStale *bool) (*URL, error) {
+func NewURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *raw.NSData, options NSURLBookmarkResolutionOptions, relativeURL string, isStale *bool) (*URL, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:"), bookmarkData.Ptr(), options, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)).Ptr(), isStale, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:"), bookmarkData.Ptr(), raw.NSURLBookmarkResolutionOptions(options), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)).Ptr(), isStale, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -181,8 +181,8 @@ func (x *URL) SetTemporaryResourceValueForKey(value objc.ID, key *raw.NSString) 
 }
 
 // BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError calls the underlying BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError.
-func (x *URL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options raw.NSURLBookmarkCreationOptions, keys *raw.NSArray[*raw.NSString], relativeURL string) (*Data, error) {
-	_r, _err := x.inner.BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options, keys, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)))
+func (x *URL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options NSURLBookmarkCreationOptions, keys *raw.NSArray[*raw.NSString], relativeURL string) (*Data, error) {
+	_r, _err := x.inner.BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(raw.NSURLBookmarkCreationOptions(options), keys, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)))
 	if _err != nil {
 		return nil, _err
 	}
@@ -547,7 +547,7 @@ type URLable interface {
 	RemoveCachedResourceValueForKey(key *raw.NSString)
 	RemoveAllCachedResourceValues()
 	SetTemporaryResourceValueForKey(value objc.ID, key *raw.NSString)
-	BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options raw.NSURLBookmarkCreationOptions, keys *raw.NSArray[*raw.NSString], relativeURL string) (*Data, error)
+	BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options NSURLBookmarkCreationOptions, keys *raw.NSArray[*raw.NSString], relativeURL string) (*Data, error)
 	StartAccessingSecurityScopedResource() bool
 	StopAccessingSecurityScopedResource()
 	DataRepresentation() *Data

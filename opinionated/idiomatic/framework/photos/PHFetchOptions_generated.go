@@ -75,8 +75,8 @@ func (x *FetchOptions) WithIncludeAllBurstAssets(includeAllBurstAssets bool) *Fe
 }
 
 // WithIncludeAssetSourceTypes sets the includeAssetSourceTypes property and returns the receiver for chaining.
-func (x *FetchOptions) WithIncludeAssetSourceTypes(includeAssetSourceTypes raw.PHAssetSourceType) *FetchOptions {
-	x.inner.SetIncludeAssetSourceTypes(includeAssetSourceTypes)
+func (x *FetchOptions) WithIncludeAssetSourceTypes(includeAssetSourceTypes PHAssetSourceType) *FetchOptions {
+	x.inner.SetIncludeAssetSourceTypes(raw.PHAssetSourceType(includeAssetSourceTypes))
 	return x
 }
 
@@ -139,13 +139,13 @@ func (x *FetchOptions) SetIncludeAllBurstAssets(includeAllBurstAssets bool) {
 }
 
 // IncludeAssetSourceTypes calls the underlying IncludeAssetSourceTypes.
-func (x *FetchOptions) IncludeAssetSourceTypes() raw.PHAssetSourceType {
-	return x.inner.IncludeAssetSourceTypes()
+func (x *FetchOptions) IncludeAssetSourceTypes() PHAssetSourceType {
+	return PHAssetSourceType(x.inner.IncludeAssetSourceTypes())
 }
 
 // SetIncludeAssetSourceTypes calls the underlying SetIncludeAssetSourceTypes.
-func (x *FetchOptions) SetIncludeAssetSourceTypes(includeAssetSourceTypes raw.PHAssetSourceType) {
-	x.inner.SetIncludeAssetSourceTypes(includeAssetSourceTypes)
+func (x *FetchOptions) SetIncludeAssetSourceTypes(includeAssetSourceTypes PHAssetSourceType) {
+	x.inner.SetIncludeAssetSourceTypes(raw.PHAssetSourceType(includeAssetSourceTypes))
 }
 
 // FetchLimit calls the underlying FetchLimit.
@@ -175,7 +175,7 @@ type FetchOptionsable interface {
 	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchOptions
 	WithIncludeHiddenAssets(includeHiddenAssets bool) *FetchOptions
 	WithIncludeAllBurstAssets(includeAllBurstAssets bool) *FetchOptions
-	WithIncludeAssetSourceTypes(includeAssetSourceTypes raw.PHAssetSourceType) *FetchOptions
+	WithIncludeAssetSourceTypes(includeAssetSourceTypes PHAssetSourceType) *FetchOptions
 	WithFetchLimit(fetchLimit uint) *FetchOptions
 	WithWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) *FetchOptions
 	Predicate() *foundation.NSPredicate
@@ -186,8 +186,8 @@ type FetchOptionsable interface {
 	SetIncludeHiddenAssets(includeHiddenAssets bool)
 	IncludeAllBurstAssets() bool
 	SetIncludeAllBurstAssets(includeAllBurstAssets bool)
-	IncludeAssetSourceTypes() raw.PHAssetSourceType
-	SetIncludeAssetSourceTypes(includeAssetSourceTypes raw.PHAssetSourceType)
+	IncludeAssetSourceTypes() PHAssetSourceType
+	SetIncludeAssetSourceTypes(includeAssetSourceTypes PHAssetSourceType)
 	FetchLimit() uint
 	SetFetchLimit(fetchLimit uint)
 	WantsIncrementalChangeDetails() bool

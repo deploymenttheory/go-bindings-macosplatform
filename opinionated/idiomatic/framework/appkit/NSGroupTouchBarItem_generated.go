@@ -51,8 +51,8 @@ func (x *GroupTouchBarItem) WithCustomizationLabel(customizationLabel string) *G
 }
 
 // WithGroupUserInterfaceLayoutDirection sets the groupUserInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *GroupTouchBarItem) WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GroupTouchBarItem {
-	x.inner.SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection)
+func (x *GroupTouchBarItem) WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GroupTouchBarItem {
+	x.inner.SetGroupUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection))
 	return x
 }
 
@@ -112,13 +112,13 @@ func (x *GroupTouchBarItem) SetCustomizationLabel(customizationLabel string) {
 }
 
 // GroupUserInterfaceLayoutDirection calls the underlying GroupUserInterfaceLayoutDirection.
-func (x *GroupTouchBarItem) GroupUserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection {
-	return x.inner.GroupUserInterfaceLayoutDirection()
+func (x *GroupTouchBarItem) GroupUserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
+	return NSUserInterfaceLayoutDirection(x.inner.GroupUserInterfaceLayoutDirection())
 }
 
 // SetGroupUserInterfaceLayoutDirection calls the underlying SetGroupUserInterfaceLayoutDirection.
-func (x *GroupTouchBarItem) SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) {
-	x.inner.SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection)
+func (x *GroupTouchBarItem) SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection NSUserInterfaceLayoutDirection) {
+	x.inner.SetGroupUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection))
 }
 
 // PrefersEqualWidths calls the underlying PrefersEqualWidths.
@@ -173,7 +173,7 @@ type GroupTouchBarItemable interface {
 	Unwrap() *raw.NSGroupTouchBarItem
 	WithGroupTouchBar(groupTouchBar *TouchBar) *GroupTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *GroupTouchBarItem
-	WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GroupTouchBarItem
+	WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GroupTouchBarItem
 	WithPrefersEqualWidths(prefersEqualWidths bool) *GroupTouchBarItem
 	WithPreferredItemWidth(preferredItemWidth float64) *GroupTouchBarItem
 	WithPrioritizedCompressionOptions(items ...*raw.NSUserInterfaceCompressionOptions) *GroupTouchBarItem
@@ -181,8 +181,8 @@ type GroupTouchBarItemable interface {
 	GroupTouchBar() *TouchBar
 	SetGroupTouchBar(groupTouchBar *raw.NSTouchBar)
 	SetCustomizationLabel(customizationLabel string)
-	GroupUserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection
-	SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection)
+	GroupUserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection
+	SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection NSUserInterfaceLayoutDirection)
 	PrefersEqualWidths() bool
 	SetPrefersEqualWidths(prefersEqualWidths bool)
 	PreferredItemWidth() float64

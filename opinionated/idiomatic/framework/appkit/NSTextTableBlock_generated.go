@@ -37,8 +37,8 @@ func NewTextTableBlockWithTableStartingRowRowSpanStartingColumnColumnSpan(table 
 }
 
 // WithVerticalAlignment sets the verticalAlignment property and returns the receiver for chaining.
-func (x *TextTableBlock) WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) *TextTableBlock {
-	x.inner.NSTextBlock.SetVerticalAlignment(verticalAlignment)
+func (x *TextTableBlock) WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextTableBlock {
+	x.inner.NSTextBlock.SetVerticalAlignment(raw.NSTextBlockVerticalAlignment(verticalAlignment))
 	return x
 }
 
@@ -82,7 +82,7 @@ func (x *TextTableBlock) asTextBlock() *raw.NSTextBlock { return &x.inner.NSText
 // TextTableBlockable is the interface implemented by [TextTableBlock], for mocking and DI.
 type TextTableBlockable interface {
 	Unwrap() *raw.NSTextTableBlock
-	WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) *TextTableBlock
+	WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextTableBlock
 	WithBackgroundColor(backgroundColor *Color) *TextTableBlock
 	Table() *TextTable
 	StartingRow() int

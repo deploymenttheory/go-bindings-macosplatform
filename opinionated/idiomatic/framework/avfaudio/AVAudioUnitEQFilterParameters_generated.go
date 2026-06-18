@@ -36,8 +36,8 @@ func NewAudioUnitEQFilterParameters() *AudioUnitEQFilterParameters {
 }
 
 // WithFilterType sets the filterType property and returns the receiver for chaining.
-func (x *AudioUnitEQFilterParameters) WithFilterType(filterType raw.AVAudioUnitEQFilterType) *AudioUnitEQFilterParameters {
-	x.inner.SetFilterType(filterType)
+func (x *AudioUnitEQFilterParameters) WithFilterType(filterType AVAudioUnitEQFilterType) *AudioUnitEQFilterParameters {
+	x.inner.SetFilterType(raw.AVAudioUnitEQFilterType(filterType))
 	return x
 }
 
@@ -66,13 +66,13 @@ func (x *AudioUnitEQFilterParameters) WithBypass(bypass bool) *AudioUnitEQFilter
 }
 
 // FilterType calls the underlying FilterType.
-func (x *AudioUnitEQFilterParameters) FilterType() raw.AVAudioUnitEQFilterType {
-	return x.inner.FilterType()
+func (x *AudioUnitEQFilterParameters) FilterType() AVAudioUnitEQFilterType {
+	return AVAudioUnitEQFilterType(x.inner.FilterType())
 }
 
 // SetFilterType calls the underlying SetFilterType.
-func (x *AudioUnitEQFilterParameters) SetFilterType(filterType raw.AVAudioUnitEQFilterType) {
-	x.inner.SetFilterType(filterType)
+func (x *AudioUnitEQFilterParameters) SetFilterType(filterType AVAudioUnitEQFilterType) {
+	x.inner.SetFilterType(raw.AVAudioUnitEQFilterType(filterType))
 }
 
 // Frequency calls the underlying Frequency.
@@ -118,13 +118,13 @@ func (x *AudioUnitEQFilterParameters) SetBypass(bypass bool) {
 // AudioUnitEQFilterParametersable is the interface implemented by [AudioUnitEQFilterParameters], for mocking and DI.
 type AudioUnitEQFilterParametersable interface {
 	Unwrap() *raw.AVAudioUnitEQFilterParameters
-	WithFilterType(filterType raw.AVAudioUnitEQFilterType) *AudioUnitEQFilterParameters
+	WithFilterType(filterType AVAudioUnitEQFilterType) *AudioUnitEQFilterParameters
 	WithFrequency(frequency float32) *AudioUnitEQFilterParameters
 	WithBandwidth(bandwidth float32) *AudioUnitEQFilterParameters
 	WithGain(gain float32) *AudioUnitEQFilterParameters
 	WithBypass(bypass bool) *AudioUnitEQFilterParameters
-	FilterType() raw.AVAudioUnitEQFilterType
-	SetFilterType(filterType raw.AVAudioUnitEQFilterType)
+	FilterType() AVAudioUnitEQFilterType
+	SetFilterType(filterType AVAudioUnitEQFilterType)
 	Frequency() float32
 	SetFrequency(frequency float32)
 	Bandwidth() float32

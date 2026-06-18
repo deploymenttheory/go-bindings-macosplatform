@@ -36,8 +36,8 @@ func NewItemSetAttributesRequest() *ItemSetAttributesRequest {
 }
 
 // WithConsumedAttributes sets the consumedAttributes property and returns the receiver for chaining.
-func (x *ItemSetAttributesRequest) WithConsumedAttributes(consumedAttributes raw.FSItemAttribute) *ItemSetAttributesRequest {
-	x.inner.SetConsumedAttributes(consumedAttributes)
+func (x *ItemSetAttributesRequest) WithConsumedAttributes(consumedAttributes FSItemAttribute) *ItemSetAttributesRequest {
+	x.inner.SetConsumedAttributes(raw.FSItemAttribute(consumedAttributes))
 	return x
 }
 
@@ -60,8 +60,8 @@ func (x *ItemSetAttributesRequest) WithMode(mode uint32) *ItemSetAttributesReque
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *ItemSetAttributesRequest) WithType(type_ raw.FSItemType) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetType(type_)
+func (x *ItemSetAttributesRequest) WithType(type_ FSItemType) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetType(raw.FSItemType(type_))
 	return x
 }
 
@@ -90,14 +90,14 @@ func (x *ItemSetAttributesRequest) WithAllocSize(allocSize uint64) *ItemSetAttri
 }
 
 // WithFileID sets the fileID property and returns the receiver for chaining.
-func (x *ItemSetAttributesRequest) WithFileID(fileID raw.FSItemID) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetFileID(fileID)
+func (x *ItemSetAttributesRequest) WithFileID(fileID FSItemID) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetFileID(raw.FSItemID(fileID))
 	return x
 }
 
 // WithParentID sets the parentID property and returns the receiver for chaining.
-func (x *ItemSetAttributesRequest) WithParentID(parentID raw.FSItemID) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetParentID(parentID)
+func (x *ItemSetAttributesRequest) WithParentID(parentID FSItemID) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetParentID(raw.FSItemID(parentID))
 	return x
 }
 
@@ -114,18 +114,18 @@ func (x *ItemSetAttributesRequest) WithInhibitKernelOffloadedIO(inhibitKernelOff
 }
 
 // WasAttributeConsumed calls the underlying WasAttributeConsumed.
-func (x *ItemSetAttributesRequest) WasAttributeConsumed(attribute raw.FSItemAttribute) bool {
-	return x.inner.WasAttributeConsumed(attribute)
+func (x *ItemSetAttributesRequest) WasAttributeConsumed(attribute FSItemAttribute) bool {
+	return x.inner.WasAttributeConsumed(raw.FSItemAttribute(attribute))
 }
 
 // ConsumedAttributes calls the underlying ConsumedAttributes.
-func (x *ItemSetAttributesRequest) ConsumedAttributes() raw.FSItemAttribute {
-	return x.inner.ConsumedAttributes()
+func (x *ItemSetAttributesRequest) ConsumedAttributes() FSItemAttribute {
+	return FSItemAttribute(x.inner.ConsumedAttributes())
 }
 
 // SetConsumedAttributes calls the underlying SetConsumedAttributes.
-func (x *ItemSetAttributesRequest) SetConsumedAttributes(consumedAttributes raw.FSItemAttribute) {
-	x.inner.SetConsumedAttributes(consumedAttributes)
+func (x *ItemSetAttributesRequest) SetConsumedAttributes(consumedAttributes FSItemAttribute) {
+	x.inner.SetConsumedAttributes(raw.FSItemAttribute(consumedAttributes))
 }
 
 func (x *ItemSetAttributesRequest) asItemAttributes() *raw.FSItemAttributes {
@@ -135,22 +135,22 @@ func (x *ItemSetAttributesRequest) asItemAttributes() *raw.FSItemAttributes {
 // ItemSetAttributesRequestable is the interface implemented by [ItemSetAttributesRequest], for mocking and DI.
 type ItemSetAttributesRequestable interface {
 	Unwrap() *raw.FSItemSetAttributesRequest
-	WithConsumedAttributes(consumedAttributes raw.FSItemAttribute) *ItemSetAttributesRequest
+	WithConsumedAttributes(consumedAttributes FSItemAttribute) *ItemSetAttributesRequest
 	WithUid(uid uint32) *ItemSetAttributesRequest
 	WithGid(gid uint32) *ItemSetAttributesRequest
 	WithMode(mode uint32) *ItemSetAttributesRequest
-	WithType(type_ raw.FSItemType) *ItemSetAttributesRequest
+	WithType(type_ FSItemType) *ItemSetAttributesRequest
 	WithLinkCount(linkCount uint32) *ItemSetAttributesRequest
 	WithFlags(flags uint32) *ItemSetAttributesRequest
 	WithSize(size uint64) *ItemSetAttributesRequest
 	WithAllocSize(allocSize uint64) *ItemSetAttributesRequest
-	WithFileID(fileID raw.FSItemID) *ItemSetAttributesRequest
-	WithParentID(parentID raw.FSItemID) *ItemSetAttributesRequest
+	WithFileID(fileID FSItemID) *ItemSetAttributesRequest
+	WithParentID(parentID FSItemID) *ItemSetAttributesRequest
 	WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemSetAttributesRequest
 	WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest
-	WasAttributeConsumed(attribute raw.FSItemAttribute) bool
-	ConsumedAttributes() raw.FSItemAttribute
-	SetConsumedAttributes(consumedAttributes raw.FSItemAttribute)
+	WasAttributeConsumed(attribute FSItemAttribute) bool
+	ConsumedAttributes() FSItemAttribute
+	SetConsumedAttributes(consumedAttributes FSItemAttribute)
 }
 
 var _ ItemSetAttributesRequestable = (*ItemSetAttributesRequest)(nil)

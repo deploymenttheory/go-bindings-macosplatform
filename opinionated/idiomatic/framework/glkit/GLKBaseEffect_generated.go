@@ -57,8 +57,8 @@ func (x *BaseEffect) WithUseConstantColor(useConstantColor uint8) *BaseEffect {
 }
 
 // WithLightingType sets the lightingType property and returns the receiver for chaining.
-func (x *BaseEffect) WithLightingType(lightingType raw.GLKLightingType) *BaseEffect {
-	x.inner.SetLightingType(lightingType)
+func (x *BaseEffect) WithLightingType(lightingType GLKLightingType) *BaseEffect {
+	x.inner.SetLightingType(raw.GLKLightingType(lightingType))
 	return x
 }
 
@@ -158,13 +158,13 @@ func (x *BaseEffect) Light2() *EffectPropertyLight {
 }
 
 // LightingType calls the underlying LightingType.
-func (x *BaseEffect) LightingType() raw.GLKLightingType {
-	return x.inner.LightingType()
+func (x *BaseEffect) LightingType() GLKLightingType {
+	return GLKLightingType(x.inner.LightingType())
 }
 
 // SetLightingType calls the underlying SetLightingType.
-func (x *BaseEffect) SetLightingType(lightingType raw.GLKLightingType) {
-	x.inner.SetLightingType(lightingType)
+func (x *BaseEffect) SetLightingType(lightingType GLKLightingType) {
+	x.inner.SetLightingType(raw.GLKLightingType(lightingType))
 }
 
 // LightModelAmbientColor calls the underlying LightModelAmbientColor.
@@ -261,7 +261,7 @@ type BaseEffectable interface {
 	WithColorMaterialEnabled(colorMaterialEnabled uint8) *BaseEffect
 	WithLightModelTwoSided(lightModelTwoSided uint8) *BaseEffect
 	WithUseConstantColor(useConstantColor uint8) *BaseEffect
-	WithLightingType(lightingType raw.GLKLightingType) *BaseEffect
+	WithLightingType(lightingType GLKLightingType) *BaseEffect
 	WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *BaseEffect
 	WithLabel(label string) *BaseEffect
 	PrepareToDraw()
@@ -275,8 +275,8 @@ type BaseEffectable interface {
 	Light0() *EffectPropertyLight
 	Light1() *EffectPropertyLight
 	Light2() *EffectPropertyLight
-	LightingType() raw.GLKLightingType
-	SetLightingType(lightingType raw.GLKLightingType)
+	LightingType() GLKLightingType
+	SetLightingType(lightingType GLKLightingType)
 	LightModelAmbientColor() unsafe.Pointer
 	SetLightModelAmbientColor(lightModelAmbientColor unsafe.Pointer)
 	Material() *EffectPropertyMaterial

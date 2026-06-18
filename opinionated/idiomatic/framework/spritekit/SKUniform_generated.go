@@ -159,8 +159,8 @@ func (x *Uniform) Name() string {
 }
 
 // UniformType calls the underlying UniformType.
-func (x *Uniform) UniformType() raw.SKUniformType {
-	return x.inner.UniformType()
+func (x *Uniform) UniformType() SKUniformType {
+	return SKUniformType(x.inner.UniformType())
 }
 
 // TextureValue calls the underlying TextureValue.
@@ -313,7 +313,7 @@ type Uniformable interface {
 	WithTextureValue(textureValue TextureProvider) *Uniform
 	WithFloatValue(floatValue float32) *Uniform
 	Name() string
-	UniformType() raw.SKUniformType
+	UniformType() SKUniformType
 	TextureValue() *Texture
 	SetTextureValue(textureValue *raw.SKTexture)
 	FloatValue() float32

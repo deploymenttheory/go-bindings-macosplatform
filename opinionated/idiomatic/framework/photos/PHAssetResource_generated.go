@@ -38,8 +38,8 @@ func NewAssetResource() *AssetResource {
 }
 
 // Type calls the underlying Type.
-func (x *AssetResource) Type() raw.PHAssetResourceType {
-	return x.inner.Type()
+func (x *AssetResource) Type() PHAssetResourceType {
+	return PHAssetResourceType(x.inner.Type())
 }
 
 // AssetLocalIdentifier calls the underlying AssetLocalIdentifier.
@@ -87,7 +87,7 @@ func (x *AssetResource) PixelHeight() int {
 // AssetResourceable is the interface implemented by [AssetResource], for mocking and DI.
 type AssetResourceable interface {
 	Unwrap() *raw.PHAssetResource
-	Type() raw.PHAssetResourceType
+	Type() PHAssetResourceType
 	AssetLocalIdentifier() string
 	OriginalFilename() string
 	ContentType() *uniformtypeidentifiers.UTType

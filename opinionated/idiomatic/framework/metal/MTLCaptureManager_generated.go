@@ -52,8 +52,8 @@ func (x *CaptureManager) NewCaptureScopeWithMTL4CommandQueue(commandQueue raw.MT
 }
 
 // SupportsDestination calls the underlying SupportsDestination.
-func (x *CaptureManager) SupportsDestination(destination raw.MTLCaptureDestination) bool {
-	return x.inner.SupportsDestination(destination)
+func (x *CaptureManager) SupportsDestination(destination MTLCaptureDestination) bool {
+	return x.inner.SupportsDestination(raw.MTLCaptureDestination(destination))
 }
 
 // StartCaptureWithDescriptorError calls the underlying StartCaptureWithDescriptorError.
@@ -102,7 +102,7 @@ type CaptureManagerable interface {
 	WithDefaultCaptureScope(defaultCaptureScope raw.MTLCaptureScope) *CaptureManager
 	NewCaptureScopeWithCommandQueue(commandQueue raw.MTLCommandQueue) raw.MTLCaptureScope
 	NewCaptureScopeWithMTL4CommandQueue(commandQueue raw.MTL4CommandQueue) raw.MTLCaptureScope
-	SupportsDestination(destination raw.MTLCaptureDestination) bool
+	SupportsDestination(destination MTLCaptureDestination) bool
 	StartCaptureWithDescriptorError(descriptor *raw.MTLCaptureDescriptor) (bool, error)
 	StartCaptureWithDevice(device raw.MTLDevice)
 	StartCaptureWithCommandQueue(commandQueue raw.MTLCommandQueue)

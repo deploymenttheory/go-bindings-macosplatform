@@ -42,8 +42,8 @@ func NewSlider() *Slider {
 }
 
 // WithSliderType sets the sliderType property and returns the receiver for chaining.
-func (x *Slider) WithSliderType(sliderType raw.NSSliderType) *Slider {
-	x.inner.SetSliderType(sliderType)
+func (x *Slider) WithSliderType(sliderType NSSliderType) *Slider {
+	x.inner.SetSliderType(raw.NSSliderType(sliderType))
 	return x
 }
 
@@ -90,8 +90,8 @@ func (x *Slider) WithTrackFillColor(trackFillColor *Color) *Slider {
 }
 
 // WithTintProminence sets the tintProminence property and returns the receiver for chaining.
-func (x *Slider) WithTintProminence(tintProminence raw.NSTintProminence) *Slider {
-	x.inner.SetTintProminence(tintProminence)
+func (x *Slider) WithTintProminence(tintProminence NSTintProminence) *Slider {
+	x.inner.SetTintProminence(raw.NSTintProminence(tintProminence))
 	return x
 }
 
@@ -102,8 +102,8 @@ func (x *Slider) WithNumberOfTickMarks(numberOfTickMarks int) *Slider {
 }
 
 // WithTickMarkPosition sets the tickMarkPosition property and returns the receiver for chaining.
-func (x *Slider) WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *Slider {
-	x.inner.SetTickMarkPosition(tickMarkPosition)
+func (x *Slider) WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *Slider {
+	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 	return x
 }
 
@@ -162,8 +162,8 @@ func (x *Slider) WithHighlighted(highlighted bool) *Slider {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Slider) WithControlSize(controlSize raw.NSControlSize) *Slider {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *Slider) WithControlSize(controlSize NSControlSize) *Slider {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -228,20 +228,20 @@ func (x *Slider) WithUsesSingleLineMode(usesSingleLineMode bool) *Slider {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Slider) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Slider {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *Slider) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Slider {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Slider) WithAlignment(alignment raw.NSTextAlignment) *Slider {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *Slider) WithAlignment(alignment NSTextAlignment) *Slider {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Slider) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Slider {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *Slider) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Slider {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -294,8 +294,8 @@ func (x *Slider) WithAutoresizesSubviews(autoresizesSubviews bool) *Slider {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Slider) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Slider {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Slider) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Slider {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -354,14 +354,14 @@ func (x *Slider) WithWantsRestingTouches(wantsRestingTouches bool) *Slider {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Slider) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Slider {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Slider) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Slider {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Slider) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Slider {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Slider) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Slider {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -468,8 +468,8 @@ func (x *Slider) WithToolTip(toolTip string) *Slider {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Slider) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Slider {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Slider) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Slider {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -486,8 +486,8 @@ func (x *Slider) WithNextKeyView(nextKeyView ViewProvider) *Slider {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Slider) WithFocusRingType(focusRingType raw.NSFocusRingType) *Slider {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *Slider) WithFocusRingType(focusRingType NSFocusRingType) *Slider {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -510,8 +510,8 @@ func (x *Slider) WithGestureRecognizers(items ...GestureRecognizerProvider) *Sli
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Slider) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Slider {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Slider) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Slider {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -600,13 +600,13 @@ func (x *Slider) WithTouchBar(touchBar *TouchBar) *Slider {
 }
 
 // SliderType calls the underlying SliderType.
-func (x *Slider) SliderType() raw.NSSliderType {
-	return x.inner.SliderType()
+func (x *Slider) SliderType() NSSliderType {
+	return NSSliderType(x.inner.SliderType())
 }
 
 // SetSliderType calls the underlying SetSliderType.
-func (x *Slider) SetSliderType(sliderType raw.NSSliderType) {
-	x.inner.SetSliderType(sliderType)
+func (x *Slider) SetSliderType(sliderType NSSliderType) {
+	x.inner.SetSliderType(raw.NSSliderType(sliderType))
 }
 
 // MinValue calls the underlying MinValue.
@@ -679,13 +679,13 @@ func (x *Slider) SetTrackFillColor(trackFillColor *raw.NSColor) {
 }
 
 // TintProminence calls the underlying TintProminence.
-func (x *Slider) TintProminence() raw.NSTintProminence {
-	return x.inner.TintProminence()
+func (x *Slider) TintProminence() NSTintProminence {
+	return NSTintProminence(x.inner.TintProminence())
 }
 
 // SetTintProminence calls the underlying SetTintProminence.
-func (x *Slider) SetTintProminence(tintProminence raw.NSTintProminence) {
-	x.inner.SetTintProminence(tintProminence)
+func (x *Slider) SetTintProminence(tintProminence NSTintProminence) {
+	x.inner.SetTintProminence(raw.NSTintProminence(tintProminence))
 }
 
 // TickMarkValueAtIndex calls the underlying TickMarkValueAtIndex.
@@ -719,13 +719,13 @@ func (x *Slider) SetNumberOfTickMarks(numberOfTickMarks int) {
 }
 
 // TickMarkPosition calls the underlying TickMarkPosition.
-func (x *Slider) TickMarkPosition() raw.NSTickMarkPosition {
-	return x.inner.TickMarkPosition()
+func (x *Slider) TickMarkPosition() NSTickMarkPosition {
+	return NSTickMarkPosition(x.inner.TickMarkPosition())
 }
 
 // SetTickMarkPosition calls the underlying SetTickMarkPosition.
-func (x *Slider) SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) {
-	x.inner.SetTickMarkPosition(tickMarkPosition)
+func (x *Slider) SetTickMarkPosition(tickMarkPosition NSTickMarkPosition) {
+	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 }
 
 // AllowsTickMarkValuesOnly calls the underlying AllowsTickMarkValuesOnly.
@@ -818,7 +818,7 @@ func (x *Slider) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSVi
 // Sliderable is the interface implemented by [Slider], for mocking and DI.
 type Sliderable interface {
 	Unwrap() *raw.NSSlider
-	WithSliderType(sliderType raw.NSSliderType) *Slider
+	WithSliderType(sliderType NSSliderType) *Slider
 	WithMinValue(minValue float64) *Slider
 	WithMaxValue(maxValue float64) *Slider
 	WithNeutralValue(neutralValue float64) *Slider
@@ -826,9 +826,9 @@ type Sliderable interface {
 	WithKnobThickness(knobThickness float64) *Slider
 	WithVertical(vertical bool) *Slider
 	WithTrackFillColor(trackFillColor *Color) *Slider
-	WithTintProminence(tintProminence raw.NSTintProminence) *Slider
+	WithTintProminence(tintProminence NSTintProminence) *Slider
 	WithNumberOfTickMarks(numberOfTickMarks int) *Slider
-	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *Slider
+	WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *Slider
 	WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *Slider
 	WithTarget(target objc.ID) *Slider
 	WithAction(action objc.SEL) *Slider
@@ -838,7 +838,7 @@ type Sliderable interface {
 	WithEnabled(enabled bool) *Slider
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Slider
 	WithHighlighted(highlighted bool) *Slider
-	WithControlSize(controlSize raw.NSControlSize) *Slider
+	WithControlSize(controlSize NSControlSize) *Slider
 	WithFormatter(formatter *foundation.NSFormatter) *Slider
 	WithObjectValue(objectValue objc.ID) *Slider
 	WithStringValue(stringValue string) *Slider
@@ -849,16 +849,16 @@ type Sliderable interface {
 	WithDoubleValue(doubleValue float64) *Slider
 	WithFont(font *Font) *Slider
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Slider
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Slider
-	WithAlignment(alignment raw.NSTextAlignment) *Slider
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Slider
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Slider
+	WithAlignment(alignment NSTextAlignment) *Slider
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Slider
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Slider
 	WithCell(cell CellProvider) *Slider
 	WithSubviews(items ...ViewProvider) *Slider
 	WithHidden(hidden bool) *Slider
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Slider
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Slider
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Slider
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Slider
 	WithFrame(frame corefoundation.CGRect) *Slider
 	WithFrameRotation(frameRotation float64) *Slider
 	WithFrameCenterRotation(frameCenterRotation float64) *Slider
@@ -868,8 +868,8 @@ type Sliderable interface {
 	WithNeedsDisplay(needsDisplay bool) *Slider
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Slider
 	WithWantsRestingTouches(wantsRestingTouches bool) *Slider
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Slider
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Slider
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Slider
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Slider
 	WithWantsLayer(wantsLayer bool) *Slider
 	WithLayer(layer *quartzcore.CALayer) *Slider
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Slider
@@ -883,12 +883,12 @@ type Sliderable interface {
 	WithClipsToBounds(clipsToBounds bool) *Slider
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Slider
 	WithToolTip(toolTip string) *Slider
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Slider
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Slider
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Slider
 	WithNextKeyView(nextKeyView ViewProvider) *Slider
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Slider
+	WithFocusRingType(focusRingType NSFocusRingType) *Slider
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Slider
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Slider
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Slider
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Slider
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Slider
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Slider
@@ -903,8 +903,8 @@ type Sliderable interface {
 	WithMenu(menu *Menu) *Slider
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Slider
 	WithTouchBar(touchBar *TouchBar) *Slider
-	SliderType() raw.NSSliderType
-	SetSliderType(sliderType raw.NSSliderType)
+	SliderType() NSSliderType
+	SetSliderType(sliderType NSSliderType)
 	MinValue() float64
 	SetMinValue(minValue float64)
 	MaxValue() float64
@@ -918,16 +918,16 @@ type Sliderable interface {
 	SetVertical(vertical bool)
 	TrackFillColor() *Color
 	SetTrackFillColor(trackFillColor *raw.NSColor)
-	TintProminence() raw.NSTintProminence
-	SetTintProminence(tintProminence raw.NSTintProminence)
+	TintProminence() NSTintProminence
+	SetTintProminence(tintProminence NSTintProminence)
 	TickMarkValueAtIndex(index int) float64
 	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
 	IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int
 	ClosestTickMarkValueToValue(value float64) float64
 	NumberOfTickMarks() int
 	SetNumberOfTickMarks(numberOfTickMarks int)
-	TickMarkPosition() raw.NSTickMarkPosition
-	SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition)
+	TickMarkPosition() NSTickMarkPosition
+	SetTickMarkPosition(tickMarkPosition NSTickMarkPosition)
 	AllowsTickMarkValuesOnly() bool
 	SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool)
 	SetTitleCell(cell *raw.NSCell)

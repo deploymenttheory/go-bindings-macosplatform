@@ -63,8 +63,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointStride(co
 }
 
 // WithControlPointFormat sets the controlPointFormat property and returns the receiver for chaining.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointFormat(controlPointFormat raw.MTLAttributeFormat) *AccelerationStructureCurveGeometryDescriptor {
-	x.inner.SetControlPointFormat(controlPointFormat)
+func (x *AccelerationStructureCurveGeometryDescriptor) WithControlPointFormat(controlPointFormat MTLAttributeFormat) *AccelerationStructureCurveGeometryDescriptor {
+	x.inner.SetControlPointFormat(raw.MTLAttributeFormat(controlPointFormat))
 	return x
 }
 
@@ -81,8 +81,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) WithRadiusBufferOffset(ra
 }
 
 // WithRadiusFormat sets the radiusFormat property and returns the receiver for chaining.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithRadiusFormat(radiusFormat raw.MTLAttributeFormat) *AccelerationStructureCurveGeometryDescriptor {
-	x.inner.SetRadiusFormat(radiusFormat)
+func (x *AccelerationStructureCurveGeometryDescriptor) WithRadiusFormat(radiusFormat MTLAttributeFormat) *AccelerationStructureCurveGeometryDescriptor {
+	x.inner.SetRadiusFormat(raw.MTLAttributeFormat(radiusFormat))
 	return x
 }
 
@@ -105,8 +105,8 @@ func (x *AccelerationStructureCurveGeometryDescriptor) WithIndexBufferOffset(ind
 }
 
 // WithIndexType sets the indexType property and returns the receiver for chaining.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithIndexType(indexType raw.MTLIndexType) *AccelerationStructureCurveGeometryDescriptor {
-	x.inner.SetIndexType(indexType)
+func (x *AccelerationStructureCurveGeometryDescriptor) WithIndexType(indexType MTLIndexType) *AccelerationStructureCurveGeometryDescriptor {
+	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 	return x
 }
 
@@ -123,20 +123,20 @@ func (x *AccelerationStructureCurveGeometryDescriptor) WithSegmentControlPointCo
 }
 
 // WithCurveType sets the curveType property and returns the receiver for chaining.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveType(curveType raw.MTLCurveType) *AccelerationStructureCurveGeometryDescriptor {
-	x.inner.SetCurveType(curveType)
+func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveType(curveType MTLCurveType) *AccelerationStructureCurveGeometryDescriptor {
+	x.inner.SetCurveType(raw.MTLCurveType(curveType))
 	return x
 }
 
 // WithCurveBasis sets the curveBasis property and returns the receiver for chaining.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveBasis(curveBasis raw.MTLCurveBasis) *AccelerationStructureCurveGeometryDescriptor {
-	x.inner.SetCurveBasis(curveBasis)
+func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveBasis(curveBasis MTLCurveBasis) *AccelerationStructureCurveGeometryDescriptor {
+	x.inner.SetCurveBasis(raw.MTLCurveBasis(curveBasis))
 	return x
 }
 
 // WithCurveEndCaps sets the curveEndCaps property and returns the receiver for chaining.
-func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveEndCaps(curveEndCaps raw.MTLCurveEndCaps) *AccelerationStructureCurveGeometryDescriptor {
-	x.inner.SetCurveEndCaps(curveEndCaps)
+func (x *AccelerationStructureCurveGeometryDescriptor) WithCurveEndCaps(curveEndCaps MTLCurveEndCaps) *AccelerationStructureCurveGeometryDescriptor {
+	x.inner.SetCurveEndCaps(raw.MTLCurveEndCaps(curveEndCaps))
 	return x
 }
 
@@ -229,13 +229,13 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointStride(con
 }
 
 // ControlPointFormat calls the underlying ControlPointFormat.
-func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointFormat() raw.MTLAttributeFormat {
-	return x.inner.ControlPointFormat()
+func (x *AccelerationStructureCurveGeometryDescriptor) ControlPointFormat() MTLAttributeFormat {
+	return MTLAttributeFormat(x.inner.ControlPointFormat())
 }
 
 // SetControlPointFormat calls the underlying SetControlPointFormat.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointFormat(controlPointFormat raw.MTLAttributeFormat) {
-	x.inner.SetControlPointFormat(controlPointFormat)
+func (x *AccelerationStructureCurveGeometryDescriptor) SetControlPointFormat(controlPointFormat MTLAttributeFormat) {
+	x.inner.SetControlPointFormat(raw.MTLAttributeFormat(controlPointFormat))
 }
 
 // RadiusBuffer calls the underlying RadiusBuffer.
@@ -259,13 +259,13 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetRadiusBufferOffset(rad
 }
 
 // RadiusFormat calls the underlying RadiusFormat.
-func (x *AccelerationStructureCurveGeometryDescriptor) RadiusFormat() raw.MTLAttributeFormat {
-	return x.inner.RadiusFormat()
+func (x *AccelerationStructureCurveGeometryDescriptor) RadiusFormat() MTLAttributeFormat {
+	return MTLAttributeFormat(x.inner.RadiusFormat())
 }
 
 // SetRadiusFormat calls the underlying SetRadiusFormat.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetRadiusFormat(radiusFormat raw.MTLAttributeFormat) {
-	x.inner.SetRadiusFormat(radiusFormat)
+func (x *AccelerationStructureCurveGeometryDescriptor) SetRadiusFormat(radiusFormat MTLAttributeFormat) {
+	x.inner.SetRadiusFormat(raw.MTLAttributeFormat(radiusFormat))
 }
 
 // RadiusStride calls the underlying RadiusStride.
@@ -299,13 +299,13 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetIndexBufferOffset(inde
 }
 
 // IndexType calls the underlying IndexType.
-func (x *AccelerationStructureCurveGeometryDescriptor) IndexType() raw.MTLIndexType {
-	return x.inner.IndexType()
+func (x *AccelerationStructureCurveGeometryDescriptor) IndexType() MTLIndexType {
+	return MTLIndexType(x.inner.IndexType())
 }
 
 // SetIndexType calls the underlying SetIndexType.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetIndexType(indexType raw.MTLIndexType) {
-	x.inner.SetIndexType(indexType)
+func (x *AccelerationStructureCurveGeometryDescriptor) SetIndexType(indexType MTLIndexType) {
+	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 }
 
 // SegmentCount calls the underlying SegmentCount.
@@ -329,33 +329,33 @@ func (x *AccelerationStructureCurveGeometryDescriptor) SetSegmentControlPointCou
 }
 
 // CurveType calls the underlying CurveType.
-func (x *AccelerationStructureCurveGeometryDescriptor) CurveType() raw.MTLCurveType {
-	return x.inner.CurveType()
+func (x *AccelerationStructureCurveGeometryDescriptor) CurveType() MTLCurveType {
+	return MTLCurveType(x.inner.CurveType())
 }
 
 // SetCurveType calls the underlying SetCurveType.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveType(curveType raw.MTLCurveType) {
-	x.inner.SetCurveType(curveType)
+func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveType(curveType MTLCurveType) {
+	x.inner.SetCurveType(raw.MTLCurveType(curveType))
 }
 
 // CurveBasis calls the underlying CurveBasis.
-func (x *AccelerationStructureCurveGeometryDescriptor) CurveBasis() raw.MTLCurveBasis {
-	return x.inner.CurveBasis()
+func (x *AccelerationStructureCurveGeometryDescriptor) CurveBasis() MTLCurveBasis {
+	return MTLCurveBasis(x.inner.CurveBasis())
 }
 
 // SetCurveBasis calls the underlying SetCurveBasis.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveBasis(curveBasis raw.MTLCurveBasis) {
-	x.inner.SetCurveBasis(curveBasis)
+func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveBasis(curveBasis MTLCurveBasis) {
+	x.inner.SetCurveBasis(raw.MTLCurveBasis(curveBasis))
 }
 
 // CurveEndCaps calls the underlying CurveEndCaps.
-func (x *AccelerationStructureCurveGeometryDescriptor) CurveEndCaps() raw.MTLCurveEndCaps {
-	return x.inner.CurveEndCaps()
+func (x *AccelerationStructureCurveGeometryDescriptor) CurveEndCaps() MTLCurveEndCaps {
+	return MTLCurveEndCaps(x.inner.CurveEndCaps())
 }
 
 // SetCurveEndCaps calls the underlying SetCurveEndCaps.
-func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveEndCaps(curveEndCaps raw.MTLCurveEndCaps) {
-	x.inner.SetCurveEndCaps(curveEndCaps)
+func (x *AccelerationStructureCurveGeometryDescriptor) SetCurveEndCaps(curveEndCaps MTLCurveEndCaps) {
+	x.inner.SetCurveEndCaps(raw.MTLCurveEndCaps(curveEndCaps))
 }
 
 func (x *AccelerationStructureCurveGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor {
@@ -369,19 +369,19 @@ type AccelerationStructureCurveGeometryDescriptorable interface {
 	WithControlPointBufferOffset(controlPointBufferOffset uint) *AccelerationStructureCurveGeometryDescriptor
 	WithControlPointCount(controlPointCount uint) *AccelerationStructureCurveGeometryDescriptor
 	WithControlPointStride(controlPointStride uint) *AccelerationStructureCurveGeometryDescriptor
-	WithControlPointFormat(controlPointFormat raw.MTLAttributeFormat) *AccelerationStructureCurveGeometryDescriptor
+	WithControlPointFormat(controlPointFormat MTLAttributeFormat) *AccelerationStructureCurveGeometryDescriptor
 	WithRadiusBuffer(radiusBuffer raw.MTLBuffer) *AccelerationStructureCurveGeometryDescriptor
 	WithRadiusBufferOffset(radiusBufferOffset uint) *AccelerationStructureCurveGeometryDescriptor
-	WithRadiusFormat(radiusFormat raw.MTLAttributeFormat) *AccelerationStructureCurveGeometryDescriptor
+	WithRadiusFormat(radiusFormat MTLAttributeFormat) *AccelerationStructureCurveGeometryDescriptor
 	WithRadiusStride(radiusStride uint) *AccelerationStructureCurveGeometryDescriptor
 	WithIndexBuffer(indexBuffer raw.MTLBuffer) *AccelerationStructureCurveGeometryDescriptor
 	WithIndexBufferOffset(indexBufferOffset uint) *AccelerationStructureCurveGeometryDescriptor
-	WithIndexType(indexType raw.MTLIndexType) *AccelerationStructureCurveGeometryDescriptor
+	WithIndexType(indexType MTLIndexType) *AccelerationStructureCurveGeometryDescriptor
 	WithSegmentCount(segmentCount uint) *AccelerationStructureCurveGeometryDescriptor
 	WithSegmentControlPointCount(segmentControlPointCount uint) *AccelerationStructureCurveGeometryDescriptor
-	WithCurveType(curveType raw.MTLCurveType) *AccelerationStructureCurveGeometryDescriptor
-	WithCurveBasis(curveBasis raw.MTLCurveBasis) *AccelerationStructureCurveGeometryDescriptor
-	WithCurveEndCaps(curveEndCaps raw.MTLCurveEndCaps) *AccelerationStructureCurveGeometryDescriptor
+	WithCurveType(curveType MTLCurveType) *AccelerationStructureCurveGeometryDescriptor
+	WithCurveBasis(curveBasis MTLCurveBasis) *AccelerationStructureCurveGeometryDescriptor
+	WithCurveEndCaps(curveEndCaps MTLCurveEndCaps) *AccelerationStructureCurveGeometryDescriptor
 	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureCurveGeometryDescriptor
 	WithOpaque(opaque bool) *AccelerationStructureCurveGeometryDescriptor
 	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureCurveGeometryDescriptor
@@ -398,32 +398,32 @@ type AccelerationStructureCurveGeometryDescriptorable interface {
 	SetControlPointCount(controlPointCount uint)
 	ControlPointStride() uint
 	SetControlPointStride(controlPointStride uint)
-	ControlPointFormat() raw.MTLAttributeFormat
-	SetControlPointFormat(controlPointFormat raw.MTLAttributeFormat)
+	ControlPointFormat() MTLAttributeFormat
+	SetControlPointFormat(controlPointFormat MTLAttributeFormat)
 	RadiusBuffer() raw.MTLBuffer
 	SetRadiusBuffer(radiusBuffer raw.MTLBuffer)
 	RadiusBufferOffset() uint
 	SetRadiusBufferOffset(radiusBufferOffset uint)
-	RadiusFormat() raw.MTLAttributeFormat
-	SetRadiusFormat(radiusFormat raw.MTLAttributeFormat)
+	RadiusFormat() MTLAttributeFormat
+	SetRadiusFormat(radiusFormat MTLAttributeFormat)
 	RadiusStride() uint
 	SetRadiusStride(radiusStride uint)
 	IndexBuffer() raw.MTLBuffer
 	SetIndexBuffer(indexBuffer raw.MTLBuffer)
 	IndexBufferOffset() uint
 	SetIndexBufferOffset(indexBufferOffset uint)
-	IndexType() raw.MTLIndexType
-	SetIndexType(indexType raw.MTLIndexType)
+	IndexType() MTLIndexType
+	SetIndexType(indexType MTLIndexType)
 	SegmentCount() uint
 	SetSegmentCount(segmentCount uint)
 	SegmentControlPointCount() uint
 	SetSegmentControlPointCount(segmentControlPointCount uint)
-	CurveType() raw.MTLCurveType
-	SetCurveType(curveType raw.MTLCurveType)
-	CurveBasis() raw.MTLCurveBasis
-	SetCurveBasis(curveBasis raw.MTLCurveBasis)
-	CurveEndCaps() raw.MTLCurveEndCaps
-	SetCurveEndCaps(curveEndCaps raw.MTLCurveEndCaps)
+	CurveType() MTLCurveType
+	SetCurveType(curveType MTLCurveType)
+	CurveBasis() MTLCurveBasis
+	SetCurveBasis(curveBasis MTLCurveBasis)
+	CurveEndCaps() MTLCurveEndCaps
+	SetCurveEndCaps(curveEndCaps MTLCurveEndCaps)
 }
 
 var _ AccelerationStructureCurveGeometryDescriptorable = (*AccelerationStructureCurveGeometryDescriptor)(nil)

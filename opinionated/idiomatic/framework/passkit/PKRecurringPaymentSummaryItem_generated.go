@@ -73,8 +73,8 @@ func (x *RecurringPaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNum
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *RecurringPaymentSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *RecurringPaymentSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetType(type_)
+func (x *RecurringPaymentSummaryItem) WithType(type_ PKPaymentSummaryItemType) *RecurringPaymentSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))
 	return x
 }
 
@@ -131,7 +131,7 @@ type RecurringPaymentSummaryItemable interface {
 	WithEndDate(endDate *foundation.NSDate) *RecurringPaymentSummaryItem
 	WithLabel(label string) *RecurringPaymentSummaryItem
 	WithAmount(amount *foundation.NSDecimalNumber) *RecurringPaymentSummaryItem
-	WithType(type_ raw.PKPaymentSummaryItemType) *RecurringPaymentSummaryItem
+	WithType(type_ PKPaymentSummaryItemType) *RecurringPaymentSummaryItem
 	StartDate() *foundation.NSDate
 	SetStartDate(startDate *foundation.NSDate)
 	IntervalUnit() foundation.NSCalendarUnit

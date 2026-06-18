@@ -59,14 +59,14 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(i
 }
 
 // WithMotionStartBorderMode sets the motionStartBorderMode property and returns the receiver for chaining.
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionStartBorderMode(motionStartBorderMode raw.MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor {
-	x.inner.SetMotionStartBorderMode(motionStartBorderMode)
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionStartBorderMode(motionStartBorderMode MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor {
+	x.inner.SetMotionStartBorderMode(raw.MTLMotionBorderMode(motionStartBorderMode))
 	return x
 }
 
 // WithMotionEndBorderMode sets the motionEndBorderMode property and returns the receiver for chaining.
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionEndBorderMode(motionEndBorderMode raw.MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor {
-	x.inner.SetMotionEndBorderMode(motionEndBorderMode)
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionEndBorderMode(motionEndBorderMode MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor {
+	x.inner.SetMotionEndBorderMode(raw.MTLMotionBorderMode(motionEndBorderMode))
 	return x
 }
 
@@ -89,8 +89,8 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithMotionKeyframeCount(m
 }
 
 // WithUsage sets the usage property and returns the receiver for chaining.
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithUsage(usage raw.MTLAccelerationStructureUsage) *MTL4PrimitiveAccelerationStructureDescriptor {
-	x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor.SetUsage(usage)
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithUsage(usage MTLAccelerationStructureUsage) *MTL4PrimitiveAccelerationStructureDescriptor {
+	x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor.SetUsage(raw.MTLAccelerationStructureUsage(usage))
 	return x
 }
 
@@ -111,23 +111,23 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetGeometryDescriptors(ge
 }
 
 // MotionStartBorderMode calls the underlying MotionStartBorderMode.
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) MotionStartBorderMode() raw.MTLMotionBorderMode {
-	return x.inner.MotionStartBorderMode()
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) MotionStartBorderMode() MTLMotionBorderMode {
+	return MTLMotionBorderMode(x.inner.MotionStartBorderMode())
 }
 
 // SetMotionStartBorderMode calls the underlying SetMotionStartBorderMode.
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionStartBorderMode(motionStartBorderMode raw.MTLMotionBorderMode) {
-	x.inner.SetMotionStartBorderMode(motionStartBorderMode)
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionStartBorderMode(motionStartBorderMode MTLMotionBorderMode) {
+	x.inner.SetMotionStartBorderMode(raw.MTLMotionBorderMode(motionStartBorderMode))
 }
 
 // MotionEndBorderMode calls the underlying MotionEndBorderMode.
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) MotionEndBorderMode() raw.MTLMotionBorderMode {
-	return x.inner.MotionEndBorderMode()
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) MotionEndBorderMode() MTLMotionBorderMode {
+	return MTLMotionBorderMode(x.inner.MotionEndBorderMode())
 }
 
 // SetMotionEndBorderMode calls the underlying SetMotionEndBorderMode.
-func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionEndBorderMode(motionEndBorderMode raw.MTLMotionBorderMode) {
-	x.inner.SetMotionEndBorderMode(motionEndBorderMode)
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionEndBorderMode(motionEndBorderMode MTLMotionBorderMode) {
+	x.inner.SetMotionEndBorderMode(raw.MTLMotionBorderMode(motionEndBorderMode))
 }
 
 // MotionStartTime calls the underlying MotionStartTime.
@@ -172,18 +172,18 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) asAccelerationStructureDe
 type MTL4PrimitiveAccelerationStructureDescriptorable interface {
 	Unwrap() *raw.MTL4PrimitiveAccelerationStructureDescriptor
 	WithGeometryDescriptors(items ...MTL4AccelerationStructureGeometryDescriptorProvider) *MTL4PrimitiveAccelerationStructureDescriptor
-	WithMotionStartBorderMode(motionStartBorderMode raw.MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor
-	WithMotionEndBorderMode(motionEndBorderMode raw.MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor
+	WithMotionStartBorderMode(motionStartBorderMode MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor
+	WithMotionEndBorderMode(motionEndBorderMode MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor
 	WithMotionStartTime(motionStartTime float32) *MTL4PrimitiveAccelerationStructureDescriptor
 	WithMotionEndTime(motionEndTime float32) *MTL4PrimitiveAccelerationStructureDescriptor
 	WithMotionKeyframeCount(motionKeyframeCount uint) *MTL4PrimitiveAccelerationStructureDescriptor
-	WithUsage(usage raw.MTLAccelerationStructureUsage) *MTL4PrimitiveAccelerationStructureDescriptor
+	WithUsage(usage MTLAccelerationStructureUsage) *MTL4PrimitiveAccelerationStructureDescriptor
 	GeometryDescriptors() []*MTL4AccelerationStructureGeometryDescriptor
 	SetGeometryDescriptors(geometryDescriptors *foundation.NSArray[*raw.MTL4AccelerationStructureGeometryDescriptor])
-	MotionStartBorderMode() raw.MTLMotionBorderMode
-	SetMotionStartBorderMode(motionStartBorderMode raw.MTLMotionBorderMode)
-	MotionEndBorderMode() raw.MTLMotionBorderMode
-	SetMotionEndBorderMode(motionEndBorderMode raw.MTLMotionBorderMode)
+	MotionStartBorderMode() MTLMotionBorderMode
+	SetMotionStartBorderMode(motionStartBorderMode MTLMotionBorderMode)
+	MotionEndBorderMode() MTLMotionBorderMode
+	SetMotionEndBorderMode(motionEndBorderMode MTLMotionBorderMode)
 	MotionStartTime() float32
 	SetMotionStartTime(motionStartTime float32)
 	MotionEndTime() float32

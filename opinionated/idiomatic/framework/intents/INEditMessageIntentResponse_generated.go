@@ -31,9 +31,9 @@ func EditMessageIntentResponseFromID(id objc.ID) *EditMessageIntentResponse {
 }
 
 // NewEditMessageIntentResponseWithCodeUserActivity creates a new [EditMessageIntentResponse].
-func NewEditMessageIntentResponseWithCodeUserActivity(code raw.INEditMessageIntentResponseCode, userActivity *foundation.NSUserActivity) *EditMessageIntentResponse {
+func NewEditMessageIntentResponseWithCodeUserActivity(code INEditMessageIntentResponseCode, userActivity *foundation.NSUserActivity) *EditMessageIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INEditMessageIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, userActivity.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INEditMessageIntentResponseCode(code), userActivity.Ptr())
 	return &EditMessageIntentResponse{inner: raw.INEditMessageIntentResponseFromID(_id)}
 }
 
@@ -44,8 +44,8 @@ func (x *EditMessageIntentResponse) WithUserActivity(userActivity *foundation.NS
 }
 
 // Code calls the underlying Code.
-func (x *EditMessageIntentResponse) Code() raw.INEditMessageIntentResponseCode {
-	return x.inner.Code()
+func (x *EditMessageIntentResponse) Code() INEditMessageIntentResponseCode {
+	return INEditMessageIntentResponseCode(x.inner.Code())
 }
 
 func (x *EditMessageIntentResponse) asIntentResponse() *raw.INIntentResponse {
@@ -56,7 +56,7 @@ func (x *EditMessageIntentResponse) asIntentResponse() *raw.INIntentResponse {
 type EditMessageIntentResponseable interface {
 	Unwrap() *raw.INEditMessageIntentResponse
 	WithUserActivity(userActivity *foundation.NSUserActivity) *EditMessageIntentResponse
-	Code() raw.INEditMessageIntentResponseCode
+	Code() INEditMessageIntentResponseCode
 }
 
 var _ EditMessageIntentResponseable = (*EditMessageIntentResponse)(nil)

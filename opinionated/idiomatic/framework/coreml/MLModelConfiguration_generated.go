@@ -45,8 +45,8 @@ func (x *ModelConfiguration) WithModelDisplayName(modelDisplayName string) *Mode
 }
 
 // WithComputeUnits sets the computeUnits property and returns the receiver for chaining.
-func (x *ModelConfiguration) WithComputeUnits(computeUnits raw.MLComputeUnits) *ModelConfiguration {
-	x.inner.SetComputeUnits(computeUnits)
+func (x *ModelConfiguration) WithComputeUnits(computeUnits MLComputeUnits) *ModelConfiguration {
+	x.inner.SetComputeUnits(raw.MLComputeUnits(computeUnits))
 	return x
 }
 
@@ -95,13 +95,13 @@ func (x *ModelConfiguration) SetModelDisplayName(modelDisplayName string) {
 }
 
 // ComputeUnits calls the underlying ComputeUnits.
-func (x *ModelConfiguration) ComputeUnits() raw.MLComputeUnits {
-	return x.inner.ComputeUnits()
+func (x *ModelConfiguration) ComputeUnits() MLComputeUnits {
+	return MLComputeUnits(x.inner.ComputeUnits())
 }
 
 // SetComputeUnits calls the underlying SetComputeUnits.
-func (x *ModelConfiguration) SetComputeUnits(computeUnits raw.MLComputeUnits) {
-	x.inner.SetComputeUnits(computeUnits)
+func (x *ModelConfiguration) SetComputeUnits(computeUnits MLComputeUnits) {
+	x.inner.SetComputeUnits(raw.MLComputeUnits(computeUnits))
 }
 
 // OptimizationHints calls the underlying OptimizationHints.
@@ -166,7 +166,7 @@ func (x *ModelConfiguration) SetFunctionName(functionName string) {
 type ModelConfigurationable interface {
 	Unwrap() *raw.MLModelConfiguration
 	WithModelDisplayName(modelDisplayName string) *ModelConfiguration
-	WithComputeUnits(computeUnits raw.MLComputeUnits) *ModelConfiguration
+	WithComputeUnits(computeUnits MLComputeUnits) *ModelConfiguration
 	WithOptimizationHints(optimizationHints *OptimizationHints) *ModelConfiguration
 	WithAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) *ModelConfiguration
 	WithPreferredMetalDevice(preferredMetalDevice metal.MTLDevice) *ModelConfiguration
@@ -174,8 +174,8 @@ type ModelConfigurationable interface {
 	WithFunctionName(functionName string) *ModelConfiguration
 	ModelDisplayName() string
 	SetModelDisplayName(modelDisplayName string)
-	ComputeUnits() raw.MLComputeUnits
-	SetComputeUnits(computeUnits raw.MLComputeUnits)
+	ComputeUnits() MLComputeUnits
+	SetComputeUnits(computeUnits MLComputeUnits)
 	OptimizationHints() *OptimizationHints
 	SetOptimizationHints(optimizationHints *raw.MLOptimizationHints)
 	AllowLowPrecisionAccumulationOnGPU() bool

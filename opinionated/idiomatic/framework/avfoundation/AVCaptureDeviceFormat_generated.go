@@ -87,8 +87,8 @@ func (x *CaptureDeviceFormat) IsHighPhotoQualitySupported() bool {
 }
 
 // AutoFocusSystem calls the underlying AutoFocusSystem.
-func (x *CaptureDeviceFormat) AutoFocusSystem() raw.AVCaptureAutoFocusSystem {
-	return x.inner.AutoFocusSystem()
+func (x *CaptureDeviceFormat) AutoFocusSystem() AVCaptureAutoFocusSystem {
+	return AVCaptureAutoFocusSystem(x.inner.AutoFocusSystem())
 }
 
 // SupportedColorSpaces returns the collection as a Go slice.
@@ -309,7 +309,7 @@ type CaptureDeviceFormatable interface {
 	SystemRecommendedVideoZoomRange() *ZoomRange
 	SystemRecommendedExposureBiasRange() *ExposureBiasRange
 	IsHighPhotoQualitySupported() bool
-	AutoFocusSystem() raw.AVCaptureAutoFocusSystem
+	AutoFocusSystem() AVCaptureAutoFocusSystem
 	SupportedColorSpaces() []*foundation.NSNumber
 	SupportedVideoZoomRangesForDepthDataDelivery() []*ZoomRange
 	ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported() bool

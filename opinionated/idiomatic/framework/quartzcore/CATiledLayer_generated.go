@@ -249,8 +249,8 @@ func (x *TiledLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *TiledLay
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *TiledLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *TiledLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *TiledLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TiledLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -267,8 +267,8 @@ func (x *TiledLayer) WithCornerRadius(cornerRadius float64) *TiledLayer {
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *TiledLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *TiledLayer {
-	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+func (x *TiledLayer) WithMaskedCorners(maskedCorners CACornerMask) *TiledLayer {
+	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -333,8 +333,8 @@ func (x *TiledLayer) WithShadowRadius(shadowRadius float64) *TiledLayer {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TiledLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *TiledLayer {
-	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+func (x *TiledLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TiledLayer {
+	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -454,10 +454,10 @@ type TiledLayerable interface {
 	WithOpaque(opaque bool) *TiledLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TiledLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *TiledLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *TiledLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TiledLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TiledLayer
 	WithCornerRadius(cornerRadius float64) *TiledLayer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *TiledLayer
+	WithMaskedCorners(maskedCorners CACornerMask) *TiledLayer
 	WithCornerCurve(cornerCurve *foundation.NSString) *TiledLayer
 	WithBorderWidth(borderWidth float64) *TiledLayer
 	WithOpacity(opacity float32) *TiledLayer
@@ -468,7 +468,7 @@ type TiledLayerable interface {
 	WithShadowOpacity(shadowOpacity float32) *TiledLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *TiledLayer
 	WithShadowRadius(shadowRadius float64) *TiledLayer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *TiledLayer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TiledLayer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *TiledLayer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TiledLayer
 	WithName(name string) *TiledLayer

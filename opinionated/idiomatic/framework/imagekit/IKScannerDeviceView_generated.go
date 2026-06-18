@@ -51,8 +51,8 @@ func (x *ScannerDeviceView) WithScannerDevice(scannerDevice *imagecapturecore.IC
 }
 
 // WithMode sets the mode property and returns the receiver for chaining.
-func (x *ScannerDeviceView) WithMode(mode raw.IKScannerDeviceViewDisplayMode) *ScannerDeviceView {
-	x.inner.SetMode(mode)
+func (x *ScannerDeviceView) WithMode(mode IKScannerDeviceViewDisplayMode) *ScannerDeviceView {
+	x.inner.SetMode(raw.IKScannerDeviceViewDisplayMode(mode))
 	return x
 }
 
@@ -69,8 +69,8 @@ func (x *ScannerDeviceView) WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bo
 }
 
 // WithTransferMode sets the transferMode property and returns the receiver for chaining.
-func (x *ScannerDeviceView) WithTransferMode(transferMode raw.IKScannerDeviceViewTransferMode) *ScannerDeviceView {
-	x.inner.SetTransferMode(transferMode)
+func (x *ScannerDeviceView) WithTransferMode(transferMode IKScannerDeviceViewTransferMode) *ScannerDeviceView {
+	x.inner.SetTransferMode(raw.IKScannerDeviceViewTransferMode(transferMode))
 	return x
 }
 
@@ -137,13 +137,13 @@ func (x *ScannerDeviceView) SetScannerDevice(scannerDevice *imagecapturecore.ICS
 }
 
 // Mode calls the underlying Mode.
-func (x *ScannerDeviceView) Mode() raw.IKScannerDeviceViewDisplayMode {
-	return x.inner.Mode()
+func (x *ScannerDeviceView) Mode() IKScannerDeviceViewDisplayMode {
+	return IKScannerDeviceViewDisplayMode(x.inner.Mode())
 }
 
 // SetMode calls the underlying SetMode.
-func (x *ScannerDeviceView) SetMode(mode raw.IKScannerDeviceViewDisplayMode) {
-	x.inner.SetMode(mode)
+func (x *ScannerDeviceView) SetMode(mode IKScannerDeviceViewDisplayMode) {
+	x.inner.SetMode(raw.IKScannerDeviceViewDisplayMode(mode))
 }
 
 // HasDisplayModeSimple calls the underlying HasDisplayModeSimple.
@@ -167,13 +167,13 @@ func (x *ScannerDeviceView) SetHasDisplayModeAdvanced(hasDisplayModeAdvanced boo
 }
 
 // TransferMode calls the underlying TransferMode.
-func (x *ScannerDeviceView) TransferMode() raw.IKScannerDeviceViewTransferMode {
-	return x.inner.TransferMode()
+func (x *ScannerDeviceView) TransferMode() IKScannerDeviceViewTransferMode {
+	return IKScannerDeviceViewTransferMode(x.inner.TransferMode())
 }
 
 // SetTransferMode calls the underlying SetTransferMode.
-func (x *ScannerDeviceView) SetTransferMode(transferMode raw.IKScannerDeviceViewTransferMode) {
-	x.inner.SetTransferMode(transferMode)
+func (x *ScannerDeviceView) SetTransferMode(transferMode IKScannerDeviceViewTransferMode) {
+	x.inner.SetTransferMode(raw.IKScannerDeviceViewTransferMode(transferMode))
 }
 
 // ScanControlLabel calls the underlying ScanControlLabel.
@@ -263,10 +263,10 @@ type ScannerDeviceViewable interface {
 	Unwrap() *raw.IKScannerDeviceView
 	WithDelegate(delegate raw.IKScannerDeviceViewDelegate) *ScannerDeviceView
 	WithScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice) *ScannerDeviceView
-	WithMode(mode raw.IKScannerDeviceViewDisplayMode) *ScannerDeviceView
+	WithMode(mode IKScannerDeviceViewDisplayMode) *ScannerDeviceView
 	WithHasDisplayModeSimple(hasDisplayModeSimple bool) *ScannerDeviceView
 	WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *ScannerDeviceView
-	WithTransferMode(transferMode raw.IKScannerDeviceViewTransferMode) *ScannerDeviceView
+	WithTransferMode(transferMode IKScannerDeviceViewTransferMode) *ScannerDeviceView
 	WithScanControlLabel(scanControlLabel string) *ScannerDeviceView
 	WithOverviewControlLabel(overviewControlLabel string) *ScannerDeviceView
 	WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *ScannerDeviceView
@@ -278,14 +278,14 @@ type ScannerDeviceViewable interface {
 	SetDelegate(delegate raw.IKScannerDeviceViewDelegate)
 	ScannerDevice() *imagecapturecore.ICScannerDevice
 	SetScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice)
-	Mode() raw.IKScannerDeviceViewDisplayMode
-	SetMode(mode raw.IKScannerDeviceViewDisplayMode)
+	Mode() IKScannerDeviceViewDisplayMode
+	SetMode(mode IKScannerDeviceViewDisplayMode)
 	HasDisplayModeSimple() bool
 	SetHasDisplayModeSimple(hasDisplayModeSimple bool)
 	HasDisplayModeAdvanced() bool
 	SetHasDisplayModeAdvanced(hasDisplayModeAdvanced bool)
-	TransferMode() raw.IKScannerDeviceViewTransferMode
-	SetTransferMode(transferMode raw.IKScannerDeviceViewTransferMode)
+	TransferMode() IKScannerDeviceViewTransferMode
+	SetTransferMode(transferMode IKScannerDeviceViewTransferMode)
 	ScanControlLabel() string
 	SetScanControlLabel(scanControlLabel string)
 	OverviewControlLabel() string

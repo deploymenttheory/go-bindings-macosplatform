@@ -51,8 +51,8 @@ func (x *LogEntrySignpost) SignpostName() string {
 }
 
 // SignpostType calls the underlying SignpostType.
-func (x *LogEntrySignpost) SignpostType() raw.OSLogEntrySignpostType {
-	return x.inner.SignpostType()
+func (x *LogEntrySignpost) SignpostType() OSLogEntrySignpostType {
+	return OSLogEntrySignpostType(x.inner.SignpostType())
 }
 
 func (x *LogEntrySignpost) asLogEntry() *raw.OSLogEntry { return &x.inner.OSLogEntry }
@@ -62,7 +62,7 @@ type LogEntrySignpostable interface {
 	Unwrap() *raw.OSLogEntrySignpost
 	SignpostIdentifier() uint64
 	SignpostName() string
-	SignpostType() raw.OSLogEntrySignpostType
+	SignpostType() OSLogEntrySignpostType
 }
 
 var _ LogEntrySignpostable = (*LogEntrySignpost)(nil)

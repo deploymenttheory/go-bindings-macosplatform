@@ -85,8 +85,8 @@ func (x *Parameter) SetValueOriginatorAtHostTime(value float32, originator unsaf
 }
 
 // SetValueOriginatorAtHostTimeEventType calls the underlying SetValueOriginatorAtHostTimeEventType.
-func (x *Parameter) SetValueOriginatorAtHostTimeEventType(value float32, originator unsafe.Pointer, hostTime uint64, eventType raw.AUParameterAutomationEventType) {
-	x.inner.SetValueOriginatorAtHostTimeEventType(value, originator, hostTime, eventType)
+func (x *Parameter) SetValueOriginatorAtHostTimeEventType(value float32, originator unsafe.Pointer, hostTime uint64, eventType AUParameterAutomationEventType) {
+	x.inner.SetValueOriginatorAtHostTimeEventType(value, originator, hostTime, raw.AUParameterAutomationEventType(eventType))
 }
 
 // StringFromValue calls the underlying StringFromValue.
@@ -114,8 +114,8 @@ func (x *Parameter) MaxValue() float32 {
 }
 
 // Unit calls the underlying Unit.
-func (x *Parameter) Unit() raw.AudioUnitParameterUnit {
-	return x.inner.Unit()
+func (x *Parameter) Unit() AudioUnitParameterUnit {
+	return AudioUnitParameterUnit(x.inner.Unit())
 }
 
 // UnitName calls the underlying UnitName.
@@ -128,8 +128,8 @@ func (x *Parameter) UnitName() string {
 }
 
 // Flags calls the underlying Flags.
-func (x *Parameter) Flags() raw.AudioUnitParameterOptions {
-	return x.inner.Flags()
+func (x *Parameter) Flags() AudioUnitParameterOptions {
+	return AudioUnitParameterOptions(x.inner.Flags())
 }
 
 // Address calls the underlying Address.
@@ -182,14 +182,14 @@ type Parameterable interface {
 	WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *Parameter
 	SetValueOriginator(value float32, originator unsafe.Pointer)
 	SetValueOriginatorAtHostTime(value float32, originator unsafe.Pointer, hostTime uint64)
-	SetValueOriginatorAtHostTimeEventType(value float32, originator unsafe.Pointer, hostTime uint64, eventType raw.AUParameterAutomationEventType)
+	SetValueOriginatorAtHostTimeEventType(value float32, originator unsafe.Pointer, hostTime uint64, eventType AUParameterAutomationEventType)
 	StringFromValue(value *float32) string
 	ValueFromString(string_ string) float32
 	MinValue() float32
 	MaxValue() float32
-	Unit() raw.AudioUnitParameterUnit
+	Unit() AudioUnitParameterUnit
 	UnitName() string
-	Flags() raw.AudioUnitParameterOptions
+	Flags() AudioUnitParameterOptions
 	Address() uint64
 	ValueStrings() []string
 	DependentParameters() []*foundation.NSNumber

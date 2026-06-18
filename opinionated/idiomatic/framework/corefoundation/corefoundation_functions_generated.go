@@ -32,9 +32,9 @@ func CFBundlePreflightExecutable(bundle unsafe.Pointer) error {
 }
 
 // CFPropertyListCreateData calls [raw.CFPropertyListCreateData], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFPropertyListCreateData(allocator unsafe.Pointer, propertyList unsafe.Pointer, format raw.CFPropertyListFormat, options uint) (unsafe.Pointer, error) {
+func CFPropertyListCreateData(allocator unsafe.Pointer, propertyList unsafe.Pointer, format CFPropertyListFormat, options uint) (unsafe.Pointer, error) {
 	var _cfErr unsafe.Pointer
-	_result := raw.CFPropertyListCreateData(allocator, propertyList, format, options, unsafe.Pointer(&_cfErr))
+	_result := raw.CFPropertyListCreateData(allocator, propertyList, raw.CFPropertyListFormat(format), options, unsafe.Pointer(&_cfErr))
 	if _result == nil {
 		return nil, _cfErrOrMsg(_cfErr, "CFPropertyListCreateData")
 	}
@@ -102,9 +102,9 @@ func CFURLCopyResourcePropertyForKey(url unsafe.Pointer, key unsafe.Pointer, pro
 }
 
 // CFURLCreateBookmarkData calls [raw.CFURLCreateBookmarkData], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLCreateBookmarkData(allocator unsafe.Pointer, url unsafe.Pointer, options raw.CFURLBookmarkCreationOptions, resourcePropertiesToInclude unsafe.Pointer, relativeToURL unsafe.Pointer) (unsafe.Pointer, error) {
+func CFURLCreateBookmarkData(allocator unsafe.Pointer, url unsafe.Pointer, options CFURLBookmarkCreationOptions, resourcePropertiesToInclude unsafe.Pointer, relativeToURL unsafe.Pointer) (unsafe.Pointer, error) {
 	var _cfErr unsafe.Pointer
-	_result := raw.CFURLCreateBookmarkData(allocator, url, options, resourcePropertiesToInclude, relativeToURL, unsafe.Pointer(&_cfErr))
+	_result := raw.CFURLCreateBookmarkData(allocator, url, raw.CFURLBookmarkCreationOptions(options), resourcePropertiesToInclude, relativeToURL, unsafe.Pointer(&_cfErr))
 	if _result == nil {
 		return nil, _cfErrOrMsg(_cfErr, "CFURLCreateBookmarkData")
 	}
@@ -122,9 +122,9 @@ func CFURLCreateBookmarkDataFromFile(allocator unsafe.Pointer, fileURL unsafe.Po
 }
 
 // CFURLCreateByResolvingBookmarkData calls [raw.CFURLCreateByResolvingBookmarkData], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CFURLCreateByResolvingBookmarkData(allocator unsafe.Pointer, bookmark unsafe.Pointer, options raw.CFURLBookmarkResolutionOptions, relativeToURL unsafe.Pointer, resourcePropertiesToInclude unsafe.Pointer, isStale *uint8) (unsafe.Pointer, error) {
+func CFURLCreateByResolvingBookmarkData(allocator unsafe.Pointer, bookmark unsafe.Pointer, options CFURLBookmarkResolutionOptions, relativeToURL unsafe.Pointer, resourcePropertiesToInclude unsafe.Pointer, isStale *uint8) (unsafe.Pointer, error) {
 	var _cfErr unsafe.Pointer
-	_result := raw.CFURLCreateByResolvingBookmarkData(allocator, bookmark, options, relativeToURL, resourcePropertiesToInclude, isStale, unsafe.Pointer(&_cfErr))
+	_result := raw.CFURLCreateByResolvingBookmarkData(allocator, bookmark, raw.CFURLBookmarkResolutionOptions(options), relativeToURL, resourcePropertiesToInclude, isStale, unsafe.Pointer(&_cfErr))
 	if _result == nil {
 		return nil, _cfErrOrMsg(_cfErr, "CFURLCreateByResolvingBookmarkData")
 	}

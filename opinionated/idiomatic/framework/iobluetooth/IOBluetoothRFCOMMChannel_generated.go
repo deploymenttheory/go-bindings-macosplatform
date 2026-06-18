@@ -82,13 +82,13 @@ func (x *IOBluetoothRFCOMMChannel) WriteSimpleLengthSleepBytesSent(data unsafe.P
 }
 
 // SetSerialParametersDataBitsParityStopBits calls the underlying SetSerialParametersDataBitsParityStopBits.
-func (x *IOBluetoothRFCOMMChannel) SetSerialParametersDataBitsParityStopBits(speed uint, nBits uint8, parity raw.BluetoothRFCOMMParityType, bitStop uint8) int {
-	return x.inner.SetSerialParametersDataBitsParityStopBits(speed, nBits, parity, bitStop)
+func (x *IOBluetoothRFCOMMChannel) SetSerialParametersDataBitsParityStopBits(speed uint, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int {
+	return x.inner.SetSerialParametersDataBitsParityStopBits(speed, nBits, raw.BluetoothRFCOMMParityType(parity), bitStop)
 }
 
 // SendRemoteLineStatus calls the underlying SendRemoteLineStatus.
-func (x *IOBluetoothRFCOMMChannel) SendRemoteLineStatus(lineStatus raw.BluetoothRFCOMMLineStatus) int {
-	return x.inner.SendRemoteLineStatus(lineStatus)
+func (x *IOBluetoothRFCOMMChannel) SendRemoteLineStatus(lineStatus BluetoothRFCOMMLineStatus) int {
+	return x.inner.SendRemoteLineStatus(raw.BluetoothRFCOMMLineStatus(lineStatus))
 }
 
 // SetDelegate calls the underlying SetDelegate.
@@ -150,8 +150,8 @@ type IOBluetoothRFCOMMChannelable interface {
 	WriteAsyncLengthRefcon(data unsafe.Pointer, length uint16, refcon unsafe.Pointer) int
 	WriteSyncLength(data unsafe.Pointer, length uint16) int
 	WriteSimpleLengthSleepBytesSent(data unsafe.Pointer, length uint16, sleep bool, numBytesSent *uint) int
-	SetSerialParametersDataBitsParityStopBits(speed uint, nBits uint8, parity raw.BluetoothRFCOMMParityType, bitStop uint8) int
-	SendRemoteLineStatus(lineStatus raw.BluetoothRFCOMMLineStatus) int
+	SetSerialParametersDataBitsParityStopBits(speed uint, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int
+	SendRemoteLineStatus(lineStatus BluetoothRFCOMMLineStatus) int
 	SetDelegate(delegate objc.ID) int
 	Delegate() objc.ID
 	GetChannelID() uint8

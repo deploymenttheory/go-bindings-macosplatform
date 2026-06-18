@@ -81,8 +81,8 @@ func (x *EPSImageRep) WithPixelsHigh(pixelsHigh int) *EPSImageRep {
 }
 
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *EPSImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *EPSImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+func (x *EPSImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *EPSImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
@@ -113,7 +113,7 @@ type EPSImageRepable interface {
 	WithBitsPerSample(bitsPerSample int) *EPSImageRep
 	WithPixelsWide(pixelsWide int) *EPSImageRep
 	WithPixelsHigh(pixelsHigh int) *EPSImageRep
-	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *EPSImageRep
+	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *EPSImageRep
 	PrepareGState()
 	BoundingBox() corefoundation.CGRect
 	EPSRepresentation() *foundation.NSData

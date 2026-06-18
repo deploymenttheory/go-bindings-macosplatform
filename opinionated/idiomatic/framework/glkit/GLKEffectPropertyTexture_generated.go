@@ -48,14 +48,14 @@ func (x *EffectPropertyTexture) WithName(name uint32) *EffectPropertyTexture {
 }
 
 // WithTarget sets the target property and returns the receiver for chaining.
-func (x *EffectPropertyTexture) WithTarget(target raw.GLKTextureTarget) *EffectPropertyTexture {
-	x.inner.SetTarget(target)
+func (x *EffectPropertyTexture) WithTarget(target GLKTextureTarget) *EffectPropertyTexture {
+	x.inner.SetTarget(raw.GLKTextureTarget(target))
 	return x
 }
 
 // WithEnvMode sets the envMode property and returns the receiver for chaining.
-func (x *EffectPropertyTexture) WithEnvMode(envMode raw.GLKTextureEnvMode) *EffectPropertyTexture {
-	x.inner.SetEnvMode(envMode)
+func (x *EffectPropertyTexture) WithEnvMode(envMode GLKTextureEnvMode) *EffectPropertyTexture {
+	x.inner.SetEnvMode(raw.GLKTextureEnvMode(envMode))
 	return x
 }
 
@@ -80,23 +80,23 @@ func (x *EffectPropertyTexture) SetName(name uint32) {
 }
 
 // Target calls the underlying Target.
-func (x *EffectPropertyTexture) Target() raw.GLKTextureTarget {
-	return x.inner.Target()
+func (x *EffectPropertyTexture) Target() GLKTextureTarget {
+	return GLKTextureTarget(x.inner.Target())
 }
 
 // SetTarget calls the underlying SetTarget.
-func (x *EffectPropertyTexture) SetTarget(target raw.GLKTextureTarget) {
-	x.inner.SetTarget(target)
+func (x *EffectPropertyTexture) SetTarget(target GLKTextureTarget) {
+	x.inner.SetTarget(raw.GLKTextureTarget(target))
 }
 
 // EnvMode calls the underlying EnvMode.
-func (x *EffectPropertyTexture) EnvMode() raw.GLKTextureEnvMode {
-	return x.inner.EnvMode()
+func (x *EffectPropertyTexture) EnvMode() GLKTextureEnvMode {
+	return GLKTextureEnvMode(x.inner.EnvMode())
 }
 
 // SetEnvMode calls the underlying SetEnvMode.
-func (x *EffectPropertyTexture) SetEnvMode(envMode raw.GLKTextureEnvMode) {
-	x.inner.SetEnvMode(envMode)
+func (x *EffectPropertyTexture) SetEnvMode(envMode GLKTextureEnvMode) {
+	x.inner.SetEnvMode(raw.GLKTextureEnvMode(envMode))
 }
 
 func (x *EffectPropertyTexture) asEffectProperty() *raw.GLKEffectProperty {
@@ -108,16 +108,16 @@ type EffectPropertyTextureable interface {
 	Unwrap() *raw.GLKEffectPropertyTexture
 	WithEnabled(enabled uint8) *EffectPropertyTexture
 	WithName(name uint32) *EffectPropertyTexture
-	WithTarget(target raw.GLKTextureTarget) *EffectPropertyTexture
-	WithEnvMode(envMode raw.GLKTextureEnvMode) *EffectPropertyTexture
+	WithTarget(target GLKTextureTarget) *EffectPropertyTexture
+	WithEnvMode(envMode GLKTextureEnvMode) *EffectPropertyTexture
 	Enabled() uint8
 	SetEnabled(enabled uint8)
 	Name() uint32
 	SetName(name uint32)
-	Target() raw.GLKTextureTarget
-	SetTarget(target raw.GLKTextureTarget)
-	EnvMode() raw.GLKTextureEnvMode
-	SetEnvMode(envMode raw.GLKTextureEnvMode)
+	Target() GLKTextureTarget
+	SetTarget(target GLKTextureTarget)
+	EnvMode() GLKTextureEnvMode
+	SetEnvMode(envMode GLKTextureEnvMode)
 }
 
 var _ EffectPropertyTextureable = (*EffectPropertyTexture)(nil)

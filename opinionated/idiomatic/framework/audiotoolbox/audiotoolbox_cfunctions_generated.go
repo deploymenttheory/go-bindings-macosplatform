@@ -352,8 +352,8 @@ func AudioComponentInstanceNew(inComponent unsafe.Pointer, outInstance **carbonc
 }
 
 // AudioComponentInstantiate calls [raw.AudioComponentInstantiate] (C function AudioComponentInstantiate).
-func AudioComponentInstantiate(inComponent unsafe.Pointer, inOptions raw.AudioComponentInstantiationOptions, inCompletionHandler func(*carboncore.ComponentInstanceRecord, int)) {
-	raw.AudioComponentInstantiate(inComponent, inOptions, inCompletionHandler)
+func AudioComponentInstantiate(inComponent unsafe.Pointer, inOptions AudioComponentInstantiationOptions, inCompletionHandler func(*carboncore.ComponentInstanceRecord, int)) {
+	raw.AudioComponentInstantiate(inComponent, raw.AudioComponentInstantiationOptions(inOptions), inCompletionHandler)
 }
 
 // AudioComponentRegister calls [raw.AudioComponentRegister] (C function AudioComponentRegister).
@@ -362,13 +362,20 @@ func AudioComponentRegister(inDesc *raw.AudioComponentDescription, inName unsafe
 }
 
 // AudioComponentValidate calls [raw.AudioComponentValidate] (C function AudioComponentValidate).
-func AudioComponentValidate(inComponent unsafe.Pointer, inValidationParameters unsafe.Pointer, outValidationResult *raw.AudioComponentValidationResult) int {
-	return raw.AudioComponentValidate(inComponent, inValidationParameters, outValidationResult)
+func AudioComponentValidate(inComponent unsafe.Pointer, inValidationParameters unsafe.Pointer, outValidationResult *AudioComponentValidationResult) int {
+	var _outValidationResult raw.AudioComponentValidationResult
+	_ret := raw.AudioComponentValidate(inComponent, inValidationParameters, &_outValidationResult)
+	if outValidationResult != nil {
+		*outValidationResult = AudioComponentValidationResult(_outValidationResult)
+	}
+	return _ret
 }
 
 // AudioComponentValidateWithResults calls [raw.AudioComponentValidateWithResults] (C function AudioComponentValidateWithResults).
-func AudioComponentValidateWithResults(inComponent unsafe.Pointer, inValidationParameters unsafe.Pointer, inCompletionHandler func(raw.AudioComponentValidationResult, unsafe.Pointer)) int {
-	return raw.AudioComponentValidateWithResults(inComponent, inValidationParameters, inCompletionHandler)
+func AudioComponentValidateWithResults(inComponent unsafe.Pointer, inValidationParameters unsafe.Pointer, inCompletionHandler func(AudioComponentValidationResult, unsafe.Pointer)) int {
+	return raw.AudioComponentValidateWithResults(inComponent, inValidationParameters, func(_a0 raw.AudioComponentValidationResult, _a1 unsafe.Pointer) {
+		inCompletionHandler(AudioComponentValidationResult(_a0), _a1)
+	})
 }
 
 // AudioConverterConvertBuffer calls [raw.AudioConverterConvertBuffer] (C function AudioConverterConvertBuffer).
@@ -427,8 +434,8 @@ func AudioConverterNewSpecific(inSourceFormat *coreaudiotypes.AudioStreamBasicDe
 }
 
 // AudioConverterNewWithOptions calls [raw.AudioConverterNewWithOptions] (C function AudioConverterNewWithOptions).
-func AudioConverterNewWithOptions(inSourceFormat *coreaudiotypes.AudioStreamBasicDescription, inDestinationFormat *coreaudiotypes.AudioStreamBasicDescription, inOptions raw.AudioConverterOptions, outAudioConverter unsafe.Pointer) int {
-	return raw.AudioConverterNewWithOptions(inSourceFormat, inDestinationFormat, inOptions, outAudioConverter)
+func AudioConverterNewWithOptions(inSourceFormat *coreaudiotypes.AudioStreamBasicDescription, inDestinationFormat *coreaudiotypes.AudioStreamBasicDescription, inOptions AudioConverterOptions, outAudioConverter unsafe.Pointer) int {
+	return raw.AudioConverterNewWithOptions(inSourceFormat, inDestinationFormat, raw.AudioConverterOptions(inOptions), outAudioConverter)
 }
 
 // AudioConverterPrepare calls [raw.AudioConverterPrepare] (C function AudioConverterPrepare).
@@ -537,13 +544,13 @@ func AudioFileCountUserData(inAudioFile unsafe.Pointer, inUserDataID uint, outNu
 }
 
 // AudioFileCreate calls [raw.AudioFileCreate] (C function AudioFileCreate).
-func AudioFileCreate(inParentRef *carboncore.FSRef, inFileName unsafe.Pointer, inFileType uint, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags raw.AudioFileFlags, outNewFileRef *carboncore.FSRef, outAudioFile unsafe.Pointer) int {
-	return raw.AudioFileCreate(inParentRef, inFileName, inFileType, inFormat, inFlags, outNewFileRef, outAudioFile)
+func AudioFileCreate(inParentRef *carboncore.FSRef, inFileName unsafe.Pointer, inFileType uint, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags AudioFileFlags, outNewFileRef *carboncore.FSRef, outAudioFile unsafe.Pointer) int {
+	return raw.AudioFileCreate(inParentRef, inFileName, inFileType, inFormat, raw.AudioFileFlags(inFlags), outNewFileRef, outAudioFile)
 }
 
 // AudioFileCreateWithURL calls [raw.AudioFileCreateWithURL] (C function AudioFileCreateWithURL).
-func AudioFileCreateWithURL(inFileRef unsafe.Pointer, inFileType uint, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags raw.AudioFileFlags, outAudioFile unsafe.Pointer) int {
-	return raw.AudioFileCreateWithURL(inFileRef, inFileType, inFormat, inFlags, outAudioFile)
+func AudioFileCreateWithURL(inFileRef unsafe.Pointer, inFileType uint, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags AudioFileFlags, outAudioFile unsafe.Pointer) int {
+	return raw.AudioFileCreateWithURL(inFileRef, inFileType, inFormat, raw.AudioFileFlags(inFlags), outAudioFile)
 }
 
 // AudioFileGetGlobalInfo calls [raw.AudioFileGetGlobalInfo] (C function AudioFileGetGlobalInfo).
@@ -587,23 +594,23 @@ func AudioFileGetUserDataSize64(inAudioFile unsafe.Pointer, inUserDataID uint, i
 }
 
 // AudioFileInitialize calls [raw.AudioFileInitialize] (C function AudioFileInitialize).
-func AudioFileInitialize(inFileRef *carboncore.FSRef, inFileType uint, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags raw.AudioFileFlags, outAudioFile unsafe.Pointer) int {
-	return raw.AudioFileInitialize(inFileRef, inFileType, inFormat, inFlags, outAudioFile)
+func AudioFileInitialize(inFileRef *carboncore.FSRef, inFileType uint, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags AudioFileFlags, outAudioFile unsafe.Pointer) int {
+	return raw.AudioFileInitialize(inFileRef, inFileType, inFormat, raw.AudioFileFlags(inFlags), outAudioFile)
 }
 
 // AudioFileInitializeWithCallbacks calls [raw.AudioFileInitializeWithCallbacks] (C function AudioFileInitializeWithCallbacks).
-func AudioFileInitializeWithCallbacks(inClientData unsafe.Pointer, inReadFunc unsafe.Pointer, inWriteFunc unsafe.Pointer, inGetSizeFunc unsafe.Pointer, inSetSizeFunc unsafe.Pointer, inFileType uint, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags raw.AudioFileFlags, outAudioFile unsafe.Pointer) int {
-	return raw.AudioFileInitializeWithCallbacks(inClientData, inReadFunc, inWriteFunc, inGetSizeFunc, inSetSizeFunc, inFileType, inFormat, inFlags, outAudioFile)
+func AudioFileInitializeWithCallbacks(inClientData unsafe.Pointer, inReadFunc unsafe.Pointer, inWriteFunc unsafe.Pointer, inGetSizeFunc unsafe.Pointer, inSetSizeFunc unsafe.Pointer, inFileType uint, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags AudioFileFlags, outAudioFile unsafe.Pointer) int {
+	return raw.AudioFileInitializeWithCallbacks(inClientData, inReadFunc, inWriteFunc, inGetSizeFunc, inSetSizeFunc, inFileType, inFormat, raw.AudioFileFlags(inFlags), outAudioFile)
 }
 
 // AudioFileOpen calls [raw.AudioFileOpen] (C function AudioFileOpen).
-func AudioFileOpen(inFileRef *carboncore.FSRef, inPermissions raw.AudioFilePermissions, inFileTypeHint uint, outAudioFile unsafe.Pointer) int {
-	return raw.AudioFileOpen(inFileRef, inPermissions, inFileTypeHint, outAudioFile)
+func AudioFileOpen(inFileRef *carboncore.FSRef, inPermissions AudioFilePermissions, inFileTypeHint uint, outAudioFile unsafe.Pointer) int {
+	return raw.AudioFileOpen(inFileRef, raw.AudioFilePermissions(inPermissions), inFileTypeHint, outAudioFile)
 }
 
 // AudioFileOpenURL calls [raw.AudioFileOpenURL] (C function AudioFileOpenURL).
-func AudioFileOpenURL(inFileRef unsafe.Pointer, inPermissions raw.AudioFilePermissions, inFileTypeHint uint, outAudioFile unsafe.Pointer) int {
-	return raw.AudioFileOpenURL(inFileRef, inPermissions, inFileTypeHint, outAudioFile)
+func AudioFileOpenURL(inFileRef unsafe.Pointer, inPermissions AudioFilePermissions, inFileTypeHint uint, outAudioFile unsafe.Pointer) int {
+	return raw.AudioFileOpenURL(inFileRef, raw.AudioFilePermissions(inPermissions), inFileTypeHint, outAudioFile)
 }
 
 // AudioFileOpenWithCallbacks calls [raw.AudioFileOpenWithCallbacks] (C function AudioFileOpenWithCallbacks).
@@ -667,13 +674,18 @@ func AudioFileStreamOpen(inClientData unsafe.Pointer, inPropertyListenerProc uns
 }
 
 // AudioFileStreamParseBytes calls [raw.AudioFileStreamParseBytes] (C function AudioFileStreamParseBytes).
-func AudioFileStreamParseBytes(inAudioFileStream unsafe.Pointer, inDataByteSize uint, inData unsafe.Pointer, inFlags raw.AudioFileStreamParseFlags) int {
-	return raw.AudioFileStreamParseBytes(inAudioFileStream, inDataByteSize, inData, inFlags)
+func AudioFileStreamParseBytes(inAudioFileStream unsafe.Pointer, inDataByteSize uint, inData unsafe.Pointer, inFlags AudioFileStreamParseFlags) int {
+	return raw.AudioFileStreamParseBytes(inAudioFileStream, inDataByteSize, inData, raw.AudioFileStreamParseFlags(inFlags))
 }
 
 // AudioFileStreamSeek calls [raw.AudioFileStreamSeek] (C function AudioFileStreamSeek).
-func AudioFileStreamSeek(inAudioFileStream unsafe.Pointer, inPacketOffset int64, outDataByteOffset *int64, ioFlags *raw.AudioFileStreamSeekFlags) int {
-	return raw.AudioFileStreamSeek(inAudioFileStream, inPacketOffset, outDataByteOffset, ioFlags)
+func AudioFileStreamSeek(inAudioFileStream unsafe.Pointer, inPacketOffset int64, outDataByteOffset *int64, ioFlags *AudioFileStreamSeekFlags) int {
+	var _ioFlags raw.AudioFileStreamSeekFlags
+	_ret := raw.AudioFileStreamSeek(inAudioFileStream, inPacketOffset, outDataByteOffset, &_ioFlags)
+	if ioFlags != nil {
+		*ioFlags = AudioFileStreamSeekFlags(_ioFlags)
+	}
+	return _ret
 }
 
 // AudioFileStreamSetProperty calls [raw.AudioFileStreamSetProperty] (C function AudioFileStreamSetProperty).
@@ -867,13 +879,18 @@ func AudioQueueProcessingTapGetQueueTime(inAQTap unsafe.Pointer, outQueueSampleT
 }
 
 // AudioQueueProcessingTapGetSourceAudio calls [raw.AudioQueueProcessingTapGetSourceAudio] (C function AudioQueueProcessingTapGetSourceAudio).
-func AudioQueueProcessingTapGetSourceAudio(inAQTap unsafe.Pointer, inNumberFrames uint, ioTimeStamp *coreaudiotypes.AudioTimeStamp, outFlags *raw.AudioQueueProcessingTapFlags, outNumberFrames *uint, ioData *coreaudiotypes.AudioBufferList) int {
-	return raw.AudioQueueProcessingTapGetSourceAudio(inAQTap, inNumberFrames, ioTimeStamp, outFlags, outNumberFrames, ioData)
+func AudioQueueProcessingTapGetSourceAudio(inAQTap unsafe.Pointer, inNumberFrames uint, ioTimeStamp *coreaudiotypes.AudioTimeStamp, outFlags *AudioQueueProcessingTapFlags, outNumberFrames *uint, ioData *coreaudiotypes.AudioBufferList) int {
+	var _outFlags raw.AudioQueueProcessingTapFlags
+	_ret := raw.AudioQueueProcessingTapGetSourceAudio(inAQTap, inNumberFrames, ioTimeStamp, &_outFlags, outNumberFrames, ioData)
+	if outFlags != nil {
+		*outFlags = AudioQueueProcessingTapFlags(_outFlags)
+	}
+	return _ret
 }
 
 // AudioQueueProcessingTapNew calls [raw.AudioQueueProcessingTapNew] (C function AudioQueueProcessingTapNew).
-func AudioQueueProcessingTapNew(inAQ unsafe.Pointer, inCallback unsafe.Pointer, inClientData unsafe.Pointer, inFlags raw.AudioQueueProcessingTapFlags, outMaxFrames *uint, outProcessingFormat *coreaudiotypes.AudioStreamBasicDescription, outAQTap unsafe.Pointer) int {
-	return raw.AudioQueueProcessingTapNew(inAQ, inCallback, inClientData, inFlags, outMaxFrames, outProcessingFormat, outAQTap)
+func AudioQueueProcessingTapNew(inAQ unsafe.Pointer, inCallback unsafe.Pointer, inClientData unsafe.Pointer, inFlags AudioQueueProcessingTapFlags, outMaxFrames *uint, outProcessingFormat *coreaudiotypes.AudioStreamBasicDescription, outAQTap unsafe.Pointer) int {
+	return raw.AudioQueueProcessingTapNew(inAQ, inCallback, inClientData, raw.AudioQueueProcessingTapFlags(inFlags), outMaxFrames, outProcessingFormat, outAQTap)
 }
 
 // AudioQueueRemovePropertyListener calls [raw.AudioQueueRemovePropertyListener] (C function AudioQueueRemovePropertyListener).
@@ -1032,8 +1049,8 @@ func CAClockGetCurrentTempo(inCAClock unsafe.Pointer, outTempo *float64, outTime
 }
 
 // CAClockGetCurrentTime calls [raw.CAClockGetCurrentTime] (C function CAClockGetCurrentTime).
-func CAClockGetCurrentTime(inCAClock unsafe.Pointer, inTimeFormat raw.CAClockTimeFormat, outTime *raw.CAClockTime) int {
-	return raw.CAClockGetCurrentTime(inCAClock, inTimeFormat, outTime)
+func CAClockGetCurrentTime(inCAClock unsafe.Pointer, inTimeFormat CAClockTimeFormat, outTime *raw.CAClockTime) int {
+	return raw.CAClockGetCurrentTime(inCAClock, raw.CAClockTimeFormat(inTimeFormat), outTime)
 }
 
 // CAClockGetPlayRate calls [raw.CAClockGetPlayRate] (C function CAClockGetPlayRate).
@@ -1042,18 +1059,18 @@ func CAClockGetPlayRate(inCAClock unsafe.Pointer, outPlayRate *float64) int {
 }
 
 // CAClockGetProperty calls [raw.CAClockGetProperty] (C function CAClockGetProperty).
-func CAClockGetProperty(inCAClock unsafe.Pointer, inPropertyID raw.CAClockPropertyID, ioPropertyDataSize *uint, outPropertyData unsafe.Pointer) int {
-	return raw.CAClockGetProperty(inCAClock, inPropertyID, ioPropertyDataSize, outPropertyData)
+func CAClockGetProperty(inCAClock unsafe.Pointer, inPropertyID CAClockPropertyID, ioPropertyDataSize *uint, outPropertyData unsafe.Pointer) int {
+	return raw.CAClockGetProperty(inCAClock, raw.CAClockPropertyID(inPropertyID), ioPropertyDataSize, outPropertyData)
 }
 
 // CAClockGetPropertyInfo calls [raw.CAClockGetPropertyInfo] (C function CAClockGetPropertyInfo).
-func CAClockGetPropertyInfo(inCAClock unsafe.Pointer, inPropertyID raw.CAClockPropertyID, outSize *uint, outWritable *uint8) int {
-	return raw.CAClockGetPropertyInfo(inCAClock, inPropertyID, outSize, outWritable)
+func CAClockGetPropertyInfo(inCAClock unsafe.Pointer, inPropertyID CAClockPropertyID, outSize *uint, outWritable *uint8) int {
+	return raw.CAClockGetPropertyInfo(inCAClock, raw.CAClockPropertyID(inPropertyID), outSize, outWritable)
 }
 
 // CAClockGetStartTime calls [raw.CAClockGetStartTime] (C function CAClockGetStartTime).
-func CAClockGetStartTime(inCAClock unsafe.Pointer, inTimeFormat raw.CAClockTimeFormat, outTime *raw.CAClockTime) int {
-	return raw.CAClockGetStartTime(inCAClock, inTimeFormat, outTime)
+func CAClockGetStartTime(inCAClock unsafe.Pointer, inTimeFormat CAClockTimeFormat, outTime *raw.CAClockTime) int {
+	return raw.CAClockGetStartTime(inCAClock, raw.CAClockTimeFormat(inTimeFormat), outTime)
 }
 
 // CAClockNew calls [raw.CAClockNew] (C function CAClockNew).
@@ -1097,8 +1114,8 @@ func CAClockSetPlayRate(inCAClock unsafe.Pointer, inPlayRate float64) int {
 }
 
 // CAClockSetProperty calls [raw.CAClockSetProperty] (C function CAClockSetProperty).
-func CAClockSetProperty(inCAClock unsafe.Pointer, inPropertyID raw.CAClockPropertyID, inPropertyDataSize uint, inPropertyData unsafe.Pointer) int {
-	return raw.CAClockSetProperty(inCAClock, inPropertyID, inPropertyDataSize, inPropertyData)
+func CAClockSetProperty(inCAClock unsafe.Pointer, inPropertyID CAClockPropertyID, inPropertyDataSize uint, inPropertyData unsafe.Pointer) int {
+	return raw.CAClockSetProperty(inCAClock, raw.CAClockPropertyID(inPropertyID), inPropertyDataSize, inPropertyData)
 }
 
 // CAClockStart calls [raw.CAClockStart] (C function CAClockStart).
@@ -1112,8 +1129,8 @@ func CAClockStop(inCAClock unsafe.Pointer) int {
 }
 
 // CAClockTranslateTime calls [raw.CAClockTranslateTime] (C function CAClockTranslateTime).
-func CAClockTranslateTime(inCAClock unsafe.Pointer, inTime *raw.CAClockTime, inOutputTimeFormat raw.CAClockTimeFormat, outTime *raw.CAClockTime) int {
-	return raw.CAClockTranslateTime(inCAClock, inTime, inOutputTimeFormat, outTime)
+func CAClockTranslateTime(inCAClock unsafe.Pointer, inTime *raw.CAClockTime, inOutputTimeFormat CAClockTimeFormat, outTime *raw.CAClockTime) int {
+	return raw.CAClockTranslateTime(inCAClock, inTime, raw.CAClockTimeFormat(inOutputTimeFormat), outTime)
 }
 
 // CAShow calls [raw.CAShow] (C function CAShow).
@@ -1217,8 +1234,8 @@ func ExtAudioFileWriteAsync(inExtAudioFile unsafe.Pointer, inNumberFrames uint, 
 }
 
 // GetAudioUnitParameterDisplayType calls [raw.GetAudioUnitParameterDisplayType] (C function GetAudioUnitParameterDisplayType).
-func GetAudioUnitParameterDisplayType(flags raw.AudioUnitParameterOptions) raw.AudioUnitParameterOptions {
-	return raw.GetAudioUnitParameterDisplayType(flags)
+func GetAudioUnitParameterDisplayType(flags AudioUnitParameterOptions) AudioUnitParameterOptions {
+	return AudioUnitParameterOptions(raw.GetAudioUnitParameterDisplayType(raw.AudioUnitParameterOptions(flags)))
 }
 
 // MusicEventIteratorDeleteEvent calls [raw.MusicEventIteratorDeleteEvent] (C function MusicEventIteratorDeleteEvent).
@@ -1347,23 +1364,23 @@ func MusicSequenceDisposeTrack(inSequence unsafe.Pointer, inTrack unsafe.Pointer
 }
 
 // MusicSequenceFileCreate calls [raw.MusicSequenceFileCreate] (C function MusicSequenceFileCreate).
-func MusicSequenceFileCreate(inSequence unsafe.Pointer, inFileRef unsafe.Pointer, inFileType raw.MusicSequenceFileTypeID, inFlags raw.MusicSequenceFileFlags, inResolution int16) int {
-	return raw.MusicSequenceFileCreate(inSequence, inFileRef, inFileType, inFlags, inResolution)
+func MusicSequenceFileCreate(inSequence unsafe.Pointer, inFileRef unsafe.Pointer, inFileType MusicSequenceFileTypeID, inFlags MusicSequenceFileFlags, inResolution int16) int {
+	return raw.MusicSequenceFileCreate(inSequence, inFileRef, raw.MusicSequenceFileTypeID(inFileType), raw.MusicSequenceFileFlags(inFlags), inResolution)
 }
 
 // MusicSequenceFileCreateData calls [raw.MusicSequenceFileCreateData] (C function MusicSequenceFileCreateData).
-func MusicSequenceFileCreateData(inSequence unsafe.Pointer, inFileType raw.MusicSequenceFileTypeID, inFlags raw.MusicSequenceFileFlags, inResolution int16, outData unsafe.Pointer) int {
-	return raw.MusicSequenceFileCreateData(inSequence, inFileType, inFlags, inResolution, outData)
+func MusicSequenceFileCreateData(inSequence unsafe.Pointer, inFileType MusicSequenceFileTypeID, inFlags MusicSequenceFileFlags, inResolution int16, outData unsafe.Pointer) int {
+	return raw.MusicSequenceFileCreateData(inSequence, raw.MusicSequenceFileTypeID(inFileType), raw.MusicSequenceFileFlags(inFlags), inResolution, outData)
 }
 
 // MusicSequenceFileLoad calls [raw.MusicSequenceFileLoad] (C function MusicSequenceFileLoad).
-func MusicSequenceFileLoad(inSequence unsafe.Pointer, inFileRef unsafe.Pointer, inFileTypeHint raw.MusicSequenceFileTypeID, inFlags raw.MusicSequenceLoadFlags) int {
-	return raw.MusicSequenceFileLoad(inSequence, inFileRef, inFileTypeHint, inFlags)
+func MusicSequenceFileLoad(inSequence unsafe.Pointer, inFileRef unsafe.Pointer, inFileTypeHint MusicSequenceFileTypeID, inFlags MusicSequenceLoadFlags) int {
+	return raw.MusicSequenceFileLoad(inSequence, inFileRef, raw.MusicSequenceFileTypeID(inFileTypeHint), raw.MusicSequenceLoadFlags(inFlags))
 }
 
 // MusicSequenceFileLoadData calls [raw.MusicSequenceFileLoadData] (C function MusicSequenceFileLoadData).
-func MusicSequenceFileLoadData(inSequence unsafe.Pointer, inData unsafe.Pointer, inFileTypeHint raw.MusicSequenceFileTypeID, inFlags raw.MusicSequenceLoadFlags) int {
-	return raw.MusicSequenceFileLoadData(inSequence, inData, inFileTypeHint, inFlags)
+func MusicSequenceFileLoadData(inSequence unsafe.Pointer, inData unsafe.Pointer, inFileTypeHint MusicSequenceFileTypeID, inFlags MusicSequenceLoadFlags) int {
+	return raw.MusicSequenceFileLoadData(inSequence, inData, raw.MusicSequenceFileTypeID(inFileTypeHint), raw.MusicSequenceLoadFlags(inFlags))
 }
 
 // MusicSequenceGetAUGraph calls [raw.MusicSequenceGetAUGraph] (C function MusicSequenceGetAUGraph).
@@ -1397,8 +1414,13 @@ func MusicSequenceGetSecondsForBeats(inSequence unsafe.Pointer, inBeats float64,
 }
 
 // MusicSequenceGetSequenceType calls [raw.MusicSequenceGetSequenceType] (C function MusicSequenceGetSequenceType).
-func MusicSequenceGetSequenceType(inSequence unsafe.Pointer, outType *raw.MusicSequenceType) int {
-	return raw.MusicSequenceGetSequenceType(inSequence, outType)
+func MusicSequenceGetSequenceType(inSequence unsafe.Pointer, outType *MusicSequenceType) int {
+	var _outType raw.MusicSequenceType
+	_ret := raw.MusicSequenceGetSequenceType(inSequence, &_outType)
+	if outType != nil {
+		*outType = MusicSequenceType(_outType)
+	}
+	return _ret
 }
 
 // MusicSequenceGetTempoTrack calls [raw.MusicSequenceGetTempoTrack] (C function MusicSequenceGetTempoTrack).
@@ -1417,13 +1439,13 @@ func MusicSequenceGetTrackIndex(inSequence unsafe.Pointer, inTrack unsafe.Pointe
 }
 
 // MusicSequenceLoadSMFDataWithFlags calls [raw.MusicSequenceLoadSMFDataWithFlags] (C function MusicSequenceLoadSMFDataWithFlags).
-func MusicSequenceLoadSMFDataWithFlags(inSequence unsafe.Pointer, inData unsafe.Pointer, inFlags raw.MusicSequenceLoadFlags) int {
-	return raw.MusicSequenceLoadSMFDataWithFlags(inSequence, inData, inFlags)
+func MusicSequenceLoadSMFDataWithFlags(inSequence unsafe.Pointer, inData unsafe.Pointer, inFlags MusicSequenceLoadFlags) int {
+	return raw.MusicSequenceLoadSMFDataWithFlags(inSequence, inData, raw.MusicSequenceLoadFlags(inFlags))
 }
 
 // MusicSequenceLoadSMFWithFlags calls [raw.MusicSequenceLoadSMFWithFlags] (C function MusicSequenceLoadSMFWithFlags).
-func MusicSequenceLoadSMFWithFlags(inSequence unsafe.Pointer, inFileRef *carboncore.FSRef, inFlags raw.MusicSequenceLoadFlags) int {
-	return raw.MusicSequenceLoadSMFWithFlags(inSequence, inFileRef, inFlags)
+func MusicSequenceLoadSMFWithFlags(inSequence unsafe.Pointer, inFileRef *carboncore.FSRef, inFlags MusicSequenceLoadFlags) int {
+	return raw.MusicSequenceLoadSMFWithFlags(inSequence, inFileRef, raw.MusicSequenceLoadFlags(inFlags))
 }
 
 // MusicSequenceNewTrack calls [raw.MusicSequenceNewTrack] (C function MusicSequenceNewTrack).
@@ -1462,8 +1484,8 @@ func MusicSequenceSetSMPTEResolution(fps int8, ticks uint8) int16 {
 }
 
 // MusicSequenceSetSequenceType calls [raw.MusicSequenceSetSequenceType] (C function MusicSequenceSetSequenceType).
-func MusicSequenceSetSequenceType(inSequence unsafe.Pointer, inType raw.MusicSequenceType) int {
-	return raw.MusicSequenceSetSequenceType(inSequence, inType)
+func MusicSequenceSetSequenceType(inSequence unsafe.Pointer, inType MusicSequenceType) int {
+	return raw.MusicSequenceSetSequenceType(inSequence, raw.MusicSequenceType(inType))
 }
 
 // MusicSequenceSetUserCallback calls [raw.MusicSequenceSetUserCallback] (C function MusicSequenceSetUserCallback).
@@ -1622,6 +1644,6 @@ func NumBytesToNumAudioFileMarkers(inNumBytes uint) uint {
 }
 
 // SetAudioUnitParameterDisplayType calls [raw.SetAudioUnitParameterDisplayType] (C function SetAudioUnitParameterDisplayType).
-func SetAudioUnitParameterDisplayType(flags raw.AudioUnitParameterOptions, displayType raw.AudioUnitParameterOptions) raw.AudioUnitParameterOptions {
-	return raw.SetAudioUnitParameterDisplayType(flags, displayType)
+func SetAudioUnitParameterDisplayType(flags AudioUnitParameterOptions, displayType AudioUnitParameterOptions) AudioUnitParameterOptions {
+	return AudioUnitParameterOptions(raw.SetAudioUnitParameterDisplayType(raw.AudioUnitParameterOptions(flags), raw.AudioUnitParameterOptions(displayType)))
 }

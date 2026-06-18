@@ -33,9 +33,9 @@ func VSUserAccountFromID(id objc.ID) *VSUserAccount {
 }
 
 // NewVSUserAccountWithAccountTypeUpdateURL creates a new [VSUserAccount].
-func NewVSUserAccountWithAccountTypeUpdateURL(accountType raw.VSUserAccountType, url string) *VSUserAccount {
+func NewVSUserAccountWithAccountTypeUpdateURL(accountType VSUserAccountType, url string) *VSUserAccount {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VSUserAccount")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccountType:updateURL:"), accountType, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccountType:updateURL:"), raw.VSUserAccountType(accountType), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
 	return &VSUserAccount{inner: raw.VSUserAccountFromID(_id)}
 }
 
@@ -64,8 +64,8 @@ func (x *VSUserAccount) WithIdentifier(identifier string) *VSUserAccount {
 }
 
 // WithAccountType sets the accountType property and returns the receiver for chaining.
-func (x *VSUserAccount) WithAccountType(accountType raw.VSUserAccountType) *VSUserAccount {
-	x.inner.SetAccountType(accountType)
+func (x *VSUserAccount) WithAccountType(accountType VSUserAccountType) *VSUserAccount {
+	x.inner.SetAccountType(raw.VSUserAccountType(accountType))
 	return x
 }
 
@@ -166,13 +166,13 @@ func (x *VSUserAccount) SetIdentifier(identifier string) {
 }
 
 // AccountType calls the underlying AccountType.
-func (x *VSUserAccount) AccountType() raw.VSUserAccountType {
-	return x.inner.AccountType()
+func (x *VSUserAccount) AccountType() VSUserAccountType {
+	return VSUserAccountType(x.inner.AccountType())
 }
 
 // SetAccountType calls the underlying SetAccountType.
-func (x *VSUserAccount) SetAccountType(accountType raw.VSUserAccountType) {
-	x.inner.SetAccountType(accountType)
+func (x *VSUserAccount) SetAccountType(accountType VSUserAccountType) {
+	x.inner.SetAccountType(raw.VSUserAccountType(accountType))
 }
 
 // IsSignedOut calls the underlying IsSignedOut.
@@ -245,8 +245,8 @@ func (x *VSUserAccount) IsFromCurrentDevice() bool {
 }
 
 // DeviceCategory calls the underlying DeviceCategory.
-func (x *VSUserAccount) DeviceCategory() raw.VSOriginatingDeviceCategory {
-	return x.inner.DeviceCategory()
+func (x *VSUserAccount) DeviceCategory() VSOriginatingDeviceCategory {
+	return VSOriginatingDeviceCategory(x.inner.DeviceCategory())
 }
 
 // AppleSubscription calls the underlying AppleSubscription.
@@ -270,7 +270,7 @@ type VSUserAccountable interface {
 	WithRequiresSystemTrust(requiresSystemTrust bool) *VSUserAccount
 	WithAccountProviderIdentifier(accountProviderIdentifier string) *VSUserAccount
 	WithIdentifier(identifier string) *VSUserAccount
-	WithAccountType(accountType raw.VSUserAccountType) *VSUserAccount
+	WithAccountType(accountType VSUserAccountType) *VSUserAccount
 	WithSignedOut(signedOut bool) *VSUserAccount
 	WithSubscriptionBillingCycleEndDate(subscriptionBillingCycleEndDate *foundation.NSDate) *VSUserAccount
 	WithTierIdentifiers(items ...*foundation.NSString) *VSUserAccount
@@ -285,8 +285,8 @@ type VSUserAccountable interface {
 	SetAccountProviderIdentifier(accountProviderIdentifier string)
 	Identifier() string
 	SetIdentifier(identifier string)
-	AccountType() raw.VSUserAccountType
-	SetAccountType(accountType raw.VSUserAccountType)
+	AccountType() VSUserAccountType
+	SetAccountType(accountType VSUserAccountType)
 	IsSignedOut() bool
 	SetSignedOut(signedOut bool)
 	SubscriptionBillingCycleEndDate() *foundation.NSDate
@@ -298,7 +298,7 @@ type VSUserAccountable interface {
 	AuthenticationData() string
 	SetAuthenticationData(authenticationData string)
 	IsFromCurrentDevice() bool
-	DeviceCategory() raw.VSOriginatingDeviceCategory
+	DeviceCategory() VSOriginatingDeviceCategory
 	AppleSubscription() *VSAppleSubscription
 	SetAppleSubscription(appleSubscription *raw.VSAppleSubscription)
 }

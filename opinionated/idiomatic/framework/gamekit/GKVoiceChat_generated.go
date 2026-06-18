@@ -38,8 +38,10 @@ func NewVoiceChat() *VoiceChat {
 }
 
 // WithPlayerVoiceChatStateDidChangeHandler sets the playerVoiceChatStateDidChangeHandler property and returns the receiver for chaining.
-func (x *VoiceChat) WithPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, raw.GKVoiceChatPlayerState)) *VoiceChat {
-	x.inner.SetPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler)
+func (x *VoiceChat) WithPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, GKVoiceChatPlayerState)) *VoiceChat {
+	x.inner.SetPlayerVoiceChatStateDidChangeHandler(func(_a0 *raw.GKPlayer, _a1 raw.GKVoiceChatPlayerState) {
+		playerVoiceChatStateDidChangeHandler(_a0, GKVoiceChatPlayerState(_a1))
+	})
 	return x
 }
 
@@ -56,8 +58,10 @@ func (x *VoiceChat) WithVolume(volume float32) *VoiceChat {
 }
 
 // WithPlayerStateUpdateHandler sets the playerStateUpdateHandler property and returns the receiver for chaining.
-func (x *VoiceChat) WithPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, raw.GKVoiceChatPlayerState)) *VoiceChat {
-	x.inner.SetPlayerStateUpdateHandler(playerStateUpdateHandler)
+func (x *VoiceChat) WithPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, GKVoiceChatPlayerState)) *VoiceChat {
+	x.inner.SetPlayerStateUpdateHandler(func(_a0 *foundation.NSString, _a1 raw.GKVoiceChatPlayerState) {
+		playerStateUpdateHandler(_a0, GKVoiceChatPlayerState(_a1))
+	})
 	return x
 }
 
@@ -82,8 +86,10 @@ func (x *VoiceChat) PlayerVoiceChatStateDidChangeHandler() objc.Block {
 }
 
 // SetPlayerVoiceChatStateDidChangeHandler calls the underlying SetPlayerVoiceChatStateDidChangeHandler.
-func (x *VoiceChat) SetPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, raw.GKVoiceChatPlayerState)) {
-	x.inner.SetPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler)
+func (x *VoiceChat) SetPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, GKVoiceChatPlayerState)) {
+	x.inner.SetPlayerVoiceChatStateDidChangeHandler(func(_a0 *raw.GKPlayer, _a1 raw.GKVoiceChatPlayerState) {
+		playerVoiceChatStateDidChangeHandler(_a0, GKVoiceChatPlayerState(_a1))
+	})
 }
 
 // Name calls the underlying Name.
@@ -132,8 +138,10 @@ func (x *VoiceChat) PlayerStateUpdateHandler() objc.Block {
 }
 
 // SetPlayerStateUpdateHandler calls the underlying SetPlayerStateUpdateHandler.
-func (x *VoiceChat) SetPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, raw.GKVoiceChatPlayerState)) {
-	x.inner.SetPlayerStateUpdateHandler(playerStateUpdateHandler)
+func (x *VoiceChat) SetPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, GKVoiceChatPlayerState)) {
+	x.inner.SetPlayerStateUpdateHandler(func(_a0 *foundation.NSString, _a1 raw.GKVoiceChatPlayerState) {
+		playerStateUpdateHandler(_a0, GKVoiceChatPlayerState(_a1))
+	})
 }
 
 // SetMuteForPlayer calls the underlying SetMuteForPlayer.
@@ -155,15 +163,15 @@ func (x *VoiceChat) PlayerIDs() []string {
 // VoiceChatable is the interface implemented by [VoiceChat], for mocking and DI.
 type VoiceChatable interface {
 	Unwrap() *raw.GKVoiceChat
-	WithPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, raw.GKVoiceChatPlayerState)) *VoiceChat
+	WithPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, GKVoiceChatPlayerState)) *VoiceChat
 	WithActive(active bool) *VoiceChat
 	WithVolume(volume float32) *VoiceChat
-	WithPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, raw.GKVoiceChatPlayerState)) *VoiceChat
+	WithPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, GKVoiceChatPlayerState)) *VoiceChat
 	Start()
 	Stop()
 	SetPlayerMuted(player *raw.GKPlayer, isMuted bool)
 	PlayerVoiceChatStateDidChangeHandler() objc.Block
-	SetPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, raw.GKVoiceChatPlayerState))
+	SetPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, GKVoiceChatPlayerState))
 	Name() string
 	IsActive() bool
 	SetActive(active bool)
@@ -171,7 +179,7 @@ type VoiceChatable interface {
 	SetVolume(volume float32)
 	Players() []*Player
 	PlayerStateUpdateHandler() objc.Block
-	SetPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, raw.GKVoiceChatPlayerState))
+	SetPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, GKVoiceChatPlayerState))
 	SetMuteForPlayer(isMuted bool, playerID string)
 	PlayerIDs() []string
 }

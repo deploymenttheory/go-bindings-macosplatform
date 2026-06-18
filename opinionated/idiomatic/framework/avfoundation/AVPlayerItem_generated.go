@@ -135,8 +135,8 @@ func (x *PlayerItem) WithAudioSpatializationAllowed(audioSpatializationAllowed b
 }
 
 // WithAllowedAudioSpatializationFormats sets the allowedAudioSpatializationFormats property and returns the receiver for chaining.
-func (x *PlayerItem) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats) *PlayerItem {
-	x.inner.SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats)
+func (x *PlayerItem) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) *PlayerItem {
+	x.inner.SetAllowedAudioSpatializationFormats(raw.AVAudioSpatializationFormats(allowedAudioSpatializationFormats))
 	return x
 }
 
@@ -189,8 +189,8 @@ func (x *PlayerItem) WithStartsOnFirstEligibleVariant(startsOnFirstEligibleVaria
 }
 
 // WithVariantPreferences sets the variantPreferences property and returns the receiver for chaining.
-func (x *PlayerItem) WithVariantPreferences(variantPreferences raw.AVVariantPreferences) *PlayerItem {
-	x.inner.SetVariantPreferences(variantPreferences)
+func (x *PlayerItem) WithVariantPreferences(variantPreferences AVVariantPreferences) *PlayerItem {
+	x.inner.SetVariantPreferences(raw.AVVariantPreferences(variantPreferences))
 	return x
 }
 
@@ -219,8 +219,8 @@ func (x *PlayerItem) WithAutomaticallyHandlesInterstitialEvents(automaticallyHan
 }
 
 // Status calls the underlying Status.
-func (x *PlayerItem) Status() raw.AVPlayerItemStatus {
-	return x.inner.Status()
+func (x *PlayerItem) Status() AVPlayerItemStatus {
+	return AVPlayerItemStatus(x.inner.Status())
 }
 
 // Error calls the underlying Error.
@@ -505,13 +505,13 @@ func (x *PlayerItem) SetAudioSpatializationAllowed(audioSpatializationAllowed bo
 }
 
 // AllowedAudioSpatializationFormats calls the underlying AllowedAudioSpatializationFormats.
-func (x *PlayerItem) AllowedAudioSpatializationFormats() raw.AVAudioSpatializationFormats {
-	return x.inner.AllowedAudioSpatializationFormats()
+func (x *PlayerItem) AllowedAudioSpatializationFormats() AVAudioSpatializationFormats {
+	return AVAudioSpatializationFormats(x.inner.AllowedAudioSpatializationFormats())
 }
 
 // SetAllowedAudioSpatializationFormats calls the underlying SetAllowedAudioSpatializationFormats.
-func (x *PlayerItem) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats) {
-	x.inner.SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats)
+func (x *PlayerItem) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) {
+	x.inner.SetAllowedAudioSpatializationFormats(raw.AVAudioSpatializationFormats(allowedAudioSpatializationFormats))
 }
 
 // AudioMix calls the underlying AudioMix.
@@ -625,13 +625,13 @@ func (x *PlayerItem) SetStartsOnFirstEligibleVariant(startsOnFirstEligibleVarian
 }
 
 // VariantPreferences calls the underlying VariantPreferences.
-func (x *PlayerItem) VariantPreferences() raw.AVVariantPreferences {
-	return x.inner.VariantPreferences()
+func (x *PlayerItem) VariantPreferences() AVVariantPreferences {
+	return AVVariantPreferences(x.inner.VariantPreferences())
 }
 
 // SetVariantPreferences calls the underlying SetVariantPreferences.
-func (x *PlayerItem) SetVariantPreferences(variantPreferences raw.AVVariantPreferences) {
-	x.inner.SetVariantPreferences(variantPreferences)
+func (x *PlayerItem) SetVariantPreferences(variantPreferences AVVariantPreferences) {
+	x.inner.SetVariantPreferences(raw.AVVariantPreferences(variantPreferences))
 }
 
 // SelectMediaOptionInMediaSelectionGroup calls the underlying SelectMediaOptionInMediaSelectionGroup.
@@ -817,8 +817,8 @@ func (x *PlayerItem) IsContentAuthorizedForPlayback() bool {
 }
 
 // ContentAuthorizationRequestStatus calls the underlying ContentAuthorizationRequestStatus.
-func (x *PlayerItem) ContentAuthorizationRequestStatus() raw.AVContentAuthorizationStatus {
-	return x.inner.ContentAuthorizationRequestStatus()
+func (x *PlayerItem) ContentAuthorizationRequestStatus() AVContentAuthorizationStatus {
+	return AVContentAuthorizationStatus(x.inner.ContentAuthorizationRequestStatus())
 }
 
 // AutomaticallyHandlesInterstitialEvents calls the underlying AutomaticallyHandlesInterstitialEvents.
@@ -872,7 +872,7 @@ type PlayerItemable interface {
 	WithAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool) *PlayerItem
 	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *PlayerItem
 	WithAudioSpatializationAllowed(audioSpatializationAllowed bool) *PlayerItem
-	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats) *PlayerItem
+	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) *PlayerItem
 	WithAudioMix(audioMix AudioMixProvider) *PlayerItem
 	WithCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused bool) *PlayerItem
 	WithPreferredForwardBufferDuration(preferredForwardBufferDuration float64) *PlayerItem
@@ -881,10 +881,10 @@ type PlayerItemable interface {
 	WithPreferredMaximumResolution(preferredMaximumResolution corefoundation.CGSize) *PlayerItem
 	WithPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize) *PlayerItem
 	WithStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool) *PlayerItem
-	WithVariantPreferences(variantPreferences raw.AVVariantPreferences) *PlayerItem
+	WithVariantPreferences(variantPreferences AVVariantPreferences) *PlayerItem
 	WithPreferredCustomMediaSelectionSchemes(items ...*raw.AVCustomMediaSelectionScheme) *PlayerItem
 	WithAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool) *PlayerItem
-	Status() raw.AVPlayerItemStatus
+	Status() AVPlayerItemStatus
 	Error() unsafe.Pointer
 	Asset() *Asset
 	Tracks() []*PlayerItemTrack
@@ -932,8 +932,8 @@ type PlayerItemable interface {
 	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
 	IsAudioSpatializationAllowed() bool
 	SetAudioSpatializationAllowed(audioSpatializationAllowed bool)
-	AllowedAudioSpatializationFormats() raw.AVAudioSpatializationFormats
-	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats)
+	AllowedAudioSpatializationFormats() AVAudioSpatializationFormats
+	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats)
 	AudioMix() *AudioMix
 	SetAudioMix(audioMix *raw.AVAudioMix)
 	LoadedTimeRanges() []*foundation.NSValue
@@ -954,8 +954,8 @@ type PlayerItemable interface {
 	SetPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize)
 	StartsOnFirstEligibleVariant() bool
 	SetStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool)
-	VariantPreferences() raw.AVVariantPreferences
-	SetVariantPreferences(variantPreferences raw.AVVariantPreferences)
+	VariantPreferences() AVVariantPreferences
+	SetVariantPreferences(variantPreferences AVVariantPreferences)
 	SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup)
 	SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup)
 	CurrentMediaSelection() *MediaSelection
@@ -983,7 +983,7 @@ type PlayerItemable interface {
 	IsAuthorizationRequiredForPlayback() bool
 	IsApplicationAuthorizedForPlayback() bool
 	IsContentAuthorizedForPlayback() bool
-	ContentAuthorizationRequestStatus() raw.AVContentAuthorizationStatus
+	ContentAuthorizationRequestStatus() AVContentAuthorizationStatus
 	AutomaticallyHandlesInterstitialEvents() bool
 	SetAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool)
 	TemplatePlayerItem() *PlayerItem

@@ -40,8 +40,8 @@ func NewEvent() *Event {
 }
 
 // CharactersByApplyingModifiers calls the underlying CharactersByApplyingModifiers.
-func (x *Event) CharactersByApplyingModifiers(modifiers raw.NSEventModifierFlags) string {
-	_r := x.inner.CharactersByApplyingModifiers(modifiers)
+func (x *Event) CharactersByApplyingModifiers(modifiers NSEventModifierFlags) string {
+	_r := x.inner.CharactersByApplyingModifiers(raw.NSEventModifierFlags(modifiers))
 	if _r == nil {
 		return ""
 	}
@@ -49,8 +49,8 @@ func (x *Event) CharactersByApplyingModifiers(modifiers raw.NSEventModifierFlags
 }
 
 // TouchesMatchingPhaseInView calls the underlying TouchesMatchingPhaseInView.
-func (x *Event) TouchesMatchingPhaseInView(phase raw.NSTouchPhase, view *raw.NSView) *foundation.NSSet[*raw.NSTouch] {
-	return x.inner.TouchesMatchingPhaseInView(phase, view)
+func (x *Event) TouchesMatchingPhaseInView(phase NSTouchPhase, view *raw.NSView) *foundation.NSSet[*raw.NSTouch] {
+	return x.inner.TouchesMatchingPhaseInView(raw.NSTouchPhase(phase), view)
 }
 
 // AllTouches calls the underlying AllTouches.
@@ -69,18 +69,20 @@ func (x *Event) CoalescedTouchesForTouch(touch *raw.NSTouch) *foundation.NSArray
 }
 
 // TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler calls the underlying TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler.
-func (x *Event) TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(options raw.NSEventSwipeTrackingOptions, minDampenThreshold float64, maxDampenThreshold float64, trackingHandler func(float64, raw.NSEventPhase, bool, *bool)) {
-	x.inner.TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(options, minDampenThreshold, maxDampenThreshold, trackingHandler)
+func (x *Event) TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(options NSEventSwipeTrackingOptions, minDampenThreshold float64, maxDampenThreshold float64, trackingHandler func(float64, NSEventPhase, bool, *bool)) {
+	x.inner.TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(raw.NSEventSwipeTrackingOptions(options), minDampenThreshold, maxDampenThreshold, func(_a0 float64, _a1 raw.NSEventPhase, _a2 bool, _a3 *bool) {
+		trackingHandler(_a0, NSEventPhase(_a1), _a2, _a3)
+	})
 }
 
 // Type calls the underlying Type.
-func (x *Event) Type() raw.NSEventType {
-	return x.inner.Type()
+func (x *Event) Type() NSEventType {
+	return NSEventType(x.inner.Type())
 }
 
 // ModifierFlags calls the underlying ModifierFlags.
-func (x *Event) ModifierFlags() raw.NSEventModifierFlags {
-	return x.inner.ModifierFlags()
+func (x *Event) ModifierFlags() NSEventModifierFlags {
+	return NSEventModifierFlags(x.inner.ModifierFlags())
 }
 
 // Timestamp calls the underlying Timestamp.
@@ -167,8 +169,8 @@ func (x *Event) ScrollingDeltaY() float64 {
 }
 
 // MomentumPhase calls the underlying MomentumPhase.
-func (x *Event) MomentumPhase() raw.NSEventPhase {
-	return x.inner.MomentumPhase()
+func (x *Event) MomentumPhase() NSEventPhase {
+	return NSEventPhase(x.inner.MomentumPhase())
 }
 
 // IsDirectionInvertedFromDevice calls the underlying IsDirectionInvertedFromDevice.
@@ -224,8 +226,8 @@ func (x *Event) TrackingArea() *TrackingArea {
 }
 
 // Subtype calls the underlying Subtype.
-func (x *Event) Subtype() raw.NSEventSubtype {
-	return x.inner.Subtype()
+func (x *Event) Subtype() NSEventSubtype {
+	return NSEventSubtype(x.inner.Subtype())
 }
 
 // Data1 calls the underlying Data1.
@@ -279,8 +281,8 @@ func (x *Event) AbsoluteZ() int {
 }
 
 // ButtonMask calls the underlying ButtonMask.
-func (x *Event) ButtonMask() raw.NSEventButtonMask {
-	return x.inner.ButtonMask()
+func (x *Event) ButtonMask() NSEventButtonMask {
+	return NSEventButtonMask(x.inner.ButtonMask())
 }
 
 // Tilt calls the underlying Tilt.
@@ -339,8 +341,8 @@ func (x *Event) CapabilityMask() uint {
 }
 
 // PointingDeviceType calls the underlying PointingDeviceType.
-func (x *Event) PointingDeviceType() raw.NSPointingDeviceType {
-	return x.inner.PointingDeviceType()
+func (x *Event) PointingDeviceType() NSPointingDeviceType {
+	return NSPointingDeviceType(x.inner.PointingDeviceType())
 }
 
 // IsEnteringProximity calls the underlying IsEnteringProximity.
@@ -349,8 +351,8 @@ func (x *Event) IsEnteringProximity() bool {
 }
 
 // Phase calls the underlying Phase.
-func (x *Event) Phase() raw.NSEventPhase {
-	return x.inner.Phase()
+func (x *Event) Phase() NSEventPhase {
+	return NSEventPhase(x.inner.Phase())
 }
 
 // Stage calls the underlying Stage.
@@ -364,26 +366,26 @@ func (x *Event) StageTransition() float64 {
 }
 
 // AssociatedEventsMask calls the underlying AssociatedEventsMask.
-func (x *Event) AssociatedEventsMask() raw.NSEventMask {
-	return x.inner.AssociatedEventsMask()
+func (x *Event) AssociatedEventsMask() NSEventMask {
+	return NSEventMask(x.inner.AssociatedEventsMask())
 }
 
 // PressureBehavior calls the underlying PressureBehavior.
-func (x *Event) PressureBehavior() raw.NSPressureBehavior {
-	return x.inner.PressureBehavior()
+func (x *Event) PressureBehavior() NSPressureBehavior {
+	return NSPressureBehavior(x.inner.PressureBehavior())
 }
 
 // Eventable is the interface implemented by [Event], for mocking and DI.
 type Eventable interface {
 	Unwrap() *raw.NSEvent
-	CharactersByApplyingModifiers(modifiers raw.NSEventModifierFlags) string
-	TouchesMatchingPhaseInView(phase raw.NSTouchPhase, view *raw.NSView) *foundation.NSSet[*raw.NSTouch]
+	CharactersByApplyingModifiers(modifiers NSEventModifierFlags) string
+	TouchesMatchingPhaseInView(phase NSTouchPhase, view *raw.NSView) *foundation.NSSet[*raw.NSTouch]
 	AllTouches() *foundation.NSSet[*raw.NSTouch]
 	TouchesForView(view *raw.NSView) *foundation.NSSet[*raw.NSTouch]
 	CoalescedTouchesForTouch(touch *raw.NSTouch) *foundation.NSArray[*raw.NSTouch]
-	TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(options raw.NSEventSwipeTrackingOptions, minDampenThreshold float64, maxDampenThreshold float64, trackingHandler func(float64, raw.NSEventPhase, bool, *bool))
-	Type() raw.NSEventType
-	ModifierFlags() raw.NSEventModifierFlags
+	TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(options NSEventSwipeTrackingOptions, minDampenThreshold float64, maxDampenThreshold float64, trackingHandler func(float64, NSEventPhase, bool, *bool))
+	Type() NSEventType
+	ModifierFlags() NSEventModifierFlags
 	Timestamp() float64
 	Window() *Window
 	WindowNumber() int
@@ -399,7 +401,7 @@ type Eventable interface {
 	HasPreciseScrollingDeltas() bool
 	ScrollingDeltaX() float64
 	ScrollingDeltaY() float64
-	MomentumPhase() raw.NSEventPhase
+	MomentumPhase() NSEventPhase
 	IsDirectionInvertedFromDevice() bool
 	Characters() string
 	CharactersIgnoringModifiers() string
@@ -408,7 +410,7 @@ type Eventable interface {
 	TrackingNumber() int
 	UserData() unsafe.Pointer
 	TrackingArea() *TrackingArea
-	Subtype() raw.NSEventSubtype
+	Subtype() NSEventSubtype
 	Data1() int
 	Data2() int
 	EventRef() unsafe.Pointer
@@ -419,7 +421,7 @@ type Eventable interface {
 	AbsoluteX() int
 	AbsoluteY() int
 	AbsoluteZ() int
-	ButtonMask() raw.NSEventButtonMask
+	ButtonMask() NSEventButtonMask
 	Tilt() corefoundation.CGPoint
 	TangentialPressure() float32
 	VendorDefined() objc.ID
@@ -431,13 +433,13 @@ type Eventable interface {
 	PointingDeviceSerialNumber() uint
 	UniqueID() uint64
 	CapabilityMask() uint
-	PointingDeviceType() raw.NSPointingDeviceType
+	PointingDeviceType() NSPointingDeviceType
 	IsEnteringProximity() bool
-	Phase() raw.NSEventPhase
+	Phase() NSEventPhase
 	Stage() int
 	StageTransition() float64
-	AssociatedEventsMask() raw.NSEventMask
-	PressureBehavior() raw.NSPressureBehavior
+	AssociatedEventsMask() NSEventMask
+	PressureBehavior() NSPressureBehavior
 }
 
 var _ Eventable = (*Event)(nil)

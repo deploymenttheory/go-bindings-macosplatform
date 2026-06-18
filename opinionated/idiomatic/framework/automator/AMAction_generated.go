@@ -127,8 +127,8 @@ func (x *Action) ParametersUpdated() {
 }
 
 // LogMessageWithLevelFormat calls the underlying LogMessageWithLevelFormat.
-func (x *Action) LogMessageWithLevelFormat(level raw.AMLogLevel, format string) {
-	x.inner.LogMessageWithLevelFormat(level, foundation.NSStringStringWithUTF8String(format))
+func (x *Action) LogMessageWithLevelFormat(level AMLogLevel, format string) {
+	x.inner.LogMessageWithLevelFormat(raw.AMLogLevel(level), foundation.NSStringStringWithUTF8String(format))
 }
 
 // Name calls the underlying Name.
@@ -206,7 +206,7 @@ type Actionable interface {
 	Closed()
 	UpdateParameters()
 	ParametersUpdated()
-	LogMessageWithLevelFormat(level raw.AMLogLevel, format string)
+	LogMessageWithLevelFormat(level AMLogLevel, format string)
 	Name() unsafe.Pointer
 	IgnoresInput() bool
 	SelectedInputType() unsafe.Pointer

@@ -46,8 +46,8 @@ func (x *FunctionConstant) Name() string {
 }
 
 // Type calls the underlying Type.
-func (x *FunctionConstant) Type() raw.MTLDataType {
-	return x.inner.Type()
+func (x *FunctionConstant) Type() MTLDataType {
+	return MTLDataType(x.inner.Type())
 }
 
 // Index calls the underlying Index.
@@ -64,7 +64,7 @@ func (x *FunctionConstant) Required() bool {
 type FunctionConstantable interface {
 	Unwrap() *raw.MTLFunctionConstant
 	Name() string
-	Type() raw.MTLDataType
+	Type() MTLDataType
 	Index() uint
 	Required() bool
 }

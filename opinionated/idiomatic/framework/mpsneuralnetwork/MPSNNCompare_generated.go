@@ -39,8 +39,8 @@ func NewNNCompareWithDevice(device metal.MTLDevice) *NNCompare {
 }
 
 // WithComparisonType sets the comparisonType property and returns the receiver for chaining.
-func (x *NNCompare) WithComparisonType(comparisonType raw.MPSNNComparisonType) *NNCompare {
-	x.inner.SetComparisonType(comparisonType)
+func (x *NNCompare) WithComparisonType(comparisonType MPSNNComparisonType) *NNCompare {
+	x.inner.SetComparisonType(raw.MPSNNComparisonType(comparisonType))
 	return x
 }
 
@@ -189,13 +189,13 @@ func (x *NNCompare) WithDestinationImageAllocator(destinationImageAllocator mpsc
 }
 
 // ComparisonType calls the underlying ComparisonType.
-func (x *NNCompare) ComparisonType() raw.MPSNNComparisonType {
-	return x.inner.ComparisonType()
+func (x *NNCompare) ComparisonType() MPSNNComparisonType {
+	return MPSNNComparisonType(x.inner.ComparisonType())
 }
 
 // SetComparisonType calls the underlying SetComparisonType.
-func (x *NNCompare) SetComparisonType(comparisonType raw.MPSNNComparisonType) {
-	x.inner.SetComparisonType(comparisonType)
+func (x *NNCompare) SetComparisonType(comparisonType MPSNNComparisonType) {
+	x.inner.SetComparisonType(raw.MPSNNComparisonType(comparisonType))
 }
 
 // Threshold calls the underlying Threshold.
@@ -217,7 +217,7 @@ func (x *NNCompare) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
 // NNCompareable is the interface implemented by [NNCompare], for mocking and DI.
 type NNCompareable interface {
 	Unwrap() *raw.MPSNNCompare
-	WithComparisonType(comparisonType raw.MPSNNComparisonType) *NNCompare
+	WithComparisonType(comparisonType MPSNNComparisonType) *NNCompare
 	WithThreshold(threshold float32) *NNCompare
 	WithPrimaryScale(primaryScale float32) *NNCompare
 	WithSecondaryScale(secondaryScale float32) *NNCompare
@@ -242,8 +242,8 @@ type NNCompareable interface {
 	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNCompare
 	WithPadding(padding raw.MPSNNPadding) *NNCompare
 	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNCompare
-	ComparisonType() raw.MPSNNComparisonType
-	SetComparisonType(comparisonType raw.MPSNNComparisonType)
+	ComparisonType() MPSNNComparisonType
+	SetComparisonType(comparisonType MPSNNComparisonType)
 	Threshold() float32
 	SetThreshold(threshold float32)
 }

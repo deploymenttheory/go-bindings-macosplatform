@@ -40,10 +40,10 @@ func NewMacAuxiliaryStorageWithURL(uRL string) *MacAuxiliaryStorage {
 }
 
 // NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError creates a new [MacAuxiliaryStorage].
-func NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError(uRL string, hardwareModel *raw.VZMacHardwareModel, options raw.VZMacAuxiliaryStorageInitializationOptions) (*MacAuxiliaryStorage, error) {
+func NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError(uRL string, hardwareModel *raw.VZMacHardwareModel, options VZMacAuxiliaryStorageInitializationOptions) (*MacAuxiliaryStorage, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingStorageAtURL:hardwareModel:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), hardwareModel.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingStorageAtURL:hardwareModel:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), hardwareModel.Ptr(), raw.VZMacAuxiliaryStorageInitializationOptions(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

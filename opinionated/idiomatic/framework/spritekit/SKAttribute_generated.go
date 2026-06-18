@@ -32,9 +32,9 @@ func AttributeFromID(id objc.ID) *Attribute {
 }
 
 // NewAttributeWithNameType creates a new [Attribute].
-func NewAttributeWithNameType(name string, type_ raw.SKAttributeType) *Attribute {
+func NewAttributeWithNameType(name string, type_ SKAttributeType) *Attribute {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAttribute")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:type:"), foundation.NSStringStringWithUTF8String(name).Ptr(), type_)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:type:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.SKAttributeType(type_))
 	return &Attribute{inner: raw.SKAttributeFromID(_id)}
 }
 
@@ -48,15 +48,15 @@ func (x *Attribute) Name() string {
 }
 
 // Type calls the underlying Type.
-func (x *Attribute) Type() raw.SKAttributeType {
-	return x.inner.Type()
+func (x *Attribute) Type() SKAttributeType {
+	return SKAttributeType(x.inner.Type())
 }
 
 // Attributeable is the interface implemented by [Attribute], for mocking and DI.
 type Attributeable interface {
 	Unwrap() *raw.SKAttribute
 	Name() string
-	Type() raw.SKAttributeType
+	Type() SKAttributeType
 }
 
 var _ Attributeable = (*Attribute)(nil)

@@ -41,14 +41,14 @@ func NewScroller() *Scroller {
 }
 
 // WithScrollerStyle sets the scrollerStyle property and returns the receiver for chaining.
-func (x *Scroller) WithScrollerStyle(scrollerStyle raw.NSScrollerStyle) *Scroller {
-	x.inner.SetScrollerStyle(scrollerStyle)
+func (x *Scroller) WithScrollerStyle(scrollerStyle NSScrollerStyle) *Scroller {
+	x.inner.SetScrollerStyle(raw.NSScrollerStyle(scrollerStyle))
 	return x
 }
 
 // WithKnobStyle sets the knobStyle property and returns the receiver for chaining.
-func (x *Scroller) WithKnobStyle(knobStyle raw.NSScrollerKnobStyle) *Scroller {
-	x.inner.SetKnobStyle(knobStyle)
+func (x *Scroller) WithKnobStyle(knobStyle NSScrollerKnobStyle) *Scroller {
+	x.inner.SetKnobStyle(raw.NSScrollerKnobStyle(knobStyle))
 	return x
 }
 
@@ -59,14 +59,14 @@ func (x *Scroller) WithKnobProportion(knobProportion float64) *Scroller {
 }
 
 // WithArrowsPosition sets the arrowsPosition property and returns the receiver for chaining.
-func (x *Scroller) WithArrowsPosition(arrowsPosition raw.NSScrollArrowPosition) *Scroller {
-	x.inner.SetArrowsPosition(arrowsPosition)
+func (x *Scroller) WithArrowsPosition(arrowsPosition NSScrollArrowPosition) *Scroller {
+	x.inner.SetArrowsPosition(raw.NSScrollArrowPosition(arrowsPosition))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *Scroller) WithControlTint(controlTint raw.NSControlTint) *Scroller {
-	x.inner.SetControlTint(controlTint)
+func (x *Scroller) WithControlTint(controlTint NSControlTint) *Scroller {
+	x.inner.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -119,8 +119,8 @@ func (x *Scroller) WithHighlighted(highlighted bool) *Scroller {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Scroller) WithControlSize(controlSize raw.NSControlSize) *Scroller {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *Scroller) WithControlSize(controlSize NSControlSize) *Scroller {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -185,20 +185,20 @@ func (x *Scroller) WithUsesSingleLineMode(usesSingleLineMode bool) *Scroller {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Scroller) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Scroller {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *Scroller) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Scroller {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Scroller) WithAlignment(alignment raw.NSTextAlignment) *Scroller {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *Scroller) WithAlignment(alignment NSTextAlignment) *Scroller {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Scroller) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Scroller {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *Scroller) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Scroller {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -251,8 +251,8 @@ func (x *Scroller) WithAutoresizesSubviews(autoresizesSubviews bool) *Scroller {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Scroller) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Scroller {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Scroller) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Scroller {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -311,14 +311,14 @@ func (x *Scroller) WithWantsRestingTouches(wantsRestingTouches bool) *Scroller {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Scroller) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Scroller {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Scroller) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Scroller {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Scroller) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Scroller {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Scroller) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Scroller {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -425,8 +425,8 @@ func (x *Scroller) WithToolTip(toolTip string) *Scroller {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Scroller) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Scroller {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Scroller) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Scroller {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -443,8 +443,8 @@ func (x *Scroller) WithNextKeyView(nextKeyView ViewProvider) *Scroller {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Scroller) WithFocusRingType(focusRingType raw.NSFocusRingType) *Scroller {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *Scroller) WithFocusRingType(focusRingType NSFocusRingType) *Scroller {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -467,8 +467,8 @@ func (x *Scroller) WithGestureRecognizers(items ...GestureRecognizerProvider) *S
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Scroller) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Scroller {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Scroller) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Scroller {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -557,8 +557,8 @@ func (x *Scroller) WithTouchBar(touchBar *TouchBar) *Scroller {
 }
 
 // RectForPart calls the underlying RectForPart.
-func (x *Scroller) RectForPart(partCode raw.NSScrollerPart) corefoundation.CGRect {
-	return x.inner.RectForPart(partCode)
+func (x *Scroller) RectForPart(partCode NSScrollerPart) corefoundation.CGRect {
+	return x.inner.RectForPart(raw.NSScrollerPart(partCode))
 }
 
 // CheckSpaceForParts calls the underlying CheckSpaceForParts.
@@ -577,8 +577,8 @@ func (x *Scroller) DrawKnobSlotInRectHighlight(slotRect corefoundation.CGRect, f
 }
 
 // TestPart calls the underlying TestPart.
-func (x *Scroller) TestPart(point corefoundation.CGPoint) raw.NSScrollerPart {
-	return x.inner.TestPart(point)
+func (x *Scroller) TestPart(point corefoundation.CGPoint) NSScrollerPart {
+	return NSScrollerPart(x.inner.TestPart(point))
 }
 
 // TrackKnob calls the underlying TrackKnob.
@@ -592,33 +592,33 @@ func (x *Scroller) SetKnobProportion(proportion float64) {
 }
 
 // ScrollerStyle calls the underlying ScrollerStyle.
-func (x *Scroller) ScrollerStyle() raw.NSScrollerStyle {
-	return x.inner.ScrollerStyle()
+func (x *Scroller) ScrollerStyle() NSScrollerStyle {
+	return NSScrollerStyle(x.inner.ScrollerStyle())
 }
 
 // SetScrollerStyle calls the underlying SetScrollerStyle.
-func (x *Scroller) SetScrollerStyle(scrollerStyle raw.NSScrollerStyle) {
-	x.inner.SetScrollerStyle(scrollerStyle)
+func (x *Scroller) SetScrollerStyle(scrollerStyle NSScrollerStyle) {
+	x.inner.SetScrollerStyle(raw.NSScrollerStyle(scrollerStyle))
 }
 
 // KnobStyle calls the underlying KnobStyle.
-func (x *Scroller) KnobStyle() raw.NSScrollerKnobStyle {
-	return x.inner.KnobStyle()
+func (x *Scroller) KnobStyle() NSScrollerKnobStyle {
+	return NSScrollerKnobStyle(x.inner.KnobStyle())
 }
 
 // SetKnobStyle calls the underlying SetKnobStyle.
-func (x *Scroller) SetKnobStyle(knobStyle raw.NSScrollerKnobStyle) {
-	x.inner.SetKnobStyle(knobStyle)
+func (x *Scroller) SetKnobStyle(knobStyle NSScrollerKnobStyle) {
+	x.inner.SetKnobStyle(raw.NSScrollerKnobStyle(knobStyle))
 }
 
 // UsableParts calls the underlying UsableParts.
-func (x *Scroller) UsableParts() raw.NSUsableScrollerParts {
-	return x.inner.UsableParts()
+func (x *Scroller) UsableParts() NSUsableScrollerParts {
+	return NSUsableScrollerParts(x.inner.UsableParts())
 }
 
 // HitPart calls the underlying HitPart.
-func (x *Scroller) HitPart() raw.NSScrollerPart {
-	return x.inner.HitPart()
+func (x *Scroller) HitPart() NSScrollerPart {
+	return NSScrollerPart(x.inner.HitPart())
 }
 
 // KnobProportion calls the underlying KnobProportion.
@@ -647,28 +647,28 @@ func (x *Scroller) DrawParts() {
 }
 
 // DrawArrowHighlight calls the underlying DrawArrowHighlight.
-func (x *Scroller) DrawArrowHighlight(whichArrow raw.NSScrollerArrow, flag bool) {
-	x.inner.DrawArrowHighlight(whichArrow, flag)
+func (x *Scroller) DrawArrowHighlight(whichArrow NSScrollerArrow, flag bool) {
+	x.inner.DrawArrowHighlight(raw.NSScrollerArrow(whichArrow), flag)
 }
 
 // ArrowsPosition calls the underlying ArrowsPosition.
-func (x *Scroller) ArrowsPosition() raw.NSScrollArrowPosition {
-	return x.inner.ArrowsPosition()
+func (x *Scroller) ArrowsPosition() NSScrollArrowPosition {
+	return NSScrollArrowPosition(x.inner.ArrowsPosition())
 }
 
 // SetArrowsPosition calls the underlying SetArrowsPosition.
-func (x *Scroller) SetArrowsPosition(arrowsPosition raw.NSScrollArrowPosition) {
-	x.inner.SetArrowsPosition(arrowsPosition)
+func (x *Scroller) SetArrowsPosition(arrowsPosition NSScrollArrowPosition) {
+	x.inner.SetArrowsPosition(raw.NSScrollArrowPosition(arrowsPosition))
 }
 
 // ControlTint calls the underlying ControlTint.
-func (x *Scroller) ControlTint() raw.NSControlTint {
-	return x.inner.ControlTint()
+func (x *Scroller) ControlTint() NSControlTint {
+	return NSControlTint(x.inner.ControlTint())
 }
 
 // SetControlTint calls the underlying SetControlTint.
-func (x *Scroller) SetControlTint(controlTint raw.NSControlTint) {
-	x.inner.SetControlTint(controlTint)
+func (x *Scroller) SetControlTint(controlTint NSControlTint) {
+	x.inner.SetControlTint(raw.NSControlTint(controlTint))
 }
 
 func (x *Scroller) asControl() *raw.NSControl { return &x.inner.NSControl }
@@ -680,11 +680,11 @@ func (x *Scroller) asResponder() *raw.NSResponder { return &x.inner.NSControl.NS
 // Scrollerable is the interface implemented by [Scroller], for mocking and DI.
 type Scrollerable interface {
 	Unwrap() *raw.NSScroller
-	WithScrollerStyle(scrollerStyle raw.NSScrollerStyle) *Scroller
-	WithKnobStyle(knobStyle raw.NSScrollerKnobStyle) *Scroller
+	WithScrollerStyle(scrollerStyle NSScrollerStyle) *Scroller
+	WithKnobStyle(knobStyle NSScrollerKnobStyle) *Scroller
 	WithKnobProportion(knobProportion float64) *Scroller
-	WithArrowsPosition(arrowsPosition raw.NSScrollArrowPosition) *Scroller
-	WithControlTint(controlTint raw.NSControlTint) *Scroller
+	WithArrowsPosition(arrowsPosition NSScrollArrowPosition) *Scroller
+	WithControlTint(controlTint NSControlTint) *Scroller
 	WithTarget(target objc.ID) *Scroller
 	WithAction(action objc.SEL) *Scroller
 	WithTag(tag int) *Scroller
@@ -693,7 +693,7 @@ type Scrollerable interface {
 	WithEnabled(enabled bool) *Scroller
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Scroller
 	WithHighlighted(highlighted bool) *Scroller
-	WithControlSize(controlSize raw.NSControlSize) *Scroller
+	WithControlSize(controlSize NSControlSize) *Scroller
 	WithFormatter(formatter *foundation.NSFormatter) *Scroller
 	WithObjectValue(objectValue objc.ID) *Scroller
 	WithStringValue(stringValue string) *Scroller
@@ -704,16 +704,16 @@ type Scrollerable interface {
 	WithDoubleValue(doubleValue float64) *Scroller
 	WithFont(font *Font) *Scroller
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Scroller
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Scroller
-	WithAlignment(alignment raw.NSTextAlignment) *Scroller
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Scroller
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Scroller
+	WithAlignment(alignment NSTextAlignment) *Scroller
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Scroller
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Scroller
 	WithCell(cell CellProvider) *Scroller
 	WithSubviews(items ...ViewProvider) *Scroller
 	WithHidden(hidden bool) *Scroller
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scroller
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Scroller
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Scroller
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Scroller
 	WithFrame(frame corefoundation.CGRect) *Scroller
 	WithFrameRotation(frameRotation float64) *Scroller
 	WithFrameCenterRotation(frameCenterRotation float64) *Scroller
@@ -723,8 +723,8 @@ type Scrollerable interface {
 	WithNeedsDisplay(needsDisplay bool) *Scroller
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scroller
 	WithWantsRestingTouches(wantsRestingTouches bool) *Scroller
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Scroller
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Scroller
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Scroller
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Scroller
 	WithWantsLayer(wantsLayer bool) *Scroller
 	WithLayer(layer *quartzcore.CALayer) *Scroller
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scroller
@@ -738,12 +738,12 @@ type Scrollerable interface {
 	WithClipsToBounds(clipsToBounds bool) *Scroller
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scroller
 	WithToolTip(toolTip string) *Scroller
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Scroller
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Scroller
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scroller
 	WithNextKeyView(nextKeyView ViewProvider) *Scroller
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Scroller
+	WithFocusRingType(focusRingType NSFocusRingType) *Scroller
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Scroller
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Scroller
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Scroller
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scroller
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scroller
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scroller
@@ -758,29 +758,29 @@ type Scrollerable interface {
 	WithMenu(menu *Menu) *Scroller
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Scroller
 	WithTouchBar(touchBar *TouchBar) *Scroller
-	RectForPart(partCode raw.NSScrollerPart) corefoundation.CGRect
+	RectForPart(partCode NSScrollerPart) corefoundation.CGRect
 	CheckSpaceForParts()
 	DrawKnob()
 	DrawKnobSlotInRectHighlight(slotRect corefoundation.CGRect, flag bool)
-	TestPart(point corefoundation.CGPoint) raw.NSScrollerPart
+	TestPart(point corefoundation.CGPoint) NSScrollerPart
 	TrackKnob(event *raw.NSEvent)
 	SetKnobProportion(proportion float64)
-	ScrollerStyle() raw.NSScrollerStyle
-	SetScrollerStyle(scrollerStyle raw.NSScrollerStyle)
-	KnobStyle() raw.NSScrollerKnobStyle
-	SetKnobStyle(knobStyle raw.NSScrollerKnobStyle)
-	UsableParts() raw.NSUsableScrollerParts
-	HitPart() raw.NSScrollerPart
+	ScrollerStyle() NSScrollerStyle
+	SetScrollerStyle(scrollerStyle NSScrollerStyle)
+	KnobStyle() NSScrollerKnobStyle
+	SetKnobStyle(knobStyle NSScrollerKnobStyle)
+	UsableParts() NSUsableScrollerParts
+	HitPart() NSScrollerPart
 	KnobProportion() float64
 	SetFloatValueKnobProportion(value float32, proportion float64)
 	Highlight(flag bool)
 	TrackScrollButtons(event *raw.NSEvent)
 	DrawParts()
-	DrawArrowHighlight(whichArrow raw.NSScrollerArrow, flag bool)
-	ArrowsPosition() raw.NSScrollArrowPosition
-	SetArrowsPosition(arrowsPosition raw.NSScrollArrowPosition)
-	ControlTint() raw.NSControlTint
-	SetControlTint(controlTint raw.NSControlTint)
+	DrawArrowHighlight(whichArrow NSScrollerArrow, flag bool)
+	ArrowsPosition() NSScrollArrowPosition
+	SetArrowsPosition(arrowsPosition NSScrollArrowPosition)
+	ControlTint() NSControlTint
+	SetControlTint(controlTint NSControlTint)
 }
 
 var _ Scrollerable = (*Scroller)(nil)

@@ -37,20 +37,20 @@ func NewGraphStencilOpDescriptor() *GraphStencilOpDescriptor {
 }
 
 // WithReductionMode sets the reductionMode property and returns the receiver for chaining.
-func (x *GraphStencilOpDescriptor) WithReductionMode(reductionMode raw.MPSGraphReductionMode) *GraphStencilOpDescriptor {
-	x.inner.SetReductionMode(reductionMode)
+func (x *GraphStencilOpDescriptor) WithReductionMode(reductionMode MPSGraphReductionMode) *GraphStencilOpDescriptor {
+	x.inner.SetReductionMode(raw.MPSGraphReductionMode(reductionMode))
 	return x
 }
 
 // WithBoundaryMode sets the boundaryMode property and returns the receiver for chaining.
-func (x *GraphStencilOpDescriptor) WithBoundaryMode(boundaryMode raw.MPSGraphPaddingMode) *GraphStencilOpDescriptor {
-	x.inner.SetBoundaryMode(boundaryMode)
+func (x *GraphStencilOpDescriptor) WithBoundaryMode(boundaryMode MPSGraphPaddingMode) *GraphStencilOpDescriptor {
+	x.inner.SetBoundaryMode(raw.MPSGraphPaddingMode(boundaryMode))
 	return x
 }
 
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
-func (x *GraphStencilOpDescriptor) WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphStencilOpDescriptor {
-	x.inner.SetPaddingStyle(paddingStyle)
+func (x *GraphStencilOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphStencilOpDescriptor {
+	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	return x
 }
 
@@ -61,13 +61,13 @@ func (x *GraphStencilOpDescriptor) WithPaddingConstant(paddingConstant float32) 
 }
 
 // ReductionMode calls the underlying ReductionMode.
-func (x *GraphStencilOpDescriptor) ReductionMode() raw.MPSGraphReductionMode {
-	return x.inner.ReductionMode()
+func (x *GraphStencilOpDescriptor) ReductionMode() MPSGraphReductionMode {
+	return MPSGraphReductionMode(x.inner.ReductionMode())
 }
 
 // SetReductionMode calls the underlying SetReductionMode.
-func (x *GraphStencilOpDescriptor) SetReductionMode(reductionMode raw.MPSGraphReductionMode) {
-	x.inner.SetReductionMode(reductionMode)
+func (x *GraphStencilOpDescriptor) SetReductionMode(reductionMode MPSGraphReductionMode) {
+	x.inner.SetReductionMode(raw.MPSGraphReductionMode(reductionMode))
 }
 
 // Offsets calls the underlying Offsets.
@@ -111,23 +111,23 @@ func (x *GraphStencilOpDescriptor) SetExplicitPadding(explicitPadding unsafe.Poi
 }
 
 // BoundaryMode calls the underlying BoundaryMode.
-func (x *GraphStencilOpDescriptor) BoundaryMode() raw.MPSGraphPaddingMode {
-	return x.inner.BoundaryMode()
+func (x *GraphStencilOpDescriptor) BoundaryMode() MPSGraphPaddingMode {
+	return MPSGraphPaddingMode(x.inner.BoundaryMode())
 }
 
 // SetBoundaryMode calls the underlying SetBoundaryMode.
-func (x *GraphStencilOpDescriptor) SetBoundaryMode(boundaryMode raw.MPSGraphPaddingMode) {
-	x.inner.SetBoundaryMode(boundaryMode)
+func (x *GraphStencilOpDescriptor) SetBoundaryMode(boundaryMode MPSGraphPaddingMode) {
+	x.inner.SetBoundaryMode(raw.MPSGraphPaddingMode(boundaryMode))
 }
 
 // PaddingStyle calls the underlying PaddingStyle.
-func (x *GraphStencilOpDescriptor) PaddingStyle() raw.MPSGraphPaddingStyle {
-	return x.inner.PaddingStyle()
+func (x *GraphStencilOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
+	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
 }
 
 // SetPaddingStyle calls the underlying SetPaddingStyle.
-func (x *GraphStencilOpDescriptor) SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) {
-	x.inner.SetPaddingStyle(paddingStyle)
+func (x *GraphStencilOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPaddingStyle) {
+	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 }
 
 // PaddingConstant calls the underlying PaddingConstant.
@@ -147,12 +147,12 @@ func (x *GraphStencilOpDescriptor) asGraphObject() *raw.MPSGraphObject {
 // GraphStencilOpDescriptorable is the interface implemented by [GraphStencilOpDescriptor], for mocking and DI.
 type GraphStencilOpDescriptorable interface {
 	Unwrap() *raw.MPSGraphStencilOpDescriptor
-	WithReductionMode(reductionMode raw.MPSGraphReductionMode) *GraphStencilOpDescriptor
-	WithBoundaryMode(boundaryMode raw.MPSGraphPaddingMode) *GraphStencilOpDescriptor
-	WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphStencilOpDescriptor
+	WithReductionMode(reductionMode MPSGraphReductionMode) *GraphStencilOpDescriptor
+	WithBoundaryMode(boundaryMode MPSGraphPaddingMode) *GraphStencilOpDescriptor
+	WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphStencilOpDescriptor
 	WithPaddingConstant(paddingConstant float32) *GraphStencilOpDescriptor
-	ReductionMode() raw.MPSGraphReductionMode
-	SetReductionMode(reductionMode raw.MPSGraphReductionMode)
+	ReductionMode() MPSGraphReductionMode
+	SetReductionMode(reductionMode MPSGraphReductionMode)
 	Offsets() unsafe.Pointer
 	SetOffsets(offsets unsafe.Pointer)
 	Strides() unsafe.Pointer
@@ -161,10 +161,10 @@ type GraphStencilOpDescriptorable interface {
 	SetDilationRates(dilationRates unsafe.Pointer)
 	ExplicitPadding() unsafe.Pointer
 	SetExplicitPadding(explicitPadding unsafe.Pointer)
-	BoundaryMode() raw.MPSGraphPaddingMode
-	SetBoundaryMode(boundaryMode raw.MPSGraphPaddingMode)
-	PaddingStyle() raw.MPSGraphPaddingStyle
-	SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle)
+	BoundaryMode() MPSGraphPaddingMode
+	SetBoundaryMode(boundaryMode MPSGraphPaddingMode)
+	PaddingStyle() MPSGraphPaddingStyle
+	SetPaddingStyle(paddingStyle MPSGraphPaddingStyle)
 	PaddingConstant() float32
 	SetPaddingConstant(paddingConstant float32)
 }

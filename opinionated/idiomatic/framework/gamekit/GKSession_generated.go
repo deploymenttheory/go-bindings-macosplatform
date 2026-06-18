@@ -33,9 +33,9 @@ func SessionFromID(id objc.ID) *Session {
 }
 
 // NewSessionWithSessionIDDisplayNameSessionMode creates a new [Session].
-func NewSessionWithSessionIDDisplayNameSessionMode(sessionID string, name string, mode raw.GKSessionMode) *Session {
+func NewSessionWithSessionIDDisplayNameSessionMode(sessionID string, name string, mode GKSessionMode) *Session {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSessionID:displayName:sessionMode:"), foundation.NSStringStringWithUTF8String(sessionID).Ptr(), foundation.NSStringStringWithUTF8String(name).Ptr(), mode)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSessionID:displayName:sessionMode:"), foundation.NSStringStringWithUTF8String(sessionID).Ptr(), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.GKSessionMode(mode))
 	return &Session{inner: raw.GKSessionFromID(_id)}
 }
 
@@ -67,13 +67,13 @@ func (x *Session) DisplayNameForPeer(peerID string) string {
 }
 
 // SendDataToPeersWithDataModeError calls the underlying SendDataToPeersWithDataModeError.
-func (x *Session) SendDataToPeersWithDataModeError(data *foundation.NSData, peers *foundation.NSArray[objc.ID], mode raw.GKSendDataMode) (bool, error) {
-	return x.inner.SendDataToPeersWithDataModeError(data, peers, mode)
+func (x *Session) SendDataToPeersWithDataModeError(data *foundation.NSData, peers *foundation.NSArray[objc.ID], mode GKSendDataMode) (bool, error) {
+	return x.inner.SendDataToPeersWithDataModeError(data, peers, raw.GKSendDataMode(mode))
 }
 
 // SendDataToAllPeersWithDataModeError calls the underlying SendDataToAllPeersWithDataModeError.
-func (x *Session) SendDataToAllPeersWithDataModeError(data *foundation.NSData, mode raw.GKSendDataMode) (bool, error) {
-	return x.inner.SendDataToAllPeersWithDataModeError(data, mode)
+func (x *Session) SendDataToAllPeersWithDataModeError(data *foundation.NSData, mode GKSendDataMode) (bool, error) {
+	return x.inner.SendDataToAllPeersWithDataModeError(data, raw.GKSendDataMode(mode))
 }
 
 // SetDataReceiveHandlerWithContext calls the underlying SetDataReceiveHandlerWithContext.
@@ -112,8 +112,8 @@ func (x *Session) DisconnectFromAllPeers() {
 }
 
 // PeersWithConnectionState calls the underlying PeersWithConnectionState.
-func (x *Session) PeersWithConnectionState(state raw.GKPeerConnectionState) *foundation.NSArray[objc.ID] {
-	return x.inner.PeersWithConnectionState(state)
+func (x *Session) PeersWithConnectionState(state GKPeerConnectionState) *foundation.NSArray[objc.ID] {
+	return x.inner.PeersWithConnectionState(raw.GKPeerConnectionState(state))
 }
 
 // Delegate calls the underlying Delegate.
@@ -145,8 +145,8 @@ func (x *Session) DisplayName() string {
 }
 
 // SessionMode calls the underlying SessionMode.
-func (x *Session) SessionMode() raw.GKSessionMode {
-	return x.inner.SessionMode()
+func (x *Session) SessionMode() GKSessionMode {
+	return GKSessionMode(x.inner.SessionMode())
 }
 
 // PeerID calls the underlying PeerID.
@@ -185,8 +185,8 @@ type Sessionable interface {
 	WithAvailable(available bool) *Session
 	WithDisconnectTimeout(disconnectTimeout float64) *Session
 	DisplayNameForPeer(peerID string) string
-	SendDataToPeersWithDataModeError(data *foundation.NSData, peers *foundation.NSArray[objc.ID], mode raw.GKSendDataMode) (bool, error)
-	SendDataToAllPeersWithDataModeError(data *foundation.NSData, mode raw.GKSendDataMode) (bool, error)
+	SendDataToPeersWithDataModeError(data *foundation.NSData, peers *foundation.NSArray[objc.ID], mode GKSendDataMode) (bool, error)
+	SendDataToAllPeersWithDataModeError(data *foundation.NSData, mode GKSendDataMode) (bool, error)
 	SetDataReceiveHandlerWithContext(handler objc.ID, context_ unsafe.Pointer)
 	ConnectToPeerWithTimeout(peerID string, timeout float64)
 	CancelConnectToPeer(peerID string)
@@ -194,12 +194,12 @@ type Sessionable interface {
 	DenyConnectionFromPeer(peerID string)
 	DisconnectPeerFromAllPeers(peerID string)
 	DisconnectFromAllPeers()
-	PeersWithConnectionState(state raw.GKPeerConnectionState) *foundation.NSArray[objc.ID]
+	PeersWithConnectionState(state GKPeerConnectionState) *foundation.NSArray[objc.ID]
 	Delegate() raw.GKSessionDelegate
 	SetDelegate(delegate raw.GKSessionDelegate)
 	SessionID() string
 	DisplayName() string
-	SessionMode() raw.GKSessionMode
+	SessionMode() GKSessionMode
 	PeerID() string
 	IsAvailable() bool
 	SetAvailable(available bool)

@@ -46,8 +46,8 @@ func (x *GraphicsContext) WithShouldAntialias(shouldAntialias bool) *GraphicsCon
 }
 
 // WithImageInterpolation sets the imageInterpolation property and returns the receiver for chaining.
-func (x *GraphicsContext) WithImageInterpolation(imageInterpolation raw.NSImageInterpolation) *GraphicsContext {
-	x.inner.SetImageInterpolation(imageInterpolation)
+func (x *GraphicsContext) WithImageInterpolation(imageInterpolation NSImageInterpolation) *GraphicsContext {
+	x.inner.SetImageInterpolation(raw.NSImageInterpolation(imageInterpolation))
 	return x
 }
 
@@ -58,14 +58,14 @@ func (x *GraphicsContext) WithPatternPhase(patternPhase corefoundation.CGPoint) 
 }
 
 // WithCompositingOperation sets the compositingOperation property and returns the receiver for chaining.
-func (x *GraphicsContext) WithCompositingOperation(compositingOperation raw.NSCompositingOperation) *GraphicsContext {
-	x.inner.SetCompositingOperation(compositingOperation)
+func (x *GraphicsContext) WithCompositingOperation(compositingOperation NSCompositingOperation) *GraphicsContext {
+	x.inner.SetCompositingOperation(raw.NSCompositingOperation(compositingOperation))
 	return x
 }
 
 // WithColorRenderingIntent sets the colorRenderingIntent property and returns the receiver for chaining.
-func (x *GraphicsContext) WithColorRenderingIntent(colorRenderingIntent raw.NSColorRenderingIntent) *GraphicsContext {
-	x.inner.SetColorRenderingIntent(colorRenderingIntent)
+func (x *GraphicsContext) WithColorRenderingIntent(colorRenderingIntent NSColorRenderingIntent) *GraphicsContext {
+	x.inner.SetColorRenderingIntent(raw.NSColorRenderingIntent(colorRenderingIntent))
 	return x
 }
 
@@ -115,13 +115,13 @@ func (x *GraphicsContext) SetShouldAntialias(shouldAntialias bool) {
 }
 
 // ImageInterpolation calls the underlying ImageInterpolation.
-func (x *GraphicsContext) ImageInterpolation() raw.NSImageInterpolation {
-	return x.inner.ImageInterpolation()
+func (x *GraphicsContext) ImageInterpolation() NSImageInterpolation {
+	return NSImageInterpolation(x.inner.ImageInterpolation())
 }
 
 // SetImageInterpolation calls the underlying SetImageInterpolation.
-func (x *GraphicsContext) SetImageInterpolation(imageInterpolation raw.NSImageInterpolation) {
-	x.inner.SetImageInterpolation(imageInterpolation)
+func (x *GraphicsContext) SetImageInterpolation(imageInterpolation NSImageInterpolation) {
+	x.inner.SetImageInterpolation(raw.NSImageInterpolation(imageInterpolation))
 }
 
 // PatternPhase calls the underlying PatternPhase.
@@ -135,23 +135,23 @@ func (x *GraphicsContext) SetPatternPhase(patternPhase corefoundation.CGPoint) {
 }
 
 // CompositingOperation calls the underlying CompositingOperation.
-func (x *GraphicsContext) CompositingOperation() raw.NSCompositingOperation {
-	return x.inner.CompositingOperation()
+func (x *GraphicsContext) CompositingOperation() NSCompositingOperation {
+	return NSCompositingOperation(x.inner.CompositingOperation())
 }
 
 // SetCompositingOperation calls the underlying SetCompositingOperation.
-func (x *GraphicsContext) SetCompositingOperation(compositingOperation raw.NSCompositingOperation) {
-	x.inner.SetCompositingOperation(compositingOperation)
+func (x *GraphicsContext) SetCompositingOperation(compositingOperation NSCompositingOperation) {
+	x.inner.SetCompositingOperation(raw.NSCompositingOperation(compositingOperation))
 }
 
 // ColorRenderingIntent calls the underlying ColorRenderingIntent.
-func (x *GraphicsContext) ColorRenderingIntent() raw.NSColorRenderingIntent {
-	return x.inner.ColorRenderingIntent()
+func (x *GraphicsContext) ColorRenderingIntent() NSColorRenderingIntent {
+	return NSColorRenderingIntent(x.inner.ColorRenderingIntent())
 }
 
 // SetColorRenderingIntent calls the underlying SetColorRenderingIntent.
-func (x *GraphicsContext) SetColorRenderingIntent(colorRenderingIntent raw.NSColorRenderingIntent) {
-	x.inner.SetColorRenderingIntent(colorRenderingIntent)
+func (x *GraphicsContext) SetColorRenderingIntent(colorRenderingIntent NSColorRenderingIntent) {
+	x.inner.SetColorRenderingIntent(raw.NSColorRenderingIntent(colorRenderingIntent))
 }
 
 // CIContext calls the underlying CIContext.
@@ -178,10 +178,10 @@ func (x *GraphicsContext) GraphicsPort() unsafe.Pointer {
 type GraphicsContextable interface {
 	Unwrap() *raw.NSGraphicsContext
 	WithShouldAntialias(shouldAntialias bool) *GraphicsContext
-	WithImageInterpolation(imageInterpolation raw.NSImageInterpolation) *GraphicsContext
+	WithImageInterpolation(imageInterpolation NSImageInterpolation) *GraphicsContext
 	WithPatternPhase(patternPhase corefoundation.CGPoint) *GraphicsContext
-	WithCompositingOperation(compositingOperation raw.NSCompositingOperation) *GraphicsContext
-	WithColorRenderingIntent(colorRenderingIntent raw.NSColorRenderingIntent) *GraphicsContext
+	WithCompositingOperation(compositingOperation NSCompositingOperation) *GraphicsContext
+	WithColorRenderingIntent(colorRenderingIntent NSColorRenderingIntent) *GraphicsContext
 	SaveGraphicsState()
 	RestoreGraphicsState()
 	FlushGraphics()
@@ -191,14 +191,14 @@ type GraphicsContextable interface {
 	IsFlipped() bool
 	ShouldAntialias() bool
 	SetShouldAntialias(shouldAntialias bool)
-	ImageInterpolation() raw.NSImageInterpolation
-	SetImageInterpolation(imageInterpolation raw.NSImageInterpolation)
+	ImageInterpolation() NSImageInterpolation
+	SetImageInterpolation(imageInterpolation NSImageInterpolation)
 	PatternPhase() corefoundation.CGPoint
 	SetPatternPhase(patternPhase corefoundation.CGPoint)
-	CompositingOperation() raw.NSCompositingOperation
-	SetCompositingOperation(compositingOperation raw.NSCompositingOperation)
-	ColorRenderingIntent() raw.NSColorRenderingIntent
-	SetColorRenderingIntent(colorRenderingIntent raw.NSColorRenderingIntent)
+	CompositingOperation() NSCompositingOperation
+	SetCompositingOperation(compositingOperation NSCompositingOperation)
+	ColorRenderingIntent() NSColorRenderingIntent
+	SetColorRenderingIntent(colorRenderingIntent NSColorRenderingIntent)
 	CIContext() *coreimage.CIContext
 	FocusStack() objc.ID
 	SetFocusStack(stack objc.ID)

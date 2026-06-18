@@ -42,14 +42,14 @@ func NewLabelNodeWithFontNamed(fontName string) *LabelNode {
 }
 
 // WithVerticalAlignmentMode sets the verticalAlignmentMode property and returns the receiver for chaining.
-func (x *LabelNode) WithVerticalAlignmentMode(verticalAlignmentMode raw.SKLabelVerticalAlignmentMode) *LabelNode {
-	x.inner.SetVerticalAlignmentMode(verticalAlignmentMode)
+func (x *LabelNode) WithVerticalAlignmentMode(verticalAlignmentMode SKLabelVerticalAlignmentMode) *LabelNode {
+	x.inner.SetVerticalAlignmentMode(raw.SKLabelVerticalAlignmentMode(verticalAlignmentMode))
 	return x
 }
 
 // WithHorizontalAlignmentMode sets the horizontalAlignmentMode property and returns the receiver for chaining.
-func (x *LabelNode) WithHorizontalAlignmentMode(horizontalAlignmentMode raw.SKLabelHorizontalAlignmentMode) *LabelNode {
-	x.inner.SetHorizontalAlignmentMode(horizontalAlignmentMode)
+func (x *LabelNode) WithHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHorizontalAlignmentMode) *LabelNode {
+	x.inner.SetHorizontalAlignmentMode(raw.SKLabelHorizontalAlignmentMode(horizontalAlignmentMode))
 	return x
 }
 
@@ -114,8 +114,8 @@ func (x *LabelNode) WithColor(color *appkit.NSColor) *LabelNode {
 }
 
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *LabelNode) WithBlendMode(blendMode raw.SKBlendMode) *LabelNode {
-	x.inner.SetBlendMode(blendMode)
+func (x *LabelNode) WithBlendMode(blendMode SKBlendMode) *LabelNode {
+	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 	return x
 }
 
@@ -282,23 +282,23 @@ func (x *LabelNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNo
 }
 
 // VerticalAlignmentMode calls the underlying VerticalAlignmentMode.
-func (x *LabelNode) VerticalAlignmentMode() raw.SKLabelVerticalAlignmentMode {
-	return x.inner.VerticalAlignmentMode()
+func (x *LabelNode) VerticalAlignmentMode() SKLabelVerticalAlignmentMode {
+	return SKLabelVerticalAlignmentMode(x.inner.VerticalAlignmentMode())
 }
 
 // SetVerticalAlignmentMode calls the underlying SetVerticalAlignmentMode.
-func (x *LabelNode) SetVerticalAlignmentMode(verticalAlignmentMode raw.SKLabelVerticalAlignmentMode) {
-	x.inner.SetVerticalAlignmentMode(verticalAlignmentMode)
+func (x *LabelNode) SetVerticalAlignmentMode(verticalAlignmentMode SKLabelVerticalAlignmentMode) {
+	x.inner.SetVerticalAlignmentMode(raw.SKLabelVerticalAlignmentMode(verticalAlignmentMode))
 }
 
 // HorizontalAlignmentMode calls the underlying HorizontalAlignmentMode.
-func (x *LabelNode) HorizontalAlignmentMode() raw.SKLabelHorizontalAlignmentMode {
-	return x.inner.HorizontalAlignmentMode()
+func (x *LabelNode) HorizontalAlignmentMode() SKLabelHorizontalAlignmentMode {
+	return SKLabelHorizontalAlignmentMode(x.inner.HorizontalAlignmentMode())
 }
 
 // SetHorizontalAlignmentMode calls the underlying SetHorizontalAlignmentMode.
-func (x *LabelNode) SetHorizontalAlignmentMode(horizontalAlignmentMode raw.SKLabelHorizontalAlignmentMode) {
-	x.inner.SetHorizontalAlignmentMode(horizontalAlignmentMode)
+func (x *LabelNode) SetHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHorizontalAlignmentMode) {
+	x.inner.SetHorizontalAlignmentMode(raw.SKLabelHorizontalAlignmentMode(horizontalAlignmentMode))
 }
 
 // NumberOfLines calls the underlying NumberOfLines.
@@ -410,13 +410,13 @@ func (x *LabelNode) SetColor(color *appkit.NSColor) {
 }
 
 // BlendMode calls the underlying BlendMode.
-func (x *LabelNode) BlendMode() raw.SKBlendMode {
-	return x.inner.BlendMode()
+func (x *LabelNode) BlendMode() SKBlendMode {
+	return SKBlendMode(x.inner.BlendMode())
 }
 
 // SetBlendMode calls the underlying SetBlendMode.
-func (x *LabelNode) SetBlendMode(blendMode raw.SKBlendMode) {
-	x.inner.SetBlendMode(blendMode)
+func (x *LabelNode) SetBlendMode(blendMode SKBlendMode) {
+	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 }
 
 func (x *LabelNode) asNode() *raw.SKNode { return &x.inner.SKNode }
@@ -424,8 +424,8 @@ func (x *LabelNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 // LabelNodeable is the interface implemented by [LabelNode], for mocking and DI.
 type LabelNodeable interface {
 	Unwrap() *raw.SKLabelNode
-	WithVerticalAlignmentMode(verticalAlignmentMode raw.SKLabelVerticalAlignmentMode) *LabelNode
-	WithHorizontalAlignmentMode(horizontalAlignmentMode raw.SKLabelHorizontalAlignmentMode) *LabelNode
+	WithVerticalAlignmentMode(verticalAlignmentMode SKLabelVerticalAlignmentMode) *LabelNode
+	WithHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHorizontalAlignmentMode) *LabelNode
 	WithNumberOfLines(numberOfLines int) *LabelNode
 	WithLineBreakMode(lineBreakMode appkit.NSLineBreakMode) *LabelNode
 	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *LabelNode
@@ -436,7 +436,7 @@ type LabelNodeable interface {
 	WithFontColor(fontColor *appkit.NSColor) *LabelNode
 	WithColorBlendFactor(colorBlendFactor float64) *LabelNode
 	WithColor(color *appkit.NSColor) *LabelNode
-	WithBlendMode(blendMode raw.SKBlendMode) *LabelNode
+	WithBlendMode(blendMode SKBlendMode) *LabelNode
 	WithPosition(position corefoundation.CGPoint) *LabelNode
 	WithZPosition(zPosition float64) *LabelNode
 	WithZRotation(zRotation float64) *LabelNode
@@ -462,10 +462,10 @@ type LabelNodeable interface {
 	WithAccessibilityHelp(accessibilityHelp string) *LabelNode
 	WithAccessibilityLabel(accessibilityLabel string) *LabelNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNode
-	VerticalAlignmentMode() raw.SKLabelVerticalAlignmentMode
-	SetVerticalAlignmentMode(verticalAlignmentMode raw.SKLabelVerticalAlignmentMode)
-	HorizontalAlignmentMode() raw.SKLabelHorizontalAlignmentMode
-	SetHorizontalAlignmentMode(horizontalAlignmentMode raw.SKLabelHorizontalAlignmentMode)
+	VerticalAlignmentMode() SKLabelVerticalAlignmentMode
+	SetVerticalAlignmentMode(verticalAlignmentMode SKLabelVerticalAlignmentMode)
+	HorizontalAlignmentMode() SKLabelHorizontalAlignmentMode
+	SetHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHorizontalAlignmentMode)
 	NumberOfLines() int
 	SetNumberOfLines(numberOfLines int)
 	LineBreakMode() appkit.NSLineBreakMode
@@ -486,8 +486,8 @@ type LabelNodeable interface {
 	SetColorBlendFactor(colorBlendFactor float64)
 	Color() *appkit.NSColor
 	SetColor(color *appkit.NSColor)
-	BlendMode() raw.SKBlendMode
-	SetBlendMode(blendMode raw.SKBlendMode)
+	BlendMode() SKBlendMode
+	SetBlendMode(blendMode SKBlendMode)
 }
 
 var _ LabelNodeable = (*LabelNode)(nil)

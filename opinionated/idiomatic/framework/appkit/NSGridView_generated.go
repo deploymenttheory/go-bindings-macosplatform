@@ -49,20 +49,20 @@ func NewGridViewWithCoder(coder *foundation.NSCoder) *GridView {
 }
 
 // WithXPlacement sets the xPlacement property and returns the receiver for chaining.
-func (x *GridView) WithXPlacement(xPlacement raw.NSGridCellPlacement) *GridView {
-	x.inner.SetXPlacement(xPlacement)
+func (x *GridView) WithXPlacement(xPlacement NSGridCellPlacement) *GridView {
+	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
 	return x
 }
 
 // WithYPlacement sets the yPlacement property and returns the receiver for chaining.
-func (x *GridView) WithYPlacement(yPlacement raw.NSGridCellPlacement) *GridView {
-	x.inner.SetYPlacement(yPlacement)
+func (x *GridView) WithYPlacement(yPlacement NSGridCellPlacement) *GridView {
+	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
 	return x
 }
 
 // WithRowAlignment sets the rowAlignment property and returns the receiver for chaining.
-func (x *GridView) WithRowAlignment(rowAlignment raw.NSGridRowAlignment) *GridView {
-	x.inner.SetRowAlignment(rowAlignment)
+func (x *GridView) WithRowAlignment(rowAlignment NSGridRowAlignment) *GridView {
+	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
 	return x
 }
 
@@ -115,8 +115,8 @@ func (x *GridView) WithAutoresizesSubviews(autoresizesSubviews bool) *GridView {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *GridView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *GridView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *GridView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *GridView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -175,14 +175,14 @@ func (x *GridView) WithWantsRestingTouches(wantsRestingTouches bool) *GridView {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *GridView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *GridView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *GridView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *GridView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *GridView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *GridView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *GridView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *GridView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -289,8 +289,8 @@ func (x *GridView) WithToolTip(toolTip string) *GridView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *GridView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GridView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *GridView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GridView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -307,8 +307,8 @@ func (x *GridView) WithNextKeyView(nextKeyView ViewProvider) *GridView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *GridView) WithFocusRingType(focusRingType raw.NSFocusRingType) *GridView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *GridView) WithFocusRingType(focusRingType NSFocusRingType) *GridView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -331,8 +331,8 @@ func (x *GridView) WithGestureRecognizers(items ...GestureRecognizerProvider) *G
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *GridView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GridView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *GridView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GridView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -538,33 +538,33 @@ func (x *GridView) NumberOfColumns() int {
 }
 
 // XPlacement calls the underlying XPlacement.
-func (x *GridView) XPlacement() raw.NSGridCellPlacement {
-	return x.inner.XPlacement()
+func (x *GridView) XPlacement() NSGridCellPlacement {
+	return NSGridCellPlacement(x.inner.XPlacement())
 }
 
 // SetXPlacement calls the underlying SetXPlacement.
-func (x *GridView) SetXPlacement(xPlacement raw.NSGridCellPlacement) {
-	x.inner.SetXPlacement(xPlacement)
+func (x *GridView) SetXPlacement(xPlacement NSGridCellPlacement) {
+	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
 }
 
 // YPlacement calls the underlying YPlacement.
-func (x *GridView) YPlacement() raw.NSGridCellPlacement {
-	return x.inner.YPlacement()
+func (x *GridView) YPlacement() NSGridCellPlacement {
+	return NSGridCellPlacement(x.inner.YPlacement())
 }
 
 // SetYPlacement calls the underlying SetYPlacement.
-func (x *GridView) SetYPlacement(yPlacement raw.NSGridCellPlacement) {
-	x.inner.SetYPlacement(yPlacement)
+func (x *GridView) SetYPlacement(yPlacement NSGridCellPlacement) {
+	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
 }
 
 // RowAlignment calls the underlying RowAlignment.
-func (x *GridView) RowAlignment() raw.NSGridRowAlignment {
-	return x.inner.RowAlignment()
+func (x *GridView) RowAlignment() NSGridRowAlignment {
+	return NSGridRowAlignment(x.inner.RowAlignment())
 }
 
 // SetRowAlignment calls the underlying SetRowAlignment.
-func (x *GridView) SetRowAlignment(rowAlignment raw.NSGridRowAlignment) {
-	x.inner.SetRowAlignment(rowAlignment)
+func (x *GridView) SetRowAlignment(rowAlignment NSGridRowAlignment) {
+	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
 }
 
 // RowSpacing calls the underlying RowSpacing.
@@ -594,16 +594,16 @@ func (x *GridView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSRes
 // GridViewable is the interface implemented by [GridView], for mocking and DI.
 type GridViewable interface {
 	Unwrap() *raw.NSGridView
-	WithXPlacement(xPlacement raw.NSGridCellPlacement) *GridView
-	WithYPlacement(yPlacement raw.NSGridCellPlacement) *GridView
-	WithRowAlignment(rowAlignment raw.NSGridRowAlignment) *GridView
+	WithXPlacement(xPlacement NSGridCellPlacement) *GridView
+	WithYPlacement(yPlacement NSGridCellPlacement) *GridView
+	WithRowAlignment(rowAlignment NSGridRowAlignment) *GridView
 	WithRowSpacing(rowSpacing float64) *GridView
 	WithColumnSpacing(columnSpacing float64) *GridView
 	WithSubviews(items ...ViewProvider) *GridView
 	WithHidden(hidden bool) *GridView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GridView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *GridView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *GridView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *GridView
 	WithFrame(frame corefoundation.CGRect) *GridView
 	WithFrameRotation(frameRotation float64) *GridView
 	WithFrameCenterRotation(frameCenterRotation float64) *GridView
@@ -613,8 +613,8 @@ type GridViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *GridView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *GridView
 	WithWantsRestingTouches(wantsRestingTouches bool) *GridView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *GridView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *GridView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *GridView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *GridView
 	WithWantsLayer(wantsLayer bool) *GridView
 	WithLayer(layer *quartzcore.CALayer) *GridView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GridView
@@ -628,12 +628,12 @@ type GridViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *GridView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GridView
 	WithToolTip(toolTip string) *GridView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GridView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GridView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GridView
 	WithNextKeyView(nextKeyView ViewProvider) *GridView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *GridView
+	WithFocusRingType(focusRingType NSFocusRingType) *GridView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *GridView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GridView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GridView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GridView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GridView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GridView
@@ -665,12 +665,12 @@ type GridViewable interface {
 	MergeCellsInHorizontalRangeVerticalRange(hRange foundation.NSRange, vRange foundation.NSRange)
 	NumberOfRows() int
 	NumberOfColumns() int
-	XPlacement() raw.NSGridCellPlacement
-	SetXPlacement(xPlacement raw.NSGridCellPlacement)
-	YPlacement() raw.NSGridCellPlacement
-	SetYPlacement(yPlacement raw.NSGridCellPlacement)
-	RowAlignment() raw.NSGridRowAlignment
-	SetRowAlignment(rowAlignment raw.NSGridRowAlignment)
+	XPlacement() NSGridCellPlacement
+	SetXPlacement(xPlacement NSGridCellPlacement)
+	YPlacement() NSGridCellPlacement
+	SetYPlacement(yPlacement NSGridCellPlacement)
+	RowAlignment() NSGridRowAlignment
+	SetRowAlignment(rowAlignment NSGridRowAlignment)
 	RowSpacing() float64
 	SetRowSpacing(rowSpacing float64)
 	ColumnSpacing() float64

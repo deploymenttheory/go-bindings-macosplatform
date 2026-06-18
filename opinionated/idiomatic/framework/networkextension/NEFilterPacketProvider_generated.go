@@ -38,8 +38,10 @@ func NewNEFilterPacketProvider() *NEFilterPacketProvider {
 }
 
 // WithPacketHandler sets the packetHandler property and returns the receiver for chaining.
-func (x *NEFilterPacketProvider) WithPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, raw.NETrafficDirection, unsafe.Pointer, unsafe.Pointer) raw.NEFilterPacketProviderVerdict) *NEFilterPacketProvider {
-	x.inner.SetPacketHandler(packetHandler)
+func (x *NEFilterPacketProvider) WithPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, NETrafficDirection, unsafe.Pointer, unsafe.Pointer) NEFilterPacketProviderVerdict) *NEFilterPacketProvider {
+	x.inner.SetPacketHandler(func(_a0 *raw.NEFilterPacketContext, _a1 *foundation.NSObject, _a2 raw.NETrafficDirection, _a3 unsafe.Pointer, _a4 unsafe.Pointer) raw.NEFilterPacketProviderVerdict {
+		return raw.NEFilterPacketProviderVerdict(packetHandler(_a0, _a1, NETrafficDirection(_a2), _a3, _a4))
+	})
 	return x
 }
 
@@ -63,8 +65,10 @@ func (x *NEFilterPacketProvider) PacketHandler() objc.Block {
 }
 
 // SetPacketHandler calls the underlying SetPacketHandler.
-func (x *NEFilterPacketProvider) SetPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, raw.NETrafficDirection, unsafe.Pointer, unsafe.Pointer) raw.NEFilterPacketProviderVerdict) {
-	x.inner.SetPacketHandler(packetHandler)
+func (x *NEFilterPacketProvider) SetPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, NETrafficDirection, unsafe.Pointer, unsafe.Pointer) NEFilterPacketProviderVerdict) {
+	x.inner.SetPacketHandler(func(_a0 *raw.NEFilterPacketContext, _a1 *foundation.NSObject, _a2 raw.NETrafficDirection, _a3 unsafe.Pointer, _a4 unsafe.Pointer) raw.NEFilterPacketProviderVerdict {
+		return raw.NEFilterPacketProviderVerdict(packetHandler(_a0, _a1, NETrafficDirection(_a2), _a3, _a4))
+	})
 }
 
 func (x *NEFilterPacketProvider) asNEFilterProvider() *raw.NEFilterProvider {
@@ -78,11 +82,11 @@ func (x *NEFilterPacketProvider) asNEProvider() *raw.NEProvider {
 // NEFilterPacketProviderable is the interface implemented by [NEFilterPacketProvider], for mocking and DI.
 type NEFilterPacketProviderable interface {
 	Unwrap() *raw.NEFilterPacketProvider
-	WithPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, raw.NETrafficDirection, unsafe.Pointer, unsafe.Pointer) raw.NEFilterPacketProviderVerdict) *NEFilterPacketProvider
+	WithPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, NETrafficDirection, unsafe.Pointer, unsafe.Pointer) NEFilterPacketProviderVerdict) *NEFilterPacketProvider
 	DelayCurrentPacket(context_ *raw.NEFilterPacketContext) *NEPacket
 	AllowPacket(packet *raw.NEPacket)
 	PacketHandler() objc.Block
-	SetPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, raw.NETrafficDirection, unsafe.Pointer, unsafe.Pointer) raw.NEFilterPacketProviderVerdict)
+	SetPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, NETrafficDirection, unsafe.Pointer, unsafe.Pointer) NEFilterPacketProviderVerdict)
 }
 
 var _ NEFilterPacketProviderable = (*NEFilterPacketProvider)(nil)

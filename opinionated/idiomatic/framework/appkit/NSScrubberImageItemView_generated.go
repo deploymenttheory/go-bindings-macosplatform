@@ -47,8 +47,8 @@ func (x *ScrubberImageItemView) WithImage(image *Image) *ScrubberImageItemView {
 }
 
 // WithImageAlignment sets the imageAlignment property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithImageAlignment(imageAlignment raw.NSImageAlignment) *ScrubberImageItemView {
-	x.inner.SetImageAlignment(imageAlignment)
+func (x *ScrubberImageItemView) WithImageAlignment(imageAlignment NSImageAlignment) *ScrubberImageItemView {
+	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
 	return x
 }
 
@@ -101,8 +101,8 @@ func (x *ScrubberImageItemView) WithAutoresizesSubviews(autoresizesSubviews bool
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *ScrubberImageItemView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -161,14 +161,14 @@ func (x *ScrubberImageItemView) WithWantsRestingTouches(wantsRestingTouches bool
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *ScrubberImageItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *ScrubberImageItemView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -275,8 +275,8 @@ func (x *ScrubberImageItemView) WithToolTip(toolTip string) *ScrubberImageItemVi
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ScrubberImageItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -293,8 +293,8 @@ func (x *ScrubberImageItemView) WithNextKeyView(nextKeyView ViewProvider) *Scrub
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFocusRingType(focusRingType)
+func (x *ScrubberImageItemView) WithFocusRingType(focusRingType NSFocusRingType) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -317,8 +317,8 @@ func (x *ScrubberImageItemView) WithGestureRecognizers(items ...GestureRecognize
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ScrubberImageItemView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberImageItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ScrubberImageItemView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrubberImageItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -430,13 +430,13 @@ func (x *ScrubberImageItemView) SetImage(image *raw.NSImage) {
 }
 
 // ImageAlignment calls the underlying ImageAlignment.
-func (x *ScrubberImageItemView) ImageAlignment() raw.NSImageAlignment {
-	return x.inner.ImageAlignment()
+func (x *ScrubberImageItemView) ImageAlignment() NSImageAlignment {
+	return NSImageAlignment(x.inner.ImageAlignment())
 }
 
 // SetImageAlignment calls the underlying SetImageAlignment.
-func (x *ScrubberImageItemView) SetImageAlignment(imageAlignment raw.NSImageAlignment) {
-	x.inner.SetImageAlignment(imageAlignment)
+func (x *ScrubberImageItemView) SetImageAlignment(imageAlignment NSImageAlignment) {
+	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
 }
 
 func (x *ScrubberImageItemView) asScrubberItemView() *raw.NSScrubberItemView {
@@ -459,14 +459,14 @@ func (x *ScrubberImageItemView) asResponder() *raw.NSResponder {
 type ScrubberImageItemViewable interface {
 	Unwrap() *raw.NSScrubberImageItemView
 	WithImage(image *Image) *ScrubberImageItemView
-	WithImageAlignment(imageAlignment raw.NSImageAlignment) *ScrubberImageItemView
+	WithImageAlignment(imageAlignment NSImageAlignment) *ScrubberImageItemView
 	WithSelected(selected bool) *ScrubberImageItemView
 	WithHighlighted(highlighted bool) *ScrubberImageItemView
 	WithSubviews(items ...ViewProvider) *ScrubberImageItemView
 	WithHidden(hidden bool) *ScrubberImageItemView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberImageItemView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberImageItemView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrubberImageItemView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrubberImageItemView
 	WithFrame(frame corefoundation.CGRect) *ScrubberImageItemView
 	WithFrameRotation(frameRotation float64) *ScrubberImageItemView
 	WithFrameCenterRotation(frameCenterRotation float64) *ScrubberImageItemView
@@ -476,8 +476,8 @@ type ScrubberImageItemViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *ScrubberImageItemView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberImageItemView
 	WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberImageItemView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrubberImageItemView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrubberImageItemView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrubberImageItemView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrubberImageItemView
 	WithWantsLayer(wantsLayer bool) *ScrubberImageItemView
 	WithLayer(layer *quartzcore.CALayer) *ScrubberImageItemView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberImageItemView
@@ -491,12 +491,12 @@ type ScrubberImageItemViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *ScrubberImageItemView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberImageItemView
 	WithToolTip(toolTip string) *ScrubberImageItemView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrubberImageItemView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrubberImageItemView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberImageItemView
 	WithNextKeyView(nextKeyView ViewProvider) *ScrubberImageItemView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrubberImageItemView
+	WithFocusRingType(focusRingType NSFocusRingType) *ScrubberImageItemView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberImageItemView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberImageItemView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrubberImageItemView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberImageItemView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberImageItemView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberImageItemView
@@ -514,8 +514,8 @@ type ScrubberImageItemViewable interface {
 	ImageView() *ImageView
 	Image() *Image
 	SetImage(image *raw.NSImage)
-	ImageAlignment() raw.NSImageAlignment
-	SetImageAlignment(imageAlignment raw.NSImageAlignment)
+	ImageAlignment() NSImageAlignment
+	SetImageAlignment(imageAlignment NSImageAlignment)
 }
 
 var _ ScrubberImageItemViewable = (*ScrubberImageItemView)(nil)

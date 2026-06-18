@@ -38,20 +38,20 @@ func NewSamplerDescriptor() *SamplerDescriptor {
 }
 
 // WithMinFilter sets the minFilter property and returns the receiver for chaining.
-func (x *SamplerDescriptor) WithMinFilter(minFilter raw.MTLSamplerMinMagFilter) *SamplerDescriptor {
-	x.inner.SetMinFilter(minFilter)
+func (x *SamplerDescriptor) WithMinFilter(minFilter MTLSamplerMinMagFilter) *SamplerDescriptor {
+	x.inner.SetMinFilter(raw.MTLSamplerMinMagFilter(minFilter))
 	return x
 }
 
 // WithMagFilter sets the magFilter property and returns the receiver for chaining.
-func (x *SamplerDescriptor) WithMagFilter(magFilter raw.MTLSamplerMinMagFilter) *SamplerDescriptor {
-	x.inner.SetMagFilter(magFilter)
+func (x *SamplerDescriptor) WithMagFilter(magFilter MTLSamplerMinMagFilter) *SamplerDescriptor {
+	x.inner.SetMagFilter(raw.MTLSamplerMinMagFilter(magFilter))
 	return x
 }
 
 // WithMipFilter sets the mipFilter property and returns the receiver for chaining.
-func (x *SamplerDescriptor) WithMipFilter(mipFilter raw.MTLSamplerMipFilter) *SamplerDescriptor {
-	x.inner.SetMipFilter(mipFilter)
+func (x *SamplerDescriptor) WithMipFilter(mipFilter MTLSamplerMipFilter) *SamplerDescriptor {
+	x.inner.SetMipFilter(raw.MTLSamplerMipFilter(mipFilter))
 	return x
 }
 
@@ -62,32 +62,32 @@ func (x *SamplerDescriptor) WithMaxAnisotropy(maxAnisotropy uint) *SamplerDescri
 }
 
 // WithSAddressMode sets the sAddressMode property and returns the receiver for chaining.
-func (x *SamplerDescriptor) WithSAddressMode(sAddressMode raw.MTLSamplerAddressMode) *SamplerDescriptor {
-	x.inner.SetSAddressMode(sAddressMode)
+func (x *SamplerDescriptor) WithSAddressMode(sAddressMode MTLSamplerAddressMode) *SamplerDescriptor {
+	x.inner.SetSAddressMode(raw.MTLSamplerAddressMode(sAddressMode))
 	return x
 }
 
 // WithTAddressMode sets the tAddressMode property and returns the receiver for chaining.
-func (x *SamplerDescriptor) WithTAddressMode(tAddressMode raw.MTLSamplerAddressMode) *SamplerDescriptor {
-	x.inner.SetTAddressMode(tAddressMode)
+func (x *SamplerDescriptor) WithTAddressMode(tAddressMode MTLSamplerAddressMode) *SamplerDescriptor {
+	x.inner.SetTAddressMode(raw.MTLSamplerAddressMode(tAddressMode))
 	return x
 }
 
 // WithRAddressMode sets the rAddressMode property and returns the receiver for chaining.
-func (x *SamplerDescriptor) WithRAddressMode(rAddressMode raw.MTLSamplerAddressMode) *SamplerDescriptor {
-	x.inner.SetRAddressMode(rAddressMode)
+func (x *SamplerDescriptor) WithRAddressMode(rAddressMode MTLSamplerAddressMode) *SamplerDescriptor {
+	x.inner.SetRAddressMode(raw.MTLSamplerAddressMode(rAddressMode))
 	return x
 }
 
 // WithBorderColor sets the borderColor property and returns the receiver for chaining.
-func (x *SamplerDescriptor) WithBorderColor(borderColor raw.MTLSamplerBorderColor) *SamplerDescriptor {
-	x.inner.SetBorderColor(borderColor)
+func (x *SamplerDescriptor) WithBorderColor(borderColor MTLSamplerBorderColor) *SamplerDescriptor {
+	x.inner.SetBorderColor(raw.MTLSamplerBorderColor(borderColor))
 	return x
 }
 
 // WithReductionMode sets the reductionMode property and returns the receiver for chaining.
-func (x *SamplerDescriptor) WithReductionMode(reductionMode raw.MTLSamplerReductionMode) *SamplerDescriptor {
-	x.inner.SetReductionMode(reductionMode)
+func (x *SamplerDescriptor) WithReductionMode(reductionMode MTLSamplerReductionMode) *SamplerDescriptor {
+	x.inner.SetReductionMode(raw.MTLSamplerReductionMode(reductionMode))
 	return x
 }
 
@@ -122,8 +122,8 @@ func (x *SamplerDescriptor) WithLodBias(lodBias float32) *SamplerDescriptor {
 }
 
 // WithCompareFunction sets the compareFunction property and returns the receiver for chaining.
-func (x *SamplerDescriptor) WithCompareFunction(compareFunction raw.MTLCompareFunction) *SamplerDescriptor {
-	x.inner.SetCompareFunction(compareFunction)
+func (x *SamplerDescriptor) WithCompareFunction(compareFunction MTLCompareFunction) *SamplerDescriptor {
+	x.inner.SetCompareFunction(raw.MTLCompareFunction(compareFunction))
 	return x
 }
 
@@ -140,33 +140,33 @@ func (x *SamplerDescriptor) WithLabel(label string) *SamplerDescriptor {
 }
 
 // MinFilter calls the underlying MinFilter.
-func (x *SamplerDescriptor) MinFilter() raw.MTLSamplerMinMagFilter {
-	return x.inner.MinFilter()
+func (x *SamplerDescriptor) MinFilter() MTLSamplerMinMagFilter {
+	return MTLSamplerMinMagFilter(x.inner.MinFilter())
 }
 
 // SetMinFilter calls the underlying SetMinFilter.
-func (x *SamplerDescriptor) SetMinFilter(minFilter raw.MTLSamplerMinMagFilter) {
-	x.inner.SetMinFilter(minFilter)
+func (x *SamplerDescriptor) SetMinFilter(minFilter MTLSamplerMinMagFilter) {
+	x.inner.SetMinFilter(raw.MTLSamplerMinMagFilter(minFilter))
 }
 
 // MagFilter calls the underlying MagFilter.
-func (x *SamplerDescriptor) MagFilter() raw.MTLSamplerMinMagFilter {
-	return x.inner.MagFilter()
+func (x *SamplerDescriptor) MagFilter() MTLSamplerMinMagFilter {
+	return MTLSamplerMinMagFilter(x.inner.MagFilter())
 }
 
 // SetMagFilter calls the underlying SetMagFilter.
-func (x *SamplerDescriptor) SetMagFilter(magFilter raw.MTLSamplerMinMagFilter) {
-	x.inner.SetMagFilter(magFilter)
+func (x *SamplerDescriptor) SetMagFilter(magFilter MTLSamplerMinMagFilter) {
+	x.inner.SetMagFilter(raw.MTLSamplerMinMagFilter(magFilter))
 }
 
 // MipFilter calls the underlying MipFilter.
-func (x *SamplerDescriptor) MipFilter() raw.MTLSamplerMipFilter {
-	return x.inner.MipFilter()
+func (x *SamplerDescriptor) MipFilter() MTLSamplerMipFilter {
+	return MTLSamplerMipFilter(x.inner.MipFilter())
 }
 
 // SetMipFilter calls the underlying SetMipFilter.
-func (x *SamplerDescriptor) SetMipFilter(mipFilter raw.MTLSamplerMipFilter) {
-	x.inner.SetMipFilter(mipFilter)
+func (x *SamplerDescriptor) SetMipFilter(mipFilter MTLSamplerMipFilter) {
+	x.inner.SetMipFilter(raw.MTLSamplerMipFilter(mipFilter))
 }
 
 // MaxAnisotropy calls the underlying MaxAnisotropy.
@@ -180,53 +180,53 @@ func (x *SamplerDescriptor) SetMaxAnisotropy(maxAnisotropy uint) {
 }
 
 // SAddressMode calls the underlying SAddressMode.
-func (x *SamplerDescriptor) SAddressMode() raw.MTLSamplerAddressMode {
-	return x.inner.SAddressMode()
+func (x *SamplerDescriptor) SAddressMode() MTLSamplerAddressMode {
+	return MTLSamplerAddressMode(x.inner.SAddressMode())
 }
 
 // SetSAddressMode calls the underlying SetSAddressMode.
-func (x *SamplerDescriptor) SetSAddressMode(sAddressMode raw.MTLSamplerAddressMode) {
-	x.inner.SetSAddressMode(sAddressMode)
+func (x *SamplerDescriptor) SetSAddressMode(sAddressMode MTLSamplerAddressMode) {
+	x.inner.SetSAddressMode(raw.MTLSamplerAddressMode(sAddressMode))
 }
 
 // TAddressMode calls the underlying TAddressMode.
-func (x *SamplerDescriptor) TAddressMode() raw.MTLSamplerAddressMode {
-	return x.inner.TAddressMode()
+func (x *SamplerDescriptor) TAddressMode() MTLSamplerAddressMode {
+	return MTLSamplerAddressMode(x.inner.TAddressMode())
 }
 
 // SetTAddressMode calls the underlying SetTAddressMode.
-func (x *SamplerDescriptor) SetTAddressMode(tAddressMode raw.MTLSamplerAddressMode) {
-	x.inner.SetTAddressMode(tAddressMode)
+func (x *SamplerDescriptor) SetTAddressMode(tAddressMode MTLSamplerAddressMode) {
+	x.inner.SetTAddressMode(raw.MTLSamplerAddressMode(tAddressMode))
 }
 
 // RAddressMode calls the underlying RAddressMode.
-func (x *SamplerDescriptor) RAddressMode() raw.MTLSamplerAddressMode {
-	return x.inner.RAddressMode()
+func (x *SamplerDescriptor) RAddressMode() MTLSamplerAddressMode {
+	return MTLSamplerAddressMode(x.inner.RAddressMode())
 }
 
 // SetRAddressMode calls the underlying SetRAddressMode.
-func (x *SamplerDescriptor) SetRAddressMode(rAddressMode raw.MTLSamplerAddressMode) {
-	x.inner.SetRAddressMode(rAddressMode)
+func (x *SamplerDescriptor) SetRAddressMode(rAddressMode MTLSamplerAddressMode) {
+	x.inner.SetRAddressMode(raw.MTLSamplerAddressMode(rAddressMode))
 }
 
 // BorderColor calls the underlying BorderColor.
-func (x *SamplerDescriptor) BorderColor() raw.MTLSamplerBorderColor {
-	return x.inner.BorderColor()
+func (x *SamplerDescriptor) BorderColor() MTLSamplerBorderColor {
+	return MTLSamplerBorderColor(x.inner.BorderColor())
 }
 
 // SetBorderColor calls the underlying SetBorderColor.
-func (x *SamplerDescriptor) SetBorderColor(borderColor raw.MTLSamplerBorderColor) {
-	x.inner.SetBorderColor(borderColor)
+func (x *SamplerDescriptor) SetBorderColor(borderColor MTLSamplerBorderColor) {
+	x.inner.SetBorderColor(raw.MTLSamplerBorderColor(borderColor))
 }
 
 // ReductionMode calls the underlying ReductionMode.
-func (x *SamplerDescriptor) ReductionMode() raw.MTLSamplerReductionMode {
-	return x.inner.ReductionMode()
+func (x *SamplerDescriptor) ReductionMode() MTLSamplerReductionMode {
+	return MTLSamplerReductionMode(x.inner.ReductionMode())
 }
 
 // SetReductionMode calls the underlying SetReductionMode.
-func (x *SamplerDescriptor) SetReductionMode(reductionMode raw.MTLSamplerReductionMode) {
-	x.inner.SetReductionMode(reductionMode)
+func (x *SamplerDescriptor) SetReductionMode(reductionMode MTLSamplerReductionMode) {
+	x.inner.SetReductionMode(raw.MTLSamplerReductionMode(reductionMode))
 }
 
 // NormalizedCoordinates calls the underlying NormalizedCoordinates.
@@ -280,13 +280,13 @@ func (x *SamplerDescriptor) SetLodBias(lodBias float32) {
 }
 
 // CompareFunction calls the underlying CompareFunction.
-func (x *SamplerDescriptor) CompareFunction() raw.MTLCompareFunction {
-	return x.inner.CompareFunction()
+func (x *SamplerDescriptor) CompareFunction() MTLCompareFunction {
+	return MTLCompareFunction(x.inner.CompareFunction())
 }
 
 // SetCompareFunction calls the underlying SetCompareFunction.
-func (x *SamplerDescriptor) SetCompareFunction(compareFunction raw.MTLCompareFunction) {
-	x.inner.SetCompareFunction(compareFunction)
+func (x *SamplerDescriptor) SetCompareFunction(compareFunction MTLCompareFunction) {
+	x.inner.SetCompareFunction(raw.MTLCompareFunction(compareFunction))
 }
 
 // SupportArgumentBuffers calls the underlying SupportArgumentBuffers.
@@ -316,41 +316,41 @@ func (x *SamplerDescriptor) SetLabel(label string) {
 // SamplerDescriptorable is the interface implemented by [SamplerDescriptor], for mocking and DI.
 type SamplerDescriptorable interface {
 	Unwrap() *raw.MTLSamplerDescriptor
-	WithMinFilter(minFilter raw.MTLSamplerMinMagFilter) *SamplerDescriptor
-	WithMagFilter(magFilter raw.MTLSamplerMinMagFilter) *SamplerDescriptor
-	WithMipFilter(mipFilter raw.MTLSamplerMipFilter) *SamplerDescriptor
+	WithMinFilter(minFilter MTLSamplerMinMagFilter) *SamplerDescriptor
+	WithMagFilter(magFilter MTLSamplerMinMagFilter) *SamplerDescriptor
+	WithMipFilter(mipFilter MTLSamplerMipFilter) *SamplerDescriptor
 	WithMaxAnisotropy(maxAnisotropy uint) *SamplerDescriptor
-	WithSAddressMode(sAddressMode raw.MTLSamplerAddressMode) *SamplerDescriptor
-	WithTAddressMode(tAddressMode raw.MTLSamplerAddressMode) *SamplerDescriptor
-	WithRAddressMode(rAddressMode raw.MTLSamplerAddressMode) *SamplerDescriptor
-	WithBorderColor(borderColor raw.MTLSamplerBorderColor) *SamplerDescriptor
-	WithReductionMode(reductionMode raw.MTLSamplerReductionMode) *SamplerDescriptor
+	WithSAddressMode(sAddressMode MTLSamplerAddressMode) *SamplerDescriptor
+	WithTAddressMode(tAddressMode MTLSamplerAddressMode) *SamplerDescriptor
+	WithRAddressMode(rAddressMode MTLSamplerAddressMode) *SamplerDescriptor
+	WithBorderColor(borderColor MTLSamplerBorderColor) *SamplerDescriptor
+	WithReductionMode(reductionMode MTLSamplerReductionMode) *SamplerDescriptor
 	WithNormalizedCoordinates(normalizedCoordinates bool) *SamplerDescriptor
 	WithLodMinClamp(lodMinClamp float32) *SamplerDescriptor
 	WithLodMaxClamp(lodMaxClamp float32) *SamplerDescriptor
 	WithLodAverage(lodAverage bool) *SamplerDescriptor
 	WithLodBias(lodBias float32) *SamplerDescriptor
-	WithCompareFunction(compareFunction raw.MTLCompareFunction) *SamplerDescriptor
+	WithCompareFunction(compareFunction MTLCompareFunction) *SamplerDescriptor
 	WithSupportArgumentBuffers(supportArgumentBuffers bool) *SamplerDescriptor
 	WithLabel(label string) *SamplerDescriptor
-	MinFilter() raw.MTLSamplerMinMagFilter
-	SetMinFilter(minFilter raw.MTLSamplerMinMagFilter)
-	MagFilter() raw.MTLSamplerMinMagFilter
-	SetMagFilter(magFilter raw.MTLSamplerMinMagFilter)
-	MipFilter() raw.MTLSamplerMipFilter
-	SetMipFilter(mipFilter raw.MTLSamplerMipFilter)
+	MinFilter() MTLSamplerMinMagFilter
+	SetMinFilter(minFilter MTLSamplerMinMagFilter)
+	MagFilter() MTLSamplerMinMagFilter
+	SetMagFilter(magFilter MTLSamplerMinMagFilter)
+	MipFilter() MTLSamplerMipFilter
+	SetMipFilter(mipFilter MTLSamplerMipFilter)
 	MaxAnisotropy() uint
 	SetMaxAnisotropy(maxAnisotropy uint)
-	SAddressMode() raw.MTLSamplerAddressMode
-	SetSAddressMode(sAddressMode raw.MTLSamplerAddressMode)
-	TAddressMode() raw.MTLSamplerAddressMode
-	SetTAddressMode(tAddressMode raw.MTLSamplerAddressMode)
-	RAddressMode() raw.MTLSamplerAddressMode
-	SetRAddressMode(rAddressMode raw.MTLSamplerAddressMode)
-	BorderColor() raw.MTLSamplerBorderColor
-	SetBorderColor(borderColor raw.MTLSamplerBorderColor)
-	ReductionMode() raw.MTLSamplerReductionMode
-	SetReductionMode(reductionMode raw.MTLSamplerReductionMode)
+	SAddressMode() MTLSamplerAddressMode
+	SetSAddressMode(sAddressMode MTLSamplerAddressMode)
+	TAddressMode() MTLSamplerAddressMode
+	SetTAddressMode(tAddressMode MTLSamplerAddressMode)
+	RAddressMode() MTLSamplerAddressMode
+	SetRAddressMode(rAddressMode MTLSamplerAddressMode)
+	BorderColor() MTLSamplerBorderColor
+	SetBorderColor(borderColor MTLSamplerBorderColor)
+	ReductionMode() MTLSamplerReductionMode
+	SetReductionMode(reductionMode MTLSamplerReductionMode)
 	NormalizedCoordinates() bool
 	SetNormalizedCoordinates(normalizedCoordinates bool)
 	LodMinClamp() float32
@@ -361,8 +361,8 @@ type SamplerDescriptorable interface {
 	SetLodAverage(lodAverage bool)
 	LodBias() float32
 	SetLodBias(lodBias float32)
-	CompareFunction() raw.MTLCompareFunction
-	SetCompareFunction(compareFunction raw.MTLCompareFunction)
+	CompareFunction() MTLCompareFunction
+	SetCompareFunction(compareFunction MTLCompareFunction)
 	SupportArgumentBuffers() bool
 	SetSupportArgumentBuffers(supportArgumentBuffers bool)
 	Label() string

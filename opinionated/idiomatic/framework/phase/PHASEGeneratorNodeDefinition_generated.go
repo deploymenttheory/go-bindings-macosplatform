@@ -60,13 +60,13 @@ func (x *GeneratorNodeDefinition) WithRateMetaParameterDefinition(rateMetaParame
 }
 
 // SetCalibrationModeLevel calls the underlying SetCalibrationModeLevel.
-func (x *GeneratorNodeDefinition) SetCalibrationModeLevel(calibrationMode raw.PHASECalibrationMode, level float64) {
-	x.inner.SetCalibrationModeLevel(calibrationMode, level)
+func (x *GeneratorNodeDefinition) SetCalibrationModeLevel(calibrationMode PHASECalibrationMode, level float64) {
+	x.inner.SetCalibrationModeLevel(raw.PHASECalibrationMode(calibrationMode), level)
 }
 
 // CalibrationMode calls the underlying CalibrationMode.
-func (x *GeneratorNodeDefinition) CalibrationMode() raw.PHASECalibrationMode {
-	return x.inner.CalibrationMode()
+func (x *GeneratorNodeDefinition) CalibrationMode() PHASECalibrationMode {
+	return PHASECalibrationMode(x.inner.CalibrationMode())
 }
 
 // Level calls the underlying Level.
@@ -154,8 +154,8 @@ type GeneratorNodeDefinitionable interface {
 	WithGroup(group *Group) *GeneratorNodeDefinition
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition
 	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition
-	SetCalibrationModeLevel(calibrationMode raw.PHASECalibrationMode, level float64)
-	CalibrationMode() raw.PHASECalibrationMode
+	SetCalibrationModeLevel(calibrationMode PHASECalibrationMode, level float64)
+	CalibrationMode() PHASECalibrationMode
 	Level() float64
 	Rate() float64
 	SetRate(rate float64)

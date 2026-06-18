@@ -51,8 +51,8 @@ func (x *FeatureDescription) Name() string {
 }
 
 // Type calls the underlying Type.
-func (x *FeatureDescription) Type() raw.MLFeatureType {
-	return x.inner.Type()
+func (x *FeatureDescription) Type() MLFeatureType {
+	return MLFeatureType(x.inner.Type())
 }
 
 // IsOptional calls the underlying IsOptional.
@@ -110,7 +110,7 @@ type FeatureDescriptionable interface {
 	Unwrap() *raw.MLFeatureDescription
 	IsAllowedValue(value *raw.MLFeatureValue) bool
 	Name() string
-	Type() raw.MLFeatureType
+	Type() MLFeatureType
 	IsOptional() bool
 	MultiArrayConstraint() *MultiArrayConstraint
 	ImageConstraint() *ImageConstraint

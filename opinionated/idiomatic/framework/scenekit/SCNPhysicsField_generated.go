@@ -78,8 +78,8 @@ func (x *PhysicsField) WithUsesEllipsoidalExtent(usesEllipsoidalExtent bool) *Ph
 }
 
 // WithScope sets the scope property and returns the receiver for chaining.
-func (x *PhysicsField) WithScope(scope raw.SCNPhysicsFieldScope) *PhysicsField {
-	x.inner.SetScope(scope)
+func (x *PhysicsField) WithScope(scope SCNPhysicsFieldScope) *PhysicsField {
+	x.inner.SetScope(raw.SCNPhysicsFieldScope(scope))
 	return x
 }
 
@@ -172,13 +172,13 @@ func (x *PhysicsField) SetUsesEllipsoidalExtent(usesEllipsoidalExtent bool) {
 }
 
 // Scope calls the underlying Scope.
-func (x *PhysicsField) Scope() raw.SCNPhysicsFieldScope {
-	return x.inner.Scope()
+func (x *PhysicsField) Scope() SCNPhysicsFieldScope {
+	return SCNPhysicsFieldScope(x.inner.Scope())
 }
 
 // SetScope calls the underlying SetScope.
-func (x *PhysicsField) SetScope(scope raw.SCNPhysicsFieldScope) {
-	x.inner.SetScope(scope)
+func (x *PhysicsField) SetScope(scope SCNPhysicsFieldScope) {
+	x.inner.SetScope(raw.SCNPhysicsFieldScope(scope))
 }
 
 // Offset calls the underlying Offset.
@@ -221,7 +221,7 @@ type PhysicsFieldable interface {
 	WithExclusive(exclusive bool) *PhysicsField
 	WithHalfExtent(halfExtent raw.SCNVector3) *PhysicsField
 	WithUsesEllipsoidalExtent(usesEllipsoidalExtent bool) *PhysicsField
-	WithScope(scope raw.SCNPhysicsFieldScope) *PhysicsField
+	WithScope(scope SCNPhysicsFieldScope) *PhysicsField
 	WithOffset(offset raw.SCNVector3) *PhysicsField
 	WithDirection(direction raw.SCNVector3) *PhysicsField
 	WithCategoryBitMask(categoryBitMask uint) *PhysicsField
@@ -239,8 +239,8 @@ type PhysicsFieldable interface {
 	SetHalfExtent(halfExtent raw.SCNVector3)
 	UsesEllipsoidalExtent() bool
 	SetUsesEllipsoidalExtent(usesEllipsoidalExtent bool)
-	Scope() raw.SCNPhysicsFieldScope
-	SetScope(scope raw.SCNPhysicsFieldScope)
+	Scope() SCNPhysicsFieldScope
+	SetScope(scope SCNPhysicsFieldScope)
 	Offset() raw.SCNVector3
 	SetOffset(offset raw.SCNVector3)
 	Direction() raw.SCNVector3

@@ -48,8 +48,10 @@ func (x *HeadphoneActivityManager) StopActivityUpdates() {
 }
 
 // StartStatusUpdatesToQueueWithHandler calls the underlying StartStatusUpdatesToQueueWithHandler.
-func (x *HeadphoneActivityManager) StartStatusUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(raw.CMHeadphoneActivityStatus, unsafe.Pointer)) {
-	x.inner.StartStatusUpdatesToQueueWithHandler(queue, handler)
+func (x *HeadphoneActivityManager) StartStatusUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(CMHeadphoneActivityStatus, unsafe.Pointer)) {
+	x.inner.StartStatusUpdatesToQueueWithHandler(queue, func(_a0 raw.CMHeadphoneActivityStatus, _a1 unsafe.Pointer) {
+		handler(CMHeadphoneActivityStatus(_a0), _a1)
+	})
 }
 
 // StopStatusUpdates calls the underlying StopStatusUpdates.
@@ -82,7 +84,7 @@ type HeadphoneActivityManagerable interface {
 	Unwrap() *raw.CMHeadphoneActivityManager
 	StartActivityUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMMotionActivity, unsafe.Pointer))
 	StopActivityUpdates()
-	StartStatusUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(raw.CMHeadphoneActivityStatus, unsafe.Pointer))
+	StartStatusUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(CMHeadphoneActivityStatus, unsafe.Pointer))
 	StopStatusUpdates()
 	IsActivityAvailable() bool
 	IsActivityActive() bool

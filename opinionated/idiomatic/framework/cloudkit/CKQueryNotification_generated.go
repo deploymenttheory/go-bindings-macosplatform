@@ -37,8 +37,8 @@ func NewQueryNotification() *QueryNotification {
 }
 
 // QueryNotificationReason calls the underlying QueryNotificationReason.
-func (x *QueryNotification) QueryNotificationReason() raw.CKQueryNotificationReason {
-	return x.inner.QueryNotificationReason()
+func (x *QueryNotification) QueryNotificationReason() CKQueryNotificationReason {
+	return CKQueryNotificationReason(x.inner.QueryNotificationReason())
 }
 
 // RecordFields calls the underlying RecordFields.
@@ -56,8 +56,8 @@ func (x *QueryNotification) RecordID() *RecordID {
 }
 
 // DatabaseScope calls the underlying DatabaseScope.
-func (x *QueryNotification) DatabaseScope() raw.CKDatabaseScope {
-	return x.inner.DatabaseScope()
+func (x *QueryNotification) DatabaseScope() CKDatabaseScope {
+	return CKDatabaseScope(x.inner.DatabaseScope())
 }
 
 func (x *QueryNotification) asNotification() *raw.CKNotification { return &x.inner.CKNotification }
@@ -65,10 +65,10 @@ func (x *QueryNotification) asNotification() *raw.CKNotification { return &x.inn
 // QueryNotificationable is the interface implemented by [QueryNotification], for mocking and DI.
 type QueryNotificationable interface {
 	Unwrap() *raw.CKQueryNotification
-	QueryNotificationReason() raw.CKQueryNotificationReason
+	QueryNotificationReason() CKQueryNotificationReason
 	RecordFields() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	RecordID() *RecordID
-	DatabaseScope() raw.CKDatabaseScope
+	DatabaseScope() CKDatabaseScope
 }
 
 var _ QueryNotificationable = (*QueryNotification)(nil)

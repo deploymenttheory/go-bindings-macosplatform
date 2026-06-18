@@ -83,8 +83,8 @@ func (x *ModifyRecordsOperation) WithRecordIDsToDelete(items ...*raw.CKRecordID)
 }
 
 // WithSavePolicy sets the savePolicy property and returns the receiver for chaining.
-func (x *ModifyRecordsOperation) WithSavePolicy(savePolicy raw.CKRecordSavePolicy) *ModifyRecordsOperation {
-	x.inner.SetSavePolicy(savePolicy)
+func (x *ModifyRecordsOperation) WithSavePolicy(savePolicy CKRecordSavePolicy) *ModifyRecordsOperation {
+	x.inner.SetSavePolicy(raw.CKRecordSavePolicy(savePolicy))
 	return x
 }
 
@@ -217,13 +217,13 @@ func (x *ModifyRecordsOperation) SetRecordIDsToDelete(recordIDsToDelete *foundat
 }
 
 // SavePolicy calls the underlying SavePolicy.
-func (x *ModifyRecordsOperation) SavePolicy() raw.CKRecordSavePolicy {
-	return x.inner.SavePolicy()
+func (x *ModifyRecordsOperation) SavePolicy() CKRecordSavePolicy {
+	return CKRecordSavePolicy(x.inner.SavePolicy())
 }
 
 // SetSavePolicy calls the underlying SetSavePolicy.
-func (x *ModifyRecordsOperation) SetSavePolicy(savePolicy raw.CKRecordSavePolicy) {
-	x.inner.SetSavePolicy(savePolicy)
+func (x *ModifyRecordsOperation) SetSavePolicy(savePolicy CKRecordSavePolicy) {
+	x.inner.SetSavePolicy(raw.CKRecordSavePolicy(savePolicy))
 }
 
 // ClientChangeTokenData calls the underlying ClientChangeTokenData.
@@ -351,7 +351,7 @@ type ModifyRecordsOperationable interface {
 	Unwrap() *raw.CKModifyRecordsOperation
 	WithRecordsToSave(items ...RecordProvider) *ModifyRecordsOperation
 	WithRecordIDsToDelete(items ...*raw.CKRecordID) *ModifyRecordsOperation
-	WithSavePolicy(savePolicy raw.CKRecordSavePolicy) *ModifyRecordsOperation
+	WithSavePolicy(savePolicy CKRecordSavePolicy) *ModifyRecordsOperation
 	WithClientChangeTokenData(clientChangeTokenData *foundation.NSData) *ModifyRecordsOperation
 	WithAtomic(atomic bool) *ModifyRecordsOperation
 	WithPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecord, float64)) *ModifyRecordsOperation
@@ -372,8 +372,8 @@ type ModifyRecordsOperationable interface {
 	SetRecordsToSave(recordsToSave *foundation.NSArray[*raw.CKRecord])
 	RecordIDsToDelete() []*RecordID
 	SetRecordIDsToDelete(recordIDsToDelete *foundation.NSArray[*raw.CKRecordID])
-	SavePolicy() raw.CKRecordSavePolicy
-	SetSavePolicy(savePolicy raw.CKRecordSavePolicy)
+	SavePolicy() CKRecordSavePolicy
+	SetSavePolicy(savePolicy CKRecordSavePolicy)
 	ClientChangeTokenData() *foundation.NSData
 	SetClientChangeTokenData(clientChangeTokenData *foundation.NSData)
 	Atomic() bool

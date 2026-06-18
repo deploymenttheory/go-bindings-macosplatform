@@ -65,23 +65,23 @@ func (x *Caption) BackgroundColorAtIndexRange(index int, outRange *foundation.NS
 }
 
 // FontWeightAtIndexRange calls the underlying FontWeightAtIndexRange.
-func (x *Caption) FontWeightAtIndexRange(index int, outRange *foundation.NSRange) raw.AVCaptionFontWeight {
-	return x.inner.FontWeightAtIndexRange(index, outRange)
+func (x *Caption) FontWeightAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionFontWeight {
+	return AVCaptionFontWeight(x.inner.FontWeightAtIndexRange(index, outRange))
 }
 
 // FontStyleAtIndexRange calls the underlying FontStyleAtIndexRange.
-func (x *Caption) FontStyleAtIndexRange(index int, outRange *foundation.NSRange) raw.AVCaptionFontStyle {
-	return x.inner.FontStyleAtIndexRange(index, outRange)
+func (x *Caption) FontStyleAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionFontStyle {
+	return AVCaptionFontStyle(x.inner.FontStyleAtIndexRange(index, outRange))
 }
 
 // DecorationAtIndexRange calls the underlying DecorationAtIndexRange.
-func (x *Caption) DecorationAtIndexRange(index int, outRange *foundation.NSRange) raw.AVCaptionDecoration {
-	return x.inner.DecorationAtIndexRange(index, outRange)
+func (x *Caption) DecorationAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionDecoration {
+	return AVCaptionDecoration(x.inner.DecorationAtIndexRange(index, outRange))
 }
 
 // TextCombineAtIndexRange calls the underlying TextCombineAtIndexRange.
-func (x *Caption) TextCombineAtIndexRange(index int, outRange *foundation.NSRange) raw.AVCaptionTextCombine {
-	return x.inner.TextCombineAtIndexRange(index, outRange)
+func (x *Caption) TextCombineAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionTextCombine {
+	return AVCaptionTextCombine(x.inner.TextCombineAtIndexRange(index, outRange))
 }
 
 // RubyAtIndexRange calls the underlying RubyAtIndexRange.
@@ -103,13 +103,13 @@ func (x *Caption) Region() *CaptionRegion {
 }
 
 // TextAlignment calls the underlying TextAlignment.
-func (x *Caption) TextAlignment() raw.AVCaptionTextAlignment {
-	return x.inner.TextAlignment()
+func (x *Caption) TextAlignment() AVCaptionTextAlignment {
+	return AVCaptionTextAlignment(x.inner.TextAlignment())
 }
 
 // Animation calls the underlying Animation.
-func (x *Caption) Animation() raw.AVCaptionAnimation {
-	return x.inner.Animation()
+func (x *Caption) Animation() AVCaptionAnimation {
+	return AVCaptionAnimation(x.inner.Animation())
 }
 
 func (x *Caption) asCaption() *raw.AVCaption { return x.inner }
@@ -121,14 +121,14 @@ type Captionable interface {
 	TimeRange() coremedia.CMTimeRange
 	TextColorAtIndexRange(index int, outRange *foundation.NSRange) unsafe.Pointer
 	BackgroundColorAtIndexRange(index int, outRange *foundation.NSRange) unsafe.Pointer
-	FontWeightAtIndexRange(index int, outRange *foundation.NSRange) raw.AVCaptionFontWeight
-	FontStyleAtIndexRange(index int, outRange *foundation.NSRange) raw.AVCaptionFontStyle
-	DecorationAtIndexRange(index int, outRange *foundation.NSRange) raw.AVCaptionDecoration
-	TextCombineAtIndexRange(index int, outRange *foundation.NSRange) raw.AVCaptionTextCombine
+	FontWeightAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionFontWeight
+	FontStyleAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionFontStyle
+	DecorationAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionDecoration
+	TextCombineAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionTextCombine
 	RubyAtIndexRange(index int, outRange *foundation.NSRange) *CaptionRuby
 	Region() *CaptionRegion
-	TextAlignment() raw.AVCaptionTextAlignment
-	Animation() raw.AVCaptionAnimation
+	TextAlignment() AVCaptionTextAlignment
+	Animation() AVCaptionAnimation
 }
 
 var _ Captionable = (*Caption)(nil)

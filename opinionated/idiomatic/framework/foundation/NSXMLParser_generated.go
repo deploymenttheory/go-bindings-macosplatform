@@ -71,8 +71,8 @@ func (x *XMLParser) WithShouldReportNamespacePrefixes(shouldReportNamespacePrefi
 }
 
 // WithExternalEntityResolvingPolicy sets the externalEntityResolvingPolicy property and returns the receiver for chaining.
-func (x *XMLParser) WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy raw.NSXMLParserExternalEntityResolvingPolicy) *XMLParser {
-	x.inner.SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy)
+func (x *XMLParser) WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy NSXMLParserExternalEntityResolvingPolicy) *XMLParser {
+	x.inner.SetExternalEntityResolvingPolicy(raw.NSXMLParserExternalEntityResolvingPolicy(externalEntityResolvingPolicy))
 	return x
 }
 
@@ -135,13 +135,13 @@ func (x *XMLParser) SetShouldReportNamespacePrefixes(shouldReportNamespacePrefix
 }
 
 // ExternalEntityResolvingPolicy calls the underlying ExternalEntityResolvingPolicy.
-func (x *XMLParser) ExternalEntityResolvingPolicy() raw.NSXMLParserExternalEntityResolvingPolicy {
-	return x.inner.ExternalEntityResolvingPolicy()
+func (x *XMLParser) ExternalEntityResolvingPolicy() NSXMLParserExternalEntityResolvingPolicy {
+	return NSXMLParserExternalEntityResolvingPolicy(x.inner.ExternalEntityResolvingPolicy())
 }
 
 // SetExternalEntityResolvingPolicy calls the underlying SetExternalEntityResolvingPolicy.
-func (x *XMLParser) SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy raw.NSXMLParserExternalEntityResolvingPolicy) {
-	x.inner.SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy)
+func (x *XMLParser) SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy NSXMLParserExternalEntityResolvingPolicy) {
+	x.inner.SetExternalEntityResolvingPolicy(raw.NSXMLParserExternalEntityResolvingPolicy(externalEntityResolvingPolicy))
 }
 
 // AllowedExternalEntityURLs calls the underlying AllowedExternalEntityURLs.
@@ -205,7 +205,7 @@ type XMLParserable interface {
 	WithDelegate(delegate raw.NSXMLParserDelegate) *XMLParser
 	WithShouldProcessNamespaces(shouldProcessNamespaces bool) *XMLParser
 	WithShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool) *XMLParser
-	WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy raw.NSXMLParserExternalEntityResolvingPolicy) *XMLParser
+	WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy NSXMLParserExternalEntityResolvingPolicy) *XMLParser
 	WithAllowedExternalEntityURLs(allowedExternalEntityURLs *raw.NSSet[*raw.NSURL]) *XMLParser
 	WithShouldResolveExternalEntities(shouldResolveExternalEntities bool) *XMLParser
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLParser
@@ -217,8 +217,8 @@ type XMLParserable interface {
 	SetShouldProcessNamespaces(shouldProcessNamespaces bool)
 	ShouldReportNamespacePrefixes() bool
 	SetShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool)
-	ExternalEntityResolvingPolicy() raw.NSXMLParserExternalEntityResolvingPolicy
-	SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy raw.NSXMLParserExternalEntityResolvingPolicy)
+	ExternalEntityResolvingPolicy() NSXMLParserExternalEntityResolvingPolicy
+	SetExternalEntityResolvingPolicy(externalEntityResolvingPolicy NSXMLParserExternalEntityResolvingPolicy)
 	AllowedExternalEntityURLs() *raw.NSSet[*raw.NSURL]
 	SetAllowedExternalEntityURLs(allowedExternalEntityURLs *raw.NSSet[*raw.NSURL])
 	ParserError() unsafe.Pointer

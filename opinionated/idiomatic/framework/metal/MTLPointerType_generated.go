@@ -54,13 +54,13 @@ func (x *PointerType) ElementArrayType() *ArrayType {
 }
 
 // ElementType calls the underlying ElementType.
-func (x *PointerType) ElementType() raw.MTLDataType {
-	return x.inner.ElementType()
+func (x *PointerType) ElementType() MTLDataType {
+	return MTLDataType(x.inner.ElementType())
 }
 
 // Access calls the underlying Access.
-func (x *PointerType) Access() raw.MTLBindingAccess {
-	return x.inner.Access()
+func (x *PointerType) Access() MTLBindingAccess {
+	return MTLBindingAccess(x.inner.Access())
 }
 
 // Alignment calls the underlying Alignment.
@@ -85,8 +85,8 @@ type PointerTypeable interface {
 	Unwrap() *raw.MTLPointerType
 	ElementStructType() *StructType
 	ElementArrayType() *ArrayType
-	ElementType() raw.MTLDataType
-	Access() raw.MTLBindingAccess
+	ElementType() MTLDataType
+	Access() MTLBindingAccess
 	Alignment() uint
 	DataSize() uint
 	ElementIsArgumentBuffer() bool

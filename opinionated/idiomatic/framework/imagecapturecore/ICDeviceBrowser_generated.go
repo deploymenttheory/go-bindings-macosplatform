@@ -44,8 +44,8 @@ func (x *DeviceBrowser) WithDelegate(delegate raw.ICDeviceBrowserDelegate) *Devi
 }
 
 // WithBrowsedDeviceTypeMask sets the browsedDeviceTypeMask property and returns the receiver for chaining.
-func (x *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask raw.ICDeviceTypeMask) *DeviceBrowser {
-	x.inner.SetBrowsedDeviceTypeMask(browsedDeviceTypeMask)
+func (x *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceTypeMask) *DeviceBrowser {
+	x.inner.SetBrowsedDeviceTypeMask(raw.ICDeviceTypeMask(browsedDeviceTypeMask))
 	return x
 }
 
@@ -75,13 +75,13 @@ func (x *DeviceBrowser) IsBrowsing() bool {
 }
 
 // BrowsedDeviceTypeMask calls the underlying BrowsedDeviceTypeMask.
-func (x *DeviceBrowser) BrowsedDeviceTypeMask() raw.ICDeviceTypeMask {
-	return x.inner.BrowsedDeviceTypeMask()
+func (x *DeviceBrowser) BrowsedDeviceTypeMask() ICDeviceTypeMask {
+	return ICDeviceTypeMask(x.inner.BrowsedDeviceTypeMask())
 }
 
 // SetBrowsedDeviceTypeMask calls the underlying SetBrowsedDeviceTypeMask.
-func (x *DeviceBrowser) SetBrowsedDeviceTypeMask(browsedDeviceTypeMask raw.ICDeviceTypeMask) {
-	x.inner.SetBrowsedDeviceTypeMask(browsedDeviceTypeMask)
+func (x *DeviceBrowser) SetBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceTypeMask) {
+	x.inner.SetBrowsedDeviceTypeMask(raw.ICDeviceTypeMask(browsedDeviceTypeMask))
 }
 
 // Devices returns the collection as a Go slice.
@@ -104,14 +104,14 @@ func (x *DeviceBrowser) PreferredDevice() unsafe.Pointer {
 type DeviceBrowserable interface {
 	Unwrap() *raw.ICDeviceBrowser
 	WithDelegate(delegate raw.ICDeviceBrowserDelegate) *DeviceBrowser
-	WithBrowsedDeviceTypeMask(browsedDeviceTypeMask raw.ICDeviceTypeMask) *DeviceBrowser
+	WithBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceTypeMask) *DeviceBrowser
 	Start()
 	Stop()
 	Delegate() raw.ICDeviceBrowserDelegate
 	SetDelegate(delegate raw.ICDeviceBrowserDelegate)
 	IsBrowsing() bool
-	BrowsedDeviceTypeMask() raw.ICDeviceTypeMask
-	SetBrowsedDeviceTypeMask(browsedDeviceTypeMask raw.ICDeviceTypeMask)
+	BrowsedDeviceTypeMask() ICDeviceTypeMask
+	SetBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceTypeMask)
 	Devices() []*Device
 	PreferredDevice() unsafe.Pointer
 }

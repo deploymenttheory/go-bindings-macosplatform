@@ -32,9 +32,9 @@ func CallRecordFilterFromID(id objc.ID) *CallRecordFilter {
 }
 
 // NewCallRecordFilterWithParticipantsCallTypesCallCapability creates a new [CallRecordFilter].
-func NewCallRecordFilterWithParticipantsCallTypesCallCapability(participants *foundation.NSArray[*raw.INPerson], callTypes raw.INCallRecordTypeOptions, callCapability raw.INCallCapability) *CallRecordFilter {
+func NewCallRecordFilterWithParticipantsCallTypesCallCapability(participants *foundation.NSArray[*raw.INPerson], callTypes INCallRecordTypeOptions, callCapability INCallCapability) *CallRecordFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecordFilter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParticipants:callTypes:callCapability:"), participants.Ptr(), callTypes, callCapability)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParticipants:callTypes:callCapability:"), participants.Ptr(), raw.INCallRecordTypeOptions(callTypes), raw.INCallCapability(callCapability))
 	return &CallRecordFilter{inner: raw.INCallRecordFilterFromID(_id)}
 }
 
@@ -50,21 +50,21 @@ func (x *CallRecordFilter) Participants() []*Person {
 }
 
 // CallTypes calls the underlying CallTypes.
-func (x *CallRecordFilter) CallTypes() raw.INCallRecordTypeOptions {
-	return x.inner.CallTypes()
+func (x *CallRecordFilter) CallTypes() INCallRecordTypeOptions {
+	return INCallRecordTypeOptions(x.inner.CallTypes())
 }
 
 // CallCapability calls the underlying CallCapability.
-func (x *CallRecordFilter) CallCapability() raw.INCallCapability {
-	return x.inner.CallCapability()
+func (x *CallRecordFilter) CallCapability() INCallCapability {
+	return INCallCapability(x.inner.CallCapability())
 }
 
 // CallRecordFilterable is the interface implemented by [CallRecordFilter], for mocking and DI.
 type CallRecordFilterable interface {
 	Unwrap() *raw.INCallRecordFilter
 	Participants() []*Person
-	CallTypes() raw.INCallRecordTypeOptions
-	CallCapability() raw.INCallCapability
+	CallTypes() INCallRecordTypeOptions
+	CallCapability() INCallCapability
 }
 
 var _ CallRecordFilterable = (*CallRecordFilter)(nil)

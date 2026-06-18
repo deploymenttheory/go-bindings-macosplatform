@@ -46,14 +46,14 @@ func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition(soundAssetI
 }
 
 // WithCullOption sets the cullOption property and returns the receiver for chaining.
-func (x *SamplerNodeDefinition) WithCullOption(cullOption raw.PHASECullOption) *SamplerNodeDefinition {
-	x.inner.SetCullOption(cullOption)
+func (x *SamplerNodeDefinition) WithCullOption(cullOption PHASECullOption) *SamplerNodeDefinition {
+	x.inner.SetCullOption(raw.PHASECullOption(cullOption))
 	return x
 }
 
 // WithPlaybackMode sets the playbackMode property and returns the receiver for chaining.
-func (x *SamplerNodeDefinition) WithPlaybackMode(playbackMode raw.PHASEPlaybackMode) *SamplerNodeDefinition {
-	x.inner.SetPlaybackMode(playbackMode)
+func (x *SamplerNodeDefinition) WithPlaybackMode(playbackMode PHASEPlaybackMode) *SamplerNodeDefinition {
+	x.inner.SetPlaybackMode(raw.PHASEPlaybackMode(playbackMode))
 	return x
 }
 
@@ -91,23 +91,23 @@ func (x *SamplerNodeDefinition) AssetIdentifier() string {
 }
 
 // CullOption calls the underlying CullOption.
-func (x *SamplerNodeDefinition) CullOption() raw.PHASECullOption {
-	return x.inner.CullOption()
+func (x *SamplerNodeDefinition) CullOption() PHASECullOption {
+	return PHASECullOption(x.inner.CullOption())
 }
 
 // SetCullOption calls the underlying SetCullOption.
-func (x *SamplerNodeDefinition) SetCullOption(cullOption raw.PHASECullOption) {
-	x.inner.SetCullOption(cullOption)
+func (x *SamplerNodeDefinition) SetCullOption(cullOption PHASECullOption) {
+	x.inner.SetCullOption(raw.PHASECullOption(cullOption))
 }
 
 // PlaybackMode calls the underlying PlaybackMode.
-func (x *SamplerNodeDefinition) PlaybackMode() raw.PHASEPlaybackMode {
-	return x.inner.PlaybackMode()
+func (x *SamplerNodeDefinition) PlaybackMode() PHASEPlaybackMode {
+	return PHASEPlaybackMode(x.inner.PlaybackMode())
 }
 
 // SetPlaybackMode calls the underlying SetPlaybackMode.
-func (x *SamplerNodeDefinition) SetPlaybackMode(playbackMode raw.PHASEPlaybackMode) {
-	x.inner.SetPlaybackMode(playbackMode)
+func (x *SamplerNodeDefinition) SetPlaybackMode(playbackMode PHASEPlaybackMode) {
+	x.inner.SetPlaybackMode(raw.PHASEPlaybackMode(playbackMode))
 }
 
 func (x *SamplerNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition {
@@ -125,17 +125,17 @@ func (x *SamplerNodeDefinition) asDefinition() *raw.PHASEDefinition {
 // SamplerNodeDefinitionable is the interface implemented by [SamplerNodeDefinition], for mocking and DI.
 type SamplerNodeDefinitionable interface {
 	Unwrap() *raw.PHASESamplerNodeDefinition
-	WithCullOption(cullOption raw.PHASECullOption) *SamplerNodeDefinition
-	WithPlaybackMode(playbackMode raw.PHASEPlaybackMode) *SamplerNodeDefinition
+	WithCullOption(cullOption PHASECullOption) *SamplerNodeDefinition
+	WithPlaybackMode(playbackMode PHASEPlaybackMode) *SamplerNodeDefinition
 	WithRate(rate float64) *SamplerNodeDefinition
 	WithGroup(group *Group) *SamplerNodeDefinition
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition
 	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition
 	AssetIdentifier() string
-	CullOption() raw.PHASECullOption
-	SetCullOption(cullOption raw.PHASECullOption)
-	PlaybackMode() raw.PHASEPlaybackMode
-	SetPlaybackMode(playbackMode raw.PHASEPlaybackMode)
+	CullOption() PHASECullOption
+	SetCullOption(cullOption PHASECullOption)
+	PlaybackMode() PHASEPlaybackMode
+	SetPlaybackMode(playbackMode PHASEPlaybackMode)
 }
 
 var _ SamplerNodeDefinitionable = (*SamplerNodeDefinition)(nil)

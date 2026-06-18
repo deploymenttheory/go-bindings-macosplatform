@@ -30,9 +30,9 @@ func MediumFromID(id objc.ID) *Medium {
 }
 
 // NewMediumWithEnginePreset creates a new [Medium].
-func NewMediumWithEnginePreset(engine *raw.PHASEEngine, preset raw.PHASEMediumPreset) *Medium {
+func NewMediumWithEnginePreset(engine *raw.PHASEEngine, preset PHASEMediumPreset) *Medium {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMedium")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), engine.Ptr(), preset)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), engine.Ptr(), raw.PHASEMediumPreset(preset))
 	return &Medium{inner: raw.PHASEMediumFromID(_id)}
 }
 

@@ -32,9 +32,9 @@ func StartCallIntentFromID(id objc.ID) *StartCallIntent {
 }
 
 // NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability creates a new [StartCallIntent].
-func NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability(callRecordFilter *raw.INCallRecordFilter, callRecordToCallBack *raw.INCallRecord, audioRoute raw.INCallAudioRoute, destinationType raw.INCallDestinationType, contacts *foundation.NSArray[*raw.INPerson], callCapability raw.INCallCapability) *StartCallIntent {
+func NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability(callRecordFilter *raw.INCallRecordFilter, callRecordToCallBack *raw.INCallRecord, audioRoute INCallAudioRoute, destinationType INCallDestinationType, contacts *foundation.NSArray[*raw.INPerson], callCapability INCallCapability) *StartCallIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INStartCallIntent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordFilter:callRecordToCallBack:audioRoute:destinationType:contacts:callCapability:"), callRecordFilter.Ptr(), callRecordToCallBack.Ptr(), audioRoute, destinationType, contacts.Ptr(), callCapability)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordFilter:callRecordToCallBack:audioRoute:destinationType:contacts:callCapability:"), callRecordFilter.Ptr(), callRecordToCallBack.Ptr(), raw.INCallAudioRoute(audioRoute), raw.INCallDestinationType(destinationType), contacts.Ptr(), raw.INCallCapability(callCapability))
 	return &StartCallIntent{inner: raw.INStartCallIntentFromID(_id)}
 }
 
@@ -69,13 +69,13 @@ func (x *StartCallIntent) CallRecordToCallBack() *CallRecord {
 }
 
 // AudioRoute calls the underlying AudioRoute.
-func (x *StartCallIntent) AudioRoute() raw.INCallAudioRoute {
-	return x.inner.AudioRoute()
+func (x *StartCallIntent) AudioRoute() INCallAudioRoute {
+	return INCallAudioRoute(x.inner.AudioRoute())
 }
 
 // DestinationType calls the underlying DestinationType.
-func (x *StartCallIntent) DestinationType() raw.INCallDestinationType {
-	return x.inner.DestinationType()
+func (x *StartCallIntent) DestinationType() INCallDestinationType {
+	return INCallDestinationType(x.inner.DestinationType())
 }
 
 // Contacts returns the collection as a Go slice.
@@ -90,8 +90,8 @@ func (x *StartCallIntent) Contacts() []*Person {
 }
 
 // CallCapability calls the underlying CallCapability.
-func (x *StartCallIntent) CallCapability() raw.INCallCapability {
-	return x.inner.CallCapability()
+func (x *StartCallIntent) CallCapability() INCallCapability {
+	return INCallCapability(x.inner.CallCapability())
 }
 
 func (x *StartCallIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
@@ -103,10 +103,10 @@ type StartCallIntentable interface {
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *StartCallIntent
 	CallRecordFilter() *CallRecordFilter
 	CallRecordToCallBack() *CallRecord
-	AudioRoute() raw.INCallAudioRoute
-	DestinationType() raw.INCallDestinationType
+	AudioRoute() INCallAudioRoute
+	DestinationType() INCallDestinationType
 	Contacts() []*Person
-	CallCapability() raw.INCallCapability
+	CallCapability() INCallCapability
 }
 
 var _ StartCallIntentable = (*StartCallIntent)(nil)

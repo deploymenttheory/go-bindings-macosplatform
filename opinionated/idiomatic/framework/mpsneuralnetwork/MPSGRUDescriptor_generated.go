@@ -114,8 +114,8 @@ func (x *GRUDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *GRUDescri
 }
 
 // WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
-func (x *GRUDescriptor) WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *GRUDescriptor {
-	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(layerSequenceDirection)
+func (x *GRUDescriptor) WithLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) *GRUDescriptor {
+	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(raw.MPSRNNSequenceDirection(layerSequenceDirection))
 	return x
 }
 
@@ -227,7 +227,7 @@ type GRUDescriptorable interface {
 	WithOutputFeatureChannels(outputFeatureChannels uint) *GRUDescriptor
 	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *GRUDescriptor
 	WithUseFloat32Weights(useFloat32Weights bool) *GRUDescriptor
-	WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *GRUDescriptor
+	WithLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) *GRUDescriptor
 	InputGateInputWeights() raw.MPSCNNConvolutionDataSource
 	SetInputGateInputWeights(inputGateInputWeights raw.MPSCNNConvolutionDataSource)
 	InputGateRecurrentWeights() raw.MPSCNNConvolutionDataSource

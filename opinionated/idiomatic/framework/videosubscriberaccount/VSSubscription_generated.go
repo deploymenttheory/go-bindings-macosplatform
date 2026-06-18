@@ -45,8 +45,8 @@ func (x *VSSubscription) WithExpirationDate(expirationDate *foundation.NSDate) *
 }
 
 // WithAccessLevel sets the accessLevel property and returns the receiver for chaining.
-func (x *VSSubscription) WithAccessLevel(accessLevel raw.VSSubscriptionAccessLevel) *VSSubscription {
-	x.inner.SetAccessLevel(accessLevel)
+func (x *VSSubscription) WithAccessLevel(accessLevel VSSubscriptionAccessLevel) *VSSubscription {
+	x.inner.SetAccessLevel(raw.VSSubscriptionAccessLevel(accessLevel))
 	return x
 }
 
@@ -85,13 +85,13 @@ func (x *VSSubscription) SetExpirationDate(expirationDate *foundation.NSDate) {
 }
 
 // AccessLevel calls the underlying AccessLevel.
-func (x *VSSubscription) AccessLevel() raw.VSSubscriptionAccessLevel {
-	return x.inner.AccessLevel()
+func (x *VSSubscription) AccessLevel() VSSubscriptionAccessLevel {
+	return VSSubscriptionAccessLevel(x.inner.AccessLevel())
 }
 
 // SetAccessLevel calls the underlying SetAccessLevel.
-func (x *VSSubscription) SetAccessLevel(accessLevel raw.VSSubscriptionAccessLevel) {
-	x.inner.SetAccessLevel(accessLevel)
+func (x *VSSubscription) SetAccessLevel(accessLevel VSSubscriptionAccessLevel) {
+	x.inner.SetAccessLevel(raw.VSSubscriptionAccessLevel(accessLevel))
 }
 
 // TierIdentifiers returns the collection as a Go slice.
@@ -128,13 +128,13 @@ func (x *VSSubscription) SetBillingIdentifier(billingIdentifier string) {
 type VSSubscriptionable interface {
 	Unwrap() *raw.VSSubscription
 	WithExpirationDate(expirationDate *foundation.NSDate) *VSSubscription
-	WithAccessLevel(accessLevel raw.VSSubscriptionAccessLevel) *VSSubscription
+	WithAccessLevel(accessLevel VSSubscriptionAccessLevel) *VSSubscription
 	WithTierIdentifiers(items ...*foundation.NSString) *VSSubscription
 	WithBillingIdentifier(billingIdentifier string) *VSSubscription
 	ExpirationDate() *foundation.NSDate
 	SetExpirationDate(expirationDate *foundation.NSDate)
-	AccessLevel() raw.VSSubscriptionAccessLevel
-	SetAccessLevel(accessLevel raw.VSSubscriptionAccessLevel)
+	AccessLevel() VSSubscriptionAccessLevel
+	SetAccessLevel(accessLevel VSSubscriptionAccessLevel)
 	TierIdentifiers() []string
 	SetTierIdentifiers(tierIdentifiers *foundation.NSArray[*foundation.NSString])
 	BillingIdentifier() string

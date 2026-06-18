@@ -37,8 +37,8 @@ func NewContainerStatus() *ContainerStatus {
 }
 
 // State calls the underlying State.
-func (x *ContainerStatus) State() raw.FSContainerState {
-	return x.inner.State()
+func (x *ContainerStatus) State() FSContainerState {
+	return FSContainerState(x.inner.State())
 }
 
 // Status calls the underlying Status.
@@ -49,7 +49,7 @@ func (x *ContainerStatus) Status() unsafe.Pointer {
 // ContainerStatusable is the interface implemented by [ContainerStatus], for mocking and DI.
 type ContainerStatusable interface {
 	Unwrap() *raw.FSContainerStatus
-	State() raw.FSContainerState
+	State() FSContainerState
 	Status() unsafe.Pointer
 }
 

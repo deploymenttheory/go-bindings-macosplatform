@@ -128,8 +128,8 @@ func (x *MenuToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *M
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *MenuToolbarItem) WithStyle(style raw.NSToolbarItemStyle) *MenuToolbarItem {
-	x.inner.NSToolbarItem.SetStyle(style)
+func (x *MenuToolbarItem) WithStyle(style NSToolbarItemStyle) *MenuToolbarItem {
+	x.inner.NSToolbarItem.SetStyle(raw.NSToolbarItemStyle(style))
 	return x
 }
 
@@ -225,7 +225,7 @@ type MenuToolbarItemable interface {
 	WithTitle(title string) *MenuToolbarItem
 	WithBordered(bordered bool) *MenuToolbarItem
 	WithBackgroundTintColor(backgroundTintColor *Color) *MenuToolbarItem
-	WithStyle(style raw.NSToolbarItemStyle) *MenuToolbarItem
+	WithStyle(style NSToolbarItemStyle) *MenuToolbarItem
 	WithNavigational(navigational bool) *MenuToolbarItem
 	WithView(view ViewProvider) *MenuToolbarItem
 	WithHidden(hidden bool) *MenuToolbarItem

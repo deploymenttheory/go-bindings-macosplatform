@@ -32,9 +32,9 @@ func MenuItemBadgeFromID(id objc.ID) *MenuItemBadge {
 }
 
 // NewMenuItemBadgeWithCountType creates a new [MenuItemBadge].
-func NewMenuItemBadgeWithCountType(itemCount int, type_ raw.NSMenuItemBadgeType) *MenuItemBadge {
+func NewMenuItemBadgeWithCountType(itemCount int, type_ NSMenuItemBadgeType) *MenuItemBadge {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenuItemBadge")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCount:type:"), itemCount, type_)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCount:type:"), itemCount, raw.NSMenuItemBadgeType(type_))
 	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(_id)}
 }
 
@@ -58,8 +58,8 @@ func (x *MenuItemBadge) ItemCount() int {
 }
 
 // Type calls the underlying Type.
-func (x *MenuItemBadge) Type() raw.NSMenuItemBadgeType {
-	return x.inner.Type()
+func (x *MenuItemBadge) Type() NSMenuItemBadgeType {
+	return NSMenuItemBadgeType(x.inner.Type())
 }
 
 // StringValue calls the underlying StringValue.
@@ -75,7 +75,7 @@ func (x *MenuItemBadge) StringValue() string {
 type MenuItemBadgeable interface {
 	Unwrap() *raw.NSMenuItemBadge
 	ItemCount() int
-	Type() raw.NSMenuItemBadgeType
+	Type() NSMenuItemBadgeType
 	StringValue() string
 }
 

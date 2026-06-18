@@ -43,8 +43,8 @@ func (x *DerivedAttributeDescription) WithDerivationExpression(derivationExpress
 }
 
 // WithAttributeType sets the attributeType property and returns the receiver for chaining.
-func (x *DerivedAttributeDescription) WithAttributeType(attributeType raw.NSAttributeType) *DerivedAttributeDescription {
-	x.inner.NSAttributeDescription.SetAttributeType(attributeType)
+func (x *DerivedAttributeDescription) WithAttributeType(attributeType NSAttributeType) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.SetAttributeType(raw.NSAttributeType(attributeType))
 	return x
 }
 
@@ -160,7 +160,7 @@ func (x *DerivedAttributeDescription) asPropertyDescription() *raw.NSPropertyDes
 type DerivedAttributeDescriptionable interface {
 	Unwrap() *raw.NSDerivedAttributeDescription
 	WithDerivationExpression(derivationExpression *foundation.NSExpression) *DerivedAttributeDescription
-	WithAttributeType(attributeType raw.NSAttributeType) *DerivedAttributeDescription
+	WithAttributeType(attributeType NSAttributeType) *DerivedAttributeDescription
 	WithAttributeValueClassName(attributeValueClassName string) *DerivedAttributeDescription
 	WithDefaultValue(defaultValue objc.ID) *DerivedAttributeDescription
 	WithValueTransformerName(valueTransformerName string) *DerivedAttributeDescription

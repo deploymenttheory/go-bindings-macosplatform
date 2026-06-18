@@ -41,8 +41,8 @@ func NewCollectionViewCompositionalLayoutConfiguration() *CollectionViewComposit
 }
 
 // WithScrollDirection sets the scrollDirection property and returns the receiver for chaining.
-func (x *CollectionViewCompositionalLayoutConfiguration) WithScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration {
-	x.inner.SetScrollDirection(scrollDirection)
+func (x *CollectionViewCompositionalLayoutConfiguration) WithScrollDirection(scrollDirection NSCollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration {
+	x.inner.SetScrollDirection(raw.NSCollectionViewScrollDirection(scrollDirection))
 	return x
 }
 
@@ -71,13 +71,13 @@ func (x *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplementa
 }
 
 // ScrollDirection calls the underlying ScrollDirection.
-func (x *CollectionViewCompositionalLayoutConfiguration) ScrollDirection() raw.NSCollectionViewScrollDirection {
-	return x.inner.ScrollDirection()
+func (x *CollectionViewCompositionalLayoutConfiguration) ScrollDirection() NSCollectionViewScrollDirection {
+	return NSCollectionViewScrollDirection(x.inner.ScrollDirection())
 }
 
 // SetScrollDirection calls the underlying SetScrollDirection.
-func (x *CollectionViewCompositionalLayoutConfiguration) SetScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection) {
-	x.inner.SetScrollDirection(scrollDirection)
+func (x *CollectionViewCompositionalLayoutConfiguration) SetScrollDirection(scrollDirection NSCollectionViewScrollDirection) {
+	x.inner.SetScrollDirection(raw.NSCollectionViewScrollDirection(scrollDirection))
 }
 
 // InterSectionSpacing calls the underlying InterSectionSpacing.
@@ -109,11 +109,11 @@ func (x *CollectionViewCompositionalLayoutConfiguration) SetBoundarySupplementar
 // CollectionViewCompositionalLayoutConfigurationable is the interface implemented by [CollectionViewCompositionalLayoutConfiguration], for mocking and DI.
 type CollectionViewCompositionalLayoutConfigurationable interface {
 	Unwrap() *raw.NSCollectionViewCompositionalLayoutConfiguration
-	WithScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration
+	WithScrollDirection(scrollDirection NSCollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration
 	WithInterSectionSpacing(interSectionSpacing float64) *CollectionViewCompositionalLayoutConfiguration
 	WithBoundarySupplementaryItems(items ...*raw.NSCollectionLayoutBoundarySupplementaryItem) *CollectionViewCompositionalLayoutConfiguration
-	ScrollDirection() raw.NSCollectionViewScrollDirection
-	SetScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection)
+	ScrollDirection() NSCollectionViewScrollDirection
+	SetScrollDirection(scrollDirection NSCollectionViewScrollDirection)
 	InterSectionSpacing() float64
 	SetInterSectionSpacing(interSectionSpacing float64)
 	BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem

@@ -121,8 +121,8 @@ func FeatureValueWithSequence(sequence *raw.MLSequence) *FeatureValue {
 }
 
 // UndefinedFeatureValueWithType calls the underlying MLFeatureValueUndefinedFeatureValueWithType.
-func UndefinedFeatureValueWithType(type_ raw.MLFeatureType) *FeatureValue {
-	_r := raw.MLFeatureValueUndefinedFeatureValueWithType(type_)
+func UndefinedFeatureValueWithType(type_ MLFeatureType) *FeatureValue {
+	_r := raw.MLFeatureValueUndefinedFeatureValueWithType(raw.MLFeatureType(type_))
 	if _r == nil {
 		return nil
 	}
@@ -463,8 +463,8 @@ func LoadModelAsset(ctx context.Context, asset *raw.MLModelAsset) (*ModelStructu
 }
 
 // MultiArrayByConcatenatingMultiArraysAlongAxisDataType calls the underlying MLMultiArrayMultiArrayByConcatenatingMultiArraysAlongAxisDataType.
-func MultiArrayByConcatenatingMultiArraysAlongAxisDataType(multiArrays *foundation.NSArray[*raw.MLMultiArray], axis int, dataType raw.MLMultiArrayDataType) *MultiArray {
-	_r := raw.MLMultiArrayMultiArrayByConcatenatingMultiArraysAlongAxisDataType(multiArrays, axis, dataType)
+func MultiArrayByConcatenatingMultiArraysAlongAxisDataType(multiArrays *foundation.NSArray[*raw.MLMultiArray], axis int, dataType MLMultiArrayDataType) *MultiArray {
+	_r := raw.MLMultiArrayMultiArrayByConcatenatingMultiArraysAlongAxisDataType(multiArrays, axis, raw.MLMultiArrayDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -598,8 +598,8 @@ func Biases() *ParameterKey {
 }
 
 // EmptySequenceWithType calls the underlying MLSequenceEmptySequenceWithType.
-func EmptySequenceWithType(type_ raw.MLFeatureType) *Sequence {
-	_r := raw.MLSequenceEmptySequenceWithType(type_)
+func EmptySequenceWithType(type_ MLFeatureType) *Sequence {
+	_r := raw.MLSequenceEmptySequenceWithType(raw.MLFeatureType(type_))
 	if _r == nil {
 		return nil
 	}

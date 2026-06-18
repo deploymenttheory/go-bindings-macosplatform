@@ -118,8 +118,8 @@ func (x *ToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *Toolb
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *ToolbarItem) WithStyle(style raw.NSToolbarItemStyle) *ToolbarItem {
-	x.inner.SetStyle(style)
+func (x *ToolbarItem) WithStyle(style NSToolbarItemStyle) *ToolbarItem {
+	x.inner.SetStyle(raw.NSToolbarItemStyle(style))
 	return x
 }
 
@@ -353,13 +353,13 @@ func (x *ToolbarItem) SetBackgroundTintColor(backgroundTintColor *raw.NSColor) {
 }
 
 // Style calls the underlying Style.
-func (x *ToolbarItem) Style() raw.NSToolbarItemStyle {
-	return x.inner.Style()
+func (x *ToolbarItem) Style() NSToolbarItemStyle {
+	return NSToolbarItemStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *ToolbarItem) SetStyle(style raw.NSToolbarItemStyle) {
-	x.inner.SetStyle(style)
+func (x *ToolbarItem) SetStyle(style NSToolbarItemStyle) {
+	x.inner.SetStyle(raw.NSToolbarItemStyle(style))
 }
 
 // IsNavigational calls the underlying IsNavigational.
@@ -478,7 +478,7 @@ type ToolbarItemable interface {
 	WithTitle(title string) *ToolbarItem
 	WithBordered(bordered bool) *ToolbarItem
 	WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItem
-	WithStyle(style raw.NSToolbarItemStyle) *ToolbarItem
+	WithStyle(style NSToolbarItemStyle) *ToolbarItem
 	WithNavigational(navigational bool) *ToolbarItem
 	WithView(view ViewProvider) *ToolbarItem
 	WithHidden(hidden bool) *ToolbarItem
@@ -516,8 +516,8 @@ type ToolbarItemable interface {
 	SetBordered(bordered bool)
 	BackgroundTintColor() *Color
 	SetBackgroundTintColor(backgroundTintColor *raw.NSColor)
-	Style() raw.NSToolbarItemStyle
-	SetStyle(style raw.NSToolbarItemStyle)
+	Style() NSToolbarItemStyle
+	SetStyle(style NSToolbarItemStyle)
 	IsNavigational() bool
 	SetNavigational(navigational bool)
 	View() *View

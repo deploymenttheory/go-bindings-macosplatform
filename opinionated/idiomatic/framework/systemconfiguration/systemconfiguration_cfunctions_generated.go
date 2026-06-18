@@ -281,8 +281,8 @@ func SCNetworkConnectionCreateWithServiceID(allocator unsafe.Pointer, serviceID 
 }
 
 // SCNetworkConnectionGetStatus calls [raw.SCNetworkConnectionGetStatus] (C function SCNetworkConnectionGetStatus).
-func SCNetworkConnectionGetStatus(connection unsafe.Pointer) raw.SCNetworkConnectionStatus {
-	return raw.SCNetworkConnectionGetStatus(connection)
+func SCNetworkConnectionGetStatus(connection unsafe.Pointer) SCNetworkConnectionStatus {
+	return SCNetworkConnectionStatus(raw.SCNetworkConnectionGetStatus(connection))
 }
 
 // SCNetworkConnectionGetTypeID calls [raw.SCNetworkConnectionGetTypeID] (C function SCNetworkConnectionGetTypeID).
@@ -471,8 +471,13 @@ func SCNetworkReachabilityCreateWithName(allocator unsafe.Pointer, nodename stri
 }
 
 // SCNetworkReachabilityGetFlags calls [raw.SCNetworkReachabilityGetFlags] (C function SCNetworkReachabilityGetFlags).
-func SCNetworkReachabilityGetFlags(target unsafe.Pointer, flags *raw.SCNetworkReachabilityFlags) uint8 {
-	return raw.SCNetworkReachabilityGetFlags(target, flags)
+func SCNetworkReachabilityGetFlags(target unsafe.Pointer, flags *SCNetworkReachabilityFlags) uint8 {
+	var _flags raw.SCNetworkReachabilityFlags
+	_ret := raw.SCNetworkReachabilityGetFlags(target, &_flags)
+	if flags != nil {
+		*flags = SCNetworkReachabilityFlags(_flags)
+	}
+	return _ret
 }
 
 // SCNetworkReachabilityGetTypeID calls [raw.SCNetworkReachabilityGetTypeID] (C function SCNetworkReachabilityGetTypeID).

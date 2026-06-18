@@ -36,8 +36,8 @@ func NewStageInputOutputDescriptor() *StageInputOutputDescriptor {
 }
 
 // WithIndexType sets the indexType property and returns the receiver for chaining.
-func (x *StageInputOutputDescriptor) WithIndexType(indexType raw.MTLIndexType) *StageInputOutputDescriptor {
-	x.inner.SetIndexType(indexType)
+func (x *StageInputOutputDescriptor) WithIndexType(indexType MTLIndexType) *StageInputOutputDescriptor {
+	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 	return x
 }
 
@@ -71,13 +71,13 @@ func (x *StageInputOutputDescriptor) Attributes() *AttributeDescriptorArray {
 }
 
 // IndexType calls the underlying IndexType.
-func (x *StageInputOutputDescriptor) IndexType() raw.MTLIndexType {
-	return x.inner.IndexType()
+func (x *StageInputOutputDescriptor) IndexType() MTLIndexType {
+	return MTLIndexType(x.inner.IndexType())
 }
 
 // SetIndexType calls the underlying SetIndexType.
-func (x *StageInputOutputDescriptor) SetIndexType(indexType raw.MTLIndexType) {
-	x.inner.SetIndexType(indexType)
+func (x *StageInputOutputDescriptor) SetIndexType(indexType MTLIndexType) {
+	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 }
 
 // IndexBufferIndex calls the underlying IndexBufferIndex.
@@ -93,13 +93,13 @@ func (x *StageInputOutputDescriptor) SetIndexBufferIndex(indexBufferIndex uint) 
 // StageInputOutputDescriptorable is the interface implemented by [StageInputOutputDescriptor], for mocking and DI.
 type StageInputOutputDescriptorable interface {
 	Unwrap() *raw.MTLStageInputOutputDescriptor
-	WithIndexType(indexType raw.MTLIndexType) *StageInputOutputDescriptor
+	WithIndexType(indexType MTLIndexType) *StageInputOutputDescriptor
 	WithIndexBufferIndex(indexBufferIndex uint) *StageInputOutputDescriptor
 	Reset()
 	Layouts() *BufferLayoutDescriptorArray
 	Attributes() *AttributeDescriptorArray
-	IndexType() raw.MTLIndexType
-	SetIndexType(indexType raw.MTLIndexType)
+	IndexType() MTLIndexType
+	SetIndexType(indexType MTLIndexType)
 	IndexBufferIndex() uint
 	SetIndexBufferIndex(indexBufferIndex uint)
 }

@@ -78,8 +78,8 @@ func (x *IndexPath) GetIndexesRange(indexes *uint, positionRange raw.NSRange) {
 }
 
 // Compare calls the underlying Compare.
-func (x *IndexPath) Compare(otherObject *raw.NSIndexPath) raw.NSComparisonResult {
-	return x.inner.Compare(otherObject)
+func (x *IndexPath) Compare(otherObject *raw.NSIndexPath) NSComparisonResult {
+	return NSComparisonResult(x.inner.Compare(otherObject))
 }
 
 // Length calls the underlying Length.
@@ -102,7 +102,7 @@ type IndexPathable interface {
 	IndexPathByRemovingLastIndex() *IndexPath
 	IndexAtPosition(position uint) uint
 	GetIndexesRange(indexes *uint, positionRange raw.NSRange)
-	Compare(otherObject *raw.NSIndexPath) raw.NSComparisonResult
+	Compare(otherObject *raw.NSIndexPath) NSComparisonResult
 	Length() uint
 	GetIndexes(indexes *uint)
 }

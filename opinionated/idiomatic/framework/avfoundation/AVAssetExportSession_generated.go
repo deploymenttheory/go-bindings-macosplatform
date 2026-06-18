@@ -120,8 +120,8 @@ func (x *AssetExportSession) WithVideoComposition(videoComposition VideoComposit
 }
 
 // WithAudioTrackGroupHandling sets the audioTrackGroupHandling property and returns the receiver for chaining.
-func (x *AssetExportSession) WithAudioTrackGroupHandling(audioTrackGroupHandling raw.AVAssetTrackGroupOutputHandling) *AssetExportSession {
-	x.inner.SetAudioTrackGroupHandling(audioTrackGroupHandling)
+func (x *AssetExportSession) WithAudioTrackGroupHandling(audioTrackGroupHandling AVAssetTrackGroupOutputHandling) *AssetExportSession {
+	x.inner.SetAudioTrackGroupHandling(raw.AVAssetTrackGroupOutputHandling(audioTrackGroupHandling))
 	return x
 }
 
@@ -219,8 +219,8 @@ func (x *AssetExportSession) SetAllowsParallelizedExport(allowsParallelizedExpor
 }
 
 // Status calls the underlying Status.
-func (x *AssetExportSession) Status() raw.AVAssetExportSessionStatus {
-	return x.inner.Status()
+func (x *AssetExportSession) Status() AVAssetExportSessionStatus {
+	return AVAssetExportSessionStatus(x.inner.Status())
 }
 
 // Error calls the underlying Error.
@@ -367,13 +367,13 @@ func (x *AssetExportSession) CustomVideoCompositor() raw.AVVideoCompositing {
 }
 
 // AudioTrackGroupHandling calls the underlying AudioTrackGroupHandling.
-func (x *AssetExportSession) AudioTrackGroupHandling() raw.AVAssetTrackGroupOutputHandling {
-	return x.inner.AudioTrackGroupHandling()
+func (x *AssetExportSession) AudioTrackGroupHandling() AVAssetTrackGroupOutputHandling {
+	return AVAssetTrackGroupOutputHandling(x.inner.AudioTrackGroupHandling())
 }
 
 // SetAudioTrackGroupHandling calls the underlying SetAudioTrackGroupHandling.
-func (x *AssetExportSession) SetAudioTrackGroupHandling(audioTrackGroupHandling raw.AVAssetTrackGroupOutputHandling) {
-	x.inner.SetAudioTrackGroupHandling(audioTrackGroupHandling)
+func (x *AssetExportSession) SetAudioTrackGroupHandling(audioTrackGroupHandling AVAssetTrackGroupOutputHandling) {
+	x.inner.SetAudioTrackGroupHandling(raw.AVAssetTrackGroupOutputHandling(audioTrackGroupHandling))
 }
 
 // CanPerformMultiplePassesOverSourceMediaData calls the underlying CanPerformMultiplePassesOverSourceMediaData.
@@ -410,7 +410,7 @@ type AssetExportSessionable interface {
 	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetExportSession
 	WithAudioMix(audioMix AudioMixProvider) *AssetExportSession
 	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetExportSession
-	WithAudioTrackGroupHandling(audioTrackGroupHandling raw.AVAssetTrackGroupOutputHandling) *AssetExportSession
+	WithAudioTrackGroupHandling(audioTrackGroupHandling AVAssetTrackGroupOutputHandling) *AssetExportSession
 	WithCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData bool) *AssetExportSession
 	WithDirectoryForTemporaryFiles(directoryForTemporaryFiles string) *AssetExportSession
 	ExportAsynchronously(ctx context.Context) error
@@ -425,7 +425,7 @@ type AssetExportSessionable interface {
 	SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool)
 	AllowsParallelizedExport() bool
 	SetAllowsParallelizedExport(allowsParallelizedExport bool)
-	Status() raw.AVAssetExportSessionStatus
+	Status() AVAssetExportSessionStatus
 	Error() unsafe.Pointer
 	Progress() float32
 	DetermineCompatibleFileTypesWithCompletionHandler(handler objc.Block)
@@ -449,8 +449,8 @@ type AssetExportSessionable interface {
 	VideoComposition() *VideoComposition
 	SetVideoComposition(videoComposition *raw.AVVideoComposition)
 	CustomVideoCompositor() raw.AVVideoCompositing
-	AudioTrackGroupHandling() raw.AVAssetTrackGroupOutputHandling
-	SetAudioTrackGroupHandling(audioTrackGroupHandling raw.AVAssetTrackGroupOutputHandling)
+	AudioTrackGroupHandling() AVAssetTrackGroupOutputHandling
+	SetAudioTrackGroupHandling(audioTrackGroupHandling AVAssetTrackGroupOutputHandling)
 	CanPerformMultiplePassesOverSourceMediaData() bool
 	SetCanPerformMultiplePassesOverSourceMediaData(canPerformMultiplePassesOverSourceMediaData bool)
 	DirectoryForTemporaryFiles() *foundation.NSURL

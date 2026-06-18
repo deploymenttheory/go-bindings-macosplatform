@@ -73,8 +73,8 @@ func (x *StepperCell) WithControlView(controlView ViewProvider) *StepperCell {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *StepperCell) WithType(type_ raw.NSCellType) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetType(type_)
+func (x *StepperCell) WithType(type_ NSCellType) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -157,8 +157,8 @@ func (x *StepperCell) WithHighlighted(highlighted bool) *StepperCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *StepperCell) WithAlignment(alignment raw.NSTextAlignment) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *StepperCell) WithAlignment(alignment NSTextAlignment) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -223,8 +223,8 @@ func (x *StepperCell) WithImage(image *Image) *StepperCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *StepperCell) WithControlSize(controlSize raw.NSControlSize) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *StepperCell) WithControlSize(controlSize NSControlSize) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -247,14 +247,14 @@ func (x *StepperCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) 
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *StepperCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *StepperCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *StepperCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *StepperCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -271,8 +271,8 @@ func (x *StepperCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *StepperCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *StepperCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -295,8 +295,8 @@ func (x *StepperCell) WithShowsFirstResponder(showsFirstResponder bool) *Stepper
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *StepperCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *StepperCell) WithFocusRingType(focusRingType NSFocusRingType) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -325,14 +325,14 @@ func (x *StepperCell) WithAllowsMixedState(allowsMixedState bool) *StepperCell {
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *StepperCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *StepperCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *StepperCell) WithControlTint(controlTint raw.NSControlTint) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *StepperCell) WithControlTint(controlTint NSControlTint) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -399,7 +399,7 @@ type StepperCellable interface {
 	WithValueWraps(valueWraps bool) *StepperCell
 	WithAutorepeat(autorepeat bool) *StepperCell
 	WithControlView(controlView ViewProvider) *StepperCell
-	WithType(type_ raw.NSCellType) *StepperCell
+	WithType(type_ NSCellType) *StepperCell
 	WithState(state int) *StepperCell
 	WithTarget(target objc.ID) *StepperCell
 	WithAction(action objc.SEL) *StepperCell
@@ -413,7 +413,7 @@ type StepperCellable interface {
 	WithBezeled(bezeled bool) *StepperCell
 	WithScrollable(scrollable bool) *StepperCell
 	WithHighlighted(highlighted bool) *StepperCell
-	WithAlignment(alignment raw.NSTextAlignment) *StepperCell
+	WithAlignment(alignment NSTextAlignment) *StepperCell
 	WithWraps(wraps bool) *StepperCell
 	WithFont(font *Font) *StepperCell
 	WithFormatter(formatter *foundation.NSFormatter) *StepperCell
@@ -424,25 +424,25 @@ type StepperCellable interface {
 	WithDoubleValue(doubleValue float64) *StepperCell
 	WithIntegerValue(integerValue int) *StepperCell
 	WithImage(image *Image) *StepperCell
-	WithControlSize(controlSize raw.NSControlSize) *StepperCell
+	WithControlSize(controlSize NSControlSize) *StepperCell
 	WithRepresentedObject(representedObject objc.ID) *StepperCell
 	WithMenu(menu *Menu) *StepperCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *StepperCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *StepperCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *StepperCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *StepperCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *StepperCell
 	WithAllowsUndo(allowsUndo bool) *StepperCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *StepperCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StepperCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StepperCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *StepperCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *StepperCell
 	WithShowsFirstResponder(showsFirstResponder bool) *StepperCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *StepperCell
+	WithFocusRingType(focusRingType NSFocusRingType) *StepperCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *StepperCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *StepperCell
 	WithImportsGraphics(importsGraphics bool) *StepperCell
 	WithAllowsMixedState(allowsMixedState bool) *StepperCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *StepperCell
-	WithControlTint(controlTint raw.NSControlTint) *StepperCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *StepperCell
+	WithControlTint(controlTint NSControlTint) *StepperCell
 	MinValue() float64
 	SetMinValue(minValue float64)
 	MaxValue() float64

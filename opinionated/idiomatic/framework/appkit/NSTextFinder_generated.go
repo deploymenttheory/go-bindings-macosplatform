@@ -75,13 +75,13 @@ func (x *TextFinder) WithIncrementalSearchingShouldDimContentView(incrementalSea
 }
 
 // PerformAction calls the underlying PerformAction.
-func (x *TextFinder) PerformAction(op raw.NSTextFinderAction) {
-	x.inner.PerformAction(op)
+func (x *TextFinder) PerformAction(op NSTextFinderAction) {
+	x.inner.PerformAction(raw.NSTextFinderAction(op))
 }
 
 // ValidateAction calls the underlying ValidateAction.
-func (x *TextFinder) ValidateAction(op raw.NSTextFinderAction) bool {
-	return x.inner.ValidateAction(op)
+func (x *TextFinder) ValidateAction(op NSTextFinderAction) bool {
+	return x.inner.ValidateAction(raw.NSTextFinderAction(op))
 }
 
 // CancelFindIndicator calls the underlying CancelFindIndicator.
@@ -163,8 +163,8 @@ type TextFinderable interface {
 	WithFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) *TextFinder
 	WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextFinder
 	WithIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) *TextFinder
-	PerformAction(op raw.NSTextFinderAction)
-	ValidateAction(op raw.NSTextFinderAction) bool
+	PerformAction(op NSTextFinderAction)
+	ValidateAction(op NSTextFinderAction) bool
 	CancelFindIndicator()
 	NoteClientStringWillChange()
 	Client() raw.NSTextFinderClient

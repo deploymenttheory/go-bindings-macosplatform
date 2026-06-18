@@ -43,8 +43,8 @@ func (x *PersistentCloudKitContainerEventResult) Result() objc.ID {
 }
 
 // ResultType calls the underlying ResultType.
-func (x *PersistentCloudKitContainerEventResult) ResultType() raw.NSPersistentCloudKitContainerEventResultType {
-	return x.inner.ResultType()
+func (x *PersistentCloudKitContainerEventResult) ResultType() NSPersistentCloudKitContainerEventResultType {
+	return NSPersistentCloudKitContainerEventResultType(x.inner.ResultType())
 }
 
 func (x *PersistentCloudKitContainerEventResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
@@ -55,7 +55,7 @@ func (x *PersistentCloudKitContainerEventResult) asPersistentStoreResult() *raw.
 type PersistentCloudKitContainerEventResultable interface {
 	Unwrap() *raw.NSPersistentCloudKitContainerEventResult
 	Result() objc.ID
-	ResultType() raw.NSPersistentCloudKitContainerEventResultType
+	ResultType() NSPersistentCloudKitContainerEventResultType
 }
 
 var _ PersistentCloudKitContainerEventResultable = (*PersistentCloudKitContainerEventResult)(nil)

@@ -76,8 +76,8 @@ func (x *LSTMDescriptor) Dropout() float32 {
 }
 
 // ResultMode calls the underlying ResultMode.
-func (x *LSTMDescriptor) ResultMode() raw.MLCLSTMResultMode {
-	return x.inner.ResultMode()
+func (x *LSTMDescriptor) ResultMode() MLCLSTMResultMode {
+	return MLCLSTMResultMode(x.inner.ResultMode())
 }
 
 // LSTMDescriptorable is the interface implemented by [LSTMDescriptor], for mocking and DI.
@@ -91,7 +91,7 @@ type LSTMDescriptorable interface {
 	IsBidirectional() bool
 	ReturnsSequences() bool
 	Dropout() float32
-	ResultMode() raw.MLCLSTMResultMode
+	ResultMode() MLCLSTMResultMode
 }
 
 var _ LSTMDescriptorable = (*LSTMDescriptor)(nil)

@@ -40,9 +40,9 @@ func NewPlayerLooperWithPlayerTemplateItemTimeRange(player *raw.AVQueuePlayer, i
 }
 
 // NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering creates a new [PlayerLooper].
-func NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering(player *raw.AVQueuePlayer, itemToLoop *raw.AVPlayerItem, loopRange coremedia.CMTimeRange, itemOrdering raw.AVPlayerLooperItemOrdering) *PlayerLooper {
+func NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering(player *raw.AVQueuePlayer, itemToLoop *raw.AVPlayerItem, loopRange coremedia.CMTimeRange, itemOrdering AVPlayerLooperItemOrdering) *PlayerLooper {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerLooper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:templateItem:timeRange:existingItemsOrdering:"), player.Ptr(), itemToLoop.Ptr(), loopRange, itemOrdering)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:templateItem:timeRange:existingItemsOrdering:"), player.Ptr(), itemToLoop.Ptr(), loopRange, raw.AVPlayerLooperItemOrdering(itemOrdering))
 	return &PlayerLooper{inner: raw.AVPlayerLooperFromID(_id)}
 }
 
@@ -52,8 +52,8 @@ func (x *PlayerLooper) DisableLooping() {
 }
 
 // Status calls the underlying Status.
-func (x *PlayerLooper) Status() raw.AVPlayerLooperStatus {
-	return x.inner.Status()
+func (x *PlayerLooper) Status() AVPlayerLooperStatus {
+	return AVPlayerLooperStatus(x.inner.Status())
 }
 
 // Error calls the underlying Error.
@@ -81,7 +81,7 @@ func (x *PlayerLooper) LoopingPlayerItems() []*PlayerItem {
 type PlayerLooperable interface {
 	Unwrap() *raw.AVPlayerLooper
 	DisableLooping()
-	Status() raw.AVPlayerLooperStatus
+	Status() AVPlayerLooperStatus
 	Error() unsafe.Pointer
 	LoopCount() int
 	LoopingPlayerItems() []*PlayerItem

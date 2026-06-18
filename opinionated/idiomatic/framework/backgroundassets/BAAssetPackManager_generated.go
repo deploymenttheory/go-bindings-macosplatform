@@ -96,13 +96,13 @@ func (x *AssetPackManager) GetAssetPackWithIdentifier(ctx context.Context, asset
 }
 
 // GetStatusRelativeToAssetPackCompletionHandler calls the underlying GetStatusRelativeToAssetPackCompletionHandler.
-func (x *AssetPackManager) GetStatusRelativeToAssetPackCompletionHandler(assetPack *raw.BAAssetPack, completionHandler func(raw.BAAssetPackStatus, unsafe.Pointer)) {
-	x.inner.GetStatusRelativeToAssetPackCompletionHandler(assetPack, completionHandler)
+func (x *AssetPackManager) GetStatusRelativeToAssetPackCompletionHandler(assetPack *raw.BAAssetPack, completionHandler func(BAAssetPackStatus, unsafe.Pointer)) {
+	x.inner.GetStatusRelativeToAssetPackCompletionHandler(assetPack, func(_a0 raw.BAAssetPackStatus, _a1 unsafe.Pointer) { completionHandler(BAAssetPackStatus(_a0), _a1) })
 }
 
 // GetLocalStatusOfAssetPackWithIdentifierCompletionHandler calls the underlying GetLocalStatusOfAssetPackWithIdentifierCompletionHandler.
-func (x *AssetPackManager) GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(raw.BAAssetPackStatus)) {
-	x.inner.GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(assetPackIdentifier), completionHandler)
+func (x *AssetPackManager) GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(BAAssetPackStatus)) {
+	x.inner.GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(assetPackIdentifier), func(_a0 raw.BAAssetPackStatus) { completionHandler(BAAssetPackStatus(_a0)) })
 }
 
 // AssetPackIsAvailableLocallyWithIdentifier calls the underlying AssetPackIsAvailableLocallyWithIdentifier.
@@ -185,8 +185,8 @@ func (x *AssetPackManager) RemoveAssetPackWithIdentifier(ctx context.Context, as
 }
 
 // GetStatusOfAssetPackWithIdentifierCompletionHandler calls the underlying GetStatusOfAssetPackWithIdentifierCompletionHandler.
-func (x *AssetPackManager) GetStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(raw.BAAssetPackStatus, unsafe.Pointer)) {
-	x.inner.GetStatusOfAssetPackWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(assetPackIdentifier), completionHandler)
+func (x *AssetPackManager) GetStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(BAAssetPackStatus, unsafe.Pointer)) {
+	x.inner.GetStatusOfAssetPackWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(assetPackIdentifier), func(_a0 raw.BAAssetPackStatus, _a1 unsafe.Pointer) { completionHandler(BAAssetPackStatus(_a0), _a1) })
 }
 
 // Delegate calls the underlying Delegate.
@@ -205,8 +205,8 @@ type AssetPackManagerable interface {
 	WithDelegate(delegate raw.BAManagedAssetPackDownloadDelegate) *AssetPackManager
 	GetAllAssetPacks(ctx context.Context) (*foundation.NSSet[*raw.BAAssetPack], error)
 	GetAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) (*AssetPack, error)
-	GetStatusRelativeToAssetPackCompletionHandler(assetPack *raw.BAAssetPack, completionHandler func(raw.BAAssetPackStatus, unsafe.Pointer))
-	GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(raw.BAAssetPackStatus))
+	GetStatusRelativeToAssetPackCompletionHandler(assetPack *raw.BAAssetPack, completionHandler func(BAAssetPackStatus, unsafe.Pointer))
+	GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(BAAssetPackStatus))
 	AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier string) bool
 	EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *raw.BAAssetPack) error
 	EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *raw.BAAssetPack, shouldUpdate bool) error
@@ -215,7 +215,7 @@ type AssetPackManagerable interface {
 	FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path string, assetPackIdentifier string) (int, error)
 	URLForPathError(path string) (*foundation.NSURL, error)
 	RemoveAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) error
-	GetStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(raw.BAAssetPackStatus, unsafe.Pointer))
+	GetStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(BAAssetPackStatus, unsafe.Pointer))
 	Delegate() raw.BAManagedAssetPackDownloadDelegate
 	SetDelegate(delegate raw.BAManagedAssetPackDownloadDelegate)
 }

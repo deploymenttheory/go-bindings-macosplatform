@@ -33,15 +33,15 @@ func TileGroupRuleFromID(id objc.ID) *TileGroupRule {
 }
 
 // NewTileGroupRuleWithAdjacencyTileDefinitions creates a new [TileGroupRule].
-func NewTileGroupRuleWithAdjacencyTileDefinitions(adjacency raw.SKTileAdjacencyMask, tileDefinitions *foundation.NSArray[*raw.SKTileDefinition]) *TileGroupRule {
+func NewTileGroupRuleWithAdjacencyTileDefinitions(adjacency SKTileAdjacencyMask, tileDefinitions *foundation.NSArray[*raw.SKTileDefinition]) *TileGroupRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTileGroupRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAdjacency:tileDefinitions:"), adjacency, tileDefinitions.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAdjacency:tileDefinitions:"), raw.SKTileAdjacencyMask(adjacency), tileDefinitions.Ptr())
 	return &TileGroupRule{inner: raw.SKTileGroupRuleFromID(_id)}
 }
 
 // WithAdjacency sets the adjacency property and returns the receiver for chaining.
-func (x *TileGroupRule) WithAdjacency(adjacency raw.SKTileAdjacencyMask) *TileGroupRule {
-	x.inner.SetAdjacency(adjacency)
+func (x *TileGroupRule) WithAdjacency(adjacency SKTileAdjacencyMask) *TileGroupRule {
+	x.inner.SetAdjacency(raw.SKTileAdjacencyMask(adjacency))
 	return x
 }
 
@@ -70,13 +70,13 @@ func (x *TileGroupRule) WithName(name string) *TileGroupRule {
 }
 
 // Adjacency calls the underlying Adjacency.
-func (x *TileGroupRule) Adjacency() raw.SKTileAdjacencyMask {
-	return x.inner.Adjacency()
+func (x *TileGroupRule) Adjacency() SKTileAdjacencyMask {
+	return SKTileAdjacencyMask(x.inner.Adjacency())
 }
 
 // SetAdjacency calls the underlying SetAdjacency.
-func (x *TileGroupRule) SetAdjacency(adjacency raw.SKTileAdjacencyMask) {
-	x.inner.SetAdjacency(adjacency)
+func (x *TileGroupRule) SetAdjacency(adjacency SKTileAdjacencyMask) {
+	x.inner.SetAdjacency(raw.SKTileAdjacencyMask(adjacency))
 }
 
 // TileDefinitions returns the collection as a Go slice.
@@ -112,11 +112,11 @@ func (x *TileGroupRule) SetName(name string) {
 // TileGroupRuleable is the interface implemented by [TileGroupRule], for mocking and DI.
 type TileGroupRuleable interface {
 	Unwrap() *raw.SKTileGroupRule
-	WithAdjacency(adjacency raw.SKTileAdjacencyMask) *TileGroupRule
+	WithAdjacency(adjacency SKTileAdjacencyMask) *TileGroupRule
 	WithTileDefinitions(items ...*raw.SKTileDefinition) *TileGroupRule
 	WithName(name string) *TileGroupRule
-	Adjacency() raw.SKTileAdjacencyMask
-	SetAdjacency(adjacency raw.SKTileAdjacencyMask)
+	Adjacency() SKTileAdjacencyMask
+	SetAdjacency(adjacency SKTileAdjacencyMask)
 	TileDefinitions() []*TileDefinition
 	SetTileDefinitions(tileDefinitions *foundation.NSArray[*raw.SKTileDefinition])
 	Name() string

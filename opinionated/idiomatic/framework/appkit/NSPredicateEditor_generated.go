@@ -78,8 +78,8 @@ func (x *PredicateEditor) WithFormattingDictionary(formattingDictionary *foundat
 }
 
 // WithNestingMode sets the nestingMode property and returns the receiver for chaining.
-func (x *PredicateEditor) WithNestingMode(nestingMode raw.NSRuleEditorNestingMode) *PredicateEditor {
-	x.inner.NSRuleEditor.SetNestingMode(nestingMode)
+func (x *PredicateEditor) WithNestingMode(nestingMode NSRuleEditorNestingMode) *PredicateEditor {
+	x.inner.NSRuleEditor.SetNestingMode(raw.NSRuleEditorNestingMode(nestingMode))
 	return x
 }
 
@@ -180,8 +180,8 @@ func (x *PredicateEditor) WithHighlighted(highlighted bool) *PredicateEditor {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *PredicateEditor) WithControlSize(controlSize raw.NSControlSize) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetControlSize(controlSize)
+func (x *PredicateEditor) WithControlSize(controlSize NSControlSize) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -246,20 +246,20 @@ func (x *PredicateEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *Predi
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *PredicateEditor) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *PredicateEditor) WithLineBreakMode(lineBreakMode NSLineBreakMode) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *PredicateEditor) WithAlignment(alignment raw.NSTextAlignment) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetAlignment(alignment)
+func (x *PredicateEditor) WithAlignment(alignment NSTextAlignment) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *PredicateEditor) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *PredicateEditor) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -312,8 +312,8 @@ func (x *PredicateEditor) WithAutoresizesSubviews(autoresizesSubviews bool) *Pre
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *PredicateEditor) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *PredicateEditor) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -372,14 +372,14 @@ func (x *PredicateEditor) WithWantsRestingTouches(wantsRestingTouches bool) *Pre
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *PredicateEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *PredicateEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *PredicateEditor) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *PredicateEditor) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -486,8 +486,8 @@ func (x *PredicateEditor) WithToolTip(toolTip string) *PredicateEditor {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *PredicateEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *PredicateEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -504,8 +504,8 @@ func (x *PredicateEditor) WithNextKeyView(nextKeyView ViewProvider) *PredicateEd
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *PredicateEditor) WithFocusRingType(focusRingType raw.NSFocusRingType) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *PredicateEditor) WithFocusRingType(focusRingType NSFocusRingType) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -528,8 +528,8 @@ func (x *PredicateEditor) WithGestureRecognizers(items ...GestureRecognizerProvi
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *PredicateEditor) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *PredicateEditor) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PredicateEditor {
+	x.inner.NSRuleEditor.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -650,7 +650,7 @@ type PredicateEditorable interface {
 	WithDelegate(delegate raw.NSRuleEditorDelegate) *PredicateEditor
 	WithFormattingStringsFilename(formattingStringsFilename string) *PredicateEditor
 	WithFormattingDictionary(formattingDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *PredicateEditor
-	WithNestingMode(nestingMode raw.NSRuleEditorNestingMode) *PredicateEditor
+	WithNestingMode(nestingMode NSRuleEditorNestingMode) *PredicateEditor
 	WithRowHeight(rowHeight float64) *PredicateEditor
 	WithEditable(editable bool) *PredicateEditor
 	WithCanRemoveAllRows(canRemoveAllRows bool) *PredicateEditor
@@ -667,7 +667,7 @@ type PredicateEditorable interface {
 	WithEnabled(enabled bool) *PredicateEditor
 	WithRefusesFirstResponder(refusesFirstResponder bool) *PredicateEditor
 	WithHighlighted(highlighted bool) *PredicateEditor
-	WithControlSize(controlSize raw.NSControlSize) *PredicateEditor
+	WithControlSize(controlSize NSControlSize) *PredicateEditor
 	WithFormatter(formatter *foundation.NSFormatter) *PredicateEditor
 	WithObjectValue(objectValue objc.ID) *PredicateEditor
 	WithStringValue(stringValue string) *PredicateEditor
@@ -678,16 +678,16 @@ type PredicateEditorable interface {
 	WithDoubleValue(doubleValue float64) *PredicateEditor
 	WithFont(font *Font) *PredicateEditor
 	WithUsesSingleLineMode(usesSingleLineMode bool) *PredicateEditor
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PredicateEditor
-	WithAlignment(alignment raw.NSTextAlignment) *PredicateEditor
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PredicateEditor
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *PredicateEditor
+	WithAlignment(alignment NSTextAlignment) *PredicateEditor
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PredicateEditor
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PredicateEditor
 	WithCell(cell CellProvider) *PredicateEditor
 	WithSubviews(items ...ViewProvider) *PredicateEditor
 	WithHidden(hidden bool) *PredicateEditor
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PredicateEditor
 	WithAutoresizesSubviews(autoresizesSubviews bool) *PredicateEditor
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *PredicateEditor
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *PredicateEditor
 	WithFrame(frame corefoundation.CGRect) *PredicateEditor
 	WithFrameRotation(frameRotation float64) *PredicateEditor
 	WithFrameCenterRotation(frameCenterRotation float64) *PredicateEditor
@@ -697,8 +697,8 @@ type PredicateEditorable interface {
 	WithNeedsDisplay(needsDisplay bool) *PredicateEditor
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *PredicateEditor
 	WithWantsRestingTouches(wantsRestingTouches bool) *PredicateEditor
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *PredicateEditor
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *PredicateEditor
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *PredicateEditor
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *PredicateEditor
 	WithWantsLayer(wantsLayer bool) *PredicateEditor
 	WithLayer(layer *quartzcore.CALayer) *PredicateEditor
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PredicateEditor
@@ -712,12 +712,12 @@ type PredicateEditorable interface {
 	WithClipsToBounds(clipsToBounds bool) *PredicateEditor
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PredicateEditor
 	WithToolTip(toolTip string) *PredicateEditor
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PredicateEditor
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PredicateEditor
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PredicateEditor
 	WithNextKeyView(nextKeyView ViewProvider) *PredicateEditor
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *PredicateEditor
+	WithFocusRingType(focusRingType NSFocusRingType) *PredicateEditor
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *PredicateEditor
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PredicateEditor
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PredicateEditor
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PredicateEditor
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PredicateEditor
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PredicateEditor

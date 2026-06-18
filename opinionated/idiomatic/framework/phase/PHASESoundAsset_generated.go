@@ -47,8 +47,8 @@ func (x *SoundAsset) Data() *foundation.NSData {
 }
 
 // Type calls the underlying Type.
-func (x *SoundAsset) Type() raw.PHASEAssetType {
-	return x.inner.Type()
+func (x *SoundAsset) Type() PHASEAssetType {
+	return PHASEAssetType(x.inner.Type())
 }
 
 func (x *SoundAsset) asAsset() *raw.PHASEAsset { return &x.inner.PHASEAsset }
@@ -58,7 +58,7 @@ type SoundAssetable interface {
 	Unwrap() *raw.PHASESoundAsset
 	Url() *foundation.NSURL
 	Data() *foundation.NSData
-	Type() raw.PHASEAssetType
+	Type() PHASEAssetType
 }
 
 var _ SoundAssetable = (*SoundAsset)(nil)

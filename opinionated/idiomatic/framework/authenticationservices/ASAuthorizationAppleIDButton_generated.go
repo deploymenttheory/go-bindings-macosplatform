@@ -30,9 +30,9 @@ func AuthorizationAppleIDButtonFromID(id objc.ID) *AuthorizationAppleIDButton {
 }
 
 // NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle creates a new [AuthorizationAppleIDButton].
-func NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle(type_ raw.ASAuthorizationAppleIDButtonType, style raw.ASAuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
+func NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationAppleIDButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationButtonType:authorizationButtonStyle:"), type_, style)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationButtonType:authorizationButtonStyle:"), raw.ASAuthorizationAppleIDButtonType(type_), raw.ASAuthorizationAppleIDButtonStyle(style))
 	return &AuthorizationAppleIDButton{inner: raw.ASAuthorizationAppleIDButtonFromID(_id)}
 }
 

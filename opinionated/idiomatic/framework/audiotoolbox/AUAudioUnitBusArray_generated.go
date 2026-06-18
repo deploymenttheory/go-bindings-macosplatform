@@ -32,16 +32,16 @@ func AudioUnitBusArrayFromID(id objc.ID) *AudioUnitBusArray {
 }
 
 // NewAudioUnitBusArrayWithAudioUnitBusTypeBusses creates a new [AudioUnitBusArray].
-func NewAudioUnitBusArrayWithAudioUnitBusTypeBusses(owner *raw.AUAudioUnit, busType raw.AUAudioUnitBusType, busArray *foundation.NSArray[*raw.AUAudioUnitBus]) *AudioUnitBusArray {
+func NewAudioUnitBusArrayWithAudioUnitBusTypeBusses(owner *raw.AUAudioUnit, busType AUAudioUnitBusType, busArray *foundation.NSArray[*raw.AUAudioUnitBus]) *AudioUnitBusArray {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUAudioUnitBusArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:busses:"), owner.Ptr(), busType, busArray.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:busses:"), owner.Ptr(), raw.AUAudioUnitBusType(busType), busArray.Ptr())
 	return &AudioUnitBusArray{inner: raw.AUAudioUnitBusArrayFromID(_id)}
 }
 
 // NewAudioUnitBusArrayWithAudioUnitBusType creates a new [AudioUnitBusArray].
-func NewAudioUnitBusArrayWithAudioUnitBusType(owner *raw.AUAudioUnit, busType raw.AUAudioUnitBusType) *AudioUnitBusArray {
+func NewAudioUnitBusArrayWithAudioUnitBusType(owner *raw.AUAudioUnit, busType AUAudioUnitBusType) *AudioUnitBusArray {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUAudioUnitBusArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:"), owner.Ptr(), busType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:"), owner.Ptr(), raw.AUAudioUnitBusType(busType))
 	return &AudioUnitBusArray{inner: raw.AUAudioUnitBusArrayFromID(_id)}
 }
 
@@ -89,8 +89,8 @@ func (x *AudioUnitBusArray) OwnerAudioUnit() *AudioUnit {
 }
 
 // BusType calls the underlying BusType.
-func (x *AudioUnitBusArray) BusType() raw.AUAudioUnitBusType {
-	return x.inner.BusType()
+func (x *AudioUnitBusArray) BusType() AUAudioUnitBusType {
+	return AUAudioUnitBusType(x.inner.BusType())
 }
 
 // ReplaceBusses calls the underlying ReplaceBusses.
@@ -108,7 +108,7 @@ type AudioUnitBusArrayable interface {
 	Count() uint
 	IsCountChangeable() bool
 	OwnerAudioUnit() *AudioUnit
-	BusType() raw.AUAudioUnitBusType
+	BusType() AUAudioUnitBusType
 	ReplaceBusses(busArray *foundation.NSArray[*raw.AUAudioUnitBus])
 }
 

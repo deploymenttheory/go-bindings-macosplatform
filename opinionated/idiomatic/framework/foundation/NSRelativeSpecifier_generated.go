@@ -38,15 +38,15 @@ func NewRelativeSpecifierWithCoder(inCoder *raw.NSCoder) *RelativeSpecifier {
 }
 
 // NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier creates a new [RelativeSpecifier].
-func NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, relPos raw.NSRelativePosition, baseSpecifier *raw.NSScriptObjectSpecifier) *RelativeSpecifier {
+func NewRelativeSpecifierWithContainerClassDescriptionContainerSpecifierKeyRelativePositionBaseSpecifier(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, relPos NSRelativePosition, baseSpecifier *raw.NSScriptObjectSpecifier) *RelativeSpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRelativeSpecifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:relativePosition:baseSpecifier:"), classDesc.Ptr(), container.Ptr(), foundation.NSStringStringWithUTF8String(property).Ptr(), relPos, baseSpecifier.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:relativePosition:baseSpecifier:"), classDesc.Ptr(), container.Ptr(), foundation.NSStringStringWithUTF8String(property).Ptr(), raw.NSRelativePosition(relPos), baseSpecifier.Ptr())
 	return &RelativeSpecifier{inner: raw.NSRelativeSpecifierFromID(_id)}
 }
 
 // WithRelativePosition sets the relativePosition property and returns the receiver for chaining.
-func (x *RelativeSpecifier) WithRelativePosition(relativePosition raw.NSRelativePosition) *RelativeSpecifier {
-	x.inner.SetRelativePosition(relativePosition)
+func (x *RelativeSpecifier) WithRelativePosition(relativePosition NSRelativePosition) *RelativeSpecifier {
+	x.inner.SetRelativePosition(raw.NSRelativePosition(relativePosition))
 	return x
 }
 
@@ -105,13 +105,13 @@ func (x *RelativeSpecifier) WithScriptingProperties(scriptingProperties *raw.NSD
 }
 
 // RelativePosition calls the underlying RelativePosition.
-func (x *RelativeSpecifier) RelativePosition() raw.NSRelativePosition {
-	return x.inner.RelativePosition()
+func (x *RelativeSpecifier) RelativePosition() NSRelativePosition {
+	return NSRelativePosition(x.inner.RelativePosition())
 }
 
 // SetRelativePosition calls the underlying SetRelativePosition.
-func (x *RelativeSpecifier) SetRelativePosition(relativePosition raw.NSRelativePosition) {
-	x.inner.SetRelativePosition(relativePosition)
+func (x *RelativeSpecifier) SetRelativePosition(relativePosition NSRelativePosition) {
+	x.inner.SetRelativePosition(raw.NSRelativePosition(relativePosition))
 }
 
 // BaseSpecifier calls the underlying BaseSpecifier.
@@ -139,7 +139,7 @@ func (x *RelativeSpecifier) asObject() *raw.NSObject {
 // RelativeSpecifierable is the interface implemented by [RelativeSpecifier], for mocking and DI.
 type RelativeSpecifierable interface {
 	Unwrap() *raw.NSRelativeSpecifier
-	WithRelativePosition(relativePosition raw.NSRelativePosition) *RelativeSpecifier
+	WithRelativePosition(relativePosition NSRelativePosition) *RelativeSpecifier
 	WithBaseSpecifier(baseSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier
 	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier
 	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RelativeSpecifier
@@ -149,8 +149,8 @@ type RelativeSpecifierable interface {
 	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RelativeSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *RelativeSpecifier
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeSpecifier
-	RelativePosition() raw.NSRelativePosition
-	SetRelativePosition(relativePosition raw.NSRelativePosition)
+	RelativePosition() NSRelativePosition
+	SetRelativePosition(relativePosition NSRelativePosition)
 	BaseSpecifier() *ScriptObjectSpecifier
 	SetBaseSpecifier(baseSpecifier *raw.NSScriptObjectSpecifier)
 }

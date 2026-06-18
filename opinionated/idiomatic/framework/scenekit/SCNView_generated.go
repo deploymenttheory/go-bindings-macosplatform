@@ -77,8 +77,8 @@ func (x *View) WithDrawableResizesAsynchronously(drawableResizesAsynchronously b
 }
 
 // WithAntialiasingMode sets the antialiasingMode property and returns the receiver for chaining.
-func (x *View) WithAntialiasingMode(antialiasingMode raw.SCNAntialiasingMode) *View {
-	x.inner.SetAntialiasingMode(antialiasingMode)
+func (x *View) WithAntialiasingMode(antialiasingMode SCNAntialiasingMode) *View {
+	x.inner.SetAntialiasingMode(raw.SCNAntialiasingMode(antialiasingMode))
 	return x
 }
 
@@ -191,13 +191,13 @@ func (x *View) SetOpenGLContext(openGLContext unsafe.Pointer) {
 }
 
 // AntialiasingMode calls the underlying AntialiasingMode.
-func (x *View) AntialiasingMode() raw.SCNAntialiasingMode {
-	return x.inner.AntialiasingMode()
+func (x *View) AntialiasingMode() SCNAntialiasingMode {
+	return SCNAntialiasingMode(x.inner.AntialiasingMode())
 }
 
 // SetAntialiasingMode calls the underlying SetAntialiasingMode.
-func (x *View) SetAntialiasingMode(antialiasingMode raw.SCNAntialiasingMode) {
-	x.inner.SetAntialiasingMode(antialiasingMode)
+func (x *View) SetAntialiasingMode(antialiasingMode SCNAntialiasingMode) {
+	x.inner.SetAntialiasingMode(raw.SCNAntialiasingMode(antialiasingMode))
 }
 
 // PixelFormat calls the underlying PixelFormat.
@@ -219,7 +219,7 @@ type Viewable interface {
 	WithAllowsCameraControl(allowsCameraControl bool) *View
 	WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View
 	WithDrawableResizesAsynchronously(drawableResizesAsynchronously bool) *View
-	WithAntialiasingMode(antialiasingMode raw.SCNAntialiasingMode) *View
+	WithAntialiasingMode(antialiasingMode SCNAntialiasingMode) *View
 	Snapshot() *appkit.NSImage
 	Play(sender objc.ID)
 	Pause(sender objc.ID)
@@ -240,8 +240,8 @@ type Viewable interface {
 	SetDrawableResizesAsynchronously(drawableResizesAsynchronously bool)
 	OpenGLContext() unsafe.Pointer
 	SetOpenGLContext(openGLContext unsafe.Pointer)
-	AntialiasingMode() raw.SCNAntialiasingMode
-	SetAntialiasingMode(antialiasingMode raw.SCNAntialiasingMode)
+	AntialiasingMode() SCNAntialiasingMode
+	SetAntialiasingMode(antialiasingMode SCNAntialiasingMode)
 	PixelFormat() unsafe.Pointer
 	SetPixelFormat(pixelFormat unsafe.Pointer)
 }

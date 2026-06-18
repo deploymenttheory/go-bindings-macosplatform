@@ -63,8 +63,8 @@ func (x *MTREventReport) Priority() *foundation.NSNumber {
 }
 
 // EventTimeType calls the underlying EventTimeType.
-func (x *MTREventReport) EventTimeType() raw.MTREventTimeType {
-	return x.inner.EventTimeType()
+func (x *MTREventReport) EventTimeType() MTREventTimeType {
+	return MTREventTimeType(x.inner.EventTimeType())
 }
 
 // SystemUpTime calls the underlying SystemUpTime.
@@ -98,7 +98,7 @@ type MTREventReportable interface {
 	Path() *MTREventPath
 	EventNumber() *foundation.NSNumber
 	Priority() *foundation.NSNumber
-	EventTimeType() raw.MTREventTimeType
+	EventTimeType() MTREventTimeType
 	SystemUpTime() float64
 	TimestampDate() *foundation.NSDate
 	Value() objc.ID

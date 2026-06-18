@@ -139,8 +139,8 @@ func (x *GameActivity) SetProperties(properties *foundation.NSDictionary[*founda
 }
 
 // State calls the underlying State.
-func (x *GameActivity) State() raw.GKGameActivityState {
-	return x.inner.State()
+func (x *GameActivity) State() GKGameActivityState {
+	return GKGameActivityState(x.inner.State())
 }
 
 // PartyCode calls the underlying PartyCode.
@@ -271,7 +271,7 @@ type GameActivityable interface {
 	ActivityDefinition() *GameActivityDefinition
 	Properties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
 	SetProperties(properties *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
-	State() raw.GKGameActivityState
+	State() GKGameActivityState
 	PartyCode() string
 	PartyURL() *foundation.NSURL
 	CreationDate() *foundation.NSDate

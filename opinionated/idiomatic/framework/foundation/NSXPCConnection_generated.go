@@ -40,9 +40,9 @@ func NewXPCConnectionWithServiceName(serviceName string) *XPCConnection {
 }
 
 // NewXPCConnectionWithMachServiceNameOptions creates a new [XPCConnection].
-func NewXPCConnectionWithMachServiceNameOptions(name string, options raw.NSXPCConnectionOptions) *XPCConnection {
+func NewXPCConnectionWithMachServiceNameOptions(name string, options NSXPCConnectionOptions) *XPCConnection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachServiceName:options:"), foundation.NSStringStringWithUTF8String(name).Ptr(), options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachServiceName:options:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.NSXPCConnectionOptions(options))
 	return &XPCConnection{inner: raw.NSXPCConnectionFromID(_id)}
 }
 

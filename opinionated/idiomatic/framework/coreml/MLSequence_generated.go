@@ -38,8 +38,8 @@ func NewSequence() *Sequence {
 }
 
 // Type calls the underlying Type.
-func (x *Sequence) Type() raw.MLFeatureType {
-	return x.inner.Type()
+func (x *Sequence) Type() MLFeatureType {
+	return MLFeatureType(x.inner.Type())
 }
 
 // StringValues returns the collection as a Go slice.
@@ -67,7 +67,7 @@ func (x *Sequence) Int64Values() []*foundation.NSNumber {
 // Sequenceable is the interface implemented by [Sequence], for mocking and DI.
 type Sequenceable interface {
 	Unwrap() *raw.MLSequence
-	Type() raw.MLFeatureType
+	Type() MLFeatureType
 	StringValues() []string
 	Int64Values() []*foundation.NSNumber
 }

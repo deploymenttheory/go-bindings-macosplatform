@@ -38,8 +38,8 @@ func NewThumbnailRepresentation() *ThumbnailRepresentation {
 }
 
 // Type calls the underlying Type.
-func (x *ThumbnailRepresentation) Type() raw.QLThumbnailRepresentationType {
-	return x.inner.Type()
+func (x *ThumbnailRepresentation) Type() QLThumbnailRepresentationType {
+	return QLThumbnailRepresentationType(x.inner.Type())
 }
 
 // CGImage calls the underlying CGImage.
@@ -55,7 +55,7 @@ func (x *ThumbnailRepresentation) ContentRect() corefoundation.CGRect {
 // ThumbnailRepresentationable is the interface implemented by [ThumbnailRepresentation], for mocking and DI.
 type ThumbnailRepresentationable interface {
 	Unwrap() *raw.QLThumbnailRepresentation
-	Type() raw.QLThumbnailRepresentationType
+	Type() QLThumbnailRepresentationType
 	CGImage() unsafe.Pointer
 	ContentRect() corefoundation.CGRect
 }

@@ -459,8 +459,8 @@ func GeometryWithSourcesElementsSourceChannels(sources *foundation.NSArray[*raw.
 }
 
 // GeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex calls the underlying SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex.
-func GeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data *foundation.NSData, primitiveType raw.SCNGeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *GeometryElement {
-	_r := raw.SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data, primitiveType, primitiveCount, bytesPerIndex)
+func GeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data *foundation.NSData, primitiveType SCNGeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *GeometryElement {
+	_r := raw.SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data, raw.SCNGeometryPrimitiveType(primitiveType), primitiveCount, bytesPerIndex)
 	if _r == nil {
 		return nil
 	}
@@ -468,8 +468,8 @@ func GeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data *found
 }
 
 // GeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex calls the underlying SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex.
-func GeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(data *foundation.NSData, primitiveType raw.SCNGeometryPrimitiveType, primitiveCount int, indicesChannelCount int, interleavedIndicesChannels bool, bytesPerIndex int) *GeometryElement {
-	_r := raw.SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(data, primitiveType, primitiveCount, indicesChannelCount, interleavedIndicesChannels, bytesPerIndex)
+func GeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(data *foundation.NSData, primitiveType SCNGeometryPrimitiveType, primitiveCount int, indicesChannelCount int, interleavedIndicesChannels bool, bytesPerIndex int) *GeometryElement {
+	_r := raw.SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(data, raw.SCNGeometryPrimitiveType(primitiveType), primitiveCount, indicesChannelCount, interleavedIndicesChannels, bytesPerIndex)
 	if _r == nil {
 		return nil
 	}
@@ -477,8 +477,8 @@ func GeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterl
 }
 
 // GeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex calls the underlying SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex.
-func GeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex(buffer metal.MTLBuffer, primitiveType raw.SCNGeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *GeometryElement {
-	_r := raw.SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex(buffer, primitiveType, primitiveCount, bytesPerIndex)
+func GeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex(buffer metal.MTLBuffer, primitiveType SCNGeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *GeometryElement {
+	_r := raw.SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex(buffer, raw.SCNGeometryPrimitiveType(primitiveType), primitiveCount, bytesPerIndex)
 	if _r == nil {
 		return nil
 	}
@@ -486,8 +486,8 @@ func GeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex(buffer me
 }
 
 // GeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex calls the underlying SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex.
-func GeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(buffer metal.MTLBuffer, primitiveType raw.SCNGeometryPrimitiveType, primitiveCount int, indicesChannelCount int, interleavedIndicesChannels bool, bytesPerIndex int) *GeometryElement {
-	_r := raw.SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(buffer, primitiveType, primitiveCount, indicesChannelCount, interleavedIndicesChannels, bytesPerIndex)
+func GeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(buffer metal.MTLBuffer, primitiveType SCNGeometryPrimitiveType, primitiveCount int, indicesChannelCount int, interleavedIndicesChannels bool, bytesPerIndex int) *GeometryElement {
+	_r := raw.SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(buffer, raw.SCNGeometryPrimitiveType(primitiveType), primitiveCount, indicesChannelCount, interleavedIndicesChannels, bytesPerIndex)
 	if _r == nil {
 		return nil
 	}
@@ -738,8 +738,8 @@ func KinematicBody() *PhysicsBody {
 }
 
 // BodyWithTypeShape calls the underlying SCNPhysicsBodyBodyWithTypeShape.
-func BodyWithTypeShape(type_ raw.SCNPhysicsBodyType, shape *raw.SCNPhysicsShape) *PhysicsBody {
-	_r := raw.SCNPhysicsBodyBodyWithTypeShape(type_, shape)
+func BodyWithTypeShape(type_ SCNPhysicsBodyType, shape *raw.SCNPhysicsShape) *PhysicsBody {
+	_r := raw.SCNPhysicsBodyBodyWithTypeShape(raw.SCNPhysicsBodyType(type_), shape)
 	if _r == nil {
 		return nil
 	}
@@ -1119,8 +1119,8 @@ func TextWithStringExtrusionDepth(string_ objc.ID, extrusionDepth float64) *Text
 }
 
 // FunctionWithTimingMode calls the underlying SCNTimingFunctionFunctionWithTimingMode.
-func FunctionWithTimingMode(timingMode raw.SCNActionTimingMode) *TimingFunction {
-	_r := raw.SCNTimingFunctionFunctionWithTimingMode(timingMode)
+func FunctionWithTimingMode(timingMode SCNActionTimingMode) *TimingFunction {
+	_r := raw.SCNTimingFunctionFunctionWithTimingMode(raw.SCNActionTimingMode(timingMode))
 	if _r == nil {
 		return nil
 	}

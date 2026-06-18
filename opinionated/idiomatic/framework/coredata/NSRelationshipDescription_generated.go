@@ -61,8 +61,8 @@ func (x *RelationshipDescription) WithMinCount(minCount uint) *RelationshipDescr
 }
 
 // WithDeleteRule sets the deleteRule property and returns the receiver for chaining.
-func (x *RelationshipDescription) WithDeleteRule(deleteRule raw.NSDeleteRule) *RelationshipDescription {
-	x.inner.SetDeleteRule(deleteRule)
+func (x *RelationshipDescription) WithDeleteRule(deleteRule NSDeleteRule) *RelationshipDescription {
+	x.inner.SetDeleteRule(raw.NSDeleteRule(deleteRule))
 	return x
 }
 
@@ -175,13 +175,13 @@ func (x *RelationshipDescription) SetMinCount(minCount uint) {
 }
 
 // DeleteRule calls the underlying DeleteRule.
-func (x *RelationshipDescription) DeleteRule() raw.NSDeleteRule {
-	return x.inner.DeleteRule()
+func (x *RelationshipDescription) DeleteRule() NSDeleteRule {
+	return NSDeleteRule(x.inner.DeleteRule())
 }
 
 // SetDeleteRule calls the underlying SetDeleteRule.
-func (x *RelationshipDescription) SetDeleteRule(deleteRule raw.NSDeleteRule) {
-	x.inner.SetDeleteRule(deleteRule)
+func (x *RelationshipDescription) SetDeleteRule(deleteRule NSDeleteRule) {
+	x.inner.SetDeleteRule(raw.NSDeleteRule(deleteRule))
 }
 
 // IsToMany calls the underlying IsToMany.
@@ -210,7 +210,7 @@ type RelationshipDescriptionable interface {
 	WithInverseRelationship(inverseRelationship *RelationshipDescription) *RelationshipDescription
 	WithMaxCount(maxCount uint) *RelationshipDescription
 	WithMinCount(minCount uint) *RelationshipDescription
-	WithDeleteRule(deleteRule raw.NSDeleteRule) *RelationshipDescription
+	WithDeleteRule(deleteRule NSDeleteRule) *RelationshipDescription
 	WithOrdered(ordered bool) *RelationshipDescription
 	WithName(name string) *RelationshipDescription
 	WithOptional(optional bool) *RelationshipDescription
@@ -229,8 +229,8 @@ type RelationshipDescriptionable interface {
 	SetMaxCount(maxCount uint)
 	MinCount() uint
 	SetMinCount(minCount uint)
-	DeleteRule() raw.NSDeleteRule
-	SetDeleteRule(deleteRule raw.NSDeleteRule)
+	DeleteRule() NSDeleteRule
+	SetDeleteRule(deleteRule NSDeleteRule)
 	IsToMany() bool
 	IsOrdered() bool
 	SetOrdered(ordered bool)

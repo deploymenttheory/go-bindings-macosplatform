@@ -285,23 +285,23 @@ func JSObjectMakeRegExp(ctx unsafe.Pointer, argumentCount uint, arguments unsafe
 }
 
 // JSObjectMakeTypedArray calls [raw.JSObjectMakeTypedArray] (C function JSObjectMakeTypedArray).
-func JSObjectMakeTypedArray(ctx unsafe.Pointer, arrayType raw.JSTypedArrayType, length uint, exception unsafe.Pointer) unsafe.Pointer {
-	return raw.JSObjectMakeTypedArray(ctx, arrayType, length, exception)
+func JSObjectMakeTypedArray(ctx unsafe.Pointer, arrayType JSTypedArrayType, length uint, exception unsafe.Pointer) unsafe.Pointer {
+	return raw.JSObjectMakeTypedArray(ctx, raw.JSTypedArrayType(arrayType), length, exception)
 }
 
 // JSObjectMakeTypedArrayWithArrayBuffer calls [raw.JSObjectMakeTypedArrayWithArrayBuffer] (C function JSObjectMakeTypedArrayWithArrayBuffer).
-func JSObjectMakeTypedArrayWithArrayBuffer(ctx unsafe.Pointer, arrayType raw.JSTypedArrayType, buffer unsafe.Pointer, exception unsafe.Pointer) unsafe.Pointer {
-	return raw.JSObjectMakeTypedArrayWithArrayBuffer(ctx, arrayType, buffer, exception)
+func JSObjectMakeTypedArrayWithArrayBuffer(ctx unsafe.Pointer, arrayType JSTypedArrayType, buffer unsafe.Pointer, exception unsafe.Pointer) unsafe.Pointer {
+	return raw.JSObjectMakeTypedArrayWithArrayBuffer(ctx, raw.JSTypedArrayType(arrayType), buffer, exception)
 }
 
 // JSObjectMakeTypedArrayWithArrayBufferAndOffset calls [raw.JSObjectMakeTypedArrayWithArrayBufferAndOffset] (C function JSObjectMakeTypedArrayWithArrayBufferAndOffset).
-func JSObjectMakeTypedArrayWithArrayBufferAndOffset(ctx unsafe.Pointer, arrayType raw.JSTypedArrayType, buffer unsafe.Pointer, byteOffset uint, length uint, exception unsafe.Pointer) unsafe.Pointer {
-	return raw.JSObjectMakeTypedArrayWithArrayBufferAndOffset(ctx, arrayType, buffer, byteOffset, length, exception)
+func JSObjectMakeTypedArrayWithArrayBufferAndOffset(ctx unsafe.Pointer, arrayType JSTypedArrayType, buffer unsafe.Pointer, byteOffset uint, length uint, exception unsafe.Pointer) unsafe.Pointer {
+	return raw.JSObjectMakeTypedArrayWithArrayBufferAndOffset(ctx, raw.JSTypedArrayType(arrayType), buffer, byteOffset, length, exception)
 }
 
 // JSObjectMakeTypedArrayWithBytesNoCopy calls [raw.JSObjectMakeTypedArrayWithBytesNoCopy] (C function JSObjectMakeTypedArrayWithBytesNoCopy).
-func JSObjectMakeTypedArrayWithBytesNoCopy(ctx unsafe.Pointer, arrayType raw.JSTypedArrayType, bytes_ unsafe.Pointer, byteLength uint, bytesDeallocator unsafe.Pointer, deallocatorContext unsafe.Pointer, exception unsafe.Pointer) unsafe.Pointer {
-	return raw.JSObjectMakeTypedArrayWithBytesNoCopy(ctx, arrayType, bytes_, byteLength, bytesDeallocator, deallocatorContext, exception)
+func JSObjectMakeTypedArrayWithBytesNoCopy(ctx unsafe.Pointer, arrayType JSTypedArrayType, bytes_ unsafe.Pointer, byteLength uint, bytesDeallocator unsafe.Pointer, deallocatorContext unsafe.Pointer, exception unsafe.Pointer) unsafe.Pointer {
+	return raw.JSObjectMakeTypedArrayWithBytesNoCopy(ctx, raw.JSTypedArrayType(arrayType), bytes_, byteLength, bytesDeallocator, deallocatorContext, exception)
 }
 
 // JSObjectSetPrivate calls [raw.JSObjectSetPrivate] (C function JSObjectSetPrivate).
@@ -415,23 +415,23 @@ func JSStringRetain(string_ unsafe.Pointer) unsafe.Pointer {
 }
 
 // JSValueCompare calls [raw.JSValueCompare] (C function JSValueCompare).
-func JSValueCompare(ctx unsafe.Pointer, left unsafe.Pointer, right unsafe.Pointer, exception unsafe.Pointer) raw.JSRelationCondition {
-	return raw.JSValueCompare(ctx, left, right, exception)
+func JSValueCompare(ctx unsafe.Pointer, left unsafe.Pointer, right unsafe.Pointer, exception unsafe.Pointer) JSRelationCondition {
+	return JSRelationCondition(raw.JSValueCompare(ctx, left, right, exception))
 }
 
 // JSValueCompareDouble calls [raw.JSValueCompareDouble] (C function JSValueCompareDouble).
-func JSValueCompareDouble(ctx unsafe.Pointer, left unsafe.Pointer, right float64, exception unsafe.Pointer) raw.JSRelationCondition {
-	return raw.JSValueCompareDouble(ctx, left, right, exception)
+func JSValueCompareDouble(ctx unsafe.Pointer, left unsafe.Pointer, right float64, exception unsafe.Pointer) JSRelationCondition {
+	return JSRelationCondition(raw.JSValueCompareDouble(ctx, left, right, exception))
 }
 
 // JSValueCompareInt64 calls [raw.JSValueCompareInt64] (C function JSValueCompareInt64).
-func JSValueCompareInt64(ctx unsafe.Pointer, left unsafe.Pointer, right int64, exception unsafe.Pointer) raw.JSRelationCondition {
-	return raw.JSValueCompareInt64(ctx, left, right, exception)
+func JSValueCompareInt64(ctx unsafe.Pointer, left unsafe.Pointer, right int64, exception unsafe.Pointer) JSRelationCondition {
+	return JSRelationCondition(raw.JSValueCompareInt64(ctx, left, right, exception))
 }
 
 // JSValueCompareUInt64 calls [raw.JSValueCompareUInt64] (C function JSValueCompareUInt64).
-func JSValueCompareUInt64(ctx unsafe.Pointer, left unsafe.Pointer, right uint64, exception unsafe.Pointer) raw.JSRelationCondition {
-	return raw.JSValueCompareUInt64(ctx, left, right, exception)
+func JSValueCompareUInt64(ctx unsafe.Pointer, left unsafe.Pointer, right uint64, exception unsafe.Pointer) JSRelationCondition {
+	return JSRelationCondition(raw.JSValueCompareUInt64(ctx, left, right, exception))
 }
 
 // JSValueCreateJSONString calls [raw.JSValueCreateJSONString] (C function JSValueCreateJSONString).
@@ -440,13 +440,13 @@ func JSValueCreateJSONString(ctx unsafe.Pointer, value unsafe.Pointer, indent ui
 }
 
 // JSValueGetType calls [raw.JSValueGetType] (C function JSValueGetType).
-func JSValueGetType(ctx unsafe.Pointer, value unsafe.Pointer) raw.JSType {
-	return raw.JSValueGetType(ctx, value)
+func JSValueGetType(ctx unsafe.Pointer, value unsafe.Pointer) JSType {
+	return JSType(raw.JSValueGetType(ctx, value))
 }
 
 // JSValueGetTypedArrayType calls [raw.JSValueGetTypedArrayType] (C function JSValueGetTypedArrayType).
-func JSValueGetTypedArrayType(ctx unsafe.Pointer, value unsafe.Pointer, exception unsafe.Pointer) raw.JSTypedArrayType {
-	return raw.JSValueGetTypedArrayType(ctx, value, exception)
+func JSValueGetTypedArrayType(ctx unsafe.Pointer, value unsafe.Pointer, exception unsafe.Pointer) JSTypedArrayType {
+	return JSTypedArrayType(raw.JSValueGetTypedArrayType(ctx, value, exception))
 }
 
 // JSValueIsArray calls [raw.JSValueIsArray] (C function JSValueIsArray).

@@ -37,8 +37,8 @@ func NewProjectInfo() *ProjectInfo {
 }
 
 // CreationSource calls the underlying CreationSource.
-func (x *ProjectInfo) CreationSource() raw.PHProjectCreationSource {
-	return x.inner.CreationSource()
+func (x *ProjectInfo) CreationSource() PHProjectCreationSource {
+	return PHProjectCreationSource(x.inner.CreationSource())
 }
 
 // ProjectType calls the underlying ProjectType.
@@ -92,7 +92,7 @@ func (x *ProjectInfo) ThemeIdentifier() string {
 // ProjectInfoable is the interface implemented by [ProjectInfo], for mocking and DI.
 type ProjectInfoable interface {
 	Unwrap() *raw.PHProjectInfo
-	CreationSource() raw.PHProjectCreationSource
+	CreationSource() PHProjectCreationSource
 	ProjectType() string
 	Sections() []*ProjectSection
 	BrandingEnabled() bool

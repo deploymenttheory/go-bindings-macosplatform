@@ -95,8 +95,8 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingValues(items ...*fo
 }
 
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
-	x.inner.SetPaddingStyle(paddingStyle)
+func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
+	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	return x
 }
 
@@ -155,13 +155,13 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingValues(paddingValues
 }
 
 // PaddingStyle calls the underlying PaddingStyle.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) PaddingStyle() raw.MPSGraphPaddingStyle {
-	return x.inner.PaddingStyle()
+func (x *GraphDepthwiseConvolution3DOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
+	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
 }
 
 // SetPaddingStyle calls the underlying SetPaddingStyle.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) {
-	x.inner.SetPaddingStyle(paddingStyle)
+func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPaddingStyle) {
+	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 }
 
 // ChannelDimensionIndex calls the underlying ChannelDimensionIndex.
@@ -184,7 +184,7 @@ type GraphDepthwiseConvolution3DOpDescriptorable interface {
 	WithStrides(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor
 	WithDilationRates(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor
 	WithPaddingValues(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor
-	WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor
+	WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor
 	WithChannelDimensionIndex(channelDimensionIndex int) *GraphDepthwiseConvolution3DOpDescriptor
 	Strides() []*foundation.NSNumber
 	SetStrides(strides *foundation.NSArray[*foundation.NSNumber])
@@ -192,8 +192,8 @@ type GraphDepthwiseConvolution3DOpDescriptorable interface {
 	SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber])
 	PaddingValues() []*foundation.NSNumber
 	SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber])
-	PaddingStyle() raw.MPSGraphPaddingStyle
-	SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle)
+	PaddingStyle() MPSGraphPaddingStyle
+	SetPaddingStyle(paddingStyle MPSGraphPaddingStyle)
 	ChannelDimensionIndex() int
 	SetChannelDimensionIndex(channelDimensionIndex int)
 }

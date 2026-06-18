@@ -57,8 +57,8 @@ func (x *UMPCIProfile) ProfileID() unsafe.Pointer {
 }
 
 // ProfileType calls the underlying ProfileType.
-func (x *UMPCIProfile) ProfileType() raw.MIDICIProfileType {
-	return x.inner.ProfileType()
+func (x *UMPCIProfile) ProfileType() MIDICIProfileType {
+	return MIDICIProfileType(x.inner.ProfileType())
 }
 
 // GroupOffset calls the underlying GroupOffset.
@@ -92,7 +92,7 @@ type UMPCIProfileable interface {
 	SetProfileStateEnabledChannelCountError(isEnabled bool, enabledChannelCount uint16) (bool, error)
 	Name() string
 	ProfileID() unsafe.Pointer
-	ProfileType() raw.MIDICIProfileType
+	ProfileType() MIDICIProfileType
 	GroupOffset() uint8
 	FirstChannel() uint8
 	EnabledChannelCount() uint16

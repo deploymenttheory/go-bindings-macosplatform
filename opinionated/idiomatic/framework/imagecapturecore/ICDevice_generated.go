@@ -140,8 +140,8 @@ func (x *Device) SetDelegate(delegate raw.ICDeviceDelegate) {
 }
 
 // Type calls the underlying Type.
-func (x *Device) Type() raw.ICDeviceType {
-	return x.inner.Type()
+func (x *Device) Type() ICDeviceType {
+	return ICDeviceType(x.inner.Type())
 }
 
 // Capabilities returns the collection as a Go slice.
@@ -292,7 +292,7 @@ type Deviceable interface {
 	RequestYield()
 	Delegate() raw.ICDeviceDelegate
 	SetDelegate(delegate raw.ICDeviceDelegate)
-	Type() raw.ICDeviceType
+	Type() ICDeviceType
 	Capabilities() []string
 	Name() string
 	ProductKind() string

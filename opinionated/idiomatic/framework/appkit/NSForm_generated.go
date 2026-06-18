@@ -47,8 +47,8 @@ func (x *Form) WithPrototype(prototype CellProvider) *Form {
 }
 
 // WithMode sets the mode property and returns the receiver for chaining.
-func (x *Form) WithMode(mode raw.NSMatrixMode) *Form {
-	x.inner.NSMatrix.SetMode(mode)
+func (x *Form) WithMode(mode NSMatrixMode) *Form {
+	x.inner.NSMatrix.SetMode(raw.NSMatrixMode(mode))
 	return x
 }
 
@@ -191,8 +191,8 @@ func (x *Form) WithHighlighted(highlighted bool) *Form {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Form) WithControlSize(controlSize raw.NSControlSize) *Form {
-	x.inner.NSMatrix.NSControl.SetControlSize(controlSize)
+func (x *Form) WithControlSize(controlSize NSControlSize) *Form {
+	x.inner.NSMatrix.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -257,20 +257,20 @@ func (x *Form) WithUsesSingleLineMode(usesSingleLineMode bool) *Form {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Form) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Form {
-	x.inner.NSMatrix.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *Form) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Form {
+	x.inner.NSMatrix.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Form) WithAlignment(alignment raw.NSTextAlignment) *Form {
-	x.inner.NSMatrix.NSControl.SetAlignment(alignment)
+func (x *Form) WithAlignment(alignment NSTextAlignment) *Form {
+	x.inner.NSMatrix.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Form) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Form {
-	x.inner.NSMatrix.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *Form) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Form {
+	x.inner.NSMatrix.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -323,8 +323,8 @@ func (x *Form) WithAutoresizesSubviews(autoresizesSubviews bool) *Form {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Form) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Form) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -383,14 +383,14 @@ func (x *Form) WithWantsRestingTouches(wantsRestingTouches bool) *Form {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Form) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Form) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Form) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Form) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -497,8 +497,8 @@ func (x *Form) WithToolTip(toolTip string) *Form {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Form) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Form) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -515,8 +515,8 @@ func (x *Form) WithNextKeyView(nextKeyView ViewProvider) *Form {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Form) WithFocusRingType(focusRingType raw.NSFocusRingType) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *Form) WithFocusRingType(focusRingType NSFocusRingType) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -539,8 +539,8 @@ func (x *Form) WithGestureRecognizers(items ...GestureRecognizerProvider) *Form 
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Form) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Form {
-	x.inner.NSMatrix.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Form) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Form {
+	x.inner.NSMatrix.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -654,13 +654,13 @@ func (x *Form) SetBezeled(flag bool) {
 }
 
 // SetTitleAlignment calls the underlying SetTitleAlignment.
-func (x *Form) SetTitleAlignment(mode raw.NSTextAlignment) {
-	x.inner.SetTitleAlignment(mode)
+func (x *Form) SetTitleAlignment(mode NSTextAlignment) {
+	x.inner.SetTitleAlignment(raw.NSTextAlignment(mode))
 }
 
 // SetTextAlignment calls the underlying SetTextAlignment.
-func (x *Form) SetTextAlignment(mode raw.NSTextAlignment) {
-	x.inner.SetTextAlignment(mode)
+func (x *Form) SetTextAlignment(mode NSTextAlignment) {
+	x.inner.SetTextAlignment(raw.NSTextAlignment(mode))
 }
 
 // SetTitleFont calls the underlying SetTitleFont.
@@ -717,13 +717,13 @@ func (x *Form) SelectTextAtIndex(index int) {
 }
 
 // SetTitleBaseWritingDirection calls the underlying SetTitleBaseWritingDirection.
-func (x *Form) SetTitleBaseWritingDirection(writingDirection raw.NSWritingDirection) {
-	x.inner.SetTitleBaseWritingDirection(writingDirection)
+func (x *Form) SetTitleBaseWritingDirection(writingDirection NSWritingDirection) {
+	x.inner.SetTitleBaseWritingDirection(raw.NSWritingDirection(writingDirection))
 }
 
 // SetTextBaseWritingDirection calls the underlying SetTextBaseWritingDirection.
-func (x *Form) SetTextBaseWritingDirection(writingDirection raw.NSWritingDirection) {
-	x.inner.SetTextBaseWritingDirection(writingDirection)
+func (x *Form) SetTextBaseWritingDirection(writingDirection NSWritingDirection) {
+	x.inner.SetTextBaseWritingDirection(raw.NSWritingDirection(writingDirection))
 }
 
 // SetPreferredTextFieldWidth calls the underlying SetPreferredTextFieldWidth.
@@ -748,7 +748,7 @@ func (x *Form) asResponder() *raw.NSResponder { return &x.inner.NSMatrix.NSContr
 type Formable interface {
 	Unwrap() *raw.NSForm
 	WithPrototype(prototype CellProvider) *Form
-	WithMode(mode raw.NSMatrixMode) *Form
+	WithMode(mode NSMatrixMode) *Form
 	WithAllowsEmptySelection(allowsEmptySelection bool) *Form
 	WithSelectionByRect(selectionByRect bool) *Form
 	WithCellSize(cellSize corefoundation.CGSize) *Form
@@ -772,7 +772,7 @@ type Formable interface {
 	WithEnabled(enabled bool) *Form
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Form
 	WithHighlighted(highlighted bool) *Form
-	WithControlSize(controlSize raw.NSControlSize) *Form
+	WithControlSize(controlSize NSControlSize) *Form
 	WithFormatter(formatter *foundation.NSFormatter) *Form
 	WithObjectValue(objectValue objc.ID) *Form
 	WithStringValue(stringValue string) *Form
@@ -783,16 +783,16 @@ type Formable interface {
 	WithDoubleValue(doubleValue float64) *Form
 	WithFont(font *Font) *Form
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Form
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Form
-	WithAlignment(alignment raw.NSTextAlignment) *Form
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Form
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Form
+	WithAlignment(alignment NSTextAlignment) *Form
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Form
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Form
 	WithCell(cell CellProvider) *Form
 	WithSubviews(items ...ViewProvider) *Form
 	WithHidden(hidden bool) *Form
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Form
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Form
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Form
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Form
 	WithFrame(frame corefoundation.CGRect) *Form
 	WithFrameRotation(frameRotation float64) *Form
 	WithFrameCenterRotation(frameCenterRotation float64) *Form
@@ -802,8 +802,8 @@ type Formable interface {
 	WithNeedsDisplay(needsDisplay bool) *Form
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Form
 	WithWantsRestingTouches(wantsRestingTouches bool) *Form
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Form
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Form
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Form
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Form
 	WithWantsLayer(wantsLayer bool) *Form
 	WithLayer(layer *quartzcore.CALayer) *Form
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Form
@@ -817,12 +817,12 @@ type Formable interface {
 	WithClipsToBounds(clipsToBounds bool) *Form
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Form
 	WithToolTip(toolTip string) *Form
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Form
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Form
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Form
 	WithNextKeyView(nextKeyView ViewProvider) *Form
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Form
+	WithFocusRingType(focusRingType NSFocusRingType) *Form
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Form
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Form
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Form
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Form
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Form
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Form
@@ -842,8 +842,8 @@ type Formable interface {
 	SetInterlineSpacing(spacing float64)
 	SetBordered(flag bool)
 	SetBezeled(flag bool)
-	SetTitleAlignment(mode raw.NSTextAlignment)
-	SetTextAlignment(mode raw.NSTextAlignment)
+	SetTitleAlignment(mode NSTextAlignment)
+	SetTextAlignment(mode NSTextAlignment)
 	SetTitleFont(fontObj *raw.NSFont)
 	SetTextFont(fontObj *raw.NSFont)
 	CellAtIndex(index int) objc.ID
@@ -853,8 +853,8 @@ type Formable interface {
 	RemoveEntryAtIndex(index int)
 	IndexOfCellWithTag(tag int) int
 	SelectTextAtIndex(index int)
-	SetTitleBaseWritingDirection(writingDirection raw.NSWritingDirection)
-	SetTextBaseWritingDirection(writingDirection raw.NSWritingDirection)
+	SetTitleBaseWritingDirection(writingDirection NSWritingDirection)
+	SetTextBaseWritingDirection(writingDirection NSWritingDirection)
 	SetPreferredTextFieldWidth(preferredWidth float64)
 	PreferredTextFieldWidth() float64
 }

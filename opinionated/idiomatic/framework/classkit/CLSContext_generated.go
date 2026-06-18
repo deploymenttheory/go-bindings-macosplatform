@@ -34,9 +34,9 @@ func ContextFromID(id objc.ID) *Context {
 }
 
 // NewContextWithTypeIdentifierTitle creates a new [Context].
-func NewContextWithTypeIdentifierTitle(type_ raw.CLSContextType, identifier string, title string) *Context {
+func NewContextWithTypeIdentifierTitle(type_ CLSContextType, identifier string, title string) *Context {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSContext")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:identifier:title:"), type_, foundation.NSStringStringWithUTF8String(identifier).Ptr(), foundation.NSStringStringWithUTF8String(title).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:identifier:title:"), raw.CLSContextType(type_), foundation.NSStringStringWithUTF8String(identifier).Ptr(), foundation.NSStringStringWithUTF8String(title).Ptr())
 	return &Context{inner: raw.CLSContextFromID(_id)}
 }
 
@@ -47,8 +47,8 @@ func (x *Context) WithUniversalLinkURL(universalLinkURL string) *Context {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *Context) WithType(type_ raw.CLSContextType) *Context {
-	x.inner.SetType(type_)
+func (x *Context) WithType(type_ CLSContextType) *Context {
+	x.inner.SetType(raw.CLSContextType(type_))
 	return x
 }
 
@@ -111,8 +111,8 @@ func (x *Context) ResignActive() {
 }
 
 // SetType calls the underlying SetType.
-func (x *Context) SetType(type_ raw.CLSContextType) {
-	x.inner.SetType(type_)
+func (x *Context) SetType(type_ CLSContextType) {
+	x.inner.SetType(raw.CLSContextType(type_))
 }
 
 // AddProgressReportingCapabilities calls the underlying AddProgressReportingCapabilities.
@@ -156,8 +156,8 @@ func (x *Context) SetUniversalLinkURL(universalLinkURL string) {
 }
 
 // Type calls the underlying Type.
-func (x *Context) Type() raw.CLSContextType {
-	return x.inner.Type()
+func (x *Context) Type() CLSContextType {
+	return CLSContextType(x.inner.Type())
 }
 
 // CustomTypeName calls the underlying CustomTypeName.
@@ -366,7 +366,7 @@ func (x *Context) asObject() *raw.CLSObject { return &x.inner.CLSObject }
 type Contextable interface {
 	Unwrap() *raw.CLSContext
 	WithUniversalLinkURL(universalLinkURL string) *Context
-	WithType(type_ raw.CLSContextType) *Context
+	WithType(type_ CLSContextType) *Context
 	WithCustomTypeName(customTypeName string) *Context
 	WithTitle(title string) *Context
 	WithDisplayOrder(displayOrder int) *Context
@@ -377,14 +377,14 @@ type Contextable interface {
 	WithSummary(summary string) *Context
 	BecomeActive()
 	ResignActive()
-	SetType(type_ raw.CLSContextType)
+	SetType(type_ CLSContextType)
 	AddProgressReportingCapabilities(capabilities *foundation.NSSet[*raw.CLSProgressReportingCapability])
 	ResetProgressReportingCapabilities()
 	IdentifierPath() []string
 	Identifier() string
 	UniversalLinkURL() *foundation.NSURL
 	SetUniversalLinkURL(universalLinkURL string)
-	Type() raw.CLSContextType
+	Type() CLSContextType
 	CustomTypeName() string
 	SetCustomTypeName(customTypeName string)
 	Title() string

@@ -58,13 +58,13 @@ func (x *SpeechSynthesizer) WriteUtteranceToBufferCallbackToMarkerCallback(utter
 }
 
 // StopSpeakingAtBoundary calls the underlying StopSpeakingAtBoundary.
-func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary raw.AVSpeechBoundary) bool {
-	return x.inner.StopSpeakingAtBoundary(boundary)
+func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary AVSpeechBoundary) bool {
+	return x.inner.StopSpeakingAtBoundary(raw.AVSpeechBoundary(boundary))
 }
 
 // PauseSpeakingAtBoundary calls the underlying PauseSpeakingAtBoundary.
-func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary raw.AVSpeechBoundary) bool {
-	return x.inner.PauseSpeakingAtBoundary(boundary)
+func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary AVSpeechBoundary) bool {
+	return x.inner.PauseSpeakingAtBoundary(raw.AVSpeechBoundary(boundary))
 }
 
 // ContinueSpeaking calls the underlying ContinueSpeaking.
@@ -99,8 +99,8 @@ type SpeechSynthesizerable interface {
 	SpeakUtterance(utterance *raw.AVSpeechUtterance)
 	WriteUtteranceToBufferCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer))
 	WriteUtteranceToBufferCallbackToMarkerCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer), markerCallback func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker]))
-	StopSpeakingAtBoundary(boundary raw.AVSpeechBoundary) bool
-	PauseSpeakingAtBoundary(boundary raw.AVSpeechBoundary) bool
+	StopSpeakingAtBoundary(boundary AVSpeechBoundary) bool
+	PauseSpeakingAtBoundary(boundary AVSpeechBoundary) bool
 	ContinueSpeaking() bool
 	Delegate() raw.AVSpeechSynthesizerDelegate
 	SetDelegate(delegate raw.AVSpeechSynthesizerDelegate)

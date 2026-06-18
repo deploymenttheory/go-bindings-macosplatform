@@ -415,8 +415,13 @@ func Tcl_CreateInterp() *raw.Tcl_Interp {
 }
 
 // Tcl_CreateMathFunc calls [raw.Tcl_CreateMathFunc] (C function Tcl_CreateMathFunc).
-func Tcl_CreateMathFunc(interp *raw.Tcl_Interp, name string, numArgs int, argTypes *raw.Tcl_ValueType, proc unsafe.Pointer, clientData unsafe.Pointer) {
-	raw.Tcl_CreateMathFunc(interp, name, numArgs, argTypes, proc, clientData)
+func Tcl_CreateMathFunc(interp *raw.Tcl_Interp, name string, numArgs int, argTypes *Tcl_ValueType, proc unsafe.Pointer, clientData unsafe.Pointer) {
+	var _argTypes raw.Tcl_ValueType
+	raw.Tcl_CreateMathFunc(interp, name, numArgs, &_argTypes, proc, clientData)
+	if argTypes != nil {
+		*argTypes = Tcl_ValueType(_argTypes)
+	}
+
 }
 
 // Tcl_CreateNamespace calls [raw.Tcl_CreateNamespace] (C function Tcl_CreateNamespace).
@@ -995,8 +1000,8 @@ func Tcl_FSGetNormalizedPath(interp *raw.Tcl_Interp, pathPtr *raw.Tcl_Obj) *raw.
 }
 
 // Tcl_FSGetPathType calls [raw.Tcl_FSGetPathType] (C function Tcl_FSGetPathType).
-func Tcl_FSGetPathType(pathPtr *raw.Tcl_Obj) raw.Tcl_PathType {
-	return raw.Tcl_FSGetPathType(pathPtr)
+func Tcl_FSGetPathType(pathPtr *raw.Tcl_Obj) Tcl_PathType {
+	return Tcl_PathType(raw.Tcl_FSGetPathType(pathPtr))
 }
 
 // Tcl_FSGetTranslatedPath calls [raw.Tcl_FSGetTranslatedPath] (C function Tcl_FSGetTranslatedPath).
@@ -1450,8 +1455,13 @@ func Tcl_GetMaster(interp *raw.Tcl_Interp) *raw.Tcl_Interp {
 }
 
 // Tcl_GetMathFuncInfo calls [raw.Tcl_GetMathFuncInfo] (C function Tcl_GetMathFuncInfo).
-func Tcl_GetMathFuncInfo(interp *raw.Tcl_Interp, name string, numArgsPtr *int32, argTypesPtr *raw.Tcl_ValueType, procPtr unsafe.Pointer, clientDataPtr unsafe.Pointer) int {
-	return raw.Tcl_GetMathFuncInfo(interp, name, numArgsPtr, argTypesPtr, procPtr, clientDataPtr)
+func Tcl_GetMathFuncInfo(interp *raw.Tcl_Interp, name string, numArgsPtr *int32, argTypesPtr *Tcl_ValueType, procPtr unsafe.Pointer, clientDataPtr unsafe.Pointer) int {
+	var _argTypesPtr raw.Tcl_ValueType
+	_ret := raw.Tcl_GetMathFuncInfo(interp, name, numArgsPtr, &_argTypesPtr, procPtr, clientDataPtr)
+	if argTypesPtr != nil {
+		*argTypesPtr = Tcl_ValueType(_argTypesPtr)
+	}
+	return _ret
 }
 
 // Tcl_GetMemoryInfo calls [raw.Tcl_GetMemoryInfo] (C function Tcl_GetMemoryInfo).
@@ -1485,8 +1495,8 @@ func Tcl_GetOpenFile(interp *raw.Tcl_Interp, chanID string, forWriting int, chec
 }
 
 // Tcl_GetPathType calls [raw.Tcl_GetPathType] (C function Tcl_GetPathType).
-func Tcl_GetPathType(path string) raw.Tcl_PathType {
-	return raw.Tcl_GetPathType(path)
+func Tcl_GetPathType(path string) Tcl_PathType {
+	return Tcl_PathType(raw.Tcl_GetPathType(path))
 }
 
 // Tcl_GetRange calls [raw.Tcl_GetRange] (C function Tcl_GetRange).
@@ -2130,8 +2140,8 @@ func Tcl_QueryTimeProc(getProc unsafe.Pointer, scaleProc unsafe.Pointer, clientD
 }
 
 // Tcl_QueueEvent calls [raw.Tcl_QueueEvent] (C function Tcl_QueueEvent).
-func Tcl_QueueEvent(evPtr *raw.Tcl_Event, position raw.Tcl_QueuePosition) {
-	raw.Tcl_QueueEvent(evPtr, position)
+func Tcl_QueueEvent(evPtr *raw.Tcl_Event, position Tcl_QueuePosition) {
+	raw.Tcl_QueueEvent(evPtr, raw.Tcl_QueuePosition(position))
 }
 
 // Tcl_Read calls [raw.Tcl_Read] (C function Tcl_Read).
@@ -2600,8 +2610,8 @@ func Tcl_ThreadAlert(threadId unsafe.Pointer) {
 }
 
 // Tcl_ThreadQueueEvent calls [raw.Tcl_ThreadQueueEvent] (C function Tcl_ThreadQueueEvent).
-func Tcl_ThreadQueueEvent(threadId unsafe.Pointer, evPtr *raw.Tcl_Event, position raw.Tcl_QueuePosition) {
-	raw.Tcl_ThreadQueueEvent(threadId, evPtr, position)
+func Tcl_ThreadQueueEvent(threadId unsafe.Pointer, evPtr *raw.Tcl_Event, position Tcl_QueuePosition) {
+	raw.Tcl_ThreadQueueEvent(threadId, evPtr, raw.Tcl_QueuePosition(position))
 }
 
 // Tcl_TraceCommand calls [raw.Tcl_TraceCommand] (C function Tcl_TraceCommand).

@@ -62,8 +62,8 @@ func (x *Contact) Identifier() string {
 }
 
 // ContactType calls the underlying ContactType.
-func (x *Contact) ContactType() raw.CNContactType {
-	return x.inner.ContactType()
+func (x *Contact) ContactType() CNContactType {
+	return CNContactType(x.inner.ContactType())
 }
 
 // NamePrefix calls the underlying NamePrefix.
@@ -275,7 +275,7 @@ type Contactable interface {
 	AreKeysAvailable(keyDescriptors *foundation.NSArray[raw.CNKeyDescriptor]) bool
 	IsUnifiedWithContactWithIdentifier(contactIdentifier string) bool
 	Identifier() string
-	ContactType() raw.CNContactType
+	ContactType() CNContactType
 	NamePrefix() string
 	GivenName() string
 	MiddleName() string

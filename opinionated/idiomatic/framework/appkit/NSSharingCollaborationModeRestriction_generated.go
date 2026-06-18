@@ -34,36 +34,36 @@ func SharingCollaborationModeRestrictionFromID(id objc.ID) *SharingCollaboration
 }
 
 // NewSharingCollaborationModeRestrictionWithDisabledMode creates a new [SharingCollaborationModeRestriction].
-func NewSharingCollaborationModeRestrictionWithDisabledMode(disabledMode raw.NSSharingCollaborationMode) *SharingCollaborationModeRestriction {
+func NewSharingCollaborationModeRestrictionWithDisabledMode(disabledMode NSSharingCollaborationMode) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:"), disabledMode)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:"), raw.NSSharingCollaborationMode(disabledMode))
 	return &SharingCollaborationModeRestriction{inner: raw.NSSharingCollaborationModeRestrictionFromID(_id)}
 }
 
 // NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessage creates a new [SharingCollaborationModeRestriction].
-func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessage(disabledMode raw.NSSharingCollaborationMode, alertTitle string, alertMessage string) *SharingCollaborationModeRestriction {
+func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessage(disabledMode NSSharingCollaborationMode, alertTitle string, alertMessage string) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:alertTitle:alertMessage:"), disabledMode, foundation.NSStringStringWithUTF8String(alertTitle).Ptr(), foundation.NSStringStringWithUTF8String(alertMessage).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:alertTitle:alertMessage:"), raw.NSSharingCollaborationMode(disabledMode), foundation.NSStringStringWithUTF8String(alertTitle).Ptr(), foundation.NSStringStringWithUTF8String(alertMessage).Ptr())
 	return &SharingCollaborationModeRestriction{inner: raw.NSSharingCollaborationModeRestrictionFromID(_id)}
 }
 
 // NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitle creates a new [SharingCollaborationModeRestriction].
-func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitle(disabledMode raw.NSSharingCollaborationMode, alertTitle string, alertMessage string, alertDismissButtonTitle string) *SharingCollaborationModeRestriction {
+func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitle(disabledMode NSSharingCollaborationMode, alertTitle string, alertMessage string, alertDismissButtonTitle string) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:alertTitle:alertMessage:alertDismissButtonTitle:"), disabledMode, foundation.NSStringStringWithUTF8String(alertTitle).Ptr(), foundation.NSStringStringWithUTF8String(alertMessage).Ptr(), foundation.NSStringStringWithUTF8String(alertDismissButtonTitle).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:alertTitle:alertMessage:alertDismissButtonTitle:"), raw.NSSharingCollaborationMode(disabledMode), foundation.NSStringStringWithUTF8String(alertTitle).Ptr(), foundation.NSStringStringWithUTF8String(alertMessage).Ptr(), foundation.NSStringStringWithUTF8String(alertDismissButtonTitle).Ptr())
 	return &SharingCollaborationModeRestriction{inner: raw.NSSharingCollaborationModeRestrictionFromID(_id)}
 }
 
 // NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitleAlertRecoverySuggestionButtonTitleAlertRecoverySuggestionButtonLaunchURL creates a new [SharingCollaborationModeRestriction].
-func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitleAlertRecoverySuggestionButtonTitleAlertRecoverySuggestionButtonLaunchURL(disabledMode raw.NSSharingCollaborationMode, alertTitle string, alertMessage string, alertDismissButtonTitle string, alertRecoverySuggestionButtonTitle string, alertRecoverySuggestionButtonLaunchURL string) *SharingCollaborationModeRestriction {
+func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitleAlertRecoverySuggestionButtonTitleAlertRecoverySuggestionButtonLaunchURL(disabledMode NSSharingCollaborationMode, alertTitle string, alertMessage string, alertDismissButtonTitle string, alertRecoverySuggestionButtonTitle string, alertRecoverySuggestionButtonLaunchURL string) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:alertTitle:alertMessage:alertDismissButtonTitle:alertRecoverySuggestionButtonTitle:alertRecoverySuggestionButtonLaunchURL:"), disabledMode, foundation.NSStringStringWithUTF8String(alertTitle).Ptr(), foundation.NSStringStringWithUTF8String(alertMessage).Ptr(), foundation.NSStringStringWithUTF8String(alertDismissButtonTitle).Ptr(), foundation.NSStringStringWithUTF8String(alertRecoverySuggestionButtonTitle).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(alertRecoverySuggestionButtonLaunchURL)).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:alertTitle:alertMessage:alertDismissButtonTitle:alertRecoverySuggestionButtonTitle:alertRecoverySuggestionButtonLaunchURL:"), raw.NSSharingCollaborationMode(disabledMode), foundation.NSStringStringWithUTF8String(alertTitle).Ptr(), foundation.NSStringStringWithUTF8String(alertMessage).Ptr(), foundation.NSStringStringWithUTF8String(alertDismissButtonTitle).Ptr(), foundation.NSStringStringWithUTF8String(alertRecoverySuggestionButtonTitle).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(alertRecoverySuggestionButtonLaunchURL)).Ptr())
 	return &SharingCollaborationModeRestriction{inner: raw.NSSharingCollaborationModeRestrictionFromID(_id)}
 }
 
 // DisabledMode calls the underlying DisabledMode.
-func (x *SharingCollaborationModeRestriction) DisabledMode() raw.NSSharingCollaborationMode {
-	return x.inner.DisabledMode()
+func (x *SharingCollaborationModeRestriction) DisabledMode() NSSharingCollaborationMode {
+	return NSSharingCollaborationMode(x.inner.DisabledMode())
 }
 
 // AlertTitle calls the underlying AlertTitle.
@@ -110,7 +110,7 @@ func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonLaunc
 // SharingCollaborationModeRestrictionable is the interface implemented by [SharingCollaborationModeRestriction], for mocking and DI.
 type SharingCollaborationModeRestrictionable interface {
 	Unwrap() *raw.NSSharingCollaborationModeRestriction
-	DisabledMode() raw.NSSharingCollaborationMode
+	DisabledMode() NSSharingCollaborationMode
 	AlertTitle() string
 	AlertMessage() string
 	AlertDismissButtonTitle() string

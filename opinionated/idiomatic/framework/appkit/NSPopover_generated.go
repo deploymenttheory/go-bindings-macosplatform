@@ -57,8 +57,8 @@ func (x *Popover) WithAppearance(appearance *Appearance) *Popover {
 }
 
 // WithBehavior sets the behavior property and returns the receiver for chaining.
-func (x *Popover) WithBehavior(behavior raw.NSPopoverBehavior) *Popover {
-	x.inner.SetBehavior(behavior)
+func (x *Popover) WithBehavior(behavior NSPopoverBehavior) *Popover {
+	x.inner.SetBehavior(raw.NSPopoverBehavior(behavior))
 	return x
 }
 
@@ -170,13 +170,13 @@ func (x *Popover) EffectiveAppearance() *Appearance {
 }
 
 // Behavior calls the underlying Behavior.
-func (x *Popover) Behavior() raw.NSPopoverBehavior {
-	return x.inner.Behavior()
+func (x *Popover) Behavior() NSPopoverBehavior {
+	return NSPopoverBehavior(x.inner.Behavior())
 }
 
 // SetBehavior calls the underlying SetBehavior.
-func (x *Popover) SetBehavior(behavior raw.NSPopoverBehavior) {
-	x.inner.SetBehavior(behavior)
+func (x *Popover) SetBehavior(behavior NSPopoverBehavior) {
+	x.inner.SetBehavior(raw.NSPopoverBehavior(behavior))
 }
 
 // Animates calls the underlying Animates.
@@ -250,7 +250,7 @@ type Popoverable interface {
 	Unwrap() *raw.NSPopover
 	WithDelegate(delegate raw.NSPopoverDelegate) *Popover
 	WithAppearance(appearance *Appearance) *Popover
-	WithBehavior(behavior raw.NSPopoverBehavior) *Popover
+	WithBehavior(behavior NSPopoverBehavior) *Popover
 	WithAnimates(animates bool) *Popover
 	WithContentViewController(contentViewController ViewControllerProvider) *Popover
 	WithContentSize(contentSize corefoundation.CGSize) *Popover
@@ -269,8 +269,8 @@ type Popoverable interface {
 	Appearance() *Appearance
 	SetAppearance(appearance *raw.NSAppearance)
 	EffectiveAppearance() *Appearance
-	Behavior() raw.NSPopoverBehavior
-	SetBehavior(behavior raw.NSPopoverBehavior)
+	Behavior() NSPopoverBehavior
+	SetBehavior(behavior NSPopoverBehavior)
 	Animates() bool
 	SetAnimates(animates bool)
 	ContentViewController() *ViewController

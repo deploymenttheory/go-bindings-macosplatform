@@ -38,8 +38,8 @@ func NewSampleBufferRequestWithStartCursor(startCursor *raw.AVSampleCursor) *Sam
 }
 
 // WithDirection sets the direction property and returns the receiver for chaining.
-func (x *SampleBufferRequest) WithDirection(direction raw.AVSampleBufferRequestDirection) *SampleBufferRequest {
-	x.inner.SetDirection(direction)
+func (x *SampleBufferRequest) WithDirection(direction AVSampleBufferRequestDirection) *SampleBufferRequest {
+	x.inner.SetDirection(raw.AVSampleBufferRequestDirection(direction))
 	return x
 }
 
@@ -62,8 +62,8 @@ func (x *SampleBufferRequest) WithMaxSampleCount(maxSampleCount int) *SampleBuff
 }
 
 // WithMode sets the mode property and returns the receiver for chaining.
-func (x *SampleBufferRequest) WithMode(mode raw.AVSampleBufferRequestMode) *SampleBufferRequest {
-	x.inner.SetMode(mode)
+func (x *SampleBufferRequest) WithMode(mode AVSampleBufferRequestMode) *SampleBufferRequest {
+	x.inner.SetMode(raw.AVSampleBufferRequestMode(mode))
 	return x
 }
 
@@ -83,13 +83,13 @@ func (x *SampleBufferRequest) StartCursor() *SampleCursor {
 }
 
 // Direction calls the underlying Direction.
-func (x *SampleBufferRequest) Direction() raw.AVSampleBufferRequestDirection {
-	return x.inner.Direction()
+func (x *SampleBufferRequest) Direction() AVSampleBufferRequestDirection {
+	return AVSampleBufferRequestDirection(x.inner.Direction())
 }
 
 // SetDirection calls the underlying SetDirection.
-func (x *SampleBufferRequest) SetDirection(direction raw.AVSampleBufferRequestDirection) {
-	x.inner.SetDirection(direction)
+func (x *SampleBufferRequest) SetDirection(direction AVSampleBufferRequestDirection) {
+	x.inner.SetDirection(raw.AVSampleBufferRequestDirection(direction))
 }
 
 // LimitCursor calls the underlying LimitCursor.
@@ -127,13 +127,13 @@ func (x *SampleBufferRequest) SetMaxSampleCount(maxSampleCount int) {
 }
 
 // Mode calls the underlying Mode.
-func (x *SampleBufferRequest) Mode() raw.AVSampleBufferRequestMode {
-	return x.inner.Mode()
+func (x *SampleBufferRequest) Mode() AVSampleBufferRequestMode {
+	return AVSampleBufferRequestMode(x.inner.Mode())
 }
 
 // SetMode calls the underlying SetMode.
-func (x *SampleBufferRequest) SetMode(mode raw.AVSampleBufferRequestMode) {
-	x.inner.SetMode(mode)
+func (x *SampleBufferRequest) SetMode(mode AVSampleBufferRequestMode) {
+	x.inner.SetMode(raw.AVSampleBufferRequestMode(mode))
 }
 
 // OverrideTime calls the underlying OverrideTime.
@@ -149,23 +149,23 @@ func (x *SampleBufferRequest) SetOverrideTime(overrideTime coremedia.CMTime) {
 // SampleBufferRequestable is the interface implemented by [SampleBufferRequest], for mocking and DI.
 type SampleBufferRequestable interface {
 	Unwrap() *raw.AVSampleBufferRequest
-	WithDirection(direction raw.AVSampleBufferRequestDirection) *SampleBufferRequest
+	WithDirection(direction AVSampleBufferRequestDirection) *SampleBufferRequest
 	WithLimitCursor(limitCursor *SampleCursor) *SampleBufferRequest
 	WithPreferredMinSampleCount(preferredMinSampleCount int) *SampleBufferRequest
 	WithMaxSampleCount(maxSampleCount int) *SampleBufferRequest
-	WithMode(mode raw.AVSampleBufferRequestMode) *SampleBufferRequest
+	WithMode(mode AVSampleBufferRequestMode) *SampleBufferRequest
 	WithOverrideTime(overrideTime coremedia.CMTime) *SampleBufferRequest
 	StartCursor() *SampleCursor
-	Direction() raw.AVSampleBufferRequestDirection
-	SetDirection(direction raw.AVSampleBufferRequestDirection)
+	Direction() AVSampleBufferRequestDirection
+	SetDirection(direction AVSampleBufferRequestDirection)
 	LimitCursor() *SampleCursor
 	SetLimitCursor(limitCursor *raw.AVSampleCursor)
 	PreferredMinSampleCount() int
 	SetPreferredMinSampleCount(preferredMinSampleCount int)
 	MaxSampleCount() int
 	SetMaxSampleCount(maxSampleCount int)
-	Mode() raw.AVSampleBufferRequestMode
-	SetMode(mode raw.AVSampleBufferRequestMode)
+	Mode() AVSampleBufferRequestMode
+	SetMode(mode AVSampleBufferRequestMode)
 	OverrideTime() coremedia.CMTime
 	SetOverrideTime(overrideTime coremedia.CMTime)
 }

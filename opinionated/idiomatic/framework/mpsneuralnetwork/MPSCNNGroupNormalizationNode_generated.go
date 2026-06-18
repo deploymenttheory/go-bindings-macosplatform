@@ -38,8 +38,8 @@ func NewCNNGroupNormalizationNodeWithSourceDataSource(source *raw.MPSNNImageNode
 }
 
 // WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
-func (x *CNNGroupNormalizationNode) WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNGroupNormalizationNode {
-	x.inner.SetTrainingStyle(trainingStyle)
+func (x *CNNGroupNormalizationNode) WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNGroupNormalizationNode {
+	x.inner.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
 	return x
 }
 
@@ -56,13 +56,13 @@ func (x *CNNGroupNormalizationNode) WithLabel(label string) *CNNGroupNormalizati
 }
 
 // TrainingStyle calls the underlying TrainingStyle.
-func (x *CNNGroupNormalizationNode) TrainingStyle() raw.MPSNNTrainingStyle {
-	return x.inner.TrainingStyle()
+func (x *CNNGroupNormalizationNode) TrainingStyle() MPSNNTrainingStyle {
+	return MPSNNTrainingStyle(x.inner.TrainingStyle())
 }
 
 // SetTrainingStyle calls the underlying SetTrainingStyle.
-func (x *CNNGroupNormalizationNode) SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) {
-	x.inner.SetTrainingStyle(trainingStyle)
+func (x *CNNGroupNormalizationNode) SetTrainingStyle(trainingStyle MPSNNTrainingStyle) {
+	x.inner.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
 }
 
 func (x *CNNGroupNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode {
@@ -72,11 +72,11 @@ func (x *CNNGroupNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode {
 // CNNGroupNormalizationNodeable is the interface implemented by [CNNGroupNormalizationNode], for mocking and DI.
 type CNNGroupNormalizationNodeable interface {
 	Unwrap() *raw.MPSCNNGroupNormalizationNode
-	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNGroupNormalizationNode
+	WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNGroupNormalizationNode
 	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNGroupNormalizationNode
 	WithLabel(label string) *CNNGroupNormalizationNode
-	TrainingStyle() raw.MPSNNTrainingStyle
-	SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle)
+	TrainingStyle() MPSNNTrainingStyle
+	SetTrainingStyle(trainingStyle MPSNNTrainingStyle)
 }
 
 var _ CNNGroupNormalizationNodeable = (*CNNGroupNormalizationNode)(nil)

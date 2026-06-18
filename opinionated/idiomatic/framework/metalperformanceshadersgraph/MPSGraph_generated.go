@@ -41,8 +41,8 @@ func NewGraph() *Graph {
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *Graph) WithOptions(options raw.MPSGraphOptions) *Graph {
-	x.inner.SetOptions(options)
+func (x *Graph) WithOptions(options MPSGraphOptions) *Graph {
+	x.inner.SetOptions(raw.MPSGraphOptions(options))
 	return x
 }
 
@@ -96,13 +96,13 @@ func (x *Graph) EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecu
 }
 
 // Options calls the underlying Options.
-func (x *Graph) Options() raw.MPSGraphOptions {
-	return x.inner.Options()
+func (x *Graph) Options() MPSGraphOptions {
+	return MPSGraphOptions(x.inner.Options())
 }
 
 // SetOptions calls the underlying SetOptions.
-func (x *Graph) SetOptions(options raw.MPSGraphOptions) {
-	x.inner.SetOptions(options)
+func (x *Graph) SetOptions(options MPSGraphOptions) {
+	x.inner.SetOptions(raw.MPSGraphOptions(options))
 }
 
 // PlaceholderTensors returns the collection as a Go slice.
@@ -1403,8 +1403,8 @@ func (x *Graph) BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor *
 }
 
 // SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName calls the underlying SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName.
-func (x *Graph) SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType raw.MPSGraphLossReductionType, name string) *GraphTensor {
-	_r := x.inner.SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor, labelsTensor, axis, reductionType, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType MPSGraphLossReductionType, name string) *GraphTensor {
+	_r := x.inner.SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor, labelsTensor, axis, raw.MPSGraphLossReductionType(reductionType), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -1412,8 +1412,8 @@ func (x *Graph) SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionType
 }
 
 // SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName calls the underlying SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName.
-func (x *Graph) SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType raw.MPSGraphLossReductionType, name string) *GraphTensor {
-	_r := x.inner.SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor, sourceTensor, labelsTensor, axis, reductionType, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType MPSGraphLossReductionType, name string) *GraphTensor {
+	_r := x.inner.SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor, sourceTensor, labelsTensor, axis, raw.MPSGraphLossReductionType(reductionType), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -1574,8 +1574,8 @@ func (x *Graph) AssignVariableWithValueOfTensorName(variable *raw.MPSGraphTensor
 }
 
 // NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName calls the underlying NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName.
-func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode raw.MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
-	_r := x.inner.NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor, scoresTensor, iOUThreshold, scoreThreshold, perClassSuppression, coordinateMode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
+	_r := x.inner.NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor, scoresTensor, iOUThreshold, scoreThreshold, perClassSuppression, raw.MPSGraphNonMaximumSuppressionCoordinateMode(coordinateMode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -1583,8 +1583,8 @@ func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScor
 }
 
 // NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName calls the underlying NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName.
-func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, classIndicesTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode raw.MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
-	_r := x.inner.NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor, scoresTensor, classIndicesTensor, iOUThreshold, scoreThreshold, perClassSuppression, coordinateMode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, classIndicesTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor {
+	_r := x.inner.NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor, scoresTensor, classIndicesTensor, iOUThreshold, scoreThreshold, perClassSuppression, raw.MPSGraphNonMaximumSuppressionCoordinateMode(coordinateMode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2262,8 +2262,8 @@ func (x *Graph) ReductionOrWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *
 }
 
 // ResizeTensorSizeModeCenterResultAlignCornersLayoutName calls the underlying ResizeTensorSizeModeCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size unsafe.Pointer, mode raw.MPSGraphResizeMode, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor, size, mode, centerResult, alignCorners, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size unsafe.Pointer, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor, size, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2271,8 +2271,8 @@ func (x *Graph) ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTen
 }
 
 // ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName calls the underlying ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor, size, mode, centerResult, alignCorners, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor, size, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2280,8 +2280,8 @@ func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(ima
 }
 
 // ResizeTensorSizeTensorModeCenterResultAlignCornersName calls the underlying ResizeTensorSizeTensorModeCenterResultAlignCornersName.
-func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
-	_r := x.inner.ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor, size, mode, centerResult, alignCorners, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
+	_r := x.inner.ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor, size, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2289,8 +2289,8 @@ func (x *Graph) ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTen
 }
 
 // ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName calls the underlying ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor, size, nearestRoundingMode, centerResult, alignCorners, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor, size, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2298,8 +2298,8 @@ func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResult
 }
 
 // ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName calls the underlying ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName.
-func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor, size, nearestRoundingMode, centerResult, alignCorners, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, name string) *GraphTensor {
+	_r := x.inner.ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor, size, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), centerResult, alignCorners, foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2307,8 +2307,8 @@ func (x *Graph) ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResult
 }
 
 // ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName calls the underlying ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor, size, centerResult, alignCorners, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor, size, centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2325,8 +2325,8 @@ func (x *Graph) ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(i
 }
 
 // ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName calls the underlying ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName.
-func (x *Graph) ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor, size, scaleOffset, mode, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode MPSGraphResizeMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor, size, scaleOffset, raw.MPSGraphResizeMode(mode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2334,8 +2334,8 @@ func (x *Graph) ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTens
 }
 
 // ResizeTensorSizeTensorScaleTensorOffsetTensorModeName calls the underlying ResizeTensorSizeTensorScaleTensorOffsetTensorModeName.
-func (x *Graph) ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, name string) *GraphTensor {
-	_r := x.inner.ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor, size, scale, offset, mode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode MPSGraphResizeMode, name string) *GraphTensor {
+	_r := x.inner.ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor, size, scale, offset, raw.MPSGraphResizeMode(mode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2343,8 +2343,8 @@ func (x *Graph) ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTens
 }
 
 // ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName calls the underlying ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName.
-func (x *Graph) ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor, size, scaleOffset, nearestRoundingMode, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor, size, scaleOffset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2352,8 +2352,8 @@ func (x *Graph) ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundin
 }
 
 // ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName calls the underlying ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName.
-func (x *Graph) ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor, size, scale, offset, nearestRoundingMode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, name string) *GraphTensor {
+	_r := x.inner.ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor, size, scale, offset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2361,8 +2361,8 @@ func (x *Graph) ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestR
 }
 
 // ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName calls the underlying ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName.
-func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor, size, scaleOffset, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor, size, scaleOffset, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2379,8 +2379,8 @@ func (x *Graph) ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(im
 }
 
 // ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName calls the underlying ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient, input, mode, centerResult, alignCorners, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient, input, raw.MPSGraphResizeMode(mode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2388,8 +2388,8 @@ func (x *Graph) ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutN
 }
 
 // ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName calls the underlying ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient, input, nearestRoundingMode, centerResult, alignCorners, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient, input, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2397,8 +2397,8 @@ func (x *Graph) ResizeNearestWithGradientTensorInputNearestRoundingModeCenterRes
 }
 
 // ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName calls the underlying ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName.
-func (x *Graph) ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient, input, centerResult, alignCorners, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient, input, centerResult, alignCorners, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2406,8 +2406,8 @@ func (x *Graph) ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLay
 }
 
 // ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName calls the underlying ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName.
-func (x *Graph) ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient, input, scaleOffset, mode, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode MPSGraphResizeMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient, input, scaleOffset, raw.MPSGraphResizeMode(mode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2415,8 +2415,8 @@ func (x *Graph) ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gra
 }
 
 // ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName calls the underlying ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName.
-func (x *Graph) ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, name string) *GraphTensor {
-	_r := x.inner.ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient, input, scale, offset, mode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode MPSGraphResizeMode, name string) *GraphTensor {
+	_r := x.inner.ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient, input, scale, offset, raw.MPSGraphResizeMode(mode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2424,8 +2424,8 @@ func (x *Graph) ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gra
 }
 
 // ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName calls the underlying ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName.
-func (x *Graph) ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient, input, scaleOffset, nearestRoundingMode, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient, input, scaleOffset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2433,8 +2433,8 @@ func (x *Graph) ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoun
 }
 
 // ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName calls the underlying ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName.
-func (x *Graph) ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, name string) *GraphTensor {
-	_r := x.inner.ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient, input, scale, offset, nearestRoundingMode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, name string) *GraphTensor {
+	_r := x.inner.ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient, input, scale, offset, raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2442,8 +2442,8 @@ func (x *Graph) ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNeare
 }
 
 // ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName calls the underlying ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName.
-func (x *Graph) ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
-	_r := x.inner.ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient, input, scaleOffset, layout, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor {
+	_r := x.inner.ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient, input, scaleOffset, raw.MPSGraphTensorNamedDataLayout(layout), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2560,8 +2560,8 @@ func (x *Graph) GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateO
 }
 
 // SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName calls the underlying SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName.
-func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout raw.MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode raw.MPSGraphPaddingMode, samplingMode raw.MPSGraphResizeMode, constantValue float64, name string) *GraphTensor {
-	_r := x.inner.SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source, coordinates, layout, normalizeCoordinates, relativeCoordinates, alignCorners, paddingMode, samplingMode, constantValue, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode MPSGraphPaddingMode, samplingMode MPSGraphResizeMode, constantValue float64, name string) *GraphTensor {
+	_r := x.inner.SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source, coordinates, raw.MPSGraphTensorNamedDataLayout(layout), normalizeCoordinates, relativeCoordinates, alignCorners, raw.MPSGraphPaddingMode(paddingMode), raw.MPSGraphResizeMode(samplingMode), constantValue, foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2569,8 +2569,8 @@ func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordin
 }
 
 // SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName calls the underlying SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName.
-func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout raw.MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode raw.MPSGraphPaddingMode, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, constantValue float64, name string) *GraphTensor {
-	_r := x.inner.SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source, coordinates, layout, normalizeCoordinates, relativeCoordinates, alignCorners, paddingMode, nearestRoundingMode, constantValue, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode MPSGraphPaddingMode, nearestRoundingMode MPSGraphResizeNearestRoundingMode, constantValue float64, name string) *GraphTensor {
+	_r := x.inner.SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source, coordinates, raw.MPSGraphTensorNamedDataLayout(layout), normalizeCoordinates, relativeCoordinates, alignCorners, raw.MPSGraphPaddingMode(paddingMode), raw.MPSGraphResizeNearestRoundingMode(nearestRoundingMode), constantValue, foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2578,8 +2578,8 @@ func (x *Graph) SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordin
 }
 
 // ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName calls the underlying ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName.
-func (x *Graph) ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, mode raw.MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor, indicesTensor, shape, batchDimensions, mode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, mode MPSGraphScatterMode, name string) *GraphTensor {
+	_r := x.inner.ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor, indicesTensor, shape, batchDimensions, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2596,8 +2596,8 @@ func (x *Graph) ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName(
 }
 
 // ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName calls the underlying ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName.
-func (x *Graph) ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, batchDimensions uint, mode raw.MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor, updatesTensor, indicesTensor, batchDimensions, mode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, batchDimensions uint, mode MPSGraphScatterMode, name string) *GraphTensor {
+	_r := x.inner.ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor, updatesTensor, indicesTensor, batchDimensions, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2605,8 +2605,8 @@ func (x *Graph) ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensions
 }
 
 // ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName calls the underlying ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName.
-func (x *Graph) ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, axis int, mode raw.MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor, indicesTensor, shape, axis, mode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, axis int, mode MPSGraphScatterMode, name string) *GraphTensor {
+	_r := x.inner.ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor, indicesTensor, shape, axis, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2614,8 +2614,8 @@ func (x *Graph) ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTe
 }
 
 // ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName calls the underlying ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName.
-func (x *Graph) ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, axis int, mode raw.MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor, updatesTensor, indicesTensor, axis, mode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, axis int, mode MPSGraphScatterMode, name string) *GraphTensor {
+	_r := x.inner.ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor, updatesTensor, indicesTensor, axis, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2623,8 +2623,8 @@ func (x *Graph) ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(data
 }
 
 // ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName calls the underlying ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName.
-func (x *Graph) ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis int, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode raw.MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis, updatesTensor, indicesTensor, shape, mode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis int, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode MPSGraphScatterMode, name string) *GraphTensor {
+	_r := x.inner.ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis, updatesTensor, indicesTensor, shape, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2632,8 +2632,8 @@ func (x *Graph) ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis
 }
 
 // ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName calls the underlying ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName.
-func (x *Graph) ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode raw.MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor, updatesTensor, indicesTensor, shape, mode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode MPSGraphScatterMode, name string) *GraphTensor {
+	_r := x.inner.ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor, updatesTensor, indicesTensor, shape, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2641,8 +2641,8 @@ func (x *Graph) ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeNam
 }
 
 // ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName calls the underlying ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName.
-func (x *Graph) ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis int, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode raw.MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis, dataTensor, updatesTensor, indicesTensor, mode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis int, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode MPSGraphScatterMode, name string) *GraphTensor {
+	_r := x.inner.ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis, dataTensor, updatesTensor, indicesTensor, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2650,8 +2650,8 @@ func (x *Graph) ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName
 }
 
 // ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName calls the underlying ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName.
-func (x *Graph) ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor *raw.MPSGraphTensor, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode raw.MPSGraphScatterMode, name string) *GraphTensor {
-	_r := x.inner.ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor, dataTensor, updatesTensor, indicesTensor, mode, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor *raw.MPSGraphTensor, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode MPSGraphScatterMode, name string) *GraphTensor {
+	_r := x.inner.ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor, dataTensor, updatesTensor, indicesTensor, raw.MPSGraphScatterMode(mode), foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2731,8 +2731,8 @@ func (x *Graph) ArgSortWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axis
 }
 
 // SparseTensorWithTypeTensorsShapeDataTypeName calls the underlying SparseTensorWithTypeTensorsShapeDataTypeName.
-func (x *Graph) SparseTensorWithTypeTensorsShapeDataTypeName(sparseStorageType raw.MPSGraphSparseStorageType, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor {
-	_r := x.inner.SparseTensorWithTypeTensorsShapeDataTypeName(sparseStorageType, inputTensorArray, shape, dataType, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) SparseTensorWithTypeTensorsShapeDataTypeName(sparseStorageType MPSGraphSparseStorageType, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor {
+	_r := x.inner.SparseTensorWithTypeTensorsShapeDataTypeName(raw.MPSGraphSparseStorageType(sparseStorageType), inputTensorArray, shape, dataType, foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2956,8 +2956,8 @@ func (x *Graph) TileGradientWithIncomingGradientTensorSourceTensorWithMultiplier
 }
 
 // PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName calls the underlying PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName.
-func (x *Graph) PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor *raw.MPSGraphTensor, paddingMode raw.MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, constantValue float64, name string) *GraphTensor {
-	_r := x.inner.PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor, paddingMode, leftPadding, rightPadding, constantValue, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor *raw.MPSGraphTensor, paddingMode MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, constantValue float64, name string) *GraphTensor {
+	_r := x.inner.PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor, raw.MPSGraphPaddingMode(paddingMode), leftPadding, rightPadding, constantValue, foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -2965,8 +2965,8 @@ func (x *Graph) PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName
 }
 
 // PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName calls the underlying PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName.
-func (x *Graph) PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, paddingMode raw.MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, name string) *GraphTensor {
-	_r := x.inner.PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor, sourceTensor, paddingMode, leftPadding, rightPadding, foundation.NSStringStringWithUTF8String(name))
+func (x *Graph) PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, paddingMode MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, name string) *GraphTensor {
+	_r := x.inner.PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor, sourceTensor, raw.MPSGraphPaddingMode(paddingMode), leftPadding, rightPadding, foundation.NSStringStringWithUTF8String(name))
 	if _r == nil {
 		return nil
 	}
@@ -3347,7 +3347,7 @@ func (x *Graph) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphOb
 // Graphable is the interface implemented by [Graph], for mocking and DI.
 type Graphable interface {
 	Unwrap() *raw.MPSGraph
-	WithOptions(options raw.MPSGraphOptions) *Graph
+	WithOptions(options MPSGraphOptions) *Graph
 	CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDescriptor(device *raw.MPSGraphDevice, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], compilationDescriptor *raw.MPSGraphCompilationDescriptor) *GraphExecutable
 	RunWithFeedsTargetTensorsTargetOperations(feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation]) unsafe.Pointer
 	RunWithMTLCommandQueueFeedsTargetTensorsTargetOperations(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation]) unsafe.Pointer
@@ -3357,8 +3357,8 @@ type Graphable interface {
 	RunAsyncWithMTLCommandQueueFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandQueue metal.MTLCommandQueue, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *raw.MPSGraphExecutionDescriptor)
 	EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, feeds unsafe.Pointer, targetTensors *foundation.NSArray[*raw.MPSGraphTensor], targetOperations *foundation.NSArray[*raw.MPSGraphOperation], executionDescriptor *raw.MPSGraphExecutionDescriptor) unsafe.Pointer
 	EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, feeds unsafe.Pointer, targetOperations *foundation.NSArray[*raw.MPSGraphOperation], resultsDictionary unsafe.Pointer, executionDescriptor *raw.MPSGraphExecutionDescriptor)
-	Options() raw.MPSGraphOptions
-	SetOptions(options raw.MPSGraphOptions)
+	Options() MPSGraphOptions
+	SetOptions(options MPSGraphOptions)
 	PlaceholderTensors() []*GraphTensor
 	GradientForPrimaryTensorWithTensorsName(primaryTensor *raw.MPSGraphTensor, tensors *foundation.NSArray[*raw.MPSGraphTensor], name string) *foundation.NSDictionary[*raw.MPSGraphTensor, *raw.MPSGraphTensor]
 	ReLUWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
@@ -3506,8 +3506,8 @@ type Graphable interface {
 	ColToImWithSourceTensorOutputShapeDescriptorName(source *raw.MPSGraphTensor, outputShape unsafe.Pointer, descriptor *raw.MPSGraphImToColOpDescriptor, name string) *GraphTensor
 	BandPartWithTensorNumLowerNumUpperName(inputTensor *raw.MPSGraphTensor, numLower int, numUpper int, name string) *GraphTensor
 	BandPartWithTensorNumLowerTensorNumUpperTensorName(inputTensor *raw.MPSGraphTensor, numLowerTensor *raw.MPSGraphTensor, numUpperTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType raw.MPSGraphLossReductionType, name string) *GraphTensor
-	SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType raw.MPSGraphLossReductionType, name string) *GraphTensor
+	SoftMaxCrossEntropyWithSourceTensorLabelsTensorAxisReductionTypeName(sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType MPSGraphLossReductionType, name string) *GraphTensor
+	SoftMaxCrossEntropyGradientWithIncomingGradientTensorSourceTensorLabelsTensorAxisReductionTypeName(gradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, labelsTensor *raw.MPSGraphTensor, axis int, reductionType MPSGraphLossReductionType, name string) *GraphTensor
 	InverseOfTensorName(inputTensor *raw.MPSGraphTensor, name string) *GraphTensor
 	MatrixMultiplicationWithPrimaryTensorSecondaryTensorName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, name string) *GraphTensor
 	HammingDistanceWithPrimaryTensorSecondaryTensorResultDataTypeName(primaryTensor *raw.MPSGraphTensor, secondaryTensor *raw.MPSGraphTensor, resultDataType mpscore.MPSDataType, name string) *GraphTensor
@@ -3525,8 +3525,8 @@ type Graphable interface {
 	VariableFromTensorWithTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
 	ReadVariableName(variable *raw.MPSGraphTensor, name string) *GraphTensor
 	AssignVariableWithValueOfTensorName(variable *raw.MPSGraphTensor, tensor *raw.MPSGraphTensor, name string) *GraphOperation
-	NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode raw.MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor
-	NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, classIndicesTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode raw.MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor
+	NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor
+	NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *raw.MPSGraphTensor, scoresTensor *raw.MPSGraphTensor, classIndicesTensor *raw.MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name string) *GraphTensor
 	NonZeroIndicesOfTensorName(tensor *raw.MPSGraphTensor, name string) *GraphTensor
 	MeanOfTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
 	VarianceOfTensorMeanTensorAxesName(tensor *raw.MPSGraphTensor, meanTensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
@@ -3605,27 +3605,27 @@ type Graphable interface {
 	ReductionAndWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
 	ReductionOrWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
 	ReductionOrWithTensorAxesName(tensor *raw.MPSGraphTensor, axes *foundation.NSArray[*foundation.NSNumber], name string) *GraphTensor
-	ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size unsafe.Pointer, mode raw.MPSGraphResizeMode, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, centerResult bool, alignCorners bool, name string) *GraphTensor
-	ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, name string) *GraphTensor
-	ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeTensorSizeModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size unsafe.Pointer, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeTensorSizeTensorModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeTensorSizeTensorModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, name string) *GraphTensor
+	ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeNearestWithTensorSizeTensorNearestRoundingModeCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, name string) *GraphTensor
+	ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
 	ResizeBilinearWithTensorSizeTensorCenterResultAlignCornersName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, centerResult bool, alignCorners bool, name string) *GraphTensor
-	ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, name string) *GraphTensor
-	ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, name string) *GraphTensor
-	ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeTensorSizeTensorScaleOffsetTensorModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode MPSGraphResizeMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeTensorSizeTensorScaleTensorOffsetTensorModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode MPSGraphResizeMode, name string) *GraphTensor
+	ResizeNearestWithTensorSizeTensorScaleOffsetTensorNearestRoundingModeLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeNearestWithTensorSizeTensorScaleTensorOffsetTensorNearestRoundingModeName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, name string) *GraphTensor
+	ResizeBilinearWithTensorSizeTensorScaleOffsetTensorLayoutName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
 	ResizeBilinearWithTensorSizeTensorScaleTensorOffsetTensorName(imagesTensor *raw.MPSGraphTensor, size *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, name string) *GraphTensor
-	ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode raw.MPSGraphResizeMode, name string) *GraphTensor
-	ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
-	ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, name string) *GraphTensor
-	ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout raw.MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeWithGradientTensorInputModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, mode MPSGraphResizeMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeNearestWithGradientTensorInputNearestRoundingModeCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeBilinearWithGradientTensorInputCenterResultAlignCornersLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, centerResult bool, alignCorners bool, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeWithGradientTensorInputScaleOffsetTensorModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, mode MPSGraphResizeMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeWithGradientTensorInputScaleTensorOffsetTensorModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, mode MPSGraphResizeMode, name string) *GraphTensor
+	ResizeNearestWithGradientTensorInputScaleOffsetTensorNearestRoundingModeLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
+	ResizeNearestWithGradientTensorInputScaleTensorOffsetTensorNearestRoundingModeName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, nearestRoundingMode MPSGraphResizeNearestRoundingMode, name string) *GraphTensor
+	ResizeBilinearWithGradientTensorInputScaleOffsetTensorLayoutName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scaleOffset *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, name string) *GraphTensor
 	ResizeBilinearWithGradientTensorInputScaleTensorOffsetTensorName(gradient *raw.MPSGraphTensor, input *raw.MPSGraphTensor, scale *raw.MPSGraphTensor, offset *raw.MPSGraphTensor, name string) *GraphTensor
 	SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateMaskDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
 	SingleGateRNNWithSourceTensorRecurrentWeightInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphSingleGateRNNDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
@@ -3647,17 +3647,17 @@ type Graphable interface {
 	GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdStateGradientInputWeightBiasInitStateMaskSecondaryBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, stateGradient *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, mask *raw.MPSGraphTensor, secondaryBias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
 	GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasInitStateDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, initState *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
 	GRUGradientsWithSourceTensorRecurrentWeightSourceGradientZStateOutputFwdInputWeightBiasDescriptorName(source *raw.MPSGraphTensor, recurrentWeight *raw.MPSGraphTensor, sourceGradient *raw.MPSGraphTensor, zState *raw.MPSGraphTensor, outputFwd *raw.MPSGraphTensor, inputWeight *raw.MPSGraphTensor, bias *raw.MPSGraphTensor, descriptor *raw.MPSGraphGRUDescriptor, name string) *foundation.NSArray[*raw.MPSGraphTensor]
-	SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout raw.MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode raw.MPSGraphPaddingMode, samplingMode raw.MPSGraphResizeMode, constantValue float64, name string) *GraphTensor
-	SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout raw.MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode raw.MPSGraphPaddingMode, nearestRoundingMode raw.MPSGraphResizeNearestRoundingMode, constantValue float64, name string) *GraphTensor
-	ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, mode raw.MPSGraphScatterMode, name string) *GraphTensor
+	SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeSamplingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode MPSGraphPaddingMode, samplingMode MPSGraphResizeMode, constantValue float64, name string) *GraphTensor
+	SampleGridWithSourceTensorCoordinateTensorLayoutNormalizeCoordinatesRelativeCoordinatesAlignCornersPaddingModeNearestRoundingModeConstantValueName(source *raw.MPSGraphTensor, coordinates *raw.MPSGraphTensor, layout MPSGraphTensorNamedDataLayout, normalizeCoordinates bool, relativeCoordinates bool, alignCorners bool, paddingMode MPSGraphPaddingMode, nearestRoundingMode MPSGraphResizeNearestRoundingMode, constantValue float64, name string) *GraphTensor
+	ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, mode MPSGraphScatterMode, name string) *GraphTensor
 	ScatterNDWithUpdatesTensorIndicesTensorShapeBatchDimensionsName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, batchDimensions uint, name string) *GraphTensor
-	ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, batchDimensions uint, mode raw.MPSGraphScatterMode, name string) *GraphTensor
-	ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, axis int, mode raw.MPSGraphScatterMode, name string) *GraphTensor
-	ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, axis int, mode raw.MPSGraphScatterMode, name string) *GraphTensor
-	ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis int, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode raw.MPSGraphScatterMode, name string) *GraphTensor
-	ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode raw.MPSGraphScatterMode, name string) *GraphTensor
-	ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis int, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode raw.MPSGraphScatterMode, name string) *GraphTensor
-	ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor *raw.MPSGraphTensor, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode raw.MPSGraphScatterMode, name string) *GraphTensor
+	ScatterNDWithDataTensorUpdatesTensorIndicesTensorBatchDimensionsModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, batchDimensions uint, mode MPSGraphScatterMode, name string) *GraphTensor
+	ScatterWithUpdatesTensorIndicesTensorShapeAxisModeName(updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, axis int, mode MPSGraphScatterMode, name string) *GraphTensor
+	ScatterWithDataTensorUpdatesTensorIndicesTensorAxisModeName(dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, axis int, mode MPSGraphScatterMode, name string) *GraphTensor
+	ScatterAlongAxisWithUpdatesTensorIndicesTensorShapeModeName(axis int, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode MPSGraphScatterMode, name string) *GraphTensor
+	ScatterAlongAxisTensorWithUpdatesTensorIndicesTensorShapeModeName(axisTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, shape unsafe.Pointer, mode MPSGraphScatterMode, name string) *GraphTensor
+	ScatterAlongAxisWithDataTensorUpdatesTensorIndicesTensorModeName(axis int, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode MPSGraphScatterMode, name string) *GraphTensor
+	ScatterAlongAxisTensorWithDataTensorUpdatesTensorIndicesTensorModeName(axisTensor *raw.MPSGraphTensor, dataTensor *raw.MPSGraphTensor, updatesTensor *raw.MPSGraphTensor, indicesTensor *raw.MPSGraphTensor, mode MPSGraphScatterMode, name string) *GraphTensor
 	SortWithTensorAxisDescendingName(tensor *raw.MPSGraphTensor, axis int, descending bool, name string) *GraphTensor
 	SortWithTensorAxisTensorDescendingName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, descending bool, name string) *GraphTensor
 	SortWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
@@ -3666,7 +3666,7 @@ type Graphable interface {
 	ArgSortWithTensorAxisTensorDescendingName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, descending bool, name string) *GraphTensor
 	ArgSortWithTensorAxisName(tensor *raw.MPSGraphTensor, axis int, name string) *GraphTensor
 	ArgSortWithTensorAxisTensorName(tensor *raw.MPSGraphTensor, axisTensor *raw.MPSGraphTensor, name string) *GraphTensor
-	SparseTensorWithTypeTensorsShapeDataTypeName(sparseStorageType raw.MPSGraphSparseStorageType, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor
+	SparseTensorWithTypeTensorsShapeDataTypeName(sparseStorageType MPSGraphSparseStorageType, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, dataType mpscore.MPSDataType, name string) *GraphTensor
 	SparseTensorWithDescriptorTensorsShapeName(sparseDescriptor *raw.MPSGraphCreateSparseOpDescriptor, inputTensorArray *foundation.NSArray[*raw.MPSGraphTensor], shape unsafe.Pointer, name string) *GraphTensor
 	StencilWithSourceTensorWeightsTensorDescriptorName(source *raw.MPSGraphTensor, weights *raw.MPSGraphTensor, descriptor *raw.MPSGraphStencilOpDescriptor, name string) *GraphTensor
 	ReshapeTensorWithShapeName(tensor *raw.MPSGraphTensor, shape unsafe.Pointer, name string) *GraphTensor
@@ -3691,8 +3691,8 @@ type Graphable interface {
 	ConcatTensorsDimensionInterleaveName(tensors *foundation.NSArray[*raw.MPSGraphTensor], dimensionIndex int, interleave bool, name string) *GraphTensor
 	TileTensorWithMultiplierName(tensor *raw.MPSGraphTensor, multiplier unsafe.Pointer, name string) *GraphTensor
 	TileGradientWithIncomingGradientTensorSourceTensorWithMultiplierName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, multiplier unsafe.Pointer, name string) *GraphTensor
-	PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor *raw.MPSGraphTensor, paddingMode raw.MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, constantValue float64, name string) *GraphTensor
-	PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, paddingMode raw.MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, name string) *GraphTensor
+	PadTensorWithPaddingModeLeftPaddingRightPaddingConstantValueName(tensor *raw.MPSGraphTensor, paddingMode MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, constantValue float64, name string) *GraphTensor
+	PadGradientWithIncomingGradientTensorSourceTensorPaddingModeLeftPaddingRightPaddingName(incomingGradientTensor *raw.MPSGraphTensor, sourceTensor *raw.MPSGraphTensor, paddingMode MPSGraphPaddingMode, leftPadding unsafe.Pointer, rightPadding unsafe.Pointer, name string) *GraphTensor
 	SpaceToDepth2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxis uint, heightAxis uint, depthAxis uint, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor
 	SpaceToDepth2DTensorWidthAxisTensorHeightAxisTensorDepthAxisTensorBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxisTensor *raw.MPSGraphTensor, heightAxisTensor *raw.MPSGraphTensor, depthAxisTensor *raw.MPSGraphTensor, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor
 	DepthToSpace2DTensorWidthAxisHeightAxisDepthAxisBlockSizeUsePixelShuffleOrderName(tensor *raw.MPSGraphTensor, widthAxis uint, heightAxis uint, depthAxis uint, blockSize uint, usePixelShuffleOrder bool, name string) *GraphTensor

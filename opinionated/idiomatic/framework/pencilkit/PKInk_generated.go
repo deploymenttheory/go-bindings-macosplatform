@@ -54,8 +54,8 @@ func (x *Ink) Color() *appkit.NSColor {
 }
 
 // RequiredContentVersion calls the underlying RequiredContentVersion.
-func (x *Ink) RequiredContentVersion() raw.PKContentVersion {
-	return x.inner.RequiredContentVersion()
+func (x *Ink) RequiredContentVersion() PKContentVersion {
+	return PKContentVersion(x.inner.RequiredContentVersion())
 }
 
 // Inkable is the interface implemented by [Ink], for mocking and DI.
@@ -63,7 +63,7 @@ type Inkable interface {
 	Unwrap() *raw.PKInk
 	InkType() string
 	Color() *appkit.NSColor
-	RequiredContentVersion() raw.PKContentVersion
+	RequiredContentVersion() PKContentVersion
 }
 
 var _ Inkable = (*Ink)(nil)

@@ -97,8 +97,8 @@ func (x *SensitivityAnalyzer) AnalyzeVideoFileCompletionHandler(fileURL string, 
 }
 
 // AnalysisPolicy calls the underlying AnalysisPolicy.
-func (x *SensitivityAnalyzer) AnalysisPolicy() raw.SCSensitivityAnalysisPolicy {
-	return x.inner.AnalysisPolicy()
+func (x *SensitivityAnalyzer) AnalysisPolicy() SCSensitivityAnalysisPolicy {
+	return SCSensitivityAnalysisPolicy(x.inner.AnalysisPolicy())
 }
 
 // SensitivityAnalyzerable is the interface implemented by [SensitivityAnalyzer], for mocking and DI.
@@ -107,7 +107,7 @@ type SensitivityAnalyzerable interface {
 	AnalyzeImageFile(ctx context.Context, fileURL string) (*SensitivityAnalysis, error)
 	AnalyzeCGImage(ctx context.Context, image unsafe.Pointer) (*SensitivityAnalysis, error)
 	AnalyzeVideoFileCompletionHandler(fileURL string, completionHandler func(*raw.SCSensitivityAnalysis, unsafe.Pointer)) *foundation.NSProgress
-	AnalysisPolicy() raw.SCSensitivityAnalysisPolicy
+	AnalysisPolicy() SCSensitivityAnalysisPolicy
 }
 
 var _ SensitivityAnalyzerable = (*SensitivityAnalyzer)(nil)

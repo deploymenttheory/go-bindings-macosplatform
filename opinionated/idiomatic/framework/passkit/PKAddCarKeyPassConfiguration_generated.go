@@ -44,8 +44,8 @@ func (x *AddCarKeyPassConfiguration) WithPassword(password string) *AddCarKeyPas
 }
 
 // WithSupportedRadioTechnologies sets the supportedRadioTechnologies property and returns the receiver for chaining.
-func (x *AddCarKeyPassConfiguration) WithSupportedRadioTechnologies(supportedRadioTechnologies raw.PKRadioTechnology) *AddCarKeyPassConfiguration {
-	x.inner.SetSupportedRadioTechnologies(supportedRadioTechnologies)
+func (x *AddCarKeyPassConfiguration) WithSupportedRadioTechnologies(supportedRadioTechnologies PKRadioTechnology) *AddCarKeyPassConfiguration {
+	x.inner.SetSupportedRadioTechnologies(raw.PKRadioTechnology(supportedRadioTechnologies))
 	return x
 }
 
@@ -94,13 +94,13 @@ func (x *AddCarKeyPassConfiguration) SetPassword(password string) {
 }
 
 // SupportedRadioTechnologies calls the underlying SupportedRadioTechnologies.
-func (x *AddCarKeyPassConfiguration) SupportedRadioTechnologies() raw.PKRadioTechnology {
-	return x.inner.SupportedRadioTechnologies()
+func (x *AddCarKeyPassConfiguration) SupportedRadioTechnologies() PKRadioTechnology {
+	return PKRadioTechnology(x.inner.SupportedRadioTechnologies())
 }
 
 // SetSupportedRadioTechnologies calls the underlying SetSupportedRadioTechnologies.
-func (x *AddCarKeyPassConfiguration) SetSupportedRadioTechnologies(supportedRadioTechnologies raw.PKRadioTechnology) {
-	x.inner.SetSupportedRadioTechnologies(supportedRadioTechnologies)
+func (x *AddCarKeyPassConfiguration) SetSupportedRadioTechnologies(supportedRadioTechnologies PKRadioTechnology) {
+	x.inner.SetSupportedRadioTechnologies(raw.PKRadioTechnology(supportedRadioTechnologies))
 }
 
 // ManufacturerIdentifier calls the underlying ManufacturerIdentifier.
@@ -153,7 +153,7 @@ func (x *AddCarKeyPassConfiguration) asAddSecureElementPassConfiguration() *raw.
 type AddCarKeyPassConfigurationable interface {
 	Unwrap() *raw.PKAddCarKeyPassConfiguration
 	WithPassword(password string) *AddCarKeyPassConfiguration
-	WithSupportedRadioTechnologies(supportedRadioTechnologies raw.PKRadioTechnology) *AddCarKeyPassConfiguration
+	WithSupportedRadioTechnologies(supportedRadioTechnologies PKRadioTechnology) *AddCarKeyPassConfiguration
 	WithManufacturerIdentifier(manufacturerIdentifier string) *AddCarKeyPassConfiguration
 	WithProvisioningTemplateIdentifier(provisioningTemplateIdentifier string) *AddCarKeyPassConfiguration
 	WithProductPlanIdentifier(productPlanIdentifier string) *AddCarKeyPassConfiguration
@@ -161,8 +161,8 @@ type AddCarKeyPassConfigurationable interface {
 	WithLocalizedDescription(localizedDescription string) *AddCarKeyPassConfiguration
 	Password() string
 	SetPassword(password string)
-	SupportedRadioTechnologies() raw.PKRadioTechnology
-	SetSupportedRadioTechnologies(supportedRadioTechnologies raw.PKRadioTechnology)
+	SupportedRadioTechnologies() PKRadioTechnology
+	SetSupportedRadioTechnologies(supportedRadioTechnologies PKRadioTechnology)
 	ManufacturerIdentifier() string
 	SetManufacturerIdentifier(manufacturerIdentifier string)
 	ProvisioningTemplateIdentifier() string

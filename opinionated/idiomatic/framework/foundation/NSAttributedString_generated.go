@@ -87,30 +87,30 @@ func NewAttributedStringWithMarkdownStringOptionsBaseURLError(markdownString str
 }
 
 // NewAttributedStringWithFormatOptionsLocale creates a new [AttributedString].
-func NewAttributedStringWithFormatOptionsLocale(format *raw.NSAttributedString, options raw.NSAttributedStringFormattingOptions, locale *raw.NSLocale) *AttributedString {
+func NewAttributedStringWithFormatOptionsLocale(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:"), format.Ptr(), options, locale.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr())
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
 // NewAttributedStringWithFormatOptionsLocaleArguments creates a new [AttributedString].
-func NewAttributedStringWithFormatOptionsLocaleArguments(format *raw.NSAttributedString, options raw.NSAttributedStringFormattingOptions, locale *raw.NSLocale, arguments string) *AttributedString {
+func NewAttributedStringWithFormatOptionsLocaleArguments(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, arguments string) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:arguments:"), format.Ptr(), options, locale.Ptr(), arguments)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:arguments:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr(), arguments)
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
 // NewAttributedStringWithFormatOptionsLocaleContext creates a new [AttributedString].
-func NewAttributedStringWithFormatOptionsLocaleContext(format *raw.NSAttributedString, options raw.NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
+func NewAttributedStringWithFormatOptionsLocaleContext(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:"), format.Ptr(), options, locale.Ptr(), context_.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr(), context_.Ptr())
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
 // NewAttributedStringWithFormatOptionsLocaleContextArguments creates a new [AttributedString].
-func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *raw.NSAttributedString, options raw.NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ *raw.NSDictionary[*raw.NSString, objc.ID], arguments string) *AttributedString {
+func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ *raw.NSDictionary[*raw.NSString, objc.ID], arguments string) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:arguments:"), format.Ptr(), options, locale.Ptr(), context_.Ptr(), arguments)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:arguments:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr(), context_.Ptr(), arguments)
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
@@ -164,13 +164,13 @@ func (x *AttributedString) IsEqualToAttributedString(other *raw.NSAttributedStri
 }
 
 // EnumerateAttributesInRangeOptionsUsing calls the underlying EnumerateAttributesInRangeOptionsUsing.
-func (x *AttributedString) EnumerateAttributesInRangeOptionsUsing(enumerationRange raw.NSRange, opts raw.NSAttributedStringEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateAttributesInRangeOptionsUsing(enumerationRange, opts, block)
+func (x *AttributedString) EnumerateAttributesInRangeOptionsUsing(enumerationRange raw.NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateAttributesInRangeOptionsUsing(enumerationRange, raw.NSAttributedStringEnumerationOptions(opts), block)
 }
 
 // EnumerateAttributeInRangeOptionsUsing calls the underlying EnumerateAttributeInRangeOptionsUsing.
-func (x *AttributedString) EnumerateAttributeInRangeOptionsUsing(attrName *raw.NSString, enumerationRange raw.NSRange, opts raw.NSAttributedStringEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateAttributeInRangeOptionsUsing(attrName, enumerationRange, opts, block)
+func (x *AttributedString) EnumerateAttributeInRangeOptionsUsing(attrName *raw.NSString, enumerationRange raw.NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateAttributeInRangeOptionsUsing(attrName, enumerationRange, raw.NSAttributedStringEnumerationOptions(opts), block)
 }
 
 // Length calls the underlying Length.
@@ -202,8 +202,8 @@ type AttributedStringable interface {
 	AttributesAtIndexLongestEffectiveRangeInRange(location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID]
 	AttributeAtIndexLongestEffectiveRangeInRange(attrName *raw.NSString, location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) objc.ID
 	IsEqualToAttributedString(other *raw.NSAttributedString) bool
-	EnumerateAttributesInRangeOptionsUsing(enumerationRange raw.NSRange, opts raw.NSAttributedStringEnumerationOptions, block objc.Block)
-	EnumerateAttributeInRangeOptionsUsing(attrName *raw.NSString, enumerationRange raw.NSRange, opts raw.NSAttributedStringEnumerationOptions, block objc.Block)
+	EnumerateAttributesInRangeOptionsUsing(enumerationRange raw.NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block)
+	EnumerateAttributeInRangeOptionsUsing(attrName *raw.NSString, enumerationRange raw.NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block)
 	Length() uint
 	AttributedStringByInflectingString() *AttributedString
 }

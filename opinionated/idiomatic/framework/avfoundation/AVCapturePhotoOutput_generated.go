@@ -39,8 +39,8 @@ func NewCapturePhotoOutput() *CapturePhotoOutput {
 }
 
 // WithMaxPhotoQualityPrioritization sets the maxPhotoQualityPrioritization property and returns the receiver for chaining.
-func (x *CapturePhotoOutput) WithMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization raw.AVCapturePhotoQualityPrioritization) *CapturePhotoOutput {
-	x.inner.SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization)
+func (x *CapturePhotoOutput) WithMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization AVCapturePhotoQualityPrioritization) *CapturePhotoOutput {
+	x.inner.SetMaxPhotoQualityPrioritization(raw.AVCapturePhotoQualityPrioritization(maxPhotoQualityPrioritization))
 	return x
 }
 
@@ -147,13 +147,13 @@ func (x *CapturePhotoOutput) AvailablePhotoFileTypes() []*foundation.NSString {
 }
 
 // MaxPhotoQualityPrioritization calls the underlying MaxPhotoQualityPrioritization.
-func (x *CapturePhotoOutput) MaxPhotoQualityPrioritization() raw.AVCapturePhotoQualityPrioritization {
-	return x.inner.MaxPhotoQualityPrioritization()
+func (x *CapturePhotoOutput) MaxPhotoQualityPrioritization() AVCapturePhotoQualityPrioritization {
+	return AVCapturePhotoQualityPrioritization(x.inner.MaxPhotoQualityPrioritization())
 }
 
 // SetMaxPhotoQualityPrioritization calls the underlying SetMaxPhotoQualityPrioritization.
-func (x *CapturePhotoOutput) SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization raw.AVCapturePhotoQualityPrioritization) {
-	x.inner.SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization)
+func (x *CapturePhotoOutput) SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization AVCapturePhotoQualityPrioritization) {
+	x.inner.SetMaxPhotoQualityPrioritization(raw.AVCapturePhotoQualityPrioritization(maxPhotoQualityPrioritization))
 }
 
 // IsFastCapturePrioritizationSupported calls the underlying IsFastCapturePrioritizationSupported.
@@ -248,8 +248,8 @@ func (x *CapturePhotoOutput) SetResponsiveCaptureEnabled(responsiveCaptureEnable
 }
 
 // CaptureReadiness calls the underlying CaptureReadiness.
-func (x *CapturePhotoOutput) CaptureReadiness() raw.AVCapturePhotoOutputCaptureReadiness {
-	return x.inner.CaptureReadiness()
+func (x *CapturePhotoOutput) CaptureReadiness() AVCapturePhotoOutputCaptureReadiness {
+	return AVCapturePhotoOutputCaptureReadiness(x.inner.CaptureReadiness())
 }
 
 // IsConstantColorSupported calls the underlying IsConstantColorSupported.
@@ -277,7 +277,7 @@ func (x *CapturePhotoOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.
 // CapturePhotoOutputable is the interface implemented by [CapturePhotoOutput], for mocking and DI.
 type CapturePhotoOutputable interface {
 	Unwrap() *raw.AVCapturePhotoOutput
-	WithMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization raw.AVCapturePhotoQualityPrioritization) *CapturePhotoOutput
+	WithMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization AVCapturePhotoQualityPrioritization) *CapturePhotoOutput
 	WithFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool) *CapturePhotoOutput
 	WithFastCapturePrioritizationEnabled(fastCapturePrioritizationEnabled bool) *CapturePhotoOutput
 	WithHighResolutionCaptureEnabled(highResolutionCaptureEnabled bool) *CapturePhotoOutput
@@ -293,8 +293,8 @@ type CapturePhotoOutputable interface {
 	AvailablePhotoPixelFormatTypes() []*foundation.NSNumber
 	AvailablePhotoCodecTypes() []*foundation.NSString
 	AvailablePhotoFileTypes() []*foundation.NSString
-	MaxPhotoQualityPrioritization() raw.AVCapturePhotoQualityPrioritization
-	SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization raw.AVCapturePhotoQualityPrioritization)
+	MaxPhotoQualityPrioritization() AVCapturePhotoQualityPrioritization
+	SetMaxPhotoQualityPrioritization(maxPhotoQualityPrioritization AVCapturePhotoQualityPrioritization)
 	IsFastCapturePrioritizationSupported() bool
 	SetFastCapturePrioritizationSupported(fastCapturePrioritizationSupported bool)
 	IsFastCapturePrioritizationEnabled() bool
@@ -312,7 +312,7 @@ type CapturePhotoOutputable interface {
 	IsResponsiveCaptureSupported() bool
 	IsResponsiveCaptureEnabled() bool
 	SetResponsiveCaptureEnabled(responsiveCaptureEnabled bool)
-	CaptureReadiness() raw.AVCapturePhotoOutputCaptureReadiness
+	CaptureReadiness() AVCapturePhotoOutputCaptureReadiness
 	IsConstantColorSupported() bool
 	IsConstantColorEnabled() bool
 	SetConstantColorEnabled(constantColorEnabled bool)

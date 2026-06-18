@@ -100,8 +100,8 @@ func (x *TextView) WithSelectedRanges(items ...*foundation.NSValue) *TextView {
 }
 
 // WithSelectionGranularity sets the selectionGranularity property and returns the receiver for chaining.
-func (x *TextView) WithSelectionGranularity(selectionGranularity raw.NSSelectionGranularity) *TextView {
-	x.inner.SetSelectionGranularity(selectionGranularity)
+func (x *TextView) WithSelectionGranularity(selectionGranularity NSSelectionGranularity) *TextView {
+	x.inner.SetSelectionGranularity(raw.NSSelectionGranularity(selectionGranularity))
 	return x
 }
 
@@ -226,14 +226,14 @@ func (x *TextView) WithAllowedInputSourceLocales(items ...*foundation.NSString) 
 }
 
 // WithWritingToolsBehavior sets the writingToolsBehavior property and returns the receiver for chaining.
-func (x *TextView) WithWritingToolsBehavior(writingToolsBehavior raw.NSWritingToolsBehavior) *TextView {
-	x.inner.SetWritingToolsBehavior(writingToolsBehavior)
+func (x *TextView) WithWritingToolsBehavior(writingToolsBehavior NSWritingToolsBehavior) *TextView {
+	x.inner.SetWritingToolsBehavior(raw.NSWritingToolsBehavior(writingToolsBehavior))
 	return x
 }
 
 // WithAllowedWritingToolsResultOptions sets the allowedWritingToolsResultOptions property and returns the receiver for chaining.
-func (x *TextView) WithAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions raw.NSWritingToolsResultOptions) *TextView {
-	x.inner.SetAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions)
+func (x *TextView) WithAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions NSWritingToolsResultOptions) *TextView {
+	x.inner.SetAllowedWritingToolsResultOptions(raw.NSWritingToolsResultOptions(allowedWritingToolsResultOptions))
 	return x
 }
 
@@ -304,14 +304,14 @@ func (x *TextView) WithIncrementalSearchingEnabled(incrementalSearchingEnabled b
 }
 
 // WithInlinePredictionType sets the inlinePredictionType property and returns the receiver for chaining.
-func (x *TextView) WithInlinePredictionType(inlinePredictionType raw.NSTextInputTraitType) *TextView {
-	x.inner.SetInlinePredictionType(inlinePredictionType)
+func (x *TextView) WithInlinePredictionType(inlinePredictionType NSTextInputTraitType) *TextView {
+	x.inner.SetInlinePredictionType(raw.NSTextInputTraitType(inlinePredictionType))
 	return x
 }
 
 // WithMathExpressionCompletionType sets the mathExpressionCompletionType property and returns the receiver for chaining.
-func (x *TextView) WithMathExpressionCompletionType(mathExpressionCompletionType raw.NSTextInputTraitType) *TextView {
-	x.inner.SetMathExpressionCompletionType(mathExpressionCompletionType)
+func (x *TextView) WithMathExpressionCompletionType(mathExpressionCompletionType NSTextInputTraitType) *TextView {
+	x.inner.SetMathExpressionCompletionType(raw.NSTextInputTraitType(mathExpressionCompletionType))
 	return x
 }
 
@@ -412,14 +412,14 @@ func (x *TextView) WithTextColor(textColor *Color) *TextView {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *TextView) WithAlignment(alignment raw.NSTextAlignment) *TextView {
-	x.inner.NSText.SetAlignment(alignment)
+func (x *TextView) WithAlignment(alignment NSTextAlignment) *TextView {
+	x.inner.NSText.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *TextView) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextView {
-	x.inner.NSText.SetBaseWritingDirection(baseWritingDirection)
+func (x *TextView) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextView {
+	x.inner.NSText.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -484,8 +484,8 @@ func (x *TextView) WithAutoresizesSubviews(autoresizesSubviews bool) *TextView {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TextView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TextView {
-	x.inner.NSText.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *TextView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TextView {
+	x.inner.NSText.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -544,14 +544,14 @@ func (x *TextView) WithWantsRestingTouches(wantsRestingTouches bool) *TextView {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *TextView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TextView {
-	x.inner.NSText.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *TextView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TextView {
+	x.inner.NSText.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *TextView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TextView {
-	x.inner.NSText.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *TextView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TextView {
+	x.inner.NSText.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -658,8 +658,8 @@ func (x *TextView) WithToolTip(toolTip string) *TextView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TextView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextView {
-	x.inner.NSText.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TextView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextView {
+	x.inner.NSText.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -676,8 +676,8 @@ func (x *TextView) WithNextKeyView(nextKeyView ViewProvider) *TextView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TextView) WithFocusRingType(focusRingType raw.NSFocusRingType) *TextView {
-	x.inner.NSText.NSView.SetFocusRingType(focusRingType)
+func (x *TextView) WithFocusRingType(focusRingType NSFocusRingType) *TextView {
+	x.inner.NSText.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -700,8 +700,8 @@ func (x *TextView) WithGestureRecognizers(items ...GestureRecognizerProvider) *T
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *TextView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextView {
-	x.inner.NSText.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *TextView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TextView {
+	x.inner.NSText.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -810,13 +810,13 @@ func (x *TextView) SetConstrainedFrameSize(desiredSize corefoundation.CGSize) {
 }
 
 // SetAlignmentRange calls the underlying SetAlignmentRange.
-func (x *TextView) SetAlignmentRange(alignment raw.NSTextAlignment, range_ foundation.NSRange) {
-	x.inner.SetAlignmentRange(alignment, range_)
+func (x *TextView) SetAlignmentRange(alignment NSTextAlignment, range_ foundation.NSRange) {
+	x.inner.SetAlignmentRange(raw.NSTextAlignment(alignment), range_)
 }
 
 // SetBaseWritingDirectionRange calls the underlying SetBaseWritingDirectionRange.
-func (x *TextView) SetBaseWritingDirectionRange(writingDirection raw.NSWritingDirection, range_ foundation.NSRange) {
-	x.inner.SetBaseWritingDirectionRange(writingDirection, range_)
+func (x *TextView) SetBaseWritingDirectionRange(writingDirection NSWritingDirection, range_ foundation.NSRange) {
+	x.inner.SetBaseWritingDirectionRange(raw.NSWritingDirection(writingDirection), range_)
 }
 
 // TurnOffKerning calls the underlying TurnOffKerning.
@@ -950,8 +950,8 @@ func (x *TextView) UpdateDragTypeRegistration() {
 }
 
 // SelectionRangeForProposedRangeGranularity calls the underlying SelectionRangeForProposedRangeGranularity.
-func (x *TextView) SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity raw.NSSelectionGranularity) foundation.NSRange {
-	return x.inner.SelectionRangeForProposedRangeGranularity(proposedCharRange, granularity)
+func (x *TextView) SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity NSSelectionGranularity) foundation.NSRange {
+	return x.inner.SelectionRangeForProposedRangeGranularity(proposedCharRange, raw.NSSelectionGranularity(granularity))
 }
 
 // ClickedOnLinkAtIndex calls the underlying ClickedOnLinkAtIndex.
@@ -970,8 +970,8 @@ func (x *TextView) StopSpeaking(sender objc.ID) {
 }
 
 // SetLayoutOrientation calls the underlying SetLayoutOrientation.
-func (x *TextView) SetLayoutOrientation(orientation raw.NSTextLayoutOrientation) {
-	x.inner.SetLayoutOrientation(orientation)
+func (x *TextView) SetLayoutOrientation(orientation NSTextLayoutOrientation) {
+	x.inner.SetLayoutOrientation(raw.NSTextLayoutOrientation(orientation))
 }
 
 // ChangeLayoutOrientation calls the underlying ChangeLayoutOrientation.
@@ -1165,8 +1165,8 @@ func (x *TextView) DragImageForSelectionWithEventOrigin(event *raw.NSEvent, orig
 }
 
 // DragOperationForDraggingInfoType calls the underlying DragOperationForDraggingInfoType.
-func (x *TextView) DragOperationForDraggingInfoType(dragInfo raw.NSDraggingInfo, type_ *foundation.NSString) raw.NSDragOperation {
-	return x.inner.DragOperationForDraggingInfoType(dragInfo, type_)
+func (x *TextView) DragOperationForDraggingInfoType(dragInfo raw.NSDraggingInfo, type_ *foundation.NSString) NSDragOperation {
+	return NSDragOperation(x.inner.DragOperationForDraggingInfoType(dragInfo, type_))
 }
 
 // CleanUpAfterDragOperation calls the underlying CleanUpAfterDragOperation.
@@ -1186,13 +1186,13 @@ func (x *TextView) AcceptableDragTypes() []*foundation.NSString {
 }
 
 // SetSelectedRangesAffinityStillSelecting calls the underlying SetSelectedRangesAffinityStillSelecting.
-func (x *TextView) SetSelectedRangesAffinityStillSelecting(ranges *foundation.NSArray[*foundation.NSValue], affinity raw.NSSelectionAffinity, stillSelectingFlag bool) {
-	x.inner.SetSelectedRangesAffinityStillSelecting(ranges, affinity, stillSelectingFlag)
+func (x *TextView) SetSelectedRangesAffinityStillSelecting(ranges *foundation.NSArray[*foundation.NSValue], affinity NSSelectionAffinity, stillSelectingFlag bool) {
+	x.inner.SetSelectedRangesAffinityStillSelecting(ranges, raw.NSSelectionAffinity(affinity), stillSelectingFlag)
 }
 
 // SetSelectedRangeAffinityStillSelecting calls the underlying SetSelectedRangeAffinityStillSelecting.
-func (x *TextView) SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity raw.NSSelectionAffinity, stillSelectingFlag bool) {
-	x.inner.SetSelectedRangeAffinityStillSelecting(charRange, affinity, stillSelectingFlag)
+func (x *TextView) SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity NSSelectionAffinity, stillSelectingFlag bool) {
+	x.inner.SetSelectedRangeAffinityStillSelecting(charRange, raw.NSSelectionAffinity(affinity), stillSelectingFlag)
 }
 
 // UpdateInsertionPointStateAndRestartTimer calls the underlying UpdateInsertionPointStateAndRestartTimer.
@@ -1257,18 +1257,18 @@ func (x *TextView) SetSelectedRanges(selectedRanges *foundation.NSArray[*foundat
 }
 
 // SelectionAffinity calls the underlying SelectionAffinity.
-func (x *TextView) SelectionAffinity() raw.NSSelectionAffinity {
-	return x.inner.SelectionAffinity()
+func (x *TextView) SelectionAffinity() NSSelectionAffinity {
+	return NSSelectionAffinity(x.inner.SelectionAffinity())
 }
 
 // SelectionGranularity calls the underlying SelectionGranularity.
-func (x *TextView) SelectionGranularity() raw.NSSelectionGranularity {
-	return x.inner.SelectionGranularity()
+func (x *TextView) SelectionGranularity() NSSelectionGranularity {
+	return NSSelectionGranularity(x.inner.SelectionGranularity())
 }
 
 // SetSelectionGranularity calls the underlying SetSelectionGranularity.
-func (x *TextView) SetSelectionGranularity(selectionGranularity raw.NSSelectionGranularity) {
-	x.inner.SetSelectionGranularity(selectionGranularity)
+func (x *TextView) SetSelectionGranularity(selectionGranularity NSSelectionGranularity) {
+	x.inner.SetSelectionGranularity(raw.NSSelectionGranularity(selectionGranularity))
 }
 
 // SelectedTextAttributes calls the underlying SelectedTextAttributes.
@@ -1524,23 +1524,23 @@ func (x *TextView) IsWritingToolsActive() bool {
 }
 
 // WritingToolsBehavior calls the underlying WritingToolsBehavior.
-func (x *TextView) WritingToolsBehavior() raw.NSWritingToolsBehavior {
-	return x.inner.WritingToolsBehavior()
+func (x *TextView) WritingToolsBehavior() NSWritingToolsBehavior {
+	return NSWritingToolsBehavior(x.inner.WritingToolsBehavior())
 }
 
 // SetWritingToolsBehavior calls the underlying SetWritingToolsBehavior.
-func (x *TextView) SetWritingToolsBehavior(writingToolsBehavior raw.NSWritingToolsBehavior) {
-	x.inner.SetWritingToolsBehavior(writingToolsBehavior)
+func (x *TextView) SetWritingToolsBehavior(writingToolsBehavior NSWritingToolsBehavior) {
+	x.inner.SetWritingToolsBehavior(raw.NSWritingToolsBehavior(writingToolsBehavior))
 }
 
 // AllowedWritingToolsResultOptions calls the underlying AllowedWritingToolsResultOptions.
-func (x *TextView) AllowedWritingToolsResultOptions() raw.NSWritingToolsResultOptions {
-	return x.inner.AllowedWritingToolsResultOptions()
+func (x *TextView) AllowedWritingToolsResultOptions() NSWritingToolsResultOptions {
+	return NSWritingToolsResultOptions(x.inner.AllowedWritingToolsResultOptions())
 }
 
 // SetAllowedWritingToolsResultOptions calls the underlying SetAllowedWritingToolsResultOptions.
-func (x *TextView) SetAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions raw.NSWritingToolsResultOptions) {
-	x.inner.SetAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions)
+func (x *TextView) SetAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions NSWritingToolsResultOptions) {
+	x.inner.SetAllowedWritingToolsResultOptions(raw.NSWritingToolsResultOptions(allowedWritingToolsResultOptions))
 }
 
 // SmartDeleteRangeForProposedRange calls the underlying SmartDeleteRangeForProposedRange.
@@ -1742,23 +1742,23 @@ func (x *TextView) SetIncrementalSearchingEnabled(incrementalSearchingEnabled bo
 }
 
 // InlinePredictionType calls the underlying InlinePredictionType.
-func (x *TextView) InlinePredictionType() raw.NSTextInputTraitType {
-	return x.inner.InlinePredictionType()
+func (x *TextView) InlinePredictionType() NSTextInputTraitType {
+	return NSTextInputTraitType(x.inner.InlinePredictionType())
 }
 
 // SetInlinePredictionType calls the underlying SetInlinePredictionType.
-func (x *TextView) SetInlinePredictionType(inlinePredictionType raw.NSTextInputTraitType) {
-	x.inner.SetInlinePredictionType(inlinePredictionType)
+func (x *TextView) SetInlinePredictionType(inlinePredictionType NSTextInputTraitType) {
+	x.inner.SetInlinePredictionType(raw.NSTextInputTraitType(inlinePredictionType))
 }
 
 // MathExpressionCompletionType calls the underlying MathExpressionCompletionType.
-func (x *TextView) MathExpressionCompletionType() raw.NSTextInputTraitType {
-	return x.inner.MathExpressionCompletionType()
+func (x *TextView) MathExpressionCompletionType() NSTextInputTraitType {
+	return NSTextInputTraitType(x.inner.MathExpressionCompletionType())
 }
 
 // SetMathExpressionCompletionType calls the underlying SetMathExpressionCompletionType.
-func (x *TextView) SetMathExpressionCompletionType(mathExpressionCompletionType raw.NSTextInputTraitType) {
-	x.inner.SetMathExpressionCompletionType(mathExpressionCompletionType)
+func (x *TextView) SetMathExpressionCompletionType(mathExpressionCompletionType NSTextInputTraitType) {
+	x.inner.SetMathExpressionCompletionType(raw.NSTextInputTraitType(mathExpressionCompletionType))
 }
 
 // ToggleQuickLookPreviewPanel calls the underlying ToggleQuickLookPreviewPanel.
@@ -1859,7 +1859,7 @@ type TextViewable interface {
 	WithTextContainerInset(textContainerInset corefoundation.CGSize) *TextView
 	WithUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance bool) *TextView
 	WithSelectedRanges(items ...*foundation.NSValue) *TextView
-	WithSelectionGranularity(selectionGranularity raw.NSSelectionGranularity) *TextView
+	WithSelectionGranularity(selectionGranularity NSSelectionGranularity) *TextView
 	WithSelectedTextAttributes(selectedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
 	WithInsertionPointColor(insertionPointColor *Color) *TextView
 	WithMarkedTextAttributes(markedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
@@ -1878,8 +1878,8 @@ type TextViewable interface {
 	WithUsesRolloverButtonForSelection(usesRolloverButtonForSelection bool) *TextView
 	WithRulerVisible(rulerVisible bool) *TextView
 	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextView
-	WithWritingToolsBehavior(writingToolsBehavior raw.NSWritingToolsBehavior) *TextView
-	WithAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions raw.NSWritingToolsResultOptions) *TextView
+	WithWritingToolsBehavior(writingToolsBehavior NSWritingToolsBehavior) *TextView
+	WithAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions NSWritingToolsResultOptions) *TextView
 	WithSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) *TextView
 	WithAutomaticQuoteSubstitutionEnabled(automaticQuoteSubstitutionEnabled bool) *TextView
 	WithAutomaticLinkDetectionEnabled(automaticLinkDetectionEnabled bool) *TextView
@@ -1891,8 +1891,8 @@ type TextViewable interface {
 	WithUsesFindPanel(usesFindPanel bool) *TextView
 	WithUsesFindBar(usesFindBar bool) *TextView
 	WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextView
-	WithInlinePredictionType(inlinePredictionType raw.NSTextInputTraitType) *TextView
-	WithMathExpressionCompletionType(mathExpressionCompletionType raw.NSTextInputTraitType) *TextView
+	WithInlinePredictionType(inlinePredictionType NSTextInputTraitType) *TextView
+	WithMathExpressionCompletionType(mathExpressionCompletionType NSTextInputTraitType) *TextView
 	WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *TextView
 	WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TextView
 	WithTextHighlightAttributes(textHighlightAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
@@ -1909,8 +1909,8 @@ type TextViewable interface {
 	WithSelectedRange(selectedRange foundation.NSRange) *TextView
 	WithFont(font *Font) *TextView
 	WithTextColor(textColor *Color) *TextView
-	WithAlignment(alignment raw.NSTextAlignment) *TextView
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextView
+	WithAlignment(alignment NSTextAlignment) *TextView
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextView
 	WithMaxSize(maxSize corefoundation.CGSize) *TextView
 	WithMinSize(minSize corefoundation.CGSize) *TextView
 	WithHorizontallyResizable(horizontallyResizable bool) *TextView
@@ -1919,7 +1919,7 @@ type TextViewable interface {
 	WithHidden(hidden bool) *TextView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TextView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TextView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TextView
 	WithFrame(frame corefoundation.CGRect) *TextView
 	WithFrameRotation(frameRotation float64) *TextView
 	WithFrameCenterRotation(frameCenterRotation float64) *TextView
@@ -1929,8 +1929,8 @@ type TextViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *TextView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextView
 	WithWantsRestingTouches(wantsRestingTouches bool) *TextView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TextView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TextView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TextView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TextView
 	WithWantsLayer(wantsLayer bool) *TextView
 	WithLayer(layer *quartzcore.CALayer) *TextView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextView
@@ -1944,12 +1944,12 @@ type TextViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *TextView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextView
 	WithToolTip(toolTip string) *TextView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextView
 	WithNextKeyView(nextKeyView ViewProvider) *TextView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TextView
+	WithFocusRingType(focusRingType NSFocusRingType) *TextView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TextView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TextView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextView
@@ -1968,8 +1968,8 @@ type TextViewable interface {
 	InvalidateTextContainerOrigin()
 	InsertText(insertString objc.ID)
 	SetConstrainedFrameSize(desiredSize corefoundation.CGSize)
-	SetAlignmentRange(alignment raw.NSTextAlignment, range_ foundation.NSRange)
-	SetBaseWritingDirectionRange(writingDirection raw.NSWritingDirection, range_ foundation.NSRange)
+	SetAlignmentRange(alignment NSTextAlignment, range_ foundation.NSRange)
+	SetBaseWritingDirectionRange(writingDirection NSWritingDirection, range_ foundation.NSRange)
 	TurnOffKerning(sender objc.ID)
 	TightenKerning(sender objc.ID)
 	LoosenKerning(sender objc.ID)
@@ -1996,11 +1996,11 @@ type TextViewable interface {
 	UpdateRuler()
 	UpdateFontPanel()
 	UpdateDragTypeRegistration()
-	SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity raw.NSSelectionGranularity) foundation.NSRange
+	SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity NSSelectionGranularity) foundation.NSRange
 	ClickedOnLinkAtIndex(link objc.ID, charIndex uint)
 	StartSpeaking(sender objc.ID)
 	StopSpeaking(sender objc.ID)
-	SetLayoutOrientation(orientation raw.NSTextLayoutOrientation)
+	SetLayoutOrientation(orientation NSTextLayoutOrientation)
 	ChangeLayoutOrientation(sender objc.ID)
 	CharacterIndexForInsertionAtPoint(point corefoundation.CGPoint) uint
 	PerformValidatedReplacementInRangeWithAttributedString(range_ foundation.NSRange, attributedString *foundation.NSAttributedString) bool
@@ -2031,11 +2031,11 @@ type TextViewable interface {
 	ReadablePasteboardTypes() []*foundation.NSString
 	DragSelectionWithEventOffsetSlideBack(event *raw.NSEvent, mouseOffset corefoundation.CGSize, slideBack bool) bool
 	DragImageForSelectionWithEventOrigin(event *raw.NSEvent, origin *corefoundation.CGPoint) *Image
-	DragOperationForDraggingInfoType(dragInfo raw.NSDraggingInfo, type_ *foundation.NSString) raw.NSDragOperation
+	DragOperationForDraggingInfoType(dragInfo raw.NSDraggingInfo, type_ *foundation.NSString) NSDragOperation
 	CleanUpAfterDragOperation()
 	AcceptableDragTypes() []*foundation.NSString
-	SetSelectedRangesAffinityStillSelecting(ranges *foundation.NSArray[*foundation.NSValue], affinity raw.NSSelectionAffinity, stillSelectingFlag bool)
-	SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity raw.NSSelectionAffinity, stillSelectingFlag bool)
+	SetSelectedRangesAffinityStillSelecting(ranges *foundation.NSArray[*foundation.NSValue], affinity NSSelectionAffinity, stillSelectingFlag bool)
+	SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity NSSelectionAffinity, stillSelectingFlag bool)
 	UpdateInsertionPointStateAndRestartTimer(restartFlag bool)
 	ToggleContinuousSpellChecking(sender objc.ID)
 	ToggleGrammarChecking(sender objc.ID)
@@ -2047,9 +2047,9 @@ type TextViewable interface {
 	ShowFindIndicatorForRange(charRange foundation.NSRange)
 	SelectedRanges() []*foundation.NSValue
 	SetSelectedRanges(selectedRanges *foundation.NSArray[*foundation.NSValue])
-	SelectionAffinity() raw.NSSelectionAffinity
-	SelectionGranularity() raw.NSSelectionGranularity
-	SetSelectionGranularity(selectionGranularity raw.NSSelectionGranularity)
+	SelectionAffinity() NSSelectionAffinity
+	SelectionGranularity() NSSelectionGranularity
+	SetSelectionGranularity(selectionGranularity NSSelectionGranularity)
 	SelectedTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetSelectedTextAttributes(selectedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
 	InsertionPointColor() *Color
@@ -2094,10 +2094,10 @@ type TextViewable interface {
 	AllowedInputSourceLocales() []string
 	SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString])
 	IsWritingToolsActive() bool
-	WritingToolsBehavior() raw.NSWritingToolsBehavior
-	SetWritingToolsBehavior(writingToolsBehavior raw.NSWritingToolsBehavior)
-	AllowedWritingToolsResultOptions() raw.NSWritingToolsResultOptions
-	SetAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions raw.NSWritingToolsResultOptions)
+	WritingToolsBehavior() NSWritingToolsBehavior
+	SetWritingToolsBehavior(writingToolsBehavior NSWritingToolsBehavior)
+	AllowedWritingToolsResultOptions() NSWritingToolsResultOptions
+	SetAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions NSWritingToolsResultOptions)
 	SmartDeleteRangeForProposedRange(proposedCharRange foundation.NSRange) foundation.NSRange
 	ToggleSmartInsertDelete(sender objc.ID)
 	SmartInsertForStringReplacingRangeBeforeStringAfterString(pasteString string, charRangeToReplace foundation.NSRange, beforeString string, afterString string)
@@ -2136,10 +2136,10 @@ type TextViewable interface {
 	SetUsesFindBar(usesFindBar bool)
 	IsIncrementalSearchingEnabled() bool
 	SetIncrementalSearchingEnabled(incrementalSearchingEnabled bool)
-	InlinePredictionType() raw.NSTextInputTraitType
-	SetInlinePredictionType(inlinePredictionType raw.NSTextInputTraitType)
-	MathExpressionCompletionType() raw.NSTextInputTraitType
-	SetMathExpressionCompletionType(mathExpressionCompletionType raw.NSTextInputTraitType)
+	InlinePredictionType() NSTextInputTraitType
+	SetInlinePredictionType(inlinePredictionType NSTextInputTraitType)
+	MathExpressionCompletionType() NSTextInputTraitType
+	SetMathExpressionCompletionType(mathExpressionCompletionType NSTextInputTraitType)
 	ToggleQuickLookPreviewPanel(sender objc.ID)
 	QuickLookPreviewableItemsInRanges(ranges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[objc.ID]
 	UpdateQuickLookPreviewPanel()

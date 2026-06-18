@@ -21,8 +21,8 @@ func LocalizedStringForKey(key string) string {
 }
 
 // ComparatorForNameSortOrder calls the underlying CNContactComparatorForNameSortOrder.
-func ComparatorForNameSortOrder(sortOrder raw.CNContactSortOrder) objc.Block {
-	return raw.CNContactComparatorForNameSortOrder(sortOrder)
+func ComparatorForNameSortOrder(sortOrder CNContactSortOrder) objc.Block {
+	return raw.CNContactComparatorForNameSortOrder(raw.CNContactSortOrder(sortOrder))
 }
 
 // DescriptorForAllComparatorKeys calls the underlying CNContactDescriptorForAllComparatorKeys.
@@ -61,13 +61,13 @@ func PredicateForContactsInContainerWithIdentifier(containerIdentifier string) *
 }
 
 // DescriptorForRequiredKeysForStyle calls the underlying CNContactFormatterDescriptorForRequiredKeysForStyle.
-func DescriptorForRequiredKeysForStyle(style raw.CNContactFormatterStyle) raw.CNKeyDescriptor {
-	return raw.CNContactFormatterDescriptorForRequiredKeysForStyle(style)
+func DescriptorForRequiredKeysForStyle(style CNContactFormatterStyle) raw.CNKeyDescriptor {
+	return raw.CNContactFormatterDescriptorForRequiredKeysForStyle(raw.CNContactFormatterStyle(style))
 }
 
 // StringFromContactStyle calls the underlying CNContactFormatterStringFromContactStyle.
-func StringFromContactStyle(contact *raw.CNContact, style raw.CNContactFormatterStyle) string {
-	_r := raw.CNContactFormatterStringFromContactStyle(contact, style)
+func StringFromContactStyle(contact *raw.CNContact, style CNContactFormatterStyle) string {
+	_r := raw.CNContactFormatterStringFromContactStyle(contact, raw.CNContactFormatterStyle(style))
 	if _r == nil {
 		return ""
 	}
@@ -75,13 +75,13 @@ func StringFromContactStyle(contact *raw.CNContact, style raw.CNContactFormatter
 }
 
 // AttributedStringFromContactStyleDefaultAttributes calls the underlying CNContactFormatterAttributedStringFromContactStyleDefaultAttributes.
-func AttributedStringFromContactStyleDefaultAttributes(contact *raw.CNContact, style raw.CNContactFormatterStyle, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
-	return raw.CNContactFormatterAttributedStringFromContactStyleDefaultAttributes(contact, style, attributes)
+func AttributedStringFromContactStyleDefaultAttributes(contact *raw.CNContact, style CNContactFormatterStyle, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
+	return raw.CNContactFormatterAttributedStringFromContactStyleDefaultAttributes(contact, raw.CNContactFormatterStyle(style), attributes)
 }
 
 // NameOrderForContact calls the underlying CNContactFormatterNameOrderForContact.
-func NameOrderForContact(contact *raw.CNContact) raw.CNContactDisplayNameOrder {
-	return raw.CNContactFormatterNameOrderForContact(contact)
+func NameOrderForContact(contact *raw.CNContact) CNContactDisplayNameOrder {
+	return CNContactDisplayNameOrder(raw.CNContactFormatterNameOrderForContact(contact))
 }
 
 // DelimiterForContact calls the underlying CNContactFormatterDelimiterForContact.
@@ -113,8 +113,8 @@ func ContactRelationWithName(name string) *ContactRelation {
 }
 
 // AuthorizationStatusForEntityType calls the underlying CNContactStoreAuthorizationStatusForEntityType.
-func AuthorizationStatusForEntityType(entityType raw.CNEntityType) raw.CNAuthorizationStatus {
-	return raw.CNContactStoreAuthorizationStatusForEntityType(entityType)
+func AuthorizationStatusForEntityType(entityType CNEntityType) CNAuthorizationStatus {
+	return CNAuthorizationStatus(raw.CNContactStoreAuthorizationStatusForEntityType(raw.CNEntityType(entityType)))
 }
 
 // DescriptorForRequiredKeys calls the underlying CNContactVCardSerializationDescriptorForRequiredKeys.
@@ -231,8 +231,8 @@ func CNPostalAddressLocalizedStringForKey(key string) string {
 }
 
 // StringFromPostalAddressStyle calls the underlying CNPostalAddressFormatterStringFromPostalAddressStyle.
-func StringFromPostalAddressStyle(postalAddress *raw.CNPostalAddress, style raw.CNPostalAddressFormatterStyle) string {
-	_r := raw.CNPostalAddressFormatterStringFromPostalAddressStyle(postalAddress, style)
+func StringFromPostalAddressStyle(postalAddress *raw.CNPostalAddress, style CNPostalAddressFormatterStyle) string {
+	_r := raw.CNPostalAddressFormatterStringFromPostalAddressStyle(postalAddress, raw.CNPostalAddressFormatterStyle(style))
 	if _r == nil {
 		return ""
 	}
@@ -240,8 +240,8 @@ func StringFromPostalAddressStyle(postalAddress *raw.CNPostalAddress, style raw.
 }
 
 // AttributedStringFromPostalAddressStyleWithDefaultAttributes calls the underlying CNPostalAddressFormatterAttributedStringFromPostalAddressStyleWithDefaultAttributes.
-func AttributedStringFromPostalAddressStyleWithDefaultAttributes(postalAddress *raw.CNPostalAddress, style raw.CNPostalAddressFormatterStyle, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
-	return raw.CNPostalAddressFormatterAttributedStringFromPostalAddressStyleWithDefaultAttributes(postalAddress, style, attributes)
+func AttributedStringFromPostalAddressStyleWithDefaultAttributes(postalAddress *raw.CNPostalAddress, style CNPostalAddressFormatterStyle, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
+	return raw.CNPostalAddressFormatterAttributedStringFromPostalAddressStyleWithDefaultAttributes(postalAddress, raw.CNPostalAddressFormatterStyle(style), attributes)
 }
 
 // CNSocialProfileLocalizedStringForKey calls the underlying CNSocialProfileLocalizedStringForKey.

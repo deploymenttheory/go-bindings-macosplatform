@@ -71,13 +71,13 @@ func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context
 }
 
 // CoordinateReadingItemAtURLOptionsErrorByAccessor blocks until the operation completes or ctx is cancelled.
-func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options raw.NSFileCoordinatorReadingOptions, outError unsafe.Pointer) (*URL, error) {
+func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options NSFileCoordinatorReadingOptions, outError unsafe.Pointer) (*URL, error) {
 	type _result struct {
 		val *URL
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.CoordinateReadingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, outError, func(_p0 *raw.NSURL) {
+	x.inner.CoordinateReadingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileCoordinatorReadingOptions(options), outError, func(_p0 *raw.NSURL) {
 		var _o _result
 		if _p0 != nil {
 			_o.val = &URL{inner: _p0}
@@ -94,13 +94,13 @@ func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx c
 }
 
 // CoordinateWritingItemAtURLOptionsErrorByAccessor blocks until the operation completes or ctx is cancelled.
-func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer) (*URL, error) {
+func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options NSFileCoordinatorWritingOptions, outError unsafe.Pointer) (*URL, error) {
 	type _result struct {
 		val *URL
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.CoordinateWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, outError, func(_p0 *raw.NSURL) {
+	x.inner.CoordinateWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileCoordinatorWritingOptions(options), outError, func(_p0 *raw.NSURL) {
 		var _o _result
 		if _p0 != nil {
 			_o.val = &URL{inner: _p0}
@@ -117,18 +117,18 @@ func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx c
 }
 
 // CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor calls the underlying CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor.
-func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL string, readingOptions raw.NSFileCoordinatorReadingOptions, writingURL string, writingOptions raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(*raw.NSURL, *raw.NSURL)) {
-	x.inner.CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(readingURL)), readingOptions, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(writingURL)), writingOptions, outError, readerWriter)
+func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL string, readingOptions NSFileCoordinatorReadingOptions, writingURL string, writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(*raw.NSURL, *raw.NSURL)) {
+	x.inner.CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(readingURL)), raw.NSFileCoordinatorReadingOptions(readingOptions), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(writingURL)), raw.NSFileCoordinatorWritingOptions(writingOptions), outError, readerWriter)
 }
 
 // CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor calls the underlying CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor.
-func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 string, options1 raw.NSFileCoordinatorWritingOptions, url2 string, options2 raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*raw.NSURL, *raw.NSURL)) {
-	x.inner.CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url1)), options1, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url2)), options2, outError, writer)
+func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 string, options1 NSFileCoordinatorWritingOptions, url2 string, options2 NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*raw.NSURL, *raw.NSURL)) {
+	x.inner.CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url1)), raw.NSFileCoordinatorWritingOptions(options1), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url2)), raw.NSFileCoordinatorWritingOptions(options2), outError, writer)
 }
 
 // PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor calls the underlying PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor.
-func (x *FileCoordinator) PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs *raw.NSArray[*raw.NSURL], readingOptions raw.NSFileCoordinatorReadingOptions, writingURLs *raw.NSArray[*raw.NSURL], writingOptions raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(objc.Block)) {
-	x.inner.PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs, readingOptions, writingURLs, writingOptions, outError, batchAccessor)
+func (x *FileCoordinator) PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs *raw.NSArray[*raw.NSURL], readingOptions NSFileCoordinatorReadingOptions, writingURLs *raw.NSArray[*raw.NSURL], writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(objc.Block)) {
+	x.inner.PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs, raw.NSFileCoordinatorReadingOptions(readingOptions), writingURLs, raw.NSFileCoordinatorWritingOptions(writingOptions), outError, batchAccessor)
 }
 
 // ItemAtURLWillMoveToURL calls the underlying ItemAtURLWillMoveToURL.
@@ -173,11 +173,11 @@ type FileCoordinatorable interface {
 	WithPurposeIdentifier(purposeIdentifier string) *FileCoordinator
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileCoordinator
 	CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents *raw.NSArray[*raw.NSFileAccessIntent], queue *raw.NSOperationQueue) error
-	CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options raw.NSFileCoordinatorReadingOptions, outError unsafe.Pointer) (*URL, error)
-	CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer) (*URL, error)
-	CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL string, readingOptions raw.NSFileCoordinatorReadingOptions, writingURL string, writingOptions raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(*raw.NSURL, *raw.NSURL))
-	CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 string, options1 raw.NSFileCoordinatorWritingOptions, url2 string, options2 raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*raw.NSURL, *raw.NSURL))
-	PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs *raw.NSArray[*raw.NSURL], readingOptions raw.NSFileCoordinatorReadingOptions, writingURLs *raw.NSArray[*raw.NSURL], writingOptions raw.NSFileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(objc.Block))
+	CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options NSFileCoordinatorReadingOptions, outError unsafe.Pointer) (*URL, error)
+	CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options NSFileCoordinatorWritingOptions, outError unsafe.Pointer) (*URL, error)
+	CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL string, readingOptions NSFileCoordinatorReadingOptions, writingURL string, writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(*raw.NSURL, *raw.NSURL))
+	CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 string, options1 NSFileCoordinatorWritingOptions, url2 string, options2 NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*raw.NSURL, *raw.NSURL))
+	PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs *raw.NSArray[*raw.NSURL], readingOptions NSFileCoordinatorReadingOptions, writingURLs *raw.NSArray[*raw.NSURL], writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(objc.Block))
 	ItemAtURLWillMoveToURL(oldURL string, newURL string)
 	ItemAtURLDidMoveToURL(oldURL string, newURL string)
 	ItemAtURLDidChangeUbiquityAttributes(url string, attributes *raw.NSSet[*raw.NSString])

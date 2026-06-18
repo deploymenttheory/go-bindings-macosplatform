@@ -77,8 +77,8 @@ func (x *Vector) Vectors() uint {
 }
 
 // DataType calls the underlying DataType.
-func (x *Vector) DataType() raw.MPSDataType {
-	return x.inner.DataType()
+func (x *Vector) DataType() MPSDataType {
+	return MPSDataType(x.inner.DataType())
 }
 
 // VectorBytes calls the underlying VectorBytes.
@@ -106,7 +106,7 @@ type Vectorable interface {
 	Device() metal.MTLDevice
 	Length() uint
 	Vectors() uint
-	DataType() raw.MPSDataType
+	DataType() MPSDataType
 	VectorBytes() uint
 	Offset() uint
 	Data() metal.MTLBuffer

@@ -38,8 +38,8 @@ func NewControllerElement() *ControllerElement {
 }
 
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *ControllerElement) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerElement {
-	x.inner.SetPreferredSystemGestureState(preferredSystemGestureState)
+func (x *ControllerElement) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerElement {
+	x.inner.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
@@ -87,13 +87,13 @@ func (x *ControllerElement) IsBoundToSystemGesture() bool {
 }
 
 // PreferredSystemGestureState calls the underlying PreferredSystemGestureState.
-func (x *ControllerElement) PreferredSystemGestureState() raw.GCSystemGestureState {
-	return x.inner.PreferredSystemGestureState()
+func (x *ControllerElement) PreferredSystemGestureState() GCSystemGestureState {
+	return GCSystemGestureState(x.inner.PreferredSystemGestureState())
 }
 
 // SetPreferredSystemGestureState calls the underlying SetPreferredSystemGestureState.
-func (x *ControllerElement) SetPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) {
-	x.inner.SetPreferredSystemGestureState(preferredSystemGestureState)
+func (x *ControllerElement) SetPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) {
+	x.inner.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 }
 
 // SfSymbolsName calls the underlying SfSymbolsName.
@@ -162,7 +162,7 @@ func (x *ControllerElement) asControllerElement() *raw.GCControllerElement { ret
 // ControllerElementable is the interface implemented by [ControllerElement], for mocking and DI.
 type ControllerElementable interface {
 	Unwrap() *raw.GCControllerElement
-	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerElement
+	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerElement
 	WithSfSymbolsName(sfSymbolsName string) *ControllerElement
 	WithLocalizedName(localizedName string) *ControllerElement
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerElement
@@ -170,8 +170,8 @@ type ControllerElementable interface {
 	Collection() *ControllerElement
 	IsAnalog() bool
 	IsBoundToSystemGesture() bool
-	PreferredSystemGestureState() raw.GCSystemGestureState
-	SetPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState)
+	PreferredSystemGestureState() GCSystemGestureState
+	SetPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState)
 	SfSymbolsName() string
 	SetSfSymbolsName(sfSymbolsName string)
 	LocalizedName() string

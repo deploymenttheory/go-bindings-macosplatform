@@ -50,8 +50,8 @@ func (x *AddShareablePassConfiguration) WithLocalizedDescription(localizedDescri
 }
 
 // PrimaryAction calls the underlying PrimaryAction.
-func (x *AddShareablePassConfiguration) PrimaryAction() raw.PKAddShareablePassConfigurationPrimaryAction {
-	return x.inner.PrimaryAction()
+func (x *AddShareablePassConfiguration) PrimaryAction() PKAddShareablePassConfigurationPrimaryAction {
+	return PKAddShareablePassConfigurationPrimaryAction(x.inner.PrimaryAction())
 }
 
 // CredentialsMetadata returns the collection as a Go slice.
@@ -83,7 +83,7 @@ type AddShareablePassConfigurationable interface {
 	Unwrap() *raw.PKAddShareablePassConfiguration
 	WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration
 	WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration
-	PrimaryAction() raw.PKAddShareablePassConfigurationPrimaryAction
+	PrimaryAction() PKAddShareablePassConfigurationPrimaryAction
 	CredentialsMetadata() []*ShareablePassMetadata
 	ProvisioningPolicyIdentifier() string
 }

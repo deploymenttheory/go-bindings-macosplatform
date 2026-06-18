@@ -56,8 +56,8 @@ func (x *MonitoringEvent) Refinement() *Condition {
 }
 
 // State calls the underlying State.
-func (x *MonitoringEvent) State() raw.CLMonitoringState {
-	return x.inner.State()
+func (x *MonitoringEvent) State() CLMonitoringState {
+	return CLMonitoringState(x.inner.State())
 }
 
 // Date calls the underlying Date.
@@ -120,7 +120,7 @@ type MonitoringEventable interface {
 	Unwrap() *raw.CLMonitoringEvent
 	Identifier() string
 	Refinement() *Condition
-	State() raw.CLMonitoringState
+	State() CLMonitoringState
 	Date() *foundation.NSDate
 	AuthorizationDenied() bool
 	AuthorizationDeniedGlobally() bool

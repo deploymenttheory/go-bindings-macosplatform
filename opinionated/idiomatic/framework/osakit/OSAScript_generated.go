@@ -47,9 +47,9 @@ func NewScriptWithSourceLanguage(source string, language *raw.OSALanguage) *Scri
 }
 
 // NewScriptWithSourceFromURLLanguageInstanceUsingStorageOptions creates a new [Script].
-func NewScriptWithSourceFromURLLanguageInstanceUsingStorageOptions(source string, url string, instance *raw.OSALanguageInstance, storageOptions raw.OSAStorageOptions) *Script {
+func NewScriptWithSourceFromURLLanguageInstanceUsingStorageOptions(source string, url string, instance *raw.OSALanguageInstance, storageOptions OSAStorageOptions) *Script {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("OSAScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:fromURL:languageInstance:usingStorageOptions:"), foundation.NSStringStringWithUTF8String(source).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), instance.Ptr(), storageOptions)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:fromURL:languageInstance:usingStorageOptions:"), foundation.NSStringStringWithUTF8String(source).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), instance.Ptr(), raw.OSAStorageOptions(storageOptions))
 	return &Script{inner: raw.OSAScriptFromID(_id)}
 }
 
@@ -68,10 +68,10 @@ func NewScriptWithContentsOfURLLanguageError(url string, language *raw.OSALangua
 }
 
 // NewScriptWithContentsOfURLLanguageInstanceUsingStorageOptionsError creates a new [Script].
-func NewScriptWithContentsOfURLLanguageInstanceUsingStorageOptionsError(url string, instance *raw.OSALanguageInstance, storageOptions raw.OSAStorageOptions) (*Script, error) {
+func NewScriptWithContentsOfURLLanguageInstanceUsingStorageOptionsError(url string, instance *raw.OSALanguageInstance, storageOptions OSAStorageOptions) (*Script, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("OSAScript")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:languageInstance:usingStorageOptions:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), instance.Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:languageInstance:usingStorageOptions:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), instance.Ptr(), raw.OSAStorageOptions(storageOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -86,10 +86,10 @@ func NewScriptWithCompiledDataError(data *foundation.NSData, errorInfo *foundati
 }
 
 // NewScriptWithCompiledDataFromURLUsingStorageOptionsError creates a new [Script].
-func NewScriptWithCompiledDataFromURLUsingStorageOptionsError(data *foundation.NSData, url string, storageOptions raw.OSAStorageOptions) (*Script, error) {
+func NewScriptWithCompiledDataFromURLUsingStorageOptionsError(data *foundation.NSData, url string, storageOptions OSAStorageOptions) (*Script, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("OSAScript")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompiledData:fromURL:usingStorageOptions:error:"), data.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompiledData:fromURL:usingStorageOptions:error:"), data.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), raw.OSAStorageOptions(storageOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -97,10 +97,10 @@ func NewScriptWithCompiledDataFromURLUsingStorageOptionsError(data *foundation.N
 }
 
 // NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptionsError creates a new [Script].
-func NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptionsError(data *foundation.NSAppleEventDescriptor, url string, instance *raw.OSALanguageInstance, storageOptions raw.OSAStorageOptions) (*Script, error) {
+func NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptionsError(data *foundation.NSAppleEventDescriptor, url string, instance *raw.OSALanguageInstance, storageOptions OSAStorageOptions) (*Script, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("OSAScript")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScriptDataDescriptor:fromURL:languageInstance:usingStorageOptions:error:"), data.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), instance.Ptr(), storageOptions, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScriptDataDescriptor:fromURL:languageInstance:usingStorageOptions:error:"), data.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), instance.Ptr(), raw.OSAStorageOptions(storageOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -149,13 +149,13 @@ func (x *Script) WriteToURLOfTypeError(url string, type_ string, errorInfo *foun
 }
 
 // WriteToURLOfTypeUsingStorageOptionsError calls the underlying WriteToURLOfTypeUsingStorageOptionsError.
-func (x *Script) WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions raw.OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	return x.inner.WriteToURLOfTypeUsingStorageOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(type_), storageOptions, errorInfo)
+func (x *Script) WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
+	return x.inner.WriteToURLOfTypeUsingStorageOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(type_), raw.OSAStorageOptions(storageOptions), errorInfo)
 }
 
 // CompiledDataForTypeUsingStorageOptionsError calls the underlying CompiledDataForTypeUsingStorageOptionsError.
-func (x *Script) CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions raw.OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
-	return x.inner.CompiledDataForTypeUsingStorageOptionsError(foundation.NSStringStringWithUTF8String(type_), storageOptions, errorInfo)
+func (x *Script) CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
+	return x.inner.CompiledDataForTypeUsingStorageOptionsError(foundation.NSStringStringWithUTF8String(type_), raw.OSAStorageOptions(storageOptions), errorInfo)
 }
 
 // Source calls the underlying Source.
@@ -217,8 +217,8 @@ type Scriptable interface {
 	ExecuteHandlerWithNameArgumentsError(name string, arguments *foundation.NSArray[objc.ID], errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSAppleEventDescriptor
 	RichTextFromDescriptor(descriptor *foundation.NSAppleEventDescriptor) *foundation.NSAttributedString
 	WriteToURLOfTypeError(url string, type_ string, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
-	WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions raw.OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
-	CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions raw.OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData
+	WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
+	CompiledDataForTypeUsingStorageOptionsError(type_ string, storageOptions OSAStorageOptions, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData
 	Source() string
 	Url() *foundation.NSURL
 	Language() *Language

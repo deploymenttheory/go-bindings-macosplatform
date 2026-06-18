@@ -112,8 +112,8 @@ func (x *Drawing) Bounds() corefoundation.CGRect {
 }
 
 // RequiredContentVersion calls the underlying RequiredContentVersion.
-func (x *Drawing) RequiredContentVersion() raw.PKContentVersion {
-	return x.inner.RequiredContentVersion()
+func (x *Drawing) RequiredContentVersion() PKContentVersion {
+	return PKContentVersion(x.inner.RequiredContentVersion())
 }
 
 // Drawingable is the interface implemented by [Drawing], for mocking and DI.
@@ -126,7 +126,7 @@ type Drawingable interface {
 	DrawingByAppendingStrokes(strokes *foundation.NSArray[*raw.PKStroke]) *Drawing
 	Strokes() []*Stroke
 	Bounds() corefoundation.CGRect
-	RequiredContentVersion() raw.PKContentVersion
+	RequiredContentVersion() PKContentVersion
 }
 
 var _ Drawingable = (*Drawing)(nil)

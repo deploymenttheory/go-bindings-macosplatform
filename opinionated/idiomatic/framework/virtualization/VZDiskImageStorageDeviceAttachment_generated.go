@@ -46,10 +46,10 @@ func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyError(url string, readOnl
 }
 
 // NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError creates a new [DiskImageStorageDeviceAttachment].
-func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError(url string, readOnly bool, cachingMode raw.VZDiskImageCachingMode, synchronizationMode raw.VZDiskImageSynchronizationMode) (*DiskImageStorageDeviceAttachment, error) {
+func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizationModeError(url string, readOnly bool, cachingMode VZDiskImageCachingMode, synchronizationMode VZDiskImageSynchronizationMode) (*DiskImageStorageDeviceAttachment, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDiskImageStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:cachingMode:synchronizationMode:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), readOnly, cachingMode, synchronizationMode, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:cachingMode:synchronizationMode:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), readOnly, raw.VZDiskImageCachingMode(cachingMode), raw.VZDiskImageSynchronizationMode(synchronizationMode), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -67,13 +67,13 @@ func (x *DiskImageStorageDeviceAttachment) IsReadOnly() bool {
 }
 
 // CachingMode calls the underlying CachingMode.
-func (x *DiskImageStorageDeviceAttachment) CachingMode() raw.VZDiskImageCachingMode {
-	return x.inner.CachingMode()
+func (x *DiskImageStorageDeviceAttachment) CachingMode() VZDiskImageCachingMode {
+	return VZDiskImageCachingMode(x.inner.CachingMode())
 }
 
 // SynchronizationMode calls the underlying SynchronizationMode.
-func (x *DiskImageStorageDeviceAttachment) SynchronizationMode() raw.VZDiskImageSynchronizationMode {
-	return x.inner.SynchronizationMode()
+func (x *DiskImageStorageDeviceAttachment) SynchronizationMode() VZDiskImageSynchronizationMode {
+	return VZDiskImageSynchronizationMode(x.inner.SynchronizationMode())
 }
 
 func (x *DiskImageStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment {
@@ -85,8 +85,8 @@ type DiskImageStorageDeviceAttachmentable interface {
 	Unwrap() *raw.VZDiskImageStorageDeviceAttachment
 	URL() *foundation.NSURL
 	IsReadOnly() bool
-	CachingMode() raw.VZDiskImageCachingMode
-	SynchronizationMode() raw.VZDiskImageSynchronizationMode
+	CachingMode() VZDiskImageCachingMode
+	SynchronizationMode() VZDiskImageSynchronizationMode
 }
 
 var _ DiskImageStorageDeviceAttachmentable = (*DiskImageStorageDeviceAttachment)(nil)

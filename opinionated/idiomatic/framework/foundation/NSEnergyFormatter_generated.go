@@ -42,8 +42,8 @@ func (x *EnergyFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) 
 }
 
 // WithUnitStyle sets the unitStyle property and returns the receiver for chaining.
-func (x *EnergyFormatter) WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *EnergyFormatter {
-	x.inner.SetUnitStyle(unitStyle)
+func (x *EnergyFormatter) WithUnitStyle(unitStyle NSFormattingUnitStyle) *EnergyFormatter {
+	x.inner.SetUnitStyle(raw.NSFormattingUnitStyle(unitStyle))
 	return x
 }
 
@@ -60,8 +60,8 @@ func (x *EnergyFormatter) WithScriptingProperties(scriptingProperties *raw.NSDic
 }
 
 // StringFromValueUnit calls the underlying StringFromValueUnit.
-func (x *EnergyFormatter) StringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String {
-	_r := x.inner.StringFromValueUnit(value, unit)
+func (x *EnergyFormatter) StringFromValueUnit(value float64, unit NSEnergyFormatterUnit) *String {
+	_r := x.inner.StringFromValueUnit(value, raw.NSEnergyFormatterUnit(unit))
 	if _r == nil {
 		return nil
 	}
@@ -78,8 +78,8 @@ func (x *EnergyFormatter) StringFromJoules(numberInJoules float64) *String {
 }
 
 // UnitStringFromValueUnit calls the underlying UnitStringFromValueUnit.
-func (x *EnergyFormatter) UnitStringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String {
-	_r := x.inner.UnitStringFromValueUnit(value, unit)
+func (x *EnergyFormatter) UnitStringFromValueUnit(value float64, unit NSEnergyFormatterUnit) *String {
+	_r := x.inner.UnitStringFromValueUnit(value, raw.NSEnergyFormatterUnit(unit))
 	if _r == nil {
 		return nil
 	}
@@ -110,13 +110,13 @@ func (x *EnergyFormatter) SetNumberFormatter(numberFormatter *raw.NSNumberFormat
 }
 
 // UnitStyle calls the underlying UnitStyle.
-func (x *EnergyFormatter) UnitStyle() raw.NSFormattingUnitStyle {
-	return x.inner.UnitStyle()
+func (x *EnergyFormatter) UnitStyle() NSFormattingUnitStyle {
+	return NSFormattingUnitStyle(x.inner.UnitStyle())
 }
 
 // SetUnitStyle calls the underlying SetUnitStyle.
-func (x *EnergyFormatter) SetUnitStyle(unitStyle raw.NSFormattingUnitStyle) {
-	x.inner.SetUnitStyle(unitStyle)
+func (x *EnergyFormatter) SetUnitStyle(unitStyle NSFormattingUnitStyle) {
+	x.inner.SetUnitStyle(raw.NSFormattingUnitStyle(unitStyle))
 }
 
 // IsForFoodEnergyUse calls the underlying IsForFoodEnergyUse.
@@ -137,17 +137,17 @@ func (x *EnergyFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter
 type EnergyFormatterable interface {
 	Unwrap() *raw.NSEnergyFormatter
 	WithNumberFormatter(numberFormatter *NumberFormatter) *EnergyFormatter
-	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *EnergyFormatter
+	WithUnitStyle(unitStyle NSFormattingUnitStyle) *EnergyFormatter
 	WithForFoodEnergyUse(forFoodEnergyUse bool) *EnergyFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *EnergyFormatter
-	StringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String
+	StringFromValueUnit(value float64, unit NSEnergyFormatterUnit) *String
 	StringFromJoules(numberInJoules float64) *String
-	UnitStringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String
+	UnitStringFromValueUnit(value float64, unit NSEnergyFormatterUnit) *String
 	UnitStringFromJoulesUsedUnit(numberInJoules float64, unitp *raw.NSEnergyFormatterUnit) *String
 	NumberFormatter() *NumberFormatter
 	SetNumberFormatter(numberFormatter *raw.NSNumberFormatter)
-	UnitStyle() raw.NSFormattingUnitStyle
-	SetUnitStyle(unitStyle raw.NSFormattingUnitStyle)
+	UnitStyle() NSFormattingUnitStyle
+	SetUnitStyle(unitStyle NSFormattingUnitStyle)
 	IsForFoodEnergyUse() bool
 	SetForFoodEnergyUse(forFoodEnergyUse bool)
 }

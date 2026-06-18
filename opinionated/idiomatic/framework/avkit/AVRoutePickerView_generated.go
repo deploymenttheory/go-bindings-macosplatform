@@ -56,13 +56,13 @@ func (x *RoutePickerView) WithRoutePickerButtonBordered(routePickerButtonBordere
 }
 
 // RoutePickerButtonColorForState calls the underlying RoutePickerButtonColorForState.
-func (x *RoutePickerView) RoutePickerButtonColorForState(state raw.AVRoutePickerViewButtonState) *appkit.NSColor {
-	return x.inner.RoutePickerButtonColorForState(state)
+func (x *RoutePickerView) RoutePickerButtonColorForState(state AVRoutePickerViewButtonState) *appkit.NSColor {
+	return x.inner.RoutePickerButtonColorForState(raw.AVRoutePickerViewButtonState(state))
 }
 
 // SetRoutePickerButtonColorForState calls the underlying SetRoutePickerButtonColorForState.
-func (x *RoutePickerView) SetRoutePickerButtonColorForState(color *appkit.NSColor, state raw.AVRoutePickerViewButtonState) {
-	x.inner.SetRoutePickerButtonColorForState(color, state)
+func (x *RoutePickerView) SetRoutePickerButtonColorForState(color *appkit.NSColor, state AVRoutePickerViewButtonState) {
+	x.inner.SetRoutePickerButtonColorForState(color, raw.AVRoutePickerViewButtonState(state))
 }
 
 // Delegate calls the underlying Delegate.
@@ -101,8 +101,8 @@ type RoutePickerViewable interface {
 	WithDelegate(delegate raw.AVRoutePickerViewDelegate) *RoutePickerView
 	WithPlayer(player *avfoundation.AVPlayer) *RoutePickerView
 	WithRoutePickerButtonBordered(routePickerButtonBordered bool) *RoutePickerView
-	RoutePickerButtonColorForState(state raw.AVRoutePickerViewButtonState) *appkit.NSColor
-	SetRoutePickerButtonColorForState(color *appkit.NSColor, state raw.AVRoutePickerViewButtonState)
+	RoutePickerButtonColorForState(state AVRoutePickerViewButtonState) *appkit.NSColor
+	SetRoutePickerButtonColorForState(color *appkit.NSColor, state AVRoutePickerViewButtonState)
 	Delegate() raw.AVRoutePickerViewDelegate
 	SetDelegate(delegate raw.AVRoutePickerViewDelegate)
 	Player() *avfoundation.AVPlayer

@@ -45,8 +45,8 @@ func (x *Database) AddOperation(operation *raw.CKDatabaseOperation) {
 }
 
 // DatabaseScope calls the underlying DatabaseScope.
-func (x *Database) DatabaseScope() raw.CKDatabaseScope {
-	return x.inner.DatabaseScope()
+func (x *Database) DatabaseScope() CKDatabaseScope {
+	return CKDatabaseScope(x.inner.DatabaseScope())
 }
 
 // FetchRecordWithID blocks until the operation completes or ctx is cancelled.
@@ -359,7 +359,7 @@ func (x *Database) DeleteSubscriptionWithID(ctx context.Context, subscriptionID 
 type Databaseable interface {
 	Unwrap() *raw.CKDatabase
 	AddOperation(operation *raw.CKDatabaseOperation)
-	DatabaseScope() raw.CKDatabaseScope
+	DatabaseScope() CKDatabaseScope
 	FetchRecordWithID(ctx context.Context, recordID *raw.CKRecordID) (*Record, error)
 	SaveRecord(ctx context.Context, record *raw.CKRecord) (*Record, error)
 	DeleteRecordWithID(ctx context.Context, recordID *raw.CKRecordID) (*RecordID, error)

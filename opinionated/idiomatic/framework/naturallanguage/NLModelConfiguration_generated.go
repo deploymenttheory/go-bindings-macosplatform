@@ -37,8 +37,8 @@ func NewModelConfiguration() *ModelConfiguration {
 }
 
 // Type calls the underlying Type.
-func (x *ModelConfiguration) Type() raw.NLModelType {
-	return x.inner.Type()
+func (x *ModelConfiguration) Type() NLModelType {
+	return NLModelType(x.inner.Type())
 }
 
 // Language calls the underlying Language.
@@ -58,7 +58,7 @@ func (x *ModelConfiguration) Revision() uint {
 // ModelConfigurationable is the interface implemented by [ModelConfiguration], for mocking and DI.
 type ModelConfigurationable interface {
 	Unwrap() *raw.NLModelConfiguration
-	Type() raw.NLModelType
+	Type() NLModelType
 	Language() string
 	Revision() uint
 }

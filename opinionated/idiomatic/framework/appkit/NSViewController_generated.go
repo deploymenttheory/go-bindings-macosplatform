@@ -313,19 +313,19 @@ func (x *ViewController) PresentViewControllerAsModalWindow(viewController *raw.
 }
 
 // PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior calls the underlying PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior.
-func (x *ViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior raw.NSPopoverBehavior) {
-	x.inner.PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController, positioningRect, positioningView, preferredEdge, behavior)
+func (x *ViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior) {
+	x.inner.PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController, positioningRect, positioningView, preferredEdge, raw.NSPopoverBehavior(behavior))
 }
 
 // PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent calls the underlying PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent.
-func (x *ViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior raw.NSPopoverBehavior, hasFullSizeContent bool) {
-	x.inner.PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController, positioningRect, positioningView, preferredEdge, behavior, hasFullSizeContent)
+func (x *ViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior, hasFullSizeContent bool) {
+	x.inner.PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController, positioningRect, positioningView, preferredEdge, raw.NSPopoverBehavior(behavior), hasFullSizeContent)
 }
 
 // TransitionFromViewControllerToViewControllerOptions blocks until the operation completes or ctx is cancelled.
-func (x *ViewController) TransitionFromViewControllerToViewControllerOptions(ctx context.Context, fromViewController *raw.NSViewController, toViewController *raw.NSViewController, options raw.NSViewControllerTransitionOptions) error {
+func (x *ViewController) TransitionFromViewControllerToViewControllerOptions(ctx context.Context, fromViewController *raw.NSViewController, toViewController *raw.NSViewController, options NSViewControllerTransitionOptions) error {
 	_ch := make(chan error, 1)
-	x.inner.TransitionFromViewControllerToViewControllerOptionsCompletionHandler(fromViewController, toViewController, options, func() {
+	x.inner.TransitionFromViewControllerToViewControllerOptionsCompletionHandler(fromViewController, toViewController, raw.NSViewControllerTransitionOptions(options), func() {
 		_ch <- nil
 	})
 	select {
@@ -489,9 +489,9 @@ type ViewControllerable interface {
 	PresentingViewController() *ViewController
 	PresentViewControllerAsSheet(viewController *raw.NSViewController)
 	PresentViewControllerAsModalWindow(viewController *raw.NSViewController)
-	PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior raw.NSPopoverBehavior)
-	PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior raw.NSPopoverBehavior, hasFullSizeContent bool)
-	TransitionFromViewControllerToViewControllerOptions(ctx context.Context, fromViewController *raw.NSViewController, toViewController *raw.NSViewController, options raw.NSViewControllerTransitionOptions) error
+	PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior)
+	PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior, hasFullSizeContent bool)
+	TransitionFromViewControllerToViewControllerOptions(ctx context.Context, fromViewController *raw.NSViewController, toViewController *raw.NSViewController, options NSViewControllerTransitionOptions) error
 	AddChildViewController(childViewController *raw.NSViewController)
 	RemoveFromParentViewController()
 	InsertChildViewControllerAtIndex(childViewController *raw.NSViewController, index int)

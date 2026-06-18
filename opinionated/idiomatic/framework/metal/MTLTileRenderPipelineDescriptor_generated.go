@@ -86,8 +86,8 @@ func (x *TileRenderPipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth u
 }
 
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
-func (x *TileRenderPipelineDescriptor) WithShaderValidation(shaderValidation raw.MTLShaderValidation) *TileRenderPipelineDescriptor {
-	x.inner.SetShaderValidation(shaderValidation)
+func (x *TileRenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *TileRenderPipelineDescriptor {
+	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 	return x
 }
 
@@ -229,13 +229,13 @@ func (x *TileRenderPipelineDescriptor) SetMaxCallStackDepth(maxCallStackDepth ui
 }
 
 // ShaderValidation calls the underlying ShaderValidation.
-func (x *TileRenderPipelineDescriptor) ShaderValidation() raw.MTLShaderValidation {
-	return x.inner.ShaderValidation()
+func (x *TileRenderPipelineDescriptor) ShaderValidation() MTLShaderValidation {
+	return MTLShaderValidation(x.inner.ShaderValidation())
 }
 
 // SetShaderValidation calls the underlying SetShaderValidation.
-func (x *TileRenderPipelineDescriptor) SetShaderValidation(shaderValidation raw.MTLShaderValidation) {
-	x.inner.SetShaderValidation(shaderValidation)
+func (x *TileRenderPipelineDescriptor) SetShaderValidation(shaderValidation MTLShaderValidation) {
+	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 }
 
 // RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
@@ -259,7 +259,7 @@ type TileRenderPipelineDescriptorable interface {
 	WithLinkedFunctions(linkedFunctions *LinkedFunctions) *TileRenderPipelineDescriptor
 	WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *TileRenderPipelineDescriptor
 	WithMaxCallStackDepth(maxCallStackDepth uint) *TileRenderPipelineDescriptor
-	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *TileRenderPipelineDescriptor
+	WithShaderValidation(shaderValidation MTLShaderValidation) *TileRenderPipelineDescriptor
 	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *TileRenderPipelineDescriptor
 	Reset()
 	Label() string
@@ -284,8 +284,8 @@ type TileRenderPipelineDescriptorable interface {
 	SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool)
 	MaxCallStackDepth() uint
 	SetMaxCallStackDepth(maxCallStackDepth uint)
-	ShaderValidation() raw.MTLShaderValidation
-	SetShaderValidation(shaderValidation raw.MTLShaderValidation)
+	ShaderValidation() MTLShaderValidation
+	SetShaderValidation(shaderValidation MTLShaderValidation)
 	RequiredThreadsPerThreadgroup() raw.MTLSize
 	SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize)
 }

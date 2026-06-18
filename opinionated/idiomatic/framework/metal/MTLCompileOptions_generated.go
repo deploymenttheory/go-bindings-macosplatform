@@ -50,26 +50,26 @@ func (x *CompileOptions) WithFastMathEnabled(fastMathEnabled bool) *CompileOptio
 }
 
 // WithMathMode sets the mathMode property and returns the receiver for chaining.
-func (x *CompileOptions) WithMathMode(mathMode raw.MTLMathMode) *CompileOptions {
-	x.inner.SetMathMode(mathMode)
+func (x *CompileOptions) WithMathMode(mathMode MTLMathMode) *CompileOptions {
+	x.inner.SetMathMode(raw.MTLMathMode(mathMode))
 	return x
 }
 
 // WithMathFloatingPointFunctions sets the mathFloatingPointFunctions property and returns the receiver for chaining.
-func (x *CompileOptions) WithMathFloatingPointFunctions(mathFloatingPointFunctions raw.MTLMathFloatingPointFunctions) *CompileOptions {
-	x.inner.SetMathFloatingPointFunctions(mathFloatingPointFunctions)
+func (x *CompileOptions) WithMathFloatingPointFunctions(mathFloatingPointFunctions MTLMathFloatingPointFunctions) *CompileOptions {
+	x.inner.SetMathFloatingPointFunctions(raw.MTLMathFloatingPointFunctions(mathFloatingPointFunctions))
 	return x
 }
 
 // WithLanguageVersion sets the languageVersion property and returns the receiver for chaining.
-func (x *CompileOptions) WithLanguageVersion(languageVersion raw.MTLLanguageVersion) *CompileOptions {
-	x.inner.SetLanguageVersion(languageVersion)
+func (x *CompileOptions) WithLanguageVersion(languageVersion MTLLanguageVersion) *CompileOptions {
+	x.inner.SetLanguageVersion(raw.MTLLanguageVersion(languageVersion))
 	return x
 }
 
 // WithLibraryType sets the libraryType property and returns the receiver for chaining.
-func (x *CompileOptions) WithLibraryType(libraryType raw.MTLLibraryType) *CompileOptions {
-	x.inner.SetLibraryType(libraryType)
+func (x *CompileOptions) WithLibraryType(libraryType MTLLibraryType) *CompileOptions {
+	x.inner.SetLibraryType(raw.MTLLibraryType(libraryType))
 	return x
 }
 
@@ -86,14 +86,14 @@ func (x *CompileOptions) WithPreserveInvariance(preserveInvariance bool) *Compil
 }
 
 // WithOptimizationLevel sets the optimizationLevel property and returns the receiver for chaining.
-func (x *CompileOptions) WithOptimizationLevel(optimizationLevel raw.MTLLibraryOptimizationLevel) *CompileOptions {
-	x.inner.SetOptimizationLevel(optimizationLevel)
+func (x *CompileOptions) WithOptimizationLevel(optimizationLevel MTLLibraryOptimizationLevel) *CompileOptions {
+	x.inner.SetOptimizationLevel(raw.MTLLibraryOptimizationLevel(optimizationLevel))
 	return x
 }
 
 // WithCompileSymbolVisibility sets the compileSymbolVisibility property and returns the receiver for chaining.
-func (x *CompileOptions) WithCompileSymbolVisibility(compileSymbolVisibility raw.MTLCompileSymbolVisibility) *CompileOptions {
-	x.inner.SetCompileSymbolVisibility(compileSymbolVisibility)
+func (x *CompileOptions) WithCompileSymbolVisibility(compileSymbolVisibility MTLCompileSymbolVisibility) *CompileOptions {
+	x.inner.SetCompileSymbolVisibility(raw.MTLCompileSymbolVisibility(compileSymbolVisibility))
 	return x
 }
 
@@ -142,43 +142,43 @@ func (x *CompileOptions) SetFastMathEnabled(fastMathEnabled bool) {
 }
 
 // MathMode calls the underlying MathMode.
-func (x *CompileOptions) MathMode() raw.MTLMathMode {
-	return x.inner.MathMode()
+func (x *CompileOptions) MathMode() MTLMathMode {
+	return MTLMathMode(x.inner.MathMode())
 }
 
 // SetMathMode calls the underlying SetMathMode.
-func (x *CompileOptions) SetMathMode(mathMode raw.MTLMathMode) {
-	x.inner.SetMathMode(mathMode)
+func (x *CompileOptions) SetMathMode(mathMode MTLMathMode) {
+	x.inner.SetMathMode(raw.MTLMathMode(mathMode))
 }
 
 // MathFloatingPointFunctions calls the underlying MathFloatingPointFunctions.
-func (x *CompileOptions) MathFloatingPointFunctions() raw.MTLMathFloatingPointFunctions {
-	return x.inner.MathFloatingPointFunctions()
+func (x *CompileOptions) MathFloatingPointFunctions() MTLMathFloatingPointFunctions {
+	return MTLMathFloatingPointFunctions(x.inner.MathFloatingPointFunctions())
 }
 
 // SetMathFloatingPointFunctions calls the underlying SetMathFloatingPointFunctions.
-func (x *CompileOptions) SetMathFloatingPointFunctions(mathFloatingPointFunctions raw.MTLMathFloatingPointFunctions) {
-	x.inner.SetMathFloatingPointFunctions(mathFloatingPointFunctions)
+func (x *CompileOptions) SetMathFloatingPointFunctions(mathFloatingPointFunctions MTLMathFloatingPointFunctions) {
+	x.inner.SetMathFloatingPointFunctions(raw.MTLMathFloatingPointFunctions(mathFloatingPointFunctions))
 }
 
 // LanguageVersion calls the underlying LanguageVersion.
-func (x *CompileOptions) LanguageVersion() raw.MTLLanguageVersion {
-	return x.inner.LanguageVersion()
+func (x *CompileOptions) LanguageVersion() MTLLanguageVersion {
+	return MTLLanguageVersion(x.inner.LanguageVersion())
 }
 
 // SetLanguageVersion calls the underlying SetLanguageVersion.
-func (x *CompileOptions) SetLanguageVersion(languageVersion raw.MTLLanguageVersion) {
-	x.inner.SetLanguageVersion(languageVersion)
+func (x *CompileOptions) SetLanguageVersion(languageVersion MTLLanguageVersion) {
+	x.inner.SetLanguageVersion(raw.MTLLanguageVersion(languageVersion))
 }
 
 // LibraryType calls the underlying LibraryType.
-func (x *CompileOptions) LibraryType() raw.MTLLibraryType {
-	return x.inner.LibraryType()
+func (x *CompileOptions) LibraryType() MTLLibraryType {
+	return MTLLibraryType(x.inner.LibraryType())
 }
 
 // SetLibraryType calls the underlying SetLibraryType.
-func (x *CompileOptions) SetLibraryType(libraryType raw.MTLLibraryType) {
-	x.inner.SetLibraryType(libraryType)
+func (x *CompileOptions) SetLibraryType(libraryType MTLLibraryType) {
+	x.inner.SetLibraryType(raw.MTLLibraryType(libraryType))
 }
 
 // InstallName calls the underlying InstallName.
@@ -216,23 +216,23 @@ func (x *CompileOptions) SetPreserveInvariance(preserveInvariance bool) {
 }
 
 // OptimizationLevel calls the underlying OptimizationLevel.
-func (x *CompileOptions) OptimizationLevel() raw.MTLLibraryOptimizationLevel {
-	return x.inner.OptimizationLevel()
+func (x *CompileOptions) OptimizationLevel() MTLLibraryOptimizationLevel {
+	return MTLLibraryOptimizationLevel(x.inner.OptimizationLevel())
 }
 
 // SetOptimizationLevel calls the underlying SetOptimizationLevel.
-func (x *CompileOptions) SetOptimizationLevel(optimizationLevel raw.MTLLibraryOptimizationLevel) {
-	x.inner.SetOptimizationLevel(optimizationLevel)
+func (x *CompileOptions) SetOptimizationLevel(optimizationLevel MTLLibraryOptimizationLevel) {
+	x.inner.SetOptimizationLevel(raw.MTLLibraryOptimizationLevel(optimizationLevel))
 }
 
 // CompileSymbolVisibility calls the underlying CompileSymbolVisibility.
-func (x *CompileOptions) CompileSymbolVisibility() raw.MTLCompileSymbolVisibility {
-	return x.inner.CompileSymbolVisibility()
+func (x *CompileOptions) CompileSymbolVisibility() MTLCompileSymbolVisibility {
+	return MTLCompileSymbolVisibility(x.inner.CompileSymbolVisibility())
 }
 
 // SetCompileSymbolVisibility calls the underlying SetCompileSymbolVisibility.
-func (x *CompileOptions) SetCompileSymbolVisibility(compileSymbolVisibility raw.MTLCompileSymbolVisibility) {
-	x.inner.SetCompileSymbolVisibility(compileSymbolVisibility)
+func (x *CompileOptions) SetCompileSymbolVisibility(compileSymbolVisibility MTLCompileSymbolVisibility) {
+	x.inner.SetCompileSymbolVisibility(raw.MTLCompileSymbolVisibility(compileSymbolVisibility))
 }
 
 // AllowReferencingUndefinedSymbols calls the underlying AllowReferencingUndefinedSymbols.
@@ -280,14 +280,14 @@ type CompileOptionsable interface {
 	Unwrap() *raw.MTLCompileOptions
 	WithPreprocessorMacros(preprocessorMacros *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) *CompileOptions
 	WithFastMathEnabled(fastMathEnabled bool) *CompileOptions
-	WithMathMode(mathMode raw.MTLMathMode) *CompileOptions
-	WithMathFloatingPointFunctions(mathFloatingPointFunctions raw.MTLMathFloatingPointFunctions) *CompileOptions
-	WithLanguageVersion(languageVersion raw.MTLLanguageVersion) *CompileOptions
-	WithLibraryType(libraryType raw.MTLLibraryType) *CompileOptions
+	WithMathMode(mathMode MTLMathMode) *CompileOptions
+	WithMathFloatingPointFunctions(mathFloatingPointFunctions MTLMathFloatingPointFunctions) *CompileOptions
+	WithLanguageVersion(languageVersion MTLLanguageVersion) *CompileOptions
+	WithLibraryType(libraryType MTLLibraryType) *CompileOptions
 	WithInstallName(installName string) *CompileOptions
 	WithPreserveInvariance(preserveInvariance bool) *CompileOptions
-	WithOptimizationLevel(optimizationLevel raw.MTLLibraryOptimizationLevel) *CompileOptions
-	WithCompileSymbolVisibility(compileSymbolVisibility raw.MTLCompileSymbolVisibility) *CompileOptions
+	WithOptimizationLevel(optimizationLevel MTLLibraryOptimizationLevel) *CompileOptions
+	WithCompileSymbolVisibility(compileSymbolVisibility MTLCompileSymbolVisibility) *CompileOptions
 	WithAllowReferencingUndefinedSymbols(allowReferencingUndefinedSymbols bool) *CompileOptions
 	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *CompileOptions
 	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *CompileOptions
@@ -296,24 +296,24 @@ type CompileOptionsable interface {
 	SetPreprocessorMacros(preprocessorMacros *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject])
 	FastMathEnabled() bool
 	SetFastMathEnabled(fastMathEnabled bool)
-	MathMode() raw.MTLMathMode
-	SetMathMode(mathMode raw.MTLMathMode)
-	MathFloatingPointFunctions() raw.MTLMathFloatingPointFunctions
-	SetMathFloatingPointFunctions(mathFloatingPointFunctions raw.MTLMathFloatingPointFunctions)
-	LanguageVersion() raw.MTLLanguageVersion
-	SetLanguageVersion(languageVersion raw.MTLLanguageVersion)
-	LibraryType() raw.MTLLibraryType
-	SetLibraryType(libraryType raw.MTLLibraryType)
+	MathMode() MTLMathMode
+	SetMathMode(mathMode MTLMathMode)
+	MathFloatingPointFunctions() MTLMathFloatingPointFunctions
+	SetMathFloatingPointFunctions(mathFloatingPointFunctions MTLMathFloatingPointFunctions)
+	LanguageVersion() MTLLanguageVersion
+	SetLanguageVersion(languageVersion MTLLanguageVersion)
+	LibraryType() MTLLibraryType
+	SetLibraryType(libraryType MTLLibraryType)
 	InstallName() string
 	SetInstallName(installName string)
 	Libraries() *foundation.NSArray[raw.MTLDynamicLibrary]
 	SetLibraries(libraries *foundation.NSArray[raw.MTLDynamicLibrary])
 	PreserveInvariance() bool
 	SetPreserveInvariance(preserveInvariance bool)
-	OptimizationLevel() raw.MTLLibraryOptimizationLevel
-	SetOptimizationLevel(optimizationLevel raw.MTLLibraryOptimizationLevel)
-	CompileSymbolVisibility() raw.MTLCompileSymbolVisibility
-	SetCompileSymbolVisibility(compileSymbolVisibility raw.MTLCompileSymbolVisibility)
+	OptimizationLevel() MTLLibraryOptimizationLevel
+	SetOptimizationLevel(optimizationLevel MTLLibraryOptimizationLevel)
+	CompileSymbolVisibility() MTLCompileSymbolVisibility
+	SetCompileSymbolVisibility(compileSymbolVisibility MTLCompileSymbolVisibility)
 	AllowReferencingUndefinedSymbols() bool
 	SetAllowReferencingUndefinedSymbols(allowReferencingUndefinedSymbols bool)
 	MaxTotalThreadsPerThreadgroup() uint

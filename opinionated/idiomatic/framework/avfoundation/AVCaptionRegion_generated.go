@@ -67,18 +67,18 @@ func (x *CaptionRegion) Size() raw.AVCaptionSize {
 }
 
 // Scroll calls the underlying Scroll.
-func (x *CaptionRegion) Scroll() raw.AVCaptionRegionScroll {
-	return x.inner.Scroll()
+func (x *CaptionRegion) Scroll() AVCaptionRegionScroll {
+	return AVCaptionRegionScroll(x.inner.Scroll())
 }
 
 // DisplayAlignment calls the underlying DisplayAlignment.
-func (x *CaptionRegion) DisplayAlignment() raw.AVCaptionRegionDisplayAlignment {
-	return x.inner.DisplayAlignment()
+func (x *CaptionRegion) DisplayAlignment() AVCaptionRegionDisplayAlignment {
+	return AVCaptionRegionDisplayAlignment(x.inner.DisplayAlignment())
 }
 
 // WritingMode calls the underlying WritingMode.
-func (x *CaptionRegion) WritingMode() raw.AVCaptionRegionWritingMode {
-	return x.inner.WritingMode()
+func (x *CaptionRegion) WritingMode() AVCaptionRegionWritingMode {
+	return AVCaptionRegionWritingMode(x.inner.WritingMode())
 }
 
 func (x *CaptionRegion) asCaptionRegion() *raw.AVCaptionRegion { return x.inner }
@@ -91,9 +91,9 @@ type CaptionRegionable interface {
 	Identifier() string
 	Origin() raw.AVCaptionPoint
 	Size() raw.AVCaptionSize
-	Scroll() raw.AVCaptionRegionScroll
-	DisplayAlignment() raw.AVCaptionRegionDisplayAlignment
-	WritingMode() raw.AVCaptionRegionWritingMode
+	Scroll() AVCaptionRegionScroll
+	DisplayAlignment() AVCaptionRegionDisplayAlignment
+	WritingMode() AVCaptionRegionWritingMode
 }
 
 var _ CaptionRegionable = (*CaptionRegion)(nil)

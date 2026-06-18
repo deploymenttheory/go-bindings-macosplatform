@@ -46,8 +46,8 @@ func (x *SmartCardSlot) MakeSmartCard() *SmartCard {
 }
 
 // State calls the underlying State.
-func (x *SmartCardSlot) State() raw.TKSmartCardSlotState {
-	return x.inner.State()
+func (x *SmartCardSlot) State() TKSmartCardSlotState {
+	return TKSmartCardSlotState(x.inner.State())
 }
 
 // ATR calls the underlying ATR.
@@ -82,7 +82,7 @@ func (x *SmartCardSlot) MaxOutputLength() int {
 type SmartCardSlotable interface {
 	Unwrap() *raw.TKSmartCardSlot
 	MakeSmartCard() *SmartCard
-	State() raw.TKSmartCardSlotState
+	State() TKSmartCardSlotState
 	ATR() *SmartCardATR
 	Name() string
 	MaxInputLength() int

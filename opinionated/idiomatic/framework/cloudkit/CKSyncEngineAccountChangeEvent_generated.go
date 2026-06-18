@@ -36,8 +36,8 @@ func NewSyncEngineAccountChangeEvent() *SyncEngineAccountChangeEvent {
 }
 
 // ChangeType calls the underlying ChangeType.
-func (x *SyncEngineAccountChangeEvent) ChangeType() raw.CKSyncEngineAccountChangeType {
-	return x.inner.ChangeType()
+func (x *SyncEngineAccountChangeEvent) ChangeType() CKSyncEngineAccountChangeType {
+	return CKSyncEngineAccountChangeType(x.inner.ChangeType())
 }
 
 // PreviousUser calls the underlying PreviousUser.
@@ -65,7 +65,7 @@ func (x *SyncEngineAccountChangeEvent) asSyncEngineEvent() *raw.CKSyncEngineEven
 // SyncEngineAccountChangeEventable is the interface implemented by [SyncEngineAccountChangeEvent], for mocking and DI.
 type SyncEngineAccountChangeEventable interface {
 	Unwrap() *raw.CKSyncEngineAccountChangeEvent
-	ChangeType() raw.CKSyncEngineAccountChangeType
+	ChangeType() CKSyncEngineAccountChangeType
 	PreviousUser() *RecordID
 	CurrentUser() *RecordID
 }

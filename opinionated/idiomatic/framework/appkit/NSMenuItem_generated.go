@@ -82,8 +82,8 @@ func (x *MenuItem) WithKeyEquivalent(keyEquivalent string) *MenuItem {
 }
 
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
-func (x *MenuItem) WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *MenuItem {
-	x.inner.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+func (x *MenuItem) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *MenuItem {
+	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
 	return x
 }
 
@@ -306,13 +306,13 @@ func (x *MenuItem) SetKeyEquivalent(keyEquivalent string) {
 }
 
 // KeyEquivalentModifierMask calls the underlying KeyEquivalentModifierMask.
-func (x *MenuItem) KeyEquivalentModifierMask() raw.NSEventModifierFlags {
-	return x.inner.KeyEquivalentModifierMask()
+func (x *MenuItem) KeyEquivalentModifierMask() NSEventModifierFlags {
+	return NSEventModifierFlags(x.inner.KeyEquivalentModifierMask())
 }
 
 // SetKeyEquivalentModifierMask calls the underlying SetKeyEquivalentModifierMask.
-func (x *MenuItem) SetKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) {
-	x.inner.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+func (x *MenuItem) SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) {
+	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
 }
 
 // UserKeyEquivalent calls the underlying UserKeyEquivalent.
@@ -585,7 +585,7 @@ type MenuItemable interface {
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *MenuItem
 	WithSubtitle(subtitle string) *MenuItem
 	WithKeyEquivalent(keyEquivalent string) *MenuItem
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *MenuItem
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *MenuItem
 	WithAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool) *MenuItem
 	WithAllowsAutomaticKeyEquivalentLocalization(allowsAutomaticKeyEquivalentLocalization bool) *MenuItem
 	WithAllowsAutomaticKeyEquivalentMirroring(allowsAutomaticKeyEquivalentMirroring bool) *MenuItem
@@ -621,8 +621,8 @@ type MenuItemable interface {
 	IsSectionHeader() bool
 	KeyEquivalent() string
 	SetKeyEquivalent(keyEquivalent string)
-	KeyEquivalentModifierMask() raw.NSEventModifierFlags
-	SetKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags)
+	KeyEquivalentModifierMask() NSEventModifierFlags
+	SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags)
 	UserKeyEquivalent() string
 	AllowsKeyEquivalentWhenHidden() bool
 	SetAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool)

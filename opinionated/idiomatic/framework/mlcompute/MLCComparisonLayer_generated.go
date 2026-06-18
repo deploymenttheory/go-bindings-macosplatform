@@ -49,8 +49,8 @@ func (x *ComparisonLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Compa
 }
 
 // Operation calls the underlying Operation.
-func (x *ComparisonLayer) Operation() raw.MLCComparisonOperation {
-	return x.inner.Operation()
+func (x *ComparisonLayer) Operation() MLCComparisonOperation {
+	return MLCComparisonOperation(x.inner.Operation())
 }
 
 func (x *ComparisonLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
@@ -60,7 +60,7 @@ type ComparisonLayerable interface {
 	Unwrap() *raw.MLCComparisonLayer
 	WithLabel(label string) *ComparisonLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ComparisonLayer
-	Operation() raw.MLCComparisonOperation
+	Operation() MLCComparisonOperation
 }
 
 var _ ComparisonLayerable = (*ComparisonLayer)(nil)

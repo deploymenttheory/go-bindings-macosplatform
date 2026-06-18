@@ -59,26 +59,26 @@ func (x *RayIntersector) WithFrontFacingWinding(frontFacingWinding metal.MTLWind
 }
 
 // WithTriangleIntersectionTestType sets the triangleIntersectionTestType property and returns the receiver for chaining.
-func (x *RayIntersector) WithTriangleIntersectionTestType(triangleIntersectionTestType raw.MPSTriangleIntersectionTestType) *RayIntersector {
-	x.inner.SetTriangleIntersectionTestType(triangleIntersectionTestType)
+func (x *RayIntersector) WithTriangleIntersectionTestType(triangleIntersectionTestType MPSTriangleIntersectionTestType) *RayIntersector {
+	x.inner.SetTriangleIntersectionTestType(raw.MPSTriangleIntersectionTestType(triangleIntersectionTestType))
 	return x
 }
 
 // WithBoundingBoxIntersectionTestType sets the boundingBoxIntersectionTestType property and returns the receiver for chaining.
-func (x *RayIntersector) WithBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType raw.MPSBoundingBoxIntersectionTestType) *RayIntersector {
-	x.inner.SetBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType)
+func (x *RayIntersector) WithBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType MPSBoundingBoxIntersectionTestType) *RayIntersector {
+	x.inner.SetBoundingBoxIntersectionTestType(raw.MPSBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType))
 	return x
 }
 
 // WithRayMaskOptions sets the rayMaskOptions property and returns the receiver for chaining.
-func (x *RayIntersector) WithRayMaskOptions(rayMaskOptions raw.MPSRayMaskOptions) *RayIntersector {
-	x.inner.SetRayMaskOptions(rayMaskOptions)
+func (x *RayIntersector) WithRayMaskOptions(rayMaskOptions MPSRayMaskOptions) *RayIntersector {
+	x.inner.SetRayMaskOptions(raw.MPSRayMaskOptions(rayMaskOptions))
 	return x
 }
 
 // WithRayMaskOperator sets the rayMaskOperator property and returns the receiver for chaining.
-func (x *RayIntersector) WithRayMaskOperator(rayMaskOperator raw.MPSRayMaskOperator) *RayIntersector {
-	x.inner.SetRayMaskOperator(rayMaskOperator)
+func (x *RayIntersector) WithRayMaskOperator(rayMaskOperator MPSRayMaskOperator) *RayIntersector {
+	x.inner.SetRayMaskOperator(raw.MPSRayMaskOperator(rayMaskOperator))
 	return x
 }
 
@@ -95,14 +95,14 @@ func (x *RayIntersector) WithIntersectionStride(intersectionStride uint) *RayInt
 }
 
 // WithRayDataType sets the rayDataType property and returns the receiver for chaining.
-func (x *RayIntersector) WithRayDataType(rayDataType raw.MPSRayDataType) *RayIntersector {
-	x.inner.SetRayDataType(rayDataType)
+func (x *RayIntersector) WithRayDataType(rayDataType MPSRayDataType) *RayIntersector {
+	x.inner.SetRayDataType(raw.MPSRayDataType(rayDataType))
 	return x
 }
 
 // WithIntersectionDataType sets the intersectionDataType property and returns the receiver for chaining.
-func (x *RayIntersector) WithIntersectionDataType(intersectionDataType raw.MPSIntersectionDataType) *RayIntersector {
-	x.inner.SetIntersectionDataType(intersectionDataType)
+func (x *RayIntersector) WithIntersectionDataType(intersectionDataType MPSIntersectionDataType) *RayIntersector {
+	x.inner.SetIntersectionDataType(raw.MPSIntersectionDataType(intersectionDataType))
 	return x
 }
 
@@ -129,28 +129,28 @@ func (x *RayIntersector) EncodeWithCoder(coder *foundation.NSCoder) {
 }
 
 // EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure calls the underlying EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure.
-func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType raw.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCount uint, accelerationStructure *raw.MPSAccelerationStructure) {
-	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure(commandBuffer, intersectionType, rayBuffer, rayBufferOffset, intersectionBuffer, intersectionBufferOffset, rayCount, accelerationStructure)
+func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCount uint, accelerationStructure *raw.MPSAccelerationStructure) {
+	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure(commandBuffer, raw.MPSIntersectionType(intersectionType), rayBuffer, rayBufferOffset, intersectionBuffer, intersectionBufferOffset, rayCount, accelerationStructure)
 }
 
 // EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure calls the underlying EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure.
-func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType raw.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCountBuffer metal.MTLBuffer, rayCountBufferOffset uint, accelerationStructure *raw.MPSAccelerationStructure) {
-	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure(commandBuffer, intersectionType, rayBuffer, rayBufferOffset, intersectionBuffer, intersectionBufferOffset, rayCountBuffer, rayCountBufferOffset, accelerationStructure)
+func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCountBuffer metal.MTLBuffer, rayCountBufferOffset uint, accelerationStructure *raw.MPSAccelerationStructure) {
+	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure(commandBuffer, raw.MPSIntersectionType(intersectionType), rayBuffer, rayBufferOffset, intersectionBuffer, intersectionBufferOffset, rayCountBuffer, rayCountBufferOffset, accelerationStructure)
 }
 
 // EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure calls the underlying EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure.
-func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType raw.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCount uint, accelerationStructure *raw.MPSAccelerationStructure) {
-	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure(commandBuffer, intersectionType, rayBuffer, rayBufferOffset, rayIndexBuffer, rayIndexBufferOffset, intersectionBuffer, intersectionBufferOffset, rayIndexCount, accelerationStructure)
+func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCount uint, accelerationStructure *raw.MPSAccelerationStructure) {
+	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure(commandBuffer, raw.MPSIntersectionType(intersectionType), rayBuffer, rayBufferOffset, rayIndexBuffer, rayIndexBufferOffset, intersectionBuffer, intersectionBufferOffset, rayIndexCount, accelerationStructure)
 }
 
 // EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure calls the underlying EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure.
-func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType raw.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCountBuffer metal.MTLBuffer, rayIndexCountBufferOffset uint, accelerationStructure *raw.MPSAccelerationStructure) {
-	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure(commandBuffer, intersectionType, rayBuffer, rayBufferOffset, rayIndexBuffer, rayIndexBufferOffset, intersectionBuffer, intersectionBufferOffset, rayIndexCountBuffer, rayIndexCountBufferOffset, accelerationStructure)
+func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCountBuffer metal.MTLBuffer, rayIndexCountBufferOffset uint, accelerationStructure *raw.MPSAccelerationStructure) {
+	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure(commandBuffer, raw.MPSIntersectionType(intersectionType), rayBuffer, rayBufferOffset, rayIndexBuffer, rayIndexBufferOffset, intersectionBuffer, intersectionBufferOffset, rayIndexCountBuffer, rayIndexCountBufferOffset, accelerationStructure)
 }
 
 // EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure calls the underlying EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure.
-func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType raw.MPSIntersectionType, rayTexture metal.MTLTexture, intersectionTexture metal.MTLTexture, accelerationStructure *raw.MPSAccelerationStructure) {
-	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure(commandBuffer, intersectionType, rayTexture, intersectionTexture, accelerationStructure)
+func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType MPSIntersectionType, rayTexture metal.MTLTexture, intersectionTexture metal.MTLTexture, accelerationStructure *raw.MPSAccelerationStructure) {
+	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure(commandBuffer, raw.MPSIntersectionType(intersectionType), rayTexture, intersectionTexture, accelerationStructure)
 }
 
 // CullMode calls the underlying CullMode.
@@ -174,43 +174,43 @@ func (x *RayIntersector) SetFrontFacingWinding(frontFacingWinding metal.MTLWindi
 }
 
 // TriangleIntersectionTestType calls the underlying TriangleIntersectionTestType.
-func (x *RayIntersector) TriangleIntersectionTestType() raw.MPSTriangleIntersectionTestType {
-	return x.inner.TriangleIntersectionTestType()
+func (x *RayIntersector) TriangleIntersectionTestType() MPSTriangleIntersectionTestType {
+	return MPSTriangleIntersectionTestType(x.inner.TriangleIntersectionTestType())
 }
 
 // SetTriangleIntersectionTestType calls the underlying SetTriangleIntersectionTestType.
-func (x *RayIntersector) SetTriangleIntersectionTestType(triangleIntersectionTestType raw.MPSTriangleIntersectionTestType) {
-	x.inner.SetTriangleIntersectionTestType(triangleIntersectionTestType)
+func (x *RayIntersector) SetTriangleIntersectionTestType(triangleIntersectionTestType MPSTriangleIntersectionTestType) {
+	x.inner.SetTriangleIntersectionTestType(raw.MPSTriangleIntersectionTestType(triangleIntersectionTestType))
 }
 
 // BoundingBoxIntersectionTestType calls the underlying BoundingBoxIntersectionTestType.
-func (x *RayIntersector) BoundingBoxIntersectionTestType() raw.MPSBoundingBoxIntersectionTestType {
-	return x.inner.BoundingBoxIntersectionTestType()
+func (x *RayIntersector) BoundingBoxIntersectionTestType() MPSBoundingBoxIntersectionTestType {
+	return MPSBoundingBoxIntersectionTestType(x.inner.BoundingBoxIntersectionTestType())
 }
 
 // SetBoundingBoxIntersectionTestType calls the underlying SetBoundingBoxIntersectionTestType.
-func (x *RayIntersector) SetBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType raw.MPSBoundingBoxIntersectionTestType) {
-	x.inner.SetBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType)
+func (x *RayIntersector) SetBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType MPSBoundingBoxIntersectionTestType) {
+	x.inner.SetBoundingBoxIntersectionTestType(raw.MPSBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType))
 }
 
 // RayMaskOptions calls the underlying RayMaskOptions.
-func (x *RayIntersector) RayMaskOptions() raw.MPSRayMaskOptions {
-	return x.inner.RayMaskOptions()
+func (x *RayIntersector) RayMaskOptions() MPSRayMaskOptions {
+	return MPSRayMaskOptions(x.inner.RayMaskOptions())
 }
 
 // SetRayMaskOptions calls the underlying SetRayMaskOptions.
-func (x *RayIntersector) SetRayMaskOptions(rayMaskOptions raw.MPSRayMaskOptions) {
-	x.inner.SetRayMaskOptions(rayMaskOptions)
+func (x *RayIntersector) SetRayMaskOptions(rayMaskOptions MPSRayMaskOptions) {
+	x.inner.SetRayMaskOptions(raw.MPSRayMaskOptions(rayMaskOptions))
 }
 
 // RayMaskOperator calls the underlying RayMaskOperator.
-func (x *RayIntersector) RayMaskOperator() raw.MPSRayMaskOperator {
-	return x.inner.RayMaskOperator()
+func (x *RayIntersector) RayMaskOperator() MPSRayMaskOperator {
+	return MPSRayMaskOperator(x.inner.RayMaskOperator())
 }
 
 // SetRayMaskOperator calls the underlying SetRayMaskOperator.
-func (x *RayIntersector) SetRayMaskOperator(rayMaskOperator raw.MPSRayMaskOperator) {
-	x.inner.SetRayMaskOperator(rayMaskOperator)
+func (x *RayIntersector) SetRayMaskOperator(rayMaskOperator MPSRayMaskOperator) {
+	x.inner.SetRayMaskOperator(raw.MPSRayMaskOperator(rayMaskOperator))
 }
 
 // RayStride calls the underlying RayStride.
@@ -234,23 +234,23 @@ func (x *RayIntersector) SetIntersectionStride(intersectionStride uint) {
 }
 
 // RayDataType calls the underlying RayDataType.
-func (x *RayIntersector) RayDataType() raw.MPSRayDataType {
-	return x.inner.RayDataType()
+func (x *RayIntersector) RayDataType() MPSRayDataType {
+	return MPSRayDataType(x.inner.RayDataType())
 }
 
 // SetRayDataType calls the underlying SetRayDataType.
-func (x *RayIntersector) SetRayDataType(rayDataType raw.MPSRayDataType) {
-	x.inner.SetRayDataType(rayDataType)
+func (x *RayIntersector) SetRayDataType(rayDataType MPSRayDataType) {
+	x.inner.SetRayDataType(raw.MPSRayDataType(rayDataType))
 }
 
 // IntersectionDataType calls the underlying IntersectionDataType.
-func (x *RayIntersector) IntersectionDataType() raw.MPSIntersectionDataType {
-	return x.inner.IntersectionDataType()
+func (x *RayIntersector) IntersectionDataType() MPSIntersectionDataType {
+	return MPSIntersectionDataType(x.inner.IntersectionDataType())
 }
 
 // SetIntersectionDataType calls the underlying SetIntersectionDataType.
-func (x *RayIntersector) SetIntersectionDataType(intersectionDataType raw.MPSIntersectionDataType) {
-	x.inner.SetIntersectionDataType(intersectionDataType)
+func (x *RayIntersector) SetIntersectionDataType(intersectionDataType MPSIntersectionDataType) {
+	x.inner.SetIntersectionDataType(raw.MPSIntersectionDataType(intersectionDataType))
 }
 
 // RayIndexDataType calls the underlying RayIndexDataType.
@@ -278,43 +278,43 @@ type RayIntersectorable interface {
 	Unwrap() *raw.MPSRayIntersector
 	WithCullMode(cullMode metal.MTLCullMode) *RayIntersector
 	WithFrontFacingWinding(frontFacingWinding metal.MTLWinding) *RayIntersector
-	WithTriangleIntersectionTestType(triangleIntersectionTestType raw.MPSTriangleIntersectionTestType) *RayIntersector
-	WithBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType raw.MPSBoundingBoxIntersectionTestType) *RayIntersector
-	WithRayMaskOptions(rayMaskOptions raw.MPSRayMaskOptions) *RayIntersector
-	WithRayMaskOperator(rayMaskOperator raw.MPSRayMaskOperator) *RayIntersector
+	WithTriangleIntersectionTestType(triangleIntersectionTestType MPSTriangleIntersectionTestType) *RayIntersector
+	WithBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType MPSBoundingBoxIntersectionTestType) *RayIntersector
+	WithRayMaskOptions(rayMaskOptions MPSRayMaskOptions) *RayIntersector
+	WithRayMaskOperator(rayMaskOperator MPSRayMaskOperator) *RayIntersector
 	WithRayStride(rayStride uint) *RayIntersector
 	WithIntersectionStride(intersectionStride uint) *RayIntersector
-	WithRayDataType(rayDataType raw.MPSRayDataType) *RayIntersector
-	WithIntersectionDataType(intersectionDataType raw.MPSIntersectionDataType) *RayIntersector
+	WithRayDataType(rayDataType MPSRayDataType) *RayIntersector
+	WithIntersectionDataType(intersectionDataType MPSIntersectionDataType) *RayIntersector
 	WithRayIndexDataType(rayIndexDataType mpscore.MPSDataType) *RayIntersector
 	WithRayMask(rayMask uint) *RayIntersector
 	RecommendedMinimumRayBatchSizeForRayCount(rayCount uint) uint
 	EncodeWithCoder(coder *foundation.NSCoder)
-	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType raw.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCount uint, accelerationStructure *raw.MPSAccelerationStructure)
-	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType raw.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCountBuffer metal.MTLBuffer, rayCountBufferOffset uint, accelerationStructure *raw.MPSAccelerationStructure)
-	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType raw.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCount uint, accelerationStructure *raw.MPSAccelerationStructure)
-	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType raw.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCountBuffer metal.MTLBuffer, rayIndexCountBufferOffset uint, accelerationStructure *raw.MPSAccelerationStructure)
-	EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType raw.MPSIntersectionType, rayTexture metal.MTLTexture, intersectionTexture metal.MTLTexture, accelerationStructure *raw.MPSAccelerationStructure)
+	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCount uint, accelerationStructure *raw.MPSAccelerationStructure)
+	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCountBuffer metal.MTLBuffer, rayCountBufferOffset uint, accelerationStructure *raw.MPSAccelerationStructure)
+	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCount uint, accelerationStructure *raw.MPSAccelerationStructure)
+	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCountBuffer metal.MTLBuffer, rayIndexCountBufferOffset uint, accelerationStructure *raw.MPSAccelerationStructure)
+	EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType MPSIntersectionType, rayTexture metal.MTLTexture, intersectionTexture metal.MTLTexture, accelerationStructure *raw.MPSAccelerationStructure)
 	CullMode() metal.MTLCullMode
 	SetCullMode(cullMode metal.MTLCullMode)
 	FrontFacingWinding() metal.MTLWinding
 	SetFrontFacingWinding(frontFacingWinding metal.MTLWinding)
-	TriangleIntersectionTestType() raw.MPSTriangleIntersectionTestType
-	SetTriangleIntersectionTestType(triangleIntersectionTestType raw.MPSTriangleIntersectionTestType)
-	BoundingBoxIntersectionTestType() raw.MPSBoundingBoxIntersectionTestType
-	SetBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType raw.MPSBoundingBoxIntersectionTestType)
-	RayMaskOptions() raw.MPSRayMaskOptions
-	SetRayMaskOptions(rayMaskOptions raw.MPSRayMaskOptions)
-	RayMaskOperator() raw.MPSRayMaskOperator
-	SetRayMaskOperator(rayMaskOperator raw.MPSRayMaskOperator)
+	TriangleIntersectionTestType() MPSTriangleIntersectionTestType
+	SetTriangleIntersectionTestType(triangleIntersectionTestType MPSTriangleIntersectionTestType)
+	BoundingBoxIntersectionTestType() MPSBoundingBoxIntersectionTestType
+	SetBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType MPSBoundingBoxIntersectionTestType)
+	RayMaskOptions() MPSRayMaskOptions
+	SetRayMaskOptions(rayMaskOptions MPSRayMaskOptions)
+	RayMaskOperator() MPSRayMaskOperator
+	SetRayMaskOperator(rayMaskOperator MPSRayMaskOperator)
 	RayStride() uint
 	SetRayStride(rayStride uint)
 	IntersectionStride() uint
 	SetIntersectionStride(intersectionStride uint)
-	RayDataType() raw.MPSRayDataType
-	SetRayDataType(rayDataType raw.MPSRayDataType)
-	IntersectionDataType() raw.MPSIntersectionDataType
-	SetIntersectionDataType(intersectionDataType raw.MPSIntersectionDataType)
+	RayDataType() MPSRayDataType
+	SetRayDataType(rayDataType MPSRayDataType)
+	IntersectionDataType() MPSIntersectionDataType
+	SetIntersectionDataType(intersectionDataType MPSIntersectionDataType)
 	RayIndexDataType() mpscore.MPSDataType
 	SetRayIndexDataType(rayIndexDataType mpscore.MPSDataType)
 	RayMask() uint

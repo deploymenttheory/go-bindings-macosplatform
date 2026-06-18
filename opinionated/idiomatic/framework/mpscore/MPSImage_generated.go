@@ -85,43 +85,43 @@ func (x *Image) ResourceSize() uint {
 }
 
 // SetPurgeableState calls the underlying SetPurgeableState.
-func (x *Image) SetPurgeableState(state raw.MPSPurgeableState) raw.MPSPurgeableState {
-	return x.inner.SetPurgeableState(state)
+func (x *Image) SetPurgeableState(state MPSPurgeableState) MPSPurgeableState {
+	return MPSPurgeableState(x.inner.SetPurgeableState(raw.MPSPurgeableState(state)))
 }
 
 // ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex calls the underlying ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex.
-func (x *Image) ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint) {
-	x.inner.ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, region, featureChannelInfo, imageIndex)
+func (x *Image) ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint) {
+	x.inner.ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes, raw.MPSDataLayout(dataLayout), bytesPerRow, region, featureChannelInfo, imageIndex)
 }
 
 // WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex calls the underlying WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex.
-func (x *Image) WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint) {
-	x.inner.WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, region, featureChannelInfo, imageIndex)
+func (x *Image) WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint) {
+	x.inner.WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes, raw.MPSDataLayout(dataLayout), bytesPerRow, region, featureChannelInfo, imageIndex)
 }
 
 // WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex calls the underlying WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex.
-func (x *Image) WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, bytesPerColumn uint, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint) {
-	x.inner.WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerColumn, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
+func (x *Image) WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, bytesPerColumn uint, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint) {
+	x.inner.WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, raw.MPSDataLayout(dataLayout), bytesPerColumn, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
 }
 
 // ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex calls the underlying ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex.
-func (x *Image) ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint) {
-	x.inner.ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
+func (x *Image) ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint) {
+	x.inner.ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, raw.MPSDataLayout(dataLayout), bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
 }
 
 // WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex calls the underlying WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex.
-func (x *Image) WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint) {
-	x.inner.WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
+func (x *Image) WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint) {
+	x.inner.WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, raw.MPSDataLayout(dataLayout), bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
 }
 
 // ReadBytesDataLayoutImageIndex calls the underlying ReadBytesDataLayoutImageIndex.
-func (x *Image) ReadBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, imageIndex uint) {
-	x.inner.ReadBytesDataLayoutImageIndex(dataBytes, dataLayout, imageIndex)
+func (x *Image) ReadBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, imageIndex uint) {
+	x.inner.ReadBytesDataLayoutImageIndex(dataBytes, raw.MPSDataLayout(dataLayout), imageIndex)
 }
 
 // WriteBytesDataLayoutImageIndex calls the underlying WriteBytesDataLayoutImageIndex.
-func (x *Image) WriteBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, imageIndex uint) {
-	x.inner.WriteBytesDataLayoutImageIndex(dataBytes, dataLayout, imageIndex)
+func (x *Image) WriteBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, imageIndex uint) {
+	x.inner.WriteBytesDataLayoutImageIndex(dataBytes, raw.MPSDataLayout(dataLayout), imageIndex)
 }
 
 // SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
@@ -175,8 +175,8 @@ func (x *Image) Usage() metal.MTLTextureUsage {
 }
 
 // FeatureChannelFormat calls the underlying FeatureChannelFormat.
-func (x *Image) FeatureChannelFormat() raw.MPSImageFeatureChannelFormat {
-	return x.inner.FeatureChannelFormat()
+func (x *Image) FeatureChannelFormat() MPSImageFeatureChannelFormat {
+	return MPSImageFeatureChannelFormat(x.inner.FeatureChannelFormat())
 }
 
 // PixelSize calls the underlying PixelSize.
@@ -222,14 +222,14 @@ type Imageable interface {
 	BatchRepresentation() unsafe.Pointer
 	SubImageWithFeatureChannelRange(range_ foundation.NSRange) *Image
 	ResourceSize() uint
-	SetPurgeableState(state raw.MPSPurgeableState) raw.MPSPurgeableState
-	ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint)
-	WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint)
-	WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, bytesPerColumn uint, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint)
-	ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint)
-	WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint)
-	ReadBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, imageIndex uint)
-	WriteBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout raw.MPSDataLayout, imageIndex uint)
+	SetPurgeableState(state MPSPurgeableState) MPSPurgeableState
+	ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint)
+	WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint)
+	WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, bytesPerColumn uint, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint)
+	ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint)
+	WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo raw.MPSImageReadWriteParams, imageIndex uint)
+	ReadBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, imageIndex uint)
+	WriteBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout MPSDataLayout, imageIndex uint)
 	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
 	Device() metal.MTLDevice
 	Width() uint
@@ -240,7 +240,7 @@ type Imageable interface {
 	PixelFormat() metal.MTLPixelFormat
 	Precision() uint
 	Usage() metal.MTLTextureUsage
-	FeatureChannelFormat() raw.MPSImageFeatureChannelFormat
+	FeatureChannelFormat() MPSImageFeatureChannelFormat
 	PixelSize() uint
 	Texture() metal.MTLTexture
 	Label() string

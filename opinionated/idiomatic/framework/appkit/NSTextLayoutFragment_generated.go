@@ -135,8 +135,8 @@ func (x *TextLayoutFragment) SetLayoutQueue(layoutQueue *foundation.NSOperationQ
 }
 
 // State calls the underlying State.
-func (x *TextLayoutFragment) State() raw.NSTextLayoutFragmentState {
-	return x.inner.State()
+func (x *TextLayoutFragment) State() NSTextLayoutFragmentState {
+	return NSTextLayoutFragmentState(x.inner.State())
 }
 
 // LayoutFragmentFrame calls the underlying LayoutFragmentFrame.
@@ -195,7 +195,7 @@ type TextLayoutFragmentable interface {
 	TextLineFragments() []*TextLineFragment
 	LayoutQueue() *foundation.NSOperationQueue
 	SetLayoutQueue(layoutQueue *foundation.NSOperationQueue)
-	State() raw.NSTextLayoutFragmentState
+	State() NSTextLayoutFragmentState
 	LayoutFragmentFrame() corefoundation.CGRect
 	RenderingSurfaceBounds() corefoundation.CGRect
 	LeadingPadding() float64

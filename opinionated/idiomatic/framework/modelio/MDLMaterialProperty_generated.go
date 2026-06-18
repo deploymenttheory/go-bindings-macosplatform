@@ -33,84 +33,84 @@ func MaterialPropertyFromID(id objc.ID) *MaterialProperty {
 }
 
 // NewMaterialPropertyWithNameSemantic creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemantic(name string, semantic raw.MDLMaterialSemantic) *MaterialProperty {
+func NewMaterialPropertyWithNameSemantic(name string, semantic MDLMaterialSemantic) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:"), foundation.NSStringStringWithUTF8String(name).Ptr(), semantic)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic))
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
 // NewMaterialPropertyWithNameSemanticFloat creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticFloat(name string, semantic raw.MDLMaterialSemantic, value float32) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticFloat(name string, semantic MDLMaterialSemantic, value float32) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float:"), foundation.NSStringStringWithUTF8String(name).Ptr(), semantic, value)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), value)
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
 // NewMaterialPropertyWithNameSemanticFloat2 creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticFloat2(name string, semantic raw.MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticFloat2(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float2:"), foundation.NSStringStringWithUTF8String(name).Ptr(), semantic, value)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float2:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), value)
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
 // NewMaterialPropertyWithNameSemanticFloat3 creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticFloat3(name string, semantic raw.MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticFloat3(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float3:"), foundation.NSStringStringWithUTF8String(name).Ptr(), semantic, value)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float3:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), value)
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
 // NewMaterialPropertyWithNameSemanticFloat4 creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticFloat4(name string, semantic raw.MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticFloat4(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float4:"), foundation.NSStringStringWithUTF8String(name).Ptr(), semantic, value)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:float4:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), value)
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
 // NewMaterialPropertyWithNameSemanticMatrix4x4 creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticMatrix4x4(name string, semantic raw.MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticMatrix4x4(name string, semantic MDLMaterialSemantic, value unsafe.Pointer) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:matrix4x4:"), foundation.NSStringStringWithUTF8String(name).Ptr(), semantic, value)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:matrix4x4:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), value)
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
 // NewMaterialPropertyWithNameSemanticURL creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticURL(name string, semantic raw.MDLMaterialSemantic, uRL string) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticURL(name string, semantic MDLMaterialSemantic, uRL string) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:URL:"), foundation.NSStringStringWithUTF8String(name).Ptr(), semantic, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:URL:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
 // NewMaterialPropertyWithNameSemanticString creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticString(name string, semantic raw.MDLMaterialSemantic, string_ string) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticString(name string, semantic MDLMaterialSemantic, string_ string) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:string:"), foundation.NSStringStringWithUTF8String(name).Ptr(), semantic, foundation.NSStringStringWithUTF8String(string_).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:string:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), foundation.NSStringStringWithUTF8String(string_).Ptr())
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
 // NewMaterialPropertyWithNameSemanticTextureSampler creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticTextureSampler(name string, semantic raw.MDLMaterialSemantic, textureSampler *raw.MDLTextureSampler) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticTextureSampler(name string, semantic MDLMaterialSemantic, textureSampler *raw.MDLTextureSampler) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:textureSampler:"), foundation.NSStringStringWithUTF8String(name).Ptr(), semantic, textureSampler.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:textureSampler:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), textureSampler.Ptr())
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
 // NewMaterialPropertyWithNameSemanticColor creates a new [MaterialProperty].
-func NewMaterialPropertyWithNameSemanticColor(name string, semantic raw.MDLMaterialSemantic, color unsafe.Pointer) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticColor(name string, semantic MDLMaterialSemantic, color unsafe.Pointer) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:color:"), foundation.NSStringStringWithUTF8String(name).Ptr(), semantic, color)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:color:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLMaterialSemantic(semantic), color)
 	return &MaterialProperty{inner: raw.MDLMaterialPropertyFromID(_id)}
 }
 
 // WithSemantic sets the semantic property and returns the receiver for chaining.
-func (x *MaterialProperty) WithSemantic(semantic raw.MDLMaterialSemantic) *MaterialProperty {
-	x.inner.SetSemantic(semantic)
+func (x *MaterialProperty) WithSemantic(semantic MDLMaterialSemantic) *MaterialProperty {
+	x.inner.SetSemantic(raw.MDLMaterialSemantic(semantic))
 	return x
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *MaterialProperty) WithType(type_ raw.MDLMaterialPropertyType) *MaterialProperty {
-	x.inner.SetType(type_)
+func (x *MaterialProperty) WithType(type_ MDLMaterialPropertyType) *MaterialProperty {
+	x.inner.SetType(raw.MDLMaterialPropertyType(type_))
 	return x
 }
 
@@ -156,23 +156,23 @@ func (x *MaterialProperty) SetProperties(property *raw.MDLMaterialProperty) {
 }
 
 // Semantic calls the underlying Semantic.
-func (x *MaterialProperty) Semantic() raw.MDLMaterialSemantic {
-	return x.inner.Semantic()
+func (x *MaterialProperty) Semantic() MDLMaterialSemantic {
+	return MDLMaterialSemantic(x.inner.Semantic())
 }
 
 // SetSemantic calls the underlying SetSemantic.
-func (x *MaterialProperty) SetSemantic(semantic raw.MDLMaterialSemantic) {
-	x.inner.SetSemantic(semantic)
+func (x *MaterialProperty) SetSemantic(semantic MDLMaterialSemantic) {
+	x.inner.SetSemantic(raw.MDLMaterialSemantic(semantic))
 }
 
 // Type calls the underlying Type.
-func (x *MaterialProperty) Type() raw.MDLMaterialPropertyType {
-	return x.inner.Type()
+func (x *MaterialProperty) Type() MDLMaterialPropertyType {
+	return MDLMaterialPropertyType(x.inner.Type())
 }
 
 // SetType calls the underlying SetType.
-func (x *MaterialProperty) SetType(type_ raw.MDLMaterialPropertyType) {
-	x.inner.SetType(type_)
+func (x *MaterialProperty) SetType(type_ MDLMaterialPropertyType) {
+	x.inner.SetType(raw.MDLMaterialPropertyType(type_))
 }
 
 // Name calls the underlying Name.
@@ -300,8 +300,8 @@ func (x *MaterialProperty) SetLuminance(luminance float32) {
 // MaterialPropertyable is the interface implemented by [MaterialProperty], for mocking and DI.
 type MaterialPropertyable interface {
 	Unwrap() *raw.MDLMaterialProperty
-	WithSemantic(semantic raw.MDLMaterialSemantic) *MaterialProperty
-	WithType(type_ raw.MDLMaterialPropertyType) *MaterialProperty
+	WithSemantic(semantic MDLMaterialSemantic) *MaterialProperty
+	WithType(type_ MDLMaterialPropertyType) *MaterialProperty
 	WithName(name string) *MaterialProperty
 	WithStringValue(stringValue string) *MaterialProperty
 	WithURLValue(uRLValue string) *MaterialProperty
@@ -309,10 +309,10 @@ type MaterialPropertyable interface {
 	WithFloatValue(floatValue float32) *MaterialProperty
 	WithLuminance(luminance float32) *MaterialProperty
 	SetProperties(property *raw.MDLMaterialProperty)
-	Semantic() raw.MDLMaterialSemantic
-	SetSemantic(semantic raw.MDLMaterialSemantic)
-	Type() raw.MDLMaterialPropertyType
-	SetType(type_ raw.MDLMaterialPropertyType)
+	Semantic() MDLMaterialSemantic
+	SetSemantic(semantic MDLMaterialSemantic)
+	Type() MDLMaterialPropertyType
+	SetType(type_ MDLMaterialPropertyType)
 	Name() string
 	SetName(name string)
 	StringValue() string

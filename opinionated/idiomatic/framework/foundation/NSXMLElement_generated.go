@@ -65,9 +65,9 @@ func NewXMLElementWithXMLStringError(string_ string) (*XMLElement, error) {
 }
 
 // NewXMLElementWithKindOptions creates a new [XMLElement].
-func NewXMLElementWithKindOptions(kind raw.NSXMLNodeKind, options raw.NSXMLNodeOptions) *XMLElement {
+func NewXMLElementWithKindOptions(kind NSXMLNodeKind, options NSXMLNodeOptions) *XMLElement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLElement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:options:"), kind, options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:options:"), raw.NSXMLNodeKind(kind), raw.NSXMLNodeOptions(options))
 	return &XMLElement{inner: raw.NSXMLElementFromID(_id)}
 }
 

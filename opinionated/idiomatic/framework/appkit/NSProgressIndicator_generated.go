@@ -47,8 +47,8 @@ func (x *ProgressIndicator) WithIndeterminate(indeterminate bool) *ProgressIndic
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithControlSize(controlSize raw.NSControlSize) *ProgressIndicator {
-	x.inner.SetControlSize(controlSize)
+func (x *ProgressIndicator) WithControlSize(controlSize NSControlSize) *ProgressIndicator {
+	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -83,8 +83,8 @@ func (x *ProgressIndicator) WithUsesThreadedAnimation(usesThreadedAnimation bool
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithStyle(style raw.NSProgressIndicatorStyle) *ProgressIndicator {
-	x.inner.SetStyle(style)
+func (x *ProgressIndicator) WithStyle(style NSProgressIndicatorStyle) *ProgressIndicator {
+	x.inner.SetStyle(raw.NSProgressIndicatorStyle(style))
 	return x
 }
 
@@ -101,8 +101,8 @@ func (x *ProgressIndicator) WithBezeled(bezeled bool) *ProgressIndicator {
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithControlTint(controlTint raw.NSControlTint) *ProgressIndicator {
-	x.inner.SetControlTint(controlTint)
+func (x *ProgressIndicator) WithControlTint(controlTint NSControlTint) *ProgressIndicator {
+	x.inner.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -143,8 +143,8 @@ func (x *ProgressIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *P
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ProgressIndicator {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *ProgressIndicator) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ProgressIndicator {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -203,14 +203,14 @@ func (x *ProgressIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *P
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ProgressIndicator {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *ProgressIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ProgressIndicator {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ProgressIndicator {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *ProgressIndicator) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ProgressIndicator {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -317,8 +317,8 @@ func (x *ProgressIndicator) WithToolTip(toolTip string) *ProgressIndicator {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ProgressIndicator {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ProgressIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ProgressIndicator {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -335,8 +335,8 @@ func (x *ProgressIndicator) WithNextKeyView(nextKeyView ViewProvider) *ProgressI
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithFocusRingType(focusRingType raw.NSFocusRingType) *ProgressIndicator {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *ProgressIndicator) WithFocusRingType(focusRingType NSFocusRingType) *ProgressIndicator {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -359,8 +359,8 @@ func (x *ProgressIndicator) WithGestureRecognizers(items ...GestureRecognizerPro
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ProgressIndicator) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ProgressIndicator {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ProgressIndicator) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ProgressIndicator {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -479,13 +479,13 @@ func (x *ProgressIndicator) SetIndeterminate(indeterminate bool) {
 }
 
 // ControlSize calls the underlying ControlSize.
-func (x *ProgressIndicator) ControlSize() raw.NSControlSize {
-	return x.inner.ControlSize()
+func (x *ProgressIndicator) ControlSize() NSControlSize {
+	return NSControlSize(x.inner.ControlSize())
 }
 
 // SetControlSize calls the underlying SetControlSize.
-func (x *ProgressIndicator) SetControlSize(controlSize raw.NSControlSize) {
-	x.inner.SetControlSize(controlSize)
+func (x *ProgressIndicator) SetControlSize(controlSize NSControlSize) {
+	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 }
 
 // DoubleValue calls the underlying DoubleValue.
@@ -539,13 +539,13 @@ func (x *ProgressIndicator) SetUsesThreadedAnimation(usesThreadedAnimation bool)
 }
 
 // Style calls the underlying Style.
-func (x *ProgressIndicator) Style() raw.NSProgressIndicatorStyle {
-	return x.inner.Style()
+func (x *ProgressIndicator) Style() NSProgressIndicatorStyle {
+	return NSProgressIndicatorStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *ProgressIndicator) SetStyle(style raw.NSProgressIndicatorStyle) {
-	x.inner.SetStyle(style)
+func (x *ProgressIndicator) SetStyle(style NSProgressIndicatorStyle) {
+	x.inner.SetStyle(raw.NSProgressIndicatorStyle(style))
 }
 
 // IsDisplayedWhenStopped calls the underlying IsDisplayedWhenStopped.
@@ -584,13 +584,13 @@ func (x *ProgressIndicator) SetBezeled(bezeled bool) {
 }
 
 // ControlTint calls the underlying ControlTint.
-func (x *ProgressIndicator) ControlTint() raw.NSControlTint {
-	return x.inner.ControlTint()
+func (x *ProgressIndicator) ControlTint() NSControlTint {
+	return NSControlTint(x.inner.ControlTint())
 }
 
 // SetControlTint calls the underlying SetControlTint.
-func (x *ProgressIndicator) SetControlTint(controlTint raw.NSControlTint) {
-	x.inner.SetControlTint(controlTint)
+func (x *ProgressIndicator) SetControlTint(controlTint NSControlTint) {
+	x.inner.SetControlTint(raw.NSControlTint(controlTint))
 }
 
 func (x *ProgressIndicator) asView() *raw.NSView { return &x.inner.NSView }
@@ -601,21 +601,21 @@ func (x *ProgressIndicator) asResponder() *raw.NSResponder { return &x.inner.NSV
 type ProgressIndicatorable interface {
 	Unwrap() *raw.NSProgressIndicator
 	WithIndeterminate(indeterminate bool) *ProgressIndicator
-	WithControlSize(controlSize raw.NSControlSize) *ProgressIndicator
+	WithControlSize(controlSize NSControlSize) *ProgressIndicator
 	WithDoubleValue(doubleValue float64) *ProgressIndicator
 	WithMinValue(minValue float64) *ProgressIndicator
 	WithMaxValue(maxValue float64) *ProgressIndicator
 	WithObservedProgress(observedProgress *foundation.NSProgress) *ProgressIndicator
 	WithUsesThreadedAnimation(usesThreadedAnimation bool) *ProgressIndicator
-	WithStyle(style raw.NSProgressIndicatorStyle) *ProgressIndicator
+	WithStyle(style NSProgressIndicatorStyle) *ProgressIndicator
 	WithDisplayedWhenStopped(displayedWhenStopped bool) *ProgressIndicator
 	WithBezeled(bezeled bool) *ProgressIndicator
-	WithControlTint(controlTint raw.NSControlTint) *ProgressIndicator
+	WithControlTint(controlTint NSControlTint) *ProgressIndicator
 	WithSubviews(items ...ViewProvider) *ProgressIndicator
 	WithHidden(hidden bool) *ProgressIndicator
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ProgressIndicator
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ProgressIndicator
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ProgressIndicator
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ProgressIndicator
 	WithFrame(frame corefoundation.CGRect) *ProgressIndicator
 	WithFrameRotation(frameRotation float64) *ProgressIndicator
 	WithFrameCenterRotation(frameCenterRotation float64) *ProgressIndicator
@@ -625,8 +625,8 @@ type ProgressIndicatorable interface {
 	WithNeedsDisplay(needsDisplay bool) *ProgressIndicator
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ProgressIndicator
 	WithWantsRestingTouches(wantsRestingTouches bool) *ProgressIndicator
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ProgressIndicator
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ProgressIndicator
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ProgressIndicator
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ProgressIndicator
 	WithWantsLayer(wantsLayer bool) *ProgressIndicator
 	WithLayer(layer *quartzcore.CALayer) *ProgressIndicator
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ProgressIndicator
@@ -640,12 +640,12 @@ type ProgressIndicatorable interface {
 	WithClipsToBounds(clipsToBounds bool) *ProgressIndicator
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ProgressIndicator
 	WithToolTip(toolTip string) *ProgressIndicator
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ProgressIndicator
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ProgressIndicator
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ProgressIndicator
 	WithNextKeyView(nextKeyView ViewProvider) *ProgressIndicator
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ProgressIndicator
+	WithFocusRingType(focusRingType NSFocusRingType) *ProgressIndicator
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ProgressIndicator
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ProgressIndicator
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ProgressIndicator
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ProgressIndicator
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ProgressIndicator
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ProgressIndicator
@@ -666,8 +666,8 @@ type ProgressIndicatorable interface {
 	SizeToFit()
 	IsIndeterminate() bool
 	SetIndeterminate(indeterminate bool)
-	ControlSize() raw.NSControlSize
-	SetControlSize(controlSize raw.NSControlSize)
+	ControlSize() NSControlSize
+	SetControlSize(controlSize NSControlSize)
 	DoubleValue() float64
 	SetDoubleValue(doubleValue float64)
 	MinValue() float64
@@ -678,8 +678,8 @@ type ProgressIndicatorable interface {
 	SetObservedProgress(observedProgress *foundation.NSProgress)
 	UsesThreadedAnimation() bool
 	SetUsesThreadedAnimation(usesThreadedAnimation bool)
-	Style() raw.NSProgressIndicatorStyle
-	SetStyle(style raw.NSProgressIndicatorStyle)
+	Style() NSProgressIndicatorStyle
+	SetStyle(style NSProgressIndicatorStyle)
 	IsDisplayedWhenStopped() bool
 	SetDisplayedWhenStopped(displayedWhenStopped bool)
 	AnimationDelay() float64
@@ -687,8 +687,8 @@ type ProgressIndicatorable interface {
 	Animate(sender objc.ID)
 	IsBezeled() bool
 	SetBezeled(bezeled bool)
-	ControlTint() raw.NSControlTint
-	SetControlTint(controlTint raw.NSControlTint)
+	ControlTint() NSControlTint
+	SetControlTint(controlTint NSControlTint)
 }
 
 var _ ProgressIndicatorable = (*ProgressIndicator)(nil)

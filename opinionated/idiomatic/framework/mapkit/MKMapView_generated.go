@@ -46,8 +46,8 @@ func (x *MapView) WithDelegate(delegate raw.MKMapViewDelegate) *MapView {
 }
 
 // WithMapType sets the mapType property and returns the receiver for chaining.
-func (x *MapView) WithMapType(mapType raw.MKMapType) *MapView {
-	x.inner.SetMapType(mapType)
+func (x *MapView) WithMapType(mapType MKMapType) *MapView {
+	x.inner.SetMapType(raw.MKMapType(mapType))
 	return x
 }
 
@@ -118,8 +118,8 @@ func (x *MapView) WithShowsUserTrackingButton(showsUserTrackingButton bool) *Map
 }
 
 // WithPitchButtonVisibility sets the pitchButtonVisibility property and returns the receiver for chaining.
-func (x *MapView) WithPitchButtonVisibility(pitchButtonVisibility raw.MKFeatureVisibility) *MapView {
-	x.inner.SetPitchButtonVisibility(pitchButtonVisibility)
+func (x *MapView) WithPitchButtonVisibility(pitchButtonVisibility MKFeatureVisibility) *MapView {
+	x.inner.SetPitchButtonVisibility(raw.MKFeatureVisibility(pitchButtonVisibility))
 	return x
 }
 
@@ -178,8 +178,8 @@ func (x *MapView) WithShowsUserLocation(showsUserLocation bool) *MapView {
 }
 
 // WithUserTrackingMode sets the userTrackingMode property and returns the receiver for chaining.
-func (x *MapView) WithUserTrackingMode(userTrackingMode raw.MKUserTrackingMode) *MapView {
-	x.inner.SetUserTrackingMode(userTrackingMode)
+func (x *MapView) WithUserTrackingMode(userTrackingMode MKUserTrackingMode) *MapView {
+	x.inner.SetUserTrackingMode(raw.MKUserTrackingMode(userTrackingMode))
 	return x
 }
 
@@ -254,8 +254,8 @@ func (x *MapView) ConvertRectToRegionFromView(rect corefoundation.CGRect, view *
 }
 
 // SetUserTrackingModeAnimated calls the underlying SetUserTrackingModeAnimated.
-func (x *MapView) SetUserTrackingModeAnimated(mode raw.MKUserTrackingMode, animated bool) {
-	x.inner.SetUserTrackingModeAnimated(mode, animated)
+func (x *MapView) SetUserTrackingModeAnimated(mode MKUserTrackingMode, animated bool) {
+	x.inner.SetUserTrackingModeAnimated(raw.MKUserTrackingMode(mode), animated)
 }
 
 // AddAnnotation calls the underlying AddAnnotation.
@@ -341,13 +341,13 @@ func (x *MapView) SetDelegate(delegate raw.MKMapViewDelegate) {
 }
 
 // MapType calls the underlying MapType.
-func (x *MapView) MapType() raw.MKMapType {
-	return x.inner.MapType()
+func (x *MapView) MapType() MKMapType {
+	return MKMapType(x.inner.MapType())
 }
 
 // SetMapType calls the underlying SetMapType.
-func (x *MapView) SetMapType(mapType raw.MKMapType) {
-	x.inner.SetMapType(mapType)
+func (x *MapView) SetMapType(mapType MKMapType) {
+	x.inner.SetMapType(raw.MKMapType(mapType))
 }
 
 // PreferredConfiguration calls the underlying PreferredConfiguration.
@@ -487,13 +487,13 @@ func (x *MapView) SetShowsUserTrackingButton(showsUserTrackingButton bool) {
 }
 
 // PitchButtonVisibility calls the underlying PitchButtonVisibility.
-func (x *MapView) PitchButtonVisibility() raw.MKFeatureVisibility {
-	return x.inner.PitchButtonVisibility()
+func (x *MapView) PitchButtonVisibility() MKFeatureVisibility {
+	return MKFeatureVisibility(x.inner.PitchButtonVisibility())
 }
 
 // SetPitchButtonVisibility calls the underlying SetPitchButtonVisibility.
-func (x *MapView) SetPitchButtonVisibility(pitchButtonVisibility raw.MKFeatureVisibility) {
-	x.inner.SetPitchButtonVisibility(pitchButtonVisibility)
+func (x *MapView) SetPitchButtonVisibility(pitchButtonVisibility MKFeatureVisibility) {
+	x.inner.SetPitchButtonVisibility(raw.MKFeatureVisibility(pitchButtonVisibility))
 }
 
 // ShowsPitchControl calls the underlying ShowsPitchControl.
@@ -600,13 +600,13 @@ func (x *MapView) UserLocation() *UserLocation {
 }
 
 // UserTrackingMode calls the underlying UserTrackingMode.
-func (x *MapView) UserTrackingMode() raw.MKUserTrackingMode {
-	return x.inner.UserTrackingMode()
+func (x *MapView) UserTrackingMode() MKUserTrackingMode {
+	return MKUserTrackingMode(x.inner.UserTrackingMode())
 }
 
 // SetUserTrackingMode calls the underlying SetUserTrackingMode.
-func (x *MapView) SetUserTrackingMode(userTrackingMode raw.MKUserTrackingMode) {
-	x.inner.SetUserTrackingMode(userTrackingMode)
+func (x *MapView) SetUserTrackingMode(userTrackingMode MKUserTrackingMode) {
+	x.inner.SetUserTrackingMode(raw.MKUserTrackingMode(userTrackingMode))
 }
 
 // IsUserLocationVisible calls the underlying IsUserLocationVisible.
@@ -635,13 +635,13 @@ func (x *MapView) AnnotationVisibleRect() corefoundation.CGRect {
 }
 
 // AddOverlayLevel calls the underlying AddOverlayLevel.
-func (x *MapView) AddOverlayLevel(overlay raw.MKOverlay, level raw.MKOverlayLevel) {
-	x.inner.AddOverlayLevel(overlay, level)
+func (x *MapView) AddOverlayLevel(overlay raw.MKOverlay, level MKOverlayLevel) {
+	x.inner.AddOverlayLevel(overlay, raw.MKOverlayLevel(level))
 }
 
 // AddOverlaysLevel calls the underlying AddOverlaysLevel.
-func (x *MapView) AddOverlaysLevel(overlays *foundation.NSArray[raw.MKOverlay], level raw.MKOverlayLevel) {
-	x.inner.AddOverlaysLevel(overlays, level)
+func (x *MapView) AddOverlaysLevel(overlays *foundation.NSArray[raw.MKOverlay], level MKOverlayLevel) {
+	x.inner.AddOverlaysLevel(overlays, raw.MKOverlayLevel(level))
 }
 
 // RemoveOverlay calls the underlying RemoveOverlay.
@@ -655,8 +655,8 @@ func (x *MapView) RemoveOverlays(overlays *foundation.NSArray[raw.MKOverlay]) {
 }
 
 // InsertOverlayAtIndexLevel calls the underlying InsertOverlayAtIndexLevel.
-func (x *MapView) InsertOverlayAtIndexLevel(overlay raw.MKOverlay, index uint, level raw.MKOverlayLevel) {
-	x.inner.InsertOverlayAtIndexLevel(overlay, index, level)
+func (x *MapView) InsertOverlayAtIndexLevel(overlay raw.MKOverlay, index uint, level MKOverlayLevel) {
+	x.inner.InsertOverlayAtIndexLevel(overlay, index, raw.MKOverlayLevel(level))
 }
 
 // InsertOverlayAboveOverlay calls the underlying InsertOverlayAboveOverlay.
@@ -675,8 +675,8 @@ func (x *MapView) ExchangeOverlayWithOverlay(overlay1 raw.MKOverlay, overlay2 ra
 }
 
 // OverlaysInLevel calls the underlying OverlaysInLevel.
-func (x *MapView) OverlaysInLevel(level raw.MKOverlayLevel) *foundation.NSArray[raw.MKOverlay] {
-	return x.inner.OverlaysInLevel(level)
+func (x *MapView) OverlaysInLevel(level MKOverlayLevel) *foundation.NSArray[raw.MKOverlay] {
+	return x.inner.OverlaysInLevel(raw.MKOverlayLevel(level))
 }
 
 // RendererForOverlay calls the underlying RendererForOverlay.
@@ -717,7 +717,7 @@ func (x *MapView) Overlays() *foundation.NSArray[raw.MKOverlay] {
 type MapViewable interface {
 	Unwrap() *raw.MKMapView
 	WithDelegate(delegate raw.MKMapViewDelegate) *MapView
-	WithMapType(mapType raw.MKMapType) *MapView
+	WithMapType(mapType MKMapType) *MapView
 	WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapView
 	WithRegion(region raw.MKCoordinateRegion) *MapView
 	WithVisibleMapRect(visibleMapRect raw.MKMapRect) *MapView
@@ -729,7 +729,7 @@ type MapViewable interface {
 	WithRotateEnabled(rotateEnabled bool) *MapView
 	WithPitchEnabled(pitchEnabled bool) *MapView
 	WithShowsUserTrackingButton(showsUserTrackingButton bool) *MapView
-	WithPitchButtonVisibility(pitchButtonVisibility raw.MKFeatureVisibility) *MapView
+	WithPitchButtonVisibility(pitchButtonVisibility MKFeatureVisibility) *MapView
 	WithShowsPitchControl(showsPitchControl bool) *MapView
 	WithShowsZoomControls(showsZoomControls bool) *MapView
 	WithShowsCompass(showsCompass bool) *MapView
@@ -739,7 +739,7 @@ type MapViewable interface {
 	WithShowsBuildings(showsBuildings bool) *MapView
 	WithShowsTraffic(showsTraffic bool) *MapView
 	WithShowsUserLocation(showsUserLocation bool) *MapView
-	WithUserTrackingMode(userTrackingMode raw.MKUserTrackingMode) *MapView
+	WithUserTrackingMode(userTrackingMode MKUserTrackingMode) *MapView
 	SetRegionAnimated(region raw.MKCoordinateRegion, animated bool)
 	SetCenterCoordinateAnimated(coordinate unsafe.Pointer, animated bool)
 	RegionThatFits(region raw.MKCoordinateRegion) raw.MKCoordinateRegion
@@ -754,7 +754,7 @@ type MapViewable interface {
 	ConvertPointToCoordinateFromView(point corefoundation.CGPoint, view *appkit.NSView) unsafe.Pointer
 	ConvertRegionToRectToView(region raw.MKCoordinateRegion, view *appkit.NSView) corefoundation.CGRect
 	ConvertRectToRegionFromView(rect corefoundation.CGRect, view *appkit.NSView) raw.MKCoordinateRegion
-	SetUserTrackingModeAnimated(mode raw.MKUserTrackingMode, animated bool)
+	SetUserTrackingModeAnimated(mode MKUserTrackingMode, animated bool)
 	AddAnnotation(annotation raw.MKAnnotation)
 	AddAnnotations(annotations *foundation.NSArray[raw.MKAnnotation])
 	RemoveAnnotation(annotation raw.MKAnnotation)
@@ -769,8 +769,8 @@ type MapViewable interface {
 	ShowAnnotationsAnimated(annotations *foundation.NSArray[raw.MKAnnotation], animated bool)
 	Delegate() raw.MKMapViewDelegate
 	SetDelegate(delegate raw.MKMapViewDelegate)
-	MapType() raw.MKMapType
-	SetMapType(mapType raw.MKMapType)
+	MapType() MKMapType
+	SetMapType(mapType MKMapType)
 	PreferredConfiguration() *MapConfiguration
 	SetPreferredConfiguration(preferredConfiguration *raw.MKMapConfiguration)
 	Region() raw.MKCoordinateRegion
@@ -795,8 +795,8 @@ type MapViewable interface {
 	SetPitchEnabled(pitchEnabled bool)
 	ShowsUserTrackingButton() bool
 	SetShowsUserTrackingButton(showsUserTrackingButton bool)
-	PitchButtonVisibility() raw.MKFeatureVisibility
-	SetPitchButtonVisibility(pitchButtonVisibility raw.MKFeatureVisibility)
+	PitchButtonVisibility() MKFeatureVisibility
+	SetPitchButtonVisibility(pitchButtonVisibility MKFeatureVisibility)
 	ShowsPitchControl() bool
 	SetShowsPitchControl(showsPitchControl bool)
 	ShowsZoomControls() bool
@@ -816,22 +816,22 @@ type MapViewable interface {
 	ShowsUserLocation() bool
 	SetShowsUserLocation(showsUserLocation bool)
 	UserLocation() *UserLocation
-	UserTrackingMode() raw.MKUserTrackingMode
-	SetUserTrackingMode(userTrackingMode raw.MKUserTrackingMode)
+	UserTrackingMode() MKUserTrackingMode
+	SetUserTrackingMode(userTrackingMode MKUserTrackingMode)
 	IsUserLocationVisible() bool
 	Annotations() *foundation.NSArray[raw.MKAnnotation]
 	SelectedAnnotations() *foundation.NSArray[raw.MKAnnotation]
 	SetSelectedAnnotations(selectedAnnotations *foundation.NSArray[raw.MKAnnotation])
 	AnnotationVisibleRect() corefoundation.CGRect
-	AddOverlayLevel(overlay raw.MKOverlay, level raw.MKOverlayLevel)
-	AddOverlaysLevel(overlays *foundation.NSArray[raw.MKOverlay], level raw.MKOverlayLevel)
+	AddOverlayLevel(overlay raw.MKOverlay, level MKOverlayLevel)
+	AddOverlaysLevel(overlays *foundation.NSArray[raw.MKOverlay], level MKOverlayLevel)
 	RemoveOverlay(overlay raw.MKOverlay)
 	RemoveOverlays(overlays *foundation.NSArray[raw.MKOverlay])
-	InsertOverlayAtIndexLevel(overlay raw.MKOverlay, index uint, level raw.MKOverlayLevel)
+	InsertOverlayAtIndexLevel(overlay raw.MKOverlay, index uint, level MKOverlayLevel)
 	InsertOverlayAboveOverlay(overlay raw.MKOverlay, sibling raw.MKOverlay)
 	InsertOverlayBelowOverlay(overlay raw.MKOverlay, sibling raw.MKOverlay)
 	ExchangeOverlayWithOverlay(overlay1 raw.MKOverlay, overlay2 raw.MKOverlay)
-	OverlaysInLevel(level raw.MKOverlayLevel) *foundation.NSArray[raw.MKOverlay]
+	OverlaysInLevel(level MKOverlayLevel) *foundation.NSArray[raw.MKOverlay]
 	RendererForOverlay(overlay raw.MKOverlay) *OverlayRenderer
 	AddOverlay(overlay raw.MKOverlay)
 	AddOverlays(overlays *foundation.NSArray[raw.MKOverlay])

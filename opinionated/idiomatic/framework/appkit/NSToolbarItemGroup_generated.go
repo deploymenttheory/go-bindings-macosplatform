@@ -58,14 +58,14 @@ func (x *ToolbarItemGroup) WithSubitems(items ...ToolbarItemProvider) *ToolbarIt
 }
 
 // WithControlRepresentation sets the controlRepresentation property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithControlRepresentation(controlRepresentation raw.NSToolbarItemGroupControlRepresentation) *ToolbarItemGroup {
-	x.inner.SetControlRepresentation(controlRepresentation)
+func (x *ToolbarItemGroup) WithControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation) *ToolbarItemGroup {
+	x.inner.SetControlRepresentation(raw.NSToolbarItemGroupControlRepresentation(controlRepresentation))
 	return x
 }
 
 // WithSelectionMode sets the selectionMode property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithSelectionMode(selectionMode raw.NSToolbarItemGroupSelectionMode) *ToolbarItemGroup {
-	x.inner.SetSelectionMode(selectionMode)
+func (x *ToolbarItemGroup) WithSelectionMode(selectionMode NSToolbarItemGroupSelectionMode) *ToolbarItemGroup {
+	x.inner.SetSelectionMode(raw.NSToolbarItemGroupSelectionMode(selectionMode))
 	return x
 }
 
@@ -154,8 +154,8 @@ func (x *ToolbarItemGroup) WithBackgroundTintColor(backgroundTintColor *Color) *
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *ToolbarItemGroup) WithStyle(style raw.NSToolbarItemStyle) *ToolbarItemGroup {
-	x.inner.NSToolbarItem.SetStyle(style)
+func (x *ToolbarItemGroup) WithStyle(style NSToolbarItemStyle) *ToolbarItemGroup {
+	x.inner.NSToolbarItem.SetStyle(raw.NSToolbarItemStyle(style))
 	return x
 }
 
@@ -234,23 +234,23 @@ func (x *ToolbarItemGroup) SetSubitems(subitems *foundation.NSArray[*raw.NSToolb
 }
 
 // ControlRepresentation calls the underlying ControlRepresentation.
-func (x *ToolbarItemGroup) ControlRepresentation() raw.NSToolbarItemGroupControlRepresentation {
-	return x.inner.ControlRepresentation()
+func (x *ToolbarItemGroup) ControlRepresentation() NSToolbarItemGroupControlRepresentation {
+	return NSToolbarItemGroupControlRepresentation(x.inner.ControlRepresentation())
 }
 
 // SetControlRepresentation calls the underlying SetControlRepresentation.
-func (x *ToolbarItemGroup) SetControlRepresentation(controlRepresentation raw.NSToolbarItemGroupControlRepresentation) {
-	x.inner.SetControlRepresentation(controlRepresentation)
+func (x *ToolbarItemGroup) SetControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation) {
+	x.inner.SetControlRepresentation(raw.NSToolbarItemGroupControlRepresentation(controlRepresentation))
 }
 
 // SelectionMode calls the underlying SelectionMode.
-func (x *ToolbarItemGroup) SelectionMode() raw.NSToolbarItemGroupSelectionMode {
-	return x.inner.SelectionMode()
+func (x *ToolbarItemGroup) SelectionMode() NSToolbarItemGroupSelectionMode {
+	return NSToolbarItemGroupSelectionMode(x.inner.SelectionMode())
 }
 
 // SetSelectionMode calls the underlying SetSelectionMode.
-func (x *ToolbarItemGroup) SetSelectionMode(selectionMode raw.NSToolbarItemGroupSelectionMode) {
-	x.inner.SetSelectionMode(selectionMode)
+func (x *ToolbarItemGroup) SetSelectionMode(selectionMode NSToolbarItemGroupSelectionMode) {
+	x.inner.SetSelectionMode(raw.NSToolbarItemGroupSelectionMode(selectionMode))
 }
 
 // SelectedIndex calls the underlying SelectedIndex.
@@ -269,8 +269,8 @@ func (x *ToolbarItemGroup) asToolbarItem() *raw.NSToolbarItem { return &x.inner.
 type ToolbarItemGroupable interface {
 	Unwrap() *raw.NSToolbarItemGroup
 	WithSubitems(items ...ToolbarItemProvider) *ToolbarItemGroup
-	WithControlRepresentation(controlRepresentation raw.NSToolbarItemGroupControlRepresentation) *ToolbarItemGroup
-	WithSelectionMode(selectionMode raw.NSToolbarItemGroupSelectionMode) *ToolbarItemGroup
+	WithControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation) *ToolbarItemGroup
+	WithSelectionMode(selectionMode NSToolbarItemGroupSelectionMode) *ToolbarItemGroup
 	WithSelectedIndex(selectedIndex int) *ToolbarItemGroup
 	WithLabel(label string) *ToolbarItemGroup
 	WithPaletteLabel(paletteLabel string) *ToolbarItemGroup
@@ -285,7 +285,7 @@ type ToolbarItemGroupable interface {
 	WithTitle(title string) *ToolbarItemGroup
 	WithBordered(bordered bool) *ToolbarItemGroup
 	WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItemGroup
-	WithStyle(style raw.NSToolbarItemStyle) *ToolbarItemGroup
+	WithStyle(style NSToolbarItemStyle) *ToolbarItemGroup
 	WithNavigational(navigational bool) *ToolbarItemGroup
 	WithView(view ViewProvider) *ToolbarItemGroup
 	WithHidden(hidden bool) *ToolbarItemGroup
@@ -298,10 +298,10 @@ type ToolbarItemGroupable interface {
 	IsSelectedAtIndex(index int) bool
 	Subitems() []*ToolbarItem
 	SetSubitems(subitems *foundation.NSArray[*raw.NSToolbarItem])
-	ControlRepresentation() raw.NSToolbarItemGroupControlRepresentation
-	SetControlRepresentation(controlRepresentation raw.NSToolbarItemGroupControlRepresentation)
-	SelectionMode() raw.NSToolbarItemGroupSelectionMode
-	SetSelectionMode(selectionMode raw.NSToolbarItemGroupSelectionMode)
+	ControlRepresentation() NSToolbarItemGroupControlRepresentation
+	SetControlRepresentation(controlRepresentation NSToolbarItemGroupControlRepresentation)
+	SelectionMode() NSToolbarItemGroupSelectionMode
+	SetSelectionMode(selectionMode NSToolbarItemGroupSelectionMode)
 	SelectedIndex() int
 	SetSelectedIndex(selectedIndex int)
 }

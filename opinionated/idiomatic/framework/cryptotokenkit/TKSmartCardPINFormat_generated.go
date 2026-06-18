@@ -36,14 +36,14 @@ func NewSmartCardPINFormat() *SmartCardPINFormat {
 }
 
 // WithCharset sets the charset property and returns the receiver for chaining.
-func (x *SmartCardPINFormat) WithCharset(charset raw.TKSmartCardPINCharset) *SmartCardPINFormat {
-	x.inner.SetCharset(charset)
+func (x *SmartCardPINFormat) WithCharset(charset TKSmartCardPINCharset) *SmartCardPINFormat {
+	x.inner.SetCharset(raw.TKSmartCardPINCharset(charset))
 	return x
 }
 
 // WithEncoding sets the encoding property and returns the receiver for chaining.
-func (x *SmartCardPINFormat) WithEncoding(encoding raw.TKSmartCardPINEncoding) *SmartCardPINFormat {
-	x.inner.SetEncoding(encoding)
+func (x *SmartCardPINFormat) WithEncoding(encoding TKSmartCardPINEncoding) *SmartCardPINFormat {
+	x.inner.SetEncoding(raw.TKSmartCardPINEncoding(encoding))
 	return x
 }
 
@@ -66,8 +66,8 @@ func (x *SmartCardPINFormat) WithPINBlockByteLength(pINBlockByteLength int) *Sma
 }
 
 // WithPINJustification sets the pINJustification property and returns the receiver for chaining.
-func (x *SmartCardPINFormat) WithPINJustification(pINJustification raw.TKSmartCardPINJustification) *SmartCardPINFormat {
-	x.inner.SetPINJustification(pINJustification)
+func (x *SmartCardPINFormat) WithPINJustification(pINJustification TKSmartCardPINJustification) *SmartCardPINFormat {
+	x.inner.SetPINJustification(raw.TKSmartCardPINJustification(pINJustification))
 	return x
 }
 
@@ -90,23 +90,23 @@ func (x *SmartCardPINFormat) WithPINLengthBitSize(pINLengthBitSize int) *SmartCa
 }
 
 // Charset calls the underlying Charset.
-func (x *SmartCardPINFormat) Charset() raw.TKSmartCardPINCharset {
-	return x.inner.Charset()
+func (x *SmartCardPINFormat) Charset() TKSmartCardPINCharset {
+	return TKSmartCardPINCharset(x.inner.Charset())
 }
 
 // SetCharset calls the underlying SetCharset.
-func (x *SmartCardPINFormat) SetCharset(charset raw.TKSmartCardPINCharset) {
-	x.inner.SetCharset(charset)
+func (x *SmartCardPINFormat) SetCharset(charset TKSmartCardPINCharset) {
+	x.inner.SetCharset(raw.TKSmartCardPINCharset(charset))
 }
 
 // Encoding calls the underlying Encoding.
-func (x *SmartCardPINFormat) Encoding() raw.TKSmartCardPINEncoding {
-	return x.inner.Encoding()
+func (x *SmartCardPINFormat) Encoding() TKSmartCardPINEncoding {
+	return TKSmartCardPINEncoding(x.inner.Encoding())
 }
 
 // SetEncoding calls the underlying SetEncoding.
-func (x *SmartCardPINFormat) SetEncoding(encoding raw.TKSmartCardPINEncoding) {
-	x.inner.SetEncoding(encoding)
+func (x *SmartCardPINFormat) SetEncoding(encoding TKSmartCardPINEncoding) {
+	x.inner.SetEncoding(raw.TKSmartCardPINEncoding(encoding))
 }
 
 // MinPINLength calls the underlying MinPINLength.
@@ -140,13 +140,13 @@ func (x *SmartCardPINFormat) SetPINBlockByteLength(pINBlockByteLength int) {
 }
 
 // PINJustification calls the underlying PINJustification.
-func (x *SmartCardPINFormat) PINJustification() raw.TKSmartCardPINJustification {
-	return x.inner.PINJustification()
+func (x *SmartCardPINFormat) PINJustification() TKSmartCardPINJustification {
+	return TKSmartCardPINJustification(x.inner.PINJustification())
 }
 
 // SetPINJustification calls the underlying SetPINJustification.
-func (x *SmartCardPINFormat) SetPINJustification(pINJustification raw.TKSmartCardPINJustification) {
-	x.inner.SetPINJustification(pINJustification)
+func (x *SmartCardPINFormat) SetPINJustification(pINJustification TKSmartCardPINJustification) {
+	x.inner.SetPINJustification(raw.TKSmartCardPINJustification(pINJustification))
 }
 
 // PINBitOffset calls the underlying PINBitOffset.
@@ -182,27 +182,27 @@ func (x *SmartCardPINFormat) SetPINLengthBitSize(pINLengthBitSize int) {
 // SmartCardPINFormatable is the interface implemented by [SmartCardPINFormat], for mocking and DI.
 type SmartCardPINFormatable interface {
 	Unwrap() *raw.TKSmartCardPINFormat
-	WithCharset(charset raw.TKSmartCardPINCharset) *SmartCardPINFormat
-	WithEncoding(encoding raw.TKSmartCardPINEncoding) *SmartCardPINFormat
+	WithCharset(charset TKSmartCardPINCharset) *SmartCardPINFormat
+	WithEncoding(encoding TKSmartCardPINEncoding) *SmartCardPINFormat
 	WithMinPINLength(minPINLength int) *SmartCardPINFormat
 	WithMaxPINLength(maxPINLength int) *SmartCardPINFormat
 	WithPINBlockByteLength(pINBlockByteLength int) *SmartCardPINFormat
-	WithPINJustification(pINJustification raw.TKSmartCardPINJustification) *SmartCardPINFormat
+	WithPINJustification(pINJustification TKSmartCardPINJustification) *SmartCardPINFormat
 	WithPINBitOffset(pINBitOffset int) *SmartCardPINFormat
 	WithPINLengthBitOffset(pINLengthBitOffset int) *SmartCardPINFormat
 	WithPINLengthBitSize(pINLengthBitSize int) *SmartCardPINFormat
-	Charset() raw.TKSmartCardPINCharset
-	SetCharset(charset raw.TKSmartCardPINCharset)
-	Encoding() raw.TKSmartCardPINEncoding
-	SetEncoding(encoding raw.TKSmartCardPINEncoding)
+	Charset() TKSmartCardPINCharset
+	SetCharset(charset TKSmartCardPINCharset)
+	Encoding() TKSmartCardPINEncoding
+	SetEncoding(encoding TKSmartCardPINEncoding)
 	MinPINLength() int
 	SetMinPINLength(minPINLength int)
 	MaxPINLength() int
 	SetMaxPINLength(maxPINLength int)
 	PINBlockByteLength() int
 	SetPINBlockByteLength(pINBlockByteLength int)
-	PINJustification() raw.TKSmartCardPINJustification
-	SetPINJustification(pINJustification raw.TKSmartCardPINJustification)
+	PINJustification() TKSmartCardPINJustification
+	SetPINJustification(pINJustification TKSmartCardPINJustification)
 	PINBitOffset() int
 	SetPINBitOffset(pINBitOffset int)
 	PINLengthBitOffset() int

@@ -61,8 +61,8 @@ func (x *Reservation) BookingTime() *foundation.NSDate {
 }
 
 // ReservationStatus calls the underlying ReservationStatus.
-func (x *Reservation) ReservationStatus() raw.INReservationStatus {
-	return x.inner.ReservationStatus()
+func (x *Reservation) ReservationStatus() INReservationStatus {
+	return INReservationStatus(x.inner.ReservationStatus())
 }
 
 // ReservationHolderName calls the underlying ReservationHolderName.
@@ -98,7 +98,7 @@ type Reservationable interface {
 	ItemReference() *SpeakableString
 	ReservationNumber() string
 	BookingTime() *foundation.NSDate
-	ReservationStatus() raw.INReservationStatus
+	ReservationStatus() INReservationStatus
 	ReservationHolderName() string
 	Actions() []*ReservationAction
 	URL() *foundation.NSURL

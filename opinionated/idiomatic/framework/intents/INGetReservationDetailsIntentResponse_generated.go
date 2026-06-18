@@ -35,9 +35,9 @@ func GetReservationDetailsIntentResponseFromID(id objc.ID) *GetReservationDetail
 }
 
 // NewGetReservationDetailsIntentResponseWithCodeUserActivity creates a new [GetReservationDetailsIntentResponse].
-func NewGetReservationDetailsIntentResponseWithCodeUserActivity(code raw.INGetReservationDetailsIntentResponseCode, userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse {
+func NewGetReservationDetailsIntentResponseWithCodeUserActivity(code INGetReservationDetailsIntentResponseCode, userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INGetReservationDetailsIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, userActivity.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INGetReservationDetailsIntentResponseCode(code), userActivity.Ptr())
 	return &GetReservationDetailsIntentResponse{inner: raw.INGetReservationDetailsIntentResponseFromID(_id)}
 }
 
@@ -66,8 +66,8 @@ func (x *GetReservationDetailsIntentResponse) WithUserActivity(userActivity *fou
 }
 
 // Code calls the underlying Code.
-func (x *GetReservationDetailsIntentResponse) Code() raw.INGetReservationDetailsIntentResponseCode {
-	return x.inner.Code()
+func (x *GetReservationDetailsIntentResponse) Code() INGetReservationDetailsIntentResponseCode {
+	return INGetReservationDetailsIntentResponseCode(x.inner.Code())
 }
 
 // Reservations returns the collection as a Go slice.
@@ -95,7 +95,7 @@ type GetReservationDetailsIntentResponseable interface {
 	Unwrap() *raw.INGetReservationDetailsIntentResponse
 	WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse
 	WithUserActivity(userActivity *foundation.NSUserActivity) *GetReservationDetailsIntentResponse
-	Code() raw.INGetReservationDetailsIntentResponseCode
+	Code() INGetReservationDetailsIntentResponseCode
 	Reservations() []*Reservation
 	SetReservations(reservations *foundation.NSArray[*raw.INReservation])
 }

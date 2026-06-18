@@ -99,14 +99,18 @@ func (x *MatchRequest) WithRestrictToAutomatch(restrictToAutomatch bool) *MatchR
 }
 
 // WithRecipientResponseHandler sets the recipientResponseHandler property and returns the receiver for chaining.
-func (x *MatchRequest) WithRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, raw.GKInviteRecipientResponse)) *MatchRequest {
-	x.inner.SetRecipientResponseHandler(recipientResponseHandler)
+func (x *MatchRequest) WithRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, GKInviteRecipientResponse)) *MatchRequest {
+	x.inner.SetRecipientResponseHandler(func(_a0 *raw.GKPlayer, _a1 raw.GKInviteRecipientResponse) {
+		recipientResponseHandler(_a0, GKInviteRecipientResponse(_a1))
+	})
 	return x
 }
 
 // WithInviteeResponseHandler sets the inviteeResponseHandler property and returns the receiver for chaining.
-func (x *MatchRequest) WithInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, raw.GKInviteRecipientResponse)) *MatchRequest {
-	x.inner.SetInviteeResponseHandler(inviteeResponseHandler)
+func (x *MatchRequest) WithInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, GKInviteRecipientResponse)) *MatchRequest {
+	x.inner.SetInviteeResponseHandler(func(_a0 *foundation.NSString, _a1 raw.GKInviteRecipientResponse) {
+		inviteeResponseHandler(_a0, GKInviteRecipientResponse(_a1))
+	})
 	return x
 }
 
@@ -236,8 +240,10 @@ func (x *MatchRequest) RecipientResponseHandler() objc.Block {
 }
 
 // SetRecipientResponseHandler calls the underlying SetRecipientResponseHandler.
-func (x *MatchRequest) SetRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, raw.GKInviteRecipientResponse)) {
-	x.inner.SetRecipientResponseHandler(recipientResponseHandler)
+func (x *MatchRequest) SetRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, GKInviteRecipientResponse)) {
+	x.inner.SetRecipientResponseHandler(func(_a0 *raw.GKPlayer, _a1 raw.GKInviteRecipientResponse) {
+		recipientResponseHandler(_a0, GKInviteRecipientResponse(_a1))
+	})
 }
 
 // InviteeResponseHandler calls the underlying InviteeResponseHandler.
@@ -246,8 +252,10 @@ func (x *MatchRequest) InviteeResponseHandler() objc.Block {
 }
 
 // SetInviteeResponseHandler calls the underlying SetInviteeResponseHandler.
-func (x *MatchRequest) SetInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, raw.GKInviteRecipientResponse)) {
-	x.inner.SetInviteeResponseHandler(inviteeResponseHandler)
+func (x *MatchRequest) SetInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, GKInviteRecipientResponse)) {
+	x.inner.SetInviteeResponseHandler(func(_a0 *foundation.NSString, _a1 raw.GKInviteRecipientResponse) {
+		inviteeResponseHandler(_a0, GKInviteRecipientResponse(_a1))
+	})
 }
 
 // PlayersToInvite returns the collection as a Go slice.
@@ -311,8 +319,8 @@ type MatchRequestable interface {
 	WithInviteMessage(inviteMessage string) *MatchRequest
 	WithDefaultNumberOfPlayers(defaultNumberOfPlayers uint) *MatchRequest
 	WithRestrictToAutomatch(restrictToAutomatch bool) *MatchRequest
-	WithRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, raw.GKInviteRecipientResponse)) *MatchRequest
-	WithInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, raw.GKInviteRecipientResponse)) *MatchRequest
+	WithRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, GKInviteRecipientResponse)) *MatchRequest
+	WithInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, GKInviteRecipientResponse)) *MatchRequest
 	WithPlayersToInvite(items ...*foundation.NSString) *MatchRequest
 	WithQueueName(queueName string) *MatchRequest
 	WithRecipientProperties(recipientProperties *foundation.NSDictionary[*raw.GKPlayer, objc.ID]) *MatchRequest
@@ -333,9 +341,9 @@ type MatchRequestable interface {
 	RestrictToAutomatch() bool
 	SetRestrictToAutomatch(restrictToAutomatch bool)
 	RecipientResponseHandler() objc.Block
-	SetRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, raw.GKInviteRecipientResponse))
+	SetRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, GKInviteRecipientResponse))
 	InviteeResponseHandler() objc.Block
-	SetInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, raw.GKInviteRecipientResponse))
+	SetInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, GKInviteRecipientResponse))
 	PlayersToInvite() []string
 	SetPlayersToInvite(playersToInvite *foundation.NSArray[*foundation.NSString])
 	QueueName() string

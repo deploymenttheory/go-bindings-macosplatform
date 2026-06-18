@@ -38,8 +38,8 @@ func NewLightProbeWithReflectiveTextureIrradianceTexture(reflectiveTexture *raw.
 }
 
 // WithLightType sets the lightType property and returns the receiver for chaining.
-func (x *LightProbe) WithLightType(lightType raw.MDLLightType) *LightProbe {
-	x.inner.MDLLight.SetLightType(lightType)
+func (x *LightProbe) WithLightType(lightType MDLLightType) *LightProbe {
+	x.inner.MDLLight.SetLightType(raw.MDLLightType(lightType))
 	return x
 }
 
@@ -119,7 +119,7 @@ func (x *LightProbe) asObject() *raw.MDLObject { return &x.inner.MDLLight.MDLObj
 // LightProbeable is the interface implemented by [LightProbe], for mocking and DI.
 type LightProbeable interface {
 	Unwrap() *raw.MDLLightProbe
-	WithLightType(lightType raw.MDLLightType) *LightProbe
+	WithLightType(lightType MDLLightType) *LightProbe
 	WithColorSpace(colorSpace string) *LightProbe
 	WithParent(parent ObjectProvider) *LightProbe
 	WithInstance(instance ObjectProvider) *LightProbe

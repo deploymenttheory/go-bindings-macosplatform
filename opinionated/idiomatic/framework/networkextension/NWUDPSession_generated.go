@@ -92,8 +92,8 @@ func (x *NWUDPSession) Cancel() {
 }
 
 // State calls the underlying State.
-func (x *NWUDPSession) State() raw.NWUDPSessionState {
-	return x.inner.State()
+func (x *NWUDPSession) State() NWUDPSessionState {
+	return NWUDPSessionState(x.inner.State())
 }
 
 // Endpoint calls the underlying Endpoint.
@@ -138,7 +138,7 @@ type NWUDPSessionable interface {
 	WriteMultipleDatagrams(ctx context.Context, datagramArray *foundation.NSArray[*foundation.NSData]) error
 	WriteDatagram(ctx context.Context, datagram *foundation.NSData) error
 	Cancel()
-	State() raw.NWUDPSessionState
+	State() NWUDPSessionState
 	Endpoint() unsafe.Pointer
 	ResolvedEndpoint() unsafe.Pointer
 	IsViable() bool

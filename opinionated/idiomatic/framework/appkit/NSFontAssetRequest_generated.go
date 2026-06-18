@@ -33,9 +33,9 @@ func FontAssetRequestFromID(id objc.ID) *FontAssetRequest {
 }
 
 // NewFontAssetRequestWithFontDescriptorsOptions creates a new [FontAssetRequest].
-func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors *foundation.NSArray[*raw.NSFontDescriptor], options raw.NSFontAssetRequestOptions) *FontAssetRequest {
+func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors *foundation.NSArray[*raw.NSFontDescriptor], options NSFontAssetRequestOptions) *FontAssetRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFontAssetRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontDescriptors:options:"), fontDescriptors.Ptr(), options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontDescriptors:options:"), fontDescriptors.Ptr(), raw.NSFontAssetRequestOptions(options))
 	return &FontAssetRequest{inner: raw.NSFontAssetRequestFromID(_id)}
 }
 

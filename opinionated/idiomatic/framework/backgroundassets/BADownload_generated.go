@@ -46,8 +46,8 @@ func (x *Download) CopyAsNonEssential() *Download {
 }
 
 // State calls the underlying State.
-func (x *Download) State() raw.BADownloadState {
-	return x.inner.State()
+func (x *Download) State() BADownloadState {
+	return BADownloadState(x.inner.State())
 }
 
 // Identifier calls the underlying Identifier.
@@ -84,7 +84,7 @@ func (x *Download) asDownload() *raw.BADownload { return x.inner }
 type Downloadable interface {
 	Unwrap() *raw.BADownload
 	CopyAsNonEssential() *Download
-	State() raw.BADownloadState
+	State() BADownloadState
 	Identifier() string
 	UniqueIdentifier() string
 	Priority() int

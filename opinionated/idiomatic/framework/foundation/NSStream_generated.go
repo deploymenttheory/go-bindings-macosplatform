@@ -89,8 +89,8 @@ func (x *Stream) SetDelegate(delegate raw.NSStreamDelegate) {
 }
 
 // StreamStatus calls the underlying StreamStatus.
-func (x *Stream) StreamStatus() raw.NSStreamStatus {
-	return x.inner.StreamStatus()
+func (x *Stream) StreamStatus() NSStreamStatus {
+	return NSStreamStatus(x.inner.StreamStatus())
 }
 
 // StreamError calls the underlying StreamError.
@@ -115,7 +115,7 @@ type Streamable interface {
 	RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
 	Delegate() raw.NSStreamDelegate
 	SetDelegate(delegate raw.NSStreamDelegate)
-	StreamStatus() raw.NSStreamStatus
+	StreamStatus() NSStreamStatus
 	StreamError() unsafe.Pointer
 }
 

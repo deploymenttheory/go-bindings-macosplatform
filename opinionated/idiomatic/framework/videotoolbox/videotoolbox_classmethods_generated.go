@@ -18,8 +18,8 @@ func SupportedRevisions() *foundation.NSIndexSet {
 }
 
 // DefaultRevision calls the underlying VTFrameRateConversionConfigurationDefaultRevision.
-func DefaultRevision() raw.VTFrameRateConversionConfigurationRevision {
-	return raw.VTFrameRateConversionConfigurationDefaultRevision()
+func DefaultRevision() VTFrameRateConversionConfigurationRevision {
+	return VTFrameRateConversionConfigurationRevision(raw.VTFrameRateConversionConfigurationDefaultRevision())
 }
 
 // IsSupported calls the underlying VTFrameRateConversionConfigurationIsSupported.
@@ -63,8 +63,8 @@ func VTMotionBlurConfigurationSupportedRevisions() *foundation.NSIndexSet {
 }
 
 // VTMotionBlurConfigurationDefaultRevision calls the underlying VTMotionBlurConfigurationDefaultRevision.
-func VTMotionBlurConfigurationDefaultRevision() raw.VTMotionBlurConfigurationRevision {
-	return raw.VTMotionBlurConfigurationDefaultRevision()
+func VTMotionBlurConfigurationDefaultRevision() VTMotionBlurConfigurationRevision {
+	return VTMotionBlurConfigurationRevision(raw.VTMotionBlurConfigurationDefaultRevision())
 }
 
 // VTMotionBlurConfigurationIsSupported calls the underlying VTMotionBlurConfigurationIsSupported.
@@ -83,8 +83,8 @@ func VTOpticalFlowConfigurationSupportedRevisions() *foundation.NSIndexSet {
 }
 
 // VTOpticalFlowConfigurationDefaultRevision calls the underlying VTOpticalFlowConfigurationDefaultRevision.
-func VTOpticalFlowConfigurationDefaultRevision() raw.VTOpticalFlowConfigurationRevision {
-	return raw.VTOpticalFlowConfigurationDefaultRevision()
+func VTOpticalFlowConfigurationDefaultRevision() VTOpticalFlowConfigurationRevision {
+	return VTOpticalFlowConfigurationRevision(raw.VTOpticalFlowConfigurationDefaultRevision())
 }
 
 // VTOpticalFlowConfigurationIsSupported calls the underlying VTOpticalFlowConfigurationIsSupported.
@@ -103,8 +103,8 @@ func VTSuperResolutionScalerConfigurationSupportedRevisions() *foundation.NSInde
 }
 
 // VTSuperResolutionScalerConfigurationDefaultRevision calls the underlying VTSuperResolutionScalerConfigurationDefaultRevision.
-func VTSuperResolutionScalerConfigurationDefaultRevision() raw.VTSuperResolutionScalerConfigurationRevision {
-	return raw.VTSuperResolutionScalerConfigurationDefaultRevision()
+func VTSuperResolutionScalerConfigurationDefaultRevision() VTSuperResolutionScalerConfigurationRevision {
+	return VTSuperResolutionScalerConfigurationRevision(raw.VTSuperResolutionScalerConfigurationDefaultRevision())
 }
 
 // VTSuperResolutionScalerConfigurationIsSupported calls the underlying VTSuperResolutionScalerConfigurationIsSupported.

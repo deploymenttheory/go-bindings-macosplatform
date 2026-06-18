@@ -36,8 +36,8 @@ func NewActivationDescriptor() *ActivationDescriptor {
 }
 
 // ActivationType calls the underlying ActivationType.
-func (x *ActivationDescriptor) ActivationType() raw.MLCActivationType {
-	return x.inner.ActivationType()
+func (x *ActivationDescriptor) ActivationType() MLCActivationType {
+	return MLCActivationType(x.inner.ActivationType())
 }
 
 // A calls the underlying A.
@@ -58,7 +58,7 @@ func (x *ActivationDescriptor) C() float32 {
 // ActivationDescriptorable is the interface implemented by [ActivationDescriptor], for mocking and DI.
 type ActivationDescriptorable interface {
 	Unwrap() *raw.MLCActivationDescriptor
-	ActivationType() raw.MLCActivationType
+	ActivationType() MLCActivationType
 	A() float32
 	B() float32
 	C() float32

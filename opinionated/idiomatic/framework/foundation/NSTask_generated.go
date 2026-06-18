@@ -106,8 +106,8 @@ func (x *Task) WithTerminationHandler(terminationHandler func(*raw.NSTask)) *Tas
 }
 
 // WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *Task) WithQualityOfService(qualityOfService raw.NSQualityOfService) *Task {
-	x.inner.SetQualityOfService(qualityOfService)
+func (x *Task) WithQualityOfService(qualityOfService NSQualityOfService) *Task {
+	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 	return x
 }
 
@@ -257,8 +257,8 @@ func (x *Task) TerminationStatus() int {
 }
 
 // TerminationReason calls the underlying TerminationReason.
-func (x *Task) TerminationReason() raw.NSTaskTerminationReason {
-	return x.inner.TerminationReason()
+func (x *Task) TerminationReason() NSTaskTerminationReason {
+	return NSTaskTerminationReason(x.inner.TerminationReason())
 }
 
 // TerminationHandler calls the underlying TerminationHandler.
@@ -290,13 +290,13 @@ func (x *Task) SetTerminationHandler(ctx context.Context) (*Task, error) {
 }
 
 // QualityOfService calls the underlying QualityOfService.
-func (x *Task) QualityOfService() raw.NSQualityOfService {
-	return x.inner.QualityOfService()
+func (x *Task) QualityOfService() NSQualityOfService {
+	return NSQualityOfService(x.inner.QualityOfService())
 }
 
 // SetQualityOfService calls the underlying SetQualityOfService.
-func (x *Task) SetQualityOfService(qualityOfService raw.NSQualityOfService) {
-	x.inner.SetQualityOfService(qualityOfService)
+func (x *Task) SetQualityOfService(qualityOfService NSQualityOfService) {
+	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 }
 
 // WaitUntilExit calls the underlying WaitUntilExit.
@@ -343,7 +343,7 @@ type Taskable interface {
 	WithStandardOutput(standardOutput objc.ID) *Task
 	WithStandardError(standardError objc.ID) *Task
 	WithTerminationHandler(terminationHandler func(*raw.NSTask)) *Task
-	WithQualityOfService(qualityOfService raw.NSQualityOfService) *Task
+	WithQualityOfService(qualityOfService NSQualityOfService) *Task
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Task
 	LaunchAndReturnError() error
 	Interrupt()
@@ -369,11 +369,11 @@ type Taskable interface {
 	ProcessIdentifier() int
 	IsRunning() bool
 	TerminationStatus() int
-	TerminationReason() raw.NSTaskTerminationReason
+	TerminationReason() NSTaskTerminationReason
 	TerminationHandler() objc.Block
 	SetTerminationHandler(ctx context.Context) (*Task, error)
-	QualityOfService() raw.NSQualityOfService
-	SetQualityOfService(qualityOfService raw.NSQualityOfService)
+	QualityOfService() NSQualityOfService
+	SetQualityOfService(qualityOfService NSQualityOfService)
 	WaitUntilExit()
 	Launch()
 	LaunchPath() unsafe.Pointer

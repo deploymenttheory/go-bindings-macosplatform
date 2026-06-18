@@ -74,8 +74,8 @@ func (x *NEOnDemandRuleIgnore) WithDNSServerAddressMatch(items ...*foundation.NS
 }
 
 // WithInterfaceTypeMatch sets the interfaceTypeMatch property and returns the receiver for chaining.
-func (x *NEOnDemandRuleIgnore) WithInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) *NEOnDemandRuleIgnore {
-	x.inner.NEOnDemandRule.SetInterfaceTypeMatch(interfaceTypeMatch)
+func (x *NEOnDemandRuleIgnore) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleIgnore {
+	x.inner.NEOnDemandRule.SetInterfaceTypeMatch(raw.NEOnDemandRuleInterfaceType(interfaceTypeMatch))
 	return x
 }
 
@@ -110,7 +110,7 @@ type NEOnDemandRuleIgnoreable interface {
 	Unwrap() *raw.NEOnDemandRuleIgnore
 	WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRuleIgnore
 	WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRuleIgnore
-	WithInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) *NEOnDemandRuleIgnore
+	WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleIgnore
 	WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleIgnore
 	WithProbeURL(probeURL string) *NEOnDemandRuleIgnore
 }

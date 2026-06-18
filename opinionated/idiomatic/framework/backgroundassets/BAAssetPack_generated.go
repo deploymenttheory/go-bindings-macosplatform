@@ -47,8 +47,8 @@ func (x *AssetPack) Download() *Download {
 }
 
 // DownloadForContentRequest calls the underlying DownloadForContentRequest.
-func (x *AssetPack) DownloadForContentRequest(contentRequest raw.BAContentRequest) *Download {
-	_r := x.inner.DownloadForContentRequest(contentRequest)
+func (x *AssetPack) DownloadForContentRequest(contentRequest BAContentRequest) *Download {
+	_r := x.inner.DownloadForContentRequest(raw.BAContentRequest(contentRequest))
 	if _r == nil {
 		return nil
 	}
@@ -78,7 +78,7 @@ func (x *AssetPack) UserInfo() *foundation.NSData {
 type AssetPackable interface {
 	Unwrap() *raw.BAAssetPack
 	Download() *Download
-	DownloadForContentRequest(contentRequest raw.BAContentRequest) *Download
+	DownloadForContentRequest(contentRequest BAContentRequest) *Download
 	Identifier() string
 	DownloadSize() int
 	UserInfo() *foundation.NSData

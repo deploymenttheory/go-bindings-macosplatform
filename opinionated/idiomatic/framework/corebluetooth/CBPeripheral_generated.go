@@ -69,13 +69,13 @@ func (x *Peripheral) ReadValueForCharacteristic(characteristic *raw.CBCharacteri
 }
 
 // MaximumWriteValueLengthForType calls the underlying MaximumWriteValueLengthForType.
-func (x *Peripheral) MaximumWriteValueLengthForType(type_ raw.CBCharacteristicWriteType) uint {
-	return x.inner.MaximumWriteValueLengthForType(type_)
+func (x *Peripheral) MaximumWriteValueLengthForType(type_ CBCharacteristicWriteType) uint {
+	return x.inner.MaximumWriteValueLengthForType(raw.CBCharacteristicWriteType(type_))
 }
 
 // WriteValueForCharacteristicType calls the underlying WriteValueForCharacteristicType.
-func (x *Peripheral) WriteValueForCharacteristicType(data *foundation.NSData, characteristic *raw.CBCharacteristic, type_ raw.CBCharacteristicWriteType) {
-	x.inner.WriteValueForCharacteristicType(data, characteristic, type_)
+func (x *Peripheral) WriteValueForCharacteristicType(data *foundation.NSData, characteristic *raw.CBCharacteristic, type_ CBCharacteristicWriteType) {
+	x.inner.WriteValueForCharacteristicType(data, characteristic, raw.CBCharacteristicWriteType(type_))
 }
 
 // SetNotifyValueForCharacteristic calls the underlying SetNotifyValueForCharacteristic.
@@ -128,8 +128,8 @@ func (x *Peripheral) RSSI() *foundation.NSNumber {
 }
 
 // State calls the underlying State.
-func (x *Peripheral) State() raw.CBPeripheralState {
-	return x.inner.State()
+func (x *Peripheral) State() CBPeripheralState {
+	return CBPeripheralState(x.inner.State())
 }
 
 // Services returns the collection as a Go slice.
@@ -159,8 +159,8 @@ type Peripheralable interface {
 	DiscoverIncludedServicesForService(includedServiceUUIDs *foundation.NSArray[*raw.CBUUID], service *raw.CBService)
 	DiscoverCharacteristicsForService(characteristicUUIDs *foundation.NSArray[*raw.CBUUID], service *raw.CBService)
 	ReadValueForCharacteristic(characteristic *raw.CBCharacteristic)
-	MaximumWriteValueLengthForType(type_ raw.CBCharacteristicWriteType) uint
-	WriteValueForCharacteristicType(data *foundation.NSData, characteristic *raw.CBCharacteristic, type_ raw.CBCharacteristicWriteType)
+	MaximumWriteValueLengthForType(type_ CBCharacteristicWriteType) uint
+	WriteValueForCharacteristicType(data *foundation.NSData, characteristic *raw.CBCharacteristic, type_ CBCharacteristicWriteType)
 	SetNotifyValueForCharacteristic(enabled bool, characteristic *raw.CBCharacteristic)
 	DiscoverDescriptorsForCharacteristic(characteristic *raw.CBCharacteristic)
 	ReadValueForDescriptor(descriptor *raw.CBDescriptor)
@@ -170,7 +170,7 @@ type Peripheralable interface {
 	SetDelegate(delegate raw.CBPeripheralDelegate)
 	Name() string
 	RSSI() *foundation.NSNumber
-	State() raw.CBPeripheralState
+	State() CBPeripheralState
 	Services() []*Service
 	CanSendWriteWithoutResponse() bool
 }

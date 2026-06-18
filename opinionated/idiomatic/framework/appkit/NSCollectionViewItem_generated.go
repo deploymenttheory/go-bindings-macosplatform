@@ -46,8 +46,8 @@ func (x *CollectionViewItem) WithSelected(selected bool) *CollectionViewItem {
 }
 
 // WithHighlightState sets the highlightState property and returns the receiver for chaining.
-func (x *CollectionViewItem) WithHighlightState(highlightState raw.NSCollectionViewItemHighlightState) *CollectionViewItem {
-	x.inner.SetHighlightState(highlightState)
+func (x *CollectionViewItem) WithHighlightState(highlightState NSCollectionViewItemHighlightState) *CollectionViewItem {
+	x.inner.SetHighlightState(raw.NSCollectionViewItemHighlightState(highlightState))
 	return x
 }
 
@@ -161,13 +161,13 @@ func (x *CollectionViewItem) SetSelected(selected bool) {
 }
 
 // HighlightState calls the underlying HighlightState.
-func (x *CollectionViewItem) HighlightState() raw.NSCollectionViewItemHighlightState {
-	return x.inner.HighlightState()
+func (x *CollectionViewItem) HighlightState() NSCollectionViewItemHighlightState {
+	return NSCollectionViewItemHighlightState(x.inner.HighlightState())
 }
 
 // SetHighlightState calls the underlying SetHighlightState.
-func (x *CollectionViewItem) SetHighlightState(highlightState raw.NSCollectionViewItemHighlightState) {
-	x.inner.SetHighlightState(highlightState)
+func (x *CollectionViewItem) SetHighlightState(highlightState NSCollectionViewItemHighlightState) {
+	x.inner.SetHighlightState(raw.NSCollectionViewItemHighlightState(highlightState))
 }
 
 // ImageView calls the underlying ImageView.
@@ -221,7 +221,7 @@ func (x *CollectionViewItem) asResponder() *raw.NSResponder {
 type CollectionViewItemable interface {
 	Unwrap() *raw.NSCollectionViewItem
 	WithSelected(selected bool) *CollectionViewItem
-	WithHighlightState(highlightState raw.NSCollectionViewItemHighlightState) *CollectionViewItem
+	WithHighlightState(highlightState NSCollectionViewItemHighlightState) *CollectionViewItem
 	WithImageView(imageView *ImageView) *CollectionViewItem
 	WithTextField(textField TextFieldProvider) *CollectionViewItem
 	WithRepresentedObject(representedObject objc.ID) *CollectionViewItem
@@ -238,8 +238,8 @@ type CollectionViewItemable interface {
 	CollectionView() *CollectionView
 	IsSelected() bool
 	SetSelected(selected bool)
-	HighlightState() raw.NSCollectionViewItemHighlightState
-	SetHighlightState(highlightState raw.NSCollectionViewItemHighlightState)
+	HighlightState() NSCollectionViewItemHighlightState
+	SetHighlightState(highlightState NSCollectionViewItemHighlightState)
 	ImageView() *ImageView
 	SetImageView(imageView *raw.NSImageView)
 	TextField() *TextField

@@ -40,20 +40,20 @@ func NewScannerFunctionalUnit() *ScannerFunctionalUnit {
 }
 
 // WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithPixelDataType(pixelDataType raw.ICScannerPixelDataType) *ScannerFunctionalUnit {
-	x.inner.SetPixelDataType(pixelDataType)
+func (x *ScannerFunctionalUnit) WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnit {
+	x.inner.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
 	return x
 }
 
 // WithBitDepth sets the bitDepth property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithBitDepth(bitDepth raw.ICScannerBitDepth) *ScannerFunctionalUnit {
-	x.inner.SetBitDepth(bitDepth)
+func (x *ScannerFunctionalUnit) WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnit {
+	x.inner.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
 	return x
 }
 
 // WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) *ScannerFunctionalUnit {
-	x.inner.SetMeasurementUnit(measurementUnit)
+func (x *ScannerFunctionalUnit) WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnit {
+	x.inner.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
 	return x
 }
 
@@ -76,8 +76,8 @@ func (x *ScannerFunctionalUnit) WithScanArea(scanArea corefoundation.CGRect) *Sc
 }
 
 // WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnit) WithScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnit {
-	x.inner.SetScanAreaOrientation(scanAreaOrientation)
+func (x *ScannerFunctionalUnit) WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnit {
+	x.inner.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
 	return x
 }
 
@@ -100,18 +100,18 @@ func (x *ScannerFunctionalUnit) WithOverviewResolution(overviewResolution uint) 
 }
 
 // Type calls the underlying Type.
-func (x *ScannerFunctionalUnit) Type() raw.ICScannerFunctionalUnitType {
-	return x.inner.Type()
+func (x *ScannerFunctionalUnit) Type() ICScannerFunctionalUnitType {
+	return ICScannerFunctionalUnitType(x.inner.Type())
 }
 
 // PixelDataType calls the underlying PixelDataType.
-func (x *ScannerFunctionalUnit) PixelDataType() raw.ICScannerPixelDataType {
-	return x.inner.PixelDataType()
+func (x *ScannerFunctionalUnit) PixelDataType() ICScannerPixelDataType {
+	return ICScannerPixelDataType(x.inner.PixelDataType())
 }
 
 // SetPixelDataType calls the underlying SetPixelDataType.
-func (x *ScannerFunctionalUnit) SetPixelDataType(pixelDataType raw.ICScannerPixelDataType) {
-	x.inner.SetPixelDataType(pixelDataType)
+func (x *ScannerFunctionalUnit) SetPixelDataType(pixelDataType ICScannerPixelDataType) {
+	x.inner.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
 }
 
 // SupportedBitDepths calls the underlying SupportedBitDepths.
@@ -120,13 +120,13 @@ func (x *ScannerFunctionalUnit) SupportedBitDepths() *foundation.NSIndexSet {
 }
 
 // BitDepth calls the underlying BitDepth.
-func (x *ScannerFunctionalUnit) BitDepth() raw.ICScannerBitDepth {
-	return x.inner.BitDepth()
+func (x *ScannerFunctionalUnit) BitDepth() ICScannerBitDepth {
+	return ICScannerBitDepth(x.inner.BitDepth())
 }
 
 // SetBitDepth calls the underlying SetBitDepth.
-func (x *ScannerFunctionalUnit) SetBitDepth(bitDepth raw.ICScannerBitDepth) {
-	x.inner.SetBitDepth(bitDepth)
+func (x *ScannerFunctionalUnit) SetBitDepth(bitDepth ICScannerBitDepth) {
+	x.inner.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
 }
 
 // SupportedMeasurementUnits calls the underlying SupportedMeasurementUnits.
@@ -135,13 +135,13 @@ func (x *ScannerFunctionalUnit) SupportedMeasurementUnits() *foundation.NSIndexS
 }
 
 // MeasurementUnit calls the underlying MeasurementUnit.
-func (x *ScannerFunctionalUnit) MeasurementUnit() raw.ICScannerMeasurementUnit {
-	return x.inner.MeasurementUnit()
+func (x *ScannerFunctionalUnit) MeasurementUnit() ICScannerMeasurementUnit {
+	return ICScannerMeasurementUnit(x.inner.MeasurementUnit())
 }
 
 // SetMeasurementUnit calls the underlying SetMeasurementUnit.
-func (x *ScannerFunctionalUnit) SetMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) {
-	x.inner.SetMeasurementUnit(measurementUnit)
+func (x *ScannerFunctionalUnit) SetMeasurementUnit(measurementUnit ICScannerMeasurementUnit) {
+	x.inner.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
 }
 
 // SupportedResolutions calls the underlying SupportedResolutions.
@@ -232,13 +232,13 @@ func (x *ScannerFunctionalUnit) SetScanArea(scanArea corefoundation.CGRect) {
 }
 
 // ScanAreaOrientation calls the underlying ScanAreaOrientation.
-func (x *ScannerFunctionalUnit) ScanAreaOrientation() raw.ICEXIFOrientationType {
-	return x.inner.ScanAreaOrientation()
+func (x *ScannerFunctionalUnit) ScanAreaOrientation() ICEXIFOrientationType {
+	return ICEXIFOrientationType(x.inner.ScanAreaOrientation())
 }
 
 // SetScanAreaOrientation calls the underlying SetScanAreaOrientation.
-func (x *ScannerFunctionalUnit) SetScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) {
-	x.inner.SetScanAreaOrientation(scanAreaOrientation)
+func (x *ScannerFunctionalUnit) SetScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) {
+	x.inner.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
 }
 
 // AcceptsThresholdForBlackAndWhiteScanning calls the underlying AcceptsThresholdForBlackAndWhiteScanning.
@@ -272,8 +272,8 @@ func (x *ScannerFunctionalUnit) SetThresholdForBlackAndWhiteScanning(thresholdFo
 }
 
 // State calls the underlying State.
-func (x *ScannerFunctionalUnit) State() raw.ICScannerFunctionalUnitState {
-	return x.inner.State()
+func (x *ScannerFunctionalUnit) State() ICScannerFunctionalUnitState {
+	return ICScannerFunctionalUnitState(x.inner.State())
 }
 
 // ScanInProgress calls the underlying ScanInProgress.
@@ -318,25 +318,25 @@ func (x *ScannerFunctionalUnit) asScannerFunctionalUnit() *raw.ICScannerFunction
 // ScannerFunctionalUnitable is the interface implemented by [ScannerFunctionalUnit], for mocking and DI.
 type ScannerFunctionalUnitable interface {
 	Unwrap() *raw.ICScannerFunctionalUnit
-	WithPixelDataType(pixelDataType raw.ICScannerPixelDataType) *ScannerFunctionalUnit
-	WithBitDepth(bitDepth raw.ICScannerBitDepth) *ScannerFunctionalUnit
-	WithMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) *ScannerFunctionalUnit
+	WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnit
+	WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnit
+	WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnit
 	WithResolution(resolution uint) *ScannerFunctionalUnit
 	WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnit
 	WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnit
-	WithScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnit
+	WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnit
 	WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnit
 	WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnit
 	WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnit
-	Type() raw.ICScannerFunctionalUnitType
-	PixelDataType() raw.ICScannerPixelDataType
-	SetPixelDataType(pixelDataType raw.ICScannerPixelDataType)
+	Type() ICScannerFunctionalUnitType
+	PixelDataType() ICScannerPixelDataType
+	SetPixelDataType(pixelDataType ICScannerPixelDataType)
 	SupportedBitDepths() *foundation.NSIndexSet
-	BitDepth() raw.ICScannerBitDepth
-	SetBitDepth(bitDepth raw.ICScannerBitDepth)
+	BitDepth() ICScannerBitDepth
+	SetBitDepth(bitDepth ICScannerBitDepth)
 	SupportedMeasurementUnits() *foundation.NSIndexSet
-	MeasurementUnit() raw.ICScannerMeasurementUnit
-	SetMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit)
+	MeasurementUnit() ICScannerMeasurementUnit
+	SetMeasurementUnit(measurementUnit ICScannerMeasurementUnit)
 	SupportedResolutions() *foundation.NSIndexSet
 	PreferredResolutions() *foundation.NSIndexSet
 	Resolution() uint
@@ -352,15 +352,15 @@ type ScannerFunctionalUnitable interface {
 	PhysicalSize() corefoundation.CGSize
 	ScanArea() corefoundation.CGRect
 	SetScanArea(scanArea corefoundation.CGRect)
-	ScanAreaOrientation() raw.ICEXIFOrientationType
-	SetScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType)
+	ScanAreaOrientation() ICEXIFOrientationType
+	SetScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType)
 	AcceptsThresholdForBlackAndWhiteScanning() bool
 	UsesThresholdForBlackAndWhiteScanning() bool
 	SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool)
 	DefaultThresholdForBlackAndWhiteScanning() uint8
 	ThresholdForBlackAndWhiteScanning() uint8
 	SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8)
-	State() raw.ICScannerFunctionalUnitState
+	State() ICScannerFunctionalUnitState
 	ScanInProgress() bool
 	ScanProgressPercentDone() float64
 	CanPerformOverviewScan() bool

@@ -31,9 +31,9 @@ func MergePolicyFromID(id objc.ID) *MergePolicy {
 }
 
 // NewMergePolicyWithMergeType creates a new [MergePolicy].
-func NewMergePolicyWithMergeType(ty raw.NSMergePolicyType) *MergePolicy {
+func NewMergePolicyWithMergeType(ty NSMergePolicyType) *MergePolicy {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMergePolicy")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMergeType:"), ty)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMergeType:"), raw.NSMergePolicyType(ty))
 	return &MergePolicy{inner: raw.NSMergePolicyFromID(_id)}
 }
 
@@ -53,8 +53,8 @@ func (x *MergePolicy) ResolveConstraintConflictsError(list *foundation.NSArray[*
 }
 
 // MergeType calls the underlying MergeType.
-func (x *MergePolicy) MergeType() raw.NSMergePolicyType {
-	return x.inner.MergeType()
+func (x *MergePolicy) MergeType() NSMergePolicyType {
+	return NSMergePolicyType(x.inner.MergeType())
 }
 
 // MergePolicyable is the interface implemented by [MergePolicy], for mocking and DI.
@@ -63,7 +63,7 @@ type MergePolicyable interface {
 	ResolveConflictsError(list *foundation.NSArray[objc.ID]) (bool, error)
 	ResolveOptimisticLockingVersionConflictsError(list *foundation.NSArray[*raw.NSMergeConflict]) (bool, error)
 	ResolveConstraintConflictsError(list *foundation.NSArray[*raw.NSConstraintConflict]) (bool, error)
-	MergeType() raw.NSMergePolicyType
+	MergeType() NSMergePolicyType
 }
 
 var _ MergePolicyable = (*MergePolicy)(nil)

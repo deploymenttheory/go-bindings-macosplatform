@@ -40,8 +40,8 @@ func NewPersistentCloudKitContainerEventRequest() *PersistentCloudKitContainerEv
 }
 
 // WithResultType sets the resultType property and returns the receiver for chaining.
-func (x *PersistentCloudKitContainerEventRequest) WithResultType(resultType raw.NSPersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest {
-	x.inner.SetResultType(resultType)
+func (x *PersistentCloudKitContainerEventRequest) WithResultType(resultType NSPersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest {
+	x.inner.SetResultType(raw.NSPersistentCloudKitContainerEventResultType(resultType))
 	return x
 }
 
@@ -64,13 +64,13 @@ func (x *PersistentCloudKitContainerEventRequest) WithAffectedStores(items ...Pe
 }
 
 // ResultType calls the underlying ResultType.
-func (x *PersistentCloudKitContainerEventRequest) ResultType() raw.NSPersistentCloudKitContainerEventResultType {
-	return x.inner.ResultType()
+func (x *PersistentCloudKitContainerEventRequest) ResultType() NSPersistentCloudKitContainerEventResultType {
+	return NSPersistentCloudKitContainerEventResultType(x.inner.ResultType())
 }
 
 // SetResultType calls the underlying SetResultType.
-func (x *PersistentCloudKitContainerEventRequest) SetResultType(resultType raw.NSPersistentCloudKitContainerEventResultType) {
-	x.inner.SetResultType(resultType)
+func (x *PersistentCloudKitContainerEventRequest) SetResultType(resultType NSPersistentCloudKitContainerEventResultType) {
+	x.inner.SetResultType(raw.NSPersistentCloudKitContainerEventResultType(resultType))
 }
 
 func (x *PersistentCloudKitContainerEventRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
@@ -80,10 +80,10 @@ func (x *PersistentCloudKitContainerEventRequest) asPersistentStoreRequest() *ra
 // PersistentCloudKitContainerEventRequestable is the interface implemented by [PersistentCloudKitContainerEventRequest], for mocking and DI.
 type PersistentCloudKitContainerEventRequestable interface {
 	Unwrap() *raw.NSPersistentCloudKitContainerEventRequest
-	WithResultType(resultType raw.NSPersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest
+	WithResultType(resultType NSPersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *PersistentCloudKitContainerEventRequest
-	ResultType() raw.NSPersistentCloudKitContainerEventResultType
-	SetResultType(resultType raw.NSPersistentCloudKitContainerEventResultType)
+	ResultType() NSPersistentCloudKitContainerEventResultType
+	SetResultType(resultType NSPersistentCloudKitContainerEventResultType)
 }
 
 var _ PersistentCloudKitContainerEventRequestable = (*PersistentCloudKitContainerEventRequest)(nil)

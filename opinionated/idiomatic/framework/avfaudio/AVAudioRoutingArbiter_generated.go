@@ -37,8 +37,8 @@ func NewAudioRoutingArbiter() *AudioRoutingArbiter {
 }
 
 // BeginArbitrationWithCategoryCompletionHandler calls the underlying BeginArbitrationWithCategoryCompletionHandler.
-func (x *AudioRoutingArbiter) BeginArbitrationWithCategoryCompletionHandler(category raw.AVAudioRoutingArbitrationCategory, handler func(bool, unsafe.Pointer)) {
-	x.inner.BeginArbitrationWithCategoryCompletionHandler(category, handler)
+func (x *AudioRoutingArbiter) BeginArbitrationWithCategoryCompletionHandler(category AVAudioRoutingArbitrationCategory, handler func(bool, unsafe.Pointer)) {
+	x.inner.BeginArbitrationWithCategoryCompletionHandler(raw.AVAudioRoutingArbitrationCategory(category), handler)
 }
 
 // LeaveArbitration calls the underlying LeaveArbitration.
@@ -49,7 +49,7 @@ func (x *AudioRoutingArbiter) LeaveArbitration() {
 // AudioRoutingArbiterable is the interface implemented by [AudioRoutingArbiter], for mocking and DI.
 type AudioRoutingArbiterable interface {
 	Unwrap() *raw.AVAudioRoutingArbiter
-	BeginArbitrationWithCategoryCompletionHandler(category raw.AVAudioRoutingArbitrationCategory, handler func(bool, unsafe.Pointer))
+	BeginArbitrationWithCategoryCompletionHandler(category AVAudioRoutingArbitrationCategory, handler func(bool, unsafe.Pointer))
 	LeaveArbitration()
 }
 

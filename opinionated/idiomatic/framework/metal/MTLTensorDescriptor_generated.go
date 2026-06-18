@@ -48,38 +48,38 @@ func (x *TensorDescriptor) WithStrides(strides *TensorExtents) *TensorDescriptor
 }
 
 // WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithDataType(dataType raw.MTLTensorDataType) *TensorDescriptor {
-	x.inner.SetDataType(dataType)
+func (x *TensorDescriptor) WithDataType(dataType MTLTensorDataType) *TensorDescriptor {
+	x.inner.SetDataType(raw.MTLTensorDataType(dataType))
 	return x
 }
 
 // WithUsage sets the usage property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithUsage(usage raw.MTLTensorUsage) *TensorDescriptor {
-	x.inner.SetUsage(usage)
+func (x *TensorDescriptor) WithUsage(usage MTLTensorUsage) *TensorDescriptor {
+	x.inner.SetUsage(raw.MTLTensorUsage(usage))
 	return x
 }
 
 // WithResourceOptions sets the resourceOptions property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithResourceOptions(resourceOptions raw.MTLResourceOptions) *TensorDescriptor {
-	x.inner.SetResourceOptions(resourceOptions)
+func (x *TensorDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions) *TensorDescriptor {
+	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
 	return x
 }
 
 // WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode) *TensorDescriptor {
-	x.inner.SetCpuCacheMode(cpuCacheMode)
+func (x *TensorDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *TensorDescriptor {
+	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
 	return x
 }
 
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithStorageMode(storageMode raw.MTLStorageMode) *TensorDescriptor {
-	x.inner.SetStorageMode(storageMode)
+func (x *TensorDescriptor) WithStorageMode(storageMode MTLStorageMode) *TensorDescriptor {
+	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 	return x
 }
 
 // WithHazardTrackingMode sets the hazardTrackingMode property and returns the receiver for chaining.
-func (x *TensorDescriptor) WithHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode) *TensorDescriptor {
-	x.inner.SetHazardTrackingMode(hazardTrackingMode)
+func (x *TensorDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *TensorDescriptor {
+	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
 	return x
 }
 
@@ -112,63 +112,63 @@ func (x *TensorDescriptor) SetStrides(strides *raw.MTLTensorExtents) {
 }
 
 // DataType calls the underlying DataType.
-func (x *TensorDescriptor) DataType() raw.MTLTensorDataType {
-	return x.inner.DataType()
+func (x *TensorDescriptor) DataType() MTLTensorDataType {
+	return MTLTensorDataType(x.inner.DataType())
 }
 
 // SetDataType calls the underlying SetDataType.
-func (x *TensorDescriptor) SetDataType(dataType raw.MTLTensorDataType) {
-	x.inner.SetDataType(dataType)
+func (x *TensorDescriptor) SetDataType(dataType MTLTensorDataType) {
+	x.inner.SetDataType(raw.MTLTensorDataType(dataType))
 }
 
 // Usage calls the underlying Usage.
-func (x *TensorDescriptor) Usage() raw.MTLTensorUsage {
-	return x.inner.Usage()
+func (x *TensorDescriptor) Usage() MTLTensorUsage {
+	return MTLTensorUsage(x.inner.Usage())
 }
 
 // SetUsage calls the underlying SetUsage.
-func (x *TensorDescriptor) SetUsage(usage raw.MTLTensorUsage) {
-	x.inner.SetUsage(usage)
+func (x *TensorDescriptor) SetUsage(usage MTLTensorUsage) {
+	x.inner.SetUsage(raw.MTLTensorUsage(usage))
 }
 
 // ResourceOptions calls the underlying ResourceOptions.
-func (x *TensorDescriptor) ResourceOptions() raw.MTLResourceOptions {
-	return x.inner.ResourceOptions()
+func (x *TensorDescriptor) ResourceOptions() MTLResourceOptions {
+	return MTLResourceOptions(x.inner.ResourceOptions())
 }
 
 // SetResourceOptions calls the underlying SetResourceOptions.
-func (x *TensorDescriptor) SetResourceOptions(resourceOptions raw.MTLResourceOptions) {
-	x.inner.SetResourceOptions(resourceOptions)
+func (x *TensorDescriptor) SetResourceOptions(resourceOptions MTLResourceOptions) {
+	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
 }
 
 // CpuCacheMode calls the underlying CpuCacheMode.
-func (x *TensorDescriptor) CpuCacheMode() raw.MTLCPUCacheMode {
-	return x.inner.CpuCacheMode()
+func (x *TensorDescriptor) CpuCacheMode() MTLCPUCacheMode {
+	return MTLCPUCacheMode(x.inner.CpuCacheMode())
 }
 
 // SetCpuCacheMode calls the underlying SetCpuCacheMode.
-func (x *TensorDescriptor) SetCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode) {
-	x.inner.SetCpuCacheMode(cpuCacheMode)
+func (x *TensorDescriptor) SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode) {
+	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
 }
 
 // StorageMode calls the underlying StorageMode.
-func (x *TensorDescriptor) StorageMode() raw.MTLStorageMode {
-	return x.inner.StorageMode()
+func (x *TensorDescriptor) StorageMode() MTLStorageMode {
+	return MTLStorageMode(x.inner.StorageMode())
 }
 
 // SetStorageMode calls the underlying SetStorageMode.
-func (x *TensorDescriptor) SetStorageMode(storageMode raw.MTLStorageMode) {
-	x.inner.SetStorageMode(storageMode)
+func (x *TensorDescriptor) SetStorageMode(storageMode MTLStorageMode) {
+	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 }
 
 // HazardTrackingMode calls the underlying HazardTrackingMode.
-func (x *TensorDescriptor) HazardTrackingMode() raw.MTLHazardTrackingMode {
-	return x.inner.HazardTrackingMode()
+func (x *TensorDescriptor) HazardTrackingMode() MTLHazardTrackingMode {
+	return MTLHazardTrackingMode(x.inner.HazardTrackingMode())
 }
 
 // SetHazardTrackingMode calls the underlying SetHazardTrackingMode.
-func (x *TensorDescriptor) SetHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode) {
-	x.inner.SetHazardTrackingMode(hazardTrackingMode)
+func (x *TensorDescriptor) SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) {
+	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
 }
 
 // TensorDescriptorable is the interface implemented by [TensorDescriptor], for mocking and DI.
@@ -176,28 +176,28 @@ type TensorDescriptorable interface {
 	Unwrap() *raw.MTLTensorDescriptor
 	WithDimensions(dimensions *TensorExtents) *TensorDescriptor
 	WithStrides(strides *TensorExtents) *TensorDescriptor
-	WithDataType(dataType raw.MTLTensorDataType) *TensorDescriptor
-	WithUsage(usage raw.MTLTensorUsage) *TensorDescriptor
-	WithResourceOptions(resourceOptions raw.MTLResourceOptions) *TensorDescriptor
-	WithCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode) *TensorDescriptor
-	WithStorageMode(storageMode raw.MTLStorageMode) *TensorDescriptor
-	WithHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode) *TensorDescriptor
+	WithDataType(dataType MTLTensorDataType) *TensorDescriptor
+	WithUsage(usage MTLTensorUsage) *TensorDescriptor
+	WithResourceOptions(resourceOptions MTLResourceOptions) *TensorDescriptor
+	WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *TensorDescriptor
+	WithStorageMode(storageMode MTLStorageMode) *TensorDescriptor
+	WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *TensorDescriptor
 	Dimensions() *TensorExtents
 	SetDimensions(dimensions *raw.MTLTensorExtents)
 	Strides() *TensorExtents
 	SetStrides(strides *raw.MTLTensorExtents)
-	DataType() raw.MTLTensorDataType
-	SetDataType(dataType raw.MTLTensorDataType)
-	Usage() raw.MTLTensorUsage
-	SetUsage(usage raw.MTLTensorUsage)
-	ResourceOptions() raw.MTLResourceOptions
-	SetResourceOptions(resourceOptions raw.MTLResourceOptions)
-	CpuCacheMode() raw.MTLCPUCacheMode
-	SetCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode)
-	StorageMode() raw.MTLStorageMode
-	SetStorageMode(storageMode raw.MTLStorageMode)
-	HazardTrackingMode() raw.MTLHazardTrackingMode
-	SetHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode)
+	DataType() MTLTensorDataType
+	SetDataType(dataType MTLTensorDataType)
+	Usage() MTLTensorUsage
+	SetUsage(usage MTLTensorUsage)
+	ResourceOptions() MTLResourceOptions
+	SetResourceOptions(resourceOptions MTLResourceOptions)
+	CpuCacheMode() MTLCPUCacheMode
+	SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode)
+	StorageMode() MTLStorageMode
+	SetStorageMode(storageMode MTLStorageMode)
+	HazardTrackingMode() MTLHazardTrackingMode
+	SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode)
 }
 
 var _ TensorDescriptorable = (*TensorDescriptor)(nil)

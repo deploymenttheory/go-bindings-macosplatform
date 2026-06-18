@@ -39,9 +39,9 @@ func NewVertexAttribute() *VertexAttribute {
 }
 
 // NewVertexAttributeWithNameFormatOffsetBufferIndex creates a new [VertexAttribute].
-func NewVertexAttributeWithNameFormatOffsetBufferIndex(name string, format raw.MDLVertexFormat, offset uint, bufferIndex uint) *VertexAttribute {
+func NewVertexAttributeWithNameFormatOffsetBufferIndex(name string, format MDLVertexFormat, offset uint, bufferIndex uint) *VertexAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLVertexAttribute")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:format:offset:bufferIndex:"), foundation.NSStringStringWithUTF8String(name).Ptr(), format, offset, bufferIndex)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:format:offset:bufferIndex:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLVertexFormat(format), offset, bufferIndex)
 	return &VertexAttribute{inner: raw.MDLVertexAttributeFromID(_id)}
 }
 
@@ -52,8 +52,8 @@ func (x *VertexAttribute) WithName(name string) *VertexAttribute {
 }
 
 // WithFormat sets the format property and returns the receiver for chaining.
-func (x *VertexAttribute) WithFormat(format raw.MDLVertexFormat) *VertexAttribute {
-	x.inner.SetFormat(format)
+func (x *VertexAttribute) WithFormat(format MDLVertexFormat) *VertexAttribute {
+	x.inner.SetFormat(raw.MDLVertexFormat(format))
 	return x
 }
 
@@ -90,13 +90,13 @@ func (x *VertexAttribute) SetName(name string) {
 }
 
 // Format calls the underlying Format.
-func (x *VertexAttribute) Format() raw.MDLVertexFormat {
-	return x.inner.Format()
+func (x *VertexAttribute) Format() MDLVertexFormat {
+	return MDLVertexFormat(x.inner.Format())
 }
 
 // SetFormat calls the underlying SetFormat.
-func (x *VertexAttribute) SetFormat(format raw.MDLVertexFormat) {
-	x.inner.SetFormat(format)
+func (x *VertexAttribute) SetFormat(format MDLVertexFormat) {
+	x.inner.SetFormat(raw.MDLVertexFormat(format))
 }
 
 // Offset calls the underlying Offset.
@@ -138,14 +138,14 @@ func (x *VertexAttribute) SetInitializationValue(initializationValue unsafe.Poin
 type VertexAttributeable interface {
 	Unwrap() *raw.MDLVertexAttribute
 	WithName(name string) *VertexAttribute
-	WithFormat(format raw.MDLVertexFormat) *VertexAttribute
+	WithFormat(format MDLVertexFormat) *VertexAttribute
 	WithOffset(offset uint) *VertexAttribute
 	WithBufferIndex(bufferIndex uint) *VertexAttribute
 	WithTime(time_ float64) *VertexAttribute
 	Name() string
 	SetName(name string)
-	Format() raw.MDLVertexFormat
-	SetFormat(format raw.MDLVertexFormat)
+	Format() MDLVertexFormat
+	SetFormat(format MDLVertexFormat)
 	Offset() uint
 	SetOffset(offset uint)
 	BufferIndex() uint

@@ -14,25 +14,25 @@ import (
 )
 
 // LSCanRefAcceptItem wraps [raw.LSCanRefAcceptItem], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCanRefAcceptItem(inItemFSRef *carboncore.FSRef, inTargetRef *carboncore.FSRef, inRoleMask raw.LSRolesMask, inFlags raw.LSAcceptanceFlags, outAcceptsItem *uint8) error {
-	if _err := purego.NewOSStatus(raw.LSCanRefAcceptItem(inItemFSRef, inTargetRef, inRoleMask, inFlags, outAcceptsItem)).Err(); _err != nil {
+func LSCanRefAcceptItem(inItemFSRef *carboncore.FSRef, inTargetRef *carboncore.FSRef, inRoleMask LSRolesMask, inFlags LSAcceptanceFlags, outAcceptsItem *uint8) error {
+	if _err := purego.NewOSStatus(raw.LSCanRefAcceptItem(inItemFSRef, inTargetRef, raw.LSRolesMask(inRoleMask), raw.LSAcceptanceFlags(inFlags), outAcceptsItem)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // LSCanURLAcceptURL wraps [raw.LSCanURLAcceptURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCanURLAcceptURL(inItemURL objc.ID, inTargetURL objc.ID, inRoleMask raw.LSRolesMask, inFlags raw.LSAcceptanceFlags, outAcceptsItem *uint8) error {
-	if _err := purego.NewOSStatus(raw.LSCanURLAcceptURL(purego.CFRef(inItemURL), purego.CFRef(inTargetURL), inRoleMask, inFlags, outAcceptsItem)).Err(); _err != nil {
+func LSCanURLAcceptURL(inItemURL objc.ID, inTargetURL objc.ID, inRoleMask LSRolesMask, inFlags LSAcceptanceFlags, outAcceptsItem *uint8) error {
+	if _err := purego.NewOSStatus(raw.LSCanURLAcceptURL(purego.CFRef(inItemURL), purego.CFRef(inTargetURL), raw.LSRolesMask(inRoleMask), raw.LSAcceptanceFlags(inFlags), outAcceptsItem)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // LSCopyApplicationForMIMEType wraps [raw.LSCopyApplicationForMIMEType], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyApplicationForMIMEType(inMIMEType objc.ID, inRoleMask raw.LSRolesMask) (objc.ID, error) {
+func LSCopyApplicationForMIMEType(inMIMEType objc.ID, inRoleMask LSRolesMask) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyApplicationForMIMEType(purego.CFRef(inMIMEType), inRoleMask, unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.LSCopyApplicationForMIMEType(purego.CFRef(inMIMEType), raw.LSRolesMask(inRoleMask), unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
@@ -57,34 +57,34 @@ func LSCopyDisplayNameForURL(inURL objc.ID) (objc.ID, error) {
 }
 
 // LSCopyItemAttribute wraps [raw.LSCopyItemAttribute], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyItemAttribute(inItem *carboncore.FSRef, inRoles raw.LSRolesMask, inAttributeName objc.ID) (objc.ID, error) {
+func LSCopyItemAttribute(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeName objc.ID) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyItemAttribute(inItem, inRoles, purego.CFRef(inAttributeName), unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.LSCopyItemAttribute(inItem, raw.LSRolesMask(inRoles), purego.CFRef(inAttributeName), unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
 }
 
 // LSCopyItemAttributes wraps [raw.LSCopyItemAttributes], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyItemAttributes(inItem *carboncore.FSRef, inRoles raw.LSRolesMask, inAttributeNames objc.ID) (objc.ID, error) {
+func LSCopyItemAttributes(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeNames objc.ID) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSCopyItemAttributes(inItem, inRoles, purego.CFRef(inAttributeNames), unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.LSCopyItemAttributes(inItem, raw.LSRolesMask(inRoles), purego.CFRef(inAttributeNames), unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
 }
 
 // LSCopyItemInfoForRef wraps [raw.LSCopyItemInfoForRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyItemInfoForRef(inItemRef *carboncore.FSRef, inWhichInfo raw.LSRequestedInfo, outItemInfo *raw.LSItemInfoRecord) error {
-	if _err := purego.NewOSStatus(raw.LSCopyItemInfoForRef(inItemRef, inWhichInfo, outItemInfo)).Err(); _err != nil {
+func LSCopyItemInfoForRef(inItemRef *carboncore.FSRef, inWhichInfo LSRequestedInfo, outItemInfo *raw.LSItemInfoRecord) error {
+	if _err := purego.NewOSStatus(raw.LSCopyItemInfoForRef(inItemRef, raw.LSRequestedInfo(inWhichInfo), outItemInfo)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // LSCopyItemInfoForURL wraps [raw.LSCopyItemInfoForURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSCopyItemInfoForURL(inURL objc.ID, inWhichInfo raw.LSRequestedInfo, outItemInfo *raw.LSItemInfoRecord) error {
-	if _err := purego.NewOSStatus(raw.LSCopyItemInfoForURL(purego.CFRef(inURL), inWhichInfo, outItemInfo)).Err(); _err != nil {
+func LSCopyItemInfoForURL(inURL objc.ID, inWhichInfo LSRequestedInfo, outItemInfo *raw.LSItemInfoRecord) error {
+	if _err := purego.NewOSStatus(raw.LSCopyItemInfoForURL(purego.CFRef(inURL), raw.LSRequestedInfo(inWhichInfo), outItemInfo)).Err(); _err != nil {
 		return _err
 	}
 	return nil
@@ -136,27 +136,27 @@ func LSFindApplicationForInfo(inCreator uint, inBundleID objc.ID, inName objc.ID
 }
 
 // LSGetApplicationForInfo wraps [raw.LSGetApplicationForInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSGetApplicationForInfo(inType uint, inCreator uint, inExtension objc.ID, inRoleMask raw.LSRolesMask, outAppRef *carboncore.FSRef) (objc.ID, error) {
+func LSGetApplicationForInfo(inType uint, inCreator uint, inExtension objc.ID, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSGetApplicationForInfo(inType, inCreator, purego.CFRef(inExtension), inRoleMask, outAppRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.LSGetApplicationForInfo(inType, inCreator, purego.CFRef(inExtension), raw.LSRolesMask(inRoleMask), outAppRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
 }
 
 // LSGetApplicationForItem wraps [raw.LSGetApplicationForItem], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSGetApplicationForItem(inItemRef *carboncore.FSRef, inRoleMask raw.LSRolesMask, outAppRef *carboncore.FSRef) (objc.ID, error) {
+func LSGetApplicationForItem(inItemRef *carboncore.FSRef, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSGetApplicationForItem(inItemRef, inRoleMask, outAppRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.LSGetApplicationForItem(inItemRef, raw.LSRolesMask(inRoleMask), outAppRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
 }
 
 // LSGetApplicationForURL wraps [raw.LSGetApplicationForURL], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSGetApplicationForURL(inURL objc.ID, inRoleMask raw.LSRolesMask, outAppRef *carboncore.FSRef) (objc.ID, error) {
+func LSGetApplicationForURL(inURL objc.ID, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.LSGetApplicationForURL(purego.CFRef(inURL), inRoleMask, outAppRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.LSGetApplicationForURL(purego.CFRef(inURL), raw.LSRolesMask(inRoleMask), outAppRef, unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
@@ -229,8 +229,8 @@ func LSSetDefaultHandlerForURLScheme(inURLScheme objc.ID, inHandlerBundleID objc
 }
 
 // LSSetDefaultRoleHandlerForContentType wraps [raw.LSSetDefaultRoleHandlerForContentType], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSSetDefaultRoleHandlerForContentType(inContentType objc.ID, inRole raw.LSRolesMask, inHandlerBundleID objc.ID) error {
-	if _err := purego.NewOSStatus(raw.LSSetDefaultRoleHandlerForContentType(purego.CFRef(inContentType), inRole, purego.CFRef(inHandlerBundleID))).Err(); _err != nil {
+func LSSetDefaultRoleHandlerForContentType(inContentType objc.ID, inRole LSRolesMask, inHandlerBundleID objc.ID) error {
+	if _err := purego.NewOSStatus(raw.LSSetDefaultRoleHandlerForContentType(purego.CFRef(inContentType), raw.LSRolesMask(inRole), purego.CFRef(inHandlerBundleID))).Err(); _err != nil {
 		return _err
 	}
 	return nil
@@ -253,16 +253,16 @@ func LSSetExtensionHiddenForURL(inURL objc.ID, inHide uint8) error {
 }
 
 // LSSetHandlerOptionsForContentType wraps [raw.LSSetHandlerOptionsForContentType], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSSetHandlerOptionsForContentType(inContentType objc.ID, inOptions raw.LSHandlerOptions) error {
-	if _err := purego.NewOSStatus(raw.LSSetHandlerOptionsForContentType(purego.CFRef(inContentType), inOptions)).Err(); _err != nil {
+func LSSetHandlerOptionsForContentType(inContentType objc.ID, inOptions LSHandlerOptions) error {
+	if _err := purego.NewOSStatus(raw.LSSetHandlerOptionsForContentType(purego.CFRef(inContentType), raw.LSHandlerOptions(inOptions))).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // LSSetItemAttribute wraps [raw.LSSetItemAttribute], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LSSetItemAttribute(inItem *carboncore.FSRef, inRoles raw.LSRolesMask, inAttributeName objc.ID, inValue objc.ID) error {
-	if _err := purego.NewOSStatus(raw.LSSetItemAttribute(inItem, inRoles, purego.CFRef(inAttributeName), purego.CFRef(inValue))).Err(); _err != nil {
+func LSSetItemAttribute(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeName objc.ID, inValue objc.ID) error {
+	if _err := purego.NewOSStatus(raw.LSSetItemAttribute(inItem, raw.LSRolesMask(inRoles), purego.CFRef(inAttributeName), purego.CFRef(inValue))).Err(); _err != nil {
 		return _err
 	}
 	return nil

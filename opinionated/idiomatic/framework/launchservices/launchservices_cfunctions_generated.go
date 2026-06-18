@@ -83,8 +83,8 @@ func LSCopyAllHandlersForURLScheme(inURLScheme unsafe.Pointer) unsafe.Pointer {
 }
 
 // LSCopyAllRoleHandlersForContentType calls [raw.LSCopyAllRoleHandlersForContentType] (C function LSCopyAllRoleHandlersForContentType).
-func LSCopyAllRoleHandlersForContentType(inContentType unsafe.Pointer, inRole raw.LSRolesMask) unsafe.Pointer {
-	return raw.LSCopyAllRoleHandlersForContentType(inContentType, inRole)
+func LSCopyAllRoleHandlersForContentType(inContentType unsafe.Pointer, inRole LSRolesMask) unsafe.Pointer {
+	return raw.LSCopyAllRoleHandlersForContentType(inContentType, raw.LSRolesMask(inRole))
 }
 
 // LSCopyApplicationURLsForBundleIdentifier calls [raw.LSCopyApplicationURLsForBundleIdentifier] (C function LSCopyApplicationURLsForBundleIdentifier).
@@ -93,18 +93,18 @@ func LSCopyApplicationURLsForBundleIdentifier(inBundleIdentifier unsafe.Pointer,
 }
 
 // LSCopyApplicationURLsForURL calls [raw.LSCopyApplicationURLsForURL] (C function LSCopyApplicationURLsForURL).
-func LSCopyApplicationURLsForURL(inURL unsafe.Pointer, inRoleMask raw.LSRolesMask) unsafe.Pointer {
-	return raw.LSCopyApplicationURLsForURL(inURL, inRoleMask)
+func LSCopyApplicationURLsForURL(inURL unsafe.Pointer, inRoleMask LSRolesMask) unsafe.Pointer {
+	return raw.LSCopyApplicationURLsForURL(inURL, raw.LSRolesMask(inRoleMask))
 }
 
 // LSCopyDefaultApplicationURLForContentType calls [raw.LSCopyDefaultApplicationURLForContentType] (C function LSCopyDefaultApplicationURLForContentType).
-func LSCopyDefaultApplicationURLForContentType(inContentType unsafe.Pointer, inRoleMask raw.LSRolesMask, outError unsafe.Pointer) unsafe.Pointer {
-	return raw.LSCopyDefaultApplicationURLForContentType(inContentType, inRoleMask, outError)
+func LSCopyDefaultApplicationURLForContentType(inContentType unsafe.Pointer, inRoleMask LSRolesMask, outError unsafe.Pointer) unsafe.Pointer {
+	return raw.LSCopyDefaultApplicationURLForContentType(inContentType, raw.LSRolesMask(inRoleMask), outError)
 }
 
 // LSCopyDefaultApplicationURLForURL calls [raw.LSCopyDefaultApplicationURLForURL] (C function LSCopyDefaultApplicationURLForURL).
-func LSCopyDefaultApplicationURLForURL(inURL unsafe.Pointer, inRoleMask raw.LSRolesMask, outError unsafe.Pointer) unsafe.Pointer {
-	return raw.LSCopyDefaultApplicationURLForURL(inURL, inRoleMask, outError)
+func LSCopyDefaultApplicationURLForURL(inURL unsafe.Pointer, inRoleMask LSRolesMask, outError unsafe.Pointer) unsafe.Pointer {
+	return raw.LSCopyDefaultApplicationURLForURL(inURL, raw.LSRolesMask(inRoleMask), outError)
 }
 
 // LSCopyDefaultHandlerForURLScheme calls [raw.LSCopyDefaultHandlerForURLScheme] (C function LSCopyDefaultHandlerForURLScheme).
@@ -113,13 +113,13 @@ func LSCopyDefaultHandlerForURLScheme(inURLScheme unsafe.Pointer) unsafe.Pointer
 }
 
 // LSCopyDefaultRoleHandlerForContentType calls [raw.LSCopyDefaultRoleHandlerForContentType] (C function LSCopyDefaultRoleHandlerForContentType).
-func LSCopyDefaultRoleHandlerForContentType(inContentType unsafe.Pointer, inRole raw.LSRolesMask) unsafe.Pointer {
-	return raw.LSCopyDefaultRoleHandlerForContentType(inContentType, inRole)
+func LSCopyDefaultRoleHandlerForContentType(inContentType unsafe.Pointer, inRole LSRolesMask) unsafe.Pointer {
+	return raw.LSCopyDefaultRoleHandlerForContentType(inContentType, raw.LSRolesMask(inRole))
 }
 
 // LSGetHandlerOptionsForContentType calls [raw.LSGetHandlerOptionsForContentType] (C function LSGetHandlerOptionsForContentType).
-func LSGetHandlerOptionsForContentType(inContentType unsafe.Pointer) raw.LSHandlerOptions {
-	return raw.LSGetHandlerOptionsForContentType(inContentType)
+func LSGetHandlerOptionsForContentType(inContentType unsafe.Pointer) LSHandlerOptions {
+	return LSHandlerOptions(raw.LSGetHandlerOptionsForContentType(inContentType))
 }
 
 // LSOpenApplication calls [raw.LSOpenApplication] (C function LSOpenApplication).
@@ -128,13 +128,13 @@ func LSOpenApplication(appParams *raw.LSApplicationParameters, outPSN unsafe.Poi
 }
 
 // LSOpenItemsWithRole calls [raw.LSOpenItemsWithRole] (C function LSOpenItemsWithRole).
-func LSOpenItemsWithRole(inItems *carboncore.FSRef, inItemCount int, inRole raw.LSRolesMask, inAEParam *ae.AEKeyDesc, inAppParams *raw.LSApplicationParameters, outPSNs unsafe.Pointer, inMaxPSNCount int) int {
-	return raw.LSOpenItemsWithRole(inItems, inItemCount, inRole, inAEParam, inAppParams, outPSNs, inMaxPSNCount)
+func LSOpenItemsWithRole(inItems *carboncore.FSRef, inItemCount int, inRole LSRolesMask, inAEParam *ae.AEKeyDesc, inAppParams *raw.LSApplicationParameters, outPSNs unsafe.Pointer, inMaxPSNCount int) int {
+	return raw.LSOpenItemsWithRole(inItems, inItemCount, raw.LSRolesMask(inRole), inAEParam, inAppParams, outPSNs, inMaxPSNCount)
 }
 
 // LSOpenURLsWithRole calls [raw.LSOpenURLsWithRole] (C function LSOpenURLsWithRole).
-func LSOpenURLsWithRole(inURLs unsafe.Pointer, inRole raw.LSRolesMask, inAEParam *ae.AEKeyDesc, inAppParams *raw.LSApplicationParameters, outPSNs unsafe.Pointer, inMaxPSNCount int) int {
-	return raw.LSOpenURLsWithRole(inURLs, inRole, inAEParam, inAppParams, outPSNs, inMaxPSNCount)
+func LSOpenURLsWithRole(inURLs unsafe.Pointer, inRole LSRolesMask, inAEParam *ae.AEKeyDesc, inAppParams *raw.LSApplicationParameters, outPSNs unsafe.Pointer, inMaxPSNCount int) int {
+	return raw.LSOpenURLsWithRole(inURLs, raw.LSRolesMask(inRole), inAEParam, inAppParams, outPSNs, inMaxPSNCount)
 }
 
 // OverrideIconRef calls [raw.OverrideIconRef] (C function OverrideIconRef).

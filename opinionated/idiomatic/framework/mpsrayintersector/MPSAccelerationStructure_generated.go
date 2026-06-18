@@ -61,8 +61,8 @@ func NewAccelerationStructureWithCoderGroup(aDecoder *foundation.NSCoder, group 
 }
 
 // WithUsage sets the usage property and returns the receiver for chaining.
-func (x *AccelerationStructure) WithUsage(usage raw.MPSAccelerationStructureUsage) *AccelerationStructure {
-	x.inner.SetUsage(usage)
+func (x *AccelerationStructure) WithUsage(usage MPSAccelerationStructureUsage) *AccelerationStructure {
+	x.inner.SetUsage(raw.MPSAccelerationStructureUsage(usage))
 	return x
 }
 
@@ -110,18 +110,18 @@ func (x *AccelerationStructure) BoundingBox() raw.MPSAxisAlignedBoundingBox {
 }
 
 // Status calls the underlying Status.
-func (x *AccelerationStructure) Status() raw.MPSAccelerationStructureStatus {
-	return x.inner.Status()
+func (x *AccelerationStructure) Status() MPSAccelerationStructureStatus {
+	return MPSAccelerationStructureStatus(x.inner.Status())
 }
 
 // Usage calls the underlying Usage.
-func (x *AccelerationStructure) Usage() raw.MPSAccelerationStructureUsage {
-	return x.inner.Usage()
+func (x *AccelerationStructure) Usage() MPSAccelerationStructureUsage {
+	return MPSAccelerationStructureUsage(x.inner.Usage())
 }
 
 // SetUsage calls the underlying SetUsage.
-func (x *AccelerationStructure) SetUsage(usage raw.MPSAccelerationStructureUsage) {
-	x.inner.SetUsage(usage)
+func (x *AccelerationStructure) SetUsage(usage MPSAccelerationStructureUsage) {
+	x.inner.SetUsage(raw.MPSAccelerationStructureUsage(usage))
 }
 
 func (x *AccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationStructure {
@@ -131,7 +131,7 @@ func (x *AccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationSt
 // AccelerationStructureable is the interface implemented by [AccelerationStructure], for mocking and DI.
 type AccelerationStructureable interface {
 	Unwrap() *raw.MPSAccelerationStructure
-	WithUsage(usage raw.MPSAccelerationStructureUsage) *AccelerationStructure
+	WithUsage(usage MPSAccelerationStructureUsage) *AccelerationStructure
 	Rebuild()
 	RebuildWithCompletionHandler(completionHandler func(*raw.MPSAccelerationStructure))
 	EncodeRefitToCommandBuffer(commandBuffer metal.MTLCommandBuffer)
@@ -139,9 +139,9 @@ type AccelerationStructureable interface {
 	EncodeWithCoder(coder *foundation.NSCoder)
 	Group() *AccelerationStructureGroup
 	BoundingBox() raw.MPSAxisAlignedBoundingBox
-	Status() raw.MPSAccelerationStructureStatus
-	Usage() raw.MPSAccelerationStructureUsage
-	SetUsage(usage raw.MPSAccelerationStructureUsage)
+	Status() MPSAccelerationStructureStatus
+	Usage() MPSAccelerationStructureUsage
+	SetUsage(usage MPSAccelerationStructureUsage)
 }
 
 var _ AccelerationStructureable = (*AccelerationStructure)(nil)

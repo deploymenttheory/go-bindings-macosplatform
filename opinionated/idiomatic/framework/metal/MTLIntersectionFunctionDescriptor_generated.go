@@ -57,8 +57,8 @@ func (x *IntersectionFunctionDescriptor) WithConstantValues(constantValues *Func
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *IntersectionFunctionDescriptor) WithOptions(options raw.MTLFunctionOptions) *IntersectionFunctionDescriptor {
-	x.inner.MTLFunctionDescriptor.SetOptions(options)
+func (x *IntersectionFunctionDescriptor) WithOptions(options MTLFunctionOptions) *IntersectionFunctionDescriptor {
+	x.inner.MTLFunctionDescriptor.SetOptions(raw.MTLFunctionOptions(options))
 	return x
 }
 
@@ -72,7 +72,7 @@ type IntersectionFunctionDescriptorable interface {
 	WithName(name string) *IntersectionFunctionDescriptor
 	WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor
 	WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor
-	WithOptions(options raw.MTLFunctionOptions) *IntersectionFunctionDescriptor
+	WithOptions(options MTLFunctionOptions) *IntersectionFunctionDescriptor
 }
 
 var _ IntersectionFunctionDescriptorable = (*IntersectionFunctionDescriptor)(nil)

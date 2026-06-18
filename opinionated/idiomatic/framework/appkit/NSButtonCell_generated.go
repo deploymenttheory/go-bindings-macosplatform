@@ -54,20 +54,20 @@ func NewButtonCellWithCoder(coder *foundation.NSCoder) *ButtonCell {
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *ButtonCell) WithBezelStyle(bezelStyle raw.NSBezelStyle) *ButtonCell {
-	x.inner.SetBezelStyle(bezelStyle)
+func (x *ButtonCell) WithBezelStyle(bezelStyle NSBezelStyle) *ButtonCell {
+	x.inner.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 	return x
 }
 
 // WithHighlightsBy sets the highlightsBy property and returns the receiver for chaining.
-func (x *ButtonCell) WithHighlightsBy(highlightsBy raw.NSCellStyleMask) *ButtonCell {
-	x.inner.SetHighlightsBy(highlightsBy)
+func (x *ButtonCell) WithHighlightsBy(highlightsBy NSCellStyleMask) *ButtonCell {
+	x.inner.SetHighlightsBy(raw.NSCellStyleMask(highlightsBy))
 	return x
 }
 
 // WithShowsStateBy sets the showsStateBy property and returns the receiver for chaining.
-func (x *ButtonCell) WithShowsStateBy(showsStateBy raw.NSCellStyleMask) *ButtonCell {
-	x.inner.SetShowsStateBy(showsStateBy)
+func (x *ButtonCell) WithShowsStateBy(showsStateBy NSCellStyleMask) *ButtonCell {
+	x.inner.SetShowsStateBy(raw.NSCellStyleMask(showsStateBy))
 	return x
 }
 
@@ -96,14 +96,14 @@ func (x *ButtonCell) WithAlternateImage(alternateImage *Image) *ButtonCell {
 }
 
 // WithImagePosition sets the imagePosition property and returns the receiver for chaining.
-func (x *ButtonCell) WithImagePosition(imagePosition raw.NSCellImagePosition) *ButtonCell {
-	x.inner.SetImagePosition(imagePosition)
+func (x *ButtonCell) WithImagePosition(imagePosition NSCellImagePosition) *ButtonCell {
+	x.inner.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 	return x
 }
 
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *ButtonCell) WithImageScaling(imageScaling raw.NSImageScaling) *ButtonCell {
-	x.inner.SetImageScaling(imageScaling)
+func (x *ButtonCell) WithImageScaling(imageScaling NSImageScaling) *ButtonCell {
+	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
@@ -114,8 +114,8 @@ func (x *ButtonCell) WithKeyEquivalent(keyEquivalent string) *ButtonCell {
 }
 
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
-func (x *ButtonCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *ButtonCell {
-	x.inner.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+func (x *ButtonCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *ButtonCell {
+	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
 	return x
 }
 
@@ -150,8 +150,8 @@ func (x *ButtonCell) WithBackgroundColor(backgroundColor *Color) *ButtonCell {
 }
 
 // WithGradientType sets the gradientType property and returns the receiver for chaining.
-func (x *ButtonCell) WithGradientType(gradientType raw.NSGradientType) *ButtonCell {
-	x.inner.SetGradientType(gradientType)
+func (x *ButtonCell) WithGradientType(gradientType NSGradientType) *ButtonCell {
+	x.inner.SetGradientType(raw.NSGradientType(gradientType))
 	return x
 }
 
@@ -168,8 +168,8 @@ func (x *ButtonCell) WithControlView(controlView ViewProvider) *ButtonCell {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *ButtonCell) WithType(type_ raw.NSCellType) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetType(type_)
+func (x *ButtonCell) WithType(type_ NSCellType) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -252,8 +252,8 @@ func (x *ButtonCell) WithHighlighted(highlighted bool) *ButtonCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ButtonCell) WithAlignment(alignment raw.NSTextAlignment) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *ButtonCell) WithAlignment(alignment NSTextAlignment) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -318,8 +318,8 @@ func (x *ButtonCell) WithImage(image *Image) *ButtonCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ButtonCell) WithControlSize(controlSize raw.NSControlSize) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *ButtonCell) WithControlSize(controlSize NSControlSize) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -342,14 +342,14 @@ func (x *ButtonCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ButtonCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *ButtonCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ButtonCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *ButtonCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -366,8 +366,8 @@ func (x *ButtonCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool)
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ButtonCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ButtonCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -390,8 +390,8 @@ func (x *ButtonCell) WithShowsFirstResponder(showsFirstResponder bool) *ButtonCe
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ButtonCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *ButtonCell) WithFocusRingType(focusRingType NSFocusRingType) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -420,20 +420,20 @@ func (x *ButtonCell) WithAllowsMixedState(allowsMixedState bool) *ButtonCell {
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *ButtonCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *ButtonCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *ButtonCell) WithControlTint(controlTint raw.NSControlTint) *ButtonCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *ButtonCell) WithControlTint(controlTint NSControlTint) *ButtonCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
 // SetButtonType calls the underlying SetButtonType.
-func (x *ButtonCell) SetButtonType(type_ raw.NSButtonType) {
-	x.inner.SetButtonType(type_)
+func (x *ButtonCell) SetButtonType(type_ NSButtonType) {
+	x.inner.SetButtonType(raw.NSButtonType(type_))
 }
 
 // SetPeriodicDelayInterval calls the underlying SetPeriodicDelayInterval.
@@ -467,33 +467,33 @@ func (x *ButtonCell) DrawTitleWithFrameInView(title *foundation.NSAttributedStri
 }
 
 // BezelStyle calls the underlying BezelStyle.
-func (x *ButtonCell) BezelStyle() raw.NSBezelStyle {
-	return x.inner.BezelStyle()
+func (x *ButtonCell) BezelStyle() NSBezelStyle {
+	return NSBezelStyle(x.inner.BezelStyle())
 }
 
 // SetBezelStyle calls the underlying SetBezelStyle.
-func (x *ButtonCell) SetBezelStyle(bezelStyle raw.NSBezelStyle) {
-	x.inner.SetBezelStyle(bezelStyle)
+func (x *ButtonCell) SetBezelStyle(bezelStyle NSBezelStyle) {
+	x.inner.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 }
 
 // HighlightsBy calls the underlying HighlightsBy.
-func (x *ButtonCell) HighlightsBy() raw.NSCellStyleMask {
-	return x.inner.HighlightsBy()
+func (x *ButtonCell) HighlightsBy() NSCellStyleMask {
+	return NSCellStyleMask(x.inner.HighlightsBy())
 }
 
 // SetHighlightsBy calls the underlying SetHighlightsBy.
-func (x *ButtonCell) SetHighlightsBy(highlightsBy raw.NSCellStyleMask) {
-	x.inner.SetHighlightsBy(highlightsBy)
+func (x *ButtonCell) SetHighlightsBy(highlightsBy NSCellStyleMask) {
+	x.inner.SetHighlightsBy(raw.NSCellStyleMask(highlightsBy))
 }
 
 // ShowsStateBy calls the underlying ShowsStateBy.
-func (x *ButtonCell) ShowsStateBy() raw.NSCellStyleMask {
-	return x.inner.ShowsStateBy()
+func (x *ButtonCell) ShowsStateBy() NSCellStyleMask {
+	return NSCellStyleMask(x.inner.ShowsStateBy())
 }
 
 // SetShowsStateBy calls the underlying SetShowsStateBy.
-func (x *ButtonCell) SetShowsStateBy(showsStateBy raw.NSCellStyleMask) {
-	x.inner.SetShowsStateBy(showsStateBy)
+func (x *ButtonCell) SetShowsStateBy(showsStateBy NSCellStyleMask) {
+	x.inner.SetShowsStateBy(raw.NSCellStyleMask(showsStateBy))
 }
 
 // AttributedTitle calls the underlying AttributedTitle.
@@ -545,23 +545,23 @@ func (x *ButtonCell) SetAlternateImage(alternateImage *raw.NSImage) {
 }
 
 // ImagePosition calls the underlying ImagePosition.
-func (x *ButtonCell) ImagePosition() raw.NSCellImagePosition {
-	return x.inner.ImagePosition()
+func (x *ButtonCell) ImagePosition() NSCellImagePosition {
+	return NSCellImagePosition(x.inner.ImagePosition())
 }
 
 // SetImagePosition calls the underlying SetImagePosition.
-func (x *ButtonCell) SetImagePosition(imagePosition raw.NSCellImagePosition) {
-	x.inner.SetImagePosition(imagePosition)
+func (x *ButtonCell) SetImagePosition(imagePosition NSCellImagePosition) {
+	x.inner.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 }
 
 // ImageScaling calls the underlying ImageScaling.
-func (x *ButtonCell) ImageScaling() raw.NSImageScaling {
-	return x.inner.ImageScaling()
+func (x *ButtonCell) ImageScaling() NSImageScaling {
+	return NSImageScaling(x.inner.ImageScaling())
 }
 
 // SetImageScaling calls the underlying SetImageScaling.
-func (x *ButtonCell) SetImageScaling(imageScaling raw.NSImageScaling) {
-	x.inner.SetImageScaling(imageScaling)
+func (x *ButtonCell) SetImageScaling(imageScaling NSImageScaling) {
+	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 }
 
 // SetKeyEquivalent calls the underlying SetKeyEquivalent.
@@ -570,13 +570,13 @@ func (x *ButtonCell) SetKeyEquivalent(keyEquivalent string) {
 }
 
 // KeyEquivalentModifierMask calls the underlying KeyEquivalentModifierMask.
-func (x *ButtonCell) KeyEquivalentModifierMask() raw.NSEventModifierFlags {
-	return x.inner.KeyEquivalentModifierMask()
+func (x *ButtonCell) KeyEquivalentModifierMask() NSEventModifierFlags {
+	return NSEventModifierFlags(x.inner.KeyEquivalentModifierMask())
 }
 
 // SetKeyEquivalentModifierMask calls the underlying SetKeyEquivalentModifierMask.
-func (x *ButtonCell) SetKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) {
-	x.inner.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+func (x *ButtonCell) SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) {
+	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
 }
 
 // IsTransparent calls the underlying IsTransparent.
@@ -667,13 +667,13 @@ func (x *ButtonCell) SetKeyEquivalentFontSize(fontName string, fontSize float64)
 }
 
 // GradientType calls the underlying GradientType.
-func (x *ButtonCell) GradientType() raw.NSGradientType {
-	return x.inner.GradientType()
+func (x *ButtonCell) GradientType() NSGradientType {
+	return NSGradientType(x.inner.GradientType())
 }
 
 // SetGradientType calls the underlying SetGradientType.
-func (x *ButtonCell) SetGradientType(gradientType raw.NSGradientType) {
-	x.inner.SetGradientType(gradientType)
+func (x *ButtonCell) SetGradientType(gradientType NSGradientType) {
+	x.inner.SetGradientType(raw.NSGradientType(gradientType))
 }
 
 // KeyEquivalentFont calls the underlying KeyEquivalentFont.
@@ -699,26 +699,26 @@ func (x *ButtonCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell 
 // ButtonCellable is the interface implemented by [ButtonCell], for mocking and DI.
 type ButtonCellable interface {
 	Unwrap() *raw.NSButtonCell
-	WithBezelStyle(bezelStyle raw.NSBezelStyle) *ButtonCell
-	WithHighlightsBy(highlightsBy raw.NSCellStyleMask) *ButtonCell
-	WithShowsStateBy(showsStateBy raw.NSCellStyleMask) *ButtonCell
+	WithBezelStyle(bezelStyle NSBezelStyle) *ButtonCell
+	WithHighlightsBy(highlightsBy NSCellStyleMask) *ButtonCell
+	WithShowsStateBy(showsStateBy NSCellStyleMask) *ButtonCell
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ButtonCell
 	WithAlternateTitle(alternateTitle string) *ButtonCell
 	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *ButtonCell
 	WithAlternateImage(alternateImage *Image) *ButtonCell
-	WithImagePosition(imagePosition raw.NSCellImagePosition) *ButtonCell
-	WithImageScaling(imageScaling raw.NSImageScaling) *ButtonCell
+	WithImagePosition(imagePosition NSCellImagePosition) *ButtonCell
+	WithImageScaling(imageScaling NSImageScaling) *ButtonCell
 	WithKeyEquivalent(keyEquivalent string) *ButtonCell
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *ButtonCell
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *ButtonCell
 	WithTransparent(transparent bool) *ButtonCell
 	WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *ButtonCell
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *ButtonCell
 	WithSound(sound *Sound) *ButtonCell
 	WithBackgroundColor(backgroundColor *Color) *ButtonCell
-	WithGradientType(gradientType raw.NSGradientType) *ButtonCell
+	WithGradientType(gradientType NSGradientType) *ButtonCell
 	WithKeyEquivalentFont(keyEquivalentFont *Font) *ButtonCell
 	WithControlView(controlView ViewProvider) *ButtonCell
-	WithType(type_ raw.NSCellType) *ButtonCell
+	WithType(type_ NSCellType) *ButtonCell
 	WithState(state int) *ButtonCell
 	WithTarget(target objc.ID) *ButtonCell
 	WithAction(action objc.SEL) *ButtonCell
@@ -732,7 +732,7 @@ type ButtonCellable interface {
 	WithBezeled(bezeled bool) *ButtonCell
 	WithScrollable(scrollable bool) *ButtonCell
 	WithHighlighted(highlighted bool) *ButtonCell
-	WithAlignment(alignment raw.NSTextAlignment) *ButtonCell
+	WithAlignment(alignment NSTextAlignment) *ButtonCell
 	WithWraps(wraps bool) *ButtonCell
 	WithFont(font *Font) *ButtonCell
 	WithFormatter(formatter *foundation.NSFormatter) *ButtonCell
@@ -743,38 +743,38 @@ type ButtonCellable interface {
 	WithDoubleValue(doubleValue float64) *ButtonCell
 	WithIntegerValue(integerValue int) *ButtonCell
 	WithImage(image *Image) *ButtonCell
-	WithControlSize(controlSize raw.NSControlSize) *ButtonCell
+	WithControlSize(controlSize NSControlSize) *ButtonCell
 	WithRepresentedObject(representedObject objc.ID) *ButtonCell
 	WithMenu(menu *Menu) *ButtonCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ButtonCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ButtonCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ButtonCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ButtonCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ButtonCell
 	WithAllowsUndo(allowsUndo bool) *ButtonCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ButtonCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ButtonCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ButtonCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ButtonCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ButtonCell
 	WithShowsFirstResponder(showsFirstResponder bool) *ButtonCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ButtonCell
+	WithFocusRingType(focusRingType NSFocusRingType) *ButtonCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ButtonCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ButtonCell
 	WithImportsGraphics(importsGraphics bool) *ButtonCell
 	WithAllowsMixedState(allowsMixedState bool) *ButtonCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ButtonCell
-	WithControlTint(controlTint raw.NSControlTint) *ButtonCell
-	SetButtonType(type_ raw.NSButtonType)
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ButtonCell
+	WithControlTint(controlTint NSControlTint) *ButtonCell
+	SetButtonType(type_ NSButtonType)
 	SetPeriodicDelayInterval(delay float32, interval float32)
 	MouseEntered(event *raw.NSEvent)
 	MouseExited(event *raw.NSEvent)
 	DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *raw.NSView)
 	DrawImageWithFrameInView(image *raw.NSImage, frame corefoundation.CGRect, controlView *raw.NSView)
 	DrawTitleWithFrameInView(title *foundation.NSAttributedString, frame corefoundation.CGRect, controlView *raw.NSView) corefoundation.CGRect
-	BezelStyle() raw.NSBezelStyle
-	SetBezelStyle(bezelStyle raw.NSBezelStyle)
-	HighlightsBy() raw.NSCellStyleMask
-	SetHighlightsBy(highlightsBy raw.NSCellStyleMask)
-	ShowsStateBy() raw.NSCellStyleMask
-	SetShowsStateBy(showsStateBy raw.NSCellStyleMask)
+	BezelStyle() NSBezelStyle
+	SetBezelStyle(bezelStyle NSBezelStyle)
+	HighlightsBy() NSCellStyleMask
+	SetHighlightsBy(highlightsBy NSCellStyleMask)
+	ShowsStateBy() NSCellStyleMask
+	SetShowsStateBy(showsStateBy NSCellStyleMask)
 	AttributedTitle() *foundation.NSAttributedString
 	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
 	AlternateTitle() string
@@ -783,13 +783,13 @@ type ButtonCellable interface {
 	SetAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString)
 	AlternateImage() *Image
 	SetAlternateImage(alternateImage *raw.NSImage)
-	ImagePosition() raw.NSCellImagePosition
-	SetImagePosition(imagePosition raw.NSCellImagePosition)
-	ImageScaling() raw.NSImageScaling
-	SetImageScaling(imageScaling raw.NSImageScaling)
+	ImagePosition() NSCellImagePosition
+	SetImagePosition(imagePosition NSCellImagePosition)
+	ImageScaling() NSImageScaling
+	SetImageScaling(imageScaling NSImageScaling)
 	SetKeyEquivalent(keyEquivalent string)
-	KeyEquivalentModifierMask() raw.NSEventModifierFlags
-	SetKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags)
+	KeyEquivalentModifierMask() NSEventModifierFlags
+	SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags)
 	IsTransparent() bool
 	SetTransparent(transparent bool)
 	ImageDimsWhenDisabled() bool
@@ -805,8 +805,8 @@ type ButtonCellable interface {
 	AlternateMnemonicLocation() uint
 	AlternateMnemonic() string
 	SetKeyEquivalentFontSize(fontName string, fontSize float64)
-	GradientType() raw.NSGradientType
-	SetGradientType(gradientType raw.NSGradientType)
+	GradientType() NSGradientType
+	SetGradientType(gradientType NSGradientType)
 	KeyEquivalentFont() *Font
 	SetKeyEquivalentFont(keyEquivalentFont *raw.NSFont)
 }

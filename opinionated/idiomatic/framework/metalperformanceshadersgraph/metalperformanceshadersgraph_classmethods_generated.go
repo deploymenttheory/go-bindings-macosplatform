@@ -22,8 +22,8 @@ func New() *Graph {
 }
 
 // DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout calls the underlying MPSGraphConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout.
-func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, groups uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle raw.MPSGraphPaddingStyle, dataLayout raw.MPSGraphTensorNamedDataLayout, weightsLayout raw.MPSGraphTensorNamedDataLayout) *GraphConvolution2DOpDescriptor {
-	_r := raw.MPSGraphConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX, strideInY, dilationRateInX, dilationRateInY, groups, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout, weightsLayout)
+func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, groups uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *GraphConvolution2DOpDescriptor {
+	_r := raw.MPSGraphConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX, strideInY, dilationRateInX, dilationRateInY, groups, paddingLeft, paddingRight, paddingTop, paddingBottom, raw.MPSGraphPaddingStyle(paddingStyle), raw.MPSGraphTensorNamedDataLayout(dataLayout), raw.MPSGraphTensorNamedDataLayout(weightsLayout))
 	if _r == nil {
 		return nil
 	}
@@ -31,8 +31,8 @@ func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPadding
 }
 
 // DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingStyleDataLayoutWeightsLayout calls the underlying MPSGraphConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingStyleDataLayoutWeightsLayout.
-func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, groups uint, paddingStyle raw.MPSGraphPaddingStyle, dataLayout raw.MPSGraphTensorNamedDataLayout, weightsLayout raw.MPSGraphTensorNamedDataLayout) *GraphConvolution2DOpDescriptor {
-	_r := raw.MPSGraphConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingStyleDataLayoutWeightsLayout(strideInX, strideInY, dilationRateInX, dilationRateInY, groups, paddingStyle, dataLayout, weightsLayout)
+func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, groups uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *GraphConvolution2DOpDescriptor {
+	_r := raw.MPSGraphConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPaddingStyleDataLayoutWeightsLayout(strideInX, strideInY, dilationRateInX, dilationRateInY, groups, raw.MPSGraphPaddingStyle(paddingStyle), raw.MPSGraphTensorNamedDataLayout(dataLayout), raw.MPSGraphTensorNamedDataLayout(weightsLayout))
 	if _r == nil {
 		return nil
 	}
@@ -40,8 +40,8 @@ func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYGroupsPadding
 }
 
 // DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBackPaddingStyleDataLayoutWeightsLayout calls the underlying MPSGraphConvolution3DOpDescriptorDescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBackPaddingStyleDataLayoutWeightsLayout.
-func DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBackPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, strideInZ uint, dilationRateInX uint, dilationRateInY uint, dilationRateInZ uint, groups uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingFront uint, paddingBack uint, paddingStyle raw.MPSGraphPaddingStyle, dataLayout raw.MPSGraphTensorNamedDataLayout, weightsLayout raw.MPSGraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
-	_r := raw.MPSGraphConvolution3DOpDescriptorDescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBackPaddingStyleDataLayoutWeightsLayout(strideInX, strideInY, strideInZ, dilationRateInX, dilationRateInY, dilationRateInZ, groups, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingFront, paddingBack, paddingStyle, dataLayout, weightsLayout)
+func DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBackPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, strideInZ uint, dilationRateInX uint, dilationRateInY uint, dilationRateInZ uint, groups uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingFront uint, paddingBack uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
+	_r := raw.MPSGraphConvolution3DOpDescriptorDescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBackPaddingStyleDataLayoutWeightsLayout(strideInX, strideInY, strideInZ, dilationRateInX, dilationRateInY, dilationRateInZ, groups, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingFront, paddingBack, raw.MPSGraphPaddingStyle(paddingStyle), raw.MPSGraphTensorNamedDataLayout(dataLayout), raw.MPSGraphTensorNamedDataLayout(weightsLayout))
 	if _r == nil {
 		return nil
 	}
@@ -49,8 +49,8 @@ func DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDila
 }
 
 // DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingStyleDataLayoutWeightsLayout calls the underlying MPSGraphConvolution3DOpDescriptorDescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingStyleDataLayoutWeightsLayout.
-func DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, strideInZ uint, dilationRateInX uint, dilationRateInY uint, dilationRateInZ uint, groups uint, paddingStyle raw.MPSGraphPaddingStyle, dataLayout raw.MPSGraphTensorNamedDataLayout, weightsLayout raw.MPSGraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
-	_r := raw.MPSGraphConvolution3DOpDescriptorDescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingStyleDataLayoutWeightsLayout(strideInX, strideInY, strideInZ, dilationRateInX, dilationRateInY, dilationRateInZ, groups, paddingStyle, dataLayout, weightsLayout)
+func DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, strideInZ uint, dilationRateInX uint, dilationRateInY uint, dilationRateInZ uint, groups uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
+	_r := raw.MPSGraphConvolution3DOpDescriptorDescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDilationRateInZGroupsPaddingStyleDataLayoutWeightsLayout(strideInX, strideInY, strideInZ, dilationRateInX, dilationRateInY, dilationRateInZ, groups, raw.MPSGraphPaddingStyle(paddingStyle), raw.MPSGraphTensorNamedDataLayout(dataLayout), raw.MPSGraphTensorNamedDataLayout(weightsLayout))
 	if _r == nil {
 		return nil
 	}
@@ -58,8 +58,8 @@ func DescriptorWithStrideInXStrideInYStrideInZDilationRateInXDilationRateInYDila
 }
 
 // DescriptorWithStorageTypeDataType calls the underlying MPSGraphCreateSparseOpDescriptorDescriptorWithStorageTypeDataType.
-func DescriptorWithStorageTypeDataType(sparseStorageType raw.MPSGraphSparseStorageType, dataType mpscore.MPSDataType) *GraphCreateSparseOpDescriptor {
-	_r := raw.MPSGraphCreateSparseOpDescriptorDescriptorWithStorageTypeDataType(sparseStorageType, dataType)
+func DescriptorWithStorageTypeDataType(sparseStorageType MPSGraphSparseStorageType, dataType mpscore.MPSDataType) *GraphCreateSparseOpDescriptor {
+	_r := raw.MPSGraphCreateSparseOpDescriptorDescriptorWithStorageTypeDataType(raw.MPSGraphSparseStorageType(sparseStorageType), dataType)
 	if _r == nil {
 		return nil
 	}
@@ -67,8 +67,8 @@ func DescriptorWithStorageTypeDataType(sparseStorageType raw.MPSGraphSparseStora
 }
 
 // DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout calls the underlying MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout.
-func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle raw.MPSGraphPaddingStyle, dataLayout raw.MPSGraphTensorNamedDataLayout, weightsLayout raw.MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
-	_r := raw.MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout, weightsLayout)
+func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
+	_r := raw.MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayoutWeightsLayout(strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, raw.MPSGraphPaddingStyle(paddingStyle), raw.MPSGraphTensorNamedDataLayout(dataLayout), raw.MPSGraphTensorNamedDataLayout(weightsLayout))
 	if _r == nil {
 		return nil
 	}
@@ -76,8 +76,8 @@ func DescriptorWithStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPa
 }
 
 // DescriptorWithDataLayoutWeightsLayout calls the underlying MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithDataLayoutWeightsLayout.
-func DescriptorWithDataLayoutWeightsLayout(dataLayout raw.MPSGraphTensorNamedDataLayout, weightsLayout raw.MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
-	_r := raw.MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithDataLayoutWeightsLayout(dataLayout, weightsLayout)
+func DescriptorWithDataLayoutWeightsLayout(dataLayout MPSGraphTensorNamedDataLayout, weightsLayout MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
+	_r := raw.MPSGraphDepthwiseConvolution2DOpDescriptorDescriptorWithDataLayoutWeightsLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout), raw.MPSGraphTensorNamedDataLayout(weightsLayout))
 	if _r == nil {
 		return nil
 	}
@@ -85,8 +85,8 @@ func DescriptorWithDataLayoutWeightsLayout(dataLayout raw.MPSGraphTensorNamedDat
 }
 
 // DescriptorWithStridesDilationRatesPaddingValuesPaddingStyle calls the underlying MPSGraphDepthwiseConvolution3DOpDescriptorDescriptorWithStridesDilationRatesPaddingValuesPaddingStyle.
-func DescriptorWithStridesDilationRatesPaddingValuesPaddingStyle(strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingValues *foundation.NSArray[*foundation.NSNumber], paddingStyle raw.MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
-	_r := raw.MPSGraphDepthwiseConvolution3DOpDescriptorDescriptorWithStridesDilationRatesPaddingValuesPaddingStyle(strides, dilationRates, paddingValues, paddingStyle)
+func DescriptorWithStridesDilationRatesPaddingValuesPaddingStyle(strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingValues *foundation.NSArray[*foundation.NSNumber], paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
+	_r := raw.MPSGraphDepthwiseConvolution3DOpDescriptorDescriptorWithStridesDilationRatesPaddingValuesPaddingStyle(strides, dilationRates, paddingValues, raw.MPSGraphPaddingStyle(paddingStyle))
 	if _r == nil {
 		return nil
 	}
@@ -94,8 +94,8 @@ func DescriptorWithStridesDilationRatesPaddingValuesPaddingStyle(strides *founda
 }
 
 // DescriptorWithPaddingStyle calls the underlying MPSGraphDepthwiseConvolution3DOpDescriptorDescriptorWithPaddingStyle.
-func DescriptorWithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
-	_r := raw.MPSGraphDepthwiseConvolution3DOpDescriptorDescriptorWithPaddingStyle(paddingStyle)
+func DescriptorWithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
+	_r := raw.MPSGraphDepthwiseConvolution3DOpDescriptorDescriptorWithPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	if _r == nil {
 		return nil
 	}
@@ -130,8 +130,8 @@ func MPSGraphGRUDescriptorDescriptor() *GraphGRUDescriptor {
 }
 
 // DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout calls the underlying MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout.
-func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
-	_r := raw.MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout(kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, dataLayout)
+func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, dataLayout MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
+	_r := raw.MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomDataLayout(kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, raw.MPSGraphTensorNamedDataLayout(dataLayout))
 	if _r == nil {
 		return nil
 	}
@@ -139,8 +139,8 @@ func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilat
 }
 
 // DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout calls the underlying MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout.
-func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
-	_r := raw.MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout(kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, dataLayout)
+func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, dataLayout MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
+	_r := raw.MPSGraphImToColOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYDataLayout(kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, raw.MPSGraphTensorNamedDataLayout(dataLayout))
 	if _r == nil {
 		return nil
 	}
@@ -157,8 +157,8 @@ func MPSGraphLSTMDescriptorDescriptor() *GraphLSTMDescriptor {
 }
 
 // DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout calls the underlying MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout.
-func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle raw.MPSGraphPaddingStyle, dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
-	_r := raw.MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout(kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, paddingStyle, dataLayout)
+func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, dilationRateInX uint, dilationRateInY uint, paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
+	_r := raw.MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilationRateInYPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingStyleDataLayout(kernelWidth, kernelHeight, strideInX, strideInY, dilationRateInX, dilationRateInY, paddingLeft, paddingRight, paddingTop, paddingBottom, raw.MPSGraphPaddingStyle(paddingStyle), raw.MPSGraphTensorNamedDataLayout(dataLayout))
 	if _r == nil {
 		return nil
 	}
@@ -166,8 +166,8 @@ func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYDilationRateInXDilat
 }
 
 // DescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout calls the underlying MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout.
-func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, paddingStyle raw.MPSGraphPaddingStyle, dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
-	_r := raw.MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout(kernelWidth, kernelHeight, strideInX, strideInY, paddingStyle, dataLayout)
+func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout(kernelWidth uint, kernelHeight uint, strideInX uint, strideInY uint, paddingStyle MPSGraphPaddingStyle, dataLayout MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
+	_r := raw.MPSGraphPooling2DOpDescriptorDescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayout(kernelWidth, kernelHeight, strideInX, strideInY, raw.MPSGraphPaddingStyle(paddingStyle), raw.MPSGraphTensorNamedDataLayout(dataLayout))
 	if _r == nil {
 		return nil
 	}
@@ -175,8 +175,8 @@ func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayo
 }
 
 // DescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle calls the underlying MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle.
-func DescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingValues *foundation.NSArray[*foundation.NSNumber], paddingStyle raw.MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor {
-	_r := raw.MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle(kernelSizes, strides, dilationRates, paddingValues, paddingStyle)
+func DescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingValues *foundation.NSArray[*foundation.NSNumber], paddingStyle MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor {
+	_r := raw.MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle(kernelSizes, strides, dilationRates, paddingValues, raw.MPSGraphPaddingStyle(paddingStyle))
 	if _r == nil {
 		return nil
 	}
@@ -184,8 +184,8 @@ func DescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle(kern
 }
 
 // DescriptorWithKernelSizesPaddingStyle calls the underlying MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesPaddingStyle.
-func DescriptorWithKernelSizesPaddingStyle(kernelSizes *foundation.NSArray[*foundation.NSNumber], paddingStyle raw.MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor {
-	_r := raw.MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesPaddingStyle(kernelSizes, paddingStyle)
+func DescriptorWithKernelSizesPaddingStyle(kernelSizes *foundation.NSArray[*foundation.NSNumber], paddingStyle MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor {
+	_r := raw.MPSGraphPooling4DOpDescriptorDescriptorWithKernelSizesPaddingStyle(kernelSizes, raw.MPSGraphPaddingStyle(paddingStyle))
 	if _r == nil {
 		return nil
 	}
@@ -193,8 +193,8 @@ func DescriptorWithKernelSizesPaddingStyle(kernelSizes *foundation.NSArray[*foun
 }
 
 // DescriptorWithDistributionDataType calls the underlying MPSGraphRandomOpDescriptorDescriptorWithDistributionDataType.
-func DescriptorWithDistributionDataType(distribution raw.MPSGraphRandomDistribution, dataType mpscore.MPSDataType) *GraphRandomOpDescriptor {
-	_r := raw.MPSGraphRandomOpDescriptorDescriptorWithDistributionDataType(distribution, dataType)
+func DescriptorWithDistributionDataType(distribution MPSGraphRandomDistribution, dataType mpscore.MPSDataType) *GraphRandomOpDescriptor {
+	_r := raw.MPSGraphRandomOpDescriptorDescriptorWithDistributionDataType(raw.MPSGraphRandomDistribution(distribution), dataType)
 	if _r == nil {
 		return nil
 	}
@@ -211,8 +211,8 @@ func MPSGraphSingleGateRNNDescriptorDescriptor() *GraphSingleGateRNNDescriptor {
 }
 
 // DescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant calls the underlying MPSGraphStencilOpDescriptorDescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant.
-func DescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant(reductionMode raw.MPSGraphReductionMode, offsets unsafe.Pointer, strides unsafe.Pointer, dilationRates unsafe.Pointer, explicitPadding unsafe.Pointer, boundaryMode raw.MPSGraphPaddingMode, paddingStyle raw.MPSGraphPaddingStyle, paddingConstant float32) *GraphStencilOpDescriptor {
-	_r := raw.MPSGraphStencilOpDescriptorDescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant(reductionMode, offsets, strides, dilationRates, explicitPadding, boundaryMode, paddingStyle, paddingConstant)
+func DescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant(reductionMode MPSGraphReductionMode, offsets unsafe.Pointer, strides unsafe.Pointer, dilationRates unsafe.Pointer, explicitPadding unsafe.Pointer, boundaryMode MPSGraphPaddingMode, paddingStyle MPSGraphPaddingStyle, paddingConstant float32) *GraphStencilOpDescriptor {
+	_r := raw.MPSGraphStencilOpDescriptorDescriptorWithReductionModeOffsetsStridesDilationRatesExplicitPaddingBoundaryModePaddingStylePaddingConstant(raw.MPSGraphReductionMode(reductionMode), offsets, strides, dilationRates, explicitPadding, raw.MPSGraphPaddingMode(boundaryMode), raw.MPSGraphPaddingStyle(paddingStyle), paddingConstant)
 	if _r == nil {
 		return nil
 	}
@@ -238,8 +238,8 @@ func DescriptorWithExplicitPadding(explicitPadding unsafe.Pointer) *GraphStencil
 }
 
 // MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle calls the underlying MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle.
-func MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphStencilOpDescriptor {
-	_r := raw.MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle(paddingStyle)
+func MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphStencilOpDescriptor {
+	_r := raw.MPSGraphStencilOpDescriptorDescriptorWithPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	if _r == nil {
 		return nil
 	}

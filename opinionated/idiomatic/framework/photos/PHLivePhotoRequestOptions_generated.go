@@ -36,8 +36,8 @@ func NewLivePhotoRequestOptions() *LivePhotoRequestOptions {
 }
 
 // WithDeliveryMode sets the deliveryMode property and returns the receiver for chaining.
-func (x *LivePhotoRequestOptions) WithDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions {
-	x.inner.SetDeliveryMode(deliveryMode)
+func (x *LivePhotoRequestOptions) WithDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions {
+	x.inner.SetDeliveryMode(raw.PHImageRequestOptionsDeliveryMode(deliveryMode))
 	return x
 }
 
@@ -54,13 +54,13 @@ func (x *LivePhotoRequestOptions) WithProgressHandler(progressHandler objc.Block
 }
 
 // DeliveryMode calls the underlying DeliveryMode.
-func (x *LivePhotoRequestOptions) DeliveryMode() raw.PHImageRequestOptionsDeliveryMode {
-	return x.inner.DeliveryMode()
+func (x *LivePhotoRequestOptions) DeliveryMode() PHImageRequestOptionsDeliveryMode {
+	return PHImageRequestOptionsDeliveryMode(x.inner.DeliveryMode())
 }
 
 // SetDeliveryMode calls the underlying SetDeliveryMode.
-func (x *LivePhotoRequestOptions) SetDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode) {
-	x.inner.SetDeliveryMode(deliveryMode)
+func (x *LivePhotoRequestOptions) SetDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) {
+	x.inner.SetDeliveryMode(raw.PHImageRequestOptionsDeliveryMode(deliveryMode))
 }
 
 // IsNetworkAccessAllowed calls the underlying IsNetworkAccessAllowed.
@@ -86,11 +86,11 @@ func (x *LivePhotoRequestOptions) SetProgressHandler(progressHandler objc.Block)
 // LivePhotoRequestOptionsable is the interface implemented by [LivePhotoRequestOptions], for mocking and DI.
 type LivePhotoRequestOptionsable interface {
 	Unwrap() *raw.PHLivePhotoRequestOptions
-	WithDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions
+	WithDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions
 	WithProgressHandler(progressHandler objc.Block) *LivePhotoRequestOptions
-	DeliveryMode() raw.PHImageRequestOptionsDeliveryMode
-	SetDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode)
+	DeliveryMode() PHImageRequestOptionsDeliveryMode
+	SetDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode)
 	IsNetworkAccessAllowed() bool
 	SetNetworkAccessAllowed(networkAccessAllowed bool)
 	ProgressHandler() objc.Block

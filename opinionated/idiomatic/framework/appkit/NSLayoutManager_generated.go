@@ -101,8 +101,8 @@ func (x *LayoutManager) WithBackgroundLayoutEnabled(backgroundLayoutEnabled bool
 }
 
 // WithDefaultAttachmentScaling sets the defaultAttachmentScaling property and returns the receiver for chaining.
-func (x *LayoutManager) WithDefaultAttachmentScaling(defaultAttachmentScaling raw.NSImageScaling) *LayoutManager {
-	x.inner.SetDefaultAttachmentScaling(defaultAttachmentScaling)
+func (x *LayoutManager) WithDefaultAttachmentScaling(defaultAttachmentScaling NSImageScaling) *LayoutManager {
+	x.inner.SetDefaultAttachmentScaling(raw.NSImageScaling(defaultAttachmentScaling))
 	return x
 }
 
@@ -113,8 +113,8 @@ func (x *LayoutManager) WithTypesetter(typesetter TypesetterProvider) *LayoutMan
 }
 
 // WithTypesetterBehavior sets the typesetterBehavior property and returns the receiver for chaining.
-func (x *LayoutManager) WithTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) *LayoutManager {
-	x.inner.SetTypesetterBehavior(typesetterBehavior)
+func (x *LayoutManager) WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *LayoutManager {
+	x.inner.SetTypesetterBehavior(raw.NSTypesetterBehavior(typesetterBehavior))
 	return x
 }
 
@@ -187,8 +187,8 @@ func (x *LayoutManager) InvalidateDisplayForGlyphRange(glyphRange foundation.NSR
 }
 
 // ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange calls the underlying ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange.
-func (x *LayoutManager) ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage *raw.NSTextStorage, editMask raw.NSTextStorageEditActions, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange) {
-	x.inner.ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage, editMask, newCharRange, delta, invalidatedCharRange)
+func (x *LayoutManager) ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage *raw.NSTextStorage, editMask NSTextStorageEditActions, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange) {
+	x.inner.ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage, raw.NSTextStorageEditActions(editMask), newCharRange, delta, invalidatedCharRange)
 }
 
 // EnsureGlyphsForCharacterRange calls the underlying EnsureGlyphsForCharacterRange.
@@ -242,8 +242,8 @@ func (x *LayoutManager) IsValidGlyphIndex(glyphIndex uint) bool {
 }
 
 // PropertyForGlyphAtIndex calls the underlying PropertyForGlyphAtIndex.
-func (x *LayoutManager) PropertyForGlyphAtIndex(glyphIndex uint) raw.NSGlyphProperty {
-	return x.inner.PropertyForGlyphAtIndex(glyphIndex)
+func (x *LayoutManager) PropertyForGlyphAtIndex(glyphIndex uint) NSGlyphProperty {
+	return NSGlyphProperty(x.inner.PropertyForGlyphAtIndex(glyphIndex))
 }
 
 // CharacterIndexForGlyphAtIndex calls the underlying CharacterIndexForGlyphAtIndex.
@@ -470,23 +470,23 @@ func (x *LayoutManager) FillBackgroundRectArrayCountForCharacterRangeColor(rectA
 }
 
 // DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
-func (x *LayoutManager) DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal raw.NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
-	x.inner.DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, underlineVal, baselineOffset, lineRect, lineGlyphRange, containerOrigin)
+func (x *LayoutManager) DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
+	x.inner.DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(underlineVal), baselineOffset, lineRect, lineGlyphRange, containerOrigin)
 }
 
 // UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
-func (x *LayoutManager) UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal raw.NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
-	x.inner.UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, underlineVal, lineRect, lineGlyphRange, containerOrigin)
+func (x *LayoutManager) UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
+	x.inner.UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(underlineVal), lineRect, lineGlyphRange, containerOrigin)
 }
 
 // DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
-func (x *LayoutManager) DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal raw.NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
-	x.inner.DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, strikethroughVal, baselineOffset, lineRect, lineGlyphRange, containerOrigin)
+func (x *LayoutManager) DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
+	x.inner.DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(strikethroughVal), baselineOffset, lineRect, lineGlyphRange, containerOrigin)
 }
 
 // StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
-func (x *LayoutManager) StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal raw.NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
-	x.inner.StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, strikethroughVal, lineRect, lineGlyphRange, containerOrigin)
+func (x *LayoutManager) StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
+	x.inner.StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(strikethroughVal), lineRect, lineGlyphRange, containerOrigin)
 }
 
 // ShowAttachmentCellInRectCharacterIndex calls the underlying ShowAttachmentCellInRectCharacterIndex.
@@ -685,13 +685,13 @@ func (x *LayoutManager) SetBackgroundLayoutEnabled(backgroundLayoutEnabled bool)
 }
 
 // DefaultAttachmentScaling calls the underlying DefaultAttachmentScaling.
-func (x *LayoutManager) DefaultAttachmentScaling() raw.NSImageScaling {
-	return x.inner.DefaultAttachmentScaling()
+func (x *LayoutManager) DefaultAttachmentScaling() NSImageScaling {
+	return NSImageScaling(x.inner.DefaultAttachmentScaling())
 }
 
 // SetDefaultAttachmentScaling calls the underlying SetDefaultAttachmentScaling.
-func (x *LayoutManager) SetDefaultAttachmentScaling(defaultAttachmentScaling raw.NSImageScaling) {
-	x.inner.SetDefaultAttachmentScaling(defaultAttachmentScaling)
+func (x *LayoutManager) SetDefaultAttachmentScaling(defaultAttachmentScaling NSImageScaling) {
+	x.inner.SetDefaultAttachmentScaling(raw.NSImageScaling(defaultAttachmentScaling))
 }
 
 // Typesetter calls the underlying Typesetter.
@@ -709,13 +709,13 @@ func (x *LayoutManager) SetTypesetter(typesetter *raw.NSTypesetter) {
 }
 
 // TypesetterBehavior calls the underlying TypesetterBehavior.
-func (x *LayoutManager) TypesetterBehavior() raw.NSTypesetterBehavior {
-	return x.inner.TypesetterBehavior()
+func (x *LayoutManager) TypesetterBehavior() NSTypesetterBehavior {
+	return NSTypesetterBehavior(x.inner.TypesetterBehavior())
 }
 
 // SetTypesetterBehavior calls the underlying SetTypesetterBehavior.
-func (x *LayoutManager) SetTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) {
-	x.inner.SetTypesetterBehavior(typesetterBehavior)
+func (x *LayoutManager) SetTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) {
+	x.inner.SetTypesetterBehavior(raw.NSTypesetterBehavior(typesetterBehavior))
 }
 
 // NumberOfGlyphs calls the underlying NumberOfGlyphs.
@@ -934,9 +934,9 @@ type LayoutManagerable interface {
 	WithAllowsNonContiguousLayout(allowsNonContiguousLayout bool) *LayoutManager
 	WithLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) *LayoutManager
 	WithBackgroundLayoutEnabled(backgroundLayoutEnabled bool) *LayoutManager
-	WithDefaultAttachmentScaling(defaultAttachmentScaling raw.NSImageScaling) *LayoutManager
+	WithDefaultAttachmentScaling(defaultAttachmentScaling NSImageScaling) *LayoutManager
 	WithTypesetter(typesetter TypesetterProvider) *LayoutManager
-	WithTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) *LayoutManager
+	WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *LayoutManager
 	WithUsesScreenFonts(usesScreenFonts bool) *LayoutManager
 	WithHyphenationFactor(hyphenationFactor float32) *LayoutManager
 	WithGlyphGenerator(glyphGenerator *GlyphGenerator) *LayoutManager
@@ -950,7 +950,7 @@ type LayoutManagerable interface {
 	InvalidateLayoutForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange)
 	InvalidateDisplayForCharacterRange(charRange foundation.NSRange)
 	InvalidateDisplayForGlyphRange(glyphRange foundation.NSRange)
-	ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage *raw.NSTextStorage, editMask raw.NSTextStorageEditActions, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange)
+	ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage *raw.NSTextStorage, editMask NSTextStorageEditActions, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange)
 	EnsureGlyphsForCharacterRange(charRange foundation.NSRange)
 	EnsureGlyphsForGlyphRange(glyphRange foundation.NSRange)
 	EnsureLayoutForCharacterRange(charRange foundation.NSRange)
@@ -961,7 +961,7 @@ type LayoutManagerable interface {
 	CGGlyphAtIndexIsValidIndex(glyphIndex uint, isValidIndex *bool) uint16
 	CGGlyphAtIndex(glyphIndex uint) uint16
 	IsValidGlyphIndex(glyphIndex uint) bool
-	PropertyForGlyphAtIndex(glyphIndex uint) raw.NSGlyphProperty
+	PropertyForGlyphAtIndex(glyphIndex uint) NSGlyphProperty
 	CharacterIndexForGlyphAtIndex(glyphIndex uint) uint
 	GlyphIndexForCharacterAtIndex(charIndex uint) uint
 	GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels(glyphRange foundation.NSRange, glyphBuffer *uint16, props *raw.NSGlyphProperty, charIndexBuffer *uint, bidiLevelBuffer *uint8) uint
@@ -1005,10 +1005,10 @@ type LayoutManagerable interface {
 	DrawGlyphsForGlyphRangeAtPoint(glyphsToShow foundation.NSRange, origin corefoundation.CGPoint)
 	ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(glyphs *uint16, positions *corefoundation.CGPoint, glyphCount int, font *raw.NSFont, textMatrix corefoundation.CGAffineTransform, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], cGContext unsafe.Pointer)
 	FillBackgroundRectArrayCountForCharacterRangeColor(rectArray *corefoundation.CGRect, rectCount uint, charRange foundation.NSRange, color *raw.NSColor)
-	DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal raw.NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
-	UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal raw.NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
-	DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal raw.NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
-	StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal raw.NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
+	DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
+	UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
+	DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
+	StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint)
 	ShowAttachmentCellInRectCharacterIndex(cell *raw.NSCell, rect corefoundation.CGRect, attachmentIndex uint)
 	SetLayoutRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *raw.NSTextBlock, glyphRange foundation.NSRange)
 	SetBoundsRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *raw.NSTextBlock, glyphRange foundation.NSRange)
@@ -1046,12 +1046,12 @@ type LayoutManagerable interface {
 	SetLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool)
 	BackgroundLayoutEnabled() bool
 	SetBackgroundLayoutEnabled(backgroundLayoutEnabled bool)
-	DefaultAttachmentScaling() raw.NSImageScaling
-	SetDefaultAttachmentScaling(defaultAttachmentScaling raw.NSImageScaling)
+	DefaultAttachmentScaling() NSImageScaling
+	SetDefaultAttachmentScaling(defaultAttachmentScaling NSImageScaling)
 	Typesetter() *Typesetter
 	SetTypesetter(typesetter *raw.NSTypesetter)
-	TypesetterBehavior() raw.NSTypesetterBehavior
-	SetTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior)
+	TypesetterBehavior() NSTypesetterBehavior
+	SetTypesetterBehavior(typesetterBehavior NSTypesetterBehavior)
 	NumberOfGlyphs() uint
 	ExtraLineFragmentRect() corefoundation.CGRect
 	ExtraLineFragmentUsedRect() corefoundation.CGRect

@@ -37,8 +37,8 @@ func NewEnvironmentMechanismCompanion() *EnvironmentMechanismCompanion {
 }
 
 // Type calls the underlying Type.
-func (x *EnvironmentMechanismCompanion) Type() raw.LACompanionType {
-	return x.inner.Type()
+func (x *EnvironmentMechanismCompanion) Type() LACompanionType {
+	return LACompanionType(x.inner.Type())
 }
 
 // StateHash calls the underlying StateHash.
@@ -53,7 +53,7 @@ func (x *EnvironmentMechanismCompanion) asEnvironmentMechanism() *raw.LAEnvironm
 // EnvironmentMechanismCompanionable is the interface implemented by [EnvironmentMechanismCompanion], for mocking and DI.
 type EnvironmentMechanismCompanionable interface {
 	Unwrap() *raw.LAEnvironmentMechanismCompanion
-	Type() raw.LACompanionType
+	Type() LACompanionType
 	StateHash() *foundation.NSData
 }
 

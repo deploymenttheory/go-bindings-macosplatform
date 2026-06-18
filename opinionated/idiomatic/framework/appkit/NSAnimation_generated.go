@@ -33,9 +33,9 @@ func AnimationFromID(id objc.ID) *Animation {
 }
 
 // NewAnimationWithDurationAnimationCurve creates a new [Animation].
-func NewAnimationWithDurationAnimationCurve(duration float64, animationCurve raw.NSAnimationCurve) *Animation {
+func NewAnimationWithDurationAnimationCurve(duration float64, animationCurve NSAnimationCurve) *Animation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAnimation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDuration:animationCurve:"), duration, animationCurve)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDuration:animationCurve:"), duration, raw.NSAnimationCurve(animationCurve))
 	return &Animation{inner: raw.NSAnimationFromID(_id)}
 }
 
@@ -59,8 +59,8 @@ func (x *Animation) WithDuration(duration float64) *Animation {
 }
 
 // WithAnimationBlockingMode sets the animationBlockingMode property and returns the receiver for chaining.
-func (x *Animation) WithAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode) *Animation {
-	x.inner.SetAnimationBlockingMode(animationBlockingMode)
+func (x *Animation) WithAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) *Animation {
+	x.inner.SetAnimationBlockingMode(raw.NSAnimationBlockingMode(animationBlockingMode))
 	return x
 }
 
@@ -71,8 +71,8 @@ func (x *Animation) WithFrameRate(frameRate float32) *Animation {
 }
 
 // WithAnimationCurve sets the animationCurve property and returns the receiver for chaining.
-func (x *Animation) WithAnimationCurve(animationCurve raw.NSAnimationCurve) *Animation {
-	x.inner.SetAnimationCurve(animationCurve)
+func (x *Animation) WithAnimationCurve(animationCurve NSAnimationCurve) *Animation {
+	x.inner.SetAnimationCurve(raw.NSAnimationCurve(animationCurve))
 	return x
 }
 
@@ -166,13 +166,13 @@ func (x *Animation) SetDuration(duration float64) {
 }
 
 // AnimationBlockingMode calls the underlying AnimationBlockingMode.
-func (x *Animation) AnimationBlockingMode() raw.NSAnimationBlockingMode {
-	return x.inner.AnimationBlockingMode()
+func (x *Animation) AnimationBlockingMode() NSAnimationBlockingMode {
+	return NSAnimationBlockingMode(x.inner.AnimationBlockingMode())
 }
 
 // SetAnimationBlockingMode calls the underlying SetAnimationBlockingMode.
-func (x *Animation) SetAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode) {
-	x.inner.SetAnimationBlockingMode(animationBlockingMode)
+func (x *Animation) SetAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) {
+	x.inner.SetAnimationBlockingMode(raw.NSAnimationBlockingMode(animationBlockingMode))
 }
 
 // FrameRate calls the underlying FrameRate.
@@ -186,13 +186,13 @@ func (x *Animation) SetFrameRate(frameRate float32) {
 }
 
 // AnimationCurve calls the underlying AnimationCurve.
-func (x *Animation) AnimationCurve() raw.NSAnimationCurve {
-	return x.inner.AnimationCurve()
+func (x *Animation) AnimationCurve() NSAnimationCurve {
+	return NSAnimationCurve(x.inner.AnimationCurve())
 }
 
 // SetAnimationCurve calls the underlying SetAnimationCurve.
-func (x *Animation) SetAnimationCurve(animationCurve raw.NSAnimationCurve) {
-	x.inner.SetAnimationCurve(animationCurve)
+func (x *Animation) SetAnimationCurve(animationCurve NSAnimationCurve) {
+	x.inner.SetAnimationCurve(raw.NSAnimationCurve(animationCurve))
 }
 
 // CurrentValue calls the underlying CurrentValue.
@@ -244,9 +244,9 @@ type Animationable interface {
 	Unwrap() *raw.NSAnimation
 	WithCurrentProgress(currentProgress float32) *Animation
 	WithDuration(duration float64) *Animation
-	WithAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode) *Animation
+	WithAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) *Animation
 	WithFrameRate(frameRate float32) *Animation
-	WithAnimationCurve(animationCurve raw.NSAnimationCurve) *Animation
+	WithAnimationCurve(animationCurve NSAnimationCurve) *Animation
 	WithDelegate(delegate raw.NSAnimationDelegate) *Animation
 	WithProgressMarks(items ...*foundation.NSNumber) *Animation
 	StartAnimation()
@@ -262,12 +262,12 @@ type Animationable interface {
 	SetCurrentProgress(currentProgress float32)
 	Duration() float64
 	SetDuration(duration float64)
-	AnimationBlockingMode() raw.NSAnimationBlockingMode
-	SetAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode)
+	AnimationBlockingMode() NSAnimationBlockingMode
+	SetAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode)
 	FrameRate() float32
 	SetFrameRate(frameRate float32)
-	AnimationCurve() raw.NSAnimationCurve
-	SetAnimationCurve(animationCurve raw.NSAnimationCurve)
+	AnimationCurve() NSAnimationCurve
+	SetAnimationCurve(animationCurve NSAnimationCurve)
 	CurrentValue() float32
 	Delegate() raw.NSAnimationDelegate
 	SetDelegate(delegate raw.NSAnimationDelegate)

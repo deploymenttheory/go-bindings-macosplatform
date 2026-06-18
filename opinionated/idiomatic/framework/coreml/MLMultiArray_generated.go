@@ -33,10 +33,10 @@ func MultiArrayFromID(id objc.ID) *MultiArray {
 }
 
 // NewMultiArrayWithShapeDataTypeError creates a new [MultiArray].
-func NewMultiArrayWithShapeDataTypeError(shape *foundation.NSArray[*foundation.NSNumber], dataType raw.MLMultiArrayDataType) (*MultiArray, error) {
+func NewMultiArrayWithShapeDataTypeError(shape *foundation.NSArray[*foundation.NSNumber], dataType MLMultiArrayDataType) (*MultiArray, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMultiArray")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:error:"), shape.Ptr(), dataType, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:error:"), shape.Ptr(), raw.MLMultiArrayDataType(dataType), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -44,17 +44,17 @@ func NewMultiArrayWithShapeDataTypeError(shape *foundation.NSArray[*foundation.N
 }
 
 // NewMultiArrayWithShapeDataTypeStrides creates a new [MultiArray].
-func NewMultiArrayWithShapeDataTypeStrides(shape *foundation.NSArray[*foundation.NSNumber], dataType raw.MLMultiArrayDataType, strides *foundation.NSArray[*foundation.NSNumber]) *MultiArray {
+func NewMultiArrayWithShapeDataTypeStrides(shape *foundation.NSArray[*foundation.NSNumber], dataType MLMultiArrayDataType, strides *foundation.NSArray[*foundation.NSNumber]) *MultiArray {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMultiArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:strides:"), shape.Ptr(), dataType, strides.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:strides:"), shape.Ptr(), raw.MLMultiArrayDataType(dataType), strides.Ptr())
 	return &MultiArray{inner: raw.MLMultiArrayFromID(_id)}
 }
 
 // NewMultiArrayWithDataPointerShapeDataTypeStridesDeallocatorError creates a new [MultiArray].
-func NewMultiArrayWithDataPointerShapeDataTypeStridesDeallocatorError(dataPointer unsafe.Pointer, shape *foundation.NSArray[*foundation.NSNumber], dataType raw.MLMultiArrayDataType, strides *foundation.NSArray[*foundation.NSNumber], deallocator func(unsafe.Pointer)) (*MultiArray, error) {
+func NewMultiArrayWithDataPointerShapeDataTypeStridesDeallocatorError(dataPointer unsafe.Pointer, shape *foundation.NSArray[*foundation.NSNumber], dataType MLMultiArrayDataType, strides *foundation.NSArray[*foundation.NSNumber], deallocator func(unsafe.Pointer)) (*MultiArray, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMultiArray")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataPointer:shape:dataType:strides:deallocator:error:"), dataPointer, shape.Ptr(), dataType, strides.Ptr(), deallocator, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataPointer:shape:dataType:strides:deallocator:error:"), dataPointer, shape.Ptr(), raw.MLMultiArrayDataType(dataType), strides.Ptr(), deallocator, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -74,8 +74,8 @@ func (x *MultiArray) DataPointer() unsafe.Pointer {
 }
 
 // DataType calls the underlying DataType.
-func (x *MultiArray) DataType() raw.MLMultiArrayDataType {
-	return x.inner.DataType()
+func (x *MultiArray) DataType() MLMultiArrayDataType {
+	return MLMultiArrayDataType(x.inner.DataType())
 }
 
 // Shape returns the collection as a Go slice.
@@ -149,7 +149,7 @@ func (x *MultiArray) TransferToMultiArray(destinationMultiArray *raw.MLMultiArra
 type MultiArrayable interface {
 	Unwrap() *raw.MLMultiArray
 	DataPointer() unsafe.Pointer
-	DataType() raw.MLMultiArrayDataType
+	DataType() MLMultiArrayDataType
 	Shape() []*foundation.NSNumber
 	Strides() []*foundation.NSNumber
 	Count() int

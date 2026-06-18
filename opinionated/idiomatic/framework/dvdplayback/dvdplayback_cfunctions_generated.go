@@ -35,8 +35,13 @@ func DVDIsRegisteredEventCallBack(inCallBackID unsafe.Pointer) uint8 {
 }
 
 // DVDRegisterEventCallBack calls [raw.DVDRegisterEventCallBack] (C function DVDRegisterEventCallBack).
-func DVDRegisterEventCallBack(inCallBackProc unsafe.Pointer, inCode *raw.DVDEventCode, inCodeCount uint, inRefCon unsafe.Pointer, outCallBackID unsafe.Pointer) int {
-	return raw.DVDRegisterEventCallBack(inCallBackProc, inCode, inCodeCount, inRefCon, outCallBackID)
+func DVDRegisterEventCallBack(inCallBackProc unsafe.Pointer, inCode *DVDEventCode, inCodeCount uint, inRefCon unsafe.Pointer, outCallBackID unsafe.Pointer) int {
+	var _inCode raw.DVDEventCode
+	_ret := raw.DVDRegisterEventCallBack(inCallBackProc, &_inCode, inCodeCount, inRefCon, outCallBackID)
+	if inCode != nil {
+		*inCode = DVDEventCode(_inCode)
+	}
+	return _ret
 }
 
 // DVDSetDriveRegionCode calls [raw.DVDSetDriveRegionCode] (C function DVDSetDriveRegionCode).

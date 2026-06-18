@@ -32,10 +32,10 @@ func AudiogramSensitivityTestFromID(id objc.ID) *AudiogramSensitivityTest {
 }
 
 // NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError creates a new [AudiogramSensitivityTest].
-func NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError(sensitivity *raw.HKQuantity, type_ raw.HKAudiogramConductionType, masked bool, side raw.HKAudiogramSensitivityTestSide, clampingRange *raw.HKAudiogramSensitivityPointClampingRange) (*AudiogramSensitivityTest, error) {
+func NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError(sensitivity *raw.HKQuantity, type_ HKAudiogramConductionType, masked bool, side HKAudiogramSensitivityTestSide, clampingRange *raw.HKAudiogramSensitivityPointClampingRange) (*AudiogramSensitivityTest, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAudiogramSensitivityTest")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSensitivity:type:masked:side:clampingRange:error:"), sensitivity.Ptr(), type_, masked, side, clampingRange.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSensitivity:type:masked:side:clampingRange:error:"), sensitivity.Ptr(), raw.HKAudiogramConductionType(type_), masked, raw.HKAudiogramSensitivityTestSide(side), clampingRange.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -52,8 +52,8 @@ func (x *AudiogramSensitivityTest) Sensitivity() *Quantity {
 }
 
 // Type calls the underlying Type.
-func (x *AudiogramSensitivityTest) Type() raw.HKAudiogramConductionType {
-	return x.inner.Type()
+func (x *AudiogramSensitivityTest) Type() HKAudiogramConductionType {
+	return HKAudiogramConductionType(x.inner.Type())
 }
 
 // Masked calls the underlying Masked.
@@ -62,8 +62,8 @@ func (x *AudiogramSensitivityTest) Masked() bool {
 }
 
 // Side calls the underlying Side.
-func (x *AudiogramSensitivityTest) Side() raw.HKAudiogramSensitivityTestSide {
-	return x.inner.Side()
+func (x *AudiogramSensitivityTest) Side() HKAudiogramSensitivityTestSide {
+	return HKAudiogramSensitivityTestSide(x.inner.Side())
 }
 
 // ClampingRange calls the underlying ClampingRange.
@@ -79,9 +79,9 @@ func (x *AudiogramSensitivityTest) ClampingRange() *AudiogramSensitivityPointCla
 type AudiogramSensitivityTestable interface {
 	Unwrap() *raw.HKAudiogramSensitivityTest
 	Sensitivity() *Quantity
-	Type() raw.HKAudiogramConductionType
+	Type() HKAudiogramConductionType
 	Masked() bool
-	Side() raw.HKAudiogramSensitivityTestSide
+	Side() HKAudiogramSensitivityTestSide
 	ClampingRange() *AudiogramSensitivityPointClampingRange
 }
 

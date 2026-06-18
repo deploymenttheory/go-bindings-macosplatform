@@ -33,15 +33,15 @@ func TicketedEventFromID(id objc.ID) *TicketedEvent {
 }
 
 // NewTicketedEventWithCategoryNameEventDurationLocation creates a new [TicketedEvent].
-func NewTicketedEventWithCategoryNameEventDurationLocation(category raw.INTicketedEventCategory, name string, eventDuration *raw.INDateComponentsRange, location *corelocation.CLPlacemark) *TicketedEvent {
+func NewTicketedEventWithCategoryNameEventDurationLocation(category INTicketedEventCategory, name string, eventDuration *raw.INDateComponentsRange, location *corelocation.CLPlacemark) *TicketedEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTicketedEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCategory:name:eventDuration:location:"), category, foundation.NSStringStringWithUTF8String(name).Ptr(), eventDuration.Ptr(), location.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCategory:name:eventDuration:location:"), raw.INTicketedEventCategory(category), foundation.NSStringStringWithUTF8String(name).Ptr(), eventDuration.Ptr(), location.Ptr())
 	return &TicketedEvent{inner: raw.INTicketedEventFromID(_id)}
 }
 
 // Category calls the underlying Category.
-func (x *TicketedEvent) Category() raw.INTicketedEventCategory {
-	return x.inner.Category()
+func (x *TicketedEvent) Category() INTicketedEventCategory {
+	return INTicketedEventCategory(x.inner.Category())
 }
 
 // Name calls the underlying Name.
@@ -70,7 +70,7 @@ func (x *TicketedEvent) Location() *corelocation.CLPlacemark {
 // TicketedEventable is the interface implemented by [TicketedEvent], for mocking and DI.
 type TicketedEventable interface {
 	Unwrap() *raw.INTicketedEvent
-	Category() raw.INTicketedEventCategory
+	Category() INTicketedEventCategory
 	Name() string
 	EventDuration() *DateComponentsRange
 	Location() *corelocation.CLPlacemark

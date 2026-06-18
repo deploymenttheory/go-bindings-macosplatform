@@ -235,8 +235,8 @@ func MTLStageInputOutputDescriptorStageInputOutputDescriptor() *StageInputOutput
 }
 
 // Texture2DDescriptorWithPixelFormatWidthHeightMipmapped calls the underlying MTLTextureDescriptorTexture2DDescriptorWithPixelFormatWidthHeightMipmapped.
-func Texture2DDescriptorWithPixelFormatWidthHeightMipmapped(pixelFormat raw.MTLPixelFormat, width uint, height uint, mipmapped bool) *TextureDescriptor {
-	_r := raw.MTLTextureDescriptorTexture2DDescriptorWithPixelFormatWidthHeightMipmapped(pixelFormat, width, height, mipmapped)
+func Texture2DDescriptorWithPixelFormatWidthHeightMipmapped(pixelFormat MTLPixelFormat, width uint, height uint, mipmapped bool) *TextureDescriptor {
+	_r := raw.MTLTextureDescriptorTexture2DDescriptorWithPixelFormatWidthHeightMipmapped(raw.MTLPixelFormat(pixelFormat), width, height, mipmapped)
 	if _r == nil {
 		return nil
 	}
@@ -244,8 +244,8 @@ func Texture2DDescriptorWithPixelFormatWidthHeightMipmapped(pixelFormat raw.MTLP
 }
 
 // TextureCubeDescriptorWithPixelFormatSizeMipmapped calls the underlying MTLTextureDescriptorTextureCubeDescriptorWithPixelFormatSizeMipmapped.
-func TextureCubeDescriptorWithPixelFormatSizeMipmapped(pixelFormat raw.MTLPixelFormat, size uint, mipmapped bool) *TextureDescriptor {
-	_r := raw.MTLTextureDescriptorTextureCubeDescriptorWithPixelFormatSizeMipmapped(pixelFormat, size, mipmapped)
+func TextureCubeDescriptorWithPixelFormatSizeMipmapped(pixelFormat MTLPixelFormat, size uint, mipmapped bool) *TextureDescriptor {
+	_r := raw.MTLTextureDescriptorTextureCubeDescriptorWithPixelFormatSizeMipmapped(raw.MTLPixelFormat(pixelFormat), size, mipmapped)
 	if _r == nil {
 		return nil
 	}
@@ -253,8 +253,8 @@ func TextureCubeDescriptorWithPixelFormatSizeMipmapped(pixelFormat raw.MTLPixelF
 }
 
 // TextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage calls the underlying MTLTextureDescriptorTextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage.
-func TextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage(pixelFormat raw.MTLPixelFormat, width uint, resourceOptions raw.MTLResourceOptions, usage raw.MTLTextureUsage) *TextureDescriptor {
-	_r := raw.MTLTextureDescriptorTextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage(pixelFormat, width, resourceOptions, usage)
+func TextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage(pixelFormat MTLPixelFormat, width uint, resourceOptions MTLResourceOptions, usage MTLTextureUsage) *TextureDescriptor {
+	_r := raw.MTLTextureDescriptorTextureBufferDescriptorWithPixelFormatWidthResourceOptionsUsage(raw.MTLPixelFormat(pixelFormat), width, raw.MTLResourceOptions(resourceOptions), raw.MTLTextureUsage(usage))
 	if _r == nil {
 		return nil
 	}

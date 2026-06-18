@@ -58,18 +58,18 @@ func (x *Participant) Name() string {
 }
 
 // ParticipantStatus calls the underlying ParticipantStatus.
-func (x *Participant) ParticipantStatus() raw.EKParticipantStatus {
-	return x.inner.ParticipantStatus()
+func (x *Participant) ParticipantStatus() EKParticipantStatus {
+	return EKParticipantStatus(x.inner.ParticipantStatus())
 }
 
 // ParticipantRole calls the underlying ParticipantRole.
-func (x *Participant) ParticipantRole() raw.EKParticipantRole {
-	return x.inner.ParticipantRole()
+func (x *Participant) ParticipantRole() EKParticipantRole {
+	return EKParticipantRole(x.inner.ParticipantRole())
 }
 
 // ParticipantType calls the underlying ParticipantType.
-func (x *Participant) ParticipantType() raw.EKParticipantType {
-	return x.inner.ParticipantType()
+func (x *Participant) ParticipantType() EKParticipantType {
+	return EKParticipantType(x.inner.ParticipantType())
 }
 
 // IsCurrentUser calls the underlying IsCurrentUser.
@@ -90,9 +90,9 @@ type Participantable interface {
 	ABPersonInAddressBook(addressBook *addressbook.ABAddressBook) *addressbook.ABPerson
 	URL() *foundation.NSURL
 	Name() string
-	ParticipantStatus() raw.EKParticipantStatus
-	ParticipantRole() raw.EKParticipantRole
-	ParticipantType() raw.EKParticipantType
+	ParticipantStatus() EKParticipantStatus
+	ParticipantRole() EKParticipantRole
+	ParticipantType() EKParticipantType
 	IsCurrentUser() bool
 	ContactPredicate() *foundation.NSPredicate
 }

@@ -31,9 +31,9 @@ func PreviewViewFromID(id objc.ID) *PreviewView {
 }
 
 // NewPreviewViewWithFrameStyle creates a new [PreviewView].
-func NewPreviewViewWithFrameStyle(frame corefoundation.CGRect, style raw.QLPreviewViewStyle) *PreviewView {
+func NewPreviewViewWithFrameStyle(frame corefoundation.CGRect, style QLPreviewViewStyle) *PreviewView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:style:"), frame, style)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:style:"), frame, raw.QLPreviewViewStyle(style))
 	return &PreviewView{inner: raw.QLPreviewViewFromID(_id)}
 }
 

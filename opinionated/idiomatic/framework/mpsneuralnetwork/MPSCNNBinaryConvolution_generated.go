@@ -33,16 +33,16 @@ func CNNBinaryConvolutionFromID(id objc.ID) *CNNBinaryConvolution {
 }
 
 // NewCNNBinaryConvolutionWithDeviceConvolutionDataScaleValueTypeFlags creates a new [CNNBinaryConvolution].
-func NewCNNBinaryConvolutionWithDeviceConvolutionDataScaleValueTypeFlags(device metal.MTLDevice, convolutionData raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ raw.MPSCNNBinaryConvolutionType, flags raw.MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolution {
+func NewCNNBinaryConvolutionWithDeviceConvolutionDataScaleValueTypeFlags(device metal.MTLDevice, convolutionData raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolution {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryConvolution")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionData:scaleValue:type:flags:"), device, convolutionData, scaleValue, type_, flags)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionData:scaleValue:type:flags:"), device, convolutionData, scaleValue, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
 	return &CNNBinaryConvolution{inner: raw.MPSCNNBinaryConvolutionFromID(_id)}
 }
 
 // NewCNNBinaryConvolutionWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags creates a new [CNNBinaryConvolution].
-func NewCNNBinaryConvolutionWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(device metal.MTLDevice, convolutionData raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ raw.MPSCNNBinaryConvolutionType, flags raw.MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolution {
+func NewCNNBinaryConvolutionWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(device metal.MTLDevice, convolutionData raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolution {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryConvolution")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionData:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:"), device, convolutionData, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, type_, flags)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionData:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:"), device, convolutionData, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
 	return &CNNBinaryConvolution{inner: raw.MPSCNNBinaryConvolutionFromID(_id)}
 }
 

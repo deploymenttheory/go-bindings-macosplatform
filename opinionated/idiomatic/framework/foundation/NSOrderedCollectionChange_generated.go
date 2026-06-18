@@ -30,16 +30,16 @@ func OrderedCollectionChangeFromID(id objc.ID) *OrderedCollectionChange {
 }
 
 // NewOrderedCollectionChangeWithObjectTypeIndex creates a new [OrderedCollectionChange].
-func NewOrderedCollectionChangeWithObjectTypeIndex(anObject objc.ID, type_ raw.NSCollectionChangeType, index uint) *OrderedCollectionChange {
+func NewOrderedCollectionChangeWithObjectTypeIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint) *OrderedCollectionChange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:"), anObject, type_, index)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:"), anObject, raw.NSCollectionChangeType(type_), index)
 	return &OrderedCollectionChange{inner: raw.NSOrderedCollectionChangeFromID[objc.ID](_id)}
 }
 
 // NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex creates a new [OrderedCollectionChange].
-func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject objc.ID, type_ raw.NSCollectionChangeType, index uint, associatedIndex uint) *OrderedCollectionChange {
+func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint, associatedIndex uint) *OrderedCollectionChange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:associatedIndex:"), anObject, type_, index, associatedIndex)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:associatedIndex:"), anObject, raw.NSCollectionChangeType(type_), index, associatedIndex)
 	return &OrderedCollectionChange{inner: raw.NSOrderedCollectionChangeFromID[objc.ID](_id)}
 }
 
@@ -55,8 +55,8 @@ func (x *OrderedCollectionChange) Object() objc.ID {
 }
 
 // ChangeType calls the underlying ChangeType.
-func (x *OrderedCollectionChange) ChangeType() raw.NSCollectionChangeType {
-	return x.inner.ChangeType()
+func (x *OrderedCollectionChange) ChangeType() NSCollectionChangeType {
+	return NSCollectionChangeType(x.inner.ChangeType())
 }
 
 // Index calls the underlying Index.
@@ -76,7 +76,7 @@ type OrderedCollectionChangeable interface {
 	Unwrap() *raw.NSOrderedCollectionChange[objc.ID]
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedCollectionChange
 	Object() objc.ID
-	ChangeType() raw.NSCollectionChangeType
+	ChangeType() NSCollectionChangeType
 	Index() uint
 	AssociatedIndex() uint
 }

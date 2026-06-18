@@ -52,8 +52,8 @@ func (x *CameraDeviceView) WithCameraDevice(cameraDevice *imagecapturecore.ICCam
 }
 
 // WithMode sets the mode property and returns the receiver for chaining.
-func (x *CameraDeviceView) WithMode(mode raw.IKCameraDeviceViewDisplayMode) *CameraDeviceView {
-	x.inner.SetMode(mode)
+func (x *CameraDeviceView) WithMode(mode IKCameraDeviceViewDisplayMode) *CameraDeviceView {
+	x.inner.SetMode(raw.IKCameraDeviceViewDisplayMode(mode))
 	return x
 }
 
@@ -88,8 +88,8 @@ func (x *CameraDeviceView) WithIconSize(iconSize uint) *CameraDeviceView {
 }
 
 // WithTransferMode sets the transferMode property and returns the receiver for chaining.
-func (x *CameraDeviceView) WithTransferMode(transferMode raw.IKCameraDeviceViewTransferMode) *CameraDeviceView {
-	x.inner.SetTransferMode(transferMode)
+func (x *CameraDeviceView) WithTransferMode(transferMode IKCameraDeviceViewTransferMode) *CameraDeviceView {
+	x.inner.SetTransferMode(raw.IKCameraDeviceViewTransferMode(transferMode))
 	return x
 }
 
@@ -203,13 +203,13 @@ func (x *CameraDeviceView) SetCameraDevice(cameraDevice *imagecapturecore.ICCame
 }
 
 // Mode calls the underlying Mode.
-func (x *CameraDeviceView) Mode() raw.IKCameraDeviceViewDisplayMode {
-	return x.inner.Mode()
+func (x *CameraDeviceView) Mode() IKCameraDeviceViewDisplayMode {
+	return IKCameraDeviceViewDisplayMode(x.inner.Mode())
 }
 
 // SetMode calls the underlying SetMode.
-func (x *CameraDeviceView) SetMode(mode raw.IKCameraDeviceViewDisplayMode) {
-	x.inner.SetMode(mode)
+func (x *CameraDeviceView) SetMode(mode IKCameraDeviceViewDisplayMode) {
+	x.inner.SetMode(raw.IKCameraDeviceViewDisplayMode(mode))
 }
 
 // HasDisplayModeTable calls the underlying HasDisplayModeTable.
@@ -271,13 +271,13 @@ func (x *CameraDeviceView) SetIconSize(iconSize uint) {
 }
 
 // TransferMode calls the underlying TransferMode.
-func (x *CameraDeviceView) TransferMode() raw.IKCameraDeviceViewTransferMode {
-	return x.inner.TransferMode()
+func (x *CameraDeviceView) TransferMode() IKCameraDeviceViewTransferMode {
+	return IKCameraDeviceViewTransferMode(x.inner.TransferMode())
 }
 
 // SetTransferMode calls the underlying SetTransferMode.
-func (x *CameraDeviceView) SetTransferMode(transferMode raw.IKCameraDeviceViewTransferMode) {
-	x.inner.SetTransferMode(transferMode)
+func (x *CameraDeviceView) SetTransferMode(transferMode IKCameraDeviceViewTransferMode) {
+	x.inner.SetTransferMode(raw.IKCameraDeviceViewTransferMode(transferMode))
 }
 
 // DisplaysDownloadsDirectoryControl calls the underlying DisplaysDownloadsDirectoryControl.
@@ -345,13 +345,13 @@ type CameraDeviceViewable interface {
 	Unwrap() *raw.IKCameraDeviceView
 	WithDelegate(delegate raw.IKCameraDeviceViewDelegate) *CameraDeviceView
 	WithCameraDevice(cameraDevice *imagecapturecore.ICCameraDevice) *CameraDeviceView
-	WithMode(mode raw.IKCameraDeviceViewDisplayMode) *CameraDeviceView
+	WithMode(mode IKCameraDeviceViewDisplayMode) *CameraDeviceView
 	WithHasDisplayModeTable(hasDisplayModeTable bool) *CameraDeviceView
 	WithHasDisplayModeIcon(hasDisplayModeIcon bool) *CameraDeviceView
 	WithDownloadAllControlLabel(downloadAllControlLabel string) *CameraDeviceView
 	WithDownloadSelectedControlLabel(downloadSelectedControlLabel string) *CameraDeviceView
 	WithIconSize(iconSize uint) *CameraDeviceView
-	WithTransferMode(transferMode raw.IKCameraDeviceViewTransferMode) *CameraDeviceView
+	WithTransferMode(transferMode IKCameraDeviceViewTransferMode) *CameraDeviceView
 	WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *CameraDeviceView
 	WithDownloadsDirectory(downloadsDirectory string) *CameraDeviceView
 	WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *CameraDeviceView
@@ -373,8 +373,8 @@ type CameraDeviceViewable interface {
 	SetDelegate(delegate raw.IKCameraDeviceViewDelegate)
 	CameraDevice() *imagecapturecore.ICCameraDevice
 	SetCameraDevice(cameraDevice *imagecapturecore.ICCameraDevice)
-	Mode() raw.IKCameraDeviceViewDisplayMode
-	SetMode(mode raw.IKCameraDeviceViewDisplayMode)
+	Mode() IKCameraDeviceViewDisplayMode
+	SetMode(mode IKCameraDeviceViewDisplayMode)
 	HasDisplayModeTable() bool
 	SetHasDisplayModeTable(hasDisplayModeTable bool)
 	HasDisplayModeIcon() bool
@@ -385,8 +385,8 @@ type CameraDeviceViewable interface {
 	SetDownloadSelectedControlLabel(downloadSelectedControlLabel string)
 	IconSize() uint
 	SetIconSize(iconSize uint)
-	TransferMode() raw.IKCameraDeviceViewTransferMode
-	SetTransferMode(transferMode raw.IKCameraDeviceViewTransferMode)
+	TransferMode() IKCameraDeviceViewTransferMode
+	SetTransferMode(transferMode IKCameraDeviceViewTransferMode)
 	DisplaysDownloadsDirectoryControl() bool
 	SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool)
 	DownloadsDirectory() *foundation.NSURL

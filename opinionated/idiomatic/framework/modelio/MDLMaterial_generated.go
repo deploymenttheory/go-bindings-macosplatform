@@ -51,8 +51,8 @@ func (x *Material) WithBaseMaterial(baseMaterial *Material) *Material {
 }
 
 // WithMaterialFace sets the materialFace property and returns the receiver for chaining.
-func (x *Material) WithMaterialFace(materialFace raw.MDLMaterialFace) *Material {
-	x.inner.SetMaterialFace(materialFace)
+func (x *Material) WithMaterialFace(materialFace MDLMaterialFace) *Material {
+	x.inner.SetMaterialFace(raw.MDLMaterialFace(materialFace))
 	return x
 }
 
@@ -76,8 +76,8 @@ func (x *Material) PropertyNamed(name string) *MaterialProperty {
 }
 
 // PropertyWithSemantic calls the underlying PropertyWithSemantic.
-func (x *Material) PropertyWithSemantic(semantic raw.MDLMaterialSemantic) *MaterialProperty {
-	_r := x.inner.PropertyWithSemantic(semantic)
+func (x *Material) PropertyWithSemantic(semantic MDLMaterialSemantic) *MaterialProperty {
+	_r := x.inner.PropertyWithSemantic(raw.MDLMaterialSemantic(semantic))
 	if _r == nil {
 		return nil
 	}
@@ -85,8 +85,8 @@ func (x *Material) PropertyWithSemantic(semantic raw.MDLMaterialSemantic) *Mater
 }
 
 // PropertiesWithSemantic calls the underlying PropertiesWithSemantic.
-func (x *Material) PropertiesWithSemantic(semantic raw.MDLMaterialSemantic) *foundation.NSArray[*raw.MDLMaterialProperty] {
-	return x.inner.PropertiesWithSemantic(semantic)
+func (x *Material) PropertiesWithSemantic(semantic MDLMaterialSemantic) *foundation.NSArray[*raw.MDLMaterialProperty] {
+	return x.inner.PropertiesWithSemantic(raw.MDLMaterialSemantic(semantic))
 }
 
 // RemoveAllProperties calls the underlying RemoveAllProperties.
@@ -165,13 +165,13 @@ func (x *Material) Count() uint {
 }
 
 // MaterialFace calls the underlying MaterialFace.
-func (x *Material) MaterialFace() raw.MDLMaterialFace {
-	return x.inner.MaterialFace()
+func (x *Material) MaterialFace() MDLMaterialFace {
+	return MDLMaterialFace(x.inner.MaterialFace())
 }
 
 // SetMaterialFace calls the underlying SetMaterialFace.
-func (x *Material) SetMaterialFace(materialFace raw.MDLMaterialFace) {
-	x.inner.SetMaterialFace(materialFace)
+func (x *Material) SetMaterialFace(materialFace MDLMaterialFace) {
+	x.inner.SetMaterialFace(raw.MDLMaterialFace(materialFace))
 }
 
 // Materialable is the interface implemented by [Material], for mocking and DI.
@@ -179,12 +179,12 @@ type Materialable interface {
 	Unwrap() *raw.MDLMaterial
 	WithName(name string) *Material
 	WithBaseMaterial(baseMaterial *Material) *Material
-	WithMaterialFace(materialFace raw.MDLMaterialFace) *Material
+	WithMaterialFace(materialFace MDLMaterialFace) *Material
 	SetProperty(property *raw.MDLMaterialProperty)
 	RemoveProperty(property *raw.MDLMaterialProperty)
 	PropertyNamed(name string) *MaterialProperty
-	PropertyWithSemantic(semantic raw.MDLMaterialSemantic) *MaterialProperty
-	PropertiesWithSemantic(semantic raw.MDLMaterialSemantic) *foundation.NSArray[*raw.MDLMaterialProperty]
+	PropertyWithSemantic(semantic MDLMaterialSemantic) *MaterialProperty
+	PropertiesWithSemantic(semantic MDLMaterialSemantic) *foundation.NSArray[*raw.MDLMaterialProperty]
 	RemoveAllProperties()
 	ResolveTexturesWithResolver(resolver raw.MDLAssetResolver)
 	LoadTexturesUsingResolver(resolver raw.MDLAssetResolver)
@@ -196,8 +196,8 @@ type Materialable interface {
 	BaseMaterial() *Material
 	SetBaseMaterial(baseMaterial *raw.MDLMaterial)
 	Count() uint
-	MaterialFace() raw.MDLMaterialFace
-	SetMaterialFace(materialFace raw.MDLMaterialFace)
+	MaterialFace() MDLMaterialFace
+	SetMaterialFace(materialFace MDLMaterialFace)
 }
 
 var _ Materialable = (*Material)(nil)

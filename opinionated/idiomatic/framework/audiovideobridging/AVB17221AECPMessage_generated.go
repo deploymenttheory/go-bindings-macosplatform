@@ -37,14 +37,14 @@ func NewAVB17221AECPMessage() *AVB17221AECPMessage {
 }
 
 // WithMessageType sets the messageType property and returns the receiver for chaining.
-func (x *AVB17221AECPMessage) WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPMessage {
-	x.inner.SetMessageType(messageType)
+func (x *AVB17221AECPMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPMessage {
+	x.inner.SetMessageType(raw.AVB17221AECPMessageType(messageType))
 	return x
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *AVB17221AECPMessage) WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPMessage {
-	x.inner.SetStatus(status)
+func (x *AVB17221AECPMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPMessage {
+	x.inner.SetStatus(raw.AVB17221AECPStatusCode(status))
 	return x
 }
 
@@ -78,23 +78,23 @@ func (x *AVB17221AECPMessage) ErrorForStatusCode() unsafe.Pointer {
 }
 
 // MessageType calls the underlying MessageType.
-func (x *AVB17221AECPMessage) MessageType() raw.AVB17221AECPMessageType {
-	return x.inner.MessageType()
+func (x *AVB17221AECPMessage) MessageType() AVB17221AECPMessageType {
+	return AVB17221AECPMessageType(x.inner.MessageType())
 }
 
 // SetMessageType calls the underlying SetMessageType.
-func (x *AVB17221AECPMessage) SetMessageType(messageType raw.AVB17221AECPMessageType) {
-	x.inner.SetMessageType(messageType)
+func (x *AVB17221AECPMessage) SetMessageType(messageType AVB17221AECPMessageType) {
+	x.inner.SetMessageType(raw.AVB17221AECPMessageType(messageType))
 }
 
 // Status calls the underlying Status.
-func (x *AVB17221AECPMessage) Status() raw.AVB17221AECPStatusCode {
-	return x.inner.Status()
+func (x *AVB17221AECPMessage) Status() AVB17221AECPStatusCode {
+	return AVB17221AECPStatusCode(x.inner.Status())
 }
 
 // SetStatus calls the underlying SetStatus.
-func (x *AVB17221AECPMessage) SetStatus(status raw.AVB17221AECPStatusCode) {
-	x.inner.SetStatus(status)
+func (x *AVB17221AECPMessage) SetStatus(status AVB17221AECPStatusCode) {
+	x.inner.SetStatus(raw.AVB17221AECPStatusCode(status))
 }
 
 // TargetEntityID calls the underlying TargetEntityID.
@@ -146,17 +146,17 @@ func (x *AVB17221AECPMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage {
 // AVB17221AECPMessageable is the interface implemented by [AVB17221AECPMessage], for mocking and DI.
 type AVB17221AECPMessageable interface {
 	Unwrap() *raw.AVB17221AECPMessage
-	WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPMessage
-	WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPMessage
+	WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPMessage
+	WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPMessage
 	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPMessage
 	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPMessage
 	WithSequenceID(sequenceID uint16) *AVB17221AECPMessage
 	WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPMessage
 	ErrorForStatusCode() unsafe.Pointer
-	MessageType() raw.AVB17221AECPMessageType
-	SetMessageType(messageType raw.AVB17221AECPMessageType)
-	Status() raw.AVB17221AECPStatusCode
-	SetStatus(status raw.AVB17221AECPStatusCode)
+	MessageType() AVB17221AECPMessageType
+	SetMessageType(messageType AVB17221AECPMessageType)
+	Status() AVB17221AECPStatusCode
+	SetStatus(status AVB17221AECPStatusCode)
 	TargetEntityID() uint64
 	SetTargetEntityID(targetEntityID uint64)
 	ControllerEntityID() uint64

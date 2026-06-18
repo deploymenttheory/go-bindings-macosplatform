@@ -31,9 +31,9 @@ func BinaryItemFromID(id objc.ID) *BinaryItem {
 }
 
 // NewBinaryItemWithIdentifierTitleType creates a new [BinaryItem].
-func NewBinaryItemWithIdentifierTitleType(identifier string, title string, valueType raw.CLSBinaryValueType) *BinaryItem {
+func NewBinaryItemWithIdentifierTitleType(identifier string, title string, valueType CLSBinaryValueType) *BinaryItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSBinaryItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:type:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), foundation.NSStringStringWithUTF8String(title).Ptr(), valueType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:type:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), foundation.NSStringStringWithUTF8String(title).Ptr(), raw.CLSBinaryValueType(valueType))
 	return &BinaryItem{inner: raw.CLSBinaryItemFromID(_id)}
 }
 
@@ -60,8 +60,8 @@ func (x *BinaryItem) SetValue(value bool) {
 }
 
 // ValueType calls the underlying ValueType.
-func (x *BinaryItem) ValueType() raw.CLSBinaryValueType {
-	return x.inner.ValueType()
+func (x *BinaryItem) ValueType() CLSBinaryValueType {
+	return CLSBinaryValueType(x.inner.ValueType())
 }
 
 func (x *BinaryItem) asActivityItem() *raw.CLSActivityItem { return &x.inner.CLSActivityItem }
@@ -75,7 +75,7 @@ type BinaryItemable interface {
 	WithTitle(title string) *BinaryItem
 	Value() bool
 	SetValue(value bool)
-	ValueType() raw.CLSBinaryValueType
+	ValueType() CLSBinaryValueType
 }
 
 var _ BinaryItemable = (*BinaryItem)(nil)

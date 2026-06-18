@@ -32,15 +32,15 @@ func PaymentRequestMerchantSessionUpdateFromID(id objc.ID) *PaymentRequestMercha
 }
 
 // NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession creates a new [PaymentRequestMerchantSessionUpdate].
-func NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession(status raw.PKPaymentAuthorizationStatus, session *raw.PKPaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
+func NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession(status PKPaymentAuthorizationStatus, session *raw.PKPaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentRequestMerchantSessionUpdate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStatus:merchantSession:"), status, session.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStatus:merchantSession:"), raw.PKPaymentAuthorizationStatus(status), session.Ptr())
 	return &PaymentRequestMerchantSessionUpdate{inner: raw.PKPaymentRequestMerchantSessionUpdateFromID(_id)}
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *PaymentRequestMerchantSessionUpdate) WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate {
-	x.inner.SetStatus(status)
+func (x *PaymentRequestMerchantSessionUpdate) WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate {
+	x.inner.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 	return x
 }
 
@@ -51,13 +51,13 @@ func (x *PaymentRequestMerchantSessionUpdate) WithSession(session *PaymentMercha
 }
 
 // Status calls the underlying Status.
-func (x *PaymentRequestMerchantSessionUpdate) Status() raw.PKPaymentAuthorizationStatus {
-	return x.inner.Status()
+func (x *PaymentRequestMerchantSessionUpdate) Status() PKPaymentAuthorizationStatus {
+	return PKPaymentAuthorizationStatus(x.inner.Status())
 }
 
 // SetStatus calls the underlying SetStatus.
-func (x *PaymentRequestMerchantSessionUpdate) SetStatus(status raw.PKPaymentAuthorizationStatus) {
-	x.inner.SetStatus(status)
+func (x *PaymentRequestMerchantSessionUpdate) SetStatus(status PKPaymentAuthorizationStatus) {
+	x.inner.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 }
 
 // Session calls the underlying Session.
@@ -77,10 +77,10 @@ func (x *PaymentRequestMerchantSessionUpdate) SetSession(session *raw.PKPaymentM
 // PaymentRequestMerchantSessionUpdateable is the interface implemented by [PaymentRequestMerchantSessionUpdate], for mocking and DI.
 type PaymentRequestMerchantSessionUpdateable interface {
 	Unwrap() *raw.PKPaymentRequestMerchantSessionUpdate
-	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate
+	WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate
 	WithSession(session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate
-	Status() raw.PKPaymentAuthorizationStatus
-	SetStatus(status raw.PKPaymentAuthorizationStatus)
+	Status() PKPaymentAuthorizationStatus
+	SetStatus(status PKPaymentAuthorizationStatus)
 	Session() *PaymentMerchantSession
 	SetSession(session *raw.PKPaymentMerchantSession)
 }

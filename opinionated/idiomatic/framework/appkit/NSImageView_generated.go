@@ -54,20 +54,20 @@ func (x *ImageView) WithEditable(editable bool) *ImageView {
 }
 
 // WithImageAlignment sets the imageAlignment property and returns the receiver for chaining.
-func (x *ImageView) WithImageAlignment(imageAlignment raw.NSImageAlignment) *ImageView {
-	x.inner.SetImageAlignment(imageAlignment)
+func (x *ImageView) WithImageAlignment(imageAlignment NSImageAlignment) *ImageView {
+	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
 	return x
 }
 
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *ImageView) WithImageScaling(imageScaling raw.NSImageScaling) *ImageView {
-	x.inner.SetImageScaling(imageScaling)
+func (x *ImageView) WithImageScaling(imageScaling NSImageScaling) *ImageView {
+	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
 // WithImageFrameStyle sets the imageFrameStyle property and returns the receiver for chaining.
-func (x *ImageView) WithImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) *ImageView {
-	x.inner.SetImageFrameStyle(imageFrameStyle)
+func (x *ImageView) WithImageFrameStyle(imageFrameStyle NSImageFrameStyle) *ImageView {
+	x.inner.SetImageFrameStyle(raw.NSImageFrameStyle(imageFrameStyle))
 	return x
 }
 
@@ -96,8 +96,8 @@ func (x *ImageView) WithAllowsCutCopyPaste(allowsCutCopyPaste bool) *ImageView {
 }
 
 // WithPreferredImageDynamicRange sets the preferredImageDynamicRange property and returns the receiver for chaining.
-func (x *ImageView) WithPreferredImageDynamicRange(preferredImageDynamicRange raw.NSImageDynamicRange) *ImageView {
-	x.inner.SetPreferredImageDynamicRange(preferredImageDynamicRange)
+func (x *ImageView) WithPreferredImageDynamicRange(preferredImageDynamicRange NSImageDynamicRange) *ImageView {
+	x.inner.SetPreferredImageDynamicRange(raw.NSImageDynamicRange(preferredImageDynamicRange))
 	return x
 }
 
@@ -150,8 +150,8 @@ func (x *ImageView) WithHighlighted(highlighted bool) *ImageView {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ImageView) WithControlSize(controlSize raw.NSControlSize) *ImageView {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *ImageView) WithControlSize(controlSize NSControlSize) *ImageView {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -216,20 +216,20 @@ func (x *ImageView) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageView {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ImageView) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ImageView {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *ImageView) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ImageView {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ImageView) WithAlignment(alignment raw.NSTextAlignment) *ImageView {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *ImageView) WithAlignment(alignment NSTextAlignment) *ImageView {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ImageView) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ImageView {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *ImageView) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ImageView {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -282,8 +282,8 @@ func (x *ImageView) WithAutoresizesSubviews(autoresizesSubviews bool) *ImageView
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ImageView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ImageView {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *ImageView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ImageView {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -342,14 +342,14 @@ func (x *ImageView) WithWantsRestingTouches(wantsRestingTouches bool) *ImageView
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ImageView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ImageView {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *ImageView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ImageView {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ImageView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ImageView {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *ImageView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ImageView {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -456,8 +456,8 @@ func (x *ImageView) WithToolTip(toolTip string) *ImageView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ImageView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ImageView {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ImageView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ImageView {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -474,8 +474,8 @@ func (x *ImageView) WithNextKeyView(nextKeyView ViewProvider) *ImageView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ImageView) WithFocusRingType(focusRingType raw.NSFocusRingType) *ImageView {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *ImageView) WithFocusRingType(focusRingType NSFocusRingType) *ImageView {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -498,8 +498,8 @@ func (x *ImageView) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ImageView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ImageView {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ImageView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ImageView {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -612,33 +612,33 @@ func (x *ImageView) SetEditable(editable bool) {
 }
 
 // ImageAlignment calls the underlying ImageAlignment.
-func (x *ImageView) ImageAlignment() raw.NSImageAlignment {
-	return x.inner.ImageAlignment()
+func (x *ImageView) ImageAlignment() NSImageAlignment {
+	return NSImageAlignment(x.inner.ImageAlignment())
 }
 
 // SetImageAlignment calls the underlying SetImageAlignment.
-func (x *ImageView) SetImageAlignment(imageAlignment raw.NSImageAlignment) {
-	x.inner.SetImageAlignment(imageAlignment)
+func (x *ImageView) SetImageAlignment(imageAlignment NSImageAlignment) {
+	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
 }
 
 // ImageScaling calls the underlying ImageScaling.
-func (x *ImageView) ImageScaling() raw.NSImageScaling {
-	return x.inner.ImageScaling()
+func (x *ImageView) ImageScaling() NSImageScaling {
+	return NSImageScaling(x.inner.ImageScaling())
 }
 
 // SetImageScaling calls the underlying SetImageScaling.
-func (x *ImageView) SetImageScaling(imageScaling raw.NSImageScaling) {
-	x.inner.SetImageScaling(imageScaling)
+func (x *ImageView) SetImageScaling(imageScaling NSImageScaling) {
+	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 }
 
 // ImageFrameStyle calls the underlying ImageFrameStyle.
-func (x *ImageView) ImageFrameStyle() raw.NSImageFrameStyle {
-	return x.inner.ImageFrameStyle()
+func (x *ImageView) ImageFrameStyle() NSImageFrameStyle {
+	return NSImageFrameStyle(x.inner.ImageFrameStyle())
 }
 
 // SetImageFrameStyle calls the underlying SetImageFrameStyle.
-func (x *ImageView) SetImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) {
-	x.inner.SetImageFrameStyle(imageFrameStyle)
+func (x *ImageView) SetImageFrameStyle(imageFrameStyle NSImageFrameStyle) {
+	x.inner.SetImageFrameStyle(raw.NSImageFrameStyle(imageFrameStyle))
 }
 
 // SymbolConfiguration calls the underlying SymbolConfiguration.
@@ -690,18 +690,18 @@ func (x *ImageView) SetAllowsCutCopyPaste(allowsCutCopyPaste bool) {
 }
 
 // PreferredImageDynamicRange calls the underlying PreferredImageDynamicRange.
-func (x *ImageView) PreferredImageDynamicRange() raw.NSImageDynamicRange {
-	return x.inner.PreferredImageDynamicRange()
+func (x *ImageView) PreferredImageDynamicRange() NSImageDynamicRange {
+	return NSImageDynamicRange(x.inner.PreferredImageDynamicRange())
 }
 
 // SetPreferredImageDynamicRange calls the underlying SetPreferredImageDynamicRange.
-func (x *ImageView) SetPreferredImageDynamicRange(preferredImageDynamicRange raw.NSImageDynamicRange) {
-	x.inner.SetPreferredImageDynamicRange(preferredImageDynamicRange)
+func (x *ImageView) SetPreferredImageDynamicRange(preferredImageDynamicRange NSImageDynamicRange) {
+	x.inner.SetPreferredImageDynamicRange(raw.NSImageDynamicRange(preferredImageDynamicRange))
 }
 
 // ImageDynamicRange calls the underlying ImageDynamicRange.
-func (x *ImageView) ImageDynamicRange() raw.NSImageDynamicRange {
-	return x.inner.ImageDynamicRange()
+func (x *ImageView) ImageDynamicRange() NSImageDynamicRange {
+	return NSImageDynamicRange(x.inner.ImageDynamicRange())
 }
 
 // AddSymbolEffect calls the underlying AddSymbolEffect.
@@ -770,14 +770,14 @@ type ImageViewable interface {
 	Unwrap() *raw.NSImageView
 	WithImage(image *Image) *ImageView
 	WithEditable(editable bool) *ImageView
-	WithImageAlignment(imageAlignment raw.NSImageAlignment) *ImageView
-	WithImageScaling(imageScaling raw.NSImageScaling) *ImageView
-	WithImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) *ImageView
+	WithImageAlignment(imageAlignment NSImageAlignment) *ImageView
+	WithImageScaling(imageScaling NSImageScaling) *ImageView
+	WithImageFrameStyle(imageFrameStyle NSImageFrameStyle) *ImageView
 	WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *ImageView
 	WithContentTintColor(contentTintColor *Color) *ImageView
 	WithAnimates(animates bool) *ImageView
 	WithAllowsCutCopyPaste(allowsCutCopyPaste bool) *ImageView
-	WithPreferredImageDynamicRange(preferredImageDynamicRange raw.NSImageDynamicRange) *ImageView
+	WithPreferredImageDynamicRange(preferredImageDynamicRange NSImageDynamicRange) *ImageView
 	WithTarget(target objc.ID) *ImageView
 	WithAction(action objc.SEL) *ImageView
 	WithTag(tag int) *ImageView
@@ -786,7 +786,7 @@ type ImageViewable interface {
 	WithEnabled(enabled bool) *ImageView
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ImageView
 	WithHighlighted(highlighted bool) *ImageView
-	WithControlSize(controlSize raw.NSControlSize) *ImageView
+	WithControlSize(controlSize NSControlSize) *ImageView
 	WithFormatter(formatter *foundation.NSFormatter) *ImageView
 	WithObjectValue(objectValue objc.ID) *ImageView
 	WithStringValue(stringValue string) *ImageView
@@ -797,16 +797,16 @@ type ImageViewable interface {
 	WithDoubleValue(doubleValue float64) *ImageView
 	WithFont(font *Font) *ImageView
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ImageView
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ImageView
-	WithAlignment(alignment raw.NSTextAlignment) *ImageView
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ImageView
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ImageView
+	WithAlignment(alignment NSTextAlignment) *ImageView
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ImageView
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ImageView
 	WithCell(cell CellProvider) *ImageView
 	WithSubviews(items ...ViewProvider) *ImageView
 	WithHidden(hidden bool) *ImageView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ImageView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ImageView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ImageView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ImageView
 	WithFrame(frame corefoundation.CGRect) *ImageView
 	WithFrameRotation(frameRotation float64) *ImageView
 	WithFrameCenterRotation(frameCenterRotation float64) *ImageView
@@ -816,8 +816,8 @@ type ImageViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *ImageView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ImageView
 	WithWantsRestingTouches(wantsRestingTouches bool) *ImageView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ImageView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ImageView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ImageView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ImageView
 	WithWantsLayer(wantsLayer bool) *ImageView
 	WithLayer(layer *quartzcore.CALayer) *ImageView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ImageView
@@ -831,12 +831,12 @@ type ImageViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *ImageView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ImageView
 	WithToolTip(toolTip string) *ImageView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ImageView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ImageView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ImageView
 	WithNextKeyView(nextKeyView ViewProvider) *ImageView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ImageView
+	WithFocusRingType(focusRingType NSFocusRingType) *ImageView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ImageView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ImageView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ImageView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ImageView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ImageView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ImageView
@@ -855,12 +855,12 @@ type ImageViewable interface {
 	SetImage(image *raw.NSImage)
 	IsEditable() bool
 	SetEditable(editable bool)
-	ImageAlignment() raw.NSImageAlignment
-	SetImageAlignment(imageAlignment raw.NSImageAlignment)
-	ImageScaling() raw.NSImageScaling
-	SetImageScaling(imageScaling raw.NSImageScaling)
-	ImageFrameStyle() raw.NSImageFrameStyle
-	SetImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle)
+	ImageAlignment() NSImageAlignment
+	SetImageAlignment(imageAlignment NSImageAlignment)
+	ImageScaling() NSImageScaling
+	SetImageScaling(imageScaling NSImageScaling)
+	ImageFrameStyle() NSImageFrameStyle
+	SetImageFrameStyle(imageFrameStyle NSImageFrameStyle)
 	SymbolConfiguration() *ImageSymbolConfiguration
 	SetSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration)
 	ContentTintColor() *Color
@@ -869,9 +869,9 @@ type ImageViewable interface {
 	SetAnimates(animates bool)
 	AllowsCutCopyPaste() bool
 	SetAllowsCutCopyPaste(allowsCutCopyPaste bool)
-	PreferredImageDynamicRange() raw.NSImageDynamicRange
-	SetPreferredImageDynamicRange(preferredImageDynamicRange raw.NSImageDynamicRange)
-	ImageDynamicRange() raw.NSImageDynamicRange
+	PreferredImageDynamicRange() NSImageDynamicRange
+	SetPreferredImageDynamicRange(preferredImageDynamicRange NSImageDynamicRange)
+	ImageDynamicRange() NSImageDynamicRange
 	AddSymbolEffect(symbolEffect *symbols.NSSymbolEffect)
 	AddSymbolEffectOptions(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions)
 	AddSymbolEffectOptionsAnimated(symbolEffect *symbols.NSSymbolEffect, options *symbols.NSSymbolEffectOptions, animated bool)

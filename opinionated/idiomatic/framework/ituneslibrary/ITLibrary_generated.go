@@ -44,10 +44,10 @@ func NewLibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error)
 }
 
 // NewLibraryWithAPIVersionOptionsError creates a new [Library].
-func NewLibraryWithAPIVersionOptionsError(requestedAPIVersion string, options raw.ITLibInitOptions) (*Library, error) {
+func NewLibraryWithAPIVersionOptionsError(requestedAPIVersion string, options ITLibInitOptions) (*Library, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibrary")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIVersion:options:error:"), foundation.NSStringStringWithUTF8String(requestedAPIVersion).Ptr(), options, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAPIVersion:options:error:"), foundation.NSStringStringWithUTF8String(requestedAPIVersion).Ptr(), raw.ITLibInitOptions(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -83,8 +83,8 @@ func (x *Library) ApplicationVersion() string {
 }
 
 // Features calls the underlying Features.
-func (x *Library) Features() raw.ITLibExportFeature {
-	return x.inner.Features()
+func (x *Library) Features() ITLibExportFeature {
+	return ITLibExportFeature(x.inner.Features())
 }
 
 // ApiMajorVersion calls the underlying ApiMajorVersion.
@@ -141,7 +141,7 @@ type Libraryable interface {
 	ReloadData() bool
 	UnloadData()
 	ApplicationVersion() string
-	Features() raw.ITLibExportFeature
+	Features() ITLibExportFeature
 	ApiMajorVersion() uint
 	ApiMinorVersion() uint
 	MediaFolderLocation() unsafe.Pointer

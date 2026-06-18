@@ -37,8 +37,8 @@ func NewAssessmentConfiguration() *AssessmentConfiguration {
 }
 
 // WithAutocorrectMode sets the autocorrectMode property and returns the receiver for chaining.
-func (x *AssessmentConfiguration) WithAutocorrectMode(autocorrectMode raw.AEAutocorrectMode) *AssessmentConfiguration {
-	x.inner.SetAutocorrectMode(autocorrectMode)
+func (x *AssessmentConfiguration) WithAutocorrectMode(autocorrectMode AEAutocorrectMode) *AssessmentConfiguration {
+	x.inner.SetAutocorrectMode(raw.AEAutocorrectMode(autocorrectMode))
 	return x
 }
 
@@ -95,13 +95,13 @@ func (x *AssessmentConfiguration) RemoveApplication(application *raw.AEAssessmen
 }
 
 // AutocorrectMode calls the underlying AutocorrectMode.
-func (x *AssessmentConfiguration) AutocorrectMode() raw.AEAutocorrectMode {
-	return x.inner.AutocorrectMode()
+func (x *AssessmentConfiguration) AutocorrectMode() AEAutocorrectMode {
+	return AEAutocorrectMode(x.inner.AutocorrectMode())
 }
 
 // SetAutocorrectMode calls the underlying SetAutocorrectMode.
-func (x *AssessmentConfiguration) SetAutocorrectMode(autocorrectMode raw.AEAutocorrectMode) {
-	x.inner.SetAutocorrectMode(autocorrectMode)
+func (x *AssessmentConfiguration) SetAutocorrectMode(autocorrectMode AEAutocorrectMode) {
+	x.inner.SetAutocorrectMode(raw.AEAutocorrectMode(autocorrectMode))
 }
 
 // AllowsSpellCheck calls the underlying AllowsSpellCheck.
@@ -191,7 +191,7 @@ func (x *AssessmentConfiguration) ConfigurationsByApplication() *foundation.NSDi
 // AssessmentConfigurationable is the interface implemented by [AssessmentConfiguration], for mocking and DI.
 type AssessmentConfigurationable interface {
 	Unwrap() *raw.AEAssessmentConfiguration
-	WithAutocorrectMode(autocorrectMode raw.AEAutocorrectMode) *AssessmentConfiguration
+	WithAutocorrectMode(autocorrectMode AEAutocorrectMode) *AssessmentConfiguration
 	WithAllowsSpellCheck(allowsSpellCheck bool) *AssessmentConfiguration
 	WithAllowsPredictiveKeyboard(allowsPredictiveKeyboard bool) *AssessmentConfiguration
 	WithAllowsKeyboardShortcuts(allowsKeyboardShortcuts bool) *AssessmentConfiguration
@@ -201,8 +201,8 @@ type AssessmentConfigurationable interface {
 	WithAllowsScreenshots(allowsScreenshots bool) *AssessmentConfiguration
 	SetConfigurationForApplication(configuration *raw.AEAssessmentParticipantConfiguration, application *raw.AEAssessmentApplication)
 	RemoveApplication(application *raw.AEAssessmentApplication)
-	AutocorrectMode() raw.AEAutocorrectMode
-	SetAutocorrectMode(autocorrectMode raw.AEAutocorrectMode)
+	AutocorrectMode() AEAutocorrectMode
+	SetAutocorrectMode(autocorrectMode AEAutocorrectMode)
 	AllowsSpellCheck() bool
 	SetAllowsSpellCheck(allowsSpellCheck bool)
 	AllowsPredictiveKeyboard() bool

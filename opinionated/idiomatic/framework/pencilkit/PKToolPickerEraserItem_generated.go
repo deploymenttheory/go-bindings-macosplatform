@@ -30,16 +30,16 @@ func ToolPickerEraserItemFromID(id objc.ID) *ToolPickerEraserItem {
 }
 
 // NewToolPickerEraserItemWithEraserType creates a new [ToolPickerEraserItem].
-func NewToolPickerEraserItemWithEraserType(eraserType raw.PKEraserType) *ToolPickerEraserItem {
+func NewToolPickerEraserItemWithEraserType(eraserType PKEraserType) *ToolPickerEraserItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerEraserItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:"), eraserType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:"), raw.PKEraserType(eraserType))
 	return &ToolPickerEraserItem{inner: raw.PKToolPickerEraserItemFromID(_id)}
 }
 
 // NewToolPickerEraserItemWithEraserTypeWidth creates a new [ToolPickerEraserItem].
-func NewToolPickerEraserItemWithEraserTypeWidth(eraserType raw.PKEraserType, width float64) *ToolPickerEraserItem {
+func NewToolPickerEraserItemWithEraserTypeWidth(eraserType PKEraserType, width float64) *ToolPickerEraserItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerEraserItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:width:"), eraserType, width)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:width:"), raw.PKEraserType(eraserType), width)
 	return &ToolPickerEraserItem{inner: raw.PKToolPickerEraserItemFromID(_id)}
 }
 

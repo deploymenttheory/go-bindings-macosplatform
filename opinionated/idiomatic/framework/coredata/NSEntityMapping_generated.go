@@ -45,8 +45,8 @@ func (x *EntityMapping) WithName(name string) *EntityMapping {
 }
 
 // WithMappingType sets the mappingType property and returns the receiver for chaining.
-func (x *EntityMapping) WithMappingType(mappingType raw.NSEntityMappingType) *EntityMapping {
-	x.inner.SetMappingType(mappingType)
+func (x *EntityMapping) WithMappingType(mappingType NSEntityMappingType) *EntityMapping {
+	x.inner.SetMappingType(raw.NSEntityMappingType(mappingType))
 	return x
 }
 
@@ -143,13 +143,13 @@ func (x *EntityMapping) SetName(name string) {
 }
 
 // MappingType calls the underlying MappingType.
-func (x *EntityMapping) MappingType() raw.NSEntityMappingType {
-	return x.inner.MappingType()
+func (x *EntityMapping) MappingType() NSEntityMappingType {
+	return NSEntityMappingType(x.inner.MappingType())
 }
 
 // SetMappingType calls the underlying SetMappingType.
-func (x *EntityMapping) SetMappingType(mappingType raw.NSEntityMappingType) {
-	x.inner.SetMappingType(mappingType)
+func (x *EntityMapping) SetMappingType(mappingType NSEntityMappingType) {
+	x.inner.SetMappingType(raw.NSEntityMappingType(mappingType))
 }
 
 // SourceEntityName calls the underlying SourceEntityName.
@@ -270,7 +270,7 @@ func (x *EntityMapping) SetEntityMigrationPolicyClassName(entityMigrationPolicyC
 type EntityMappingable interface {
 	Unwrap() *raw.NSEntityMapping
 	WithName(name string) *EntityMapping
-	WithMappingType(mappingType raw.NSEntityMappingType) *EntityMapping
+	WithMappingType(mappingType NSEntityMappingType) *EntityMapping
 	WithSourceEntityName(sourceEntityName string) *EntityMapping
 	WithSourceEntityVersionHash(sourceEntityVersionHash *foundation.NSData) *EntityMapping
 	WithDestinationEntityName(destinationEntityName string) *EntityMapping
@@ -282,8 +282,8 @@ type EntityMappingable interface {
 	WithEntityMigrationPolicyClassName(entityMigrationPolicyClassName string) *EntityMapping
 	Name() string
 	SetName(name string)
-	MappingType() raw.NSEntityMappingType
-	SetMappingType(mappingType raw.NSEntityMappingType)
+	MappingType() NSEntityMappingType
+	SetMappingType(mappingType NSEntityMappingType)
 	SourceEntityName() string
 	SetSourceEntityName(sourceEntityName string)
 	SourceEntityVersionHash() *foundation.NSData

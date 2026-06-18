@@ -32,16 +32,16 @@ func PersonHandleFromID(id objc.ID) *PersonHandle {
 }
 
 // NewPersonHandleWithValueTypeLabel creates a new [PersonHandle].
-func NewPersonHandleWithValueTypeLabel(value string, type_ raw.INPersonHandleType, label *foundation.NSString) *PersonHandle {
+func NewPersonHandleWithValueTypeLabel(value string, type_ INPersonHandleType, label *foundation.NSString) *PersonHandle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPersonHandle")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:type:label:"), foundation.NSStringStringWithUTF8String(value).Ptr(), type_, label.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:type:label:"), foundation.NSStringStringWithUTF8String(value).Ptr(), raw.INPersonHandleType(type_), label.Ptr())
 	return &PersonHandle{inner: raw.INPersonHandleFromID(_id)}
 }
 
 // NewPersonHandleWithValueType creates a new [PersonHandle].
-func NewPersonHandleWithValueType(value string, type_ raw.INPersonHandleType) *PersonHandle {
+func NewPersonHandleWithValueType(value string, type_ INPersonHandleType) *PersonHandle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPersonHandle")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:type:"), foundation.NSStringStringWithUTF8String(value).Ptr(), type_)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:type:"), foundation.NSStringStringWithUTF8String(value).Ptr(), raw.INPersonHandleType(type_))
 	return &PersonHandle{inner: raw.INPersonHandleFromID(_id)}
 }
 
@@ -55,8 +55,8 @@ func (x *PersonHandle) Value() string {
 }
 
 // Type calls the underlying Type.
-func (x *PersonHandle) Type() raw.INPersonHandleType {
-	return x.inner.Type()
+func (x *PersonHandle) Type() INPersonHandleType {
+	return INPersonHandleType(x.inner.Type())
 }
 
 // Label calls the underlying Label.
@@ -72,7 +72,7 @@ func (x *PersonHandle) Label() string {
 type PersonHandleable interface {
 	Unwrap() *raw.INPersonHandle
 	Value() string
-	Type() raw.INPersonHandleType
+	Type() INPersonHandleType
 	Label() string
 }
 

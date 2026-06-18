@@ -40,14 +40,14 @@ func NewSmartCardUserInteractionForSecurePINChange() *SmartCardUserInteractionFo
 }
 
 // WithPINConfirmation sets the pINConfirmation property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINChange) WithPINConfirmation(pINConfirmation raw.TKSmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange {
-	x.inner.SetPINConfirmation(pINConfirmation)
+func (x *SmartCardUserInteractionForSecurePINChange) WithPINConfirmation(pINConfirmation TKSmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange {
+	x.inner.SetPINConfirmation(raw.TKSmartCardPINConfirmation(pINConfirmation))
 	return x
 }
 
 // WithPINCompletion sets the pINCompletion property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINChange) WithPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange {
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINCompletion(pINCompletion)
+func (x *SmartCardUserInteractionForSecurePINChange) WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange {
+	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
 	return x
 }
 
@@ -106,13 +106,13 @@ func (x *SmartCardUserInteractionForSecurePINChange) WithInteractionTimeout(inte
 }
 
 // PINConfirmation calls the underlying PINConfirmation.
-func (x *SmartCardUserInteractionForSecurePINChange) PINConfirmation() raw.TKSmartCardPINConfirmation {
-	return x.inner.PINConfirmation()
+func (x *SmartCardUserInteractionForSecurePINChange) PINConfirmation() TKSmartCardPINConfirmation {
+	return TKSmartCardPINConfirmation(x.inner.PINConfirmation())
 }
 
 // SetPINConfirmation calls the underlying SetPINConfirmation.
-func (x *SmartCardUserInteractionForSecurePINChange) SetPINConfirmation(pINConfirmation raw.TKSmartCardPINConfirmation) {
-	x.inner.SetPINConfirmation(pINConfirmation)
+func (x *SmartCardUserInteractionForSecurePINChange) SetPINConfirmation(pINConfirmation TKSmartCardPINConfirmation) {
+	x.inner.SetPINConfirmation(raw.TKSmartCardPINConfirmation(pINConfirmation))
 }
 
 func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation {
@@ -126,8 +126,8 @@ func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteraction(
 // SmartCardUserInteractionForSecurePINChangeable is the interface implemented by [SmartCardUserInteractionForSecurePINChange], for mocking and DI.
 type SmartCardUserInteractionForSecurePINChangeable interface {
 	Unwrap() *raw.TKSmartCardUserInteractionForSecurePINChange
-	WithPINConfirmation(pINConfirmation raw.TKSmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange
-	WithPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange
+	WithPINConfirmation(pINConfirmation TKSmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange
+	WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange
 	WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINChange
 	WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForSecurePINChange
 	WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINChange
@@ -135,8 +135,8 @@ type SmartCardUserInteractionForSecurePINChangeable interface {
 	WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINChange
 	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINChange
 	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINChange
-	PINConfirmation() raw.TKSmartCardPINConfirmation
-	SetPINConfirmation(pINConfirmation raw.TKSmartCardPINConfirmation)
+	PINConfirmation() TKSmartCardPINConfirmation
+	SetPINConfirmation(pINConfirmation TKSmartCardPINConfirmation)
 }
 
 var _ SmartCardUserInteractionForSecurePINChangeable = (*SmartCardUserInteractionForSecurePINChange)(nil)

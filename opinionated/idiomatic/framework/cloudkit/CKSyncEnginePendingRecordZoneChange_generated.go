@@ -32,9 +32,9 @@ func SyncEnginePendingRecordZoneChangeFromID(id objc.ID) *SyncEnginePendingRecor
 }
 
 // NewSyncEnginePendingRecordZoneChangeWithRecordIDType creates a new [SyncEnginePendingRecordZoneChange].
-func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *raw.CKRecordID, type_ raw.CKSyncEnginePendingRecordZoneChangeType) *SyncEnginePendingRecordZoneChange {
+func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *raw.CKRecordID, type_ CKSyncEnginePendingRecordZoneChangeType) *SyncEnginePendingRecordZoneChange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEnginePendingRecordZoneChange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordID:type:"), recordID.Ptr(), type_)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordID:type:"), recordID.Ptr(), raw.CKSyncEnginePendingRecordZoneChangeType(type_))
 	return &SyncEnginePendingRecordZoneChange{inner: raw.CKSyncEnginePendingRecordZoneChangeFromID(_id)}
 }
 
@@ -48,15 +48,15 @@ func (x *SyncEnginePendingRecordZoneChange) RecordID() *RecordID {
 }
 
 // Type calls the underlying Type.
-func (x *SyncEnginePendingRecordZoneChange) Type() raw.CKSyncEnginePendingRecordZoneChangeType {
-	return x.inner.Type()
+func (x *SyncEnginePendingRecordZoneChange) Type() CKSyncEnginePendingRecordZoneChangeType {
+	return CKSyncEnginePendingRecordZoneChangeType(x.inner.Type())
 }
 
 // SyncEnginePendingRecordZoneChangeable is the interface implemented by [SyncEnginePendingRecordZoneChange], for mocking and DI.
 type SyncEnginePendingRecordZoneChangeable interface {
 	Unwrap() *raw.CKSyncEnginePendingRecordZoneChange
 	RecordID() *RecordID
-	Type() raw.CKSyncEnginePendingRecordZoneChangeType
+	Type() CKSyncEnginePendingRecordZoneChangeType
 }
 
 var _ SyncEnginePendingRecordZoneChangeable = (*SyncEnginePendingRecordZoneChange)(nil)

@@ -16,13 +16,13 @@ func CTFontCollectionCopyExclusionDescriptors(collection unsafe.Pointer) unsafe.
 }
 
 // CTFontCollectionCopyFontAttribute calls [raw.CTFontCollectionCopyFontAttribute] (C function CTFontCollectionCopyFontAttribute).
-func CTFontCollectionCopyFontAttribute(collection unsafe.Pointer, attributeName unsafe.Pointer, options raw.CTFontCollectionCopyOptions) unsafe.Pointer {
-	return raw.CTFontCollectionCopyFontAttribute(collection, attributeName, options)
+func CTFontCollectionCopyFontAttribute(collection unsafe.Pointer, attributeName unsafe.Pointer, options CTFontCollectionCopyOptions) unsafe.Pointer {
+	return raw.CTFontCollectionCopyFontAttribute(collection, attributeName, raw.CTFontCollectionCopyOptions(options))
 }
 
 // CTFontCollectionCopyFontAttributes calls [raw.CTFontCollectionCopyFontAttributes] (C function CTFontCollectionCopyFontAttributes).
-func CTFontCollectionCopyFontAttributes(collection unsafe.Pointer, attributeNames unsafe.Pointer, options raw.CTFontCollectionCopyOptions) unsafe.Pointer {
-	return raw.CTFontCollectionCopyFontAttributes(collection, attributeNames, options)
+func CTFontCollectionCopyFontAttributes(collection unsafe.Pointer, attributeNames unsafe.Pointer, options CTFontCollectionCopyOptions) unsafe.Pointer {
+	return raw.CTFontCollectionCopyFontAttributes(collection, attributeNames, raw.CTFontCollectionCopyOptions(options))
 }
 
 // CTFontCollectionCopyQueryDescriptors calls [raw.CTFontCollectionCopyQueryDescriptors] (C function CTFontCollectionCopyQueryDescriptors).
@@ -91,8 +91,8 @@ func CTFontCopyAttribute(font unsafe.Pointer, attribute unsafe.Pointer) unsafe.P
 }
 
 // CTFontCopyAvailableTables calls [raw.CTFontCopyAvailableTables] (C function CTFontCopyAvailableTables).
-func CTFontCopyAvailableTables(font unsafe.Pointer, options raw.CTFontTableOptions) unsafe.Pointer {
-	return raw.CTFontCopyAvailableTables(font, options)
+func CTFontCopyAvailableTables(font unsafe.Pointer, options CTFontTableOptions) unsafe.Pointer {
+	return raw.CTFontCopyAvailableTables(font, raw.CTFontTableOptions(options))
 }
 
 // CTFontCopyCharacterSet calls [raw.CTFontCopyCharacterSet] (C function CTFontCopyCharacterSet).
@@ -166,8 +166,8 @@ func CTFontCopySupportedLanguages(font unsafe.Pointer) unsafe.Pointer {
 }
 
 // CTFontCopyTable calls [raw.CTFontCopyTable] (C function CTFontCopyTable).
-func CTFontCopyTable(font unsafe.Pointer, table uint, options raw.CTFontTableOptions) unsafe.Pointer {
-	return raw.CTFontCopyTable(font, table, options)
+func CTFontCopyTable(font unsafe.Pointer, table uint, options CTFontTableOptions) unsafe.Pointer {
+	return raw.CTFontCopyTable(font, table, raw.CTFontTableOptions(options))
 }
 
 // CTFontCopyTraits calls [raw.CTFontCopyTraits] (C function CTFontCopyTraits).
@@ -196,8 +196,8 @@ func CTFontCreateCopyWithFamily(font unsafe.Pointer, size float64, matrix *coref
 }
 
 // CTFontCreateCopyWithSymbolicTraits calls [raw.CTFontCreateCopyWithSymbolicTraits] (C function CTFontCreateCopyWithSymbolicTraits).
-func CTFontCreateCopyWithSymbolicTraits(font unsafe.Pointer, size float64, matrix *corefoundation.CGAffineTransform, symTraitValue raw.CTFontSymbolicTraits, symTraitMask raw.CTFontSymbolicTraits) unsafe.Pointer {
-	return raw.CTFontCreateCopyWithSymbolicTraits(font, size, matrix, symTraitValue, symTraitMask)
+func CTFontCreateCopyWithSymbolicTraits(font unsafe.Pointer, size float64, matrix *corefoundation.CGAffineTransform, symTraitValue CTFontSymbolicTraits, symTraitMask CTFontSymbolicTraits) unsafe.Pointer {
+	return raw.CTFontCreateCopyWithSymbolicTraits(font, size, matrix, raw.CTFontSymbolicTraits(symTraitValue), raw.CTFontSymbolicTraits(symTraitMask))
 }
 
 // CTFontCreateForString calls [raw.CTFontCreateForString] (C function CTFontCreateForString).
@@ -216,8 +216,8 @@ func CTFontCreatePathForGlyph(font unsafe.Pointer, glyph uint16, matrix *corefou
 }
 
 // CTFontCreateUIFontForLanguage calls [raw.CTFontCreateUIFontForLanguage] (C function CTFontCreateUIFontForLanguage).
-func CTFontCreateUIFontForLanguage(uiType raw.CTFontUIFontType, size float64, language unsafe.Pointer) unsafe.Pointer {
-	return raw.CTFontCreateUIFontForLanguage(uiType, size, language)
+func CTFontCreateUIFontForLanguage(uiType CTFontUIFontType, size float64, language unsafe.Pointer) unsafe.Pointer {
+	return raw.CTFontCreateUIFontForLanguage(raw.CTFontUIFontType(uiType), size, language)
 }
 
 // CTFontCreateWithFontDescriptor calls [raw.CTFontCreateWithFontDescriptor] (C function CTFontCreateWithFontDescriptor).
@@ -226,8 +226,8 @@ func CTFontCreateWithFontDescriptor(descriptor unsafe.Pointer, size float64, mat
 }
 
 // CTFontCreateWithFontDescriptorAndOptions calls [raw.CTFontCreateWithFontDescriptorAndOptions] (C function CTFontCreateWithFontDescriptorAndOptions).
-func CTFontCreateWithFontDescriptorAndOptions(descriptor unsafe.Pointer, size float64, matrix *corefoundation.CGAffineTransform, options raw.CTFontOptions) unsafe.Pointer {
-	return raw.CTFontCreateWithFontDescriptorAndOptions(descriptor, size, matrix, options)
+func CTFontCreateWithFontDescriptorAndOptions(descriptor unsafe.Pointer, size float64, matrix *corefoundation.CGAffineTransform, options CTFontOptions) unsafe.Pointer {
+	return raw.CTFontCreateWithFontDescriptorAndOptions(descriptor, size, matrix, raw.CTFontOptions(options))
 }
 
 // CTFontCreateWithGraphicsFont calls [raw.CTFontCreateWithGraphicsFont] (C function CTFontCreateWithGraphicsFont).
@@ -241,8 +241,8 @@ func CTFontCreateWithName(name unsafe.Pointer, size float64, matrix *corefoundat
 }
 
 // CTFontCreateWithNameAndOptions calls [raw.CTFontCreateWithNameAndOptions] (C function CTFontCreateWithNameAndOptions).
-func CTFontCreateWithNameAndOptions(name unsafe.Pointer, size float64, matrix *corefoundation.CGAffineTransform, options raw.CTFontOptions) unsafe.Pointer {
-	return raw.CTFontCreateWithNameAndOptions(name, size, matrix, options)
+func CTFontCreateWithNameAndOptions(name unsafe.Pointer, size float64, matrix *corefoundation.CGAffineTransform, options CTFontOptions) unsafe.Pointer {
+	return raw.CTFontCreateWithNameAndOptions(name, size, matrix, raw.CTFontOptions(options))
 }
 
 // CTFontCreateWithPlatformFont calls [raw.CTFontCreateWithPlatformFont] (C function CTFontCreateWithPlatformFont).
@@ -286,8 +286,8 @@ func CTFontDescriptorCreateCopyWithFeature(original unsafe.Pointer, featureTypeI
 }
 
 // CTFontDescriptorCreateCopyWithSymbolicTraits calls [raw.CTFontDescriptorCreateCopyWithSymbolicTraits] (C function CTFontDescriptorCreateCopyWithSymbolicTraits).
-func CTFontDescriptorCreateCopyWithSymbolicTraits(original unsafe.Pointer, symTraitValue raw.CTFontSymbolicTraits, symTraitMask raw.CTFontSymbolicTraits) unsafe.Pointer {
-	return raw.CTFontDescriptorCreateCopyWithSymbolicTraits(original, symTraitValue, symTraitMask)
+func CTFontDescriptorCreateCopyWithSymbolicTraits(original unsafe.Pointer, symTraitValue CTFontSymbolicTraits, symTraitMask CTFontSymbolicTraits) unsafe.Pointer {
+	return raw.CTFontDescriptorCreateCopyWithSymbolicTraits(original, raw.CTFontSymbolicTraits(symTraitValue), raw.CTFontSymbolicTraits(symTraitMask))
 }
 
 // CTFontDescriptorCreateCopyWithVariation calls [raw.CTFontDescriptorCreateCopyWithVariation] (C function CTFontDescriptorCreateCopyWithVariation).
@@ -321,8 +321,10 @@ func CTFontDescriptorGetTypeID() uint {
 }
 
 // CTFontDescriptorMatchFontDescriptorsWithProgressHandler calls [raw.CTFontDescriptorMatchFontDescriptorsWithProgressHandler] (C function CTFontDescriptorMatchFontDescriptorsWithProgressHandler).
-func CTFontDescriptorMatchFontDescriptorsWithProgressHandler(descriptors unsafe.Pointer, mandatoryAttributes unsafe.Pointer, progressBlock func(raw.CTFontDescriptorMatchingState, unsafe.Pointer) bool) bool {
-	return raw.CTFontDescriptorMatchFontDescriptorsWithProgressHandler(descriptors, mandatoryAttributes, progressBlock)
+func CTFontDescriptorMatchFontDescriptorsWithProgressHandler(descriptors unsafe.Pointer, mandatoryAttributes unsafe.Pointer, progressBlock func(CTFontDescriptorMatchingState, unsafe.Pointer) bool) bool {
+	return raw.CTFontDescriptorMatchFontDescriptorsWithProgressHandler(descriptors, mandatoryAttributes, func(_a0 raw.CTFontDescriptorMatchingState, _a1 unsafe.Pointer) bool {
+		return progressBlock(CTFontDescriptorMatchingState(_a0), _a1)
+	})
 }
 
 // CTFontDrawGlyphs calls [raw.CTFontDrawGlyphs] (C function CTFontDrawGlyphs).
@@ -336,8 +338,8 @@ func CTFontDrawImageFromAdaptiveImageProviderAtPoint(font unsafe.Pointer, provid
 }
 
 // CTFontGetAdvancesForGlyphs calls [raw.CTFontGetAdvancesForGlyphs] (C function CTFontGetAdvancesForGlyphs).
-func CTFontGetAdvancesForGlyphs(font unsafe.Pointer, orientation raw.CTFontOrientation, glyphs *uint16, advances *corefoundation.CGSize, count int) float64 {
-	return raw.CTFontGetAdvancesForGlyphs(font, orientation, glyphs, advances, count)
+func CTFontGetAdvancesForGlyphs(font unsafe.Pointer, orientation CTFontOrientation, glyphs *uint16, advances *corefoundation.CGSize, count int) float64 {
+	return raw.CTFontGetAdvancesForGlyphs(font, raw.CTFontOrientation(orientation), glyphs, advances, count)
 }
 
 // CTFontGetAscent calls [raw.CTFontGetAscent] (C function CTFontGetAscent).
@@ -351,8 +353,8 @@ func CTFontGetBoundingBox(font unsafe.Pointer) corefoundation.CGRect {
 }
 
 // CTFontGetBoundingRectsForGlyphs calls [raw.CTFontGetBoundingRectsForGlyphs] (C function CTFontGetBoundingRectsForGlyphs).
-func CTFontGetBoundingRectsForGlyphs(font unsafe.Pointer, orientation raw.CTFontOrientation, glyphs *uint16, boundingRects *corefoundation.CGRect, count int) corefoundation.CGRect {
-	return raw.CTFontGetBoundingRectsForGlyphs(font, orientation, glyphs, boundingRects, count)
+func CTFontGetBoundingRectsForGlyphs(font unsafe.Pointer, orientation CTFontOrientation, glyphs *uint16, boundingRects *corefoundation.CGRect, count int) corefoundation.CGRect {
+	return raw.CTFontGetBoundingRectsForGlyphs(font, raw.CTFontOrientation(orientation), glyphs, boundingRects, count)
 }
 
 // CTFontGetCapHeight calls [raw.CTFontGetCapHeight] (C function CTFontGetCapHeight).
@@ -421,8 +423,8 @@ func CTFontGetStringEncoding(font unsafe.Pointer) uint {
 }
 
 // CTFontGetSymbolicTraits calls [raw.CTFontGetSymbolicTraits] (C function CTFontGetSymbolicTraits).
-func CTFontGetSymbolicTraits(font unsafe.Pointer) raw.CTFontSymbolicTraits {
-	return raw.CTFontGetSymbolicTraits(font)
+func CTFontGetSymbolicTraits(font unsafe.Pointer) CTFontSymbolicTraits {
+	return CTFontSymbolicTraits(raw.CTFontGetSymbolicTraits(font))
 }
 
 // CTFontGetTypeID calls [raw.CTFontGetTypeID] (C function CTFontGetTypeID).
@@ -436,8 +438,8 @@ func CTFontGetTypographicBoundsForAdaptiveImageProvider(font unsafe.Pointer, pro
 }
 
 // CTFontGetUIFontType calls [raw.CTFontGetUIFontType] (C function CTFontGetUIFontType).
-func CTFontGetUIFontType(font unsafe.Pointer) raw.CTFontUIFontType {
-	return raw.CTFontGetUIFontType(font)
+func CTFontGetUIFontType(font unsafe.Pointer) CTFontUIFontType {
+	return CTFontUIFontType(raw.CTFontGetUIFontType(font))
 }
 
 // CTFontGetUnderlinePosition calls [raw.CTFontGetUnderlinePosition] (C function CTFontGetUnderlinePosition).
@@ -516,13 +518,13 @@ func CTFontManagerEnableFontDescriptors(descriptors unsafe.Pointer, enable bool)
 }
 
 // CTFontManagerGetAutoActivationSetting calls [raw.CTFontManagerGetAutoActivationSetting] (C function CTFontManagerGetAutoActivationSetting).
-func CTFontManagerGetAutoActivationSetting(bundleIdentifier unsafe.Pointer) raw.CTFontManagerAutoActivationSetting {
-	return raw.CTFontManagerGetAutoActivationSetting(bundleIdentifier)
+func CTFontManagerGetAutoActivationSetting(bundleIdentifier unsafe.Pointer) CTFontManagerAutoActivationSetting {
+	return CTFontManagerAutoActivationSetting(raw.CTFontManagerGetAutoActivationSetting(bundleIdentifier))
 }
 
 // CTFontManagerGetScopeForURL calls [raw.CTFontManagerGetScopeForURL] (C function CTFontManagerGetScopeForURL).
-func CTFontManagerGetScopeForURL(fontURL unsafe.Pointer) raw.CTFontManagerScope {
-	return raw.CTFontManagerGetScopeForURL(fontURL)
+func CTFontManagerGetScopeForURL(fontURL unsafe.Pointer) CTFontManagerScope {
+	return CTFontManagerScope(raw.CTFontManagerGetScopeForURL(fontURL))
 }
 
 // CTFontManagerIsSupportedFont calls [raw.CTFontManagerIsSupportedFont] (C function CTFontManagerIsSupportedFont).
@@ -531,23 +533,23 @@ func CTFontManagerIsSupportedFont(fontURL unsafe.Pointer) bool {
 }
 
 // CTFontManagerRegisterFontDescriptors calls [raw.CTFontManagerRegisterFontDescriptors] (C function CTFontManagerRegisterFontDescriptors).
-func CTFontManagerRegisterFontDescriptors(fontDescriptors unsafe.Pointer, scope raw.CTFontManagerScope, enabled bool, registrationHandler func(unsafe.Pointer, bool) bool) {
-	raw.CTFontManagerRegisterFontDescriptors(fontDescriptors, scope, enabled, registrationHandler)
+func CTFontManagerRegisterFontDescriptors(fontDescriptors unsafe.Pointer, scope CTFontManagerScope, enabled bool, registrationHandler func(unsafe.Pointer, bool) bool) {
+	raw.CTFontManagerRegisterFontDescriptors(fontDescriptors, raw.CTFontManagerScope(scope), enabled, registrationHandler)
 }
 
 // CTFontManagerRegisterFontURLs calls [raw.CTFontManagerRegisterFontURLs] (C function CTFontManagerRegisterFontURLs).
-func CTFontManagerRegisterFontURLs(fontURLs unsafe.Pointer, scope raw.CTFontManagerScope, enabled bool, registrationHandler func(unsafe.Pointer, bool) bool) {
-	raw.CTFontManagerRegisterFontURLs(fontURLs, scope, enabled, registrationHandler)
+func CTFontManagerRegisterFontURLs(fontURLs unsafe.Pointer, scope CTFontManagerScope, enabled bool, registrationHandler func(unsafe.Pointer, bool) bool) {
+	raw.CTFontManagerRegisterFontURLs(fontURLs, raw.CTFontManagerScope(scope), enabled, registrationHandler)
 }
 
 // CTFontManagerRegisterFontsForURL calls [raw.CTFontManagerRegisterFontsForURL] (C function CTFontManagerRegisterFontsForURL).
-func CTFontManagerRegisterFontsForURL(fontURL unsafe.Pointer, scope raw.CTFontManagerScope, error_ unsafe.Pointer) bool {
-	return raw.CTFontManagerRegisterFontsForURL(fontURL, scope, error_)
+func CTFontManagerRegisterFontsForURL(fontURL unsafe.Pointer, scope CTFontManagerScope, error_ unsafe.Pointer) bool {
+	return raw.CTFontManagerRegisterFontsForURL(fontURL, raw.CTFontManagerScope(scope), error_)
 }
 
 // CTFontManagerRegisterFontsForURLs calls [raw.CTFontManagerRegisterFontsForURLs] (C function CTFontManagerRegisterFontsForURLs).
-func CTFontManagerRegisterFontsForURLs(fontURLs unsafe.Pointer, scope raw.CTFontManagerScope, errors_ unsafe.Pointer) bool {
-	return raw.CTFontManagerRegisterFontsForURLs(fontURLs, scope, errors_)
+func CTFontManagerRegisterFontsForURLs(fontURLs unsafe.Pointer, scope CTFontManagerScope, errors_ unsafe.Pointer) bool {
+	return raw.CTFontManagerRegisterFontsForURLs(fontURLs, raw.CTFontManagerScope(scope), errors_)
 }
 
 // CTFontManagerRegisterGraphicsFont calls [raw.CTFontManagerRegisterGraphicsFont] (C function CTFontManagerRegisterGraphicsFont).
@@ -556,28 +558,28 @@ func CTFontManagerRegisterGraphicsFont(font unsafe.Pointer, error_ unsafe.Pointe
 }
 
 // CTFontManagerSetAutoActivationSetting calls [raw.CTFontManagerSetAutoActivationSetting] (C function CTFontManagerSetAutoActivationSetting).
-func CTFontManagerSetAutoActivationSetting(bundleIdentifier unsafe.Pointer, setting raw.CTFontManagerAutoActivationSetting) {
-	raw.CTFontManagerSetAutoActivationSetting(bundleIdentifier, setting)
+func CTFontManagerSetAutoActivationSetting(bundleIdentifier unsafe.Pointer, setting CTFontManagerAutoActivationSetting) {
+	raw.CTFontManagerSetAutoActivationSetting(bundleIdentifier, raw.CTFontManagerAutoActivationSetting(setting))
 }
 
 // CTFontManagerUnregisterFontDescriptors calls [raw.CTFontManagerUnregisterFontDescriptors] (C function CTFontManagerUnregisterFontDescriptors).
-func CTFontManagerUnregisterFontDescriptors(fontDescriptors unsafe.Pointer, scope raw.CTFontManagerScope, registrationHandler func(unsafe.Pointer, bool) bool) {
-	raw.CTFontManagerUnregisterFontDescriptors(fontDescriptors, scope, registrationHandler)
+func CTFontManagerUnregisterFontDescriptors(fontDescriptors unsafe.Pointer, scope CTFontManagerScope, registrationHandler func(unsafe.Pointer, bool) bool) {
+	raw.CTFontManagerUnregisterFontDescriptors(fontDescriptors, raw.CTFontManagerScope(scope), registrationHandler)
 }
 
 // CTFontManagerUnregisterFontURLs calls [raw.CTFontManagerUnregisterFontURLs] (C function CTFontManagerUnregisterFontURLs).
-func CTFontManagerUnregisterFontURLs(fontURLs unsafe.Pointer, scope raw.CTFontManagerScope, registrationHandler func(unsafe.Pointer, bool) bool) {
-	raw.CTFontManagerUnregisterFontURLs(fontURLs, scope, registrationHandler)
+func CTFontManagerUnregisterFontURLs(fontURLs unsafe.Pointer, scope CTFontManagerScope, registrationHandler func(unsafe.Pointer, bool) bool) {
+	raw.CTFontManagerUnregisterFontURLs(fontURLs, raw.CTFontManagerScope(scope), registrationHandler)
 }
 
 // CTFontManagerUnregisterFontsForURL calls [raw.CTFontManagerUnregisterFontsForURL] (C function CTFontManagerUnregisterFontsForURL).
-func CTFontManagerUnregisterFontsForURL(fontURL unsafe.Pointer, scope raw.CTFontManagerScope, error_ unsafe.Pointer) bool {
-	return raw.CTFontManagerUnregisterFontsForURL(fontURL, scope, error_)
+func CTFontManagerUnregisterFontsForURL(fontURL unsafe.Pointer, scope CTFontManagerScope, error_ unsafe.Pointer) bool {
+	return raw.CTFontManagerUnregisterFontsForURL(fontURL, raw.CTFontManagerScope(scope), error_)
 }
 
 // CTFontManagerUnregisterFontsForURLs calls [raw.CTFontManagerUnregisterFontsForURLs] (C function CTFontManagerUnregisterFontsForURLs).
-func CTFontManagerUnregisterFontsForURLs(fontURLs unsafe.Pointer, scope raw.CTFontManagerScope, errors_ unsafe.Pointer) bool {
-	return raw.CTFontManagerUnregisterFontsForURLs(fontURLs, scope, errors_)
+func CTFontManagerUnregisterFontsForURLs(fontURLs unsafe.Pointer, scope CTFontManagerScope, errors_ unsafe.Pointer) bool {
+	return raw.CTFontManagerUnregisterFontsForURLs(fontURLs, raw.CTFontManagerScope(scope), errors_)
 }
 
 // CTFontManagerUnregisterGraphicsFont calls [raw.CTFontManagerUnregisterGraphicsFont] (C function CTFontManagerUnregisterGraphicsFont).
@@ -661,8 +663,8 @@ func CTGetCoreTextVersion() uint32 {
 }
 
 // CTGlyphInfoCreateWithCharacterIdentifier calls [raw.CTGlyphInfoCreateWithCharacterIdentifier] (C function CTGlyphInfoCreateWithCharacterIdentifier).
-func CTGlyphInfoCreateWithCharacterIdentifier(cid uint16, collection raw.CTCharacterCollection, baseString unsafe.Pointer) unsafe.Pointer {
-	return raw.CTGlyphInfoCreateWithCharacterIdentifier(cid, collection, baseString)
+func CTGlyphInfoCreateWithCharacterIdentifier(cid uint16, collection CTCharacterCollection, baseString unsafe.Pointer) unsafe.Pointer {
+	return raw.CTGlyphInfoCreateWithCharacterIdentifier(cid, raw.CTCharacterCollection(collection), baseString)
 }
 
 // CTGlyphInfoCreateWithGlyph calls [raw.CTGlyphInfoCreateWithGlyph] (C function CTGlyphInfoCreateWithGlyph).
@@ -676,8 +678,8 @@ func CTGlyphInfoCreateWithGlyphName(glyphName unsafe.Pointer, font unsafe.Pointe
 }
 
 // CTGlyphInfoGetCharacterCollection calls [raw.CTGlyphInfoGetCharacterCollection] (C function CTGlyphInfoGetCharacterCollection).
-func CTGlyphInfoGetCharacterCollection(glyphInfo unsafe.Pointer) raw.CTCharacterCollection {
-	return raw.CTGlyphInfoGetCharacterCollection(glyphInfo)
+func CTGlyphInfoGetCharacterCollection(glyphInfo unsafe.Pointer) CTCharacterCollection {
+	return CTCharacterCollection(raw.CTGlyphInfoGetCharacterCollection(glyphInfo))
 }
 
 // CTGlyphInfoGetCharacterIdentifier calls [raw.CTGlyphInfoGetCharacterIdentifier] (C function CTGlyphInfoGetCharacterIdentifier).
@@ -706,8 +708,8 @@ func CTLineCreateJustifiedLine(line unsafe.Pointer, justificationFactor float64,
 }
 
 // CTLineCreateTruncatedLine calls [raw.CTLineCreateTruncatedLine] (C function CTLineCreateTruncatedLine).
-func CTLineCreateTruncatedLine(line unsafe.Pointer, width float64, truncationType raw.CTLineTruncationType, truncationToken unsafe.Pointer) unsafe.Pointer {
-	return raw.CTLineCreateTruncatedLine(line, width, truncationType, truncationToken)
+func CTLineCreateTruncatedLine(line unsafe.Pointer, width float64, truncationType CTLineTruncationType, truncationToken unsafe.Pointer) unsafe.Pointer {
+	return raw.CTLineCreateTruncatedLine(line, width, raw.CTLineTruncationType(truncationType), truncationToken)
 }
 
 // CTLineCreateWithAttributedString calls [raw.CTLineCreateWithAttributedString] (C function CTLineCreateWithAttributedString).
@@ -726,8 +728,8 @@ func CTLineEnumerateCaretOffsets(line unsafe.Pointer, block func(float64, int, b
 }
 
 // CTLineGetBoundsWithOptions calls [raw.CTLineGetBoundsWithOptions] (C function CTLineGetBoundsWithOptions).
-func CTLineGetBoundsWithOptions(line unsafe.Pointer, options raw.CTLineBoundsOptions) corefoundation.CGRect {
-	return raw.CTLineGetBoundsWithOptions(line, options)
+func CTLineGetBoundsWithOptions(line unsafe.Pointer, options CTLineBoundsOptions) corefoundation.CGRect {
+	return raw.CTLineGetBoundsWithOptions(line, raw.CTLineBoundsOptions(options))
 }
 
 // CTLineGetGlyphCount calls [raw.CTLineGetGlyphCount] (C function CTLineGetGlyphCount).
@@ -796,13 +798,13 @@ func CTParagraphStyleGetTypeID() uint {
 }
 
 // CTParagraphStyleGetValueForSpecifier calls [raw.CTParagraphStyleGetValueForSpecifier] (C function CTParagraphStyleGetValueForSpecifier).
-func CTParagraphStyleGetValueForSpecifier(paragraphStyle unsafe.Pointer, spec raw.CTParagraphStyleSpecifier, valueBufferSize uint, valueBuffer unsafe.Pointer) bool {
-	return raw.CTParagraphStyleGetValueForSpecifier(paragraphStyle, spec, valueBufferSize, valueBuffer)
+func CTParagraphStyleGetValueForSpecifier(paragraphStyle unsafe.Pointer, spec CTParagraphStyleSpecifier, valueBufferSize uint, valueBuffer unsafe.Pointer) bool {
+	return raw.CTParagraphStyleGetValueForSpecifier(paragraphStyle, raw.CTParagraphStyleSpecifier(spec), valueBufferSize, valueBuffer)
 }
 
 // CTRubyAnnotationCreate calls [raw.CTRubyAnnotationCreate] (C function CTRubyAnnotationCreate).
-func CTRubyAnnotationCreate(alignment raw.CTRubyAlignment, overhang raw.CTRubyOverhang, sizeFactor float64, text unsafe.Pointer) unsafe.Pointer {
-	return raw.CTRubyAnnotationCreate(alignment, overhang, sizeFactor, text)
+func CTRubyAnnotationCreate(alignment CTRubyAlignment, overhang CTRubyOverhang, sizeFactor float64, text unsafe.Pointer) unsafe.Pointer {
+	return raw.CTRubyAnnotationCreate(raw.CTRubyAlignment(alignment), raw.CTRubyOverhang(overhang), sizeFactor, text)
 }
 
 // CTRubyAnnotationCreateCopy calls [raw.CTRubyAnnotationCreateCopy] (C function CTRubyAnnotationCreateCopy).
@@ -811,18 +813,18 @@ func CTRubyAnnotationCreateCopy(rubyAnnotation unsafe.Pointer) unsafe.Pointer {
 }
 
 // CTRubyAnnotationCreateWithAttributes calls [raw.CTRubyAnnotationCreateWithAttributes] (C function CTRubyAnnotationCreateWithAttributes).
-func CTRubyAnnotationCreateWithAttributes(alignment raw.CTRubyAlignment, overhang raw.CTRubyOverhang, position raw.CTRubyPosition, string_ unsafe.Pointer, attributes unsafe.Pointer) unsafe.Pointer {
-	return raw.CTRubyAnnotationCreateWithAttributes(alignment, overhang, position, string_, attributes)
+func CTRubyAnnotationCreateWithAttributes(alignment CTRubyAlignment, overhang CTRubyOverhang, position CTRubyPosition, string_ unsafe.Pointer, attributes unsafe.Pointer) unsafe.Pointer {
+	return raw.CTRubyAnnotationCreateWithAttributes(raw.CTRubyAlignment(alignment), raw.CTRubyOverhang(overhang), raw.CTRubyPosition(position), string_, attributes)
 }
 
 // CTRubyAnnotationGetAlignment calls [raw.CTRubyAnnotationGetAlignment] (C function CTRubyAnnotationGetAlignment).
-func CTRubyAnnotationGetAlignment(rubyAnnotation unsafe.Pointer) raw.CTRubyAlignment {
-	return raw.CTRubyAnnotationGetAlignment(rubyAnnotation)
+func CTRubyAnnotationGetAlignment(rubyAnnotation unsafe.Pointer) CTRubyAlignment {
+	return CTRubyAlignment(raw.CTRubyAnnotationGetAlignment(rubyAnnotation))
 }
 
 // CTRubyAnnotationGetOverhang calls [raw.CTRubyAnnotationGetOverhang] (C function CTRubyAnnotationGetOverhang).
-func CTRubyAnnotationGetOverhang(rubyAnnotation unsafe.Pointer) raw.CTRubyOverhang {
-	return raw.CTRubyAnnotationGetOverhang(rubyAnnotation)
+func CTRubyAnnotationGetOverhang(rubyAnnotation unsafe.Pointer) CTRubyOverhang {
+	return CTRubyOverhang(raw.CTRubyAnnotationGetOverhang(rubyAnnotation))
 }
 
 // CTRubyAnnotationGetSizeFactor calls [raw.CTRubyAnnotationGetSizeFactor] (C function CTRubyAnnotationGetSizeFactor).
@@ -831,8 +833,8 @@ func CTRubyAnnotationGetSizeFactor(rubyAnnotation unsafe.Pointer) float64 {
 }
 
 // CTRubyAnnotationGetTextForPosition calls [raw.CTRubyAnnotationGetTextForPosition] (C function CTRubyAnnotationGetTextForPosition).
-func CTRubyAnnotationGetTextForPosition(rubyAnnotation unsafe.Pointer, position raw.CTRubyPosition) unsafe.Pointer {
-	return raw.CTRubyAnnotationGetTextForPosition(rubyAnnotation, position)
+func CTRubyAnnotationGetTextForPosition(rubyAnnotation unsafe.Pointer, position CTRubyPosition) unsafe.Pointer {
+	return raw.CTRubyAnnotationGetTextForPosition(rubyAnnotation, raw.CTRubyPosition(position))
 }
 
 // CTRubyAnnotationGetTypeID calls [raw.CTRubyAnnotationGetTypeID] (C function CTRubyAnnotationGetTypeID).
@@ -911,8 +913,8 @@ func CTRunGetPositionsPtr(run unsafe.Pointer) *corefoundation.CGPoint {
 }
 
 // CTRunGetStatus calls [raw.CTRunGetStatus] (C function CTRunGetStatus).
-func CTRunGetStatus(run unsafe.Pointer) raw.CTRunStatus {
-	return raw.CTRunGetStatus(run)
+func CTRunGetStatus(run unsafe.Pointer) CTRunStatus {
+	return CTRunStatus(raw.CTRunGetStatus(run))
 }
 
 // CTRunGetStringIndices calls [raw.CTRunGetStringIndices] (C function CTRunGetStringIndices).
@@ -946,13 +948,13 @@ func CTRunGetTypographicBounds(run unsafe.Pointer, range_ corefoundation.CFRange
 }
 
 // CTTextTabCreate calls [raw.CTTextTabCreate] (C function CTTextTabCreate).
-func CTTextTabCreate(alignment raw.CTTextAlignment, location float64, options unsafe.Pointer) unsafe.Pointer {
-	return raw.CTTextTabCreate(alignment, location, options)
+func CTTextTabCreate(alignment CTTextAlignment, location float64, options unsafe.Pointer) unsafe.Pointer {
+	return raw.CTTextTabCreate(raw.CTTextAlignment(alignment), location, options)
 }
 
 // CTTextTabGetAlignment calls [raw.CTTextTabGetAlignment] (C function CTTextTabGetAlignment).
-func CTTextTabGetAlignment(tab unsafe.Pointer) raw.CTTextAlignment {
-	return raw.CTTextTabGetAlignment(tab)
+func CTTextTabGetAlignment(tab unsafe.Pointer) CTTextAlignment {
+	return CTTextAlignment(raw.CTTextTabGetAlignment(tab))
 }
 
 // CTTextTabGetLocation calls [raw.CTTextTabGetLocation] (C function CTTextTabGetLocation).

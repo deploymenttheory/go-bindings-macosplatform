@@ -105,8 +105,8 @@ func (x *AppleEventDescriptor) AttributeDescriptorForKeyword(keyword uint) *Appl
 }
 
 // SendEventWithOptionsTimeoutError calls the underlying SendEventWithOptionsTimeoutError.
-func (x *AppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions raw.NSAppleEventSendOptions, timeoutInSeconds float64) (*AppleEventDescriptor, error) {
-	_r, _err := x.inner.SendEventWithOptionsTimeoutError(sendOptions, timeoutInSeconds)
+func (x *AppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions NSAppleEventSendOptions, timeoutInSeconds float64) (*AppleEventDescriptor, error) {
+	_r, _err := x.inner.SendEventWithOptionsTimeoutError(raw.NSAppleEventSendOptions(sendOptions), timeoutInSeconds)
 	if _err != nil {
 		return nil, _err
 	}
@@ -280,7 +280,7 @@ type AppleEventDescriptorable interface {
 	RemoveParamDescriptorWithKeyword(keyword uint)
 	SetAttributeDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint)
 	AttributeDescriptorForKeyword(keyword uint) *AppleEventDescriptor
-	SendEventWithOptionsTimeoutError(sendOptions raw.NSAppleEventSendOptions, timeoutInSeconds float64) (*AppleEventDescriptor, error)
+	SendEventWithOptionsTimeoutError(sendOptions NSAppleEventSendOptions, timeoutInSeconds float64) (*AppleEventDescriptor, error)
 	InsertDescriptorAtIndex(descriptor *raw.NSAppleEventDescriptor, index int)
 	DescriptorAtIndex(index int) *AppleEventDescriptor
 	RemoveDescriptorAtIndex(index int)

@@ -43,28 +43,28 @@ func (x *Embedding) ContainsString(string_ string) bool {
 }
 
 // DistanceBetweenStringAndStringDistanceType calls the underlying DistanceBetweenStringAndStringDistanceType.
-func (x *Embedding) DistanceBetweenStringAndStringDistanceType(firstString string, secondString string, distanceType raw.NLDistanceType) float64 {
-	return x.inner.DistanceBetweenStringAndStringDistanceType(foundation.NSStringStringWithUTF8String(firstString), foundation.NSStringStringWithUTF8String(secondString), distanceType)
+func (x *Embedding) DistanceBetweenStringAndStringDistanceType(firstString string, secondString string, distanceType NLDistanceType) float64 {
+	return x.inner.DistanceBetweenStringAndStringDistanceType(foundation.NSStringStringWithUTF8String(firstString), foundation.NSStringStringWithUTF8String(secondString), raw.NLDistanceType(distanceType))
 }
 
 // EnumerateNeighborsForStringMaximumCountDistanceTypeUsing calls the underlying EnumerateNeighborsForStringMaximumCountDistanceTypeUsing.
-func (x *Embedding) EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(string_ string, maxCount uint, distanceType raw.NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
-	x.inner.EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(foundation.NSStringStringWithUTF8String(string_), maxCount, distanceType, block)
+func (x *Embedding) EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(string_ string, maxCount uint, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
+	x.inner.EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(foundation.NSStringStringWithUTF8String(string_), maxCount, raw.NLDistanceType(distanceType), block)
 }
 
 // EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing calls the underlying EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing.
-func (x *Embedding) EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(string_ string, maxCount uint, maxDistance float64, distanceType raw.NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
-	x.inner.EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(foundation.NSStringStringWithUTF8String(string_), maxCount, maxDistance, distanceType, block)
+func (x *Embedding) EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(string_ string, maxCount uint, maxDistance float64, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
+	x.inner.EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(foundation.NSStringStringWithUTF8String(string_), maxCount, maxDistance, raw.NLDistanceType(distanceType), block)
 }
 
 // NeighborsForStringMaximumCountDistanceType calls the underlying NeighborsForStringMaximumCountDistanceType.
-func (x *Embedding) NeighborsForStringMaximumCountDistanceType(string_ string, maxCount uint, distanceType raw.NLDistanceType) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.NeighborsForStringMaximumCountDistanceType(foundation.NSStringStringWithUTF8String(string_), maxCount, distanceType)
+func (x *Embedding) NeighborsForStringMaximumCountDistanceType(string_ string, maxCount uint, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.NeighborsForStringMaximumCountDistanceType(foundation.NSStringStringWithUTF8String(string_), maxCount, raw.NLDistanceType(distanceType))
 }
 
 // NeighborsForStringMaximumCountMaximumDistanceDistanceType calls the underlying NeighborsForStringMaximumCountMaximumDistanceDistanceType.
-func (x *Embedding) NeighborsForStringMaximumCountMaximumDistanceDistanceType(string_ string, maxCount uint, maxDistance float64, distanceType raw.NLDistanceType) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.NeighborsForStringMaximumCountMaximumDistanceDistanceType(foundation.NSStringStringWithUTF8String(string_), maxCount, maxDistance, distanceType)
+func (x *Embedding) NeighborsForStringMaximumCountMaximumDistanceDistanceType(string_ string, maxCount uint, maxDistance float64, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.NeighborsForStringMaximumCountMaximumDistanceDistanceType(foundation.NSStringStringWithUTF8String(string_), maxCount, maxDistance, raw.NLDistanceType(distanceType))
 }
 
 // VectorForString calls the underlying VectorForString.
@@ -78,23 +78,23 @@ func (x *Embedding) GetVectorForString(vector *float32, string_ string) bool {
 }
 
 // EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing calls the underlying EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing.
-func (x *Embedding) EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType raw.NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
-	x.inner.EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector, maxCount, distanceType, block)
+func (x *Embedding) EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
+	x.inner.EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector, maxCount, raw.NLDistanceType(distanceType), block)
 }
 
 // EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing calls the underlying EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing.
-func (x *Embedding) EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType raw.NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
-	x.inner.EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector, maxCount, maxDistance, distanceType, block)
+func (x *Embedding) EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool)) {
+	x.inner.EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector, maxCount, maxDistance, raw.NLDistanceType(distanceType), block)
 }
 
 // NeighborsForVectorMaximumCountDistanceType calls the underlying NeighborsForVectorMaximumCountDistanceType.
-func (x *Embedding) NeighborsForVectorMaximumCountDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType raw.NLDistanceType) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.NeighborsForVectorMaximumCountDistanceType(vector, maxCount, distanceType)
+func (x *Embedding) NeighborsForVectorMaximumCountDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.NeighborsForVectorMaximumCountDistanceType(vector, maxCount, raw.NLDistanceType(distanceType))
 }
 
 // NeighborsForVectorMaximumCountMaximumDistanceDistanceType calls the underlying NeighborsForVectorMaximumCountMaximumDistanceDistanceType.
-func (x *Embedding) NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType raw.NLDistanceType) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector, maxCount, maxDistance, distanceType)
+func (x *Embedding) NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector, maxCount, maxDistance, raw.NLDistanceType(distanceType))
 }
 
 // Dimension calls the underlying Dimension.
@@ -125,17 +125,17 @@ func (x *Embedding) Revision() uint {
 type Embeddingable interface {
 	Unwrap() *raw.NLEmbedding
 	ContainsString(string_ string) bool
-	DistanceBetweenStringAndStringDistanceType(firstString string, secondString string, distanceType raw.NLDistanceType) float64
-	EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(string_ string, maxCount uint, distanceType raw.NLDistanceType, block func(*foundation.NSString, float64, *bool))
-	EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(string_ string, maxCount uint, maxDistance float64, distanceType raw.NLDistanceType, block func(*foundation.NSString, float64, *bool))
-	NeighborsForStringMaximumCountDistanceType(string_ string, maxCount uint, distanceType raw.NLDistanceType) *foundation.NSArray[*foundation.NSString]
-	NeighborsForStringMaximumCountMaximumDistanceDistanceType(string_ string, maxCount uint, maxDistance float64, distanceType raw.NLDistanceType) *foundation.NSArray[*foundation.NSString]
+	DistanceBetweenStringAndStringDistanceType(firstString string, secondString string, distanceType NLDistanceType) float64
+	EnumerateNeighborsForStringMaximumCountDistanceTypeUsing(string_ string, maxCount uint, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool))
+	EnumerateNeighborsForStringMaximumCountMaximumDistanceDistanceTypeUsing(string_ string, maxCount uint, maxDistance float64, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool))
+	NeighborsForStringMaximumCountDistanceType(string_ string, maxCount uint, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString]
+	NeighborsForStringMaximumCountMaximumDistanceDistanceType(string_ string, maxCount uint, maxDistance float64, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString]
 	VectorForString(string_ string) *foundation.NSArray[*foundation.NSNumber]
 	GetVectorForString(vector *float32, string_ string) bool
-	EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType raw.NLDistanceType, block func(*foundation.NSString, float64, *bool))
-	EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType raw.NLDistanceType, block func(*foundation.NSString, float64, *bool))
-	NeighborsForVectorMaximumCountDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType raw.NLDistanceType) *foundation.NSArray[*foundation.NSString]
-	NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType raw.NLDistanceType) *foundation.NSArray[*foundation.NSString]
+	EnumerateNeighborsForVectorMaximumCountDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool))
+	EnumerateNeighborsForVectorMaximumCountMaximumDistanceDistanceTypeUsing(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType NLDistanceType, block func(*foundation.NSString, float64, *bool))
+	NeighborsForVectorMaximumCountDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString]
+	NeighborsForVectorMaximumCountMaximumDistanceDistanceType(vector *foundation.NSArray[*foundation.NSNumber], maxCount uint, maxDistance float64, distanceType NLDistanceType) *foundation.NSArray[*foundation.NSString]
 	Dimension() uint
 	VocabularySize() uint
 	Language() string

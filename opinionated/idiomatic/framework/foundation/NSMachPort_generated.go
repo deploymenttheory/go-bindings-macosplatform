@@ -37,9 +37,9 @@ func NewMachPortWithMachPort(machPort uint32) *MachPort {
 }
 
 // NewMachPortWithMachPortOptions creates a new [MachPort].
-func NewMachPortWithMachPortOptions(machPort uint32, f raw.NSMachPortOptions) *MachPort {
+func NewMachPortWithMachPortOptions(machPort uint32, f NSMachPortOptions) *MachPort {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMachPort")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachPort:options:"), machPort, f)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachPort:options:"), machPort, raw.NSMachPortOptions(f))
 	return &MachPort{inner: raw.NSMachPortFromID(_id)}
 }
 

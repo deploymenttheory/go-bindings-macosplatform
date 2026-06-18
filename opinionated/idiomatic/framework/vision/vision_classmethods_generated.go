@@ -52,8 +52,8 @@ func SupportedSymbologies() []*foundation.NSString {
 }
 
 // RevisionSupportsConstellation calls the underlying VNDetectFaceLandmarksRequestRevisionSupportsConstellation.
-func RevisionSupportsConstellation(requestRevision uint, constellation raw.VNRequestFaceLandmarksConstellation) bool {
-	return raw.VNDetectFaceLandmarksRequestRevisionSupportsConstellation(requestRevision, constellation)
+func RevisionSupportsConstellation(requestRevision uint, constellation VNRequestFaceLandmarksConstellation) bool {
+	return raw.VNDetectFaceLandmarksRequestRevisionSupportsConstellation(requestRevision, raw.VNRequestFaceLandmarksConstellation(constellation))
 }
 
 // SupportedJointNamesForRevisionError calls the underlying VNDetectHumanBodyPoseRequestSupportedJointNamesForRevisionError.
@@ -196,8 +196,8 @@ func KnownAnimalIdentifiersForRevisionError(requestRevision uint) (*foundation.N
 }
 
 // SupportedRecognitionLanguagesForTextRecognitionLevelRevisionError calls the underlying VNRecognizeTextRequestSupportedRecognitionLanguagesForTextRecognitionLevelRevisionError.
-func SupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(recognitionLevel raw.VNRequestTextRecognitionLevel, requestRevision uint) (*foundation.NSArray[*foundation.NSString], error) {
-	return raw.VNRecognizeTextRequestSupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(recognitionLevel, requestRevision)
+func SupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(recognitionLevel VNRequestTextRecognitionLevel, requestRevision uint) (*foundation.NSArray[*foundation.NSString], error) {
+	return raw.VNRecognizeTextRequestSupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(raw.VNRequestTextRecognitionLevel(recognitionLevel), requestRevision)
 }
 
 // RectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight calls the underlying VNRectangleObservationRectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight.

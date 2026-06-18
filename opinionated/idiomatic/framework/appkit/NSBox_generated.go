@@ -42,14 +42,14 @@ func NewBox() *Box {
 }
 
 // WithBoxType sets the boxType property and returns the receiver for chaining.
-func (x *Box) WithBoxType(boxType raw.NSBoxType) *Box {
-	x.inner.SetBoxType(boxType)
+func (x *Box) WithBoxType(boxType NSBoxType) *Box {
+	x.inner.SetBoxType(raw.NSBoxType(boxType))
 	return x
 }
 
 // WithTitlePosition sets the titlePosition property and returns the receiver for chaining.
-func (x *Box) WithTitlePosition(titlePosition raw.NSTitlePosition) *Box {
-	x.inner.SetTitlePosition(titlePosition)
+func (x *Box) WithTitlePosition(titlePosition NSTitlePosition) *Box {
+	x.inner.SetTitlePosition(raw.NSTitlePosition(titlePosition))
 	return x
 }
 
@@ -108,8 +108,8 @@ func (x *Box) WithFillColor(fillColor *Color) *Box {
 }
 
 // WithBorderType sets the borderType property and returns the receiver for chaining.
-func (x *Box) WithBorderType(borderType raw.NSBorderType) *Box {
-	x.inner.SetBorderType(borderType)
+func (x *Box) WithBorderType(borderType NSBorderType) *Box {
+	x.inner.SetBorderType(raw.NSBorderType(borderType))
 	return x
 }
 
@@ -150,8 +150,8 @@ func (x *Box) WithAutoresizesSubviews(autoresizesSubviews bool) *Box {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Box) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Box {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Box) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Box {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -210,14 +210,14 @@ func (x *Box) WithWantsRestingTouches(wantsRestingTouches bool) *Box {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Box) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Box {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Box) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Box {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Box) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Box {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Box) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Box {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -324,8 +324,8 @@ func (x *Box) WithToolTip(toolTip string) *Box {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Box) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Box {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Box) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Box {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -342,8 +342,8 @@ func (x *Box) WithNextKeyView(nextKeyView ViewProvider) *Box {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Box) WithFocusRingType(focusRingType raw.NSFocusRingType) *Box {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *Box) WithFocusRingType(focusRingType NSFocusRingType) *Box {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -366,8 +366,8 @@ func (x *Box) WithGestureRecognizers(items ...GestureRecognizerProvider) *Box {
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Box) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Box {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Box) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Box {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -466,23 +466,23 @@ func (x *Box) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
 }
 
 // BoxType calls the underlying BoxType.
-func (x *Box) BoxType() raw.NSBoxType {
-	return x.inner.BoxType()
+func (x *Box) BoxType() NSBoxType {
+	return NSBoxType(x.inner.BoxType())
 }
 
 // SetBoxType calls the underlying SetBoxType.
-func (x *Box) SetBoxType(boxType raw.NSBoxType) {
-	x.inner.SetBoxType(boxType)
+func (x *Box) SetBoxType(boxType NSBoxType) {
+	x.inner.SetBoxType(raw.NSBoxType(boxType))
 }
 
 // TitlePosition calls the underlying TitlePosition.
-func (x *Box) TitlePosition() raw.NSTitlePosition {
-	return x.inner.TitlePosition()
+func (x *Box) TitlePosition() NSTitlePosition {
+	return NSTitlePosition(x.inner.TitlePosition())
 }
 
 // SetTitlePosition calls the underlying SetTitlePosition.
-func (x *Box) SetTitlePosition(titlePosition raw.NSTitlePosition) {
-	x.inner.SetTitlePosition(titlePosition)
+func (x *Box) SetTitlePosition(titlePosition NSTitlePosition) {
+	x.inner.SetTitlePosition(raw.NSTitlePosition(titlePosition))
 }
 
 // Title calls the underlying Title.
@@ -616,13 +616,13 @@ func (x *Box) SetTitleWithMnemonic(stringWithAmpersand string) {
 }
 
 // BorderType calls the underlying BorderType.
-func (x *Box) BorderType() raw.NSBorderType {
-	return x.inner.BorderType()
+func (x *Box) BorderType() NSBorderType {
+	return NSBorderType(x.inner.BorderType())
 }
 
 // SetBorderType calls the underlying SetBorderType.
-func (x *Box) SetBorderType(borderType raw.NSBorderType) {
-	x.inner.SetBorderType(borderType)
+func (x *Box) SetBorderType(borderType NSBorderType) {
+	x.inner.SetBorderType(raw.NSBorderType(borderType))
 }
 
 func (x *Box) asView() *raw.NSView { return &x.inner.NSView }
@@ -632,8 +632,8 @@ func (x *Box) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponde
 // Boxable is the interface implemented by [Box], for mocking and DI.
 type Boxable interface {
 	Unwrap() *raw.NSBox
-	WithBoxType(boxType raw.NSBoxType) *Box
-	WithTitlePosition(titlePosition raw.NSTitlePosition) *Box
+	WithBoxType(boxType NSBoxType) *Box
+	WithTitlePosition(titlePosition NSTitlePosition) *Box
 	WithTitle(title string) *Box
 	WithTitleFont(titleFont *Font) *Box
 	WithContentViewMargins(contentViewMargins corefoundation.CGSize) *Box
@@ -643,12 +643,12 @@ type Boxable interface {
 	WithCornerRadius(cornerRadius float64) *Box
 	WithBorderColor(borderColor *Color) *Box
 	WithFillColor(fillColor *Color) *Box
-	WithBorderType(borderType raw.NSBorderType) *Box
+	WithBorderType(borderType NSBorderType) *Box
 	WithSubviews(items ...ViewProvider) *Box
 	WithHidden(hidden bool) *Box
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Box
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Box
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Box
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Box
 	WithFrame(frame corefoundation.CGRect) *Box
 	WithFrameRotation(frameRotation float64) *Box
 	WithFrameCenterRotation(frameCenterRotation float64) *Box
@@ -658,8 +658,8 @@ type Boxable interface {
 	WithNeedsDisplay(needsDisplay bool) *Box
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Box
 	WithWantsRestingTouches(wantsRestingTouches bool) *Box
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Box
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Box
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Box
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Box
 	WithWantsLayer(wantsLayer bool) *Box
 	WithLayer(layer *quartzcore.CALayer) *Box
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Box
@@ -673,12 +673,12 @@ type Boxable interface {
 	WithClipsToBounds(clipsToBounds bool) *Box
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Box
 	WithToolTip(toolTip string) *Box
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Box
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Box
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Box
 	WithNextKeyView(nextKeyView ViewProvider) *Box
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Box
+	WithFocusRingType(focusRingType NSFocusRingType) *Box
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Box
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Box
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Box
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Box
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Box
@@ -695,10 +695,10 @@ type Boxable interface {
 	WithTouchBar(touchBar *TouchBar) *Box
 	SizeToFit()
 	SetFrameFromContentFrame(contentFrame corefoundation.CGRect)
-	BoxType() raw.NSBoxType
-	SetBoxType(boxType raw.NSBoxType)
-	TitlePosition() raw.NSTitlePosition
-	SetTitlePosition(titlePosition raw.NSTitlePosition)
+	BoxType() NSBoxType
+	SetBoxType(boxType NSBoxType)
+	TitlePosition() NSTitlePosition
+	SetTitlePosition(titlePosition NSTitlePosition)
 	Title() string
 	SetTitle(title string)
 	TitleFont() *Font
@@ -721,8 +721,8 @@ type Boxable interface {
 	FillColor() *Color
 	SetFillColor(fillColor *raw.NSColor)
 	SetTitleWithMnemonic(stringWithAmpersand string)
-	BorderType() raw.NSBorderType
-	SetBorderType(borderType raw.NSBorderType)
+	BorderType() NSBorderType
+	SetBorderType(borderType NSBorderType)
 }
 
 var _ Boxable = (*Box)(nil)

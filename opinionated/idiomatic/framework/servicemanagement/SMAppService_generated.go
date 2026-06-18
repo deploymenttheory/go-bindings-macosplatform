@@ -69,8 +69,8 @@ func (x *AppService) Unregister(ctx context.Context) error {
 }
 
 // Status calls the underlying Status.
-func (x *AppService) Status() raw.SMAppServiceStatus {
-	return x.inner.Status()
+func (x *AppService) Status() SMAppServiceStatus {
+	return SMAppServiceStatus(x.inner.Status())
 }
 
 // AppServiceable is the interface implemented by [AppService], for mocking and DI.
@@ -79,7 +79,7 @@ type AppServiceable interface {
 	RegisterAndReturnError() error
 	UnregisterAndReturnError() error
 	Unregister(ctx context.Context) error
-	Status() raw.SMAppServiceStatus
+	Status() SMAppServiceStatus
 }
 
 var _ AppServiceable = (*AppService)(nil)

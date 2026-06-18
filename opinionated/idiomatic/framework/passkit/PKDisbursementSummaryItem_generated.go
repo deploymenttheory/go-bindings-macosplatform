@@ -49,8 +49,8 @@ func (x *DisbursementSummaryItem) WithAmount(amount *foundation.NSDecimalNumber)
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *DisbursementSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *DisbursementSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetType(type_)
+func (x *DisbursementSummaryItem) WithType(type_ PKPaymentSummaryItemType) *DisbursementSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))
 	return x
 }
 
@@ -63,7 +63,7 @@ type DisbursementSummaryItemable interface {
 	Unwrap() *raw.PKDisbursementSummaryItem
 	WithLabel(label string) *DisbursementSummaryItem
 	WithAmount(amount *foundation.NSDecimalNumber) *DisbursementSummaryItem
-	WithType(type_ raw.PKPaymentSummaryItemType) *DisbursementSummaryItem
+	WithType(type_ PKPaymentSummaryItemType) *DisbursementSummaryItem
 }
 
 var _ DisbursementSummaryItemable = (*DisbursementSummaryItem)(nil)

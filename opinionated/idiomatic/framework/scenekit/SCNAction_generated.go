@@ -42,8 +42,8 @@ func (x *Action) WithDuration(duration float64) *Action {
 }
 
 // WithTimingMode sets the timingMode property and returns the receiver for chaining.
-func (x *Action) WithTimingMode(timingMode raw.SCNActionTimingMode) *Action {
-	x.inner.SetTimingMode(timingMode)
+func (x *Action) WithTimingMode(timingMode SCNActionTimingMode) *Action {
+	x.inner.SetTimingMode(raw.SCNActionTimingMode(timingMode))
 	return x
 }
 
@@ -79,13 +79,13 @@ func (x *Action) SetDuration(duration float64) {
 }
 
 // TimingMode calls the underlying TimingMode.
-func (x *Action) TimingMode() raw.SCNActionTimingMode {
-	return x.inner.TimingMode()
+func (x *Action) TimingMode() SCNActionTimingMode {
+	return SCNActionTimingMode(x.inner.TimingMode())
 }
 
 // SetTimingMode calls the underlying SetTimingMode.
-func (x *Action) SetTimingMode(timingMode raw.SCNActionTimingMode) {
-	x.inner.SetTimingMode(timingMode)
+func (x *Action) SetTimingMode(timingMode SCNActionTimingMode) {
+	x.inner.SetTimingMode(raw.SCNActionTimingMode(timingMode))
 }
 
 // TimingFunction calls the underlying TimingFunction.
@@ -112,14 +112,14 @@ func (x *Action) SetSpeed(speed float64) {
 type Actionable interface {
 	Unwrap() *raw.SCNAction
 	WithDuration(duration float64) *Action
-	WithTimingMode(timingMode raw.SCNActionTimingMode) *Action
+	WithTimingMode(timingMode SCNActionTimingMode) *Action
 	WithTimingFunction(timingFunction objc.Block) *Action
 	WithSpeed(speed float64) *Action
 	ReversedAction() *Action
 	Duration() float64
 	SetDuration(duration float64)
-	TimingMode() raw.SCNActionTimingMode
-	SetTimingMode(timingMode raw.SCNActionTimingMode)
+	TimingMode() SCNActionTimingMode
+	SetTimingMode(timingMode SCNActionTimingMode)
 	TimingFunction() objc.Block
 	SetTimingFunction(timingFunction objc.Block)
 	Speed() float64

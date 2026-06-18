@@ -30,9 +30,9 @@ func CompoundPredicateFromID(id objc.ID) *CompoundPredicate {
 }
 
 // NewCompoundPredicateWithTypeSubpredicates creates a new [CompoundPredicate].
-func NewCompoundPredicateWithTypeSubpredicates(type_ raw.NSCompoundPredicateType, subpredicates *raw.NSArray[*raw.NSPredicate]) *CompoundPredicate {
+func NewCompoundPredicateWithTypeSubpredicates(type_ NSCompoundPredicateType, subpredicates *raw.NSArray[*raw.NSPredicate]) *CompoundPredicate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCompoundPredicate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:subpredicates:"), type_, subpredicates.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:subpredicates:"), raw.NSCompoundPredicateType(type_), subpredicates.Ptr())
 	return &CompoundPredicate{inner: raw.NSCompoundPredicateFromID(_id)}
 }
 
@@ -50,8 +50,8 @@ func (x *CompoundPredicate) WithScriptingProperties(scriptingProperties *raw.NSD
 }
 
 // CompoundPredicateType calls the underlying CompoundPredicateType.
-func (x *CompoundPredicate) CompoundPredicateType() raw.NSCompoundPredicateType {
-	return x.inner.CompoundPredicateType()
+func (x *CompoundPredicate) CompoundPredicateType() NSCompoundPredicateType {
+	return NSCompoundPredicateType(x.inner.CompoundPredicateType())
 }
 
 // Subpredicates calls the underlying Subpredicates.
@@ -67,7 +67,7 @@ func (x *CompoundPredicate) asObject() *raw.NSObject { return &x.inner.NSPredica
 type CompoundPredicateable interface {
 	Unwrap() *raw.NSCompoundPredicate
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CompoundPredicate
-	CompoundPredicateType() raw.NSCompoundPredicateType
+	CompoundPredicateType() NSCompoundPredicateType
 	Subpredicates() *raw.NSArray[objc.ID]
 }
 

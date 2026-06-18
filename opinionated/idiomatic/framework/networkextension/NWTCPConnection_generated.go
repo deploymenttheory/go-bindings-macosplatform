@@ -117,8 +117,8 @@ func (x *NWTCPConnection) WriteClose() {
 }
 
 // State calls the underlying State.
-func (x *NWTCPConnection) State() raw.NWTCPConnectionState {
-	return x.inner.State()
+func (x *NWTCPConnection) State() NWTCPConnectionState {
+	return NWTCPConnectionState(x.inner.State())
 }
 
 // IsViable calls the underlying IsViable.
@@ -173,7 +173,7 @@ type NWTCPConnectionable interface {
 	ReadMinimumLengthMaximumLength(ctx context.Context, minimum uint, maximum uint) (*foundation.NSData, error)
 	Write(ctx context.Context, data *foundation.NSData) error
 	WriteClose()
-	State() raw.NWTCPConnectionState
+	State() NWTCPConnectionState
 	IsViable() bool
 	HasBetterPath() bool
 	Endpoint() unsafe.Pointer

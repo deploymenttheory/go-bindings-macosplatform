@@ -48,8 +48,8 @@ func (x *LibArtwork) ImageData() *foundation.NSData {
 }
 
 // ImageDataFormat calls the underlying ImageDataFormat.
-func (x *LibArtwork) ImageDataFormat() raw.ITLibArtworkFormat {
-	return x.inner.ImageDataFormat()
+func (x *LibArtwork) ImageDataFormat() ITLibArtworkFormat {
+	return ITLibArtworkFormat(x.inner.ImageDataFormat())
 }
 
 // LibArtworkable is the interface implemented by [LibArtwork], for mocking and DI.
@@ -57,7 +57,7 @@ type LibArtworkable interface {
 	Unwrap() *raw.ITLibArtwork
 	Image() *appkit.NSImage
 	ImageData() *foundation.NSData
-	ImageDataFormat() raw.ITLibArtworkFormat
+	ImageDataFormat() ITLibArtworkFormat
 }
 
 var _ LibArtworkable = (*LibArtwork)(nil)

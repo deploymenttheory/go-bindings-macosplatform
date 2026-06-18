@@ -50,8 +50,8 @@ func (x *HealthStore) SupportsHealthRecords() bool {
 }
 
 // AuthorizationStatusForType calls the underlying AuthorizationStatusForType.
-func (x *HealthStore) AuthorizationStatusForType(type_ *raw.HKObjectType) raw.HKAuthorizationStatus {
-	return x.inner.AuthorizationStatusForType(type_)
+func (x *HealthStore) AuthorizationStatusForType(type_ *raw.HKObjectType) HKAuthorizationStatus {
+	return HKAuthorizationStatus(x.inner.AuthorizationStatusForType(type_))
 }
 
 // RequestAuthorizationToShareTypesReadTypesCompletion calls the underlying RequestAuthorizationToShareTypesReadTypesCompletion.
@@ -65,8 +65,10 @@ func (x *HealthStore) RequestPerObjectReadAuthorizationForTypePredicateCompletio
 }
 
 // GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion calls the underlying GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion.
-func (x *HealthStore) GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(raw.HKAuthorizationRequestStatus, unsafe.Pointer)) {
-	x.inner.GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare, typesToRead, completion)
+func (x *HealthStore) GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(HKAuthorizationRequestStatus, unsafe.Pointer)) {
+	x.inner.GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare, typesToRead, func(_a0 raw.HKAuthorizationRequestStatus, _a1 unsafe.Pointer) {
+		completion(HKAuthorizationRequestStatus(_a0), _a1)
+	})
 }
 
 // HandleAuthorizationForExtensionWithCompletion calls the underlying HandleAuthorizationForExtensionWithCompletion.
@@ -238,8 +240,8 @@ func (x *HealthStore) SetWorkoutSessionMirroringStartHandler(ctx context.Context
 }
 
 // EnableBackgroundDeliveryForTypeFrequencyWithCompletion calls the underlying EnableBackgroundDeliveryForTypeFrequencyWithCompletion.
-func (x *HealthStore) EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_ *raw.HKObjectType, frequency raw.HKUpdateFrequency, completion func(bool, unsafe.Pointer)) {
-	x.inner.EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_, frequency, completion)
+func (x *HealthStore) EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_ *raw.HKObjectType, frequency HKUpdateFrequency, completion func(bool, unsafe.Pointer)) {
+	x.inner.EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_, raw.HKUpdateFrequency(frequency), completion)
 }
 
 // DisableBackgroundDeliveryForTypeWithCompletion calls the underlying DisableBackgroundDeliveryForTypeWithCompletion.
@@ -277,10 +279,10 @@ type HealthStoreable interface {
 	Unwrap() *raw.HKHealthStore
 	WithWorkoutSessionMirroringStartHandler(workoutSessionMirroringStartHandler func(*raw.HKWorkoutSession)) *HealthStore
 	SupportsHealthRecords() bool
-	AuthorizationStatusForType(type_ *raw.HKObjectType) raw.HKAuthorizationStatus
+	AuthorizationStatusForType(type_ *raw.HKObjectType) HKAuthorizationStatus
 	RequestAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(bool, unsafe.Pointer))
 	RequestPerObjectReadAuthorizationForTypePredicateCompletion(objectType *raw.HKObjectType, predicate *foundation.NSPredicate, completion func(bool, unsafe.Pointer))
-	GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(raw.HKAuthorizationRequestStatus, unsafe.Pointer))
+	GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(HKAuthorizationRequestStatus, unsafe.Pointer))
 	HandleAuthorizationForExtensionWithCompletion(completion func(bool, unsafe.Pointer))
 	EarliestPermittedSampleDate() *foundation.NSDate
 	SaveObjectWithCompletion(object *raw.HKObject, completion func(bool, unsafe.Pointer))
@@ -304,7 +306,7 @@ type HealthStoreable interface {
 	StartWatchAppWithWorkoutConfigurationCompletion(workoutConfiguration *raw.HKWorkoutConfiguration, completion func(bool, unsafe.Pointer))
 	WorkoutSessionMirroringStartHandler() objc.Block
 	SetWorkoutSessionMirroringStartHandler(ctx context.Context) (*WorkoutSession, error)
-	EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_ *raw.HKObjectType, frequency raw.HKUpdateFrequency, completion func(bool, unsafe.Pointer))
+	EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_ *raw.HKObjectType, frequency HKUpdateFrequency, completion func(bool, unsafe.Pointer))
 	DisableBackgroundDeliveryForTypeWithCompletion(type_ *raw.HKObjectType, completion func(bool, unsafe.Pointer))
 	DisableAllBackgroundDeliveryWithCompletion(completion func(bool, unsafe.Pointer))
 	PreferredUnitsForQuantityTypesCompletion(quantityTypes *foundation.NSSet[*raw.HKQuantityType], completion func(*foundation.NSDictionary[*raw.HKQuantityType, *raw.HKUnit], unsafe.Pointer))

@@ -36,20 +36,20 @@ func NewRelativeDateTimeFormatter() *RelativeDateTimeFormatter {
 }
 
 // WithDateTimeStyle sets the dateTimeStyle property and returns the receiver for chaining.
-func (x *RelativeDateTimeFormatter) WithDateTimeStyle(dateTimeStyle raw.NSRelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter {
-	x.inner.SetDateTimeStyle(dateTimeStyle)
+func (x *RelativeDateTimeFormatter) WithDateTimeStyle(dateTimeStyle NSRelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter {
+	x.inner.SetDateTimeStyle(raw.NSRelativeDateTimeFormatterStyle(dateTimeStyle))
 	return x
 }
 
 // WithUnitsStyle sets the unitsStyle property and returns the receiver for chaining.
-func (x *RelativeDateTimeFormatter) WithUnitsStyle(unitsStyle raw.NSRelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter {
-	x.inner.SetUnitsStyle(unitsStyle)
+func (x *RelativeDateTimeFormatter) WithUnitsStyle(unitsStyle NSRelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter {
+	x.inner.SetUnitsStyle(raw.NSRelativeDateTimeFormatterUnitsStyle(unitsStyle))
 	return x
 }
 
 // WithFormattingContext sets the formattingContext property and returns the receiver for chaining.
-func (x *RelativeDateTimeFormatter) WithFormattingContext(formattingContext raw.NSFormattingContext) *RelativeDateTimeFormatter {
-	x.inner.SetFormattingContext(formattingContext)
+func (x *RelativeDateTimeFormatter) WithFormattingContext(formattingContext NSFormattingContext) *RelativeDateTimeFormatter {
+	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
 	return x
 }
 
@@ -99,33 +99,33 @@ func (x *RelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date *r
 }
 
 // DateTimeStyle calls the underlying DateTimeStyle.
-func (x *RelativeDateTimeFormatter) DateTimeStyle() raw.NSRelativeDateTimeFormatterStyle {
-	return x.inner.DateTimeStyle()
+func (x *RelativeDateTimeFormatter) DateTimeStyle() NSRelativeDateTimeFormatterStyle {
+	return NSRelativeDateTimeFormatterStyle(x.inner.DateTimeStyle())
 }
 
 // SetDateTimeStyle calls the underlying SetDateTimeStyle.
-func (x *RelativeDateTimeFormatter) SetDateTimeStyle(dateTimeStyle raw.NSRelativeDateTimeFormatterStyle) {
-	x.inner.SetDateTimeStyle(dateTimeStyle)
+func (x *RelativeDateTimeFormatter) SetDateTimeStyle(dateTimeStyle NSRelativeDateTimeFormatterStyle) {
+	x.inner.SetDateTimeStyle(raw.NSRelativeDateTimeFormatterStyle(dateTimeStyle))
 }
 
 // UnitsStyle calls the underlying UnitsStyle.
-func (x *RelativeDateTimeFormatter) UnitsStyle() raw.NSRelativeDateTimeFormatterUnitsStyle {
-	return x.inner.UnitsStyle()
+func (x *RelativeDateTimeFormatter) UnitsStyle() NSRelativeDateTimeFormatterUnitsStyle {
+	return NSRelativeDateTimeFormatterUnitsStyle(x.inner.UnitsStyle())
 }
 
 // SetUnitsStyle calls the underlying SetUnitsStyle.
-func (x *RelativeDateTimeFormatter) SetUnitsStyle(unitsStyle raw.NSRelativeDateTimeFormatterUnitsStyle) {
-	x.inner.SetUnitsStyle(unitsStyle)
+func (x *RelativeDateTimeFormatter) SetUnitsStyle(unitsStyle NSRelativeDateTimeFormatterUnitsStyle) {
+	x.inner.SetUnitsStyle(raw.NSRelativeDateTimeFormatterUnitsStyle(unitsStyle))
 }
 
 // FormattingContext calls the underlying FormattingContext.
-func (x *RelativeDateTimeFormatter) FormattingContext() raw.NSFormattingContext {
-	return x.inner.FormattingContext()
+func (x *RelativeDateTimeFormatter) FormattingContext() NSFormattingContext {
+	return NSFormattingContext(x.inner.FormattingContext())
 }
 
 // SetFormattingContext calls the underlying SetFormattingContext.
-func (x *RelativeDateTimeFormatter) SetFormattingContext(formattingContext raw.NSFormattingContext) {
-	x.inner.SetFormattingContext(formattingContext)
+func (x *RelativeDateTimeFormatter) SetFormattingContext(formattingContext NSFormattingContext) {
+	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
 }
 
 // Calendar calls the underlying Calendar.
@@ -163,21 +163,21 @@ func (x *RelativeDateTimeFormatter) asObject() *raw.NSObject { return &x.inner.N
 // RelativeDateTimeFormatterable is the interface implemented by [RelativeDateTimeFormatter], for mocking and DI.
 type RelativeDateTimeFormatterable interface {
 	Unwrap() *raw.NSRelativeDateTimeFormatter
-	WithDateTimeStyle(dateTimeStyle raw.NSRelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter
-	WithUnitsStyle(unitsStyle raw.NSRelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter
-	WithFormattingContext(formattingContext raw.NSFormattingContext) *RelativeDateTimeFormatter
+	WithDateTimeStyle(dateTimeStyle NSRelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter
+	WithUnitsStyle(unitsStyle NSRelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter
+	WithFormattingContext(formattingContext NSFormattingContext) *RelativeDateTimeFormatter
 	WithCalendar(calendar *Calendar) *RelativeDateTimeFormatter
 	WithLocale(locale *Locale) *RelativeDateTimeFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeDateTimeFormatter
 	LocalizedStringFromDateComponents(dateComponents *raw.NSDateComponents) *String
 	LocalizedStringFromTimeInterval(timeInterval float64) *String
 	LocalizedStringForDateRelativeToDate(date *raw.NSDate, referenceDate *raw.NSDate) *String
-	DateTimeStyle() raw.NSRelativeDateTimeFormatterStyle
-	SetDateTimeStyle(dateTimeStyle raw.NSRelativeDateTimeFormatterStyle)
-	UnitsStyle() raw.NSRelativeDateTimeFormatterUnitsStyle
-	SetUnitsStyle(unitsStyle raw.NSRelativeDateTimeFormatterUnitsStyle)
-	FormattingContext() raw.NSFormattingContext
-	SetFormattingContext(formattingContext raw.NSFormattingContext)
+	DateTimeStyle() NSRelativeDateTimeFormatterStyle
+	SetDateTimeStyle(dateTimeStyle NSRelativeDateTimeFormatterStyle)
+	UnitsStyle() NSRelativeDateTimeFormatterUnitsStyle
+	SetUnitsStyle(unitsStyle NSRelativeDateTimeFormatterUnitsStyle)
+	FormattingContext() NSFormattingContext
+	SetFormattingContext(formattingContext NSFormattingContext)
 	Calendar() *Calendar
 	SetCalendar(calendar *raw.NSCalendar)
 	Locale() *Locale

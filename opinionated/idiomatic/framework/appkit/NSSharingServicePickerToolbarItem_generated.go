@@ -124,8 +124,8 @@ func (x *SharingServicePickerToolbarItem) WithBackgroundTintColor(backgroundTint
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *SharingServicePickerToolbarItem) WithStyle(style raw.NSToolbarItemStyle) *SharingServicePickerToolbarItem {
-	x.inner.NSToolbarItem.SetStyle(style)
+func (x *SharingServicePickerToolbarItem) WithStyle(style NSToolbarItemStyle) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetStyle(raw.NSToolbarItemStyle(style))
 	return x
 }
 
@@ -208,7 +208,7 @@ type SharingServicePickerToolbarItemable interface {
 	WithTitle(title string) *SharingServicePickerToolbarItem
 	WithBordered(bordered bool) *SharingServicePickerToolbarItem
 	WithBackgroundTintColor(backgroundTintColor *Color) *SharingServicePickerToolbarItem
-	WithStyle(style raw.NSToolbarItemStyle) *SharingServicePickerToolbarItem
+	WithStyle(style NSToolbarItemStyle) *SharingServicePickerToolbarItem
 	WithNavigational(navigational bool) *SharingServicePickerToolbarItem
 	WithView(view ViewProvider) *SharingServicePickerToolbarItem
 	WithHidden(hidden bool) *SharingServicePickerToolbarItem

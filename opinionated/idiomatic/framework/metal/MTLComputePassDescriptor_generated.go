@@ -36,19 +36,19 @@ func NewComputePassDescriptor() *ComputePassDescriptor {
 }
 
 // WithDispatchType sets the dispatchType property and returns the receiver for chaining.
-func (x *ComputePassDescriptor) WithDispatchType(dispatchType raw.MTLDispatchType) *ComputePassDescriptor {
-	x.inner.SetDispatchType(dispatchType)
+func (x *ComputePassDescriptor) WithDispatchType(dispatchType MTLDispatchType) *ComputePassDescriptor {
+	x.inner.SetDispatchType(raw.MTLDispatchType(dispatchType))
 	return x
 }
 
 // DispatchType calls the underlying DispatchType.
-func (x *ComputePassDescriptor) DispatchType() raw.MTLDispatchType {
-	return x.inner.DispatchType()
+func (x *ComputePassDescriptor) DispatchType() MTLDispatchType {
+	return MTLDispatchType(x.inner.DispatchType())
 }
 
 // SetDispatchType calls the underlying SetDispatchType.
-func (x *ComputePassDescriptor) SetDispatchType(dispatchType raw.MTLDispatchType) {
-	x.inner.SetDispatchType(dispatchType)
+func (x *ComputePassDescriptor) SetDispatchType(dispatchType MTLDispatchType) {
+	x.inner.SetDispatchType(raw.MTLDispatchType(dispatchType))
 }
 
 // SampleBufferAttachments calls the underlying SampleBufferAttachments.
@@ -63,9 +63,9 @@ func (x *ComputePassDescriptor) SampleBufferAttachments() *ComputePassSampleBuff
 // ComputePassDescriptorable is the interface implemented by [ComputePassDescriptor], for mocking and DI.
 type ComputePassDescriptorable interface {
 	Unwrap() *raw.MTLComputePassDescriptor
-	WithDispatchType(dispatchType raw.MTLDispatchType) *ComputePassDescriptor
-	DispatchType() raw.MTLDispatchType
-	SetDispatchType(dispatchType raw.MTLDispatchType)
+	WithDispatchType(dispatchType MTLDispatchType) *ComputePassDescriptor
+	DispatchType() MTLDispatchType
+	SetDispatchType(dispatchType MTLDispatchType)
 	SampleBufferAttachments() *ComputePassSampleBufferAttachmentDescriptorArray
 }
 

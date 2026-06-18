@@ -88,8 +88,8 @@ func (x *CustomImageRep) WithPixelsHigh(pixelsHigh int) *CustomImageRep {
 }
 
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *CustomImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CustomImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+func (x *CustomImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CustomImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
@@ -120,7 +120,7 @@ type CustomImageRepable interface {
 	WithBitsPerSample(bitsPerSample int) *CustomImageRep
 	WithPixelsWide(pixelsWide int) *CustomImageRep
 	WithPixelsHigh(pixelsHigh int) *CustomImageRep
-	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CustomImageRep
+	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CustomImageRep
 	DrawingHandler() objc.Block
 	DrawSelector() objc.SEL
 	Delegate() objc.ID

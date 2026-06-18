@@ -56,8 +56,8 @@ func (x *Alarm) WithStructuredLocation(structuredLocation *StructuredLocation) *
 }
 
 // WithProximity sets the proximity property and returns the receiver for chaining.
-func (x *Alarm) WithProximity(proximity raw.EKAlarmProximity) *Alarm {
-	x.inner.SetProximity(proximity)
+func (x *Alarm) WithProximity(proximity EKAlarmProximity) *Alarm {
+	x.inner.SetProximity(raw.EKAlarmProximity(proximity))
 	return x
 }
 
@@ -114,18 +114,18 @@ func (x *Alarm) SetStructuredLocation(structuredLocation *raw.EKStructuredLocati
 }
 
 // Proximity calls the underlying Proximity.
-func (x *Alarm) Proximity() raw.EKAlarmProximity {
-	return x.inner.Proximity()
+func (x *Alarm) Proximity() EKAlarmProximity {
+	return EKAlarmProximity(x.inner.Proximity())
 }
 
 // SetProximity calls the underlying SetProximity.
-func (x *Alarm) SetProximity(proximity raw.EKAlarmProximity) {
-	x.inner.SetProximity(proximity)
+func (x *Alarm) SetProximity(proximity EKAlarmProximity) {
+	x.inner.SetProximity(raw.EKAlarmProximity(proximity))
 }
 
 // Type calls the underlying Type.
-func (x *Alarm) Type() raw.EKAlarmType {
-	return x.inner.Type()
+func (x *Alarm) Type() EKAlarmType {
+	return EKAlarmType(x.inner.Type())
 }
 
 // EmailAddress calls the underlying EmailAddress.
@@ -174,7 +174,7 @@ type Alarmable interface {
 	WithRelativeOffset(relativeOffset float64) *Alarm
 	WithAbsoluteDate(absoluteDate *foundation.NSDate) *Alarm
 	WithStructuredLocation(structuredLocation *StructuredLocation) *Alarm
-	WithProximity(proximity raw.EKAlarmProximity) *Alarm
+	WithProximity(proximity EKAlarmProximity) *Alarm
 	WithEmailAddress(emailAddress string) *Alarm
 	WithSoundName(soundName string) *Alarm
 	WithUrl(url string) *Alarm
@@ -184,9 +184,9 @@ type Alarmable interface {
 	SetAbsoluteDate(absoluteDate *foundation.NSDate)
 	StructuredLocation() *StructuredLocation
 	SetStructuredLocation(structuredLocation *raw.EKStructuredLocation)
-	Proximity() raw.EKAlarmProximity
-	SetProximity(proximity raw.EKAlarmProximity)
-	Type() raw.EKAlarmType
+	Proximity() EKAlarmProximity
+	SetProximity(proximity EKAlarmProximity)
+	Type() EKAlarmType
 	EmailAddress() string
 	SetEmailAddress(emailAddress string)
 	SoundName() string

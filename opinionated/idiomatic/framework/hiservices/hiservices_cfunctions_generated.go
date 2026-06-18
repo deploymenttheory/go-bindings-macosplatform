@@ -30,23 +30,23 @@ func AXIsProcessTrustedWithOptions(options unsafe.Pointer) uint8 {
 }
 
 // AXMakeProcessTrusted calls [raw.AXMakeProcessTrusted] (C function AXMakeProcessTrusted).
-func AXMakeProcessTrusted(executablePath unsafe.Pointer) raw.AXError {
-	return raw.AXMakeProcessTrusted(executablePath)
+func AXMakeProcessTrusted(executablePath unsafe.Pointer) AXError {
+	return AXError(raw.AXMakeProcessTrusted(executablePath))
 }
 
 // AXObserverAddNotification calls [raw.AXObserverAddNotification] (C function AXObserverAddNotification).
-func AXObserverAddNotification(observer unsafe.Pointer, element unsafe.Pointer, notification unsafe.Pointer, refcon unsafe.Pointer) raw.AXError {
-	return raw.AXObserverAddNotification(observer, element, notification, refcon)
+func AXObserverAddNotification(observer unsafe.Pointer, element unsafe.Pointer, notification unsafe.Pointer, refcon unsafe.Pointer) AXError {
+	return AXError(raw.AXObserverAddNotification(observer, element, notification, refcon))
 }
 
 // AXObserverCreate calls [raw.AXObserverCreate] (C function AXObserverCreate).
-func AXObserverCreate(application int, callback unsafe.Pointer, outObserver unsafe.Pointer) raw.AXError {
-	return raw.AXObserverCreate(application, callback, outObserver)
+func AXObserverCreate(application int, callback unsafe.Pointer, outObserver unsafe.Pointer) AXError {
+	return AXError(raw.AXObserverCreate(application, callback, outObserver))
 }
 
 // AXObserverCreateWithInfoCallback calls [raw.AXObserverCreateWithInfoCallback] (C function AXObserverCreateWithInfoCallback).
-func AXObserverCreateWithInfoCallback(application int, callback unsafe.Pointer, outObserver unsafe.Pointer) raw.AXError {
-	return raw.AXObserverCreateWithInfoCallback(application, callback, outObserver)
+func AXObserverCreateWithInfoCallback(application int, callback unsafe.Pointer, outObserver unsafe.Pointer) AXError {
+	return AXError(raw.AXObserverCreateWithInfoCallback(application, callback, outObserver))
 }
 
 // AXObserverGetRunLoopSource calls [raw.AXObserverGetRunLoopSource] (C function AXObserverGetRunLoopSource).
@@ -60,8 +60,8 @@ func AXObserverGetTypeID() uint {
 }
 
 // AXObserverRemoveNotification calls [raw.AXObserverRemoveNotification] (C function AXObserverRemoveNotification).
-func AXObserverRemoveNotification(observer unsafe.Pointer, element unsafe.Pointer, notification unsafe.Pointer) raw.AXError {
-	return raw.AXObserverRemoveNotification(observer, element, notification)
+func AXObserverRemoveNotification(observer unsafe.Pointer, element unsafe.Pointer, notification unsafe.Pointer) AXError {
+	return AXError(raw.AXObserverRemoveNotification(observer, element, notification))
 }
 
 // AXTextMarkerCreate calls [raw.AXTextMarkerCreate] (C function AXTextMarkerCreate).
@@ -110,48 +110,48 @@ func AXTextMarkerRangeGetTypeID() uint {
 }
 
 // AXUIElementCopyActionDescription calls [raw.AXUIElementCopyActionDescription] (C function AXUIElementCopyActionDescription).
-func AXUIElementCopyActionDescription(element unsafe.Pointer, action unsafe.Pointer, description unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementCopyActionDescription(element, action, description)
+func AXUIElementCopyActionDescription(element unsafe.Pointer, action unsafe.Pointer, description unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementCopyActionDescription(element, action, description))
 }
 
 // AXUIElementCopyActionNames calls [raw.AXUIElementCopyActionNames] (C function AXUIElementCopyActionNames).
-func AXUIElementCopyActionNames(element unsafe.Pointer, names unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementCopyActionNames(element, names)
+func AXUIElementCopyActionNames(element unsafe.Pointer, names unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementCopyActionNames(element, names))
 }
 
 // AXUIElementCopyAttributeNames calls [raw.AXUIElementCopyAttributeNames] (C function AXUIElementCopyAttributeNames).
-func AXUIElementCopyAttributeNames(element unsafe.Pointer, names unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementCopyAttributeNames(element, names)
+func AXUIElementCopyAttributeNames(element unsafe.Pointer, names unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementCopyAttributeNames(element, names))
 }
 
 // AXUIElementCopyAttributeValue calls [raw.AXUIElementCopyAttributeValue] (C function AXUIElementCopyAttributeValue).
-func AXUIElementCopyAttributeValue(element unsafe.Pointer, attribute unsafe.Pointer, value unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementCopyAttributeValue(element, attribute, value)
+func AXUIElementCopyAttributeValue(element unsafe.Pointer, attribute unsafe.Pointer, value unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementCopyAttributeValue(element, attribute, value))
 }
 
 // AXUIElementCopyAttributeValues calls [raw.AXUIElementCopyAttributeValues] (C function AXUIElementCopyAttributeValues).
-func AXUIElementCopyAttributeValues(element unsafe.Pointer, attribute unsafe.Pointer, index int, maxValues int, values unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementCopyAttributeValues(element, attribute, index, maxValues, values)
+func AXUIElementCopyAttributeValues(element unsafe.Pointer, attribute unsafe.Pointer, index int, maxValues int, values unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementCopyAttributeValues(element, attribute, index, maxValues, values))
 }
 
 // AXUIElementCopyElementAtPosition calls [raw.AXUIElementCopyElementAtPosition] (C function AXUIElementCopyElementAtPosition).
-func AXUIElementCopyElementAtPosition(application unsafe.Pointer, x float32, y float32, element unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementCopyElementAtPosition(application, x, y, element)
+func AXUIElementCopyElementAtPosition(application unsafe.Pointer, x float32, y float32, element unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementCopyElementAtPosition(application, x, y, element))
 }
 
 // AXUIElementCopyMultipleAttributeValues calls [raw.AXUIElementCopyMultipleAttributeValues] (C function AXUIElementCopyMultipleAttributeValues).
-func AXUIElementCopyMultipleAttributeValues(element unsafe.Pointer, attributes unsafe.Pointer, options raw.AXCopyMultipleAttributeOptions, values unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementCopyMultipleAttributeValues(element, attributes, options, values)
+func AXUIElementCopyMultipleAttributeValues(element unsafe.Pointer, attributes unsafe.Pointer, options AXCopyMultipleAttributeOptions, values unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementCopyMultipleAttributeValues(element, attributes, raw.AXCopyMultipleAttributeOptions(options), values))
 }
 
 // AXUIElementCopyParameterizedAttributeNames calls [raw.AXUIElementCopyParameterizedAttributeNames] (C function AXUIElementCopyParameterizedAttributeNames).
-func AXUIElementCopyParameterizedAttributeNames(element unsafe.Pointer, names unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementCopyParameterizedAttributeNames(element, names)
+func AXUIElementCopyParameterizedAttributeNames(element unsafe.Pointer, names unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementCopyParameterizedAttributeNames(element, names))
 }
 
 // AXUIElementCopyParameterizedAttributeValue calls [raw.AXUIElementCopyParameterizedAttributeValue] (C function AXUIElementCopyParameterizedAttributeValue).
-func AXUIElementCopyParameterizedAttributeValue(element unsafe.Pointer, parameterizedAttribute unsafe.Pointer, parameter unsafe.Pointer, result unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementCopyParameterizedAttributeValue(element, parameterizedAttribute, parameter, result)
+func AXUIElementCopyParameterizedAttributeValue(element unsafe.Pointer, parameterizedAttribute unsafe.Pointer, parameter unsafe.Pointer, result unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementCopyParameterizedAttributeValue(element, parameterizedAttribute, parameter, result))
 }
 
 // AXUIElementCreateApplication calls [raw.AXUIElementCreateApplication] (C function AXUIElementCreateApplication).
@@ -165,13 +165,13 @@ func AXUIElementCreateSystemWide() unsafe.Pointer {
 }
 
 // AXUIElementGetAttributeValueCount calls [raw.AXUIElementGetAttributeValueCount] (C function AXUIElementGetAttributeValueCount).
-func AXUIElementGetAttributeValueCount(element unsafe.Pointer, attribute unsafe.Pointer, count *int) raw.AXError {
-	return raw.AXUIElementGetAttributeValueCount(element, attribute, count)
+func AXUIElementGetAttributeValueCount(element unsafe.Pointer, attribute unsafe.Pointer, count *int) AXError {
+	return AXError(raw.AXUIElementGetAttributeValueCount(element, attribute, count))
 }
 
 // AXUIElementGetPid calls [raw.AXUIElementGetPid] (C function AXUIElementGetPid).
-func AXUIElementGetPid(element unsafe.Pointer, pid *int) raw.AXError {
-	return raw.AXUIElementGetPid(element, pid)
+func AXUIElementGetPid(element unsafe.Pointer, pid *int) AXError {
+	return AXError(raw.AXUIElementGetPid(element, pid))
 }
 
 // AXUIElementGetTypeID calls [raw.AXUIElementGetTypeID] (C function AXUIElementGetTypeID).
@@ -180,38 +180,38 @@ func AXUIElementGetTypeID() uint {
 }
 
 // AXUIElementIsAttributeSettable calls [raw.AXUIElementIsAttributeSettable] (C function AXUIElementIsAttributeSettable).
-func AXUIElementIsAttributeSettable(element unsafe.Pointer, attribute unsafe.Pointer, settable *uint8) raw.AXError {
-	return raw.AXUIElementIsAttributeSettable(element, attribute, settable)
+func AXUIElementIsAttributeSettable(element unsafe.Pointer, attribute unsafe.Pointer, settable *uint8) AXError {
+	return AXError(raw.AXUIElementIsAttributeSettable(element, attribute, settable))
 }
 
 // AXUIElementPerformAction calls [raw.AXUIElementPerformAction] (C function AXUIElementPerformAction).
-func AXUIElementPerformAction(element unsafe.Pointer, action unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementPerformAction(element, action)
+func AXUIElementPerformAction(element unsafe.Pointer, action unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementPerformAction(element, action))
 }
 
 // AXUIElementPostKeyboardEvent calls [raw.AXUIElementPostKeyboardEvent] (C function AXUIElementPostKeyboardEvent).
-func AXUIElementPostKeyboardEvent(application unsafe.Pointer, keyChar uint16, virtualKey uint16, keyDown uint8) raw.AXError {
-	return raw.AXUIElementPostKeyboardEvent(application, keyChar, virtualKey, keyDown)
+func AXUIElementPostKeyboardEvent(application unsafe.Pointer, keyChar uint16, virtualKey uint16, keyDown uint8) AXError {
+	return AXError(raw.AXUIElementPostKeyboardEvent(application, keyChar, virtualKey, keyDown))
 }
 
 // AXUIElementSetAttributeValue calls [raw.AXUIElementSetAttributeValue] (C function AXUIElementSetAttributeValue).
-func AXUIElementSetAttributeValue(element unsafe.Pointer, attribute unsafe.Pointer, value unsafe.Pointer) raw.AXError {
-	return raw.AXUIElementSetAttributeValue(element, attribute, value)
+func AXUIElementSetAttributeValue(element unsafe.Pointer, attribute unsafe.Pointer, value unsafe.Pointer) AXError {
+	return AXError(raw.AXUIElementSetAttributeValue(element, attribute, value))
 }
 
 // AXUIElementSetMessagingTimeout calls [raw.AXUIElementSetMessagingTimeout] (C function AXUIElementSetMessagingTimeout).
-func AXUIElementSetMessagingTimeout(element unsafe.Pointer, timeoutInSeconds float32) raw.AXError {
-	return raw.AXUIElementSetMessagingTimeout(element, timeoutInSeconds)
+func AXUIElementSetMessagingTimeout(element unsafe.Pointer, timeoutInSeconds float32) AXError {
+	return AXError(raw.AXUIElementSetMessagingTimeout(element, timeoutInSeconds))
 }
 
 // AXValueCreate calls [raw.AXValueCreate] (C function AXValueCreate).
-func AXValueCreate(theType raw.AXValueType, valuePtr unsafe.Pointer) unsafe.Pointer {
-	return raw.AXValueCreate(theType, valuePtr)
+func AXValueCreate(theType AXValueType, valuePtr unsafe.Pointer) unsafe.Pointer {
+	return raw.AXValueCreate(raw.AXValueType(theType), valuePtr)
 }
 
 // AXValueGetType calls [raw.AXValueGetType] (C function AXValueGetType).
-func AXValueGetType(value unsafe.Pointer) raw.AXValueType {
-	return raw.AXValueGetType(value)
+func AXValueGetType(value unsafe.Pointer) AXValueType {
+	return AXValueType(raw.AXValueGetType(value))
 }
 
 // AXValueGetTypeID calls [raw.AXValueGetTypeID] (C function AXValueGetTypeID).
@@ -220,8 +220,8 @@ func AXValueGetTypeID() uint {
 }
 
 // AXValueGetValue calls [raw.AXValueGetValue] (C function AXValueGetValue).
-func AXValueGetValue(value unsafe.Pointer, theType raw.AXValueType, valuePtr unsafe.Pointer) uint8 {
-	return raw.AXValueGetValue(value, theType, valuePtr)
+func AXValueGetValue(value unsafe.Pointer, theType AXValueType, valuePtr unsafe.Pointer) uint8 {
+	return raw.AXValueGetValue(value, raw.AXValueType(theType), valuePtr)
 }
 
 // CopyProcessName calls [raw.CopyProcessName] (C function CopyProcessName).
@@ -730,8 +730,13 @@ func PasteboardGetItemCount(inPasteboard unsafe.Pointer, outItemCount *uint) int
 }
 
 // PasteboardGetItemFlavorFlags calls [raw.PasteboardGetItemFlavorFlags] (C function PasteboardGetItemFlavorFlags).
-func PasteboardGetItemFlavorFlags(inPasteboard unsafe.Pointer, inItem unsafe.Pointer, inFlavorType unsafe.Pointer, outFlags *raw.PasteboardFlavorFlags) int {
-	return raw.PasteboardGetItemFlavorFlags(inPasteboard, inItem, inFlavorType, outFlags)
+func PasteboardGetItemFlavorFlags(inPasteboard unsafe.Pointer, inItem unsafe.Pointer, inFlavorType unsafe.Pointer, outFlags *PasteboardFlavorFlags) int {
+	var _outFlags raw.PasteboardFlavorFlags
+	_ret := raw.PasteboardGetItemFlavorFlags(inPasteboard, inItem, inFlavorType, &_outFlags)
+	if outFlags != nil {
+		*outFlags = PasteboardFlavorFlags(_outFlags)
+	}
+	return _ret
 }
 
 // PasteboardGetItemIdentifier calls [raw.PasteboardGetItemIdentifier] (C function PasteboardGetItemIdentifier).
@@ -745,8 +750,8 @@ func PasteboardGetTypeID() uint {
 }
 
 // PasteboardPutItemFlavor calls [raw.PasteboardPutItemFlavor] (C function PasteboardPutItemFlavor).
-func PasteboardPutItemFlavor(inPasteboard unsafe.Pointer, inItem unsafe.Pointer, inFlavorType unsafe.Pointer, inData unsafe.Pointer, inFlags raw.PasteboardFlavorFlags) int {
-	return raw.PasteboardPutItemFlavor(inPasteboard, inItem, inFlavorType, inData, inFlags)
+func PasteboardPutItemFlavor(inPasteboard unsafe.Pointer, inItem unsafe.Pointer, inFlavorType unsafe.Pointer, inData unsafe.Pointer, inFlags PasteboardFlavorFlags) int {
+	return raw.PasteboardPutItemFlavor(inPasteboard, inItem, inFlavorType, inData, raw.PasteboardFlavorFlags(inFlags))
 }
 
 // PasteboardResolvePromises calls [raw.PasteboardResolvePromises] (C function PasteboardResolvePromises).
@@ -765,8 +770,8 @@ func PasteboardSetPromiseKeeper(inPasteboard unsafe.Pointer, inPromiseKeeper uns
 }
 
 // PasteboardSynchronize calls [raw.PasteboardSynchronize] (C function PasteboardSynchronize).
-func PasteboardSynchronize(inPasteboard unsafe.Pointer) raw.PasteboardSyncFlags {
-	return raw.PasteboardSynchronize(inPasteboard)
+func PasteboardSynchronize(inPasteboard unsafe.Pointer) PasteboardSyncFlags {
+	return PasteboardSyncFlags(raw.PasteboardSynchronize(inPasteboard))
 }
 
 // PlotIconRefInContext calls [raw.PlotIconRefInContext] (C function PlotIconRefInContext).

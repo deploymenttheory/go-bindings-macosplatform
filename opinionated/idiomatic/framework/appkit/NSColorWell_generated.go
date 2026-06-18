@@ -53,8 +53,8 @@ func (x *ColorWell) WithColor(color *Color) *ColorWell {
 }
 
 // WithColorWellStyle sets the colorWellStyle property and returns the receiver for chaining.
-func (x *ColorWell) WithColorWellStyle(colorWellStyle raw.NSColorWellStyle) *ColorWell {
-	x.inner.SetColorWellStyle(colorWellStyle)
+func (x *ColorWell) WithColorWellStyle(colorWellStyle NSColorWellStyle) *ColorWell {
+	x.inner.SetColorWellStyle(raw.NSColorWellStyle(colorWellStyle))
 	return x
 }
 
@@ -137,8 +137,8 @@ func (x *ColorWell) WithHighlighted(highlighted bool) *ColorWell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ColorWell) WithControlSize(controlSize raw.NSControlSize) *ColorWell {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *ColorWell) WithControlSize(controlSize NSControlSize) *ColorWell {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -203,20 +203,20 @@ func (x *ColorWell) WithUsesSingleLineMode(usesSingleLineMode bool) *ColorWell {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ColorWell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ColorWell {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *ColorWell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ColorWell {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ColorWell) WithAlignment(alignment raw.NSTextAlignment) *ColorWell {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *ColorWell) WithAlignment(alignment NSTextAlignment) *ColorWell {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ColorWell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ColorWell {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *ColorWell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ColorWell {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -269,8 +269,8 @@ func (x *ColorWell) WithAutoresizesSubviews(autoresizesSubviews bool) *ColorWell
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ColorWell) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ColorWell {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *ColorWell) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ColorWell {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -329,14 +329,14 @@ func (x *ColorWell) WithWantsRestingTouches(wantsRestingTouches bool) *ColorWell
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ColorWell) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ColorWell {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *ColorWell) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ColorWell {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ColorWell) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ColorWell {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *ColorWell) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ColorWell {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -443,8 +443,8 @@ func (x *ColorWell) WithToolTip(toolTip string) *ColorWell {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ColorWell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ColorWell {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ColorWell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ColorWell {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -461,8 +461,8 @@ func (x *ColorWell) WithNextKeyView(nextKeyView ViewProvider) *ColorWell {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ColorWell) WithFocusRingType(focusRingType raw.NSFocusRingType) *ColorWell {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *ColorWell) WithFocusRingType(focusRingType NSFocusRingType) *ColorWell {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -485,8 +485,8 @@ func (x *ColorWell) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ColorWell) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ColorWell {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ColorWell) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ColorWell {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -624,13 +624,13 @@ func (x *ColorWell) SetColor(color *raw.NSColor) {
 }
 
 // ColorWellStyle calls the underlying ColorWellStyle.
-func (x *ColorWell) ColorWellStyle() raw.NSColorWellStyle {
-	return x.inner.ColorWellStyle()
+func (x *ColorWell) ColorWellStyle() NSColorWellStyle {
+	return NSColorWellStyle(x.inner.ColorWellStyle())
 }
 
 // SetColorWellStyle calls the underlying SetColorWellStyle.
-func (x *ColorWell) SetColorWellStyle(colorWellStyle raw.NSColorWellStyle) {
-	x.inner.SetColorWellStyle(colorWellStyle)
+func (x *ColorWell) SetColorWellStyle(colorWellStyle NSColorWellStyle) {
+	x.inner.SetColorWellStyle(raw.NSColorWellStyle(colorWellStyle))
 }
 
 // Image calls the underlying Image.
@@ -698,7 +698,7 @@ type ColorWellable interface {
 	Unwrap() *raw.NSColorWell
 	WithBordered(bordered bool) *ColorWell
 	WithColor(color *Color) *ColorWell
-	WithColorWellStyle(colorWellStyle raw.NSColorWellStyle) *ColorWell
+	WithColorWellStyle(colorWellStyle NSColorWellStyle) *ColorWell
 	WithImage(image *Image) *ColorWell
 	WithPulldownTarget(pulldownTarget objc.ID) *ColorWell
 	WithPulldownAction(pulldownAction objc.SEL) *ColorWell
@@ -712,7 +712,7 @@ type ColorWellable interface {
 	WithEnabled(enabled bool) *ColorWell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ColorWell
 	WithHighlighted(highlighted bool) *ColorWell
-	WithControlSize(controlSize raw.NSControlSize) *ColorWell
+	WithControlSize(controlSize NSControlSize) *ColorWell
 	WithFormatter(formatter *foundation.NSFormatter) *ColorWell
 	WithObjectValue(objectValue objc.ID) *ColorWell
 	WithStringValue(stringValue string) *ColorWell
@@ -723,16 +723,16 @@ type ColorWellable interface {
 	WithDoubleValue(doubleValue float64) *ColorWell
 	WithFont(font *Font) *ColorWell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ColorWell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ColorWell
-	WithAlignment(alignment raw.NSTextAlignment) *ColorWell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ColorWell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ColorWell
+	WithAlignment(alignment NSTextAlignment) *ColorWell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ColorWell
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ColorWell
 	WithCell(cell CellProvider) *ColorWell
 	WithSubviews(items ...ViewProvider) *ColorWell
 	WithHidden(hidden bool) *ColorWell
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ColorWell
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ColorWell
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ColorWell
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ColorWell
 	WithFrame(frame corefoundation.CGRect) *ColorWell
 	WithFrameRotation(frameRotation float64) *ColorWell
 	WithFrameCenterRotation(frameCenterRotation float64) *ColorWell
@@ -742,8 +742,8 @@ type ColorWellable interface {
 	WithNeedsDisplay(needsDisplay bool) *ColorWell
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ColorWell
 	WithWantsRestingTouches(wantsRestingTouches bool) *ColorWell
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ColorWell
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ColorWell
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ColorWell
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ColorWell
 	WithWantsLayer(wantsLayer bool) *ColorWell
 	WithLayer(layer *quartzcore.CALayer) *ColorWell
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ColorWell
@@ -757,12 +757,12 @@ type ColorWellable interface {
 	WithClipsToBounds(clipsToBounds bool) *ColorWell
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ColorWell
 	WithToolTip(toolTip string) *ColorWell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ColorWell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ColorWell
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ColorWell
 	WithNextKeyView(nextKeyView ViewProvider) *ColorWell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ColorWell
+	WithFocusRingType(focusRingType NSFocusRingType) *ColorWell
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ColorWell
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ColorWell
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ColorWell
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ColorWell
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ColorWell
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ColorWell
@@ -786,8 +786,8 @@ type ColorWellable interface {
 	SetBordered(bordered bool)
 	Color() *Color
 	SetColor(color *raw.NSColor)
-	ColorWellStyle() raw.NSColorWellStyle
-	SetColorWellStyle(colorWellStyle raw.NSColorWellStyle)
+	ColorWellStyle() NSColorWellStyle
+	SetColorWellStyle(colorWellStyle NSColorWellStyle)
 	Image() *Image
 	SetImage(image *raw.NSImage)
 	PulldownTarget() objc.ID

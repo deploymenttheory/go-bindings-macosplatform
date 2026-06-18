@@ -78,8 +78,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithDeviceContext(dev
 }
 
 // WithUserSecureEnclaveKeyBiometricPolicy sets the userSecureEnclaveKeyBiometricPolicy property and returns the receiver for chaining.
-func (x *AuthorizationProviderExtensionLoginConfiguration) WithUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) *AuthorizationProviderExtensionLoginConfiguration {
-	x.inner.SetUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy)
+func (x *AuthorizationProviderExtensionLoginConfiguration) WithUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) *AuthorizationProviderExtensionLoginConfiguration {
+	x.inner.SetUserSecureEnclaveKeyBiometricPolicy(raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy))
 	return x
 }
 
@@ -228,8 +228,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomRefreshRequ
 }
 
 // WithFederationType sets the federationType property and returns the receiver for chaining.
-func (x *AuthorizationProviderExtensionLoginConfiguration) WithFederationType(federationType raw.ASAuthorizationProviderExtensionFederationType) *AuthorizationProviderExtensionLoginConfiguration {
-	x.inner.SetFederationType(federationType)
+func (x *AuthorizationProviderExtensionLoginConfiguration) WithFederationType(federationType ASAuthorizationProviderExtensionFederationType) *AuthorizationProviderExtensionLoginConfiguration {
+	x.inner.SetFederationType(raw.ASAuthorizationProviderExtensionFederationType(federationType))
 	return x
 }
 
@@ -510,13 +510,13 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetDeviceContext(devi
 }
 
 // UserSecureEnclaveKeyBiometricPolicy calls the underlying UserSecureEnclaveKeyBiometricPolicy.
-func (x *AuthorizationProviderExtensionLoginConfiguration) UserSecureEnclaveKeyBiometricPolicy() raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy {
-	return x.inner.UserSecureEnclaveKeyBiometricPolicy()
+func (x *AuthorizationProviderExtensionLoginConfiguration) UserSecureEnclaveKeyBiometricPolicy() ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy {
+	return ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy(x.inner.UserSecureEnclaveKeyBiometricPolicy())
 }
 
 // SetUserSecureEnclaveKeyBiometricPolicy calls the underlying SetUserSecureEnclaveKeyBiometricPolicy.
-func (x *AuthorizationProviderExtensionLoginConfiguration) SetUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) {
-	x.inner.SetUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy)
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) {
+	x.inner.SetUserSecureEnclaveKeyBiometricPolicy(raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy))
 }
 
 // NonceEndpointURL calls the underlying NonceEndpointURL.
@@ -740,13 +740,13 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshReque
 }
 
 // FederationType calls the underlying FederationType.
-func (x *AuthorizationProviderExtensionLoginConfiguration) FederationType() raw.ASAuthorizationProviderExtensionFederationType {
-	return x.inner.FederationType()
+func (x *AuthorizationProviderExtensionLoginConfiguration) FederationType() ASAuthorizationProviderExtensionFederationType {
+	return ASAuthorizationProviderExtensionFederationType(x.inner.FederationType())
 }
 
 // SetFederationType calls the underlying SetFederationType.
-func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationType(federationType raw.ASAuthorizationProviderExtensionFederationType) {
-	x.inner.SetFederationType(federationType)
+func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationType(federationType ASAuthorizationProviderExtensionFederationType) {
+	x.inner.SetFederationType(raw.ASAuthorizationProviderExtensionFederationType(federationType))
 }
 
 // FederationRequestURN calls the underlying FederationRequestURN.
@@ -958,7 +958,7 @@ type AuthorizationProviderExtensionLoginConfigurationable interface {
 	WithTokenEndpointURL(tokenEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration
 	WithJwksEndpointURL(jwksEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration
 	WithDeviceContext(deviceContext *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration
-	WithUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) *AuthorizationProviderExtensionLoginConfiguration
+	WithUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) *AuthorizationProviderExtensionLoginConfiguration
 	WithNonceEndpointURL(nonceEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration
 	WithNonceResponseKeypath(nonceResponseKeypath string) *AuthorizationProviderExtensionLoginConfiguration
 	WithServerNonceClaimName(serverNonceClaimName string) *AuthorizationProviderExtensionLoginConfiguration
@@ -975,7 +975,7 @@ type AuthorizationProviderExtensionLoginConfigurationable interface {
 	WithKerberosTicketMappings(items ...*raw.ASAuthorizationProviderExtensionKerberosMapping) *AuthorizationProviderExtensionLoginConfiguration
 	WithRefreshEndpointURL(refreshEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration
 	WithCustomRefreshRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration
-	WithFederationType(federationType raw.ASAuthorizationProviderExtensionFederationType) *AuthorizationProviderExtensionLoginConfiguration
+	WithFederationType(federationType ASAuthorizationProviderExtensionFederationType) *AuthorizationProviderExtensionLoginConfiguration
 	WithFederationRequestURN(federationRequestURN string) *AuthorizationProviderExtensionLoginConfiguration
 	WithFederationMEXURL(federationMEXURL string) *AuthorizationProviderExtensionLoginConfiguration
 	WithFederationUserPreauthenticationURL(federationUserPreauthenticationURL string) *AuthorizationProviderExtensionLoginConfiguration
@@ -1017,8 +1017,8 @@ type AuthorizationProviderExtensionLoginConfigurationable interface {
 	SetJwksTrustedRootCertificates(jwksTrustedRootCertificates *foundation.NSArray[objc.ID])
 	DeviceContext() *foundation.NSData
 	SetDeviceContext(deviceContext *foundation.NSData)
-	UserSecureEnclaveKeyBiometricPolicy() raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy
-	SetUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy)
+	UserSecureEnclaveKeyBiometricPolicy() ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy
+	SetUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy)
 	NonceEndpointURL() *foundation.NSURL
 	SetNonceEndpointURL(nonceEndpointURL string)
 	NonceResponseKeypath() string
@@ -1051,8 +1051,8 @@ type AuthorizationProviderExtensionLoginConfigurationable interface {
 	SetRefreshEndpointURL(refreshEndpointURL string)
 	CustomRefreshRequestValues() []*foundation.NSURLQueryItem
 	SetCustomRefreshRequestValues(customRefreshRequestValues *foundation.NSArray[*foundation.NSURLQueryItem])
-	FederationType() raw.ASAuthorizationProviderExtensionFederationType
-	SetFederationType(federationType raw.ASAuthorizationProviderExtensionFederationType)
+	FederationType() ASAuthorizationProviderExtensionFederationType
+	SetFederationType(federationType ASAuthorizationProviderExtensionFederationType)
 	FederationRequestURN() string
 	SetFederationRequestURN(federationRequestURN string)
 	FederationMEXURL() *foundation.NSURL

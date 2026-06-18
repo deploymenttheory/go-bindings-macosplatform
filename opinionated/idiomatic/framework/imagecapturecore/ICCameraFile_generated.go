@@ -40,8 +40,8 @@ func NewCameraFile() *CameraFile {
 }
 
 // WithOrientation sets the orientation property and returns the receiver for chaining.
-func (x *CameraFile) WithOrientation(orientation raw.ICEXIFOrientationType) *CameraFile {
-	x.inner.SetOrientation(orientation)
+func (x *CameraFile) WithOrientation(orientation ICEXIFOrientationType) *CameraFile {
+	x.inner.SetOrientation(raw.ICEXIFOrientationType(orientation))
 	return x
 }
 
@@ -187,13 +187,13 @@ func (x *CameraFile) FileSize() int64 {
 }
 
 // Orientation calls the underlying Orientation.
-func (x *CameraFile) Orientation() raw.ICEXIFOrientationType {
-	return x.inner.Orientation()
+func (x *CameraFile) Orientation() ICEXIFOrientationType {
+	return ICEXIFOrientationType(x.inner.Orientation())
 }
 
 // SetOrientation calls the underlying SetOrientation.
-func (x *CameraFile) SetOrientation(orientation raw.ICEXIFOrientationType) {
-	x.inner.SetOrientation(orientation)
+func (x *CameraFile) SetOrientation(orientation ICEXIFOrientationType) {
+	x.inner.SetOrientation(raw.ICEXIFOrientationType(orientation))
 }
 
 // Duration calls the underlying Duration.
@@ -325,7 +325,7 @@ func (x *CameraFile) asCameraItem() *raw.ICCameraItem { return &x.inner.ICCamera
 // CameraFileable is the interface implemented by [CameraFile], for mocking and DI.
 type CameraFileable interface {
 	Unwrap() *raw.ICCameraFile
-	WithOrientation(orientation raw.ICEXIFOrientationType) *CameraFile
+	WithOrientation(orientation ICEXIFOrientationType) *CameraFile
 	RequestThumbnailDataWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
 	RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion objc.Block)
 	RequestDownloadWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSString, unsafe.Pointer)) *foundation.NSProgress
@@ -337,8 +337,8 @@ type CameraFileable interface {
 	OriginalFilename() string
 	CreatedFilename() string
 	FileSize() int64
-	Orientation() raw.ICEXIFOrientationType
-	SetOrientation(orientation raw.ICEXIFOrientationType)
+	Orientation() ICEXIFOrientationType
+	SetOrientation(orientation ICEXIFOrientationType)
 	Duration() float64
 	HighFramerate() bool
 	TimeLapse() bool

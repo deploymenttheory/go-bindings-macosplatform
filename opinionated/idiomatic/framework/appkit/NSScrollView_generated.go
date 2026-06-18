@@ -67,8 +67,8 @@ func (x *ScrollView) WithDocumentCursor(documentCursor *Cursor) *ScrollView {
 }
 
 // WithBorderType sets the borderType property and returns the receiver for chaining.
-func (x *ScrollView) WithBorderType(borderType raw.NSBorderType) *ScrollView {
-	x.inner.SetBorderType(borderType)
+func (x *ScrollView) WithBorderType(borderType NSBorderType) *ScrollView {
+	x.inner.SetBorderType(raw.NSBorderType(borderType))
 	return x
 }
 
@@ -157,26 +157,26 @@ func (x *ScrollView) WithScrollsDynamically(scrollsDynamically bool) *ScrollView
 }
 
 // WithScrollerStyle sets the scrollerStyle property and returns the receiver for chaining.
-func (x *ScrollView) WithScrollerStyle(scrollerStyle raw.NSScrollerStyle) *ScrollView {
-	x.inner.SetScrollerStyle(scrollerStyle)
+func (x *ScrollView) WithScrollerStyle(scrollerStyle NSScrollerStyle) *ScrollView {
+	x.inner.SetScrollerStyle(raw.NSScrollerStyle(scrollerStyle))
 	return x
 }
 
 // WithScrollerKnobStyle sets the scrollerKnobStyle property and returns the receiver for chaining.
-func (x *ScrollView) WithScrollerKnobStyle(scrollerKnobStyle raw.NSScrollerKnobStyle) *ScrollView {
-	x.inner.SetScrollerKnobStyle(scrollerKnobStyle)
+func (x *ScrollView) WithScrollerKnobStyle(scrollerKnobStyle NSScrollerKnobStyle) *ScrollView {
+	x.inner.SetScrollerKnobStyle(raw.NSScrollerKnobStyle(scrollerKnobStyle))
 	return x
 }
 
 // WithHorizontalScrollElasticity sets the horizontalScrollElasticity property and returns the receiver for chaining.
-func (x *ScrollView) WithHorizontalScrollElasticity(horizontalScrollElasticity raw.NSScrollElasticity) *ScrollView {
-	x.inner.SetHorizontalScrollElasticity(horizontalScrollElasticity)
+func (x *ScrollView) WithHorizontalScrollElasticity(horizontalScrollElasticity NSScrollElasticity) *ScrollView {
+	x.inner.SetHorizontalScrollElasticity(raw.NSScrollElasticity(horizontalScrollElasticity))
 	return x
 }
 
 // WithVerticalScrollElasticity sets the verticalScrollElasticity property and returns the receiver for chaining.
-func (x *ScrollView) WithVerticalScrollElasticity(verticalScrollElasticity raw.NSScrollElasticity) *ScrollView {
-	x.inner.SetVerticalScrollElasticity(verticalScrollElasticity)
+func (x *ScrollView) WithVerticalScrollElasticity(verticalScrollElasticity NSScrollElasticity) *ScrollView {
+	x.inner.SetVerticalScrollElasticity(raw.NSScrollElasticity(verticalScrollElasticity))
 	return x
 }
 
@@ -259,8 +259,8 @@ func (x *ScrollView) WithVerticalRulerView(verticalRulerView *RulerView) *Scroll
 }
 
 // WithFindBarPosition sets the findBarPosition property and returns the receiver for chaining.
-func (x *ScrollView) WithFindBarPosition(findBarPosition raw.NSScrollViewFindBarPosition) *ScrollView {
-	x.inner.SetFindBarPosition(findBarPosition)
+func (x *ScrollView) WithFindBarPosition(findBarPosition NSScrollViewFindBarPosition) *ScrollView {
+	x.inner.SetFindBarPosition(raw.NSScrollViewFindBarPosition(findBarPosition))
 	return x
 }
 
@@ -301,8 +301,8 @@ func (x *ScrollView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrollVi
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ScrollView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrollView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *ScrollView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrollView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -361,14 +361,14 @@ func (x *ScrollView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrollVi
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ScrollView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrollView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *ScrollView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrollView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ScrollView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrollView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *ScrollView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrollView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -475,8 +475,8 @@ func (x *ScrollView) WithToolTip(toolTip string) *ScrollView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ScrollView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrollView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ScrollView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrollView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -493,8 +493,8 @@ func (x *ScrollView) WithNextKeyView(nextKeyView ViewProvider) *ScrollView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ScrollView) WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrollView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *ScrollView) WithFocusRingType(focusRingType NSFocusRingType) *ScrollView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -517,8 +517,8 @@ func (x *ScrollView) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ScrollView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrollView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ScrollView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrollView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -627,8 +627,8 @@ func (x *ScrollView) SetMagnificationCenteredAtPoint(magnification float64, poin
 }
 
 // AddFloatingSubviewForAxis calls the underlying AddFloatingSubviewForAxis.
-func (x *ScrollView) AddFloatingSubviewForAxis(view *raw.NSView, axis raw.NSEventGestureAxis) {
-	x.inner.AddFloatingSubviewForAxis(view, axis)
+func (x *ScrollView) AddFloatingSubviewForAxis(view *raw.NSView, axis NSEventGestureAxis) {
+	x.inner.AddFloatingSubviewForAxis(view, raw.NSEventGestureAxis(axis))
 }
 
 // DocumentVisibleRect calls the underlying DocumentVisibleRect.
@@ -684,13 +684,13 @@ func (x *ScrollView) SetDocumentCursor(documentCursor *raw.NSCursor) {
 }
 
 // BorderType calls the underlying BorderType.
-func (x *ScrollView) BorderType() raw.NSBorderType {
-	return x.inner.BorderType()
+func (x *ScrollView) BorderType() NSBorderType {
+	return NSBorderType(x.inner.BorderType())
 }
 
 // SetBorderType calls the underlying SetBorderType.
-func (x *ScrollView) SetBorderType(borderType raw.NSBorderType) {
-	x.inner.SetBorderType(borderType)
+func (x *ScrollView) SetBorderType(borderType NSBorderType) {
+	x.inner.SetBorderType(raw.NSBorderType(borderType))
 }
 
 // BackgroundColor calls the underlying BackgroundColor.
@@ -846,43 +846,43 @@ func (x *ScrollView) SetScrollsDynamically(scrollsDynamically bool) {
 }
 
 // ScrollerStyle calls the underlying ScrollerStyle.
-func (x *ScrollView) ScrollerStyle() raw.NSScrollerStyle {
-	return x.inner.ScrollerStyle()
+func (x *ScrollView) ScrollerStyle() NSScrollerStyle {
+	return NSScrollerStyle(x.inner.ScrollerStyle())
 }
 
 // SetScrollerStyle calls the underlying SetScrollerStyle.
-func (x *ScrollView) SetScrollerStyle(scrollerStyle raw.NSScrollerStyle) {
-	x.inner.SetScrollerStyle(scrollerStyle)
+func (x *ScrollView) SetScrollerStyle(scrollerStyle NSScrollerStyle) {
+	x.inner.SetScrollerStyle(raw.NSScrollerStyle(scrollerStyle))
 }
 
 // ScrollerKnobStyle calls the underlying ScrollerKnobStyle.
-func (x *ScrollView) ScrollerKnobStyle() raw.NSScrollerKnobStyle {
-	return x.inner.ScrollerKnobStyle()
+func (x *ScrollView) ScrollerKnobStyle() NSScrollerKnobStyle {
+	return NSScrollerKnobStyle(x.inner.ScrollerKnobStyle())
 }
 
 // SetScrollerKnobStyle calls the underlying SetScrollerKnobStyle.
-func (x *ScrollView) SetScrollerKnobStyle(scrollerKnobStyle raw.NSScrollerKnobStyle) {
-	x.inner.SetScrollerKnobStyle(scrollerKnobStyle)
+func (x *ScrollView) SetScrollerKnobStyle(scrollerKnobStyle NSScrollerKnobStyle) {
+	x.inner.SetScrollerKnobStyle(raw.NSScrollerKnobStyle(scrollerKnobStyle))
 }
 
 // HorizontalScrollElasticity calls the underlying HorizontalScrollElasticity.
-func (x *ScrollView) HorizontalScrollElasticity() raw.NSScrollElasticity {
-	return x.inner.HorizontalScrollElasticity()
+func (x *ScrollView) HorizontalScrollElasticity() NSScrollElasticity {
+	return NSScrollElasticity(x.inner.HorizontalScrollElasticity())
 }
 
 // SetHorizontalScrollElasticity calls the underlying SetHorizontalScrollElasticity.
-func (x *ScrollView) SetHorizontalScrollElasticity(horizontalScrollElasticity raw.NSScrollElasticity) {
-	x.inner.SetHorizontalScrollElasticity(horizontalScrollElasticity)
+func (x *ScrollView) SetHorizontalScrollElasticity(horizontalScrollElasticity NSScrollElasticity) {
+	x.inner.SetHorizontalScrollElasticity(raw.NSScrollElasticity(horizontalScrollElasticity))
 }
 
 // VerticalScrollElasticity calls the underlying VerticalScrollElasticity.
-func (x *ScrollView) VerticalScrollElasticity() raw.NSScrollElasticity {
-	return x.inner.VerticalScrollElasticity()
+func (x *ScrollView) VerticalScrollElasticity() NSScrollElasticity {
+	return NSScrollElasticity(x.inner.VerticalScrollElasticity())
 }
 
 // SetVerticalScrollElasticity calls the underlying SetVerticalScrollElasticity.
-func (x *ScrollView) SetVerticalScrollElasticity(verticalScrollElasticity raw.NSScrollElasticity) {
-	x.inner.SetVerticalScrollElasticity(verticalScrollElasticity)
+func (x *ScrollView) SetVerticalScrollElasticity(verticalScrollElasticity NSScrollElasticity) {
+	x.inner.SetVerticalScrollElasticity(raw.NSScrollElasticity(verticalScrollElasticity))
 }
 
 // UsesPredominantAxisScrolling calls the underlying UsesPredominantAxisScrolling.
@@ -1024,13 +1024,13 @@ func (x *ScrollView) SetVerticalRulerView(verticalRulerView *raw.NSRulerView) {
 }
 
 // FindBarPosition calls the underlying FindBarPosition.
-func (x *ScrollView) FindBarPosition() raw.NSScrollViewFindBarPosition {
-	return x.inner.FindBarPosition()
+func (x *ScrollView) FindBarPosition() NSScrollViewFindBarPosition {
+	return NSScrollViewFindBarPosition(x.inner.FindBarPosition())
 }
 
 // SetFindBarPosition calls the underlying SetFindBarPosition.
-func (x *ScrollView) SetFindBarPosition(findBarPosition raw.NSScrollViewFindBarPosition) {
-	x.inner.SetFindBarPosition(findBarPosition)
+func (x *ScrollView) SetFindBarPosition(findBarPosition NSScrollViewFindBarPosition) {
+	x.inner.SetFindBarPosition(raw.NSScrollViewFindBarPosition(findBarPosition))
 }
 
 func (x *ScrollView) asView() *raw.NSView { return &x.inner.NSView }
@@ -1043,7 +1043,7 @@ type ScrollViewable interface {
 	WithDocumentView(documentView ViewProvider) *ScrollView
 	WithContentView(contentView *ClipView) *ScrollView
 	WithDocumentCursor(documentCursor *Cursor) *ScrollView
-	WithBorderType(borderType raw.NSBorderType) *ScrollView
+	WithBorderType(borderType NSBorderType) *ScrollView
 	WithBackgroundColor(backgroundColor *Color) *ScrollView
 	WithDrawsBackground(drawsBackground bool) *ScrollView
 	WithHasVerticalScroller(hasVerticalScroller bool) *ScrollView
@@ -1058,10 +1058,10 @@ type ScrollViewable interface {
 	WithVerticalPageScroll(verticalPageScroll float64) *ScrollView
 	WithPageScroll(pageScroll float64) *ScrollView
 	WithScrollsDynamically(scrollsDynamically bool) *ScrollView
-	WithScrollerStyle(scrollerStyle raw.NSScrollerStyle) *ScrollView
-	WithScrollerKnobStyle(scrollerKnobStyle raw.NSScrollerKnobStyle) *ScrollView
-	WithHorizontalScrollElasticity(horizontalScrollElasticity raw.NSScrollElasticity) *ScrollView
-	WithVerticalScrollElasticity(verticalScrollElasticity raw.NSScrollElasticity) *ScrollView
+	WithScrollerStyle(scrollerStyle NSScrollerStyle) *ScrollView
+	WithScrollerKnobStyle(scrollerKnobStyle NSScrollerKnobStyle) *ScrollView
+	WithHorizontalScrollElasticity(horizontalScrollElasticity NSScrollElasticity) *ScrollView
+	WithVerticalScrollElasticity(verticalScrollElasticity NSScrollElasticity) *ScrollView
 	WithUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool) *ScrollView
 	WithAllowsMagnification(allowsMagnification bool) *ScrollView
 	WithMagnification(magnification float64) *ScrollView
@@ -1075,12 +1075,12 @@ type ScrollViewable interface {
 	WithHasVerticalRuler(hasVerticalRuler bool) *ScrollView
 	WithHorizontalRulerView(horizontalRulerView *RulerView) *ScrollView
 	WithVerticalRulerView(verticalRulerView *RulerView) *ScrollView
-	WithFindBarPosition(findBarPosition raw.NSScrollViewFindBarPosition) *ScrollView
+	WithFindBarPosition(findBarPosition NSScrollViewFindBarPosition) *ScrollView
 	WithSubviews(items ...ViewProvider) *ScrollView
 	WithHidden(hidden bool) *ScrollView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrollView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ScrollView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrollView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrollView
 	WithFrame(frame corefoundation.CGRect) *ScrollView
 	WithFrameRotation(frameRotation float64) *ScrollView
 	WithFrameCenterRotation(frameCenterRotation float64) *ScrollView
@@ -1090,8 +1090,8 @@ type ScrollViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *ScrollView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrollView
 	WithWantsRestingTouches(wantsRestingTouches bool) *ScrollView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrollView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrollView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrollView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrollView
 	WithWantsLayer(wantsLayer bool) *ScrollView
 	WithLayer(layer *quartzcore.CALayer) *ScrollView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrollView
@@ -1105,12 +1105,12 @@ type ScrollViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *ScrollView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrollView
 	WithToolTip(toolTip string) *ScrollView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrollView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrollView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrollView
 	WithNextKeyView(nextKeyView ViewProvider) *ScrollView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrollView
+	WithFocusRingType(focusRingType NSFocusRingType) *ScrollView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrollView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrollView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrollView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrollView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrollView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrollView
@@ -1129,7 +1129,7 @@ type ScrollViewable interface {
 	FlashScrollers()
 	MagnifyToFitRect(rect corefoundation.CGRect)
 	SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint)
-	AddFloatingSubviewForAxis(view *raw.NSView, axis raw.NSEventGestureAxis)
+	AddFloatingSubviewForAxis(view *raw.NSView, axis NSEventGestureAxis)
 	DocumentVisibleRect() corefoundation.CGRect
 	ContentSize() corefoundation.CGSize
 	DocumentView() *View
@@ -1138,8 +1138,8 @@ type ScrollViewable interface {
 	SetContentView(contentView *raw.NSClipView)
 	DocumentCursor() *Cursor
 	SetDocumentCursor(documentCursor *raw.NSCursor)
-	BorderType() raw.NSBorderType
-	SetBorderType(borderType raw.NSBorderType)
+	BorderType() NSBorderType
+	SetBorderType(borderType NSBorderType)
 	BackgroundColor() *Color
 	SetBackgroundColor(backgroundColor *raw.NSColor)
 	DrawsBackground() bool
@@ -1168,14 +1168,14 @@ type ScrollViewable interface {
 	SetPageScroll(pageScroll float64)
 	ScrollsDynamically() bool
 	SetScrollsDynamically(scrollsDynamically bool)
-	ScrollerStyle() raw.NSScrollerStyle
-	SetScrollerStyle(scrollerStyle raw.NSScrollerStyle)
-	ScrollerKnobStyle() raw.NSScrollerKnobStyle
-	SetScrollerKnobStyle(scrollerKnobStyle raw.NSScrollerKnobStyle)
-	HorizontalScrollElasticity() raw.NSScrollElasticity
-	SetHorizontalScrollElasticity(horizontalScrollElasticity raw.NSScrollElasticity)
-	VerticalScrollElasticity() raw.NSScrollElasticity
-	SetVerticalScrollElasticity(verticalScrollElasticity raw.NSScrollElasticity)
+	ScrollerStyle() NSScrollerStyle
+	SetScrollerStyle(scrollerStyle NSScrollerStyle)
+	ScrollerKnobStyle() NSScrollerKnobStyle
+	SetScrollerKnobStyle(scrollerKnobStyle NSScrollerKnobStyle)
+	HorizontalScrollElasticity() NSScrollElasticity
+	SetHorizontalScrollElasticity(horizontalScrollElasticity NSScrollElasticity)
+	VerticalScrollElasticity() NSScrollElasticity
+	SetVerticalScrollElasticity(verticalScrollElasticity NSScrollElasticity)
 	UsesPredominantAxisScrolling() bool
 	SetUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool)
 	AllowsMagnification() bool
@@ -1202,8 +1202,8 @@ type ScrollViewable interface {
 	SetHorizontalRulerView(horizontalRulerView *raw.NSRulerView)
 	VerticalRulerView() *RulerView
 	SetVerticalRulerView(verticalRulerView *raw.NSRulerView)
-	FindBarPosition() raw.NSScrollViewFindBarPosition
-	SetFindBarPosition(findBarPosition raw.NSScrollViewFindBarPosition)
+	FindBarPosition() NSScrollViewFindBarPosition
+	SetFindBarPosition(findBarPosition NSScrollViewFindBarPosition)
 }
 
 var _ ScrollViewable = (*ScrollView)(nil)

@@ -161,8 +161,8 @@ func (x *Node) WithCastsShadow(castsShadow bool) *Node {
 }
 
 // WithMovabilityHint sets the movabilityHint property and returns the receiver for chaining.
-func (x *Node) WithMovabilityHint(movabilityHint raw.SCNMovabilityHint) *Node {
-	x.inner.SetMovabilityHint(movabilityHint)
+func (x *Node) WithMovabilityHint(movabilityHint SCNMovabilityHint) *Node {
+	x.inner.SetMovabilityHint(raw.SCNMovabilityHint(movabilityHint))
 	return x
 }
 
@@ -233,8 +233,8 @@ func (x *Node) WithCategoryBitMask(categoryBitMask uint) *Node {
 }
 
 // WithFocusBehavior sets the focusBehavior property and returns the receiver for chaining.
-func (x *Node) WithFocusBehavior(focusBehavior raw.SCNNodeFocusBehavior) *Node {
-	x.inner.SetFocusBehavior(focusBehavior)
+func (x *Node) WithFocusBehavior(focusBehavior SCNNodeFocusBehavior) *Node {
+	x.inner.SetFocusBehavior(raw.SCNNodeFocusBehavior(focusBehavior))
 	return x
 }
 
@@ -560,13 +560,13 @@ func (x *Node) SetCastsShadow(castsShadow bool) {
 }
 
 // MovabilityHint calls the underlying MovabilityHint.
-func (x *Node) MovabilityHint() raw.SCNMovabilityHint {
-	return x.inner.MovabilityHint()
+func (x *Node) MovabilityHint() SCNMovabilityHint {
+	return SCNMovabilityHint(x.inner.MovabilityHint())
 }
 
 // SetMovabilityHint calls the underlying SetMovabilityHint.
-func (x *Node) SetMovabilityHint(movabilityHint raw.SCNMovabilityHint) {
-	x.inner.SetMovabilityHint(movabilityHint)
+func (x *Node) SetMovabilityHint(movabilityHint SCNMovabilityHint) {
+	x.inner.SetMovabilityHint(raw.SCNMovabilityHint(movabilityHint))
 }
 
 // ParentNode calls the underlying ParentNode.
@@ -899,13 +899,13 @@ func (x *Node) SimdWorldFront() unsafe.Pointer {
 }
 
 // FocusBehavior calls the underlying FocusBehavior.
-func (x *Node) FocusBehavior() raw.SCNNodeFocusBehavior {
-	return x.inner.FocusBehavior()
+func (x *Node) FocusBehavior() SCNNodeFocusBehavior {
+	return SCNNodeFocusBehavior(x.inner.FocusBehavior())
 }
 
 // SetFocusBehavior calls the underlying SetFocusBehavior.
-func (x *Node) SetFocusBehavior(focusBehavior raw.SCNNodeFocusBehavior) {
-	x.inner.SetFocusBehavior(focusBehavior)
+func (x *Node) SetFocusBehavior(focusBehavior SCNNodeFocusBehavior) {
+	x.inner.SetFocusBehavior(raw.SCNNodeFocusBehavior(focusBehavior))
 }
 
 // AddParticleSystem calls the underlying AddParticleSystem.
@@ -985,7 +985,7 @@ type Nodeable interface {
 	WithOpacity(opacity float64) *Node
 	WithRenderingOrder(renderingOrder int) *Node
 	WithCastsShadow(castsShadow bool) *Node
-	WithMovabilityHint(movabilityHint raw.SCNMovabilityHint) *Node
+	WithMovabilityHint(movabilityHint SCNMovabilityHint) *Node
 	WithPhysicsBody(physicsBody *PhysicsBody) *Node
 	WithPhysicsField(physicsField *PhysicsField) *Node
 	WithConstraints(items ...ConstraintProvider) *Node
@@ -993,7 +993,7 @@ type Nodeable interface {
 	WithPaused(paused bool) *Node
 	WithRendererDelegate(rendererDelegate raw.SCNNodeRendererDelegate) *Node
 	WithCategoryBitMask(categoryBitMask uint) *Node
-	WithFocusBehavior(focusBehavior raw.SCNNodeFocusBehavior) *Node
+	WithFocusBehavior(focusBehavior SCNNodeFocusBehavior) *Node
 	Clone() *Node
 	FlattenedClone() *Node
 	SetWorldTransform(worldTransform quartzcore.CATransform3D)
@@ -1051,8 +1051,8 @@ type Nodeable interface {
 	SetRenderingOrder(renderingOrder int)
 	CastsShadow() bool
 	SetCastsShadow(castsShadow bool)
-	MovabilityHint() raw.SCNMovabilityHint
-	SetMovabilityHint(movabilityHint raw.SCNMovabilityHint)
+	MovabilityHint() SCNMovabilityHint
+	SetMovabilityHint(movabilityHint SCNMovabilityHint)
 	ParentNode() *Node
 	ChildNodes() []*Node
 	PhysicsBody() *PhysicsBody
@@ -1112,8 +1112,8 @@ type Nodeable interface {
 	SimdWorldUp() unsafe.Pointer
 	SimdWorldRight() unsafe.Pointer
 	SimdWorldFront() unsafe.Pointer
-	FocusBehavior() raw.SCNNodeFocusBehavior
-	SetFocusBehavior(focusBehavior raw.SCNNodeFocusBehavior)
+	FocusBehavior() SCNNodeFocusBehavior
+	SetFocusBehavior(focusBehavior SCNNodeFocusBehavior)
 	AddParticleSystem(system *raw.SCNParticleSystem)
 	RemoveAllParticleSystems()
 	RemoveParticleSystem(system *raw.SCNParticleSystem)

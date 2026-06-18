@@ -42,13 +42,13 @@ func NewContentEditingInput() *ContentEditingInput {
 }
 
 // MediaType calls the underlying MediaType.
-func (x *ContentEditingInput) MediaType() raw.PHAssetMediaType {
-	return x.inner.MediaType()
+func (x *ContentEditingInput) MediaType() PHAssetMediaType {
+	return PHAssetMediaType(x.inner.MediaType())
 }
 
 // MediaSubtypes calls the underlying MediaSubtypes.
-func (x *ContentEditingInput) MediaSubtypes() raw.PHAssetMediaSubtype {
-	return x.inner.MediaSubtypes()
+func (x *ContentEditingInput) MediaSubtypes() PHAssetMediaSubtype {
+	return PHAssetMediaSubtype(x.inner.MediaSubtypes())
 }
 
 // CreationDate calls the underlying CreationDate.
@@ -76,8 +76,8 @@ func (x *ContentEditingInput) UniformTypeIdentifier() string {
 }
 
 // PlaybackStyle calls the underlying PlaybackStyle.
-func (x *ContentEditingInput) PlaybackStyle() raw.PHAssetPlaybackStyle {
-	return x.inner.PlaybackStyle()
+func (x *ContentEditingInput) PlaybackStyle() PHAssetPlaybackStyle {
+	return PHAssetPlaybackStyle(x.inner.PlaybackStyle())
 }
 
 // AdjustmentData calls the underlying AdjustmentData.
@@ -121,13 +121,13 @@ func (x *ContentEditingInput) LivePhoto() *LivePhoto {
 // ContentEditingInputable is the interface implemented by [ContentEditingInput], for mocking and DI.
 type ContentEditingInputable interface {
 	Unwrap() *raw.PHContentEditingInput
-	MediaType() raw.PHAssetMediaType
-	MediaSubtypes() raw.PHAssetMediaSubtype
+	MediaType() PHAssetMediaType
+	MediaSubtypes() PHAssetMediaSubtype
 	CreationDate() *foundation.NSDate
 	Location() unsafe.Pointer
 	ContentType() *uniformtypeidentifiers.UTType
 	UniformTypeIdentifier() string
-	PlaybackStyle() raw.PHAssetPlaybackStyle
+	PlaybackStyle() PHAssetPlaybackStyle
 	AdjustmentData() *AdjustmentData
 	DisplaySizeImage() *appkit.NSImage
 	FullSizeImageURL() *foundation.NSURL

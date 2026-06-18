@@ -39,8 +39,8 @@ func NewSyncedDirectoryState() *SyncedDirectoryState {
 }
 
 // State calls the underlying State.
-func (x *SyncedDirectoryState) State() raw.GSSyncState {
-	return x.inner.State()
+func (x *SyncedDirectoryState) State() GSSyncState {
+	return GSSyncState(x.inner.State())
 }
 
 // Url calls the underlying Url.
@@ -67,7 +67,7 @@ func (x *SyncedDirectoryState) Error() unsafe.Pointer {
 // SyncedDirectoryStateable is the interface implemented by [SyncedDirectoryState], for mocking and DI.
 type SyncedDirectoryStateable interface {
 	Unwrap() *raw.GSSyncedDirectoryState
-	State() raw.GSSyncState
+	State() GSSyncState
 	Url() *foundation.NSURL
 	ConflictedVersions() []*SyncedDirectoryVersion
 	Error() unsafe.Pointer

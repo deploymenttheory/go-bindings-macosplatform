@@ -46,8 +46,10 @@ func NewSceneSourceWithDataOptions(data *foundation.NSData, options *foundation.
 }
 
 // SceneWithOptionsStatusHandler calls the underlying SceneWithOptionsStatusHandler.
-func (x *SceneSource) SceneWithOptionsStatusHandler(options *foundation.NSDictionary[*foundation.NSString, objc.ID], statusHandler func(float32, raw.SCNSceneSourceStatus, unsafe.Pointer, *bool)) *Scene {
-	_r := x.inner.SceneWithOptionsStatusHandler(options, statusHandler)
+func (x *SceneSource) SceneWithOptionsStatusHandler(options *foundation.NSDictionary[*foundation.NSString, objc.ID], statusHandler func(float32, SCNSceneSourceStatus, unsafe.Pointer, *bool)) *Scene {
+	_r := x.inner.SceneWithOptionsStatusHandler(options, func(_a0 float32, _a1 raw.SCNSceneSourceStatus, _a2 unsafe.Pointer, _a3 *bool) {
+		statusHandler(_a0, SCNSceneSourceStatus(_a1), _a2, _a3)
+	})
 	if _r == nil {
 		return nil
 	}
@@ -99,7 +101,7 @@ func (x *SceneSource) Data() *foundation.NSData {
 // SceneSourceable is the interface implemented by [SceneSource], for mocking and DI.
 type SceneSourceable interface {
 	Unwrap() *raw.SCNSceneSource
-	SceneWithOptionsStatusHandler(options *foundation.NSDictionary[*foundation.NSString, objc.ID], statusHandler func(float32, raw.SCNSceneSourceStatus, unsafe.Pointer, *bool)) *Scene
+	SceneWithOptionsStatusHandler(options *foundation.NSDictionary[*foundation.NSString, objc.ID], statusHandler func(float32, SCNSceneSourceStatus, unsafe.Pointer, *bool)) *Scene
 	SceneWithOptionsError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Scene, error)
 	PropertyForKey(key string) objc.ID
 	EntryWithIdentifierWithClass(uid string, entryClass objc.Class) objc.ID

@@ -38,8 +38,8 @@ func NewTokenFieldCell() *TokenFieldCell {
 }
 
 // WithTokenStyle sets the tokenStyle property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithTokenStyle(tokenStyle raw.NSTokenStyle) *TokenFieldCell {
-	x.inner.SetTokenStyle(tokenStyle)
+func (x *TokenFieldCell) WithTokenStyle(tokenStyle NSTokenStyle) *TokenFieldCell {
+	x.inner.SetTokenStyle(raw.NSTokenStyle(tokenStyle))
 	return x
 }
 
@@ -80,8 +80,8 @@ func (x *TokenFieldCell) WithTextColor(textColor *Color) *TokenFieldCell {
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TokenFieldCell {
-	x.inner.NSTextFieldCell.SetBezelStyle(bezelStyle)
+func (x *TokenFieldCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TokenFieldCell {
+	x.inner.NSTextFieldCell.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -122,8 +122,8 @@ func (x *TokenFieldCell) WithControlView(controlView ViewProvider) *TokenFieldCe
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithType(type_ raw.NSCellType) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(type_)
+func (x *TokenFieldCell) WithType(type_ NSCellType) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -206,8 +206,8 @@ func (x *TokenFieldCell) WithHighlighted(highlighted bool) *TokenFieldCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithAlignment(alignment raw.NSTextAlignment) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *TokenFieldCell) WithAlignment(alignment NSTextAlignment) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -272,8 +272,8 @@ func (x *TokenFieldCell) WithImage(image *Image) *TokenFieldCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithControlSize(controlSize raw.NSControlSize) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *TokenFieldCell) WithControlSize(controlSize NSControlSize) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -296,14 +296,14 @@ func (x *TokenFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing boo
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *TokenFieldCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *TokenFieldCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -320,8 +320,8 @@ func (x *TokenFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine b
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TokenFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -344,8 +344,8 @@ func (x *TokenFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *Toke
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *TokenFieldCell) WithFocusRingType(focusRingType NSFocusRingType) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -374,25 +374,25 @@ func (x *TokenFieldCell) WithAllowsMixedState(allowsMixedState bool) *TokenField
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *TokenFieldCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *TokenFieldCell) WithControlTint(controlTint raw.NSControlTint) *TokenFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *TokenFieldCell) WithControlTint(controlTint NSControlTint) *TokenFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
 // TokenStyle calls the underlying TokenStyle.
-func (x *TokenFieldCell) TokenStyle() raw.NSTokenStyle {
-	return x.inner.TokenStyle()
+func (x *TokenFieldCell) TokenStyle() NSTokenStyle {
+	return NSTokenStyle(x.inner.TokenStyle())
 }
 
 // SetTokenStyle calls the underlying SetTokenStyle.
-func (x *TokenFieldCell) SetTokenStyle(tokenStyle raw.NSTokenStyle) {
-	x.inner.SetTokenStyle(tokenStyle)
+func (x *TokenFieldCell) SetTokenStyle(tokenStyle NSTokenStyle) {
+	x.inner.SetTokenStyle(raw.NSTokenStyle(tokenStyle))
 }
 
 // CompletionDelay calls the underlying CompletionDelay.
@@ -436,19 +436,19 @@ func (x *TokenFieldCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.
 // TokenFieldCellable is the interface implemented by [TokenFieldCell], for mocking and DI.
 type TokenFieldCellable interface {
 	Unwrap() *raw.NSTokenFieldCell
-	WithTokenStyle(tokenStyle raw.NSTokenStyle) *TokenFieldCell
+	WithTokenStyle(tokenStyle NSTokenStyle) *TokenFieldCell
 	WithCompletionDelay(completionDelay float64) *TokenFieldCell
 	WithTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) *TokenFieldCell
 	WithDelegate(delegate raw.NSTokenFieldCellDelegate) *TokenFieldCell
 	WithBackgroundColor(backgroundColor *Color) *TokenFieldCell
 	WithDrawsBackground(drawsBackground bool) *TokenFieldCell
 	WithTextColor(textColor *Color) *TokenFieldCell
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TokenFieldCell
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TokenFieldCell
 	WithPlaceholderString(placeholderString string) *TokenFieldCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TokenFieldCell
 	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TokenFieldCell
 	WithControlView(controlView ViewProvider) *TokenFieldCell
-	WithType(type_ raw.NSCellType) *TokenFieldCell
+	WithType(type_ NSCellType) *TokenFieldCell
 	WithState(state int) *TokenFieldCell
 	WithTarget(target objc.ID) *TokenFieldCell
 	WithAction(action objc.SEL) *TokenFieldCell
@@ -462,7 +462,7 @@ type TokenFieldCellable interface {
 	WithBezeled(bezeled bool) *TokenFieldCell
 	WithScrollable(scrollable bool) *TokenFieldCell
 	WithHighlighted(highlighted bool) *TokenFieldCell
-	WithAlignment(alignment raw.NSTextAlignment) *TokenFieldCell
+	WithAlignment(alignment NSTextAlignment) *TokenFieldCell
 	WithWraps(wraps bool) *TokenFieldCell
 	WithFont(font *Font) *TokenFieldCell
 	WithFormatter(formatter *foundation.NSFormatter) *TokenFieldCell
@@ -473,27 +473,27 @@ type TokenFieldCellable interface {
 	WithDoubleValue(doubleValue float64) *TokenFieldCell
 	WithIntegerValue(integerValue int) *TokenFieldCell
 	WithImage(image *Image) *TokenFieldCell
-	WithControlSize(controlSize raw.NSControlSize) *TokenFieldCell
+	WithControlSize(controlSize NSControlSize) *TokenFieldCell
 	WithRepresentedObject(representedObject objc.ID) *TokenFieldCell
 	WithMenu(menu *Menu) *TokenFieldCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TokenFieldCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TokenFieldCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TokenFieldCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TokenFieldCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TokenFieldCell
 	WithAllowsUndo(allowsUndo bool) *TokenFieldCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TokenFieldCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TokenFieldCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TokenFieldCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TokenFieldCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *TokenFieldCell
 	WithShowsFirstResponder(showsFirstResponder bool) *TokenFieldCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TokenFieldCell
+	WithFocusRingType(focusRingType NSFocusRingType) *TokenFieldCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TokenFieldCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TokenFieldCell
 	WithImportsGraphics(importsGraphics bool) *TokenFieldCell
 	WithAllowsMixedState(allowsMixedState bool) *TokenFieldCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TokenFieldCell
-	WithControlTint(controlTint raw.NSControlTint) *TokenFieldCell
-	TokenStyle() raw.NSTokenStyle
-	SetTokenStyle(tokenStyle raw.NSTokenStyle)
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TokenFieldCell
+	WithControlTint(controlTint NSControlTint) *TokenFieldCell
+	TokenStyle() NSTokenStyle
+	SetTokenStyle(tokenStyle NSTokenStyle)
 	CompletionDelay() float64
 	SetCompletionDelay(completionDelay float64)
 	TokenizingCharacterSet() *foundation.NSCharacterSet

@@ -41,20 +41,20 @@ func NewVisualEffectView() *VisualEffectView {
 }
 
 // WithMaterial sets the material property and returns the receiver for chaining.
-func (x *VisualEffectView) WithMaterial(material raw.NSVisualEffectMaterial) *VisualEffectView {
-	x.inner.SetMaterial(material)
+func (x *VisualEffectView) WithMaterial(material NSVisualEffectMaterial) *VisualEffectView {
+	x.inner.SetMaterial(raw.NSVisualEffectMaterial(material))
 	return x
 }
 
 // WithBlendingMode sets the blendingMode property and returns the receiver for chaining.
-func (x *VisualEffectView) WithBlendingMode(blendingMode raw.NSVisualEffectBlendingMode) *VisualEffectView {
-	x.inner.SetBlendingMode(blendingMode)
+func (x *VisualEffectView) WithBlendingMode(blendingMode NSVisualEffectBlendingMode) *VisualEffectView {
+	x.inner.SetBlendingMode(raw.NSVisualEffectBlendingMode(blendingMode))
 	return x
 }
 
 // WithState sets the state property and returns the receiver for chaining.
-func (x *VisualEffectView) WithState(state raw.NSVisualEffectState) *VisualEffectView {
-	x.inner.SetState(state)
+func (x *VisualEffectView) WithState(state NSVisualEffectState) *VisualEffectView {
+	x.inner.SetState(raw.NSVisualEffectState(state))
 	return x
 }
 
@@ -107,8 +107,8 @@ func (x *VisualEffectView) WithAutoresizesSubviews(autoresizesSubviews bool) *Vi
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *VisualEffectView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *VisualEffectView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *VisualEffectView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *VisualEffectView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -167,14 +167,14 @@ func (x *VisualEffectView) WithWantsRestingTouches(wantsRestingTouches bool) *Vi
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *VisualEffectView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *VisualEffectView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *VisualEffectView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *VisualEffectView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *VisualEffectView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *VisualEffectView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *VisualEffectView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *VisualEffectView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -281,8 +281,8 @@ func (x *VisualEffectView) WithToolTip(toolTip string) *VisualEffectView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *VisualEffectView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *VisualEffectView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *VisualEffectView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *VisualEffectView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -299,8 +299,8 @@ func (x *VisualEffectView) WithNextKeyView(nextKeyView ViewProvider) *VisualEffe
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *VisualEffectView) WithFocusRingType(focusRingType raw.NSFocusRingType) *VisualEffectView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *VisualEffectView) WithFocusRingType(focusRingType NSFocusRingType) *VisualEffectView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -323,8 +323,8 @@ func (x *VisualEffectView) WithGestureRecognizers(items ...GestureRecognizerProv
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *VisualEffectView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *VisualEffectView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *VisualEffectView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *VisualEffectView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -413,38 +413,38 @@ func (x *VisualEffectView) WithTouchBar(touchBar *TouchBar) *VisualEffectView {
 }
 
 // Material calls the underlying Material.
-func (x *VisualEffectView) Material() raw.NSVisualEffectMaterial {
-	return x.inner.Material()
+func (x *VisualEffectView) Material() NSVisualEffectMaterial {
+	return NSVisualEffectMaterial(x.inner.Material())
 }
 
 // SetMaterial calls the underlying SetMaterial.
-func (x *VisualEffectView) SetMaterial(material raw.NSVisualEffectMaterial) {
-	x.inner.SetMaterial(material)
+func (x *VisualEffectView) SetMaterial(material NSVisualEffectMaterial) {
+	x.inner.SetMaterial(raw.NSVisualEffectMaterial(material))
 }
 
 // InteriorBackgroundStyle calls the underlying InteriorBackgroundStyle.
-func (x *VisualEffectView) InteriorBackgroundStyle() raw.NSBackgroundStyle {
-	return x.inner.InteriorBackgroundStyle()
+func (x *VisualEffectView) InteriorBackgroundStyle() NSBackgroundStyle {
+	return NSBackgroundStyle(x.inner.InteriorBackgroundStyle())
 }
 
 // BlendingMode calls the underlying BlendingMode.
-func (x *VisualEffectView) BlendingMode() raw.NSVisualEffectBlendingMode {
-	return x.inner.BlendingMode()
+func (x *VisualEffectView) BlendingMode() NSVisualEffectBlendingMode {
+	return NSVisualEffectBlendingMode(x.inner.BlendingMode())
 }
 
 // SetBlendingMode calls the underlying SetBlendingMode.
-func (x *VisualEffectView) SetBlendingMode(blendingMode raw.NSVisualEffectBlendingMode) {
-	x.inner.SetBlendingMode(blendingMode)
+func (x *VisualEffectView) SetBlendingMode(blendingMode NSVisualEffectBlendingMode) {
+	x.inner.SetBlendingMode(raw.NSVisualEffectBlendingMode(blendingMode))
 }
 
 // State calls the underlying State.
-func (x *VisualEffectView) State() raw.NSVisualEffectState {
-	return x.inner.State()
+func (x *VisualEffectView) State() NSVisualEffectState {
+	return NSVisualEffectState(x.inner.State())
 }
 
 // SetState calls the underlying SetState.
-func (x *VisualEffectView) SetState(state raw.NSVisualEffectState) {
-	x.inner.SetState(state)
+func (x *VisualEffectView) SetState(state NSVisualEffectState) {
+	x.inner.SetState(raw.NSVisualEffectState(state))
 }
 
 // MaskImage calls the underlying MaskImage.
@@ -478,16 +478,16 @@ func (x *VisualEffectView) asResponder() *raw.NSResponder { return &x.inner.NSVi
 // VisualEffectViewable is the interface implemented by [VisualEffectView], for mocking and DI.
 type VisualEffectViewable interface {
 	Unwrap() *raw.NSVisualEffectView
-	WithMaterial(material raw.NSVisualEffectMaterial) *VisualEffectView
-	WithBlendingMode(blendingMode raw.NSVisualEffectBlendingMode) *VisualEffectView
-	WithState(state raw.NSVisualEffectState) *VisualEffectView
+	WithMaterial(material NSVisualEffectMaterial) *VisualEffectView
+	WithBlendingMode(blendingMode NSVisualEffectBlendingMode) *VisualEffectView
+	WithState(state NSVisualEffectState) *VisualEffectView
 	WithMaskImage(maskImage *Image) *VisualEffectView
 	WithEmphasized(emphasized bool) *VisualEffectView
 	WithSubviews(items ...ViewProvider) *VisualEffectView
 	WithHidden(hidden bool) *VisualEffectView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *VisualEffectView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *VisualEffectView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *VisualEffectView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *VisualEffectView
 	WithFrame(frame corefoundation.CGRect) *VisualEffectView
 	WithFrameRotation(frameRotation float64) *VisualEffectView
 	WithFrameCenterRotation(frameCenterRotation float64) *VisualEffectView
@@ -497,8 +497,8 @@ type VisualEffectViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *VisualEffectView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *VisualEffectView
 	WithWantsRestingTouches(wantsRestingTouches bool) *VisualEffectView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *VisualEffectView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *VisualEffectView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *VisualEffectView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *VisualEffectView
 	WithWantsLayer(wantsLayer bool) *VisualEffectView
 	WithLayer(layer *quartzcore.CALayer) *VisualEffectView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *VisualEffectView
@@ -512,12 +512,12 @@ type VisualEffectViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *VisualEffectView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *VisualEffectView
 	WithToolTip(toolTip string) *VisualEffectView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *VisualEffectView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *VisualEffectView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *VisualEffectView
 	WithNextKeyView(nextKeyView ViewProvider) *VisualEffectView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *VisualEffectView
+	WithFocusRingType(focusRingType NSFocusRingType) *VisualEffectView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *VisualEffectView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *VisualEffectView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *VisualEffectView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *VisualEffectView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *VisualEffectView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *VisualEffectView
@@ -532,13 +532,13 @@ type VisualEffectViewable interface {
 	WithMenu(menu *Menu) *VisualEffectView
 	WithUserActivity(userActivity *foundation.NSUserActivity) *VisualEffectView
 	WithTouchBar(touchBar *TouchBar) *VisualEffectView
-	Material() raw.NSVisualEffectMaterial
-	SetMaterial(material raw.NSVisualEffectMaterial)
-	InteriorBackgroundStyle() raw.NSBackgroundStyle
-	BlendingMode() raw.NSVisualEffectBlendingMode
-	SetBlendingMode(blendingMode raw.NSVisualEffectBlendingMode)
-	State() raw.NSVisualEffectState
-	SetState(state raw.NSVisualEffectState)
+	Material() NSVisualEffectMaterial
+	SetMaterial(material NSVisualEffectMaterial)
+	InteriorBackgroundStyle() NSBackgroundStyle
+	BlendingMode() NSVisualEffectBlendingMode
+	SetBlendingMode(blendingMode NSVisualEffectBlendingMode)
+	State() NSVisualEffectState
+	SetState(state NSVisualEffectState)
 	MaskImage() *Image
 	SetMaskImage(maskImage *raw.NSImage)
 	IsEmphasized() bool

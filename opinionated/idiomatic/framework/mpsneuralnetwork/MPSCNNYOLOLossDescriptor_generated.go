@@ -61,8 +61,8 @@ func (x *CNNYOLOLossDescriptor) WithClassesLossDescriptor(classesLossDescriptor 
 }
 
 // WithReductionType sets the reductionType property and returns the receiver for chaining.
-func (x *CNNYOLOLossDescriptor) WithReductionType(reductionType raw.MPSCNNReductionType) *CNNYOLOLossDescriptor {
-	x.inner.SetReductionType(reductionType)
+func (x *CNNYOLOLossDescriptor) WithReductionType(reductionType MPSCNNReductionType) *CNNYOLOLossDescriptor {
+	x.inner.SetReductionType(raw.MPSCNNReductionType(reductionType))
 	return x
 }
 
@@ -189,13 +189,13 @@ func (x *CNNYOLOLossDescriptor) SetClassesLossDescriptor(classesLossDescriptor *
 }
 
 // ReductionType calls the underlying ReductionType.
-func (x *CNNYOLOLossDescriptor) ReductionType() raw.MPSCNNReductionType {
-	return x.inner.ReductionType()
+func (x *CNNYOLOLossDescriptor) ReductionType() MPSCNNReductionType {
+	return MPSCNNReductionType(x.inner.ReductionType())
 }
 
 // SetReductionType calls the underlying SetReductionType.
-func (x *CNNYOLOLossDescriptor) SetReductionType(reductionType raw.MPSCNNReductionType) {
-	x.inner.SetReductionType(reductionType)
+func (x *CNNYOLOLossDescriptor) SetReductionType(reductionType MPSCNNReductionType) {
+	x.inner.SetReductionType(raw.MPSCNNReductionType(reductionType))
 }
 
 // ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
@@ -315,7 +315,7 @@ type CNNYOLOLossDescriptorable interface {
 	WithWHLossDescriptor(wHLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
 	WithConfidenceLossDescriptor(confidenceLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
 	WithClassesLossDescriptor(classesLossDescriptor *CNNLossDescriptor) *CNNYOLOLossDescriptor
-	WithReductionType(reductionType raw.MPSCNNReductionType) *CNNYOLOLossDescriptor
+	WithReductionType(reductionType MPSCNNReductionType) *CNNYOLOLossDescriptor
 	WithReduceAcrossBatch(reduceAcrossBatch bool) *CNNYOLOLossDescriptor
 	WithRescore(rescore bool) *CNNYOLOLossDescriptor
 	WithScaleXY(scaleXY float32) *CNNYOLOLossDescriptor
@@ -335,8 +335,8 @@ type CNNYOLOLossDescriptorable interface {
 	SetConfidenceLossDescriptor(confidenceLossDescriptor *raw.MPSCNNLossDescriptor)
 	ClassesLossDescriptor() *CNNLossDescriptor
 	SetClassesLossDescriptor(classesLossDescriptor *raw.MPSCNNLossDescriptor)
-	ReductionType() raw.MPSCNNReductionType
-	SetReductionType(reductionType raw.MPSCNNReductionType)
+	ReductionType() MPSCNNReductionType
+	SetReductionType(reductionType MPSCNNReductionType)
 	ReduceAcrossBatch() bool
 	SetReduceAcrossBatch(reduceAcrossBatch bool)
 	Rescore() bool

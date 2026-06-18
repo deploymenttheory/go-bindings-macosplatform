@@ -38,8 +38,8 @@ func NewElectrocardiogramVoltageMeasurement() *ElectrocardiogramVoltageMeasureme
 }
 
 // QuantityForLead calls the underlying QuantityForLead.
-func (x *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead raw.HKElectrocardiogramLead) *Quantity {
-	_r := x.inner.QuantityForLead(lead)
+func (x *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead HKElectrocardiogramLead) *Quantity {
+	_r := x.inner.QuantityForLead(raw.HKElectrocardiogramLead(lead))
 	if _r == nil {
 		return nil
 	}
@@ -54,7 +54,7 @@ func (x *ElectrocardiogramVoltageMeasurement) TimeSinceSampleStart() float64 {
 // ElectrocardiogramVoltageMeasurementable is the interface implemented by [ElectrocardiogramVoltageMeasurement], for mocking and DI.
 type ElectrocardiogramVoltageMeasurementable interface {
 	Unwrap() *raw.HKElectrocardiogramVoltageMeasurement
-	QuantityForLead(lead raw.HKElectrocardiogramLead) *Quantity
+	QuantityForLead(lead HKElectrocardiogramLead) *Quantity
 	TimeSinceSampleStart() float64
 }
 

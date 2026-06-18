@@ -49,8 +49,8 @@ func (x *PaddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingL
 }
 
 // PaddingType calls the underlying PaddingType.
-func (x *PaddingLayer) PaddingType() raw.MLCPaddingType {
-	return x.inner.PaddingType()
+func (x *PaddingLayer) PaddingType() MLCPaddingType {
+	return MLCPaddingType(x.inner.PaddingType())
 }
 
 // PaddingLeft calls the underlying PaddingLeft.
@@ -85,7 +85,7 @@ type PaddingLayerable interface {
 	Unwrap() *raw.MLCPaddingLayer
 	WithLabel(label string) *PaddingLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer
-	PaddingType() raw.MLCPaddingType
+	PaddingType() MLCPaddingType
 	PaddingLeft() uint
 	PaddingRight() uint
 	PaddingTop() uint

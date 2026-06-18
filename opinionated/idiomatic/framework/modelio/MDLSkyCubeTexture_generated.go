@@ -32,16 +32,16 @@ func SkyCubeTextureFromID(id objc.ID) *SkyCubeTexture {
 }
 
 // NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo creates a new [SkyCubeTexture].
-func NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo(name string, channelEncoding raw.MDLTextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, upperAtmosphereScattering float32, groundAlbedo float32) *SkyCubeTexture {
+func NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationUpperAtmosphereScatteringGroundAlbedo(name string, channelEncoding MDLTextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, upperAtmosphereScattering float32, groundAlbedo float32) *SkyCubeTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSkyCubeTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:upperAtmosphereScattering:groundAlbedo:"), foundation.NSStringStringWithUTF8String(name).Ptr(), channelEncoding, textureDimensions, turbidity, sunElevation, upperAtmosphereScattering, groundAlbedo)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:upperAtmosphereScattering:groundAlbedo:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLTextureChannelEncoding(channelEncoding), textureDimensions, turbidity, sunElevation, upperAtmosphereScattering, groundAlbedo)
 	return &SkyCubeTexture{inner: raw.MDLSkyCubeTextureFromID(_id)}
 }
 
 // NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationSunAzimuthUpperAtmosphereScatteringGroundAlbedo creates a new [SkyCubeTexture].
-func NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationSunAzimuthUpperAtmosphereScatteringGroundAlbedo(name string, channelEncoding raw.MDLTextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, sunAzimuth float32, upperAtmosphereScattering float32, groundAlbedo float32) *SkyCubeTexture {
+func NewSkyCubeTextureWithNameChannelEncodingTextureDimensionsTurbiditySunElevationSunAzimuthUpperAtmosphereScatteringGroundAlbedo(name string, channelEncoding MDLTextureChannelEncoding, textureDimensions unsafe.Pointer, turbidity float32, sunElevation float32, sunAzimuth float32, upperAtmosphereScattering float32, groundAlbedo float32) *SkyCubeTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSkyCubeTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:sunAzimuth:upperAtmosphereScattering:groundAlbedo:"), foundation.NSStringStringWithUTF8String(name).Ptr(), channelEncoding, textureDimensions, turbidity, sunElevation, sunAzimuth, upperAtmosphereScattering, groundAlbedo)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:channelEncoding:textureDimensions:turbidity:sunElevation:sunAzimuth:upperAtmosphereScattering:groundAlbedo:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.MDLTextureChannelEncoding(channelEncoding), textureDimensions, turbidity, sunElevation, sunAzimuth, upperAtmosphereScattering, groundAlbedo)
 	return &SkyCubeTexture{inner: raw.MDLSkyCubeTextureFromID(_id)}
 }
 

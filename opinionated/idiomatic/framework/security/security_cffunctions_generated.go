@@ -29,48 +29,48 @@ func AuthorizationRightGet(rightName string) (objc.ID, error) {
 }
 
 // SecHostCreateGuest wraps [raw.SecHostCreateGuest], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecHostCreateGuest(host uint, status uint32, path objc.ID, attributes objc.ID, flags raw.SecCSFlags, newGuest *uint) error {
-	if _err := purego.NewOSStatus(raw.SecHostCreateGuest(host, status, purego.CFRef(path), purego.CFRef(attributes), flags, newGuest)).Err(); _err != nil {
+func SecHostCreateGuest(host uint, status uint32, path objc.ID, attributes objc.ID, flags SecCSFlags, newGuest *uint) error {
+	if _err := purego.NewOSStatus(raw.SecHostCreateGuest(host, status, purego.CFRef(path), purego.CFRef(attributes), raw.SecCSFlags(flags), newGuest)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // SecHostRemoveGuest wraps [raw.SecHostRemoveGuest], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecHostRemoveGuest(host uint, guest uint, flags raw.SecCSFlags) error {
-	if _err := purego.NewOSStatus(raw.SecHostRemoveGuest(host, guest, flags)).Err(); _err != nil {
+func SecHostRemoveGuest(host uint, guest uint, flags SecCSFlags) error {
+	if _err := purego.NewOSStatus(raw.SecHostRemoveGuest(host, guest, raw.SecCSFlags(flags))).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // SecHostSelectGuest wraps [raw.SecHostSelectGuest], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecHostSelectGuest(guestRef uint, flags raw.SecCSFlags) error {
-	if _err := purego.NewOSStatus(raw.SecHostSelectGuest(guestRef, flags)).Err(); _err != nil {
+func SecHostSelectGuest(guestRef uint, flags SecCSFlags) error {
+	if _err := purego.NewOSStatus(raw.SecHostSelectGuest(guestRef, raw.SecCSFlags(flags))).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // SecHostSelectedGuest wraps [raw.SecHostSelectedGuest], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecHostSelectedGuest(flags raw.SecCSFlags, guestRef *uint) error {
-	if _err := purego.NewOSStatus(raw.SecHostSelectedGuest(flags, guestRef)).Err(); _err != nil {
+func SecHostSelectedGuest(flags SecCSFlags, guestRef *uint) error {
+	if _err := purego.NewOSStatus(raw.SecHostSelectedGuest(raw.SecCSFlags(flags), guestRef)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // SecHostSetGuestStatus wraps [raw.SecHostSetGuestStatus], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecHostSetGuestStatus(guestRef uint, status uint32, attributes objc.ID, flags raw.SecCSFlags) error {
-	if _err := purego.NewOSStatus(raw.SecHostSetGuestStatus(guestRef, status, purego.CFRef(attributes), flags)).Err(); _err != nil {
+func SecHostSetGuestStatus(guestRef uint, status uint32, attributes objc.ID, flags SecCSFlags) error {
+	if _err := purego.NewOSStatus(raw.SecHostSetGuestStatus(guestRef, status, purego.CFRef(attributes), raw.SecCSFlags(flags))).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // SecHostSetHostingPort wraps [raw.SecHostSetHostingPort], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecHostSetHostingPort(hostingPort uint, flags raw.SecCSFlags) error {
-	if _err := purego.NewOSStatus(raw.SecHostSetHostingPort(hostingPort, flags)).Err(); _err != nil {
+func SecHostSetHostingPort(hostingPort uint, flags SecCSFlags) error {
+	if _err := purego.NewOSStatus(raw.SecHostSetHostingPort(hostingPort, raw.SecCSFlags(flags))).Err(); _err != nil {
 		return _err
 	}
 	return nil
@@ -103,9 +103,9 @@ func SecItemDelete(query objc.ID) error {
 }
 
 // SecItemExport wraps [raw.SecItemExport], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecItemExport(secItemOrArray objc.ID, outputFormat raw.SecExternalFormat, flags raw.SecItemImportExportFlags, keyParams *raw.SecItemImportExportKeyParameters) (objc.ID, error) {
+func SecItemExport(secItemOrArray objc.ID, outputFormat SecExternalFormat, flags SecItemImportExportFlags, keyParams *raw.SecItemImportExportKeyParameters) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.SecItemExport(purego.CFRef(secItemOrArray), outputFormat, flags, keyParams, unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.SecItemExport(purego.CFRef(secItemOrArray), raw.SecExternalFormat(outputFormat), raw.SecItemImportExportFlags(flags), keyParams, unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
@@ -120,9 +120,9 @@ func SecItemUpdate(query objc.ID, attributesToUpdate objc.ID) error {
 }
 
 // SecKeychainCopyDomainSearchList wraps [raw.SecKeychainCopyDomainSearchList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecKeychainCopyDomainSearchList(domain raw.SecPreferencesDomain) (objc.ID, error) {
+func SecKeychainCopyDomainSearchList(domain SecPreferencesDomain) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.SecKeychainCopyDomainSearchList(domain, unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.SecKeychainCopyDomainSearchList(raw.SecPreferencesDomain(domain), unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
@@ -170,9 +170,9 @@ func SecKeychainGetVersion(returnVers *uint) error {
 }
 
 // SecKeychainItemExport wraps [raw.SecKeychainItemExport], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecKeychainItemExport(keychainItemOrArray objc.ID, outputFormat raw.SecExternalFormat, flags raw.SecItemImportExportFlags, keyParams *raw.SecKeyImportExportParameters) (objc.ID, error) {
+func SecKeychainItemExport(keychainItemOrArray objc.ID, outputFormat SecExternalFormat, flags SecItemImportExportFlags, keyParams *raw.SecKeyImportExportParameters) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.SecKeychainItemExport(purego.CFRef(keychainItemOrArray), outputFormat, flags, keyParams, unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.SecKeychainItemExport(purego.CFRef(keychainItemOrArray), raw.SecExternalFormat(outputFormat), raw.SecItemImportExportFlags(flags), keyParams, unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
@@ -187,16 +187,16 @@ func SecKeychainLockAll() error {
 }
 
 // SecKeychainSetDomainSearchList wraps [raw.SecKeychainSetDomainSearchList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecKeychainSetDomainSearchList(domain raw.SecPreferencesDomain, searchList objc.ID) error {
-	if _err := purego.NewOSStatus(raw.SecKeychainSetDomainSearchList(domain, purego.CFRef(searchList))).Err(); _err != nil {
+func SecKeychainSetDomainSearchList(domain SecPreferencesDomain, searchList objc.ID) error {
+	if _err := purego.NewOSStatus(raw.SecKeychainSetDomainSearchList(raw.SecPreferencesDomain(domain), purego.CFRef(searchList))).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // SecKeychainSetPreferenceDomain wraps [raw.SecKeychainSetPreferenceDomain], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecKeychainSetPreferenceDomain(domain raw.SecPreferencesDomain) error {
-	if _err := purego.NewOSStatus(raw.SecKeychainSetPreferenceDomain(domain)).Err(); _err != nil {
+func SecKeychainSetPreferenceDomain(domain SecPreferencesDomain) error {
+	if _err := purego.NewOSStatus(raw.SecKeychainSetPreferenceDomain(raw.SecPreferencesDomain(domain))).Err(); _err != nil {
 		return _err
 	}
 	return nil
@@ -237,34 +237,34 @@ func SecTrustCopyAnchorCertificates() (objc.ID, error) {
 }
 
 // SecTrustSettingsCopyCertificates wraps [raw.SecTrustSettingsCopyCertificates], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecTrustSettingsCopyCertificates(domain raw.SecTrustSettingsDomain) (objc.ID, error) {
+func SecTrustSettingsCopyCertificates(domain SecTrustSettingsDomain) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.SecTrustSettingsCopyCertificates(domain, unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.SecTrustSettingsCopyCertificates(raw.SecTrustSettingsDomain(domain), unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
 }
 
 // SecTrustSettingsCreateExternalRepresentation wraps [raw.SecTrustSettingsCreateExternalRepresentation], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecTrustSettingsCreateExternalRepresentation(domain raw.SecTrustSettingsDomain) (objc.ID, error) {
+func SecTrustSettingsCreateExternalRepresentation(domain SecTrustSettingsDomain) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.SecTrustSettingsCreateExternalRepresentation(domain, unsafe.Pointer(&_out0))).Err(); _err != nil {
+	if _err := purego.NewOSStatus(raw.SecTrustSettingsCreateExternalRepresentation(raw.SecTrustSettingsDomain(domain), unsafe.Pointer(&_out0))).Err(); _err != nil {
 		return 0, _err
 	}
 	return objc.ID(_out0), nil
 }
 
 // SecTrustSettingsImportExternalRepresentation wraps [raw.SecTrustSettingsImportExternalRepresentation], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecTrustSettingsImportExternalRepresentation(domain raw.SecTrustSettingsDomain, trustSettings objc.ID) error {
-	if _err := purego.NewOSStatus(raw.SecTrustSettingsImportExternalRepresentation(domain, purego.CFRef(trustSettings))).Err(); _err != nil {
+func SecTrustSettingsImportExternalRepresentation(domain SecTrustSettingsDomain, trustSettings objc.ID) error {
+	if _err := purego.NewOSStatus(raw.SecTrustSettingsImportExternalRepresentation(raw.SecTrustSettingsDomain(domain), purego.CFRef(trustSettings))).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
 // SessionCreate wraps [raw.SessionCreate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SessionCreate(flags raw.SessionCreationFlags, attributes raw.SessionAttributeBits) error {
-	if _err := purego.NewOSStatus(raw.SessionCreate(flags, attributes)).Err(); _err != nil {
+func SessionCreate(flags SessionCreationFlags, attributes SessionAttributeBits) error {
+	if _err := purego.NewOSStatus(raw.SessionCreate(raw.SessionCreationFlags(flags), raw.SessionAttributeBits(attributes))).Err(); _err != nil {
 		return _err
 	}
 	return nil

@@ -36,8 +36,8 @@ func NewAttributeDescriptor() *AttributeDescriptor {
 }
 
 // WithFormat sets the format property and returns the receiver for chaining.
-func (x *AttributeDescriptor) WithFormat(format raw.MTLAttributeFormat) *AttributeDescriptor {
-	x.inner.SetFormat(format)
+func (x *AttributeDescriptor) WithFormat(format MTLAttributeFormat) *AttributeDescriptor {
+	x.inner.SetFormat(raw.MTLAttributeFormat(format))
 	return x
 }
 
@@ -54,13 +54,13 @@ func (x *AttributeDescriptor) WithBufferIndex(bufferIndex uint) *AttributeDescri
 }
 
 // Format calls the underlying Format.
-func (x *AttributeDescriptor) Format() raw.MTLAttributeFormat {
-	return x.inner.Format()
+func (x *AttributeDescriptor) Format() MTLAttributeFormat {
+	return MTLAttributeFormat(x.inner.Format())
 }
 
 // SetFormat calls the underlying SetFormat.
-func (x *AttributeDescriptor) SetFormat(format raw.MTLAttributeFormat) {
-	x.inner.SetFormat(format)
+func (x *AttributeDescriptor) SetFormat(format MTLAttributeFormat) {
+	x.inner.SetFormat(raw.MTLAttributeFormat(format))
 }
 
 // Offset calls the underlying Offset.
@@ -86,11 +86,11 @@ func (x *AttributeDescriptor) SetBufferIndex(bufferIndex uint) {
 // AttributeDescriptorable is the interface implemented by [AttributeDescriptor], for mocking and DI.
 type AttributeDescriptorable interface {
 	Unwrap() *raw.MTLAttributeDescriptor
-	WithFormat(format raw.MTLAttributeFormat) *AttributeDescriptor
+	WithFormat(format MTLAttributeFormat) *AttributeDescriptor
 	WithOffset(offset uint) *AttributeDescriptor
 	WithBufferIndex(bufferIndex uint) *AttributeDescriptor
-	Format() raw.MTLAttributeFormat
-	SetFormat(format raw.MTLAttributeFormat)
+	Format() MTLAttributeFormat
+	SetFormat(format MTLAttributeFormat)
 	Offset() uint
 	SetOffset(offset uint)
 	BufferIndex() uint

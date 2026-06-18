@@ -103,8 +103,8 @@ func (x *CalRecurrenceRule) RecurrenceEnd() *CalRecurrenceEnd {
 }
 
 // RecurrenceType calls the underlying RecurrenceType.
-func (x *CalRecurrenceRule) RecurrenceType() raw.CalRecurrenceType {
-	return x.inner.RecurrenceType()
+func (x *CalRecurrenceRule) RecurrenceType() CalRecurrenceType {
+	return CalRecurrenceType(x.inner.RecurrenceType())
 }
 
 // RecurrenceInterval calls the underlying RecurrenceInterval.
@@ -141,7 +141,7 @@ func (x *CalRecurrenceRule) MonthsOfTheYear() *foundation.NSArray[objc.ID] {
 type CalRecurrenceRuleable interface {
 	Unwrap() *raw.CalRecurrenceRule
 	RecurrenceEnd() *CalRecurrenceEnd
-	RecurrenceType() raw.CalRecurrenceType
+	RecurrenceType() CalRecurrenceType
 	RecurrenceInterval() uint
 	FirstDayOfTheWeek() uint
 	DaysOfTheWeek() *foundation.NSArray[objc.ID]

@@ -32,9 +32,9 @@ func SuperResolutionScalerParametersFromID(id objc.ID) *SuperResolutionScalerPar
 }
 
 // NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame creates a new [SuperResolutionScalerParameters].
-func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame(sourceFrame *raw.VTFrameProcessorFrame, previousFrame *raw.VTFrameProcessorFrame, previousOutputFrame *raw.VTFrameProcessorFrame, opticalFlow *raw.VTFrameProcessorOpticalFlow, submissionMode raw.VTSuperResolutionScalerParametersSubmissionMode, destinationFrame *raw.VTFrameProcessorFrame) *SuperResolutionScalerParameters {
+func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame(sourceFrame *raw.VTFrameProcessorFrame, previousFrame *raw.VTFrameProcessorFrame, previousOutputFrame *raw.VTFrameProcessorFrame, opticalFlow *raw.VTFrameProcessorOpticalFlow, submissionMode VTSuperResolutionScalerParametersSubmissionMode, destinationFrame *raw.VTFrameProcessorFrame) *SuperResolutionScalerParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTSuperResolutionScalerParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:previousOutputFrame:opticalFlow:submissionMode:destinationFrame:"), sourceFrame.Ptr(), previousFrame.Ptr(), previousOutputFrame.Ptr(), opticalFlow.Ptr(), submissionMode, destinationFrame.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:previousOutputFrame:opticalFlow:submissionMode:destinationFrame:"), sourceFrame.Ptr(), previousFrame.Ptr(), previousOutputFrame.Ptr(), opticalFlow.Ptr(), raw.VTSuperResolutionScalerParametersSubmissionMode(submissionMode), destinationFrame.Ptr())
 	return &SuperResolutionScalerParameters{inner: raw.VTSuperResolutionScalerParametersFromID(_id)}
 }
 
@@ -75,8 +75,8 @@ func (x *SuperResolutionScalerParameters) OpticalFlow() *FrameProcessorOpticalFl
 }
 
 // SubmissionMode calls the underlying SubmissionMode.
-func (x *SuperResolutionScalerParameters) SubmissionMode() raw.VTSuperResolutionScalerParametersSubmissionMode {
-	return x.inner.SubmissionMode()
+func (x *SuperResolutionScalerParameters) SubmissionMode() VTSuperResolutionScalerParametersSubmissionMode {
+	return VTSuperResolutionScalerParametersSubmissionMode(x.inner.SubmissionMode())
 }
 
 // DestinationFrame calls the underlying DestinationFrame.
@@ -95,7 +95,7 @@ type SuperResolutionScalerParametersable interface {
 	PreviousFrame() *FrameProcessorFrame
 	PreviousOutputFrame() *FrameProcessorFrame
 	OpticalFlow() *FrameProcessorOpticalFlow
-	SubmissionMode() raw.VTSuperResolutionScalerParametersSubmissionMode
+	SubmissionMode() VTSuperResolutionScalerParametersSubmissionMode
 	DestinationFrame() *FrameProcessorFrame
 }
 

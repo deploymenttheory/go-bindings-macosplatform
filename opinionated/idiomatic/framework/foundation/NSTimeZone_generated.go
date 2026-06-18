@@ -107,8 +107,8 @@ func (x *TimeZone) IsEqualToTimeZone(aTimeZone *raw.NSTimeZone) bool {
 }
 
 // LocalizedNameLocale calls the underlying LocalizedNameLocale.
-func (x *TimeZone) LocalizedNameLocale(style raw.NSTimeZoneNameStyle, locale *raw.NSLocale) *String {
-	_r := x.inner.LocalizedNameLocale(style, locale)
+func (x *TimeZone) LocalizedNameLocale(style NSTimeZoneNameStyle, locale *raw.NSLocale) *String {
+	_r := x.inner.LocalizedNameLocale(raw.NSTimeZoneNameStyle(style), locale)
 	if _r == nil {
 		return nil
 	}
@@ -162,7 +162,7 @@ type TimeZoneable interface {
 	Name() *String
 	Data() *Data
 	IsEqualToTimeZone(aTimeZone *raw.NSTimeZone) bool
-	LocalizedNameLocale(style raw.NSTimeZoneNameStyle, locale *raw.NSLocale) *String
+	LocalizedNameLocale(style NSTimeZoneNameStyle, locale *raw.NSLocale) *String
 	SecondsFromGMT() int
 	Abbreviation() *String
 	IsDaylightSavingTime() bool

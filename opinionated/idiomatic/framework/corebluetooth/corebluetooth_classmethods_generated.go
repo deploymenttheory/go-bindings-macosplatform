@@ -11,13 +11,13 @@ import (
 )
 
 // AuthorizationClass calls the underlying CBManagerAuthorizationClass.
-func AuthorizationClass() raw.CBManagerAuthorization {
-	return raw.CBManagerAuthorizationClass()
+func AuthorizationClass() CBManagerAuthorization {
+	return CBManagerAuthorization(raw.CBManagerAuthorizationClass())
 }
 
 // AuthorizationStatusClass calls the underlying CBPeripheralManagerAuthorizationStatusClass.
-func AuthorizationStatusClass() raw.CBPeripheralManagerAuthorizationStatus {
-	return raw.CBPeripheralManagerAuthorizationStatusClass()
+func AuthorizationStatusClass() CBPeripheralManagerAuthorizationStatus {
+	return CBPeripheralManagerAuthorizationStatus(raw.CBPeripheralManagerAuthorizationStatusClass())
 }
 
 // UUIDWithString calls the underlying CBUUIDUUIDWithString.

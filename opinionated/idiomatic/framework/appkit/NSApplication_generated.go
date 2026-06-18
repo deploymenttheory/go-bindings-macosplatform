@@ -63,8 +63,8 @@ func (x *Application) WithApplicationIconImage(applicationIconImage *Image) *App
 }
 
 // WithPresentationOptions sets the presentationOptions property and returns the receiver for chaining.
-func (x *Application) WithPresentationOptions(presentationOptions raw.NSApplicationPresentationOptions) *Application {
-	x.inner.SetPresentationOptions(presentationOptions)
+func (x *Application) WithPresentationOptions(presentationOptions NSApplicationPresentationOptions) *Application {
+	x.inner.SetPresentationOptions(raw.NSApplicationPresentationOptions(presentationOptions))
 	return x
 }
 
@@ -237,8 +237,8 @@ func (x *Application) Terminate(sender objc.ID) {
 }
 
 // RequestUserAttention calls the underlying RequestUserAttention.
-func (x *Application) RequestUserAttention(requestType raw.NSRequestUserAttentionType) int {
-	return x.inner.RequestUserAttention(requestType)
+func (x *Application) RequestUserAttention(requestType NSRequestUserAttentionType) int {
+	return x.inner.RequestUserAttention(raw.NSRequestUserAttentionType(requestType))
 }
 
 // CancelUserAttentionRequest calls the underlying CancelUserAttentionRequest.
@@ -247,8 +247,8 @@ func (x *Application) CancelUserAttentionRequest(request int) {
 }
 
 // EnumerateWindowsWithOptionsUsing calls the underlying EnumerateWindowsWithOptionsUsing.
-func (x *Application) EnumerateWindowsWithOptionsUsing(options raw.NSWindowListOptions, block func(*raw.NSWindow, *bool)) {
-	x.inner.EnumerateWindowsWithOptionsUsing(options, block)
+func (x *Application) EnumerateWindowsWithOptionsUsing(options NSWindowListOptions, block func(*raw.NSWindow, *bool)) {
+	x.inner.EnumerateWindowsWithOptionsUsing(raw.NSWindowListOptions(options), block)
 }
 
 // PreventWindowOrdering calls the underlying PreventWindowOrdering.
@@ -267,13 +267,13 @@ func (x *Application) UpdateWindows() {
 }
 
 // ActivationPolicy calls the underlying ActivationPolicy.
-func (x *Application) ActivationPolicy() raw.NSApplicationActivationPolicy {
-	return x.inner.ActivationPolicy()
+func (x *Application) ActivationPolicy() NSApplicationActivationPolicy {
+	return NSApplicationActivationPolicy(x.inner.ActivationPolicy())
 }
 
 // SetActivationPolicy calls the underlying SetActivationPolicy.
-func (x *Application) SetActivationPolicy(activationPolicy raw.NSApplicationActivationPolicy) bool {
-	return x.inner.SetActivationPolicy(activationPolicy)
+func (x *Application) SetActivationPolicy(activationPolicy NSApplicationActivationPolicy) bool {
+	return x.inner.SetActivationPolicy(raw.NSApplicationActivationPolicy(activationPolicy))
 }
 
 // ReportException calls the underlying ReportException.
@@ -287,8 +287,8 @@ func (x *Application) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
 }
 
 // ReplyToOpenOrPrint calls the underlying ReplyToOpenOrPrint.
-func (x *Application) ReplyToOpenOrPrint(reply raw.NSApplicationDelegateReply) {
-	x.inner.ReplyToOpenOrPrint(reply)
+func (x *Application) ReplyToOpenOrPrint(reply NSApplicationDelegateReply) {
+	x.inner.ReplyToOpenOrPrint(raw.NSApplicationDelegateReply(reply))
 }
 
 // OrderFrontCharacterPalette calls the underlying OrderFrontCharacterPalette.
@@ -416,23 +416,23 @@ func (x *Application) DockTile() *DockTile {
 }
 
 // PresentationOptions calls the underlying PresentationOptions.
-func (x *Application) PresentationOptions() raw.NSApplicationPresentationOptions {
-	return x.inner.PresentationOptions()
+func (x *Application) PresentationOptions() NSApplicationPresentationOptions {
+	return NSApplicationPresentationOptions(x.inner.PresentationOptions())
 }
 
 // SetPresentationOptions calls the underlying SetPresentationOptions.
-func (x *Application) SetPresentationOptions(presentationOptions raw.NSApplicationPresentationOptions) {
-	x.inner.SetPresentationOptions(presentationOptions)
+func (x *Application) SetPresentationOptions(presentationOptions NSApplicationPresentationOptions) {
+	x.inner.SetPresentationOptions(raw.NSApplicationPresentationOptions(presentationOptions))
 }
 
 // CurrentSystemPresentationOptions calls the underlying CurrentSystemPresentationOptions.
-func (x *Application) CurrentSystemPresentationOptions() raw.NSApplicationPresentationOptions {
-	return x.inner.CurrentSystemPresentationOptions()
+func (x *Application) CurrentSystemPresentationOptions() NSApplicationPresentationOptions {
+	return NSApplicationPresentationOptions(x.inner.CurrentSystemPresentationOptions())
 }
 
 // OcclusionState calls the underlying OcclusionState.
-func (x *Application) OcclusionState() raw.NSApplicationOcclusionState {
-	return x.inner.OcclusionState()
+func (x *Application) OcclusionState() NSApplicationOcclusionState {
+	return NSApplicationOcclusionState(x.inner.OcclusionState())
 }
 
 // IsProtectedDataAvailable calls the underlying IsProtectedDataAvailable.
@@ -474,8 +474,8 @@ func (x *Application) PostEventAtStart(event *raw.NSEvent, atStart bool) {
 }
 
 // NextEventMatchingMaskUntilDateInModeDequeue calls the underlying NextEventMatchingMaskUntilDateInModeDequeue.
-func (x *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask raw.NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event {
-	_r := x.inner.NextEventMatchingMaskUntilDateInModeDequeue(mask, expiration, mode, deqFlag)
+func (x *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event {
+	_r := x.inner.NextEventMatchingMaskUntilDateInModeDequeue(raw.NSEventMask(mask), expiration, mode, deqFlag)
 	if _r == nil {
 		return nil
 	}
@@ -483,8 +483,8 @@ func (x *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask raw.NSEve
 }
 
 // DiscardEventsMatchingMaskBeforeEvent calls the underlying DiscardEventsMatchingMaskBeforeEvent.
-func (x *Application) DiscardEventsMatchingMaskBeforeEvent(mask raw.NSEventMask, lastEvent *raw.NSEvent) {
-	x.inner.DiscardEventsMatchingMaskBeforeEvent(mask, lastEvent)
+func (x *Application) DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *raw.NSEvent) {
+	x.inner.DiscardEventsMatchingMaskBeforeEvent(raw.NSEventMask(mask), lastEvent)
 }
 
 // CurrentEvent calls the underlying CurrentEvent.
@@ -600,8 +600,8 @@ func (x *Application) OrderFrontStandardAboutPanelWithOptions(optionsDictionary 
 }
 
 // UserInterfaceLayoutDirection calls the underlying UserInterfaceLayoutDirection.
-func (x *Application) UserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection {
-	return x.inner.UserInterfaceLayoutDirection()
+func (x *Application) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
+	return NSUserInterfaceLayoutDirection(x.inner.UserInterfaceLayoutDirection())
 }
 
 // DisableRelaunchOnLogin calls the underlying DisableRelaunchOnLogin.
@@ -625,8 +625,8 @@ func (x *Application) UnregisterForRemoteNotifications() {
 }
 
 // RegisterForRemoteNotificationTypes calls the underlying RegisterForRemoteNotificationTypes.
-func (x *Application) RegisterForRemoteNotificationTypes(types raw.NSRemoteNotificationType) {
-	x.inner.RegisterForRemoteNotificationTypes(types)
+func (x *Application) RegisterForRemoteNotificationTypes(types NSRemoteNotificationType) {
+	x.inner.RegisterForRemoteNotificationTypes(raw.NSRemoteNotificationType(types))
 }
 
 // IsRegisteredForRemoteNotifications calls the underlying IsRegisteredForRemoteNotifications.
@@ -635,8 +635,8 @@ func (x *Application) IsRegisteredForRemoteNotifications() bool {
 }
 
 // EnabledRemoteNotificationTypes calls the underlying EnabledRemoteNotificationTypes.
-func (x *Application) EnabledRemoteNotificationTypes() raw.NSRemoteNotificationType {
-	return x.inner.EnabledRemoteNotificationTypes()
+func (x *Application) EnabledRemoteNotificationTypes() NSRemoteNotificationType {
+	return NSRemoteNotificationType(x.inner.EnabledRemoteNotificationTypes())
 }
 
 // RunModalForWindowRelativeToWindow calls the underlying RunModalForWindowRelativeToWindow.
@@ -783,7 +783,7 @@ type Applicationable interface {
 	WithMainMenu(mainMenu *Menu) *Application
 	WithHelpMenu(helpMenu *Menu) *Application
 	WithApplicationIconImage(applicationIconImage *Image) *Application
-	WithPresentationOptions(presentationOptions raw.NSApplicationPresentationOptions) *Application
+	WithPresentationOptions(presentationOptions NSApplicationPresentationOptions) *Application
 	WithAppearance(appearance *Appearance) *Application
 	WithWindowsMenu(windowsMenu *Menu) *Application
 	WithServicesMenu(servicesMenu *Menu) *Application
@@ -815,17 +815,17 @@ type Applicationable interface {
 	RunModalSession(session unsafe.Pointer) int
 	EndModalSession(session unsafe.Pointer)
 	Terminate(sender objc.ID)
-	RequestUserAttention(requestType raw.NSRequestUserAttentionType) int
+	RequestUserAttention(requestType NSRequestUserAttentionType) int
 	CancelUserAttentionRequest(request int)
-	EnumerateWindowsWithOptionsUsing(options raw.NSWindowListOptions, block func(*raw.NSWindow, *bool))
+	EnumerateWindowsWithOptionsUsing(options NSWindowListOptions, block func(*raw.NSWindow, *bool))
 	PreventWindowOrdering()
 	SetWindowsNeedUpdate(needUpdate bool)
 	UpdateWindows()
-	ActivationPolicy() raw.NSApplicationActivationPolicy
-	SetActivationPolicy(activationPolicy raw.NSApplicationActivationPolicy) bool
+	ActivationPolicy() NSApplicationActivationPolicy
+	SetActivationPolicy(activationPolicy NSApplicationActivationPolicy) bool
 	ReportException(exception *foundation.NSException)
 	ReplyToApplicationShouldTerminate(shouldTerminate bool)
-	ReplyToOpenOrPrint(reply raw.NSApplicationDelegateReply)
+	ReplyToOpenOrPrint(reply NSApplicationDelegateReply)
 	OrderFrontCharacterPalette(sender objc.ID)
 	Delegate() raw.NSApplicationDelegate
 	SetDelegate(delegate raw.NSApplicationDelegate)
@@ -844,18 +844,18 @@ type Applicationable interface {
 	ApplicationIconImage() *Image
 	SetApplicationIconImage(applicationIconImage *raw.NSImage)
 	DockTile() *DockTile
-	PresentationOptions() raw.NSApplicationPresentationOptions
-	SetPresentationOptions(presentationOptions raw.NSApplicationPresentationOptions)
-	CurrentSystemPresentationOptions() raw.NSApplicationPresentationOptions
-	OcclusionState() raw.NSApplicationOcclusionState
+	PresentationOptions() NSApplicationPresentationOptions
+	SetPresentationOptions(presentationOptions NSApplicationPresentationOptions)
+	CurrentSystemPresentationOptions() NSApplicationPresentationOptions
+	OcclusionState() NSApplicationOcclusionState
 	IsProtectedDataAvailable() bool
 	Appearance() *Appearance
 	SetAppearance(appearance *raw.NSAppearance)
 	EffectiveAppearance() *Appearance
 	SendEvent(event *raw.NSEvent)
 	PostEventAtStart(event *raw.NSEvent, atStart bool)
-	NextEventMatchingMaskUntilDateInModeDequeue(mask raw.NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event
-	DiscardEventsMatchingMaskBeforeEvent(mask raw.NSEventMask, lastEvent *raw.NSEvent)
+	NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event
+	DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *raw.NSEvent)
 	CurrentEvent() *Event
 	SendActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) bool
 	TargetForAction(action objc.SEL) objc.ID
@@ -876,14 +876,14 @@ type Applicationable interface {
 	SetServicesProvider(servicesProvider objc.ID)
 	OrderFrontStandardAboutPanel(sender objc.ID)
 	OrderFrontStandardAboutPanelWithOptions(optionsDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	UserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection
+	UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection
 	DisableRelaunchOnLogin()
 	EnableRelaunchOnLogin()
 	RegisterForRemoteNotifications()
 	UnregisterForRemoteNotifications()
-	RegisterForRemoteNotificationTypes(types raw.NSRemoteNotificationType)
+	RegisterForRemoteNotificationTypes(types NSRemoteNotificationType)
 	IsRegisteredForRemoteNotifications() bool
-	EnabledRemoteNotificationTypes() raw.NSRemoteNotificationType
+	EnabledRemoteNotificationTypes() NSRemoteNotificationType
 	RunModalForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) int
 	BeginModalSessionForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) unsafe.Pointer
 	ApplicationPrintFiles(sender *raw.NSApplication, filenames *foundation.NSArray[*foundation.NSString])

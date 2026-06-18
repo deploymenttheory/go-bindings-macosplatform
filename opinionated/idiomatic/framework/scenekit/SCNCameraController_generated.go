@@ -50,8 +50,8 @@ func (x *CameraController) WithPointOfView(pointOfView NodeProvider) *CameraCont
 }
 
 // WithInteractionMode sets the interactionMode property and returns the receiver for chaining.
-func (x *CameraController) WithInteractionMode(interactionMode raw.SCNInteractionMode) *CameraController {
-	x.inner.SetInteractionMode(interactionMode)
+func (x *CameraController) WithInteractionMode(interactionMode SCNInteractionMode) *CameraController {
+	x.inner.SetInteractionMode(raw.SCNInteractionMode(interactionMode))
 	return x
 }
 
@@ -194,13 +194,13 @@ func (x *CameraController) SetPointOfView(pointOfView *raw.SCNNode) {
 }
 
 // InteractionMode calls the underlying InteractionMode.
-func (x *CameraController) InteractionMode() raw.SCNInteractionMode {
-	return x.inner.InteractionMode()
+func (x *CameraController) InteractionMode() SCNInteractionMode {
+	return SCNInteractionMode(x.inner.InteractionMode())
 }
 
 // SetInteractionMode calls the underlying SetInteractionMode.
-func (x *CameraController) SetInteractionMode(interactionMode raw.SCNInteractionMode) {
-	x.inner.SetInteractionMode(interactionMode)
+func (x *CameraController) SetInteractionMode(interactionMode SCNInteractionMode) {
+	x.inner.SetInteractionMode(raw.SCNInteractionMode(interactionMode))
 }
 
 // Target calls the underlying Target.
@@ -303,7 +303,7 @@ type CameraControllerable interface {
 	Unwrap() *raw.SCNCameraController
 	WithDelegate(delegate raw.SCNCameraControllerDelegate) *CameraController
 	WithPointOfView(pointOfView NodeProvider) *CameraController
-	WithInteractionMode(interactionMode raw.SCNInteractionMode) *CameraController
+	WithInteractionMode(interactionMode SCNInteractionMode) *CameraController
 	WithTarget(target raw.SCNVector3) *CameraController
 	WithAutomaticTarget(automaticTarget bool) *CameraController
 	WithWorldUp(worldUp raw.SCNVector3) *CameraController
@@ -329,8 +329,8 @@ type CameraControllerable interface {
 	SetDelegate(delegate raw.SCNCameraControllerDelegate)
 	PointOfView() *Node
 	SetPointOfView(pointOfView *raw.SCNNode)
-	InteractionMode() raw.SCNInteractionMode
-	SetInteractionMode(interactionMode raw.SCNInteractionMode)
+	InteractionMode() SCNInteractionMode
+	SetInteractionMode(interactionMode SCNInteractionMode)
 	Target() raw.SCNVector3
 	SetTarget(target raw.SCNVector3)
 	AutomaticTarget() bool

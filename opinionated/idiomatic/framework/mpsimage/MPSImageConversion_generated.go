@@ -33,9 +33,9 @@ func ImageConversionFromID(id objc.ID) *ImageConversion {
 }
 
 // NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo creates a new [ImageConversion].
-func NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo(device metal.MTLDevice, srcAlpha raw.MPSAlphaType, destAlpha raw.MPSAlphaType, backgroundColor *float64, conversionInfo unsafe.Pointer) *ImageConversion {
+func NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo(device metal.MTLDevice, srcAlpha MPSAlphaType, destAlpha MPSAlphaType, backgroundColor *float64, conversionInfo unsafe.Pointer) *ImageConversion {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageConversion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:srcAlpha:destAlpha:backgroundColor:conversionInfo:"), device, srcAlpha, destAlpha, backgroundColor, conversionInfo)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:srcAlpha:destAlpha:backgroundColor:conversionInfo:"), device, raw.MPSAlphaType(srcAlpha), raw.MPSAlphaType(destAlpha), backgroundColor, conversionInfo)
 	return &ImageConversion{inner: raw.MPSImageConversionFromID(_id)}
 }
 
@@ -58,13 +58,13 @@ func (x *ImageConversion) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *Image
 }
 
 // SourceAlpha calls the underlying SourceAlpha.
-func (x *ImageConversion) SourceAlpha() raw.MPSAlphaType {
-	return x.inner.SourceAlpha()
+func (x *ImageConversion) SourceAlpha() MPSAlphaType {
+	return MPSAlphaType(x.inner.SourceAlpha())
 }
 
 // DestinationAlpha calls the underlying DestinationAlpha.
-func (x *ImageConversion) DestinationAlpha() raw.MPSAlphaType {
-	return x.inner.DestinationAlpha()
+func (x *ImageConversion) DestinationAlpha() MPSAlphaType {
+	return MPSAlphaType(x.inner.DestinationAlpha())
 }
 
 func (x *ImageConversion) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
@@ -77,8 +77,8 @@ type ImageConversionable interface {
 	WithOffset(offset mpscore.MPSOffset) *ImageConversion
 	WithClipRect(clipRect metal.MTLRegion) *ImageConversion
 	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConversion
-	SourceAlpha() raw.MPSAlphaType
-	DestinationAlpha() raw.MPSAlphaType
+	SourceAlpha() MPSAlphaType
+	DestinationAlpha() MPSAlphaType
 }
 
 var _ ImageConversionable = (*ImageConversion)(nil)

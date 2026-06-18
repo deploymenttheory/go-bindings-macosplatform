@@ -53,8 +53,8 @@ func (x *ShapeNode) WithFillColor(fillColor *appkit.NSColor) *ShapeNode {
 }
 
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *ShapeNode) WithBlendMode(blendMode raw.SKBlendMode) *ShapeNode {
-	x.inner.SetBlendMode(blendMode)
+func (x *ShapeNode) WithBlendMode(blendMode SKBlendMode) *ShapeNode {
+	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 	return x
 }
 
@@ -311,13 +311,13 @@ func (x *ShapeNode) SetFillColor(fillColor *appkit.NSColor) {
 }
 
 // BlendMode calls the underlying BlendMode.
-func (x *ShapeNode) BlendMode() raw.SKBlendMode {
-	return x.inner.BlendMode()
+func (x *ShapeNode) BlendMode() SKBlendMode {
+	return SKBlendMode(x.inner.BlendMode())
 }
 
 // SetBlendMode calls the underlying SetBlendMode.
-func (x *ShapeNode) SetBlendMode(blendMode raw.SKBlendMode) {
-	x.inner.SetBlendMode(blendMode)
+func (x *ShapeNode) SetBlendMode(blendMode SKBlendMode) {
+	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 }
 
 // IsAntialiased calls the underlying IsAntialiased.
@@ -448,7 +448,7 @@ type ShapeNodeable interface {
 	Unwrap() *raw.SKShapeNode
 	WithStrokeColor(strokeColor *appkit.NSColor) *ShapeNode
 	WithFillColor(fillColor *appkit.NSColor) *ShapeNode
-	WithBlendMode(blendMode raw.SKBlendMode) *ShapeNode
+	WithBlendMode(blendMode SKBlendMode) *ShapeNode
 	WithAntialiased(antialiased bool) *ShapeNode
 	WithLineWidth(lineWidth float64) *ShapeNode
 	WithGlowWidth(glowWidth float64) *ShapeNode
@@ -490,8 +490,8 @@ type ShapeNodeable interface {
 	SetStrokeColor(strokeColor *appkit.NSColor)
 	FillColor() *appkit.NSColor
 	SetFillColor(fillColor *appkit.NSColor)
-	BlendMode() raw.SKBlendMode
-	SetBlendMode(blendMode raw.SKBlendMode)
+	BlendMode() SKBlendMode
+	SetBlendMode(blendMode SKBlendMode)
 	IsAntialiased() bool
 	SetAntialiased(antialiased bool)
 	LineWidth() float64

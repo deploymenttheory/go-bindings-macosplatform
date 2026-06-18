@@ -54,8 +54,8 @@ func (x *SegmentedControl) WithSelectedSegment(selectedSegment int) *SegmentedCo
 }
 
 // WithSegmentStyle sets the segmentStyle property and returns the receiver for chaining.
-func (x *SegmentedControl) WithSegmentStyle(segmentStyle raw.NSSegmentStyle) *SegmentedControl {
-	x.inner.SetSegmentStyle(segmentStyle)
+func (x *SegmentedControl) WithSegmentStyle(segmentStyle NSSegmentStyle) *SegmentedControl {
+	x.inner.SetSegmentStyle(raw.NSSegmentStyle(segmentStyle))
 	return x
 }
 
@@ -66,8 +66,8 @@ func (x *SegmentedControl) WithSpringLoaded(springLoaded bool) *SegmentedControl
 }
 
 // WithTrackingMode sets the trackingMode property and returns the receiver for chaining.
-func (x *SegmentedControl) WithTrackingMode(trackingMode raw.NSSegmentSwitchTracking) *SegmentedControl {
-	x.inner.SetTrackingMode(trackingMode)
+func (x *SegmentedControl) WithTrackingMode(trackingMode NSSegmentSwitchTracking) *SegmentedControl {
+	x.inner.SetTrackingMode(raw.NSSegmentSwitchTracking(trackingMode))
 	return x
 }
 
@@ -78,14 +78,14 @@ func (x *SegmentedControl) WithSelectedSegmentBezelColor(selectedSegmentBezelCol
 }
 
 // WithSegmentDistribution sets the segmentDistribution property and returns the receiver for chaining.
-func (x *SegmentedControl) WithSegmentDistribution(segmentDistribution raw.NSSegmentDistribution) *SegmentedControl {
-	x.inner.SetSegmentDistribution(segmentDistribution)
+func (x *SegmentedControl) WithSegmentDistribution(segmentDistribution NSSegmentDistribution) *SegmentedControl {
+	x.inner.SetSegmentDistribution(raw.NSSegmentDistribution(segmentDistribution))
 	return x
 }
 
 // WithBorderShape sets the borderShape property and returns the receiver for chaining.
-func (x *SegmentedControl) WithBorderShape(borderShape raw.NSControlBorderShape) *SegmentedControl {
-	x.inner.SetBorderShape(borderShape)
+func (x *SegmentedControl) WithBorderShape(borderShape NSControlBorderShape) *SegmentedControl {
+	x.inner.SetBorderShape(raw.NSControlBorderShape(borderShape))
 	return x
 }
 
@@ -138,8 +138,8 @@ func (x *SegmentedControl) WithHighlighted(highlighted bool) *SegmentedControl {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *SegmentedControl) WithControlSize(controlSize raw.NSControlSize) *SegmentedControl {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *SegmentedControl) WithControlSize(controlSize NSControlSize) *SegmentedControl {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -204,20 +204,20 @@ func (x *SegmentedControl) WithUsesSingleLineMode(usesSingleLineMode bool) *Segm
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *SegmentedControl) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SegmentedControl {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *SegmentedControl) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SegmentedControl {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *SegmentedControl) WithAlignment(alignment raw.NSTextAlignment) *SegmentedControl {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *SegmentedControl) WithAlignment(alignment NSTextAlignment) *SegmentedControl {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *SegmentedControl) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SegmentedControl {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *SegmentedControl) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SegmentedControl {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -270,8 +270,8 @@ func (x *SegmentedControl) WithAutoresizesSubviews(autoresizesSubviews bool) *Se
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *SegmentedControl) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *SegmentedControl {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *SegmentedControl) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SegmentedControl {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -330,14 +330,14 @@ func (x *SegmentedControl) WithWantsRestingTouches(wantsRestingTouches bool) *Se
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *SegmentedControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *SegmentedControl {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *SegmentedControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SegmentedControl {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *SegmentedControl) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *SegmentedControl {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *SegmentedControl) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SegmentedControl {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -444,8 +444,8 @@ func (x *SegmentedControl) WithToolTip(toolTip string) *SegmentedControl {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SegmentedControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SegmentedControl {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *SegmentedControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SegmentedControl {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -462,8 +462,8 @@ func (x *SegmentedControl) WithNextKeyView(nextKeyView ViewProvider) *SegmentedC
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SegmentedControl) WithFocusRingType(focusRingType raw.NSFocusRingType) *SegmentedControl {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *SegmentedControl) WithFocusRingType(focusRingType NSFocusRingType) *SegmentedControl {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -486,8 +486,8 @@ func (x *SegmentedControl) WithGestureRecognizers(items ...GestureRecognizerProv
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *SegmentedControl) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SegmentedControl {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *SegmentedControl) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SegmentedControl {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -605,13 +605,13 @@ func (x *SegmentedControl) ImageForSegment(segment int) *Image {
 }
 
 // SetImageScalingForSegment calls the underlying SetImageScalingForSegment.
-func (x *SegmentedControl) SetImageScalingForSegment(scaling raw.NSImageScaling, segment int) {
-	x.inner.SetImageScalingForSegment(scaling, segment)
+func (x *SegmentedControl) SetImageScalingForSegment(scaling NSImageScaling, segment int) {
+	x.inner.SetImageScalingForSegment(raw.NSImageScaling(scaling), segment)
 }
 
 // ImageScalingForSegment calls the underlying ImageScalingForSegment.
-func (x *SegmentedControl) ImageScalingForSegment(segment int) raw.NSImageScaling {
-	return x.inner.ImageScalingForSegment(segment)
+func (x *SegmentedControl) ImageScalingForSegment(segment int) NSImageScaling {
+	return NSImageScaling(x.inner.ImageScalingForSegment(segment))
 }
 
 // SetLabelForSegment calls the underlying SetLabelForSegment.
@@ -697,13 +697,13 @@ func (x *SegmentedControl) ShowsMenuIndicatorForSegment(segment int) bool {
 }
 
 // SetAlignmentForSegment calls the underlying SetAlignmentForSegment.
-func (x *SegmentedControl) SetAlignmentForSegment(alignment raw.NSTextAlignment, segment int) {
-	x.inner.SetAlignmentForSegment(alignment, segment)
+func (x *SegmentedControl) SetAlignmentForSegment(alignment NSTextAlignment, segment int) {
+	x.inner.SetAlignmentForSegment(raw.NSTextAlignment(alignment), segment)
 }
 
 // AlignmentForSegment calls the underlying AlignmentForSegment.
-func (x *SegmentedControl) AlignmentForSegment(segment int) raw.NSTextAlignment {
-	return x.inner.AlignmentForSegment(segment)
+func (x *SegmentedControl) AlignmentForSegment(segment int) NSTextAlignment {
+	return NSTextAlignment(x.inner.AlignmentForSegment(segment))
 }
 
 // CompressWithPrioritizedCompressionOptions calls the underlying CompressWithPrioritizedCompressionOptions.
@@ -737,13 +737,13 @@ func (x *SegmentedControl) SetSelectedSegment(selectedSegment int) {
 }
 
 // SegmentStyle calls the underlying SegmentStyle.
-func (x *SegmentedControl) SegmentStyle() raw.NSSegmentStyle {
-	return x.inner.SegmentStyle()
+func (x *SegmentedControl) SegmentStyle() NSSegmentStyle {
+	return NSSegmentStyle(x.inner.SegmentStyle())
 }
 
 // SetSegmentStyle calls the underlying SetSegmentStyle.
-func (x *SegmentedControl) SetSegmentStyle(segmentStyle raw.NSSegmentStyle) {
-	x.inner.SetSegmentStyle(segmentStyle)
+func (x *SegmentedControl) SetSegmentStyle(segmentStyle NSSegmentStyle) {
+	x.inner.SetSegmentStyle(raw.NSSegmentStyle(segmentStyle))
 }
 
 // IsSpringLoaded calls the underlying IsSpringLoaded.
@@ -757,13 +757,13 @@ func (x *SegmentedControl) SetSpringLoaded(springLoaded bool) {
 }
 
 // TrackingMode calls the underlying TrackingMode.
-func (x *SegmentedControl) TrackingMode() raw.NSSegmentSwitchTracking {
-	return x.inner.TrackingMode()
+func (x *SegmentedControl) TrackingMode() NSSegmentSwitchTracking {
+	return NSSegmentSwitchTracking(x.inner.TrackingMode())
 }
 
 // SetTrackingMode calls the underlying SetTrackingMode.
-func (x *SegmentedControl) SetTrackingMode(trackingMode raw.NSSegmentSwitchTracking) {
-	x.inner.SetTrackingMode(trackingMode)
+func (x *SegmentedControl) SetTrackingMode(trackingMode NSSegmentSwitchTracking) {
+	x.inner.SetTrackingMode(raw.NSSegmentSwitchTracking(trackingMode))
 }
 
 // DoubleValueForSelectedSegment calls the underlying DoubleValueForSelectedSegment.
@@ -791,13 +791,13 @@ func (x *SegmentedControl) IndexOfSelectedItem() int {
 }
 
 // SegmentDistribution calls the underlying SegmentDistribution.
-func (x *SegmentedControl) SegmentDistribution() raw.NSSegmentDistribution {
-	return x.inner.SegmentDistribution()
+func (x *SegmentedControl) SegmentDistribution() NSSegmentDistribution {
+	return NSSegmentDistribution(x.inner.SegmentDistribution())
 }
 
 // SetSegmentDistribution calls the underlying SetSegmentDistribution.
-func (x *SegmentedControl) SetSegmentDistribution(segmentDistribution raw.NSSegmentDistribution) {
-	x.inner.SetSegmentDistribution(segmentDistribution)
+func (x *SegmentedControl) SetSegmentDistribution(segmentDistribution NSSegmentDistribution) {
+	x.inner.SetSegmentDistribution(raw.NSSegmentDistribution(segmentDistribution))
 }
 
 // ActiveCompressionOptions calls the underlying ActiveCompressionOptions.
@@ -810,13 +810,13 @@ func (x *SegmentedControl) ActiveCompressionOptions() *UserInterfaceCompressionO
 }
 
 // BorderShape calls the underlying BorderShape.
-func (x *SegmentedControl) BorderShape() raw.NSControlBorderShape {
-	return x.inner.BorderShape()
+func (x *SegmentedControl) BorderShape() NSControlBorderShape {
+	return NSControlBorderShape(x.inner.BorderShape())
 }
 
 // SetBorderShape calls the underlying SetBorderShape.
-func (x *SegmentedControl) SetBorderShape(borderShape raw.NSControlBorderShape) {
-	x.inner.SetBorderShape(borderShape)
+func (x *SegmentedControl) SetBorderShape(borderShape NSControlBorderShape) {
+	x.inner.SetBorderShape(raw.NSControlBorderShape(borderShape))
 }
 
 func (x *SegmentedControl) asControl() *raw.NSControl { return &x.inner.NSControl }
@@ -832,12 +832,12 @@ type SegmentedControlable interface {
 	Unwrap() *raw.NSSegmentedControl
 	WithSegmentCount(segmentCount int) *SegmentedControl
 	WithSelectedSegment(selectedSegment int) *SegmentedControl
-	WithSegmentStyle(segmentStyle raw.NSSegmentStyle) *SegmentedControl
+	WithSegmentStyle(segmentStyle NSSegmentStyle) *SegmentedControl
 	WithSpringLoaded(springLoaded bool) *SegmentedControl
-	WithTrackingMode(trackingMode raw.NSSegmentSwitchTracking) *SegmentedControl
+	WithTrackingMode(trackingMode NSSegmentSwitchTracking) *SegmentedControl
 	WithSelectedSegmentBezelColor(selectedSegmentBezelColor *Color) *SegmentedControl
-	WithSegmentDistribution(segmentDistribution raw.NSSegmentDistribution) *SegmentedControl
-	WithBorderShape(borderShape raw.NSControlBorderShape) *SegmentedControl
+	WithSegmentDistribution(segmentDistribution NSSegmentDistribution) *SegmentedControl
+	WithBorderShape(borderShape NSControlBorderShape) *SegmentedControl
 	WithTarget(target objc.ID) *SegmentedControl
 	WithAction(action objc.SEL) *SegmentedControl
 	WithTag(tag int) *SegmentedControl
@@ -846,7 +846,7 @@ type SegmentedControlable interface {
 	WithEnabled(enabled bool) *SegmentedControl
 	WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedControl
 	WithHighlighted(highlighted bool) *SegmentedControl
-	WithControlSize(controlSize raw.NSControlSize) *SegmentedControl
+	WithControlSize(controlSize NSControlSize) *SegmentedControl
 	WithFormatter(formatter *foundation.NSFormatter) *SegmentedControl
 	WithObjectValue(objectValue objc.ID) *SegmentedControl
 	WithStringValue(stringValue string) *SegmentedControl
@@ -857,16 +857,16 @@ type SegmentedControlable interface {
 	WithDoubleValue(doubleValue float64) *SegmentedControl
 	WithFont(font *Font) *SegmentedControl
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedControl
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SegmentedControl
-	WithAlignment(alignment raw.NSTextAlignment) *SegmentedControl
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SegmentedControl
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *SegmentedControl
+	WithAlignment(alignment NSTextAlignment) *SegmentedControl
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SegmentedControl
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SegmentedControl
 	WithCell(cell CellProvider) *SegmentedControl
 	WithSubviews(items ...ViewProvider) *SegmentedControl
 	WithHidden(hidden bool) *SegmentedControl
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SegmentedControl
 	WithAutoresizesSubviews(autoresizesSubviews bool) *SegmentedControl
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *SegmentedControl
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SegmentedControl
 	WithFrame(frame corefoundation.CGRect) *SegmentedControl
 	WithFrameRotation(frameRotation float64) *SegmentedControl
 	WithFrameCenterRotation(frameCenterRotation float64) *SegmentedControl
@@ -876,8 +876,8 @@ type SegmentedControlable interface {
 	WithNeedsDisplay(needsDisplay bool) *SegmentedControl
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *SegmentedControl
 	WithWantsRestingTouches(wantsRestingTouches bool) *SegmentedControl
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *SegmentedControl
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *SegmentedControl
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SegmentedControl
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SegmentedControl
 	WithWantsLayer(wantsLayer bool) *SegmentedControl
 	WithLayer(layer *quartzcore.CALayer) *SegmentedControl
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SegmentedControl
@@ -891,12 +891,12 @@ type SegmentedControlable interface {
 	WithClipsToBounds(clipsToBounds bool) *SegmentedControl
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SegmentedControl
 	WithToolTip(toolTip string) *SegmentedControl
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SegmentedControl
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SegmentedControl
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SegmentedControl
 	WithNextKeyView(nextKeyView ViewProvider) *SegmentedControl
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *SegmentedControl
+	WithFocusRingType(focusRingType NSFocusRingType) *SegmentedControl
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *SegmentedControl
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SegmentedControl
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SegmentedControl
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SegmentedControl
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SegmentedControl
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SegmentedControl
@@ -916,8 +916,8 @@ type SegmentedControlable interface {
 	WidthForSegment(segment int) float64
 	SetImageForSegment(image *raw.NSImage, segment int)
 	ImageForSegment(segment int) *Image
-	SetImageScalingForSegment(scaling raw.NSImageScaling, segment int)
-	ImageScalingForSegment(segment int) raw.NSImageScaling
+	SetImageScalingForSegment(scaling NSImageScaling, segment int)
+	ImageScalingForSegment(segment int) NSImageScaling
 	SetLabelForSegment(label string, segment int)
 	LabelForSegment(segment int) string
 	SetMenuForSegment(menu *raw.NSMenu, segment int)
@@ -932,29 +932,29 @@ type SegmentedControlable interface {
 	TagForSegment(segment int) int
 	SetShowsMenuIndicatorForSegment(showsMenuIndicator bool, segment int)
 	ShowsMenuIndicatorForSegment(segment int) bool
-	SetAlignmentForSegment(alignment raw.NSTextAlignment, segment int)
-	AlignmentForSegment(segment int) raw.NSTextAlignment
+	SetAlignmentForSegment(alignment NSTextAlignment, segment int)
+	AlignmentForSegment(segment int) NSTextAlignment
 	CompressWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions])
 	MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions]) corefoundation.CGSize
 	SegmentCount() int
 	SetSegmentCount(segmentCount int)
 	SelectedSegment() int
 	SetSelectedSegment(selectedSegment int)
-	SegmentStyle() raw.NSSegmentStyle
-	SetSegmentStyle(segmentStyle raw.NSSegmentStyle)
+	SegmentStyle() NSSegmentStyle
+	SetSegmentStyle(segmentStyle NSSegmentStyle)
 	IsSpringLoaded() bool
 	SetSpringLoaded(springLoaded bool)
-	TrackingMode() raw.NSSegmentSwitchTracking
-	SetTrackingMode(trackingMode raw.NSSegmentSwitchTracking)
+	TrackingMode() NSSegmentSwitchTracking
+	SetTrackingMode(trackingMode NSSegmentSwitchTracking)
 	DoubleValueForSelectedSegment() float64
 	SelectedSegmentBezelColor() *Color
 	SetSelectedSegmentBezelColor(selectedSegmentBezelColor *raw.NSColor)
 	IndexOfSelectedItem() int
-	SegmentDistribution() raw.NSSegmentDistribution
-	SetSegmentDistribution(segmentDistribution raw.NSSegmentDistribution)
+	SegmentDistribution() NSSegmentDistribution
+	SetSegmentDistribution(segmentDistribution NSSegmentDistribution)
 	ActiveCompressionOptions() *UserInterfaceCompressionOptions
-	BorderShape() raw.NSControlBorderShape
-	SetBorderShape(borderShape raw.NSControlBorderShape)
+	BorderShape() NSControlBorderShape
+	SetBorderShape(borderShape NSControlBorderShape)
 }
 
 var _ SegmentedControlable = (*SegmentedControl)(nil)

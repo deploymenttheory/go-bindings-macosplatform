@@ -37,8 +37,8 @@ func NewCollectionLayoutAnchor() *CollectionLayoutAnchor {
 }
 
 // Edges calls the underlying Edges.
-func (x *CollectionLayoutAnchor) Edges() raw.NSDirectionalRectEdge {
-	return x.inner.Edges()
+func (x *CollectionLayoutAnchor) Edges() NSDirectionalRectEdge {
+	return NSDirectionalRectEdge(x.inner.Edges())
 }
 
 // Offset calls the underlying Offset.
@@ -59,7 +59,7 @@ func (x *CollectionLayoutAnchor) IsFractionalOffset() bool {
 // CollectionLayoutAnchorable is the interface implemented by [CollectionLayoutAnchor], for mocking and DI.
 type CollectionLayoutAnchorable interface {
 	Unwrap() *raw.NSCollectionLayoutAnchor
-	Edges() raw.NSDirectionalRectEdge
+	Edges() NSDirectionalRectEdge
 	Offset() corefoundation.CGPoint
 	IsAbsoluteOffset() bool
 	IsFractionalOffset() bool

@@ -224,8 +224,8 @@ func (x *NETunnelProviderManager) CopyAppRules() []*NEAppRule {
 }
 
 // RoutingMethod calls the underlying RoutingMethod.
-func (x *NETunnelProviderManager) RoutingMethod() raw.NETunnelProviderRoutingMethod {
-	return x.inner.RoutingMethod()
+func (x *NETunnelProviderManager) RoutingMethod() NETunnelProviderRoutingMethod {
+	return NETunnelProviderRoutingMethod(x.inner.RoutingMethod())
 }
 
 // SafariDomains returns the collection as a Go slice.
@@ -363,7 +363,7 @@ type NETunnelProviderManagerable interface {
 	WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETunnelProviderManager
 	WithEnabled(enabled bool) *NETunnelProviderManager
 	CopyAppRules() []*NEAppRule
-	RoutingMethod() raw.NETunnelProviderRoutingMethod
+	RoutingMethod() NETunnelProviderRoutingMethod
 	SafariDomains() []string
 	SetSafariDomains(safariDomains *foundation.NSArray[*foundation.NSString])
 	MailDomains() []string

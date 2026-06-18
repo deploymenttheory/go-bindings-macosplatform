@@ -30,9 +30,9 @@ func ComparisonPredicateFromID(id objc.ID) *ComparisonPredicate {
 }
 
 // NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions creates a new [ComparisonPredicate].
-func NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *raw.NSExpression, rhs *raw.NSExpression, modifier raw.NSComparisonPredicateModifier, type_ raw.NSPredicateOperatorType, options raw.NSComparisonPredicateOptions) *ComparisonPredicate {
+func NewComparisonPredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *raw.NSExpression, rhs *raw.NSExpression, modifier NSComparisonPredicateModifier, type_ NSPredicateOperatorType, options NSComparisonPredicateOptions) *ComparisonPredicate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSComparisonPredicate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeftExpression:rightExpression:modifier:type:options:"), lhs.Ptr(), rhs.Ptr(), modifier, type_, options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeftExpression:rightExpression:modifier:type:options:"), lhs.Ptr(), rhs.Ptr(), raw.NSComparisonPredicateModifier(modifier), raw.NSPredicateOperatorType(type_), raw.NSComparisonPredicateOptions(options))
 	return &ComparisonPredicate{inner: raw.NSComparisonPredicateFromID(_id)}
 }
 
@@ -57,13 +57,13 @@ func (x *ComparisonPredicate) WithScriptingProperties(scriptingProperties *raw.N
 }
 
 // PredicateOperatorType calls the underlying PredicateOperatorType.
-func (x *ComparisonPredicate) PredicateOperatorType() raw.NSPredicateOperatorType {
-	return x.inner.PredicateOperatorType()
+func (x *ComparisonPredicate) PredicateOperatorType() NSPredicateOperatorType {
+	return NSPredicateOperatorType(x.inner.PredicateOperatorType())
 }
 
 // ComparisonPredicateModifier calls the underlying ComparisonPredicateModifier.
-func (x *ComparisonPredicate) ComparisonPredicateModifier() raw.NSComparisonPredicateModifier {
-	return x.inner.ComparisonPredicateModifier()
+func (x *ComparisonPredicate) ComparisonPredicateModifier() NSComparisonPredicateModifier {
+	return NSComparisonPredicateModifier(x.inner.ComparisonPredicateModifier())
 }
 
 // LeftExpression calls the underlying LeftExpression.
@@ -90,8 +90,8 @@ func (x *ComparisonPredicate) CustomSelector() objc.SEL {
 }
 
 // Options calls the underlying Options.
-func (x *ComparisonPredicate) Options() raw.NSComparisonPredicateOptions {
-	return x.inner.Options()
+func (x *ComparisonPredicate) Options() NSComparisonPredicateOptions {
+	return NSComparisonPredicateOptions(x.inner.Options())
 }
 
 func (x *ComparisonPredicate) asPredicate() *raw.NSPredicate { return &x.inner.NSPredicate }
@@ -102,12 +102,12 @@ func (x *ComparisonPredicate) asObject() *raw.NSObject { return &x.inner.NSPredi
 type ComparisonPredicateable interface {
 	Unwrap() *raw.NSComparisonPredicate
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ComparisonPredicate
-	PredicateOperatorType() raw.NSPredicateOperatorType
-	ComparisonPredicateModifier() raw.NSComparisonPredicateModifier
+	PredicateOperatorType() NSPredicateOperatorType
+	ComparisonPredicateModifier() NSComparisonPredicateModifier
 	LeftExpression() *Expression
 	RightExpression() *Expression
 	CustomSelector() objc.SEL
-	Options() raw.NSComparisonPredicateOptions
+	Options() NSComparisonPredicateOptions
 }
 
 var _ ComparisonPredicateable = (*ComparisonPredicate)(nil)

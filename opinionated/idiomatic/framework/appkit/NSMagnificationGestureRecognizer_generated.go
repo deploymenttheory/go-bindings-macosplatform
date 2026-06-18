@@ -57,8 +57,8 @@ func (x *MagnificationGestureRecognizer) WithAction(action objc.SEL) *Magnificat
 }
 
 // WithState sets the state property and returns the receiver for chaining.
-func (x *MagnificationGestureRecognizer) WithState(state raw.NSGestureRecognizerState) *MagnificationGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetState(state)
+func (x *MagnificationGestureRecognizer) WithState(state NSGestureRecognizerState) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
@@ -123,8 +123,8 @@ func (x *MagnificationGestureRecognizer) WithName(name string) *MagnificationGes
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *MagnificationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *MagnificationGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *MagnificationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *MagnificationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -148,7 +148,7 @@ type MagnificationGestureRecognizerable interface {
 	WithMagnification(magnification float64) *MagnificationGestureRecognizer
 	WithTarget(target objc.ID) *MagnificationGestureRecognizer
 	WithAction(action objc.SEL) *MagnificationGestureRecognizer
-	WithState(state raw.NSGestureRecognizerState) *MagnificationGestureRecognizer
+	WithState(state NSGestureRecognizerState) *MagnificationGestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *MagnificationGestureRecognizer
 	WithEnabled(enabled bool) *MagnificationGestureRecognizer
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *MagnificationGestureRecognizer
@@ -159,7 +159,7 @@ type MagnificationGestureRecognizerable interface {
 	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *MagnificationGestureRecognizer
 	WithDelaysRotationEvents(delaysRotationEvents bool) *MagnificationGestureRecognizer
 	WithName(name string) *MagnificationGestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *MagnificationGestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *MagnificationGestureRecognizer
 	Magnification() float64
 	SetMagnification(magnification float64)
 }

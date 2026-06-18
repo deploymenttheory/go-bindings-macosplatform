@@ -53,23 +53,23 @@ func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCus
 }
 
 // NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType creates a new [Person].
-func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, isMe bool, suggestionType raw.INPersonSuggestionType) *Person {
+func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsMeSuggestionType(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, isMe bool, suggestionType INPersonSuggestionType) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isMe:suggestionType:"), personHandle.Ptr(), nameComponents.Ptr(), foundation.NSStringStringWithUTF8String(displayName).Ptr(), image.Ptr(), foundation.NSStringStringWithUTF8String(contactIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(customIdentifier).Ptr(), isMe, suggestionType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isMe:suggestionType:"), personHandle.Ptr(), nameComponents.Ptr(), foundation.NSStringStringWithUTF8String(displayName).Ptr(), image.Ptr(), foundation.NSStringStringWithUTF8String(contactIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(customIdentifier).Ptr(), isMe, raw.INPersonSuggestionType(suggestionType))
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
 // NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType creates a new [Person].
-func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, isContactSuggestion bool, suggestionType raw.INPersonSuggestionType) *Person {
+func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierIsContactSuggestionSuggestionType(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, isContactSuggestion bool, suggestionType INPersonSuggestionType) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isContactSuggestion:suggestionType:"), personHandle.Ptr(), nameComponents.Ptr(), foundation.NSStringStringWithUTF8String(displayName).Ptr(), image.Ptr(), foundation.NSStringStringWithUTF8String(contactIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(customIdentifier).Ptr(), isContactSuggestion, suggestionType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:isContactSuggestion:suggestionType:"), personHandle.Ptr(), nameComponents.Ptr(), foundation.NSStringStringWithUTF8String(displayName).Ptr(), image.Ptr(), foundation.NSStringStringWithUTF8String(contactIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(customIdentifier).Ptr(), isContactSuggestion, raw.INPersonSuggestionType(suggestionType))
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
 // NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType creates a new [Person].
-func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, aliases *foundation.NSArray[*raw.INPersonHandle], suggestionType raw.INPersonSuggestionType) *Person {
+func NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifierAliasesSuggestionType(personHandle *raw.INPersonHandle, nameComponents *foundation.NSPersonNameComponents, displayName string, image *raw.INImage, contactIdentifier string, customIdentifier string, aliases *foundation.NSArray[*raw.INPersonHandle], suggestionType INPersonSuggestionType) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPerson")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:aliases:suggestionType:"), personHandle.Ptr(), nameComponents.Ptr(), foundation.NSStringStringWithUTF8String(displayName).Ptr(), image.Ptr(), foundation.NSStringStringWithUTF8String(contactIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(customIdentifier).Ptr(), aliases.Ptr(), suggestionType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonHandle:nameComponents:displayName:image:contactIdentifier:customIdentifier:aliases:suggestionType:"), personHandle.Ptr(), nameComponents.Ptr(), foundation.NSStringStringWithUTF8String(displayName).Ptr(), image.Ptr(), foundation.NSStringStringWithUTF8String(contactIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(customIdentifier).Ptr(), aliases.Ptr(), raw.INPersonSuggestionType(suggestionType))
 	return &Person{inner: raw.INPersonFromID(_id)}
 }
 
@@ -170,8 +170,8 @@ func (x *Person) Aliases() []*PersonHandle {
 }
 
 // SuggestionType calls the underlying SuggestionType.
-func (x *Person) SuggestionType() raw.INPersonSuggestionType {
-	return x.inner.SuggestionType()
+func (x *Person) SuggestionType() INPersonSuggestionType {
+	return INPersonSuggestionType(x.inner.SuggestionType())
 }
 
 // IsMe calls the underlying IsMe.
@@ -200,7 +200,7 @@ type Personable interface {
 	Relationship() string
 	IsContactSuggestion() bool
 	Aliases() []*PersonHandle
-	SuggestionType() raw.INPersonSuggestionType
+	SuggestionType() INPersonSuggestionType
 	IsMe() bool
 	Handle() string
 }

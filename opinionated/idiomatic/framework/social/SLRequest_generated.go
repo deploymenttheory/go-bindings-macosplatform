@@ -75,8 +75,8 @@ func (x *Request) SetAccount(account *accounts.ACAccount) {
 }
 
 // RequestMethod calls the underlying RequestMethod.
-func (x *Request) RequestMethod() raw.SLRequestMethod {
-	return x.inner.RequestMethod()
+func (x *Request) RequestMethod() SLRequestMethod {
+	return SLRequestMethod(x.inner.RequestMethod())
 }
 
 // URL calls the underlying URL.
@@ -99,7 +99,7 @@ type Requestable interface {
 	PerformRequestWithHandler(handler func(*foundation.NSData, *foundation.NSHTTPURLResponse, unsafe.Pointer))
 	Account() *accounts.ACAccount
 	SetAccount(account *accounts.ACAccount)
-	RequestMethod() raw.SLRequestMethod
+	RequestMethod() SLRequestMethod
 	URL() *foundation.NSURL
 	Parameters() *foundation.NSDictionary[objc.ID, objc.ID]
 }

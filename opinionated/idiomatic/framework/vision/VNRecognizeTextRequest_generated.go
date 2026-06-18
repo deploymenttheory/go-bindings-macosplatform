@@ -76,8 +76,8 @@ func (x *RecognizeTextRequest) WithCustomWords(items ...*foundation.NSString) *R
 }
 
 // WithRecognitionLevel sets the recognitionLevel property and returns the receiver for chaining.
-func (x *RecognizeTextRequest) WithRecognitionLevel(recognitionLevel raw.VNRequestTextRecognitionLevel) *RecognizeTextRequest {
-	x.inner.SetRecognitionLevel(recognitionLevel)
+func (x *RecognizeTextRequest) WithRecognitionLevel(recognitionLevel VNRequestTextRecognitionLevel) *RecognizeTextRequest {
+	x.inner.SetRecognitionLevel(raw.VNRequestTextRecognitionLevel(recognitionLevel))
 	return x
 }
 
@@ -170,13 +170,13 @@ func (x *RecognizeTextRequest) SetCustomWords(customWords *foundation.NSArray[*f
 }
 
 // RecognitionLevel calls the underlying RecognitionLevel.
-func (x *RecognizeTextRequest) RecognitionLevel() raw.VNRequestTextRecognitionLevel {
-	return x.inner.RecognitionLevel()
+func (x *RecognizeTextRequest) RecognitionLevel() VNRequestTextRecognitionLevel {
+	return VNRequestTextRecognitionLevel(x.inner.RecognitionLevel())
 }
 
 // SetRecognitionLevel calls the underlying SetRecognitionLevel.
-func (x *RecognizeTextRequest) SetRecognitionLevel(recognitionLevel raw.VNRequestTextRecognitionLevel) {
-	x.inner.SetRecognitionLevel(recognitionLevel)
+func (x *RecognizeTextRequest) SetRecognitionLevel(recognitionLevel VNRequestTextRecognitionLevel) {
+	x.inner.SetRecognitionLevel(raw.VNRequestTextRecognitionLevel(recognitionLevel))
 }
 
 // UsesLanguageCorrection calls the underlying UsesLanguageCorrection.
@@ -222,7 +222,7 @@ type RecognizeTextRequestable interface {
 	Unwrap() *raw.VNRecognizeTextRequest
 	WithRecognitionLanguages(items ...*foundation.NSString) *RecognizeTextRequest
 	WithCustomWords(items ...*foundation.NSString) *RecognizeTextRequest
-	WithRecognitionLevel(recognitionLevel raw.VNRequestTextRecognitionLevel) *RecognizeTextRequest
+	WithRecognitionLevel(recognitionLevel VNRequestTextRecognitionLevel) *RecognizeTextRequest
 	WithUsesLanguageCorrection(usesLanguageCorrection bool) *RecognizeTextRequest
 	WithAutomaticallyDetectsLanguage(automaticallyDetectsLanguage bool) *RecognizeTextRequest
 	WithMinimumTextHeight(minimumTextHeight float32) *RecognizeTextRequest
@@ -235,8 +235,8 @@ type RecognizeTextRequestable interface {
 	SetRecognitionLanguages(recognitionLanguages *foundation.NSArray[*foundation.NSString])
 	CustomWords() []string
 	SetCustomWords(customWords *foundation.NSArray[*foundation.NSString])
-	RecognitionLevel() raw.VNRequestTextRecognitionLevel
-	SetRecognitionLevel(recognitionLevel raw.VNRequestTextRecognitionLevel)
+	RecognitionLevel() VNRequestTextRecognitionLevel
+	SetRecognitionLevel(recognitionLevel VNRequestTextRecognitionLevel)
 	UsesLanguageCorrection() bool
 	SetUsesLanguageCorrection(usesLanguageCorrection bool)
 	AutomaticallyDetectsLanguage() bool

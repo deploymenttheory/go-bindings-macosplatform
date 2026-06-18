@@ -67,8 +67,8 @@ func (x *ClickGestureRecognizer) WithAction(action objc.SEL) *ClickGestureRecogn
 }
 
 // WithState sets the state property and returns the receiver for chaining.
-func (x *ClickGestureRecognizer) WithState(state raw.NSGestureRecognizerState) *ClickGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetState(state)
+func (x *ClickGestureRecognizer) WithState(state NSGestureRecognizerState) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
@@ -133,8 +133,8 @@ func (x *ClickGestureRecognizer) WithName(name string) *ClickGestureRecognizer {
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ClickGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ClickGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ClickGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ClickGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -180,7 +180,7 @@ type ClickGestureRecognizerable interface {
 	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *ClickGestureRecognizer
 	WithTarget(target objc.ID) *ClickGestureRecognizer
 	WithAction(action objc.SEL) *ClickGestureRecognizer
-	WithState(state raw.NSGestureRecognizerState) *ClickGestureRecognizer
+	WithState(state NSGestureRecognizerState) *ClickGestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *ClickGestureRecognizer
 	WithEnabled(enabled bool) *ClickGestureRecognizer
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClickGestureRecognizer
@@ -191,7 +191,7 @@ type ClickGestureRecognizerable interface {
 	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *ClickGestureRecognizer
 	WithDelaysRotationEvents(delaysRotationEvents bool) *ClickGestureRecognizer
 	WithName(name string) *ClickGestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ClickGestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ClickGestureRecognizer
 	ButtonMask() uint
 	SetButtonMask(buttonMask uint)
 	NumberOfClicksRequired() int

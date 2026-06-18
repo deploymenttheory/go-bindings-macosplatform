@@ -47,8 +47,8 @@ func NewColorWithCoder(coder *foundation.NSCoder) *Color {
 }
 
 // ColorUsingType calls the underlying ColorUsingType.
-func (x *Color) ColorUsingType(type_ raw.NSColorType) *Color {
-	_r := x.inner.ColorUsingType(type_)
+func (x *Color) ColorUsingType(type_ NSColorType) *Color {
+	_r := x.inner.ColorUsingType(raw.NSColorType(type_))
 	if _r == nil {
 		return nil
 	}
@@ -92,8 +92,8 @@ func (x *Color) ShadowWithLevel(val float64) *Color {
 }
 
 // ColorWithSystemEffect calls the underlying ColorWithSystemEffect.
-func (x *Color) ColorWithSystemEffect(systemEffect raw.NSColorSystemEffect) *Color {
-	_r := x.inner.ColorWithSystemEffect(systemEffect)
+func (x *Color) ColorWithSystemEffect(systemEffect NSColorSystemEffect) *Color {
+	_r := x.inner.ColorWithSystemEffect(raw.NSColorSystemEffect(systemEffect))
 	if _r == nil {
 		return nil
 	}
@@ -169,8 +169,8 @@ func (x *Color) DrawSwatchInRect(rect corefoundation.CGRect) {
 }
 
 // Type calls the underlying Type.
-func (x *Color) Type() raw.NSColorType {
-	return x.inner.Type()
+func (x *Color) Type() NSColorType {
+	return NSColorType(x.inner.Type())
 }
 
 // StandardDynamicRangeColor calls the underlying StandardDynamicRangeColor.
@@ -341,12 +341,12 @@ func (x *Color) ColorSpaceName() string {
 // Colorable is the interface implemented by [Color], for mocking and DI.
 type Colorable interface {
 	Unwrap() *raw.NSColor
-	ColorUsingType(type_ raw.NSColorType) *Color
+	ColorUsingType(type_ NSColorType) *Color
 	ColorUsingColorSpace(space *raw.NSColorSpace) *Color
 	ColorByApplyingContentHeadroom(contentHeadroom float64) *Color
 	HighlightWithLevel(val float64) *Color
 	ShadowWithLevel(val float64) *Color
-	ColorWithSystemEffect(systemEffect raw.NSColorSystemEffect) *Color
+	ColorWithSystemEffect(systemEffect NSColorSystemEffect) *Color
 	Set()
 	SetFill()
 	SetStroke()
@@ -359,7 +359,7 @@ type Colorable interface {
 	GetComponents(components *float64)
 	WriteToPasteboard(pasteBoard *raw.NSPasteboard)
 	DrawSwatchInRect(rect corefoundation.CGRect)
-	Type() raw.NSColorType
+	Type() NSColorType
 	StandardDynamicRangeColor() *Color
 	CatalogNameComponent() string
 	ColorNameComponent() string

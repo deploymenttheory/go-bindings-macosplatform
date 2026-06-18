@@ -116,13 +116,13 @@ func (x *CNNLoss) EncodeBatchToCommandBufferSourceImagesLabels(commandBuffer met
 }
 
 // LossType calls the underlying LossType.
-func (x *CNNLoss) LossType() raw.MPSCNNLossType {
-	return x.inner.LossType()
+func (x *CNNLoss) LossType() MPSCNNLossType {
+	return MPSCNNLossType(x.inner.LossType())
 }
 
 // ReductionType calls the underlying ReductionType.
-func (x *CNNLoss) ReductionType() raw.MPSCNNReductionType {
-	return x.inner.ReductionType()
+func (x *CNNLoss) ReductionType() MPSCNNReductionType {
+	return MPSCNNReductionType(x.inner.ReductionType())
 }
 
 // Weight calls the underlying Weight.
@@ -172,8 +172,8 @@ type CNNLossable interface {
 	EncodeToCommandBufferSourceImageLabels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels) *mpscore.MPSImage
 	EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer, destinationImage unsafe.Pointer)
 	EncodeBatchToCommandBufferSourceImagesLabels(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer) unsafe.Pointer
-	LossType() raw.MPSCNNLossType
-	ReductionType() raw.MPSCNNReductionType
+	LossType() MPSCNNLossType
+	ReductionType() MPSCNNReductionType
 	Weight() float32
 	LabelSmoothing() float32
 	NumberOfClasses() uint

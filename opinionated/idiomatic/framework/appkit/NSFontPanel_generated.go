@@ -81,8 +81,8 @@ func (x *FontPanel) WithSubtitle(subtitle string) *FontPanel {
 }
 
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
-func (x *FontPanel) WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetTitleVisibility(titleVisibility)
+func (x *FontPanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
 	return x
 }
 
@@ -93,8 +93,8 @@ func (x *FontPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bo
 }
 
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
-func (x *FontPanel) WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetToolbarStyle(toolbarStyle)
+func (x *FontPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
 	return x
 }
 
@@ -147,8 +147,8 @@ func (x *FontPanel) WithDelegate(delegate raw.NSWindowDelegate) *FontPanel {
 }
 
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
-func (x *FontPanel) WithStyleMask(styleMask raw.NSWindowStyleMask) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetStyleMask(styleMask)
+func (x *FontPanel) WithStyleMask(styleMask NSWindowStyleMask) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetStyleMask(raw.NSWindowStyleMask(styleMask))
 	return x
 }
 
@@ -255,8 +255,8 @@ func (x *FontPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWh
 }
 
 // WithBackingType sets the backingType property and returns the receiver for chaining.
-func (x *FontPanel) WithBackingType(backingType raw.NSBackingStoreType) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetBackingType(backingType)
+func (x *FontPanel) WithBackingType(backingType NSBackingStoreType) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
@@ -267,8 +267,8 @@ func (x *FontPanel) WithLevel(level int) *FontPanel {
 }
 
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
-func (x *FontPanel) WithDepthLimit(depthLimit raw.NSWindowDepth) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetDepthLimit(depthLimit)
+func (x *FontPanel) WithDepthLimit(depthLimit NSWindowDepth) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
@@ -291,8 +291,8 @@ func (x *FontPanel) WithOpaque(opaque bool) *FontPanel {
 }
 
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
-func (x *FontPanel) WithSharingType(sharingType raw.NSWindowSharingType) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetSharingType(sharingType)
+func (x *FontPanel) WithSharingType(sharingType NSWindowSharingType) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetSharingType(raw.NSWindowSharingType(sharingType))
 	return x
 }
 
@@ -315,14 +315,14 @@ func (x *FontPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogi
 }
 
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
-func (x *FontPanel) WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetCollectionBehavior(collectionBehavior)
+func (x *FontPanel) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
-func (x *FontPanel) WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetAnimationBehavior(animationBehavior)
+func (x *FontPanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
 	return x
 }
 
@@ -393,8 +393,8 @@ func (x *FontPanel) WithColorSpace(colorSpace *ColorSpace) *FontPanel {
 }
 
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
-func (x *FontPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+func (x *FontPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 	return x
 }
 
@@ -435,8 +435,8 @@ func (x *FontPanel) WithShowsToolbarButton(showsToolbarButton bool) *FontPanel {
 }
 
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
-func (x *FontPanel) WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetTabbingMode(tabbingMode)
+func (x *FontPanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
 	return x
 }
 
@@ -471,8 +471,8 @@ func (x *FontPanel) WithOneShot(oneShot bool) *FontPanel {
 }
 
 // WithPreferredBackingLocation sets the preferredBackingLocation property and returns the receiver for chaining.
-func (x *FontPanel) WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *FontPanel {
-	x.inner.NSPanel.NSWindow.SetPreferredBackingLocation(preferredBackingLocation)
+func (x *FontPanel) WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetPreferredBackingLocation(raw.NSWindowBackingLocation(preferredBackingLocation))
 	return x
 }
 
@@ -577,16 +577,16 @@ type FontPanelable interface {
 	WithWorksWhenModal(worksWhenModal bool) *FontPanel
 	WithTitle(title string) *FontPanel
 	WithSubtitle(subtitle string) *FontPanel
-	WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *FontPanel
+	WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *FontPanel
 	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *FontPanel
-	WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *FontPanel
+	WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *FontPanel
 	WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *FontPanel
 	WithRepresentedURL(representedURL string) *FontPanel
 	WithRepresentedFilename(representedFilename string) *FontPanel
 	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *FontPanel
 	WithContentView(contentView ViewProvider) *FontPanel
 	WithDelegate(delegate raw.NSWindowDelegate) *FontPanel
-	WithStyleMask(styleMask raw.NSWindowStyleMask) *FontPanel
+	WithStyleMask(styleMask NSWindowStyleMask) *FontPanel
 	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *FontPanel
 	WithAspectRatio(aspectRatio corefoundation.CGSize) *FontPanel
 	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *FontPanel
@@ -604,18 +604,18 @@ type FontPanelable interface {
 	WithDocumentEdited(documentEdited bool) *FontPanel
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *FontPanel
 	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *FontPanel
-	WithBackingType(backingType raw.NSBackingStoreType) *FontPanel
+	WithBackingType(backingType NSBackingStoreType) *FontPanel
 	WithLevel(level int) *FontPanel
-	WithDepthLimit(depthLimit raw.NSWindowDepth) *FontPanel
+	WithDepthLimit(depthLimit NSWindowDepth) *FontPanel
 	WithHasShadow(hasShadow bool) *FontPanel
 	WithAlphaValue(alphaValue float64) *FontPanel
 	WithOpaque(opaque bool) *FontPanel
-	WithSharingType(sharingType raw.NSWindowSharingType) *FontPanel
+	WithSharingType(sharingType NSWindowSharingType) *FontPanel
 	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *FontPanel
 	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *FontPanel
 	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *FontPanel
-	WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *FontPanel
-	WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *FontPanel
+	WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *FontPanel
+	WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *FontPanel
 	WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *FontPanel
 	WithMinSize(minSize corefoundation.CGSize) *FontPanel
 	WithMaxSize(maxSize corefoundation.CGSize) *FontPanel
@@ -627,20 +627,20 @@ type FontPanelable interface {
 	WithParentWindow(parentWindow WindowProvider) *FontPanel
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *FontPanel
 	WithColorSpace(colorSpace *ColorSpace) *FontPanel
-	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *FontPanel
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *FontPanel
 	WithContentViewController(contentViewController ViewControllerProvider) *FontPanel
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *FontPanel
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *FontPanel
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *FontPanel
 	WithToolbar(toolbar *Toolbar) *FontPanel
 	WithShowsToolbarButton(showsToolbarButton bool) *FontPanel
-	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *FontPanel
+	WithTabbingMode(tabbingMode NSWindowTabbingMode) *FontPanel
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *FontPanel
 	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *FontPanel
 	WithIgnoresMouseEvents(ignoresMouseEvents bool) *FontPanel
 	WithAutodisplay(autodisplay bool) *FontPanel
 	WithOneShot(oneShot bool) *FontPanel
-	WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *FontPanel
+	WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *FontPanel
 	WithShowsResizeIndicator(showsResizeIndicator bool) *FontPanel
 	WithOrderedIndex(orderedIndex int) *FontPanel
 	WithRestorable(restorable bool) *FontPanel

@@ -56,8 +56,8 @@ func (x *AuthorizationController) PerformRequests() {
 }
 
 // PerformRequestsWithOptions calls the underlying PerformRequestsWithOptions.
-func (x *AuthorizationController) PerformRequestsWithOptions(options raw.ASAuthorizationControllerRequestOptions) {
-	x.inner.PerformRequestsWithOptions(options)
+func (x *AuthorizationController) PerformRequestsWithOptions(options ASAuthorizationControllerRequestOptions) {
+	x.inner.PerformRequestsWithOptions(raw.ASAuthorizationControllerRequestOptions(options))
 }
 
 // Cancel calls the underlying Cancel.
@@ -102,7 +102,7 @@ type AuthorizationControllerable interface {
 	WithDelegate(delegate raw.ASAuthorizationControllerDelegate) *AuthorizationController
 	WithPresentationContextProvider(presentationContextProvider raw.ASAuthorizationControllerPresentationContextProviding) *AuthorizationController
 	PerformRequests()
-	PerformRequestsWithOptions(options raw.ASAuthorizationControllerRequestOptions)
+	PerformRequestsWithOptions(options ASAuthorizationControllerRequestOptions)
 	Cancel()
 	AuthorizationRequests() []*AuthorizationRequest
 	Delegate() raw.ASAuthorizationControllerDelegate

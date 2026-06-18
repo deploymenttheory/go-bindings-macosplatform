@@ -43,8 +43,8 @@ func (x *MutableNetworkProfile) WithSsidData(ssidData *foundation.NSData) *Mutab
 }
 
 // WithSecurity sets the security property and returns the receiver for chaining.
-func (x *MutableNetworkProfile) WithSecurity(security raw.CWSecurity) *MutableNetworkProfile {
-	x.inner.SetSecurity(security)
+func (x *MutableNetworkProfile) WithSecurity(security CWSecurity) *MutableNetworkProfile {
+	x.inner.SetSecurity(raw.CWSecurity(security))
 	return x
 }
 
@@ -54,8 +54,8 @@ func (x *MutableNetworkProfile) SetSsidData(ssidData *foundation.NSData) {
 }
 
 // SetSecurity calls the underlying SetSecurity.
-func (x *MutableNetworkProfile) SetSecurity(security raw.CWSecurity) {
-	x.inner.SetSecurity(security)
+func (x *MutableNetworkProfile) SetSecurity(security CWSecurity) {
+	x.inner.SetSecurity(raw.CWSecurity(security))
 }
 
 func (x *MutableNetworkProfile) asNetworkProfile() *raw.CWNetworkProfile {
@@ -66,9 +66,9 @@ func (x *MutableNetworkProfile) asNetworkProfile() *raw.CWNetworkProfile {
 type MutableNetworkProfileable interface {
 	Unwrap() *raw.CWMutableNetworkProfile
 	WithSsidData(ssidData *foundation.NSData) *MutableNetworkProfile
-	WithSecurity(security raw.CWSecurity) *MutableNetworkProfile
+	WithSecurity(security CWSecurity) *MutableNetworkProfile
 	SetSsidData(ssidData *foundation.NSData)
-	SetSecurity(security raw.CWSecurity)
+	SetSecurity(security CWSecurity)
 }
 
 var _ MutableNetworkProfileable = (*MutableNetworkProfile)(nil)

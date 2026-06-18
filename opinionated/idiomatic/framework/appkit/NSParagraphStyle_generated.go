@@ -72,13 +72,13 @@ func (x *ParagraphStyle) MaximumLineHeight() float64 {
 }
 
 // LineBreakMode calls the underlying LineBreakMode.
-func (x *ParagraphStyle) LineBreakMode() raw.NSLineBreakMode {
-	return x.inner.LineBreakMode()
+func (x *ParagraphStyle) LineBreakMode() NSLineBreakMode {
+	return NSLineBreakMode(x.inner.LineBreakMode())
 }
 
 // BaseWritingDirection calls the underlying BaseWritingDirection.
-func (x *ParagraphStyle) BaseWritingDirection() raw.NSWritingDirection {
-	return x.inner.BaseWritingDirection()
+func (x *ParagraphStyle) BaseWritingDirection() NSWritingDirection {
+	return NSWritingDirection(x.inner.BaseWritingDirection())
 }
 
 // LineHeightMultiple calls the underlying LineHeightMultiple.
@@ -134,13 +134,13 @@ func (x *ParagraphStyle) AllowsDefaultTighteningForTruncation() bool {
 }
 
 // LineBreakStrategy calls the underlying LineBreakStrategy.
-func (x *ParagraphStyle) LineBreakStrategy() raw.NSLineBreakStrategy {
-	return x.inner.LineBreakStrategy()
+func (x *ParagraphStyle) LineBreakStrategy() NSLineBreakStrategy {
+	return NSLineBreakStrategy(x.inner.LineBreakStrategy())
 }
 
 // Alignment calls the underlying Alignment.
-func (x *ParagraphStyle) Alignment() raw.NSTextAlignment {
-	return x.inner.Alignment()
+func (x *ParagraphStyle) Alignment() NSTextAlignment {
+	return NSTextAlignment(x.inner.Alignment())
 }
 
 // TighteningFactorForTruncation calls the underlying TighteningFactorForTruncation.
@@ -176,8 +176,8 @@ type ParagraphStyleable interface {
 	FirstLineHeadIndent() float64
 	MinimumLineHeight() float64
 	MaximumLineHeight() float64
-	LineBreakMode() raw.NSLineBreakMode
-	BaseWritingDirection() raw.NSWritingDirection
+	LineBreakMode() NSLineBreakMode
+	BaseWritingDirection() NSWritingDirection
 	LineHeightMultiple() float64
 	ParagraphSpacingBefore() float64
 	HyphenationFactor() float32
@@ -186,8 +186,8 @@ type ParagraphStyleable interface {
 	DefaultTabInterval() float64
 	TextLists() []*TextList
 	AllowsDefaultTighteningForTruncation() bool
-	LineBreakStrategy() raw.NSLineBreakStrategy
-	Alignment() raw.NSTextAlignment
+	LineBreakStrategy() NSLineBreakStrategy
+	Alignment() NSTextAlignment
 	TighteningFactorForTruncation() float32
 	TextBlocks() []*TextBlock
 	HeaderLevel() int

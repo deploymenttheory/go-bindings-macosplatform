@@ -60,8 +60,8 @@ func NewShareWithCoder(aDecoder *foundation.NSCoder) *Share {
 }
 
 // WithPublicPermission sets the publicPermission property and returns the receiver for chaining.
-func (x *Share) WithPublicPermission(publicPermission raw.CKShareParticipantPermission) *Share {
-	x.inner.SetPublicPermission(publicPermission)
+func (x *Share) WithPublicPermission(publicPermission CKShareParticipantPermission) *Share {
+	x.inner.SetPublicPermission(raw.CKShareParticipantPermission(publicPermission))
 	return x
 }
 
@@ -108,13 +108,13 @@ func (x *Share) UnblockIdentities(blockedIdentities *foundation.NSArray[*raw.CKS
 }
 
 // PublicPermission calls the underlying PublicPermission.
-func (x *Share) PublicPermission() raw.CKShareParticipantPermission {
-	return x.inner.PublicPermission()
+func (x *Share) PublicPermission() CKShareParticipantPermission {
+	return CKShareParticipantPermission(x.inner.PublicPermission())
 }
 
 // SetPublicPermission calls the underlying SetPublicPermission.
-func (x *Share) SetPublicPermission(publicPermission raw.CKShareParticipantPermission) {
-	x.inner.SetPublicPermission(publicPermission)
+func (x *Share) SetPublicPermission(publicPermission CKShareParticipantPermission) {
+	x.inner.SetPublicPermission(raw.CKShareParticipantPermission(publicPermission))
 }
 
 // URL calls the underlying URL.
@@ -188,7 +188,7 @@ func (x *Share) asRecord() *raw.CKRecord { return &x.inner.CKRecord }
 // Shareable is the interface implemented by [Share], for mocking and DI.
 type Shareable interface {
 	Unwrap() *raw.CKShare
-	WithPublicPermission(publicPermission raw.CKShareParticipantPermission) *Share
+	WithPublicPermission(publicPermission CKShareParticipantPermission) *Share
 	WithAllowsAccessRequests(allowsAccessRequests bool) *Share
 	WithParent(parent *Reference) *Share
 	AddParticipant(participant *raw.CKShareParticipant)
@@ -197,8 +197,8 @@ type Shareable interface {
 	DenyRequesters(requesters *foundation.NSArray[*raw.CKShareAccessRequester])
 	BlockRequesters(requesters *foundation.NSArray[*raw.CKShareAccessRequester])
 	UnblockIdentities(blockedIdentities *foundation.NSArray[*raw.CKShareBlockedIdentity])
-	PublicPermission() raw.CKShareParticipantPermission
-	SetPublicPermission(publicPermission raw.CKShareParticipantPermission)
+	PublicPermission() CKShareParticipantPermission
+	SetPublicPermission(publicPermission CKShareParticipantPermission)
 	URL() *foundation.NSURL
 	Participants() []*ShareParticipant
 	Owner() *ShareParticipant

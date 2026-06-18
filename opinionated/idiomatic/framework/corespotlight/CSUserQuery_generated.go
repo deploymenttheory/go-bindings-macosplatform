@@ -76,13 +76,13 @@ func (x *UserQuery) WithProtectionClasses(items ...*foundation.NSString) *UserQu
 }
 
 // UserEngagedWithItemVisibleItemsUserInteractionType calls the underlying UserEngagedWithItemVisibleItemsUserInteractionType.
-func (x *UserQuery) UserEngagedWithItemVisibleItemsUserInteractionType(item *raw.CSSearchableItem, visibleItems *foundation.NSArray[*raw.CSSearchableItem], userInteractionType raw.CSUserInteraction) {
-	x.inner.UserEngagedWithItemVisibleItemsUserInteractionType(item, visibleItems, userInteractionType)
+func (x *UserQuery) UserEngagedWithItemVisibleItemsUserInteractionType(item *raw.CSSearchableItem, visibleItems *foundation.NSArray[*raw.CSSearchableItem], userInteractionType CSUserInteraction) {
+	x.inner.UserEngagedWithItemVisibleItemsUserInteractionType(item, visibleItems, raw.CSUserInteraction(userInteractionType))
 }
 
 // UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType calls the underlying UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType.
-func (x *UserQuery) UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *raw.CSSuggestion, visibleSuggestions *foundation.NSArray[*raw.CSSuggestion], userInteractionType raw.CSUserInteraction) {
-	x.inner.UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion, visibleSuggestions, userInteractionType)
+func (x *UserQuery) UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *raw.CSSuggestion, visibleSuggestions *foundation.NSArray[*raw.CSSuggestion], userInteractionType CSUserInteraction) {
+	x.inner.UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion, visibleSuggestions, raw.CSUserInteraction(userInteractionType))
 }
 
 // FoundSuggestionCount calls the underlying FoundSuggestionCount.
@@ -125,8 +125,8 @@ type UserQueryable interface {
 	WithFoundItemsHandler(foundItemsHandler func(*foundation.NSArray[*raw.CSSearchableItem])) *UserQuery
 	WithCompletionHandler(completionHandler func(unsafe.Pointer)) *UserQuery
 	WithProtectionClasses(items ...*foundation.NSString) *UserQuery
-	UserEngagedWithItemVisibleItemsUserInteractionType(item *raw.CSSearchableItem, visibleItems *foundation.NSArray[*raw.CSSearchableItem], userInteractionType raw.CSUserInteraction)
-	UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *raw.CSSuggestion, visibleSuggestions *foundation.NSArray[*raw.CSSuggestion], userInteractionType raw.CSUserInteraction)
+	UserEngagedWithItemVisibleItemsUserInteractionType(item *raw.CSSearchableItem, visibleItems *foundation.NSArray[*raw.CSSearchableItem], userInteractionType CSUserInteraction)
+	UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *raw.CSSuggestion, visibleSuggestions *foundation.NSArray[*raw.CSSuggestion], userInteractionType CSUserInteraction)
 	FoundSuggestionCount() int
 	FoundSuggestionsHandler() objc.Block
 	SetFoundSuggestionsHandler(ctx context.Context) (*foundation.NSArray[*raw.CSSuggestion], error)

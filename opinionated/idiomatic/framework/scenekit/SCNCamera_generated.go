@@ -52,8 +52,8 @@ func (x *Camera) WithFieldOfView(fieldOfView float64) *Camera {
 }
 
 // WithProjectionDirection sets the projectionDirection property and returns the receiver for chaining.
-func (x *Camera) WithProjectionDirection(projectionDirection raw.SCNCameraProjectionDirection) *Camera {
-	x.inner.SetProjectionDirection(projectionDirection)
+func (x *Camera) WithProjectionDirection(projectionDirection SCNCameraProjectionDirection) *Camera {
+	x.inner.SetProjectionDirection(raw.SCNCameraProjectionDirection(projectionDirection))
 	return x
 }
 
@@ -403,13 +403,13 @@ func (x *Camera) SetFieldOfView(fieldOfView float64) {
 }
 
 // ProjectionDirection calls the underlying ProjectionDirection.
-func (x *Camera) ProjectionDirection() raw.SCNCameraProjectionDirection {
-	return x.inner.ProjectionDirection()
+func (x *Camera) ProjectionDirection() SCNCameraProjectionDirection {
+	return SCNCameraProjectionDirection(x.inner.ProjectionDirection())
 }
 
 // SetProjectionDirection calls the underlying SetProjectionDirection.
-func (x *Camera) SetProjectionDirection(projectionDirection raw.SCNCameraProjectionDirection) {
-	x.inner.SetProjectionDirection(projectionDirection)
+func (x *Camera) SetProjectionDirection(projectionDirection SCNCameraProjectionDirection) {
+	x.inner.SetProjectionDirection(raw.SCNCameraProjectionDirection(projectionDirection))
 }
 
 // FocalLength calls the underlying FocalLength.
@@ -926,7 +926,7 @@ type Cameraable interface {
 	Unwrap() *raw.SCNCamera
 	WithName(name string) *Camera
 	WithFieldOfView(fieldOfView float64) *Camera
-	WithProjectionDirection(projectionDirection raw.SCNCameraProjectionDirection) *Camera
+	WithProjectionDirection(projectionDirection SCNCameraProjectionDirection) *Camera
 	WithFocalLength(focalLength float64) *Camera
 	WithSensorHeight(sensorHeight float64) *Camera
 	WithZNear(zNear float64) *Camera
@@ -985,8 +985,8 @@ type Cameraable interface {
 	SetName(name string)
 	FieldOfView() float64
 	SetFieldOfView(fieldOfView float64)
-	ProjectionDirection() raw.SCNCameraProjectionDirection
-	SetProjectionDirection(projectionDirection raw.SCNCameraProjectionDirection)
+	ProjectionDirection() SCNCameraProjectionDirection
+	SetProjectionDirection(projectionDirection SCNCameraProjectionDirection)
 	FocalLength() float64
 	SetFocalLength(focalLength float64)
 	SensorHeight() float64

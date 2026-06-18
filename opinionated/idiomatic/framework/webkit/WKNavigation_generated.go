@@ -36,14 +36,14 @@ func NewWKNavigation() *WKNavigation {
 }
 
 // EffectiveContentMode calls the underlying EffectiveContentMode.
-func (x *WKNavigation) EffectiveContentMode() raw.WKContentMode {
-	return x.inner.EffectiveContentMode()
+func (x *WKNavigation) EffectiveContentMode() WKContentMode {
+	return WKContentMode(x.inner.EffectiveContentMode())
 }
 
 // WKNavigationable is the interface implemented by [WKNavigation], for mocking and DI.
 type WKNavigationable interface {
 	Unwrap() *raw.WKNavigation
-	EffectiveContentMode() raw.WKContentMode
+	EffectiveContentMode() WKContentMode
 }
 
 var _ WKNavigationable = (*WKNavigation)(nil)

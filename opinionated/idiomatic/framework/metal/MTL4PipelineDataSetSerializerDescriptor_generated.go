@@ -38,27 +38,27 @@ func NewMTL4PipelineDataSetSerializerDescriptor() *MTL4PipelineDataSetSerializer
 }
 
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
-func (x *MTL4PipelineDataSetSerializerDescriptor) WithConfiguration(configuration raw.MTL4PipelineDataSetSerializerConfiguration) *MTL4PipelineDataSetSerializerDescriptor {
-	x.inner.SetConfiguration(configuration)
+func (x *MTL4PipelineDataSetSerializerDescriptor) WithConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) *MTL4PipelineDataSetSerializerDescriptor {
+	x.inner.SetConfiguration(raw.MTL4PipelineDataSetSerializerConfiguration(configuration))
 	return x
 }
 
 // Configuration calls the underlying Configuration.
-func (x *MTL4PipelineDataSetSerializerDescriptor) Configuration() raw.MTL4PipelineDataSetSerializerConfiguration {
-	return x.inner.Configuration()
+func (x *MTL4PipelineDataSetSerializerDescriptor) Configuration() MTL4PipelineDataSetSerializerConfiguration {
+	return MTL4PipelineDataSetSerializerConfiguration(x.inner.Configuration())
 }
 
 // SetConfiguration calls the underlying SetConfiguration.
-func (x *MTL4PipelineDataSetSerializerDescriptor) SetConfiguration(configuration raw.MTL4PipelineDataSetSerializerConfiguration) {
-	x.inner.SetConfiguration(configuration)
+func (x *MTL4PipelineDataSetSerializerDescriptor) SetConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) {
+	x.inner.SetConfiguration(raw.MTL4PipelineDataSetSerializerConfiguration(configuration))
 }
 
 // MTL4PipelineDataSetSerializerDescriptorable is the interface implemented by [MTL4PipelineDataSetSerializerDescriptor], for mocking and DI.
 type MTL4PipelineDataSetSerializerDescriptorable interface {
 	Unwrap() *raw.MTL4PipelineDataSetSerializerDescriptor
-	WithConfiguration(configuration raw.MTL4PipelineDataSetSerializerConfiguration) *MTL4PipelineDataSetSerializerDescriptor
-	Configuration() raw.MTL4PipelineDataSetSerializerConfiguration
-	SetConfiguration(configuration raw.MTL4PipelineDataSetSerializerConfiguration)
+	WithConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) *MTL4PipelineDataSetSerializerDescriptor
+	Configuration() MTL4PipelineDataSetSerializerConfiguration
+	SetConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration)
 }
 
 var _ MTL4PipelineDataSetSerializerDescriptorable = (*MTL4PipelineDataSetSerializerDescriptor)(nil)

@@ -42,8 +42,8 @@ func (x *GraphFFTDescriptor) WithInverse(inverse bool) *GraphFFTDescriptor {
 }
 
 // WithScalingMode sets the scalingMode property and returns the receiver for chaining.
-func (x *GraphFFTDescriptor) WithScalingMode(scalingMode raw.MPSGraphFFTScalingMode) *GraphFFTDescriptor {
-	x.inner.SetScalingMode(scalingMode)
+func (x *GraphFFTDescriptor) WithScalingMode(scalingMode MPSGraphFFTScalingMode) *GraphFFTDescriptor {
+	x.inner.SetScalingMode(raw.MPSGraphFFTScalingMode(scalingMode))
 	return x
 }
 
@@ -64,13 +64,13 @@ func (x *GraphFFTDescriptor) SetInverse(inverse bool) {
 }
 
 // ScalingMode calls the underlying ScalingMode.
-func (x *GraphFFTDescriptor) ScalingMode() raw.MPSGraphFFTScalingMode {
-	return x.inner.ScalingMode()
+func (x *GraphFFTDescriptor) ScalingMode() MPSGraphFFTScalingMode {
+	return MPSGraphFFTScalingMode(x.inner.ScalingMode())
 }
 
 // SetScalingMode calls the underlying SetScalingMode.
-func (x *GraphFFTDescriptor) SetScalingMode(scalingMode raw.MPSGraphFFTScalingMode) {
-	x.inner.SetScalingMode(scalingMode)
+func (x *GraphFFTDescriptor) SetScalingMode(scalingMode MPSGraphFFTScalingMode) {
+	x.inner.SetScalingMode(raw.MPSGraphFFTScalingMode(scalingMode))
 }
 
 // RoundToOddHermitean calls the underlying RoundToOddHermitean.
@@ -89,12 +89,12 @@ func (x *GraphFFTDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inn
 type GraphFFTDescriptorable interface {
 	Unwrap() *raw.MPSGraphFFTDescriptor
 	WithInverse(inverse bool) *GraphFFTDescriptor
-	WithScalingMode(scalingMode raw.MPSGraphFFTScalingMode) *GraphFFTDescriptor
+	WithScalingMode(scalingMode MPSGraphFFTScalingMode) *GraphFFTDescriptor
 	WithRoundToOddHermitean(roundToOddHermitean bool) *GraphFFTDescriptor
 	Inverse() bool
 	SetInverse(inverse bool)
-	ScalingMode() raw.MPSGraphFFTScalingMode
-	SetScalingMode(scalingMode raw.MPSGraphFFTScalingMode)
+	ScalingMode() MPSGraphFFTScalingMode
+	SetScalingMode(scalingMode MPSGraphFFTScalingMode)
 	RoundToOddHermitean() bool
 	SetRoundToOddHermitean(roundToOddHermitean bool)
 }

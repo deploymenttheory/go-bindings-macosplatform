@@ -57,8 +57,8 @@ func (x *Task) TaskIdentifier() string {
 }
 
 // State calls the underlying State.
-func (x *Task) State() raw.MLTaskState {
-	return x.inner.State()
+func (x *Task) State() MLTaskState {
+	return MLTaskState(x.inner.State())
 }
 
 // Error calls the underlying Error.
@@ -74,7 +74,7 @@ type Taskable interface {
 	Resume()
 	Cancel()
 	TaskIdentifier() string
-	State() raw.MLTaskState
+	State() MLTaskState
 	Error() unsafe.Pointer
 }
 

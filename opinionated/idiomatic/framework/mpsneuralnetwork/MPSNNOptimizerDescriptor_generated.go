@@ -30,16 +30,16 @@ func NNOptimizerDescriptorFromID(id objc.ID) *NNOptimizerDescriptor {
 }
 
 // NewNNOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale creates a new [NNOptimizerDescriptor].
-func NewNNOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType raw.MPSNNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
+func NewNNOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType MPSNNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizerDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLearningRate:gradientRescale:regularizationType:regularizationScale:"), learningRate, gradientRescale, regularizationType, regularizationScale)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLearningRate:gradientRescale:regularizationType:regularizationScale:"), learningRate, gradientRescale, raw.MPSNNRegularizationType(regularizationType), regularizationScale)
 	return &NNOptimizerDescriptor{inner: raw.MPSNNOptimizerDescriptorFromID(_id)}
 }
 
 // NewNNOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale creates a new [NNOptimizerDescriptor].
-func NewNNOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, applyGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType raw.MPSNNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
+func NewNNOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, applyGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType MPSNNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizerDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLearningRate:gradientRescale:applyGradientClipping:gradientClipMax:gradientClipMin:regularizationType:regularizationScale:"), learningRate, gradientRescale, applyGradientClipping, gradientClipMax, gradientClipMin, regularizationType, regularizationScale)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLearningRate:gradientRescale:applyGradientClipping:gradientClipMax:gradientClipMin:regularizationType:regularizationScale:"), learningRate, gradientRescale, applyGradientClipping, gradientClipMax, gradientClipMin, raw.MPSNNRegularizationType(regularizationType), regularizationScale)
 	return &NNOptimizerDescriptor{inner: raw.MPSNNOptimizerDescriptorFromID(_id)}
 }
 
@@ -80,8 +80,8 @@ func (x *NNOptimizerDescriptor) WithRegularizationScale(regularizationScale floa
 }
 
 // WithRegularizationType sets the regularizationType property and returns the receiver for chaining.
-func (x *NNOptimizerDescriptor) WithRegularizationType(regularizationType raw.MPSNNRegularizationType) *NNOptimizerDescriptor {
-	x.inner.SetRegularizationType(regularizationType)
+func (x *NNOptimizerDescriptor) WithRegularizationType(regularizationType MPSNNRegularizationType) *NNOptimizerDescriptor {
+	x.inner.SetRegularizationType(raw.MPSNNRegularizationType(regularizationType))
 	return x
 }
 
@@ -146,13 +146,13 @@ func (x *NNOptimizerDescriptor) SetRegularizationScale(regularizationScale float
 }
 
 // RegularizationType calls the underlying RegularizationType.
-func (x *NNOptimizerDescriptor) RegularizationType() raw.MPSNNRegularizationType {
-	return x.inner.RegularizationType()
+func (x *NNOptimizerDescriptor) RegularizationType() MPSNNRegularizationType {
+	return MPSNNRegularizationType(x.inner.RegularizationType())
 }
 
 // SetRegularizationType calls the underlying SetRegularizationType.
-func (x *NNOptimizerDescriptor) SetRegularizationType(regularizationType raw.MPSNNRegularizationType) {
-	x.inner.SetRegularizationType(regularizationType)
+func (x *NNOptimizerDescriptor) SetRegularizationType(regularizationType MPSNNRegularizationType) {
+	x.inner.SetRegularizationType(raw.MPSNNRegularizationType(regularizationType))
 }
 
 // NNOptimizerDescriptorable is the interface implemented by [NNOptimizerDescriptor], for mocking and DI.
@@ -164,7 +164,7 @@ type NNOptimizerDescriptorable interface {
 	WithGradientClipMax(gradientClipMax float32) *NNOptimizerDescriptor
 	WithGradientClipMin(gradientClipMin float32) *NNOptimizerDescriptor
 	WithRegularizationScale(regularizationScale float32) *NNOptimizerDescriptor
-	WithRegularizationType(regularizationType raw.MPSNNRegularizationType) *NNOptimizerDescriptor
+	WithRegularizationType(regularizationType MPSNNRegularizationType) *NNOptimizerDescriptor
 	LearningRate() float32
 	SetLearningRate(learningRate float32)
 	GradientRescale() float32
@@ -177,8 +177,8 @@ type NNOptimizerDescriptorable interface {
 	SetGradientClipMin(gradientClipMin float32)
 	RegularizationScale() float32
 	SetRegularizationScale(regularizationScale float32)
-	RegularizationType() raw.MPSNNRegularizationType
-	SetRegularizationType(regularizationType raw.MPSNNRegularizationType)
+	RegularizationType() MPSNNRegularizationType
+	SetRegularizationType(regularizationType MPSNNRegularizationType)
 }
 
 var _ NNOptimizerDescriptorable = (*NNOptimizerDescriptor)(nil)

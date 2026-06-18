@@ -105,13 +105,13 @@ func (x *MTRDevice) OpenCommissioningWindowWithDiscriminatorDurationQueueComplet
 }
 
 // DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ raw.MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error) {
+func (x *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error) {
 	type _result struct {
 		val *foundation.NSURL
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.DownloadLogOfTypeTimeoutQueueCompletion(type_, timeout, queue, func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
+	x.inner.DownloadLogOfTypeTimeoutQueueCompletion(raw.MTRDiagnosticLogType(type_), timeout, queue, func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
 		var _o _result
 		if uintptr(_p1) != 0 {
 			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
@@ -138,8 +138,8 @@ func (x *MTRDevice) WaitForAttributeValuesTimeoutQueueCompletion(values *foundat
 }
 
 // State calls the underlying State.
-func (x *MTRDevice) State() raw.MTRDeviceState {
-	return x.inner.State()
+func (x *MTRDevice) State() MTRDeviceState {
+	return MTRDeviceState(x.inner.State())
 }
 
 // DeviceCachePrimed calls the underlying DeviceCachePrimed.
@@ -182,8 +182,8 @@ func (x *MTRDevice) ProductID() *foundation.NSNumber {
 }
 
 // NetworkCommissioningFeatures calls the underlying NetworkCommissioningFeatures.
-func (x *MTRDevice) NetworkCommissioningFeatures() raw.MTRNetworkCommissioningFeature {
-	return x.inner.NetworkCommissioningFeatures()
+func (x *MTRDevice) NetworkCommissioningFeatures() MTRNetworkCommissioningFeature {
+	return MTRNetworkCommissioningFeature(x.inner.NetworkCommissioningFeatures())
 }
 
 // InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion calls the underlying InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion.
@@ -207,9 +207,9 @@ type MTRDeviceable interface {
 	InvokeCommandsQueueCompletion(commands *foundation.NSArray[objc.ID], queue *foundation.NSObject, completion objc.Block)
 	OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode *foundation.NSNumber, discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer))
 	OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer))
-	DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ raw.MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error)
+	DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error)
 	WaitForAttributeValuesTimeoutQueueCompletion(values *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID], timeout float64, queue *foundation.NSObject, completion func(unsafe.Pointer)) *MTRAttributeValueWaiter
-	State() raw.MTRDeviceState
+	State() MTRDeviceState
 	DeviceCachePrimed() bool
 	EstimatedStartTime() *foundation.NSDate
 	DeviceController() *MTRDeviceController
@@ -217,7 +217,7 @@ type MTRDeviceable interface {
 	EstimatedSubscriptionLatency() *foundation.NSNumber
 	VendorID() *foundation.NSNumber
 	ProductID() *foundation.NSNumber
-	NetworkCommissioningFeatures() raw.MTRNetworkCommissioningFeature
+	NetworkCommissioningFeatures() MTRNetworkCommissioningFeature
 	InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, expectedValues *foundation.NSArray[objc.ID], expectedValueInterval *foundation.NSNumber, timeout *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block)
 }
 

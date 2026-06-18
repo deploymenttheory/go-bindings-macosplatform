@@ -37,8 +37,8 @@ func NewVSAutoSignInToken() *VSAutoSignInToken {
 }
 
 // Authorization calls the underlying Authorization.
-func (x *VSAutoSignInToken) Authorization() raw.VSAutoSignInAuthorization {
-	return x.inner.Authorization()
+func (x *VSAutoSignInToken) Authorization() VSAutoSignInAuthorization {
+	return VSAutoSignInAuthorization(x.inner.Authorization())
 }
 
 // Value calls the underlying Value.
@@ -53,7 +53,7 @@ func (x *VSAutoSignInToken) Value() string {
 // VSAutoSignInTokenable is the interface implemented by [VSAutoSignInToken], for mocking and DI.
 type VSAutoSignInTokenable interface {
 	Unwrap() *raw.VSAutoSignInToken
-	Authorization() raw.VSAutoSignInAuthorization
+	Authorization() VSAutoSignInAuthorization
 	Value() string
 }
 

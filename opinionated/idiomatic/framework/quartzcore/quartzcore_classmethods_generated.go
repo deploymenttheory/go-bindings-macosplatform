@@ -28,8 +28,8 @@ func DefaultValueForKey(key string) objc.ID {
 }
 
 // ConstraintWithAttributeRelativeToAttributeScaleOffset calls the underlying CAConstraintConstraintWithAttributeRelativeToAttributeScaleOffset.
-func ConstraintWithAttributeRelativeToAttributeScaleOffset(attr raw.CAConstraintAttribute, srcId string, srcAttr raw.CAConstraintAttribute, m float64, c float64) *Constraint {
-	_r := raw.CAConstraintConstraintWithAttributeRelativeToAttributeScaleOffset(attr, foundation.NSStringStringWithUTF8String(srcId), srcAttr, m, c)
+func ConstraintWithAttributeRelativeToAttributeScaleOffset(attr CAConstraintAttribute, srcId string, srcAttr CAConstraintAttribute, m float64, c float64) *Constraint {
+	_r := raw.CAConstraintConstraintWithAttributeRelativeToAttributeScaleOffset(raw.CAConstraintAttribute(attr), foundation.NSStringStringWithUTF8String(srcId), raw.CAConstraintAttribute(srcAttr), m, c)
 	if _r == nil {
 		return nil
 	}
@@ -37,8 +37,8 @@ func ConstraintWithAttributeRelativeToAttributeScaleOffset(attr raw.CAConstraint
 }
 
 // ConstraintWithAttributeRelativeToAttributeOffset calls the underlying CAConstraintConstraintWithAttributeRelativeToAttributeOffset.
-func ConstraintWithAttributeRelativeToAttributeOffset(attr raw.CAConstraintAttribute, srcId string, srcAttr raw.CAConstraintAttribute, c float64) *Constraint {
-	_r := raw.CAConstraintConstraintWithAttributeRelativeToAttributeOffset(attr, foundation.NSStringStringWithUTF8String(srcId), srcAttr, c)
+func ConstraintWithAttributeRelativeToAttributeOffset(attr CAConstraintAttribute, srcId string, srcAttr CAConstraintAttribute, c float64) *Constraint {
+	_r := raw.CAConstraintConstraintWithAttributeRelativeToAttributeOffset(raw.CAConstraintAttribute(attr), foundation.NSStringStringWithUTF8String(srcId), raw.CAConstraintAttribute(srcAttr), c)
 	if _r == nil {
 		return nil
 	}
@@ -46,8 +46,8 @@ func ConstraintWithAttributeRelativeToAttributeOffset(attr raw.CAConstraintAttri
 }
 
 // ConstraintWithAttributeRelativeToAttribute calls the underlying CAConstraintConstraintWithAttributeRelativeToAttribute.
-func ConstraintWithAttributeRelativeToAttribute(attr raw.CAConstraintAttribute, srcId string, srcAttr raw.CAConstraintAttribute) *Constraint {
-	_r := raw.CAConstraintConstraintWithAttributeRelativeToAttribute(attr, foundation.NSStringStringWithUTF8String(srcId), srcAttr)
+func ConstraintWithAttributeRelativeToAttribute(attr CAConstraintAttribute, srcId string, srcAttr CAConstraintAttribute) *Constraint {
+	_r := raw.CAConstraintConstraintWithAttributeRelativeToAttribute(raw.CAConstraintAttribute(attr), foundation.NSStringStringWithUTF8String(srcId), raw.CAConstraintAttribute(srcAttr))
 	if _r == nil {
 		return nil
 	}

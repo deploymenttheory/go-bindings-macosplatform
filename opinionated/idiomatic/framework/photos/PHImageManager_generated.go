@@ -38,8 +38,8 @@ func NewImageManager() *ImageManager {
 }
 
 // RequestImageForAssetTargetSizeContentModeOptionsResultHandler calls the underlying RequestImageForAssetTargetSizeContentModeOptionsResultHandler.
-func (x *ImageManager) RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions, resultHandler objc.Block) int32 {
-	return x.inner.RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset, targetSize, contentMode, options, resultHandler)
+func (x *ImageManager) RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions, resultHandler objc.Block) int32 {
+	return x.inner.RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset, targetSize, raw.PHImageContentMode(contentMode), options, resultHandler)
 }
 
 // RequestImageDataAndOrientationForAssetOptionsResultHandler calls the underlying RequestImageDataAndOrientationForAssetOptionsResultHandler.
@@ -53,8 +53,8 @@ func (x *ImageManager) CancelImageRequest(requestID int32) {
 }
 
 // RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler calls the underlying RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler.
-func (x *ImageManager) RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHLivePhotoRequestOptions, resultHandler objc.Block) int32 {
-	return x.inner.RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset, targetSize, contentMode, options, resultHandler)
+func (x *ImageManager) RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHLivePhotoRequestOptions, resultHandler objc.Block) int32 {
+	return x.inner.RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset, targetSize, raw.PHImageContentMode(contentMode), options, resultHandler)
 }
 
 // RequestPlayerItemForVideoOptionsResultHandler calls the underlying RequestPlayerItemForVideoOptionsResultHandler.
@@ -77,10 +77,10 @@ func (x *ImageManager) asImageManager() *raw.PHImageManager { return x.inner }
 // ImageManagerable is the interface implemented by [ImageManager], for mocking and DI.
 type ImageManagerable interface {
 	Unwrap() *raw.PHImageManager
-	RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions, resultHandler objc.Block) int32
+	RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions, resultHandler objc.Block) int32
 	RequestImageDataAndOrientationForAssetOptionsResultHandler(asset *raw.PHAsset, options *raw.PHImageRequestOptions, resultHandler objc.Block) int32
 	CancelImageRequest(requestID int32)
-	RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHLivePhotoRequestOptions, resultHandler objc.Block) int32
+	RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHLivePhotoRequestOptions, resultHandler objc.Block) int32
 	RequestPlayerItemForVideoOptionsResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, resultHandler objc.Block) int32
 	RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, exportPreset string, resultHandler objc.Block) int32
 	RequestAVAssetForVideoOptionsResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, resultHandler objc.Block) int32

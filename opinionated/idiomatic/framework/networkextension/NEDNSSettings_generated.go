@@ -94,8 +94,8 @@ func (x *NEDNSSettings) WithAllowFailover(allowFailover bool) *NEDNSSettings {
 }
 
 // DnsProtocol calls the underlying DnsProtocol.
-func (x *NEDNSSettings) DnsProtocol() raw.NEDNSProtocol {
-	return x.inner.DnsProtocol()
+func (x *NEDNSSettings) DnsProtocol() NEDNSProtocol {
+	return NEDNSProtocol(x.inner.DnsProtocol())
 }
 
 // Servers returns the collection as a Go slice.
@@ -185,7 +185,7 @@ type NEDNSSettingsable interface {
 	WithMatchDomains(items ...*foundation.NSString) *NEDNSSettings
 	WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSSettings
 	WithAllowFailover(allowFailover bool) *NEDNSSettings
-	DnsProtocol() raw.NEDNSProtocol
+	DnsProtocol() NEDNSProtocol
 	Servers() []string
 	SearchDomains() []string
 	SetSearchDomains(searchDomains *foundation.NSArray[*foundation.NSString])

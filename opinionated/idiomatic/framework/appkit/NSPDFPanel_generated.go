@@ -44,8 +44,8 @@ func (x *PDFPanel) WithAccessoryController(accessoryController ViewControllerPro
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *PDFPanel) WithOptions(options raw.NSPDFPanelOptions) *PDFPanel {
-	x.inner.SetOptions(options)
+func (x *PDFPanel) WithOptions(options NSPDFPanelOptions) *PDFPanel {
+	x.inner.SetOptions(raw.NSPDFPanelOptions(options))
 	return x
 }
 
@@ -75,13 +75,13 @@ func (x *PDFPanel) SetAccessoryController(accessoryController *raw.NSViewControl
 }
 
 // Options calls the underlying Options.
-func (x *PDFPanel) Options() raw.NSPDFPanelOptions {
-	return x.inner.Options()
+func (x *PDFPanel) Options() NSPDFPanelOptions {
+	return NSPDFPanelOptions(x.inner.Options())
 }
 
 // SetOptions calls the underlying SetOptions.
-func (x *PDFPanel) SetOptions(options raw.NSPDFPanelOptions) {
-	x.inner.SetOptions(options)
+func (x *PDFPanel) SetOptions(options NSPDFPanelOptions) {
+	x.inner.SetOptions(raw.NSPDFPanelOptions(options))
 }
 
 // DefaultFileName calls the underlying DefaultFileName.
@@ -102,13 +102,13 @@ func (x *PDFPanel) SetDefaultFileName(defaultFileName string) {
 type PDFPanelable interface {
 	Unwrap() *raw.NSPDFPanel
 	WithAccessoryController(accessoryController ViewControllerProvider) *PDFPanel
-	WithOptions(options raw.NSPDFPanelOptions) *PDFPanel
+	WithOptions(options NSPDFPanelOptions) *PDFPanel
 	WithDefaultFileName(defaultFileName string) *PDFPanel
 	BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo *raw.NSPDFInfo, docWindow *raw.NSWindow, completionHandler func(int))
 	AccessoryController() *ViewController
 	SetAccessoryController(accessoryController *raw.NSViewController)
-	Options() raw.NSPDFPanelOptions
-	SetOptions(options raw.NSPDFPanelOptions)
+	Options() NSPDFPanelOptions
+	SetOptions(options NSPDFPanelOptions)
 	DefaultFileName() string
 	SetDefaultFileName(defaultFileName string)
 }

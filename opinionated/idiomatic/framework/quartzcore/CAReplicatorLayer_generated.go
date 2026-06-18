@@ -279,8 +279,8 @@ func (x *ReplicatorLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *Rep
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *ReplicatorLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *ReplicatorLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *ReplicatorLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *ReplicatorLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -297,8 +297,8 @@ func (x *ReplicatorLayer) WithCornerRadius(cornerRadius float64) *ReplicatorLaye
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *ReplicatorLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *ReplicatorLayer {
-	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+func (x *ReplicatorLayer) WithMaskedCorners(maskedCorners CACornerMask) *ReplicatorLayer {
+	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -363,8 +363,8 @@ func (x *ReplicatorLayer) WithShadowRadius(shadowRadius float64) *ReplicatorLaye
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ReplicatorLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *ReplicatorLayer {
-	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+func (x *ReplicatorLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *ReplicatorLayer {
+	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -549,10 +549,10 @@ type ReplicatorLayerable interface {
 	WithOpaque(opaque bool) *ReplicatorLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ReplicatorLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *ReplicatorLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *ReplicatorLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *ReplicatorLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ReplicatorLayer
 	WithCornerRadius(cornerRadius float64) *ReplicatorLayer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *ReplicatorLayer
+	WithMaskedCorners(maskedCorners CACornerMask) *ReplicatorLayer
 	WithCornerCurve(cornerCurve *foundation.NSString) *ReplicatorLayer
 	WithBorderWidth(borderWidth float64) *ReplicatorLayer
 	WithOpacity(opacity float32) *ReplicatorLayer
@@ -563,7 +563,7 @@ type ReplicatorLayerable interface {
 	WithShadowOpacity(shadowOpacity float32) *ReplicatorLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *ReplicatorLayer
 	WithShadowRadius(shadowRadius float64) *ReplicatorLayer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *ReplicatorLayer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *ReplicatorLayer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *ReplicatorLayer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *ReplicatorLayer
 	WithName(name string) *ReplicatorLayer

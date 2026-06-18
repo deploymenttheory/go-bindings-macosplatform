@@ -46,13 +46,13 @@ func (x *Channel) ChannelNumber() int {
 }
 
 // ChannelWidth calls the underlying ChannelWidth.
-func (x *Channel) ChannelWidth() raw.CWChannelWidth {
-	return x.inner.ChannelWidth()
+func (x *Channel) ChannelWidth() CWChannelWidth {
+	return CWChannelWidth(x.inner.ChannelWidth())
 }
 
 // ChannelBand calls the underlying ChannelBand.
-func (x *Channel) ChannelBand() raw.CWChannelBand {
-	return x.inner.ChannelBand()
+func (x *Channel) ChannelBand() CWChannelBand {
+	return CWChannelBand(x.inner.ChannelBand())
 }
 
 // Channelable is the interface implemented by [Channel], for mocking and DI.
@@ -60,8 +60,8 @@ type Channelable interface {
 	Unwrap() *raw.CWChannel
 	IsEqualToChannel(channel *raw.CWChannel) bool
 	ChannelNumber() int
-	ChannelWidth() raw.CWChannelWidth
-	ChannelBand() raw.CWChannelBand
+	ChannelWidth() CWChannelWidth
+	ChannelBand() CWChannelBand
 }
 
 var _ Channelable = (*Channel)(nil)

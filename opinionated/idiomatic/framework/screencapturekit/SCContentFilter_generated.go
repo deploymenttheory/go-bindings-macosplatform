@@ -74,13 +74,13 @@ func (x *ContentFilter) WithIncludeMenuBar(includeMenuBar bool) *ContentFilter {
 }
 
 // StreamType calls the underlying StreamType.
-func (x *ContentFilter) StreamType() raw.SCStreamType {
-	return x.inner.StreamType()
+func (x *ContentFilter) StreamType() SCStreamType {
+	return SCStreamType(x.inner.StreamType())
 }
 
 // Style calls the underlying Style.
-func (x *ContentFilter) Style() raw.SCShareableContentStyle {
-	return x.inner.Style()
+func (x *ContentFilter) Style() SCShareableContentStyle {
+	return SCShareableContentStyle(x.inner.Style())
 }
 
 // PointPixelScale calls the underlying PointPixelScale.
@@ -140,8 +140,8 @@ func (x *ContentFilter) IncludedWindows() []*Window {
 type ContentFilterable interface {
 	Unwrap() *raw.SCContentFilter
 	WithIncludeMenuBar(includeMenuBar bool) *ContentFilter
-	StreamType() raw.SCStreamType
-	Style() raw.SCShareableContentStyle
+	StreamType() SCStreamType
+	Style() SCShareableContentStyle
 	PointPixelScale() float32
 	ContentRect() corefoundation.CGRect
 	IncludeMenuBar() bool

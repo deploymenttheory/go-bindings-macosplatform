@@ -33,9 +33,9 @@ func NEEvaluateConnectionRuleFromID(id objc.ID) *NEEvaluateConnectionRule {
 }
 
 // NewNEEvaluateConnectionRuleWithMatchDomainsAndAction creates a new [NEEvaluateConnectionRule].
-func NewNEEvaluateConnectionRuleWithMatchDomainsAndAction(domains *foundation.NSArray[*foundation.NSString], action raw.NEEvaluateConnectionRuleAction) *NEEvaluateConnectionRule {
+func NewNEEvaluateConnectionRuleWithMatchDomainsAndAction(domains *foundation.NSArray[*foundation.NSString], action NEEvaluateConnectionRuleAction) *NEEvaluateConnectionRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEEvaluateConnectionRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchDomains:andAction:"), domains.Ptr(), action)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchDomains:andAction:"), domains.Ptr(), raw.NEEvaluateConnectionRuleAction(action))
 	return &NEEvaluateConnectionRule{inner: raw.NEEvaluateConnectionRuleFromID(_id)}
 }
 
@@ -64,8 +64,8 @@ func (x *NEEvaluateConnectionRule) WithProbeURL(probeURL string) *NEEvaluateConn
 }
 
 // Action calls the underlying Action.
-func (x *NEEvaluateConnectionRule) Action() raw.NEEvaluateConnectionRuleAction {
-	return x.inner.Action()
+func (x *NEEvaluateConnectionRule) Action() NEEvaluateConnectionRuleAction {
+	return NEEvaluateConnectionRuleAction(x.inner.Action())
 }
 
 // MatchDomains returns the collection as a Go slice.
@@ -110,7 +110,7 @@ type NEEvaluateConnectionRuleable interface {
 	Unwrap() *raw.NEEvaluateConnectionRule
 	WithUseDNSServers(items ...*foundation.NSString) *NEEvaluateConnectionRule
 	WithProbeURL(probeURL string) *NEEvaluateConnectionRule
-	Action() raw.NEEvaluateConnectionRuleAction
+	Action() NEEvaluateConnectionRuleAction
 	MatchDomains() []string
 	UseDNSServers() []string
 	SetUseDNSServers(useDNSServers *foundation.NSArray[*foundation.NSString])

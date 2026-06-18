@@ -37,8 +37,8 @@ func NewProbeResult() *ProbeResult {
 }
 
 // Result calls the underlying Result.
-func (x *ProbeResult) Result() raw.FSMatchResult {
-	return x.inner.Result()
+func (x *ProbeResult) Result() FSMatchResult {
+	return FSMatchResult(x.inner.Result())
 }
 
 // Name calls the underlying Name.
@@ -62,7 +62,7 @@ func (x *ProbeResult) ContainerID() *ContainerIdentifier {
 // ProbeResultable is the interface implemented by [ProbeResult], for mocking and DI.
 type ProbeResultable interface {
 	Unwrap() *raw.FSProbeResult
-	Result() raw.FSMatchResult
+	Result() FSMatchResult
 	Name() string
 	ContainerID() *ContainerIdentifier
 }

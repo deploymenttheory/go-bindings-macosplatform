@@ -38,8 +38,8 @@ func NewCustomContent() *CustomContent {
 }
 
 // WithImportance sets the importance property and returns the receiver for chaining.
-func (x *CustomContent) WithImportance(importance raw.AXCustomContentImportance) *CustomContent {
-	x.inner.SetImportance(importance)
+func (x *CustomContent) WithImportance(importance AXCustomContentImportance) *CustomContent {
+	x.inner.SetImportance(raw.AXCustomContentImportance(importance))
 	return x
 }
 
@@ -72,25 +72,25 @@ func (x *CustomContent) AttributedValue() *foundation.NSAttributedString {
 }
 
 // Importance calls the underlying Importance.
-func (x *CustomContent) Importance() raw.AXCustomContentImportance {
-	return x.inner.Importance()
+func (x *CustomContent) Importance() AXCustomContentImportance {
+	return AXCustomContentImportance(x.inner.Importance())
 }
 
 // SetImportance calls the underlying SetImportance.
-func (x *CustomContent) SetImportance(importance raw.AXCustomContentImportance) {
-	x.inner.SetImportance(importance)
+func (x *CustomContent) SetImportance(importance AXCustomContentImportance) {
+	x.inner.SetImportance(raw.AXCustomContentImportance(importance))
 }
 
 // CustomContentable is the interface implemented by [CustomContent], for mocking and DI.
 type CustomContentable interface {
 	Unwrap() *raw.AXCustomContent
-	WithImportance(importance raw.AXCustomContentImportance) *CustomContent
+	WithImportance(importance AXCustomContentImportance) *CustomContent
 	Label() string
 	AttributedLabel() *foundation.NSAttributedString
 	Value() string
 	AttributedValue() *foundation.NSAttributedString
-	Importance() raw.AXCustomContentImportance
-	SetImportance(importance raw.AXCustomContentImportance)
+	Importance() AXCustomContentImportance
+	SetImportance(importance AXCustomContentImportance)
 }
 
 var _ CustomContentable = (*CustomContent)(nil)

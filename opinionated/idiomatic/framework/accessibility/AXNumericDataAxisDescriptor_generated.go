@@ -47,8 +47,8 @@ func NewNumericDataAxisDescriptorWithAttributedTitleLowerBoundUpperBoundGridline
 }
 
 // WithScaleType sets the scaleType property and returns the receiver for chaining.
-func (x *NumericDataAxisDescriptor) WithScaleType(scaleType raw.AXNumericDataAxisDescriptorScale) *NumericDataAxisDescriptor {
-	x.inner.SetScaleType(scaleType)
+func (x *NumericDataAxisDescriptor) WithScaleType(scaleType AXNumericDataAxisDescriptorScale) *NumericDataAxisDescriptor {
+	x.inner.SetScaleType(raw.AXNumericDataAxisDescriptorScale(scaleType))
 	return x
 }
 
@@ -89,13 +89,13 @@ func (x *NumericDataAxisDescriptor) WithGridlinePositions(items ...*foundation.N
 }
 
 // ScaleType calls the underlying ScaleType.
-func (x *NumericDataAxisDescriptor) ScaleType() raw.AXNumericDataAxisDescriptorScale {
-	return x.inner.ScaleType()
+func (x *NumericDataAxisDescriptor) ScaleType() AXNumericDataAxisDescriptorScale {
+	return AXNumericDataAxisDescriptorScale(x.inner.ScaleType())
 }
 
 // SetScaleType calls the underlying SetScaleType.
-func (x *NumericDataAxisDescriptor) SetScaleType(scaleType raw.AXNumericDataAxisDescriptorScale) {
-	x.inner.SetScaleType(scaleType)
+func (x *NumericDataAxisDescriptor) SetScaleType(scaleType AXNumericDataAxisDescriptorScale) {
+	x.inner.SetScaleType(raw.AXNumericDataAxisDescriptorScale(scaleType))
 }
 
 // LowerBound calls the underlying LowerBound.
@@ -147,13 +147,13 @@ func (x *NumericDataAxisDescriptor) SetGridlinePositions(gridlinePositions *foun
 // NumericDataAxisDescriptorable is the interface implemented by [NumericDataAxisDescriptor], for mocking and DI.
 type NumericDataAxisDescriptorable interface {
 	Unwrap() *raw.AXNumericDataAxisDescriptor
-	WithScaleType(scaleType raw.AXNumericDataAxisDescriptorScale) *NumericDataAxisDescriptor
+	WithScaleType(scaleType AXNumericDataAxisDescriptorScale) *NumericDataAxisDescriptor
 	WithLowerBound(lowerBound float64) *NumericDataAxisDescriptor
 	WithUpperBound(upperBound float64) *NumericDataAxisDescriptor
 	WithValueDescriptionProvider(valueDescriptionProvider objc.Block) *NumericDataAxisDescriptor
 	WithGridlinePositions(items ...*foundation.NSNumber) *NumericDataAxisDescriptor
-	ScaleType() raw.AXNumericDataAxisDescriptorScale
-	SetScaleType(scaleType raw.AXNumericDataAxisDescriptorScale)
+	ScaleType() AXNumericDataAxisDescriptorScale
+	SetScaleType(scaleType AXNumericDataAxisDescriptorScale)
 	LowerBound() float64
 	SetLowerBound(lowerBound float64)
 	UpperBound() float64

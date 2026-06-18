@@ -51,8 +51,8 @@ func (x *UMPFunctionBlock) FunctionBlockID() uint8 {
 }
 
 // Direction calls the underlying Direction.
-func (x *UMPFunctionBlock) Direction() raw.MIDIUMPFunctionBlockDirection {
-	return x.inner.Direction()
+func (x *UMPFunctionBlock) Direction() MIDIUMPFunctionBlockDirection {
+	return MIDIUMPFunctionBlockDirection(x.inner.Direction())
 }
 
 // FirstGroup calls the underlying FirstGroup.
@@ -71,13 +71,13 @@ func (x *UMPFunctionBlock) MaxSysEx8Streams() uint8 {
 }
 
 // MIDI1Info calls the underlying MIDI1Info.
-func (x *UMPFunctionBlock) MIDI1Info() raw.MIDIUMPFunctionBlockMIDI1Info {
-	return x.inner.MIDI1Info()
+func (x *UMPFunctionBlock) MIDI1Info() MIDIUMPFunctionBlockMIDI1Info {
+	return MIDIUMPFunctionBlockMIDI1Info(x.inner.MIDI1Info())
 }
 
 // UIHint calls the underlying UIHint.
-func (x *UMPFunctionBlock) UIHint() raw.MIDIUMPFunctionBlockUIHint {
-	return x.inner.UIHint()
+func (x *UMPFunctionBlock) UIHint() MIDIUMPFunctionBlockUIHint {
+	return MIDIUMPFunctionBlockUIHint(x.inner.UIHint())
 }
 
 // UMPEndpoint calls the underlying UMPEndpoint.
@@ -110,12 +110,12 @@ type UMPFunctionBlockable interface {
 	Unwrap() *raw.MIDIUMPFunctionBlock
 	Name() string
 	FunctionBlockID() uint8
-	Direction() raw.MIDIUMPFunctionBlockDirection
+	Direction() MIDIUMPFunctionBlockDirection
 	FirstGroup() uint8
 	TotalGroupsSpanned() uint8
 	MaxSysEx8Streams() uint8
-	MIDI1Info() raw.MIDIUMPFunctionBlockMIDI1Info
-	UIHint() raw.MIDIUMPFunctionBlockUIHint
+	MIDI1Info() MIDIUMPFunctionBlockMIDI1Info
+	UIHint() MIDIUMPFunctionBlockUIHint
 	UMPEndpoint() *UMPEndpoint
 	MidiCIDevice() *CIDevice
 	IsEnabled() bool

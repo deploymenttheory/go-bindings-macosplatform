@@ -31,9 +31,9 @@ func AddIdentityDocumentMetadataFromID(id objc.ID) *AddIdentityDocumentMetadata 
 }
 
 // NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview creates a new [AddIdentityDocumentMetadata].
-func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, issuingCountryCode string, documentType raw.PKAddIdentityDocumentType, preview *raw.PKAddPassMetadataPreview) *AddIdentityDocumentMetadata {
+func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, issuingCountryCode string, documentType PKAddIdentityDocumentType, preview *raw.PKAddPassMetadataPreview) *AddIdentityDocumentMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddIdentityDocumentMetadata")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:issuingCountryCode:documentType:preview:"), foundation.NSStringStringWithUTF8String(credentialIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(sharingInstanceIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(templateIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(issuingCountryCode).Ptr(), documentType, preview.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:issuingCountryCode:documentType:preview:"), foundation.NSStringStringWithUTF8String(credentialIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(sharingInstanceIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(templateIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(issuingCountryCode).Ptr(), raw.PKAddIdentityDocumentType(documentType), preview.Ptr())
 	return &AddIdentityDocumentMetadata{inner: raw.PKAddIdentityDocumentMetadataFromID(_id)}
 }
 

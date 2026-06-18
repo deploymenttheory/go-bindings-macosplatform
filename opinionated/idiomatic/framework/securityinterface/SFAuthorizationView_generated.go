@@ -73,8 +73,8 @@ func (x *AuthorizationView) SetAutoupdateInterval(autoupdate bool, interval floa
 }
 
 // AuthorizationState calls the underlying AuthorizationState.
-func (x *AuthorizationView) AuthorizationState() raw.SFAuthorizationViewState {
-	return x.inner.AuthorizationState()
+func (x *AuthorizationView) AuthorizationState() SFAuthorizationViewState {
+	return SFAuthorizationViewState(x.inner.AuthorizationState())
 }
 
 // SetEnabled calls the underlying SetEnabled.
@@ -122,7 +122,7 @@ type AuthorizationViewable interface {
 	UpdateStatus(inSender objc.ID) bool
 	SetAutoupdate(autoupdate bool)
 	SetAutoupdateInterval(autoupdate bool, interval float64)
-	AuthorizationState() raw.SFAuthorizationViewState
+	AuthorizationState() SFAuthorizationViewState
 	SetEnabled(enabled bool)
 	IsEnabled() bool
 	SetFlags(flags security.AuthorizationFlags)

@@ -43,8 +43,8 @@ func (x *Listener) WithGain(gain float64) *Listener {
 }
 
 // WithAutomaticHeadTrackingFlags sets the automaticHeadTrackingFlags property and returns the receiver for chaining.
-func (x *Listener) WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags raw.PHASEAutomaticHeadTrackingFlags) *Listener {
-	x.inner.SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags)
+func (x *Listener) WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags PHASEAutomaticHeadTrackingFlags) *Listener {
+	x.inner.SetAutomaticHeadTrackingFlags(raw.PHASEAutomaticHeadTrackingFlags(automaticHeadTrackingFlags))
 	return x
 }
 
@@ -59,13 +59,13 @@ func (x *Listener) SetGain(gain float64) {
 }
 
 // AutomaticHeadTrackingFlags calls the underlying AutomaticHeadTrackingFlags.
-func (x *Listener) AutomaticHeadTrackingFlags() raw.PHASEAutomaticHeadTrackingFlags {
-	return x.inner.AutomaticHeadTrackingFlags()
+func (x *Listener) AutomaticHeadTrackingFlags() PHASEAutomaticHeadTrackingFlags {
+	return PHASEAutomaticHeadTrackingFlags(x.inner.AutomaticHeadTrackingFlags())
 }
 
 // SetAutomaticHeadTrackingFlags calls the underlying SetAutomaticHeadTrackingFlags.
-func (x *Listener) SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags raw.PHASEAutomaticHeadTrackingFlags) {
-	x.inner.SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags)
+func (x *Listener) SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags PHASEAutomaticHeadTrackingFlags) {
+	x.inner.SetAutomaticHeadTrackingFlags(raw.PHASEAutomaticHeadTrackingFlags(automaticHeadTrackingFlags))
 }
 
 func (x *Listener) asObject() *raw.PHASEObject { return &x.inner.PHASEObject }
@@ -74,11 +74,11 @@ func (x *Listener) asObject() *raw.PHASEObject { return &x.inner.PHASEObject }
 type Listenerable interface {
 	Unwrap() *raw.PHASEListener
 	WithGain(gain float64) *Listener
-	WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags raw.PHASEAutomaticHeadTrackingFlags) *Listener
+	WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags PHASEAutomaticHeadTrackingFlags) *Listener
 	Gain() float64
 	SetGain(gain float64)
-	AutomaticHeadTrackingFlags() raw.PHASEAutomaticHeadTrackingFlags
-	SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags raw.PHASEAutomaticHeadTrackingFlags)
+	AutomaticHeadTrackingFlags() PHASEAutomaticHeadTrackingFlags
+	SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags PHASEAutomaticHeadTrackingFlags)
 }
 
 var _ Listenerable = (*Listener)(nil)

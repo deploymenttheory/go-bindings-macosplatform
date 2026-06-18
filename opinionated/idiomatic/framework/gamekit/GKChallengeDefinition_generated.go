@@ -105,8 +105,8 @@ func (x *ChallengeDefinition) Leaderboard() *Leaderboard {
 }
 
 // ReleaseState calls the underlying ReleaseState.
-func (x *ChallengeDefinition) ReleaseState() raw.GKReleaseState {
-	return x.inner.ReleaseState()
+func (x *ChallengeDefinition) ReleaseState() GKReleaseState {
+	return GKReleaseState(x.inner.ReleaseState())
 }
 
 // HasActiveChallengesWithCompletionHandler calls the underlying HasActiveChallengesWithCompletionHandler.
@@ -125,7 +125,7 @@ type ChallengeDefinitionable interface {
 	DurationOptions() []*foundation.NSDateComponents
 	IsRepeatable() bool
 	Leaderboard() *Leaderboard
-	ReleaseState() raw.GKReleaseState
+	ReleaseState() GKReleaseState
 	HasActiveChallengesWithCompletionHandler(completionHandler func(bool, unsafe.Pointer))
 }
 

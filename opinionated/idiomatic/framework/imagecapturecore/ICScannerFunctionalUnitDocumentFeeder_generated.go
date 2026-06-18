@@ -40,8 +40,8 @@ func NewScannerFunctionalUnitDocumentFeeder() *ScannerFunctionalUnitDocumentFeed
 }
 
 // WithDocumentType sets the documentType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithDocumentType(documentType raw.ICScannerDocumentType) *ScannerFunctionalUnitDocumentFeeder {
-	x.inner.SetDocumentType(documentType)
+func (x *ScannerFunctionalUnitDocumentFeeder) WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitDocumentFeeder {
+	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
 	return x
 }
 
@@ -52,32 +52,32 @@ func (x *ScannerFunctionalUnitDocumentFeeder) WithDuplexScanningEnabled(duplexSc
 }
 
 // WithOddPageOrientation sets the oddPageOrientation property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithOddPageOrientation(oddPageOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
-	x.inner.SetOddPageOrientation(oddPageOrientation)
+func (x *ScannerFunctionalUnitDocumentFeeder) WithOddPageOrientation(oddPageOrientation ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
+	x.inner.SetOddPageOrientation(raw.ICEXIFOrientationType(oddPageOrientation))
 	return x
 }
 
 // WithEvenPageOrientation sets the evenPageOrientation property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithEvenPageOrientation(evenPageOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
-	x.inner.SetEvenPageOrientation(evenPageOrientation)
+func (x *ScannerFunctionalUnitDocumentFeeder) WithEvenPageOrientation(evenPageOrientation ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
+	x.inner.SetEvenPageOrientation(raw.ICEXIFOrientationType(evenPageOrientation))
 	return x
 }
 
 // WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithPixelDataType(pixelDataType raw.ICScannerPixelDataType) *ScannerFunctionalUnitDocumentFeeder {
-	x.inner.ICScannerFunctionalUnit.SetPixelDataType(pixelDataType)
+func (x *ScannerFunctionalUnitDocumentFeeder) WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitDocumentFeeder {
+	x.inner.ICScannerFunctionalUnit.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
 	return x
 }
 
 // WithBitDepth sets the bitDepth property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithBitDepth(bitDepth raw.ICScannerBitDepth) *ScannerFunctionalUnitDocumentFeeder {
-	x.inner.ICScannerFunctionalUnit.SetBitDepth(bitDepth)
+func (x *ScannerFunctionalUnitDocumentFeeder) WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitDocumentFeeder {
+	x.inner.ICScannerFunctionalUnit.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
 	return x
 }
 
 // WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) *ScannerFunctionalUnitDocumentFeeder {
-	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(measurementUnit)
+func (x *ScannerFunctionalUnitDocumentFeeder) WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitDocumentFeeder {
+	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
 	return x
 }
 
@@ -100,8 +100,8 @@ func (x *ScannerFunctionalUnitDocumentFeeder) WithScanArea(scanArea corefoundati
 }
 
 // WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
-	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(scanAreaOrientation)
+func (x *ScannerFunctionalUnitDocumentFeeder) WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
+	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
 	return x
 }
 
@@ -129,13 +129,13 @@ func (x *ScannerFunctionalUnitDocumentFeeder) SupportedDocumentTypes() *foundati
 }
 
 // DocumentType calls the underlying DocumentType.
-func (x *ScannerFunctionalUnitDocumentFeeder) DocumentType() raw.ICScannerDocumentType {
-	return x.inner.DocumentType()
+func (x *ScannerFunctionalUnitDocumentFeeder) DocumentType() ICScannerDocumentType {
+	return ICScannerDocumentType(x.inner.DocumentType())
 }
 
 // SetDocumentType calls the underlying SetDocumentType.
-func (x *ScannerFunctionalUnitDocumentFeeder) SetDocumentType(documentType raw.ICScannerDocumentType) {
-	x.inner.SetDocumentType(documentType)
+func (x *ScannerFunctionalUnitDocumentFeeder) SetDocumentType(documentType ICScannerDocumentType) {
+	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
 }
 
 // DocumentSize calls the underlying DocumentSize.
@@ -164,23 +164,23 @@ func (x *ScannerFunctionalUnitDocumentFeeder) DocumentLoaded() bool {
 }
 
 // OddPageOrientation calls the underlying OddPageOrientation.
-func (x *ScannerFunctionalUnitDocumentFeeder) OddPageOrientation() raw.ICEXIFOrientationType {
-	return x.inner.OddPageOrientation()
+func (x *ScannerFunctionalUnitDocumentFeeder) OddPageOrientation() ICEXIFOrientationType {
+	return ICEXIFOrientationType(x.inner.OddPageOrientation())
 }
 
 // SetOddPageOrientation calls the underlying SetOddPageOrientation.
-func (x *ScannerFunctionalUnitDocumentFeeder) SetOddPageOrientation(oddPageOrientation raw.ICEXIFOrientationType) {
-	x.inner.SetOddPageOrientation(oddPageOrientation)
+func (x *ScannerFunctionalUnitDocumentFeeder) SetOddPageOrientation(oddPageOrientation ICEXIFOrientationType) {
+	x.inner.SetOddPageOrientation(raw.ICEXIFOrientationType(oddPageOrientation))
 }
 
 // EvenPageOrientation calls the underlying EvenPageOrientation.
-func (x *ScannerFunctionalUnitDocumentFeeder) EvenPageOrientation() raw.ICEXIFOrientationType {
-	return x.inner.EvenPageOrientation()
+func (x *ScannerFunctionalUnitDocumentFeeder) EvenPageOrientation() ICEXIFOrientationType {
+	return ICEXIFOrientationType(x.inner.EvenPageOrientation())
 }
 
 // SetEvenPageOrientation calls the underlying SetEvenPageOrientation.
-func (x *ScannerFunctionalUnitDocumentFeeder) SetEvenPageOrientation(evenPageOrientation raw.ICEXIFOrientationType) {
-	x.inner.SetEvenPageOrientation(evenPageOrientation)
+func (x *ScannerFunctionalUnitDocumentFeeder) SetEvenPageOrientation(evenPageOrientation ICEXIFOrientationType) {
+	x.inner.SetEvenPageOrientation(raw.ICEXIFOrientationType(evenPageOrientation))
 }
 
 // ReverseFeederPageOrder calls the underlying ReverseFeederPageOrder.
@@ -195,32 +195,32 @@ func (x *ScannerFunctionalUnitDocumentFeeder) asScannerFunctionalUnit() *raw.ICS
 // ScannerFunctionalUnitDocumentFeederable is the interface implemented by [ScannerFunctionalUnitDocumentFeeder], for mocking and DI.
 type ScannerFunctionalUnitDocumentFeederable interface {
 	Unwrap() *raw.ICScannerFunctionalUnitDocumentFeeder
-	WithDocumentType(documentType raw.ICScannerDocumentType) *ScannerFunctionalUnitDocumentFeeder
+	WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitDocumentFeeder
 	WithDuplexScanningEnabled(duplexScanningEnabled bool) *ScannerFunctionalUnitDocumentFeeder
-	WithOddPageOrientation(oddPageOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder
-	WithEvenPageOrientation(evenPageOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder
-	WithPixelDataType(pixelDataType raw.ICScannerPixelDataType) *ScannerFunctionalUnitDocumentFeeder
-	WithBitDepth(bitDepth raw.ICScannerBitDepth) *ScannerFunctionalUnitDocumentFeeder
-	WithMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) *ScannerFunctionalUnitDocumentFeeder
+	WithOddPageOrientation(oddPageOrientation ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder
+	WithEvenPageOrientation(evenPageOrientation ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder
+	WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitDocumentFeeder
+	WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitDocumentFeeder
+	WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitDocumentFeeder
 	WithResolution(resolution uint) *ScannerFunctionalUnitDocumentFeeder
 	WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitDocumentFeeder
 	WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitDocumentFeeder
-	WithScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder
+	WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder
 	WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitDocumentFeeder
 	WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitDocumentFeeder
 	WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitDocumentFeeder
 	SupportedDocumentTypes() *foundation.NSIndexSet
-	DocumentType() raw.ICScannerDocumentType
-	SetDocumentType(documentType raw.ICScannerDocumentType)
+	DocumentType() ICScannerDocumentType
+	SetDocumentType(documentType ICScannerDocumentType)
 	DocumentSize() corefoundation.CGSize
 	SupportsDuplexScanning() bool
 	DuplexScanningEnabled() bool
 	SetDuplexScanningEnabled(duplexScanningEnabled bool)
 	DocumentLoaded() bool
-	OddPageOrientation() raw.ICEXIFOrientationType
-	SetOddPageOrientation(oddPageOrientation raw.ICEXIFOrientationType)
-	EvenPageOrientation() raw.ICEXIFOrientationType
-	SetEvenPageOrientation(evenPageOrientation raw.ICEXIFOrientationType)
+	OddPageOrientation() ICEXIFOrientationType
+	SetOddPageOrientation(oddPageOrientation ICEXIFOrientationType)
+	EvenPageOrientation() ICEXIFOrientationType
+	SetEvenPageOrientation(evenPageOrientation ICEXIFOrientationType)
 	ReverseFeederPageOrder() bool
 }
 

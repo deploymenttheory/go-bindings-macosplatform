@@ -187,8 +187,8 @@ func (x *WKWebExtensionController) DidReplaceTabWithTab(oldTab raw.WKWebExtensio
 }
 
 // DidChangeTabPropertiesForTab calls the underlying DidChangeTabPropertiesForTab.
-func (x *WKWebExtensionController) DidChangeTabPropertiesForTab(properties raw.WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab) {
-	x.inner.DidChangeTabPropertiesForTab(properties, changedTab)
+func (x *WKWebExtensionController) DidChangeTabPropertiesForTab(properties WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab) {
+	x.inner.DidChangeTabPropertiesForTab(raw.WKWebExtensionTabChangedProperties(properties), changedTab)
 }
 
 // Delegate calls the underlying Delegate.
@@ -241,7 +241,7 @@ type WKWebExtensionControllerable interface {
 	DidDeselectTabs(deselectedTabs *foundation.NSArray[raw.WKWebExtensionTab])
 	DidMoveTabFromIndexInWindow(movedTab raw.WKWebExtensionTab, index uint, oldWindow raw.WKWebExtensionWindow)
 	DidReplaceTabWithTab(oldTab raw.WKWebExtensionTab, newTab raw.WKWebExtensionTab)
-	DidChangeTabPropertiesForTab(properties raw.WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab)
+	DidChangeTabPropertiesForTab(properties WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab)
 	Delegate() raw.WKWebExtensionControllerDelegate
 	SetDelegate(delegate raw.WKWebExtensionControllerDelegate)
 	Configuration() *WKWebExtensionControllerConfiguration

@@ -87,17 +87,41 @@ LULU_CONFIG=config/firewall.example.yaml luludaemon  # daemon reconciles at star
 lulu export current.yaml                             # dump the live rules to a document
 ```
 
-Reconciliation (`config` package) is:
+Reconciliation (`config` package) is **authoritative**: the document is the
+*complete* firewall state.
 
 - **Idempotent** — rule identity is content-addressed (a hash of path + action +
   host + port), so re-applying an unchanged document is a no-op; editing an
   endpoint cleanly replaces the old rule.
-- **Safe** — only rules created by `apply` are marked *managed* and eligible for
-  pruning. Rules added by hand (`lulu allow`/`block`) are never removed by an apply.
+- **Authoritative / prune-all** — any rule *not* in the document is removed,
+  regardless of who created it. A rule added out-of-band (interactively or by an
+  XPC client) cannot survive an apply, so the policy can't be bypassed by adding
+  local allow rules.
+
+### Managed mode (enforcement)
+
+A one-shot apply only enforces at apply-time. When the daemon is governed by a
+config (`LULU_CONFIG`), it runs in **managed mode**, which closes the bypass
+window:
+
+- **Locked mutation surface** — the daemon *rejects* rule mutations over XPC
+  (`addRule`/`deleteRule`/`toggle`). Policy can only change by editing the
+  document. (This also disables the interactive alert→rule flow — the correct
+  behaviour for an enforced policy.)
+- **Continuous reconciliation** — the daemon re-applies the config on an interval
+  (`reconcileInterval`, 60s), so drift from direct tampering of the persisted
+  `rules.json` is reverted automatically.
+
+**Tradeoff:** authoritative mode wipes ad-hoc/interactive rules on every apply.
+That is what makes the policy enforceable, but it means you cannot mix a
+declarative baseline with persistent interactive additions. Supporting both would
+need a layered policy model (a locked base + a user overlay) — intentionally not
+built here.
 
 The engine-local path (`config.Apply` over a `rules.Engine`) is plain Go and is
-covered by `config/config_test.go`; the XPC path drives the same reconciler
-against the live daemon. Sample documents: `config/firewall.example.{yaml,json}`.
+covered by `config/config_test.go` (including a test that an out-of-band rule is
+pruned by an authoritative apply); the XPC path drives the same reconciler.
+Sample documents: `config/firewall.example.{yaml,json}`.
 
 YAML support uses `gopkg.in/yaml.v3` — the one place this example departs from the
 SDK's otherwise dependency-free posture (JSON alone is stdlib).

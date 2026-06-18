@@ -46,8 +46,8 @@ func (x *AccessibilityCustomRotorSearchParameters) WithCurrentItem(currentItem *
 }
 
 // WithSearchDirection sets the searchDirection property and returns the receiver for chaining.
-func (x *AccessibilityCustomRotorSearchParameters) WithSearchDirection(searchDirection raw.NSAccessibilityCustomRotorSearchDirection) *AccessibilityCustomRotorSearchParameters {
-	x.inner.SetSearchDirection(searchDirection)
+func (x *AccessibilityCustomRotorSearchParameters) WithSearchDirection(searchDirection NSAccessibilityCustomRotorSearchDirection) *AccessibilityCustomRotorSearchParameters {
+	x.inner.SetSearchDirection(raw.NSAccessibilityCustomRotorSearchDirection(searchDirection))
 	return x
 }
 
@@ -72,13 +72,13 @@ func (x *AccessibilityCustomRotorSearchParameters) SetCurrentItem(currentItem *r
 }
 
 // SearchDirection calls the underlying SearchDirection.
-func (x *AccessibilityCustomRotorSearchParameters) SearchDirection() raw.NSAccessibilityCustomRotorSearchDirection {
-	return x.inner.SearchDirection()
+func (x *AccessibilityCustomRotorSearchParameters) SearchDirection() NSAccessibilityCustomRotorSearchDirection {
+	return NSAccessibilityCustomRotorSearchDirection(x.inner.SearchDirection())
 }
 
 // SetSearchDirection calls the underlying SetSearchDirection.
-func (x *AccessibilityCustomRotorSearchParameters) SetSearchDirection(searchDirection raw.NSAccessibilityCustomRotorSearchDirection) {
-	x.inner.SetSearchDirection(searchDirection)
+func (x *AccessibilityCustomRotorSearchParameters) SetSearchDirection(searchDirection NSAccessibilityCustomRotorSearchDirection) {
+	x.inner.SetSearchDirection(raw.NSAccessibilityCustomRotorSearchDirection(searchDirection))
 }
 
 // FilterString calls the underlying FilterString.
@@ -99,12 +99,12 @@ func (x *AccessibilityCustomRotorSearchParameters) SetFilterString(filterString 
 type AccessibilityCustomRotorSearchParametersable interface {
 	Unwrap() *raw.NSAccessibilityCustomRotorSearchParameters
 	WithCurrentItem(currentItem *AccessibilityCustomRotorItemResult) *AccessibilityCustomRotorSearchParameters
-	WithSearchDirection(searchDirection raw.NSAccessibilityCustomRotorSearchDirection) *AccessibilityCustomRotorSearchParameters
+	WithSearchDirection(searchDirection NSAccessibilityCustomRotorSearchDirection) *AccessibilityCustomRotorSearchParameters
 	WithFilterString(filterString string) *AccessibilityCustomRotorSearchParameters
 	CurrentItem() *AccessibilityCustomRotorItemResult
 	SetCurrentItem(currentItem *raw.NSAccessibilityCustomRotorItemResult)
-	SearchDirection() raw.NSAccessibilityCustomRotorSearchDirection
-	SetSearchDirection(searchDirection raw.NSAccessibilityCustomRotorSearchDirection)
+	SearchDirection() NSAccessibilityCustomRotorSearchDirection
+	SetSearchDirection(searchDirection NSAccessibilityCustomRotorSearchDirection)
 	FilterString() string
 	SetFilterString(filterString string)
 }

@@ -84,8 +84,8 @@ func (x *InstanceAccelerationStructure) WithTransformBufferOffset(transformBuffe
 }
 
 // WithTransformType sets the transformType property and returns the receiver for chaining.
-func (x *InstanceAccelerationStructure) WithTransformType(transformType raw.MPSTransformType) *InstanceAccelerationStructure {
-	x.inner.SetTransformType(transformType)
+func (x *InstanceAccelerationStructure) WithTransformType(transformType MPSTransformType) *InstanceAccelerationStructure {
+	x.inner.SetTransformType(raw.MPSTransformType(transformType))
 	return x
 }
 
@@ -108,8 +108,8 @@ func (x *InstanceAccelerationStructure) WithInstanceCount(instanceCount uint) *I
 }
 
 // WithUsage sets the usage property and returns the receiver for chaining.
-func (x *InstanceAccelerationStructure) WithUsage(usage raw.MPSAccelerationStructureUsage) *InstanceAccelerationStructure {
-	x.inner.MPSAccelerationStructure.SetUsage(usage)
+func (x *InstanceAccelerationStructure) WithUsage(usage MPSAccelerationStructureUsage) *InstanceAccelerationStructure {
+	x.inner.MPSAccelerationStructure.SetUsage(raw.MPSAccelerationStructureUsage(usage))
 	return x
 }
 
@@ -170,13 +170,13 @@ func (x *InstanceAccelerationStructure) SetTransformBufferOffset(transformBuffer
 }
 
 // TransformType calls the underlying TransformType.
-func (x *InstanceAccelerationStructure) TransformType() raw.MPSTransformType {
-	return x.inner.TransformType()
+func (x *InstanceAccelerationStructure) TransformType() MPSTransformType {
+	return MPSTransformType(x.inner.TransformType())
 }
 
 // SetTransformType calls the underlying SetTransformType.
-func (x *InstanceAccelerationStructure) SetTransformType(transformType raw.MPSTransformType) {
-	x.inner.SetTransformType(transformType)
+func (x *InstanceAccelerationStructure) SetTransformType(transformType MPSTransformType) {
+	x.inner.SetTransformType(raw.MPSTransformType(transformType))
 }
 
 // MaskBuffer calls the underlying MaskBuffer.
@@ -221,11 +221,11 @@ type InstanceAccelerationStructureable interface {
 	WithInstanceBufferOffset(instanceBufferOffset uint) *InstanceAccelerationStructure
 	WithTransformBuffer(transformBuffer metal.MTLBuffer) *InstanceAccelerationStructure
 	WithTransformBufferOffset(transformBufferOffset uint) *InstanceAccelerationStructure
-	WithTransformType(transformType raw.MPSTransformType) *InstanceAccelerationStructure
+	WithTransformType(transformType MPSTransformType) *InstanceAccelerationStructure
 	WithMaskBuffer(maskBuffer metal.MTLBuffer) *InstanceAccelerationStructure
 	WithMaskBufferOffset(maskBufferOffset uint) *InstanceAccelerationStructure
 	WithInstanceCount(instanceCount uint) *InstanceAccelerationStructure
-	WithUsage(usage raw.MPSAccelerationStructureUsage) *InstanceAccelerationStructure
+	WithUsage(usage MPSAccelerationStructureUsage) *InstanceAccelerationStructure
 	AccelerationStructures() []*PolygonAccelerationStructure
 	SetAccelerationStructures(accelerationStructures *foundation.NSArray[*raw.MPSPolygonAccelerationStructure])
 	InstanceBuffer() metal.MTLBuffer
@@ -236,8 +236,8 @@ type InstanceAccelerationStructureable interface {
 	SetTransformBuffer(transformBuffer metal.MTLBuffer)
 	TransformBufferOffset() uint
 	SetTransformBufferOffset(transformBufferOffset uint)
-	TransformType() raw.MPSTransformType
-	SetTransformType(transformType raw.MPSTransformType)
+	TransformType() MPSTransformType
+	SetTransformType(transformType MPSTransformType)
 	MaskBuffer() metal.MTLBuffer
 	SetMaskBuffer(maskBuffer metal.MTLBuffer)
 	MaskBufferOffset() uint

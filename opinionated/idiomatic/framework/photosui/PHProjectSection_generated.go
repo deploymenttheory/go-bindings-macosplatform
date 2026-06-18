@@ -48,8 +48,8 @@ func (x *ProjectSection) SectionContents() []*ProjectSectionContent {
 }
 
 // SectionType calls the underlying SectionType.
-func (x *ProjectSection) SectionType() raw.PHProjectSectionType {
-	return x.inner.SectionType()
+func (x *ProjectSection) SectionType() PHProjectSectionType {
+	return PHProjectSectionType(x.inner.SectionType())
 }
 
 // Title calls the underlying Title.
@@ -65,7 +65,7 @@ func (x *ProjectSection) Title() string {
 type ProjectSectionable interface {
 	Unwrap() *raw.PHProjectSection
 	SectionContents() []*ProjectSectionContent
-	SectionType() raw.PHProjectSectionType
+	SectionType() PHProjectSectionType
 	Title() string
 }
 

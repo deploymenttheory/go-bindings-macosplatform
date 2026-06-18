@@ -67,8 +67,10 @@ func (x *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Co
 }
 
 // GenerateRepresentationsForRequestUpdateHandler calls the underlying GenerateRepresentationsForRequestUpdateHandler.
-func (x *ThumbnailGenerator) GenerateRepresentationsForRequestUpdateHandler(request *raw.QLThumbnailGenerationRequest, updateHandler func(*raw.QLThumbnailRepresentation, raw.QLThumbnailRepresentationType, unsafe.Pointer)) {
-	x.inner.GenerateRepresentationsForRequestUpdateHandler(request, updateHandler)
+func (x *ThumbnailGenerator) GenerateRepresentationsForRequestUpdateHandler(request *raw.QLThumbnailGenerationRequest, updateHandler func(*raw.QLThumbnailRepresentation, QLThumbnailRepresentationType, unsafe.Pointer)) {
+	x.inner.GenerateRepresentationsForRequestUpdateHandler(request, func(_a0 *raw.QLThumbnailRepresentation, _a1 raw.QLThumbnailRepresentationType, _a2 unsafe.Pointer) {
+		updateHandler(_a0, QLThumbnailRepresentationType(_a1), _a2)
+	})
 }
 
 // CancelRequest calls the underlying CancelRequest.
@@ -116,7 +118,7 @@ func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithCont
 type ThumbnailGeneratorable interface {
 	Unwrap() *raw.QLThumbnailGenerator
 	GenerateBestRepresentationForRequest(ctx context.Context, request *raw.QLThumbnailGenerationRequest) (*ThumbnailRepresentation, error)
-	GenerateRepresentationsForRequestUpdateHandler(request *raw.QLThumbnailGenerationRequest, updateHandler func(*raw.QLThumbnailRepresentation, raw.QLThumbnailRepresentationType, unsafe.Pointer))
+	GenerateRepresentationsForRequestUpdateHandler(request *raw.QLThumbnailGenerationRequest, updateHandler func(*raw.QLThumbnailRepresentation, QLThumbnailRepresentationType, unsafe.Pointer))
 	CancelRequest(request *raw.QLThumbnailGenerationRequest)
 	SaveBestRepresentationForRequestToFileAtURLAsContentType(ctx context.Context, request *raw.QLThumbnailGenerationRequest, fileURL string, contentType *uniformtypeidentifiers.UTType) error
 	SaveBestRepresentationForRequestToFileAtURLWithContentType(ctx context.Context, request *raw.QLThumbnailGenerationRequest, fileURL string, contentType string) error

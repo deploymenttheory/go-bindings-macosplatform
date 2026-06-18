@@ -192,13 +192,13 @@ func (x *MutableArray) SetObjectAtIndexedSubscript(obj objc.ID, idx uint) {
 }
 
 // SortUsingComparator calls the underlying SortUsingComparator.
-func (x *MutableArray) SortUsingComparator(cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) {
-	x.inner.SortUsingComparator(cmptr)
+func (x *MutableArray) SortUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) {
+	x.inner.SortUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
 // SortWithOptionsUsingComparator calls the underlying SortWithOptionsUsingComparator.
-func (x *MutableArray) SortWithOptionsUsingComparator(opts raw.NSSortOptions, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) {
-	x.inner.SortWithOptionsUsingComparator(opts, cmptr)
+func (x *MutableArray) SortWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) {
+	x.inner.SortWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
 // ApplyDifference calls the underlying ApplyDifference.
@@ -248,8 +248,8 @@ type MutableArrayable interface {
 	RemoveObjectsAtIndexes(indexes *raw.NSIndexSet)
 	ReplaceObjectsAtIndexesWithObjects(indexes *raw.NSIndexSet, objects *raw.NSArray[objc.ID])
 	SetObjectAtIndexedSubscript(obj objc.ID, idx uint)
-	SortUsingComparator(cmptr func(objc.ID, objc.ID) raw.NSComparisonResult)
-	SortWithOptionsUsingComparator(opts raw.NSSortOptions, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult)
+	SortUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult)
+	SortWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult)
 	ApplyDifference(difference *raw.NSOrderedCollectionDifference[objc.ID])
 	SortUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor])
 	FilterUsingPredicate(predicate *raw.NSPredicate)

@@ -98,26 +98,26 @@ func (x *RenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVertexAmpl
 }
 
 // WithDepthAttachmentPixelFormat sets the depthAttachmentPixelFormat property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat) *RenderPipelineDescriptor {
-	x.inner.SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat)
+func (x *RenderPipelineDescriptor) WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) *RenderPipelineDescriptor {
+	x.inner.SetDepthAttachmentPixelFormat(raw.MTLPixelFormat(depthAttachmentPixelFormat))
 	return x
 }
 
 // WithStencilAttachmentPixelFormat sets the stencilAttachmentPixelFormat property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat) *RenderPipelineDescriptor {
-	x.inner.SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat)
+func (x *RenderPipelineDescriptor) WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) *RenderPipelineDescriptor {
+	x.inner.SetStencilAttachmentPixelFormat(raw.MTLPixelFormat(stencilAttachmentPixelFormat))
 	return x
 }
 
 // WithInputPrimitiveTopology sets the inputPrimitiveTopology property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithInputPrimitiveTopology(inputPrimitiveTopology raw.MTLPrimitiveTopologyClass) *RenderPipelineDescriptor {
-	x.inner.SetInputPrimitiveTopology(inputPrimitiveTopology)
+func (x *RenderPipelineDescriptor) WithInputPrimitiveTopology(inputPrimitiveTopology MTLPrimitiveTopologyClass) *RenderPipelineDescriptor {
+	x.inner.SetInputPrimitiveTopology(raw.MTLPrimitiveTopologyClass(inputPrimitiveTopology))
 	return x
 }
 
 // WithTessellationPartitionMode sets the tessellationPartitionMode property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithTessellationPartitionMode(tessellationPartitionMode raw.MTLTessellationPartitionMode) *RenderPipelineDescriptor {
-	x.inner.SetTessellationPartitionMode(tessellationPartitionMode)
+func (x *RenderPipelineDescriptor) WithTessellationPartitionMode(tessellationPartitionMode MTLTessellationPartitionMode) *RenderPipelineDescriptor {
+	x.inner.SetTessellationPartitionMode(raw.MTLTessellationPartitionMode(tessellationPartitionMode))
 	return x
 }
 
@@ -134,26 +134,26 @@ func (x *RenderPipelineDescriptor) WithTessellationFactorScaleEnabled(tessellati
 }
 
 // WithTessellationFactorFormat sets the tessellationFactorFormat property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithTessellationFactorFormat(tessellationFactorFormat raw.MTLTessellationFactorFormat) *RenderPipelineDescriptor {
-	x.inner.SetTessellationFactorFormat(tessellationFactorFormat)
+func (x *RenderPipelineDescriptor) WithTessellationFactorFormat(tessellationFactorFormat MTLTessellationFactorFormat) *RenderPipelineDescriptor {
+	x.inner.SetTessellationFactorFormat(raw.MTLTessellationFactorFormat(tessellationFactorFormat))
 	return x
 }
 
 // WithTessellationControlPointIndexType sets the tessellationControlPointIndexType property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithTessellationControlPointIndexType(tessellationControlPointIndexType raw.MTLTessellationControlPointIndexType) *RenderPipelineDescriptor {
-	x.inner.SetTessellationControlPointIndexType(tessellationControlPointIndexType)
+func (x *RenderPipelineDescriptor) WithTessellationControlPointIndexType(tessellationControlPointIndexType MTLTessellationControlPointIndexType) *RenderPipelineDescriptor {
+	x.inner.SetTessellationControlPointIndexType(raw.MTLTessellationControlPointIndexType(tessellationControlPointIndexType))
 	return x
 }
 
 // WithTessellationFactorStepFunction sets the tessellationFactorStepFunction property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithTessellationFactorStepFunction(tessellationFactorStepFunction raw.MTLTessellationFactorStepFunction) *RenderPipelineDescriptor {
-	x.inner.SetTessellationFactorStepFunction(tessellationFactorStepFunction)
+func (x *RenderPipelineDescriptor) WithTessellationFactorStepFunction(tessellationFactorStepFunction MTLTessellationFactorStepFunction) *RenderPipelineDescriptor {
+	x.inner.SetTessellationFactorStepFunction(raw.MTLTessellationFactorStepFunction(tessellationFactorStepFunction))
 	return x
 }
 
 // WithTessellationOutputWindingOrder sets the tessellationOutputWindingOrder property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithTessellationOutputWindingOrder(tessellationOutputWindingOrder raw.MTLWinding) *RenderPipelineDescriptor {
-	x.inner.SetTessellationOutputWindingOrder(tessellationOutputWindingOrder)
+func (x *RenderPipelineDescriptor) WithTessellationOutputWindingOrder(tessellationOutputWindingOrder MTLWinding) *RenderPipelineDescriptor {
+	x.inner.SetTessellationOutputWindingOrder(raw.MTLWinding(tessellationOutputWindingOrder))
 	return x
 }
 
@@ -200,8 +200,8 @@ func (x *RenderPipelineDescriptor) WithMaxFragmentCallStackDepth(maxFragmentCall
 }
 
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
-func (x *RenderPipelineDescriptor) WithShaderValidation(shaderValidation raw.MTLShaderValidation) *RenderPipelineDescriptor {
-	x.inner.SetShaderValidation(shaderValidation)
+func (x *RenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *RenderPipelineDescriptor {
+	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 	return x
 }
 
@@ -328,43 +328,43 @@ func (x *RenderPipelineDescriptor) ColorAttachments() *RenderPipelineColorAttach
 }
 
 // DepthAttachmentPixelFormat calls the underlying DepthAttachmentPixelFormat.
-func (x *RenderPipelineDescriptor) DepthAttachmentPixelFormat() raw.MTLPixelFormat {
-	return x.inner.DepthAttachmentPixelFormat()
+func (x *RenderPipelineDescriptor) DepthAttachmentPixelFormat() MTLPixelFormat {
+	return MTLPixelFormat(x.inner.DepthAttachmentPixelFormat())
 }
 
 // SetDepthAttachmentPixelFormat calls the underlying SetDepthAttachmentPixelFormat.
-func (x *RenderPipelineDescriptor) SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat) {
-	x.inner.SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat)
+func (x *RenderPipelineDescriptor) SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) {
+	x.inner.SetDepthAttachmentPixelFormat(raw.MTLPixelFormat(depthAttachmentPixelFormat))
 }
 
 // StencilAttachmentPixelFormat calls the underlying StencilAttachmentPixelFormat.
-func (x *RenderPipelineDescriptor) StencilAttachmentPixelFormat() raw.MTLPixelFormat {
-	return x.inner.StencilAttachmentPixelFormat()
+func (x *RenderPipelineDescriptor) StencilAttachmentPixelFormat() MTLPixelFormat {
+	return MTLPixelFormat(x.inner.StencilAttachmentPixelFormat())
 }
 
 // SetStencilAttachmentPixelFormat calls the underlying SetStencilAttachmentPixelFormat.
-func (x *RenderPipelineDescriptor) SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat) {
-	x.inner.SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat)
+func (x *RenderPipelineDescriptor) SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) {
+	x.inner.SetStencilAttachmentPixelFormat(raw.MTLPixelFormat(stencilAttachmentPixelFormat))
 }
 
 // InputPrimitiveTopology calls the underlying InputPrimitiveTopology.
-func (x *RenderPipelineDescriptor) InputPrimitiveTopology() raw.MTLPrimitiveTopologyClass {
-	return x.inner.InputPrimitiveTopology()
+func (x *RenderPipelineDescriptor) InputPrimitiveTopology() MTLPrimitiveTopologyClass {
+	return MTLPrimitiveTopologyClass(x.inner.InputPrimitiveTopology())
 }
 
 // SetInputPrimitiveTopology calls the underlying SetInputPrimitiveTopology.
-func (x *RenderPipelineDescriptor) SetInputPrimitiveTopology(inputPrimitiveTopology raw.MTLPrimitiveTopologyClass) {
-	x.inner.SetInputPrimitiveTopology(inputPrimitiveTopology)
+func (x *RenderPipelineDescriptor) SetInputPrimitiveTopology(inputPrimitiveTopology MTLPrimitiveTopologyClass) {
+	x.inner.SetInputPrimitiveTopology(raw.MTLPrimitiveTopologyClass(inputPrimitiveTopology))
 }
 
 // TessellationPartitionMode calls the underlying TessellationPartitionMode.
-func (x *RenderPipelineDescriptor) TessellationPartitionMode() raw.MTLTessellationPartitionMode {
-	return x.inner.TessellationPartitionMode()
+func (x *RenderPipelineDescriptor) TessellationPartitionMode() MTLTessellationPartitionMode {
+	return MTLTessellationPartitionMode(x.inner.TessellationPartitionMode())
 }
 
 // SetTessellationPartitionMode calls the underlying SetTessellationPartitionMode.
-func (x *RenderPipelineDescriptor) SetTessellationPartitionMode(tessellationPartitionMode raw.MTLTessellationPartitionMode) {
-	x.inner.SetTessellationPartitionMode(tessellationPartitionMode)
+func (x *RenderPipelineDescriptor) SetTessellationPartitionMode(tessellationPartitionMode MTLTessellationPartitionMode) {
+	x.inner.SetTessellationPartitionMode(raw.MTLTessellationPartitionMode(tessellationPartitionMode))
 }
 
 // MaxTessellationFactor calls the underlying MaxTessellationFactor.
@@ -388,43 +388,43 @@ func (x *RenderPipelineDescriptor) SetTessellationFactorScaleEnabled(tessellatio
 }
 
 // TessellationFactorFormat calls the underlying TessellationFactorFormat.
-func (x *RenderPipelineDescriptor) TessellationFactorFormat() raw.MTLTessellationFactorFormat {
-	return x.inner.TessellationFactorFormat()
+func (x *RenderPipelineDescriptor) TessellationFactorFormat() MTLTessellationFactorFormat {
+	return MTLTessellationFactorFormat(x.inner.TessellationFactorFormat())
 }
 
 // SetTessellationFactorFormat calls the underlying SetTessellationFactorFormat.
-func (x *RenderPipelineDescriptor) SetTessellationFactorFormat(tessellationFactorFormat raw.MTLTessellationFactorFormat) {
-	x.inner.SetTessellationFactorFormat(tessellationFactorFormat)
+func (x *RenderPipelineDescriptor) SetTessellationFactorFormat(tessellationFactorFormat MTLTessellationFactorFormat) {
+	x.inner.SetTessellationFactorFormat(raw.MTLTessellationFactorFormat(tessellationFactorFormat))
 }
 
 // TessellationControlPointIndexType calls the underlying TessellationControlPointIndexType.
-func (x *RenderPipelineDescriptor) TessellationControlPointIndexType() raw.MTLTessellationControlPointIndexType {
-	return x.inner.TessellationControlPointIndexType()
+func (x *RenderPipelineDescriptor) TessellationControlPointIndexType() MTLTessellationControlPointIndexType {
+	return MTLTessellationControlPointIndexType(x.inner.TessellationControlPointIndexType())
 }
 
 // SetTessellationControlPointIndexType calls the underlying SetTessellationControlPointIndexType.
-func (x *RenderPipelineDescriptor) SetTessellationControlPointIndexType(tessellationControlPointIndexType raw.MTLTessellationControlPointIndexType) {
-	x.inner.SetTessellationControlPointIndexType(tessellationControlPointIndexType)
+func (x *RenderPipelineDescriptor) SetTessellationControlPointIndexType(tessellationControlPointIndexType MTLTessellationControlPointIndexType) {
+	x.inner.SetTessellationControlPointIndexType(raw.MTLTessellationControlPointIndexType(tessellationControlPointIndexType))
 }
 
 // TessellationFactorStepFunction calls the underlying TessellationFactorStepFunction.
-func (x *RenderPipelineDescriptor) TessellationFactorStepFunction() raw.MTLTessellationFactorStepFunction {
-	return x.inner.TessellationFactorStepFunction()
+func (x *RenderPipelineDescriptor) TessellationFactorStepFunction() MTLTessellationFactorStepFunction {
+	return MTLTessellationFactorStepFunction(x.inner.TessellationFactorStepFunction())
 }
 
 // SetTessellationFactorStepFunction calls the underlying SetTessellationFactorStepFunction.
-func (x *RenderPipelineDescriptor) SetTessellationFactorStepFunction(tessellationFactorStepFunction raw.MTLTessellationFactorStepFunction) {
-	x.inner.SetTessellationFactorStepFunction(tessellationFactorStepFunction)
+func (x *RenderPipelineDescriptor) SetTessellationFactorStepFunction(tessellationFactorStepFunction MTLTessellationFactorStepFunction) {
+	x.inner.SetTessellationFactorStepFunction(raw.MTLTessellationFactorStepFunction(tessellationFactorStepFunction))
 }
 
 // TessellationOutputWindingOrder calls the underlying TessellationOutputWindingOrder.
-func (x *RenderPipelineDescriptor) TessellationOutputWindingOrder() raw.MTLWinding {
-	return x.inner.TessellationOutputWindingOrder()
+func (x *RenderPipelineDescriptor) TessellationOutputWindingOrder() MTLWinding {
+	return MTLWinding(x.inner.TessellationOutputWindingOrder())
 }
 
 // SetTessellationOutputWindingOrder calls the underlying SetTessellationOutputWindingOrder.
-func (x *RenderPipelineDescriptor) SetTessellationOutputWindingOrder(tessellationOutputWindingOrder raw.MTLWinding) {
-	x.inner.SetTessellationOutputWindingOrder(tessellationOutputWindingOrder)
+func (x *RenderPipelineDescriptor) SetTessellationOutputWindingOrder(tessellationOutputWindingOrder MTLWinding) {
+	x.inner.SetTessellationOutputWindingOrder(raw.MTLWinding(tessellationOutputWindingOrder))
 }
 
 // VertexBuffers calls the underlying VertexBuffers.
@@ -554,13 +554,13 @@ func (x *RenderPipelineDescriptor) SetMaxFragmentCallStackDepth(maxFragmentCallS
 }
 
 // ShaderValidation calls the underlying ShaderValidation.
-func (x *RenderPipelineDescriptor) ShaderValidation() raw.MTLShaderValidation {
-	return x.inner.ShaderValidation()
+func (x *RenderPipelineDescriptor) ShaderValidation() MTLShaderValidation {
+	return MTLShaderValidation(x.inner.ShaderValidation())
 }
 
 // SetShaderValidation calls the underlying SetShaderValidation.
-func (x *RenderPipelineDescriptor) SetShaderValidation(shaderValidation raw.MTLShaderValidation) {
-	x.inner.SetShaderValidation(shaderValidation)
+func (x *RenderPipelineDescriptor) SetShaderValidation(shaderValidation MTLShaderValidation) {
+	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 }
 
 // RenderPipelineDescriptorable is the interface implemented by [RenderPipelineDescriptor], for mocking and DI.
@@ -576,16 +576,16 @@ type RenderPipelineDescriptorable interface {
 	WithAlphaToOneEnabled(alphaToOneEnabled bool) *RenderPipelineDescriptor
 	WithRasterizationEnabled(rasterizationEnabled bool) *RenderPipelineDescriptor
 	WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *RenderPipelineDescriptor
-	WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat) *RenderPipelineDescriptor
-	WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat) *RenderPipelineDescriptor
-	WithInputPrimitiveTopology(inputPrimitiveTopology raw.MTLPrimitiveTopologyClass) *RenderPipelineDescriptor
-	WithTessellationPartitionMode(tessellationPartitionMode raw.MTLTessellationPartitionMode) *RenderPipelineDescriptor
+	WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) *RenderPipelineDescriptor
+	WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) *RenderPipelineDescriptor
+	WithInputPrimitiveTopology(inputPrimitiveTopology MTLPrimitiveTopologyClass) *RenderPipelineDescriptor
+	WithTessellationPartitionMode(tessellationPartitionMode MTLTessellationPartitionMode) *RenderPipelineDescriptor
 	WithMaxTessellationFactor(maxTessellationFactor uint) *RenderPipelineDescriptor
 	WithTessellationFactorScaleEnabled(tessellationFactorScaleEnabled bool) *RenderPipelineDescriptor
-	WithTessellationFactorFormat(tessellationFactorFormat raw.MTLTessellationFactorFormat) *RenderPipelineDescriptor
-	WithTessellationControlPointIndexType(tessellationControlPointIndexType raw.MTLTessellationControlPointIndexType) *RenderPipelineDescriptor
-	WithTessellationFactorStepFunction(tessellationFactorStepFunction raw.MTLTessellationFactorStepFunction) *RenderPipelineDescriptor
-	WithTessellationOutputWindingOrder(tessellationOutputWindingOrder raw.MTLWinding) *RenderPipelineDescriptor
+	WithTessellationFactorFormat(tessellationFactorFormat MTLTessellationFactorFormat) *RenderPipelineDescriptor
+	WithTessellationControlPointIndexType(tessellationControlPointIndexType MTLTessellationControlPointIndexType) *RenderPipelineDescriptor
+	WithTessellationFactorStepFunction(tessellationFactorStepFunction MTLTessellationFactorStepFunction) *RenderPipelineDescriptor
+	WithTessellationOutputWindingOrder(tessellationOutputWindingOrder MTLWinding) *RenderPipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *RenderPipelineDescriptor
 	WithVertexLinkedFunctions(vertexLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor
 	WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor
@@ -593,7 +593,7 @@ type RenderPipelineDescriptorable interface {
 	WithSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions bool) *RenderPipelineDescriptor
 	WithMaxVertexCallStackDepth(maxVertexCallStackDepth uint) *RenderPipelineDescriptor
 	WithMaxFragmentCallStackDepth(maxFragmentCallStackDepth uint) *RenderPipelineDescriptor
-	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *RenderPipelineDescriptor
+	WithShaderValidation(shaderValidation MTLShaderValidation) *RenderPipelineDescriptor
 	Reset()
 	Label() string
 	SetLabel(label string)
@@ -616,26 +616,26 @@ type RenderPipelineDescriptorable interface {
 	MaxVertexAmplificationCount() uint
 	SetMaxVertexAmplificationCount(maxVertexAmplificationCount uint)
 	ColorAttachments() *RenderPipelineColorAttachmentDescriptorArray
-	DepthAttachmentPixelFormat() raw.MTLPixelFormat
-	SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat raw.MTLPixelFormat)
-	StencilAttachmentPixelFormat() raw.MTLPixelFormat
-	SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat raw.MTLPixelFormat)
-	InputPrimitiveTopology() raw.MTLPrimitiveTopologyClass
-	SetInputPrimitiveTopology(inputPrimitiveTopology raw.MTLPrimitiveTopologyClass)
-	TessellationPartitionMode() raw.MTLTessellationPartitionMode
-	SetTessellationPartitionMode(tessellationPartitionMode raw.MTLTessellationPartitionMode)
+	DepthAttachmentPixelFormat() MTLPixelFormat
+	SetDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat)
+	StencilAttachmentPixelFormat() MTLPixelFormat
+	SetStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat)
+	InputPrimitiveTopology() MTLPrimitiveTopologyClass
+	SetInputPrimitiveTopology(inputPrimitiveTopology MTLPrimitiveTopologyClass)
+	TessellationPartitionMode() MTLTessellationPartitionMode
+	SetTessellationPartitionMode(tessellationPartitionMode MTLTessellationPartitionMode)
 	MaxTessellationFactor() uint
 	SetMaxTessellationFactor(maxTessellationFactor uint)
 	IsTessellationFactorScaleEnabled() bool
 	SetTessellationFactorScaleEnabled(tessellationFactorScaleEnabled bool)
-	TessellationFactorFormat() raw.MTLTessellationFactorFormat
-	SetTessellationFactorFormat(tessellationFactorFormat raw.MTLTessellationFactorFormat)
-	TessellationControlPointIndexType() raw.MTLTessellationControlPointIndexType
-	SetTessellationControlPointIndexType(tessellationControlPointIndexType raw.MTLTessellationControlPointIndexType)
-	TessellationFactorStepFunction() raw.MTLTessellationFactorStepFunction
-	SetTessellationFactorStepFunction(tessellationFactorStepFunction raw.MTLTessellationFactorStepFunction)
-	TessellationOutputWindingOrder() raw.MTLWinding
-	SetTessellationOutputWindingOrder(tessellationOutputWindingOrder raw.MTLWinding)
+	TessellationFactorFormat() MTLTessellationFactorFormat
+	SetTessellationFactorFormat(tessellationFactorFormat MTLTessellationFactorFormat)
+	TessellationControlPointIndexType() MTLTessellationControlPointIndexType
+	SetTessellationControlPointIndexType(tessellationControlPointIndexType MTLTessellationControlPointIndexType)
+	TessellationFactorStepFunction() MTLTessellationFactorStepFunction
+	SetTessellationFactorStepFunction(tessellationFactorStepFunction MTLTessellationFactorStepFunction)
+	TessellationOutputWindingOrder() MTLWinding
+	SetTessellationOutputWindingOrder(tessellationOutputWindingOrder MTLWinding)
 	VertexBuffers() *PipelineBufferDescriptorArray
 	FragmentBuffers() *PipelineBufferDescriptorArray
 	SupportIndirectCommandBuffers() bool
@@ -658,8 +658,8 @@ type RenderPipelineDescriptorable interface {
 	SetMaxVertexCallStackDepth(maxVertexCallStackDepth uint)
 	MaxFragmentCallStackDepth() uint
 	SetMaxFragmentCallStackDepth(maxFragmentCallStackDepth uint)
-	ShaderValidation() raw.MTLShaderValidation
-	SetShaderValidation(shaderValidation raw.MTLShaderValidation)
+	ShaderValidation() MTLShaderValidation
+	SetShaderValidation(shaderValidation MTLShaderValidation)
 }
 
 var _ RenderPipelineDescriptorable = (*RenderPipelineDescriptor)(nil)

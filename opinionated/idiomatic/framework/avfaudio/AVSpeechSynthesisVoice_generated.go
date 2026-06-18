@@ -65,13 +65,13 @@ func (x *SpeechSynthesisVoice) Name() string {
 }
 
 // Quality calls the underlying Quality.
-func (x *SpeechSynthesisVoice) Quality() raw.AVSpeechSynthesisVoiceQuality {
-	return x.inner.Quality()
+func (x *SpeechSynthesisVoice) Quality() AVSpeechSynthesisVoiceQuality {
+	return AVSpeechSynthesisVoiceQuality(x.inner.Quality())
 }
 
 // Gender calls the underlying Gender.
-func (x *SpeechSynthesisVoice) Gender() raw.AVSpeechSynthesisVoiceGender {
-	return x.inner.Gender()
+func (x *SpeechSynthesisVoice) Gender() AVSpeechSynthesisVoiceGender {
+	return AVSpeechSynthesisVoiceGender(x.inner.Gender())
 }
 
 // AudioFileSettings calls the underlying AudioFileSettings.
@@ -80,8 +80,8 @@ func (x *SpeechSynthesisVoice) AudioFileSettings() *foundation.NSDictionary[*fou
 }
 
 // VoiceTraits calls the underlying VoiceTraits.
-func (x *SpeechSynthesisVoice) VoiceTraits() raw.AVSpeechSynthesisVoiceTraits {
-	return x.inner.VoiceTraits()
+func (x *SpeechSynthesisVoice) VoiceTraits() AVSpeechSynthesisVoiceTraits {
+	return AVSpeechSynthesisVoiceTraits(x.inner.VoiceTraits())
 }
 
 // SpeechSynthesisVoiceable is the interface implemented by [SpeechSynthesisVoice], for mocking and DI.
@@ -90,10 +90,10 @@ type SpeechSynthesisVoiceable interface {
 	Language() string
 	Identifier() string
 	Name() string
-	Quality() raw.AVSpeechSynthesisVoiceQuality
-	Gender() raw.AVSpeechSynthesisVoiceGender
+	Quality() AVSpeechSynthesisVoiceQuality
+	Gender() AVSpeechSynthesisVoiceGender
 	AudioFileSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	VoiceTraits() raw.AVSpeechSynthesisVoiceTraits
+	VoiceTraits() AVSpeechSynthesisVoiceTraits
 }
 
 var _ SpeechSynthesisVoiceable = (*SpeechSynthesisVoice)(nil)

@@ -155,8 +155,8 @@ func (x *CNNNeuronGradient) WithDestinationImageAllocator(destinationImageAlloca
 }
 
 // NeuronType calls the underlying NeuronType.
-func (x *CNNNeuronGradient) NeuronType() raw.MPSCNNNeuronType {
-	return x.inner.NeuronType()
+func (x *CNNNeuronGradient) NeuronType() MPSCNNNeuronType {
+	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
 // A calls the underlying A.
@@ -208,7 +208,7 @@ type CNNNeuronGradientable interface {
 	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNNeuronGradient
 	WithPadding(padding raw.MPSNNPadding) *CNNNeuronGradient
 	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronGradient
-	NeuronType() raw.MPSCNNNeuronType
+	NeuronType() MPSCNNNeuronType
 	A() float32
 	B() float32
 	C() float32

@@ -38,8 +38,8 @@ func NewScannerDevice() *ScannerDevice {
 }
 
 // WithTransferMode sets the transferMode property and returns the receiver for chaining.
-func (x *ScannerDevice) WithTransferMode(transferMode raw.ICScannerTransferMode) *ScannerDevice {
-	x.inner.SetTransferMode(transferMode)
+func (x *ScannerDevice) WithTransferMode(transferMode ICScannerTransferMode) *ScannerDevice {
+	x.inner.SetTransferMode(raw.ICScannerTransferMode(transferMode))
 	return x
 }
 
@@ -61,8 +61,8 @@ func (x *ScannerDevice) RequestOpenSessionWithCredentialsPassword(username strin
 }
 
 // RequestSelectFunctionalUnit calls the underlying RequestSelectFunctionalUnit.
-func (x *ScannerDevice) RequestSelectFunctionalUnit(type_ raw.ICScannerFunctionalUnitType) {
-	x.inner.RequestSelectFunctionalUnit(type_)
+func (x *ScannerDevice) RequestSelectFunctionalUnit(type_ ICScannerFunctionalUnitType) {
+	x.inner.RequestSelectFunctionalUnit(raw.ICScannerFunctionalUnitType(type_))
 }
 
 // RequestOverviewScan calls the underlying RequestOverviewScan.
@@ -91,13 +91,13 @@ func (x *ScannerDevice) SelectedFunctionalUnit() unsafe.Pointer {
 }
 
 // TransferMode calls the underlying TransferMode.
-func (x *ScannerDevice) TransferMode() raw.ICScannerTransferMode {
-	return x.inner.TransferMode()
+func (x *ScannerDevice) TransferMode() ICScannerTransferMode {
+	return ICScannerTransferMode(x.inner.TransferMode())
 }
 
 // SetTransferMode calls the underlying SetTransferMode.
-func (x *ScannerDevice) SetTransferMode(transferMode raw.ICScannerTransferMode) {
-	x.inner.SetTransferMode(transferMode)
+func (x *ScannerDevice) SetTransferMode(transferMode ICScannerTransferMode) {
+	x.inner.SetTransferMode(raw.ICScannerTransferMode(transferMode))
 }
 
 // MaxMemoryBandSize calls the underlying MaxMemoryBandSize.
@@ -155,18 +155,18 @@ func (x *ScannerDevice) asDevice() *raw.ICDevice { return &x.inner.ICDevice }
 // ScannerDeviceable is the interface implemented by [ScannerDevice], for mocking and DI.
 type ScannerDeviceable interface {
 	Unwrap() *raw.ICScannerDevice
-	WithTransferMode(transferMode raw.ICScannerTransferMode) *ScannerDevice
+	WithTransferMode(transferMode ICScannerTransferMode) *ScannerDevice
 	WithMaxMemoryBandSize(maxMemoryBandSize uint) *ScannerDevice
 	WithDelegate(delegate raw.ICDeviceDelegate) *ScannerDevice
 	RequestOpenSessionWithCredentialsPassword(username string, password string)
-	RequestSelectFunctionalUnit(type_ raw.ICScannerFunctionalUnitType)
+	RequestSelectFunctionalUnit(type_ ICScannerFunctionalUnitType)
 	RequestOverviewScan()
 	RequestScan()
 	CancelScan()
 	AvailableFunctionalUnitTypes() unsafe.Pointer
 	SelectedFunctionalUnit() unsafe.Pointer
-	TransferMode() raw.ICScannerTransferMode
-	SetTransferMode(transferMode raw.ICScannerTransferMode)
+	TransferMode() ICScannerTransferMode
+	SetTransferMode(transferMode ICScannerTransferMode)
 	MaxMemoryBandSize() uint
 	SetMaxMemoryBandSize(maxMemoryBandSize uint)
 	DownloadsDirectory() unsafe.Pointer

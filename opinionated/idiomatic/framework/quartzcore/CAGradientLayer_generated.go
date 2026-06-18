@@ -268,8 +268,8 @@ func (x *GradientLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *Gradi
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *GradientLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *GradientLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *GradientLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *GradientLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -286,8 +286,8 @@ func (x *GradientLayer) WithCornerRadius(cornerRadius float64) *GradientLayer {
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *GradientLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *GradientLayer {
-	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+func (x *GradientLayer) WithMaskedCorners(maskedCorners CACornerMask) *GradientLayer {
+	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -352,8 +352,8 @@ func (x *GradientLayer) WithShadowRadius(shadowRadius float64) *GradientLayer {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *GradientLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *GradientLayer {
-	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+func (x *GradientLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *GradientLayer {
+	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -504,10 +504,10 @@ type GradientLayerable interface {
 	WithOpaque(opaque bool) *GradientLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *GradientLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *GradientLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *GradientLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *GradientLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *GradientLayer
 	WithCornerRadius(cornerRadius float64) *GradientLayer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *GradientLayer
+	WithMaskedCorners(maskedCorners CACornerMask) *GradientLayer
 	WithCornerCurve(cornerCurve *foundation.NSString) *GradientLayer
 	WithBorderWidth(borderWidth float64) *GradientLayer
 	WithOpacity(opacity float32) *GradientLayer
@@ -518,7 +518,7 @@ type GradientLayerable interface {
 	WithShadowOpacity(shadowOpacity float32) *GradientLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *GradientLayer
 	WithShadowRadius(shadowRadius float64) *GradientLayer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *GradientLayer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *GradientLayer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *GradientLayer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *GradientLayer
 	WithName(name string) *GradientLayer

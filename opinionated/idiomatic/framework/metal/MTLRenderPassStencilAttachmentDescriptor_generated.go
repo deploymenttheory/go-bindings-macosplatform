@@ -44,8 +44,8 @@ func (x *RenderPassStencilAttachmentDescriptor) WithClearStencil(clearStencil ui
 }
 
 // WithStencilResolveFilter sets the stencilResolveFilter property and returns the receiver for chaining.
-func (x *RenderPassStencilAttachmentDescriptor) WithStencilResolveFilter(stencilResolveFilter raw.MTLMultisampleStencilResolveFilter) *RenderPassStencilAttachmentDescriptor {
-	x.inner.SetStencilResolveFilter(stencilResolveFilter)
+func (x *RenderPassStencilAttachmentDescriptor) WithStencilResolveFilter(stencilResolveFilter MTLMultisampleStencilResolveFilter) *RenderPassStencilAttachmentDescriptor {
+	x.inner.SetStencilResolveFilter(raw.MTLMultisampleStencilResolveFilter(stencilResolveFilter))
 	return x
 }
 
@@ -98,20 +98,20 @@ func (x *RenderPassStencilAttachmentDescriptor) WithResolveDepthPlane(resolveDep
 }
 
 // WithLoadAction sets the loadAction property and returns the receiver for chaining.
-func (x *RenderPassStencilAttachmentDescriptor) WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassStencilAttachmentDescriptor {
-	x.inner.MTLRenderPassAttachmentDescriptor.SetLoadAction(loadAction)
+func (x *RenderPassStencilAttachmentDescriptor) WithLoadAction(loadAction MTLLoadAction) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetLoadAction(raw.MTLLoadAction(loadAction))
 	return x
 }
 
 // WithStoreAction sets the storeAction property and returns the receiver for chaining.
-func (x *RenderPassStencilAttachmentDescriptor) WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassStencilAttachmentDescriptor {
-	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreAction(storeAction)
+func (x *RenderPassStencilAttachmentDescriptor) WithStoreAction(storeAction MTLStoreAction) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreAction(raw.MTLStoreAction(storeAction))
 	return x
 }
 
 // WithStoreActionOptions sets the storeActionOptions property and returns the receiver for chaining.
-func (x *RenderPassStencilAttachmentDescriptor) WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassStencilAttachmentDescriptor {
-	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreActionOptions(storeActionOptions)
+func (x *RenderPassStencilAttachmentDescriptor) WithStoreActionOptions(storeActionOptions MTLStoreActionOptions) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreActionOptions(raw.MTLStoreActionOptions(storeActionOptions))
 	return x
 }
 
@@ -126,13 +126,13 @@ func (x *RenderPassStencilAttachmentDescriptor) SetClearStencil(clearStencil uin
 }
 
 // StencilResolveFilter calls the underlying StencilResolveFilter.
-func (x *RenderPassStencilAttachmentDescriptor) StencilResolveFilter() raw.MTLMultisampleStencilResolveFilter {
-	return x.inner.StencilResolveFilter()
+func (x *RenderPassStencilAttachmentDescriptor) StencilResolveFilter() MTLMultisampleStencilResolveFilter {
+	return MTLMultisampleStencilResolveFilter(x.inner.StencilResolveFilter())
 }
 
 // SetStencilResolveFilter calls the underlying SetStencilResolveFilter.
-func (x *RenderPassStencilAttachmentDescriptor) SetStencilResolveFilter(stencilResolveFilter raw.MTLMultisampleStencilResolveFilter) {
-	x.inner.SetStencilResolveFilter(stencilResolveFilter)
+func (x *RenderPassStencilAttachmentDescriptor) SetStencilResolveFilter(stencilResolveFilter MTLMultisampleStencilResolveFilter) {
+	x.inner.SetStencilResolveFilter(raw.MTLMultisampleStencilResolveFilter(stencilResolveFilter))
 }
 
 func (x *RenderPassStencilAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor {
@@ -143,7 +143,7 @@ func (x *RenderPassStencilAttachmentDescriptor) asRenderPassAttachmentDescriptor
 type RenderPassStencilAttachmentDescriptorable interface {
 	Unwrap() *raw.MTLRenderPassStencilAttachmentDescriptor
 	WithClearStencil(clearStencil uint32) *RenderPassStencilAttachmentDescriptor
-	WithStencilResolveFilter(stencilResolveFilter raw.MTLMultisampleStencilResolveFilter) *RenderPassStencilAttachmentDescriptor
+	WithStencilResolveFilter(stencilResolveFilter MTLMultisampleStencilResolveFilter) *RenderPassStencilAttachmentDescriptor
 	WithTexture(texture raw.MTLTexture) *RenderPassStencilAttachmentDescriptor
 	WithLevel(level uint) *RenderPassStencilAttachmentDescriptor
 	WithSlice(slice uint) *RenderPassStencilAttachmentDescriptor
@@ -152,13 +152,13 @@ type RenderPassStencilAttachmentDescriptorable interface {
 	WithResolveLevel(resolveLevel uint) *RenderPassStencilAttachmentDescriptor
 	WithResolveSlice(resolveSlice uint) *RenderPassStencilAttachmentDescriptor
 	WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassStencilAttachmentDescriptor
-	WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassStencilAttachmentDescriptor
-	WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassStencilAttachmentDescriptor
-	WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassStencilAttachmentDescriptor
+	WithLoadAction(loadAction MTLLoadAction) *RenderPassStencilAttachmentDescriptor
+	WithStoreAction(storeAction MTLStoreAction) *RenderPassStencilAttachmentDescriptor
+	WithStoreActionOptions(storeActionOptions MTLStoreActionOptions) *RenderPassStencilAttachmentDescriptor
 	ClearStencil() uint32
 	SetClearStencil(clearStencil uint32)
-	StencilResolveFilter() raw.MTLMultisampleStencilResolveFilter
-	SetStencilResolveFilter(stencilResolveFilter raw.MTLMultisampleStencilResolveFilter)
+	StencilResolveFilter() MTLMultisampleStencilResolveFilter
+	SetStencilResolveFilter(stencilResolveFilter MTLMultisampleStencilResolveFilter)
 }
 
 var _ RenderPassStencilAttachmentDescriptorable = (*RenderPassStencilAttachmentDescriptor)(nil)

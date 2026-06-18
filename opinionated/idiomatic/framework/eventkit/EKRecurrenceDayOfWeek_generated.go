@@ -30,15 +30,15 @@ func RecurrenceDayOfWeekFromID(id objc.ID) *RecurrenceDayOfWeek {
 }
 
 // NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber creates a new [RecurrenceDayOfWeek].
-func NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber(dayOfTheWeek raw.EKWeekday, weekNumber int) *RecurrenceDayOfWeek {
+func NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber(dayOfTheWeek EKWeekday, weekNumber int) *RecurrenceDayOfWeek {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKRecurrenceDayOfWeek")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDayOfTheWeek:weekNumber:"), dayOfTheWeek, weekNumber)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDayOfTheWeek:weekNumber:"), raw.EKWeekday(dayOfTheWeek), weekNumber)
 	return &RecurrenceDayOfWeek{inner: raw.EKRecurrenceDayOfWeekFromID(_id)}
 }
 
 // DayOfTheWeek calls the underlying DayOfTheWeek.
-func (x *RecurrenceDayOfWeek) DayOfTheWeek() raw.EKWeekday {
-	return x.inner.DayOfTheWeek()
+func (x *RecurrenceDayOfWeek) DayOfTheWeek() EKWeekday {
+	return EKWeekday(x.inner.DayOfTheWeek())
 }
 
 // WeekNumber calls the underlying WeekNumber.
@@ -49,7 +49,7 @@ func (x *RecurrenceDayOfWeek) WeekNumber() int {
 // RecurrenceDayOfWeekable is the interface implemented by [RecurrenceDayOfWeek], for mocking and DI.
 type RecurrenceDayOfWeekable interface {
 	Unwrap() *raw.EKRecurrenceDayOfWeek
-	DayOfTheWeek() raw.EKWeekday
+	DayOfTheWeek() EKWeekday
 	WeekNumber() int
 }
 

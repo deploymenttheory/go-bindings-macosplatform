@@ -32,15 +32,15 @@ func ProgressReportingCapabilityFromID(id objc.ID) *ProgressReportingCapability 
 }
 
 // NewProgressReportingCapabilityWithKindDetails creates a new [ProgressReportingCapability].
-func NewProgressReportingCapabilityWithKindDetails(kind raw.CLSProgressReportingCapabilityKind, details string) *ProgressReportingCapability {
+func NewProgressReportingCapabilityWithKindDetails(kind CLSProgressReportingCapabilityKind, details string) *ProgressReportingCapability {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSProgressReportingCapability")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:details:"), kind, foundation.NSStringStringWithUTF8String(details).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:details:"), raw.CLSProgressReportingCapabilityKind(kind), foundation.NSStringStringWithUTF8String(details).Ptr())
 	return &ProgressReportingCapability{inner: raw.CLSProgressReportingCapabilityFromID(_id)}
 }
 
 // Kind calls the underlying Kind.
-func (x *ProgressReportingCapability) Kind() raw.CLSProgressReportingCapabilityKind {
-	return x.inner.Kind()
+func (x *ProgressReportingCapability) Kind() CLSProgressReportingCapabilityKind {
+	return CLSProgressReportingCapabilityKind(x.inner.Kind())
 }
 
 // Details calls the underlying Details.
@@ -57,7 +57,7 @@ func (x *ProgressReportingCapability) asObject() *raw.CLSObject { return &x.inne
 // ProgressReportingCapabilityable is the interface implemented by [ProgressReportingCapability], for mocking and DI.
 type ProgressReportingCapabilityable interface {
 	Unwrap() *raw.CLSProgressReportingCapability
-	Kind() raw.CLSProgressReportingCapabilityKind
+	Kind() CLSProgressReportingCapabilityKind
 	Details() string
 }
 

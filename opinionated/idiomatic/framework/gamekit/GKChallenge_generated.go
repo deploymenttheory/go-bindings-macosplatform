@@ -61,8 +61,8 @@ func (x *Challenge) ReceivingPlayer() *Player {
 }
 
 // State calls the underlying State.
-func (x *Challenge) State() raw.GKChallengeState {
-	return x.inner.State()
+func (x *Challenge) State() GKChallengeState {
+	return GKChallengeState(x.inner.State())
 }
 
 // IssueDate calls the underlying IssueDate.
@@ -110,7 +110,7 @@ type Challengeable interface {
 	Decline()
 	IssuingPlayer() *Player
 	ReceivingPlayer() *Player
-	State() raw.GKChallengeState
+	State() GKChallengeState
 	IssueDate() *foundation.NSDate
 	CompletionDate() *foundation.NSDate
 	Message() string

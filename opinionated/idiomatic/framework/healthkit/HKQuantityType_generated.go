@@ -41,8 +41,8 @@ func (x *QuantityType) IsCompatibleWithUnit(unit *raw.HKUnit) bool {
 }
 
 // AggregationStyle calls the underlying AggregationStyle.
-func (x *QuantityType) AggregationStyle() raw.HKQuantityAggregationStyle {
-	return x.inner.AggregationStyle()
+func (x *QuantityType) AggregationStyle() HKQuantityAggregationStyle {
+	return HKQuantityAggregationStyle(x.inner.AggregationStyle())
 }
 
 func (x *QuantityType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
@@ -53,7 +53,7 @@ func (x *QuantityType) asObjectType() *raw.HKObjectType { return &x.inner.HKSamp
 type QuantityTypeable interface {
 	Unwrap() *raw.HKQuantityType
 	IsCompatibleWithUnit(unit *raw.HKUnit) bool
-	AggregationStyle() raw.HKQuantityAggregationStyle
+	AggregationStyle() HKQuantityAggregationStyle
 }
 
 var _ QuantityTypeable = (*QuantityType)(nil)

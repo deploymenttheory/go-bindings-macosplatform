@@ -54,9 +54,9 @@ func NewBitmapImageRepWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSampl
 }
 
 // NewBitmapImageRepWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBitmapFormatBytesPerRowBitsPerPixel creates a new [BitmapImageRep].
-func NewBitmapImageRepWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBitmapFormatBytesPerRowBitsPerPixel(planes *uint8, width int, height int, bps int, spp int, alpha bool, isPlanar bool, colorSpaceName *foundation.NSString, bitmapFormat raw.NSBitmapFormat, rBytes int, pBits int) *BitmapImageRep {
+func NewBitmapImageRepWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBitmapFormatBytesPerRowBitsPerPixel(planes *uint8, width int, height int, bps int, spp int, alpha bool, isPlanar bool, colorSpaceName *foundation.NSString, bitmapFormat NSBitmapFormat, rBytes int, pBits int) *BitmapImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBitmapImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBitmapDataPlanes:pixelsWide:pixelsHigh:bitsPerSample:samplesPerPixel:hasAlpha:isPlanar:colorSpaceName:bitmapFormat:bytesPerRow:bitsPerPixel:"), planes, width, height, bps, spp, alpha, isPlanar, colorSpaceName.Ptr(), bitmapFormat, rBytes, pBits)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBitmapDataPlanes:pixelsWide:pixelsHigh:bitsPerSample:samplesPerPixel:hasAlpha:isPlanar:colorSpaceName:bitmapFormat:bytesPerRow:bitsPerPixel:"), planes, width, height, bps, spp, alpha, isPlanar, colorSpaceName.Ptr(), raw.NSBitmapFormat(bitmapFormat), rBytes, pBits)
 	return &BitmapImageRep{inner: raw.NSBitmapImageRepFromID(_id)}
 }
 
@@ -124,8 +124,8 @@ func (x *BitmapImageRep) WithPixelsHigh(pixelsHigh int) *BitmapImageRep {
 }
 
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *BitmapImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *BitmapImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+func (x *BitmapImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *BitmapImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
@@ -140,18 +140,18 @@ func (x *BitmapImageRep) GetCompressionFactor(compression *raw.NSTIFFCompression
 }
 
 // SetCompressionFactor calls the underlying SetCompressionFactor.
-func (x *BitmapImageRep) SetCompressionFactor(compression raw.NSTIFFCompression, factor float32) {
-	x.inner.SetCompressionFactor(compression, factor)
+func (x *BitmapImageRep) SetCompressionFactor(compression NSTIFFCompression, factor float32) {
+	x.inner.SetCompressionFactor(raw.NSTIFFCompression(compression), factor)
 }
 
 // TIFFRepresentationUsingCompressionFactor calls the underlying TIFFRepresentationUsingCompressionFactor.
-func (x *BitmapImageRep) TIFFRepresentationUsingCompressionFactor(comp raw.NSTIFFCompression, factor float32) *foundation.NSData {
-	return x.inner.TIFFRepresentationUsingCompressionFactor(comp, factor)
+func (x *BitmapImageRep) TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression, factor float32) *foundation.NSData {
+	return x.inner.TIFFRepresentationUsingCompressionFactor(raw.NSTIFFCompression(comp), factor)
 }
 
 // CanBeCompressedUsing calls the underlying CanBeCompressedUsing.
-func (x *BitmapImageRep) CanBeCompressedUsing(compression raw.NSTIFFCompression) bool {
-	return x.inner.CanBeCompressedUsing(compression)
+func (x *BitmapImageRep) CanBeCompressedUsing(compression NSTIFFCompression) bool {
+	return x.inner.CanBeCompressedUsing(raw.NSTIFFCompression(compression))
 }
 
 // ColorizeByMappingGrayToColorBlackMappingWhiteMapping calls the underlying ColorizeByMappingGrayToColorBlackMappingWhiteMapping.
@@ -189,8 +189,8 @@ func (x *BitmapImageRep) SetPixelAtXY(p *uint, x_ int, y int) {
 }
 
 // BitmapImageRepByConvertingToColorSpaceRenderingIntent calls the underlying BitmapImageRepByConvertingToColorSpaceRenderingIntent.
-func (x *BitmapImageRep) BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace *raw.NSColorSpace, renderingIntent raw.NSColorRenderingIntent) *BitmapImageRep {
-	_r := x.inner.BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace, renderingIntent)
+func (x *BitmapImageRep) BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace *raw.NSColorSpace, renderingIntent NSColorRenderingIntent) *BitmapImageRep {
+	_r := x.inner.BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace, raw.NSColorRenderingIntent(renderingIntent))
 	if _r == nil {
 		return nil
 	}
@@ -242,8 +242,8 @@ func (x *BitmapImageRep) NumberOfPlanes() int {
 }
 
 // BitmapFormat calls the underlying BitmapFormat.
-func (x *BitmapImageRep) BitmapFormat() raw.NSBitmapFormat {
-	return x.inner.BitmapFormat()
+func (x *BitmapImageRep) BitmapFormat() NSBitmapFormat {
+	return NSBitmapFormat(x.inner.BitmapFormat())
 }
 
 // TIFFRepresentation calls the underlying TIFFRepresentation.
@@ -266,8 +266,8 @@ func (x *BitmapImageRep) ColorSpace() *ColorSpace {
 }
 
 // RepresentationUsingTypeProperties calls the underlying RepresentationUsingTypeProperties.
-func (x *BitmapImageRep) RepresentationUsingTypeProperties(storageType raw.NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
-	return x.inner.RepresentationUsingTypeProperties(storageType, properties)
+func (x *BitmapImageRep) RepresentationUsingTypeProperties(storageType NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
+	return x.inner.RepresentationUsingTypeProperties(raw.NSBitmapImageFileType(storageType), properties)
 }
 
 // SetPropertyWithValue calls the underlying SetPropertyWithValue.
@@ -292,19 +292,19 @@ type BitmapImageRepable interface {
 	WithBitsPerSample(bitsPerSample int) *BitmapImageRep
 	WithPixelsWide(pixelsWide int) *BitmapImageRep
 	WithPixelsHigh(pixelsHigh int) *BitmapImageRep
-	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *BitmapImageRep
+	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *BitmapImageRep
 	GetBitmapDataPlanes(data *uint8)
 	GetCompressionFactor(compression *raw.NSTIFFCompression, factor *float32)
-	SetCompressionFactor(compression raw.NSTIFFCompression, factor float32)
-	TIFFRepresentationUsingCompressionFactor(comp raw.NSTIFFCompression, factor float32) *foundation.NSData
-	CanBeCompressedUsing(compression raw.NSTIFFCompression) bool
+	SetCompressionFactor(compression NSTIFFCompression, factor float32)
+	TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression, factor float32) *foundation.NSData
+	CanBeCompressedUsing(compression NSTIFFCompression) bool
 	ColorizeByMappingGrayToColorBlackMappingWhiteMapping(midPoint float64, midPointColor *raw.NSColor, shadowColor *raw.NSColor, lightColor *raw.NSColor)
 	IncrementalLoadFromDataComplete(data *foundation.NSData, complete bool) int
 	SetColorAtXY(color *raw.NSColor, x_ int, y int)
 	ColorAtXY(x_ int, y int) *Color
 	GetPixelAtXY(p *uint, x_ int, y int)
 	SetPixelAtXY(p *uint, x_ int, y int)
-	BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace *raw.NSColorSpace, renderingIntent raw.NSColorRenderingIntent) *BitmapImageRep
+	BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace *raw.NSColorSpace, renderingIntent NSColorRenderingIntent) *BitmapImageRep
 	BitmapImageRepByRetaggingWithColorSpace(newSpace *raw.NSColorSpace) *BitmapImageRep
 	BitmapData() unsafe.Pointer
 	IsPlanar() bool
@@ -313,11 +313,11 @@ type BitmapImageRepable interface {
 	BytesPerRow() int
 	BytesPerPlane() int
 	NumberOfPlanes() int
-	BitmapFormat() raw.NSBitmapFormat
+	BitmapFormat() NSBitmapFormat
 	TIFFRepresentation() *foundation.NSData
 	CGImage() unsafe.Pointer
 	ColorSpace() *ColorSpace
-	RepresentationUsingTypeProperties(storageType raw.NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData
+	RepresentationUsingTypeProperties(storageType NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData
 	SetPropertyWithValue(property *foundation.NSString, value objc.ID)
 	ValueForProperty(property *foundation.NSString) objc.ID
 }

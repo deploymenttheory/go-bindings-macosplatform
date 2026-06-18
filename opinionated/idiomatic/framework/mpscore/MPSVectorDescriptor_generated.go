@@ -42,8 +42,8 @@ func (x *VectorDescriptor) WithLength(length uint) *VectorDescriptor {
 }
 
 // WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *VectorDescriptor) WithDataType(dataType raw.MPSDataType) *VectorDescriptor {
-	x.inner.SetDataType(dataType)
+func (x *VectorDescriptor) WithDataType(dataType MPSDataType) *VectorDescriptor {
+	x.inner.SetDataType(raw.MPSDataType(dataType))
 	return x
 }
 
@@ -63,13 +63,13 @@ func (x *VectorDescriptor) Vectors() uint {
 }
 
 // DataType calls the underlying DataType.
-func (x *VectorDescriptor) DataType() raw.MPSDataType {
-	return x.inner.DataType()
+func (x *VectorDescriptor) DataType() MPSDataType {
+	return MPSDataType(x.inner.DataType())
 }
 
 // SetDataType calls the underlying SetDataType.
-func (x *VectorDescriptor) SetDataType(dataType raw.MPSDataType) {
-	x.inner.SetDataType(dataType)
+func (x *VectorDescriptor) SetDataType(dataType MPSDataType) {
+	x.inner.SetDataType(raw.MPSDataType(dataType))
 }
 
 // VectorBytes calls the underlying VectorBytes.
@@ -81,12 +81,12 @@ func (x *VectorDescriptor) VectorBytes() uint {
 type VectorDescriptorable interface {
 	Unwrap() *raw.MPSVectorDescriptor
 	WithLength(length uint) *VectorDescriptor
-	WithDataType(dataType raw.MPSDataType) *VectorDescriptor
+	WithDataType(dataType MPSDataType) *VectorDescriptor
 	Length() uint
 	SetLength(length uint)
 	Vectors() uint
-	DataType() raw.MPSDataType
-	SetDataType(dataType raw.MPSDataType)
+	DataType() MPSDataType
+	SetDataType(dataType MPSDataType)
 	VectorBytes() uint
 }
 

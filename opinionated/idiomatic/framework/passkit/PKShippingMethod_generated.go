@@ -68,8 +68,8 @@ func (x *ShippingMethod) WithAmount(amount *foundation.NSDecimalNumber) *Shippin
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *ShippingMethod) WithType(type_ raw.PKPaymentSummaryItemType) *ShippingMethod {
-	x.inner.PKPaymentSummaryItem.SetType(type_)
+func (x *ShippingMethod) WithType(type_ PKPaymentSummaryItemType) *ShippingMethod {
+	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))
 	return x
 }
 
@@ -127,7 +127,7 @@ type ShippingMethodable interface {
 	WithDateComponentsRange(dateComponentsRange *DateComponentsRange) *ShippingMethod
 	WithLabel(label string) *ShippingMethod
 	WithAmount(amount *foundation.NSDecimalNumber) *ShippingMethod
-	WithType(type_ raw.PKPaymentSummaryItemType) *ShippingMethod
+	WithType(type_ PKPaymentSummaryItemType) *ShippingMethod
 	Identifier() string
 	SetIdentifier(identifier string)
 	Detail() string

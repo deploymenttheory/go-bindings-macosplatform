@@ -46,8 +46,8 @@ func (x *MedicationDoseEvent) MedicationDoseEventType() *MedicationDoseEventType
 }
 
 // ScheduleType calls the underlying ScheduleType.
-func (x *MedicationDoseEvent) ScheduleType() raw.HKMedicationDoseEventScheduleType {
-	return x.inner.ScheduleType()
+func (x *MedicationDoseEvent) ScheduleType() HKMedicationDoseEventScheduleType {
+	return HKMedicationDoseEventScheduleType(x.inner.ScheduleType())
 }
 
 // MedicationConceptIdentifier calls the underlying MedicationConceptIdentifier.
@@ -75,8 +75,8 @@ func (x *MedicationDoseEvent) DoseQuantity() *foundation.NSNumber {
 }
 
 // LogStatus calls the underlying LogStatus.
-func (x *MedicationDoseEvent) LogStatus() raw.HKMedicationDoseEventLogStatus {
-	return x.inner.LogStatus()
+func (x *MedicationDoseEvent) LogStatus() HKMedicationDoseEventLogStatus {
+	return HKMedicationDoseEventLogStatus(x.inner.LogStatus())
 }
 
 // Unit calls the underlying Unit.
@@ -96,12 +96,12 @@ func (x *MedicationDoseEvent) asObject() *raw.HKObject { return &x.inner.HKSampl
 type MedicationDoseEventable interface {
 	Unwrap() *raw.HKMedicationDoseEvent
 	MedicationDoseEventType() *MedicationDoseEventType
-	ScheduleType() raw.HKMedicationDoseEventScheduleType
+	ScheduleType() HKMedicationDoseEventScheduleType
 	MedicationConceptIdentifier() *HealthConceptIdentifier
 	ScheduledDate() *foundation.NSDate
 	ScheduledDoseQuantity() *foundation.NSNumber
 	DoseQuantity() *foundation.NSNumber
-	LogStatus() raw.HKMedicationDoseEventLogStatus
+	LogStatus() HKMedicationDoseEventLogStatus
 	Unit() *Unit
 }
 

@@ -82,8 +82,8 @@ func (x *Asset) ProvidesPreciseDurationAndTiming() bool {
 }
 
 // ReferenceRestrictions calls the underlying ReferenceRestrictions.
-func (x *Asset) ReferenceRestrictions() raw.AVAssetReferenceRestrictions {
-	return x.inner.ReferenceRestrictions()
+func (x *Asset) ReferenceRestrictions() AVAssetReferenceRestrictions {
+	return AVAssetReferenceRestrictions(x.inner.ReferenceRestrictions())
 }
 
 // TrackWithTrackID calls the underlying TrackWithTrackID.
@@ -442,7 +442,7 @@ type Assetable interface {
 	MinimumTimeOffsetFromLive() coremedia.CMTime
 	CancelLoading()
 	ProvidesPreciseDurationAndTiming() bool
-	ReferenceRestrictions() raw.AVAssetReferenceRestrictions
+	ReferenceRestrictions() AVAssetReferenceRestrictions
 	TrackWithTrackID(trackID int32) *AssetTrack
 	LoadTrackWithTrackIDCompletionHandler(trackID int32, completionHandler func(unsafe.Pointer, unsafe.Pointer))
 	TracksWithMediaType(mediaType *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack]

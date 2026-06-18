@@ -49,8 +49,8 @@ func (x *ControllerAxisInput) WithValue(value float32) *ControllerAxisInput {
 }
 
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerAxisInput {
-	x.inner.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+func (x *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerAxisInput {
+	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
@@ -107,7 +107,7 @@ type ControllerAxisInputable interface {
 	Unwrap() *raw.GCControllerAxisInput
 	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerAxisInput, float32)) *ControllerAxisInput
 	WithValue(value float32) *ControllerAxisInput
-	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerAxisInput
+	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerAxisInput
 	WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput
 	WithLocalizedName(localizedName string) *ControllerAxisInput
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerAxisInput

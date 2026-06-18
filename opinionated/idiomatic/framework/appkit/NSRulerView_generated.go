@@ -43,9 +43,9 @@ func NewRulerViewWithCoder(coder *foundation.NSCoder) *RulerView {
 }
 
 // NewRulerViewWithScrollViewOrientation creates a new [RulerView].
-func NewRulerViewWithScrollViewOrientation(scrollView *raw.NSScrollView, orientation raw.NSRulerOrientation) *RulerView {
+func NewRulerViewWithScrollViewOrientation(scrollView *raw.NSScrollView, orientation NSRulerOrientation) *RulerView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRulerView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScrollView:orientation:"), scrollView.Ptr(), orientation)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScrollView:orientation:"), scrollView.Ptr(), raw.NSRulerOrientation(orientation))
 	return &RulerView{inner: raw.NSRulerViewFromID(_id)}
 }
 
@@ -56,8 +56,8 @@ func (x *RulerView) WithScrollView(scrollView *ScrollView) *RulerView {
 }
 
 // WithOrientation sets the orientation property and returns the receiver for chaining.
-func (x *RulerView) WithOrientation(orientation raw.NSRulerOrientation) *RulerView {
-	x.inner.SetOrientation(orientation)
+func (x *RulerView) WithOrientation(orientation NSRulerOrientation) *RulerView {
+	x.inner.SetOrientation(raw.NSRulerOrientation(orientation))
 	return x
 }
 
@@ -158,8 +158,8 @@ func (x *RulerView) WithAutoresizesSubviews(autoresizesSubviews bool) *RulerView
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *RulerView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *RulerView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *RulerView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *RulerView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -218,14 +218,14 @@ func (x *RulerView) WithWantsRestingTouches(wantsRestingTouches bool) *RulerView
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *RulerView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *RulerView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *RulerView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *RulerView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *RulerView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *RulerView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *RulerView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *RulerView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -332,8 +332,8 @@ func (x *RulerView) WithToolTip(toolTip string) *RulerView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *RulerView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *RulerView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *RulerView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *RulerView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -350,8 +350,8 @@ func (x *RulerView) WithNextKeyView(nextKeyView ViewProvider) *RulerView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *RulerView) WithFocusRingType(focusRingType raw.NSFocusRingType) *RulerView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *RulerView) WithFocusRingType(focusRingType NSFocusRingType) *RulerView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -374,8 +374,8 @@ func (x *RulerView) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *RulerView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RulerView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *RulerView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *RulerView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -513,13 +513,13 @@ func (x *RulerView) SetScrollView(scrollView *raw.NSScrollView) {
 }
 
 // Orientation calls the underlying Orientation.
-func (x *RulerView) Orientation() raw.NSRulerOrientation {
-	return x.inner.Orientation()
+func (x *RulerView) Orientation() NSRulerOrientation {
+	return NSRulerOrientation(x.inner.Orientation())
 }
 
 // SetOrientation calls the underlying SetOrientation.
-func (x *RulerView) SetOrientation(orientation raw.NSRulerOrientation) {
-	x.inner.SetOrientation(orientation)
+func (x *RulerView) SetOrientation(orientation NSRulerOrientation) {
+	x.inner.SetOrientation(raw.NSRulerOrientation(orientation))
 }
 
 // BaselineLocation calls the underlying BaselineLocation.
@@ -638,7 +638,7 @@ func (x *RulerView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSRe
 type RulerViewable interface {
 	Unwrap() *raw.NSRulerView
 	WithScrollView(scrollView *ScrollView) *RulerView
-	WithOrientation(orientation raw.NSRulerOrientation) *RulerView
+	WithOrientation(orientation NSRulerOrientation) *RulerView
 	WithRuleThickness(ruleThickness float64) *RulerView
 	WithReservedThicknessForMarkers(reservedThicknessForMarkers float64) *RulerView
 	WithReservedThicknessForAccessoryView(reservedThicknessForAccessoryView float64) *RulerView
@@ -651,7 +651,7 @@ type RulerViewable interface {
 	WithHidden(hidden bool) *RulerView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RulerView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *RulerView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *RulerView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *RulerView
 	WithFrame(frame corefoundation.CGRect) *RulerView
 	WithFrameRotation(frameRotation float64) *RulerView
 	WithFrameCenterRotation(frameCenterRotation float64) *RulerView
@@ -661,8 +661,8 @@ type RulerViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *RulerView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *RulerView
 	WithWantsRestingTouches(wantsRestingTouches bool) *RulerView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *RulerView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *RulerView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *RulerView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *RulerView
 	WithWantsLayer(wantsLayer bool) *RulerView
 	WithLayer(layer *quartzcore.CALayer) *RulerView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RulerView
@@ -676,12 +676,12 @@ type RulerViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *RulerView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RulerView
 	WithToolTip(toolTip string) *RulerView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *RulerView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *RulerView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RulerView
 	WithNextKeyView(nextKeyView ViewProvider) *RulerView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *RulerView
+	WithFocusRingType(focusRingType NSFocusRingType) *RulerView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *RulerView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RulerView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *RulerView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RulerView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RulerView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RulerView
@@ -705,8 +705,8 @@ type RulerViewable interface {
 	DrawMarkersInRect(rect corefoundation.CGRect)
 	ScrollView() *ScrollView
 	SetScrollView(scrollView *raw.NSScrollView)
-	Orientation() raw.NSRulerOrientation
-	SetOrientation(orientation raw.NSRulerOrientation)
+	Orientation() NSRulerOrientation
+	SetOrientation(orientation NSRulerOrientation)
 	BaselineLocation() float64
 	RequiredThickness() float64
 	RuleThickness() float64

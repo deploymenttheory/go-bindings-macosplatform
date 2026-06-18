@@ -47,8 +47,8 @@ func (x *CollectionViewUpdateItem) IndexPathAfterUpdate() *foundation.NSIndexPat
 }
 
 // UpdateAction calls the underlying UpdateAction.
-func (x *CollectionViewUpdateItem) UpdateAction() raw.NSCollectionUpdateAction {
-	return x.inner.UpdateAction()
+func (x *CollectionViewUpdateItem) UpdateAction() NSCollectionUpdateAction {
+	return NSCollectionUpdateAction(x.inner.UpdateAction())
 }
 
 // CollectionViewUpdateItemable is the interface implemented by [CollectionViewUpdateItem], for mocking and DI.
@@ -56,7 +56,7 @@ type CollectionViewUpdateItemable interface {
 	Unwrap() *raw.NSCollectionViewUpdateItem
 	IndexPathBeforeUpdate() *foundation.NSIndexPath
 	IndexPathAfterUpdate() *foundation.NSIndexPath
-	UpdateAction() raw.NSCollectionUpdateAction
+	UpdateAction() NSCollectionUpdateAction
 }
 
 var _ CollectionViewUpdateItemable = (*CollectionViewUpdateItem)(nil)

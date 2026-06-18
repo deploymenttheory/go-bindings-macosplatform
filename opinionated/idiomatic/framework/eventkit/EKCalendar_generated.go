@@ -95,8 +95,8 @@ func (x *Calendar) SetTitle(title string) {
 }
 
 // Type calls the underlying Type.
-func (x *Calendar) Type() raw.EKCalendarType {
-	return x.inner.Type()
+func (x *Calendar) Type() EKCalendarType {
+	return EKCalendarType(x.inner.Type())
 }
 
 // AllowsContentModifications calls the underlying AllowsContentModifications.
@@ -135,13 +135,13 @@ func (x *Calendar) SetColor(color *appkit.NSColor) {
 }
 
 // SupportedEventAvailabilities calls the underlying SupportedEventAvailabilities.
-func (x *Calendar) SupportedEventAvailabilities() raw.EKCalendarEventAvailabilityMask {
-	return x.inner.SupportedEventAvailabilities()
+func (x *Calendar) SupportedEventAvailabilities() EKCalendarEventAvailabilityMask {
+	return EKCalendarEventAvailabilityMask(x.inner.SupportedEventAvailabilities())
 }
 
 // AllowedEntityTypes calls the underlying AllowedEntityTypes.
-func (x *Calendar) AllowedEntityTypes() raw.EKEntityMask {
-	return x.inner.AllowedEntityTypes()
+func (x *Calendar) AllowedEntityTypes() EKEntityMask {
+	return EKEntityMask(x.inner.AllowedEntityTypes())
 }
 
 func (x *Calendar) asObject() *raw.EKObject { return &x.inner.EKObject }
@@ -157,7 +157,7 @@ type Calendarable interface {
 	CalendarIdentifier() string
 	Title() string
 	SetTitle(title string)
-	Type() raw.EKCalendarType
+	Type() EKCalendarType
 	AllowsContentModifications() bool
 	IsSubscribed() bool
 	IsImmutable() bool
@@ -165,8 +165,8 @@ type Calendarable interface {
 	SetCGColor(cGColor unsafe.Pointer)
 	Color() *appkit.NSColor
 	SetColor(color *appkit.NSColor)
-	SupportedEventAvailabilities() raw.EKCalendarEventAvailabilityMask
-	AllowedEntityTypes() raw.EKEntityMask
+	SupportedEventAvailabilities() EKCalendarEventAvailabilityMask
+	AllowedEntityTypes() EKEntityMask
 }
 
 var _ Calendarable = (*Calendar)(nil)

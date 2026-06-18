@@ -41,8 +41,8 @@ func IOLockAlloc() unsafe.Pointer {
 }
 
 // IOLockAssert calls [raw.IOLockAssert] (C function IOLockAssert).
-func IOLockAssert(lock unsafe.Pointer, type_ raw.IOLockAssertState) {
-	raw.IOLockAssert(lock, type_)
+func IOLockAssert(lock unsafe.Pointer, type_ IOLockAssertState) {
+	raw.IOLockAssert(lock, raw.IOLockAssertState(type_))
 }
 
 // IOLockFree calls [raw.IOLockFree] (C function IOLockFree).

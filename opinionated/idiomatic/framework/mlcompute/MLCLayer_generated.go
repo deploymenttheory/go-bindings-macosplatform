@@ -79,8 +79,8 @@ func (x *Layer) SetIsDebuggingEnabled(isDebuggingEnabled bool) {
 }
 
 // DeviceType calls the underlying DeviceType.
-func (x *Layer) DeviceType() raw.MLCDeviceType {
-	return x.inner.DeviceType()
+func (x *Layer) DeviceType() MLCDeviceType {
+	return MLCDeviceType(x.inner.DeviceType())
 }
 
 func (x *Layer) asLayer() *raw.MLCLayer { return x.inner }
@@ -95,7 +95,7 @@ type Layerable interface {
 	SetLabel(label string)
 	IsDebuggingEnabled() bool
 	SetIsDebuggingEnabled(isDebuggingEnabled bool)
-	DeviceType() raw.MLCDeviceType
+	DeviceType() MLCDeviceType
 }
 
 var _ Layerable = (*Layer)(nil)

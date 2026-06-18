@@ -32,9 +32,9 @@ func StatisticsQueryFromID(id objc.ID) *StatisticsQuery {
 }
 
 // NewStatisticsQueryWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler creates a new [StatisticsQuery].
-func NewStatisticsQueryWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler(quantityType *raw.HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options raw.HKStatisticsOptions, handler func(*raw.HKStatisticsQuery, *raw.HKStatistics, unsafe.Pointer)) *StatisticsQuery {
+func NewStatisticsQueryWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler(quantityType *raw.HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options HKStatisticsOptions, handler func(*raw.HKStatisticsQuery, *raw.HKStatistics, unsafe.Pointer)) *StatisticsQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKStatisticsQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:completionHandler:"), quantityType.Ptr(), quantitySamplePredicate.Ptr(), options, handler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:completionHandler:"), quantityType.Ptr(), quantitySamplePredicate.Ptr(), raw.HKStatisticsOptions(options), handler)
 	return &StatisticsQuery{inner: raw.HKStatisticsQueryFromID(_id)}
 }
 

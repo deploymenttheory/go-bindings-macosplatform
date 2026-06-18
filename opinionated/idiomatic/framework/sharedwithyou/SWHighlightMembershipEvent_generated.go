@@ -30,21 +30,21 @@ func HighlightMembershipEventFromID(id objc.ID) *HighlightMembershipEvent {
 }
 
 // NewHighlightMembershipEventWithHighlightTrigger creates a new [HighlightMembershipEvent].
-func NewHighlightMembershipEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger raw.SWHighlightMembershipEventTrigger) *HighlightMembershipEvent {
+func NewHighlightMembershipEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightMembershipEventTrigger) *HighlightMembershipEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightMembershipEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), highlight.Ptr(), trigger)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), highlight.Ptr(), raw.SWHighlightMembershipEventTrigger(trigger))
 	return &HighlightMembershipEvent{inner: raw.SWHighlightMembershipEventFromID(_id)}
 }
 
 // MembershipEventTrigger calls the underlying MembershipEventTrigger.
-func (x *HighlightMembershipEvent) MembershipEventTrigger() raw.SWHighlightMembershipEventTrigger {
-	return x.inner.MembershipEventTrigger()
+func (x *HighlightMembershipEvent) MembershipEventTrigger() SWHighlightMembershipEventTrigger {
+	return SWHighlightMembershipEventTrigger(x.inner.MembershipEventTrigger())
 }
 
 // HighlightMembershipEventable is the interface implemented by [HighlightMembershipEvent], for mocking and DI.
 type HighlightMembershipEventable interface {
 	Unwrap() *raw.SWHighlightMembershipEvent
-	MembershipEventTrigger() raw.SWHighlightMembershipEventTrigger
+	MembershipEventTrigger() SWHighlightMembershipEventTrigger
 }
 
 var _ HighlightMembershipEventable = (*HighlightMembershipEvent)(nil)

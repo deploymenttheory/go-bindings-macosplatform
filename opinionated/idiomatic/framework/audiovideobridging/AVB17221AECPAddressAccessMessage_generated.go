@@ -59,14 +59,14 @@ func (x *AVB17221AECPAddressAccessMessage) WithTlvs(items ...*raw.AVB17221AECPAd
 }
 
 // WithMessageType sets the messageType property and returns the receiver for chaining.
-func (x *AVB17221AECPAddressAccessMessage) WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPAddressAccessMessage {
-	x.inner.AVB17221AECPMessage.SetMessageType(messageType)
+func (x *AVB17221AECPAddressAccessMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAddressAccessMessage {
+	x.inner.AVB17221AECPMessage.SetMessageType(raw.AVB17221AECPMessageType(messageType))
 	return x
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *AVB17221AECPAddressAccessMessage) WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPAddressAccessMessage {
-	x.inner.AVB17221AECPMessage.SetStatus(status)
+func (x *AVB17221AECPAddressAccessMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAddressAccessMessage {
+	x.inner.AVB17221AECPMessage.SetStatus(raw.AVB17221AECPStatusCode(status))
 	return x
 }
 
@@ -118,8 +118,8 @@ func (x *AVB17221AECPAddressAccessMessage) asAVB17221AECPMessage() *raw.AVB17221
 type AVB17221AECPAddressAccessMessageable interface {
 	Unwrap() *raw.AVB17221AECPAddressAccessMessage
 	WithTlvs(items ...*raw.AVB17221AECPAddressAccessTLV) *AVB17221AECPAddressAccessMessage
-	WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPAddressAccessMessage
-	WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPAddressAccessMessage
+	WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAddressAccessMessage
+	WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAddressAccessMessage
 	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAddressAccessMessage
 	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAddressAccessMessage
 	WithSequenceID(sequenceID uint16) *AVB17221AECPAddressAccessMessage

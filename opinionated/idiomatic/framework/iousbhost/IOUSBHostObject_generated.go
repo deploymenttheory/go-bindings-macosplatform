@@ -33,9 +33,9 @@ func HostObjectFromID(id objc.ID) *HostObject {
 }
 
 // NewHostObjectWithIOServiceOptionsQueueErrorInterestHandler creates a new [HostObject].
-func NewHostObjectWithIOServiceOptionsQueueErrorInterestHandler(ioService uint, options raw.IOUSBHostObjectInitOptions, queue *foundation.NSObject, error_ unsafe.Pointer, interestHandler func(*raw.IOUSBHostObject, uint32, unsafe.Pointer)) *HostObject {
+func NewHostObjectWithIOServiceOptionsQueueErrorInterestHandler(ioService uint, options IOUSBHostObjectInitOptions, queue *foundation.NSObject, error_ unsafe.Pointer, interestHandler func(*raw.IOUSBHostObject, uint32, unsafe.Pointer)) *HostObject {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:options:queue:error:interestHandler:"), ioService, options, queue.Ptr(), error_, interestHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:options:queue:error:interestHandler:"), ioService, raw.IOUSBHostObjectInitOptions(options), queue.Ptr(), error_, interestHandler)
 	return &HostObject{inner: raw.IOUSBHostObjectFromID(_id)}
 }
 
@@ -52,8 +52,8 @@ func (x *HostObject) Destroy() {
 }
 
 // DestroyWithOptions calls the underlying DestroyWithOptions.
-func (x *HostObject) DestroyWithOptions(options raw.IOUSBHostObjectDestroyOptions) {
-	x.inner.DestroyWithOptions(options)
+func (x *HostObject) DestroyWithOptions(options IOUSBHostObjectDestroyOptions) {
+	x.inner.DestroyWithOptions(raw.IOUSBHostObjectDestroyOptions(options))
 }
 
 // SendDeviceRequestDataBytesTransferredCompletionTimeoutError calls the underlying SendDeviceRequestDataBytesTransferredCompletionTimeoutError.
@@ -87,8 +87,8 @@ func (x *HostObject) EnqueueDeviceRequestErrorCompletionHandler(request unsafe.P
 }
 
 // AbortDeviceRequestsWithOptionError calls the underlying AbortDeviceRequestsWithOptionError.
-func (x *HostObject) AbortDeviceRequestsWithOptionError(option raw.IOUSBHostAbortOption) (bool, error) {
-	return x.inner.AbortDeviceRequestsWithOptionError(option)
+func (x *HostObject) AbortDeviceRequestsWithOptionError(option IOUSBHostAbortOption) (bool, error) {
+	return x.inner.AbortDeviceRequestsWithOptionError(raw.IOUSBHostAbortOption(option))
 }
 
 // AbortDeviceRequests returns any validation error.
@@ -197,14 +197,14 @@ func (x *HostObject) asHostObject() *raw.IOUSBHostObject { return x.inner }
 type HostObjectable interface {
 	Unwrap() *raw.IOUSBHostObject
 	Destroy()
-	DestroyWithOptions(options raw.IOUSBHostObjectDestroyOptions)
+	DestroyWithOptions(options IOUSBHostObjectDestroyOptions)
 	SendDeviceRequestDataBytesTransferredCompletionTimeoutError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error)
 	SendDeviceRequestDataBytesTransferredError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint) (bool, error)
 	SendDeviceRequestError(request unsafe.Pointer) (bool, error)
 	EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool
 	EnqueueDeviceRequestDataErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool
 	EnqueueDeviceRequestErrorCompletionHandler(request unsafe.Pointer, error_ unsafe.Pointer, completionHandler func(int, uint)) bool
-	AbortDeviceRequestsWithOptionError(option raw.IOUSBHostAbortOption) (bool, error)
+	AbortDeviceRequestsWithOptionError(option IOUSBHostAbortOption) (bool, error)
 	AbortDeviceRequests() error
 	DescriptorWithTypeLengthIndexLanguageIDRequestTypeRequestRecipientError(type_ unsafe.Pointer, length *uint, index uint, languageID uint, requestType unsafe.Pointer, requestRecipient unsafe.Pointer) (unsafe.Pointer, error)
 	DescriptorWithTypeLengthIndexLanguageIDError(type_ unsafe.Pointer, length *uint, index uint, languageID uint) (unsafe.Pointer, error)

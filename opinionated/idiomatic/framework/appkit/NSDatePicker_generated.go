@@ -41,8 +41,8 @@ func NewDatePicker() *DatePicker {
 }
 
 // WithDatePickerStyle sets the datePickerStyle property and returns the receiver for chaining.
-func (x *DatePicker) WithDatePickerStyle(datePickerStyle raw.NSDatePickerStyle) *DatePicker {
-	x.inner.SetDatePickerStyle(datePickerStyle)
+func (x *DatePicker) WithDatePickerStyle(datePickerStyle NSDatePickerStyle) *DatePicker {
+	x.inner.SetDatePickerStyle(raw.NSDatePickerStyle(datePickerStyle))
 	return x
 }
 
@@ -77,14 +77,14 @@ func (x *DatePicker) WithTextColor(textColor *Color) *DatePicker {
 }
 
 // WithDatePickerMode sets the datePickerMode property and returns the receiver for chaining.
-func (x *DatePicker) WithDatePickerMode(datePickerMode raw.NSDatePickerMode) *DatePicker {
-	x.inner.SetDatePickerMode(datePickerMode)
+func (x *DatePicker) WithDatePickerMode(datePickerMode NSDatePickerMode) *DatePicker {
+	x.inner.SetDatePickerMode(raw.NSDatePickerMode(datePickerMode))
 	return x
 }
 
 // WithDatePickerElements sets the datePickerElements property and returns the receiver for chaining.
-func (x *DatePicker) WithDatePickerElements(datePickerElements raw.NSDatePickerElementFlags) *DatePicker {
-	x.inner.SetDatePickerElements(datePickerElements)
+func (x *DatePicker) WithDatePickerElements(datePickerElements NSDatePickerElementFlags) *DatePicker {
+	x.inner.SetDatePickerElements(raw.NSDatePickerElementFlags(datePickerElements))
 	return x
 }
 
@@ -191,8 +191,8 @@ func (x *DatePicker) WithHighlighted(highlighted bool) *DatePicker {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *DatePicker) WithControlSize(controlSize raw.NSControlSize) *DatePicker {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *DatePicker) WithControlSize(controlSize NSControlSize) *DatePicker {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -257,20 +257,20 @@ func (x *DatePicker) WithUsesSingleLineMode(usesSingleLineMode bool) *DatePicker
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *DatePicker) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *DatePicker {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *DatePicker) WithLineBreakMode(lineBreakMode NSLineBreakMode) *DatePicker {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *DatePicker) WithAlignment(alignment raw.NSTextAlignment) *DatePicker {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *DatePicker) WithAlignment(alignment NSTextAlignment) *DatePicker {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *DatePicker) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *DatePicker {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *DatePicker) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *DatePicker {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -323,8 +323,8 @@ func (x *DatePicker) WithAutoresizesSubviews(autoresizesSubviews bool) *DatePick
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *DatePicker) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *DatePicker {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *DatePicker) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *DatePicker {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -383,14 +383,14 @@ func (x *DatePicker) WithWantsRestingTouches(wantsRestingTouches bool) *DatePick
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *DatePicker) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *DatePicker {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *DatePicker) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *DatePicker {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *DatePicker) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *DatePicker {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *DatePicker) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *DatePicker {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -497,8 +497,8 @@ func (x *DatePicker) WithToolTip(toolTip string) *DatePicker {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *DatePicker) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *DatePicker {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *DatePicker) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *DatePicker {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -515,8 +515,8 @@ func (x *DatePicker) WithNextKeyView(nextKeyView ViewProvider) *DatePicker {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *DatePicker) WithFocusRingType(focusRingType raw.NSFocusRingType) *DatePicker {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *DatePicker) WithFocusRingType(focusRingType NSFocusRingType) *DatePicker {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -539,8 +539,8 @@ func (x *DatePicker) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *DatePicker) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *DatePicker {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *DatePicker) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *DatePicker {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -629,13 +629,13 @@ func (x *DatePicker) WithTouchBar(touchBar *TouchBar) *DatePicker {
 }
 
 // DatePickerStyle calls the underlying DatePickerStyle.
-func (x *DatePicker) DatePickerStyle() raw.NSDatePickerStyle {
-	return x.inner.DatePickerStyle()
+func (x *DatePicker) DatePickerStyle() NSDatePickerStyle {
+	return NSDatePickerStyle(x.inner.DatePickerStyle())
 }
 
 // SetDatePickerStyle calls the underlying SetDatePickerStyle.
-func (x *DatePicker) SetDatePickerStyle(datePickerStyle raw.NSDatePickerStyle) {
-	x.inner.SetDatePickerStyle(datePickerStyle)
+func (x *DatePicker) SetDatePickerStyle(datePickerStyle NSDatePickerStyle) {
+	x.inner.SetDatePickerStyle(raw.NSDatePickerStyle(datePickerStyle))
 }
 
 // IsBezeled calls the underlying IsBezeled.
@@ -697,23 +697,23 @@ func (x *DatePicker) SetTextColor(textColor *raw.NSColor) {
 }
 
 // DatePickerMode calls the underlying DatePickerMode.
-func (x *DatePicker) DatePickerMode() raw.NSDatePickerMode {
-	return x.inner.DatePickerMode()
+func (x *DatePicker) DatePickerMode() NSDatePickerMode {
+	return NSDatePickerMode(x.inner.DatePickerMode())
 }
 
 // SetDatePickerMode calls the underlying SetDatePickerMode.
-func (x *DatePicker) SetDatePickerMode(datePickerMode raw.NSDatePickerMode) {
-	x.inner.SetDatePickerMode(datePickerMode)
+func (x *DatePicker) SetDatePickerMode(datePickerMode NSDatePickerMode) {
+	x.inner.SetDatePickerMode(raw.NSDatePickerMode(datePickerMode))
 }
 
 // DatePickerElements calls the underlying DatePickerElements.
-func (x *DatePicker) DatePickerElements() raw.NSDatePickerElementFlags {
-	return x.inner.DatePickerElements()
+func (x *DatePicker) DatePickerElements() NSDatePickerElementFlags {
+	return NSDatePickerElementFlags(x.inner.DatePickerElements())
 }
 
 // SetDatePickerElements calls the underlying SetDatePickerElements.
-func (x *DatePicker) SetDatePickerElements(datePickerElements raw.NSDatePickerElementFlags) {
-	x.inner.SetDatePickerElements(datePickerElements)
+func (x *DatePicker) SetDatePickerElements(datePickerElements NSDatePickerElementFlags) {
+	x.inner.SetDatePickerElements(raw.NSDatePickerElementFlags(datePickerElements))
 }
 
 // Calendar calls the underlying Calendar.
@@ -815,14 +815,14 @@ func (x *DatePicker) asResponder() *raw.NSResponder { return &x.inner.NSControl.
 // DatePickerable is the interface implemented by [DatePicker], for mocking and DI.
 type DatePickerable interface {
 	Unwrap() *raw.NSDatePicker
-	WithDatePickerStyle(datePickerStyle raw.NSDatePickerStyle) *DatePicker
+	WithDatePickerStyle(datePickerStyle NSDatePickerStyle) *DatePicker
 	WithBezeled(bezeled bool) *DatePicker
 	WithBordered(bordered bool) *DatePicker
 	WithDrawsBackground(drawsBackground bool) *DatePicker
 	WithBackgroundColor(backgroundColor *Color) *DatePicker
 	WithTextColor(textColor *Color) *DatePicker
-	WithDatePickerMode(datePickerMode raw.NSDatePickerMode) *DatePicker
-	WithDatePickerElements(datePickerElements raw.NSDatePickerElementFlags) *DatePicker
+	WithDatePickerMode(datePickerMode NSDatePickerMode) *DatePicker
+	WithDatePickerElements(datePickerElements NSDatePickerElementFlags) *DatePicker
 	WithCalendar(calendar *foundation.NSCalendar) *DatePicker
 	WithLocale(locale *foundation.NSLocale) *DatePicker
 	WithTimeZone(timeZone *foundation.NSTimeZone) *DatePicker
@@ -840,7 +840,7 @@ type DatePickerable interface {
 	WithEnabled(enabled bool) *DatePicker
 	WithRefusesFirstResponder(refusesFirstResponder bool) *DatePicker
 	WithHighlighted(highlighted bool) *DatePicker
-	WithControlSize(controlSize raw.NSControlSize) *DatePicker
+	WithControlSize(controlSize NSControlSize) *DatePicker
 	WithFormatter(formatter *foundation.NSFormatter) *DatePicker
 	WithObjectValue(objectValue objc.ID) *DatePicker
 	WithStringValue(stringValue string) *DatePicker
@@ -851,16 +851,16 @@ type DatePickerable interface {
 	WithDoubleValue(doubleValue float64) *DatePicker
 	WithFont(font *Font) *DatePicker
 	WithUsesSingleLineMode(usesSingleLineMode bool) *DatePicker
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *DatePicker
-	WithAlignment(alignment raw.NSTextAlignment) *DatePicker
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *DatePicker
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *DatePicker
+	WithAlignment(alignment NSTextAlignment) *DatePicker
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *DatePicker
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *DatePicker
 	WithCell(cell CellProvider) *DatePicker
 	WithSubviews(items ...ViewProvider) *DatePicker
 	WithHidden(hidden bool) *DatePicker
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *DatePicker
 	WithAutoresizesSubviews(autoresizesSubviews bool) *DatePicker
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *DatePicker
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *DatePicker
 	WithFrame(frame corefoundation.CGRect) *DatePicker
 	WithFrameRotation(frameRotation float64) *DatePicker
 	WithFrameCenterRotation(frameCenterRotation float64) *DatePicker
@@ -870,8 +870,8 @@ type DatePickerable interface {
 	WithNeedsDisplay(needsDisplay bool) *DatePicker
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *DatePicker
 	WithWantsRestingTouches(wantsRestingTouches bool) *DatePicker
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *DatePicker
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *DatePicker
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *DatePicker
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *DatePicker
 	WithWantsLayer(wantsLayer bool) *DatePicker
 	WithLayer(layer *quartzcore.CALayer) *DatePicker
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *DatePicker
@@ -885,12 +885,12 @@ type DatePickerable interface {
 	WithClipsToBounds(clipsToBounds bool) *DatePicker
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *DatePicker
 	WithToolTip(toolTip string) *DatePicker
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *DatePicker
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *DatePicker
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *DatePicker
 	WithNextKeyView(nextKeyView ViewProvider) *DatePicker
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *DatePicker
+	WithFocusRingType(focusRingType NSFocusRingType) *DatePicker
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *DatePicker
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *DatePicker
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *DatePicker
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *DatePicker
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *DatePicker
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *DatePicker
@@ -905,8 +905,8 @@ type DatePickerable interface {
 	WithMenu(menu *Menu) *DatePicker
 	WithUserActivity(userActivity *foundation.NSUserActivity) *DatePicker
 	WithTouchBar(touchBar *TouchBar) *DatePicker
-	DatePickerStyle() raw.NSDatePickerStyle
-	SetDatePickerStyle(datePickerStyle raw.NSDatePickerStyle)
+	DatePickerStyle() NSDatePickerStyle
+	SetDatePickerStyle(datePickerStyle NSDatePickerStyle)
 	IsBezeled() bool
 	SetBezeled(bezeled bool)
 	IsBordered() bool
@@ -917,10 +917,10 @@ type DatePickerable interface {
 	SetBackgroundColor(backgroundColor *raw.NSColor)
 	TextColor() *Color
 	SetTextColor(textColor *raw.NSColor)
-	DatePickerMode() raw.NSDatePickerMode
-	SetDatePickerMode(datePickerMode raw.NSDatePickerMode)
-	DatePickerElements() raw.NSDatePickerElementFlags
-	SetDatePickerElements(datePickerElements raw.NSDatePickerElementFlags)
+	DatePickerMode() NSDatePickerMode
+	SetDatePickerMode(datePickerMode NSDatePickerMode)
+	DatePickerElements() NSDatePickerElementFlags
+	SetDatePickerElements(datePickerElements NSDatePickerElementFlags)
 	Calendar() *foundation.NSCalendar
 	SetCalendar(calendar *foundation.NSCalendar)
 	Locale() *foundation.NSLocale

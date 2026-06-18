@@ -61,8 +61,8 @@ func (x *RotationGestureRecognizer) WithAction(action objc.SEL) *RotationGesture
 }
 
 // WithState sets the state property and returns the receiver for chaining.
-func (x *RotationGestureRecognizer) WithState(state raw.NSGestureRecognizerState) *RotationGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetState(state)
+func (x *RotationGestureRecognizer) WithState(state NSGestureRecognizerState) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
@@ -127,8 +127,8 @@ func (x *RotationGestureRecognizer) WithName(name string) *RotationGestureRecogn
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *RotationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RotationGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *RotationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *RotationGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -163,7 +163,7 @@ type RotationGestureRecognizerable interface {
 	WithRotationInDegrees(rotationInDegrees float64) *RotationGestureRecognizer
 	WithTarget(target objc.ID) *RotationGestureRecognizer
 	WithAction(action objc.SEL) *RotationGestureRecognizer
-	WithState(state raw.NSGestureRecognizerState) *RotationGestureRecognizer
+	WithState(state NSGestureRecognizerState) *RotationGestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *RotationGestureRecognizer
 	WithEnabled(enabled bool) *RotationGestureRecognizer
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RotationGestureRecognizer
@@ -174,7 +174,7 @@ type RotationGestureRecognizerable interface {
 	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *RotationGestureRecognizer
 	WithDelaysRotationEvents(delaysRotationEvents bool) *RotationGestureRecognizer
 	WithName(name string) *RotationGestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RotationGestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *RotationGestureRecognizer
 	Rotation() float64
 	SetRotation(rotation float64)
 	RotationInDegrees() float64

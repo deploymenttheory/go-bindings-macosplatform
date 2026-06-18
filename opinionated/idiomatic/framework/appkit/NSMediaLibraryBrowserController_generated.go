@@ -49,8 +49,8 @@ func (x *MediaLibraryBrowserController) WithFrame(frame corefoundation.CGRect) *
 }
 
 // WithMediaLibraries sets the mediaLibraries property and returns the receiver for chaining.
-func (x *MediaLibraryBrowserController) WithMediaLibraries(mediaLibraries raw.NSMediaLibrary) *MediaLibraryBrowserController {
-	x.inner.SetMediaLibraries(mediaLibraries)
+func (x *MediaLibraryBrowserController) WithMediaLibraries(mediaLibraries NSMediaLibrary) *MediaLibraryBrowserController {
+	x.inner.SetMediaLibraries(raw.NSMediaLibrary(mediaLibraries))
 	return x
 }
 
@@ -80,13 +80,13 @@ func (x *MediaLibraryBrowserController) SetFrame(frame corefoundation.CGRect) {
 }
 
 // MediaLibraries calls the underlying MediaLibraries.
-func (x *MediaLibraryBrowserController) MediaLibraries() raw.NSMediaLibrary {
-	return x.inner.MediaLibraries()
+func (x *MediaLibraryBrowserController) MediaLibraries() NSMediaLibrary {
+	return NSMediaLibrary(x.inner.MediaLibraries())
 }
 
 // SetMediaLibraries calls the underlying SetMediaLibraries.
-func (x *MediaLibraryBrowserController) SetMediaLibraries(mediaLibraries raw.NSMediaLibrary) {
-	x.inner.SetMediaLibraries(mediaLibraries)
+func (x *MediaLibraryBrowserController) SetMediaLibraries(mediaLibraries NSMediaLibrary) {
+	x.inner.SetMediaLibraries(raw.NSMediaLibrary(mediaLibraries))
 }
 
 // MediaLibraryBrowserControllerable is the interface implemented by [MediaLibraryBrowserController], for mocking and DI.
@@ -94,14 +94,14 @@ type MediaLibraryBrowserControllerable interface {
 	Unwrap() *raw.NSMediaLibraryBrowserController
 	WithVisible(visible bool) *MediaLibraryBrowserController
 	WithFrame(frame corefoundation.CGRect) *MediaLibraryBrowserController
-	WithMediaLibraries(mediaLibraries raw.NSMediaLibrary) *MediaLibraryBrowserController
+	WithMediaLibraries(mediaLibraries NSMediaLibrary) *MediaLibraryBrowserController
 	TogglePanel(sender objc.ID)
 	IsVisible() bool
 	SetVisible(visible bool)
 	Frame() corefoundation.CGRect
 	SetFrame(frame corefoundation.CGRect)
-	MediaLibraries() raw.NSMediaLibrary
-	SetMediaLibraries(mediaLibraries raw.NSMediaLibrary)
+	MediaLibraries() NSMediaLibrary
+	SetMediaLibraries(mediaLibraries NSMediaLibrary)
 }
 
 var _ MediaLibraryBrowserControllerable = (*MediaLibraryBrowserController)(nil)

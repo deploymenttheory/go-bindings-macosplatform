@@ -48,8 +48,8 @@ func NewGraphExecutableWithCoreMLPackageAtURLCompilationDescriptor(coreMLPackage
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *GraphExecutable) WithOptions(options raw.MPSGraphOptions) *GraphExecutable {
-	x.inner.SetOptions(options)
+func (x *GraphExecutable) WithOptions(options MPSGraphOptions) *GraphExecutable {
+	x.inner.SetOptions(raw.MPSGraphOptions(options))
 	return x
 }
 
@@ -84,13 +84,13 @@ func (x *GraphExecutable) SerializeToMPSGraphPackageAtURLDescriptor(url string, 
 }
 
 // Options calls the underlying Options.
-func (x *GraphExecutable) Options() raw.MPSGraphOptions {
-	return x.inner.Options()
+func (x *GraphExecutable) Options() MPSGraphOptions {
+	return MPSGraphOptions(x.inner.Options())
 }
 
 // SetOptions calls the underlying SetOptions.
-func (x *GraphExecutable) SetOptions(options raw.MPSGraphOptions) {
-	x.inner.SetOptions(options)
+func (x *GraphExecutable) SetOptions(options MPSGraphOptions) {
+	x.inner.SetOptions(raw.MPSGraphOptions(options))
 }
 
 // FeedTensors returns the collection as a Go slice.
@@ -120,15 +120,15 @@ func (x *GraphExecutable) asGraphObject() *raw.MPSGraphObject { return &x.inner.
 // GraphExecutableable is the interface implemented by [GraphExecutable], for mocking and DI.
 type GraphExecutableable interface {
 	Unwrap() *raw.MPSGraphExecutable
-	WithOptions(options raw.MPSGraphOptions) *GraphExecutable
+	WithOptions(options MPSGraphOptions) *GraphExecutable
 	SpecializeWithDeviceInputTypesCompilationDescriptor(device *raw.MPSGraphDevice, inputTypes *foundation.NSArray[*raw.MPSGraphType], compilationDescriptor *raw.MPSGraphCompilationDescriptor)
 	GetOutputTypesWithDeviceInputTypesCompilationDescriptor(device *raw.MPSGraphDevice, inputTypes *foundation.NSArray[*raw.MPSGraphType], compilationDescriptor *raw.MPSGraphCompilationDescriptor) *foundation.NSArray[*raw.MPSGraphShapedType]
 	RunWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor(commandQueue metal.MTLCommandQueue, inputsArray *foundation.NSArray[*raw.MPSGraphTensorData], resultsArray *foundation.NSArray[*raw.MPSGraphTensorData], executionDescriptor *raw.MPSGraphExecutableExecutionDescriptor) *foundation.NSArray[*raw.MPSGraphTensorData]
 	RunAsyncWithMTLCommandQueueInputsArrayResultsArrayExecutionDescriptor(commandQueue metal.MTLCommandQueue, inputsArray *foundation.NSArray[*raw.MPSGraphTensorData], resultsArray *foundation.NSArray[*raw.MPSGraphTensorData], executionDescriptor *raw.MPSGraphExecutableExecutionDescriptor) *foundation.NSArray[*raw.MPSGraphTensorData]
 	EncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor(commandBuffer *mpscore.MPSCommandBuffer, inputsArray *foundation.NSArray[*raw.MPSGraphTensorData], resultsArray *foundation.NSArray[*raw.MPSGraphTensorData], executionDescriptor *raw.MPSGraphExecutableExecutionDescriptor) *foundation.NSArray[*raw.MPSGraphTensorData]
 	SerializeToMPSGraphPackageAtURLDescriptor(url string, descriptor *raw.MPSGraphExecutableSerializationDescriptor)
-	Options() raw.MPSGraphOptions
-	SetOptions(options raw.MPSGraphOptions)
+	Options() MPSGraphOptions
+	SetOptions(options MPSGraphOptions)
 	FeedTensors() []*GraphTensor
 	TargetTensors() []*GraphTensor
 }

@@ -61,8 +61,8 @@ func (x *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []*foundation.NSNumb
 }
 
 // PointsClassification calls the underlying PointsClassification.
-func (x *FaceLandmarkRegion2D) PointsClassification() raw.VNPointsClassification {
-	return x.inner.PointsClassification()
+func (x *FaceLandmarkRegion2D) PointsClassification() VNPointsClassification {
+	return VNPointsClassification(x.inner.PointsClassification())
 }
 
 func (x *FaceLandmarkRegion2D) asFaceLandmarkRegion() *raw.VNFaceLandmarkRegion {
@@ -75,7 +75,7 @@ type FaceLandmarkRegion2Dable interface {
 	PointsInImageOfSize(imageSize corefoundation.CGSize) *corefoundation.CGPoint
 	NormalizedPoints() unsafe.Pointer
 	PrecisionEstimatesPerPoint() []*foundation.NSNumber
-	PointsClassification() raw.VNPointsClassification
+	PointsClassification() VNPointsClassification
 }
 
 var _ FaceLandmarkRegion2Dable = (*FaceLandmarkRegion2D)(nil)

@@ -43,8 +43,8 @@ func (x *Monitor) AddConditionForMonitoringIdentifier(condition *raw.CLCondition
 }
 
 // AddConditionForMonitoringIdentifierAssumedState calls the underlying AddConditionForMonitoringIdentifierAssumedState.
-func (x *Monitor) AddConditionForMonitoringIdentifierAssumedState(condition *raw.CLCondition, identifier string, state raw.CLMonitoringState) {
-	x.inner.AddConditionForMonitoringIdentifierAssumedState(condition, foundation.NSStringStringWithUTF8String(identifier), state)
+func (x *Monitor) AddConditionForMonitoringIdentifierAssumedState(condition *raw.CLCondition, identifier string, state CLMonitoringState) {
+	x.inner.AddConditionForMonitoringIdentifierAssumedState(condition, foundation.NSStringStringWithUTF8String(identifier), raw.CLMonitoringState(state))
 }
 
 // RemoveConditionFromMonitoringWithIdentifier calls the underlying RemoveConditionFromMonitoringWithIdentifier.
@@ -85,7 +85,7 @@ func (x *Monitor) MonitoredIdentifiers() []string {
 type Monitorable interface {
 	Unwrap() *raw.CLMonitor
 	AddConditionForMonitoringIdentifier(condition *raw.CLCondition, identifier string)
-	AddConditionForMonitoringIdentifierAssumedState(condition *raw.CLCondition, identifier string, state raw.CLMonitoringState)
+	AddConditionForMonitoringIdentifierAssumedState(condition *raw.CLCondition, identifier string, state CLMonitoringState)
 	RemoveConditionFromMonitoringWithIdentifier(identifier string)
 	MonitoringRecordForIdentifier(identifier string) *MonitoringRecord
 	Name() string

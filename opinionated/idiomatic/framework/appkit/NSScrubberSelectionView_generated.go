@@ -89,8 +89,8 @@ func (x *ScrubberSelectionView) WithAutoresizesSubviews(autoresizesSubviews bool
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *ScrubberSelectionView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -149,14 +149,14 @@ func (x *ScrubberSelectionView) WithWantsRestingTouches(wantsRestingTouches bool
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *ScrubberSelectionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *ScrubberSelectionView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -263,8 +263,8 @@ func (x *ScrubberSelectionView) WithToolTip(toolTip string) *ScrubberSelectionVi
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ScrubberSelectionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -281,8 +281,8 @@ func (x *ScrubberSelectionView) WithNextKeyView(nextKeyView ViewProvider) *Scrub
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.SetFocusRingType(focusRingType)
+func (x *ScrubberSelectionView) WithFocusRingType(focusRingType NSFocusRingType) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -305,8 +305,8 @@ func (x *ScrubberSelectionView) WithGestureRecognizers(items ...GestureRecognize
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ScrubberSelectionView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberSelectionView {
-	x.inner.NSScrubberArrangedView.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ScrubberSelectionView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrubberSelectionView {
+	x.inner.NSScrubberArrangedView.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -413,7 +413,7 @@ type ScrubberSelectionViewable interface {
 	WithHidden(hidden bool) *ScrubberSelectionView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberSelectionView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberSelectionView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrubberSelectionView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrubberSelectionView
 	WithFrame(frame corefoundation.CGRect) *ScrubberSelectionView
 	WithFrameRotation(frameRotation float64) *ScrubberSelectionView
 	WithFrameCenterRotation(frameCenterRotation float64) *ScrubberSelectionView
@@ -423,8 +423,8 @@ type ScrubberSelectionViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *ScrubberSelectionView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberSelectionView
 	WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberSelectionView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrubberSelectionView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrubberSelectionView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrubberSelectionView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrubberSelectionView
 	WithWantsLayer(wantsLayer bool) *ScrubberSelectionView
 	WithLayer(layer *quartzcore.CALayer) *ScrubberSelectionView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberSelectionView
@@ -438,12 +438,12 @@ type ScrubberSelectionViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *ScrubberSelectionView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberSelectionView
 	WithToolTip(toolTip string) *ScrubberSelectionView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrubberSelectionView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrubberSelectionView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberSelectionView
 	WithNextKeyView(nextKeyView ViewProvider) *ScrubberSelectionView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrubberSelectionView
+	WithFocusRingType(focusRingType NSFocusRingType) *ScrubberSelectionView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberSelectionView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberSelectionView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrubberSelectionView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberSelectionView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberSelectionView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberSelectionView

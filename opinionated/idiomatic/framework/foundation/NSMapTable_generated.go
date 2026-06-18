@@ -30,9 +30,9 @@ func MapTableFromID(id objc.ID) *MapTable {
 }
 
 // NewMapTableWithKeyOptionsValueOptionsCapacity creates a new [MapTable].
-func NewMapTableWithKeyOptionsValueOptionsCapacity(keyOptions raw.NSPointerFunctionsOptions, valueOptions raw.NSPointerFunctionsOptions, initialCapacity uint) *MapTable {
+func NewMapTableWithKeyOptionsValueOptionsCapacity(keyOptions NSPointerFunctionsOptions, valueOptions NSPointerFunctionsOptions, initialCapacity uint) *MapTable {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMapTable")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyOptions:valueOptions:capacity:"), keyOptions, valueOptions, initialCapacity)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyOptions:valueOptions:capacity:"), raw.NSPointerFunctionsOptions(keyOptions), raw.NSPointerFunctionsOptions(valueOptions), initialCapacity)
 	return &MapTable{inner: raw.NSMapTableFromID[objc.ID, objc.ID](_id)}
 }
 

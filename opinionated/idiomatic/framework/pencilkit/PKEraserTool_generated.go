@@ -30,22 +30,22 @@ func EraserToolFromID(id objc.ID) *EraserTool {
 }
 
 // NewEraserToolWithEraserType creates a new [EraserTool].
-func NewEraserToolWithEraserType(eraserType raw.PKEraserType) *EraserTool {
+func NewEraserToolWithEraserType(eraserType PKEraserType) *EraserTool {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKEraserTool")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:"), eraserType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:"), raw.PKEraserType(eraserType))
 	return &EraserTool{inner: raw.PKEraserToolFromID(_id)}
 }
 
 // NewEraserToolWithEraserTypeWidth creates a new [EraserTool].
-func NewEraserToolWithEraserTypeWidth(eraserType raw.PKEraserType, width float64) *EraserTool {
+func NewEraserToolWithEraserTypeWidth(eraserType PKEraserType, width float64) *EraserTool {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKEraserTool")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:width:"), eraserType, width)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:width:"), raw.PKEraserType(eraserType), width)
 	return &EraserTool{inner: raw.PKEraserToolFromID(_id)}
 }
 
 // EraserType calls the underlying EraserType.
-func (x *EraserTool) EraserType() raw.PKEraserType {
-	return x.inner.EraserType()
+func (x *EraserTool) EraserType() PKEraserType {
+	return PKEraserType(x.inner.EraserType())
 }
 
 // Width calls the underlying Width.
@@ -58,7 +58,7 @@ func (x *EraserTool) asTool() *raw.PKTool { return &x.inner.PKTool }
 // EraserToolable is the interface implemented by [EraserTool], for mocking and DI.
 type EraserToolable interface {
 	Unwrap() *raw.PKEraserTool
-	EraserType() raw.PKEraserType
+	EraserType() PKEraserType
 	Width() float64
 }
 

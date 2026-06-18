@@ -11,8 +11,8 @@ import (
 )
 
 // VNElementTypeSize calls [raw.VNElementTypeSize] (C function VNElementTypeSize).
-func VNElementTypeSize(elementType raw.VNElementType) uint {
-	return raw.VNElementTypeSize(elementType)
+func VNElementTypeSize(elementType VNElementType) uint {
+	return raw.VNElementTypeSize(raw.VNElementType(elementType))
 }
 
 // VNImagePointForFaceLandmarkPoint calls [raw.VNImagePointForFaceLandmarkPoint] (C function VNImagePointForFaceLandmarkPoint).

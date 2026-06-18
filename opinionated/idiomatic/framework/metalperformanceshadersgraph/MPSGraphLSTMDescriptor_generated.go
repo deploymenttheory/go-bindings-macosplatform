@@ -66,32 +66,32 @@ func (x *GraphLSTMDescriptor) WithForgetGateLast(forgetGateLast bool) *GraphLSTM
 }
 
 // WithInputGateActivation sets the inputGateActivation property and returns the receiver for chaining.
-func (x *GraphLSTMDescriptor) WithInputGateActivation(inputGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor {
-	x.inner.SetInputGateActivation(inputGateActivation)
+func (x *GraphLSTMDescriptor) WithInputGateActivation(inputGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor {
+	x.inner.SetInputGateActivation(raw.MPSGraphRNNActivation(inputGateActivation))
 	return x
 }
 
 // WithForgetGateActivation sets the forgetGateActivation property and returns the receiver for chaining.
-func (x *GraphLSTMDescriptor) WithForgetGateActivation(forgetGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor {
-	x.inner.SetForgetGateActivation(forgetGateActivation)
+func (x *GraphLSTMDescriptor) WithForgetGateActivation(forgetGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor {
+	x.inner.SetForgetGateActivation(raw.MPSGraphRNNActivation(forgetGateActivation))
 	return x
 }
 
 // WithCellGateActivation sets the cellGateActivation property and returns the receiver for chaining.
-func (x *GraphLSTMDescriptor) WithCellGateActivation(cellGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor {
-	x.inner.SetCellGateActivation(cellGateActivation)
+func (x *GraphLSTMDescriptor) WithCellGateActivation(cellGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor {
+	x.inner.SetCellGateActivation(raw.MPSGraphRNNActivation(cellGateActivation))
 	return x
 }
 
 // WithOutputGateActivation sets the outputGateActivation property and returns the receiver for chaining.
-func (x *GraphLSTMDescriptor) WithOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor {
-	x.inner.SetOutputGateActivation(outputGateActivation)
+func (x *GraphLSTMDescriptor) WithOutputGateActivation(outputGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor {
+	x.inner.SetOutputGateActivation(raw.MPSGraphRNNActivation(outputGateActivation))
 	return x
 }
 
 // WithActivation sets the activation property and returns the receiver for chaining.
-func (x *GraphLSTMDescriptor) WithActivation(activation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor {
-	x.inner.SetActivation(activation)
+func (x *GraphLSTMDescriptor) WithActivation(activation MPSGraphRNNActivation) *GraphLSTMDescriptor {
+	x.inner.SetActivation(raw.MPSGraphRNNActivation(activation))
 	return x
 }
 
@@ -146,53 +146,53 @@ func (x *GraphLSTMDescriptor) SetForgetGateLast(forgetGateLast bool) {
 }
 
 // InputGateActivation calls the underlying InputGateActivation.
-func (x *GraphLSTMDescriptor) InputGateActivation() raw.MPSGraphRNNActivation {
-	return x.inner.InputGateActivation()
+func (x *GraphLSTMDescriptor) InputGateActivation() MPSGraphRNNActivation {
+	return MPSGraphRNNActivation(x.inner.InputGateActivation())
 }
 
 // SetInputGateActivation calls the underlying SetInputGateActivation.
-func (x *GraphLSTMDescriptor) SetInputGateActivation(inputGateActivation raw.MPSGraphRNNActivation) {
-	x.inner.SetInputGateActivation(inputGateActivation)
+func (x *GraphLSTMDescriptor) SetInputGateActivation(inputGateActivation MPSGraphRNNActivation) {
+	x.inner.SetInputGateActivation(raw.MPSGraphRNNActivation(inputGateActivation))
 }
 
 // ForgetGateActivation calls the underlying ForgetGateActivation.
-func (x *GraphLSTMDescriptor) ForgetGateActivation() raw.MPSGraphRNNActivation {
-	return x.inner.ForgetGateActivation()
+func (x *GraphLSTMDescriptor) ForgetGateActivation() MPSGraphRNNActivation {
+	return MPSGraphRNNActivation(x.inner.ForgetGateActivation())
 }
 
 // SetForgetGateActivation calls the underlying SetForgetGateActivation.
-func (x *GraphLSTMDescriptor) SetForgetGateActivation(forgetGateActivation raw.MPSGraphRNNActivation) {
-	x.inner.SetForgetGateActivation(forgetGateActivation)
+func (x *GraphLSTMDescriptor) SetForgetGateActivation(forgetGateActivation MPSGraphRNNActivation) {
+	x.inner.SetForgetGateActivation(raw.MPSGraphRNNActivation(forgetGateActivation))
 }
 
 // CellGateActivation calls the underlying CellGateActivation.
-func (x *GraphLSTMDescriptor) CellGateActivation() raw.MPSGraphRNNActivation {
-	return x.inner.CellGateActivation()
+func (x *GraphLSTMDescriptor) CellGateActivation() MPSGraphRNNActivation {
+	return MPSGraphRNNActivation(x.inner.CellGateActivation())
 }
 
 // SetCellGateActivation calls the underlying SetCellGateActivation.
-func (x *GraphLSTMDescriptor) SetCellGateActivation(cellGateActivation raw.MPSGraphRNNActivation) {
-	x.inner.SetCellGateActivation(cellGateActivation)
+func (x *GraphLSTMDescriptor) SetCellGateActivation(cellGateActivation MPSGraphRNNActivation) {
+	x.inner.SetCellGateActivation(raw.MPSGraphRNNActivation(cellGateActivation))
 }
 
 // OutputGateActivation calls the underlying OutputGateActivation.
-func (x *GraphLSTMDescriptor) OutputGateActivation() raw.MPSGraphRNNActivation {
-	return x.inner.OutputGateActivation()
+func (x *GraphLSTMDescriptor) OutputGateActivation() MPSGraphRNNActivation {
+	return MPSGraphRNNActivation(x.inner.OutputGateActivation())
 }
 
 // SetOutputGateActivation calls the underlying SetOutputGateActivation.
-func (x *GraphLSTMDescriptor) SetOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation) {
-	x.inner.SetOutputGateActivation(outputGateActivation)
+func (x *GraphLSTMDescriptor) SetOutputGateActivation(outputGateActivation MPSGraphRNNActivation) {
+	x.inner.SetOutputGateActivation(raw.MPSGraphRNNActivation(outputGateActivation))
 }
 
 // Activation calls the underlying Activation.
-func (x *GraphLSTMDescriptor) Activation() raw.MPSGraphRNNActivation {
-	return x.inner.Activation()
+func (x *GraphLSTMDescriptor) Activation() MPSGraphRNNActivation {
+	return MPSGraphRNNActivation(x.inner.Activation())
 }
 
 // SetActivation calls the underlying SetActivation.
-func (x *GraphLSTMDescriptor) SetActivation(activation raw.MPSGraphRNNActivation) {
-	x.inner.SetActivation(activation)
+func (x *GraphLSTMDescriptor) SetActivation(activation MPSGraphRNNActivation) {
+	x.inner.SetActivation(raw.MPSGraphRNNActivation(activation))
 }
 
 func (x *GraphLSTMDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
@@ -205,11 +205,11 @@ type GraphLSTMDescriptorable interface {
 	WithProduceCell(produceCell bool) *GraphLSTMDescriptor
 	WithTraining(training bool) *GraphLSTMDescriptor
 	WithForgetGateLast(forgetGateLast bool) *GraphLSTMDescriptor
-	WithInputGateActivation(inputGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor
-	WithForgetGateActivation(forgetGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor
-	WithCellGateActivation(cellGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor
-	WithOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor
-	WithActivation(activation raw.MPSGraphRNNActivation) *GraphLSTMDescriptor
+	WithInputGateActivation(inputGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor
+	WithForgetGateActivation(forgetGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor
+	WithCellGateActivation(cellGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor
+	WithOutputGateActivation(outputGateActivation MPSGraphRNNActivation) *GraphLSTMDescriptor
+	WithActivation(activation MPSGraphRNNActivation) *GraphLSTMDescriptor
 	Reverse() bool
 	SetReverse(reverse bool)
 	Bidirectional() bool
@@ -220,16 +220,16 @@ type GraphLSTMDescriptorable interface {
 	SetTraining(training bool)
 	ForgetGateLast() bool
 	SetForgetGateLast(forgetGateLast bool)
-	InputGateActivation() raw.MPSGraphRNNActivation
-	SetInputGateActivation(inputGateActivation raw.MPSGraphRNNActivation)
-	ForgetGateActivation() raw.MPSGraphRNNActivation
-	SetForgetGateActivation(forgetGateActivation raw.MPSGraphRNNActivation)
-	CellGateActivation() raw.MPSGraphRNNActivation
-	SetCellGateActivation(cellGateActivation raw.MPSGraphRNNActivation)
-	OutputGateActivation() raw.MPSGraphRNNActivation
-	SetOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation)
-	Activation() raw.MPSGraphRNNActivation
-	SetActivation(activation raw.MPSGraphRNNActivation)
+	InputGateActivation() MPSGraphRNNActivation
+	SetInputGateActivation(inputGateActivation MPSGraphRNNActivation)
+	ForgetGateActivation() MPSGraphRNNActivation
+	SetForgetGateActivation(forgetGateActivation MPSGraphRNNActivation)
+	CellGateActivation() MPSGraphRNNActivation
+	SetCellGateActivation(cellGateActivation MPSGraphRNNActivation)
+	OutputGateActivation() MPSGraphRNNActivation
+	SetOutputGateActivation(outputGateActivation MPSGraphRNNActivation)
+	Activation() MPSGraphRNNActivation
+	SetActivation(activation MPSGraphRNNActivation)
 }
 
 var _ GraphLSTMDescriptorable = (*GraphLSTMDescriptor)(nil)

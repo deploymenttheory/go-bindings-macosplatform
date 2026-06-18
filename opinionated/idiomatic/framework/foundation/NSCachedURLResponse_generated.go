@@ -37,9 +37,9 @@ func NewCachedURLResponseWithResponseData(response *raw.NSURLResponse, data *raw
 }
 
 // NewCachedURLResponseWithResponseDataUserInfoStoragePolicy creates a new [CachedURLResponse].
-func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *raw.NSURLResponse, data *raw.NSData, userInfo *raw.NSDictionary[objc.ID, objc.ID], storagePolicy raw.NSURLCacheStoragePolicy) *CachedURLResponse {
+func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *raw.NSURLResponse, data *raw.NSData, userInfo *raw.NSDictionary[objc.ID, objc.ID], storagePolicy NSURLCacheStoragePolicy) *CachedURLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedURLResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponse:data:userInfo:storagePolicy:"), response.Ptr(), data.Ptr(), userInfo.Ptr(), storagePolicy)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponse:data:userInfo:storagePolicy:"), response.Ptr(), data.Ptr(), userInfo.Ptr(), raw.NSURLCacheStoragePolicy(storagePolicy))
 	return &CachedURLResponse{inner: raw.NSCachedURLResponseFromID(_id)}
 }
 
@@ -73,8 +73,8 @@ func (x *CachedURLResponse) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
 }
 
 // StoragePolicy calls the underlying StoragePolicy.
-func (x *CachedURLResponse) StoragePolicy() raw.NSURLCacheStoragePolicy {
-	return x.inner.StoragePolicy()
+func (x *CachedURLResponse) StoragePolicy() NSURLCacheStoragePolicy {
+	return NSURLCacheStoragePolicy(x.inner.StoragePolicy())
 }
 
 func (x *CachedURLResponse) asObject() *raw.NSObject { return &x.inner.NSObject }
@@ -86,7 +86,7 @@ type CachedURLResponseable interface {
 	Response() *URLResponse
 	Data() *Data
 	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
-	StoragePolicy() raw.NSURLCacheStoragePolicy
+	StoragePolicy() NSURLCacheStoragePolicy
 }
 
 var _ CachedURLResponseable = (*CachedURLResponse)(nil)

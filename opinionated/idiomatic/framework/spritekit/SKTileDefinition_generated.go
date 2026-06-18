@@ -135,8 +135,8 @@ func (x *TileDefinition) WithPlacementWeight(placementWeight uint) *TileDefiniti
 }
 
 // WithRotation sets the rotation property and returns the receiver for chaining.
-func (x *TileDefinition) WithRotation(rotation raw.SKTileDefinitionRotation) *TileDefinition {
-	x.inner.SetRotation(rotation)
+func (x *TileDefinition) WithRotation(rotation SKTileDefinitionRotation) *TileDefinition {
+	x.inner.SetRotation(raw.SKTileDefinitionRotation(rotation))
 	return x
 }
 
@@ -239,13 +239,13 @@ func (x *TileDefinition) SetPlacementWeight(placementWeight uint) {
 }
 
 // Rotation calls the underlying Rotation.
-func (x *TileDefinition) Rotation() raw.SKTileDefinitionRotation {
-	return x.inner.Rotation()
+func (x *TileDefinition) Rotation() SKTileDefinitionRotation {
+	return SKTileDefinitionRotation(x.inner.Rotation())
 }
 
 // SetRotation calls the underlying SetRotation.
-func (x *TileDefinition) SetRotation(rotation raw.SKTileDefinitionRotation) {
-	x.inner.SetRotation(rotation)
+func (x *TileDefinition) SetRotation(rotation SKTileDefinitionRotation) {
+	x.inner.SetRotation(raw.SKTileDefinitionRotation(rotation))
 }
 
 // FlipVertically calls the underlying FlipVertically.
@@ -278,7 +278,7 @@ type TileDefinitionable interface {
 	WithSize(size corefoundation.CGSize) *TileDefinition
 	WithTimePerFrame(timePerFrame float64) *TileDefinition
 	WithPlacementWeight(placementWeight uint) *TileDefinition
-	WithRotation(rotation raw.SKTileDefinitionRotation) *TileDefinition
+	WithRotation(rotation SKTileDefinitionRotation) *TileDefinition
 	WithFlipVertically(flipVertically bool) *TileDefinition
 	WithFlipHorizontally(flipHorizontally bool) *TileDefinition
 	Textures() []*Texture
@@ -295,8 +295,8 @@ type TileDefinitionable interface {
 	SetTimePerFrame(timePerFrame float64)
 	PlacementWeight() uint
 	SetPlacementWeight(placementWeight uint)
-	Rotation() raw.SKTileDefinitionRotation
-	SetRotation(rotation raw.SKTileDefinitionRotation)
+	Rotation() SKTileDefinitionRotation
+	SetRotation(rotation SKTileDefinitionRotation)
 	FlipVertically() bool
 	SetFlipVertically(flipVertically bool)
 	FlipHorizontally() bool

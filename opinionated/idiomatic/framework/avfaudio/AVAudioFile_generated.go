@@ -50,10 +50,10 @@ func NewAudioFileForReadingError(fileURL string) (*AudioFile, error) {
 }
 
 // NewAudioFileForReadingCommonFormatInterleavedError creates a new [AudioFile].
-func NewAudioFileForReadingCommonFormatInterleavedError(fileURL string, format raw.AVAudioCommonFormat, interleaved bool) (*AudioFile, error) {
+func NewAudioFileForReadingCommonFormatInterleavedError(fileURL string, format AVAudioCommonFormat, interleaved bool) (*AudioFile, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFile")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReading:commonFormat:interleaved:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), format, interleaved, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReading:commonFormat:interleaved:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), raw.AVAudioCommonFormat(format), interleaved, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -72,10 +72,10 @@ func NewAudioFileForWritingSettingsError(fileURL string, settings *foundation.NS
 }
 
 // NewAudioFileForWritingSettingsCommonFormatInterleavedError creates a new [AudioFile].
-func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, settings *foundation.NSDictionary[*foundation.NSString, objc.ID], format raw.AVAudioCommonFormat, interleaved bool) (*AudioFile, error) {
+func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, settings *foundation.NSDictionary[*foundation.NSString, objc.ID], format AVAudioCommonFormat, interleaved bool) (*AudioFile, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFile")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:commonFormat:interleaved:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), settings.Ptr(), format, interleaved, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:commonFormat:interleaved:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), settings.Ptr(), raw.AVAudioCommonFormat(format), interleaved, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

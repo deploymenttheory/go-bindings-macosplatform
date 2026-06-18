@@ -75,8 +75,8 @@ func (x *NEOnDemandRule) WithDNSServerAddressMatch(items ...*foundation.NSString
 }
 
 // WithInterfaceTypeMatch sets the interfaceTypeMatch property and returns the receiver for chaining.
-func (x *NEOnDemandRule) WithInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) *NEOnDemandRule {
-	x.inner.SetInterfaceTypeMatch(interfaceTypeMatch)
+func (x *NEOnDemandRule) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRule {
+	x.inner.SetInterfaceTypeMatch(raw.NEOnDemandRuleInterfaceType(interfaceTypeMatch))
 	return x
 }
 
@@ -105,8 +105,8 @@ func (x *NEOnDemandRule) WithProbeURL(probeURL string) *NEOnDemandRule {
 }
 
 // Action calls the underlying Action.
-func (x *NEOnDemandRule) Action() raw.NEOnDemandRuleAction {
-	return x.inner.Action()
+func (x *NEOnDemandRule) Action() NEOnDemandRuleAction {
+	return NEOnDemandRuleAction(x.inner.Action())
 }
 
 // DNSSearchDomainMatch returns the collection as a Go slice.
@@ -142,13 +142,13 @@ func (x *NEOnDemandRule) SetDNSServerAddressMatch(dNSServerAddressMatch *foundat
 }
 
 // InterfaceTypeMatch calls the underlying InterfaceTypeMatch.
-func (x *NEOnDemandRule) InterfaceTypeMatch() raw.NEOnDemandRuleInterfaceType {
-	return x.inner.InterfaceTypeMatch()
+func (x *NEOnDemandRule) InterfaceTypeMatch() NEOnDemandRuleInterfaceType {
+	return NEOnDemandRuleInterfaceType(x.inner.InterfaceTypeMatch())
 }
 
 // SetInterfaceTypeMatch calls the underlying SetInterfaceTypeMatch.
-func (x *NEOnDemandRule) SetInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) {
-	x.inner.SetInterfaceTypeMatch(interfaceTypeMatch)
+func (x *NEOnDemandRule) SetInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) {
+	x.inner.SetInterfaceTypeMatch(raw.NEOnDemandRuleInterfaceType(interfaceTypeMatch))
 }
 
 // SSIDMatch returns the collection as a Go slice.
@@ -184,16 +184,16 @@ type NEOnDemandRuleable interface {
 	Unwrap() *raw.NEOnDemandRule
 	WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRule
 	WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRule
-	WithInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) *NEOnDemandRule
+	WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRule
 	WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRule
 	WithProbeURL(probeURL string) *NEOnDemandRule
-	Action() raw.NEOnDemandRuleAction
+	Action() NEOnDemandRuleAction
 	DNSSearchDomainMatch() []string
 	SetDNSSearchDomainMatch(dNSSearchDomainMatch *foundation.NSArray[*foundation.NSString])
 	DNSServerAddressMatch() []string
 	SetDNSServerAddressMatch(dNSServerAddressMatch *foundation.NSArray[*foundation.NSString])
-	InterfaceTypeMatch() raw.NEOnDemandRuleInterfaceType
-	SetInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType)
+	InterfaceTypeMatch() NEOnDemandRuleInterfaceType
+	SetInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType)
 	SSIDMatch() []string
 	SetSSIDMatch(sSIDMatch *foundation.NSArray[*foundation.NSString])
 	ProbeURL() *foundation.NSURL

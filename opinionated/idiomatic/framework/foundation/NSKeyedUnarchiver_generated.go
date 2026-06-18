@@ -69,8 +69,8 @@ func (x *KeyedUnarchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *K
 }
 
 // WithDecodingFailurePolicy sets the decodingFailurePolicy property and returns the receiver for chaining.
-func (x *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy raw.NSDecodingFailurePolicy) *KeyedUnarchiver {
-	x.inner.SetDecodingFailurePolicy(decodingFailurePolicy)
+func (x *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy NSDecodingFailurePolicy) *KeyedUnarchiver {
+	x.inner.SetDecodingFailurePolicy(raw.NSDecodingFailurePolicy(decodingFailurePolicy))
 	return x
 }
 
@@ -111,8 +111,8 @@ func (x *KeyedUnarchiver) SetRequiresSecureCoding(requiresSecureCoding bool) {
 }
 
 // SetDecodingFailurePolicy calls the underlying SetDecodingFailurePolicy.
-func (x *KeyedUnarchiver) SetDecodingFailurePolicy(decodingFailurePolicy raw.NSDecodingFailurePolicy) {
-	x.inner.SetDecodingFailurePolicy(decodingFailurePolicy)
+func (x *KeyedUnarchiver) SetDecodingFailurePolicy(decodingFailurePolicy NSDecodingFailurePolicy) {
+	x.inner.SetDecodingFailurePolicy(raw.NSDecodingFailurePolicy(decodingFailurePolicy))
 }
 
 func (x *KeyedUnarchiver) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
@@ -124,7 +124,7 @@ type KeyedUnarchiverable interface {
 	Unwrap() *raw.NSKeyedUnarchiver
 	WithDelegate(delegate raw.NSKeyedUnarchiverDelegate) *KeyedUnarchiver
 	WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedUnarchiver
-	WithDecodingFailurePolicy(decodingFailurePolicy raw.NSDecodingFailurePolicy) *KeyedUnarchiver
+	WithDecodingFailurePolicy(decodingFailurePolicy NSDecodingFailurePolicy) *KeyedUnarchiver
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyedUnarchiver
 	FinishDecoding()
 	SetClassForClassName(cls objc.Class, codedName string)
@@ -132,7 +132,7 @@ type KeyedUnarchiverable interface {
 	Delegate() raw.NSKeyedUnarchiverDelegate
 	SetDelegate(delegate raw.NSKeyedUnarchiverDelegate)
 	SetRequiresSecureCoding(requiresSecureCoding bool)
-	SetDecodingFailurePolicy(decodingFailurePolicy raw.NSDecodingFailurePolicy)
+	SetDecodingFailurePolicy(decodingFailurePolicy NSDecodingFailurePolicy)
 }
 
 var _ KeyedUnarchiverable = (*KeyedUnarchiver)(nil)

@@ -112,9 +112,9 @@ func (x *GameSession) SaveData(ctx context.Context, data *foundation.NSData) (*f
 }
 
 // SetConnectionState blocks until the operation completes or ctx is cancelled.
-func (x *GameSession) SetConnectionState(ctx context.Context, state raw.GKConnectionState) error {
+func (x *GameSession) SetConnectionState(ctx context.Context, state GKConnectionState) error {
 	_ch := make(chan error, 1)
-	x.inner.SetConnectionStateCompletionHandler(state, func(_p0 unsafe.Pointer) {
+	x.inner.SetConnectionStateCompletionHandler(raw.GKConnectionState(state), func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -130,14 +130,14 @@ func (x *GameSession) SetConnectionState(ctx context.Context, state raw.GKConnec
 }
 
 // PlayersWithConnectionState calls the underlying PlayersWithConnectionState.
-func (x *GameSession) PlayersWithConnectionState(state raw.GKConnectionState) *foundation.NSArray[*raw.GKCloudPlayer] {
-	return x.inner.PlayersWithConnectionState(state)
+func (x *GameSession) PlayersWithConnectionState(state GKConnectionState) *foundation.NSArray[*raw.GKCloudPlayer] {
+	return x.inner.PlayersWithConnectionState(raw.GKConnectionState(state))
 }
 
 // SendDataWithTransportType blocks until the operation completes or ctx is cancelled.
-func (x *GameSession) SendDataWithTransportType(ctx context.Context, data *foundation.NSData, transport raw.GKTransportType) error {
+func (x *GameSession) SendDataWithTransportType(ctx context.Context, data *foundation.NSData, transport GKTransportType) error {
 	_ch := make(chan error, 1)
-	x.inner.SendDataWithTransportTypeCompletionHandler(data, transport, func(_p0 unsafe.Pointer) {
+	x.inner.SendDataWithTransportTypeCompletionHandler(data, raw.GKTransportType(transport), func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -262,9 +262,9 @@ type GameSessionable interface {
 	GetShareURL(ctx context.Context) (*foundation.NSURL, error)
 	LoadData(ctx context.Context) (*foundation.NSData, error)
 	SaveData(ctx context.Context, data *foundation.NSData) (*foundation.NSData, error)
-	SetConnectionState(ctx context.Context, state raw.GKConnectionState) error
-	PlayersWithConnectionState(state raw.GKConnectionState) *foundation.NSArray[*raw.GKCloudPlayer]
-	SendDataWithTransportType(ctx context.Context, data *foundation.NSData, transport raw.GKTransportType) error
+	SetConnectionState(ctx context.Context, state GKConnectionState) error
+	PlayersWithConnectionState(state GKConnectionState) *foundation.NSArray[*raw.GKCloudPlayer]
+	SendDataWithTransportType(ctx context.Context, data *foundation.NSData, transport GKTransportType) error
 	SendMessageWithLocalizedFormatKeyArgumentsDataToPlayersBadgePlayers(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData, players *foundation.NSArray[*raw.GKCloudPlayer], badgePlayers bool) error
 	ClearBadgeForPlayers(ctx context.Context, players *foundation.NSArray[*raw.GKCloudPlayer]) error
 	Identifier() string

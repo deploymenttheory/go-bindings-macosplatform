@@ -874,8 +874,8 @@ func ChangeOcclusionByDuration(v float32, duration float64) *Action {
 }
 
 // AttributeWithNameType calls the underlying SKAttributeAttributeWithNameType.
-func AttributeWithNameType(name string, type_ raw.SKAttributeType) *Attribute {
-	_r := raw.SKAttributeAttributeWithNameType(foundation.NSStringStringWithUTF8String(name), type_)
+func AttributeWithNameType(name string, type_ SKAttributeType) *Attribute {
+	_r := raw.SKAttributeAttributeWithNameType(foundation.NSStringStringWithUTF8String(name), raw.SKAttributeType(type_))
 	if _r == nil {
 		return nil
 	}
@@ -1847,8 +1847,8 @@ func EmptyTileGroup() *TileGroup {
 }
 
 // TileGroupRuleWithAdjacencyTileDefinitions calls the underlying SKTileGroupRuleTileGroupRuleWithAdjacencyTileDefinitions.
-func TileGroupRuleWithAdjacencyTileDefinitions(adjacency raw.SKTileAdjacencyMask, tileDefinitions *foundation.NSArray[*raw.SKTileDefinition]) *TileGroupRule {
-	_r := raw.SKTileGroupRuleTileGroupRuleWithAdjacencyTileDefinitions(adjacency, tileDefinitions)
+func TileGroupRuleWithAdjacencyTileDefinitions(adjacency SKTileAdjacencyMask, tileDefinitions *foundation.NSArray[*raw.SKTileDefinition]) *TileGroupRule {
+	_r := raw.SKTileGroupRuleTileGroupRuleWithAdjacencyTileDefinitions(raw.SKTileAdjacencyMask(adjacency), tileDefinitions)
 	if _r == nil {
 		return nil
 	}
@@ -1892,8 +1892,8 @@ func TileSetWithTileGroups(tileGroups *foundation.NSArray[*raw.SKTileGroup]) *Ti
 }
 
 // TileSetWithTileGroupsTileSetType calls the underlying SKTileSetTileSetWithTileGroupsTileSetType.
-func TileSetWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*raw.SKTileGroup], tileSetType raw.SKTileSetType) *TileSet {
-	_r := raw.SKTileSetTileSetWithTileGroupsTileSetType(tileGroups, tileSetType)
+func TileSetWithTileGroupsTileSetType(tileGroups *foundation.NSArray[*raw.SKTileGroup], tileSetType SKTileSetType) *TileSet {
+	_r := raw.SKTileSetTileSetWithTileGroupsTileSetType(tileGroups, raw.SKTileSetType(tileSetType))
 	if _r == nil {
 		return nil
 	}
@@ -1964,8 +1964,8 @@ func FlipVerticalWithDuration(sec float64) *Transition {
 }
 
 // RevealWithDirectionDuration calls the underlying SKTransitionRevealWithDirectionDuration.
-func RevealWithDirectionDuration(direction raw.SKTransitionDirection, sec float64) *Transition {
-	_r := raw.SKTransitionRevealWithDirectionDuration(direction, sec)
+func RevealWithDirectionDuration(direction SKTransitionDirection, sec float64) *Transition {
+	_r := raw.SKTransitionRevealWithDirectionDuration(raw.SKTransitionDirection(direction), sec)
 	if _r == nil {
 		return nil
 	}
@@ -1973,8 +1973,8 @@ func RevealWithDirectionDuration(direction raw.SKTransitionDirection, sec float6
 }
 
 // MoveInWithDirectionDuration calls the underlying SKTransitionMoveInWithDirectionDuration.
-func MoveInWithDirectionDuration(direction raw.SKTransitionDirection, sec float64) *Transition {
-	_r := raw.SKTransitionMoveInWithDirectionDuration(direction, sec)
+func MoveInWithDirectionDuration(direction SKTransitionDirection, sec float64) *Transition {
+	_r := raw.SKTransitionMoveInWithDirectionDuration(raw.SKTransitionDirection(direction), sec)
 	if _r == nil {
 		return nil
 	}
@@ -1982,8 +1982,8 @@ func MoveInWithDirectionDuration(direction raw.SKTransitionDirection, sec float6
 }
 
 // PushWithDirectionDuration calls the underlying SKTransitionPushWithDirectionDuration.
-func PushWithDirectionDuration(direction raw.SKTransitionDirection, sec float64) *Transition {
-	_r := raw.SKTransitionPushWithDirectionDuration(direction, sec)
+func PushWithDirectionDuration(direction SKTransitionDirection, sec float64) *Transition {
+	_r := raw.SKTransitionPushWithDirectionDuration(raw.SKTransitionDirection(direction), sec)
 	if _r == nil {
 		return nil
 	}

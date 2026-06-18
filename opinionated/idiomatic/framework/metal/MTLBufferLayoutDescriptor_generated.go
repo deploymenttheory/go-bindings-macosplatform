@@ -42,8 +42,8 @@ func (x *BufferLayoutDescriptor) WithStride(stride uint) *BufferLayoutDescriptor
 }
 
 // WithStepFunction sets the stepFunction property and returns the receiver for chaining.
-func (x *BufferLayoutDescriptor) WithStepFunction(stepFunction raw.MTLStepFunction) *BufferLayoutDescriptor {
-	x.inner.SetStepFunction(stepFunction)
+func (x *BufferLayoutDescriptor) WithStepFunction(stepFunction MTLStepFunction) *BufferLayoutDescriptor {
+	x.inner.SetStepFunction(raw.MTLStepFunction(stepFunction))
 	return x
 }
 
@@ -64,13 +64,13 @@ func (x *BufferLayoutDescriptor) SetStride(stride uint) {
 }
 
 // StepFunction calls the underlying StepFunction.
-func (x *BufferLayoutDescriptor) StepFunction() raw.MTLStepFunction {
-	return x.inner.StepFunction()
+func (x *BufferLayoutDescriptor) StepFunction() MTLStepFunction {
+	return MTLStepFunction(x.inner.StepFunction())
 }
 
 // SetStepFunction calls the underlying SetStepFunction.
-func (x *BufferLayoutDescriptor) SetStepFunction(stepFunction raw.MTLStepFunction) {
-	x.inner.SetStepFunction(stepFunction)
+func (x *BufferLayoutDescriptor) SetStepFunction(stepFunction MTLStepFunction) {
+	x.inner.SetStepFunction(raw.MTLStepFunction(stepFunction))
 }
 
 // StepRate calls the underlying StepRate.
@@ -87,12 +87,12 @@ func (x *BufferLayoutDescriptor) SetStepRate(stepRate uint) {
 type BufferLayoutDescriptorable interface {
 	Unwrap() *raw.MTLBufferLayoutDescriptor
 	WithStride(stride uint) *BufferLayoutDescriptor
-	WithStepFunction(stepFunction raw.MTLStepFunction) *BufferLayoutDescriptor
+	WithStepFunction(stepFunction MTLStepFunction) *BufferLayoutDescriptor
 	WithStepRate(stepRate uint) *BufferLayoutDescriptor
 	Stride() uint
 	SetStride(stride uint)
-	StepFunction() raw.MTLStepFunction
-	SetStepFunction(stepFunction raw.MTLStepFunction)
+	StepFunction() MTLStepFunction
+	SetStepFunction(stepFunction MTLStepFunction)
 	StepRate() uint
 	SetStepRate(stepRate uint)
 }

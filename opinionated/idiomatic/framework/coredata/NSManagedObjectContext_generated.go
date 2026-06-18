@@ -39,9 +39,9 @@ func NewManagedObjectContext() *ManagedObjectContext {
 }
 
 // NewManagedObjectContextWithConcurrencyType creates a new [ManagedObjectContext].
-func NewManagedObjectContextWithConcurrencyType(ct raw.NSManagedObjectContextConcurrencyType) *ManagedObjectContext {
+func NewManagedObjectContextWithConcurrencyType(ct NSManagedObjectContextConcurrencyType) *ManagedObjectContext {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectContext")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConcurrencyType:"), ct)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConcurrencyType:"), raw.NSManagedObjectContextConcurrencyType(ct))
 	return &ManagedObjectContext{inner: raw.NSManagedObjectContextFromID(_id)}
 }
 
@@ -350,8 +350,8 @@ func (x *ManagedObjectContext) UserInfo() *foundation.NSMutableDictionary[objc.I
 }
 
 // ConcurrencyType calls the underlying ConcurrencyType.
-func (x *ManagedObjectContext) ConcurrencyType() raw.NSManagedObjectContextConcurrencyType {
-	return x.inner.ConcurrencyType()
+func (x *ManagedObjectContext) ConcurrencyType() NSManagedObjectContextConcurrencyType {
+	return NSManagedObjectContextConcurrencyType(x.inner.ConcurrencyType())
 }
 
 // InsertedObjects calls the underlying InsertedObjects.
@@ -508,7 +508,7 @@ type ManagedObjectContextable interface {
 	SetUndoManager(undoManager *foundation.NSUndoManager)
 	HasChanges() bool
 	UserInfo() *foundation.NSMutableDictionary[objc.ID, objc.ID]
-	ConcurrencyType() raw.NSManagedObjectContextConcurrencyType
+	ConcurrencyType() NSManagedObjectContextConcurrencyType
 	InsertedObjects() *foundation.NSSet[*raw.NSManagedObject]
 	UpdatedObjects() *foundation.NSSet[*raw.NSManagedObject]
 	DeletedObjects() *foundation.NSSet[*raw.NSManagedObject]

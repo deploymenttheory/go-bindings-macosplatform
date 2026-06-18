@@ -187,8 +187,8 @@ func (x *CNNYOLOLoss) MaxIOUForObjectAbsence() float32 {
 }
 
 // ReductionType calls the underlying ReductionType.
-func (x *CNNYOLOLoss) ReductionType() raw.MPSCNNReductionType {
-	return x.inner.ReductionType()
+func (x *CNNYOLOLoss) ReductionType() MPSCNNReductionType {
+	return MPSCNNReductionType(x.inner.ReductionType())
 }
 
 // NumberOfAnchorBoxes calls the underlying NumberOfAnchorBoxes.
@@ -234,7 +234,7 @@ type CNNYOLOLossable interface {
 	ScaleClass() float32
 	MinIOUForObjectPresence() float32
 	MaxIOUForObjectAbsence() float32
-	ReductionType() raw.MPSCNNReductionType
+	ReductionType() MPSCNNReductionType
 	NumberOfAnchorBoxes() uint
 	AnchorBoxes() *foundation.NSData
 	ReduceAcrossBatch() bool

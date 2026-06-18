@@ -50,8 +50,8 @@ func (x *DirectionsRequest) WithDestination(destination *MapItem) *DirectionsReq
 }
 
 // WithTransportType sets the transportType property and returns the receiver for chaining.
-func (x *DirectionsRequest) WithTransportType(transportType raw.MKDirectionsTransportType) *DirectionsRequest {
-	x.inner.SetTransportType(transportType)
+func (x *DirectionsRequest) WithTransportType(transportType MKDirectionsTransportType) *DirectionsRequest {
+	x.inner.SetTransportType(raw.MKDirectionsTransportType(transportType))
 	return x
 }
 
@@ -74,14 +74,14 @@ func (x *DirectionsRequest) WithArrivalDate(arrivalDate *foundation.NSDate) *Dir
 }
 
 // WithTollPreference sets the tollPreference property and returns the receiver for chaining.
-func (x *DirectionsRequest) WithTollPreference(tollPreference raw.MKDirectionsRoutePreference) *DirectionsRequest {
-	x.inner.SetTollPreference(tollPreference)
+func (x *DirectionsRequest) WithTollPreference(tollPreference MKDirectionsRoutePreference) *DirectionsRequest {
+	x.inner.SetTollPreference(raw.MKDirectionsRoutePreference(tollPreference))
 	return x
 }
 
 // WithHighwayPreference sets the highwayPreference property and returns the receiver for chaining.
-func (x *DirectionsRequest) WithHighwayPreference(highwayPreference raw.MKDirectionsRoutePreference) *DirectionsRequest {
-	x.inner.SetHighwayPreference(highwayPreference)
+func (x *DirectionsRequest) WithHighwayPreference(highwayPreference MKDirectionsRoutePreference) *DirectionsRequest {
+	x.inner.SetHighwayPreference(raw.MKDirectionsRoutePreference(highwayPreference))
 	return x
 }
 
@@ -114,13 +114,13 @@ func (x *DirectionsRequest) Destination() *MapItem {
 }
 
 // TransportType calls the underlying TransportType.
-func (x *DirectionsRequest) TransportType() raw.MKDirectionsTransportType {
-	return x.inner.TransportType()
+func (x *DirectionsRequest) TransportType() MKDirectionsTransportType {
+	return MKDirectionsTransportType(x.inner.TransportType())
 }
 
 // SetTransportType calls the underlying SetTransportType.
-func (x *DirectionsRequest) SetTransportType(transportType raw.MKDirectionsTransportType) {
-	x.inner.SetTransportType(transportType)
+func (x *DirectionsRequest) SetTransportType(transportType MKDirectionsTransportType) {
+	x.inner.SetTransportType(raw.MKDirectionsTransportType(transportType))
 }
 
 // RequestsAlternateRoutes calls the underlying RequestsAlternateRoutes.
@@ -154,23 +154,23 @@ func (x *DirectionsRequest) SetArrivalDate(arrivalDate *foundation.NSDate) {
 }
 
 // TollPreference calls the underlying TollPreference.
-func (x *DirectionsRequest) TollPreference() raw.MKDirectionsRoutePreference {
-	return x.inner.TollPreference()
+func (x *DirectionsRequest) TollPreference() MKDirectionsRoutePreference {
+	return MKDirectionsRoutePreference(x.inner.TollPreference())
 }
 
 // SetTollPreference calls the underlying SetTollPreference.
-func (x *DirectionsRequest) SetTollPreference(tollPreference raw.MKDirectionsRoutePreference) {
-	x.inner.SetTollPreference(tollPreference)
+func (x *DirectionsRequest) SetTollPreference(tollPreference MKDirectionsRoutePreference) {
+	x.inner.SetTollPreference(raw.MKDirectionsRoutePreference(tollPreference))
 }
 
 // HighwayPreference calls the underlying HighwayPreference.
-func (x *DirectionsRequest) HighwayPreference() raw.MKDirectionsRoutePreference {
-	return x.inner.HighwayPreference()
+func (x *DirectionsRequest) HighwayPreference() MKDirectionsRoutePreference {
+	return MKDirectionsRoutePreference(x.inner.HighwayPreference())
 }
 
 // SetHighwayPreference calls the underlying SetHighwayPreference.
-func (x *DirectionsRequest) SetHighwayPreference(highwayPreference raw.MKDirectionsRoutePreference) {
-	x.inner.SetHighwayPreference(highwayPreference)
+func (x *DirectionsRequest) SetHighwayPreference(highwayPreference MKDirectionsRoutePreference) {
+	x.inner.SetHighwayPreference(raw.MKDirectionsRoutePreference(highwayPreference))
 }
 
 // DirectionsRequestable is the interface implemented by [DirectionsRequest], for mocking and DI.
@@ -178,28 +178,28 @@ type DirectionsRequestable interface {
 	Unwrap() *raw.MKDirectionsRequest
 	WithSource(source *MapItem) *DirectionsRequest
 	WithDestination(destination *MapItem) *DirectionsRequest
-	WithTransportType(transportType raw.MKDirectionsTransportType) *DirectionsRequest
+	WithTransportType(transportType MKDirectionsTransportType) *DirectionsRequest
 	WithRequestsAlternateRoutes(requestsAlternateRoutes bool) *DirectionsRequest
 	WithDepartureDate(departureDate *foundation.NSDate) *DirectionsRequest
 	WithArrivalDate(arrivalDate *foundation.NSDate) *DirectionsRequest
-	WithTollPreference(tollPreference raw.MKDirectionsRoutePreference) *DirectionsRequest
-	WithHighwayPreference(highwayPreference raw.MKDirectionsRoutePreference) *DirectionsRequest
+	WithTollPreference(tollPreference MKDirectionsRoutePreference) *DirectionsRequest
+	WithHighwayPreference(highwayPreference MKDirectionsRoutePreference) *DirectionsRequest
 	SetSource(source *raw.MKMapItem)
 	SetDestination(destination *raw.MKMapItem)
 	Source() *MapItem
 	Destination() *MapItem
-	TransportType() raw.MKDirectionsTransportType
-	SetTransportType(transportType raw.MKDirectionsTransportType)
+	TransportType() MKDirectionsTransportType
+	SetTransportType(transportType MKDirectionsTransportType)
 	RequestsAlternateRoutes() bool
 	SetRequestsAlternateRoutes(requestsAlternateRoutes bool)
 	DepartureDate() *foundation.NSDate
 	SetDepartureDate(departureDate *foundation.NSDate)
 	ArrivalDate() *foundation.NSDate
 	SetArrivalDate(arrivalDate *foundation.NSDate)
-	TollPreference() raw.MKDirectionsRoutePreference
-	SetTollPreference(tollPreference raw.MKDirectionsRoutePreference)
-	HighwayPreference() raw.MKDirectionsRoutePreference
-	SetHighwayPreference(highwayPreference raw.MKDirectionsRoutePreference)
+	TollPreference() MKDirectionsRoutePreference
+	SetTollPreference(tollPreference MKDirectionsRoutePreference)
+	HighwayPreference() MKDirectionsRoutePreference
+	SetHighwayPreference(highwayPreference MKDirectionsRoutePreference)
 }
 
 var _ DirectionsRequestable = (*DirectionsRequest)(nil)

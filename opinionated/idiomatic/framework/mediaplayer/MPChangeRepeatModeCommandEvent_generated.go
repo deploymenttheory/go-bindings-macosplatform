@@ -36,8 +36,8 @@ func NewChangeRepeatModeCommandEvent() *ChangeRepeatModeCommandEvent {
 }
 
 // RepeatType calls the underlying RepeatType.
-func (x *ChangeRepeatModeCommandEvent) RepeatType() raw.MPRepeatType {
-	return x.inner.RepeatType()
+func (x *ChangeRepeatModeCommandEvent) RepeatType() MPRepeatType {
+	return MPRepeatType(x.inner.RepeatType())
 }
 
 // PreservesRepeatMode calls the underlying PreservesRepeatMode.
@@ -52,7 +52,7 @@ func (x *ChangeRepeatModeCommandEvent) asRemoteCommandEvent() *raw.MPRemoteComma
 // ChangeRepeatModeCommandEventable is the interface implemented by [ChangeRepeatModeCommandEvent], for mocking and DI.
 type ChangeRepeatModeCommandEventable interface {
 	Unwrap() *raw.MPChangeRepeatModeCommandEvent
-	RepeatType() raw.MPRepeatType
+	RepeatType() MPRepeatType
 	PreservesRepeatMode() bool
 }
 

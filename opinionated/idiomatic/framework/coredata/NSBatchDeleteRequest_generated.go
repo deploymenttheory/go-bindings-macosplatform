@@ -46,8 +46,8 @@ func NewBatchDeleteRequestWithObjectIDs(objects *foundation.NSArray[*raw.NSManag
 }
 
 // WithResultType sets the resultType property and returns the receiver for chaining.
-func (x *BatchDeleteRequest) WithResultType(resultType raw.NSBatchDeleteRequestResultType) *BatchDeleteRequest {
-	x.inner.SetResultType(resultType)
+func (x *BatchDeleteRequest) WithResultType(resultType NSBatchDeleteRequestResultType) *BatchDeleteRequest {
+	x.inner.SetResultType(raw.NSBatchDeleteRequestResultType(resultType))
 	return x
 }
 
@@ -70,13 +70,13 @@ func (x *BatchDeleteRequest) WithAffectedStores(items ...PersistentStoreProvider
 }
 
 // ResultType calls the underlying ResultType.
-func (x *BatchDeleteRequest) ResultType() raw.NSBatchDeleteRequestResultType {
-	return x.inner.ResultType()
+func (x *BatchDeleteRequest) ResultType() NSBatchDeleteRequestResultType {
+	return NSBatchDeleteRequestResultType(x.inner.ResultType())
 }
 
 // SetResultType calls the underlying SetResultType.
-func (x *BatchDeleteRequest) SetResultType(resultType raw.NSBatchDeleteRequestResultType) {
-	x.inner.SetResultType(resultType)
+func (x *BatchDeleteRequest) SetResultType(resultType NSBatchDeleteRequestResultType) {
+	x.inner.SetResultType(raw.NSBatchDeleteRequestResultType(resultType))
 }
 
 // FetchRequest calls the underlying FetchRequest.
@@ -91,10 +91,10 @@ func (x *BatchDeleteRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRe
 // BatchDeleteRequestable is the interface implemented by [BatchDeleteRequest], for mocking and DI.
 type BatchDeleteRequestable interface {
 	Unwrap() *raw.NSBatchDeleteRequest
-	WithResultType(resultType raw.NSBatchDeleteRequestResultType) *BatchDeleteRequest
+	WithResultType(resultType NSBatchDeleteRequestResultType) *BatchDeleteRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *BatchDeleteRequest
-	ResultType() raw.NSBatchDeleteRequestResultType
-	SetResultType(resultType raw.NSBatchDeleteRequestResultType)
+	ResultType() NSBatchDeleteRequestResultType
+	SetResultType(resultType NSBatchDeleteRequestResultType)
 	FetchRequest() *raw.NSFetchRequest[objc.ID]
 }
 

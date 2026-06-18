@@ -36,14 +36,14 @@ func NewWheelchairUseObject() *WheelchairUseObject {
 }
 
 // WheelchairUse calls the underlying WheelchairUse.
-func (x *WheelchairUseObject) WheelchairUse() raw.HKWheelchairUse {
-	return x.inner.WheelchairUse()
+func (x *WheelchairUseObject) WheelchairUse() HKWheelchairUse {
+	return HKWheelchairUse(x.inner.WheelchairUse())
 }
 
 // WheelchairUseObjectable is the interface implemented by [WheelchairUseObject], for mocking and DI.
 type WheelchairUseObjectable interface {
 	Unwrap() *raw.HKWheelchairUseObject
-	WheelchairUse() raw.HKWheelchairUse
+	WheelchairUse() HKWheelchairUse
 }
 
 var _ WheelchairUseObjectable = (*WheelchairUseObject)(nil)

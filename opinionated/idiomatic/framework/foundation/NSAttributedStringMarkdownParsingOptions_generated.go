@@ -45,14 +45,14 @@ func (x *AttributedStringMarkdownParsingOptions) WithAllowsExtendedAttributes(al
 }
 
 // WithInterpretedSyntax sets the interpretedSyntax property and returns the receiver for chaining.
-func (x *AttributedStringMarkdownParsingOptions) WithInterpretedSyntax(interpretedSyntax raw.NSAttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions {
-	x.inner.SetInterpretedSyntax(interpretedSyntax)
+func (x *AttributedStringMarkdownParsingOptions) WithInterpretedSyntax(interpretedSyntax NSAttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions {
+	x.inner.SetInterpretedSyntax(raw.NSAttributedStringMarkdownInterpretedSyntax(interpretedSyntax))
 	return x
 }
 
 // WithFailurePolicy sets the failurePolicy property and returns the receiver for chaining.
-func (x *AttributedStringMarkdownParsingOptions) WithFailurePolicy(failurePolicy raw.NSAttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions {
-	x.inner.SetFailurePolicy(failurePolicy)
+func (x *AttributedStringMarkdownParsingOptions) WithFailurePolicy(failurePolicy NSAttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions {
+	x.inner.SetFailurePolicy(raw.NSAttributedStringMarkdownParsingFailurePolicy(failurePolicy))
 	return x
 }
 
@@ -85,23 +85,23 @@ func (x *AttributedStringMarkdownParsingOptions) SetAllowsExtendedAttributes(all
 }
 
 // InterpretedSyntax calls the underlying InterpretedSyntax.
-func (x *AttributedStringMarkdownParsingOptions) InterpretedSyntax() raw.NSAttributedStringMarkdownInterpretedSyntax {
-	return x.inner.InterpretedSyntax()
+func (x *AttributedStringMarkdownParsingOptions) InterpretedSyntax() NSAttributedStringMarkdownInterpretedSyntax {
+	return NSAttributedStringMarkdownInterpretedSyntax(x.inner.InterpretedSyntax())
 }
 
 // SetInterpretedSyntax calls the underlying SetInterpretedSyntax.
-func (x *AttributedStringMarkdownParsingOptions) SetInterpretedSyntax(interpretedSyntax raw.NSAttributedStringMarkdownInterpretedSyntax) {
-	x.inner.SetInterpretedSyntax(interpretedSyntax)
+func (x *AttributedStringMarkdownParsingOptions) SetInterpretedSyntax(interpretedSyntax NSAttributedStringMarkdownInterpretedSyntax) {
+	x.inner.SetInterpretedSyntax(raw.NSAttributedStringMarkdownInterpretedSyntax(interpretedSyntax))
 }
 
 // FailurePolicy calls the underlying FailurePolicy.
-func (x *AttributedStringMarkdownParsingOptions) FailurePolicy() raw.NSAttributedStringMarkdownParsingFailurePolicy {
-	return x.inner.FailurePolicy()
+func (x *AttributedStringMarkdownParsingOptions) FailurePolicy() NSAttributedStringMarkdownParsingFailurePolicy {
+	return NSAttributedStringMarkdownParsingFailurePolicy(x.inner.FailurePolicy())
 }
 
 // SetFailurePolicy calls the underlying SetFailurePolicy.
-func (x *AttributedStringMarkdownParsingOptions) SetFailurePolicy(failurePolicy raw.NSAttributedStringMarkdownParsingFailurePolicy) {
-	x.inner.SetFailurePolicy(failurePolicy)
+func (x *AttributedStringMarkdownParsingOptions) SetFailurePolicy(failurePolicy NSAttributedStringMarkdownParsingFailurePolicy) {
+	x.inner.SetFailurePolicy(raw.NSAttributedStringMarkdownParsingFailurePolicy(failurePolicy))
 }
 
 // LanguageCode calls the underlying LanguageCode.
@@ -134,17 +134,17 @@ func (x *AttributedStringMarkdownParsingOptions) asObject() *raw.NSObject { retu
 type AttributedStringMarkdownParsingOptionsable interface {
 	Unwrap() *raw.NSAttributedStringMarkdownParsingOptions
 	WithAllowsExtendedAttributes(allowsExtendedAttributes bool) *AttributedStringMarkdownParsingOptions
-	WithInterpretedSyntax(interpretedSyntax raw.NSAttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions
-	WithFailurePolicy(failurePolicy raw.NSAttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions
+	WithInterpretedSyntax(interpretedSyntax NSAttributedStringMarkdownInterpretedSyntax) *AttributedStringMarkdownParsingOptions
+	WithFailurePolicy(failurePolicy NSAttributedStringMarkdownParsingFailurePolicy) *AttributedStringMarkdownParsingOptions
 	WithLanguageCode(languageCode string) *AttributedStringMarkdownParsingOptions
 	WithAppliesSourcePositionAttributes(appliesSourcePositionAttributes bool) *AttributedStringMarkdownParsingOptions
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedStringMarkdownParsingOptions
 	AllowsExtendedAttributes() bool
 	SetAllowsExtendedAttributes(allowsExtendedAttributes bool)
-	InterpretedSyntax() raw.NSAttributedStringMarkdownInterpretedSyntax
-	SetInterpretedSyntax(interpretedSyntax raw.NSAttributedStringMarkdownInterpretedSyntax)
-	FailurePolicy() raw.NSAttributedStringMarkdownParsingFailurePolicy
-	SetFailurePolicy(failurePolicy raw.NSAttributedStringMarkdownParsingFailurePolicy)
+	InterpretedSyntax() NSAttributedStringMarkdownInterpretedSyntax
+	SetInterpretedSyntax(interpretedSyntax NSAttributedStringMarkdownInterpretedSyntax)
+	FailurePolicy() NSAttributedStringMarkdownParsingFailurePolicy
+	SetFailurePolicy(failurePolicy NSAttributedStringMarkdownParsingFailurePolicy)
 	LanguageCode() *String
 	SetLanguageCode(languageCode string)
 	AppliesSourcePositionAttributes() bool

@@ -262,8 +262,8 @@ func LocalizedAttributedStringWithFormat(format *raw.NSAttributedString) *Attrib
 }
 
 // LocalizedAttributedStringWithFormatOptions calls the underlying NSAttributedStringLocalizedAttributedStringWithFormatOptions.
-func LocalizedAttributedStringWithFormatOptions(format *raw.NSAttributedString, options raw.NSAttributedStringFormattingOptions) *AttributedString {
-	_r := raw.NSAttributedStringLocalizedAttributedStringWithFormatOptions(format, options)
+func LocalizedAttributedStringWithFormatOptions(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions) *AttributedString {
+	_r := raw.NSAttributedStringLocalizedAttributedStringWithFormatOptions(format, raw.NSAttributedStringFormattingOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -280,8 +280,8 @@ func LocalizedAttributedStringWithFormatContext(format *raw.NSAttributedString, 
 }
 
 // LocalizedAttributedStringWithFormatOptionsContext calls the underlying NSAttributedStringLocalizedAttributedStringWithFormatOptionsContext.
-func LocalizedAttributedStringWithFormatOptionsContext(format *raw.NSAttributedString, options raw.NSAttributedStringFormattingOptions, context_ *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
-	_r := raw.NSAttributedStringLocalizedAttributedStringWithFormatOptionsContext(format, options, context_)
+func LocalizedAttributedStringWithFormatOptionsContext(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, context_ *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
+	_r := raw.NSAttributedStringLocalizedAttributedStringWithFormatOptionsContext(format, raw.NSAttributedStringFormattingOptions(options), context_)
 	if _r == nil {
 		return nil
 	}
@@ -408,8 +408,8 @@ func AllFrameworks() []*Bundle {
 }
 
 // StringFromByteCountCountStyle calls the underlying NSByteCountFormatterStringFromByteCountCountStyle.
-func StringFromByteCountCountStyle(byteCount int64, countStyle raw.NSByteCountFormatterCountStyle) *String {
-	_r := raw.NSByteCountFormatterStringFromByteCountCountStyle(byteCount, countStyle)
+func StringFromByteCountCountStyle(byteCount int64, countStyle NSByteCountFormatterCountStyle) *String {
+	_r := raw.NSByteCountFormatterStringFromByteCountCountStyle(byteCount, raw.NSByteCountFormatterCountStyle(countStyle))
 	if _r == nil {
 		return nil
 	}
@@ -417,8 +417,8 @@ func StringFromByteCountCountStyle(byteCount int64, countStyle raw.NSByteCountFo
 }
 
 // StringFromMeasurementCountStyle calls the underlying NSByteCountFormatterStringFromMeasurementCountStyle.
-func StringFromMeasurementCountStyle(measurement *raw.NSMeasurement[*raw.NSUnitInformationStorage], countStyle raw.NSByteCountFormatterCountStyle) *String {
-	_r := raw.NSByteCountFormatterStringFromMeasurementCountStyle(measurement, countStyle)
+func StringFromMeasurementCountStyle(measurement *raw.NSMeasurement[*raw.NSUnitInformationStorage], countStyle NSByteCountFormatterCountStyle) *String {
+	_r := raw.NSByteCountFormatterStringFromMeasurementCountStyle(measurement, raw.NSByteCountFormatterCountStyle(countStyle))
 	if _r == nil {
 		return nil
 	}
@@ -735,8 +735,8 @@ func ClassDescriptionForClass(aClass objc.Class) *ClassDescription {
 }
 
 // PredicateWithLeftExpressionRightExpressionModifierTypeOptions calls the underlying NSComparisonPredicatePredicateWithLeftExpressionRightExpressionModifierTypeOptions.
-func PredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *raw.NSExpression, rhs *raw.NSExpression, modifier raw.NSComparisonPredicateModifier, type_ raw.NSPredicateOperatorType, options raw.NSComparisonPredicateOptions) *ComparisonPredicate {
-	_r := raw.NSComparisonPredicatePredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs, rhs, modifier, type_, options)
+func PredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *raw.NSExpression, rhs *raw.NSExpression, modifier NSComparisonPredicateModifier, type_ NSPredicateOperatorType, options NSComparisonPredicateOptions) *ComparisonPredicate {
+	_r := raw.NSComparisonPredicatePredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs, rhs, raw.NSComparisonPredicateModifier(modifier), raw.NSPredicateOperatorType(type_), raw.NSComparisonPredicateOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -904,8 +904,8 @@ func DataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length uint, b
 }
 
 // DataWithContentsOfFileOptionsError calls the underlying NSDataDataWithContentsOfFileOptionsError.
-func DataWithContentsOfFileOptionsError(path string, readOptionsMask raw.NSDataReadingOptions) (*Data, error) {
-	_r, _err := raw.NSDataDataWithContentsOfFileOptionsError(foundation.NSStringStringWithUTF8String(path), readOptionsMask)
+func DataWithContentsOfFileOptionsError(path string, readOptionsMask NSDataReadingOptions) (*Data, error) {
+	_r, _err := raw.NSDataDataWithContentsOfFileOptionsError(foundation.NSStringStringWithUTF8String(path), raw.NSDataReadingOptions(readOptionsMask))
 	if _err != nil {
 		return nil, _err
 	}
@@ -916,8 +916,8 @@ func DataWithContentsOfFileOptionsError(path string, readOptionsMask raw.NSDataR
 }
 
 // DataWithContentsOfURLOptionsError calls the underlying NSDataDataWithContentsOfURLOptionsError.
-func DataWithContentsOfURLOptionsError(url string, readOptionsMask raw.NSDataReadingOptions) (*Data, error) {
-	_r, _err := raw.NSDataDataWithContentsOfURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), readOptionsMask)
+func DataWithContentsOfURLOptionsError(url string, readOptionsMask NSDataReadingOptions) (*Data, error) {
+	_r, _err := raw.NSDataDataWithContentsOfURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSDataReadingOptions(readOptionsMask))
 	if _err != nil {
 		return nil, _err
 	}
@@ -1064,8 +1064,8 @@ func DateWithString(aString string) objc.ID {
 }
 
 // LocalizedStringFromDateComponentsUnitsStyle calls the underlying NSDateComponentsFormatterLocalizedStringFromDateComponentsUnitsStyle.
-func LocalizedStringFromDateComponentsUnitsStyle(components *raw.NSDateComponents, unitsStyle raw.NSDateComponentsFormatterUnitsStyle) *String {
-	_r := raw.NSDateComponentsFormatterLocalizedStringFromDateComponentsUnitsStyle(components, unitsStyle)
+func LocalizedStringFromDateComponentsUnitsStyle(components *raw.NSDateComponents, unitsStyle NSDateComponentsFormatterUnitsStyle) *String {
+	_r := raw.NSDateComponentsFormatterLocalizedStringFromDateComponentsUnitsStyle(components, raw.NSDateComponentsFormatterUnitsStyle(unitsStyle))
 	if _r == nil {
 		return nil
 	}
@@ -1073,8 +1073,8 @@ func LocalizedStringFromDateComponentsUnitsStyle(components *raw.NSDateComponent
 }
 
 // LocalizedStringFromDateDateStyleTimeStyle calls the underlying NSDateFormatterLocalizedStringFromDateDateStyleTimeStyle.
-func LocalizedStringFromDateDateStyleTimeStyle(date *raw.NSDate, dstyle raw.NSDateFormatterStyle, tstyle raw.NSDateFormatterStyle) *String {
-	_r := raw.NSDateFormatterLocalizedStringFromDateDateStyleTimeStyle(date, dstyle, tstyle)
+func LocalizedStringFromDateDateStyleTimeStyle(date *raw.NSDate, dstyle NSDateFormatterStyle, tstyle NSDateFormatterStyle) *String {
+	_r := raw.NSDateFormatterLocalizedStringFromDateDateStyleTimeStyle(date, raw.NSDateFormatterStyle(dstyle), raw.NSDateFormatterStyle(tstyle))
 	if _r == nil {
 		return nil
 	}
@@ -1091,13 +1091,13 @@ func DateFormatFromTemplateOptionsLocale(tmplate string, opts uint, locale *raw.
 }
 
 // DefaultFormatterBehavior calls the underlying NSDateFormatterDefaultFormatterBehavior.
-func DefaultFormatterBehavior() raw.NSDateFormatterBehavior {
-	return raw.NSDateFormatterDefaultFormatterBehavior()
+func DefaultFormatterBehavior() NSDateFormatterBehavior {
+	return NSDateFormatterBehavior(raw.NSDateFormatterDefaultFormatterBehavior())
 }
 
 // SetDefaultFormatterBehavior calls the underlying NSDateFormatterSetDefaultFormatterBehavior.
-func SetDefaultFormatterBehavior(defaultFormatterBehavior raw.NSDateFormatterBehavior) {
-	raw.NSDateFormatterSetDefaultFormatterBehavior(defaultFormatterBehavior)
+func SetDefaultFormatterBehavior(defaultFormatterBehavior NSDateFormatterBehavior) {
+	raw.NSDateFormatterSetDefaultFormatterBehavior(raw.NSDateFormatterBehavior(defaultFormatterBehavior))
 }
 
 // DecimalNumberWithMantissaExponentIsNegative calls the underlying NSDecimalNumberDecimalNumberWithMantissaExponentIsNegative.
@@ -1192,8 +1192,8 @@ func SetDefaultBehavior(defaultBehavior raw.NSDecimalNumberBehaviors) {
 }
 
 // DecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero calls the underlying NSDecimalNumberHandlerDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero.
-func DecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode raw.NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *DecimalNumberHandler {
-	_r := raw.NSDecimalNumberHandlerDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode, scale, exact, overflow, underflow, divideByZero)
+func DecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *DecimalNumberHandler {
+	_r := raw.NSDecimalNumberHandlerDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(raw.NSRoundingMode(roundingMode), scale, exact, overflow, underflow, divideByZero)
 	if _r == nil {
 		return nil
 	}
@@ -1492,8 +1492,8 @@ func ExpressionForConditionalTrueExpressionFalseExpression(predicate *raw.NSPred
 }
 
 // ReadingIntentWithURLOptions calls the underlying NSFileAccessIntentReadingIntentWithURLOptions.
-func ReadingIntentWithURLOptions(url string, options raw.NSFileCoordinatorReadingOptions) *FileAccessIntent {
-	_r := raw.NSFileAccessIntentReadingIntentWithURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+func ReadingIntentWithURLOptions(url string, options NSFileCoordinatorReadingOptions) *FileAccessIntent {
+	_r := raw.NSFileAccessIntentReadingIntentWithURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileCoordinatorReadingOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -1501,8 +1501,8 @@ func ReadingIntentWithURLOptions(url string, options raw.NSFileCoordinatorReadin
 }
 
 // WritingIntentWithURLOptions calls the underlying NSFileAccessIntentWritingIntentWithURLOptions.
-func WritingIntentWithURLOptions(url string, options raw.NSFileCoordinatorWritingOptions) *FileAccessIntent {
-	_r := raw.NSFileAccessIntentWritingIntentWithURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+func WritingIntentWithURLOptions(url string, options NSFileCoordinatorWritingOptions) *FileAccessIntent {
+	_r := raw.NSFileAccessIntentWritingIntentWithURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileCoordinatorWritingOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -1685,8 +1685,8 @@ func VersionOfItemAtURLForPersistentIdentifier(url string, persistentIdentifier 
 }
 
 // AddVersionOfItemAtURLWithContentsOfURLOptionsError calls the underlying NSFileVersionAddVersionOfItemAtURLWithContentsOfURLOptionsError.
-func AddVersionOfItemAtURLWithContentsOfURLOptionsError(url string, contentsURL string, options raw.NSFileVersionAddingOptions) (*FileVersion, error) {
-	_r, _err := raw.NSFileVersionAddVersionOfItemAtURLWithContentsOfURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentsURL)), options)
+func AddVersionOfItemAtURLWithContentsOfURLOptionsError(url string, contentsURL string, options NSFileVersionAddingOptions) (*FileVersion, error) {
+	_r, _err := raw.NSFileVersionAddVersionOfItemAtURLWithContentsOfURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentsURL)), raw.NSFileVersionAddingOptions(options))
 	if _err != nil {
 		return nil, _err
 	}
@@ -1762,8 +1762,8 @@ func LocalizedStringForStatusCode(statusCode int) *String {
 }
 
 // HashTableWithOptions calls the underlying NSHashTableHashTableWithOptions.
-func HashTableWithOptions(options raw.NSPointerFunctionsOptions) *raw.NSHashTable[objc.ID] {
-	return raw.NSHashTableHashTableWithOptions(options)
+func HashTableWithOptions(options NSPointerFunctionsOptions) *raw.NSHashTable[objc.ID] {
+	return raw.NSHashTableHashTableWithOptions(raw.NSPointerFunctionsOptions(options))
 }
 
 // HashTableWithWeakObjects calls the underlying NSHashTableHashTableWithWeakObjects.
@@ -1819,8 +1819,8 @@ func FlushHostCache() {
 }
 
 // StringFromDateTimeZoneFormatOptions calls the underlying NSISO8601DateFormatterStringFromDateTimeZoneFormatOptions.
-func StringFromDateTimeZoneFormatOptions(date *raw.NSDate, timeZone *raw.NSTimeZone, formatOptions raw.NSISO8601DateFormatOptions) *String {
-	_r := raw.NSISO8601DateFormatterStringFromDateTimeZoneFormatOptions(date, timeZone, formatOptions)
+func StringFromDateTimeZoneFormatOptions(date *raw.NSDate, timeZone *raw.NSTimeZone, formatOptions NSISO8601DateFormatOptions) *String {
+	_r := raw.NSISO8601DateFormatterStringFromDateTimeZoneFormatOptions(date, timeZone, raw.NSISO8601DateFormatOptions(formatOptions))
 	if _r == nil {
 		return nil
 	}
@@ -1933,8 +1933,8 @@ func IsValidJSONObject(obj objc.ID) bool {
 }
 
 // DataWithJSONObjectOptionsError calls the underlying NSJSONSerializationDataWithJSONObjectOptionsError.
-func DataWithJSONObjectOptionsError(obj objc.ID, opt raw.NSJSONWritingOptions) (*Data, error) {
-	_r, _err := raw.NSJSONSerializationDataWithJSONObjectOptionsError(obj, opt)
+func DataWithJSONObjectOptionsError(obj objc.ID, opt NSJSONWritingOptions) (*Data, error) {
+	_r, _err := raw.NSJSONSerializationDataWithJSONObjectOptionsError(obj, raw.NSJSONWritingOptions(opt))
 	if _err != nil {
 		return nil, _err
 	}
@@ -1945,18 +1945,18 @@ func DataWithJSONObjectOptionsError(obj objc.ID, opt raw.NSJSONWritingOptions) (
 }
 
 // JSONObjectWithDataOptionsError calls the underlying NSJSONSerializationJSONObjectWithDataOptionsError.
-func JSONObjectWithDataOptionsError(data *raw.NSData, opt raw.NSJSONReadingOptions) (objc.ID, error) {
-	return raw.NSJSONSerializationJSONObjectWithDataOptionsError(data, opt)
+func JSONObjectWithDataOptionsError(data *raw.NSData, opt NSJSONReadingOptions) (objc.ID, error) {
+	return raw.NSJSONSerializationJSONObjectWithDataOptionsError(data, raw.NSJSONReadingOptions(opt))
 }
 
 // WriteJSONObjectToStreamOptionsError calls the underlying NSJSONSerializationWriteJSONObjectToStreamOptionsError.
-func WriteJSONObjectToStreamOptionsError(obj objc.ID, stream *raw.NSOutputStream, opt raw.NSJSONWritingOptions) (int, error) {
-	return raw.NSJSONSerializationWriteJSONObjectToStreamOptionsError(obj, stream, opt)
+func WriteJSONObjectToStreamOptionsError(obj objc.ID, stream *raw.NSOutputStream, opt NSJSONWritingOptions) (int, error) {
+	return raw.NSJSONSerializationWriteJSONObjectToStreamOptionsError(obj, stream, raw.NSJSONWritingOptions(opt))
 }
 
 // JSONObjectWithStreamOptionsError calls the underlying NSJSONSerializationJSONObjectWithStreamOptionsError.
-func JSONObjectWithStreamOptionsError(stream *raw.NSInputStream, opt raw.NSJSONReadingOptions) (objc.ID, error) {
-	return raw.NSJSONSerializationJSONObjectWithStreamOptionsError(stream, opt)
+func JSONObjectWithStreamOptionsError(stream *raw.NSInputStream, opt NSJSONReadingOptions) (objc.ID, error) {
+	return raw.NSJSONSerializationJSONObjectWithStreamOptionsError(stream, raw.NSJSONReadingOptions(opt))
 }
 
 // ArchivedDataWithRootObjectRequiringSecureCodingError calls the underlying NSKeyedArchiverArchivedDataWithRootObjectRequiringSecureCodingError.
@@ -2055,8 +2055,8 @@ func ClassForClassName(codedName string) objc.Class {
 }
 
 // AvailableTagSchemesForUnitLanguage calls the underlying NSLinguisticTaggerAvailableTagSchemesForUnitLanguage.
-func AvailableTagSchemesForUnitLanguage(unit raw.NSLinguisticTaggerUnit, language string) *raw.NSArray[*raw.NSString] {
-	return raw.NSLinguisticTaggerAvailableTagSchemesForUnitLanguage(unit, foundation.NSStringStringWithUTF8String(language))
+func AvailableTagSchemesForUnitLanguage(unit NSLinguisticTaggerUnit, language string) *raw.NSArray[*raw.NSString] {
+	return raw.NSLinguisticTaggerAvailableTagSchemesForUnitLanguage(raw.NSLinguisticTaggerUnit(unit), foundation.NSStringStringWithUTF8String(language))
 }
 
 // AvailableTagSchemesForLanguage calls the underlying NSLinguisticTaggerAvailableTagSchemesForLanguage.
@@ -2074,8 +2074,8 @@ func DominantLanguageForString(string_ string) *String {
 }
 
 // TagForStringAtIndexUnitSchemeOrthographyTokenRange calls the underlying NSLinguisticTaggerTagForStringAtIndexUnitSchemeOrthographyTokenRange.
-func TagForStringAtIndexUnitSchemeOrthographyTokenRange(string_ string, charIndex uint, unit raw.NSLinguisticTaggerUnit, scheme *raw.NSString, orthography *raw.NSOrthography, tokenRange *raw.NSRange) *String {
-	_r := raw.NSLinguisticTaggerTagForStringAtIndexUnitSchemeOrthographyTokenRange(foundation.NSStringStringWithUTF8String(string_), charIndex, unit, scheme, orthography, tokenRange)
+func TagForStringAtIndexUnitSchemeOrthographyTokenRange(string_ string, charIndex uint, unit NSLinguisticTaggerUnit, scheme *raw.NSString, orthography *raw.NSOrthography, tokenRange *raw.NSRange) *String {
+	_r := raw.NSLinguisticTaggerTagForStringAtIndexUnitSchemeOrthographyTokenRange(foundation.NSStringStringWithUTF8String(string_), charIndex, raw.NSLinguisticTaggerUnit(unit), scheme, orthography, tokenRange)
 	if _r == nil {
 		return nil
 	}
@@ -2083,13 +2083,13 @@ func TagForStringAtIndexUnitSchemeOrthographyTokenRange(string_ string, charInde
 }
 
 // TagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges calls the underlying NSLinguisticTaggerTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges.
-func TagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(string_ string, range_ raw.NSRange, unit raw.NSLinguisticTaggerUnit, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
-	return raw.NSLinguisticTaggerTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(foundation.NSStringStringWithUTF8String(string_), range_, unit, scheme, options, orthography, tokenRanges)
+func TagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(string_ string, range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
+	return raw.NSLinguisticTaggerTagsForStringRangeUnitSchemeOptionsOrthographyTokenRanges(foundation.NSStringStringWithUTF8String(string_), range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), orthography, tokenRanges)
 }
 
 // EnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing calls the underlying NSLinguisticTaggerEnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing.
-func EnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing(string_ string, range_ raw.NSRange, unit raw.NSLinguisticTaggerUnit, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block) {
-	raw.NSLinguisticTaggerEnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing(foundation.NSStringStringWithUTF8String(string_), range_, unit, scheme, options, orthography, block)
+func EnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing(string_ string, range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block) {
+	raw.NSLinguisticTaggerEnumerateTagsForStringRangeUnitSchemeOptionsOrthographyUsing(foundation.NSStringStringWithUTF8String(string_), range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), orthography, block)
 }
 
 // LocalizedStringByJoiningStrings calls the underlying NSListFormatterLocalizedStringByJoiningStrings.
@@ -2184,13 +2184,13 @@ func WindowsLocaleCodeFromLocaleIdentifier(localeIdentifier string) uint32 {
 }
 
 // CharacterDirectionForLanguage calls the underlying NSLocaleCharacterDirectionForLanguage.
-func CharacterDirectionForLanguage(isoLangCode string) raw.NSLocaleLanguageDirection {
-	return raw.NSLocaleCharacterDirectionForLanguage(foundation.NSStringStringWithUTF8String(isoLangCode))
+func CharacterDirectionForLanguage(isoLangCode string) NSLocaleLanguageDirection {
+	return NSLocaleLanguageDirection(raw.NSLocaleCharacterDirectionForLanguage(foundation.NSStringStringWithUTF8String(isoLangCode)))
 }
 
 // LineDirectionForLanguage calls the underlying NSLocaleLineDirectionForLanguage.
-func LineDirectionForLanguage(isoLangCode string) raw.NSLocaleLanguageDirection {
-	return raw.NSLocaleLineDirectionForLanguage(foundation.NSStringStringWithUTF8String(isoLangCode))
+func LineDirectionForLanguage(isoLangCode string) NSLocaleLanguageDirection {
+	return NSLocaleLanguageDirection(raw.NSLocaleLineDirectionForLanguage(foundation.NSStringStringWithUTF8String(isoLangCode)))
 }
 
 // AvailableLocaleIdentifiers returns the collection as a Go slice.
@@ -2283,8 +2283,8 @@ func PortWithMachPort(machPort uint32) *Port {
 }
 
 // PortWithMachPortOptions calls the underlying NSMachPortPortWithMachPortOptions.
-func PortWithMachPortOptions(machPort uint32, f raw.NSMachPortOptions) *Port {
-	_r := raw.NSMachPortPortWithMachPortOptions(machPort, f)
+func PortWithMachPortOptions(machPort uint32, f NSMachPortOptions) *Port {
+	_r := raw.NSMachPortPortWithMachPortOptions(machPort, raw.NSMachPortOptions(f))
 	if _r == nil {
 		return nil
 	}
@@ -2292,8 +2292,8 @@ func PortWithMachPortOptions(machPort uint32, f raw.NSMachPortOptions) *Port {
 }
 
 // MapTableWithKeyOptionsValueOptions calls the underlying NSMapTableMapTableWithKeyOptionsValueOptions.
-func MapTableWithKeyOptionsValueOptions(keyOptions raw.NSPointerFunctionsOptions, valueOptions raw.NSPointerFunctionsOptions) *raw.NSMapTable[objc.ID, objc.ID] {
-	return raw.NSMapTableMapTableWithKeyOptionsValueOptions(keyOptions, valueOptions)
+func MapTableWithKeyOptionsValueOptions(keyOptions NSPointerFunctionsOptions, valueOptions NSPointerFunctionsOptions) *raw.NSMapTable[objc.ID, objc.ID] {
+	return raw.NSMapTableMapTableWithKeyOptionsValueOptions(raw.NSPointerFunctionsOptions(keyOptions), raw.NSPointerFunctionsOptions(valueOptions))
 }
 
 // MapTableWithStrongToStrongObjects calls the underlying NSMapTableMapTableWithStrongToStrongObjects.
@@ -2807,8 +2807,8 @@ func NumberWithUnsignedInteger(value uint) *Number {
 }
 
 // LocalizedStringFromNumberNumberStyle calls the underlying NSNumberFormatterLocalizedStringFromNumberNumberStyle.
-func LocalizedStringFromNumberNumberStyle(num *raw.NSNumber, nstyle raw.NSNumberFormatterStyle) *String {
-	_r := raw.NSNumberFormatterLocalizedStringFromNumberNumberStyle(num, nstyle)
+func LocalizedStringFromNumberNumberStyle(num *raw.NSNumber, nstyle NSNumberFormatterStyle) *String {
+	_r := raw.NSNumberFormatterLocalizedStringFromNumberNumberStyle(num, raw.NSNumberFormatterStyle(nstyle))
 	if _r == nil {
 		return nil
 	}
@@ -2816,13 +2816,13 @@ func LocalizedStringFromNumberNumberStyle(num *raw.NSNumber, nstyle raw.NSNumber
 }
 
 // NSNumberFormatterDefaultFormatterBehavior calls the underlying NSNumberFormatterDefaultFormatterBehavior.
-func NSNumberFormatterDefaultFormatterBehavior() raw.NSNumberFormatterBehavior {
-	return raw.NSNumberFormatterDefaultFormatterBehavior()
+func NSNumberFormatterDefaultFormatterBehavior() NSNumberFormatterBehavior {
+	return NSNumberFormatterBehavior(raw.NSNumberFormatterDefaultFormatterBehavior())
 }
 
 // NSNumberFormatterSetDefaultFormatterBehavior calls the underlying NSNumberFormatterSetDefaultFormatterBehavior.
-func NSNumberFormatterSetDefaultFormatterBehavior(behavior raw.NSNumberFormatterBehavior) {
-	raw.NSNumberFormatterSetDefaultFormatterBehavior(behavior)
+func NSNumberFormatterSetDefaultFormatterBehavior(behavior NSNumberFormatterBehavior) {
+	raw.NSNumberFormatterSetDefaultFormatterBehavior(raw.NSNumberFormatterBehavior(behavior))
 }
 
 // New calls the underlying NSObjectNew.
@@ -3014,13 +3014,13 @@ func MainQueue() *OperationQueue {
 }
 
 // ChangeWithObjectTypeIndex calls the underlying NSOrderedCollectionChangeChangeWithObjectTypeIndex.
-func ChangeWithObjectTypeIndex(anObject objc.ID, type_ raw.NSCollectionChangeType, index uint) *raw.NSOrderedCollectionChange[objc.ID] {
-	return raw.NSOrderedCollectionChangeChangeWithObjectTypeIndex(anObject, type_, index)
+func ChangeWithObjectTypeIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint) *raw.NSOrderedCollectionChange[objc.ID] {
+	return raw.NSOrderedCollectionChangeChangeWithObjectTypeIndex(anObject, raw.NSCollectionChangeType(type_), index)
 }
 
 // ChangeWithObjectTypeIndexAssociatedIndex calls the underlying NSOrderedCollectionChangeChangeWithObjectTypeIndexAssociatedIndex.
-func ChangeWithObjectTypeIndexAssociatedIndex(anObject objc.ID, type_ raw.NSCollectionChangeType, index uint, associatedIndex uint) *raw.NSOrderedCollectionChange[objc.ID] {
-	return raw.NSOrderedCollectionChangeChangeWithObjectTypeIndexAssociatedIndex(anObject, type_, index, associatedIndex)
+func ChangeWithObjectTypeIndexAssociatedIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint, associatedIndex uint) *raw.NSOrderedCollectionChange[objc.ID] {
+	return raw.NSOrderedCollectionChangeChangeWithObjectTypeIndexAssociatedIndex(anObject, raw.NSCollectionChangeType(type_), index, associatedIndex)
 }
 
 // NSOrderedSetOrderedSet calls the underlying NSOrderedSetOrderedSet.
@@ -3123,8 +3123,8 @@ func OutputStreamWithURLAppend(url string, shouldAppend bool) *OutputStream {
 }
 
 // LocalizedStringFromPersonNameComponentsStyleOptions calls the underlying NSPersonNameComponentsFormatterLocalizedStringFromPersonNameComponentsStyleOptions.
-func LocalizedStringFromPersonNameComponentsStyleOptions(components *raw.NSPersonNameComponents, nameFormatStyle raw.NSPersonNameComponentsFormatterStyle, nameOptions raw.NSPersonNameComponentsFormatterOptions) *String {
-	_r := raw.NSPersonNameComponentsFormatterLocalizedStringFromPersonNameComponentsStyleOptions(components, nameFormatStyle, nameOptions)
+func LocalizedStringFromPersonNameComponentsStyleOptions(components *raw.NSPersonNameComponents, nameFormatStyle NSPersonNameComponentsFormatterStyle, nameOptions NSPersonNameComponentsFormatterOptions) *String {
+	_r := raw.NSPersonNameComponentsFormatterLocalizedStringFromPersonNameComponentsStyleOptions(components, raw.NSPersonNameComponentsFormatterStyle(nameFormatStyle), raw.NSPersonNameComponentsFormatterOptions(nameOptions))
 	if _r == nil {
 		return nil
 	}
@@ -3141,8 +3141,8 @@ func NSPipePipe() *Pipe {
 }
 
 // PointerArrayWithOptions calls the underlying NSPointerArrayPointerArrayWithOptions.
-func PointerArrayWithOptions(options raw.NSPointerFunctionsOptions) *PointerArray {
-	_r := raw.NSPointerArrayPointerArrayWithOptions(options)
+func PointerArrayWithOptions(options NSPointerFunctionsOptions) *PointerArray {
+	_r := raw.NSPointerArrayPointerArrayWithOptions(raw.NSPointerFunctionsOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -3187,8 +3187,8 @@ func WeakObjectsPointerArray() *PointerArray {
 }
 
 // PointerFunctionsWithOptions calls the underlying NSPointerFunctionsPointerFunctionsWithOptions.
-func PointerFunctionsWithOptions(options raw.NSPointerFunctionsOptions) *PointerFunctions {
-	_r := raw.NSPointerFunctionsPointerFunctionsWithOptions(options)
+func PointerFunctionsWithOptions(options NSPointerFunctionsOptions) *PointerFunctions {
+	_r := raw.NSPointerFunctionsPointerFunctionsWithOptions(raw.NSPointerFunctionsOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -3436,13 +3436,13 @@ func RemoveSubscriber(subscriber objc.ID) {
 }
 
 // PropertyListIsValidForFormat calls the underlying NSPropertyListSerializationPropertyListIsValidForFormat.
-func PropertyListIsValidForFormat(plist objc.ID, format raw.NSPropertyListFormat) bool {
-	return raw.NSPropertyListSerializationPropertyListIsValidForFormat(plist, format)
+func PropertyListIsValidForFormat(plist objc.ID, format NSPropertyListFormat) bool {
+	return raw.NSPropertyListSerializationPropertyListIsValidForFormat(plist, raw.NSPropertyListFormat(format))
 }
 
 // DataWithPropertyListFormatOptionsError calls the underlying NSPropertyListSerializationDataWithPropertyListFormatOptionsError.
-func DataWithPropertyListFormatOptionsError(plist objc.ID, format raw.NSPropertyListFormat, opt uint) (*Data, error) {
-	_r, _err := raw.NSPropertyListSerializationDataWithPropertyListFormatOptionsError(plist, format, opt)
+func DataWithPropertyListFormatOptionsError(plist objc.ID, format NSPropertyListFormat, opt uint) (*Data, error) {
+	_r, _err := raw.NSPropertyListSerializationDataWithPropertyListFormatOptionsError(plist, raw.NSPropertyListFormat(format), opt)
 	if _err != nil {
 		return nil, _err
 	}
@@ -3453,23 +3453,23 @@ func DataWithPropertyListFormatOptionsError(plist objc.ID, format raw.NSProperty
 }
 
 // WritePropertyListToStreamFormatOptionsError calls the underlying NSPropertyListSerializationWritePropertyListToStreamFormatOptionsError.
-func WritePropertyListToStreamFormatOptionsError(plist objc.ID, stream *raw.NSOutputStream, format raw.NSPropertyListFormat, opt uint) (int, error) {
-	return raw.NSPropertyListSerializationWritePropertyListToStreamFormatOptionsError(plist, stream, format, opt)
+func WritePropertyListToStreamFormatOptionsError(plist objc.ID, stream *raw.NSOutputStream, format NSPropertyListFormat, opt uint) (int, error) {
+	return raw.NSPropertyListSerializationWritePropertyListToStreamFormatOptionsError(plist, stream, raw.NSPropertyListFormat(format), opt)
 }
 
 // PropertyListWithDataOptionsFormatError calls the underlying NSPropertyListSerializationPropertyListWithDataOptionsFormatError.
-func PropertyListWithDataOptionsFormatError(data *raw.NSData, opt raw.NSPropertyListMutabilityOptions, format *raw.NSPropertyListFormat) (objc.ID, error) {
-	return raw.NSPropertyListSerializationPropertyListWithDataOptionsFormatError(data, opt, format)
+func PropertyListWithDataOptionsFormatError(data *raw.NSData, opt NSPropertyListMutabilityOptions, format *raw.NSPropertyListFormat) (objc.ID, error) {
+	return raw.NSPropertyListSerializationPropertyListWithDataOptionsFormatError(data, raw.NSPropertyListMutabilityOptions(opt), format)
 }
 
 // PropertyListWithStreamOptionsFormatError calls the underlying NSPropertyListSerializationPropertyListWithStreamOptionsFormatError.
-func PropertyListWithStreamOptionsFormatError(stream *raw.NSInputStream, opt raw.NSPropertyListMutabilityOptions, format *raw.NSPropertyListFormat) (objc.ID, error) {
-	return raw.NSPropertyListSerializationPropertyListWithStreamOptionsFormatError(stream, opt, format)
+func PropertyListWithStreamOptionsFormatError(stream *raw.NSInputStream, opt NSPropertyListMutabilityOptions, format *raw.NSPropertyListFormat) (objc.ID, error) {
+	return raw.NSPropertyListSerializationPropertyListWithStreamOptionsFormatError(stream, raw.NSPropertyListMutabilityOptions(opt), format)
 }
 
 // DataFromPropertyListFormatErrorDescription calls the underlying NSPropertyListSerializationDataFromPropertyListFormatErrorDescription.
-func DataFromPropertyListFormatErrorDescription(plist objc.ID, format raw.NSPropertyListFormat, errorString string) *Data {
-	_r := raw.NSPropertyListSerializationDataFromPropertyListFormatErrorDescription(plist, format, foundation.NSStringStringWithUTF8String(errorString))
+func DataFromPropertyListFormatErrorDescription(plist objc.ID, format NSPropertyListFormat, errorString string) *Data {
+	_r := raw.NSPropertyListSerializationDataFromPropertyListFormatErrorDescription(plist, raw.NSPropertyListFormat(format), foundation.NSStringStringWithUTF8String(errorString))
 	if _r == nil {
 		return nil
 	}
@@ -3477,8 +3477,8 @@ func DataFromPropertyListFormatErrorDescription(plist objc.ID, format raw.NSProp
 }
 
 // PropertyListFromDataMutabilityOptionFormatErrorDescription calls the underlying NSPropertyListSerializationPropertyListFromDataMutabilityOptionFormatErrorDescription.
-func PropertyListFromDataMutabilityOptionFormatErrorDescription(data *raw.NSData, opt raw.NSPropertyListMutabilityOptions, format *raw.NSPropertyListFormat, errorString string) objc.ID {
-	return raw.NSPropertyListSerializationPropertyListFromDataMutabilityOptionFormatErrorDescription(data, opt, format, foundation.NSStringStringWithUTF8String(errorString))
+func PropertyListFromDataMutabilityOptionFormatErrorDescription(data *raw.NSData, opt NSPropertyListMutabilityOptions, format *raw.NSPropertyListFormat, errorString string) objc.ID {
+	return raw.NSPropertyListSerializationPropertyListFromDataMutabilityOptionFormatErrorDescription(data, raw.NSPropertyListMutabilityOptions(opt), format, foundation.NSStringStringWithUTF8String(errorString))
 }
 
 // ProtocolCheckerWithTargetProtocol calls the underlying NSProtocolCheckerProtocolCheckerWithTargetProtocol.
@@ -3511,8 +3511,8 @@ func RespondsToSelector(aSelector objc.SEL) bool {
 }
 
 // RegularExpressionWithPatternOptionsError calls the underlying NSRegularExpressionRegularExpressionWithPatternOptionsError.
-func RegularExpressionWithPatternOptionsError(pattern string, options raw.NSRegularExpressionOptions) (*RegularExpression, error) {
-	_r, _err := raw.NSRegularExpressionRegularExpressionWithPatternOptionsError(foundation.NSStringStringWithUTF8String(pattern), options)
+func RegularExpressionWithPatternOptionsError(pattern string, options NSRegularExpressionOptions) (*RegularExpression, error) {
+	_r, _err := raw.NSRegularExpressionRegularExpressionWithPatternOptionsError(foundation.NSStringStringWithUTF8String(pattern), raw.NSRegularExpressionOptions(options))
 	if _err != nil {
 		return nil, _err
 	}
@@ -3685,8 +3685,8 @@ func SortDescriptorWithKeyAscendingSelector(key string, ascending bool, selector
 }
 
 // SortDescriptorWithKeyAscendingComparator calls the underlying NSSortDescriptorSortDescriptorWithKeyAscendingComparator.
-func SortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) *SortDescriptor {
-	_r := raw.NSSortDescriptorSortDescriptorWithKeyAscendingComparator(foundation.NSStringStringWithUTF8String(key), ascending, cmptr)
+func SortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmptr func(objc.ID, objc.ID) NSComparisonResult) *SortDescriptor {
+	_r := raw.NSSortDescriptorSortDescriptorWithKeyAscendingComparator(foundation.NSStringStringWithUTF8String(key), ascending, func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 	if _r == nil {
 		return nil
 	}
@@ -4436,8 +4436,8 @@ func AbsoluteURLWithDataRepresentationRelativeToURL(data *raw.NSData, baseURL st
 }
 
 // URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError calls the underlying NSURLURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError.
-func URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *raw.NSData, options raw.NSURLBookmarkResolutionOptions, relativeURL string, isStale *bool) (*URL, error) {
-	_r, _err := raw.NSURLURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData, options, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)), isStale)
+func URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *raw.NSData, options NSURLBookmarkResolutionOptions, relativeURL string, isStale *bool) (*URL, error) {
+	_r, _err := raw.NSURLURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData, raw.NSURLBookmarkResolutionOptions(options), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)), isStale)
 	if _err != nil {
 		return nil, _err
 	}
@@ -4470,8 +4470,8 @@ func BookmarkDataWithContentsOfURLError(bookmarkFileURL string) (*Data, error) {
 }
 
 // URLByResolvingAliasFileAtURLOptionsError calls the underlying NSURLURLByResolvingAliasFileAtURLOptionsError.
-func URLByResolvingAliasFileAtURLOptionsError(url string, options raw.NSURLBookmarkResolutionOptions) (*URL, error) {
-	_r, _err := raw.NSURLURLByResolvingAliasFileAtURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+func URLByResolvingAliasFileAtURLOptionsError(url string, options NSURLBookmarkResolutionOptions) (*URL, error) {
+	_r, _err := raw.NSURLURLByResolvingAliasFileAtURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSURLBookmarkResolutionOptions(options))
 	if _err != nil {
 		return nil, _err
 	}
@@ -4563,8 +4563,8 @@ func SendAsynchronousRequestQueueCompletionHandler(request *raw.NSURLRequest, qu
 }
 
 // CredentialWithUserPasswordPersistence calls the underlying NSURLCredentialCredentialWithUserPasswordPersistence.
-func CredentialWithUserPasswordPersistence(user string, password string, persistence raw.NSURLCredentialPersistence) *URLCredential {
-	_r := raw.NSURLCredentialCredentialWithUserPasswordPersistence(foundation.NSStringStringWithUTF8String(user), foundation.NSStringStringWithUTF8String(password), persistence)
+func CredentialWithUserPasswordPersistence(user string, password string, persistence NSURLCredentialPersistence) *URLCredential {
+	_r := raw.NSURLCredentialCredentialWithUserPasswordPersistence(foundation.NSStringStringWithUTF8String(user), foundation.NSStringStringWithUTF8String(password), raw.NSURLCredentialPersistence(persistence))
 	if _r == nil {
 		return nil
 	}
@@ -4572,8 +4572,8 @@ func CredentialWithUserPasswordPersistence(user string, password string, persist
 }
 
 // CredentialWithIdentityCertificatesPersistence calls the underlying NSURLCredentialCredentialWithIdentityCertificatesPersistence.
-func CredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *raw.NSArray[objc.ID], persistence raw.NSURLCredentialPersistence) *URLCredential {
-	_r := raw.NSURLCredentialCredentialWithIdentityCertificatesPersistence(identity, certArray, persistence)
+func CredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *raw.NSArray[objc.ID], persistence NSURLCredentialPersistence) *URLCredential {
+	_r := raw.NSURLCredentialCredentialWithIdentityCertificatesPersistence(identity, certArray, raw.NSURLCredentialPersistence(persistence))
 	if _r == nil {
 		return nil
 	}
@@ -4695,8 +4695,8 @@ func RequestWithURL(uRL string) *URLRequest {
 }
 
 // RequestWithURLCachePolicyTimeoutInterval calls the underlying NSURLRequestRequestWithURLCachePolicyTimeoutInterval.
-func RequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy raw.NSURLRequestCachePolicy, timeoutInterval float64) *URLRequest {
-	_r := raw.NSURLRequestRequestWithURLCachePolicyTimeoutInterval(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), cachePolicy, timeoutInterval)
+func RequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *URLRequest {
+	_r := raw.NSURLRequestRequestWithURLCachePolicyTimeoutInterval(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), raw.NSURLRequestCachePolicy(cachePolicy), timeoutInterval)
 	if _r == nil {
 		return nil
 	}

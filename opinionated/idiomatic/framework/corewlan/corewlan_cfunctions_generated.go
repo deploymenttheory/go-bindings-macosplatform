@@ -16,8 +16,8 @@ func CWKeychainCopyEAPIdentity(ssidData unsafe.Pointer, identity unsafe.Pointer)
 }
 
 // CWKeychainCopyWiFiEAPIdentity calls [raw.CWKeychainCopyWiFiEAPIdentity] (C function CWKeychainCopyWiFiEAPIdentity).
-func CWKeychainCopyWiFiEAPIdentity(domain raw.CWKeychainDomain, ssid *foundation.NSData, identity unsafe.Pointer) int {
-	return raw.CWKeychainCopyWiFiEAPIdentity(domain, ssid, identity)
+func CWKeychainCopyWiFiEAPIdentity(domain CWKeychainDomain, ssid *foundation.NSData, identity unsafe.Pointer) int {
+	return raw.CWKeychainCopyWiFiEAPIdentity(raw.CWKeychainDomain(domain), ssid, identity)
 }
 
 // CWKeychainSetEAPIdentity calls [raw.CWKeychainSetEAPIdentity] (C function CWKeychainSetEAPIdentity).
@@ -26,8 +26,8 @@ func CWKeychainSetEAPIdentity(ssidData unsafe.Pointer, identity unsafe.Pointer) 
 }
 
 // CWKeychainSetWiFiEAPIdentity calls [raw.CWKeychainSetWiFiEAPIdentity] (C function CWKeychainSetWiFiEAPIdentity).
-func CWKeychainSetWiFiEAPIdentity(domain raw.CWKeychainDomain, ssid *foundation.NSData, identity unsafe.Pointer) int {
-	return raw.CWKeychainSetWiFiEAPIdentity(domain, ssid, identity)
+func CWKeychainSetWiFiEAPIdentity(domain CWKeychainDomain, ssid *foundation.NSData, identity unsafe.Pointer) int {
+	return raw.CWKeychainSetWiFiEAPIdentity(raw.CWKeychainDomain(domain), ssid, identity)
 }
 
 // CWMergeNetworks calls [raw.CWMergeNetworks] (C function CWMergeNetworks).

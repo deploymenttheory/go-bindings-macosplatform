@@ -239,8 +239,8 @@ func (x *Layer) WithDrawsAsynchronously(drawsAsynchronously bool) *Layer {
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *Layer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *Layer {
-	x.inner.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *Layer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *Layer {
+	x.inner.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -257,8 +257,8 @@ func (x *Layer) WithCornerRadius(cornerRadius float64) *Layer {
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *Layer) WithMaskedCorners(maskedCorners raw.CACornerMask) *Layer {
-	x.inner.SetMaskedCorners(maskedCorners)
+func (x *Layer) WithMaskedCorners(maskedCorners CACornerMask) *Layer {
+	x.inner.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -323,8 +323,8 @@ func (x *Layer) WithShadowRadius(shadowRadius float64) *Layer {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Layer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *Layer {
-	x.inner.SetAutoresizingMask(autoresizingMask)
+func (x *Layer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *Layer {
+	x.inner.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -942,13 +942,13 @@ func (x *Layer) SetDrawsAsynchronously(drawsAsynchronously bool) {
 }
 
 // EdgeAntialiasingMask calls the underlying EdgeAntialiasingMask.
-func (x *Layer) EdgeAntialiasingMask() raw.CAEdgeAntialiasingMask {
-	return x.inner.EdgeAntialiasingMask()
+func (x *Layer) EdgeAntialiasingMask() CAEdgeAntialiasingMask {
+	return CAEdgeAntialiasingMask(x.inner.EdgeAntialiasingMask())
 }
 
 // SetEdgeAntialiasingMask calls the underlying SetEdgeAntialiasingMask.
-func (x *Layer) SetEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) {
-	x.inner.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *Layer) SetEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) {
+	x.inner.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 }
 
 // AllowsEdgeAntialiasing calls the underlying AllowsEdgeAntialiasing.
@@ -982,13 +982,13 @@ func (x *Layer) SetCornerRadius(cornerRadius float64) {
 }
 
 // MaskedCorners calls the underlying MaskedCorners.
-func (x *Layer) MaskedCorners() raw.CACornerMask {
-	return x.inner.MaskedCorners()
+func (x *Layer) MaskedCorners() CACornerMask {
+	return CACornerMask(x.inner.MaskedCorners())
 }
 
 // SetMaskedCorners calls the underlying SetMaskedCorners.
-func (x *Layer) SetMaskedCorners(maskedCorners raw.CACornerMask) {
-	x.inner.SetMaskedCorners(maskedCorners)
+func (x *Layer) SetMaskedCorners(maskedCorners CACornerMask) {
+	x.inner.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 }
 
 // CornerCurve calls the underlying CornerCurve.
@@ -1146,13 +1146,13 @@ func (x *Layer) SetShadowPath(shadowPath unsafe.Pointer) {
 }
 
 // AutoresizingMask calls the underlying AutoresizingMask.
-func (x *Layer) AutoresizingMask() raw.CAAutoresizingMask {
-	return x.inner.AutoresizingMask()
+func (x *Layer) AutoresizingMask() CAAutoresizingMask {
+	return CAAutoresizingMask(x.inner.AutoresizingMask())
 }
 
 // SetAutoresizingMask calls the underlying SetAutoresizingMask.
-func (x *Layer) SetAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) {
-	x.inner.SetAutoresizingMask(autoresizingMask)
+func (x *Layer) SetAutoresizingMask(autoresizingMask CAAutoresizingMask) {
+	x.inner.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 }
 
 // LayoutManager calls the underlying LayoutManager.
@@ -1280,10 +1280,10 @@ type Layerable interface {
 	WithOpaque(opaque bool) *Layer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *Layer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *Layer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *Layer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *Layer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *Layer
 	WithCornerRadius(cornerRadius float64) *Layer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *Layer
+	WithMaskedCorners(maskedCorners CACornerMask) *Layer
 	WithCornerCurve(cornerCurve *foundation.NSString) *Layer
 	WithBorderWidth(borderWidth float64) *Layer
 	WithOpacity(opacity float32) *Layer
@@ -1294,7 +1294,7 @@ type Layerable interface {
 	WithShadowOpacity(shadowOpacity float32) *Layer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *Layer
 	WithShadowRadius(shadowRadius float64) *Layer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *Layer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *Layer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *Layer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *Layer
 	WithName(name string) *Layer
@@ -1402,16 +1402,16 @@ type Layerable interface {
 	SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool)
 	DrawsAsynchronously() bool
 	SetDrawsAsynchronously(drawsAsynchronously bool)
-	EdgeAntialiasingMask() raw.CAEdgeAntialiasingMask
-	SetEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask)
+	EdgeAntialiasingMask() CAEdgeAntialiasingMask
+	SetEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask)
 	AllowsEdgeAntialiasing() bool
 	SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool)
 	BackgroundColor() unsafe.Pointer
 	SetBackgroundColor(backgroundColor unsafe.Pointer)
 	CornerRadius() float64
 	SetCornerRadius(cornerRadius float64)
-	MaskedCorners() raw.CACornerMask
-	SetMaskedCorners(maskedCorners raw.CACornerMask)
+	MaskedCorners() CACornerMask
+	SetMaskedCorners(maskedCorners CACornerMask)
 	CornerCurve() string
 	SetCornerCurve(cornerCurve *foundation.NSString)
 	BorderWidth() float64
@@ -1442,8 +1442,8 @@ type Layerable interface {
 	SetShadowRadius(shadowRadius float64)
 	ShadowPath() unsafe.Pointer
 	SetShadowPath(shadowPath unsafe.Pointer)
-	AutoresizingMask() raw.CAAutoresizingMask
-	SetAutoresizingMask(autoresizingMask raw.CAAutoresizingMask)
+	AutoresizingMask() CAAutoresizingMask
+	SetAutoresizingMask(autoresizingMask CAAutoresizingMask)
 	LayoutManager() raw.CALayoutManager
 	SetLayoutManager(layoutManager raw.CALayoutManager)
 	Actions() *foundation.NSDictionary[*foundation.NSString, raw.CAAction]

@@ -149,8 +149,8 @@ func (x *StreamConfiguration) WithIgnoreShadowsSingleWindow(ignoreShadowsSingleW
 }
 
 // WithCaptureResolution sets the captureResolution property and returns the receiver for chaining.
-func (x *StreamConfiguration) WithCaptureResolution(captureResolution raw.SCCaptureResolutionType) *StreamConfiguration {
-	x.inner.SetCaptureResolution(captureResolution)
+func (x *StreamConfiguration) WithCaptureResolution(captureResolution SCCaptureResolutionType) *StreamConfiguration {
+	x.inner.SetCaptureResolution(raw.SCCaptureResolutionType(captureResolution))
 	return x
 }
 
@@ -179,8 +179,8 @@ func (x *StreamConfiguration) WithIgnoreGlobalClipSingleWindow(ignoreGlobalClipS
 }
 
 // WithPresenterOverlayPrivacyAlertSetting sets the presenterOverlayPrivacyAlertSetting property and returns the receiver for chaining.
-func (x *StreamConfiguration) WithPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting raw.SCPresenterOverlayAlertSetting) *StreamConfiguration {
-	x.inner.SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting)
+func (x *StreamConfiguration) WithPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting SCPresenterOverlayAlertSetting) *StreamConfiguration {
+	x.inner.SetPresenterOverlayPrivacyAlertSetting(raw.SCPresenterOverlayAlertSetting(presenterOverlayPrivacyAlertSetting))
 	return x
 }
 
@@ -203,8 +203,8 @@ func (x *StreamConfiguration) WithMicrophoneCaptureDeviceID(microphoneCaptureDev
 }
 
 // WithCaptureDynamicRange sets the captureDynamicRange property and returns the receiver for chaining.
-func (x *StreamConfiguration) WithCaptureDynamicRange(captureDynamicRange raw.SCCaptureDynamicRange) *StreamConfiguration {
-	x.inner.SetCaptureDynamicRange(captureDynamicRange)
+func (x *StreamConfiguration) WithCaptureDynamicRange(captureDynamicRange SCCaptureDynamicRange) *StreamConfiguration {
+	x.inner.SetCaptureDynamicRange(raw.SCCaptureDynamicRange(captureDynamicRange))
 	return x
 }
 
@@ -423,13 +423,13 @@ func (x *StreamConfiguration) SetIgnoreShadowsSingleWindow(ignoreShadowsSingleWi
 }
 
 // CaptureResolution calls the underlying CaptureResolution.
-func (x *StreamConfiguration) CaptureResolution() raw.SCCaptureResolutionType {
-	return x.inner.CaptureResolution()
+func (x *StreamConfiguration) CaptureResolution() SCCaptureResolutionType {
+	return SCCaptureResolutionType(x.inner.CaptureResolution())
 }
 
 // SetCaptureResolution calls the underlying SetCaptureResolution.
-func (x *StreamConfiguration) SetCaptureResolution(captureResolution raw.SCCaptureResolutionType) {
-	x.inner.SetCaptureResolution(captureResolution)
+func (x *StreamConfiguration) SetCaptureResolution(captureResolution SCCaptureResolutionType) {
+	x.inner.SetCaptureResolution(raw.SCCaptureResolutionType(captureResolution))
 }
 
 // CapturesShadowsOnly calls the underlying CapturesShadowsOnly.
@@ -473,13 +473,13 @@ func (x *StreamConfiguration) SetIgnoreGlobalClipSingleWindow(ignoreGlobalClipSi
 }
 
 // PresenterOverlayPrivacyAlertSetting calls the underlying PresenterOverlayPrivacyAlertSetting.
-func (x *StreamConfiguration) PresenterOverlayPrivacyAlertSetting() raw.SCPresenterOverlayAlertSetting {
-	return x.inner.PresenterOverlayPrivacyAlertSetting()
+func (x *StreamConfiguration) PresenterOverlayPrivacyAlertSetting() SCPresenterOverlayAlertSetting {
+	return SCPresenterOverlayAlertSetting(x.inner.PresenterOverlayPrivacyAlertSetting())
 }
 
 // SetPresenterOverlayPrivacyAlertSetting calls the underlying SetPresenterOverlayPrivacyAlertSetting.
-func (x *StreamConfiguration) SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting raw.SCPresenterOverlayAlertSetting) {
-	x.inner.SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting)
+func (x *StreamConfiguration) SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting SCPresenterOverlayAlertSetting) {
+	x.inner.SetPresenterOverlayPrivacyAlertSetting(raw.SCPresenterOverlayAlertSetting(presenterOverlayPrivacyAlertSetting))
 }
 
 // IncludeChildWindows calls the underlying IncludeChildWindows.
@@ -517,13 +517,13 @@ func (x *StreamConfiguration) SetMicrophoneCaptureDeviceID(microphoneCaptureDevi
 }
 
 // CaptureDynamicRange calls the underlying CaptureDynamicRange.
-func (x *StreamConfiguration) CaptureDynamicRange() raw.SCCaptureDynamicRange {
-	return x.inner.CaptureDynamicRange()
+func (x *StreamConfiguration) CaptureDynamicRange() SCCaptureDynamicRange {
+	return SCCaptureDynamicRange(x.inner.CaptureDynamicRange())
 }
 
 // SetCaptureDynamicRange calls the underlying SetCaptureDynamicRange.
-func (x *StreamConfiguration) SetCaptureDynamicRange(captureDynamicRange raw.SCCaptureDynamicRange) {
-	x.inner.SetCaptureDynamicRange(captureDynamicRange)
+func (x *StreamConfiguration) SetCaptureDynamicRange(captureDynamicRange SCCaptureDynamicRange) {
+	x.inner.SetCaptureDynamicRange(raw.SCCaptureDynamicRange(captureDynamicRange))
 }
 
 // StreamConfigurationable is the interface implemented by [StreamConfiguration], for mocking and DI.
@@ -547,16 +547,16 @@ type StreamConfigurationable interface {
 	WithExcludesCurrentProcessAudio(excludesCurrentProcessAudio bool) *StreamConfiguration
 	WithIgnoreShadowsDisplay(ignoreShadowsDisplay bool) *StreamConfiguration
 	WithIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool) *StreamConfiguration
-	WithCaptureResolution(captureResolution raw.SCCaptureResolutionType) *StreamConfiguration
+	WithCaptureResolution(captureResolution SCCaptureResolutionType) *StreamConfiguration
 	WithCapturesShadowsOnly(capturesShadowsOnly bool) *StreamConfiguration
 	WithShouldBeOpaque(shouldBeOpaque bool) *StreamConfiguration
 	WithIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool) *StreamConfiguration
 	WithIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool) *StreamConfiguration
-	WithPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting raw.SCPresenterOverlayAlertSetting) *StreamConfiguration
+	WithPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting SCPresenterOverlayAlertSetting) *StreamConfiguration
 	WithIncludeChildWindows(includeChildWindows bool) *StreamConfiguration
 	WithCaptureMicrophone(captureMicrophone bool) *StreamConfiguration
 	WithMicrophoneCaptureDeviceID(microphoneCaptureDeviceID string) *StreamConfiguration
-	WithCaptureDynamicRange(captureDynamicRange raw.SCCaptureDynamicRange) *StreamConfiguration
+	WithCaptureDynamicRange(captureDynamicRange SCCaptureDynamicRange) *StreamConfiguration
 	Width() uint
 	SetWidth(width uint)
 	Height() uint
@@ -599,8 +599,8 @@ type StreamConfigurationable interface {
 	SetIgnoreShadowsDisplay(ignoreShadowsDisplay bool)
 	IgnoreShadowsSingleWindow() bool
 	SetIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool)
-	CaptureResolution() raw.SCCaptureResolutionType
-	SetCaptureResolution(captureResolution raw.SCCaptureResolutionType)
+	CaptureResolution() SCCaptureResolutionType
+	SetCaptureResolution(captureResolution SCCaptureResolutionType)
 	CapturesShadowsOnly() bool
 	SetCapturesShadowsOnly(capturesShadowsOnly bool)
 	ShouldBeOpaque() bool
@@ -609,16 +609,16 @@ type StreamConfigurationable interface {
 	SetIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool)
 	IgnoreGlobalClipSingleWindow() bool
 	SetIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool)
-	PresenterOverlayPrivacyAlertSetting() raw.SCPresenterOverlayAlertSetting
-	SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting raw.SCPresenterOverlayAlertSetting)
+	PresenterOverlayPrivacyAlertSetting() SCPresenterOverlayAlertSetting
+	SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting SCPresenterOverlayAlertSetting)
 	IncludeChildWindows() bool
 	SetIncludeChildWindows(includeChildWindows bool)
 	CaptureMicrophone() bool
 	SetCaptureMicrophone(captureMicrophone bool)
 	MicrophoneCaptureDeviceID() string
 	SetMicrophoneCaptureDeviceID(microphoneCaptureDeviceID string)
-	CaptureDynamicRange() raw.SCCaptureDynamicRange
-	SetCaptureDynamicRange(captureDynamicRange raw.SCCaptureDynamicRange)
+	CaptureDynamicRange() SCCaptureDynamicRange
+	SetCaptureDynamicRange(captureDynamicRange SCCaptureDynamicRange)
 }
 
 var _ StreamConfigurationable = (*StreamConfiguration)(nil)

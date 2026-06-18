@@ -56,8 +56,8 @@ func (x *LogMessageComponent) Placeholder() string {
 }
 
 // ArgumentCategory calls the underlying ArgumentCategory.
-func (x *LogMessageComponent) ArgumentCategory() raw.OSLogMessageComponentArgumentCategory {
-	return x.inner.ArgumentCategory()
+func (x *LogMessageComponent) ArgumentCategory() OSLogMessageComponentArgumentCategory {
+	return OSLogMessageComponentArgumentCategory(x.inner.ArgumentCategory())
 }
 
 // ArgumentDataValue calls the underlying ArgumentDataValue.
@@ -99,7 +99,7 @@ type LogMessageComponentable interface {
 	Unwrap() *raw.OSLogMessageComponent
 	FormatSubstring() string
 	Placeholder() string
-	ArgumentCategory() raw.OSLogMessageComponentArgumentCategory
+	ArgumentCategory() OSLogMessageComponentArgumentCategory
 	ArgumentDataValue() *foundation.NSData
 	ArgumentDoubleValue() float64
 	ArgumentInt64Value() int64

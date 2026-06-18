@@ -982,11 +982,12 @@ func buildParamConstructor(
 			resolved := rawParamGoType(p.ObjCType, ctx, m, impSet)
 			goType := qualifyRaw(resolved, fw, rawPkgAlias, ctx.GenericParams)
 			maps.Copy(extraImports, impSet)
+			sigType, rawExpr := localizeParam(pName, goType, fw, rawPkgAlias)
 			params = append(params, ctorParam{
 				goName:   pName,
-				goType:   goType,
-				rawExpr:  pName,
-				isObject: isObjectPointerType(goType, m),
+				goType:   sigType,
+				rawExpr:  rawExpr,
+				isObject: isObjectPointerType(sigType, m),
 			})
 		}
 	}
@@ -1298,13 +1299,14 @@ func buildWithSetter(
 		}
 	}
 
+	sigType, rawExpr := localizeParam(pName, goType, fw, rawPkgAlias)
 	return &withEntry{
 		goName:          goWithName,
 		rawSetterGoName: rawSetterGoName,
 		param: withParam{
 			goName:  pName,
-			goType:  goType,
-			rawExpr: pName,
+			goType:  sigType,
+			rawExpr: rawExpr,
 		},
 		extraImports: extraImports,
 	}
@@ -1380,6 +1382,7 @@ const (
 	plainRetRaw                           // return the raw value unchanged
 	plainRetString                        // *foundation.NSString → Go string
 	plainRetTrialWrap                     // *raw.<Class> → *<Trial> (this package)
+	plainRetEnumCast                      // raw.<Enum> → local <Enum> (this package)
 )
 
 // plainParam is one parameter of a plain pass-through method: the Go signature
@@ -1543,10 +1546,12 @@ func buildAsyncMethod(
 			impSet := make(typemap.ImportSet)
 			resolved := rawParamGoType(p.ObjCType, ctx, m, impSet)
 			maps.Copy(extraImports, impSet)
+			goType := qualifyRaw(resolved, fw, rawPkgAlias, ctx.GenericParams)
+			sigType, rawExpr := localizeParam(pName, goType, fw, rawPkgAlias)
 			nonBlockParams = append(nonBlockParams, asyncParam{
 				goName:  pName,
-				goType:  qualifyRaw(resolved, fw, rawPkgAlias, ctx.GenericParams),
-				rawExpr: pName,
+				goType:  sigType,
+				rawExpr: rawExpr,
 			})
 		}
 	}
@@ -1741,7 +1746,8 @@ func buildPlainMethod(
 				return nil
 			}
 			maps.Copy(extraImports, impSet)
-			params = append(params, plainParam{goName: pName, goType: goType, rawExpr: pName})
+			sigType, rawExpr := localizeParam(pName, goType, fw, rawPkgAlias)
+			params = append(params, plainParam{goName: pName, goType: sigType, rawExpr: rawExpr})
 		}
 	}
 
@@ -1786,8 +1792,12 @@ func buildPlainMethod(
 				}
 			}
 			if retMode != plainRetTrialWrap {
-				maps.Copy(extraImports, impSet)
-				retMode, retType = plainRetRaw, rawRet
+				if sig, _, isEnum := localizeEnumType(rawRet, fw, rawPkgAlias); isEnum {
+					retMode, retType = plainRetEnumCast, sig
+				} else {
+					maps.Copy(extraImports, impSet)
+					retMode, retType = plainRetRaw, rawRet
+				}
 			}
 		}
 	}
@@ -1869,6 +1879,7 @@ func writePlainMethod(w io.Writer, recv, target string, me methodEntry) {
 		HasError:  me.plainHasError,
 		RetMode:   plainRetModeName(me.plainRetMode),
 		TrialType: me.plainTrialType,
+		EnumType:  me.plainRetType,
 	})
 }
 
@@ -1884,6 +1895,8 @@ func plainRetModeName(m plainRetMode) string {
 		return "string"
 	case plainRetTrialWrap:
 		return "trialwrap"
+	case plainRetEnumCast:
+		return "enumcast"
 	}
 	return ""
 }
@@ -1897,8 +1910,9 @@ type plainMethodView struct {
 	RetSig    string
 	Call      string
 	HasError  bool
-	RetMode   string // "void" | "raw" | "string" | "trialwrap"
+	RetMode   string // "void" | "raw" | "string" | "trialwrap" | "enumcast"
 	TrialType string
+	EnumType  string // local enum type for the enumcast return
 }
 
 // plainRetSig is the return clause for a plain method, shared by the writer and
@@ -2501,6 +2515,223 @@ func frameworkOwnTypeNames(fw *meta.FrameworkMeta) map[string]bool {
 	return set
 }
 
+// ── Enum localization ────────────────────────────────────────────────────────
+
+// ownEnumNameCache memoises the per-framework exported enum Go-type-name set.
+var ownEnumNameCache = map[*meta.FrameworkMeta]map[string]bool{}
+
+// frameworkOwnEnumNames is the set of Go type names of fw's own enums, derived
+// exactly like emitEnums' index (naming.GoTypeName on each exported, available,
+// non-anon enum key). These are the enums the idiomatic package re-emits as
+// concrete local types, so signatures can use the local spelling instead of the
+// raw one.
+func frameworkOwnEnumNames(fw *meta.FrameworkMeta) map[string]bool {
+	if set, ok := ownEnumNameCache[fw]; ok {
+		return set
+	}
+	set := make(map[string]bool)
+	for key, e := range fw.Enums {
+		if e.Availability.IsUnavailable || e.IsAnon {
+			continue
+		}
+		goType := naming.GoTypeName(key)
+		if !isExportedGoIdent(goType) {
+			continue
+		}
+		// emitEnums only re-emits enums that have at least one available member
+		// (it skips member-less ones). Localizing a name the enums file won't
+		// define would dangle, so mirror that filter here.
+		if !enumHasAvailableMember(e) {
+			continue
+		}
+		set[goType] = true
+	}
+	ownEnumNameCache[fw] = set
+	return set
+}
+
+// enumHasAvailableMember reports whether e has at least one available member,
+// matching the condition under which emitEnums emits a concrete local type.
+func enumHasAvailableMember(e meta.Enum) bool {
+	for _, m := range e.Members {
+		if !m.Availability.IsUnavailable {
+			return true
+		}
+	}
+	return false
+}
+
+// referencedEnumsCache accumulates, per framework, the enum Go type names that
+// localizeEnumType rewrote into a local signature. emitEnums emits concrete
+// definitions for exactly this set (see enums.go). Generation is sequential per
+// framework, so a plain map is safe.
+var referencedEnumsCache = map[*meta.FrameworkMeta]map[string]bool{}
+
+// referencedEnums returns (creating on first use) the per-framework set of
+// locally-referenced enum names.
+func referencedEnums(fw *meta.FrameworkMeta) map[string]bool {
+	set, ok := referencedEnumsCache[fw]
+	if !ok {
+		set = make(map[string]bool)
+		referencedEnumsCache[fw] = set
+	}
+	return set
+}
+
+// localizeEnumType rewrites a raw-qualified scalar enum type (rawPkgAlias.<E>,
+// where <E> is one of fw's own enums) to the local idiomatic spelling <E>,
+// recording it as referenced so emitEnums emits its concrete definition. It
+// returns (localType, rawType, true); for anything else it returns the input
+// unchanged with isEnum=false. Only the exact alias.<E> form matches, so
+// pointer/slice/compound types keep their raw spelling.
+func localizeEnumType(qualified string, fw *meta.FrameworkMeta, rawPkgAlias string) (sigType, rawType string, isEnum bool) {
+	prefix := rawPkgAlias + "."
+	if !strings.HasPrefix(qualified, prefix) {
+		return qualified, "", false
+	}
+	name := qualified[len(prefix):]
+	if !frameworkOwnEnumNames(fw)[name] {
+		return qualified, "", false
+	}
+	referencedEnums(fw)[name] = true
+	return name, qualified, true
+}
+
+// localizeParam returns the signature type and the raw-call expression for a
+// parameter whose raw-qualified type is goType, supplied as pName. When goType
+// is a local enum the signature uses the local spelling and the value is cast
+// back to the raw enum at the boundary; otherwise both are unchanged.
+func localizeParam(pName, goType string, fw *meta.FrameworkMeta, rawPkgAlias string) (sigType, rawExpr string) {
+	if sig, raw, isEnum := localizeEnumType(goType, fw, rawPkgAlias); isEnum {
+		return sig, raw + "(" + pName + ")"
+	}
+	if sig, adapter, ok := localizeBlockParam(pName, goType, fw, rawPkgAlias); ok {
+		return sig, adapter
+	}
+	return goType, pName
+}
+
+// splitTopLevelCommas splits s on commas that are not nested inside (), [], or
+// <>, so a compound Go type's component types can be examined individually.
+func splitTopLevelCommas(s string) []string {
+	var parts []string
+	depth, start := 0, 0
+	for i := 0; i < len(s); i++ {
+		switch s[i] {
+		case '(', '[', '<':
+			depth++
+		case ')', ']', '>':
+			depth--
+		case ',':
+			if depth == 0 {
+				parts = append(parts, s[start:i])
+				start = i + 1
+			}
+		}
+	}
+	return append(parts, s[start:])
+}
+
+// localizeBlockParam rewrites a block parameter `func(...)` or `func(...) R` that
+// contains at least one framework-own enum (in a parameter or the return) so its
+// signature uses the local enum spelling, returning an adapter closure with
+// raw-typed params/return that converts each enum across the boundary before/after
+// calling the caller's pName closure. ok is false for non-blocks or blocks with no
+// enum component (left untouched).
+func localizeBlockParam(pName, blockType string, fw *meta.FrameworkMeta, rawPkgAlias string) (sigType, adapter string, ok bool) {
+	if !strings.HasPrefix(blockType, "func(") {
+		return "", "", false
+	}
+	// Find the ')' closing the parameter list, then anything after it is the
+	// (single) return type.
+	depth, closeIdx := 0, -1
+	for i := len("func(") - 1; i < len(blockType) && closeIdx < 0; i++ {
+		switch blockType[i] {
+		case '(':
+			depth++
+		case ')':
+			if depth--; depth == 0 {
+				closeIdx = i
+			}
+		}
+	}
+	if closeIdx < 0 {
+		return "", "", false
+	}
+	inner := blockType[len("func("):closeIdx]
+	retType := strings.TrimSpace(blockType[closeIdx+1:])
+
+	var sigParams, adaptParams, callArgs []string
+	any := false
+	if strings.TrimSpace(inner) != "" {
+		for i, p := range splitTopLevelCommas(inner) {
+			p = strings.TrimSpace(p)
+			v := fmt.Sprintf("_a%d", i)
+			adaptParams = append(adaptParams, v+" "+p)
+			if sig, _, isEnum := localizeEnumType(p, fw, rawPkgAlias); isEnum {
+				sigParams = append(sigParams, sig)
+				callArgs = append(callArgs, sig+"("+v+")")
+				any = true
+			} else {
+				sigParams = append(sigParams, p)
+				callArgs = append(callArgs, v)
+			}
+		}
+	}
+
+	// A local-enum return: the caller's closure returns the local type; the
+	// adapter casts it back to raw for the underlying block.
+	sigRet, retOpen, retClose := retType, "", ""
+	if sig, rawType, isEnum := localizeEnumType(retType, fw, rawPkgAlias); isEnum {
+		sigRet, retOpen, retClose = sig, rawType+"(", ")"
+		any = true
+	}
+	if !any {
+		return "", "", false
+	}
+
+	sigType = "func(" + strings.Join(sigParams, ", ") + ")"
+	if sigRet != "" {
+		sigType += " " + sigRet
+	}
+	call := pName + "(" + strings.Join(callArgs, ", ") + ")"
+	adapter = "func(" + strings.Join(adaptParams, ", ") + ")"
+	if retType != "" {
+		adapter += " " + retType + " { return " + retOpen + call + retClose + " }"
+	} else {
+		adapter += " { " + call + " }"
+	}
+	return sigType, adapter, true
+}
+
+// adaptCFuncParam localizes one C-function-wrapper parameter whose raw-qualified
+// type is goType, returning the signature type, the expression passed to the raw
+// call, and any pre/post statements wrapping the call. It extends localizeParam
+// to the two compound enum surfaces C functions present: pointer-to-enum
+// out-parameters (via a raw temporary copied back) and enum-bearing block
+// parameters (via an adapter closure).
+func adaptCFuncParam(pName, goType string, fw *meta.FrameworkMeta, rawPkgAlias string) (sigType, callArg string, pre, post []string) {
+	if sig, rawType, isEnum := localizeEnumType(goType, fw, rawPkgAlias); isEnum {
+		return sig, rawType + "(" + pName + ")", nil, nil
+	}
+	if strings.HasPrefix(goType, "*") {
+		if sig, rawType, isEnum := localizeEnumType(goType[1:], fw, rawPkgAlias); isEnum {
+			tmp := "_" + pName
+			pre = []string{"var " + tmp + " " + rawType}
+			post = []string{
+				"if " + pName + " != nil {",
+				"*" + pName + " = " + sig + "(" + tmp + ")",
+				"}",
+			}
+			return "*" + sig, "&" + tmp, pre, post
+		}
+	}
+	if sig, adapter, ok := localizeBlockParam(pName, goType, fw, rawPkgAlias); ok {
+		return sig, adapter, nil, nil
+	}
+	return goType, pName, nil, nil
+}
+
 // ── File utilities ─────────────────────────────────────────────────────────────
 
 func sortedKeys(m map[string]meta.Class) []string {
@@ -2685,8 +2916,9 @@ func emitFunctionWrappers(
 	ctx := typemap.Context{Framework: fw.Framework}
 
 	type wrapParam struct {
-		goName string
-		goType string
+		goName  string
+		goType  string
+		rawExpr string
 	}
 	type wrapEntry struct {
 		rawFnName string
@@ -2723,7 +2955,8 @@ func emitFunctionWrappers(
 			if strings.Contains(goType, "foundation.") {
 				needsFoundation = true
 			}
-			params = append(params, wrapParam{goName: pName, goType: goType})
+			sigType, rawExpr := localizeParam(pName, goType, fw, rawPkgAlias)
+			params = append(params, wrapParam{goName: pName, goType: sigType, rawExpr: rawExpr})
 		}
 
 		retObjC := strings.TrimSpace(fn.Return.ObjCType)
@@ -2778,7 +3011,7 @@ func emitFunctionWrappers(
 		var sigParts, callArgs []string
 		for _, p := range e.params {
 			sigParts = append(sigParts, p.goName+" "+p.goType)
-			callArgs = append(callArgs, p.goName)
+			callArgs = append(callArgs, p.rawExpr)
 		}
 		callArgs = append(callArgs, "unsafe.Pointer(&_cfErr)")
 

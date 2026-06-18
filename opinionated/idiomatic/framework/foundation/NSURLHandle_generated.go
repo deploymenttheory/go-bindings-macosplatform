@@ -44,8 +44,8 @@ func (x *URLHandle) WithScriptingProperties(scriptingProperties *raw.NSDictionar
 }
 
 // Status calls the underlying Status.
-func (x *URLHandle) Status() raw.NSURLHandleStatus {
-	return x.inner.Status()
+func (x *URLHandle) Status() NSURLHandleStatus {
+	return NSURLHandleStatus(x.inner.Status())
 }
 
 // FailureReason calls the underlying FailureReason.
@@ -160,7 +160,7 @@ func (x *URLHandle) asObject() *raw.NSObject { return &x.inner.NSObject }
 type URLHandleable interface {
 	Unwrap() *raw.NSURLHandle
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLHandle
-	Status() raw.NSURLHandleStatus
+	Status() NSURLHandleStatus
 	FailureReason() *String
 	AddClient(client raw.NSURLHandleClient)
 	RemoveClient(client raw.NSURLHandleClient)

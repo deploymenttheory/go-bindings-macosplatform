@@ -57,8 +57,8 @@ func (x *ColorPanel) WithShowsAlpha(showsAlpha bool) *ColorPanel {
 }
 
 // WithMode sets the mode property and returns the receiver for chaining.
-func (x *ColorPanel) WithMode(mode raw.NSColorPanelMode) *ColorPanel {
-	x.inner.SetMode(mode)
+func (x *ColorPanel) WithMode(mode NSColorPanelMode) *ColorPanel {
+	x.inner.SetMode(raw.NSColorPanelMode(mode))
 	return x
 }
 
@@ -105,8 +105,8 @@ func (x *ColorPanel) WithSubtitle(subtitle string) *ColorPanel {
 }
 
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
-func (x *ColorPanel) WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetTitleVisibility(titleVisibility)
+func (x *ColorPanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
 	return x
 }
 
@@ -117,8 +117,8 @@ func (x *ColorPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent b
 }
 
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
-func (x *ColorPanel) WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetToolbarStyle(toolbarStyle)
+func (x *ColorPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
 	return x
 }
 
@@ -171,8 +171,8 @@ func (x *ColorPanel) WithDelegate(delegate raw.NSWindowDelegate) *ColorPanel {
 }
 
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
-func (x *ColorPanel) WithStyleMask(styleMask raw.NSWindowStyleMask) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetStyleMask(styleMask)
+func (x *ColorPanel) WithStyleMask(styleMask NSWindowStyleMask) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetStyleMask(raw.NSWindowStyleMask(styleMask))
 	return x
 }
 
@@ -279,8 +279,8 @@ func (x *ColorPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsW
 }
 
 // WithBackingType sets the backingType property and returns the receiver for chaining.
-func (x *ColorPanel) WithBackingType(backingType raw.NSBackingStoreType) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetBackingType(backingType)
+func (x *ColorPanel) WithBackingType(backingType NSBackingStoreType) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
@@ -291,8 +291,8 @@ func (x *ColorPanel) WithLevel(level int) *ColorPanel {
 }
 
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
-func (x *ColorPanel) WithDepthLimit(depthLimit raw.NSWindowDepth) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetDepthLimit(depthLimit)
+func (x *ColorPanel) WithDepthLimit(depthLimit NSWindowDepth) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
@@ -315,8 +315,8 @@ func (x *ColorPanel) WithOpaque(opaque bool) *ColorPanel {
 }
 
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
-func (x *ColorPanel) WithSharingType(sharingType raw.NSWindowSharingType) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetSharingType(sharingType)
+func (x *ColorPanel) WithSharingType(sharingType NSWindowSharingType) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetSharingType(raw.NSWindowSharingType(sharingType))
 	return x
 }
 
@@ -339,14 +339,14 @@ func (x *ColorPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLog
 }
 
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
-func (x *ColorPanel) WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetCollectionBehavior(collectionBehavior)
+func (x *ColorPanel) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
-func (x *ColorPanel) WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetAnimationBehavior(animationBehavior)
+func (x *ColorPanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
 	return x
 }
 
@@ -417,8 +417,8 @@ func (x *ColorPanel) WithColorSpace(colorSpace *ColorSpace) *ColorPanel {
 }
 
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
-func (x *ColorPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+func (x *ColorPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 	return x
 }
 
@@ -459,8 +459,8 @@ func (x *ColorPanel) WithShowsToolbarButton(showsToolbarButton bool) *ColorPanel
 }
 
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
-func (x *ColorPanel) WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetTabbingMode(tabbingMode)
+func (x *ColorPanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
 	return x
 }
 
@@ -495,8 +495,8 @@ func (x *ColorPanel) WithOneShot(oneShot bool) *ColorPanel {
 }
 
 // WithPreferredBackingLocation sets the preferredBackingLocation property and returns the receiver for chaining.
-func (x *ColorPanel) WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *ColorPanel {
-	x.inner.NSPanel.NSWindow.SetPreferredBackingLocation(preferredBackingLocation)
+func (x *ColorPanel) WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *ColorPanel {
+	x.inner.NSPanel.NSWindow.SetPreferredBackingLocation(raw.NSWindowBackingLocation(preferredBackingLocation))
 	return x
 }
 
@@ -597,13 +597,13 @@ func (x *ColorPanel) SetShowsAlpha(showsAlpha bool) {
 }
 
 // Mode calls the underlying Mode.
-func (x *ColorPanel) Mode() raw.NSColorPanelMode {
-	return x.inner.Mode()
+func (x *ColorPanel) Mode() NSColorPanelMode {
+	return NSColorPanelMode(x.inner.Mode())
 }
 
 // SetMode calls the underlying SetMode.
-func (x *ColorPanel) SetMode(mode raw.NSColorPanelMode) {
-	x.inner.SetMode(mode)
+func (x *ColorPanel) SetMode(mode NSColorPanelMode) {
+	x.inner.SetMode(raw.NSColorPanelMode(mode))
 }
 
 // Color calls the underlying Color.
@@ -647,7 +647,7 @@ type ColorPanelable interface {
 	WithAccessoryView(accessoryView ViewProvider) *ColorPanel
 	WithContinuous(continuous bool) *ColorPanel
 	WithShowsAlpha(showsAlpha bool) *ColorPanel
-	WithMode(mode raw.NSColorPanelMode) *ColorPanel
+	WithMode(mode NSColorPanelMode) *ColorPanel
 	WithColor(color *Color) *ColorPanel
 	WithMaximumLinearExposure(maximumLinearExposure float64) *ColorPanel
 	WithFloatingPanel(floatingPanel bool) *ColorPanel
@@ -655,16 +655,16 @@ type ColorPanelable interface {
 	WithWorksWhenModal(worksWhenModal bool) *ColorPanel
 	WithTitle(title string) *ColorPanel
 	WithSubtitle(subtitle string) *ColorPanel
-	WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *ColorPanel
+	WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *ColorPanel
 	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *ColorPanel
-	WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *ColorPanel
+	WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *ColorPanel
 	WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *ColorPanel
 	WithRepresentedURL(representedURL string) *ColorPanel
 	WithRepresentedFilename(representedFilename string) *ColorPanel
 	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *ColorPanel
 	WithContentView(contentView ViewProvider) *ColorPanel
 	WithDelegate(delegate raw.NSWindowDelegate) *ColorPanel
-	WithStyleMask(styleMask raw.NSWindowStyleMask) *ColorPanel
+	WithStyleMask(styleMask NSWindowStyleMask) *ColorPanel
 	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *ColorPanel
 	WithAspectRatio(aspectRatio corefoundation.CGSize) *ColorPanel
 	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *ColorPanel
@@ -682,18 +682,18 @@ type ColorPanelable interface {
 	WithDocumentEdited(documentEdited bool) *ColorPanel
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *ColorPanel
 	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *ColorPanel
-	WithBackingType(backingType raw.NSBackingStoreType) *ColorPanel
+	WithBackingType(backingType NSBackingStoreType) *ColorPanel
 	WithLevel(level int) *ColorPanel
-	WithDepthLimit(depthLimit raw.NSWindowDepth) *ColorPanel
+	WithDepthLimit(depthLimit NSWindowDepth) *ColorPanel
 	WithHasShadow(hasShadow bool) *ColorPanel
 	WithAlphaValue(alphaValue float64) *ColorPanel
 	WithOpaque(opaque bool) *ColorPanel
-	WithSharingType(sharingType raw.NSWindowSharingType) *ColorPanel
+	WithSharingType(sharingType NSWindowSharingType) *ColorPanel
 	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *ColorPanel
 	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *ColorPanel
 	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *ColorPanel
-	WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *ColorPanel
-	WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *ColorPanel
+	WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *ColorPanel
+	WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *ColorPanel
 	WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *ColorPanel
 	WithMinSize(minSize corefoundation.CGSize) *ColorPanel
 	WithMaxSize(maxSize corefoundation.CGSize) *ColorPanel
@@ -705,20 +705,20 @@ type ColorPanelable interface {
 	WithParentWindow(parentWindow WindowProvider) *ColorPanel
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *ColorPanel
 	WithColorSpace(colorSpace *ColorSpace) *ColorPanel
-	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *ColorPanel
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *ColorPanel
 	WithContentViewController(contentViewController ViewControllerProvider) *ColorPanel
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *ColorPanel
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *ColorPanel
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *ColorPanel
 	WithToolbar(toolbar *Toolbar) *ColorPanel
 	WithShowsToolbarButton(showsToolbarButton bool) *ColorPanel
-	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *ColorPanel
+	WithTabbingMode(tabbingMode NSWindowTabbingMode) *ColorPanel
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *ColorPanel
 	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *ColorPanel
 	WithIgnoresMouseEvents(ignoresMouseEvents bool) *ColorPanel
 	WithAutodisplay(autodisplay bool) *ColorPanel
 	WithOneShot(oneShot bool) *ColorPanel
-	WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *ColorPanel
+	WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *ColorPanel
 	WithShowsResizeIndicator(showsResizeIndicator bool) *ColorPanel
 	WithOrderedIndex(orderedIndex int) *ColorPanel
 	WithRestorable(restorable bool) *ColorPanel
@@ -736,8 +736,8 @@ type ColorPanelable interface {
 	SetContinuous(continuous bool)
 	ShowsAlpha() bool
 	SetShowsAlpha(showsAlpha bool)
-	Mode() raw.NSColorPanelMode
-	SetMode(mode raw.NSColorPanelMode)
+	Mode() NSColorPanelMode
+	SetMode(mode NSColorPanelMode)
 	Color() *Color
 	SetColor(color *raw.NSColor)
 	Alpha() float64

@@ -10,26 +10,26 @@ import (
 )
 
 // DDDeviceCategoryToString calls [raw.DDDeviceCategoryToString] (C function DDDeviceCategoryToString).
-func DDDeviceCategoryToString(inValue raw.DDDeviceCategory) *foundation.NSString {
-	return raw.DDDeviceCategoryToString(inValue)
+func DDDeviceCategoryToString(inValue DDDeviceCategory) *foundation.NSString {
+	return raw.DDDeviceCategoryToString(raw.DDDeviceCategory(inValue))
 }
 
 // DDDeviceMediaPlaybackStateToString calls [raw.DDDeviceMediaPlaybackStateToString] (C function DDDeviceMediaPlaybackStateToString).
-func DDDeviceMediaPlaybackStateToString(inValue raw.DDDeviceMediaPlaybackState) *foundation.NSString {
-	return raw.DDDeviceMediaPlaybackStateToString(inValue)
+func DDDeviceMediaPlaybackStateToString(inValue DDDeviceMediaPlaybackState) *foundation.NSString {
+	return raw.DDDeviceMediaPlaybackStateToString(raw.DDDeviceMediaPlaybackState(inValue))
 }
 
 // DDDeviceProtocolToString calls [raw.DDDeviceProtocolToString] (C function DDDeviceProtocolToString).
-func DDDeviceProtocolToString(inValue raw.DDDeviceProtocol) *foundation.NSString {
-	return raw.DDDeviceProtocolToString(inValue)
+func DDDeviceProtocolToString(inValue DDDeviceProtocol) *foundation.NSString {
+	return raw.DDDeviceProtocolToString(raw.DDDeviceProtocol(inValue))
 }
 
 // DDDeviceStateToString calls [raw.DDDeviceStateToString] (C function DDDeviceStateToString).
-func DDDeviceStateToString(inValue raw.DDDeviceState) *foundation.NSString {
-	return raw.DDDeviceStateToString(inValue)
+func DDDeviceStateToString(inValue DDDeviceState) *foundation.NSString {
+	return raw.DDDeviceStateToString(raw.DDDeviceState(inValue))
 }
 
 // DDEventTypeToString calls [raw.DDEventTypeToString] (C function DDEventTypeToString).
-func DDEventTypeToString(inValue raw.DDEventType) *foundation.NSString {
-	return raw.DDEventTypeToString(inValue)
+func DDEventTypeToString(inValue DDEventType) *foundation.NSString {
+	return raw.DDEventTypeToString(raw.DDEventType(inValue))
 }

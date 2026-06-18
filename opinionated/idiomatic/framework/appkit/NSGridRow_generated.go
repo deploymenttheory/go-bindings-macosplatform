@@ -37,14 +37,14 @@ func NewGridRow() *GridRow {
 }
 
 // WithYPlacement sets the yPlacement property and returns the receiver for chaining.
-func (x *GridRow) WithYPlacement(yPlacement raw.NSGridCellPlacement) *GridRow {
-	x.inner.SetYPlacement(yPlacement)
+func (x *GridRow) WithYPlacement(yPlacement NSGridCellPlacement) *GridRow {
+	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
 	return x
 }
 
 // WithRowAlignment sets the rowAlignment property and returns the receiver for chaining.
-func (x *GridRow) WithRowAlignment(rowAlignment raw.NSGridRowAlignment) *GridRow {
-	x.inner.SetRowAlignment(rowAlignment)
+func (x *GridRow) WithRowAlignment(rowAlignment NSGridRowAlignment) *GridRow {
+	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
 	return x
 }
 
@@ -101,23 +101,23 @@ func (x *GridRow) NumberOfCells() int {
 }
 
 // YPlacement calls the underlying YPlacement.
-func (x *GridRow) YPlacement() raw.NSGridCellPlacement {
-	return x.inner.YPlacement()
+func (x *GridRow) YPlacement() NSGridCellPlacement {
+	return NSGridCellPlacement(x.inner.YPlacement())
 }
 
 // SetYPlacement calls the underlying SetYPlacement.
-func (x *GridRow) SetYPlacement(yPlacement raw.NSGridCellPlacement) {
-	x.inner.SetYPlacement(yPlacement)
+func (x *GridRow) SetYPlacement(yPlacement NSGridCellPlacement) {
+	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
 }
 
 // RowAlignment calls the underlying RowAlignment.
-func (x *GridRow) RowAlignment() raw.NSGridRowAlignment {
-	return x.inner.RowAlignment()
+func (x *GridRow) RowAlignment() NSGridRowAlignment {
+	return NSGridRowAlignment(x.inner.RowAlignment())
 }
 
 // SetRowAlignment calls the underlying SetRowAlignment.
-func (x *GridRow) SetRowAlignment(rowAlignment raw.NSGridRowAlignment) {
-	x.inner.SetRowAlignment(rowAlignment)
+func (x *GridRow) SetRowAlignment(rowAlignment NSGridRowAlignment) {
+	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
 }
 
 // Height calls the underlying Height.
@@ -163,8 +163,8 @@ func (x *GridRow) SetHidden(hidden bool) {
 // GridRowable is the interface implemented by [GridRow], for mocking and DI.
 type GridRowable interface {
 	Unwrap() *raw.NSGridRow
-	WithYPlacement(yPlacement raw.NSGridCellPlacement) *GridRow
-	WithRowAlignment(rowAlignment raw.NSGridRowAlignment) *GridRow
+	WithYPlacement(yPlacement NSGridCellPlacement) *GridRow
+	WithRowAlignment(rowAlignment NSGridRowAlignment) *GridRow
 	WithHeight(height float64) *GridRow
 	WithTopPadding(topPadding float64) *GridRow
 	WithBottomPadding(bottomPadding float64) *GridRow
@@ -173,10 +173,10 @@ type GridRowable interface {
 	MergeCellsInRange(range_ foundation.NSRange)
 	GridView() *GridView
 	NumberOfCells() int
-	YPlacement() raw.NSGridCellPlacement
-	SetYPlacement(yPlacement raw.NSGridCellPlacement)
-	RowAlignment() raw.NSGridRowAlignment
-	SetRowAlignment(rowAlignment raw.NSGridRowAlignment)
+	YPlacement() NSGridCellPlacement
+	SetYPlacement(yPlacement NSGridCellPlacement)
+	RowAlignment() NSGridRowAlignment
+	SetRowAlignment(rowAlignment NSGridRowAlignment)
 	Height() float64
 	SetHeight(height float64)
 	TopPadding() float64

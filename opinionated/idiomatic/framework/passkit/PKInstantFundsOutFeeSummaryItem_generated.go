@@ -49,8 +49,8 @@ func (x *InstantFundsOutFeeSummaryItem) WithAmount(amount *foundation.NSDecimalN
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *InstantFundsOutFeeSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *InstantFundsOutFeeSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetType(type_)
+func (x *InstantFundsOutFeeSummaryItem) WithType(type_ PKPaymentSummaryItemType) *InstantFundsOutFeeSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))
 	return x
 }
 
@@ -63,7 +63,7 @@ type InstantFundsOutFeeSummaryItemable interface {
 	Unwrap() *raw.PKInstantFundsOutFeeSummaryItem
 	WithLabel(label string) *InstantFundsOutFeeSummaryItem
 	WithAmount(amount *foundation.NSDecimalNumber) *InstantFundsOutFeeSummaryItem
-	WithType(type_ raw.PKPaymentSummaryItemType) *InstantFundsOutFeeSummaryItem
+	WithType(type_ PKPaymentSummaryItemType) *InstantFundsOutFeeSummaryItem
 }
 
 var _ InstantFundsOutFeeSummaryItemable = (*InstantFundsOutFeeSummaryItem)(nil)

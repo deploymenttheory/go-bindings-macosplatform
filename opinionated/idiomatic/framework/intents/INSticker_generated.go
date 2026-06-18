@@ -32,15 +32,15 @@ func StickerFromID(id objc.ID) *Sticker {
 }
 
 // NewStickerWithTypeEmoji creates a new [Sticker].
-func NewStickerWithTypeEmoji(type_ raw.INStickerType, emoji string) *Sticker {
+func NewStickerWithTypeEmoji(type_ INStickerType, emoji string) *Sticker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSticker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:emoji:"), type_, foundation.NSStringStringWithUTF8String(emoji).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:emoji:"), raw.INStickerType(type_), foundation.NSStringStringWithUTF8String(emoji).Ptr())
 	return &Sticker{inner: raw.INStickerFromID(_id)}
 }
 
 // Type calls the underlying Type.
-func (x *Sticker) Type() raw.INStickerType {
-	return x.inner.Type()
+func (x *Sticker) Type() INStickerType {
+	return INStickerType(x.inner.Type())
 }
 
 // Emoji calls the underlying Emoji.
@@ -55,7 +55,7 @@ func (x *Sticker) Emoji() string {
 // Stickerable is the interface implemented by [Sticker], for mocking and DI.
 type Stickerable interface {
 	Unwrap() *raw.INSticker
-	Type() raw.INStickerType
+	Type() INStickerType
 	Emoji() string
 }
 

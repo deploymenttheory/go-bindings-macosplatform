@@ -40,23 +40,23 @@ func NewAsset() *Asset {
 }
 
 // CanPerformEditOperation calls the underlying CanPerformEditOperation.
-func (x *Asset) CanPerformEditOperation(editOperation raw.PHAssetEditOperation) bool {
-	return x.inner.CanPerformEditOperation(editOperation)
+func (x *Asset) CanPerformEditOperation(editOperation PHAssetEditOperation) bool {
+	return x.inner.CanPerformEditOperation(raw.PHAssetEditOperation(editOperation))
 }
 
 // PlaybackStyle calls the underlying PlaybackStyle.
-func (x *Asset) PlaybackStyle() raw.PHAssetPlaybackStyle {
-	return x.inner.PlaybackStyle()
+func (x *Asset) PlaybackStyle() PHAssetPlaybackStyle {
+	return PHAssetPlaybackStyle(x.inner.PlaybackStyle())
 }
 
 // MediaType calls the underlying MediaType.
-func (x *Asset) MediaType() raw.PHAssetMediaType {
-	return x.inner.MediaType()
+func (x *Asset) MediaType() PHAssetMediaType {
+	return PHAssetMediaType(x.inner.MediaType())
 }
 
 // MediaSubtypes calls the underlying MediaSubtypes.
-func (x *Asset) MediaSubtypes() raw.PHAssetMediaSubtype {
-	return x.inner.MediaSubtypes()
+func (x *Asset) MediaSubtypes() PHAssetMediaSubtype {
+	return PHAssetMediaSubtype(x.inner.MediaSubtypes())
 }
 
 // ContentType calls the underlying ContentType.
@@ -124,8 +124,8 @@ func (x *Asset) BurstIdentifier() string {
 }
 
 // BurstSelectionTypes calls the underlying BurstSelectionTypes.
-func (x *Asset) BurstSelectionTypes() raw.PHAssetBurstSelectionType {
-	return x.inner.BurstSelectionTypes()
+func (x *Asset) BurstSelectionTypes() PHAssetBurstSelectionType {
+	return PHAssetBurstSelectionType(x.inner.BurstSelectionTypes())
 }
 
 // RepresentsBurst calls the underlying RepresentsBurst.
@@ -134,8 +134,8 @@ func (x *Asset) RepresentsBurst() bool {
 }
 
 // SourceType calls the underlying SourceType.
-func (x *Asset) SourceType() raw.PHAssetSourceType {
-	return x.inner.SourceType()
+func (x *Asset) SourceType() PHAssetSourceType {
+	return PHAssetSourceType(x.inner.SourceType())
 }
 
 // HasAdjustments calls the underlying HasAdjustments.
@@ -167,10 +167,10 @@ func (x *Asset) asObject() *raw.PHObject { return &x.inner.PHObject }
 // Assetable is the interface implemented by [Asset], for mocking and DI.
 type Assetable interface {
 	Unwrap() *raw.PHAsset
-	CanPerformEditOperation(editOperation raw.PHAssetEditOperation) bool
-	PlaybackStyle() raw.PHAssetPlaybackStyle
-	MediaType() raw.PHAssetMediaType
-	MediaSubtypes() raw.PHAssetMediaSubtype
+	CanPerformEditOperation(editOperation PHAssetEditOperation) bool
+	PlaybackStyle() PHAssetPlaybackStyle
+	MediaType() PHAssetMediaType
+	MediaSubtypes() PHAssetMediaSubtype
 	ContentType() *uniformtypeidentifiers.UTType
 	PixelWidth() uint
 	PixelHeight() uint
@@ -183,9 +183,9 @@ type Assetable interface {
 	IsFavorite() bool
 	IsSyncFailureHidden() bool
 	BurstIdentifier() string
-	BurstSelectionTypes() raw.PHAssetBurstSelectionType
+	BurstSelectionTypes() PHAssetBurstSelectionType
 	RepresentsBurst() bool
-	SourceType() raw.PHAssetSourceType
+	SourceType() PHAssetSourceType
 	HasAdjustments() bool
 	AdjustmentFormatIdentifier() string
 	RequestContentEditingInputWithOptionsCompletionHandler(options *raw.PHContentEditingInputRequestOptions, completionHandler objc.Block) uint

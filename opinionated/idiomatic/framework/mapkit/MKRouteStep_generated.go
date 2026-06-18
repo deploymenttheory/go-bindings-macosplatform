@@ -70,8 +70,8 @@ func (x *RouteStep) Distance() unsafe.Pointer {
 }
 
 // TransportType calls the underlying TransportType.
-func (x *RouteStep) TransportType() raw.MKDirectionsTransportType {
-	return x.inner.TransportType()
+func (x *RouteStep) TransportType() MKDirectionsTransportType {
+	return MKDirectionsTransportType(x.inner.TransportType())
 }
 
 // RouteStepable is the interface implemented by [RouteStep], for mocking and DI.
@@ -81,7 +81,7 @@ type RouteStepable interface {
 	Notice() string
 	Polyline() *Polyline
 	Distance() unsafe.Pointer
-	TransportType() raw.MKDirectionsTransportType
+	TransportType() MKDirectionsTransportType
 }
 
 var _ RouteStepable = (*RouteStep)(nil)

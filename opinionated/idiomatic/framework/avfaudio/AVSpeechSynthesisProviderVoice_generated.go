@@ -45,8 +45,8 @@ func (x *SpeechSynthesisProviderVoice) WithVoiceSize(voiceSize int64) *SpeechSyn
 }
 
 // WithGender sets the gender property and returns the receiver for chaining.
-func (x *SpeechSynthesisProviderVoice) WithGender(gender raw.AVSpeechSynthesisVoiceGender) *SpeechSynthesisProviderVoice {
-	x.inner.SetGender(gender)
+func (x *SpeechSynthesisProviderVoice) WithGender(gender AVSpeechSynthesisVoiceGender) *SpeechSynthesisProviderVoice {
+	x.inner.SetGender(raw.AVSpeechSynthesisVoiceGender(gender))
 	return x
 }
 
@@ -107,13 +107,13 @@ func (x *SpeechSynthesisProviderVoice) SetVoiceSize(voiceSize int64) {
 }
 
 // Gender calls the underlying Gender.
-func (x *SpeechSynthesisProviderVoice) Gender() raw.AVSpeechSynthesisVoiceGender {
-	return x.inner.Gender()
+func (x *SpeechSynthesisProviderVoice) Gender() AVSpeechSynthesisVoiceGender {
+	return AVSpeechSynthesisVoiceGender(x.inner.Gender())
 }
 
 // SetGender calls the underlying SetGender.
-func (x *SpeechSynthesisProviderVoice) SetGender(gender raw.AVSpeechSynthesisVoiceGender) {
-	x.inner.SetGender(gender)
+func (x *SpeechSynthesisProviderVoice) SetGender(gender AVSpeechSynthesisVoiceGender) {
+	x.inner.SetGender(raw.AVSpeechSynthesisVoiceGender(gender))
 }
 
 // Age calls the underlying Age.
@@ -130,7 +130,7 @@ func (x *SpeechSynthesisProviderVoice) SetAge(age int) {
 type SpeechSynthesisProviderVoiceable interface {
 	Unwrap() *raw.AVSpeechSynthesisProviderVoice
 	WithVoiceSize(voiceSize int64) *SpeechSynthesisProviderVoice
-	WithGender(gender raw.AVSpeechSynthesisVoiceGender) *SpeechSynthesisProviderVoice
+	WithGender(gender AVSpeechSynthesisVoiceGender) *SpeechSynthesisProviderVoice
 	WithAge(age int) *SpeechSynthesisProviderVoice
 	Name() string
 	Identifier() string
@@ -138,8 +138,8 @@ type SpeechSynthesisProviderVoiceable interface {
 	SupportedLanguages() []string
 	VoiceSize() int64
 	SetVoiceSize(voiceSize int64)
-	Gender() raw.AVSpeechSynthesisVoiceGender
-	SetGender(gender raw.AVSpeechSynthesisVoiceGender)
+	Gender() AVSpeechSynthesisVoiceGender
+	SetGender(gender AVSpeechSynthesisVoiceGender)
 	Age() int
 	SetAge(age int)
 }

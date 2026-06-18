@@ -43,8 +43,8 @@ func (x *MutableURLRequest) WithURL(uRL string) *MutableURLRequest {
 }
 
 // WithCachePolicy sets the cachePolicy property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithCachePolicy(cachePolicy raw.NSURLRequestCachePolicy) *MutableURLRequest {
-	x.inner.SetCachePolicy(cachePolicy)
+func (x *MutableURLRequest) WithCachePolicy(cachePolicy NSURLRequestCachePolicy) *MutableURLRequest {
+	x.inner.SetCachePolicy(raw.NSURLRequestCachePolicy(cachePolicy))
 	return x
 }
 
@@ -61,8 +61,8 @@ func (x *MutableURLRequest) WithMainDocumentURL(mainDocumentURL string) *Mutable
 }
 
 // WithNetworkServiceType sets the networkServiceType property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType) *MutableURLRequest {
-	x.inner.SetNetworkServiceType(networkServiceType)
+func (x *MutableURLRequest) WithNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType) *MutableURLRequest {
+	x.inner.SetNetworkServiceType(raw.NSURLRequestNetworkServiceType(networkServiceType))
 	return x
 }
 
@@ -97,8 +97,8 @@ func (x *MutableURLRequest) WithAssumesHTTP3Capable(assumesHTTP3Capable bool) *M
 }
 
 // WithAttribution sets the attribution property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithAttribution(attribution raw.NSURLRequestAttribution) *MutableURLRequest {
-	x.inner.SetAttribution(attribution)
+func (x *MutableURLRequest) WithAttribution(attribution NSURLRequestAttribution) *MutableURLRequest {
+	x.inner.SetAttribution(raw.NSURLRequestAttribution(attribution))
 	return x
 }
 
@@ -168,8 +168,8 @@ func (x *MutableURLRequest) SetURL(uRL string) {
 }
 
 // SetCachePolicy calls the underlying SetCachePolicy.
-func (x *MutableURLRequest) SetCachePolicy(cachePolicy raw.NSURLRequestCachePolicy) {
-	x.inner.SetCachePolicy(cachePolicy)
+func (x *MutableURLRequest) SetCachePolicy(cachePolicy NSURLRequestCachePolicy) {
+	x.inner.SetCachePolicy(raw.NSURLRequestCachePolicy(cachePolicy))
 }
 
 // SetTimeoutInterval calls the underlying SetTimeoutInterval.
@@ -183,8 +183,8 @@ func (x *MutableURLRequest) SetMainDocumentURL(mainDocumentURL string) {
 }
 
 // SetNetworkServiceType calls the underlying SetNetworkServiceType.
-func (x *MutableURLRequest) SetNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType) {
-	x.inner.SetNetworkServiceType(networkServiceType)
+func (x *MutableURLRequest) SetNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType) {
+	x.inner.SetNetworkServiceType(raw.NSURLRequestNetworkServiceType(networkServiceType))
 }
 
 // SetAllowsCellularAccess calls the underlying SetAllowsCellularAccess.
@@ -213,8 +213,8 @@ func (x *MutableURLRequest) SetAssumesHTTP3Capable(assumesHTTP3Capable bool) {
 }
 
 // SetAttribution calls the underlying SetAttribution.
-func (x *MutableURLRequest) SetAttribution(attribution raw.NSURLRequestAttribution) {
-	x.inner.SetAttribution(attribution)
+func (x *MutableURLRequest) SetAttribution(attribution NSURLRequestAttribution) {
+	x.inner.SetAttribution(raw.NSURLRequestAttribution(attribution))
 }
 
 // SetRequiresDNSSECValidation calls the underlying SetRequiresDNSSECValidation.
@@ -280,16 +280,16 @@ func (x *MutableURLRequest) asObject() *raw.NSObject { return &x.inner.NSURLRequ
 type MutableURLRequestable interface {
 	Unwrap() *raw.NSMutableURLRequest
 	WithURL(uRL string) *MutableURLRequest
-	WithCachePolicy(cachePolicy raw.NSURLRequestCachePolicy) *MutableURLRequest
+	WithCachePolicy(cachePolicy NSURLRequestCachePolicy) *MutableURLRequest
 	WithTimeoutInterval(timeoutInterval float64) *MutableURLRequest
 	WithMainDocumentURL(mainDocumentURL string) *MutableURLRequest
-	WithNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType) *MutableURLRequest
+	WithNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType) *MutableURLRequest
 	WithAllowsCellularAccess(allowsCellularAccess bool) *MutableURLRequest
 	WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *MutableURLRequest
 	WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *MutableURLRequest
 	WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *MutableURLRequest
 	WithAssumesHTTP3Capable(assumesHTTP3Capable bool) *MutableURLRequest
-	WithAttribution(attribution raw.NSURLRequestAttribution) *MutableURLRequest
+	WithAttribution(attribution NSURLRequestAttribution) *MutableURLRequest
 	WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *MutableURLRequest
 	WithAllowsPersistentDNS(allowsPersistentDNS bool) *MutableURLRequest
 	WithCookiePartitionIdentifier(cookiePartitionIdentifier string) *MutableURLRequest
@@ -301,16 +301,16 @@ type MutableURLRequestable interface {
 	WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableURLRequest
 	SetURL(uRL string)
-	SetCachePolicy(cachePolicy raw.NSURLRequestCachePolicy)
+	SetCachePolicy(cachePolicy NSURLRequestCachePolicy)
 	SetTimeoutInterval(timeoutInterval float64)
 	SetMainDocumentURL(mainDocumentURL string)
-	SetNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType)
+	SetNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType)
 	SetAllowsCellularAccess(allowsCellularAccess bool)
 	SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool)
 	SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool)
 	SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool)
 	SetAssumesHTTP3Capable(assumesHTTP3Capable bool)
-	SetAttribution(attribution raw.NSURLRequestAttribution)
+	SetAttribution(attribution NSURLRequestAttribution)
 	SetRequiresDNSSECValidation(requiresDNSSECValidation bool)
 	SetAllowsPersistentDNS(allowsPersistentDNS bool)
 	SetCookiePartitionIdentifier(cookiePartitionIdentifier string)

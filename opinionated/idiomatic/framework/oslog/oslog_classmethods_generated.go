@@ -22,8 +22,8 @@ func LocalStoreAndReturnError() (*LogStore, error) {
 }
 
 // StoreWithScopeError calls the underlying OSLogStoreStoreWithScopeError.
-func StoreWithScopeError(scope raw.OSLogStoreScope) (*LogStore, error) {
-	_r, _err := raw.OSLogStoreStoreWithScopeError(scope)
+func StoreWithScopeError(scope OSLogStoreScope) (*LogStore, error) {
+	_r, _err := raw.OSLogStoreStoreWithScopeError(raw.OSLogStoreScope(scope))
 	if _err != nil {
 		return nil, _err
 	}

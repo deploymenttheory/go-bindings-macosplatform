@@ -73,8 +73,8 @@ func (x *PressGestureRecognizer) WithAction(action objc.SEL) *PressGestureRecogn
 }
 
 // WithState sets the state property and returns the receiver for chaining.
-func (x *PressGestureRecognizer) WithState(state raw.NSGestureRecognizerState) *PressGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetState(state)
+func (x *PressGestureRecognizer) WithState(state NSGestureRecognizerState) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
@@ -139,8 +139,8 @@ func (x *PressGestureRecognizer) WithName(name string) *PressGestureRecognizer {
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *PressGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PressGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *PressGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PressGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -197,7 +197,7 @@ type PressGestureRecognizerable interface {
 	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PressGestureRecognizer
 	WithTarget(target objc.ID) *PressGestureRecognizer
 	WithAction(action objc.SEL) *PressGestureRecognizer
-	WithState(state raw.NSGestureRecognizerState) *PressGestureRecognizer
+	WithState(state NSGestureRecognizerState) *PressGestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *PressGestureRecognizer
 	WithEnabled(enabled bool) *PressGestureRecognizer
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PressGestureRecognizer
@@ -208,7 +208,7 @@ type PressGestureRecognizerable interface {
 	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PressGestureRecognizer
 	WithDelaysRotationEvents(delaysRotationEvents bool) *PressGestureRecognizer
 	WithName(name string) *PressGestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PressGestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PressGestureRecognizer
 	ButtonMask() uint
 	SetButtonMask(buttonMask uint)
 	MinimumPressDuration() float64

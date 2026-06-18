@@ -57,8 +57,8 @@ func (x *OperationQueue) WithName(name string) *OperationQueue {
 }
 
 // WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *OperationQueue) WithQualityOfService(qualityOfService raw.NSQualityOfService) *OperationQueue {
-	x.inner.SetQualityOfService(qualityOfService)
+func (x *OperationQueue) WithQualityOfService(qualityOfService NSQualityOfService) *OperationQueue {
+	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 	return x
 }
 
@@ -166,13 +166,13 @@ func (x *OperationQueue) SetName(name string) {
 }
 
 // QualityOfService calls the underlying QualityOfService.
-func (x *OperationQueue) QualityOfService() raw.NSQualityOfService {
-	return x.inner.QualityOfService()
+func (x *OperationQueue) QualityOfService() NSQualityOfService {
+	return NSQualityOfService(x.inner.QualityOfService())
 }
 
 // SetQualityOfService calls the underlying SetQualityOfService.
-func (x *OperationQueue) SetQualityOfService(qualityOfService raw.NSQualityOfService) {
-	x.inner.SetQualityOfService(qualityOfService)
+func (x *OperationQueue) SetQualityOfService(qualityOfService NSQualityOfService) {
+	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 }
 
 // UnderlyingQueue calls the underlying UnderlyingQueue.
@@ -213,7 +213,7 @@ type OperationQueueable interface {
 	WithMaxConcurrentOperationCount(maxConcurrentOperationCount int) *OperationQueue
 	WithSuspended(suspended bool) *OperationQueue
 	WithName(name string) *OperationQueue
-	WithQualityOfService(qualityOfService raw.NSQualityOfService) *OperationQueue
+	WithQualityOfService(qualityOfService NSQualityOfService) *OperationQueue
 	WithUnderlyingQueue(underlyingQueue ObjectProvider) *OperationQueue
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OperationQueue
 	AddOperation(op *raw.NSOperation)
@@ -229,8 +229,8 @@ type OperationQueueable interface {
 	SetSuspended(suspended bool)
 	Name() *String
 	SetName(name string)
-	QualityOfService() raw.NSQualityOfService
-	SetQualityOfService(qualityOfService raw.NSQualityOfService)
+	QualityOfService() NSQualityOfService
+	SetQualityOfService(qualityOfService NSQualityOfService)
 	UnderlyingQueue() *Object
 	SetUnderlyingQueue(underlyingQueue *raw.NSObject)
 	Operations() []*Operation

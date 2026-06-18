@@ -32,16 +32,16 @@ func WKUserScriptFromID(id objc.ID) *WKUserScript {
 }
 
 // NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly creates a new [WKUserScript].
-func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly(source string, injectionTime raw.WKUserScriptInjectionTime, forMainFrameOnly bool) *WKUserScript {
+func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool) *WKUserScript {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WKUserScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:"), foundation.NSStringStringWithUTF8String(source).Ptr(), injectionTime, forMainFrameOnly)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:"), foundation.NSStringStringWithUTF8String(source).Ptr(), raw.WKUserScriptInjectionTime(injectionTime), forMainFrameOnly)
 	return &WKUserScript{inner: raw.WKUserScriptFromID(_id)}
 }
 
 // NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld creates a new [WKUserScript].
-func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source string, injectionTime raw.WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *raw.WKContentWorld) *WKUserScript {
+func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *raw.WKContentWorld) *WKUserScript {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WKUserScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:inContentWorld:"), foundation.NSStringStringWithUTF8String(source).Ptr(), injectionTime, forMainFrameOnly, contentWorld.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:inContentWorld:"), foundation.NSStringStringWithUTF8String(source).Ptr(), raw.WKUserScriptInjectionTime(injectionTime), forMainFrameOnly, contentWorld.Ptr())
 	return &WKUserScript{inner: raw.WKUserScriptFromID(_id)}
 }
 
@@ -55,8 +55,8 @@ func (x *WKUserScript) Source() string {
 }
 
 // InjectionTime calls the underlying InjectionTime.
-func (x *WKUserScript) InjectionTime() raw.WKUserScriptInjectionTime {
-	return x.inner.InjectionTime()
+func (x *WKUserScript) InjectionTime() WKUserScriptInjectionTime {
+	return WKUserScriptInjectionTime(x.inner.InjectionTime())
 }
 
 // IsForMainFrameOnly calls the underlying IsForMainFrameOnly.
@@ -68,7 +68,7 @@ func (x *WKUserScript) IsForMainFrameOnly() bool {
 type WKUserScriptable interface {
 	Unwrap() *raw.WKUserScript
 	Source() string
-	InjectionTime() raw.WKUserScriptInjectionTime
+	InjectionTime() WKUserScriptInjectionTime
 	IsForMainFrameOnly() bool
 }
 

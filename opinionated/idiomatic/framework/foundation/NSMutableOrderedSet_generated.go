@@ -177,18 +177,18 @@ func (x *MutableOrderedSet) UnionSet(other *raw.NSSet[objc.ID]) {
 }
 
 // SortUsingComparator calls the underlying SortUsingComparator.
-func (x *MutableOrderedSet) SortUsingComparator(cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) {
-	x.inner.SortUsingComparator(cmptr)
+func (x *MutableOrderedSet) SortUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) {
+	x.inner.SortUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
 // SortWithOptionsUsingComparator calls the underlying SortWithOptionsUsingComparator.
-func (x *MutableOrderedSet) SortWithOptionsUsingComparator(opts raw.NSSortOptions, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) {
-	x.inner.SortWithOptionsUsingComparator(opts, cmptr)
+func (x *MutableOrderedSet) SortWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) {
+	x.inner.SortWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
 // SortRangeOptionsUsingComparator calls the underlying SortRangeOptionsUsingComparator.
-func (x *MutableOrderedSet) SortRangeOptionsUsingComparator(range_ raw.NSRange, opts raw.NSSortOptions, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) {
-	x.inner.SortRangeOptionsUsingComparator(range_, opts, cmptr)
+func (x *MutableOrderedSet) SortRangeOptionsUsingComparator(range_ raw.NSRange, opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) {
+	x.inner.SortRangeOptionsUsingComparator(range_, raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
 // ApplyDifference calls the underlying ApplyDifference.
@@ -238,9 +238,9 @@ type MutableOrderedSetable interface {
 	IntersectSet(other *raw.NSSet[objc.ID])
 	MinusSet(other *raw.NSSet[objc.ID])
 	UnionSet(other *raw.NSSet[objc.ID])
-	SortUsingComparator(cmptr func(objc.ID, objc.ID) raw.NSComparisonResult)
-	SortWithOptionsUsingComparator(opts raw.NSSortOptions, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult)
-	SortRangeOptionsUsingComparator(range_ raw.NSRange, opts raw.NSSortOptions, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult)
+	SortUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult)
+	SortWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult)
+	SortRangeOptionsUsingComparator(range_ raw.NSRange, opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult)
 	ApplyDifference(difference *raw.NSOrderedCollectionDifference[objc.ID])
 	SortUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor])
 	FilterUsingPredicate(p *raw.NSPredicate)

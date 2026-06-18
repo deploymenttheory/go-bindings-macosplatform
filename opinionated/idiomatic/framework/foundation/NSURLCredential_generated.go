@@ -32,16 +32,16 @@ func URLCredentialFromID(id objc.ID) *URLCredential {
 }
 
 // NewURLCredentialWithUserPasswordPersistence creates a new [URLCredential].
-func NewURLCredentialWithUserPasswordPersistence(user string, password string, persistence raw.NSURLCredentialPersistence) *URLCredential {
+func NewURLCredentialWithUserPasswordPersistence(user string, password string, persistence NSURLCredentialPersistence) *URLCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:password:persistence:"), foundation.NSStringStringWithUTF8String(user).Ptr(), foundation.NSStringStringWithUTF8String(password).Ptr(), persistence)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUser:password:persistence:"), foundation.NSStringStringWithUTF8String(user).Ptr(), foundation.NSStringStringWithUTF8String(password).Ptr(), raw.NSURLCredentialPersistence(persistence))
 	return &URLCredential{inner: raw.NSURLCredentialFromID(_id)}
 }
 
 // NewURLCredentialWithIdentityCertificatesPersistence creates a new [URLCredential].
-func NewURLCredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *raw.NSArray[objc.ID], persistence raw.NSURLCredentialPersistence) *URLCredential {
+func NewURLCredentialWithIdentityCertificatesPersistence(identity unsafe.Pointer, certArray *raw.NSArray[objc.ID], persistence NSURLCredentialPersistence) *URLCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentity:certificates:persistence:"), identity, certArray.Ptr(), persistence)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentity:certificates:persistence:"), identity, certArray.Ptr(), raw.NSURLCredentialPersistence(persistence))
 	return &URLCredential{inner: raw.NSURLCredentialFromID(_id)}
 }
 
@@ -59,8 +59,8 @@ func (x *URLCredential) WithScriptingProperties(scriptingProperties *raw.NSDicti
 }
 
 // Persistence calls the underlying Persistence.
-func (x *URLCredential) Persistence() raw.NSURLCredentialPersistence {
-	return x.inner.Persistence()
+func (x *URLCredential) Persistence() NSURLCredentialPersistence {
+	return NSURLCredentialPersistence(x.inner.Persistence())
 }
 
 // User calls the underlying User.
@@ -102,7 +102,7 @@ func (x *URLCredential) asObject() *raw.NSObject { return &x.inner.NSObject }
 type URLCredentialable interface {
 	Unwrap() *raw.NSURLCredential
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLCredential
-	Persistence() raw.NSURLCredentialPersistence
+	Persistence() NSURLCredentialPersistence
 	User() *String
 	Password() *String
 	HasPassword() bool

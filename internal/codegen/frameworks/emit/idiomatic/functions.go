@@ -43,6 +43,9 @@ func emitGenericFunctionWrappers(
 		params    []string
 		callArgs  []string
 		retType   string
+		enumRet   string   // local enum type when the return localizes, else ""
+		preLines  []string // statements before the raw call (enum out-params)
+		postLines []string // statements after the raw call (enum out-param copy-back)
 	}
 
 	var entries []wrapEntry
@@ -75,7 +78,7 @@ func emitGenericFunctionWrappers(
 
 		// Mirror the raw emitter's signature exactly so the wrapper forwards
 		// arguments unchanged.
-		var params, callArgs []string
+		var params, callArgs, preLines, postLines []string
 		usedNames := make(map[string]int)
 		unexportedRef := false
 		for _, param := range fn.Params {
@@ -93,11 +96,14 @@ func emitGenericFunctionWrappers(
 			if referencesUnexportedQualified(goType) {
 				unexportedRef = true
 			}
-			params = append(params, paramName+" "+goType)
-			callArgs = append(callArgs, paramName)
+			sigType, callArg, pre, post := adaptCFuncParam(paramName, goType, fw, rawPkgAlias)
+			params = append(params, paramName+" "+sigType)
+			callArgs = append(callArgs, callArg)
+			preLines = append(preLines, pre...)
+			postLines = append(postLines, post...)
 		}
 
-		retType := ""
+		retType, enumRet := "", ""
 		if _, retIsBlock := m.ResolveBlockSignature(fn.Return.ObjCType); retIsBlock {
 			retType = "objc.Block"
 		} else if fn.Return.ObjCType != "void" && fn.Return.ObjCType != "" {
@@ -109,6 +115,9 @@ func emitGenericFunctionWrappers(
 			retType = qualifyRaw(retType, fw, rawPkgAlias, nil)
 			if referencesUnexportedQualified(retType) {
 				unexportedRef = true
+			}
+			if sig, _, isEnum := localizeEnumType(retType, fw, rawPkgAlias); isEnum {
+				retType, enumRet = sig, sig
 			}
 		}
 
@@ -131,6 +140,9 @@ func emitGenericFunctionWrappers(
 			params:    params,
 			callArgs:  callArgs,
 			retType:   retType,
+			enumRet:   enumRet,
+			preLines:  preLines,
+			postLines: postLines,
 		})
 	}
 
@@ -152,6 +164,9 @@ func emitGenericFunctionWrappers(
 			CallArgs:  strings.Join(entry.callArgs, ", "),
 			RetType:   entry.retType,
 			RetSig:    retSig,
+			EnumCast:  entry.enumRet,
+			PreLines:  entry.preLines,
+			PostLines: entry.postLines,
 		})
 	}
 	if err := executeTemplate(&body, "cfunctions", view); err != nil {
@@ -444,8 +459,9 @@ func emitCFFunctionWrappers(
 				if goType == "" || strings.HasPrefix(goType, "func(") || strings.Contains(goType, "unsafe.Pointer") {
 					ok = false
 				} else {
-					sigParams = append(sigParams, pName+" "+goType)
-					callArgs = append(callArgs, pName)
+					sigType, callArg := localizeParam(pName, goType, fw, rawPkgAlias)
+					sigParams = append(sigParams, pName+" "+sigType)
+					callArgs = append(callArgs, callArg)
 				}
 			}
 			if !ok {
@@ -610,6 +626,9 @@ type cfuncEntry struct {
 	CallArgs  string // "name, …"
 	RetType   string // "" for a void function
 	RetSig    string // " <retType>" or ""
+	EnumCast  string // local enum type to cast the raw return into, else ""
+	PreLines  []string // statements before the raw call (enum out-params)
+	PostLines []string // statements after the raw call (enum out-param copy-back)
 }
 
 type cfunctionsView struct {

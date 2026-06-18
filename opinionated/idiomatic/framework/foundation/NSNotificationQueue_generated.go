@@ -43,13 +43,13 @@ func (x *NotificationQueue) WithScriptingProperties(scriptingProperties *raw.NSD
 }
 
 // EnqueueNotificationPostingStyle calls the underlying EnqueueNotificationPostingStyle.
-func (x *NotificationQueue) EnqueueNotificationPostingStyle(notification *raw.NSNotification, postingStyle raw.NSPostingStyle) {
-	x.inner.EnqueueNotificationPostingStyle(notification, postingStyle)
+func (x *NotificationQueue) EnqueueNotificationPostingStyle(notification *raw.NSNotification, postingStyle NSPostingStyle) {
+	x.inner.EnqueueNotificationPostingStyle(notification, raw.NSPostingStyle(postingStyle))
 }
 
 // EnqueueNotificationPostingStyleCoalesceMaskForModes calls the underlying EnqueueNotificationPostingStyleCoalesceMaskForModes.
-func (x *NotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle raw.NSPostingStyle, coalesceMask raw.NSNotificationCoalescing, modes *raw.NSArray[*raw.NSString]) {
-	x.inner.EnqueueNotificationPostingStyleCoalesceMaskForModes(notification, postingStyle, coalesceMask, modes)
+func (x *NotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle NSPostingStyle, coalesceMask NSNotificationCoalescing, modes *raw.NSArray[*raw.NSString]) {
+	x.inner.EnqueueNotificationPostingStyleCoalesceMaskForModes(notification, raw.NSPostingStyle(postingStyle), raw.NSNotificationCoalescing(coalesceMask), modes)
 }
 
 // DequeueNotificationsMatchingCoalesceMask calls the underlying DequeueNotificationsMatchingCoalesceMask.
@@ -63,8 +63,8 @@ func (x *NotificationQueue) asObject() *raw.NSObject { return &x.inner.NSObject 
 type NotificationQueueable interface {
 	Unwrap() *raw.NSNotificationQueue
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NotificationQueue
-	EnqueueNotificationPostingStyle(notification *raw.NSNotification, postingStyle raw.NSPostingStyle)
-	EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle raw.NSPostingStyle, coalesceMask raw.NSNotificationCoalescing, modes *raw.NSArray[*raw.NSString])
+	EnqueueNotificationPostingStyle(notification *raw.NSNotification, postingStyle NSPostingStyle)
+	EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle NSPostingStyle, coalesceMask NSNotificationCoalescing, modes *raw.NSArray[*raw.NSString])
 	DequeueNotificationsMatchingCoalesceMask(notification *raw.NSNotification, coalesceMask uint)
 }
 

@@ -31,9 +31,9 @@ func DataMatrixCodeDescriptorFromID(id objc.ID) *DataMatrixCodeDescriptor {
 }
 
 // NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion creates a new [DataMatrixCodeDescriptor].
-func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion raw.CIDataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
+func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion CIDataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIDataMatrixCodeDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:rowCount:columnCount:eccVersion:"), errorCorrectedPayload.Ptr(), rowCount, columnCount, eccVersion)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:rowCount:columnCount:eccVersion:"), errorCorrectedPayload.Ptr(), rowCount, columnCount, raw.CIDataMatrixCodeECCVersion(eccVersion))
 	return &DataMatrixCodeDescriptor{inner: raw.CIDataMatrixCodeDescriptorFromID(_id)}
 }
 
@@ -53,8 +53,8 @@ func (x *DataMatrixCodeDescriptor) ColumnCount() int {
 }
 
 // EccVersion calls the underlying EccVersion.
-func (x *DataMatrixCodeDescriptor) EccVersion() raw.CIDataMatrixCodeECCVersion {
-	return x.inner.EccVersion()
+func (x *DataMatrixCodeDescriptor) EccVersion() CIDataMatrixCodeECCVersion {
+	return CIDataMatrixCodeECCVersion(x.inner.EccVersion())
 }
 
 func (x *DataMatrixCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor {
@@ -67,7 +67,7 @@ type DataMatrixCodeDescriptorable interface {
 	ErrorCorrectedPayload() *foundation.NSData
 	RowCount() int
 	ColumnCount() int
-	EccVersion() raw.CIDataMatrixCodeECCVersion
+	EccVersion() CIDataMatrixCodeECCVersion
 }
 
 var _ DataMatrixCodeDescriptorable = (*DataMatrixCodeDescriptor)(nil)

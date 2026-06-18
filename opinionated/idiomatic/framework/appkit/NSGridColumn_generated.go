@@ -37,8 +37,8 @@ func NewGridColumn() *GridColumn {
 }
 
 // WithXPlacement sets the xPlacement property and returns the receiver for chaining.
-func (x *GridColumn) WithXPlacement(xPlacement raw.NSGridCellPlacement) *GridColumn {
-	x.inner.SetXPlacement(xPlacement)
+func (x *GridColumn) WithXPlacement(xPlacement NSGridCellPlacement) *GridColumn {
+	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
 	return x
 }
 
@@ -95,13 +95,13 @@ func (x *GridColumn) NumberOfCells() int {
 }
 
 // XPlacement calls the underlying XPlacement.
-func (x *GridColumn) XPlacement() raw.NSGridCellPlacement {
-	return x.inner.XPlacement()
+func (x *GridColumn) XPlacement() NSGridCellPlacement {
+	return NSGridCellPlacement(x.inner.XPlacement())
 }
 
 // SetXPlacement calls the underlying SetXPlacement.
-func (x *GridColumn) SetXPlacement(xPlacement raw.NSGridCellPlacement) {
-	x.inner.SetXPlacement(xPlacement)
+func (x *GridColumn) SetXPlacement(xPlacement NSGridCellPlacement) {
+	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
 }
 
 // Width calls the underlying Width.
@@ -147,7 +147,7 @@ func (x *GridColumn) SetHidden(hidden bool) {
 // GridColumnable is the interface implemented by [GridColumn], for mocking and DI.
 type GridColumnable interface {
 	Unwrap() *raw.NSGridColumn
-	WithXPlacement(xPlacement raw.NSGridCellPlacement) *GridColumn
+	WithXPlacement(xPlacement NSGridCellPlacement) *GridColumn
 	WithWidth(width float64) *GridColumn
 	WithLeadingPadding(leadingPadding float64) *GridColumn
 	WithTrailingPadding(trailingPadding float64) *GridColumn
@@ -156,8 +156,8 @@ type GridColumnable interface {
 	MergeCellsInRange(range_ foundation.NSRange)
 	GridView() *GridView
 	NumberOfCells() int
-	XPlacement() raw.NSGridCellPlacement
-	SetXPlacement(xPlacement raw.NSGridCellPlacement)
+	XPlacement() NSGridCellPlacement
+	SetXPlacement(xPlacement NSGridCellPlacement)
 	Width() float64
 	SetWidth(width float64)
 	LeadingPadding() float64

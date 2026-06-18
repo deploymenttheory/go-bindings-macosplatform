@@ -41,8 +41,8 @@ func NewTitlebarAccessoryViewController() *TitlebarAccessoryViewController {
 }
 
 // WithLayoutAttribute sets the layoutAttribute property and returns the receiver for chaining.
-func (x *TitlebarAccessoryViewController) WithLayoutAttribute(layoutAttribute raw.NSLayoutAttribute) *TitlebarAccessoryViewController {
-	x.inner.SetLayoutAttribute(layoutAttribute)
+func (x *TitlebarAccessoryViewController) WithLayoutAttribute(layoutAttribute NSLayoutAttribute) *TitlebarAccessoryViewController {
+	x.inner.SetLayoutAttribute(raw.NSLayoutAttribute(layoutAttribute))
 	return x
 }
 
@@ -149,13 +149,13 @@ func (x *TitlebarAccessoryViewController) WithTouchBar(touchBar *TouchBar) *Titl
 }
 
 // LayoutAttribute calls the underlying LayoutAttribute.
-func (x *TitlebarAccessoryViewController) LayoutAttribute() raw.NSLayoutAttribute {
-	return x.inner.LayoutAttribute()
+func (x *TitlebarAccessoryViewController) LayoutAttribute() NSLayoutAttribute {
+	return NSLayoutAttribute(x.inner.LayoutAttribute())
 }
 
 // SetLayoutAttribute calls the underlying SetLayoutAttribute.
-func (x *TitlebarAccessoryViewController) SetLayoutAttribute(layoutAttribute raw.NSLayoutAttribute) {
-	x.inner.SetLayoutAttribute(layoutAttribute)
+func (x *TitlebarAccessoryViewController) SetLayoutAttribute(layoutAttribute NSLayoutAttribute) {
+	x.inner.SetLayoutAttribute(raw.NSLayoutAttribute(layoutAttribute))
 }
 
 // FullScreenMinHeight calls the underlying FullScreenMinHeight.
@@ -213,7 +213,7 @@ func (x *TitlebarAccessoryViewController) asResponder() *raw.NSResponder {
 // TitlebarAccessoryViewControllerable is the interface implemented by [TitlebarAccessoryViewController], for mocking and DI.
 type TitlebarAccessoryViewControllerable interface {
 	Unwrap() *raw.NSTitlebarAccessoryViewController
-	WithLayoutAttribute(layoutAttribute raw.NSLayoutAttribute) *TitlebarAccessoryViewController
+	WithLayoutAttribute(layoutAttribute NSLayoutAttribute) *TitlebarAccessoryViewController
 	WithFullScreenMinHeight(fullScreenMinHeight float64) *TitlebarAccessoryViewController
 	WithHidden(hidden bool) *TitlebarAccessoryViewController
 	WithAutomaticallyAdjustsSize(automaticallyAdjustsSize bool) *TitlebarAccessoryViewController
@@ -229,8 +229,8 @@ type TitlebarAccessoryViewControllerable interface {
 	WithMenu(menu *Menu) *TitlebarAccessoryViewController
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TitlebarAccessoryViewController
 	WithTouchBar(touchBar *TouchBar) *TitlebarAccessoryViewController
-	LayoutAttribute() raw.NSLayoutAttribute
-	SetLayoutAttribute(layoutAttribute raw.NSLayoutAttribute)
+	LayoutAttribute() NSLayoutAttribute
+	SetLayoutAttribute(layoutAttribute NSLayoutAttribute)
 	FullScreenMinHeight() float64
 	SetFullScreenMinHeight(fullScreenMinHeight float64)
 	IsHidden() bool

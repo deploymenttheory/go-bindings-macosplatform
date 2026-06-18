@@ -120,20 +120,20 @@ func (x *Menu) WithShowsStateColumn(showsStateColumn bool) *Menu {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Menu) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Menu {
-	x.inner.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Menu) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Menu {
+	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
 // WithPresentationStyle sets the presentationStyle property and returns the receiver for chaining.
-func (x *Menu) WithPresentationStyle(presentationStyle raw.NSMenuPresentationStyle) *Menu {
-	x.inner.SetPresentationStyle(presentationStyle)
+func (x *Menu) WithPresentationStyle(presentationStyle NSMenuPresentationStyle) *Menu {
+	x.inner.SetPresentationStyle(raw.NSMenuPresentationStyle(presentationStyle))
 	return x
 }
 
 // WithSelectionMode sets the selectionMode property and returns the receiver for chaining.
-func (x *Menu) WithSelectionMode(selectionMode raw.NSMenuSelectionMode) *Menu {
-	x.inner.SetSelectionMode(selectionMode)
+func (x *Menu) WithSelectionMode(selectionMode NSMenuSelectionMode) *Menu {
+	x.inner.SetSelectionMode(raw.NSMenuSelectionMode(selectionMode))
 	return x
 }
 
@@ -444,33 +444,33 @@ func (x *Menu) SetShowsStateColumn(showsStateColumn bool) {
 }
 
 // UserInterfaceLayoutDirection calls the underlying UserInterfaceLayoutDirection.
-func (x *Menu) UserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection {
-	return x.inner.UserInterfaceLayoutDirection()
+func (x *Menu) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
+	return NSUserInterfaceLayoutDirection(x.inner.UserInterfaceLayoutDirection())
 }
 
 // SetUserInterfaceLayoutDirection calls the underlying SetUserInterfaceLayoutDirection.
-func (x *Menu) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) {
-	x.inner.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Menu) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) {
+	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 }
 
 // PresentationStyle calls the underlying PresentationStyle.
-func (x *Menu) PresentationStyle() raw.NSMenuPresentationStyle {
-	return x.inner.PresentationStyle()
+func (x *Menu) PresentationStyle() NSMenuPresentationStyle {
+	return NSMenuPresentationStyle(x.inner.PresentationStyle())
 }
 
 // SetPresentationStyle calls the underlying SetPresentationStyle.
-func (x *Menu) SetPresentationStyle(presentationStyle raw.NSMenuPresentationStyle) {
-	x.inner.SetPresentationStyle(presentationStyle)
+func (x *Menu) SetPresentationStyle(presentationStyle NSMenuPresentationStyle) {
+	x.inner.SetPresentationStyle(raw.NSMenuPresentationStyle(presentationStyle))
 }
 
 // SelectionMode calls the underlying SelectionMode.
-func (x *Menu) SelectionMode() raw.NSMenuSelectionMode {
-	return x.inner.SelectionMode()
+func (x *Menu) SelectionMode() NSMenuSelectionMode {
+	return NSMenuSelectionMode(x.inner.SelectionMode())
 }
 
 // SetSelectionMode calls the underlying SetSelectionMode.
-func (x *Menu) SetSelectionMode(selectionMode raw.NSMenuSelectionMode) {
-	x.inner.SetSelectionMode(selectionMode)
+func (x *Menu) SetSelectionMode(selectionMode NSMenuSelectionMode) {
+	x.inner.SetSelectionMode(raw.NSMenuSelectionMode(selectionMode))
 }
 
 // SelectedItems returns the collection as a Go slice.
@@ -495,8 +495,8 @@ func (x *Menu) SubmenuAction(sender objc.ID) {
 }
 
 // PropertiesToUpdate calls the underlying PropertiesToUpdate.
-func (x *Menu) PropertiesToUpdate() raw.NSMenuProperties {
-	return x.inner.PropertiesToUpdate()
+func (x *Menu) PropertiesToUpdate() NSMenuProperties {
+	return NSMenuProperties(x.inner.PropertiesToUpdate())
 }
 
 // SetMenuRepresentation calls the underlying SetMenuRepresentation.
@@ -586,9 +586,9 @@ type Menuable interface {
 	WithAllowsContextMenuPlugIns(allowsContextMenuPlugIns bool) *Menu
 	WithAutomaticallyInsertsWritingToolsItems(automaticallyInsertsWritingToolsItems bool) *Menu
 	WithShowsStateColumn(showsStateColumn bool) *Menu
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Menu
-	WithPresentationStyle(presentationStyle raw.NSMenuPresentationStyle) *Menu
-	WithSelectionMode(selectionMode raw.NSMenuSelectionMode) *Menu
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Menu
+	WithPresentationStyle(presentationStyle NSMenuPresentationStyle) *Menu
+	WithSelectionMode(selectionMode NSMenuSelectionMode) *Menu
 	WithSelectedItems(items ...*raw.NSMenuItem) *Menu
 	WithMenuChangedMessagesEnabled(menuChangedMessagesEnabled bool) *Menu
 	PopUpMenuPositioningItemAtLocationInView(item *raw.NSMenuItem, location corefoundation.CGPoint, view *raw.NSView) bool
@@ -639,16 +639,16 @@ type Menuable interface {
 	SetAutomaticallyInsertsWritingToolsItems(automaticallyInsertsWritingToolsItems bool)
 	ShowsStateColumn() bool
 	SetShowsStateColumn(showsStateColumn bool)
-	UserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection
-	SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection)
-	PresentationStyle() raw.NSMenuPresentationStyle
-	SetPresentationStyle(presentationStyle raw.NSMenuPresentationStyle)
-	SelectionMode() raw.NSMenuSelectionMode
-	SetSelectionMode(selectionMode raw.NSMenuSelectionMode)
+	UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection
+	SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection)
+	PresentationStyle() NSMenuPresentationStyle
+	SetPresentationStyle(presentationStyle NSMenuPresentationStyle)
+	SelectionMode() NSMenuSelectionMode
+	SetSelectionMode(selectionMode NSMenuSelectionMode)
 	SelectedItems() []*MenuItem
 	SetSelectedItems(selectedItems *foundation.NSArray[*raw.NSMenuItem])
 	SubmenuAction(sender objc.ID)
-	PropertiesToUpdate() raw.NSMenuProperties
+	PropertiesToUpdate() NSMenuProperties
 	SetMenuRepresentation(menuRep objc.ID)
 	MenuRepresentation() objc.ID
 	SetContextMenuRepresentation(menuRep objc.ID)

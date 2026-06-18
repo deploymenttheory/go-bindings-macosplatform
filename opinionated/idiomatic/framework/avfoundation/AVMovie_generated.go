@@ -79,8 +79,8 @@ func (x *Movie) MovieHeaderWithFileTypeError(fileType *foundation.NSString) (*fo
 }
 
 // WriteMovieHeaderToURLFileTypeOptionsError calls the underlying WriteMovieHeaderToURLFileTypeOptionsError.
-func (x *Movie) WriteMovieHeaderToURLFileTypeOptionsError(uRL string, fileType *foundation.NSString, options raw.AVMovieWritingOptions) (bool, error) {
-	return x.inner.WriteMovieHeaderToURLFileTypeOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), fileType, options)
+func (x *Movie) WriteMovieHeaderToURLFileTypeOptionsError(uRL string, fileType *foundation.NSString, options AVMovieWritingOptions) (bool, error) {
+	return x.inner.WriteMovieHeaderToURLFileTypeOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), fileType, raw.AVMovieWritingOptions(options))
 }
 
 // IsCompatibleWithFileType calls the underlying IsCompatibleWithFileType.
@@ -101,7 +101,7 @@ type Movieable interface {
 	CanContainMovieFragments() bool
 	ContainsMovieFragments() bool
 	MovieHeaderWithFileTypeError(fileType *foundation.NSString) (*foundation.NSData, error)
-	WriteMovieHeaderToURLFileTypeOptionsError(uRL string, fileType *foundation.NSString, options raw.AVMovieWritingOptions) (bool, error)
+	WriteMovieHeaderToURLFileTypeOptionsError(uRL string, fileType *foundation.NSString, options AVMovieWritingOptions) (bool, error)
 	IsCompatibleWithFileType(fileType *foundation.NSString) bool
 }
 

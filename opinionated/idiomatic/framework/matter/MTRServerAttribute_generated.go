@@ -31,9 +31,9 @@ func MTRServerAttributeFromID(id objc.ID) *MTRServerAttribute {
 }
 
 // NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege creates a new [MTRServerAttribute].
-func NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege(attributeID *foundation.NSNumber, value *foundation.NSDictionary[*foundation.NSString, objc.ID], requiredPrivilege raw.MTRAccessControlEntryPrivilege) *MTRServerAttribute {
+func NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege(attributeID *foundation.NSNumber, value *foundation.NSDictionary[*foundation.NSString, objc.ID], requiredPrivilege MTRAccessControlEntryPrivilege) *MTRServerAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRServerAttribute")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initReadonlyAttributeWithID:initialValue:requiredPrivilege:"), attributeID.Ptr(), value.Ptr(), requiredPrivilege)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initReadonlyAttributeWithID:initialValue:requiredPrivilege:"), attributeID.Ptr(), value.Ptr(), raw.MTRAccessControlEntryPrivilege(requiredPrivilege))
 	return &MTRServerAttribute{inner: raw.MTRServerAttributeFromID(_id)}
 }
 
@@ -59,8 +59,8 @@ func (x *MTRServerAttribute) Value() *foundation.NSDictionary[*foundation.NSStri
 }
 
 // RequiredReadPrivilege calls the underlying RequiredReadPrivilege.
-func (x *MTRServerAttribute) RequiredReadPrivilege() raw.MTRAccessControlEntryPrivilege {
-	return x.inner.RequiredReadPrivilege()
+func (x *MTRServerAttribute) RequiredReadPrivilege() MTRAccessControlEntryPrivilege {
+	return MTRAccessControlEntryPrivilege(x.inner.RequiredReadPrivilege())
 }
 
 // IsWritable calls the underlying IsWritable.
@@ -75,7 +75,7 @@ type MTRServerAttributeable interface {
 	SetValue(value *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
 	AttributeID() *foundation.NSNumber
 	Value() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	RequiredReadPrivilege() raw.MTRAccessControlEntryPrivilege
+	RequiredReadPrivilege() MTRAccessControlEntryPrivilege
 	IsWritable() bool
 }
 

@@ -49,8 +49,8 @@ func (x *DistributedNotificationCenter) WithScriptingProperties(scriptingPropert
 }
 
 // AddObserverSelectorNameObjectSuspensionBehavior calls the underlying AddObserverSelectorNameObjectSuspensionBehavior.
-func (x *DistributedNotificationCenter) AddObserverSelectorNameObjectSuspensionBehavior(observer objc.ID, selector objc.SEL, name *raw.NSString, object string, suspensionBehavior raw.NSNotificationSuspensionBehavior) {
-	x.inner.AddObserverSelectorNameObjectSuspensionBehavior(observer, selector, name, foundation.NSStringStringWithUTF8String(object), suspensionBehavior)
+func (x *DistributedNotificationCenter) AddObserverSelectorNameObjectSuspensionBehavior(observer objc.ID, selector objc.SEL, name *raw.NSString, object string, suspensionBehavior NSNotificationSuspensionBehavior) {
+	x.inner.AddObserverSelectorNameObjectSuspensionBehavior(observer, selector, name, foundation.NSStringStringWithUTF8String(object), raw.NSNotificationSuspensionBehavior(suspensionBehavior))
 }
 
 // PostNotificationNameObjectUserInfoDeliverImmediately calls the underlying PostNotificationNameObjectUserInfoDeliverImmediately.
@@ -59,8 +59,8 @@ func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDelive
 }
 
 // PostNotificationNameObjectUserInfoOptions calls the underlying PostNotificationNameObjectUserInfoOptions.
-func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], options raw.NSDistributedNotificationOptions) {
-	x.inner.PostNotificationNameObjectUserInfoOptions(name, foundation.NSStringStringWithUTF8String(object), userInfo, options)
+func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], options NSDistributedNotificationOptions) {
+	x.inner.PostNotificationNameObjectUserInfoOptions(name, foundation.NSStringStringWithUTF8String(object), userInfo, raw.NSDistributedNotificationOptions(options))
 }
 
 // Suspended calls the underlying Suspended.
@@ -86,9 +86,9 @@ type DistributedNotificationCenterable interface {
 	Unwrap() *raw.NSDistributedNotificationCenter
 	WithSuspended(suspended bool) *DistributedNotificationCenter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DistributedNotificationCenter
-	AddObserverSelectorNameObjectSuspensionBehavior(observer objc.ID, selector objc.SEL, name *raw.NSString, object string, suspensionBehavior raw.NSNotificationSuspensionBehavior)
+	AddObserverSelectorNameObjectSuspensionBehavior(observer objc.ID, selector objc.SEL, name *raw.NSString, object string, suspensionBehavior NSNotificationSuspensionBehavior)
 	PostNotificationNameObjectUserInfoDeliverImmediately(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], deliverImmediately bool)
-	PostNotificationNameObjectUserInfoOptions(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], options raw.NSDistributedNotificationOptions)
+	PostNotificationNameObjectUserInfoOptions(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], options NSDistributedNotificationOptions)
 	Suspended() bool
 	SetSuspended(suspended bool)
 }

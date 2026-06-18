@@ -129,8 +129,8 @@ func (x *UserLocationView) WithDraggable(draggable bool) *UserLocationView {
 }
 
 // WithDragState sets the dragState property and returns the receiver for chaining.
-func (x *UserLocationView) WithDragState(dragState raw.MKAnnotationViewDragState) *UserLocationView {
-	x.inner.MKAnnotationView.SetDragState(dragState)
+func (x *UserLocationView) WithDragState(dragState MKAnnotationViewDragState) *UserLocationView {
+	x.inner.MKAnnotationView.SetDragState(raw.MKAnnotationViewDragState(dragState))
 	return x
 }
 
@@ -159,8 +159,8 @@ func (x *UserLocationView) WithSelectedZPriority(selectedZPriority float32) *Use
 }
 
 // WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
-func (x *UserLocationView) WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *UserLocationView {
-	x.inner.MKAnnotationView.SetCollisionMode(collisionMode)
+func (x *UserLocationView) WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *UserLocationView {
+	x.inner.MKAnnotationView.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))
 	return x
 }
 
@@ -184,12 +184,12 @@ type UserLocationViewable interface {
 	WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *UserLocationView
 	WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *UserLocationView
 	WithDraggable(draggable bool) *UserLocationView
-	WithDragState(dragState raw.MKAnnotationViewDragState) *UserLocationView
+	WithDragState(dragState MKAnnotationViewDragState) *UserLocationView
 	WithClusteringIdentifier(clusteringIdentifier string) *UserLocationView
 	WithDisplayPriority(displayPriority float32) *UserLocationView
 	WithZPriority(zPriority float32) *UserLocationView
 	WithSelectedZPriority(selectedZPriority float32) *UserLocationView
-	WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *UserLocationView
+	WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *UserLocationView
 }
 
 var _ UserLocationViewable = (*UserLocationView)(nil)

@@ -33,15 +33,15 @@ func EngineFromID(id objc.ID) *Engine {
 }
 
 // NewEngineWithUpdateMode creates a new [Engine].
-func NewEngineWithUpdateMode(updateMode raw.PHASEUpdateMode) *Engine {
+func NewEngineWithUpdateMode(updateMode PHASEUpdateMode) *Engine {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEEngine")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpdateMode:"), updateMode)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpdateMode:"), raw.PHASEUpdateMode(updateMode))
 	return &Engine{inner: raw.PHASEEngineFromID(_id)}
 }
 
 // WithOutputSpatializationMode sets the outputSpatializationMode property and returns the receiver for chaining.
-func (x *Engine) WithOutputSpatializationMode(outputSpatializationMode raw.PHASESpatializationMode) *Engine {
-	x.inner.SetOutputSpatializationMode(outputSpatializationMode)
+func (x *Engine) WithOutputSpatializationMode(outputSpatializationMode PHASESpatializationMode) *Engine {
+	x.inner.SetOutputSpatializationMode(raw.PHASESpatializationMode(outputSpatializationMode))
 	return x
 }
 
@@ -52,8 +52,8 @@ func (x *Engine) WithDefaultMedium(defaultMedium *Medium) *Engine {
 }
 
 // WithDefaultReverbPreset sets the defaultReverbPreset property and returns the receiver for chaining.
-func (x *Engine) WithDefaultReverbPreset(defaultReverbPreset raw.PHASEReverbPreset) *Engine {
-	x.inner.SetDefaultReverbPreset(defaultReverbPreset)
+func (x *Engine) WithDefaultReverbPreset(defaultReverbPreset PHASEReverbPreset) *Engine {
+	x.inner.SetDefaultReverbPreset(raw.PHASEReverbPreset(defaultReverbPreset))
 	return x
 }
 
@@ -91,18 +91,18 @@ func (x *Engine) Update() {
 }
 
 // OutputSpatializationMode calls the underlying OutputSpatializationMode.
-func (x *Engine) OutputSpatializationMode() raw.PHASESpatializationMode {
-	return x.inner.OutputSpatializationMode()
+func (x *Engine) OutputSpatializationMode() PHASESpatializationMode {
+	return PHASESpatializationMode(x.inner.OutputSpatializationMode())
 }
 
 // SetOutputSpatializationMode calls the underlying SetOutputSpatializationMode.
-func (x *Engine) SetOutputSpatializationMode(outputSpatializationMode raw.PHASESpatializationMode) {
-	x.inner.SetOutputSpatializationMode(outputSpatializationMode)
+func (x *Engine) SetOutputSpatializationMode(outputSpatializationMode PHASESpatializationMode) {
+	x.inner.SetOutputSpatializationMode(raw.PHASESpatializationMode(outputSpatializationMode))
 }
 
 // RenderingState calls the underlying RenderingState.
-func (x *Engine) RenderingState() raw.PHASERenderingState {
-	return x.inner.RenderingState()
+func (x *Engine) RenderingState() PHASERenderingState {
+	return PHASERenderingState(x.inner.RenderingState())
 }
 
 // RootObject calls the underlying RootObject.
@@ -129,13 +129,13 @@ func (x *Engine) SetDefaultMedium(defaultMedium *raw.PHASEMedium) {
 }
 
 // DefaultReverbPreset calls the underlying DefaultReverbPreset.
-func (x *Engine) DefaultReverbPreset() raw.PHASEReverbPreset {
-	return x.inner.DefaultReverbPreset()
+func (x *Engine) DefaultReverbPreset() PHASEReverbPreset {
+	return PHASEReverbPreset(x.inner.DefaultReverbPreset())
 }
 
 // SetDefaultReverbPreset calls the underlying SetDefaultReverbPreset.
-func (x *Engine) SetDefaultReverbPreset(defaultReverbPreset raw.PHASEReverbPreset) {
-	x.inner.SetDefaultReverbPreset(defaultReverbPreset)
+func (x *Engine) SetDefaultReverbPreset(defaultReverbPreset PHASEReverbPreset) {
+	x.inner.SetDefaultReverbPreset(raw.PHASEReverbPreset(defaultReverbPreset))
 }
 
 // UnitsPerSecond calls the underlying UnitsPerSecond.
@@ -211,23 +211,23 @@ func (x *Engine) LastRenderTime() *avfaudio.AVAudioTime {
 // Engineable is the interface implemented by [Engine], for mocking and DI.
 type Engineable interface {
 	Unwrap() *raw.PHASEEngine
-	WithOutputSpatializationMode(outputSpatializationMode raw.PHASESpatializationMode) *Engine
+	WithOutputSpatializationMode(outputSpatializationMode PHASESpatializationMode) *Engine
 	WithDefaultMedium(defaultMedium *Medium) *Engine
-	WithDefaultReverbPreset(defaultReverbPreset raw.PHASEReverbPreset) *Engine
+	WithDefaultReverbPreset(defaultReverbPreset PHASEReverbPreset) *Engine
 	WithUnitsPerSecond(unitsPerSecond float64) *Engine
 	WithUnitsPerMeter(unitsPerMeter float64) *Engine
 	StartAndReturnError() error
 	Pause()
 	Stop()
 	Update()
-	OutputSpatializationMode() raw.PHASESpatializationMode
-	SetOutputSpatializationMode(outputSpatializationMode raw.PHASESpatializationMode)
-	RenderingState() raw.PHASERenderingState
+	OutputSpatializationMode() PHASESpatializationMode
+	SetOutputSpatializationMode(outputSpatializationMode PHASESpatializationMode)
+	RenderingState() PHASERenderingState
 	RootObject() *Object
 	DefaultMedium() *Medium
 	SetDefaultMedium(defaultMedium *raw.PHASEMedium)
-	DefaultReverbPreset() raw.PHASEReverbPreset
-	SetDefaultReverbPreset(defaultReverbPreset raw.PHASEReverbPreset)
+	DefaultReverbPreset() PHASEReverbPreset
+	SetDefaultReverbPreset(defaultReverbPreset PHASEReverbPreset)
 	UnitsPerSecond() float64
 	SetUnitsPerSecond(unitsPerSecond float64)
 	UnitsPerMeter() float64

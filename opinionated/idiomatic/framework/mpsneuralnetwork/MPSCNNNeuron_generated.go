@@ -95,8 +95,8 @@ func (x *CNNNeuron) WithDestinationImageAllocator(destinationImageAllocator mpsc
 }
 
 // NeuronType calls the underlying NeuronType.
-func (x *CNNNeuron) NeuronType() raw.MPSCNNNeuronType {
-	return x.inner.NeuronType()
+func (x *CNNNeuron) NeuronType() MPSCNNNeuronType {
+	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
 // A calls the underlying A.
@@ -134,7 +134,7 @@ type CNNNeuronable interface {
 	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuron
 	WithPadding(padding raw.MPSNNPadding) *CNNNeuron
 	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuron
-	NeuronType() raw.MPSCNNNeuronType
+	NeuronType() MPSCNNNeuronType
 	A() float32
 	B() float32
 	C() float32

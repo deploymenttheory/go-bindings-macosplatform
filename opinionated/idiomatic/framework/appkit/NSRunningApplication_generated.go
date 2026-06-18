@@ -48,13 +48,13 @@ func (x *RunningApplication) Unhide() bool {
 }
 
 // ActivateFromApplicationOptions calls the underlying ActivateFromApplicationOptions.
-func (x *RunningApplication) ActivateFromApplicationOptions(application *raw.NSRunningApplication, options raw.NSApplicationActivationOptions) bool {
-	return x.inner.ActivateFromApplicationOptions(application, options)
+func (x *RunningApplication) ActivateFromApplicationOptions(application *raw.NSRunningApplication, options NSApplicationActivationOptions) bool {
+	return x.inner.ActivateFromApplicationOptions(application, raw.NSApplicationActivationOptions(options))
 }
 
 // ActivateWithOptions calls the underlying ActivateWithOptions.
-func (x *RunningApplication) ActivateWithOptions(options raw.NSApplicationActivationOptions) bool {
-	return x.inner.ActivateWithOptions(options)
+func (x *RunningApplication) ActivateWithOptions(options NSApplicationActivationOptions) bool {
+	return x.inner.ActivateWithOptions(raw.NSApplicationActivationOptions(options))
 }
 
 // Terminate calls the underlying Terminate.
@@ -93,8 +93,8 @@ func (x *RunningApplication) OwnsMenuBar() bool {
 }
 
 // ActivationPolicy calls the underlying ActivationPolicy.
-func (x *RunningApplication) ActivationPolicy() raw.NSApplicationActivationPolicy {
-	return x.inner.ActivationPolicy()
+func (x *RunningApplication) ActivationPolicy() NSApplicationActivationPolicy {
+	return NSApplicationActivationPolicy(x.inner.ActivationPolicy())
 }
 
 // LocalizedName calls the underlying LocalizedName.
@@ -154,8 +154,8 @@ type RunningApplicationable interface {
 	Unwrap() *raw.NSRunningApplication
 	Hide() bool
 	Unhide() bool
-	ActivateFromApplicationOptions(application *raw.NSRunningApplication, options raw.NSApplicationActivationOptions) bool
-	ActivateWithOptions(options raw.NSApplicationActivationOptions) bool
+	ActivateFromApplicationOptions(application *raw.NSRunningApplication, options NSApplicationActivationOptions) bool
+	ActivateWithOptions(options NSApplicationActivationOptions) bool
 	Terminate() bool
 	ForceTerminate() bool
 	IsTerminated() bool
@@ -163,7 +163,7 @@ type RunningApplicationable interface {
 	IsHidden() bool
 	IsActive() bool
 	OwnsMenuBar() bool
-	ActivationPolicy() raw.NSApplicationActivationPolicy
+	ActivationPolicy() NSApplicationActivationPolicy
 	LocalizedName() string
 	BundleIdentifier() string
 	BundleURL() *foundation.NSURL

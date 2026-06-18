@@ -41,8 +41,8 @@ func NewSmartCardUserInteractionForPINOperation() *SmartCardUserInteractionForPI
 }
 
 // WithPINCompletion sets the pINCompletion property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForPINOperation) WithPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) *SmartCardUserInteractionForPINOperation {
-	x.inner.SetPINCompletion(pINCompletion)
+func (x *SmartCardUserInteractionForPINOperation) WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForPINOperation {
+	x.inner.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
 	return x
 }
 
@@ -101,13 +101,13 @@ func (x *SmartCardUserInteractionForPINOperation) WithInteractionTimeout(interac
 }
 
 // PINCompletion calls the underlying PINCompletion.
-func (x *SmartCardUserInteractionForPINOperation) PINCompletion() raw.TKSmartCardPINCompletion {
-	return x.inner.PINCompletion()
+func (x *SmartCardUserInteractionForPINOperation) PINCompletion() TKSmartCardPINCompletion {
+	return TKSmartCardPINCompletion(x.inner.PINCompletion())
 }
 
 // SetPINCompletion calls the underlying SetPINCompletion.
-func (x *SmartCardUserInteractionForPINOperation) SetPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) {
-	x.inner.SetPINCompletion(pINCompletion)
+func (x *SmartCardUserInteractionForPINOperation) SetPINCompletion(pINCompletion TKSmartCardPINCompletion) {
+	x.inner.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
 }
 
 // PINMessageIndices returns the collection as a Go slice.
@@ -167,7 +167,7 @@ func (x *SmartCardUserInteractionForPINOperation) asSmartCardUserInteraction() *
 // SmartCardUserInteractionForPINOperationable is the interface implemented by [SmartCardUserInteractionForPINOperation], for mocking and DI.
 type SmartCardUserInteractionForPINOperationable interface {
 	Unwrap() *raw.TKSmartCardUserInteractionForPINOperation
-	WithPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) *SmartCardUserInteractionForPINOperation
+	WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForPINOperation
 	WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForPINOperation
 	WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForPINOperation
 	WithResultSW(resultSW uint16) *SmartCardUserInteractionForPINOperation
@@ -175,8 +175,8 @@ type SmartCardUserInteractionForPINOperationable interface {
 	WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForPINOperation
 	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForPINOperation
 	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForPINOperation
-	PINCompletion() raw.TKSmartCardPINCompletion
-	SetPINCompletion(pINCompletion raw.TKSmartCardPINCompletion)
+	PINCompletion() TKSmartCardPINCompletion
+	SetPINCompletion(pINCompletion TKSmartCardPINCompletion)
 	PINMessageIndices() []*foundation.NSNumber
 	SetPINMessageIndices(pINMessageIndices *foundation.NSArray[*foundation.NSNumber])
 	Locale() *foundation.NSLocale

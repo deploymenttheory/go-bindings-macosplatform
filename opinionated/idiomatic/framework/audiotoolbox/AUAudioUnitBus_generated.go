@@ -142,8 +142,8 @@ func (x *AudioUnitBus) Index() uint {
 }
 
 // BusType calls the underlying BusType.
-func (x *AudioUnitBus) BusType() raw.AUAudioUnitBusType {
-	return x.inner.BusType()
+func (x *AudioUnitBus) BusType() AUAudioUnitBusType {
+	return AUAudioUnitBusType(x.inner.BusType())
 }
 
 // OwnerAudioUnit calls the underlying OwnerAudioUnit.
@@ -220,7 +220,7 @@ type AudioUnitBusable interface {
 	Name() string
 	SetName(name string)
 	Index() uint
-	BusType() raw.AUAudioUnitBusType
+	BusType() AUAudioUnitBusType
 	OwnerAudioUnit() *AudioUnit
 	SupportedChannelLayoutTags() []*foundation.NSNumber
 	ContextPresentationLatency() float64

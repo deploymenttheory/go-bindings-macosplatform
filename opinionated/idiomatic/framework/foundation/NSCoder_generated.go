@@ -334,8 +334,8 @@ func (x *Coder) AllowedClasses() *raw.NSSet[objc.Class] {
 }
 
 // DecodingFailurePolicy calls the underlying DecodingFailurePolicy.
-func (x *Coder) DecodingFailurePolicy() raw.NSDecodingFailurePolicy {
-	return x.inner.DecodingFailurePolicy()
+func (x *Coder) DecodingFailurePolicy() NSDecodingFailurePolicy {
+	return NSDecodingFailurePolicy(x.inner.DecodingFailurePolicy())
 }
 
 // Error calls the underlying Error.
@@ -483,7 +483,7 @@ type Coderable interface {
 	AllowsKeyedCoding() bool
 	RequiresSecureCoding() bool
 	AllowedClasses() *raw.NSSet[objc.Class]
-	DecodingFailurePolicy() raw.NSDecodingFailurePolicy
+	DecodingFailurePolicy() NSDecodingFailurePolicy
 	Error() unsafe.Pointer
 	EncodeNXObject(object objc.ID)
 	DecodeNXObject() objc.ID

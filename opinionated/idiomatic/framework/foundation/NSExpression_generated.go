@@ -31,9 +31,9 @@ func ExpressionFromID(id objc.ID) *Expression {
 }
 
 // NewExpressionWithExpressionType creates a new [Expression].
-func NewExpressionWithExpressionType(type_ raw.NSExpressionType) *Expression {
+func NewExpressionWithExpressionType(type_ NSExpressionType) *Expression {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSExpression")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressionType:"), type_)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressionType:"), raw.NSExpressionType(type_))
 	return &Expression{inner: raw.NSExpressionFromID(_id)}
 }
 
@@ -61,8 +61,8 @@ func (x *Expression) AllowEvaluation() {
 }
 
 // ExpressionType calls the underlying ExpressionType.
-func (x *Expression) ExpressionType() raw.NSExpressionType {
-	return x.inner.ExpressionType()
+func (x *Expression) ExpressionType() NSExpressionType {
+	return NSExpressionType(x.inner.ExpressionType())
 }
 
 // ConstantValue calls the underlying ConstantValue.
@@ -180,7 +180,7 @@ type Expressionable interface {
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Expression
 	ExpressionValueWithObjectContext(object objc.ID, context_ *raw.NSMutableDictionary[objc.ID, objc.ID]) objc.ID
 	AllowEvaluation()
-	ExpressionType() raw.NSExpressionType
+	ExpressionType() NSExpressionType
 	ConstantValue() objc.ID
 	KeyPath() *String
 	Function() *String

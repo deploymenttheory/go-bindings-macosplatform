@@ -38,8 +38,8 @@ func NewGraphCompilationDescriptor() *GraphCompilationDescriptor {
 }
 
 // WithOptimizationLevel sets the optimizationLevel property and returns the receiver for chaining.
-func (x *GraphCompilationDescriptor) WithOptimizationLevel(optimizationLevel raw.MPSGraphOptimization) *GraphCompilationDescriptor {
-	x.inner.SetOptimizationLevel(optimizationLevel)
+func (x *GraphCompilationDescriptor) WithOptimizationLevel(optimizationLevel MPSGraphOptimization) *GraphCompilationDescriptor {
+	x.inner.SetOptimizationLevel(raw.MPSGraphOptimization(optimizationLevel))
 	return x
 }
 
@@ -62,14 +62,14 @@ func (x *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue *foundation
 }
 
 // WithOptimizationProfile sets the optimizationProfile property and returns the receiver for chaining.
-func (x *GraphCompilationDescriptor) WithOptimizationProfile(optimizationProfile raw.MPSGraphOptimizationProfile) *GraphCompilationDescriptor {
-	x.inner.SetOptimizationProfile(optimizationProfile)
+func (x *GraphCompilationDescriptor) WithOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile) *GraphCompilationDescriptor {
+	x.inner.SetOptimizationProfile(raw.MPSGraphOptimizationProfile(optimizationProfile))
 	return x
 }
 
 // WithReducedPrecisionFastMath sets the reducedPrecisionFastMath property and returns the receiver for chaining.
-func (x *GraphCompilationDescriptor) WithReducedPrecisionFastMath(reducedPrecisionFastMath raw.MPSGraphReducedPrecisionFastMath) *GraphCompilationDescriptor {
-	x.inner.SetReducedPrecisionFastMath(reducedPrecisionFastMath)
+func (x *GraphCompilationDescriptor) WithReducedPrecisionFastMath(reducedPrecisionFastMath MPSGraphReducedPrecisionFastMath) *GraphCompilationDescriptor {
+	x.inner.SetReducedPrecisionFastMath(raw.MPSGraphReducedPrecisionFastMath(reducedPrecisionFastMath))
 	return x
 }
 
@@ -84,13 +84,13 @@ func (x *GraphCompilationDescriptor) ConvertLayoutToNHWC() {
 }
 
 // OptimizationLevel calls the underlying OptimizationLevel.
-func (x *GraphCompilationDescriptor) OptimizationLevel() raw.MPSGraphOptimization {
-	return x.inner.OptimizationLevel()
+func (x *GraphCompilationDescriptor) OptimizationLevel() MPSGraphOptimization {
+	return MPSGraphOptimization(x.inner.OptimizationLevel())
 }
 
 // SetOptimizationLevel calls the underlying SetOptimizationLevel.
-func (x *GraphCompilationDescriptor) SetOptimizationLevel(optimizationLevel raw.MPSGraphOptimization) {
-	x.inner.SetOptimizationLevel(optimizationLevel)
+func (x *GraphCompilationDescriptor) SetOptimizationLevel(optimizationLevel MPSGraphOptimization) {
+	x.inner.SetOptimizationLevel(raw.MPSGraphOptimization(optimizationLevel))
 }
 
 // WaitForCompilationCompletion calls the underlying WaitForCompilationCompletion.
@@ -124,13 +124,13 @@ func (x *GraphCompilationDescriptor) SetDispatchQueue(dispatchQueue *foundation.
 }
 
 // OptimizationProfile calls the underlying OptimizationProfile.
-func (x *GraphCompilationDescriptor) OptimizationProfile() raw.MPSGraphOptimizationProfile {
-	return x.inner.OptimizationProfile()
+func (x *GraphCompilationDescriptor) OptimizationProfile() MPSGraphOptimizationProfile {
+	return MPSGraphOptimizationProfile(x.inner.OptimizationProfile())
 }
 
 // SetOptimizationProfile calls the underlying SetOptimizationProfile.
-func (x *GraphCompilationDescriptor) SetOptimizationProfile(optimizationProfile raw.MPSGraphOptimizationProfile) {
-	x.inner.SetOptimizationProfile(optimizationProfile)
+func (x *GraphCompilationDescriptor) SetOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile) {
+	x.inner.SetOptimizationProfile(raw.MPSGraphOptimizationProfile(optimizationProfile))
 }
 
 // Callables calls the underlying Callables.
@@ -144,13 +144,13 @@ func (x *GraphCompilationDescriptor) SetCallables(callables unsafe.Pointer) {
 }
 
 // ReducedPrecisionFastMath calls the underlying ReducedPrecisionFastMath.
-func (x *GraphCompilationDescriptor) ReducedPrecisionFastMath() raw.MPSGraphReducedPrecisionFastMath {
-	return x.inner.ReducedPrecisionFastMath()
+func (x *GraphCompilationDescriptor) ReducedPrecisionFastMath() MPSGraphReducedPrecisionFastMath {
+	return MPSGraphReducedPrecisionFastMath(x.inner.ReducedPrecisionFastMath())
 }
 
 // SetReducedPrecisionFastMath calls the underlying SetReducedPrecisionFastMath.
-func (x *GraphCompilationDescriptor) SetReducedPrecisionFastMath(reducedPrecisionFastMath raw.MPSGraphReducedPrecisionFastMath) {
-	x.inner.SetReducedPrecisionFastMath(reducedPrecisionFastMath)
+func (x *GraphCompilationDescriptor) SetReducedPrecisionFastMath(reducedPrecisionFastMath MPSGraphReducedPrecisionFastMath) {
+	x.inner.SetReducedPrecisionFastMath(raw.MPSGraphReducedPrecisionFastMath(reducedPrecisionFastMath))
 }
 
 func (x *GraphCompilationDescriptor) asGraphObject() *raw.MPSGraphObject {
@@ -160,28 +160,28 @@ func (x *GraphCompilationDescriptor) asGraphObject() *raw.MPSGraphObject {
 // GraphCompilationDescriptorable is the interface implemented by [GraphCompilationDescriptor], for mocking and DI.
 type GraphCompilationDescriptorable interface {
 	Unwrap() *raw.MPSGraphCompilationDescriptor
-	WithOptimizationLevel(optimizationLevel raw.MPSGraphOptimization) *GraphCompilationDescriptor
+	WithOptimizationLevel(optimizationLevel MPSGraphOptimization) *GraphCompilationDescriptor
 	WithWaitForCompilationCompletion(waitForCompilationCompletion bool) *GraphCompilationDescriptor
 	WithCompilationCompletionHandler(compilationCompletionHandler func(*raw.MPSGraphExecutable, unsafe.Pointer)) *GraphCompilationDescriptor
 	WithDispatchQueue(dispatchQueue *foundation.NSObject) *GraphCompilationDescriptor
-	WithOptimizationProfile(optimizationProfile raw.MPSGraphOptimizationProfile) *GraphCompilationDescriptor
-	WithReducedPrecisionFastMath(reducedPrecisionFastMath raw.MPSGraphReducedPrecisionFastMath) *GraphCompilationDescriptor
+	WithOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile) *GraphCompilationDescriptor
+	WithReducedPrecisionFastMath(reducedPrecisionFastMath MPSGraphReducedPrecisionFastMath) *GraphCompilationDescriptor
 	DisableTypeInference()
 	ConvertLayoutToNHWC()
-	OptimizationLevel() raw.MPSGraphOptimization
-	SetOptimizationLevel(optimizationLevel raw.MPSGraphOptimization)
+	OptimizationLevel() MPSGraphOptimization
+	SetOptimizationLevel(optimizationLevel MPSGraphOptimization)
 	WaitForCompilationCompletion() bool
 	SetWaitForCompilationCompletion(waitForCompilationCompletion bool)
 	CompilationCompletionHandler() objc.Block
 	SetCompilationCompletionHandler(compilationCompletionHandler func(*raw.MPSGraphExecutable, unsafe.Pointer))
 	DispatchQueue() *foundation.NSObject
 	SetDispatchQueue(dispatchQueue *foundation.NSObject)
-	OptimizationProfile() raw.MPSGraphOptimizationProfile
-	SetOptimizationProfile(optimizationProfile raw.MPSGraphOptimizationProfile)
+	OptimizationProfile() MPSGraphOptimizationProfile
+	SetOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile)
 	Callables() unsafe.Pointer
 	SetCallables(callables unsafe.Pointer)
-	ReducedPrecisionFastMath() raw.MPSGraphReducedPrecisionFastMath
-	SetReducedPrecisionFastMath(reducedPrecisionFastMath raw.MPSGraphReducedPrecisionFastMath)
+	ReducedPrecisionFastMath() MPSGraphReducedPrecisionFastMath
+	SetReducedPrecisionFastMath(reducedPrecisionFastMath MPSGraphReducedPrecisionFastMath)
 }
 
 var _ GraphCompilationDescriptorable = (*GraphCompilationDescriptor)(nil)

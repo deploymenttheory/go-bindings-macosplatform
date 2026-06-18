@@ -96,8 +96,8 @@ func (x *DepthData) DepthDataMap() unsafe.Pointer {
 }
 
 // DepthDataQuality calls the underlying DepthDataQuality.
-func (x *DepthData) DepthDataQuality() raw.AVDepthDataQuality {
-	return x.inner.DepthDataQuality()
+func (x *DepthData) DepthDataQuality() AVDepthDataQuality {
+	return AVDepthDataQuality(x.inner.DepthDataQuality())
 }
 
 // IsDepthDataFiltered calls the underlying IsDepthDataFiltered.
@@ -106,8 +106,8 @@ func (x *DepthData) IsDepthDataFiltered() bool {
 }
 
 // DepthDataAccuracy calls the underlying DepthDataAccuracy.
-func (x *DepthData) DepthDataAccuracy() raw.AVDepthDataAccuracy {
-	return x.inner.DepthDataAccuracy()
+func (x *DepthData) DepthDataAccuracy() AVDepthDataAccuracy {
+	return AVDepthDataAccuracy(x.inner.DepthDataAccuracy())
 }
 
 // CameraCalibrationData calls the underlying CameraCalibrationData.
@@ -129,9 +129,9 @@ type DepthDataable interface {
 	AvailableDepthDataTypes() []*foundation.NSNumber
 	DepthDataType() uint
 	DepthDataMap() unsafe.Pointer
-	DepthDataQuality() raw.AVDepthDataQuality
+	DepthDataQuality() AVDepthDataQuality
 	IsDepthDataFiltered() bool
-	DepthDataAccuracy() raw.AVDepthDataAccuracy
+	DepthDataAccuracy() AVDepthDataAccuracy
 	CameraCalibrationData() *CameraCalibrationData
 }
 

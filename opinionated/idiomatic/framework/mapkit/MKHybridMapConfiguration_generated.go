@@ -36,9 +36,9 @@ func NewHybridMapConfiguration() *HybridMapConfiguration {
 }
 
 // NewHybridMapConfigurationWithElevationStyle creates a new [HybridMapConfiguration].
-func NewHybridMapConfigurationWithElevationStyle(elevationStyle raw.MKMapElevationStyle) *HybridMapConfiguration {
+func NewHybridMapConfigurationWithElevationStyle(elevationStyle MKMapElevationStyle) *HybridMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKHybridMapConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), elevationStyle)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), raw.MKMapElevationStyle(elevationStyle))
 	return &HybridMapConfiguration{inner: raw.MKHybridMapConfigurationFromID(_id)}
 }
 
@@ -55,8 +55,8 @@ func (x *HybridMapConfiguration) WithShowsTraffic(showsTraffic bool) *HybridMapC
 }
 
 // WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
-func (x *HybridMapConfiguration) WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *HybridMapConfiguration {
-	x.inner.MKMapConfiguration.SetElevationStyle(elevationStyle)
+func (x *HybridMapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *HybridMapConfiguration {
+	x.inner.MKMapConfiguration.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))
 	return x
 }
 
@@ -93,7 +93,7 @@ type HybridMapConfigurationable interface {
 	Unwrap() *raw.MKHybridMapConfiguration
 	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *HybridMapConfiguration
 	WithShowsTraffic(showsTraffic bool) *HybridMapConfiguration
-	WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *HybridMapConfiguration
+	WithElevationStyle(elevationStyle MKMapElevationStyle) *HybridMapConfiguration
 	PointOfInterestFilter() *PointOfInterestFilter
 	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
 	ShowsTraffic() bool

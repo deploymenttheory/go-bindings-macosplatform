@@ -35,48 +35,6 @@ func (e DVDAspectRatio) String() string {
 	}
 }
 
-type DVDAudioFormat int64
-
-const (
-	KDVDAudioUnknownFormat DVDAudioFormat = 0
-	KDVDAudioAC3Format     DVDAudioFormat = 1
-	KDVDAudioMPEG1Format   DVDAudioFormat = 2
-	KDVDAudioMPEG2Format   DVDAudioFormat = 3
-	KDVDAudioPCMFormat     DVDAudioFormat = 4
-	KDVDAudioDTSFormat     DVDAudioFormat = 5
-	KDVDAudioSDDSFormat    DVDAudioFormat = 6
-	KDVDAudioMLPFormat     DVDAudioFormat = 7
-	KDVDAudioDDPlusFormat  DVDAudioFormat = 8
-	KDVDAudioDTSHDFormat   DVDAudioFormat = 9
-)
-
-func (e DVDAudioFormat) String() string {
-	switch e {
-	case KDVDAudioUnknownFormat:
-		return "KDVDAudioUnknownFormat"
-	case KDVDAudioAC3Format:
-		return "KDVDAudioAC3Format"
-	case KDVDAudioMPEG1Format:
-		return "KDVDAudioMPEG1Format"
-	case KDVDAudioMPEG2Format:
-		return "KDVDAudioMPEG2Format"
-	case KDVDAudioPCMFormat:
-		return "KDVDAudioPCMFormat"
-	case KDVDAudioDTSFormat:
-		return "KDVDAudioDTSFormat"
-	case KDVDAudioSDDSFormat:
-		return "KDVDAudioSDDSFormat"
-	case KDVDAudioMLPFormat:
-		return "KDVDAudioMLPFormat"
-	case KDVDAudioDDPlusFormat:
-		return "KDVDAudioDDPlusFormat"
-	case KDVDAudioDTSHDFormat:
-		return "KDVDAudioDTSHDFormat"
-	default:
-		return fmt.Sprintf("DVDAudioFormat(%d)", int64(e))
-	}
-}
-
 type DVDEventCode int64
 
 const (
@@ -167,33 +125,6 @@ func (e DVDEventCode) String() string {
 	}
 }
 
-type DVDFormat int64
-
-const (
-	KDVDFormatUninitialized DVDFormat = 0
-	KDVDFormatNTSC          DVDFormat = 1
-	KDVDFormatPAL           DVDFormat = 2
-	KDVDFormatNTSC_HDTV     DVDFormat = 3
-	KDVDFormatPAL_HDTV      DVDFormat = 4
-)
-
-func (e DVDFormat) String() string {
-	switch e {
-	case KDVDFormatUninitialized:
-		return "KDVDFormatUninitialized"
-	case KDVDFormatNTSC:
-		return "KDVDFormatNTSC"
-	case KDVDFormatPAL:
-		return "KDVDFormatPAL"
-	case KDVDFormatNTSC_HDTV:
-		return "KDVDFormatNTSC_HDTV"
-	case KDVDFormatPAL_HDTV:
-		return "KDVDFormatPAL_HDTV"
-	default:
-		return fmt.Sprintf("DVDFormat(%d)", int64(e))
-	}
-}
-
 type DVDMenu int64
 
 const (
@@ -281,42 +212,6 @@ func (e DVDScanRate) String() string {
 		return "KDVDScanRate32x"
 	default:
 		return fmt.Sprintf("DVDScanRate(%d)", int64(e))
-	}
-}
-
-type DVDState int64
-
-const (
-	KDVDStateUnknown      DVDState = 0
-	KDVDStatePlaying      DVDState = 1
-	KDVDStatePlayingStill DVDState = 2
-	KDVDStatePaused       DVDState = 3
-	KDVDStateStopped      DVDState = 4
-	KDVDStateScanning     DVDState = 5
-	KDVDStateIdle         DVDState = 6
-	KDVDStatePlayingSlow  DVDState = 7
-)
-
-func (e DVDState) String() string {
-	switch e {
-	case KDVDStateUnknown:
-		return "KDVDStateUnknown"
-	case KDVDStatePlaying:
-		return "KDVDStatePlaying"
-	case KDVDStatePlayingStill:
-		return "KDVDStatePlayingStill"
-	case KDVDStatePaused:
-		return "KDVDStatePaused"
-	case KDVDStateStopped:
-		return "KDVDStateStopped"
-	case KDVDStateScanning:
-		return "KDVDStateScanning"
-	case KDVDStateIdle:
-		return "KDVDStateIdle"
-	case KDVDStatePlayingSlow:
-		return "KDVDStatePlayingSlow"
-	default:
-		return fmt.Sprintf("DVDState(%d)", int64(e))
 	}
 }
 

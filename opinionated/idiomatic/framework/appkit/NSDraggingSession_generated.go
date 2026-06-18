@@ -38,8 +38,8 @@ func NewDraggingSession() *DraggingSession {
 }
 
 // WithDraggingFormation sets the draggingFormation property and returns the receiver for chaining.
-func (x *DraggingSession) WithDraggingFormation(draggingFormation raw.NSDraggingFormation) *DraggingSession {
-	x.inner.SetDraggingFormation(draggingFormation)
+func (x *DraggingSession) WithDraggingFormation(draggingFormation NSDraggingFormation) *DraggingSession {
+	x.inner.SetDraggingFormation(raw.NSDraggingFormation(draggingFormation))
 	return x
 }
 
@@ -56,18 +56,18 @@ func (x *DraggingSession) WithDraggingLeaderIndex(draggingLeaderIndex int) *Drag
 }
 
 // EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing calls the underlying EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing.
-func (x *DraggingSession) EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts raw.NSDraggingItemEnumerationOptions, view *raw.NSView, classArray *foundation.NSArray[objc.Class], searchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(*raw.NSDraggingItem, int, *bool)) {
-	x.inner.EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts, view, classArray, searchOptions, block)
+func (x *DraggingSession) EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts NSDraggingItemEnumerationOptions, view *raw.NSView, classArray *foundation.NSArray[objc.Class], searchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(*raw.NSDraggingItem, int, *bool)) {
+	x.inner.EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(raw.NSDraggingItemEnumerationOptions(enumOpts), view, classArray, searchOptions, block)
 }
 
 // DraggingFormation calls the underlying DraggingFormation.
-func (x *DraggingSession) DraggingFormation() raw.NSDraggingFormation {
-	return x.inner.DraggingFormation()
+func (x *DraggingSession) DraggingFormation() NSDraggingFormation {
+	return NSDraggingFormation(x.inner.DraggingFormation())
 }
 
 // SetDraggingFormation calls the underlying SetDraggingFormation.
-func (x *DraggingSession) SetDraggingFormation(draggingFormation raw.NSDraggingFormation) {
-	x.inner.SetDraggingFormation(draggingFormation)
+func (x *DraggingSession) SetDraggingFormation(draggingFormation NSDraggingFormation) {
+	x.inner.SetDraggingFormation(raw.NSDraggingFormation(draggingFormation))
 }
 
 // AnimatesToStartingPositionsOnCancelOrFail calls the underlying AnimatesToStartingPositionsOnCancelOrFail.
@@ -112,12 +112,12 @@ func (x *DraggingSession) DraggingLocation() corefoundation.CGPoint {
 // DraggingSessionable is the interface implemented by [DraggingSession], for mocking and DI.
 type DraggingSessionable interface {
 	Unwrap() *raw.NSDraggingSession
-	WithDraggingFormation(draggingFormation raw.NSDraggingFormation) *DraggingSession
+	WithDraggingFormation(draggingFormation NSDraggingFormation) *DraggingSession
 	WithAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool) *DraggingSession
 	WithDraggingLeaderIndex(draggingLeaderIndex int) *DraggingSession
-	EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts raw.NSDraggingItemEnumerationOptions, view *raw.NSView, classArray *foundation.NSArray[objc.Class], searchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(*raw.NSDraggingItem, int, *bool))
-	DraggingFormation() raw.NSDraggingFormation
-	SetDraggingFormation(draggingFormation raw.NSDraggingFormation)
+	EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts NSDraggingItemEnumerationOptions, view *raw.NSView, classArray *foundation.NSArray[objc.Class], searchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(*raw.NSDraggingItem, int, *bool))
+	DraggingFormation() NSDraggingFormation
+	SetDraggingFormation(draggingFormation NSDraggingFormation)
 	AnimatesToStartingPositionsOnCancelOrFail() bool
 	SetAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool)
 	DraggingLeaderIndex() int

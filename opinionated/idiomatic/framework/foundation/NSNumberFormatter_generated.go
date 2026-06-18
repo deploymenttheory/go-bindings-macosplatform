@@ -37,8 +37,8 @@ func NewNumberFormatter() *NumberFormatter {
 }
 
 // WithFormattingContext sets the formattingContext property and returns the receiver for chaining.
-func (x *NumberFormatter) WithFormattingContext(formattingContext raw.NSFormattingContext) *NumberFormatter {
-	x.inner.SetFormattingContext(formattingContext)
+func (x *NumberFormatter) WithFormattingContext(formattingContext NSFormattingContext) *NumberFormatter {
+	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
 	return x
 }
 
@@ -49,8 +49,8 @@ func (x *NumberFormatter) WithMinimumGroupingDigits(minimumGroupingDigits int) *
 }
 
 // WithNumberStyle sets the numberStyle property and returns the receiver for chaining.
-func (x *NumberFormatter) WithNumberStyle(numberStyle raw.NSNumberFormatterStyle) *NumberFormatter {
-	x.inner.SetNumberStyle(numberStyle)
+func (x *NumberFormatter) WithNumberStyle(numberStyle NSNumberFormatterStyle) *NumberFormatter {
+	x.inner.SetNumberStyle(raw.NSNumberFormatterStyle(numberStyle))
 	return x
 }
 
@@ -67,8 +67,8 @@ func (x *NumberFormatter) WithGeneratesDecimalNumbers(generatesDecimalNumbers bo
 }
 
 // WithFormatterBehavior sets the formatterBehavior property and returns the receiver for chaining.
-func (x *NumberFormatter) WithFormatterBehavior(formatterBehavior raw.NSNumberFormatterBehavior) *NumberFormatter {
-	x.inner.SetFormatterBehavior(formatterBehavior)
+func (x *NumberFormatter) WithFormatterBehavior(formatterBehavior NSNumberFormatterBehavior) *NumberFormatter {
+	x.inner.SetFormatterBehavior(raw.NSNumberFormatterBehavior(formatterBehavior))
 	return x
 }
 
@@ -295,14 +295,14 @@ func (x *NumberFormatter) WithPaddingCharacter(paddingCharacter string) *NumberF
 }
 
 // WithPaddingPosition sets the paddingPosition property and returns the receiver for chaining.
-func (x *NumberFormatter) WithPaddingPosition(paddingPosition raw.NSNumberFormatterPadPosition) *NumberFormatter {
-	x.inner.SetPaddingPosition(paddingPosition)
+func (x *NumberFormatter) WithPaddingPosition(paddingPosition NSNumberFormatterPadPosition) *NumberFormatter {
+	x.inner.SetPaddingPosition(raw.NSNumberFormatterPadPosition(paddingPosition))
 	return x
 }
 
 // WithRoundingMode sets the roundingMode property and returns the receiver for chaining.
-func (x *NumberFormatter) WithRoundingMode(roundingMode raw.NSNumberFormatterRoundingMode) *NumberFormatter {
-	x.inner.SetRoundingMode(roundingMode)
+func (x *NumberFormatter) WithRoundingMode(roundingMode NSNumberFormatterRoundingMode) *NumberFormatter {
+	x.inner.SetRoundingMode(raw.NSNumberFormatterRoundingMode(roundingMode))
 	return x
 }
 
@@ -462,13 +462,13 @@ func (x *NumberFormatter) NumberFromString(string_ string) *Number {
 }
 
 // FormattingContext calls the underlying FormattingContext.
-func (x *NumberFormatter) FormattingContext() raw.NSFormattingContext {
-	return x.inner.FormattingContext()
+func (x *NumberFormatter) FormattingContext() NSFormattingContext {
+	return NSFormattingContext(x.inner.FormattingContext())
 }
 
 // SetFormattingContext calls the underlying SetFormattingContext.
-func (x *NumberFormatter) SetFormattingContext(formattingContext raw.NSFormattingContext) {
-	x.inner.SetFormattingContext(formattingContext)
+func (x *NumberFormatter) SetFormattingContext(formattingContext NSFormattingContext) {
+	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
 }
 
 // MinimumGroupingDigits calls the underlying MinimumGroupingDigits.
@@ -482,13 +482,13 @@ func (x *NumberFormatter) SetMinimumGroupingDigits(minimumGroupingDigits int) {
 }
 
 // NumberStyle calls the underlying NumberStyle.
-func (x *NumberFormatter) NumberStyle() raw.NSNumberFormatterStyle {
-	return x.inner.NumberStyle()
+func (x *NumberFormatter) NumberStyle() NSNumberFormatterStyle {
+	return NSNumberFormatterStyle(x.inner.NumberStyle())
 }
 
 // SetNumberStyle calls the underlying SetNumberStyle.
-func (x *NumberFormatter) SetNumberStyle(numberStyle raw.NSNumberFormatterStyle) {
-	x.inner.SetNumberStyle(numberStyle)
+func (x *NumberFormatter) SetNumberStyle(numberStyle NSNumberFormatterStyle) {
+	x.inner.SetNumberStyle(raw.NSNumberFormatterStyle(numberStyle))
 }
 
 // Locale calls the underlying Locale.
@@ -516,13 +516,13 @@ func (x *NumberFormatter) SetGeneratesDecimalNumbers(generatesDecimalNumbers boo
 }
 
 // FormatterBehavior calls the underlying FormatterBehavior.
-func (x *NumberFormatter) FormatterBehavior() raw.NSNumberFormatterBehavior {
-	return x.inner.FormatterBehavior()
+func (x *NumberFormatter) FormatterBehavior() NSNumberFormatterBehavior {
+	return NSNumberFormatterBehavior(x.inner.FormatterBehavior())
 }
 
 // SetFormatterBehavior calls the underlying SetFormatterBehavior.
-func (x *NumberFormatter) SetFormatterBehavior(formatterBehavior raw.NSNumberFormatterBehavior) {
-	x.inner.SetFormatterBehavior(formatterBehavior)
+func (x *NumberFormatter) SetFormatterBehavior(formatterBehavior NSNumberFormatterBehavior) {
+	x.inner.SetFormatterBehavior(raw.NSNumberFormatterBehavior(formatterBehavior))
 }
 
 // NegativeFormat calls the underlying NegativeFormat.
@@ -992,23 +992,23 @@ func (x *NumberFormatter) SetPaddingCharacter(paddingCharacter string) {
 }
 
 // PaddingPosition calls the underlying PaddingPosition.
-func (x *NumberFormatter) PaddingPosition() raw.NSNumberFormatterPadPosition {
-	return x.inner.PaddingPosition()
+func (x *NumberFormatter) PaddingPosition() NSNumberFormatterPadPosition {
+	return NSNumberFormatterPadPosition(x.inner.PaddingPosition())
 }
 
 // SetPaddingPosition calls the underlying SetPaddingPosition.
-func (x *NumberFormatter) SetPaddingPosition(paddingPosition raw.NSNumberFormatterPadPosition) {
-	x.inner.SetPaddingPosition(paddingPosition)
+func (x *NumberFormatter) SetPaddingPosition(paddingPosition NSNumberFormatterPadPosition) {
+	x.inner.SetPaddingPosition(raw.NSNumberFormatterPadPosition(paddingPosition))
 }
 
 // RoundingMode calls the underlying RoundingMode.
-func (x *NumberFormatter) RoundingMode() raw.NSNumberFormatterRoundingMode {
-	return x.inner.RoundingMode()
+func (x *NumberFormatter) RoundingMode() NSNumberFormatterRoundingMode {
+	return NSNumberFormatterRoundingMode(x.inner.RoundingMode())
 }
 
 // SetRoundingMode calls the underlying SetRoundingMode.
-func (x *NumberFormatter) SetRoundingMode(roundingMode raw.NSNumberFormatterRoundingMode) {
-	x.inner.SetRoundingMode(roundingMode)
+func (x *NumberFormatter) SetRoundingMode(roundingMode NSNumberFormatterRoundingMode) {
+	x.inner.SetRoundingMode(raw.NSNumberFormatterRoundingMode(roundingMode))
 }
 
 // RoundingIncrement calls the underlying RoundingIncrement.
@@ -1268,12 +1268,12 @@ func (x *NumberFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter
 // NumberFormatterable is the interface implemented by [NumberFormatter], for mocking and DI.
 type NumberFormatterable interface {
 	Unwrap() *raw.NSNumberFormatter
-	WithFormattingContext(formattingContext raw.NSFormattingContext) *NumberFormatter
+	WithFormattingContext(formattingContext NSFormattingContext) *NumberFormatter
 	WithMinimumGroupingDigits(minimumGroupingDigits int) *NumberFormatter
-	WithNumberStyle(numberStyle raw.NSNumberFormatterStyle) *NumberFormatter
+	WithNumberStyle(numberStyle NSNumberFormatterStyle) *NumberFormatter
 	WithLocale(locale *Locale) *NumberFormatter
 	WithGeneratesDecimalNumbers(generatesDecimalNumbers bool) *NumberFormatter
-	WithFormatterBehavior(formatterBehavior raw.NSNumberFormatterBehavior) *NumberFormatter
+	WithFormatterBehavior(formatterBehavior NSNumberFormatterBehavior) *NumberFormatter
 	WithNegativeFormat(negativeFormat string) *NumberFormatter
 	WithTextAttributesForNegativeValues(textAttributesForNegativeValues *raw.NSDictionary[*raw.NSString, objc.ID]) *NumberFormatter
 	WithPositiveFormat(positiveFormat string) *NumberFormatter
@@ -1311,8 +1311,8 @@ type NumberFormatterable interface {
 	WithMultiplier(multiplier NumberProvider) *NumberFormatter
 	WithFormatWidth(formatWidth uint) *NumberFormatter
 	WithPaddingCharacter(paddingCharacter string) *NumberFormatter
-	WithPaddingPosition(paddingPosition raw.NSNumberFormatterPadPosition) *NumberFormatter
-	WithRoundingMode(roundingMode raw.NSNumberFormatterRoundingMode) *NumberFormatter
+	WithPaddingPosition(paddingPosition NSNumberFormatterPadPosition) *NumberFormatter
+	WithRoundingMode(roundingMode NSNumberFormatterRoundingMode) *NumberFormatter
 	WithRoundingIncrement(roundingIncrement NumberProvider) *NumberFormatter
 	WithMinimumIntegerDigits(minimumIntegerDigits uint) *NumberFormatter
 	WithMaximumIntegerDigits(maximumIntegerDigits uint) *NumberFormatter
@@ -1338,18 +1338,18 @@ type NumberFormatterable interface {
 	GetObjectValueForStringRangeError(obj **raw.ObjcObject, string_ string, rangep *raw.NSRange) (bool, error)
 	StringFromNumber(number *raw.NSNumber) *String
 	NumberFromString(string_ string) *Number
-	FormattingContext() raw.NSFormattingContext
-	SetFormattingContext(formattingContext raw.NSFormattingContext)
+	FormattingContext() NSFormattingContext
+	SetFormattingContext(formattingContext NSFormattingContext)
 	MinimumGroupingDigits() int
 	SetMinimumGroupingDigits(minimumGroupingDigits int)
-	NumberStyle() raw.NSNumberFormatterStyle
-	SetNumberStyle(numberStyle raw.NSNumberFormatterStyle)
+	NumberStyle() NSNumberFormatterStyle
+	SetNumberStyle(numberStyle NSNumberFormatterStyle)
 	Locale() *Locale
 	SetLocale(locale *raw.NSLocale)
 	GeneratesDecimalNumbers() bool
 	SetGeneratesDecimalNumbers(generatesDecimalNumbers bool)
-	FormatterBehavior() raw.NSNumberFormatterBehavior
-	SetFormatterBehavior(formatterBehavior raw.NSNumberFormatterBehavior)
+	FormatterBehavior() NSNumberFormatterBehavior
+	SetFormatterBehavior(formatterBehavior NSNumberFormatterBehavior)
 	NegativeFormat() *String
 	SetNegativeFormat(negativeFormat string)
 	TextAttributesForNegativeValues() *raw.NSDictionary[*raw.NSString, objc.ID]
@@ -1424,10 +1424,10 @@ type NumberFormatterable interface {
 	SetFormatWidth(formatWidth uint)
 	PaddingCharacter() *String
 	SetPaddingCharacter(paddingCharacter string)
-	PaddingPosition() raw.NSNumberFormatterPadPosition
-	SetPaddingPosition(paddingPosition raw.NSNumberFormatterPadPosition)
-	RoundingMode() raw.NSNumberFormatterRoundingMode
-	SetRoundingMode(roundingMode raw.NSNumberFormatterRoundingMode)
+	PaddingPosition() NSNumberFormatterPadPosition
+	SetPaddingPosition(paddingPosition NSNumberFormatterPadPosition)
+	RoundingMode() NSNumberFormatterRoundingMode
+	SetRoundingMode(roundingMode NSNumberFormatterRoundingMode)
 	RoundingIncrement() *Number
 	SetRoundingIncrement(roundingIncrement *raw.NSNumber)
 	MinimumIntegerDigits() uint

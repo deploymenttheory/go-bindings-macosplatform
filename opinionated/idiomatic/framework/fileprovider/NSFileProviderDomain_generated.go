@@ -52,8 +52,8 @@ func (x *FileProviderDomain) WithHidden(hidden bool) *FileProviderDomain {
 }
 
 // WithTestingModes sets the testingModes property and returns the receiver for chaining.
-func (x *FileProviderDomain) WithTestingModes(testingModes raw.NSFileProviderDomainTestingModes) *FileProviderDomain {
-	x.inner.SetTestingModes(testingModes)
+func (x *FileProviderDomain) WithTestingModes(testingModes NSFileProviderDomainTestingModes) *FileProviderDomain {
+	x.inner.SetTestingModes(raw.NSFileProviderDomainTestingModes(testingModes))
 	return x
 }
 
@@ -70,8 +70,8 @@ func (x *FileProviderDomain) WithUserInfo(userInfo *foundation.NSDictionary[objc
 }
 
 // WithSupportedKnownFolders sets the supportedKnownFolders property and returns the receiver for chaining.
-func (x *FileProviderDomain) WithSupportedKnownFolders(supportedKnownFolders raw.NSFileProviderKnownFolders) *FileProviderDomain {
-	x.inner.SetSupportedKnownFolders(supportedKnownFolders)
+func (x *FileProviderDomain) WithSupportedKnownFolders(supportedKnownFolders NSFileProviderKnownFolders) *FileProviderDomain {
+	x.inner.SetSupportedKnownFolders(raw.NSFileProviderKnownFolders(supportedKnownFolders))
 	return x
 }
 
@@ -125,13 +125,13 @@ func (x *FileProviderDomain) IsReplicated() bool {
 }
 
 // TestingModes calls the underlying TestingModes.
-func (x *FileProviderDomain) TestingModes() raw.NSFileProviderDomainTestingModes {
-	return x.inner.TestingModes()
+func (x *FileProviderDomain) TestingModes() NSFileProviderDomainTestingModes {
+	return NSFileProviderDomainTestingModes(x.inner.TestingModes())
 }
 
 // SetTestingModes calls the underlying SetTestingModes.
-func (x *FileProviderDomain) SetTestingModes(testingModes raw.NSFileProviderDomainTestingModes) {
-	x.inner.SetTestingModes(testingModes)
+func (x *FileProviderDomain) SetTestingModes(testingModes NSFileProviderDomainTestingModes) {
+	x.inner.SetTestingModes(raw.NSFileProviderDomainTestingModes(testingModes))
 }
 
 // BackingStoreIdentity calls the underlying BackingStoreIdentity.
@@ -165,18 +165,18 @@ func (x *FileProviderDomain) SetUserInfo(userInfo *foundation.NSDictionary[objc.
 }
 
 // ReplicatedKnownFolders calls the underlying ReplicatedKnownFolders.
-func (x *FileProviderDomain) ReplicatedKnownFolders() raw.NSFileProviderKnownFolders {
-	return x.inner.ReplicatedKnownFolders()
+func (x *FileProviderDomain) ReplicatedKnownFolders() NSFileProviderKnownFolders {
+	return NSFileProviderKnownFolders(x.inner.ReplicatedKnownFolders())
 }
 
 // SupportedKnownFolders calls the underlying SupportedKnownFolders.
-func (x *FileProviderDomain) SupportedKnownFolders() raw.NSFileProviderKnownFolders {
-	return x.inner.SupportedKnownFolders()
+func (x *FileProviderDomain) SupportedKnownFolders() NSFileProviderKnownFolders {
+	return NSFileProviderKnownFolders(x.inner.SupportedKnownFolders())
 }
 
 // SetSupportedKnownFolders calls the underlying SetSupportedKnownFolders.
-func (x *FileProviderDomain) SetSupportedKnownFolders(supportedKnownFolders raw.NSFileProviderKnownFolders) {
-	x.inner.SetSupportedKnownFolders(supportedKnownFolders)
+func (x *FileProviderDomain) SetSupportedKnownFolders(supportedKnownFolders NSFileProviderKnownFolders) {
+	x.inner.SetSupportedKnownFolders(raw.NSFileProviderKnownFolders(supportedKnownFolders))
 }
 
 // SupportsStringSearchRequest calls the underlying SupportsStringSearchRequest.
@@ -193,10 +193,10 @@ func (x *FileProviderDomain) SetSupportsStringSearchRequest(supportsStringSearch
 type FileProviderDomainable interface {
 	Unwrap() *raw.NSFileProviderDomain
 	WithHidden(hidden bool) *FileProviderDomain
-	WithTestingModes(testingModes raw.NSFileProviderDomainTestingModes) *FileProviderDomain
+	WithTestingModes(testingModes NSFileProviderDomainTestingModes) *FileProviderDomain
 	WithSupportsSyncingTrash(supportsSyncingTrash bool) *FileProviderDomain
 	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *FileProviderDomain
-	WithSupportedKnownFolders(supportedKnownFolders raw.NSFileProviderKnownFolders) *FileProviderDomain
+	WithSupportedKnownFolders(supportedKnownFolders NSFileProviderKnownFolders) *FileProviderDomain
 	WithSupportsStringSearchRequest(supportsStringSearchRequest bool) *FileProviderDomain
 	Identifier() string
 	DisplayName() string
@@ -205,17 +205,17 @@ type FileProviderDomainable interface {
 	IsHidden() bool
 	SetHidden(hidden bool)
 	IsReplicated() bool
-	TestingModes() raw.NSFileProviderDomainTestingModes
-	SetTestingModes(testingModes raw.NSFileProviderDomainTestingModes)
+	TestingModes() NSFileProviderDomainTestingModes
+	SetTestingModes(testingModes NSFileProviderDomainTestingModes)
 	BackingStoreIdentity() *foundation.NSData
 	SupportsSyncingTrash() bool
 	SetSupportsSyncingTrash(supportsSyncingTrash bool)
 	VolumeUUID() *foundation.NSUUID
 	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
 	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
-	ReplicatedKnownFolders() raw.NSFileProviderKnownFolders
-	SupportedKnownFolders() raw.NSFileProviderKnownFolders
-	SetSupportedKnownFolders(supportedKnownFolders raw.NSFileProviderKnownFolders)
+	ReplicatedKnownFolders() NSFileProviderKnownFolders
+	SupportedKnownFolders() NSFileProviderKnownFolders
+	SetSupportedKnownFolders(supportedKnownFolders NSFileProviderKnownFolders)
 	SupportsStringSearchRequest() bool
 	SetSupportsStringSearchRequest(supportsStringSearchRequest bool)
 }

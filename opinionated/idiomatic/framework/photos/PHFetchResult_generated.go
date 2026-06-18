@@ -82,8 +82,8 @@ func (x *FetchResult) EnumerateObjectsAtIndexesOptionsUsing(s *foundation.NSInde
 }
 
 // CountOfAssetsWithMediaType calls the underlying CountOfAssetsWithMediaType.
-func (x *FetchResult) CountOfAssetsWithMediaType(mediaType raw.PHAssetMediaType) uint {
-	return x.inner.CountOfAssetsWithMediaType(mediaType)
+func (x *FetchResult) CountOfAssetsWithMediaType(mediaType PHAssetMediaType) uint {
+	return x.inner.CountOfAssetsWithMediaType(raw.PHAssetMediaType(mediaType))
 }
 
 // Count calls the underlying Count.
@@ -113,7 +113,7 @@ type FetchResultable interface {
 	EnumerateObjectsUsing(block objc.Block)
 	EnumerateObjectsWithOptionsUsing(opts foundation.NSEnumerationOptions, block objc.Block)
 	EnumerateObjectsAtIndexesOptionsUsing(s *foundation.NSIndexSet, opts foundation.NSEnumerationOptions, block objc.Block)
-	CountOfAssetsWithMediaType(mediaType raw.PHAssetMediaType) uint
+	CountOfAssetsWithMediaType(mediaType PHAssetMediaType) uint
 	Count() uint
 	FirstObject() objc.ID
 	LastObject() objc.ID

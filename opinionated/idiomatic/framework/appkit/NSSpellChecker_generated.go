@@ -170,18 +170,18 @@ func (x *SpellChecker) CloseSpellDocumentWithTag(tag int) {
 }
 
 // RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag calls the underlying RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag.
-func (x *SpellChecker) RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(response raw.NSCorrectionResponse, correction string, word string, language string, tag int) {
-	x.inner.RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(response, foundation.NSStringStringWithUTF8String(correction), foundation.NSStringStringWithUTF8String(word), foundation.NSStringStringWithUTF8String(language), tag)
+func (x *SpellChecker) RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(response NSCorrectionResponse, correction string, word string, language string, tag int) {
+	x.inner.RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(raw.NSCorrectionResponse(response), foundation.NSStringStringWithUTF8String(correction), foundation.NSStringStringWithUTF8String(word), foundation.NSStringStringWithUTF8String(language), tag)
 }
 
 // ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView blocks until the operation completes or ctx is cancelled.
-func (x *SpellChecker) ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView(ctx context.Context, type_ raw.NSCorrectionIndicatorType, primaryString string, alternativeStrings *foundation.NSArray[*foundation.NSString], rectOfTypedString corefoundation.CGRect, view *raw.NSView) (string, error) {
+func (x *SpellChecker) ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView(ctx context.Context, type_ NSCorrectionIndicatorType, primaryString string, alternativeStrings *foundation.NSArray[*foundation.NSString], rectOfTypedString corefoundation.CGRect, view *raw.NSView) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectViewCompletionHandler(type_, foundation.NSStringStringWithUTF8String(primaryString), alternativeStrings, rectOfTypedString, view, func(_p0 *foundation.NSString) {
+	x.inner.ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectViewCompletionHandler(raw.NSCorrectionIndicatorType(type_), foundation.NSStringStringWithUTF8String(primaryString), alternativeStrings, rectOfTypedString, view, func(_p0 *foundation.NSString) {
 		var _o _result
 		if _p0 != nil {
 			_o.val = purego.GoString(_p0.Ptr())
@@ -370,8 +370,8 @@ type SpellCheckerable interface {
 	CompletionsForPartialWordRangeInStringLanguageInSpellDocumentWithTag(range_ foundation.NSRange, string_ string, language string, tag int) *foundation.NSArray[*foundation.NSString]
 	LanguageForWordRangeInStringOrthography(range_ foundation.NSRange, string_ string, orthography *foundation.NSOrthography) string
 	CloseSpellDocumentWithTag(tag int)
-	RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(response raw.NSCorrectionResponse, correction string, word string, language string, tag int)
-	ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView(ctx context.Context, type_ raw.NSCorrectionIndicatorType, primaryString string, alternativeStrings *foundation.NSArray[*foundation.NSString], rectOfTypedString corefoundation.CGRect, view *raw.NSView) (string, error)
+	RecordResponseToCorrectionForWordLanguageInSpellDocumentWithTag(response NSCorrectionResponse, correction string, word string, language string, tag int)
+	ShowCorrectionIndicatorOfTypePrimaryStringAlternativeStringsForStringInRectView(ctx context.Context, type_ NSCorrectionIndicatorType, primaryString string, alternativeStrings *foundation.NSArray[*foundation.NSString], rectOfTypedString corefoundation.CGRect, view *raw.NSView) (string, error)
 	DismissCorrectionIndicatorForView(view *raw.NSView)
 	ShowInlinePredictionForCandidatesClient(candidates *foundation.NSArray[*foundation.NSTextCheckingResult], client raw.NSTextInputClient)
 	PreventsAutocorrectionBeforeStringLanguage(string_ string, language string) bool

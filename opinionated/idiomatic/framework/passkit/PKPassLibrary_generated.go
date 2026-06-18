@@ -70,8 +70,8 @@ func (x *PassLibrary) PassesWithReaderIdentifier(readerIdentifier string) *found
 }
 
 // PassesOfType calls the underlying PassesOfType.
-func (x *PassLibrary) PassesOfType(passType raw.PKPassType) *foundation.NSArray[*raw.PKPass] {
-	return x.inner.PassesOfType(passType)
+func (x *PassLibrary) PassesOfType(passType PKPassType) *foundation.NSArray[*raw.PKPass] {
+	return x.inner.PassesOfType(raw.PKPassType(passType))
 }
 
 // RemotePaymentPasses returns the collection as a Go slice.
@@ -101,8 +101,8 @@ func (x *PassLibrary) ReplacePassWithPass(pass *raw.PKPass) bool {
 }
 
 // AddPassesWithCompletionHandler calls the underlying AddPassesWithCompletionHandler.
-func (x *PassLibrary) AddPassesWithCompletionHandler(passes *foundation.NSArray[*raw.PKPass], completion func(raw.PKPassLibraryAddPassesStatus)) {
-	x.inner.AddPassesWithCompletionHandler(passes, completion)
+func (x *PassLibrary) AddPassesWithCompletionHandler(passes *foundation.NSArray[*raw.PKPass], completion func(PKPassLibraryAddPassesStatus)) {
+	x.inner.AddPassesWithCompletionHandler(passes, func(_a0 raw.PKPassLibraryAddPassesStatus) { completion(PKPassLibraryAddPassesStatus(_a0)) })
 }
 
 // OpenPaymentSetup calls the underlying OpenPaymentSetup.
@@ -190,13 +190,13 @@ func (x *PassLibrary) ServiceProviderDataForSecureElementPassCompletion(ctx cont
 }
 
 // AuthorizationStatusForCapability calls the underlying AuthorizationStatusForCapability.
-func (x *PassLibrary) AuthorizationStatusForCapability(capability raw.PKPassLibraryCapability) raw.PKPassLibraryAuthorizationStatus {
-	return x.inner.AuthorizationStatusForCapability(capability)
+func (x *PassLibrary) AuthorizationStatusForCapability(capability PKPassLibraryCapability) PKPassLibraryAuthorizationStatus {
+	return PKPassLibraryAuthorizationStatus(x.inner.AuthorizationStatusForCapability(raw.PKPassLibraryCapability(capability)))
 }
 
 // RequestAuthorizationForCapabilityCompletion calls the underlying RequestAuthorizationForCapabilityCompletion.
-func (x *PassLibrary) RequestAuthorizationForCapabilityCompletion(capability raw.PKPassLibraryCapability, completion func(raw.PKPassLibraryAuthorizationStatus)) {
-	x.inner.RequestAuthorizationForCapabilityCompletion(capability, completion)
+func (x *PassLibrary) RequestAuthorizationForCapabilityCompletion(capability PKPassLibraryCapability, completion func(PKPassLibraryAuthorizationStatus)) {
+	x.inner.RequestAuthorizationForCapabilityCompletion(raw.PKPassLibraryCapability(capability), func(_a0 raw.PKPassLibraryAuthorizationStatus) { completion(PKPassLibraryAuthorizationStatus(_a0)) })
 }
 
 // IsSecureElementPassActivationAvailable calls the underlying IsSecureElementPassActivationAvailable.
@@ -222,12 +222,12 @@ type PassLibraryable interface {
 	Passes() []*Pass
 	PassWithPassTypeIdentifierSerialNumber(identifier string, serialNumber string) *Pass
 	PassesWithReaderIdentifier(readerIdentifier string) *foundation.NSSet[*raw.PKSecureElementPass]
-	PassesOfType(passType raw.PKPassType) *foundation.NSArray[*raw.PKPass]
+	PassesOfType(passType PKPassType) *foundation.NSArray[*raw.PKPass]
 	RemotePaymentPasses() []*PaymentPass
 	RemovePass(pass *raw.PKPass)
 	ContainsPass(pass *raw.PKPass) bool
 	ReplacePassWithPass(pass *raw.PKPass) bool
-	AddPassesWithCompletionHandler(passes *foundation.NSArray[*raw.PKPass], completion func(raw.PKPassLibraryAddPassesStatus))
+	AddPassesWithCompletionHandler(passes *foundation.NSArray[*raw.PKPass], completion func(PKPassLibraryAddPassesStatus))
 	OpenPaymentSetup()
 	OpenPaymentSetupWithMerchantIdentifier(merchantIdentifier string)
 	PresentPaymentPass(pass *raw.PKPaymentPass)
@@ -241,8 +241,8 @@ type PassLibraryable interface {
 	SignDataWithSecureElementPassCompletion(signData *foundation.NSData, secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer))
 	EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *raw.PKSecureElementPass, completion objc.Block)
 	ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *raw.PKSecureElementPass) (*foundation.NSData, error)
-	AuthorizationStatusForCapability(capability raw.PKPassLibraryCapability) raw.PKPassLibraryAuthorizationStatus
-	RequestAuthorizationForCapabilityCompletion(capability raw.PKPassLibraryCapability, completion func(raw.PKPassLibraryAuthorizationStatus))
+	AuthorizationStatusForCapability(capability PKPassLibraryCapability) PKPassLibraryAuthorizationStatus
+	RequestAuthorizationForCapabilityCompletion(capability PKPassLibraryCapability, completion func(PKPassLibraryAuthorizationStatus))
 	IsSecureElementPassActivationAvailable() bool
 	RemoteSecureElementPasses() []*SecureElementPass
 }

@@ -39,8 +39,8 @@ func NewLight() *Light {
 }
 
 // WithLightType sets the lightType property and returns the receiver for chaining.
-func (x *Light) WithLightType(lightType raw.MDLLightType) *Light {
-	x.inner.SetLightType(lightType)
+func (x *Light) WithLightType(lightType MDLLightType) *Light {
+	x.inner.SetLightType(raw.MDLLightType(lightType))
 	return x
 }
 
@@ -91,13 +91,13 @@ func (x *Light) IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace uns
 }
 
 // LightType calls the underlying LightType.
-func (x *Light) LightType() raw.MDLLightType {
-	return x.inner.LightType()
+func (x *Light) LightType() MDLLightType {
+	return MDLLightType(x.inner.LightType())
 }
 
 // SetLightType calls the underlying SetLightType.
-func (x *Light) SetLightType(lightType raw.MDLLightType) {
-	x.inner.SetLightType(lightType)
+func (x *Light) SetLightType(lightType MDLLightType) {
+	x.inner.SetLightType(raw.MDLLightType(lightType))
 }
 
 // ColorSpace calls the underlying ColorSpace.
@@ -121,7 +121,7 @@ func (x *Light) asObject() *raw.MDLObject { return &x.inner.MDLObject }
 // Lightable is the interface implemented by [Light], for mocking and DI.
 type Lightable interface {
 	Unwrap() *raw.MDLLight
-	WithLightType(lightType raw.MDLLightType) *Light
+	WithLightType(lightType MDLLightType) *Light
 	WithColorSpace(colorSpace string) *Light
 	WithParent(parent ObjectProvider) *Light
 	WithInstance(instance ObjectProvider) *Light
@@ -130,8 +130,8 @@ type Lightable interface {
 	WithHidden(hidden bool) *Light
 	IrradianceAtPoint(point unsafe.Pointer) unsafe.Pointer
 	IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace unsafe.Pointer) unsafe.Pointer
-	LightType() raw.MDLLightType
-	SetLightType(lightType raw.MDLLightType)
+	LightType() MDLLightType
+	SetLightType(lightType MDLLightType)
 	ColorSpace() string
 	SetColorSpace(colorSpace string)
 }

@@ -250,8 +250,8 @@ func ColorSyncRegisterDevice(deviceClass unsafe.Pointer, deviceID unsafe.Pointer
 }
 
 // ColorSyncTransformConvert calls [raw.ColorSyncTransformConvert] (C function ColorSyncTransformConvert).
-func ColorSyncTransformConvert(transform unsafe.Pointer, width uint, height uint, dst unsafe.Pointer, dstDepth raw.ColorSyncDataDepth, dstLayout uint32, dstBytesPerRow uint, src unsafe.Pointer, srcDepth raw.ColorSyncDataDepth, srcLayout uint32, srcBytesPerRow uint, options unsafe.Pointer) bool {
-	return raw.ColorSyncTransformConvert(transform, width, height, dst, dstDepth, dstLayout, dstBytesPerRow, src, srcDepth, srcLayout, srcBytesPerRow, options)
+func ColorSyncTransformConvert(transform unsafe.Pointer, width uint, height uint, dst unsafe.Pointer, dstDepth ColorSyncDataDepth, dstLayout uint32, dstBytesPerRow uint, src unsafe.Pointer, srcDepth ColorSyncDataDepth, srcLayout uint32, srcBytesPerRow uint, options unsafe.Pointer) bool {
+	return raw.ColorSyncTransformConvert(transform, width, height, dst, raw.ColorSyncDataDepth(dstDepth), dstLayout, dstBytesPerRow, src, raw.ColorSyncDataDepth(srcDepth), srcLayout, srcBytesPerRow, options)
 }
 
 // ColorSyncTransformCopyProperty calls [raw.ColorSyncTransformCopyProperty] (C function ColorSyncTransformCopyProperty).

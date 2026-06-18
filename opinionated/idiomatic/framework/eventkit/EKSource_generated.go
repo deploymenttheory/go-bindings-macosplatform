@@ -38,8 +38,8 @@ func NewSource() *Source {
 }
 
 // CalendarsForEntityType calls the underlying CalendarsForEntityType.
-func (x *Source) CalendarsForEntityType(entityType raw.EKEntityType) *foundation.NSSet[*raw.EKCalendar] {
-	return x.inner.CalendarsForEntityType(entityType)
+func (x *Source) CalendarsForEntityType(entityType EKEntityType) *foundation.NSSet[*raw.EKCalendar] {
+	return x.inner.CalendarsForEntityType(raw.EKEntityType(entityType))
 }
 
 // SourceIdentifier calls the underlying SourceIdentifier.
@@ -52,8 +52,8 @@ func (x *Source) SourceIdentifier() string {
 }
 
 // SourceType calls the underlying SourceType.
-func (x *Source) SourceType() raw.EKSourceType {
-	return x.inner.SourceType()
+func (x *Source) SourceType() EKSourceType {
+	return EKSourceType(x.inner.SourceType())
 }
 
 // Title calls the underlying Title.
@@ -75,9 +75,9 @@ func (x *Source) asObject() *raw.EKObject { return &x.inner.EKObject }
 // Sourceable is the interface implemented by [Source], for mocking and DI.
 type Sourceable interface {
 	Unwrap() *raw.EKSource
-	CalendarsForEntityType(entityType raw.EKEntityType) *foundation.NSSet[*raw.EKCalendar]
+	CalendarsForEntityType(entityType EKEntityType) *foundation.NSSet[*raw.EKCalendar]
 	SourceIdentifier() string
-	SourceType() raw.EKSourceType
+	SourceType() EKSourceType
 	Title() string
 	IsDelegate() bool
 }

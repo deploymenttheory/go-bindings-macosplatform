@@ -62,8 +62,8 @@ func (x *AssetRegistry) RegisterSoundEventAssetWithRootNodeIdentifierError(rootN
 }
 
 // RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError calls the underlying RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError.
-func (x *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType raw.PHASEAssetType, channelLayout *avfaudio.AVAudioChannelLayout, normalizationMode raw.PHASENormalizationMode) (*SoundAsset, error) {
-	_r, _err := x.inner.RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(identifier), assetType, channelLayout, normalizationMode)
+func (x *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType PHASEAssetType, channelLayout *avfaudio.AVAudioChannelLayout, normalizationMode PHASENormalizationMode) (*SoundAsset, error) {
+	_r, _err := x.inner.RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(identifier), raw.PHASEAssetType(assetType), channelLayout, raw.PHASENormalizationMode(normalizationMode))
 	if _err != nil {
 		return nil, _err
 	}
@@ -74,8 +74,8 @@ func (x *AssetRegistry) RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutN
 }
 
 // RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError calls the underlying RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError.
-func (x *AssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data *foundation.NSData, identifier string, format *avfaudio.AVAudioFormat, normalizationMode raw.PHASENormalizationMode) (*SoundAsset, error) {
-	_r, _err := x.inner.RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data, foundation.NSStringStringWithUTF8String(identifier), format, normalizationMode)
+func (x *AssetRegistry) RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data *foundation.NSData, identifier string, format *avfaudio.AVAudioFormat, normalizationMode PHASENormalizationMode) (*SoundAsset, error) {
+	_r, _err := x.inner.RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data, foundation.NSStringStringWithUTF8String(identifier), format, raw.PHASENormalizationMode(normalizationMode))
 	if _err != nil {
 		return nil, _err
 	}
@@ -109,8 +109,8 @@ type AssetRegistryable interface {
 	Unwrap() *raw.PHASEAssetRegistry
 	RegisterGlobalMetaParameterError(metaParameterDefinition *raw.PHASEMetaParameterDefinition) (*GlobalMetaParameterAsset, error)
 	RegisterSoundEventAssetWithRootNodeIdentifierError(rootNode *raw.PHASESoundEventNodeDefinition, identifier string) (*SoundEventNodeAsset, error)
-	RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType raw.PHASEAssetType, channelLayout *avfaudio.AVAudioChannelLayout, normalizationMode raw.PHASENormalizationMode) (*SoundAsset, error)
-	RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data *foundation.NSData, identifier string, format *avfaudio.AVAudioFormat, normalizationMode raw.PHASENormalizationMode) (*SoundAsset, error)
+	RegisterSoundAssetAtURLIdentifierAssetTypeChannelLayoutNormalizationModeError(url string, identifier string, assetType PHASEAssetType, channelLayout *avfaudio.AVAudioChannelLayout, normalizationMode PHASENormalizationMode) (*SoundAsset, error)
+	RegisterSoundAssetWithDataIdentifierFormatNormalizationModeError(data *foundation.NSData, identifier string, format *avfaudio.AVAudioFormat, normalizationMode PHASENormalizationMode) (*SoundAsset, error)
 	UnregisterAssetWithIdentifierCompletion(identifier string, handler func(bool))
 	AssetForIdentifier(identifier string) *Asset
 	GlobalMetaParameters() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEMetaParameter]

@@ -69,8 +69,8 @@ func RemoveDomain(ctx context.Context, domain *raw.NSFileProviderDomain) error {
 }
 
 // RemoveDomainModeCompletionHandler calls the underlying NSFileProviderManagerRemoveDomainModeCompletionHandler.
-func RemoveDomainModeCompletionHandler(domain *raw.NSFileProviderDomain, mode raw.NSFileProviderDomainRemovalMode, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	raw.NSFileProviderManagerRemoveDomainModeCompletionHandler(domain, mode, completionHandler)
+func RemoveDomainModeCompletionHandler(domain *raw.NSFileProviderDomain, mode NSFileProviderDomainRemovalMode, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	raw.NSFileProviderManagerRemoveDomainModeCompletionHandler(domain, raw.NSFileProviderDomainRemovalMode(mode), completionHandler)
 }
 
 // GetDomains blocks until the operation completes or ctx is cancelled.

@@ -32,44 +32,44 @@ func NENetworkRuleFromID(id objc.ID) *NENetworkRule {
 }
 
 // NewNENetworkRuleWithDestinationNetworkEndpointPrefixProtocol creates a new [NENetworkRule].
-func NewNENetworkRuleWithDestinationNetworkEndpointPrefixProtocol(networkEndpoint *foundation.NSObject, destinationPrefix uint, protocol raw.NENetworkRuleProtocol) *NENetworkRule {
+func NewNENetworkRuleWithDestinationNetworkEndpointPrefixProtocol(networkEndpoint *foundation.NSObject, destinationPrefix uint, protocol NENetworkRuleProtocol) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NENetworkRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationNetworkEndpoint:prefix:protocol:"), networkEndpoint.Ptr(), destinationPrefix, protocol)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationNetworkEndpoint:prefix:protocol:"), networkEndpoint.Ptr(), destinationPrefix, raw.NENetworkRuleProtocol(protocol))
 	return &NENetworkRule{inner: raw.NENetworkRuleFromID(_id)}
 }
 
 // NewNENetworkRuleWithDestinationNetworkPrefixProtocol creates a new [NENetworkRule].
-func NewNENetworkRuleWithDestinationNetworkPrefixProtocol(networkEndpoint *raw.NWHostEndpoint, destinationPrefix uint, protocol raw.NENetworkRuleProtocol) *NENetworkRule {
+func NewNENetworkRuleWithDestinationNetworkPrefixProtocol(networkEndpoint *raw.NWHostEndpoint, destinationPrefix uint, protocol NENetworkRuleProtocol) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NENetworkRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationNetwork:prefix:protocol:"), networkEndpoint.Ptr(), destinationPrefix, protocol)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationNetwork:prefix:protocol:"), networkEndpoint.Ptr(), destinationPrefix, raw.NENetworkRuleProtocol(protocol))
 	return &NENetworkRule{inner: raw.NENetworkRuleFromID(_id)}
 }
 
 // NewNENetworkRuleWithDestinationHostEndpointProtocol creates a new [NENetworkRule].
-func NewNENetworkRuleWithDestinationHostEndpointProtocol(hostEndpoint *foundation.NSObject, protocol raw.NENetworkRuleProtocol) *NENetworkRule {
+func NewNENetworkRuleWithDestinationHostEndpointProtocol(hostEndpoint *foundation.NSObject, protocol NENetworkRuleProtocol) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NENetworkRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationHostEndpoint:protocol:"), hostEndpoint.Ptr(), protocol)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationHostEndpoint:protocol:"), hostEndpoint.Ptr(), raw.NENetworkRuleProtocol(protocol))
 	return &NENetworkRule{inner: raw.NENetworkRuleFromID(_id)}
 }
 
 // NewNENetworkRuleWithDestinationHostProtocol creates a new [NENetworkRule].
-func NewNENetworkRuleWithDestinationHostProtocol(hostEndpoint *raw.NWHostEndpoint, protocol raw.NENetworkRuleProtocol) *NENetworkRule {
+func NewNENetworkRuleWithDestinationHostProtocol(hostEndpoint *raw.NWHostEndpoint, protocol NENetworkRuleProtocol) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NENetworkRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationHost:protocol:"), hostEndpoint.Ptr(), protocol)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestinationHost:protocol:"), hostEndpoint.Ptr(), raw.NENetworkRuleProtocol(protocol))
 	return &NENetworkRule{inner: raw.NENetworkRuleFromID(_id)}
 }
 
 // NewNENetworkRuleWithRemoteNetworkEndpointRemotePrefixLocalNetworkEndpointLocalPrefixProtocolDirection creates a new [NENetworkRule].
-func NewNENetworkRuleWithRemoteNetworkEndpointRemotePrefixLocalNetworkEndpointLocalPrefixProtocolDirection(remoteNetwork *foundation.NSObject, remotePrefix uint, localNetwork *foundation.NSObject, localPrefix uint, protocol raw.NENetworkRuleProtocol, direction raw.NETrafficDirection) *NENetworkRule {
+func NewNENetworkRuleWithRemoteNetworkEndpointRemotePrefixLocalNetworkEndpointLocalPrefixProtocolDirection(remoteNetwork *foundation.NSObject, remotePrefix uint, localNetwork *foundation.NSObject, localPrefix uint, protocol NENetworkRuleProtocol, direction NETrafficDirection) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NENetworkRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRemoteNetworkEndpoint:remotePrefix:localNetworkEndpoint:localPrefix:protocol:direction:"), remoteNetwork.Ptr(), remotePrefix, localNetwork.Ptr(), localPrefix, protocol, direction)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRemoteNetworkEndpoint:remotePrefix:localNetworkEndpoint:localPrefix:protocol:direction:"), remoteNetwork.Ptr(), remotePrefix, localNetwork.Ptr(), localPrefix, raw.NENetworkRuleProtocol(protocol), raw.NETrafficDirection(direction))
 	return &NENetworkRule{inner: raw.NENetworkRuleFromID(_id)}
 }
 
 // NewNENetworkRuleWithRemoteNetworkRemotePrefixLocalNetworkLocalPrefixProtocolDirection creates a new [NENetworkRule].
-func NewNENetworkRuleWithRemoteNetworkRemotePrefixLocalNetworkLocalPrefixProtocolDirection(remoteNetwork *raw.NWHostEndpoint, remotePrefix uint, localNetwork *raw.NWHostEndpoint, localPrefix uint, protocol raw.NENetworkRuleProtocol, direction raw.NETrafficDirection) *NENetworkRule {
+func NewNENetworkRuleWithRemoteNetworkRemotePrefixLocalNetworkLocalPrefixProtocolDirection(remoteNetwork *raw.NWHostEndpoint, remotePrefix uint, localNetwork *raw.NWHostEndpoint, localPrefix uint, protocol NENetworkRuleProtocol, direction NETrafficDirection) *NENetworkRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NENetworkRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRemoteNetwork:remotePrefix:localNetwork:localPrefix:protocol:direction:"), remoteNetwork.Ptr(), remotePrefix, localNetwork.Ptr(), localPrefix, protocol, direction)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRemoteNetwork:remotePrefix:localNetwork:localPrefix:protocol:direction:"), remoteNetwork.Ptr(), remotePrefix, localNetwork.Ptr(), localPrefix, raw.NENetworkRuleProtocol(protocol), raw.NETrafficDirection(direction))
 	return &NENetworkRule{inner: raw.NENetworkRuleFromID(_id)}
 }
 
@@ -104,13 +104,13 @@ func (x *NENetworkRule) MatchLocalPrefix() uint {
 }
 
 // MatchProtocol calls the underlying MatchProtocol.
-func (x *NENetworkRule) MatchProtocol() raw.NENetworkRuleProtocol {
-	return x.inner.MatchProtocol()
+func (x *NENetworkRule) MatchProtocol() NENetworkRuleProtocol {
+	return NENetworkRuleProtocol(x.inner.MatchProtocol())
 }
 
 // MatchDirection calls the underlying MatchDirection.
-func (x *NENetworkRule) MatchDirection() raw.NETrafficDirection {
-	return x.inner.MatchDirection()
+func (x *NENetworkRule) MatchDirection() NETrafficDirection {
+	return NETrafficDirection(x.inner.MatchDirection())
 }
 
 // NENetworkRuleable is the interface implemented by [NENetworkRule], for mocking and DI.
@@ -122,8 +122,8 @@ type NENetworkRuleable interface {
 	MatchLocalNetworkEndpoint() *foundation.NSObject
 	MatchLocalNetwork() unsafe.Pointer
 	MatchLocalPrefix() uint
-	MatchProtocol() raw.NENetworkRuleProtocol
-	MatchDirection() raw.NETrafficDirection
+	MatchProtocol() NENetworkRuleProtocol
+	MatchDirection() NETrafficDirection
 }
 
 var _ NENetworkRuleable = (*NENetworkRule)(nil)

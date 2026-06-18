@@ -79,8 +79,8 @@ func (x *GeometryTessellator) WithMaximumEdgeLength(maximumEdgeLength float64) *
 }
 
 // WithSmoothingMode sets the smoothingMode property and returns the receiver for chaining.
-func (x *GeometryTessellator) WithSmoothingMode(smoothingMode raw.SCNTessellationSmoothingMode) *GeometryTessellator {
-	x.inner.SetSmoothingMode(smoothingMode)
+func (x *GeometryTessellator) WithSmoothingMode(smoothingMode SCNTessellationSmoothingMode) *GeometryTessellator {
+	x.inner.SetSmoothingMode(raw.SCNTessellationSmoothingMode(smoothingMode))
 	return x
 }
 
@@ -155,13 +155,13 @@ func (x *GeometryTessellator) SetMaximumEdgeLength(maximumEdgeLength float64) {
 }
 
 // SmoothingMode calls the underlying SmoothingMode.
-func (x *GeometryTessellator) SmoothingMode() raw.SCNTessellationSmoothingMode {
-	return x.inner.SmoothingMode()
+func (x *GeometryTessellator) SmoothingMode() SCNTessellationSmoothingMode {
+	return SCNTessellationSmoothingMode(x.inner.SmoothingMode())
 }
 
 // SetSmoothingMode calls the underlying SetSmoothingMode.
-func (x *GeometryTessellator) SetSmoothingMode(smoothingMode raw.SCNTessellationSmoothingMode) {
-	x.inner.SetSmoothingMode(smoothingMode)
+func (x *GeometryTessellator) SetSmoothingMode(smoothingMode SCNTessellationSmoothingMode) {
+	x.inner.SetSmoothingMode(raw.SCNTessellationSmoothingMode(smoothingMode))
 }
 
 // GeometryTessellatorable is the interface implemented by [GeometryTessellator], for mocking and DI.
@@ -174,7 +174,7 @@ type GeometryTessellatorable interface {
 	WithEdgeTessellationFactor(edgeTessellationFactor float64) *GeometryTessellator
 	WithInsideTessellationFactor(insideTessellationFactor float64) *GeometryTessellator
 	WithMaximumEdgeLength(maximumEdgeLength float64) *GeometryTessellator
-	WithSmoothingMode(smoothingMode raw.SCNTessellationSmoothingMode) *GeometryTessellator
+	WithSmoothingMode(smoothingMode SCNTessellationSmoothingMode) *GeometryTessellator
 	TessellationFactorScale() float64
 	SetTessellationFactorScale(tessellationFactorScale float64)
 	TessellationPartitionMode() metal.MTLTessellationPartitionMode
@@ -189,8 +189,8 @@ type GeometryTessellatorable interface {
 	SetInsideTessellationFactor(insideTessellationFactor float64)
 	MaximumEdgeLength() float64
 	SetMaximumEdgeLength(maximumEdgeLength float64)
-	SmoothingMode() raw.SCNTessellationSmoothingMode
-	SetSmoothingMode(smoothingMode raw.SCNTessellationSmoothingMode)
+	SmoothingMode() SCNTessellationSmoothingMode
+	SetSmoothingMode(smoothingMode SCNTessellationSmoothingMode)
 }
 
 var _ GeometryTessellatorable = (*GeometryTessellator)(nil)

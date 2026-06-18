@@ -36,14 +36,14 @@ func NewBiologicalSexObject() *BiologicalSexObject {
 }
 
 // BiologicalSex calls the underlying BiologicalSex.
-func (x *BiologicalSexObject) BiologicalSex() raw.HKBiologicalSex {
-	return x.inner.BiologicalSex()
+func (x *BiologicalSexObject) BiologicalSex() HKBiologicalSex {
+	return HKBiologicalSex(x.inner.BiologicalSex())
 }
 
 // BiologicalSexObjectable is the interface implemented by [BiologicalSexObject], for mocking and DI.
 type BiologicalSexObjectable interface {
 	Unwrap() *raw.HKBiologicalSexObject
-	BiologicalSex() raw.HKBiologicalSex
+	BiologicalSex() HKBiologicalSex
 }
 
 var _ BiologicalSexObjectable = (*BiologicalSexObject)(nil)

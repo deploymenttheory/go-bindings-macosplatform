@@ -96,8 +96,8 @@ func (x *ScrubberTextItemView) WithAutoresizesSubviews(autoresizesSubviews bool)
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *ScrubberTextItemView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrubberTextItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -156,14 +156,14 @@ func (x *ScrubberTextItemView) WithWantsRestingTouches(wantsRestingTouches bool)
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *ScrubberTextItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrubberTextItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *ScrubberTextItemView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrubberTextItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -270,8 +270,8 @@ func (x *ScrubberTextItemView) WithToolTip(toolTip string) *ScrubberTextItemView
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ScrubberTextItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrubberTextItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -288,8 +288,8 @@ func (x *ScrubberTextItemView) WithNextKeyView(nextKeyView ViewProvider) *Scrubb
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFocusRingType(focusRingType)
+func (x *ScrubberTextItemView) WithFocusRingType(focusRingType NSFocusRingType) *ScrubberTextItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -312,8 +312,8 @@ func (x *ScrubberTextItemView) WithGestureRecognizers(items ...GestureRecognizer
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ScrubberTextItemView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberTextItemView {
-	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ScrubberTextItemView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrubberTextItemView {
+	x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -450,7 +450,7 @@ type ScrubberTextItemViewable interface {
 	WithHidden(hidden bool) *ScrubberTextItemView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberTextItemView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberTextItemView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrubberTextItemView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ScrubberTextItemView
 	WithFrame(frame corefoundation.CGRect) *ScrubberTextItemView
 	WithFrameRotation(frameRotation float64) *ScrubberTextItemView
 	WithFrameCenterRotation(frameCenterRotation float64) *ScrubberTextItemView
@@ -460,8 +460,8 @@ type ScrubberTextItemViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *ScrubberTextItemView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberTextItemView
 	WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberTextItemView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrubberTextItemView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrubberTextItemView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ScrubberTextItemView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ScrubberTextItemView
 	WithWantsLayer(wantsLayer bool) *ScrubberTextItemView
 	WithLayer(layer *quartzcore.CALayer) *ScrubberTextItemView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberTextItemView
@@ -475,12 +475,12 @@ type ScrubberTextItemViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *ScrubberTextItemView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberTextItemView
 	WithToolTip(toolTip string) *ScrubberTextItemView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrubberTextItemView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ScrubberTextItemView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberTextItemView
 	WithNextKeyView(nextKeyView ViewProvider) *ScrubberTextItemView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrubberTextItemView
+	WithFocusRingType(focusRingType NSFocusRingType) *ScrubberTextItemView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberTextItemView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrubberTextItemView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ScrubberTextItemView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberTextItemView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberTextItemView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberTextItemView

@@ -82,8 +82,8 @@ func (x *Matrix) Matrices() uint {
 }
 
 // DataType calls the underlying DataType.
-func (x *Matrix) DataType() raw.MPSDataType {
-	return x.inner.DataType()
+func (x *Matrix) DataType() MPSDataType {
+	return MPSDataType(x.inner.DataType())
 }
 
 // RowBytes calls the underlying RowBytes.
@@ -117,7 +117,7 @@ type Matrixable interface {
 	Rows() uint
 	Columns() uint
 	Matrices() uint
-	DataType() raw.MPSDataType
+	DataType() MPSDataType
 	RowBytes() uint
 	MatrixBytes() uint
 	Offset() uint

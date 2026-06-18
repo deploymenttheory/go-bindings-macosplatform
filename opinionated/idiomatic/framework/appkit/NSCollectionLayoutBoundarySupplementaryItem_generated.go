@@ -89,8 +89,8 @@ func (x *CollectionLayoutBoundarySupplementaryItem) SetPinToVisibleBounds(pinToV
 }
 
 // Alignment calls the underlying Alignment.
-func (x *CollectionLayoutBoundarySupplementaryItem) Alignment() raw.NSRectAlignment {
-	return x.inner.Alignment()
+func (x *CollectionLayoutBoundarySupplementaryItem) Alignment() NSRectAlignment {
+	return NSRectAlignment(x.inner.Alignment())
 }
 
 // Offset calls the underlying Offset.
@@ -118,7 +118,7 @@ type CollectionLayoutBoundarySupplementaryItemable interface {
 	SetExtendsBoundary(extendsBoundary bool)
 	PinToVisibleBounds() bool
 	SetPinToVisibleBounds(pinToVisibleBounds bool)
-	Alignment() raw.NSRectAlignment
+	Alignment() NSRectAlignment
 	Offset() corefoundation.CGPoint
 }
 

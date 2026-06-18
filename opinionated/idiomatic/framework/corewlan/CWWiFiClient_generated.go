@@ -84,13 +84,13 @@ func (x *WiFiClient) Interfaces() []*Interface {
 }
 
 // StartMonitoringEventWithTypeError calls the underlying StartMonitoringEventWithTypeError.
-func (x *WiFiClient) StartMonitoringEventWithTypeError(type_ raw.CWEventType) (bool, error) {
-	return x.inner.StartMonitoringEventWithTypeError(type_)
+func (x *WiFiClient) StartMonitoringEventWithTypeError(type_ CWEventType) (bool, error) {
+	return x.inner.StartMonitoringEventWithTypeError(raw.CWEventType(type_))
 }
 
 // StopMonitoringEventWithTypeError calls the underlying StopMonitoringEventWithTypeError.
-func (x *WiFiClient) StopMonitoringEventWithTypeError(type_ raw.CWEventType) (bool, error) {
-	return x.inner.StopMonitoringEventWithTypeError(type_)
+func (x *WiFiClient) StopMonitoringEventWithTypeError(type_ CWEventType) (bool, error) {
+	return x.inner.StopMonitoringEventWithTypeError(raw.CWEventType(type_))
 }
 
 // StopMonitoringAllEventsAndReturnError returns any validation error.
@@ -117,8 +117,8 @@ type WiFiClientable interface {
 	InterfaceNames() []string
 	InterfaceWithName(interfaceName string) *Interface
 	Interfaces() []*Interface
-	StartMonitoringEventWithTypeError(type_ raw.CWEventType) (bool, error)
-	StopMonitoringEventWithTypeError(type_ raw.CWEventType) (bool, error)
+	StartMonitoringEventWithTypeError(type_ CWEventType) (bool, error)
+	StopMonitoringEventWithTypeError(type_ CWEventType) (bool, error)
 	StopMonitoringAllEventsAndReturnError() error
 	Delegate() objc.ID
 	SetDelegate(delegate objc.ID)

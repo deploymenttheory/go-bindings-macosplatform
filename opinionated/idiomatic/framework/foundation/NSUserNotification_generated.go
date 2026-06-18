@@ -304,8 +304,8 @@ func (x *UserNotification) SetHasActionButton(hasActionButton bool) {
 }
 
 // ActivationType calls the underlying ActivationType.
-func (x *UserNotification) ActivationType() raw.NSUserNotificationActivationType {
-	return x.inner.ActivationType()
+func (x *UserNotification) ActivationType() NSUserNotificationActivationType {
+	return NSUserNotificationActivationType(x.inner.ActivationType())
 }
 
 // OtherButtonTitle calls the underlying OtherButtonTitle.
@@ -449,7 +449,7 @@ type UserNotificationable interface {
 	SetSoundName(soundName string)
 	HasActionButton() bool
 	SetHasActionButton(hasActionButton bool)
-	ActivationType() raw.NSUserNotificationActivationType
+	ActivationType() NSUserNotificationActivationType
 	OtherButtonTitle() *String
 	SetOtherButtonTitle(otherButtonTitle string)
 	Identifier() *String

@@ -75,8 +75,8 @@ func NewRenderDestinationWithBitmapDataWidthHeightBytesPerRowFormat(data unsafe.
 }
 
 // WithAlphaMode sets the alphaMode property and returns the receiver for chaining.
-func (x *RenderDestination) WithAlphaMode(alphaMode raw.CIRenderDestinationAlphaMode) *RenderDestination {
-	x.inner.SetAlphaMode(alphaMode)
+func (x *RenderDestination) WithAlphaMode(alphaMode CIRenderDestinationAlphaMode) *RenderDestination {
+	x.inner.SetAlphaMode(raw.CIRenderDestinationAlphaMode(alphaMode))
 	return x
 }
 
@@ -127,13 +127,13 @@ func (x *RenderDestination) Height() uint {
 }
 
 // AlphaMode calls the underlying AlphaMode.
-func (x *RenderDestination) AlphaMode() raw.CIRenderDestinationAlphaMode {
-	return x.inner.AlphaMode()
+func (x *RenderDestination) AlphaMode() CIRenderDestinationAlphaMode {
+	return CIRenderDestinationAlphaMode(x.inner.AlphaMode())
 }
 
 // SetAlphaMode calls the underlying SetAlphaMode.
-func (x *RenderDestination) SetAlphaMode(alphaMode raw.CIRenderDestinationAlphaMode) {
-	x.inner.SetAlphaMode(alphaMode)
+func (x *RenderDestination) SetAlphaMode(alphaMode CIRenderDestinationAlphaMode) {
+	x.inner.SetAlphaMode(raw.CIRenderDestinationAlphaMode(alphaMode))
 }
 
 // IsFlipped calls the underlying IsFlipped.
@@ -213,7 +213,7 @@ func (x *RenderDestination) SetCaptureTraceURL(captureTraceURL string) {
 // RenderDestinationable is the interface implemented by [RenderDestination], for mocking and DI.
 type RenderDestinationable interface {
 	Unwrap() *raw.CIRenderDestination
-	WithAlphaMode(alphaMode raw.CIRenderDestinationAlphaMode) *RenderDestination
+	WithAlphaMode(alphaMode CIRenderDestinationAlphaMode) *RenderDestination
 	WithFlipped(flipped bool) *RenderDestination
 	WithDithered(dithered bool) *RenderDestination
 	WithClamped(clamped bool) *RenderDestination
@@ -222,8 +222,8 @@ type RenderDestinationable interface {
 	WithCaptureTraceURL(captureTraceURL string) *RenderDestination
 	Width() uint
 	Height() uint
-	AlphaMode() raw.CIRenderDestinationAlphaMode
-	SetAlphaMode(alphaMode raw.CIRenderDestinationAlphaMode)
+	AlphaMode() CIRenderDestinationAlphaMode
+	SetAlphaMode(alphaMode CIRenderDestinationAlphaMode)
 	IsFlipped() bool
 	SetFlipped(flipped bool)
 	IsDithered() bool

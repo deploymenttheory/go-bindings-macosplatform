@@ -74,14 +74,14 @@ func (x *Scrubber) WithSelectedIndex(selectedIndex int) *Scrubber {
 }
 
 // WithMode sets the mode property and returns the receiver for chaining.
-func (x *Scrubber) WithMode(mode raw.NSScrubberMode) *Scrubber {
-	x.inner.SetMode(mode)
+func (x *Scrubber) WithMode(mode NSScrubberMode) *Scrubber {
+	x.inner.SetMode(raw.NSScrubberMode(mode))
 	return x
 }
 
 // WithItemAlignment sets the itemAlignment property and returns the receiver for chaining.
-func (x *Scrubber) WithItemAlignment(itemAlignment raw.NSScrubberAlignment) *Scrubber {
-	x.inner.SetItemAlignment(itemAlignment)
+func (x *Scrubber) WithItemAlignment(itemAlignment NSScrubberAlignment) *Scrubber {
+	x.inner.SetItemAlignment(raw.NSScrubberAlignment(itemAlignment))
 	return x
 }
 
@@ -170,8 +170,8 @@ func (x *Scrubber) WithAutoresizesSubviews(autoresizesSubviews bool) *Scrubber {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Scrubber) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Scrubber {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Scrubber) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Scrubber {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -230,14 +230,14 @@ func (x *Scrubber) WithWantsRestingTouches(wantsRestingTouches bool) *Scrubber {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Scrubber) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Scrubber {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Scrubber) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Scrubber {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Scrubber) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Scrubber {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Scrubber) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Scrubber {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -344,8 +344,8 @@ func (x *Scrubber) WithToolTip(toolTip string) *Scrubber {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Scrubber) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Scrubber {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Scrubber) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Scrubber {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -362,8 +362,8 @@ func (x *Scrubber) WithNextKeyView(nextKeyView ViewProvider) *Scrubber {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Scrubber) WithFocusRingType(focusRingType raw.NSFocusRingType) *Scrubber {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *Scrubber) WithFocusRingType(focusRingType NSFocusRingType) *Scrubber {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -386,8 +386,8 @@ func (x *Scrubber) WithGestureRecognizers(items ...GestureRecognizerProvider) *S
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Scrubber) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Scrubber {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Scrubber) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Scrubber {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -515,8 +515,8 @@ func (x *Scrubber) MoveItemAtIndexToIndex(oldIndex int, newIndex int) {
 }
 
 // ScrollItemAtIndexToAlignment calls the underlying ScrollItemAtIndexToAlignment.
-func (x *Scrubber) ScrollItemAtIndexToAlignment(index int, alignment raw.NSScrubberAlignment) {
-	x.inner.ScrollItemAtIndexToAlignment(index, alignment)
+func (x *Scrubber) ScrollItemAtIndexToAlignment(index int, alignment NSScrubberAlignment) {
+	x.inner.ScrollItemAtIndexToAlignment(index, raw.NSScrubberAlignment(alignment))
 }
 
 // ItemViewForItemAtIndex calls the underlying ItemViewForItemAtIndex.
@@ -602,23 +602,23 @@ func (x *Scrubber) SetSelectedIndex(selectedIndex int) {
 }
 
 // Mode calls the underlying Mode.
-func (x *Scrubber) Mode() raw.NSScrubberMode {
-	return x.inner.Mode()
+func (x *Scrubber) Mode() NSScrubberMode {
+	return NSScrubberMode(x.inner.Mode())
 }
 
 // SetMode calls the underlying SetMode.
-func (x *Scrubber) SetMode(mode raw.NSScrubberMode) {
-	x.inner.SetMode(mode)
+func (x *Scrubber) SetMode(mode NSScrubberMode) {
+	x.inner.SetMode(raw.NSScrubberMode(mode))
 }
 
 // ItemAlignment calls the underlying ItemAlignment.
-func (x *Scrubber) ItemAlignment() raw.NSScrubberAlignment {
-	return x.inner.ItemAlignment()
+func (x *Scrubber) ItemAlignment() NSScrubberAlignment {
+	return NSScrubberAlignment(x.inner.ItemAlignment())
 }
 
 // SetItemAlignment calls the underlying SetItemAlignment.
-func (x *Scrubber) SetItemAlignment(itemAlignment raw.NSScrubberAlignment) {
-	x.inner.SetItemAlignment(itemAlignment)
+func (x *Scrubber) SetItemAlignment(itemAlignment NSScrubberAlignment) {
+	x.inner.SetItemAlignment(raw.NSScrubberAlignment(itemAlignment))
 }
 
 // IsContinuous calls the underlying IsContinuous.
@@ -728,8 +728,8 @@ type Scrubberable interface {
 	WithDelegate(delegate raw.NSScrubberDelegate) *Scrubber
 	WithScrubberLayout(scrubberLayout ScrubberLayoutProvider) *Scrubber
 	WithSelectedIndex(selectedIndex int) *Scrubber
-	WithMode(mode raw.NSScrubberMode) *Scrubber
-	WithItemAlignment(itemAlignment raw.NSScrubberAlignment) *Scrubber
+	WithMode(mode NSScrubberMode) *Scrubber
+	WithItemAlignment(itemAlignment NSScrubberAlignment) *Scrubber
 	WithContinuous(continuous bool) *Scrubber
 	WithFloatsSelectionViews(floatsSelectionViews bool) *Scrubber
 	WithSelectionBackgroundStyle(selectionBackgroundStyle *ScrubberSelectionStyle) *Scrubber
@@ -742,7 +742,7 @@ type Scrubberable interface {
 	WithHidden(hidden bool) *Scrubber
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scrubber
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Scrubber
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Scrubber
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Scrubber
 	WithFrame(frame corefoundation.CGRect) *Scrubber
 	WithFrameRotation(frameRotation float64) *Scrubber
 	WithFrameCenterRotation(frameCenterRotation float64) *Scrubber
@@ -752,8 +752,8 @@ type Scrubberable interface {
 	WithNeedsDisplay(needsDisplay bool) *Scrubber
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scrubber
 	WithWantsRestingTouches(wantsRestingTouches bool) *Scrubber
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Scrubber
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Scrubber
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Scrubber
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Scrubber
 	WithWantsLayer(wantsLayer bool) *Scrubber
 	WithLayer(layer *quartzcore.CALayer) *Scrubber
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scrubber
@@ -767,12 +767,12 @@ type Scrubberable interface {
 	WithClipsToBounds(clipsToBounds bool) *Scrubber
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scrubber
 	WithToolTip(toolTip string) *Scrubber
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Scrubber
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Scrubber
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scrubber
 	WithNextKeyView(nextKeyView ViewProvider) *Scrubber
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Scrubber
+	WithFocusRingType(focusRingType NSFocusRingType) *Scrubber
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Scrubber
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Scrubber
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Scrubber
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scrubber
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scrubber
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scrubber
@@ -793,7 +793,7 @@ type Scrubberable interface {
 	RemoveItemsAtIndexes(indexes *foundation.NSIndexSet)
 	ReloadItemsAtIndexes(indexes *foundation.NSIndexSet)
 	MoveItemAtIndexToIndex(oldIndex int, newIndex int)
-	ScrollItemAtIndexToAlignment(index int, alignment raw.NSScrubberAlignment)
+	ScrollItemAtIndexToAlignment(index int, alignment NSScrubberAlignment)
 	ItemViewForItemAtIndex(index int) *ScrubberItemView
 	RegisterClassForItemIdentifier(itemViewClass objc.Class, itemIdentifier *foundation.NSString)
 	RegisterNibForItemIdentifier(nib *raw.NSNib, itemIdentifier *foundation.NSString)
@@ -808,10 +808,10 @@ type Scrubberable interface {
 	HighlightedIndex() int
 	SelectedIndex() int
 	SetSelectedIndex(selectedIndex int)
-	Mode() raw.NSScrubberMode
-	SetMode(mode raw.NSScrubberMode)
-	ItemAlignment() raw.NSScrubberAlignment
-	SetItemAlignment(itemAlignment raw.NSScrubberAlignment)
+	Mode() NSScrubberMode
+	SetMode(mode NSScrubberMode)
+	ItemAlignment() NSScrubberAlignment
+	SetItemAlignment(itemAlignment NSScrubberAlignment)
 	IsContinuous() bool
 	SetContinuous(continuous bool)
 	FloatsSelectionViews() bool

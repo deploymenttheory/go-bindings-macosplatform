@@ -26,13 +26,15 @@ func RepairArcadeApp() {
 }
 
 // AuthorizationStatus calls the underlying SKCloudServiceControllerAuthorizationStatus.
-func AuthorizationStatus() raw.SKCloudServiceAuthorizationStatus {
-	return raw.SKCloudServiceControllerAuthorizationStatus()
+func AuthorizationStatus() SKCloudServiceAuthorizationStatus {
+	return SKCloudServiceAuthorizationStatus(raw.SKCloudServiceControllerAuthorizationStatus())
 }
 
 // RequestAuthorization calls the underlying SKCloudServiceControllerRequestAuthorization.
-func RequestAuthorization(completionHandler func(raw.SKCloudServiceAuthorizationStatus)) {
-	raw.SKCloudServiceControllerRequestAuthorization(completionHandler)
+func RequestAuthorization(completionHandler func(SKCloudServiceAuthorizationStatus)) {
+	raw.SKCloudServiceControllerRequestAuthorization(func(_a0 raw.SKCloudServiceAuthorizationStatus) {
+		completionHandler(SKCloudServiceAuthorizationStatus(_a0))
+	})
 }
 
 // ContentURLForProductID calls the underlying SKDownloadContentURLForProductID.

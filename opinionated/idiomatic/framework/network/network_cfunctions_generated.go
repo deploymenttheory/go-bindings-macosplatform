@@ -1123,8 +1123,8 @@ func NwParametersGetAllowUltraConstrained(parameters *foundation.NSObject) bool 
 }
 
 // NwParametersGetAttribution calls [raw.NwParametersGetAttribution] (C function nw_parameters_get_attribution).
-func NwParametersGetAttribution(parameters *foundation.NSObject) raw.Nw_parameters_attribution_t {
-	return raw.NwParametersGetAttribution(parameters)
+func NwParametersGetAttribution(parameters *foundation.NSObject) Nw_parameters_attribution_t {
+	return Nw_parameters_attribution_t(raw.NwParametersGetAttribution(parameters))
 }
 
 // NwParametersGetExpiredDnsBehavior calls [raw.NwParametersGetExpiredDnsBehavior] (C function nw_parameters_get_expired_dns_behavior).
@@ -1218,8 +1218,8 @@ func NwParametersSetAllowUltraConstrained(parameters *foundation.NSObject, allow
 }
 
 // NwParametersSetAttribution calls [raw.NwParametersSetAttribution] (C function nw_parameters_set_attribution).
-func NwParametersSetAttribution(parameters *foundation.NSObject, attribution raw.Nw_parameters_attribution_t) {
-	raw.NwParametersSetAttribution(parameters, attribution)
+func NwParametersSetAttribution(parameters *foundation.NSObject, attribution Nw_parameters_attribution_t) {
+	raw.NwParametersSetAttribution(parameters, raw.Nw_parameters_attribution_t(attribution))
 }
 
 // NwParametersSetExpiredDnsBehavior calls [raw.NwParametersSetExpiredDnsBehavior] (C function nw_parameters_set_expired_dns_behavior).

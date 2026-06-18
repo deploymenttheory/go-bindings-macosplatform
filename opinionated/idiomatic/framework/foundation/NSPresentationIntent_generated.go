@@ -48,8 +48,8 @@ func (x *PresentationIntent) IsEquivalentToPresentationIntent(other *raw.NSPrese
 }
 
 // IntentKind calls the underlying IntentKind.
-func (x *PresentationIntent) IntentKind() raw.NSPresentationIntentKind {
-	return x.inner.IntentKind()
+func (x *PresentationIntent) IntentKind() NSPresentationIntentKind {
+	return NSPresentationIntentKind(x.inner.IntentKind())
 }
 
 // ParentIntent calls the underlying ParentIntent.
@@ -123,7 +123,7 @@ type PresentationIntentable interface {
 	Unwrap() *raw.NSPresentationIntent
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PresentationIntent
 	IsEquivalentToPresentationIntent(other *raw.NSPresentationIntent) bool
-	IntentKind() raw.NSPresentationIntentKind
+	IntentKind() NSPresentationIntentKind
 	ParentIntent() *PresentationIntent
 	Identity() int
 	Ordinal() int

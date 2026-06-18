@@ -39,8 +39,8 @@ func NewPrintPanel() *PrintPanel {
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *PrintPanel) WithOptions(options raw.NSPrintPanelOptions) *PrintPanel {
-	x.inner.SetOptions(options)
+func (x *PrintPanel) WithOptions(options NSPrintPanelOptions) *PrintPanel {
+	x.inner.SetOptions(raw.NSPrintPanelOptions(options))
 	return x
 }
 
@@ -81,8 +81,8 @@ func (x *PrintPanel) DefaultButtonTitle() string {
 }
 
 // BeginSheetUsingPrintInfoOnWindowCompletionHandler calls the underlying BeginSheetUsingPrintInfoOnWindowCompletionHandler.
-func (x *PrintPanel) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(raw.NSPrintPanelResult)) {
-	x.inner.BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo, parentWindow, handler)
+func (x *PrintPanel) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(NSPrintPanelResult)) {
+	x.inner.BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo, parentWindow, func(_a0 raw.NSPrintPanelResult) { handler(NSPrintPanelResult(_a0)) })
 }
 
 // BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo calls the underlying BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo.
@@ -112,13 +112,13 @@ func (x *PrintPanel) AccessoryControllers() []*ViewController {
 }
 
 // Options calls the underlying Options.
-func (x *PrintPanel) Options() raw.NSPrintPanelOptions {
-	return x.inner.Options()
+func (x *PrintPanel) Options() NSPrintPanelOptions {
+	return NSPrintPanelOptions(x.inner.Options())
 }
 
 // SetOptions calls the underlying SetOptions.
-func (x *PrintPanel) SetOptions(options raw.NSPrintPanelOptions) {
-	x.inner.SetOptions(options)
+func (x *PrintPanel) SetOptions(options NSPrintPanelOptions) {
+	x.inner.SetOptions(raw.NSPrintPanelOptions(options))
 }
 
 // HelpAnchor calls the underlying HelpAnchor.
@@ -185,20 +185,20 @@ func (x *PrintPanel) FinalWritePrintInfo() {
 // PrintPanelable is the interface implemented by [PrintPanel], for mocking and DI.
 type PrintPanelable interface {
 	Unwrap() *raw.NSPrintPanel
-	WithOptions(options raw.NSPrintPanelOptions) *PrintPanel
+	WithOptions(options NSPrintPanelOptions) *PrintPanel
 	WithHelpAnchor(helpAnchor *foundation.NSString) *PrintPanel
 	WithJobStyleHint(jobStyleHint *foundation.NSString) *PrintPanel
 	AddAccessoryController(accessoryController *raw.NSViewController)
 	RemoveAccessoryController(accessoryController *raw.NSViewController)
 	SetDefaultButtonTitle(defaultButtonTitle string)
 	DefaultButtonTitle() string
-	BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(raw.NSPrintPanelResult))
+	BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(NSPrintPanelResult))
 	BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *raw.NSPrintInfo, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
 	RunModalWithPrintInfo(printInfo *raw.NSPrintInfo) int
 	RunModal() int
 	AccessoryControllers() []*ViewController
-	Options() raw.NSPrintPanelOptions
-	SetOptions(options raw.NSPrintPanelOptions)
+	Options() NSPrintPanelOptions
+	SetOptions(options NSPrintPanelOptions)
 	HelpAnchor() string
 	SetHelpAnchor(helpAnchor *foundation.NSString)
 	JobStyleHint() string

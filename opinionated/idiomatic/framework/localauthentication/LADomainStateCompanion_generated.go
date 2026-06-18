@@ -37,8 +37,8 @@ func NewDomainStateCompanion() *DomainStateCompanion {
 }
 
 // StateHashForCompanionType calls the underlying StateHashForCompanionType.
-func (x *DomainStateCompanion) StateHashForCompanionType(companionType raw.LACompanionType) *foundation.NSData {
-	return x.inner.StateHashForCompanionType(companionType)
+func (x *DomainStateCompanion) StateHashForCompanionType(companionType LACompanionType) *foundation.NSData {
+	return x.inner.StateHashForCompanionType(raw.LACompanionType(companionType))
 }
 
 // AvailableCompanionTypes calls the underlying AvailableCompanionTypes.
@@ -54,7 +54,7 @@ func (x *DomainStateCompanion) StateHash() *foundation.NSData {
 // DomainStateCompanionable is the interface implemented by [DomainStateCompanion], for mocking and DI.
 type DomainStateCompanionable interface {
 	Unwrap() *raw.LADomainStateCompanion
-	StateHashForCompanionType(companionType raw.LACompanionType) *foundation.NSData
+	StateHashForCompanionType(companionType LACompanionType) *foundation.NSData
 	AvailableCompanionTypes() *foundation.NSSet[*foundation.NSNumber]
 	StateHash() *foundation.NSData
 }

@@ -169,8 +169,8 @@ func (x *Document) CancelFindString() {
 }
 
 // PrintOperationForPrintInfoScalingModeAutoRotate calls the underlying PrintOperationForPrintInfoScalingModeAutoRotate.
-func (x *Document) PrintOperationForPrintInfoScalingModeAutoRotate(printInfo *appkit.NSPrintInfo, scaleMode raw.PDFPrintScalingMode, doRotate bool) *appkit.NSPrintOperation {
-	return x.inner.PrintOperationForPrintInfoScalingModeAutoRotate(printInfo, scaleMode, doRotate)
+func (x *Document) PrintOperationForPrintInfoScalingModeAutoRotate(printInfo *appkit.NSPrintInfo, scaleMode PDFPrintScalingMode, doRotate bool) *appkit.NSPrintOperation {
+	return x.inner.PrintOperationForPrintInfoScalingModeAutoRotate(printInfo, raw.PDFPrintScalingMode(scaleMode), doRotate)
 }
 
 // SelectionFromPageAtPointToPageAtPoint calls the underlying SelectionFromPageAtPointToPageAtPoint.
@@ -183,8 +183,8 @@ func (x *Document) SelectionFromPageAtPointToPageAtPoint(startPage *raw.PDFPage,
 }
 
 // SelectionFromPageAtPointToPageAtPointWithGranularity calls the underlying SelectionFromPageAtPointToPageAtPointWithGranularity.
-func (x *Document) SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *raw.PDFPage, startPoint corefoundation.CGPoint, endPage *raw.PDFPage, endPoint corefoundation.CGPoint, granularity raw.PDFSelectionGranularity) *Selection {
-	_r := x.inner.SelectionFromPageAtPointToPageAtPointWithGranularity(startPage, startPoint, endPage, endPoint, granularity)
+func (x *Document) SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *raw.PDFPage, startPoint corefoundation.CGPoint, endPage *raw.PDFPage, endPoint corefoundation.CGPoint, granularity PDFSelectionGranularity) *Selection {
+	_r := x.inner.SelectionFromPageAtPointToPageAtPointWithGranularity(startPage, startPoint, endPage, endPoint, raw.PDFSelectionGranularity(granularity))
 	if _r == nil {
 		return nil
 	}
@@ -276,13 +276,13 @@ func (x *Document) AllowsFormFieldEntry() bool {
 }
 
 // AccessPermissions calls the underlying AccessPermissions.
-func (x *Document) AccessPermissions() raw.PDFAccessPermissions {
-	return x.inner.AccessPermissions()
+func (x *Document) AccessPermissions() PDFAccessPermissions {
+	return PDFAccessPermissions(x.inner.AccessPermissions())
 }
 
 // PermissionsStatus calls the underlying PermissionsStatus.
-func (x *Document) PermissionsStatus() raw.PDFDocumentPermissions {
-	return x.inner.PermissionsStatus()
+func (x *Document) PermissionsStatus() PDFDocumentPermissions {
+	return PDFDocumentPermissions(x.inner.PermissionsStatus())
 }
 
 // String calls the underlying String.
@@ -361,9 +361,9 @@ type Documentable interface {
 	BeginFindStringsWithOptions(strings_ *foundation.NSArray[*foundation.NSString], options foundation.NSStringCompareOptions)
 	FindStringFromSelectionWithOptions(string_ string, selection *raw.PDFSelection, options foundation.NSStringCompareOptions) *Selection
 	CancelFindString()
-	PrintOperationForPrintInfoScalingModeAutoRotate(printInfo *appkit.NSPrintInfo, scaleMode raw.PDFPrintScalingMode, doRotate bool) *appkit.NSPrintOperation
+	PrintOperationForPrintInfoScalingModeAutoRotate(printInfo *appkit.NSPrintInfo, scaleMode PDFPrintScalingMode, doRotate bool) *appkit.NSPrintOperation
 	SelectionFromPageAtPointToPageAtPoint(startPage *raw.PDFPage, startPoint corefoundation.CGPoint, endPage *raw.PDFPage, endPoint corefoundation.CGPoint) *Selection
-	SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *raw.PDFPage, startPoint corefoundation.CGPoint, endPage *raw.PDFPage, endPoint corefoundation.CGPoint, granularity raw.PDFSelectionGranularity) *Selection
+	SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *raw.PDFPage, startPoint corefoundation.CGPoint, endPage *raw.PDFPage, endPoint corefoundation.CGPoint, granularity PDFSelectionGranularity) *Selection
 	SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *raw.PDFPage, startCharacter uint, endPage *raw.PDFPage, endCharacter uint) *Selection
 	DocumentURL() *foundation.NSURL
 	DocumentRef() unsafe.Pointer
@@ -380,8 +380,8 @@ type Documentable interface {
 	AllowsContentAccessibility() bool
 	AllowsCommenting() bool
 	AllowsFormFieldEntry() bool
-	AccessPermissions() raw.PDFAccessPermissions
-	PermissionsStatus() raw.PDFDocumentPermissions
+	AccessPermissions() PDFAccessPermissions
+	PermissionsStatus() PDFDocumentPermissions
 	String() string
 	Delegate() raw.PDFDocumentDelegate
 	SetDelegate(delegate raw.PDFDocumentDelegate)

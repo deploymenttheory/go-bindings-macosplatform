@@ -31,9 +31,9 @@ func HangUpCallIntentResponseFromID(id objc.ID) *HangUpCallIntentResponse {
 }
 
 // NewHangUpCallIntentResponseWithCodeUserActivity creates a new [HangUpCallIntentResponse].
-func NewHangUpCallIntentResponseWithCodeUserActivity(code raw.INHangUpCallIntentResponseCode, userActivity *foundation.NSUserActivity) *HangUpCallIntentResponse {
+func NewHangUpCallIntentResponseWithCodeUserActivity(code INHangUpCallIntentResponseCode, userActivity *foundation.NSUserActivity) *HangUpCallIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INHangUpCallIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, userActivity.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INHangUpCallIntentResponseCode(code), userActivity.Ptr())
 	return &HangUpCallIntentResponse{inner: raw.INHangUpCallIntentResponseFromID(_id)}
 }
 
@@ -44,8 +44,8 @@ func (x *HangUpCallIntentResponse) WithUserActivity(userActivity *foundation.NSU
 }
 
 // Code calls the underlying Code.
-func (x *HangUpCallIntentResponse) Code() raw.INHangUpCallIntentResponseCode {
-	return x.inner.Code()
+func (x *HangUpCallIntentResponse) Code() INHangUpCallIntentResponseCode {
+	return INHangUpCallIntentResponseCode(x.inner.Code())
 }
 
 func (x *HangUpCallIntentResponse) asIntentResponse() *raw.INIntentResponse {
@@ -56,7 +56,7 @@ func (x *HangUpCallIntentResponse) asIntentResponse() *raw.INIntentResponse {
 type HangUpCallIntentResponseable interface {
 	Unwrap() *raw.INHangUpCallIntentResponse
 	WithUserActivity(userActivity *foundation.NSUserActivity) *HangUpCallIntentResponse
-	Code() raw.INHangUpCallIntentResponseCode
+	Code() INHangUpCallIntentResponseCode
 }
 
 var _ HangUpCallIntentResponseable = (*HangUpCallIntentResponse)(nil)

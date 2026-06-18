@@ -49,14 +49,14 @@ func (x *AVB17221AECPVendorMessage) WithProtocolSpecificData(protocolSpecificDat
 }
 
 // WithMessageType sets the messageType property and returns the receiver for chaining.
-func (x *AVB17221AECPVendorMessage) WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPVendorMessage {
-	x.inner.AVB17221AECPMessage.SetMessageType(messageType)
+func (x *AVB17221AECPVendorMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPVendorMessage {
+	x.inner.AVB17221AECPMessage.SetMessageType(raw.AVB17221AECPMessageType(messageType))
 	return x
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *AVB17221AECPVendorMessage) WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPVendorMessage {
-	x.inner.AVB17221AECPMessage.SetStatus(status)
+func (x *AVB17221AECPVendorMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPVendorMessage {
+	x.inner.AVB17221AECPMessage.SetStatus(raw.AVB17221AECPStatusCode(status))
 	return x
 }
 
@@ -113,8 +113,8 @@ type AVB17221AECPVendorMessageable interface {
 	Unwrap() *raw.AVB17221AECPVendorMessage
 	WithProtocolID(protocolID uint64) *AVB17221AECPVendorMessage
 	WithProtocolSpecificData(protocolSpecificData *foundation.NSData) *AVB17221AECPVendorMessage
-	WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPVendorMessage
-	WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPVendorMessage
+	WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPVendorMessage
+	WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPVendorMessage
 	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPVendorMessage
 	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPVendorMessage
 	WithSequenceID(sequenceID uint16) *AVB17221AECPVendorMessage

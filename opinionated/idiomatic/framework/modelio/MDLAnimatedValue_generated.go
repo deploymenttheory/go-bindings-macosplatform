@@ -38,8 +38,8 @@ func NewAnimatedValue() *AnimatedValue {
 }
 
 // WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedValue) WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedValue {
-	x.inner.SetInterpolation(interpolation)
+func (x *AnimatedValue) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedValue {
+	x.inner.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
 	return x
 }
 
@@ -59,8 +59,8 @@ func (x *AnimatedValue) GetTimesMaxCount(timesArray *float64, maxCount uint) uin
 }
 
 // Precision calls the underlying Precision.
-func (x *AnimatedValue) Precision() raw.MDLDataPrecision {
-	return x.inner.Precision()
+func (x *AnimatedValue) Precision() MDLDataPrecision {
+	return MDLDataPrecision(x.inner.Precision())
 }
 
 // TimeSampleCount calls the underlying TimeSampleCount.
@@ -79,13 +79,13 @@ func (x *AnimatedValue) MaximumTime() float64 {
 }
 
 // Interpolation calls the underlying Interpolation.
-func (x *AnimatedValue) Interpolation() raw.MDLAnimatedValueInterpolation {
-	return x.inner.Interpolation()
+func (x *AnimatedValue) Interpolation() MDLAnimatedValueInterpolation {
+	return MDLAnimatedValueInterpolation(x.inner.Interpolation())
 }
 
 // SetInterpolation calls the underlying SetInterpolation.
-func (x *AnimatedValue) SetInterpolation(interpolation raw.MDLAnimatedValueInterpolation) {
-	x.inner.SetInterpolation(interpolation)
+func (x *AnimatedValue) SetInterpolation(interpolation MDLAnimatedValueInterpolation) {
+	x.inner.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
 }
 
 // KeyTimes returns the collection as a Go slice.
@@ -104,16 +104,16 @@ func (x *AnimatedValue) asAnimatedValue() *raw.MDLAnimatedValue { return x.inner
 // AnimatedValueable is the interface implemented by [AnimatedValue], for mocking and DI.
 type AnimatedValueable interface {
 	Unwrap() *raw.MDLAnimatedValue
-	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedValue
+	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedValue
 	IsAnimated() bool
 	Clear()
 	GetTimesMaxCount(timesArray *float64, maxCount uint) uint
-	Precision() raw.MDLDataPrecision
+	Precision() MDLDataPrecision
 	TimeSampleCount() uint
 	MinimumTime() float64
 	MaximumTime() float64
-	Interpolation() raw.MDLAnimatedValueInterpolation
-	SetInterpolation(interpolation raw.MDLAnimatedValueInterpolation)
+	Interpolation() MDLAnimatedValueInterpolation
+	SetInterpolation(interpolation MDLAnimatedValueInterpolation)
 	KeyTimes() []*foundation.NSNumber
 }
 

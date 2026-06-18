@@ -268,8 +268,8 @@ func (x *TextLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *TextLayer
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *TextLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *TextLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *TextLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TextLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -286,8 +286,8 @@ func (x *TextLayer) WithCornerRadius(cornerRadius float64) *TextLayer {
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *TextLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *TextLayer {
-	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+func (x *TextLayer) WithMaskedCorners(maskedCorners CACornerMask) *TextLayer {
+	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -352,8 +352,8 @@ func (x *TextLayer) WithShadowRadius(shadowRadius float64) *TextLayer {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TextLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *TextLayer {
-	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+func (x *TextLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TextLayer {
+	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -534,10 +534,10 @@ type TextLayerable interface {
 	WithOpaque(opaque bool) *TextLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TextLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *TextLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *TextLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TextLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TextLayer
 	WithCornerRadius(cornerRadius float64) *TextLayer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *TextLayer
+	WithMaskedCorners(maskedCorners CACornerMask) *TextLayer
 	WithCornerCurve(cornerCurve *foundation.NSString) *TextLayer
 	WithBorderWidth(borderWidth float64) *TextLayer
 	WithOpacity(opacity float32) *TextLayer
@@ -548,7 +548,7 @@ type TextLayerable interface {
 	WithShadowOpacity(shadowOpacity float32) *TextLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *TextLayer
 	WithShadowRadius(shadowRadius float64) *TextLayer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *TextLayer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TextLayer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *TextLayer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TextLayer
 	WithName(name string) *TextLayer

@@ -39,8 +39,8 @@ func NewSpeechURLRecognitionRequestWithURL(uRL string) *SpeechURLRecognitionRequ
 }
 
 // WithTaskHint sets the taskHint property and returns the receiver for chaining.
-func (x *SpeechURLRecognitionRequest) WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechURLRecognitionRequest {
-	x.inner.SFSpeechRecognitionRequest.SetTaskHint(taskHint)
+func (x *SpeechURLRecognitionRequest) WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechURLRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetTaskHint(raw.SFSpeechRecognitionTaskHint(taskHint))
 	return x
 }
 
@@ -104,7 +104,7 @@ func (x *SpeechURLRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeech
 // SpeechURLRecognitionRequestable is the interface implemented by [SpeechURLRecognitionRequest], for mocking and DI.
 type SpeechURLRecognitionRequestable interface {
 	Unwrap() *raw.SFSpeechURLRecognitionRequest
-	WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechURLRecognitionRequest
+	WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechURLRecognitionRequest
 	WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechURLRecognitionRequest
 	WithContextualStrings(items ...*foundation.NSString) *SpeechURLRecognitionRequest
 	WithInteractionIdentifier(interactionIdentifier string) *SpeechURLRecognitionRequest

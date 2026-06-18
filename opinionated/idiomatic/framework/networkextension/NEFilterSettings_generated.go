@@ -32,9 +32,9 @@ func NEFilterSettingsFromID(id objc.ID) *NEFilterSettings {
 }
 
 // NewNEFilterSettingsWithRulesDefaultAction creates a new [NEFilterSettings].
-func NewNEFilterSettingsWithRulesDefaultAction(rules *foundation.NSArray[*raw.NEFilterRule], defaultAction raw.NEFilterAction) *NEFilterSettings {
+func NewNEFilterSettingsWithRulesDefaultAction(rules *foundation.NSArray[*raw.NEFilterRule], defaultAction NEFilterAction) *NEFilterSettings {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterSettings")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRules:defaultAction:"), rules.Ptr(), defaultAction)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRules:defaultAction:"), rules.Ptr(), raw.NEFilterAction(defaultAction))
 	return &NEFilterSettings{inner: raw.NEFilterSettingsFromID(_id)}
 }
 
@@ -50,15 +50,15 @@ func (x *NEFilterSettings) Rules() []*NEFilterRule {
 }
 
 // DefaultAction calls the underlying DefaultAction.
-func (x *NEFilterSettings) DefaultAction() raw.NEFilterAction {
-	return x.inner.DefaultAction()
+func (x *NEFilterSettings) DefaultAction() NEFilterAction {
+	return NEFilterAction(x.inner.DefaultAction())
 }
 
 // NEFilterSettingsable is the interface implemented by [NEFilterSettings], for mocking and DI.
 type NEFilterSettingsable interface {
 	Unwrap() *raw.NEFilterSettings
 	Rules() []*NEFilterRule
-	DefaultAction() raw.NEFilterAction
+	DefaultAction() NEFilterAction
 }
 
 var _ NEFilterSettingsable = (*NEFilterSettings)(nil)

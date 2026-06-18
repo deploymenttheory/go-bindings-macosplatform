@@ -62,8 +62,8 @@ func (x *PanGestureRecognizer) WithAction(action objc.SEL) *PanGestureRecognizer
 }
 
 // WithState sets the state property and returns the receiver for chaining.
-func (x *PanGestureRecognizer) WithState(state raw.NSGestureRecognizerState) *PanGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetState(state)
+func (x *PanGestureRecognizer) WithState(state NSGestureRecognizerState) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
@@ -128,8 +128,8 @@ func (x *PanGestureRecognizer) WithName(name string) *PanGestureRecognizer {
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *PanGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PanGestureRecognizer {
-	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *PanGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PanGestureRecognizer {
+	x.inner.NSGestureRecognizer.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -179,7 +179,7 @@ type PanGestureRecognizerable interface {
 	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PanGestureRecognizer
 	WithTarget(target objc.ID) *PanGestureRecognizer
 	WithAction(action objc.SEL) *PanGestureRecognizer
-	WithState(state raw.NSGestureRecognizerState) *PanGestureRecognizer
+	WithState(state NSGestureRecognizerState) *PanGestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *PanGestureRecognizer
 	WithEnabled(enabled bool) *PanGestureRecognizer
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PanGestureRecognizer
@@ -190,7 +190,7 @@ type PanGestureRecognizerable interface {
 	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PanGestureRecognizer
 	WithDelaysRotationEvents(delaysRotationEvents bool) *PanGestureRecognizer
 	WithName(name string) *PanGestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PanGestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PanGestureRecognizer
 	TranslationInView(view *raw.NSView) corefoundation.CGPoint
 	SetTranslationInView(translation corefoundation.CGPoint, view *raw.NSView)
 	VelocityInView(view *raw.NSView) corefoundation.CGPoint

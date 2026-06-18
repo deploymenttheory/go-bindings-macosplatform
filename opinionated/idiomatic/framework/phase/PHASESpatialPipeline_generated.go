@@ -31,15 +31,15 @@ func SpatialPipelineFromID(id objc.ID) *SpatialPipeline {
 }
 
 // NewSpatialPipelineWithFlags creates a new [SpatialPipeline].
-func NewSpatialPipelineWithFlags(flags raw.PHASESpatialPipelineFlags) *SpatialPipeline {
+func NewSpatialPipelineWithFlags(flags PHASESpatialPipelineFlags) *SpatialPipeline {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESpatialPipeline")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFlags:"), flags)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFlags:"), raw.PHASESpatialPipelineFlags(flags))
 	return &SpatialPipeline{inner: raw.PHASESpatialPipelineFromID(_id)}
 }
 
 // Flags calls the underlying Flags.
-func (x *SpatialPipeline) Flags() raw.PHASESpatialPipelineFlags {
-	return x.inner.Flags()
+func (x *SpatialPipeline) Flags() PHASESpatialPipelineFlags {
+	return PHASESpatialPipelineFlags(x.inner.Flags())
 }
 
 // Entries calls the underlying Entries.
@@ -50,7 +50,7 @@ func (x *SpatialPipeline) Entries() *foundation.NSDictionary[*foundation.NSStrin
 // SpatialPipelineable is the interface implemented by [SpatialPipeline], for mocking and DI.
 type SpatialPipelineable interface {
 	Unwrap() *raw.PHASESpatialPipeline
-	Flags() raw.PHASESpatialPipelineFlags
+	Flags() PHASESpatialPipelineFlags
 	Entries() *foundation.NSDictionary[*foundation.NSString, *raw.PHASESpatialPipelineEntry]
 }
 

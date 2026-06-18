@@ -41,8 +41,8 @@ func (x *NWPath) IsEqualToPath(path *raw.NWPath) bool {
 }
 
 // Status calls the underlying Status.
-func (x *NWPath) Status() raw.NWPathStatus {
-	return x.inner.Status()
+func (x *NWPath) Status() NWPathStatus {
+	return NWPathStatus(x.inner.Status())
 }
 
 // IsExpensive calls the underlying IsExpensive.
@@ -59,7 +59,7 @@ func (x *NWPath) IsConstrained() bool {
 type NWPathable interface {
 	Unwrap() *raw.NWPath
 	IsEqualToPath(path *raw.NWPath) bool
-	Status() raw.NWPathStatus
+	Status() NWPathStatus
 	IsExpensive() bool
 	IsConstrained() bool
 }

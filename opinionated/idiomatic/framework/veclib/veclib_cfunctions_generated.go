@@ -13,8 +13,8 @@ import (
 )
 
 // BLASGetThreading calls [raw.BLASGetThreading] (C function BLASGetThreading).
-func BLASGetThreading() raw.BLAS_THREADING {
-	return raw.BLASGetThreading()
+func BLASGetThreading() BLAS_THREADING {
+	return BLAS_THREADING(raw.BLASGetThreading())
 }
 
 // BLASSetThreading calls [raw.BLASSetThreading] (C function BLASSetThreading).
@@ -8368,43 +8368,43 @@ func SparseMatrixDestroy(a unsafe.Pointer) accelerate.Sparse_status {
 }
 
 // SparseMatrixProductDenseDouble calls [raw.SparseMatrixProductDenseDouble] (C function sparse_matrix_product_dense_double).
-func SparseMatrixProductDenseDouble(order raw.CBLAS_ORDER, transa raw.CBLAS_TRANSPOSE, n uint64, alpha float64, a unsafe.Pointer, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixProductDenseDouble(order, transa, n, alpha, a, b, ldb, c, ldc)
+func SparseMatrixProductDenseDouble(order CBLAS_ORDER, transa CBLAS_TRANSPOSE, n uint64, alpha float64, a unsafe.Pointer, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixProductDenseDouble(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transa), n, alpha, a, b, ldb, c, ldc)
 }
 
 // SparseMatrixProductDenseDoubleComplex calls [raw.SparseMatrixProductDenseDoubleComplex] (C function sparse_matrix_product_dense_double_complex).
-func SparseMatrixProductDenseDoubleComplex(order raw.CBLAS_ORDER, transa raw.CBLAS_TRANSPOSE, n uint64, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixProductDenseDoubleComplex(order, transa, n, alpha, a, b, ldb, c, ldc)
+func SparseMatrixProductDenseDoubleComplex(order CBLAS_ORDER, transa CBLAS_TRANSPOSE, n uint64, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixProductDenseDoubleComplex(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transa), n, alpha, a, b, ldb, c, ldc)
 }
 
 // SparseMatrixProductDenseFloat calls [raw.SparseMatrixProductDenseFloat] (C function sparse_matrix_product_dense_float).
-func SparseMatrixProductDenseFloat(order raw.CBLAS_ORDER, transa raw.CBLAS_TRANSPOSE, n uint64, alpha float32, a unsafe.Pointer, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixProductDenseFloat(order, transa, n, alpha, a, b, ldb, c, ldc)
+func SparseMatrixProductDenseFloat(order CBLAS_ORDER, transa CBLAS_TRANSPOSE, n uint64, alpha float32, a unsafe.Pointer, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixProductDenseFloat(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transa), n, alpha, a, b, ldb, c, ldc)
 }
 
 // SparseMatrixProductDenseFloatComplex calls [raw.SparseMatrixProductDenseFloatComplex] (C function sparse_matrix_product_dense_float_complex).
-func SparseMatrixProductDenseFloatComplex(order raw.CBLAS_ORDER, transa raw.CBLAS_TRANSPOSE, n uint64, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixProductDenseFloatComplex(order, transa, n, alpha, a, b, ldb, c, ldc)
+func SparseMatrixProductDenseFloatComplex(order CBLAS_ORDER, transa CBLAS_TRANSPOSE, n uint64, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixProductDenseFloatComplex(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transa), n, alpha, a, b, ldb, c, ldc)
 }
 
 // SparseMatrixProductSparseDouble calls [raw.SparseMatrixProductSparseDouble] (C function sparse_matrix_product_sparse_double).
-func SparseMatrixProductSparseDouble(order raw.CBLAS_ORDER, transa raw.CBLAS_TRANSPOSE, alpha float64, a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixProductSparseDouble(order, transa, alpha, a, b, c, ldc)
+func SparseMatrixProductSparseDouble(order CBLAS_ORDER, transa CBLAS_TRANSPOSE, alpha float64, a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixProductSparseDouble(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transa), alpha, a, b, c, ldc)
 }
 
 // SparseMatrixProductSparseDoubleComplex calls [raw.SparseMatrixProductSparseDoubleComplex] (C function sparse_matrix_product_sparse_double_complex).
-func SparseMatrixProductSparseDoubleComplex(order raw.CBLAS_ORDER, transa raw.CBLAS_TRANSPOSE, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixProductSparseDoubleComplex(order, transa, alpha, a, b, c, ldc)
+func SparseMatrixProductSparseDoubleComplex(order CBLAS_ORDER, transa CBLAS_TRANSPOSE, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixProductSparseDoubleComplex(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transa), alpha, a, b, c, ldc)
 }
 
 // SparseMatrixProductSparseFloat calls [raw.SparseMatrixProductSparseFloat] (C function sparse_matrix_product_sparse_float).
-func SparseMatrixProductSparseFloat(order raw.CBLAS_ORDER, transa raw.CBLAS_TRANSPOSE, alpha float32, a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixProductSparseFloat(order, transa, alpha, a, b, c, ldc)
+func SparseMatrixProductSparseFloat(order CBLAS_ORDER, transa CBLAS_TRANSPOSE, alpha float32, a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixProductSparseFloat(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transa), alpha, a, b, c, ldc)
 }
 
 // SparseMatrixProductSparseFloatComplex calls [raw.SparseMatrixProductSparseFloatComplex] (C function sparse_matrix_product_sparse_float_complex).
-func SparseMatrixProductSparseFloatComplex(order raw.CBLAS_ORDER, transa raw.CBLAS_TRANSPOSE, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixProductSparseFloatComplex(order, transa, alpha, a, b, c, ldc)
+func SparseMatrixProductSparseFloatComplex(order CBLAS_ORDER, transa CBLAS_TRANSPOSE, alpha unsafe.Pointer, a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, ldc uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixProductSparseFloatComplex(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transa), alpha, a, b, c, ldc)
 }
 
 // SparseMatrixTraceDouble calls [raw.SparseMatrixTraceDouble] (C function sparse_matrix_trace_double).
@@ -8428,23 +8428,23 @@ func SparseMatrixTraceFloatComplex(a unsafe.Pointer, offset int64) unsafe.Pointe
 }
 
 // SparseMatrixTriangularSolveDenseDouble calls [raw.SparseMatrixTriangularSolveDenseDouble] (C function sparse_matrix_triangular_solve_dense_double).
-func SparseMatrixTriangularSolveDenseDouble(order raw.CBLAS_ORDER, transt raw.CBLAS_TRANSPOSE, nrhs uint64, alpha float64, t unsafe.Pointer, b unsafe.Pointer, ldb uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixTriangularSolveDenseDouble(order, transt, nrhs, alpha, t, b, ldb)
+func SparseMatrixTriangularSolveDenseDouble(order CBLAS_ORDER, transt CBLAS_TRANSPOSE, nrhs uint64, alpha float64, t unsafe.Pointer, b unsafe.Pointer, ldb uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixTriangularSolveDenseDouble(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transt), nrhs, alpha, t, b, ldb)
 }
 
 // SparseMatrixTriangularSolveDenseDoubleComplex calls [raw.SparseMatrixTriangularSolveDenseDoubleComplex] (C function sparse_matrix_triangular_solve_dense_double_complex).
-func SparseMatrixTriangularSolveDenseDoubleComplex(order raw.CBLAS_ORDER, transt raw.CBLAS_TRANSPOSE, nrhs uint64, alpha unsafe.Pointer, t unsafe.Pointer, b unsafe.Pointer, ldb uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixTriangularSolveDenseDoubleComplex(order, transt, nrhs, alpha, t, b, ldb)
+func SparseMatrixTriangularSolveDenseDoubleComplex(order CBLAS_ORDER, transt CBLAS_TRANSPOSE, nrhs uint64, alpha unsafe.Pointer, t unsafe.Pointer, b unsafe.Pointer, ldb uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixTriangularSolveDenseDoubleComplex(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transt), nrhs, alpha, t, b, ldb)
 }
 
 // SparseMatrixTriangularSolveDenseFloat calls [raw.SparseMatrixTriangularSolveDenseFloat] (C function sparse_matrix_triangular_solve_dense_float).
-func SparseMatrixTriangularSolveDenseFloat(order raw.CBLAS_ORDER, transt raw.CBLAS_TRANSPOSE, nrhs uint64, alpha float32, t unsafe.Pointer, b unsafe.Pointer, ldb uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixTriangularSolveDenseFloat(order, transt, nrhs, alpha, t, b, ldb)
+func SparseMatrixTriangularSolveDenseFloat(order CBLAS_ORDER, transt CBLAS_TRANSPOSE, nrhs uint64, alpha float32, t unsafe.Pointer, b unsafe.Pointer, ldb uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixTriangularSolveDenseFloat(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transt), nrhs, alpha, t, b, ldb)
 }
 
 // SparseMatrixTriangularSolveDenseFloatComplex calls [raw.SparseMatrixTriangularSolveDenseFloatComplex] (C function sparse_matrix_triangular_solve_dense_float_complex).
-func SparseMatrixTriangularSolveDenseFloatComplex(order raw.CBLAS_ORDER, transt raw.CBLAS_TRANSPOSE, nrhs uint64, alpha unsafe.Pointer, t unsafe.Pointer, b unsafe.Pointer, ldb uint64) accelerate.Sparse_status {
-	return raw.SparseMatrixTriangularSolveDenseFloatComplex(order, transt, nrhs, alpha, t, b, ldb)
+func SparseMatrixTriangularSolveDenseFloatComplex(order CBLAS_ORDER, transt CBLAS_TRANSPOSE, nrhs uint64, alpha unsafe.Pointer, t unsafe.Pointer, b unsafe.Pointer, ldb uint64) accelerate.Sparse_status {
+	return raw.SparseMatrixTriangularSolveDenseFloatComplex(raw.CBLAS_ORDER(order), raw.CBLAS_TRANSPOSE(transt), nrhs, alpha, t, b, ldb)
 }
 
 // SparseMatrixVariableBlockCreateDouble calls [raw.SparseMatrixVariableBlockCreateDouble] (C function sparse_matrix_variable_block_create_double).
@@ -8468,23 +8468,23 @@ func SparseMatrixVariableBlockCreateFloatComplex(mb uint64, nb uint64, k *uint64
 }
 
 // SparseMatrixVectorProductDenseDouble calls [raw.SparseMatrixVectorProductDenseDouble] (C function sparse_matrix_vector_product_dense_double).
-func SparseMatrixVectorProductDenseDouble(transa raw.CBLAS_TRANSPOSE, alpha float64, a unsafe.Pointer, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) accelerate.Sparse_status {
-	return raw.SparseMatrixVectorProductDenseDouble(transa, alpha, a, x, incx, y, incy)
+func SparseMatrixVectorProductDenseDouble(transa CBLAS_TRANSPOSE, alpha float64, a unsafe.Pointer, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) accelerate.Sparse_status {
+	return raw.SparseMatrixVectorProductDenseDouble(raw.CBLAS_TRANSPOSE(transa), alpha, a, x, incx, y, incy)
 }
 
 // SparseMatrixVectorProductDenseDoubleComplex calls [raw.SparseMatrixVectorProductDenseDoubleComplex] (C function sparse_matrix_vector_product_dense_double_complex).
-func SparseMatrixVectorProductDenseDoubleComplex(transa raw.CBLAS_TRANSPOSE, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) accelerate.Sparse_status {
-	return raw.SparseMatrixVectorProductDenseDoubleComplex(transa, alpha, a, x, incx, y, incy)
+func SparseMatrixVectorProductDenseDoubleComplex(transa CBLAS_TRANSPOSE, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) accelerate.Sparse_status {
+	return raw.SparseMatrixVectorProductDenseDoubleComplex(raw.CBLAS_TRANSPOSE(transa), alpha, a, x, incx, y, incy)
 }
 
 // SparseMatrixVectorProductDenseFloat calls [raw.SparseMatrixVectorProductDenseFloat] (C function sparse_matrix_vector_product_dense_float).
-func SparseMatrixVectorProductDenseFloat(transa raw.CBLAS_TRANSPOSE, alpha float32, a unsafe.Pointer, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) accelerate.Sparse_status {
-	return raw.SparseMatrixVectorProductDenseFloat(transa, alpha, a, x, incx, y, incy)
+func SparseMatrixVectorProductDenseFloat(transa CBLAS_TRANSPOSE, alpha float32, a unsafe.Pointer, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) accelerate.Sparse_status {
+	return raw.SparseMatrixVectorProductDenseFloat(raw.CBLAS_TRANSPOSE(transa), alpha, a, x, incx, y, incy)
 }
 
 // SparseMatrixVectorProductDenseFloatComplex calls [raw.SparseMatrixVectorProductDenseFloatComplex] (C function sparse_matrix_vector_product_dense_float_complex).
-func SparseMatrixVectorProductDenseFloatComplex(transa raw.CBLAS_TRANSPOSE, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) accelerate.Sparse_status {
-	return raw.SparseMatrixVectorProductDenseFloatComplex(transa, alpha, a, x, incx, y, incy)
+func SparseMatrixVectorProductDenseFloatComplex(transa CBLAS_TRANSPOSE, alpha unsafe.Pointer, a unsafe.Pointer, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) accelerate.Sparse_status {
+	return raw.SparseMatrixVectorProductDenseFloatComplex(raw.CBLAS_TRANSPOSE(transa), alpha, a, x, incx, y, incy)
 }
 
 // SparseOperatorNormDouble calls [raw.SparseOperatorNormDouble] (C function sparse_operator_norm_double).
@@ -8653,23 +8653,23 @@ func SparseVectorNormFloatComplex(nz uint64, x unsafe.Pointer, indx unsafe.Point
 }
 
 // SparseVectorTriangularSolveDenseDouble calls [raw.SparseVectorTriangularSolveDenseDouble] (C function sparse_vector_triangular_solve_dense_double).
-func SparseVectorTriangularSolveDenseDouble(transt raw.CBLAS_TRANSPOSE, alpha float64, t unsafe.Pointer, x unsafe.Pointer, incx int64) accelerate.Sparse_status {
-	return raw.SparseVectorTriangularSolveDenseDouble(transt, alpha, t, x, incx)
+func SparseVectorTriangularSolveDenseDouble(transt CBLAS_TRANSPOSE, alpha float64, t unsafe.Pointer, x unsafe.Pointer, incx int64) accelerate.Sparse_status {
+	return raw.SparseVectorTriangularSolveDenseDouble(raw.CBLAS_TRANSPOSE(transt), alpha, t, x, incx)
 }
 
 // SparseVectorTriangularSolveDenseDoubleComplex calls [raw.SparseVectorTriangularSolveDenseDoubleComplex] (C function sparse_vector_triangular_solve_dense_double_complex).
-func SparseVectorTriangularSolveDenseDoubleComplex(transt raw.CBLAS_TRANSPOSE, alpha unsafe.Pointer, t unsafe.Pointer, x unsafe.Pointer, incx int64) accelerate.Sparse_status {
-	return raw.SparseVectorTriangularSolveDenseDoubleComplex(transt, alpha, t, x, incx)
+func SparseVectorTriangularSolveDenseDoubleComplex(transt CBLAS_TRANSPOSE, alpha unsafe.Pointer, t unsafe.Pointer, x unsafe.Pointer, incx int64) accelerate.Sparse_status {
+	return raw.SparseVectorTriangularSolveDenseDoubleComplex(raw.CBLAS_TRANSPOSE(transt), alpha, t, x, incx)
 }
 
 // SparseVectorTriangularSolveDenseFloat calls [raw.SparseVectorTriangularSolveDenseFloat] (C function sparse_vector_triangular_solve_dense_float).
-func SparseVectorTriangularSolveDenseFloat(transt raw.CBLAS_TRANSPOSE, alpha float32, t unsafe.Pointer, x unsafe.Pointer, incx int64) accelerate.Sparse_status {
-	return raw.SparseVectorTriangularSolveDenseFloat(transt, alpha, t, x, incx)
+func SparseVectorTriangularSolveDenseFloat(transt CBLAS_TRANSPOSE, alpha float32, t unsafe.Pointer, x unsafe.Pointer, incx int64) accelerate.Sparse_status {
+	return raw.SparseVectorTriangularSolveDenseFloat(raw.CBLAS_TRANSPOSE(transt), alpha, t, x, incx)
 }
 
 // SparseVectorTriangularSolveDenseFloatComplex calls [raw.SparseVectorTriangularSolveDenseFloatComplex] (C function sparse_vector_triangular_solve_dense_float_complex).
-func SparseVectorTriangularSolveDenseFloatComplex(transt raw.CBLAS_TRANSPOSE, alpha unsafe.Pointer, t unsafe.Pointer, x unsafe.Pointer, incx int64) accelerate.Sparse_status {
-	return raw.SparseVectorTriangularSolveDenseFloatComplex(transt, alpha, t, x, incx)
+func SparseVectorTriangularSolveDenseFloatComplex(transt CBLAS_TRANSPOSE, alpha unsafe.Pointer, t unsafe.Pointer, x unsafe.Pointer, incx int64) accelerate.Sparse_status {
+	return raw.SparseVectorTriangularSolveDenseFloatComplex(raw.CBLAS_TRANSPOSE(transt), alpha, t, x, incx)
 }
 
 // Spbcon calls [raw.Spbcon] (C function spbcon_).
@@ -9478,8 +9478,8 @@ func VA64Shift2(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
 }
 
 // VDSPDCTCreateSetup calls [raw.VDSPDCTCreateSetup] (C function vDSP_DCT_CreateSetup).
-func VDSPDCTCreateSetup(__Previous unsafe.Pointer, __Length uint, __Type raw.VDSP_DCT_Type) unsafe.Pointer {
-	return raw.VDSPDCTCreateSetup(__Previous, __Length, __Type)
+func VDSPDCTCreateSetup(__Previous unsafe.Pointer, __Length uint, __Type VDSP_DCT_Type) unsafe.Pointer {
+	return raw.VDSPDCTCreateSetup(__Previous, __Length, raw.VDSP_DCT_Type(__Type))
 }
 
 // VDSPDCTExecute calls [raw.VDSPDCTExecute] (C function vDSP_DCT_Execute).
@@ -9513,13 +9513,13 @@ func VDSPDFTExecuteD(__Setup unsafe.Pointer, __Ir *float64, __Ii *float64, __Or 
 }
 
 // VDSPDFTInterleavedCreateSetup calls [raw.VDSPDFTInterleavedCreateSetup] (C function vDSP_DFT_Interleaved_CreateSetup).
-func VDSPDFTInterleavedCreateSetup(previous unsafe.Pointer, length uint, direction raw.VDSP_DFT_Direction, realtoComplex raw.VDSP_DFT_RealtoComplex) unsafe.Pointer {
-	return raw.VDSPDFTInterleavedCreateSetup(previous, length, direction, realtoComplex)
+func VDSPDFTInterleavedCreateSetup(previous unsafe.Pointer, length uint, direction VDSP_DFT_Direction, realtoComplex VDSP_DFT_RealtoComplex) unsafe.Pointer {
+	return raw.VDSPDFTInterleavedCreateSetup(previous, length, raw.VDSP_DFT_Direction(direction), raw.VDSP_DFT_RealtoComplex(realtoComplex))
 }
 
 // VDSPDFTInterleavedCreateSetupD calls [raw.VDSPDFTInterleavedCreateSetupD] (C function vDSP_DFT_Interleaved_CreateSetupD).
-func VDSPDFTInterleavedCreateSetupD(previous unsafe.Pointer, length uint, direction raw.VDSP_DFT_Direction, realtoComplex raw.VDSP_DFT_RealtoComplex) unsafe.Pointer {
-	return raw.VDSPDFTInterleavedCreateSetupD(previous, length, direction, realtoComplex)
+func VDSPDFTInterleavedCreateSetupD(previous unsafe.Pointer, length uint, direction VDSP_DFT_Direction, realtoComplex VDSP_DFT_RealtoComplex) unsafe.Pointer {
+	return raw.VDSPDFTInterleavedCreateSetupD(previous, length, raw.VDSP_DFT_Direction(direction), raw.VDSP_DFT_RealtoComplex(realtoComplex))
 }
 
 // VDSPDFTInterleavedDestroySetup calls [raw.VDSPDFTInterleavedDestroySetup] (C function vDSP_DFT_Interleaved_DestroySetup).
@@ -9543,28 +9543,28 @@ func VDSPDFTInterleavedExecuteD(setup unsafe.Pointer, iri *raw.DSPDoubleComplex,
 }
 
 // VDSPDFTZop calls [raw.VDSPDFTZop] (C function vDSP_DFT_zop).
-func VDSPDFTZop(__Setup unsafe.Pointer, __Ir *float32, __Ii *float32, __Is int, __Or *float32, __Oi *float32, __Os int, __Direction raw.VDSP_DFT_Direction) {
-	raw.VDSPDFTZop(__Setup, __Ir, __Ii, __Is, __Or, __Oi, __Os, __Direction)
+func VDSPDFTZop(__Setup unsafe.Pointer, __Ir *float32, __Ii *float32, __Is int, __Or *float32, __Oi *float32, __Os int, __Direction VDSP_DFT_Direction) {
+	raw.VDSPDFTZop(__Setup, __Ir, __Ii, __Is, __Or, __Oi, __Os, raw.VDSP_DFT_Direction(__Direction))
 }
 
 // VDSPDFTZopCreateSetup calls [raw.VDSPDFTZopCreateSetup] (C function vDSP_DFT_zop_CreateSetup).
-func VDSPDFTZopCreateSetup(__Previous unsafe.Pointer, __Length uint, __Direction raw.VDSP_DFT_Direction) unsafe.Pointer {
-	return raw.VDSPDFTZopCreateSetup(__Previous, __Length, __Direction)
+func VDSPDFTZopCreateSetup(__Previous unsafe.Pointer, __Length uint, __Direction VDSP_DFT_Direction) unsafe.Pointer {
+	return raw.VDSPDFTZopCreateSetup(__Previous, __Length, raw.VDSP_DFT_Direction(__Direction))
 }
 
 // VDSPDFTZopCreateSetupD calls [raw.VDSPDFTZopCreateSetupD] (C function vDSP_DFT_zop_CreateSetupD).
-func VDSPDFTZopCreateSetupD(__Previous unsafe.Pointer, __Length uint, __Direction raw.VDSP_DFT_Direction) unsafe.Pointer {
-	return raw.VDSPDFTZopCreateSetupD(__Previous, __Length, __Direction)
+func VDSPDFTZopCreateSetupD(__Previous unsafe.Pointer, __Length uint, __Direction VDSP_DFT_Direction) unsafe.Pointer {
+	return raw.VDSPDFTZopCreateSetupD(__Previous, __Length, raw.VDSP_DFT_Direction(__Direction))
 }
 
 // VDSPDFTZropCreateSetup calls [raw.VDSPDFTZropCreateSetup] (C function vDSP_DFT_zrop_CreateSetup).
-func VDSPDFTZropCreateSetup(__Previous unsafe.Pointer, __Length uint, __Direction raw.VDSP_DFT_Direction) unsafe.Pointer {
-	return raw.VDSPDFTZropCreateSetup(__Previous, __Length, __Direction)
+func VDSPDFTZropCreateSetup(__Previous unsafe.Pointer, __Length uint, __Direction VDSP_DFT_Direction) unsafe.Pointer {
+	return raw.VDSPDFTZropCreateSetup(__Previous, __Length, raw.VDSP_DFT_Direction(__Direction))
 }
 
 // VDSPDFTZropCreateSetupD calls [raw.VDSPDFTZropCreateSetupD] (C function vDSP_DFT_zrop_CreateSetupD).
-func VDSPDFTZropCreateSetupD(__Previous unsafe.Pointer, __Length uint, __Direction raw.VDSP_DFT_Direction) unsafe.Pointer {
-	return raw.VDSPDFTZropCreateSetupD(__Previous, __Length, __Direction)
+func VDSPDFTZropCreateSetupD(__Previous unsafe.Pointer, __Length uint, __Direction VDSP_DFT_Direction) unsafe.Pointer {
+	return raw.VDSPDFTZropCreateSetupD(__Previous, __Length, raw.VDSP_DFT_Direction(__Direction))
 }
 
 // VDSPFFT16Copv calls [raw.VDSPFFT16Copv] (C function vDSP_FFT16_copv).

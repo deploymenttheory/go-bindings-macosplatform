@@ -31,15 +31,15 @@ func MIDIMetaEventFromID(id objc.ID) *MIDIMetaEvent {
 }
 
 // NewMIDIMetaEventWithTypeData creates a new [MIDIMetaEvent].
-func NewMIDIMetaEventWithTypeData(type_ raw.AVMIDIMetaEventType, data *foundation.NSData) *MIDIMetaEvent {
+func NewMIDIMetaEventWithTypeData(type_ AVMIDIMetaEventType, data *foundation.NSData) *MIDIMetaEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIMetaEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, data.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), raw.AVMIDIMetaEventType(type_), data.Ptr())
 	return &MIDIMetaEvent{inner: raw.AVMIDIMetaEventFromID(_id)}
 }
 
 // Type calls the underlying Type.
-func (x *MIDIMetaEvent) Type() raw.AVMIDIMetaEventType {
-	return x.inner.Type()
+func (x *MIDIMetaEvent) Type() AVMIDIMetaEventType {
+	return AVMIDIMetaEventType(x.inner.Type())
 }
 
 func (x *MIDIMetaEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
@@ -47,7 +47,7 @@ func (x *MIDIMetaEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMus
 // MIDIMetaEventable is the interface implemented by [MIDIMetaEvent], for mocking and DI.
 type MIDIMetaEventable interface {
 	Unwrap() *raw.AVMIDIMetaEvent
-	Type() raw.AVMIDIMetaEventType
+	Type() AVMIDIMetaEventType
 }
 
 var _ MIDIMetaEventable = (*MIDIMetaEvent)(nil)

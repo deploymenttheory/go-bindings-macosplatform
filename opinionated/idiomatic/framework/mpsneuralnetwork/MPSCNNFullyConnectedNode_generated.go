@@ -38,14 +38,14 @@ func NewCNNFullyConnectedNodeWithSourceWeights(sourceNode *raw.MPSNNImageNode, w
 }
 
 // WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
-func (x *CNNFullyConnectedNode) WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNFullyConnectedNode {
-	x.inner.MPSCNNConvolutionNode.SetTrainingStyle(trainingStyle)
+func (x *CNNFullyConnectedNode) WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNFullyConnectedNode {
+	x.inner.MPSCNNConvolutionNode.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
 	return x
 }
 
 // WithAccumulatorPrecision sets the accumulatorPrecision property and returns the receiver for chaining.
-func (x *CNNFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnectedNode {
-	x.inner.MPSCNNConvolutionNode.SetAccumulatorPrecision(accumulatorPrecision)
+func (x *CNNFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnectedNode {
+	x.inner.MPSCNNConvolutionNode.SetAccumulatorPrecision(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecision))
 	return x
 }
 
@@ -72,8 +72,8 @@ func (x *CNNFullyConnectedNode) asNNFilterNode() *raw.MPSNNFilterNode {
 // CNNFullyConnectedNodeable is the interface implemented by [CNNFullyConnectedNode], for mocking and DI.
 type CNNFullyConnectedNodeable interface {
 	Unwrap() *raw.MPSCNNFullyConnectedNode
-	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNFullyConnectedNode
-	WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnectedNode
+	WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNFullyConnectedNode
+	WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnectedNode
 	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNFullyConnectedNode
 	WithLabel(label string) *CNNFullyConnectedNode
 }

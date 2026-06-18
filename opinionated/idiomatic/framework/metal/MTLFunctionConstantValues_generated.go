@@ -38,18 +38,18 @@ func NewFunctionConstantValues() *FunctionConstantValues {
 }
 
 // SetConstantValueTypeAtIndex calls the underlying SetConstantValueTypeAtIndex.
-func (x *FunctionConstantValues) SetConstantValueTypeAtIndex(value unsafe.Pointer, type_ raw.MTLDataType, index uint) {
-	x.inner.SetConstantValueTypeAtIndex(value, type_, index)
+func (x *FunctionConstantValues) SetConstantValueTypeAtIndex(value unsafe.Pointer, type_ MTLDataType, index uint) {
+	x.inner.SetConstantValueTypeAtIndex(value, raw.MTLDataType(type_), index)
 }
 
 // SetConstantValuesTypeWithRange calls the underlying SetConstantValuesTypeWithRange.
-func (x *FunctionConstantValues) SetConstantValuesTypeWithRange(values unsafe.Pointer, type_ raw.MTLDataType, range_ foundation.NSRange) {
-	x.inner.SetConstantValuesTypeWithRange(values, type_, range_)
+func (x *FunctionConstantValues) SetConstantValuesTypeWithRange(values unsafe.Pointer, type_ MTLDataType, range_ foundation.NSRange) {
+	x.inner.SetConstantValuesTypeWithRange(values, raw.MTLDataType(type_), range_)
 }
 
 // SetConstantValueTypeWithName calls the underlying SetConstantValueTypeWithName.
-func (x *FunctionConstantValues) SetConstantValueTypeWithName(value unsafe.Pointer, type_ raw.MTLDataType, name string) {
-	x.inner.SetConstantValueTypeWithName(value, type_, foundation.NSStringStringWithUTF8String(name))
+func (x *FunctionConstantValues) SetConstantValueTypeWithName(value unsafe.Pointer, type_ MTLDataType, name string) {
+	x.inner.SetConstantValueTypeWithName(value, raw.MTLDataType(type_), foundation.NSStringStringWithUTF8String(name))
 }
 
 // Reset calls the underlying Reset.
@@ -60,9 +60,9 @@ func (x *FunctionConstantValues) Reset() {
 // FunctionConstantValuesable is the interface implemented by [FunctionConstantValues], for mocking and DI.
 type FunctionConstantValuesable interface {
 	Unwrap() *raw.MTLFunctionConstantValues
-	SetConstantValueTypeAtIndex(value unsafe.Pointer, type_ raw.MTLDataType, index uint)
-	SetConstantValuesTypeWithRange(values unsafe.Pointer, type_ raw.MTLDataType, range_ foundation.NSRange)
-	SetConstantValueTypeWithName(value unsafe.Pointer, type_ raw.MTLDataType, name string)
+	SetConstantValueTypeAtIndex(value unsafe.Pointer, type_ MTLDataType, index uint)
+	SetConstantValuesTypeWithRange(values unsafe.Pointer, type_ MTLDataType, range_ foundation.NSRange)
+	SetConstantValueTypeWithName(value unsafe.Pointer, type_ MTLDataType, name string)
 	Reset()
 }
 

@@ -77,8 +77,8 @@ func (x *BarcodeObservation) IsColorInverted() bool {
 }
 
 // SupplementalCompositeType calls the underlying SupplementalCompositeType.
-func (x *BarcodeObservation) SupplementalCompositeType() raw.VNBarcodeCompositeType {
-	return x.inner.SupplementalCompositeType()
+func (x *BarcodeObservation) SupplementalCompositeType() VNBarcodeCompositeType {
+	return VNBarcodeCompositeType(x.inner.SupplementalCompositeType())
 }
 
 // SupplementalPayloadString calls the underlying SupplementalPayloadString.
@@ -116,7 +116,7 @@ type BarcodeObservationable interface {
 	PayloadData() *foundation.NSData
 	IsGS1DataCarrier() bool
 	IsColorInverted() bool
-	SupplementalCompositeType() raw.VNBarcodeCompositeType
+	SupplementalCompositeType() VNBarcodeCompositeType
 	SupplementalPayloadString() string
 	SupplementalPayloadData() *foundation.NSData
 }

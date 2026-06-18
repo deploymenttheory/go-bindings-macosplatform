@@ -32,15 +32,15 @@ func ConstraintFromID(id objc.ID) *Constraint {
 }
 
 // NewConstraintWithAttributeRelativeToAttributeScaleOffset creates a new [Constraint].
-func NewConstraintWithAttributeRelativeToAttributeScaleOffset(attr raw.CAConstraintAttribute, srcId string, srcAttr raw.CAConstraintAttribute, m float64, c float64) *Constraint {
+func NewConstraintWithAttributeRelativeToAttributeScaleOffset(attr CAConstraintAttribute, srcId string, srcAttr CAConstraintAttribute, m float64, c float64) *Constraint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CAConstraint")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttribute:relativeTo:attribute:scale:offset:"), attr, foundation.NSStringStringWithUTF8String(srcId).Ptr(), srcAttr, m, c)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttribute:relativeTo:attribute:scale:offset:"), raw.CAConstraintAttribute(attr), foundation.NSStringStringWithUTF8String(srcId).Ptr(), raw.CAConstraintAttribute(srcAttr), m, c)
 	return &Constraint{inner: raw.CAConstraintFromID(_id)}
 }
 
 // Attribute calls the underlying Attribute.
-func (x *Constraint) Attribute() raw.CAConstraintAttribute {
-	return x.inner.Attribute()
+func (x *Constraint) Attribute() CAConstraintAttribute {
+	return CAConstraintAttribute(x.inner.Attribute())
 }
 
 // SourceName calls the underlying SourceName.
@@ -53,8 +53,8 @@ func (x *Constraint) SourceName() string {
 }
 
 // SourceAttribute calls the underlying SourceAttribute.
-func (x *Constraint) SourceAttribute() raw.CAConstraintAttribute {
-	return x.inner.SourceAttribute()
+func (x *Constraint) SourceAttribute() CAConstraintAttribute {
+	return CAConstraintAttribute(x.inner.SourceAttribute())
 }
 
 // Scale calls the underlying Scale.
@@ -70,9 +70,9 @@ func (x *Constraint) Offset() float64 {
 // Constraintable is the interface implemented by [Constraint], for mocking and DI.
 type Constraintable interface {
 	Unwrap() *raw.CAConstraint
-	Attribute() raw.CAConstraintAttribute
+	Attribute() CAConstraintAttribute
 	SourceName() string
-	SourceAttribute() raw.CAConstraintAttribute
+	SourceAttribute() CAConstraintAttribute
 	Scale() float64
 	Offset() float64
 }

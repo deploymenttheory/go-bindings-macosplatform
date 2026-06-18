@@ -37,14 +37,14 @@ func NewImageRequestOptions() *ImageRequestOptions {
 }
 
 // WithDeliveryMode sets the deliveryMode property and returns the receiver for chaining.
-func (x *ImageRequestOptions) WithDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode) *ImageRequestOptions {
-	x.inner.SetDeliveryMode(deliveryMode)
+func (x *ImageRequestOptions) WithDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) *ImageRequestOptions {
+	x.inner.SetDeliveryMode(raw.PHImageRequestOptionsDeliveryMode(deliveryMode))
 	return x
 }
 
 // WithResizeMode sets the resizeMode property and returns the receiver for chaining.
-func (x *ImageRequestOptions) WithResizeMode(resizeMode raw.PHImageRequestOptionsResizeMode) *ImageRequestOptions {
-	x.inner.SetResizeMode(resizeMode)
+func (x *ImageRequestOptions) WithResizeMode(resizeMode PHImageRequestOptionsResizeMode) *ImageRequestOptions {
+	x.inner.SetResizeMode(raw.PHImageRequestOptionsResizeMode(resizeMode))
 	return x
 }
 
@@ -79,23 +79,23 @@ func (x *ImageRequestOptions) WithAllowSecondaryDegradedImage(allowSecondaryDegr
 }
 
 // DeliveryMode calls the underlying DeliveryMode.
-func (x *ImageRequestOptions) DeliveryMode() raw.PHImageRequestOptionsDeliveryMode {
-	return x.inner.DeliveryMode()
+func (x *ImageRequestOptions) DeliveryMode() PHImageRequestOptionsDeliveryMode {
+	return PHImageRequestOptionsDeliveryMode(x.inner.DeliveryMode())
 }
 
 // SetDeliveryMode calls the underlying SetDeliveryMode.
-func (x *ImageRequestOptions) SetDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode) {
-	x.inner.SetDeliveryMode(deliveryMode)
+func (x *ImageRequestOptions) SetDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) {
+	x.inner.SetDeliveryMode(raw.PHImageRequestOptionsDeliveryMode(deliveryMode))
 }
 
 // ResizeMode calls the underlying ResizeMode.
-func (x *ImageRequestOptions) ResizeMode() raw.PHImageRequestOptionsResizeMode {
-	return x.inner.ResizeMode()
+func (x *ImageRequestOptions) ResizeMode() PHImageRequestOptionsResizeMode {
+	return PHImageRequestOptionsResizeMode(x.inner.ResizeMode())
 }
 
 // SetResizeMode calls the underlying SetResizeMode.
-func (x *ImageRequestOptions) SetResizeMode(resizeMode raw.PHImageRequestOptionsResizeMode) {
-	x.inner.SetResizeMode(resizeMode)
+func (x *ImageRequestOptions) SetResizeMode(resizeMode PHImageRequestOptionsResizeMode) {
+	x.inner.SetResizeMode(raw.PHImageRequestOptionsResizeMode(resizeMode))
 }
 
 // NormalizedCropRect calls the underlying NormalizedCropRect.
@@ -151,17 +151,17 @@ func (x *ImageRequestOptions) SetAllowSecondaryDegradedImage(allowSecondaryDegra
 // ImageRequestOptionsable is the interface implemented by [ImageRequestOptions], for mocking and DI.
 type ImageRequestOptionsable interface {
 	Unwrap() *raw.PHImageRequestOptions
-	WithDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode) *ImageRequestOptions
-	WithResizeMode(resizeMode raw.PHImageRequestOptionsResizeMode) *ImageRequestOptions
+	WithDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode) *ImageRequestOptions
+	WithResizeMode(resizeMode PHImageRequestOptionsResizeMode) *ImageRequestOptions
 	WithNormalizedCropRect(normalizedCropRect corefoundation.CGRect) *ImageRequestOptions
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *ImageRequestOptions
 	WithSynchronous(synchronous bool) *ImageRequestOptions
 	WithProgressHandler(progressHandler objc.Block) *ImageRequestOptions
 	WithAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool) *ImageRequestOptions
-	DeliveryMode() raw.PHImageRequestOptionsDeliveryMode
-	SetDeliveryMode(deliveryMode raw.PHImageRequestOptionsDeliveryMode)
-	ResizeMode() raw.PHImageRequestOptionsResizeMode
-	SetResizeMode(resizeMode raw.PHImageRequestOptionsResizeMode)
+	DeliveryMode() PHImageRequestOptionsDeliveryMode
+	SetDeliveryMode(deliveryMode PHImageRequestOptionsDeliveryMode)
+	ResizeMode() PHImageRequestOptionsResizeMode
+	SetResizeMode(resizeMode PHImageRequestOptionsResizeMode)
 	NormalizedCropRect() corefoundation.CGRect
 	SetNormalizedCropRect(normalizedCropRect corefoundation.CGRect)
 	IsNetworkAccessAllowed() bool

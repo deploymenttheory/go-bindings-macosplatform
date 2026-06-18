@@ -61,8 +61,8 @@ func (x *UpsampleLayer) Shape() []*foundation.NSNumber {
 }
 
 // SampleMode calls the underlying SampleMode.
-func (x *UpsampleLayer) SampleMode() raw.MLCSampleMode {
-	return x.inner.SampleMode()
+func (x *UpsampleLayer) SampleMode() MLCSampleMode {
+	return MLCSampleMode(x.inner.SampleMode())
 }
 
 // AlignsCorners calls the underlying AlignsCorners.
@@ -78,7 +78,7 @@ type UpsampleLayerable interface {
 	WithLabel(label string) *UpsampleLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer
 	Shape() []*foundation.NSNumber
-	SampleMode() raw.MLCSampleMode
+	SampleMode() MLCSampleMode
 	AlignsCorners() bool
 }
 
