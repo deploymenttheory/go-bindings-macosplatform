@@ -1103,10 +1103,10 @@ func TestWriteClassNSCodingMethods(t *testing.T) {
 	out := buf.String()
 
 	for _, want := range []string{
-		"func (o *NSString) SerializeToArchive(",
-		"func NewNSStringFromArchive(",
-		"archivedDataWithRootObject:requiringSecureCoding:error:",
-		"unarchivedObjectOfClass:fromData:error:",
+		"func (o *NSString) SerializeToArchive() ([]byte, error) {",
+		"func NewNSStringFromArchive(data []byte) (*NSString, error) {",
+		"cgo.RaiseIfException(_exc)",
+		"cgo.NSErrorToError(_nsErr)",
 		"foundation_NSString_serializeToArchive",
 		"foundation_NSString_newFromArchive",
 	} {

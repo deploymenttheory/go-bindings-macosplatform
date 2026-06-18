@@ -37,64 +37,62 @@ static void* goBindings_NSDictionaryFromPairs(void** objects, void** keys, NSUIn
 import "C"
 
 import (
-	"context"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
 )
 
 // NSArrayOf creates an immutable *NSArray[T] from a variadic list of typed ObjC objects.
 // This is a convenience wrapper over the non-variadic bridge path; the underlying
 // +arrayWithObjects: (nil-terminated variadics) is not bridgeable via CGo.
-func NSArrayOf[T cgo.Object](ctx context.Context, objects ...T) *NSArray[T] {
-	arr := NSMutableArrayArrayWithCapacity(ctx, uint64(len(objects)))
+func NSArrayOf[T cgo.Object](objects ...T) *NSArray[T] {
+	arr := NSMutableArrayArrayWithCapacity(uint64(len(objects)))
 	if arr == nil {
 		return nil
 	}
 	for _, o := range objects {
-		arr.AddObject(ctx, o)
+		arr.AddObject(o)
 	}
-	_cpy := arr.Copy(ctx)
+	_cpy := arr.Copy()
 	if _cpy == nil { return nil }
 	return NewNSArrayT[T](_cpy.Ptr())
 }
 
 // NSMutableArrayOf creates a *NSMutableArray[T] from a variadic list of typed ObjC objects.
-func NSMutableArrayOf[T cgo.Object](ctx context.Context, objects ...T) *NSMutableArray[T] {
-	arr := NSMutableArrayArrayWithCapacity(ctx, uint64(len(objects)))
+func NSMutableArrayOf[T cgo.Object](objects ...T) *NSMutableArray[T] {
+	arr := NSMutableArrayArrayWithCapacity(uint64(len(objects)))
 	if arr == nil {
 		return nil
 	}
 	for _, o := range objects {
-		arr.AddObject(ctx, o)
+		arr.AddObject(o)
 	}
 	return NewNSMutableArrayT[T](arr.Ptr())
 }
 
 // NSSetOf creates an immutable *NSSet[T] from a variadic list of typed ObjC objects.
 // This is a convenience wrapper; the underlying +setWithObjects: is not bridgeable via CGo.
-func NSSetOf[T cgo.Object](ctx context.Context, objects ...T) *NSSet[T] {
-	set := NSMutableSetSetWithCapacity(ctx, uint64(len(objects)))
+func NSSetOf[T cgo.Object](objects ...T) *NSSet[T] {
+	set := NSMutableSetSetWithCapacity(uint64(len(objects)))
 	if set == nil {
 		return nil
 	}
 	for _, o := range objects {
-		set.AddObject(ctx, o)
+		set.AddObject(o)
 	}
-	_cpy := set.Copy(ctx)
+	_cpy := set.Copy()
 	if _cpy == nil { return nil }
 	return NewNSSetT[T](_cpy.Ptr())
 }
 
 // NSMutableSetOf creates a *NSMutableSet[T] from a variadic list of typed ObjC objects.
-func NSMutableSetOf[T cgo.Object](ctx context.Context, objects ...T) *NSMutableSet[T] {
-	set := NSMutableSetSetWithCapacity(ctx, uint64(len(objects)))
+func NSMutableSetOf[T cgo.Object](objects ...T) *NSMutableSet[T] {
+	set := NSMutableSetSetWithCapacity(uint64(len(objects)))
 	if set == nil {
 		return nil
 	}
 	for _, o := range objects {
-		set.AddObject(ctx, o)
+		set.AddObject(o)
 	}
 	return NewNSMutableSetT[T](set.Ptr())
 }
@@ -104,13 +102,11 @@ func NSMutableSetOf[T cgo.Object](ctx context.Context, objects ...T) *NSMutableS
 // (e.g. NSString, NSNumber). An odd number of arguments returns nil.
 // This replaces the variadic +[NSDictionary dictionaryWithObjectsAndKeys:] via a C wrapper;
 // CGo cannot call variadic ObjC methods directly.
-func NSDictionaryOf(ctx context.Context, objectsAndKeys ...cgo.Object) *NSDictionary[cgo.Object] {
+func NSDictionaryOf(objectsAndKeys ...cgo.Object) *NSDictionary[cgo.Object] {
 	if len(objectsAndKeys)%2 != 0 {
 		return nil
 	}
 	n := len(objectsAndKeys) / 2
-	ctx, _end := tel.Call(ctx, nil, "Foundation.NSDictionary/dictionaryWithObjectsAndKeys:")
-	defer _end()
 	objs := make([]unsafe.Pointer, n)
 	keys := make([]unsafe.Pointer, n)
 	for i := 0; i < n; i++ {
@@ -124,7 +120,7 @@ func NSDictionaryOf(ctx context.Context, objectsAndKeys ...cgo.Object) *NSDictio
 		keysPtr = &keys[0]
 	}
 	ptr := unsafe.Pointer(C.goBindings_NSDictionaryFromPairs(objsPtr, keysPtr, C.NSUInteger(n), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	if ptr == nil {
 		return nil
 	}
@@ -133,13 +129,11 @@ func NSDictionaryOf(ctx context.Context, objectsAndKeys ...cgo.Object) *NSDictio
 
 // NSMutableDictionaryOf creates a *NSMutableDictionary from interleaved value/key pairs.
 // Pairs are passed as (value0, key0, value1, key1, ...). Keys must be NSCopying-conformant.
-func NSMutableDictionaryOf(ctx context.Context, objectsAndKeys ...cgo.Object) *NSMutableDictionary[cgo.Object] {
+func NSMutableDictionaryOf(objectsAndKeys ...cgo.Object) *NSMutableDictionary[cgo.Object] {
 	if len(objectsAndKeys)%2 != 0 {
 		return nil
 	}
 	n := len(objectsAndKeys) / 2
-	ctx, _end := tel.Call(ctx, nil, "Foundation.NSMutableDictionary/initWithObjectsAndKeys:")
-	defer _end()
 	objs := make([]unsafe.Pointer, n)
 	keys := make([]unsafe.Pointer, n)
 	for i := 0; i < n; i++ {
@@ -153,7 +147,7 @@ func NSMutableDictionaryOf(ctx context.Context, objectsAndKeys ...cgo.Object) *N
 		keysPtr = &keys[0]
 	}
 	ptr := unsafe.Pointer(C.goBindings_NSDictionaryFromPairs(objsPtr, keysPtr, C.NSUInteger(n), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	if ptr == nil {
 		return nil
 	}

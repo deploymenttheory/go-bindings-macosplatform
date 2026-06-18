@@ -149,19 +149,17 @@ The runtime layer lives under `bindings/runtime/` — **public** packages import
 - **`bindings/runtime/purego`** (package `purego`) — the runtime for every generated framework package (`bindings/frameworks/`). Pure-Go (over `github.com/ebitengine/purego`): `Track`/`Retain`/`Release`, `GoString`/`NSString`, `NSErrorToError` (structured `objcerrors.ObjCError`), `GoCString`. It also re-exports the ObjC dynamic-dispatch surface (`ID`, `SEL`, `Send`, `RegisterName`, `RegisterClass`, `NewBlock`, …) so consumers never import `ebitengine/purego` directly. The `objcerrors` subpackage holds the structured error type.
 - **`bindings/runtime/cgo`** (package `cgo`) — the darwin-only CGo runtime for the C-library packages (`bindings/libraries/`, compiled with `-fno-objc-arc`):
   - `Retain`/`Release`/`Track` — explicit ObjC retain/release; `Track` registers a Go finalizer so the GC automatically releases `+1`-retained objects
-  - `KeepAlive(v)` — wraps `runtime.KeepAlive`; emitted as `defer runtime.KeepAlive(o)` in every generated instance method to prevent the GC from finalizing the receiver before the CGo call completes
+  - `KeepAlive(v)` — wraps `runtime.KeepAlive`; emitted as `defer cgo.KeepAlive(o)` in every generated instance method (and for each ObjC-object argument) to prevent the GC from finalizing the receiver before the CGo call completes
   - `FreePtr(ptr)` — frees a `malloc`-allocated C buffer; used by generated code after copying a value-type struct return into Go memory
   - `RunOnMainThread` — executes a closure on the main GCD queue via `dispatch_sync_f`; required for all AppKit/UIKit calls
   - String conversion between `NSString *` and Go `string`
   - `ClassNameOf(ptr)` — returns the ObjC runtime class name via `object_getClass` + `class_getName`; use this to verify the concrete type before a downcast
-  - `ExceptionReason` — extracts the reason string from a caught ObjC exception pointer
+  - `ExceptionInfoFromPtr`/`ExceptionReason` — extract structured fields (name, reason) from a caught ObjC exception pointer
+  - `RaiseIfException(exc)` — converts a caught ObjC `NSException *` into a Go panic (no-op when nil); calls the `OnException` hook first
+  - `NSErrorToError(ptr)` — converts an ObjC `NSError *` to a Go `error` (and releases the pointer)
+  - `OnException` / `OnCallbackPanic` — optional package-level hooks an application can set at startup to route ObjC exceptions and recovered callback panics to its structured logger
 
-`bindings/runtime/tel/` wraps `go.opentelemetry.io/otel` and is imported by every generated CGo library method:
-- `Call(ctx, recv, spanName)` — opens an OTel span for each ObjC method invocation and keeps the receiver alive across the CGo boundary
-- `RaiseIfException(ctx, exc)` — records the exception on the active span then panics
-- `NSErrorToError(ctx, ptr)` — converts an ObjC `NSError *` to a Go `error` and records it on the span
-
-This means any app that wires up an OTel exporter automatically gets a full distributed trace of every C-library call, correlated with the application's own spans. If no provider is configured, `otel.Tracer()` returns a no-op tracer and the overhead is negligible. (The purego framework packages do not use `tel` — their dispatch is zero-overhead and uninstrumented.)
+Generated CGo library functions and methods take **no** `context.Context` parameter and have **no** telemetry: they call the C bridge directly, then `cgo.RaiseIfException(_exc)` (and `cgo.NSErrorToError(_nsErr)` for `NSError`-returning calls), keeping the receiver and object arguments alive via `defer cgo.KeepAlive(...)`. This matches the zero-overhead, uninstrumented dispatch of the purego framework packages.
 
 ### Block trampoline runtime (`bindings/runtime/blocks/`)
 
@@ -286,6 +284,6 @@ non-negotiable — violations block PRs.
 
 - **ARC disabled**: all bridge `.m` files use `-fno-objc-arc`. Do not mix ARC code with the bridges.
 - **Main thread**: AppKit and any UI-framework calls must be dispatched via `objc.RunOnMainThread`. The generated bindings do not do this automatically — the caller is responsible.
-- **Single permitted external dependency**: `go.opentelemetry.io/otel` (and its stable transitive deps) is an intentional, foundational dependency. Every generated CGo C-library method imports `bindings/runtime/tel`, which uses OTel to trace calls and record exceptions on the active span. Do not add further external dependencies without a compelling reason reviewed by a maintainer.
+- **Single permitted external dependency**: `github.com/ebitengine/purego` is the only non-stdlib dependency, used by the purego framework runtime. The CGo C-library layer has no external runtime dependency (it is pure CGo over `bindings/runtime/cgo`). Do not add further external dependencies without a compelling reason reviewed by a maintainer. (OpenTelemetry was previously a foundational dependency of the CGo libraries layer via `bindings/runtime/tel`; that package and the dependency have been removed — library calls are now `context`-free and uninstrumented.)
 - **darwin-only**: scanner and generator are gated on `//go:build darwin`. Unit tests in `internal/` that don't call Clang run on any platform.
 - **Modifying the generator**: when changing `internal/` or `cmd/generate/`, re-run `go run ./cmd/generate/ bindings` and include updated `frameworks/` in the same PR. If a scanner-side change requires re-scanning a framework, run `go run ./cmd/generate/ scan --framework <Name>` so the new `.gometa.json` lands in the committed `metadata/` tree.

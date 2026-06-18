@@ -140,27 +140,27 @@ func EmitSpecs(w io.Writer, pkgName, rawImportPath string, framework *macosplatf
 			fmt.Fprintf(&body, " and calling ValidateWithError")
 		}
 		fmt.Fprintf(&body, ".\n")
-		fmt.Fprintf(&body, "func Apply%s(ctx context.Context, c *raw.%s, spec %s) error {\n",
+		fmt.Fprintf(&body, "func Apply%s(c *raw.%s, spec %s) error {\n",
 			spec.className, spec.className, specTypeName)
 		for _, f := range spec.fields {
 			if f.isSlice {
 				fmt.Fprintf(&body, "\tif len(spec.%s) > 0 {\n", f.name)
 				fmt.Fprintf(&body, "\t\t_objs := make([]cgo.Object, len(spec.%s))\n", f.name)
 				fmt.Fprintf(&body, "\t\tfor _i, _d := range spec.%s { _objs[_i] = _d }\n", f.name)
-				fmt.Fprintf(&body, "\t\tc.%s(ctx, foundation.NSArrayOf[cgo.Object](ctx, _objs...))\n", f.setter)
+				fmt.Fprintf(&body, "\t\tc.%s(foundation.NSArrayOf[cgo.Object](_objs...))\n", f.setter)
 				fmt.Fprintf(&body, "\t}\n")
 			} else if strings.HasPrefix(f.goType, "*") || f.isInterface {
-				fmt.Fprintf(&body, "\tif spec.%s != nil { c.%s(ctx, spec.%s) }\n", f.name, f.setter, f.name)
+				fmt.Fprintf(&body, "\tif spec.%s != nil { c.%s(spec.%s) }\n", f.name, f.setter, f.name)
 			} else if f.goType == "bool" {
-				fmt.Fprintf(&body, "\tif spec.%s { c.%s(ctx, spec.%s) }\n", f.name, f.setter, f.name)
+				fmt.Fprintf(&body, "\tif spec.%s { c.%s(spec.%s) }\n", f.name, f.setter, f.name)
 			} else if f.isValueStruct {
-				fmt.Fprintf(&body, "\tif spec.%s != (%s{}) { c.%s(ctx, spec.%s) }\n", f.name, f.goType, f.setter, f.name)
+				fmt.Fprintf(&body, "\tif spec.%s != (%s{}) { c.%s(spec.%s) }\n", f.name, f.goType, f.setter, f.name)
 			} else {
-				fmt.Fprintf(&body, "\tif spec.%s != 0 { c.%s(ctx, spec.%s) }\n", f.name, f.setter, f.name)
+				fmt.Fprintf(&body, "\tif spec.%s != 0 { c.%s(spec.%s) }\n", f.name, f.setter, f.name)
 			}
 		}
 		if classHasValidateMethod(framework.Classes[spec.className]) {
-			fmt.Fprintf(&body, "\tif _, err := c.ValidateWithError(ctx); err != nil {\n")
+			fmt.Fprintf(&body, "\tif _, err := c.ValidateWithError(); err != nil {\n")
 			fmt.Fprintf(&body, "\t\treturn err\n")
 			fmt.Fprintf(&body, "\t}\n")
 		}

@@ -244,8 +244,8 @@ func TestProtocolMethodReturn(t *testing.T) {
 	}, nil)
 	out := runProtocols(t, framework)
 
-	if !strings.Contains(out, "Count(ctx context.Context) uint64") {
-		t.Errorf("expected 'Count(ctx context.Context) uint64' in output:\n%s", out)
+	if !strings.Contains(out, "Count() uint64") {
+		t.Errorf("expected 'Count() uint64' in output:\n%s", out)
 	}
 }
 
@@ -294,8 +294,8 @@ func TestProtocolSkipsNilSentinelVariadic(t *testing.T) {
 		t.Errorf("nil-sentinel variadic method LogItems should have been skipped:\n%s", out)
 	}
 	// Non-variadic should still appear.
-	if !strings.Contains(out, "Log(ctx context.Context)") {
-		t.Errorf("expected non-variadic method Log(ctx context.Context):\n%s", out)
+	if !strings.Contains(out, "Log()") {
+		t.Errorf("expected non-variadic method Log():\n%s", out)
 	}
 	// Format-string variadic should appear.
 	if !strings.Contains(out, "LogWithFormat(") {
@@ -319,14 +319,14 @@ func TestProtocolDedupsMethods(t *testing.T) {
 	}, nil)
 	out := runProtocols(t, framework)
 
-	// "Count(ctx context.Context)" should appear exactly once inside the interface body.
-	first := strings.Index(out, "Count(ctx context.Context)")
+	// "Count()" should appear exactly once inside the interface body.
+	first := strings.Index(out, "Count()")
 	if first < 0 {
-		t.Fatalf("expected at least one Count(ctx context.Context) method:\n%s", out)
+		t.Fatalf("expected at least one Count() method:\n%s", out)
 	}
-	second := strings.Index(out[first+1:], "Count(ctx context.Context)")
+	second := strings.Index(out[first+1:], "Count()")
 	if second >= 0 {
-		t.Errorf("Count(ctx context.Context) appears more than once (dedup failed):\n%s", out)
+		t.Errorf("Count() appears more than once (dedup failed):\n%s", out)
 	}
 }
 

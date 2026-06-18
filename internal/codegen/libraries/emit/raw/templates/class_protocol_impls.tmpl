@@ -25,7 +25,6 @@ package {{.PackageName}}
 import "C"
 
 import (
-	"context"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/callbacks"
@@ -39,7 +38,7 @@ import (
 type {{.CallbacksStructName}} struct {
 {{.ImplFields}}}
 
-{{.FactoryComment}}func {{.FactoryName}}(_ context.Context, fns *{{.CallbacksStructName}}) {{.ReturnType}} {
+{{.FactoryComment}}func {{.FactoryName}}(fns *{{.CallbacksStructName}}) {{.ReturnType}} {
 	if fns == nil {
 		return nil
 	}

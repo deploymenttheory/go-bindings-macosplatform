@@ -8,9 +8,8 @@ package applearchive
 import "C"
 
 import (
-	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/bsd"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
@@ -19,1771 +18,1632 @@ var _ unsafe.Pointer // suppress unused import
 // @abstract Sequential write @param s ByteStream @param buf provides the bytes to write @param nbyte number of bytes to write @return number of bytes written on success, and a negative error code on failure or if \p write is not implemented
 // [AAByteStream.h:28]
 // ID: objc-sym AppleArchive.AAByteStreamWrite
-func AAByteStreamWrite(ctx context.Context, s *AAByteStream, buf unsafe.Pointer, nbyte uint64) int64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAByteStreamWrite", s)
-	defer _end()
+func AAByteStreamWrite(s *AAByteStream, buf unsafe.Pointer, nbyte uint64) int64 {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamWrite(_objcPtr_s, buf, C.uint64_t(nbyte), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Random-access write @param s ByteStream @param buf provides the bytes to write @param nbyte number of bytes to write @param offset write location in stream @return number of bytes written on success, and a negative error code on failure or if \p pwrite is not implemented
 // [AAByteStream.h:44]
 // ID: objc-sym AppleArchive.AAByteStreamPWrite
-func AAByteStreamPWrite(ctx context.Context, s *AAByteStream, buf unsafe.Pointer, nbyte uint64, offset int64) int64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAByteStreamPWrite", s)
-	defer _end()
+func AAByteStreamPWrite(s *AAByteStream, buf unsafe.Pointer, nbyte uint64, offset int64) int64 {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamPWrite(_objcPtr_s, buf, C.uint64_t(nbyte), C.int64_t(offset), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Sequential read @param s ByteStream @param buf receives the bytes to read @param nbyte number of bytes to read @return number of bytes read on success, and a negative error code on failure or if \p read is not implemented
 // [AAByteStream.h:60]
 // ID: objc-sym AppleArchive.AAByteStreamRead
-func AAByteStreamRead(ctx context.Context, s *AAByteStream, buf unsafe.Pointer, nbyte uint64) int64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAByteStreamRead", s)
-	defer _end()
+func AAByteStreamRead(s *AAByteStream, buf unsafe.Pointer, nbyte uint64) int64 {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamRead(_objcPtr_s, buf, C.uint64_t(nbyte), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Random-access read @param s ByteStream @param buf receives the bytes to read @param nbyte number of bytes to read @param offset read location in stream @return number of bytes read on success, and a negative error code on failure or if \p pread is not implemented
 // [AAByteStream.h:76]
 // ID: objc-sym AppleArchive.AAByteStreamPRead
-func AAByteStreamPRead(ctx context.Context, s *AAByteStream, buf unsafe.Pointer, nbyte uint64, offset int64) int64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAByteStreamPRead", s)
-	defer _end()
+func AAByteStreamPRead(s *AAByteStream, buf unsafe.Pointer, nbyte uint64, offset int64) int64 {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamPRead(_objcPtr_s, buf, C.uint64_t(nbyte), C.int64_t(offset), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Seek @discussion Set internal stream position to \p offset, relative to \p whence, one of SEEK_SET, SEEK_CUR, SEEK_END @param s ByteStream @param offset new location relative to origin @param whence origin @return the new stream position on success, relative to the beginning of the stream, and a negative value on failure
 // [AAByteStream.h:95]
 // ID: objc-sym AppleArchive.AAByteStreamSeek
-func AAByteStreamSeek(ctx context.Context, s *AAByteStream, offset int64, whence int32) int64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAByteStreamSeek", s)
-	defer _end()
+func AAByteStreamSeek(s *AAByteStream, offset int64, whence int32) int64 {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamSeek(_objcPtr_s, C.int64_t(offset), C.int32_t(whence), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Cancel, the stream still needs to be closed @discussion Asynchronous cancellation. Subsequent calls to the stream are expected to fail. @param s ByteStream
 // [AAByteStream.h:108]
 // ID: objc-sym AppleArchive.AAByteStreamCancel
-func AAByteStreamCancel(ctx context.Context, s *AAByteStream) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAByteStreamCancel", s)
-	defer _end()
+func AAByteStreamCancel(s *AAByteStream) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAByteStreamCancel(_objcPtr_s, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Close stream @discussion Destroy the stream and release all resources.  The stream handle becomes invalid after this call. @param s ByteStream, ignored if NULL @return 0 on success, a negative value on failure
 // [AAByteStream.h:121]
 // ID: objc-sym AppleArchive.AAByteStreamClose
-func AAByteStreamClose(ctx context.Context, s *AAByteStream) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAByteStreamClose", s)
-	defer _end()
+func AAByteStreamClose(s *AAByteStream) int32 {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAByteStreamClose(_objcPtr_s, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Create file stream with an open file descriptor @discussion All calls are directly mapped to the read, write, etc. system calls. @param fd is the opened file descriptor @param automatic_close if not 0, we'll close(fd) when the stream is closed @return a new stream instance on success, and NULL on failure
 // [AAByteStream.h:138]
 // ID: objc-sym AppleArchive.AAFileStreamOpenWithFD
-func AAFileStreamOpenWithFD(ctx context.Context, fd int32, automatic_close int32) *AAByteStream {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFileStreamOpenWithFD")
-	defer _end()
+func AAFileStreamOpenWithFD(fd int32, automatic_close int32) *AAByteStream {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAFileStreamOpenWithFD(C.int32_t(fd), C.int32_t(automatic_close), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAByteStream(_ptr)
 }
 
 // @abstract Open a new file descriptor and create file stream @discussion The file is opened with open(path, open_flags, open_mode). All calls are directly mapped to the read, write, etc. system calls. We will call close(fd) when the stream is destroyed. @param path is the file to open @param open_flags are the flags passed to open(2) @param open_mode is the creation mode passed to open(2) @return a new stream instance on success, and NULL on failure
 // [AAByteStream.h:157]
 // ID: objc-sym AppleArchive.AAFileStreamOpenWithPath
-func AAFileStreamOpenWithPath(ctx context.Context, path string, open_flags int32, open_mode uint16) *AAByteStream {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFileStreamOpenWithPath")
-	defer _end()
+func AAFileStreamOpenWithPath(path string, open_flags int32, open_mode uint16) *AAByteStream {
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAFileStreamOpenWithPath(_cstr_path, C.int32_t(open_flags), C.uint16_t(open_mode), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAByteStream(_ptr)
 }
 
 // @abstract Open a new temporary file descriptor and create a file stream @discussion All calls are directly mapped to the read, write, etc. system calls. AAByteStreamClose will remove the file. @return a new stream instance on success, and NULL on failure
 // [AAByteStream.h:268]
 // ID: objc-sym AppleArchive.AATempFileStreamOpen
-func AATempFileStreamOpen(ctx context.Context) *AAByteStream {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AATempFileStreamOpen")
-	defer _end()
+func AATempFileStreamOpen() *AAByteStream {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AATempFileStreamOpen(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAByteStream(_ptr)
 }
 
 // @abstract Create a shared buffer and associated pair of stream streams @discussion This shared buffer allows data buffering between two threads. The writer thread writes to the buffer through \p ostream and blocks when full, and the reader thread reads from the buffer through \p istream and blocks when empty. If \p ostream receives a write call with nbyte=0, it is considered EOF, and after all data is read, further reads on \p istream will return 0. @param ostream is initialized with a new sequential write stream, writing data to the buffer @param istream is initialized with a new sequential read stream, reading data from the buffer @param buffer_capacity is the size to allocate for the buffer (bytes) @return 0 and set both streams to new instances on success, return a negative error code and set both streams to NULL on failure
 // [AAByteStream.h:287]
 // ID: objc-sym AppleArchive.AASharedBufferPipeOpen
-func AASharedBufferPipeOpen(ctx context.Context, ostream unsafe.Pointer, istream unsafe.Pointer, buffer_capacity uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AASharedBufferPipeOpen")
-	defer _end()
+func AASharedBufferPipeOpen(ostream unsafe.Pointer, istream unsafe.Pointer, buffer_capacity uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AASharedBufferPipeOpen(ostream, istream, C.uint64_t(buffer_capacity), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Process all data of a stream @discussion Read all bytes from \p istream, and write them to \p ostream. @param istream input byte stream @param ostream output byte stream @return number of bytes processed on success, and a negative error code on failure
 // [AAByteStream.h:305]
 // ID: objc-sym AppleArchive.AAByteStreamProcess
-func AAByteStreamProcess(ctx context.Context, istream *AAByteStream, ostream *AAByteStream) int64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAByteStreamProcess", istream, ostream)
-	defer _end()
+func AAByteStreamProcess(istream *AAByteStream, ostream *AAByteStream) int64 {
+	defer cgo.KeepAlive(istream)
+	defer cgo.KeepAlive(ostream)
 	var _objcPtr_istream unsafe.Pointer
 	if istream != nil { _objcPtr_istream = istream.Ptr() }
 	var _objcPtr_ostream unsafe.Pointer
 	if ostream != nil { _objcPtr_ostream = ostream.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int64(C.applearchive_fn_AAByteStreamProcess(_objcPtr_istream, _objcPtr_ostream, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Create a new custom byte stream @discussion All callbacks are initially empty
 // [AACustomByteStream.h:142]
 // ID: objc-sym AppleArchive.AACustomByteStreamOpen
-func AACustomByteStreamOpen(ctx context.Context) *AAByteStream {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomByteStreamOpen")
-	defer _end()
+func AACustomByteStreamOpen() *AAByteStream {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AACustomByteStreamOpen(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAByteStream(_ptr)
 }
 
 // @abstract Set custom byte stream data @discussion This value is passed as first argument to all callbacks @param s target object @param data stream data
 // [AACustomByteStream.h:154]
 // ID: objc-sym AppleArchive.AACustomByteStreamSetData
-func AACustomByteStreamSetData(ctx context.Context, s *AAByteStream, data unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomByteStreamSetData", s)
-	defer _end()
+func AACustomByteStreamSetData(s *AAByteStream, data unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetData(_objcPtr_s, data, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom byte stream close callback @discussion If the stream data is non NULL, a non NULL close callback is mandatory @param s target object @param proc callback
 // [AACustomByteStream.h:166]
 // ID: objc-sym AppleArchive.AACustomByteStreamSetCloseProc
-func AACustomByteStreamSetCloseProc(ctx context.Context, s *AAByteStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomByteStreamSetCloseProc", s)
-	defer _end()
+func AACustomByteStreamSetCloseProc(s *AAByteStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetCloseProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom byte stream read callback @param s target object @param proc callback
 // [AACustomByteStream.h:175]
 // ID: objc-sym AppleArchive.AACustomByteStreamSetReadProc
-func AACustomByteStreamSetReadProc(ctx context.Context, s *AAByteStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomByteStreamSetReadProc", s)
-	defer _end()
+func AACustomByteStreamSetReadProc(s *AAByteStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetReadProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom byte stream pread callback @param s target object @param proc callback
 // [AACustomByteStream.h:184]
 // ID: objc-sym AppleArchive.AACustomByteStreamSetPReadProc
-func AACustomByteStreamSetPReadProc(ctx context.Context, s *AAByteStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomByteStreamSetPReadProc", s)
-	defer _end()
+func AACustomByteStreamSetPReadProc(s *AAByteStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetPReadProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom byte stream write callback @param s target object @param proc callback
 // [AACustomByteStream.h:193]
 // ID: objc-sym AppleArchive.AACustomByteStreamSetWriteProc
-func AACustomByteStreamSetWriteProc(ctx context.Context, s *AAByteStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomByteStreamSetWriteProc", s)
-	defer _end()
+func AACustomByteStreamSetWriteProc(s *AAByteStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetWriteProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom byte stream pwrite callback @param s target object @param proc callback
 // [AACustomByteStream.h:202]
 // ID: objc-sym AppleArchive.AACustomByteStreamSetPWriteProc
-func AACustomByteStreamSetPWriteProc(ctx context.Context, s *AAByteStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomByteStreamSetPWriteProc", s)
-	defer _end()
+func AACustomByteStreamSetPWriteProc(s *AAByteStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetPWriteProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom byte stream seek callback @param s target object @param proc callback
 // [AACustomByteStream.h:211]
 // ID: objc-sym AppleArchive.AACustomByteStreamSetSeekProc
-func AACustomByteStreamSetSeekProc(ctx context.Context, s *AAByteStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomByteStreamSetSeekProc", s)
-	defer _end()
+func AACustomByteStreamSetSeekProc(s *AAByteStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetSeekProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom byte stream cancel callback @param s target object @param proc callback
 // [AACustomByteStream.h:220]
 // ID: objc-sym AppleArchive.AACustomByteStreamSetCancelProc
-func AACustomByteStreamSetCancelProc(ctx context.Context, s *AAByteStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomByteStreamSetCancelProc", s)
-	defer _end()
+func AACustomByteStreamSetCancelProc(s *AAByteStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomByteStreamSetCancelProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Create an empty field key set @return a new non zero instance on success, and NULL on failure
 // [AAFieldKeys.h:29]
 // ID: objc-sym AppleArchive.AAFieldKeySetCreate
-func AAFieldKeySetCreate(ctx context.Context) *AAFieldKeySet {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFieldKeySetCreate")
-	defer _end()
+func AAFieldKeySetCreate() *AAFieldKeySet {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAFieldKeySetCreate(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAFieldKeySet(_ptr)
 }
 
 // @abstract Create a field key set from a string representation @discussion Create a set from 0-terminated string \p s="AAA,BBB,CCC,DDD" (length must be exactly 4*N-1). The keys do not need to be ordered in \p s.  Characters do not need to be uppercase. @param s the string to parse @return a new non zero instance on success, and NULL on failure
 // [AAFieldKeys.h:43]
 // ID: objc-sym AppleArchive.AAFieldKeySetCreateWithString
-func AAFieldKeySetCreateWithString(ctx context.Context, s string) *AAFieldKeySet {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFieldKeySetCreateWithString")
-	defer _end()
+func AAFieldKeySetCreateWithString(s string) *AAFieldKeySet {
 	_cstr_s := C.CString(s)
 	defer C.free(unsafe.Pointer(_cstr_s))
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAFieldKeySetCreateWithString(_cstr_s, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAFieldKeySet(_ptr)
 }
 
 // @abstract Create a clone of a field key set @param key_set object to copy @return a new non zero instance on success, and NULL on failure
 // [AAFieldKeys.h:53]
 // ID: objc-sym AppleArchive.AAFieldKeySetClone
-func AAFieldKeySetClone(ctx context.Context, key_set *AAFieldKeySet) *AAFieldKeySet {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFieldKeySetClone", key_set)
-	defer _end()
+func AAFieldKeySetClone(key_set *AAFieldKeySet) *AAFieldKeySet {
+	defer cgo.KeepAlive(key_set)
 	var _objcPtr_key_set unsafe.Pointer
 	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAFieldKeySetClone(_objcPtr_key_set, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAFieldKeySet(_ptr)
 }
 
 // @abstract Destroy a field key set @discussion Do nothing if \p key_set is NULL @param key_set target object
 // [AAFieldKeys.h:63]
 // ID: objc-sym AppleArchive.AAFieldKeySetDestroy
-func AAFieldKeySetDestroy(ctx context.Context, key_set *AAFieldKeySet) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFieldKeySetDestroy", key_set)
-	defer _end()
+func AAFieldKeySetDestroy(key_set *AAFieldKeySet) {
+	defer cgo.KeepAlive(key_set)
 	var _objcPtr_key_set unsafe.Pointer
 	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAFieldKeySetDestroy(_objcPtr_key_set, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Remove all entries in a field key set @param key_set target object @return 0 on success, a negative error code on failure
 // [AAFieldKeys.h:73]
 // ID: objc-sym AppleArchive.AAFieldKeySetClear
-func AAFieldKeySetClear(ctx context.Context, key_set *AAFieldKeySet) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFieldKeySetClear", key_set)
-	defer _end()
+func AAFieldKeySetClear(key_set *AAFieldKeySet) int32 {
+	defer cgo.KeepAlive(key_set)
 	var _objcPtr_key_set unsafe.Pointer
 	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAFieldKeySetClear(_objcPtr_key_set, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Insert all keys in \p s to \p key_set @discussion key_set = key_set UNION s @param key_set target object @param s set to add @return 0 on success, a negative error code on failure
 // [AAFieldKeys.h:123]
 // ID: objc-sym AppleArchive.AAFieldKeySetInsertKeySet
-func AAFieldKeySetInsertKeySet(ctx context.Context, key_set *AAFieldKeySet, s *AAFieldKeySet) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFieldKeySetInsertKeySet", key_set, s)
-	defer _end()
+func AAFieldKeySetInsertKeySet(key_set *AAFieldKeySet, s *AAFieldKeySet) int32 {
+	defer cgo.KeepAlive(key_set)
+	defer cgo.KeepAlive(s)
 	var _objcPtr_key_set unsafe.Pointer
 	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAFieldKeySetInsertKeySet(_objcPtr_key_set, _objcPtr_s, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Remove all keys in \p s from \p key_set @discussion key_set = key_set INTER (NOT s) @param key_set target object @param s set to remove @return 0 on success, a negative error code on failure
 // [AAFieldKeys.h:136]
 // ID: objc-sym AppleArchive.AAFieldKeySetRemoveKeySet
-func AAFieldKeySetRemoveKeySet(ctx context.Context, key_set *AAFieldKeySet, s *AAFieldKeySet) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFieldKeySetRemoveKeySet", key_set, s)
-	defer _end()
+func AAFieldKeySetRemoveKeySet(key_set *AAFieldKeySet, s *AAFieldKeySet) int32 {
+	defer cgo.KeepAlive(key_set)
+	defer cgo.KeepAlive(s)
 	var _objcPtr_key_set unsafe.Pointer
 	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAFieldKeySetRemoveKeySet(_objcPtr_key_set, _objcPtr_s, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Remove all keys not in \p s from \p key_set @discussion key_set = key_set INTER s @param key_set target object @param s set to remove @return 0 on success, a negative error code on failure
 // [AAFieldKeys.h:149]
 // ID: objc-sym AppleArchive.AAFieldKeySetSelectKeySet
-func AAFieldKeySetSelectKeySet(ctx context.Context, key_set *AAFieldKeySet, s *AAFieldKeySet) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFieldKeySetSelectKeySet", key_set, s)
-	defer _end()
+func AAFieldKeySetSelectKeySet(key_set *AAFieldKeySet, s *AAFieldKeySet) int32 {
+	defer cgo.KeepAlive(key_set)
+	defer cgo.KeepAlive(s)
 	var _objcPtr_key_set unsafe.Pointer
 	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAFieldKeySetSelectKeySet(_objcPtr_key_set, _objcPtr_s, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Field key count @param key_set target object @return number of keys in \p key_set
 // [AAFieldKeys.h:159]
 // ID: objc-sym AppleArchive.AAFieldKeySetGetKeyCount
-func AAFieldKeySetGetKeyCount(ctx context.Context, key_set *AAFieldKeySet) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFieldKeySetGetKeyCount", key_set)
-	defer _end()
+func AAFieldKeySetGetKeyCount(key_set *AAFieldKeySet) uint32 {
+	defer cgo.KeepAlive(key_set)
 	var _objcPtr_key_set unsafe.Pointer
 	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AAFieldKeySetGetKeyCount(_objcPtr_key_set, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Serialize \p key_set to string @param key_set target object @param capacity bytes allocated in \p s, must be at least 4 * NKeys @param s receives the string representation of \p key_set @return 0 on success, a negative error code on failure
 // [AAFieldKeys.h:182]
 // ID: objc-sym AppleArchive.AAFieldKeySetSerialize
-func AAFieldKeySetSerialize(ctx context.Context, key_set *AAFieldKeySet, capacity uint64, s string) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAFieldKeySetSerialize", key_set)
-	defer _end()
+func AAFieldKeySetSerialize(key_set *AAFieldKeySet, capacity uint64, s string) int32 {
+	defer cgo.KeepAlive(key_set)
 	var _objcPtr_key_set unsafe.Pointer
 	if key_set != nil { _objcPtr_key_set = key_set.Ptr() }
 	_cstr_s := C.CString(s)
 	defer C.free(unsafe.Pointer(_cstr_s))
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAFieldKeySetSerialize(_objcPtr_key_set, C.uint64_t(capacity), _cstr_s, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Create an empty Header @return a new non zero instance on success, and NULL on failure
 // [AAHeader.h:24]
 // ID: objc-sym AppleArchive.AAHeaderCreate
-func AAHeaderCreate(ctx context.Context) *AAHeader {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderCreate")
-	defer _end()
+func AAHeaderCreate() *AAHeader {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAHeaderCreate(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAHeader(_ptr)
 }
 
 // @abstract Destroy a Header @param header is the header to destroy, do nothing if NULL
 // [AAHeader.h:32]
 // ID: objc-sym AppleArchive.AAHeaderDestroy
-func AAHeaderDestroy(ctx context.Context, header *AAHeader) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderDestroy", header)
-	defer _end()
+func AAHeaderDestroy(header *AAHeader) {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAHeaderDestroy(_objcPtr_header, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Create a Header and initialize with encoded data @param data_size number of bytes in \p data @param data encoded data to parse @return a non-zero instance on success, and 0 on failure
 // [AAHeader.h:43]
 // ID: objc-sym AppleArchive.AAHeaderCreateWithEncodedData
-func AAHeaderCreateWithEncodedData(ctx context.Context, data_size uint64, data *uint8) *AAHeader {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderCreateWithEncodedData")
-	defer _end()
+func AAHeaderCreateWithEncodedData(data_size uint64, data *uint8) *AAHeader {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAHeaderCreateWithEncodedData(C.uint64_t(data_size), unsafe.Pointer(data), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAHeader(_ptr)
 }
 
 // [AAHeader.h:55]
 // ID: objc-sym AppleArchive.AAHeaderClone
-func AAHeaderClone(ctx context.Context, header *AAHeader) *AAHeader {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderClone", header)
-	defer _end()
+func AAHeaderClone(header *AAHeader) *AAHeader {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAHeaderClone(_objcPtr_header, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAHeader(_ptr)
 }
 
 // @abstract Assign header values @discussion Assign \p from_header contents to \p header @param header is the target header @param from_header is the source header @return 0 on success, and a negative error code on failure
 // [AAHeader.h:69]
 // ID: objc-sym AppleArchive.AAHeaderAssign
-func AAHeaderAssign(ctx context.Context, header *AAHeader, from_header *AAHeader) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderAssign", header, from_header)
-	defer _end()
+func AAHeaderAssign(header *AAHeader, from_header *AAHeader) int32 {
+	defer cgo.KeepAlive(header)
+	defer cgo.KeepAlive(from_header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _objcPtr_from_header unsafe.Pointer
 	if from_header != nil { _objcPtr_from_header = from_header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderAssign(_objcPtr_header, _objcPtr_from_header, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get number of fields in \p header @param header target object @return the number of fields >= 0
 // [AAHeader.h:113]
 // ID: objc-sym AppleArchive.AAHeaderGetFieldCount
-func AAHeaderGetFieldCount(ctx context.Context, header *AAHeader) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderGetFieldCount", header)
-	defer _end()
+func AAHeaderGetFieldCount(header *AAHeader) uint32 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AAHeaderGetFieldCount(_objcPtr_header, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get type for field \p i in \p header @param header target object @param i field index @return one of AA_FIELD_TYPE_... >= 0 on success, and a negative error code on failure
 // [AAHeader.h:138]
 // ID: objc-sym AppleArchive.AAHeaderGetFieldType
-func AAHeaderGetFieldType(ctx context.Context, header *AAHeader, i uint32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderGetFieldType", header)
-	defer _end()
+func AAHeaderGetFieldType(header *AAHeader, i uint32) int32 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldType(_objcPtr_header, C.uint32_t(i), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get payload size, total size of all BLOB fields (64-bit) @param header target object @return payload size >= 0
 // [AAHeader.h:159]
 // ID: objc-sym AppleArchive.AAHeaderGetPayloadSize
-func AAHeaderGetPayloadSize(ctx context.Context, header *AAHeader) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderGetPayloadSize", header)
-	defer _end()
+func AAHeaderGetPayloadSize(header *AAHeader) uint64 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAHeaderGetPayloadSize(_objcPtr_header, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Remove field \p from \p header @param header target object @param i field index @return 0 on success, and a negative error code on failure
 // [AAHeader.h:170]
 // ID: objc-sym AppleArchive.AAHeaderRemoveField
-func AAHeaderRemoveField(ctx context.Context, header *AAHeader, i uint32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderRemoveField", header)
-	defer _end()
+func AAHeaderRemoveField(header *AAHeader, i uint32) int32 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderRemoveField(_objcPtr_header, C.uint32_t(i), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Remove all fields from \p header @param header target object @return 0 on success, and a negative error code on failure
 // [AAHeader.h:180]
 // ID: objc-sym AppleArchive.AAHeaderClear
-func AAHeaderClear(ctx context.Context, header *AAHeader) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderClear", header)
-	defer _end()
+func AAHeaderClear(header *AAHeader) int32 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderClear(_objcPtr_header, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get value for UInt field \p i in \p header @param header target object @param i field index, field type must match the type expected by this function @param value receives the field value @return 0 and set return value on success, and a negative error code on failure
 // [AAHeader.h:355]
 // ID: objc-sym AppleArchive.AAHeaderGetFieldUInt
-func AAHeaderGetFieldUInt(ctx context.Context, header *AAHeader, i uint32, value *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderGetFieldUInt", header)
-	defer _end()
+func AAHeaderGetFieldUInt(header *AAHeader, i uint32, value *uint64) int32 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldUInt(_objcPtr_header, C.uint32_t(i), unsafe.Pointer(value), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get value for String field \p i in \p header @discussion If \p capacity is 0, \p length receives the length of the string, and \p value not accessed. If \p capacity > strlen(string), \p length receives the length of the string, and \p value receives a 0-terminated copy of the string. Otherwise, the call fails. @param header target object @param i field index, field type must match the type expected by this function @param capacity number of bytes available in \p value @param value receives a 0-terminated copy of the field string on success, can be NULL if \p capacity is 0 @param length receives the length of the field string on success, if not NULL @return 0 and set return value on success, and a negative error code on failure (includes insufficient capacity)
 // [AAHeader.h:374]
 // ID: objc-sym AppleArchive.AAHeaderGetFieldString
-func AAHeaderGetFieldString(ctx context.Context, header *AAHeader, i uint32, capacity uint64, value string, length *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderGetFieldString", header)
-	defer _end()
+func AAHeaderGetFieldString(header *AAHeader, i uint32, capacity uint64, value string, length *uint64) int32 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	_cstr_value := C.CString(value)
 	defer C.free(unsafe.Pointer(_cstr_value))
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldString(_objcPtr_header, C.uint32_t(i), C.uint64_t(capacity), _cstr_value, unsafe.Pointer(length), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get value for Hash field \p i in \p header If \p capacity is 0, \p hash_function receives the hash function, and \p value is not accessed @param header target object @param i field index, field type must match the type expected by this function @param capacity number of bytes available in \p value @param hash_function receives the hash function, if not NULL, one of AA_HASH_FUNCTION_* @param value receives the hash value on success, can be NULL if \p capacity is 0 @return 0 and set return value on success, and a negative error code on failure (includes insufficient capacity)
 // [AAHeader.h:389]
 // ID: objc-sym AppleArchive.AAHeaderGetFieldHash
-func AAHeaderGetFieldHash(ctx context.Context, header *AAHeader, i uint32, capacity uint64, hash_function *uint32, value *uint8) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderGetFieldHash", header)
-	defer _end()
+func AAHeaderGetFieldHash(header *AAHeader, i uint32, capacity uint64, hash_function *uint32, value *uint8) int32 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldHash(_objcPtr_header, C.uint32_t(i), C.uint64_t(capacity), unsafe.Pointer(hash_function), unsafe.Pointer(value), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get value for Timespec field \p i in \p header @param header target object @param i field index, field type must match the type expected by this function @param value receives seconds, nanoseconds @return 0 and set return value on success, and a negative error code on failure
 // [AAHeader.h:401]
 // ID: objc-sym AppleArchive.AAHeaderGetFieldTimespec
-func AAHeaderGetFieldTimespec(ctx context.Context, header *AAHeader, i uint32, value *bsd.Timespec) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderGetFieldTimespec", header)
-	defer _end()
+func AAHeaderGetFieldTimespec(header *AAHeader, i uint32, value *bsd.Timespec) int32 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldTimespec(_objcPtr_header, C.uint32_t(i), unsafe.Pointer(value), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get value for Blob field \p i in \p header @param header target object @param i field index, field type must match the type expected by this function @param size receives the blob size @param offset receives the blob offset in the blob section of the entry. Offset 0 is the first byte after the header @return 0 and set return value on success, and a negative error code on failure
 // [AAHeader.h:414]
 // ID: objc-sym AppleArchive.AAHeaderGetFieldBlob
-func AAHeaderGetFieldBlob(ctx context.Context, header *AAHeader, i uint32, size *uint64, offset *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderGetFieldBlob", header)
-	defer _end()
+func AAHeaderGetFieldBlob(header *AAHeader, i uint32, size *uint64, offset *uint64) int32 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAHeaderGetFieldBlob(_objcPtr_header, C.uint32_t(i), unsafe.Pointer(size), unsafe.Pointer(offset), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get header blob size, size of the data blob encoding the header @return header blob size >= 0
 // [AAHeader.h:520]
 // ID: objc-sym AppleArchive.AAHeaderGetEncodedSize
-func AAHeaderGetEncodedSize(ctx context.Context, header *AAHeader) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderGetEncodedSize", header)
-	defer _end()
+func AAHeaderGetEncodedSize(header *AAHeader) uint64 {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAHeaderGetEncodedSize(_objcPtr_header, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get header blob data, encoding the header. This pointer becomes invalid when HEADER is modified, or destroyed. @return a pointer to the read only header blob data on success, and 0 on failure
 // [AAHeader.h:528]
 // ID: objc-sym AppleArchive.AAHeaderGetEncodedData
-func AAHeaderGetEncodedData(ctx context.Context, header *AAHeader) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAHeaderGetEncodedData", header)
-	defer _end()
+func AAHeaderGetEncodedData(header *AAHeader) unsafe.Pointer {
+	defer cgo.KeepAlive(header)
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.applearchive_fn_AAHeaderGetEncodedData(_objcPtr_header, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Create an empty ACL (Access Control List blob) @return a non-zero instance on success, and 0 on failure
 // [AAEntryACLBlob.h:64]
 // ID: objc-sym AppleArchive.AAEntryACLBlobCreate
-func AAEntryACLBlobCreate(ctx context.Context) *AAEntryACLBlob {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobCreate")
-	defer _end()
+func AAEntryACLBlobCreate() *AAEntryACLBlob {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAEntryACLBlobCreate(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAEntryACLBlob(_ptr)
 }
 
 // @abstract Destroy ACL
 // [AAEntryACLBlob.h:70]
 // ID: objc-sym AppleArchive.AAEntryACLBlobDestroy
-func AAEntryACLBlobDestroy(ctx context.Context, acl *AAEntryACLBlob) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobDestroy", acl)
-	defer _end()
+func AAEntryACLBlobDestroy(acl *AAEntryACLBlob) {
+	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
 	if acl != nil { _objcPtr_acl = acl.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAEntryACLBlobDestroy(_objcPtr_acl, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Create from encoded data representing an ACL field @param data encoded data to parse @param data_size number of bytes in \p data @return a non-zero instance on success, and 0 on failure
 // [AAEntryACLBlob.h:82]
 // ID: objc-sym AppleArchive.AAEntryACLBlobCreateWithEncodedData
-func AAEntryACLBlobCreateWithEncodedData(ctx context.Context, data *uint8, data_size uint64) *AAEntryACLBlob {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobCreateWithEncodedData")
-	defer _end()
+func AAEntryACLBlobCreateWithEncodedData(data *uint8, data_size uint64) *AAEntryACLBlob {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAEntryACLBlobCreateWithEncodedData(unsafe.Pointer(data), C.uint64_t(data_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAEntryACLBlob(_ptr)
 }
 
 // @abstract Get number of entries in ACL @return the number of entries >= 0
 // [AAEntryACLBlob.h:128]
 // ID: objc-sym AppleArchive.AAEntryACLBlobGetEntryCount
-func AAEntryACLBlobGetEntryCount(ctx context.Context, acl *AAEntryACLBlob) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobGetEntryCount", acl)
-	defer _end()
+func AAEntryACLBlobGetEntryCount(acl *AAEntryACLBlob) uint32 {
+	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
 	if acl != nil { _objcPtr_acl = acl.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AAEntryACLBlobGetEntryCount(_objcPtr_acl, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get ACL entry contents @discussion Set all fields in \p entry to the contents of entry \p i in \p acl. \p qualifier_size is always set to the actual qualifier size in ACL. If \p qualifier_capacity is 0, \p qualifier_value is not accessed and can be 0. If \p qualifier_capacity >= qualifier_size, \p qualifier_value receives a copy of the qualifier. Otherwise, the call fails. @param acl target object @param i index of entry to get @param ace access control entry @param qualifier_capacity is the number of bytes allocated in \p qualifier_value, or 0 for size query only @param qualifier_value receives the ACE qualifier value if capacity is large enough, not accessed is capacity is 0 @param qualifier_size receives the ACE qualifier size, if not NULL @return 0 on success, and a negative error code on failure
 // [AAEntryACLBlob.h:151]
 // ID: objc-sym AppleArchive.AAEntryACLBlobGetEntry
-func AAEntryACLBlobGetEntry(ctx context.Context, acl *AAEntryACLBlob, i uint32, ace *AAAccessControlEntry, qualifier_capacity uint64, qualifier_value *uint8, qualifier_size *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobGetEntry", acl)
-	defer _end()
+func AAEntryACLBlobGetEntry(acl *AAEntryACLBlob, i uint32, ace *AAAccessControlEntry, qualifier_capacity uint64, qualifier_value *uint8, qualifier_size *uint64) int32 {
+	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
 	if acl != nil { _objcPtr_acl = acl.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryACLBlobGetEntry(_objcPtr_acl, C.uint32_t(i), unsafe.Pointer(ace), C.uint64_t(qualifier_capacity), unsafe.Pointer(qualifier_value), unsafe.Pointer(qualifier_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Append an ACL entry @discussion Append \p entry, \p qualifier_value. \p qualifier_value must point to \p qualifier_size bytes of data @param acl target object @param ace access control entry @param qualifier_value ACE qualifier value, \p qualifier_size bytes @param qualifier_size ACE qualifier size @return 0 on success, and a negative error code on failure
 // [AAEntryACLBlob.h:174]
 // ID: objc-sym AppleArchive.AAEntryACLBlobAppendEntry
-func AAEntryACLBlobAppendEntry(ctx context.Context, acl *AAEntryACLBlob, ace *AAAccessControlEntry, qualifier_value *uint8, qualifier_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobAppendEntry", acl)
-	defer _end()
+func AAEntryACLBlobAppendEntry(acl *AAEntryACLBlob, ace *AAAccessControlEntry, qualifier_value *uint8, qualifier_size uint64) int32 {
+	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
 	if acl != nil { _objcPtr_acl = acl.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryACLBlobAppendEntry(_objcPtr_acl, unsafe.Pointer(ace), unsafe.Pointer(qualifier_value), C.uint64_t(qualifier_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Update an ACL entry @discussion Set entry \p i in ACL to \p entry, \p qualifier_value. \p qualifier_value must point to \p qualifier_size bytes of data @param acl target object @param i index of entry to update @param ace access control entry @param qualifier_size ACE qualifier size @param qualifier_value ACE qualifier value, \p qualifier_size bytes @return 0 on success, and a negative error code on failure
 // [AAEntryACLBlob.h:196]
 // ID: objc-sym AppleArchive.AAEntryACLBlobSetEntry
-func AAEntryACLBlobSetEntry(ctx context.Context, acl *AAEntryACLBlob, i uint32, ace *AAAccessControlEntry, qualifier_value *uint8, qualifier_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobSetEntry", acl)
-	defer _end()
+func AAEntryACLBlobSetEntry(acl *AAEntryACLBlob, i uint32, ace *AAAccessControlEntry, qualifier_value *uint8, qualifier_size uint64) int32 {
+	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
 	if acl != nil { _objcPtr_acl = acl.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryACLBlobSetEntry(_objcPtr_acl, C.uint32_t(i), unsafe.Pointer(ace), unsafe.Pointer(qualifier_value), C.uint64_t(qualifier_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Remove all ACL entries @param acl target object @return 0 on success, and a negative error code on failure
 // [AAEntryACLBlob.h:211]
 // ID: objc-sym AppleArchive.AAEntryACLBlobClear
-func AAEntryACLBlobClear(ctx context.Context, acl *AAEntryACLBlob) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobClear", acl)
-	defer _end()
+func AAEntryACLBlobClear(acl *AAEntryACLBlob) int32 {
+	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
 	if acl != nil { _objcPtr_acl = acl.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryACLBlobClear(_objcPtr_acl, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Remove one ACL entry @param acl target object @param i index of entry to remove @return 0 on success, and a negative error code on failure
 // [AAEntryACLBlob.h:223]
 // ID: objc-sym AppleArchive.AAEntryACLBlobRemoveEntry
-func AAEntryACLBlobRemoveEntry(ctx context.Context, acl *AAEntryACLBlob, i uint32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobRemoveEntry", acl)
-	defer _end()
+func AAEntryACLBlobRemoveEntry(acl *AAEntryACLBlob, i uint32) int32 {
+	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
 	if acl != nil { _objcPtr_acl = acl.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryACLBlobRemoveEntry(_objcPtr_acl, C.uint32_t(i), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get size of the data blob encoding the ACL field @param acl target object @return blob size >= 0
 // [AAEntryACLBlob.h:235]
 // ID: objc-sym AppleArchive.AAEntryACLBlobGetEncodedSize
-func AAEntryACLBlobGetEncodedSize(ctx context.Context, acl *AAEntryACLBlob) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobGetEncodedSize", acl)
-	defer _end()
+func AAEntryACLBlobGetEncodedSize(acl *AAEntryACLBlob) uint64 {
+	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
 	if acl != nil { _objcPtr_acl = acl.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAEntryACLBlobGetEncodedSize(_objcPtr_acl, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get data blob encoding the ACL field @discussion This pointer becomes invalid after ACL is modified, or destroyed. @param acl target object @return a pointer to the ACL blob data on success, and 0 on failure
 // [AAEntryACLBlob.h:248]
 // ID: objc-sym AppleArchive.AAEntryACLBlobGetEncodedData
-func AAEntryACLBlobGetEncodedData(ctx context.Context, acl *AAEntryACLBlob) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryACLBlobGetEncodedData", acl)
-	defer _end()
+func AAEntryACLBlobGetEncodedData(acl *AAEntryACLBlob) unsafe.Pointer {
+	defer cgo.KeepAlive(acl)
 	var _objcPtr_acl unsafe.Pointer
 	if acl != nil { _objcPtr_acl = acl.Ptr() }
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.applearchive_fn_AAEntryACLBlobGetEncodedData(_objcPtr_acl, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Create an empty XAT (extended attributes blob) @return a non-zero instance on success, and 0 on failure
 // [AAEntryXATBlob.h:30]
 // ID: objc-sym AppleArchive.AAEntryXATBlobCreate
-func AAEntryXATBlobCreate(ctx context.Context) *AAEntryXATBlob {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobCreate")
-	defer _end()
+func AAEntryXATBlobCreate() *AAEntryXATBlob {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAEntryXATBlobCreate(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAEntryXATBlob(_ptr)
 }
 
 // @abstract Destroy XAT @param xat target object
 // [AAEntryXATBlob.h:38]
 // ID: objc-sym AppleArchive.AAEntryXATBlobDestroy
-func AAEntryXATBlobDestroy(ctx context.Context, xat *AAEntryXATBlob) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobDestroy", xat)
-	defer _end()
+func AAEntryXATBlobDestroy(xat *AAEntryXATBlob) {
+	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
 	if xat != nil { _objcPtr_xat = xat.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAEntryXATBlobDestroy(_objcPtr_xat, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Create from encoded data representing an XAT field @param data encoded data to parse @param data_size number of bytes in \p data @return a non-zero instance on success, and 0 on failure
 // [AAEntryXATBlob.h:50]
 // ID: objc-sym AppleArchive.AAEntryXATBlobCreateWithEncodedData
-func AAEntryXATBlobCreateWithEncodedData(ctx context.Context, data *uint8, data_size uint64) *AAEntryXATBlob {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobCreateWithEncodedData")
-	defer _end()
+func AAEntryXATBlobCreateWithEncodedData(data *uint8, data_size uint64) *AAEntryXATBlob {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAEntryXATBlobCreateWithEncodedData(unsafe.Pointer(data), C.uint64_t(data_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAEntryXATBlob(_ptr)
 }
 
 // @abstract Get number of entries in XAT @param xat target object @return the number of entries
 // [AAEntryXATBlob.h:98]
 // ID: objc-sym AppleArchive.AAEntryXATBlobGetEntryCount
-func AAEntryXATBlobGetEntryCount(ctx context.Context, xat *AAEntryXATBlob) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobGetEntryCount", xat)
-	defer _end()
+func AAEntryXATBlobGetEntryCount(xat *AAEntryXATBlob) uint32 {
+	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
 	if xat != nil { _objcPtr_xat = xat.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AAEntryXATBlobGetEntryCount(_objcPtr_xat, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get a XAT entry @discussion If \p key_capacity is 0, \p key_length receives strlen(attribute_key), and \p key is not accessed. If \p key_capacity > strlen(attribute_key), \p key_length receives strlen(attribute_key), and \p key receives a 0-terminated copy of attribute_key. Otherwise the call fails. If \p data_capacity is 0, \p data_size receives the attribute_data size, and \p data is not accessed. If \p data_capacity >= attribute_data size, \p data_size receives the attribute_data size, and \p data receives a copy of attribute_data. Otherwise the call fails. @param xat target object @param i index of entry to get @param key_capacity number of bytes allocated in \p key, or 0 for key length query @param key receives 0-terminated key value if \p key_capacity allows it @param key_length receives key length (strlen, does not include final 0), if not NULL @param data_capacity number of bytes allocated in \p data, or 0 for data size query @param data receives data value if \p data_capacity allows it @param data_size receives data size, if not NULL @return 0 on success, and a negative error code on failure
 // [AAEntryXATBlob.h:124]
 // ID: objc-sym AppleArchive.AAEntryXATBlobGetEntry
-func AAEntryXATBlobGetEntry(ctx context.Context, xat *AAEntryXATBlob, i uint32, key_capacity uint64, key string, key_length *uint64, data_capacity uint64, data *uint8, data_size *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobGetEntry", xat)
-	defer _end()
+func AAEntryXATBlobGetEntry(xat *AAEntryXATBlob, i uint32, key_capacity uint64, key string, key_length *uint64, data_capacity uint64, data *uint8, data_size *uint64) int32 {
+	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
 	if xat != nil { _objcPtr_xat = xat.Ptr() }
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryXATBlobGetEntry(_objcPtr_xat, C.uint32_t(i), C.uint64_t(key_capacity), _cstr_key, unsafe.Pointer(key_length), C.uint64_t(data_capacity), unsafe.Pointer(data), unsafe.Pointer(data_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Append a XAT entry @discussion \p key must be 0-terminated, and \p data must point to \p data_size bytes @param xat target object @param key 0-terminated attribute key @param data_size attribute value size in bytes @param data attribute value, \p data_size bytes, can be NULL if data_size is 0 @return 0 on success, and a negative error code on failure
 // [AAEntryXATBlob.h:148]
 // ID: objc-sym AppleArchive.AAEntryXATBlobAppendEntry
-func AAEntryXATBlobAppendEntry(ctx context.Context, xat *AAEntryXATBlob, key string, data *uint8, data_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobAppendEntry", xat)
-	defer _end()
+func AAEntryXATBlobAppendEntry(xat *AAEntryXATBlob, key string, data *uint8, data_size uint64) int32 {
+	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
 	if xat != nil { _objcPtr_xat = xat.Ptr() }
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryXATBlobAppendEntry(_objcPtr_xat, _cstr_key, unsafe.Pointer(data), C.uint64_t(data_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Update a XAT entry @discussion \p key must be 0-terminated, and \p data must point to \p data_size bytes @param xat target object @param i index of entry to update @param key 0-terminated attribute key @param data_size attribute value size in bytes @param data attribute value, \p data_size bytes @return 0 on success, and a negative error code on failure
 // [AAEntryXATBlob.h:169]
 // ID: objc-sym AppleArchive.AAEntryXATBlobSetEntry
-func AAEntryXATBlobSetEntry(ctx context.Context, xat *AAEntryXATBlob, i uint32, key string, data *uint8, data_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobSetEntry", xat)
-	defer _end()
+func AAEntryXATBlobSetEntry(xat *AAEntryXATBlob, i uint32, key string, data *uint8, data_size uint64) int32 {
+	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
 	if xat != nil { _objcPtr_xat = xat.Ptr() }
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryXATBlobSetEntry(_objcPtr_xat, C.uint32_t(i), _cstr_key, unsafe.Pointer(data), C.uint64_t(data_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Remove all XAT entries @param xat target object @return 0 on success, and a negative error code on failure
 // [AAEntryXATBlob.h:184]
 // ID: objc-sym AppleArchive.AAEntryXATBlobClear
-func AAEntryXATBlobClear(ctx context.Context, xat *AAEntryXATBlob) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobClear", xat)
-	defer _end()
+func AAEntryXATBlobClear(xat *AAEntryXATBlob) int32 {
+	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
 	if xat != nil { _objcPtr_xat = xat.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryXATBlobClear(_objcPtr_xat, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Remove an entry from XAT @param xat target object @param i index of entry to remove @return 0 on success, and a negative error code on failure
 // [AAEntryXATBlob.h:196]
 // ID: objc-sym AppleArchive.AAEntryXATBlobRemoveEntry
-func AAEntryXATBlobRemoveEntry(ctx context.Context, xat *AAEntryXATBlob, i uint32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobRemoveEntry", xat)
-	defer _end()
+func AAEntryXATBlobRemoveEntry(xat *AAEntryXATBlob, i uint32) int32 {
+	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
 	if xat != nil { _objcPtr_xat = xat.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAEntryXATBlobRemoveEntry(_objcPtr_xat, C.uint32_t(i), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get blob size, size of the data blob encoding the XAT field @param xat target object @return blob size >= 0 on success, and a negative error code on failure
 // [AAEntryXATBlob.h:208]
 // ID: objc-sym AppleArchive.AAEntryXATBlobGetEncodedSize
-func AAEntryXATBlobGetEncodedSize(ctx context.Context, xat *AAEntryXATBlob) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobGetEncodedSize", xat)
-	defer _end()
+func AAEntryXATBlobGetEncodedSize(xat *AAEntryXATBlob) uint64 {
+	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
 	if xat != nil { _objcPtr_xat = xat.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAEntryXATBlobGetEncodedSize(_objcPtr_xat, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get blob data, encoding the header @discussion This pointer becomes invalid when XAT is modified, or destroyed. @param xat target object @return a pointer to the XAT blob data on success, and 0 on failure
 // [AAEntryXATBlob.h:221]
 // ID: objc-sym AppleArchive.AAEntryXATBlobGetEncodedData
-func AAEntryXATBlobGetEncodedData(ctx context.Context, xat *AAEntryXATBlob) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAEntryXATBlobGetEncodedData", xat)
-	defer _end()
+func AAEntryXATBlobGetEncodedData(xat *AAEntryXATBlob) unsafe.Pointer {
+	defer cgo.KeepAlive(xat)
 	var _objcPtr_xat unsafe.Pointer
 	if xat != nil { _objcPtr_xat = xat.Ptr() }
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.applearchive_fn_AAEntryXATBlobGetEncodedData(_objcPtr_xat, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Create a new path list with a single path @discussion The path list only contains \p path, referring to existing filesystem object \p dir/path @param dir base directory @param path entry path under \p dir @return a new non-NULL instance on success, and NULL on failure
 // [AAPathList.h:56]
 // ID: objc-sym AppleArchive.AAPathListCreateWithPath
-func AAPathListCreateWithPath(ctx context.Context, dir string, path string) *AAPathList {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAPathListCreateWithPath")
-	defer _end()
+func AAPathListCreateWithPath(dir string, path string) *AAPathList {
 	_cstr_dir := C.CString(dir)
 	defer C.free(unsafe.Pointer(_cstr_dir))
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AAPathListCreateWithPath(_cstr_dir, _cstr_path, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAPathList(_ptr)
 }
 
 // @abstract Destroy a path list @discussion Do nothing if \p path_list is NULL @param path_list target object
 // [AAPathList.h:68]
 // ID: objc-sym AppleArchive.AAPathListDestroy
-func AAPathListDestroy(ctx context.Context, path_list *AAPathList) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAPathListDestroy", path_list)
-	defer _end()
+func AAPathListDestroy(path_list *AAPathList) {
+	defer cgo.KeepAlive(path_list)
 	var _objcPtr_path_list unsafe.Pointer
 	if path_list != nil { _objcPtr_path_list = path_list.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAPathListDestroy(_objcPtr_path_list, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Get node path @discussion Let node_path be the path string corresponding to the given node. If \p capacity is 0, \p length receives strlen(node_path), and \p path is not accessed. if \p capacity > strlen(node_path), store a 0-terminated copy of node_path in path, and \p length receives strlen(node_path). Otherwise, return an error. @param path_list target object @param node index of node to retrieve @param path_capacity bytes available in \p path @param path receives a 0-terminated copy of node_path on success @param path_length receives strlen(node_path) on success if not NULL @return 0 on success, and a negative error code on failure
 // [AAPathList.h:89]
 // ID: objc-sym AppleArchive.AAPathListNodeGetPath
-func AAPathListNodeGetPath(ctx context.Context, path_list *AAPathList, node uint64, path_capacity uint64, path string, path_length *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAPathListNodeGetPath", path_list)
-	defer _end()
+func AAPathListNodeGetPath(path_list *AAPathList, node uint64, path_capacity uint64, path string, path_length *uint64) int32 {
+	defer cgo.KeepAlive(path_list)
 	var _objcPtr_path_list unsafe.Pointer
 	if path_list != nil { _objcPtr_path_list = path_list.Ptr() }
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAPathListNodeGetPath(_objcPtr_path_list, C.uint64_t(node), C.uint64_t(path_capacity), _cstr_path, unsafe.Pointer(path_length), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Iterator on non-excluded entries, first node @param path_list target object @return index of first node, or UINT64_MAX if none
 // [AAPathList.h:104]
 // ID: objc-sym AppleArchive.AAPathListNodeFirst
-func AAPathListNodeFirst(ctx context.Context, path_list *AAPathList) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAPathListNodeFirst", path_list)
-	defer _end()
+func AAPathListNodeFirst(path_list *AAPathList) uint64 {
+	defer cgo.KeepAlive(path_list)
 	var _objcPtr_path_list unsafe.Pointer
 	if path_list != nil { _objcPtr_path_list = path_list.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAPathListNodeFirst(_objcPtr_path_list, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstrsct Iterator on non-excluded entries, next node @param path_list target object @paran node current node @return index of next node, or UINT64_MAX if none
 // [AAPathList.h:116]
 // ID: objc-sym AppleArchive.AAPathListNodeNext
-func AAPathListNodeNext(ctx context.Context, path_list *AAPathList, node uint64) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAPathListNodeNext", path_list)
-	defer _end()
+func AAPathListNodeNext(path_list *AAPathList, node uint64) uint64 {
+	defer cgo.KeepAlive(path_list)
 	var _objcPtr_path_list unsafe.Pointer
 	if path_list != nil { _objcPtr_path_list = path_list.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AAPathListNodeNext(_objcPtr_path_list, C.uint64_t(node), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Begin a new entry @discussion All data blobs for the previous entry must have been written before this call. @param s target stream @param header is the header for the new entry @return 0 on success, a negative error code on failure
 // [AAArchiveStream.h:43]
 // ID: objc-sym AppleArchive.AAArchiveStreamWriteHeader
-func AAArchiveStreamWriteHeader(ctx context.Context, s *AAArchiveStream, header *AAHeader) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAArchiveStreamWriteHeader", s, header)
-	defer _end()
+func AAArchiveStreamWriteHeader(s *AAArchiveStream, header *AAHeader) int32 {
+	defer cgo.KeepAlive(s)
+	defer cgo.KeepAlive(header)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _objcPtr_header unsafe.Pointer
 	if header != nil { _objcPtr_header = header.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAArchiveStreamWriteHeader(_objcPtr_s, _objcPtr_header, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get next archive entry header @discussion If \p *header is initially NULL and there is an entry to return, a new \p AAHeader instance is returned, the caller gains ownership of the object, and should destroy it after use. \p *header is allowed to be non NULL when this function is called. In that case, the contents of this existing object will be replaced with the new header contents. @param s the target stream @param header receives the next entry AAHeader object if an entry is found, and is left unchanged otherwise @return 1 and set/update the parameters if an entry is found, 0 if we reached the end of the archive, and a negative error code on failure
 // [AAArchiveStream.h:78]
 // ID: objc-sym AppleArchive.AAArchiveStreamReadHeader
-func AAArchiveStreamReadHeader(ctx context.Context, s *AAArchiveStream, header unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAArchiveStreamReadHeader", s)
-	defer _end()
+func AAArchiveStreamReadHeader(s *AAArchiveStream, header unsafe.Pointer) int32 {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAArchiveStreamReadHeader(_objcPtr_s, header, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Cancel stream @discussion After this call, other stream operations are expected to fail @param s target stream
 // [AAArchiveStream.h:113]
 // ID: objc-sym AppleArchive.AAArchiveStreamCancel
-func AAArchiveStreamCancel(ctx context.Context, s *AAArchiveStream) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAArchiveStreamCancel", s)
-	defer _end()
+func AAArchiveStreamCancel(s *AAArchiveStream) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AAArchiveStreamCancel(_objcPtr_s, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Close an archive output stream @param s target stream, do nothing if NULL
 // [AAArchiveStream.h:121]
 // ID: objc-sym AppleArchive.AAArchiveStreamClose
-func AAArchiveStreamClose(ctx context.Context, s *AAArchiveStream) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AAArchiveStreamClose", s)
-	defer _end()
+func AAArchiveStreamClose(s *AAArchiveStream) int32 {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AAArchiveStreamClose(_objcPtr_s, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Create a new custom archive output stream @discussion All callbacks are initially empty
 // [AACustomArchiveStream.h:51]
 // ID: objc-sym AppleArchive.AACustomArchiveStreamOpen
-func AACustomArchiveStreamOpen(ctx context.Context) *AAArchiveStream {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomArchiveStreamOpen")
-	defer _end()
+func AACustomArchiveStreamOpen() *AAArchiveStream {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AACustomArchiveStreamOpen(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAAArchiveStream(_ptr)
 }
 
 // @abstract Set custom archive stream data @discussion This value is passed as first argument to all callbacks @param s target object @param data stream data
 // [AACustomArchiveStream.h:63]
 // ID: objc-sym AppleArchive.AACustomArchiveStreamSetData
-func AACustomArchiveStreamSetData(ctx context.Context, s *AAArchiveStream, data unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomArchiveStreamSetData", s)
-	defer _end()
+func AACustomArchiveStreamSetData(s *AAArchiveStream, data unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetData(_objcPtr_s, data, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom archive stream close callback @discussion If the stream data is non NULL, a non NULL destructor callback is mandatory @param s target object @param proc callback
 // [AACustomArchiveStream.h:75]
 // ID: objc-sym AppleArchive.AACustomArchiveStreamSetCloseProc
-func AACustomArchiveStreamSetCloseProc(ctx context.Context, s *AAArchiveStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomArchiveStreamSetCloseProc", s)
-	defer _end()
+func AACustomArchiveStreamSetCloseProc(s *AAArchiveStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetCloseProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom archive stream cancel callback @param s target object @param proc callback
 // [AACustomArchiveStream.h:84]
 // ID: objc-sym AppleArchive.AACustomArchiveStreamSetCancelProc
-func AACustomArchiveStreamSetCancelProc(ctx context.Context, s *AAArchiveStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomArchiveStreamSetCancelProc", s)
-	defer _end()
+func AACustomArchiveStreamSetCancelProc(s *AAArchiveStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetCancelProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom archive stream write header callback @param s target object @param proc callback
 // [AACustomArchiveStream.h:93]
 // ID: objc-sym AppleArchive.AACustomArchiveStreamSetWriteHeaderProc
-func AACustomArchiveStreamSetWriteHeaderProc(ctx context.Context, s *AAArchiveStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomArchiveStreamSetWriteHeaderProc", s)
-	defer _end()
+func AACustomArchiveStreamSetWriteHeaderProc(s *AAArchiveStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetWriteHeaderProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom archive stream write blob callback @param s target object @param proc callback
 // [AACustomArchiveStream.h:102]
 // ID: objc-sym AppleArchive.AACustomArchiveStreamSetWriteBlobProc
-func AACustomArchiveStreamSetWriteBlobProc(ctx context.Context, s *AAArchiveStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomArchiveStreamSetWriteBlobProc", s)
-	defer _end()
+func AACustomArchiveStreamSetWriteBlobProc(s *AAArchiveStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetWriteBlobProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom archive stream read header callback @param s target object @param proc callback
 // [AACustomArchiveStream.h:111]
 // ID: objc-sym AppleArchive.AACustomArchiveStreamSetReadHeaderProc
-func AACustomArchiveStreamSetReadHeaderProc(ctx context.Context, s *AAArchiveStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomArchiveStreamSetReadHeaderProc", s)
-	defer _end()
+func AACustomArchiveStreamSetReadHeaderProc(s *AAArchiveStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetReadHeaderProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Set custom archive stream read blob callback @param s target object @param proc callback
 // [AACustomArchiveStream.h:120]
 // ID: objc-sym AppleArchive.AACustomArchiveStreamSetReadBlobProc
-func AACustomArchiveStreamSetReadBlobProc(ctx context.Context, s *AAArchiveStream, proc unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AACustomArchiveStreamSetReadBlobProc", s)
-	defer _end()
+func AACustomArchiveStreamSetReadBlobProc(s *AAArchiveStream, proc unsafe.Pointer) {
+	defer cgo.KeepAlive(s)
 	var _objcPtr_s unsafe.Pointer
 	if s != nil { _objcPtr_s = s.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AACustomArchiveStreamSetReadBlobProc(_objcPtr_s, proc, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Create an empty auth data blob @return a non-zero instance on success, and 0 on failure
 // [AEAAuthData.h:28]
 // ID: objc-sym AppleArchive.AEAAuthDataCreate
-func AEAAuthDataCreate(ctx context.Context) *AEAAuthData {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataCreate")
-	defer _end()
+func AEAAuthDataCreate() *AEAAuthData {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AEAAuthDataCreate(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAEAAuthData(_ptr)
 }
 
 // @abstract Destroy auth data blob @param auth_data target object, can be NULL
 // [AEAAuthData.h:36]
 // ID: objc-sym AppleArchive.AEAAuthDataDestroy
-func AEAAuthDataDestroy(ctx context.Context, auth_data *AEAAuthData) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataDestroy", auth_data)
-	defer _end()
+func AEAAuthDataDestroy(auth_data *AEAAuthData) {
+	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
 	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AEAAuthDataDestroy(_objcPtr_auth_data, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Create from auth data field in context @param context provides the auth data @return a non-zero instance on success, and 0 on failure
 // [AEAAuthData.h:47]
 // ID: objc-sym AppleArchive.AEAAuthDataCreateWithContext
-func AEAAuthDataCreateWithContext(ctx context.Context, context_ *AEAContext) *AEAAuthData {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataCreateWithContext", context_)
-	defer _end()
+func AEAAuthDataCreateWithContext(context_ *AEAContext) *AEAAuthData {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AEAAuthDataCreateWithContext(_objcPtr_context_, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAEAAuthData(_ptr)
 }
 
 // @abstract Get number of entries in auth data @param auth_data target object @return the number of entries
 // [AEAAuthData.h:58]
 // ID: objc-sym AppleArchive.AEAAuthDataGetEntryCount
-func AEAAuthDataGetEntryCount(ctx context.Context, auth_data *AEAAuthData) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataGetEntryCount", auth_data)
-	defer _end()
+func AEAAuthDataGetEntryCount(auth_data *AEAAuthData) uint32 {
+	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
 	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AEAAuthDataGetEntryCount(_objcPtr_auth_data, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get a auth data entry @discussion If \p key_capacity is 0, \p key_length receives strlen(entry_key), and \p key is not accessed. If \p key_capacity > strlen(entry_key), \p key_length receives strlen(entry_key), and \p key receives a 0-terminated copy of entry_key. Otherwise the call fails. If \p data_capacity is 0, \p data_size receives the entry_data size, and \p data is not accessed. If \p data_capacity >= entry_data size, \p data_size receives the entry_data size, and \p data receives a copy of entry_data. Otherwise the call fails. @param auth_data target object @param i index of entry to get @param key_capacity number of bytes allocated in \p key, or 0 for key length query @param key receives 0-terminated key value if \p key_capacity allows it @param key_length receives key length (strlen, does not include final 0), if not NULL @param data_capacity number of bytes allocated in \p data, or 0 for data size query @param data receives data value if \p data_capacity allows it @param data_size receives data size, if not NULL @return 0 on success, and a negative error code on failure
 // [AEAAuthData.h:84]
 // ID: objc-sym AppleArchive.AEAAuthDataGetEntry
-func AEAAuthDataGetEntry(ctx context.Context, auth_data *AEAAuthData, i uint32, key_capacity uint64, key string, key_length *uint64, data_capacity uint64, data *uint8, data_size *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataGetEntry", auth_data)
-	defer _end()
+func AEAAuthDataGetEntry(auth_data *AEAAuthData, i uint32, key_capacity uint64, key string, key_length *uint64, data_capacity uint64, data *uint8, data_size *uint64) int32 {
+	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
 	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAAuthDataGetEntry(_objcPtr_auth_data, C.uint32_t(i), C.uint64_t(key_capacity), _cstr_key, unsafe.Pointer(key_length), C.uint64_t(data_capacity), unsafe.Pointer(data), unsafe.Pointer(data_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Append a auth data entry @discussion \p key must be 0-terminated, and \p data must point to \p data_size bytes @param auth_data target object @param key 0-terminated entry key @param data_size entry value size in bytes @param data entry value, \p data_size bytes, can be NULL if data_size is 0 @return 0 on success, and a negative error code on failure
 // [AEAAuthData.h:108]
 // ID: objc-sym AppleArchive.AEAAuthDataAppendEntry
-func AEAAuthDataAppendEntry(ctx context.Context, auth_data *AEAAuthData, key string, data *uint8, data_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataAppendEntry", auth_data)
-	defer _end()
+func AEAAuthDataAppendEntry(auth_data *AEAAuthData, key string, data *uint8, data_size uint64) int32 {
+	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
 	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAAuthDataAppendEntry(_objcPtr_auth_data, _cstr_key, unsafe.Pointer(data), C.uint64_t(data_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Update a auth data entry @discussion \p key must be 0-terminated, and \p data must point to \p data_size bytes @param auth_data target object @param i index of entry to update @param key 0-terminated entry key @param data_size entry value size in bytes @param data entry value, \p data_size bytes @return 0 on success, and a negative error code on failure
 // [AEAAuthData.h:129]
 // ID: objc-sym AppleArchive.AEAAuthDataSetEntry
-func AEAAuthDataSetEntry(ctx context.Context, auth_data *AEAAuthData, i uint32, key string, data *uint8, data_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataSetEntry", auth_data)
-	defer _end()
+func AEAAuthDataSetEntry(auth_data *AEAAuthData, i uint32, key string, data *uint8, data_size uint64) int32 {
+	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
 	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
 	_cstr_key := C.CString(key)
 	defer C.free(unsafe.Pointer(_cstr_key))
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAAuthDataSetEntry(_objcPtr_auth_data, C.uint32_t(i), _cstr_key, unsafe.Pointer(data), C.uint64_t(data_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Remove all auth data entries @param auth_data target object @return 0 on success, and a negative error code on failure
 // [AEAAuthData.h:144]
 // ID: objc-sym AppleArchive.AEAAuthDataClear
-func AEAAuthDataClear(ctx context.Context, auth_data *AEAAuthData) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataClear", auth_data)
-	defer _end()
+func AEAAuthDataClear(auth_data *AEAAuthData) int32 {
+	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
 	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAAuthDataClear(_objcPtr_auth_data, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Remove an entry from auth data @param auth_data target object @param i index of entry to remove @return 0 on success, and a negative error code on failure
 // [AEAAuthData.h:156]
 // ID: objc-sym AppleArchive.AEAAuthDataRemoveEntry
-func AEAAuthDataRemoveEntry(ctx context.Context, auth_data *AEAAuthData, i uint32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataRemoveEntry", auth_data)
-	defer _end()
+func AEAAuthDataRemoveEntry(auth_data *AEAAuthData, i uint32) int32 {
+	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
 	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAAuthDataRemoveEntry(_objcPtr_auth_data, C.uint32_t(i), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get blob size, size of the data blob encoding the auth data @param auth_data target object @return blob size >= 0 on success, and a negative error code on failure
 // [AEAAuthData.h:168]
 // ID: objc-sym AppleArchive.AEAAuthDataGetEncodedSize
-func AEAAuthDataGetEncodedSize(ctx context.Context, auth_data *AEAAuthData) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataGetEncodedSize", auth_data)
-	defer _end()
+func AEAAuthDataGetEncodedSize(auth_data *AEAAuthData) uint64 {
+	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
 	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AEAAuthDataGetEncodedSize(_objcPtr_auth_data, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get blob data, encoding the header @discussion This pointer becomes invalid when auth_data is modified, or destroyed. @param auth_data target object @return a pointer to the encoded blob data on success, and 0 on failure
 // [AEAAuthData.h:181]
 // ID: objc-sym AppleArchive.AEAAuthDataGetEncodedData
-func AEAAuthDataGetEncodedData(ctx context.Context, auth_data *AEAAuthData) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAAuthDataGetEncodedData", auth_data)
-	defer _end()
+func AEAAuthDataGetEncodedData(auth_data *AEAAuthData) unsafe.Pointer {
+	defer cgo.KeepAlive(auth_data)
 	var _objcPtr_auth_data unsafe.Pointer
 	if auth_data != nil { _objcPtr_auth_data = auth_data.Ptr() }
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.applearchive_fn_AEAAuthDataGetEncodedData(_objcPtr_auth_data, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Create an encryption context from an existing encrypted stream @discussion The new context will be initialized with the archive prologue read from \p encrypted_stream. The caller can then use this context to query the archive profile, unique identifier, and auth data; attach the keys required to open the archive, and eventually open a decryption stream for reading, or open an encryption stream for append. The context must be destroyed after use by calling \p AEAContextDestroy. \p read is called on \p encrypted_stream to read the encrypted prologue and store it in the context. \p encrypted_stream is expected to be positionned on the first byte of the archive magic before this call, and will point to the first byte after the prologue after a successful call. @param encrypted_stream provides encrypted data, only \p read is called, and the entire archive prologue will be read. @return a new context instance on success, NULL on failure
 // [AEAContext.h:52]
 // ID: objc-sym AppleArchive.AEAContextCreateWithEncryptedStream
-func AEAContextCreateWithEncryptedStream(ctx context.Context, encrypted_stream *AAByteStream) *AEAContext {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextCreateWithEncryptedStream", encrypted_stream)
-	defer _end()
+func AEAContextCreateWithEncryptedStream(encrypted_stream *AAByteStream) *AEAContext {
+	defer cgo.KeepAlive(encrypted_stream)
 	var _objcPtr_encrypted_stream unsafe.Pointer
 	if encrypted_stream != nil { _objcPtr_encrypted_stream = encrypted_stream.Ptr() }
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.applearchive_fn_AEAContextCreateWithEncryptedStream(_objcPtr_encrypted_stream, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return NewAEAContext(_ptr)
 }
 
 // @abstract Destroy an encryption context @param context object to destroy, do nothing if NULL
 // [AEAContext.h:60]
 // ID: objc-sym AppleArchive.AEAContextDestroy
-func AEAContextDestroy(ctx context.Context, context_ *AEAContext) {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextDestroy", context_)
-	defer _end()
+func AEAContextDestroy(context_ *AEAContext) {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	C.applearchive_fn_AEAContextDestroy(_objcPtr_context_, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // @abstract Get context profile @param context target object @return context profile
 // [AEAContext.h:155]
 // ID: objc-sym AppleArchive.AEAContextGetProfile
-func AEAContextGetProfile(ctx context.Context, context_ *AEAContext) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextGetProfile", context_)
-	defer _end()
+func AEAContextGetProfile(context_ *AEAContext) uint32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AEAContextGetProfile(_objcPtr_context_, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get profile ciphersuite @param profile profile @return profile ciphersuite
 // [AEAContext.h:164]
 // ID: objc-sym AppleArchive.AEAProfileGetCiphersuite
-func AEAProfileGetCiphersuite(ctx context.Context, profile uint32) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAProfileGetCiphersuite")
-	defer _end()
+func AEAProfileGetCiphersuite(profile uint32) uint32 {
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AEAProfileGetCiphersuite(C.uint32_t(profile), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get profile signature mode @param profile profile @return profile signature mode
 // [AEAContext.h:183]
 // ID: objc-sym AppleArchive.AEAProfileGetSignatureMode
-func AEAProfileGetSignatureMode(ctx context.Context, profile uint32) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAProfileGetSignatureMode")
-	defer _end()
+func AEAProfileGetSignatureMode(profile uint32) uint32 {
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AEAProfileGetSignatureMode(C.uint32_t(profile), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get profile encryption mode @param profile profile @return profile encryption mode
 // [AEAContext.h:202]
 // ID: objc-sym AppleArchive.AEAProfileGetEncryptionMode
-func AEAProfileGetEncryptionMode(ctx context.Context, profile uint32) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAProfileGetEncryptionMode")
-	defer _end()
+func AEAProfileGetEncryptionMode(profile uint32) uint32 {
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AEAProfileGetEncryptionMode(C.uint32_t(profile), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get context padding size, or one of the AEA_CONTEXT_PADDING_* constants @discussion This is available only when encrypting. @param context target object @return context padding mode
 // [AEAContext.h:224]
 // ID: objc-sym AppleArchive.AEAContextGetPaddingSize
-func AEAContextGetPaddingSize(ctx context.Context, context_ *AEAContext) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextGetPaddingSize", context_)
-	defer _end()
+func AEAContextGetPaddingSize(context_ *AEAContext) uint64 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AEAContextGetPaddingSize(_objcPtr_context_, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get context checksum mode @param context target object @return context checksum mode
 // [AEAContext.h:233]
 // ID: objc-sym AppleArchive.AEAContextGetChecksumMode
-func AEAContextGetChecksumMode(ctx context.Context, context_ *AEAContext) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextGetChecksumMode", context_)
-	defer _end()
+func AEAContextGetChecksumMode(context_ *AEAContext) uint32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint32(C.applearchive_fn_AEAContextGetChecksumMode(_objcPtr_context_, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get context compression block size @param context target object @return context compression block size
 // [AEAContext.h:251]
 // ID: objc-sym AppleArchive.AEAContextGetCompressionBlockSize
-func AEAContextGetCompressionBlockSize(ctx context.Context, context_ *AEAContext) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextGetCompressionBlockSize", context_)
-	defer _end()
+func AEAContextGetCompressionBlockSize(context_ *AEAContext) uint64 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AEAContextGetCompressionBlockSize(_objcPtr_context_, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get archive raw data size @param context target object @return Uncompressed size of data stored in archive (as stored in root header)
 // [AEAContext.h:260]
 // ID: objc-sym AppleArchive.AEAContextGetRawSize
-func AEAContextGetRawSize(ctx context.Context, context_ *AEAContext) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextGetRawSize", context_)
-	defer _end()
+func AEAContextGetRawSize(context_ *AEAContext) uint64 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AEAContextGetRawSize(_objcPtr_context_, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get archive container size @param context target object @return Archive container size (as stored in root header)
 // [AEAContext.h:269]
 // ID: objc-sym AppleArchive.AEAContextGetContainerSize
-func AEAContextGetContainerSize(ctx context.Context, context_ *AEAContext) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextGetContainerSize", context_)
-	defer _end()
+func AEAContextGetContainerSize(context_ *AEAContext) uint64 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := uint64(C.applearchive_fn_AEAContextGetContainerSize(_objcPtr_context_, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get context auth data @param context target object @param auth_data_capacity is the number of bytes allocated in \p auth_data, can be 0 to query size @param auth_data receives a copy of the context auth data on success (raw bytes), can be NULL when \p auth_data_capacity is 0 @param auth_data_size receives the auth data size if not NULL (bytes) @return 0 on success, and a negative error code on failure
 // [AEAContext.h:281]
 // ID: objc-sym AppleArchive.AEAContextGetAuthData
-func AEAContextGetAuthData(ctx context.Context, context_ *AEAContext, auth_data_capacity uint64, auth_data *uint8, auth_data_size *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextGetAuthData", context_)
-	defer _end()
+func AEAContextGetAuthData(context_ *AEAContext, auth_data_capacity uint64, auth_data *uint8, auth_data_size *uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextGetAuthData(_objcPtr_context_, C.uint64_t(auth_data_capacity), unsafe.Pointer(auth_data), unsafe.Pointer(auth_data_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get context signature encryption key @discussion This key is needed to sign the archive after it has been closed, without requiring the encryption credentials. @param context target object @param key_capacity bytes allocated in \p key, can be 0 to query size @param key receives the key (raw bytes), can be NULL if \p key_capacity is 0 @param key_size receives the key size if not NULL (bytes) @return 0 on success, and a negative error code on failure
 // [AEAContext.h:308]
 // ID: objc-sym AppleArchive.AEAContextGetSignatureEncryptionKey
-func AEAContextGetSignatureEncryptionKey(ctx context.Context, context_ *AEAContext, key_capacity uint64, key *uint8, key_size *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextGetSignatureEncryptionKey", context_)
-	defer _end()
+func AEAContextGetSignatureEncryptionKey(context_ *AEAContext, key_capacity uint64, key *uint8, key_size *uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextGetSignatureEncryptionKey(_objcPtr_context_, C.uint64_t(key_capacity), unsafe.Pointer(key), unsafe.Pointer(key_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get archive unique identifier @param context target object @param identifier_capacity bytes allocated in \p identifier, can be 0 to query size @param identifier receives the archive identifier (raw bytes), can be NULL if \p identifier_capacity is 0 @param identifier_size receives the archive identifier size if not NULL (bytes) @return 0 on success, and a negative error code on failure
 // [AEAContext.h:333]
 // ID: objc-sym AppleArchive.AEAContextGetArchiveIdentifier
-func AEAContextGetArchiveIdentifier(ctx context.Context, context_ *AEAContext, identifier_capacity uint64, identifier *uint8, identifier_size *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextGetArchiveIdentifier", context_)
-	defer _end()
+func AEAContextGetArchiveIdentifier(context_ *AEAContext, identifier_capacity uint64, identifier *uint8, identifier_size *uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextGetArchiveIdentifier(_objcPtr_context_, C.uint64_t(identifier_capacity), unsafe.Pointer(identifier), unsafe.Pointer(identifier_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Get archive main key @param context target object @param key_capacity bytes allocated in \p key, can be 0 to query size @param key receives the key (raw bytes), can be NULL if \p key_capacity is 0 @param key_size receives the key size if not NULL (bytes) @return 0 on success, and a negative error code on failure
 // [AEAContext.h:358]
 // ID: objc-sym AppleArchive.AEAContextGetMainKey
-func AEAContextGetMainKey(ctx context.Context, context_ *AEAContext, key_capacity uint64, key *uint8, key_size *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextGetMainKey", context_)
-	defer _end()
+func AEAContextGetMainKey(context_ *AEAContext, key_capacity uint64, key *uint8, key_size *uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextGetMainKey(_objcPtr_context_, C.uint64_t(key_capacity), unsafe.Pointer(key), unsafe.Pointer(key_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context compression block size @param context target object @param compression_block_size block size, will be internally clamped to a limited range @return 0 on success, and a negative error code on failure
 // [AEAContext.h:392]
 // ID: objc-sym AppleArchive.AEAContextSetCompressionBlockSize
-func AEAContextSetCompressionBlockSize(ctx context.Context, context_ *AEAContext, compression_block_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetCompressionBlockSize", context_)
-	defer _end()
+func AEAContextSetCompressionBlockSize(context_ *AEAContext, compression_block_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetCompressionBlockSize(_objcPtr_context_, C.uint64_t(compression_block_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context checksum mode @param context target object @param checksum_mode checksum mode @return 0 on success, and a negative error code on failure
 // [AEAContext.h:405]
 // ID: objc-sym AppleArchive.AEAContextSetChecksumMode
-func AEAContextSetChecksumMode(ctx context.Context, context_ *AEAContext, checksum_mode uint32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetChecksumMode", context_)
-	defer _end()
+func AEAContextSetChecksumMode(context_ *AEAContext, checksum_mode uint32) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetChecksumMode(_objcPtr_context_, C.uint32_t(checksum_mode), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context padding size @discussion When encrypting, the final archive size will be multiple of \p padding_size. Valid byte sizes are >= AEA_CONTEXT_PADDING_MIN_SIZE. Special padding schemes are one of AEA_CONTEXT_PADDING_*, including AEA_CONTEXT_PADDING_NONE (0) for no padding. @param context target object @param padding_size requested padding size in bytes if >= AEA_CONTEXT_PADDING_MIN_SIZE, or a special padding scheme AEA_CONTEXT_PADDING_* @return 0 on success, and a negative error code on failure
 // [AEAContext.h:420]
 // ID: objc-sym AppleArchive.AEAContextSetPaddingSize
-func AEAContextSetPaddingSize(ctx context.Context, context_ *AEAContext, padding_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetPaddingSize", context_)
-	defer _end()
+func AEAContextSetPaddingSize(context_ *AEAContext, padding_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetPaddingSize(_objcPtr_context_, C.uint64_t(padding_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context auth data @discussion The auth data is an opaque data blob stored unencrypted in the archive prologue. @param context target object @param auth_data auth data (raw data) @param auth_data_size auth data size (bytes) @return 0 on success, and a negative error code on failure
 // [AEAContext.h:437]
 // ID: objc-sym AppleArchive.AEAContextSetAuthData
-func AEAContextSetAuthData(ctx context.Context, context_ *AEAContext, auth_data *uint8, auth_data_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetAuthData", context_)
-	defer _end()
+func AEAContextSetAuthData(context_ *AEAContext, auth_data *uint8, auth_data_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetAuthData(_objcPtr_context_, unsafe.Pointer(auth_data), C.uint64_t(auth_data_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context signature encryption key @discussion The signature encryption key can be obtained from a context after it has been used to open an encryption stream.  The signature encryption key allows signing the stream after it is closed, without requiring the encryption credentials. i.e. the stream can be signed offline by a process not able to decrypt it. @param context target object @param key key data (raw data) @param key_size key size (bytes) @return 0 on success, a negative error code on failure
 // [AEAContext.h:486]
 // ID: objc-sym AppleArchive.AEAContextSetSignatureEncryptionKey
-func AEAContextSetSignatureEncryptionKey(ctx context.Context, context_ *AEAContext, key *uint8, key_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetSignatureEncryptionKey", context_)
-	defer _end()
+func AEAContextSetSignatureEncryptionKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetSignatureEncryptionKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context symmetric key @discussion Stores a copy of \p key in \p context.  Required to encrypt/decrypt a stream when encryption mode is \b SYMMETRIC. An internal size range is enforced for the key. The caller is expected to enforce key strength policies. @param context target object @param key key (raw data) @param key_size key size (bytes) @return 0 on success, a negative error code on failure
 // [AEAContext.h:513]
 // ID: objc-sym AppleArchive.AEAContextSetSymmetricKey
-func AEAContextSetSymmetricKey(ctx context.Context, context_ *AEAContext, key *uint8, key_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetSymmetricKey", context_)
-	defer _end()
+func AEAContextSetSymmetricKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetSymmetricKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context password @discussion Stores a copy of \p password in \p context.  Required to encrypt/decrypt a stream when encryption mode is \b SCRYPT. An internal size range is enforced for the password. The caller is expected to enforce password strength policies. @param context target object @param password password (raw data) @param password_size password size (bytes) @return 0 on success, a negative error code on failure
 // [AEAContext.h:540]
 // ID: objc-sym AppleArchive.AEAContextSetPassword
-func AEAContextSetPassword(ctx context.Context, context_ *AEAContext, password *uint8, password_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetPassword", context_)
-	defer _end()
+func AEAContextSetPassword(context_ *AEAContext, password *uint8, password_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetPassword(_objcPtr_context_, unsafe.Pointer(password), C.uint64_t(password_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context signing public key (x9.63 representation) @discussion Stores a copy of \p key in \p context.  This is required to open the stream when signature mode is \b ECDSA_P256.  The corresponding private key must be used to sign the archive, and the same key must be passed when opening the archive for decryption. @param context target object @param key key @param key_size key size (bytes) @return 0 on success, a negative error code on failure
 // [AEAContext.h:567]
 // ID: objc-sym AppleArchive.AEAContextSetSigningPublicKey
-func AEAContextSetSigningPublicKey(ctx context.Context, context_ *AEAContext, key *uint8, key_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetSigningPublicKey", context_)
-	defer _end()
+func AEAContextSetSigningPublicKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetSigningPublicKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context signing private key (x9.63 representation) @discussion Stores a copy of \p key in \p context.  This can be passed instead of the signing public key to an encryption stream when signature mode is \b ECDSA_P256.  In that case, the encryption stream will be signed on close. The corresponding public key must be used to decrypt the stream and verify the signature. @param context target object @param key key @param key_size key size (bytes) @return 0 on success, a negative error code on failure
 // [AEAContext.h:594]
 // ID: objc-sym AppleArchive.AEAContextSetSigningPrivateKey
-func AEAContextSetSigningPrivateKey(ctx context.Context, context_ *AEAContext, key *uint8, key_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetSigningPrivateKey", context_)
-	defer _end()
+func AEAContextSetSigningPrivateKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetSigningPrivateKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context recipient public key (x9.63 representation) @discussion Stores a copy of \p key in \p context.  This is required to encrypt a stream when encryption mode is \b ECDHE_P256.  The corresponding private key must be used to decrypt the archive. @param context target object @param key key @param key_size key size (bytes) @return 0 on success, a negative error code on failure
 // [AEAContext.h:620]
 // ID: objc-sym AppleArchive.AEAContextSetRecipientPublicKey
-func AEAContextSetRecipientPublicKey(ctx context.Context, context_ *AEAContext, key *uint8, key_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetRecipientPublicKey", context_)
-	defer _end()
+func AEAContextSetRecipientPublicKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetRecipientPublicKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set context recipient private key (x9.63 representation) @discussion Stores a copy of \p key in \p context.  This is required to decrypt a stream when encryption mode is \b ECDHE_P256. @param context target object @param key key @param key_size key size (bytes) @return 0 on success, a negative error code on failure
 // [AEAContext.h:646]
 // ID: objc-sym AppleArchive.AEAContextSetRecipientPrivateKey
-func AEAContextSetRecipientPrivateKey(ctx context.Context, context_ *AEAContext, key *uint8, key_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetRecipientPrivateKey", context_)
-	defer _end()
+func AEAContextSetRecipientPrivateKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetRecipientPrivateKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Set archive main key @discussion The main key can be obtained from a context after it has been used to open an encryption stream.  The main key allows re-opening the stream to append data to it, and is not intended to be communicated to the archive recipients, or third parties. @param context target object @param key key data (raw data) @param key_size key size (bytes) @return 0 on success, a negative error code on failure
 // [AEAContext.h:673]
 // ID: objc-sym AppleArchive.AEAContextSetMainKey
-func AEAContextSetMainKey(ctx context.Context, context_ *AEAContext, key *uint8, key_size uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextSetMainKey", context_)
-	defer _end()
+func AEAContextSetMainKey(context_ *AEAContext, key *uint8, key_size uint64) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextSetMainKey(_objcPtr_context_, unsafe.Pointer(key), C.uint64_t(key_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Close encryption output stream and collect archive attributes @discussion \p stream must be an encryption stream. This function will close the stream, as if AAByteStreamClose(stream) were called, and collect the archive raw size, archive container size, and archive identifier in \p context. Other fields in \p context are not modified. @param stream is the encryption output stream @param context receives attributes @return 0 on success, a negative error code on failure
 // [AEAStreams.h:84]
 // ID: objc-sym AppleArchive.AEAEncryptionOutputStreamCloseAndUpdateContext
-func AEAEncryptionOutputStreamCloseAndUpdateContext(ctx context.Context, stream *AAByteStream, context_ *AEAContext) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAEncryptionOutputStreamCloseAndUpdateContext", stream, context_)
-	defer _end()
+func AEAEncryptionOutputStreamCloseAndUpdateContext(stream *AAByteStream, context_ *AEAContext) int32 {
+	defer cgo.KeepAlive(stream)
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_stream unsafe.Pointer
 	if stream != nil { _objcPtr_stream = stream.Ptr() }
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAEncryptionOutputStreamCloseAndUpdateContext(_objcPtr_stream, _objcPtr_context_, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Validate decryption keys, and collect archive attributes @discussion \p context must have been created from an encrypted stream.  If the call is successful, \p context is updated with the decrypted archive attributes (raw size, container size, compression algorithm, block size, etc.)  If the call fails, it indicates the provided credentials do not match the archive prologue stored in `context`, either because the keys are invalid, or the prologue could not be authenticated. The same validation and update is done when opening a decryption input stream: it is not necessary to call this function before `AEADecryptionInputStreamOpen` or `AEADecryptionRandomAccessInputStreamOpen`. @param context provides archive encrypted prologue and credentials, receives decrypted attributes @return 0 on success, a negative error code on failure
 // [AEAStreams.h:107]
 // ID: objc-sym AppleArchive.AEAContextDecryptAttributes
-func AEAContextDecryptAttributes(ctx context.Context, context_ *AEAContext) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAContextDecryptAttributes", context_)
-	defer _end()
+func AEAContextDecryptAttributes(context_ *AEAContext) int32 {
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAContextDecryptAttributes(_objcPtr_context_, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // @abstract Sign an encrypted_stream @discussion Must be called on a ByteStream with random read-write access to an encrypted stream, _after_ the stream has been written and closed. \p context needs to be created from the same stream, and populated with the required keys before this call. The function signs the archive prologue (replacing the signature segment with 0x00), using the \p signing_private_key and \p signing_encryption_key in \p context then stores the encrypted signature back in the archive.  Other data in the archive is left unchanged. The private key used to sign the archive must match the signing public key used to create the archive, or unlocking the archive will fail. @param encrypted_stream is the stream to sign @param context provides parameters, keys, and associated data @return 0 on success, a negative error code on failure
 // [AEAStreams.h:193]
 // ID: objc-sym AppleArchive.AEAStreamSign
-func AEAStreamSign(ctx context.Context, encrypted_stream *AAByteStream, context_ *AEAContext) int32 {
-	ctx, _end := tel.Call(ctx, nil, "AppleArchive/AEAStreamSign", encrypted_stream, context_)
-	defer _end()
+func AEAStreamSign(encrypted_stream *AAByteStream, context_ *AEAContext) int32 {
+	defer cgo.KeepAlive(encrypted_stream)
+	defer cgo.KeepAlive(context_)
 	var _objcPtr_encrypted_stream unsafe.Pointer
 	if encrypted_stream != nil { _objcPtr_encrypted_stream = encrypted_stream.Ptr() }
 	var _objcPtr_context_ unsafe.Pointer
 	if context_ != nil { _objcPtr_context_ = context_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := int32(C.applearchive_fn_AEAStreamSign(_objcPtr_encrypted_stream, _objcPtr_context_, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 

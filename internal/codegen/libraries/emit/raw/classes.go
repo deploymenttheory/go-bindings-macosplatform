@@ -193,8 +193,7 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 	emittedInstanceGoNames := make(map[string]bool)
 	emittedClassGoNames := make(map[string]bool)
 	seenVariadicKeys := make(map[string]bool)
-	needsContext := false // true when at least one generated method uses ctx context.Context
-	needsBlocks := false  // true when at least one method argument is a block type
+	needsBlocks := false // true when at least one method argument is a block type
 	for _, method := range cls.Methods {
 		if method.Availability.IsUnavailable {
 			continue
@@ -287,7 +286,6 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 		if err := writeMethod(&body, em, receiver, name, framework.Framework, ctx, m, framework.Classes, allClasses, pkgTypeNames, usedImports); err != nil {
 			return err
 		}
-		needsContext = true
 		if methodHasBlockArgs(method.Params, m) {
 			needsBlocks = true
 		}
@@ -295,9 +293,6 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 
 	// NSCoding/NSSecureCoding convenience methods (non-generic classes only).
 	if !isGeneric && (cls.Availability.IsUnavailable == false) {
-		if classConformsToCoding(cls) {
-			needsContext = true
-		}
 		writeCodingMethods(&body, name, framework.Framework, cls)
 	}
 
@@ -309,7 +304,7 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 	// defines on any foreign ancestor must be emitted here as real Go instance
 	// methods — they cannot be added to the foreign type, and subclasses of this
 	// class inherit them via Go embedding promotion without re-declaration.
-	if err := writeForeignAncestorExtensions(&body, name, receiver, framework, ctx, m, allClasses, pkgTypeNames, usedImports, emittedInstanceGoNames, &needsContext, &needsBlocks); err != nil {
+	if err := writeForeignAncestorExtensions(&body, name, receiver, framework, ctx, m, allClasses, pkgTypeNames, usedImports, emittedInstanceGoNames, &needsBlocks); err != nil {
 		return err
 	}
 
@@ -317,12 +312,6 @@ func EmitClass(w io.Writer, name string, cls macosplatformmetadata.Class, framew
 	allImports := []string{
 		"unsafe",
 		"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo",
-	}
-	if needsContext {
-		allImports = append(allImports,
-			"context",
-			"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel",
-		)
 	}
 	if needsBlocks {
 		allImports = append(allImports, "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks")
@@ -561,7 +550,7 @@ func writeDesignatedInitConstructors(w io.Writer, name string, cls macosplatform
 		// buildGoArgs drops the NSError out-arg (the Init method itself converts it
 		// into a Go error return); we mirror that here and propagate the error if
 		// HasNSError is set.
-		goArgs := append([]string{"ctx context.Context"}, buildGoArgs(method.Params, method.IsNSError, ctx, m, imports)...)
+		goArgs := buildGoArgs(method.Params, method.IsNSError, ctx, m, imports)
 		// Call args: just the resolved names (no type annotations).
 		callNames := buildParamNames(method.Params)
 
@@ -591,8 +580,7 @@ func writeDesignatedInitConstructors(w io.Writer, name string, cls macosplatform
 		// New<Class>(_raw) would register a second finalizer on the same pointer,
 		// causing a double-Release when the GC runs.
 		fmt.Fprintf(w, "\t_obj := %sWithPtr(_raw)\n", name)
-		callWithCtx := append([]string{"ctx"}, callNames...)
-		callExpr := fmt.Sprintf("_obj.%s(%s)", goMethodName, strings.Join(callWithCtx, ", "))
+		callExpr := fmt.Sprintf("_obj.%s(%s)", goMethodName, strings.Join(callNames, ", "))
 		switch {
 		case initReturnsID && method.IsNSError:
 			// id (cgo.Object) return: extract Ptr() to pass to typed constructor.
@@ -654,23 +642,19 @@ func writeCodingMethods(w io.Writer, name, framework string, cls macosplatformme
 	serializeFn := packageName + "_" + name + "_serializeToArchive"
 	deserializeFn := packageName + "_" + name + "_newFromArchive"
 
-	serializeSpan := fmt.Sprintf("%s.%s/archivedDataWithRootObject:requiringSecureCoding:error:", framework, name)
-	deserializeSpan := fmt.Sprintf("%s.%s/unarchivedObjectOfClass:fromData:error:", framework, name)
-
 	// SerializeToArchive — instance method
 	fmt.Fprintf(w, "// SerializeToArchive encodes the receiver using NSKeyedArchiver and returns\n")
 	fmt.Fprintf(w, "// the resulting binary plist data. Requires NSSecureCoding conformance.\n")
-	fmt.Fprintf(w, "func (o *%s) SerializeToArchive(ctx context.Context) ([]byte, error) {\n", name)
-	fmt.Fprintf(w, "\tctx, _end := tel.Call(ctx, o, %q)\n", serializeSpan)
-	fmt.Fprintf(w, "\tdefer _end()\n")
+	fmt.Fprintf(w, "func (o *%s) SerializeToArchive() ([]byte, error) {\n", name)
+	fmt.Fprintf(w, "\tdefer cgo.KeepAlive(o)\n")
 	fmt.Fprintf(w, "\tvar _exc unsafe.Pointer\n")
 	fmt.Fprintf(w, "\tvar _nsErr unsafe.Pointer\n")
 	fmt.Fprintf(w, "\tvar _ptr unsafe.Pointer\n")
 	fmt.Fprintf(w, "\tvar _len C.size_t\n")
 	fmt.Fprintf(w, "\t_ptr = C.%s(o.Ptr(), &_len, &_nsErr, &_exc)\n", serializeFn)
-	fmt.Fprintf(w, "\ttel.RaiseIfException(ctx, _exc)\n")
+	fmt.Fprintf(w, "\tcgo.RaiseIfException(_exc)\n")
 	fmt.Fprintf(w, "\tif _nsErr != nil {\n")
-	fmt.Fprintf(w, "\t\treturn nil, tel.NSErrorToError(ctx, _nsErr)\n")
+	fmt.Fprintf(w, "\t\treturn nil, cgo.NSErrorToError(_nsErr)\n")
 	fmt.Fprintf(w, "\t}\n")
 	fmt.Fprintf(w, "\tif _ptr == nil {\n")
 	fmt.Fprintf(w, "\t\treturn nil, nil\n")
@@ -683,18 +667,16 @@ func writeCodingMethods(w io.Writer, name, framework string, cls macosplatformme
 	// NewXFromArchive — package-level constructor
 	fmt.Fprintf(w, "// New%sFromArchive decodes a %s from binary plist data produced by\n", name, name)
 	fmt.Fprintf(w, "// SerializeToArchive or NSKeyedArchiver.\n")
-	fmt.Fprintf(w, "func New%sFromArchive(ctx context.Context, data []byte) (*%s, error) {\n", name, name)
+	fmt.Fprintf(w, "func New%sFromArchive(data []byte) (*%s, error) {\n", name, name)
 	fmt.Fprintf(w, "\tif len(data) == 0 {\n")
 	fmt.Fprintf(w, "\t\treturn nil, nil\n")
 	fmt.Fprintf(w, "\t}\n")
-	fmt.Fprintf(w, "\tctx, _end := tel.Call(ctx, nil, %q)\n", deserializeSpan)
-	fmt.Fprintf(w, "\tdefer _end()\n")
 	fmt.Fprintf(w, "\tvar _exc unsafe.Pointer\n")
 	fmt.Fprintf(w, "\tvar _nsErr unsafe.Pointer\n")
 	fmt.Fprintf(w, "\t_ptr := unsafe.Pointer(C.%s(unsafe.Pointer(&data[0]), C.size_t(len(data)), &_nsErr, &_exc))\n", deserializeFn)
-	fmt.Fprintf(w, "\ttel.RaiseIfException(ctx, _exc)\n")
+	fmt.Fprintf(w, "\tcgo.RaiseIfException(_exc)\n")
 	fmt.Fprintf(w, "\tif _nsErr != nil {\n")
-	fmt.Fprintf(w, "\t\treturn nil, tel.NSErrorToError(ctx, _nsErr)\n")
+	fmt.Fprintf(w, "\t\treturn nil, cgo.NSErrorToError(_nsErr)\n")
 	fmt.Fprintf(w, "\t}\n")
 	fmt.Fprintf(w, "\treturn New%s(_ptr), nil\n", name)
 	fmt.Fprintf(w, "}\n\n")
@@ -723,7 +705,7 @@ func writeForeignAncestorExtensions(
 	pkgTypeNames map[string]bool,
 	usedImports typemap.ImportSet,
 	alreadyEmittedGoNames map[string]bool,
-	needsContext, needsBlocks *bool,
+	needsBlocks *bool,
 ) error {
 	if len(framework.ForeignExtensions) == 0 {
 		return nil
@@ -789,7 +771,6 @@ func writeForeignAncestorExtensions(
 			if err := writeMethod(w, em, receiver, className, framework.Framework, methodCtx, m, framework.Classes, allClasses, pkgTypeNames, usedImports); err != nil {
 				return err
 			}
-			*needsContext = true
 			if methodHasBlockArgs(method.Params, m) {
 				*needsBlocks = true
 			}
@@ -920,7 +901,7 @@ func writeMethod(w io.Writer, em emittedMethod, receiver string, className, fram
 
 	cFunc := em.cFuncName
 	goName := em.goName // pre-resolved, collision-free
-	goArgs := append([]string{"ctx context.Context"}, buildGoArgs(method.Params, method.IsNSError, methodCtx, m, imports)...)
+	goArgs := buildGoArgs(method.Params, method.IsNSError, methodCtx, m, imports)
 	goRet := buildGoReturn(method, methodCtx, m, className, imports)
 
 	writeContextComments(w, method.Doc, method.SDKFile, method.SDKLine, method.Availability, "")
@@ -995,20 +976,21 @@ func writeClassMethod(w io.Writer, goName, className string, goArgs []string, go
 	fmt.Fprintf(w, "}\n\n")
 }
 
-// writeMethodBody writes the function body: tel.Call span + CGo call + return conversion.
+// writeMethodBody writes the function body: keep-alive defers + CGo call + return conversion.
 func writeMethodBody(w io.Writer, method macosplatformmetadata.Method, cFunc string, isClassMethod bool, ctx typemap.Context, m *typemap.Mapper, fmClasses map[string]macosplatformmetadata.Class, imports typemap.ImportSet) {
 	var preambles []string
 	var keepAlives []string
 	cgoCallArgs := buildCGOCallArgs(method.Params, isClassMethod, method.IsNSError, true, ctx, m, &preambles, &keepAlives, imports)
 
-	spanName := fmt.Sprintf("%s.%s/%s", ctx.Framework, ctx.ClassName, method.Selector)
-	telExtra := buildTelCallExtra(keepAlives)
-	if isClassMethod {
-		fmt.Fprintf(w, "\tctx, _end := tel.Call(ctx, nil, %q%s)\n", spanName, telExtra)
-	} else {
-		fmt.Fprintf(w, "\tctx, _end := tel.Call(ctx, o, %q%s)\n", spanName, telExtra)
+	// Keep the receiver and every ObjC-object argument alive across the CGo call
+	// so the GC cannot finalise the Go wrapper while the callee still holds the
+	// raw pointer.
+	if !isClassMethod {
+		fmt.Fprintf(w, "\tdefer cgo.KeepAlive(o)\n")
 	}
-	fmt.Fprintf(w, "\tdefer _end()\n")
+	for _, ka := range keepAlives {
+		fmt.Fprintf(w, "\tdefer cgo.KeepAlive(%s)\n", ka)
+	}
 
 	// String-to-C-string conversions and block trampolines; their defers run at method exit,
 	// keeping C pointers valid through the CGo call.
@@ -1035,29 +1017,29 @@ func writeMethodBody(w io.Writer, method macosplatformmetadata.Method, cFunc str
 		fmt.Fprintf(w, "\t%s\n", rawCall)
 	}
 
-	fmt.Fprintf(w, "\ttel.RaiseIfException(ctx, _exc)\n")
+	fmt.Fprintf(w, "\tcgo.RaiseIfException(_exc)\n")
 
 	if method.IsNSError {
 		if retType == "" {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn tel.NSErrorToError(ctx, _nsErr)\n\t}\n")
+			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn cgo.NSErrorToError(_nsErr)\n\t}\n")
 			fmt.Fprintf(w, "\treturn nil\n")
 		} else if retType == "cgo.Object" {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn nil, tel.NSErrorToError(ctx, _nsErr)\n\t}\n")
+			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn nil, cgo.NSErrorToError(_nsErr)\n\t}\n")
 			fmt.Fprintf(w, "\treturn cgo.WrapObject(_ptr), nil\n")
 		} else if isObjectReturn(retType) {
 			structType := extractStructType(retType, isClassMethod)
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn nil, tel.NSErrorToError(ctx, _nsErr)\n\t}\n")
+			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn nil, cgo.NSErrorToError(_nsErr)\n\t}\n")
 			writeObjectReturnWithError(w, structType, fmClasses, m)
 		} else if isValueStruct {
 			fmt.Fprintf(w, "\tif _nsErr != nil {\n")
 			fmt.Fprintf(w, "\t\tif _ptr != nil {\n\t\t\tcgo.FreePtr(_ptr)\n\t\t}\n")
-			fmt.Fprintf(w, "\t\treturn %s{}, tel.NSErrorToError(ctx, _nsErr)\n\t}\n", retType)
+			fmt.Fprintf(w, "\t\treturn %s{}, cgo.NSErrorToError(_nsErr)\n\t}\n", retType)
 			fmt.Fprintf(w, "\tif _ptr == nil {\n\t\treturn %s{}, nil\n\t}\n", retType)
 			fmt.Fprintf(w, "\t_result := *(*%s)(unsafe.Pointer(_ptr))\n", retType)
 			fmt.Fprintf(w, "\tcgo.FreePtr(_ptr)\n")
 			fmt.Fprintf(w, "\treturn _result, nil\n")
 		} else {
-			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn _result, tel.NSErrorToError(ctx, _nsErr)\n\t}\n")
+			fmt.Fprintf(w, "\tif _nsErr != nil {\n\t\treturn _result, cgo.NSErrorToError(_nsErr)\n\t}\n")
 			fmt.Fprintf(w, "\treturn _result, nil\n")
 		}
 		return
@@ -1534,16 +1516,6 @@ func methodHasBlockArgs(args []macosplatformmetadata.Param, m *typemap.Mapper) b
 }
 
 // buildCGOCallArgs builds the comma-separated CGo call argument list.
-// buildTelCallExtra returns the variadic suffix appended to tel.Call for the
-// collected ObjC-object argument names — e.g. ", arg1, arg2". Returns ""
-// when there are no ObjC object arguments so the tel.Call line is unchanged.
-func buildTelCallExtra(keepAlives []string) string {
-	if len(keepAlives) == 0 {
-		return ""
-	}
-	return ", " + strings.Join(keepAlives, ", ")
-}
-
 // Instance methods prepend o.Ptr() (the promoted pointer accessor).
 // When withException is true, &_exc is appended as the final argument
 // to match the void **outException out-parameter on every generated bridge function.
@@ -1604,7 +1576,7 @@ func buildCGOCallArgs(args []macosplatformmetadata.Param, isClassMethod, hasNSEr
 
 // goCGoArgExpr converts a Go-typed argument to the CGo call expression.
 // ObjC-object arguments whose wrappers must survive the CGo call are appended
-// to keepAlives so the caller can consolidate them into the tel.Call variadics
+// to keepAlives so the caller can emit defer cgo.KeepAlive for each ObjC-object
 // instead of emitting individual defer cgo.KeepAlive statements.
 func goCGoArgExpr(goType, argName string, m *typemap.Mapper, preambles, keepAlives *[]string) string {
 	switch goType {
@@ -1612,7 +1584,7 @@ func goCGoArgExpr(goType, argName string, m *typemap.Mapper, preambles, keepAliv
 		return argName
 	case "cgo.Object":
 		// Interface value: nil-safe pointer extraction. KeepAlive is handled by
-		// the caller via tel.Call's variadic args rather than a separate defer.
+		// the caller via a defer cgo.KeepAlive on the argument name.
 		varName := "_objcPtr_" + argName
 		*preambles = append(*preambles,
 			"var "+varName+" unsafe.Pointer",
@@ -1678,7 +1650,7 @@ func goCGoArgExpr(goType, argName string, m *typemap.Mapper, preambles, keepAliv
 			return "unsafe.Pointer(" + argName + ")"
 		}
 		// ObjC class wrapper — nil-safe extract of raw pointer via Ptr().
-		// KeepAlive is handled via tel.Call's variadic args so the GC cannot
+		// KeepAlive is handled by the caller (defer cgo.KeepAlive) so the GC cannot
 		// finalize the wrapper before the CGo callee retains the pointer —
 		// e.g. [NSButton setImage:] must retain the image before our bridge
 		// returns, but the compiler may consider the typed pointer dead once
@@ -1895,7 +1867,7 @@ func nsStringOverloadArgs(args []macosplatformmetadata.Param, hasNSError bool, n
 		idxSet[i] = true
 	}
 	resolved := buildParamNames(args)
-	out := []string{"ctx context.Context"}
+	out := []string{}
 	for i, arg := range args {
 		if idxSet[i] {
 			out = append(out, resolved[i]+" string")
@@ -1955,11 +1927,11 @@ func writeNSStringInstanceOverload(w io.Writer, goName, receiver string, method 
 	for i := range method.Params {
 		callArgs = append(callArgs, nsStringConvertArg(resolved[i], idxSet[i], ctx, m, imports))
 	}
-	callWithCtx := append([]string{"ctx"}, callArgs...)
+	callAll := callArgs
 	if goRet != "" {
-		fmt.Fprintf(w, "\treturn o.%s(%s)\n", goName, strings.Join(callWithCtx, ", "))
+		fmt.Fprintf(w, "\treturn o.%s(%s)\n", goName, strings.Join(callAll, ", "))
 	} else {
-		fmt.Fprintf(w, "\to.%s(%s)\n", goName, strings.Join(callWithCtx, ", "))
+		fmt.Fprintf(w, "\to.%s(%s)\n", goName, strings.Join(callAll, ", "))
 	}
 	fmt.Fprintf(w, "}\n\n")
 }
@@ -1992,11 +1964,11 @@ func writeNSStringClassOverload(w io.Writer, goName, className string, method ma
 	for i := range method.Params {
 		callArgs = append(callArgs, nsStringConvertArg(resolved[i], idxSet[i], ctx, m, imports))
 	}
-	callWithCtx := append([]string{"ctx"}, callArgs...)
+	callAll := callArgs
 	if goRet != "" {
-		fmt.Fprintf(w, "\treturn %s%s(%s)\n", className, goName, strings.Join(callWithCtx, ", "))
+		fmt.Fprintf(w, "\treturn %s%s(%s)\n", className, goName, strings.Join(callAll, ", "))
 	} else {
-		fmt.Fprintf(w, "\t%s%s(%s)\n", className, goName, strings.Join(callWithCtx, ", "))
+		fmt.Fprintf(w, "\t%s%s(%s)\n", className, goName, strings.Join(callAll, ", "))
 	}
 	fmt.Fprintf(w, "}\n\n")
 }

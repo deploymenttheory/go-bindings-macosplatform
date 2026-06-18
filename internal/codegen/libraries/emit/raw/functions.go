@@ -73,9 +73,8 @@ func buildFunctionModel(fn macosplatformmetadata.Function, framework, _ string, 
 		retType = m.GoReturnType(fn.Return.ObjCType, ctx, imports)
 	}
 
-	// Build parameter list (ctx first, then mapped ObjC args).
-	goArgs := append([]string{"ctx context.Context"}, buildGoArgs(fn.Params, false, ctx, m, imports)...)
-	params := strings.Join(goArgs, ", ")
+	// Build parameter list (mapped ObjC args).
+	params := strings.Join(buildGoArgs(fn.Params, false, ctx, m, imports), ", ")
 
 	// Build CGo call argument list, collecting preambles and keep-alives.
 	var preambles, keepAlives []string
@@ -91,8 +90,7 @@ func buildFunctionModel(fn macosplatformmetadata.Function, framework, _ string, 
 		GoName:       goName,
 		Params:       params,
 		Ret:          retType,
-		SpanName:     fmt.Sprintf("%s/%s", framework, fn.Name),
-		TelExtra:     buildTelCallExtra(keepAlives),
+		KeepAlives:   keepAlives,
 		Preambles:    preambles,
 		CallBody:     callBody,
 	}
@@ -108,22 +106,22 @@ func buildFunctionCallBody(callExpr, retType string, m *typemap.Mapper) string {
 	switch {
 	case retType == "":
 		fmt.Fprintf(&sb, "\t%s\n", callExpr)
-		fmt.Fprintf(&sb, "\ttel.RaiseIfException(ctx, _exc)\n")
+		fmt.Fprintf(&sb, "\tcgo.RaiseIfException(_exc)\n")
 
 	case retType == "cgo.Object":
 		fmt.Fprintf(&sb, "\t_ptr := unsafe.Pointer(%s)\n", callExpr)
-		fmt.Fprintf(&sb, "\ttel.RaiseIfException(ctx, _exc)\n")
+		fmt.Fprintf(&sb, "\tcgo.RaiseIfException(_exc)\n")
 		fmt.Fprintf(&sb, "\treturn cgo.WrapObject(_ptr)\n")
 
 	case isObjectReturn(retType):
 		structType := strings.TrimPrefix(retType, "*")
 		fmt.Fprintf(&sb, "\t_ptr := unsafe.Pointer(%s)\n", callExpr)
-		fmt.Fprintf(&sb, "\ttel.RaiseIfException(ctx, _exc)\n")
+		fmt.Fprintf(&sb, "\tcgo.RaiseIfException(_exc)\n")
 		fmt.Fprintf(&sb, "\treturn %s\n", objectConstructExpr(structType, "_ptr", nil, m))
 
 	case isValueStructReturn(retType, m):
 		fmt.Fprintf(&sb, "\t_ptr := unsafe.Pointer(%s)\n", callExpr)
-		fmt.Fprintf(&sb, "\ttel.RaiseIfException(ctx, _exc)\n")
+		fmt.Fprintf(&sb, "\tcgo.RaiseIfException(_exc)\n")
 		fmt.Fprintf(&sb, "\tif _ptr == nil {\n\t\treturn %s{}\n\t}\n", retType)
 		fmt.Fprintf(&sb, "\t_result := *(*%s)(unsafe.Pointer(_ptr))\n", retType)
 		fmt.Fprintf(&sb, "\tcgo.FreePtr(_ptr)\n")
@@ -131,7 +129,7 @@ func buildFunctionCallBody(callExpr, retType string, m *typemap.Mapper) string {
 
 	default:
 		fmt.Fprintf(&sb, "\t_result := %s\n", cgoReturnConvert(callExpr, retType, m))
-		fmt.Fprintf(&sb, "\ttel.RaiseIfException(ctx, _exc)\n")
+		fmt.Fprintf(&sb, "\tcgo.RaiseIfException(_exc)\n")
 		fmt.Fprintf(&sb, "\treturn _result\n")
 	}
 
@@ -156,13 +154,10 @@ func buildFunctionsImports(functions []functionModel, usedImports typemap.Import
 
 	set := map[string]bool{"unsafe": true}
 	if len(functions) > 0 {
-		set["context"] = true
-		set["github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"] = true
+		// Every generated wrapper calls cgo.RaiseIfException.
+		set["github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"] = true
 		if bytes.Contains(body, []byte("blocks.MakeBlock_")) {
 			set["github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks"] = true
-		}
-		if bytes.Contains(body, []byte("cgo.")) {
-			set["github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"] = true
 		}
 	}
 	for _, path := range usedImports {
@@ -187,7 +182,7 @@ func writeFunction(w io.Writer, fn macosplatformmetadata.Function, framework str
 	return executeTemplate(w, "functions_file", functionsFileModel{
 		PkgName:   strings.ToLower(framework),
 		FwLower:   packageName,
-		Imports:   []string{"context", "unsafe", "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"},
+		Imports:   []string{"unsafe", "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"},
 		Functions: []functionModel{model},
 	})
 }

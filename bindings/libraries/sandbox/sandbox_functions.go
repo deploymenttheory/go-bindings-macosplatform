@@ -8,8 +8,7 @@ package sandbox
 import "C"
 
 import (
-	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
@@ -21,14 +20,12 @@ var _ unsafe.Pointer // suppress unused import
 // Deprecated: Deprecated in macOS 10.8. No longer supported
 // Return value must not be discarded.
 // ID: objc-sym Sandbox.sandbox_init
-func Sandbox_init(ctx context.Context, profile string, flags uint64, errorbuf unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "Sandbox/sandbox_init")
-	defer _end()
+func Sandbox_init(profile string, flags uint64, errorbuf unsafe.Pointer) int32 {
 	_cstr_profile := C.CString(profile)
 	defer C.free(unsafe.Pointer(_cstr_profile))
 	var _exc unsafe.Pointer
 	_result := int32(C.sandbox_fn_sandbox_init(_cstr_profile, C.uint64_t(flags), errorbuf, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -37,13 +34,11 @@ func Sandbox_init(ctx context.Context, profile string, flags uint64, errorbuf un
 //
 // Deprecated: Deprecated in macOS 10.8. No longer supported
 // ID: objc-sym Sandbox.sandbox_free_error
-func Sandbox_free_error(ctx context.Context, errorbuf string) {
-	ctx, _end := tel.Call(ctx, nil, "Sandbox/sandbox_free_error")
-	defer _end()
+func Sandbox_free_error(errorbuf string) {
 	_cstr_errorbuf := C.CString(errorbuf)
 	defer C.free(unsafe.Pointer(_cstr_errorbuf))
 	var _exc unsafe.Pointer
 	C.sandbox_fn_sandbox_free_error(_cstr_errorbuf, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 

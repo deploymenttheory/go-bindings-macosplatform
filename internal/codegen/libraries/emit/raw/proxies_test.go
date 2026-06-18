@@ -193,12 +193,12 @@ func TestWriteIDProtocolMethodBodyVoidReturn(t *testing.T) {
 		t.Fatal(err)
 	}
 	out := buf.String()
-	// void method should have tel.Call and RaiseIfException
-	if !strings.Contains(out, "tel.Call") {
-		t.Errorf("expected tel.Call in method body; got:\n%s", out)
+	// void method should keep the receiver alive and raise ObjC exceptions.
+	if !strings.Contains(out, "defer cgo.KeepAlive(p)") {
+		t.Errorf("expected defer cgo.KeepAlive(p) in method body; got:\n%s", out)
 	}
-	if !strings.Contains(out, "RaiseIfException") {
-		t.Errorf("expected RaiseIfException; got:\n%s", out)
+	if !strings.Contains(out, "cgo.RaiseIfException(_exc)") {
+		t.Errorf("expected cgo.RaiseIfException(_exc); got:\n%s", out)
 	}
 }
 

@@ -14,8 +14,8 @@ import (
 // For every property whose ObjC type is NSArray<ClassName *> where ClassName
 // belongs to the same framework, two functions are emitted:
 //
-//   - FooList(ctx, recv) []*raw.Foo  — typed getter
-//   - SetFooList(ctx, recv, items)   — typed setter (non-readonly properties only)
+//   - FooList(recv) []*raw.Foo  — typed getter
+//   - SetFooList(recv, items)   — typed setter (non-readonly properties only)
 func EmitSlices(w io.Writer, pkgName, rawImportPath string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool) error {
 	type sliceEntry struct {
 		className string
@@ -89,14 +89,14 @@ func EmitSlices(w io.Writer, pkgName, rawImportPath string, framework *macosplat
 			seen[getterFnName] = true
 			fmt.Fprintf(&body, "// %sList returns the %s of %s as a typed Go slice.\n",
 				e.propName, e.propName, e.className)
-			fmt.Fprintf(&body, "func %sList(ctx context.Context, recv *raw.%s) []*raw.%s {\n",
+			fmt.Fprintf(&body, "func %sList(recv *raw.%s) []*raw.%s {\n",
 				e.propName, e.className, e.elemClass)
-			fmt.Fprintf(&body, "\ta := recv.%s(ctx)\n", e.propName)
+			fmt.Fprintf(&body, "\ta := recv.%s()\n", e.propName)
 			fmt.Fprintf(&body, "\tif a == nil {\n\t\treturn nil\n\t}\n")
-			fmt.Fprintf(&body, "\tn := int(a.Count(ctx))\n")
+			fmt.Fprintf(&body, "\tn := int(a.Count())\n")
 			fmt.Fprintf(&body, "\tout := make([]*raw.%s, n)\n", e.elemClass)
 			fmt.Fprintf(&body, "\tfor i := range n {\n")
-			fmt.Fprintf(&body, "\t\tout[i] = raw.Cast%s(a.ObjectAtIndex(ctx, uint64(i)))\n", e.elemClass)
+			fmt.Fprintf(&body, "\t\tout[i] = raw.Cast%s(a.ObjectAtIndex(uint64(i)))\n", e.elemClass)
 			fmt.Fprintf(&body, "\t}\n")
 			fmt.Fprintf(&body, "\treturn out\n")
 			fmt.Fprintf(&body, "}\n\n")
@@ -110,11 +110,11 @@ func EmitSlices(w io.Writer, pkgName, rawImportPath string, framework *macosplat
 				needsObjc = true
 				fmt.Fprintf(&body, "// Set%sList sets the %s of %s from a typed Go slice.\n",
 					e.propName, e.propName, e.className)
-				fmt.Fprintf(&body, "func Set%sList(ctx context.Context, recv *raw.%s, items []*raw.%s) {\n",
+				fmt.Fprintf(&body, "func Set%sList(recv *raw.%s, items []*raw.%s) {\n",
 					e.propName, e.className, e.elemClass)
 				fmt.Fprintf(&body, "\tobjects := make([]cgo.Object, len(items))\n")
 				fmt.Fprintf(&body, "\tfor i, item := range items {\n\t\tobjects[i] = item\n\t}\n")
-				fmt.Fprintf(&body, "\trecv.Set%s(ctx, foundation.NSArrayOf[cgo.Object](ctx, objects...))\n", e.propName)
+				fmt.Fprintf(&body, "\trecv.Set%s(foundation.NSArrayOf[cgo.Object](objects...))\n", e.propName)
 				fmt.Fprintf(&body, "}\n\n")
 			}
 		}

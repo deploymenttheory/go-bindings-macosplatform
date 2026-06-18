@@ -108,16 +108,15 @@ func EmitAsync(w io.Writer, pkgName, rawImportPath string, framework *macosplatf
 			callArgs = append(callArgs, a.name)
 		}
 		callArgs = append(callArgs, "func(err error) { _ch <- err }")
-		allCallArgs := append([]string{"ctx"}, callArgs...)
 
 		fmt.Fprintf(&body, "// %s calls %s.%s and blocks until the operation completes or ctx is cancelled.\n",
 			e.goName, e.className, e.rawMethod)
 		fmt.Fprintf(&body, "func %s(%s) error {\n", e.goName, strings.Join(params, ", "))
 		fmt.Fprintf(&body, "\t_ch := make(chan error, 1)\n")
 		if e.isClassMethod {
-			fmt.Fprintf(&body, "\traw.%s%s(%s)\n", e.className, e.rawMethod, strings.Join(allCallArgs, ", "))
+			fmt.Fprintf(&body, "\traw.%s%s(%s)\n", e.className, e.rawMethod, strings.Join(callArgs, ", "))
 		} else {
-			fmt.Fprintf(&body, "\trecv.%s(%s)\n", e.rawMethod, strings.Join(allCallArgs, ", "))
+			fmt.Fprintf(&body, "\trecv.%s(%s)\n", e.rawMethod, strings.Join(callArgs, ", "))
 		}
 		fmt.Fprintf(&body, "\tselect {\n")
 		fmt.Fprintf(&body, "\tcase err := <-_ch:\n\t\treturn err\n")
@@ -130,7 +129,8 @@ func EmitAsync(w io.Writer, pkgName, rawImportPath string, framework *macosplatf
 		return nil
 	}
 
-	writeOpinionatedHeader(w, pkgName, rawImportPath, nil, usedImports, false)
+	// The emitted blocking wrappers take ctx for cancellation (select on ctx.Done()).
+	writeOpinionatedHeader(w, pkgName, rawImportPath, map[string]string{"context": "context"}, usedImports, false)
 	_, err := w.Write(body.Bytes())
 	return err
 }

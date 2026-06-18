@@ -25,7 +25,6 @@ package {{.PackageName}}
 import "C"
 
 import (
-	"context"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/callbacks"
@@ -40,7 +39,7 @@ type {{.ClassName}}Overrides struct {
 // overridden methods to the provided Go callbacks.
 // Pass nil for overrides to obtain a plain {{.ClassName}}-compatible instance.
 // The returned *{{.ClassName}} is +1 retained and tracked by the Go GC.
-func New{{.ClassName}}Subclass(_ context.Context, overrides *{{.ClassName}}Overrides) *{{.ClassName}} {
+func New{{.ClassName}}Subclass(overrides *{{.ClassName}}Overrides) *{{.ClassName}} {
 	callbacks.ClassRegistrationMu.Lock()
 	cls := C.{{.GoClassName}}_createClass()
 	if overrides != nil {

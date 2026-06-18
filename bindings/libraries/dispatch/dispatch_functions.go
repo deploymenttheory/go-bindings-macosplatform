@@ -8,10 +8,9 @@ package dispatch
 import "C"
 
 import (
-	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/bsd"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
@@ -21,12 +20,10 @@ var _ unsafe.Pointer // suppress unused import
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_time
-func Dispatch_time(ctx context.Context, when uint64, delta int64) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_time")
-	defer _end()
+func Dispatch_time(when uint64, delta int64) uint64 {
 	var _exc unsafe.Pointer
 	_result := uint64(C.dispatch_fn_dispatch_time(C.uint64_t(when), C.int64_t(delta), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -34,220 +31,182 @@ func Dispatch_time(ctx context.Context, when uint64, delta int64) uint64 {
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_walltime
-func Dispatch_walltime(ctx context.Context, when *bsd.Timespec, delta int64) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_walltime")
-	defer _end()
+func Dispatch_walltime(when *bsd.Timespec, delta int64) uint64 {
 	var _exc unsafe.Pointer
 	_result := uint64(C.dispatch_fn_dispatch_walltime(unsafe.Pointer(when), C.int64_t(delta), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [object.h:93]
 // ID: objc-sym dispatch._dispatch_object_validate
-func _dispatch_object_validate(ctx context.Context, object unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/_dispatch_object_validate")
-	defer _end()
+func _dispatch_object_validate(object unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn__dispatch_object_validate(object, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [object.h:272]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_retain
-func Dispatch_retain(ctx context.Context, object unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_retain")
-	defer _end()
+func Dispatch_retain(object unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_retain(object, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [object.h:300]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_release
-func Dispatch_release(ctx context.Context, object unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_release")
-	defer _end()
+func Dispatch_release(object unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_release(object, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [object.h:325]
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_get_context
-func Dispatch_get_context(ctx context.Context, object unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_get_context")
-	defer _end()
+func Dispatch_get_context(object unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_get_context(object, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [object.h:344]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_set_context
-func Dispatch_set_context(ctx context.Context, object unsafe.Pointer, context_ unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_set_context")
-	defer _end()
+func Dispatch_set_context(object unsafe.Pointer, context_ unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_set_context(object, context_, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [object.h:371]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_set_finalizer_f
-func Dispatch_set_finalizer_f(ctx context.Context, object unsafe.Pointer, finalizer unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_set_finalizer_f")
-	defer _end()
+func Dispatch_set_finalizer_f(object unsafe.Pointer, finalizer unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_set_finalizer_f(object, finalizer, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [object.h:400]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_activate
-func Dispatch_activate(ctx context.Context, object unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_activate")
-	defer _end()
+func Dispatch_activate(object unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_activate(object, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [object.h:424]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_suspend
-func Dispatch_suspend(ctx context.Context, object unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_suspend")
-	defer _end()
+func Dispatch_suspend(object unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_suspend(object, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [object.h:454]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_resume
-func Dispatch_resume(ctx context.Context, object unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_resume")
-	defer _end()
+func Dispatch_resume(object unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_resume(object, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [object.h:497]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_set_qos_class_floor
-func Dispatch_set_qos_class_floor(ctx context.Context, object unsafe.Pointer, qos_class Qos_class_t, relative_priority int32) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_set_qos_class_floor")
-	defer _end()
+func Dispatch_set_qos_class_floor(object unsafe.Pointer, qos_class Qos_class_t, relative_priority int32) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_set_qos_class_floor(object, C.uint32_t(qos_class), C.int32_t(relative_priority), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:239]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_async
-func Dispatch_async(ctx context.Context, queue unsafe.Pointer, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_async")
-	defer _end()
+func Dispatch_async(queue unsafe.Pointer, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_async(queue, _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:270]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_async_f
-func Dispatch_async_f(ctx context.Context, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_async_f")
-	defer _end()
+func Dispatch_async_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_async_f(queue, context_, work, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:314]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_sync
-func Dispatch_sync(ctx context.Context, queue unsafe.Pointer, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_sync")
-	defer _end()
+func Dispatch_sync(queue unsafe.Pointer, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_sync(queue, _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:343]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_sync_f
-func Dispatch_sync_f(ctx context.Context, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_sync_f")
-	defer _end()
+func Dispatch_sync_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_sync_f(queue, context_, work, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:411]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_async_and_wait
-func Dispatch_async_and_wait(ctx context.Context, queue unsafe.Pointer, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_async_and_wait")
-	defer _end()
+func Dispatch_async_and_wait(queue unsafe.Pointer, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_async_and_wait(queue, _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:441]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_async_and_wait_f
-func Dispatch_async_and_wait_f(ctx context.Context, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_async_and_wait_f")
-	defer _end()
+func Dispatch_async_and_wait_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_async_and_wait_f(queue, context_, work, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:514]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_apply
-func Dispatch_apply(ctx context.Context, iterations uint64, queue unsafe.Pointer, block func(uint64)) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_apply")
-	defer _end()
+func Dispatch_apply(iterations uint64, queue unsafe.Pointer, block func(uint64)) {
 	_blk_block := blocks.MakeBlock_void_uint64(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_apply(C.uint64_t(iterations), queue, _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:550]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_apply_f
-func Dispatch_apply_f(ctx context.Context, iterations uint64, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_apply_f")
-	defer _end()
+func Dispatch_apply_f(iterations uint64, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_apply_f(C.uint64_t(iterations), queue, context_, work, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:586]
@@ -256,23 +215,19 @@ func Dispatch_apply_f(ctx context.Context, iterations uint64, queue unsafe.Point
 // Deprecated: Deprecated in macOS 10.9. unsupported interface
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_get_current_queue
-func Dispatch_get_current_queue(ctx context.Context) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_get_current_queue")
-	defer _end()
+func Dispatch_get_current_queue() unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_get_current_queue(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [queue.h:619]
 // ID: objc-sym dispatch.dispatch_get_main_queue
-func Dispatch_get_main_queue(ctx context.Context) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_get_main_queue")
-	defer _end()
+func Dispatch_get_main_queue() unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_get_main_queue(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -280,12 +235,10 @@ func Dispatch_get_main_queue(ctx context.Context) unsafe.Pointer {
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_get_global_queue
-func Dispatch_get_global_queue(ctx context.Context, identifier int64, flags uint64) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_get_global_queue")
-	defer _end()
+func Dispatch_get_global_queue(identifier int64, flags uint64) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_get_global_queue(C.int64_t(identifier), C.uint64_t(flags), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -293,12 +246,10 @@ func Dispatch_get_global_queue(ctx context.Context, identifier int64, flags uint
 // Introduced: macOS 10.12
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_attr_make_initially_inactive
-func Dispatch_queue_attr_make_initially_inactive(ctx context.Context, attr unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_queue_attr_make_initially_inactive")
-	defer _end()
+func Dispatch_queue_attr_make_initially_inactive(attr unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_attr_make_initially_inactive(attr, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -306,12 +257,10 @@ func Dispatch_queue_attr_make_initially_inactive(ctx context.Context, attr unsaf
 // Introduced: macOS 10.12
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_attr_make_with_autorelease_frequency
-func Dispatch_queue_attr_make_with_autorelease_frequency(ctx context.Context, attr unsafe.Pointer, frequency Dispatch_autorelease_frequency_t) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_queue_attr_make_with_autorelease_frequency")
-	defer _end()
+func Dispatch_queue_attr_make_with_autorelease_frequency(attr unsafe.Pointer, frequency Dispatch_autorelease_frequency_t) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_attr_make_with_autorelease_frequency(attr, C.uint64_t(frequency), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -319,12 +268,10 @@ func Dispatch_queue_attr_make_with_autorelease_frequency(ctx context.Context, at
 // Introduced: macOS 10.10
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_attr_make_with_qos_class
-func Dispatch_queue_attr_make_with_qos_class(ctx context.Context, attr unsafe.Pointer, qos_class Qos_class_t, relative_priority int32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_queue_attr_make_with_qos_class")
-	defer _end()
+func Dispatch_queue_attr_make_with_qos_class(attr unsafe.Pointer, qos_class Qos_class_t, relative_priority int32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_attr_make_with_qos_class(attr, C.uint32_t(qos_class), C.int32_t(relative_priority), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -332,14 +279,12 @@ func Dispatch_queue_attr_make_with_qos_class(ctx context.Context, attr unsafe.Po
 // Introduced: macOS 10.12
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_create_with_target
-func Dispatch_queue_create_with_target(ctx context.Context, label string, attr unsafe.Pointer, target unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_queue_create_with_target")
-	defer _end()
+func Dispatch_queue_create_with_target(label string, attr unsafe.Pointer, target unsafe.Pointer) unsafe.Pointer {
 	_cstr_label := C.CString(label)
 	defer C.free(unsafe.Pointer(_cstr_label))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_create_with_target(_cstr_label, attr, target, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -347,14 +292,12 @@ func Dispatch_queue_create_with_target(ctx context.Context, label string, attr u
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_create
-func Dispatch_queue_create(ctx context.Context, label string, attr unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_queue_create")
-	defer _end()
+func Dispatch_queue_create(label string, attr unsafe.Pointer) unsafe.Pointer {
 	_cstr_label := C.CString(label)
 	defer C.free(unsafe.Pointer(_cstr_label))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_create(_cstr_label, attr, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -362,12 +305,10 @@ func Dispatch_queue_create(ctx context.Context, label string, attr unsafe.Pointe
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_get_label
-func Dispatch_queue_get_label(ctx context.Context, queue unsafe.Pointer) string {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_queue_get_label")
-	defer _end()
+func Dispatch_queue_get_label(queue unsafe.Pointer) string {
 	var _exc unsafe.Pointer
 	_result := C.GoString(C.dispatch_fn_dispatch_queue_get_label(queue, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -375,154 +316,128 @@ func Dispatch_queue_get_label(ctx context.Context, queue unsafe.Pointer) string 
 // Introduced: macOS 10.10
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_get_qos_class
-func Dispatch_queue_get_qos_class(ctx context.Context, queue unsafe.Pointer, relative_priority_ptr *int32) Qos_class_t {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_queue_get_qos_class")
-	defer _end()
+func Dispatch_queue_get_qos_class(queue unsafe.Pointer, relative_priority_ptr *int32) Qos_class_t {
 	var _exc unsafe.Pointer
 	_result := Qos_class_t(C.dispatch_fn_dispatch_queue_get_qos_class(queue, unsafe.Pointer(relative_priority_ptr), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [queue.h:1229]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_set_target_queue
-func Dispatch_set_target_queue(ctx context.Context, object unsafe.Pointer, queue unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_set_target_queue")
-	defer _end()
+func Dispatch_set_target_queue(object unsafe.Pointer, queue unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_set_target_queue(object, queue, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1249]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_main
-func Dispatch_main(ctx context.Context) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_main")
-	defer _end()
+func Dispatch_main() {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_main(&_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1278]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_after
-func Dispatch_after(ctx context.Context, when uint64, queue unsafe.Pointer, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_after")
-	defer _end()
+func Dispatch_after(when uint64, queue unsafe.Pointer, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_after(C.uint64_t(when), queue, _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1311]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_after_f
-func Dispatch_after_f(ctx context.Context, when uint64, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_after_f")
-	defer _end()
+func Dispatch_after_f(when uint64, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_after_f(C.uint64_t(when), queue, context_, work, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1358]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_async
-func Dispatch_barrier_async(ctx context.Context, queue unsafe.Pointer, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_barrier_async")
-	defer _end()
+func Dispatch_barrier_async(queue unsafe.Pointer, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_barrier_async(queue, _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1394]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_async_f
-func Dispatch_barrier_async_f(ctx context.Context, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_barrier_async_f")
-	defer _end()
+func Dispatch_barrier_async_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_barrier_async_f(queue, context_, work, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1423]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_sync
-func Dispatch_barrier_sync(ctx context.Context, queue unsafe.Pointer, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_barrier_sync")
-	defer _end()
+func Dispatch_barrier_sync(queue unsafe.Pointer, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_barrier_sync(queue, _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1456]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_barrier_sync_f
-func Dispatch_barrier_sync_f(ctx context.Context, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_barrier_sync_f")
-	defer _end()
+func Dispatch_barrier_sync_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_barrier_sync_f(queue, context_, work, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1485]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_barrier_async_and_wait
-func Dispatch_barrier_async_and_wait(ctx context.Context, queue unsafe.Pointer, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_barrier_async_and_wait")
-	defer _end()
+func Dispatch_barrier_async_and_wait(queue unsafe.Pointer, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_barrier_async_and_wait(queue, _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1519]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_barrier_async_and_wait_f
-func Dispatch_barrier_async_and_wait_f(ctx context.Context, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_barrier_async_and_wait_f")
-	defer _end()
+func Dispatch_barrier_async_and_wait_f(queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_barrier_async_and_wait_f(queue, context_, work, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1562]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_queue_set_specific
-func Dispatch_queue_set_specific(ctx context.Context, queue unsafe.Pointer, key unsafe.Pointer, context_ unsafe.Pointer, destructor unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_queue_set_specific")
-	defer _end()
+func Dispatch_queue_set_specific(queue unsafe.Pointer, key unsafe.Pointer, context_ unsafe.Pointer, destructor unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_queue_set_specific(queue, key, context_, destructor, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1593]
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_get_specific
-func Dispatch_queue_get_specific(ctx context.Context, queue unsafe.Pointer, key unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_queue_get_specific")
-	defer _end()
+func Dispatch_queue_get_specific(queue unsafe.Pointer, key unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_get_specific(queue, key, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -530,57 +445,47 @@ func Dispatch_queue_get_specific(ctx context.Context, queue unsafe.Pointer, key 
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_get_specific
-func Dispatch_get_specific(ctx context.Context, key unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_get_specific")
-	defer _end()
+func Dispatch_get_specific(key unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_get_specific(key, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [queue.h:1675]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_assert_queue
-func Dispatch_assert_queue(ctx context.Context, queue unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_assert_queue")
-	defer _end()
+func Dispatch_assert_queue(queue unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_assert_queue(queue, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1702]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_assert_queue_barrier
-func Dispatch_assert_queue_barrier(ctx context.Context, queue unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_assert_queue_barrier")
-	defer _end()
+func Dispatch_assert_queue_barrier(queue unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_assert_queue_barrier(queue, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1726]
 // Introduced: macOS 10.12
 // ID: objc-sym dispatch.dispatch_assert_queue_not
-func Dispatch_assert_queue_not(ctx context.Context, queue unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_assert_queue_not")
-	defer _end()
+func Dispatch_assert_queue_not(queue unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_assert_queue_not(queue, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [queue.h:1800]
 // Introduced: macOS 14.4
 // ID: objc-sym dispatch.dispatch_allow_send_signals
-func Dispatch_allow_send_signals(ctx context.Context, preserve_signum int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_allow_send_signals")
-	defer _end()
+func Dispatch_allow_send_signals(preserve_signum int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.dispatch_fn_dispatch_allow_send_signals(C.int32_t(preserve_signum), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -588,14 +493,12 @@ func Dispatch_allow_send_signals(ctx context.Context, preserve_signum int32) int
 // Introduced: macOS 10.10
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_block_create
-func Dispatch_block_create(ctx context.Context, flags Dispatch_block_flags_t, block func()) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_block_create")
-	defer _end()
+func Dispatch_block_create(flags Dispatch_block_flags_t, block func()) unsafe.Pointer {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_block_create(C.uint64_t(flags), _blk_block, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -603,84 +506,72 @@ func Dispatch_block_create(ctx context.Context, flags Dispatch_block_flags_t, bl
 // Introduced: macOS 10.10
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_block_create_with_qos_class
-func Dispatch_block_create_with_qos_class(ctx context.Context, flags Dispatch_block_flags_t, qos_class Qos_class_t, relative_priority int32, block func()) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_block_create_with_qos_class")
-	defer _end()
+func Dispatch_block_create_with_qos_class(flags Dispatch_block_flags_t, qos_class Qos_class_t, relative_priority int32, block func()) unsafe.Pointer {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_block_create_with_qos_class(C.uint64_t(flags), C.uint32_t(qos_class), C.int32_t(relative_priority), _blk_block, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [block.h:287]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_perform
-func Dispatch_block_perform(ctx context.Context, flags Dispatch_block_flags_t, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_block_perform")
-	defer _end()
+func Dispatch_block_perform(flags Dispatch_block_flags_t, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_block_perform(C.uint64_t(flags), _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [block.h:339]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_wait
-func Dispatch_block_wait(ctx context.Context, block func(), timeout uint64) int64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_block_wait")
-	defer _end()
+func Dispatch_block_wait(block func(), timeout uint64) int64 {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	_result := int64(C.dispatch_fn_dispatch_block_wait(_blk_block, C.uint64_t(timeout), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [block.h:381]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_notify
-func Dispatch_block_notify(ctx context.Context, block func(), queue unsafe.Pointer, notification_block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_block_notify")
-	defer _end()
+func Dispatch_block_notify(block func(), queue unsafe.Pointer, notification_block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	_blk_notification_block := blocks.MakeBlock_void(notification_block)
 	defer blocks.FreeBlock(_blk_notification_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_block_notify(_blk_block, queue, _blk_notification_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [block.h:414]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_cancel
-func Dispatch_block_cancel(ctx context.Context, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_block_cancel")
-	defer _end()
+func Dispatch_block_cancel(block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_block_cancel(_blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [block.h:435]
 // Introduced: macOS 10.10
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_block_testcancel
-func Dispatch_block_testcancel(ctx context.Context, block func()) int64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_block_testcancel")
-	defer _end()
+func Dispatch_block_testcancel(block func()) int64 {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	_result := int64(C.dispatch_fn_dispatch_block_testcancel(_blk_block, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -688,86 +579,73 @@ func Dispatch_block_testcancel(ctx context.Context, block func()) int64 {
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_create
-func Dispatch_source_create(ctx context.Context, type_ *Dispatch_source_type_t, handle uint64, mask uint64, queue unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_create", type_)
-	defer _end()
+func Dispatch_source_create(type_ *Dispatch_source_type_t, handle uint64, mask uint64, queue unsafe.Pointer) unsafe.Pointer {
+	defer cgo.KeepAlive(type_)
 	var _objcPtr_type_ unsafe.Pointer
 	if type_ != nil { _objcPtr_type_ = type_.Ptr() }
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_source_create(_objcPtr_type_, C.uint64_t(handle), C.uint64_t(mask), queue, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [source.h:423]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_event_handler
-func Dispatch_source_set_event_handler(ctx context.Context, source unsafe.Pointer, handler func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_set_event_handler")
-	defer _end()
+func Dispatch_source_set_event_handler(source unsafe.Pointer, handler func()) {
 	_blk_handler := blocks.MakeBlock_void(handler)
 	defer blocks.FreeBlock(_blk_handler)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_source_set_event_handler(source, _blk_handler, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [source.h:446]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_event_handler_f
-func Dispatch_source_set_event_handler_f(ctx context.Context, source unsafe.Pointer, handler unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_set_event_handler_f")
-	defer _end()
+func Dispatch_source_set_event_handler_f(source unsafe.Pointer, handler unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_source_set_event_handler_f(source, handler, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [source.h:482]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_cancel_handler
-func Dispatch_source_set_cancel_handler(ctx context.Context, source unsafe.Pointer, handler func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_set_cancel_handler")
-	defer _end()
+func Dispatch_source_set_cancel_handler(source unsafe.Pointer, handler func()) {
 	_blk_handler := blocks.MakeBlock_void(handler)
 	defer blocks.FreeBlock(_blk_handler)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_source_set_cancel_handler(source, _blk_handler, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [source.h:508]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_cancel_handler_f
-func Dispatch_source_set_cancel_handler_f(ctx context.Context, source unsafe.Pointer, handler unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_set_cancel_handler_f")
-	defer _end()
+func Dispatch_source_set_cancel_handler_f(source unsafe.Pointer, handler unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_source_set_cancel_handler_f(source, handler, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [source.h:537]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_cancel
-func Dispatch_source_cancel(ctx context.Context, source unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_cancel")
-	defer _end()
+func Dispatch_source_cancel(source unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_source_cancel(source, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [source.h:557]
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_testcancel
-func Dispatch_source_testcancel(ctx context.Context, source unsafe.Pointer) int64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_testcancel")
-	defer _end()
+func Dispatch_source_testcancel(source unsafe.Pointer) int64 {
 	var _exc unsafe.Pointer
 	_result := int64(C.dispatch_fn_dispatch_source_testcancel(source, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -775,12 +653,10 @@ func Dispatch_source_testcancel(ctx context.Context, source unsafe.Pointer) int6
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_get_handle
-func Dispatch_source_get_handle(ctx context.Context, source unsafe.Pointer) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_get_handle")
-	defer _end()
+func Dispatch_source_get_handle(source unsafe.Pointer) uint64 {
 	var _exc unsafe.Pointer
 	_result := uint64(C.dispatch_fn_dispatch_source_get_handle(source, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -788,12 +664,10 @@ func Dispatch_source_get_handle(ctx context.Context, source unsafe.Pointer) uint
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_get_mask
-func Dispatch_source_get_mask(ctx context.Context, source unsafe.Pointer) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_get_mask")
-	defer _end()
+func Dispatch_source_get_mask(source unsafe.Pointer) uint64 {
 	var _exc unsafe.Pointer
 	_result := uint64(C.dispatch_fn_dispatch_source_get_mask(source, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -801,263 +675,219 @@ func Dispatch_source_get_mask(ctx context.Context, source unsafe.Pointer) uint64
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_get_data
-func Dispatch_source_get_data(ctx context.Context, source unsafe.Pointer) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_get_data")
-	defer _end()
+func Dispatch_source_get_data(source unsafe.Pointer) uint64 {
 	var _exc unsafe.Pointer
 	_result := uint64(C.dispatch_fn_dispatch_source_get_data(source, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [source.h:685]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_merge_data
-func Dispatch_source_merge_data(ctx context.Context, source unsafe.Pointer, value uint64) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_merge_data")
-	defer _end()
+func Dispatch_source_merge_data(source unsafe.Pointer, value uint64) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_source_merge_data(source, C.uint64_t(value), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [source.h:739]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_source_set_timer
-func Dispatch_source_set_timer(ctx context.Context, source unsafe.Pointer, start uint64, interval uint64, leeway uint64) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_set_timer")
-	defer _end()
+func Dispatch_source_set_timer(source unsafe.Pointer, start uint64, interval uint64, leeway uint64) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_source_set_timer(source, C.uint64_t(start), C.uint64_t(interval), C.uint64_t(leeway), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [source.h:770]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_source_set_registration_handler
-func Dispatch_source_set_registration_handler(ctx context.Context, source unsafe.Pointer, handler func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_set_registration_handler")
-	defer _end()
+func Dispatch_source_set_registration_handler(source unsafe.Pointer, handler func()) {
 	_blk_handler := blocks.MakeBlock_void(handler)
 	defer blocks.FreeBlock(_blk_handler)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_source_set_registration_handler(source, _blk_handler, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [source.h:796]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_source_set_registration_handler_f
-func Dispatch_source_set_registration_handler_f(ctx context.Context, source unsafe.Pointer, handler unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_source_set_registration_handler_f")
-	defer _end()
+func Dispatch_source_set_registration_handler_f(source unsafe.Pointer, handler unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_source_set_registration_handler_f(source, handler, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [group.h:60]
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_group_create
-func Dispatch_group_create(ctx context.Context) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_group_create")
-	defer _end()
+func Dispatch_group_create() unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_group_create(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [group.h:90]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_async
-func Dispatch_group_async(ctx context.Context, group unsafe.Pointer, queue unsafe.Pointer, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_group_async")
-	defer _end()
+func Dispatch_group_async(group unsafe.Pointer, queue unsafe.Pointer, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_group_async(group, queue, _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [group.h:126]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_async_f
-func Dispatch_group_async_f(ctx context.Context, group unsafe.Pointer, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_group_async_f")
-	defer _end()
+func Dispatch_group_async_f(group unsafe.Pointer, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_group_async_f(group, queue, context_, work, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [group.h:169]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_wait
-func Dispatch_group_wait(ctx context.Context, group unsafe.Pointer, timeout uint64) int64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_group_wait")
-	defer _end()
+func Dispatch_group_wait(group unsafe.Pointer, timeout uint64) int64 {
 	var _exc unsafe.Pointer
 	_result := int64(C.dispatch_fn_dispatch_group_wait(group, C.uint64_t(timeout), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [group.h:206]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_notify
-func Dispatch_group_notify(ctx context.Context, group unsafe.Pointer, queue unsafe.Pointer, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_group_notify")
-	defer _end()
+func Dispatch_group_notify(group unsafe.Pointer, queue unsafe.Pointer, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_group_notify(group, queue, _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [group.h:238]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_notify_f
-func Dispatch_group_notify_f(ctx context.Context, group unsafe.Pointer, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_group_notify_f")
-	defer _end()
+func Dispatch_group_notify_f(group unsafe.Pointer, queue unsafe.Pointer, context_ unsafe.Pointer, work unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_group_notify_f(group, queue, context_, work, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [group.h:262]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_enter
-func Dispatch_group_enter(ctx context.Context, group unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_group_enter")
-	defer _end()
+func Dispatch_group_enter(group unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_group_enter(group, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [group.h:282]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_group_leave
-func Dispatch_group_leave(ctx context.Context, group unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_group_leave")
-	defer _end()
+func Dispatch_group_leave(group unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_group_leave(group, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [semaphore.h:66]
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_semaphore_create
-func Dispatch_semaphore_create(ctx context.Context, value int64) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_semaphore_create")
-	defer _end()
+func Dispatch_semaphore_create(value int64) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_semaphore_create(C.int64_t(value), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [semaphore.h:94]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_semaphore_wait
-func Dispatch_semaphore_wait(ctx context.Context, dsema unsafe.Pointer, timeout uint64) int64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_semaphore_wait")
-	defer _end()
+func Dispatch_semaphore_wait(dsema unsafe.Pointer, timeout uint64) int64 {
 	var _exc unsafe.Pointer
 	_result := int64(C.dispatch_fn_dispatch_semaphore_wait(dsema, C.uint64_t(timeout), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [semaphore.h:117]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_semaphore_signal
-func Dispatch_semaphore_signal(ctx context.Context, dsema unsafe.Pointer) int64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_semaphore_signal")
-	defer _end()
+func Dispatch_semaphore_signal(dsema unsafe.Pointer) int64 {
 	var _exc unsafe.Pointer
 	_result := int64(C.dispatch_fn_dispatch_semaphore_signal(dsema, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [once.h:74]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_once
-func Dispatch_once(ctx context.Context, predicate *int64, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_once")
-	defer _end()
+func Dispatch_once(predicate *int64, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_once(unsafe.Pointer(predicate), _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [once.h:82]
 // ID: objc-sym dispatch._dispatch_once
-func _dispatch_once(ctx context.Context, predicate *int64, block func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/_dispatch_once")
-	defer _end()
+func _dispatch_once(predicate *int64, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
 	C.dispatch_fn__dispatch_once(unsafe.Pointer(predicate), _blk_block, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [once.h:101]
 // Introduced: macOS 10.6
 // ID: objc-sym dispatch.dispatch_once_f
-func Dispatch_once_f(ctx context.Context, predicate *int64, context_ unsafe.Pointer, function unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_once_f")
-	defer _end()
+func Dispatch_once_f(predicate *int64, context_ unsafe.Pointer, function unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_once_f(unsafe.Pointer(predicate), context_, function, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [once.h:109]
 // ID: objc-sym dispatch._dispatch_once_f
-func _dispatch_once_f(ctx context.Context, predicate *int64, context_ unsafe.Pointer, function unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/_dispatch_once_f")
-	defer _end()
+func _dispatch_once_f(predicate *int64, context_ unsafe.Pointer, function unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn__dispatch_once_f(unsafe.Pointer(predicate), context_, function, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [data.h:122]
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_data_create
-func Dispatch_data_create(ctx context.Context, buffer unsafe.Pointer, size uint64, queue unsafe.Pointer, destructor func()) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_data_create")
-	defer _end()
+func Dispatch_data_create(buffer unsafe.Pointer, size uint64, queue unsafe.Pointer, destructor func()) unsafe.Pointer {
 	_blk_destructor := blocks.MakeBlock_void(destructor)
 	defer blocks.FreeBlock(_blk_destructor)
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_data_create(buffer, C.uint64_t(size), queue, _blk_destructor, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [data.h:140]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_data_get_size
-func Dispatch_data_get_size(ctx context.Context, data unsafe.Pointer) uint64 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_data_get_size")
-	defer _end()
+func Dispatch_data_get_size(data unsafe.Pointer) uint64 {
 	var _exc unsafe.Pointer
 	_result := uint64(C.dispatch_fn_dispatch_data_get_size(data, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1065,12 +895,10 @@ func Dispatch_data_get_size(ctx context.Context, data unsafe.Pointer) uint64 {
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_data_create_map
-func Dispatch_data_create_map(ctx context.Context, data unsafe.Pointer, buffer_ptr unsafe.Pointer, size_ptr *uint64) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_data_create_map")
-	defer _end()
+func Dispatch_data_create_map(data unsafe.Pointer, buffer_ptr unsafe.Pointer, size_ptr *uint64) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_data_create_map(data, buffer_ptr, unsafe.Pointer(size_ptr), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1078,12 +906,10 @@ func Dispatch_data_create_map(ctx context.Context, data unsafe.Pointer, buffer_p
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_data_create_concat
-func Dispatch_data_create_concat(ctx context.Context, data1 unsafe.Pointer, data2 unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_data_create_concat")
-	defer _end()
+func Dispatch_data_create_concat(data1 unsafe.Pointer, data2 unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_data_create_concat(data1, data2, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1091,26 +917,22 @@ func Dispatch_data_create_concat(ctx context.Context, data1 unsafe.Pointer, data
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_data_create_subrange
-func Dispatch_data_create_subrange(ctx context.Context, data unsafe.Pointer, offset uint64, length uint64) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_data_create_subrange")
-	defer _end()
+func Dispatch_data_create_subrange(data unsafe.Pointer, offset uint64, length uint64) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_data_create_subrange(data, C.uint64_t(offset), C.uint64_t(length), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [data.h:258]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_data_apply
-func Dispatch_data_apply(ctx context.Context, data unsafe.Pointer, applier func(unsafe.Pointer, uint64, unsafe.Pointer, uint64) bool) bool {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_data_apply")
-	defer _end()
+func Dispatch_data_apply(data unsafe.Pointer, applier func(unsafe.Pointer, uint64, unsafe.Pointer, uint64) bool) bool {
 	_blk_applier := blocks.MakeBlock_bool_ptr_uint64_ptr_uint64(applier)
 	defer blocks.FreeBlock(_blk_applier)
 	var _exc unsafe.Pointer
 	_result := bool(C.dispatch_fn_dispatch_data_apply(data, _blk_applier, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1118,53 +940,45 @@ func Dispatch_data_apply(ctx context.Context, data unsafe.Pointer, applier func(
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_data_copy_region
-func Dispatch_data_copy_region(ctx context.Context, data unsafe.Pointer, location uint64, offset_ptr *uint64) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_data_copy_region")
-	defer _end()
+func Dispatch_data_copy_region(data unsafe.Pointer, location uint64, offset_ptr *uint64) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_data_copy_region(data, C.uint64_t(location), unsafe.Pointer(offset_ptr), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [io.h:115]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_read
-func Dispatch_read(ctx context.Context, fd int32, length uint64, queue unsafe.Pointer, handler func(unsafe.Pointer, int32)) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_read")
-	defer _end()
+func Dispatch_read(fd int32, length uint64, queue unsafe.Pointer, handler func(unsafe.Pointer, int32)) {
 	_blk_handler := blocks.MakeBlock_void_ptr_int32(handler)
 	defer blocks.FreeBlock(_blk_handler)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_read(C.int32_t(fd), C.uint64_t(length), queue, _blk_handler, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [io.h:155]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_write
-func Dispatch_write(ctx context.Context, fd int32, data unsafe.Pointer, queue unsafe.Pointer, handler func(unsafe.Pointer, int32)) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_write")
-	defer _end()
+func Dispatch_write(fd int32, data unsafe.Pointer, queue unsafe.Pointer, handler func(unsafe.Pointer, int32)) {
 	_blk_handler := blocks.MakeBlock_void_ptr_int32(handler)
 	defer blocks.FreeBlock(_blk_handler)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_write(C.int32_t(fd), data, queue, _blk_handler, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [io.h:228]
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_io_create
-func Dispatch_io_create(ctx context.Context, type_ uint64, fd int32, queue unsafe.Pointer, cleanup_handler func(int32)) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_create")
-	defer _end()
+func Dispatch_io_create(type_ uint64, fd int32, queue unsafe.Pointer, cleanup_handler func(int32)) unsafe.Pointer {
 	_blk_cleanup_handler := blocks.MakeBlock_void_int32(cleanup_handler)
 	defer blocks.FreeBlock(_blk_cleanup_handler)
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_io_create(C.uint64_t(type_), C.int32_t(fd), queue, _blk_cleanup_handler, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1172,16 +986,14 @@ func Dispatch_io_create(ctx context.Context, type_ uint64, fd int32, queue unsaf
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_io_create_with_path
-func Dispatch_io_create_with_path(ctx context.Context, type_ uint64, path string, oflag int32, mode uint16, queue unsafe.Pointer, cleanup_handler func(int32)) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_create_with_path")
-	defer _end()
+func Dispatch_io_create_with_path(type_ uint64, path string, oflag int32, mode uint16, queue unsafe.Pointer, cleanup_handler func(int32)) unsafe.Pointer {
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	_blk_cleanup_handler := blocks.MakeBlock_void_int32(cleanup_handler)
 	defer blocks.FreeBlock(_blk_cleanup_handler)
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_io_create_with_path(C.uint64_t(type_), _cstr_path, C.int32_t(oflag), C.uint16_t(mode), queue, _blk_cleanup_handler, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1189,125 +1001,105 @@ func Dispatch_io_create_with_path(ctx context.Context, type_ uint64, path string
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_io_create_with_io
-func Dispatch_io_create_with_io(ctx context.Context, type_ uint64, io unsafe.Pointer, queue unsafe.Pointer, cleanup_handler func(int32)) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_create_with_io")
-	defer _end()
+func Dispatch_io_create_with_io(type_ uint64, io unsafe.Pointer, queue unsafe.Pointer, cleanup_handler func(int32)) unsafe.Pointer {
 	_blk_cleanup_handler := blocks.MakeBlock_void_int32(cleanup_handler)
 	defer blocks.FreeBlock(_blk_cleanup_handler)
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_io_create_with_io(C.uint64_t(type_), io, queue, _blk_cleanup_handler, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [io.h:370]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_read
-func Dispatch_io_read(ctx context.Context, channel unsafe.Pointer, offset int64, length uint64, queue unsafe.Pointer, io_handler func(bool, unsafe.Pointer, int32)) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_read")
-	defer _end()
+func Dispatch_io_read(channel unsafe.Pointer, offset int64, length uint64, queue unsafe.Pointer, io_handler func(bool, unsafe.Pointer, int32)) {
 	_blk_io_handler := blocks.MakeBlock_void_bool_ptr_int32(io_handler)
 	defer blocks.FreeBlock(_blk_io_handler)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_io_read(channel, C.int64_t(offset), C.uint64_t(length), queue, _blk_io_handler, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [io.h:424]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_write
-func Dispatch_io_write(ctx context.Context, channel unsafe.Pointer, offset int64, data unsafe.Pointer, queue unsafe.Pointer, io_handler func(bool, unsafe.Pointer, int32)) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_write")
-	defer _end()
+func Dispatch_io_write(channel unsafe.Pointer, offset int64, data unsafe.Pointer, queue unsafe.Pointer, io_handler func(bool, unsafe.Pointer, int32)) {
 	_blk_io_handler := blocks.MakeBlock_void_bool_ptr_int32(io_handler)
 	defer blocks.FreeBlock(_blk_io_handler)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_io_write(channel, C.int64_t(offset), data, queue, _blk_io_handler, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [io.h:464]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_close
-func Dispatch_io_close(ctx context.Context, channel unsafe.Pointer, flags uint64) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_close")
-	defer _end()
+func Dispatch_io_close(channel unsafe.Pointer, flags uint64) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_io_close(channel, C.uint64_t(flags), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [io.h:492]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_barrier
-func Dispatch_io_barrier(ctx context.Context, channel unsafe.Pointer, barrier func()) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_barrier")
-	defer _end()
+func Dispatch_io_barrier(channel unsafe.Pointer, barrier func()) {
 	_blk_barrier := blocks.MakeBlock_void(barrier)
 	defer blocks.FreeBlock(_blk_barrier)
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_io_barrier(channel, _blk_barrier, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [io.h:513]
 // Introduced: macOS 10.7
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_io_get_descriptor
-func Dispatch_io_get_descriptor(ctx context.Context, channel unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_get_descriptor")
-	defer _end()
+func Dispatch_io_get_descriptor(channel unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.dispatch_fn_dispatch_io_get_descriptor(channel, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [io.h:535]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_set_high_water
-func Dispatch_io_set_high_water(ctx context.Context, channel unsafe.Pointer, high_water uint64) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_set_high_water")
-	defer _end()
+func Dispatch_io_set_high_water(channel unsafe.Pointer, high_water uint64) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_io_set_high_water(channel, C.uint64_t(high_water), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [io.h:567]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_set_low_water
-func Dispatch_io_set_low_water(ctx context.Context, channel unsafe.Pointer, low_water uint64) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_set_low_water")
-	defer _end()
+func Dispatch_io_set_low_water(channel unsafe.Pointer, low_water uint64) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_io_set_low_water(channel, C.uint64_t(low_water), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [io.h:608]
 // Introduced: macOS 10.7
 // ID: objc-sym dispatch.dispatch_io_set_interval
-func Dispatch_io_set_interval(ctx context.Context, channel unsafe.Pointer, interval uint64, flags uint64) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_io_set_interval")
-	defer _end()
+func Dispatch_io_set_interval(channel unsafe.Pointer, interval uint64, flags uint64) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_io_set_interval(channel, C.uint64_t(interval), C.uint64_t(flags), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [workloop.h:83]
 // Introduced: macOS 10.14
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_workloop_create
-func Dispatch_workloop_create(ctx context.Context, label string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_workloop_create")
-	defer _end()
+func Dispatch_workloop_create(label string) unsafe.Pointer {
 	_cstr_label := C.CString(label)
 	defer C.free(unsafe.Pointer(_cstr_label))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_workloop_create(_cstr_label, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1315,36 +1107,30 @@ func Dispatch_workloop_create(ctx context.Context, label string) unsafe.Pointer 
 // Introduced: macOS 10.14
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_workloop_create_inactive
-func Dispatch_workloop_create_inactive(ctx context.Context, label string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_workloop_create_inactive")
-	defer _end()
+func Dispatch_workloop_create_inactive(label string) unsafe.Pointer {
 	_cstr_label := C.CString(label)
 	defer C.free(unsafe.Pointer(_cstr_label))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_workloop_create_inactive(_cstr_label, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [workloop.h:136]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_workloop_set_autorelease_frequency
-func Dispatch_workloop_set_autorelease_frequency(ctx context.Context, workloop unsafe.Pointer, frequency Dispatch_autorelease_frequency_t) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_workloop_set_autorelease_frequency")
-	defer _end()
+func Dispatch_workloop_set_autorelease_frequency(workloop unsafe.Pointer, frequency Dispatch_autorelease_frequency_t) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_workloop_set_autorelease_frequency(workloop, C.uint64_t(frequency), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [workloop.h:169]
 // Introduced: macOS 11.0
 // ID: objc-sym dispatch.dispatch_workloop_set_os_workgroup
-func Dispatch_workloop_set_os_workgroup(ctx context.Context, workloop unsafe.Pointer, workgroup unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "dispatch/dispatch_workloop_set_os_workgroup")
-	defer _end()
+func Dispatch_workloop_set_os_workgroup(workloop unsafe.Pointer, workgroup unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_workloop_set_os_workgroup(workloop, workgroup, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
