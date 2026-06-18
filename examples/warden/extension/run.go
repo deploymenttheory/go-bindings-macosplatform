@@ -7,8 +7,8 @@ import (
 	"time"
 
 	rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/config"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/rules"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/config"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/rules"
 )
 
 // reconcileInterval is how often a config-governed daemon re-applies its config
@@ -18,7 +18,7 @@ const reconcileInterval = 60 * time.Second
 // Run is the network-extension entry point. It loads the rule set, optionally
 // reconciles it against a declarative config document, registers the filter
 // provider class and the XPC daemon, enters NEProvider system-extension mode,
-// and runs the main run loop forever. This is the Go equivalent of LuLu's
+// and runs the main run loop forever. This is the Go equivalent of Warden's
 // Extension/main.m calling [NEProvider startSystemExtensionMode].
 //
 // NOTE: macOS only loads this as a system extension when it is the principal

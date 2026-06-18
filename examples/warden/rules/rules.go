@@ -1,8 +1,8 @@
 //go:build darwin
 
-// Package rules implements LuLu's rule engine: an in-memory, disk-backed store
+// Package rules implements Warden's rule engine: an in-memory, disk-backed store
 // of firewall rules keyed by process identity, with the lookup that the network
-// extension consults for every new flow. Mirrors LuLu's Extension/Rules.
+// extension consults for every new flow. Mirrors Warden's Extension/Rules.
 package rules
 
 import (
@@ -10,7 +10,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/shared"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 )
 
 // Engine is a concurrency-safe rule store keyed by process identity (signing id

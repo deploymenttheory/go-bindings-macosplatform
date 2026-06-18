@@ -1,6 +1,6 @@
-# LuLu (Go port)
+# Warden (Go port)
 
-A port of [Objective-See's **LuLu**](https://github.com/objective-see/LuLu) macOS
+A port of [Objective-See's **Warden**](https://github.com/objective-see/Warden) macOS
 firewall to Go, built on this SDK. It demonstrates the three capabilities added
 for this example:
 
@@ -8,17 +8,17 @@ for this example:
 - **NSXPCConnection from Go** (`bindings/runtime/purego` `XPCProtocol`/`XPCConn`/`XPCListener`),
 - **idiomatic CGo libraries** (`opinionated/idiomatic/libraries/libproc` for process attribution).
 
-It mirrors LuLu's target layout:
+It mirrors Warden's target layout:
 
-| LuLu (ObjC)            | This port (Go)                                  |
+| Warden (ObjC)            | This port (Go)                                  |
 |------------------------|-------------------------------------------------|
 | `Shared/` (Rule, protos, consts) | `shared/`                              |
 | `Extension/Rules`      | `rules/`                                        |
 | `Extension/FilterDataProvider` | `extension/provider.go`                 |
 | `Extension/XPCListener`/`XPCDaemon` | `extension/daemon.go`              |
 | `Extension/Process`/`Binary` | `extension/process.go` (via libproc)      |
-| `Extension/main.m`     | `extension/run.go` + `cmd/luludaemon`           |
-| `App/`                 | `app/` + `cmd/lulu`                             |
+| `Extension/main.m`     | `extension/run.go` + `cmd/wardend`           |
+| `App/`                 | `app/` + `cmd/warden`                             |
 
 ## Data flow
 
@@ -29,7 +29,7 @@ new outbound flow
       → rules.Engine.Find(processKey, remoteAddr, port)
           allow → NEFilterNewFlowVerdict allowVerdict
           block → NEFilterNewFlowVerdict dropVerdict
-          none  → default verdict (LuLu prompts the user over XPC)
+          none  → default verdict (Warden prompts the user over XPC)
 app ──XPC──► daemon (XPCDaemonProtocol): get/add/delete/toggle rules
 daemon ──XPC──► app (XPCUserProtocol): rulesChanged / showAlert
 ```
@@ -37,23 +37,23 @@ daemon ──XPC──► app (XPCUserProtocol): rulesChanged / showAlert
 ## Build
 
 ```sh
-go build ./examples/lulu/...
+go build ./examples/warden/...
 ```
 
 Two binaries:
-- `cmd/lulu` — the controlling app/CLI (pure purego).
-- `cmd/luludaemon` — the network extension (links CGo `libproc`).
+- `cmd/warden` — the controlling app/CLI (pure purego).
+- `cmd/wardend` — the network extension (links CGo `libproc`).
 
 ## Run
 
 The **CLI control surface** runs as an ordinary binary once a daemon is reachable:
 
 ```sh
-lulu list                    # list rules from the daemon (XPC)
-lulu allow /usr/bin/curl     # add an allow rule for a process
-lulu block /usr/bin/nc 1.2.3.4
-lulu delete <key> <uuid>
-lulu activate                # submit the system-extension activation request
+warden list                    # list rules from the daemon (XPC)
+warden allow /usr/bin/curl     # add an allow rule for a process
+warden block /usr/bin/nc 1.2.3.4
+warden delete <key> <uuid>
+warden activate                # submit the system-extension activation request
 ```
 
 The **rule engine** is plain Go and unit-testable in isolation.
@@ -82,9 +82,9 @@ rules:
 Apply it two ways:
 
 ```sh
-lulu apply config/firewall.example.yaml              # reconcile a running daemon over XPC
-LULU_CONFIG=config/firewall.example.yaml luludaemon  # daemon reconciles at startup
-lulu export current.yaml                             # dump the live rules to a document
+warden apply config/firewall.example.yaml              # reconcile a running daemon over XPC
+WARDEN_CONFIG=config/firewall.example.yaml wardend  # daemon reconciles at startup
+warden export current.yaml                             # dump the live rules to a document
 ```
 
 Reconciliation (`config` package) is **authoritative**: the document is the
@@ -101,7 +101,7 @@ Reconciliation (`config` package) is **authoritative**: the document is the
 ### Managed mode (enforcement)
 
 A one-shot apply only enforces at apply-time. When the daemon is governed by a
-config (`LULU_CONFIG`), it runs in **managed mode**, which closes the bypass
+config (`WARDEN_CONFIG`), it runs in **managed mode**, which closes the bypass
 window:
 
 - **Locked mutation surface** — the daemon *rejects* rule mutations over XPC
@@ -128,16 +128,16 @@ SDK's otherwise dependency-free posture (JSON alone is stdlib).
 
 ## What requires Apple provisioning (not doable with `go build` alone)
 
-macOS only loads `cmd/luludaemon` as a *system extension* when it is packaged and
+macOS only loads `cmd/wardend` as a *system extension* when it is packaged and
 signed correctly — this is an OS constraint, not an SDK one:
 
 1. The extension binary must live in a host app bundle at
-   `LuLu.app/Contents/Library/SystemExtensions/com.example.lulu.extension.systemextension/`,
-   with the `Info.plist` here naming `LuLuFilterDataProvider` as its
+   `Warden.app/Contents/Library/SystemExtensions/com.example.warden.extension.systemextension/`,
+   with the `Info.plist` here naming `WardenFilterDataProvider` as its
    `NSExtensionPrincipalClass` (the Go daemon registers that exact ObjC class at
    startup, subclassing `NEFilterDataProvider`).
 2. Both the app and the extension must be **code-signed** with the entitlements
-   in `LuLu.entitlements` / `extension/LuLuExtension.entitlements`. The
+   in `Warden.entitlements` / `extension/WardenExtension.entitlements`. The
    `com.apple.developer.networking.networkextension` entitlement is **restricted**
    and must be granted to your App ID through an Apple Developer provisioning
    profile.

@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/shared"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 )
 
 func TestFindVerdicts(t *testing.T) {

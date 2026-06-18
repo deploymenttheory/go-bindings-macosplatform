@@ -1,9 +1,10 @@
-# Declarative LuLu firewall configuration (YAML).
-# Apply with:   lulu apply config/firewall.example.yaml
-# Or have the daemon reconcile at startup:  LULU_CONFIG=.../firewall.example.yaml luludaemon
+# Declarative Warden firewall configuration (YAML).
+# Apply with:   warden apply config/firewall.example.yaml
+# Or have the daemon reconcile at startup:  WARDEN_CONFIG=.../firewall.example.yaml wardend
 #
-# `lulu apply` is idempotent and only manages the rules it creates: hand-added
-# rules (via `lulu allow`/`block`) are never pruned.
+# `warden apply` is idempotent and authoritative: the document is the complete
+# firewall state, so any rule not listed here is pruned. Under a config-governed
+# (managed) daemon, out-of-band rule changes over XPC are rejected entirely.
 version: "1"
 
 # Verdict for flows with no matching rule. (Informational here; the extension's

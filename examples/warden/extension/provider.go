@@ -6,8 +6,8 @@ import (
 	"unsafe"
 
 	rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/rules"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/shared"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/rules"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 
 	// Side-effect import: loads NetworkExtension.framework so its classes
 	// (NEFilterDataProvider, NEFilterNewFlowVerdict, NEProvider, …) resolve.
@@ -16,10 +16,10 @@ import (
 
 // ProviderClassName is the ObjC class the network extension's Info.plist names as
 // its NSExtensionPrincipalClass — the system instantiates it to filter flows.
-const ProviderClassName = "LuLuFilterDataProvider"
+const ProviderClassName = "WardenFilterDataProvider"
 
 // engine is the rule store the flow handler consults. DefaultAllow is the verdict
-// for a flow with no matching rule: LuLu prompts the user via XPC; this port
+// for a flow with no matching rule: Warden prompts the user via XPC; this port
 // applies a configurable default and logs (a real build would call out to the app).
 var (
 	engine       *rules.Engine
@@ -55,7 +55,7 @@ func impStopFilter(_ rt.ID, _ rt.SEL, _ int, completion rt.Block) {
 
 // impHandleNewFlow is the core firewall decision, called for every new flow:
 // attribute the flow to a process, look up the rule verdict, and return an
-// allow/drop NEFilterNewFlowVerdict. Equivalent to LuLu's -handleNewFlow:.
+// allow/drop NEFilterNewFlowVerdict. Equivalent to Warden's -handleNewFlow:.
 func impHandleNewFlow(_ rt.ID, _ rt.SEL, flow rt.ID) rt.ID {
 	addr, port := remoteEndpoint(flow)
 	key := ProcessPath(flowPID(flow))

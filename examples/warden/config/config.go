@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/shared"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 	"gopkg.in/yaml.v3"
 )
 

@@ -8,12 +8,12 @@ import (
 	"time"
 
 	rt "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/deploymenttheory/go-bindings-macosplatform/examples/lulu/shared"
+	"github.com/deploymenttheory/go-bindings-macosplatform/examples/warden/shared"
 
 	_ "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
-// Client is a connection to the LuLu daemon's XPC service.
+// Client is a connection to the Warden daemon's XPC service.
 type Client struct {
 	conn  rt.XPCConn
 	proxy rt.XPCProxy
@@ -45,7 +45,7 @@ func (c Client) GetRules() (map[string][]*shared.Rule, error) {
 		}
 		return out, nil
 	case <-time.After(5 * time.Second):
-		return nil, errors.New("lulu: timed out waiting for daemon reply")
+		return nil, errors.New("warden: timed out waiting for daemon reply")
 	}
 }
 
