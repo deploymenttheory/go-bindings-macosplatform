@@ -1,0 +1,1415 @@
+{
+  "schema_version": 1,
+  "framework": "Quartz",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "IKCameraDeviceView": {
+      "doc": "The IKCameraDeviceView class displays the contents of the selected camera.",
+      "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview"
+    },
+    "IKDeviceBrowserView": {
+      "doc": "The IKDeviceBrowserView allows you to select a camera or scanner from a list of the available devices.",
+      "url": "https://developer.apple.com/documentation/quartz/ikdevicebrowserview"
+    },
+    "IKFilterBrowserPanel": {
+      "doc": "Presents a user interface for browsing filters.",
+      "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserpanel"
+    },
+    "IKFilterBrowserView": {
+      "doc": "The IKFilterBrowserView class is used as a container for the elements of an IKFilterBrowserPanel object.",
+      "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserview"
+    },
+    "IKFilterUIView": {
+      "doc": "Input parameters for filtering core image filters.",
+      "url": "https://developer.apple.com/documentation/quartz/ikfilteruiview"
+    },
+    "IKImageBrowserCell": {
+      "doc": "A class used to display a cell.",
+      "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell"
+    },
+    "IKImageBrowserView": {
+      "doc": "A view for displaying and browsing a large collection of images and movies.",
+      "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview"
+    },
+    "IKImageEditPanel": {
+      "doc": "The IKImageEditPanel class provides a panel, that is, a utility window that floats on top of document windows, optimized for image editing.",
+      "url": "https://developer.apple.com/documentation/quartz/ikimageeditpanel"
+    },
+    "IKImageView": {
+      "doc": "A view that allows displaying and minor editing of an image.",
+      "url": "https://developer.apple.com/documentation/quartz/ikimageview"
+    },
+    "IKPictureTaker": {
+      "doc": "The IKPictureTaker class represents a panel that allows users to choose images by browsing the file system. The picture taker panel provides an Open Recent menu, supports image cropping, and supports taking snapshots from an iSight or other digital camera.",
+      "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker"
+    },
+    "IKSaveOptions": {
+      "doc": "The IKSaveOptions class initializes, adds, and manages user interface options for saving image data.",
+      "url": "https://developer.apple.com/documentation/quartz/iksaveoptions"
+    },
+    "IKScannerDeviceView": {
+      "doc": "The IKScannerDeviceView class displays a view that allows scanning. It can be customized by specifying the display mode. The delegate receives the scanned data and must implement the IKScannerDeviceViewDelegate protocol.",
+      "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview"
+    },
+    "IKSlideshow": {
+      "doc": "The IKSlideshow class encapsulates a data source and options for a slideshow.",
+      "url": "https://developer.apple.com/documentation/quartz/ikslideshow"
+    },
+    "QCComposition": {
+      "doc": "The QCComposition class represents a Quartz Composer composition that either:",
+      "url": "https://developer.apple.com/documentation/quartz/qccomposition"
+    },
+    "QCCompositionLayer": {
+      "doc": "A layer that loads, plays, and controls Quartz Composer compositions in a Core Animation layer hierarchy.",
+      "url": "https://developer.apple.com/documentation/quartz/qccompositionlayer"
+    },
+    "QCCompositionParameterView": {
+      "doc": "A class that allows users to edit the input parameters of a composition in real time. The composition can be rendering in any of the following objects: QCRenderer, QCView, or QCCompositionLayer.",
+      "url": "https://developer.apple.com/documentation/quartz/qccompositionparameterview"
+    },
+    "QCCompositionPickerPanel": {
+      "doc": "The QCCompositionPickerPanel class represents a utility window that allows users to browse compositions that are in the Quartz Composer composition repository and, if supported, preview the composition. The QCCompositionPickerPanel class cannot be subclassed.",
+      "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerpanel"
+    },
+    "QCCompositionPickerView": {
+      "doc": "The QCCompositionPickerView class allows users to browse compositions that are in the Quartz Composer composition repository, and to preview them. You can set the default input parameters for a composition preview by using the method setDefaultValue:forInputKey:.",
+      "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview"
+    },
+    "QCCompositionRepository": {
+      "doc": "The QCCompositionRepository class represents a system-wide centralized repository of built-in and installed Quartz Composer compositions (/Library/Compositions and ~/Library/Compositions). The QCCompositionRepository class cannot be subclassed.",
+      "url": "https://developer.apple.com/documentation/quartz/qccompositionrepository"
+    },
+    "QCPatchController": {
+      "url": "https://developer.apple.com/documentation/quartz/qcpatchcontroller"
+    },
+    "QCPlugIn": {
+      "doc": "A base class to subclass for writing custom patches.",
+      "url": "https://developer.apple.com/documentation/quartz/qcplugin"
+    },
+    "QCPlugInViewController": {
+      "doc": "The QCPlugInViewController class communicates (through Cocoa bindings) between a custom patch and the view used for the internal settings of the custom patch. Only custom patches that use internal settings exposed to the user need to use the QCPlugInViewController class.",
+      "url": "https://developer.apple.com/documentation/quartz/qcpluginviewcontroller"
+    },
+    "QCRenderer": {
+      "doc": "A base class for low-level rendering.",
+      "url": "https://developer.apple.com/documentation/quartz/qcrenderer"
+    },
+    "QCView": {
+      "doc": "The QCView class is a custom NSView class that loads, plays, and controls Quartz Composer compositions. It is an autonomous view that is driven by an internal timer running on the main thread.",
+      "url": "https://developer.apple.com/documentation/quartz/qcview"
+    },
+    "QuartzFilter": {
+      "url": "https://developer.apple.com/documentation/quartz/quartzfilter"
+    },
+    "QuartzFilterManager": {
+      "url": "https://developer.apple.com/documentation/quartz/quartzfiltermanager"
+    },
+    "QuartzFilterView": {
+      "url": "https://developer.apple.com/documentation/quartz/quartzfilterview"
+    }
+  },
+  "enums": {
+    "IKImageBrowserCellState": {
+      "doc": "The possible states for the browser cell. These values are used by the cellState method.",
+      "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercellstate"
+    },
+    "IKImageBrowserDropOperation": {
+      "doc": "These constants specify the locations for dropping items onto the browser view. Used by the method setDropIndex:dropOperation:.",
+      "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserdropoperation"
+    },
+    "QCPlugInExecutionMode": {
+      "doc": "Execution modes for custom patches.",
+      "url": "https://developer.apple.com/documentation/quartz/qcpluginexecutionmode"
+    },
+    "QCPlugInTimeMode": {
+      "doc": "Time modes for custom patches.",
+      "url": "https://developer.apple.com/documentation/quartz/qcplugintimemode"
+    }
+  },
+  "methods": {
+    "IKCameraDeviceView": {
+      "-deleteSelectedItems:": {
+        "doc": "Deletes the currently selected items.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/deleteselecteditems(_:)"
+      },
+      "-downloadAllItems:": {
+        "doc": "Downloads all the items.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/downloadallitems(_:)"
+      },
+      "-downloadSelectedItems:": {
+        "doc": "Deletes the selected items from the camera.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/downloadselecteditems(_:)"
+      },
+      "-rotateLeft:": {
+        "doc": "Rotates the selected image to the left.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/rotateleft(_:)"
+      },
+      "-rotateRight:": {
+        "doc": "Rotates the selected image to the right.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/rotateright(_:)"
+      },
+      "-selectIndexes:byExtendingSelection:": {
+        "doc": "Invoked to select the specified files, extending the selection if specified.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/select(_:byextendingselection:)"
+      },
+      "-selectedIndexes": {
+        "doc": "The selected indexes of the camera files.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/selectedindexes()"
+      }
+    },
+    "IKFilterBrowserPanel": {
+      "+filterBrowserPanelWithStyleMask:": {
+        "doc": "Creates a shared instance of the IKFilterBrowserPanel class.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserpanel/filterbrowserpanel(withstylemask:)"
+      },
+      "-beginSheetWithOptions:modalForWindow:modalDelegate:didEndSelector:contextInfo:": {
+        "doc": "Displays the filter browser in a sheet—that is, a dialog that is attached to its parent window and must be dismissed by the user.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserpanel/beginsheet(options:modalfor:modaldelegate:didend:contextinfo:)"
+      },
+      "-beginWithOptions:modelessDelegate:didEndSelector:contextInfo:": {
+        "doc": "Displays the filter browser in a new utility window, unless the filter browser is already open.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserpanel/begin(options:modelessdelegate:didend:contextinfo:)"
+      },
+      "-filterBrowserViewWithOptions:": {
+        "doc": "Returns a view that contains a filter browser.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserpanel/filterbrowserview(options:)"
+      },
+      "-filterName": {
+        "doc": "Returns the name of the filter that is currently selected in the filter browser.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserpanel/filtername()"
+      },
+      "-finish:": {
+        "doc": "Closes a filter browser view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserpanel/finish(_:)"
+      },
+      "-runModalWithOptions:": {
+        "doc": "Displays the filter browser in a modal dialog that must be dismissed by the user but that is not attached to a window.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserpanel/runmodal(options:)"
+      }
+    },
+    "IKFilterBrowserView": {
+      "-filterName": {
+        "doc": "Returns the name of the filter that is currently selected in the filter browser.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserview/filtername()"
+      },
+      "-setPreviewState:": {
+        "doc": "Sets the preview state.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilterbrowserview/setpreviewstate(_:)"
+      }
+    },
+    "IKFilterUIView": {
+      "+viewWithFrame:filter:": {
+        "doc": "Creates a view that contains controls for the input parameters of a filter.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilteruiview/view(withframe:filter:)"
+      },
+      "-filter": {
+        "doc": "Returns the Core Image filter associated with the view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilteruiview/filter()"
+      },
+      "-initWithFrame:filter:": {
+        "doc": "Initializes a view that contains controls for the input parameters of a filter.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilteruiview/init(frame:filter:)"
+      },
+      "-objectController": {
+        "doc": "Returns the object controller for the bindings between the filter and its view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikfilteruiview/objectcontroller()"
+      }
+    },
+    "IKImageBrowserCell": {
+      "-cellState": {
+        "doc": "Returns the current cell state of the receiver.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/cellstate()"
+      },
+      "-frame": {
+        "doc": "Returns the receiver’s frame rectangle, which defines its position in its IKImageBrowserView.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/frame()"
+      },
+      "-imageAlignment": {
+        "doc": "Returns the position of the cell’s image in the frame.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/imagealignment()"
+      },
+      "-imageBrowserView": {
+        "doc": "Returns the view the receiver uses to display the cell.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/imagebrowserview()"
+      },
+      "-imageContainerFrame": {
+        "doc": "Returns the receiver’s image container frame rectangle, which defines the position of the container of the thumbnail.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/imagecontainerframe()"
+      },
+      "-imageFrame": {
+        "doc": "Returns the receiver’s image frame rectangle, which defines the position of the thumbnail in its IKImageBrowserView.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/imageframe()"
+      },
+      "-indexOfRepresentedItem": {
+        "doc": "Returns the index of the receiver’s represented object in the datasource.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/indexofrepresenteditem()"
+      },
+      "-isSelected": {
+        "doc": "Returns whether the cell is selected.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/isselected()"
+      },
+      "-layerForType:": {
+        "doc": "Returns a layer for the specified position.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/layer(fortype:)"
+      },
+      "-opacity": {
+        "doc": "Returns the opacity of the receiver.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/opacity()"
+      },
+      "-representedItem": {
+        "doc": "Returns the receiver’s represented object.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/representeditem()"
+      },
+      "-selectionFrame": {
+        "doc": "Returns the receiver’s selection frame rectangle, which defines the position of the selection rectangle in its IKImageBrowserView.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/selectionframe()"
+      },
+      "-subtitleFrame": {
+        "doc": "Returns the receiver’s subtitle frame rectangle.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/subtitleframe()"
+      },
+      "-titleFrame": {
+        "doc": "Returns the receiver’s title frame rectangle.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowsercell/titleframe()"
+      }
+    },
+    "IKImageBrowserView": {
+      "-allowsDroppingOnItems": {
+        "doc": "Returns whether the user can drop on items.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/allowsdroppingonitems()"
+      },
+      "-allowsEmptySelection": {
+        "doc": "Returns whether an empty selection is allowed.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/allowsemptyselection()"
+      },
+      "-allowsMultipleSelection": {
+        "doc": "Returns whether multiple selections are allowed.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/allowsmultipleselection()"
+      },
+      "-allowsReordering": {
+        "doc": "Returns whether the user can reorder items.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/allowsreordering()"
+      },
+      "-animates": {
+        "doc": "Returns whether the receiver animates reordering and changes of the data source.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/animates()"
+      },
+      "-backgroundLayer": {
+        "doc": "Returns the foreground Core Animation layer",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/backgroundlayer()"
+      },
+      "-canControlQuickLookPanel": {
+        "doc": "Returns whether the view can automatically take control of the QuickLook panel.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/cancontrolquicklookpanel()"
+      },
+      "-cellForItemAtIndex:": {
+        "doc": "Returns the browser cell for the item at the specified index.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/cellforitem(at:)"
+      },
+      "-cellSize": {
+        "doc": "Returns the cell size.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/cellsize()"
+      },
+      "-cellsStyleMask": {
+        "doc": "Returns the appearance style mask for the cell.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/cellsstylemask()"
+      },
+      "-collapseGroupAtIndex:": {
+        "doc": "Collapses a group at the specified index.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/collapsegroup(at:)"
+      },
+      "-columnIndexesInRect:": {
+        "doc": "Returns the column indexes in the specified rectangle.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/columnindexes(in:)"
+      },
+      "-constrainsToOriginalSize": {
+        "doc": "Returns whether the receiver constrains the cell’s image to its original size.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/constrainstooriginalsize()"
+      },
+      "-contentResizingMask": {
+        "doc": "Returns the receiver’s content resizing mask, which determines how its content is resized while zooming.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/contentresizingmask()"
+      },
+      "-draggingDestinationDelegate": {
+        "doc": "Returns the dragging destination delegate of the receiver.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/draggingdestinationdelegate()"
+      },
+      "-dropOperation": {
+        "doc": "Returns the current drop operation.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/dropoperation()"
+      },
+      "-expandGroupAtIndex:": {
+        "doc": "Expands a group at the specified index.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/expandgroup(at:)"
+      },
+      "-foregroundLayer": {
+        "doc": "Returns the foreground Core Animation layer",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/foregroundlayer()"
+      },
+      "-indexAtLocationOfDroppedItem": {
+        "doc": "Returns the index of the cell where the drop operation occurred.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/indexatlocationofdroppeditem()"
+      },
+      "-indexOfItemAtPoint:": {
+        "doc": "Returns the index of the item at the specified location.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/indexofitem(at:)"
+      },
+      "-initWithFrame:": {
+        "doc": "Initializes a newly allocated image browser view with the provided frame rectangle.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/initwithframe:"
+      },
+      "-intercellSpacing": {
+        "doc": "Returns the spacing between cells in the view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/intercellspacing()"
+      },
+      "-isGroupExpandedAtIndex:": {
+        "doc": "Returns whether the group at the provided index is expanded.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/isgroupexpanded(at:)"
+      },
+      "-itemFrameAtIndex:": {
+        "doc": "Returns the frame rectangle for the item located at the specified index.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/itemframe(at:)"
+      },
+      "-newCellForRepresentedItem:": {
+        "doc": "Returns the cell to use for the specified item.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/newcell(forrepresenteditem:)"
+      },
+      "-numberOfColumns": {
+        "doc": "Returns the current number of columns.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/numberofcolumns()"
+      },
+      "-numberOfRows": {
+        "doc": "Returns the current number of rows.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/numberofrows()"
+      },
+      "-rectOfColumn:": {
+        "doc": "Returns the rectangle containing the specified column.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/rect(ofcolumn:)"
+      },
+      "-rectOfRow:": {
+        "doc": "Returns the rectangle containing the specified row.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/rect(ofrow:)"
+      },
+      "-reloadData": {
+        "doc": "Marks the receiver as needing its data reloaded.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/reloaddata()"
+      },
+      "-rowIndexesInRect:": {
+        "doc": "Returns the row indexes in the specified rectangle.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/rowindexes(in:)"
+      },
+      "-scrollIndexToVisible:": {
+        "doc": "Scrolls the receiver to the item at the specified index.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/scrollindextovisible(_:)"
+      },
+      "-selectionIndexes": {
+        "doc": "Returns the indexes of the selected cells.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/selectionindexes()"
+      },
+      "-setAllowsDroppingOnItems:": {
+        "doc": "Specifies whether the user can drop on items.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setallowsdroppingonitems(_:)"
+      },
+      "-setAllowsEmptySelection:": {
+        "doc": "Controls whether an empty selection is allowed.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setallowsemptyselection(_:)"
+      },
+      "-setAllowsMultipleSelection:": {
+        "doc": "Controls whether the user can select more than one cell at a time.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setallowsmultipleselection(_:)"
+      },
+      "-setAllowsReordering:": {
+        "doc": "Controls whether the user can reorder items.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setallowsreordering(_:)"
+      },
+      "-setAnimates:": {
+        "doc": "Controls whether the receiver animates reordering and changes of the data source.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setanimates(_:)"
+      },
+      "-setBackgroundLayer:": {
+        "doc": "The Core Animation layer used as the view’s background.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setbackgroundlayer(_:)"
+      },
+      "-setCanControlQuickLookPanel:": {
+        "doc": "Specifies whether the view can automatically take control of the QuickLook panel.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setcancontrolquicklookpanel(_:)"
+      },
+      "-setCellSize:": {
+        "doc": "Sets the cell size.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setcellsize(_:)"
+      },
+      "-setCellsStyleMask:": {
+        "doc": "Defines the appearance style of the cells.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setcellsstylemask(_:)"
+      },
+      "-setConstrainsToOriginalSize:": {
+        "doc": "Sets whether the receiver constrains the cell’s image to its original size.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setconstrainstooriginalsize(_:)"
+      },
+      "-setContentResizingMask:": {
+        "doc": "Determines how the receiver resizes its content when zooming.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setcontentresizingmask(_:)"
+      },
+      "-setDraggingDestinationDelegate:": {
+        "doc": "Sets the dragging destination delegate of the receiver.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setdraggingdestinationdelegate(_:)"
+      },
+      "-setDropIndex:dropOperation:": {
+        "doc": "Allows the class to retarget the drop action.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setdrop(_:dropoperation:)"
+      },
+      "-setForegroundLayer:": {
+        "doc": "The Core Animation layer used as the foreground overlay.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setforegroundlayer(_:)"
+      },
+      "-setIntercellSpacing:": {
+        "doc": "Sets the spacing between cells in the view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setintercellspacing(_:)"
+      },
+      "-setSelectionIndexes:byExtendingSelection:": {
+        "doc": "Selects cells at the specified indexes.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setselectionindexes(_:byextendingselection:)"
+      },
+      "-setZoomValue:": {
+        "doc": "Sets the zoom value.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/setzoomvalue(_:)"
+      },
+      "-visibleItemIndexes": {
+        "doc": "Returns the indexes of the view’s currently visible items.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/visibleitemindexes()"
+      },
+      "-zoomValue": {
+        "doc": "Returns the current zoom value.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/zoomvalue()"
+      }
+    },
+    "IKImageEditPanel": {
+      "+sharedImageEditPanel": {
+        "doc": "Creates a shared instance of an image editing panel.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageeditpanel/shared()"
+      },
+      "-reloadData": {
+        "doc": "Reloads the data from the data associated with an image editing panel.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageeditpanel/reloaddata()"
+      }
+    },
+    "IKImageView": {
+      "-convertImagePointToViewPoint:": {
+        "doc": "Converts an image coordinate to an image view coordinate.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/convertimagepoint(toviewpoint:)"
+      },
+      "-convertImageRectToViewRect:": {
+        "doc": "Converts an image rectangle to an image view rectangle.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/convertimagerect(toviewrect:)"
+      },
+      "-convertViewPointToImagePoint:": {
+        "doc": "Converts an image view coordinate to an image coordinate.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/convertpoint(toimagepoint:)"
+      },
+      "-convertViewRectToImageRect:": {
+        "doc": "Converts an image view rectangle to an image rectangle.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/convertrect(toimagerect:)"
+      },
+      "-crop:": {
+        "doc": "Crops the image using the current selection.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/crop(_:)"
+      },
+      "-flipImageHorizontal:": {
+        "doc": "Flips an image along the horizontal axis.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/flipimagehorizontal(_:)"
+      },
+      "-flipImageVertical:": {
+        "doc": "Flips an image along the vertical axis.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/flipimagevertical(_:)"
+      },
+      "-image": {
+        "doc": "Returns the image associated with the view, after any image corrections.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/image()"
+      },
+      "-imageProperties": {
+        "doc": "Returns the metadata for the image in the view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/imageproperties()"
+      },
+      "-imageSize": {
+        "doc": "Returns the size of the image in the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/imagesize()"
+      },
+      "-overlayForType:": {
+        "doc": "Returns the Core Animation layer associated with a layer type.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/overlay(fortype:)"
+      },
+      "-rotateImageLeft:": {
+        "doc": "Rotates the image left (counter-clockwise).",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/rotateimageleft(_:)"
+      },
+      "-rotateImageRight:": {
+        "doc": "Rotates the image right (clockwise).",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/rotateimageright(_:)"
+      },
+      "-scrollToPoint:": {
+        "doc": "Scrolls the view to the specified point.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/scroll(to:)-myqk"
+      },
+      "-scrollToRect:": {
+        "doc": "Scrolls the view so that it includes the provided rectangular area.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/scroll(to:)-535q6"
+      },
+      "-setImage:imageProperties:": {
+        "doc": "Sets the image to display in an image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/setimage(_:imageproperties:)"
+      },
+      "-setImageWithURL:": {
+        "doc": "Initializes an image view with the image specified by a URL.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/setimagewith(_:)"
+      },
+      "-setImageZoomFactor:centerPoint:": {
+        "doc": "Sets the zoom factor at the provided origin.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/setimagezoomfactor(_:center:)"
+      },
+      "-setOverlay:forType:": {
+        "doc": "Sets an overlay type for a Core Animation layer.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/setoverlay(_:fortype:)"
+      },
+      "-setRotationAngle:centerPoint:": {
+        "doc": "Sets the rotation angle at the provided origin.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/setrotationangle(_:center:)"
+      },
+      "-zoomImageToActualSize:": {
+        "doc": "Zooms the image so that it is displayed using its true size.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/zoomimagetoactualsize(_:)"
+      },
+      "-zoomImageToFit:": {
+        "doc": "Zooms the image so that it fits in the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/zoomimagetofit(_:)"
+      },
+      "-zoomImageToRect:": {
+        "doc": "Zooms the image so that it fits in the specified rectangle.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/zoomimage(to:)"
+      },
+      "-zoomIn:": {
+        "doc": "Zooms the image in.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/zoomin(_:)"
+      },
+      "-zoomOut:": {
+        "doc": "Zooms the image out.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/zoomout(_:)"
+      }
+    },
+    "IKPictureTaker": {
+      "+pictureTaker": {
+        "doc": "Returns a shared IKPictureTaker instance, creating it if necessary.",
+        "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker/picturetaker()"
+      },
+      "-beginPictureTakerSheetForWindow:withDelegate:didEndSelector:contextInfo:": {
+        "doc": "Opens a picture taker as a sheet whose parent is the specified window.",
+        "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker/beginsheet(for:withdelegate:didend:contextinfo:)"
+      },
+      "-beginPictureTakerWithDelegate:didEndSelector:contextInfo:": {
+        "doc": "Opens a picture taker pane.",
+        "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker/begin(withdelegate:didend:contextinfo:)"
+      },
+      "-inputImage": {
+        "doc": "Returns the input image associated with the picture taker.",
+        "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker/inputimage()"
+      },
+      "-mirroring": {
+        "doc": "Returns whether video mirroring is enabled during snapshots.",
+        "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker/mirroring()"
+      },
+      "-outputImage": {
+        "doc": "Returns the edited image.",
+        "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker/outputimage()"
+      },
+      "-popUpRecentsMenuForView:withDelegate:didEndSelector:contextInfo:": {
+        "doc": "Displays the Open Recent popup menu associated with the picture taker.",
+        "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker/popuprecentsmenu(for:withdelegate:didend:contextinfo:)"
+      },
+      "-runModal": {
+        "doc": "Opens a modal picture taker dialog.",
+        "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker/runmodal()"
+      },
+      "-setInputImage:": {
+        "doc": "Set the image input for the picture taker.",
+        "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker/setinputimage(_:)"
+      },
+      "-setMirroring:": {
+        "doc": "Controls whether the receiver enables video mirroring during snapshots.",
+        "url": "https://developer.apple.com/documentation/quartz/ikpicturetaker/setmirroring(_:)"
+      }
+    },
+    "IKSaveOptions": {
+      "-addSaveOptionsAccessoryViewToSavePanel:": {
+        "doc": "Adds IKSaveOptions accessory view to a NSSavePanel.",
+        "url": "https://developer.apple.com/documentation/quartz/iksaveoptions/addaccessoryview(to:)"
+      },
+      "-initWithImageProperties:imageUTType:": {
+        "doc": "Initializes a save options accessory pane for the provided image properties and uniform type identifier.",
+        "url": "https://developer.apple.com/documentation/quartz/iksaveoptions/init(imageproperties:imageuttype:)"
+      }
+    },
+    "IKSlideshow": {
+      "+canExportToApplication:": {
+        "doc": "Finds out whether the slideshow can export its contents to an application.",
+        "url": "https://developer.apple.com/documentation/quartz/ikslideshow/canexport(toapplication:)"
+      },
+      "+exportSlideshowItem:toApplication:": {
+        "doc": "Exports a slideshow item to the application that has the provided bundle identifier.",
+        "url": "https://developer.apple.com/documentation/quartz/ikslideshow/exportitem(_:toapplication:)"
+      },
+      "+sharedSlideshow": {
+        "doc": "Returns a shared instance of a slideshow.",
+        "url": "https://developer.apple.com/documentation/quartz/ikslideshow/shared()"
+      },
+      "-indexOfCurrentSlideshowItem": {
+        "doc": "Returns the index of the current slideshow item.",
+        "url": "https://developer.apple.com/documentation/quartz/ikslideshow/indexofcurrentslideshowitem()"
+      },
+      "-reloadData": {
+        "doc": "Reloads the data for a slideshow.",
+        "url": "https://developer.apple.com/documentation/quartz/ikslideshow/reloaddata()"
+      },
+      "-reloadSlideshowItemAtIndex:": {
+        "doc": "Reloads the data for a slideshow, starting at the specified index.",
+        "url": "https://developer.apple.com/documentation/quartz/ikslideshow/reloaditem(at:)"
+      },
+      "-runSlideshowWithDataSource:inMode:options:": {
+        "doc": "Runs a slideshow that contains the specified kind of items, provided from a data source.",
+        "url": "https://developer.apple.com/documentation/quartz/ikslideshow/run(with:inmode:options:)"
+      },
+      "-stopSlideshow:": {
+        "doc": "Stops a slideshow.",
+        "url": "https://developer.apple.com/documentation/quartz/ikslideshow/stop(_:)"
+      }
+    },
+    "QCComposition": {
+      "+compositionWithData:": {
+        "doc": "Returns a composition object initialized with the contents of a Quartz Composer composition file.",
+        "url": "https://developer.apple.com/documentation/quartz/qccomposition/init(data:)"
+      },
+      "+compositionWithFile:": {
+        "doc": "Returns a composition object initialized with a Quartz Composer composition file.",
+        "url": "https://developer.apple.com/documentation/quartz/qccomposition/init(file:)"
+      },
+      "-attributes": {
+        "doc": "Returns the attributes of the composition.",
+        "url": "https://developer.apple.com/documentation/quartz/qccomposition/attributes()"
+      },
+      "-identifier": {
+        "doc": "Returns the unique and persistent identifier for the composition from the composition repository.",
+        "url": "https://developer.apple.com/documentation/quartz/qccomposition/identifier()"
+      },
+      "-inputKeys": {
+        "doc": "Returns an array listing the keys that identify the input ports of the root patch of the composition.",
+        "url": "https://developer.apple.com/documentation/quartz/qccomposition/inputkeys()"
+      },
+      "-outputKeys": {
+        "doc": "Returns an array listing the keys that identify the output ports of the root patch of the composition.",
+        "url": "https://developer.apple.com/documentation/quartz/qccomposition/outputkeys()"
+      },
+      "-protocols": {
+        "doc": "Returns the list of protocols to which the composition conforms.",
+        "url": "https://developer.apple.com/documentation/quartz/qccomposition/protocols()"
+      }
+    },
+    "QCCompositionLayer": {
+      "+compositionLayerWithComposition:": {
+        "doc": "Creates and returns an instance of a composition layer using the provided Quartz Composer composition.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionlayer/compositionlayerwithcomposition:"
+      },
+      "+compositionLayerWithFile:": {
+        "doc": "Creates and returns an instance of a composition layer using the Quartz Composer composition in the specified file.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionlayer/compositionlayerwithfile:"
+      },
+      "-composition": {
+        "doc": "Returns the composition associated with the layer.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionlayer/composition()"
+      },
+      "-initWithComposition:": {
+        "doc": "Initializes and returns a composition layer using the provided Quartz Composer composition.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionlayer/init(composition:)"
+      },
+      "-initWithFile:": {
+        "doc": "Initializes and returns a composition layer using the Quartz Composer composition in the specified file.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionlayer/init(file:)"
+      }
+    },
+    "QCCompositionParameterView": {
+      "-backgroundColor": {
+        "doc": "Retrieves the background color of the composition parameter view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionparameterview/backgroundcolor()"
+      },
+      "-compositionRenderer": {
+        "doc": "Returns the renderer object associated with the composition parameter view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionparameterview/compositionrenderer()"
+      },
+      "-delegate": {
+        "doc": "Returns the composition parameter view delegate.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionparameterview/delegate()"
+      },
+      "-drawsBackground": {
+        "doc": "Returns whether the composition parameter view draws its background.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionparameterview/drawsbackground()"
+      },
+      "-hasParameters": {
+        "doc": "Checks whether the composition that is currently edited by the composition parameter view has any input parameters.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionparameterview/hasparameters()"
+      },
+      "-setBackgroundColor:": {
+        "doc": "Sets the background color of the composition parameter view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionparameterview/setbackgroundcolor(_:)"
+      },
+      "-setCompositionRenderer:": {
+        "doc": "Sets the composition parameter view for editing the input parameters of the provided renderer object.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionparameterview/setcompositionrenderer(_:)"
+      },
+      "-setDelegate:": {
+        "doc": "Sets the composition parameter view delegate.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionparameterview/setdelegate(_:)"
+      },
+      "-setDrawsBackground:": {
+        "doc": "Sets whether the composition parameter view draws its background.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionparameterview/setdrawsbackground(_:)"
+      }
+    },
+    "QCCompositionPickerPanel": {
+      "+sharedCompositionPickerPanel": {
+        "doc": "Returns the shared instance of the composition picker panel.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerpanel/shared()"
+      },
+      "-compositionPickerView": {
+        "doc": "Returns the composition picker view used by the panel so that it can be configured.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerpanel/compositionpickerview()"
+      }
+    },
+    "QCCompositionPickerView": {
+      "-allowsEmptySelection": {
+        "doc": "Retrieves the empty-selection state of the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/allowsemptyselection()"
+      },
+      "-backgroundColor": {
+        "doc": "Returns the background color of the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/backgroundcolor()"
+      },
+      "-compositionAspectRatio": {
+        "doc": "Retrieves the aspect ratio used to display compositions in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/compositionaspectratio()"
+      },
+      "-compositions": {
+        "doc": "Returns the list of compositions that are currently in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/compositions()"
+      },
+      "-delegate": {
+        "doc": "Retrieves the composition picker view delegate.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/delegate()"
+      },
+      "-drawsBackground": {
+        "doc": "Returns whether the composition picker view draws its background.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/drawsbackground()"
+      },
+      "-isAnimating": {
+        "doc": "Returns whether or not the composition picker view is currently animating its composition.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/isanimating()"
+      },
+      "-maxAnimationFrameRate": {
+        "doc": "Retrieves the maximum frame rate for animating compositions.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/maxanimationframerate()"
+      },
+      "-numberOfColumns": {
+        "doc": "Retrieves the number of columns in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/numberofcolumns()"
+      },
+      "-numberOfRows": {
+        "doc": "Retrieves the number of rows in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/numberofrows()"
+      },
+      "-resetDefaultInputValues": {
+        "doc": "Clears all previously set default values for composition input parameters.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/resetdefaultinputvalues()"
+      },
+      "-selectedComposition": {
+        "doc": "Returns the composition that is currently selected in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/selectedcomposition()"
+      },
+      "-setAllowsEmptySelection:": {
+        "doc": "Sets whether to allow an empty selection in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setallowsemptyselection(_:)"
+      },
+      "-setBackgroundColor:": {
+        "doc": "Sets the background color for the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setbackgroundcolor(_:)"
+      },
+      "-setCompositionAspectRatio:": {
+        "doc": "Sets the aspect ratio used to display compositions in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setcompositionaspectratio(_:)"
+      },
+      "-setCompositionsFromRepositoryWithProtocol:andAttributes:": {
+        "doc": "Sets the compositions in the composition picker view to those that match the specified criteria.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setcompositionsfromrepositorywithprotocol(_:andattributes:)"
+      },
+      "-setDefaultValue:forInputKey:": {
+        "doc": "Sets the default value to use for a composition input parameter.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setdefaultvalue(_:forinputkey:)"
+      },
+      "-setDelegate:": {
+        "doc": "Sets the composition picker view delegate.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setdelegate(_:)"
+      },
+      "-setDrawsBackground:": {
+        "doc": "Sets whether the composition picker view draws its background.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setdrawsbackground(_:)"
+      },
+      "-setMaxAnimationFrameRate:": {
+        "doc": "Sets the maximum frame rate for animating compositions.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setmaxanimationframerate(_:)"
+      },
+      "-setNumberOfColumns:": {
+        "doc": "Sets the number of columns in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setnumberofcolumns(_:)"
+      },
+      "-setNumberOfRows:": {
+        "doc": "Sets the number of rows in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setnumberofrows(_:)"
+      },
+      "-setSelectedComposition:": {
+        "doc": "Sets a composition as selected in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setselectedcomposition(_:)"
+      },
+      "-setShowsCompositionNames:": {
+        "doc": "Enables the display of composition names in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/setshowscompositionnames(_:)"
+      },
+      "-showsCompositionNames": {
+        "doc": "Retrieves whether composition names can be shown in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/showscompositionnames()"
+      },
+      "-startAnimation:": {
+        "doc": "Starts animating the composition in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/startanimation(_:)"
+      },
+      "-stopAnimation:": {
+        "doc": "Stops animating the composition that is currently animating in the composition picker view.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionpickerview/stopanimation(_:)"
+      }
+    },
+    "QCCompositionRepository": {
+      "+sharedCompositionRepository": {
+        "doc": "Returns the shared instance of the composition repository.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionrepository/shared()"
+      },
+      "-allCompositions": {
+        "doc": "Returns an array that contains all compositions currently in the composition repository.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionrepository/allcompositions()"
+      },
+      "-compositionWithIdentifier:": {
+        "doc": "Returns the composition that corresponds to the identifier.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionrepository/composition(withidentifier:)"
+      },
+      "-compositionsWithProtocols:andAttributes:": {
+        "doc": "Returns an array of compositions that match a set of criteria.",
+        "url": "https://developer.apple.com/documentation/quartz/qccompositionrepository/compositions(withprotocols:andattributes:)"
+      }
+    },
+    "QCPlugIn": {
+      "+attributes": {
+        "doc": "Returns a dictionary that contains strings for the user interface that describe the custom patch.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/attributes()"
+      },
+      "+attributesForPropertyPortWithKey:": {
+        "doc": "Returns a dictionary that contains strings for the user interface that describe the optional attributes for ports created from properties.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/attributesforpropertyport(withkey:)"
+      },
+      "+executionMode": {
+        "doc": "Returns the execution mode of the custom patch.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/executionmode()"
+      },
+      "+loadPlugInAtPath:": {
+        "doc": "Loads a Quartz Composer plug-in bundle from the specified path.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/load(atpath:)"
+      },
+      "+plugInKeys": {
+        "doc": "Returns the keys for the internal settings of a custom patch.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/pluginkeys()"
+      },
+      "+registerPlugInClass:": {
+        "doc": "Registers a QCPlugIn subclass.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/registerclass(_:)"
+      },
+      "+sortedPropertyPortKeys": {
+        "doc": "Returns and array of property port keys in the order you want them to appear in the user interface.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/sortedpropertyportkeys()"
+      },
+      "+timeMode": {
+        "doc": "Returns the time mode for the custom patch.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/timemode()"
+      },
+      "-addInputPortWithType:forKey:withAttributes:": {
+        "doc": "Adds an input port of the specified type and associates a key and attributes with the port.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/addinputport(withtype:forkey:withattributes:)"
+      },
+      "-addOutputPortWithType:forKey:withAttributes:": {
+        "doc": "Adds an output port of the specified type and associates a key and attributes with the port.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/addoutputport(withtype:forkey:withattributes:)"
+      },
+      "-createViewController": {
+        "doc": "Creates and returns a view controller for the Settings pane of a custom patch.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/createviewcontroller()"
+      },
+      "-didValueForInputKeyChange:": {
+        "doc": "Returns whether the input port value changed since the last execution of the custom patch.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/didvalue(forinputkeychange:)"
+      },
+      "-disableExecution:": {
+        "doc": "Allows you to perform custom tasks when the execution of the QCPlugIn object is paused.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/disableexecution(_:)"
+      },
+      "-enableExecution:": {
+        "doc": "Allows you to perform custom tasks when the execution of the QCPlugIn object is resumed.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/enableexecution(_:)"
+      },
+      "-execute:atTime:withArguments:": {
+        "doc": "Performs the processing or rendering tasks appropriate for the custom patch.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/execute(_:attime:witharguments:)"
+      },
+      "-removeInputPortForKey:": {
+        "doc": "Removes the input port for a given key.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/removeinputport(forkey:)"
+      },
+      "-removeOutputPortForKey:": {
+        "doc": "Removes the output port for a given key.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/removeoutputport(forkey:)"
+      },
+      "-serializedValueForKey:": {
+        "doc": "A method implemented to override serialization.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/serializedvalue(forkey:)"
+      },
+      "-setSerializedValue:forKey:": {
+        "doc": "Provides custom deserialization for patch internal settings that were previously serialized using the method serializedValueForKey:.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/setserializedvalue(_:forkey:)"
+      },
+      "-setValue:forOutputKey:": {
+        "doc": "Sets the value of an output port.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/setvalue(_:foroutputkey:)"
+      },
+      "-startExecution:": {
+        "doc": "Allows you to perform custom setup tasks before the Quartz Composer engine starts rendering.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/startexecution(_:)"
+      },
+      "-stopExecution:": {
+        "doc": "Allows you to perform custom tasks when the QCPlugIn object stops executing.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/stopexecution(_:)"
+      },
+      "-valueForInputKey:": {
+        "doc": "Returns the current value for an input port.",
+        "url": "https://developer.apple.com/documentation/quartz/qcplugin/value(forinputkey:)"
+      }
+    },
+    "QCPlugInViewController": {
+      "-initWithPlugIn:viewNibName:": {
+        "doc": "Creates and initializes a controller for the specified QCPlugIn object and nib file.",
+        "url": "https://developer.apple.com/documentation/quartz/qcpluginviewcontroller/init(plugin:viewnibname:)"
+      },
+      "-plugIn": {
+        "doc": "Returns the QCPlugIn object associated with the view controller for the custom patch.",
+        "url": "https://developer.apple.com/documentation/quartz/qcpluginviewcontroller/plugin()"
+      }
+    },
+    "QCRenderer": {
+      "-composition": {
+        "doc": "Returns the composition object associated with the renderer.",
+        "url": "https://developer.apple.com/documentation/quartz/qcrenderer/composition()"
+      },
+      "-createSnapshotImageOfType:": {
+        "doc": "Returns the current image in the OpenGL context associated with the renderer, as an image object of the provided image type.",
+        "url": "https://developer.apple.com/documentation/quartz/qcrenderer/createsnapshotimage(oftype:)"
+      },
+      "-initOffScreenWithSize:colorSpace:composition:": {
+        "doc": "Creates an offscreen renderer of a given size with the provided color space and composition object.",
+        "url": "https://developer.apple.com/documentation/quartz/qcrenderer/init(offscreenwith:colorspace:composition:)"
+      },
+      "-initWithCGLContext:pixelFormat:colorSpace:composition:": {
+        "doc": "Creates a renderer object with a CGLContextObj object, a pixel format, a color space, and a composition object.",
+        "url": "https://developer.apple.com/documentation/quartz/qcrenderer/init(cglcontext:pixelformat:colorspace:composition:)-7at42"
+      },
+      "-initWithComposition:colorSpace:": {
+        "doc": "Creates a renderer object with a composition object and a color space.",
+        "url": "https://developer.apple.com/documentation/quartz/qcrenderer/init(composition:colorspace:)"
+      },
+      "-initWithOpenGLContext:pixelFormat:file:": {
+        "doc": "Creates a renderer object with an NSOpenGLContext object and a composition file.",
+        "url": "https://developer.apple.com/documentation/quartz/qcrenderer/init(openglcontext:pixelformat:file:)"
+      },
+      "-renderAtTime:arguments:": {
+        "doc": "Renders a frame of a composition at the specified time.",
+        "url": "https://developer.apple.com/documentation/quartz/qcrenderer/render(attime:arguments:)"
+      },
+      "-snapshotImage": {
+        "doc": "Returns an NSImage object of the current image in the OpenGL context associated with the renderer.",
+        "url": "https://developer.apple.com/documentation/quartz/qcrenderer/snapshotimage()"
+      }
+    },
+    "QCView": {
+      "-autostartsRendering": {
+        "doc": "Checks whether the view is set to start rendering automatically.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/autostartsrendering()"
+      },
+      "-createSnapshotImageOfType:": {
+        "doc": "Returns the current image in the view as an image object of the provided image type.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/createsnapshotimage(oftype:)"
+      },
+      "-erase": {
+        "doc": "Clears the view using the current erase color.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/erase()"
+      },
+      "-eraseColor": {
+        "doc": "Retrieves the current color used to erase the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/erasecolor()"
+      },
+      "-eventForwardingMask": {
+        "doc": "Retrieves the mask used to filter which types of events are forwarded from the view to the composition during rendering.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/eventforwardingmask()"
+      },
+      "-isPausedRendering": {
+        "doc": "Returns whether or not the rendering in the view is paused.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/ispausedrendering()"
+      },
+      "-isRendering": {
+        "doc": "Checks whether a composition is rendering in the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/isrendering()"
+      },
+      "-loadComposition:": {
+        "doc": "Loads a QCComposition object into the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/load(_:)"
+      },
+      "-loadCompositionFromFile:": {
+        "doc": "Loads the composition file located at the specified path.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/loadcomposition(fromfile:)"
+      },
+      "-loadedComposition": {
+        "doc": "Returns the composition loaded in the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/loadedcomposition()"
+      },
+      "-maxRenderingFrameRate": {
+        "doc": "Returns the maximum frame rate for rendering.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/maxrenderingframerate()"
+      },
+      "-openGLContext": {
+        "doc": "Returns the OpenGL context used by the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/openglcontext()"
+      },
+      "-openGLPixelFormat": {
+        "doc": "Returns the OpenGL pixel format used by the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/openglpixelformat()"
+      },
+      "-pauseRendering": {
+        "doc": "Pauses rendering in the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/pauserendering()"
+      },
+      "-play:": {
+        "doc": "Plays or pauses a composition in a view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/play(_:)"
+      },
+      "-renderAtTime:arguments:": {
+        "doc": "Overrides to perform your custom operations prior to or after rendering a frame of a composition.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/render(attime:arguments:)"
+      },
+      "-resumeRendering": {
+        "doc": "Resumes rendering a paused composition.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/resumerendering()"
+      },
+      "-setAutostartsRendering:": {
+        "doc": "Sets whether the composition that is in the view starts rendering automatically when the view is put on the screen.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/setautostartsrendering(_:)"
+      },
+      "-setEraseColor:": {
+        "doc": "Sets the color used to erase the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/seterasecolor(_:)"
+      },
+      "-setEventForwardingMask:": {
+        "doc": "Sets the mask used to filter which types of events are forwarded from the view to the composition during rendering.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/seteventforwardingmask(_:)"
+      },
+      "-setMaxRenderingFrameRate:": {
+        "doc": "Sets the maximum rendering frame rate.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/setmaxrenderingframerate(_:)"
+      },
+      "-snapshotImage": {
+        "doc": "Returns an NSImage object of the current image in the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/snapshotimage()"
+      },
+      "-start:": {
+        "doc": "Starts rendering a composition in a view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/start(_:)"
+      },
+      "-startRendering": {
+        "doc": "Starts rendering the composition that is in the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/startrendering()"
+      },
+      "-stop:": {
+        "doc": "Stops rendering a composition in a view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/stop(_:)"
+      },
+      "-stopRendering": {
+        "doc": "Stops rendering the composition that is in the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/stoprendering()"
+      },
+      "-unloadComposition": {
+        "doc": "Unloads the composition from the view.",
+        "url": "https://developer.apple.com/documentation/quartz/qcview/unloadcomposition()"
+      }
+    }
+  },
+  "properties": {
+    "IKCameraDeviceView": {
+      "cameraDevice": {
+        "doc": "The current camera device.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/cameradevice"
+      },
+      "canDeleteSelectedItems": {
+        "doc": "Returns whether the selected items can be deleted.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/candeleteselecteditems"
+      },
+      "canDownloadSelectedItems": {
+        "doc": "Returns whether the selected items can be downloaded",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/candownloadselecteditems"
+      },
+      "canRotateSelectedItemsLeft": {
+        "doc": "Returns whether the selected items can be rotated left.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/canrotateselecteditemsleft"
+      },
+      "canRotateSelectedItemsRight": {
+        "doc": "Returns whether the selected items can be rotated right.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/canrotateselecteditemsright"
+      },
+      "delegate": {
+        "doc": "The camera device view delegate.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/delegate"
+      },
+      "displaysDownloadsDirectoryControl": {
+        "doc": "Specifies whether the downloads directory control should be displayed.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/displaysdownloadsdirectorycontrol"
+      },
+      "displaysPostProcessApplicationControl": {
+        "doc": "Displays whether the post process application control should be displayed.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/displayspostprocessapplicationcontrol"
+      },
+      "downloadAllControlLabel": {
+        "doc": "Allows the “Download All” control to be renamed.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/downloadallcontrollabel"
+      },
+      "downloadSelectedControlLabel": {
+        "doc": "Allows the “Download Selected” control to be renamed.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/downloadselectedcontrollabel"
+      },
+      "downloadsDirectory": {
+        "doc": "Specifies the directory where files are downloaded",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/downloadsdirectory"
+      },
+      "hasDisplayModeIcon": {
+        "doc": "Returns whether the device view is being displayed in icon mode.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/hasdisplaymodeicon"
+      },
+      "hasDisplayModeTable": {
+        "doc": "Returns whether the device view is being displayed in table mode.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/hasdisplaymodetable"
+      },
+      "iconSize": {
+        "doc": "Specifies the icon size.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/iconsize"
+      },
+      "mode": {
+        "doc": "Specifies the display mode of the camera device view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/mode"
+      },
+      "postProcessApplication": {
+        "doc": "The URL of the application used to post process the image.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/postprocessapplication"
+      },
+      "transferMode": {
+        "doc": "Determines how the contents are saved by the delegate.",
+        "url": "https://developer.apple.com/documentation/quartz/ikcameradeviceview/transfermode"
+      }
+    },
+    "IKDeviceBrowserView": {
+      "delegate": {
+        "doc": "Specifies the delegate object.",
+        "url": "https://developer.apple.com/documentation/quartz/ikdevicebrowserview/delegate"
+      },
+      "displaysLocalCameras": {
+        "doc": "Specifies whether local cameras are displayed by the browser.",
+        "url": "https://developer.apple.com/documentation/quartz/ikdevicebrowserview/displayslocalcameras"
+      },
+      "displaysLocalScanners": {
+        "doc": "Specifies whether local scanners are displayed by the browser.",
+        "url": "https://developer.apple.com/documentation/quartz/ikdevicebrowserview/displayslocalscanners"
+      },
+      "displaysNetworkCameras": {
+        "doc": "Specifies whether network cameras are displayed by the browser.",
+        "url": "https://developer.apple.com/documentation/quartz/ikdevicebrowserview/displaysnetworkcameras"
+      },
+      "displaysNetworkScanners": {
+        "doc": "Specifies whether network scanners are displayed by the browser.",
+        "url": "https://developer.apple.com/documentation/quartz/ikdevicebrowserview/displaysnetworkscanners"
+      },
+      "mode": {
+        "doc": "Specifies the browser display mode.",
+        "url": "https://developer.apple.com/documentation/quartz/ikdevicebrowserview/mode"
+      },
+      "selectedDevice": {
+        "doc": "Returns the selected device.",
+        "url": "https://developer.apple.com/documentation/quartz/ikdevicebrowserview/selecteddevice"
+      }
+    },
+    "IKImageBrowserView": {
+      "dataSource": {
+        "doc": "Returns the data source of the receiver.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/datasource"
+      },
+      "delegate": {
+        "doc": "Returns the delegate of the receiver.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimagebrowserview/delegate"
+      }
+    },
+    "IKImageEditPanel": {
+      "dataSource": {
+        "doc": "Specifies the edit panel’s dataSource.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageeditpanel/datasource"
+      },
+      "filterArray": {
+        "doc": "Returns the current array of user adjustments to effects.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageeditpanel/filterarray"
+      }
+    },
+    "IKImageView": {
+      "autohidesScrollers": {
+        "doc": "Specifies the automatic-hiding scroll bar state for the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/autohidesscrollers"
+      },
+      "autoresizes": {
+        "doc": "Specifies the automatic resizing state for the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/autoresizes"
+      },
+      "backgroundColor": {
+        "doc": "Specifies the background color for the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/backgroundcolor"
+      },
+      "currentToolMode": {
+        "doc": "Specifies the current tool mode for the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/currenttoolmode"
+      },
+      "delegate": {
+        "doc": "Specifies the delegate object of the receiver.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/delegate"
+      },
+      "doubleClickOpensImageEditPanel": {
+        "doc": "Specifies the image-opening state of the editing pane in the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/doubleclickopensimageeditpanel"
+      },
+      "editable": {
+        "doc": "Specifies the editable state for the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/editable"
+      },
+      "hasHorizontalScroller": {
+        "doc": "Specifies the horizontal scroll bar state for the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/hashorizontalscroller"
+      },
+      "hasVerticalScroller": {
+        "doc": "Specifies the vertical scroll bar state for the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/hasverticalscroller"
+      },
+      "imageCorrection": {
+        "doc": "Specifies a Core Image filter for image correction.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/imagecorrection"
+      },
+      "rotationAngle": {
+        "doc": "Specifies the rotation angle for the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/rotationangle"
+      },
+      "supportsDragAndDrop": {
+        "doc": "Specifies the drag-and-drop support state for the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/supportsdraganddrop"
+      },
+      "zoomFactor": {
+        "doc": "Specifies the zoom factor for the image view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikimageview/zoomfactor"
+      }
+    },
+    "IKSaveOptions": {
+      "delegate": {
+        "doc": "Specifies the delegate object.",
+        "url": "https://developer.apple.com/documentation/quartz/iksaveoptions/delegate"
+      },
+      "imageProperties": {
+        "doc": "Returns a dictionary of updated image properties that reflects the user’s selection.",
+        "url": "https://developer.apple.com/documentation/quartz/iksaveoptions/imageproperties"
+      },
+      "imageUTType": {
+        "doc": "Returns the uniform type identifier that reflects the user’s selection.",
+        "url": "https://developer.apple.com/documentation/quartz/iksaveoptions/imageuttype"
+      },
+      "userSelection": {
+        "doc": "Returns a dictionary that contains the save options selected by the user.",
+        "url": "https://developer.apple.com/documentation/quartz/iksaveoptions/userselection"
+      }
+    },
+    "IKScannerDeviceView": {
+      "delegate": {
+        "doc": "The scanner device delegate",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/delegate"
+      },
+      "displaysDownloadsDirectoryControl": {
+        "doc": "Determines whether the downloads directory control is displayed.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/displaysdownloadsdirectorycontrol"
+      },
+      "displaysPostProcessApplicationControl": {
+        "doc": "Specifies whether the post processing application control is displayed.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/displayspostprocessapplicationcontrol"
+      },
+      "documentName": {
+        "doc": "Returns the document name.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/documentname"
+      },
+      "downloadsDirectory": {
+        "doc": "The directory where scans are saved.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/downloadsdirectory"
+      },
+      "hasDisplayModeAdvanced": {
+        "doc": "The property that determines whether the scanner view uses the advanced display mode.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/hasdisplaymodeadvanced"
+      },
+      "hasDisplayModeSimple": {
+        "doc": "The property that determines whether the scanner view uses the simple display mode.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/hasdisplaymodesimple"
+      },
+      "mode": {
+        "doc": "The display mode used by the device view.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/mode"
+      },
+      "overviewControlLabel": {
+        "doc": "Allows customization of the “Overview” label.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/overviewcontrollabel"
+      },
+      "postProcessApplication": {
+        "doc": "The URL of the application to use for post processing of the scan.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/postprocessapplication"
+      },
+      "scanControlLabel": {
+        "doc": "Allows customization of the “Scan” label.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/scancontrollabel"
+      },
+      "scannerDevice": {
+        "doc": "The device used for scanning",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/scannerdevice"
+      },
+      "transferMode": {
+        "doc": "Determines how the scanned content is provided to the delegate.",
+        "url": "https://developer.apple.com/documentation/quartz/ikscannerdeviceview/transfermode"
+      }
+    },
+    "IKSlideshow": {
+      "autoPlayDelay": {
+        "doc": "Controls the interval of time before a slideshow starts to play automatically.",
+        "url": "https://developer.apple.com/documentation/quartz/ikslideshow/autoplaydelay"
+      }
+    }
+  }
+}
