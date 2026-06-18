@@ -558,11 +558,7 @@ func emitClassFile(
 
 	// ── Write output ───────────────────────────────────────────────────────────
 
-	fmt.Fprint(w, generatedHeader+"\n")
-	fmt.Fprint(w, buildTag+"\n")
-	fmt.Fprintf(w, "package %s\n\n", pkgName)
-	writeImportBlock(w, imports)
-	if _, err := w.Write(body.Bytes()); err != nil {
+	if _, err := w.Write(assembleFile(pkgName, imports, body.Bytes())); err != nil {
 		return fmt.Errorf("write class body: %w", err)
 	}
 
@@ -2516,44 +2512,67 @@ func sortedKeys(m map[string]meta.Class) []string {
 	return keys
 }
 
-func writeImportBlock(w io.Writer, imports map[string]string) {
+// importLines returns the import statements (each `"path"` or `alias "path"`)
+// for the alias→path map, sorted by path then alias (the same path can be
+// imported under two aliases, e.g. raw and foundation in the trial foundation
+// package).
+func importLines(imports map[string]string) []string {
 	type imp struct{ alias, path string }
 	list := make([]imp, 0, len(imports))
 	for alias, path := range imports {
 		list = append(list, imp{alias, path})
 	}
 	sort.Slice(list, func(i, j int) bool {
-		// Tie-break on alias: the same path can be imported under two aliases
-		// (e.g. raw and foundation in the trial foundation package).
 		if list[i].path != list[j].path {
 			return list[i].path < list[j].path
 		}
 		return list[i].alias < list[j].alias
 	})
-	fmt.Fprint(w, "import (\n")
+	lines := make([]string, 0, len(list))
 	for _, i := range list {
 		segs := strings.Split(i.path, "/")
 		defaultAlias := segs[len(segs)-1]
 		if i.alias == defaultAlias || i.alias == i.path {
-			fmt.Fprintf(w, "\t%q\n", i.path)
+			lines = append(lines, fmt.Sprintf("%q", i.path))
 		} else {
-			fmt.Fprintf(w, "\t%s %q\n", i.alias, i.path)
+			lines = append(lines, fmt.Sprintf("%s %q", i.alias, i.path))
 		}
 	}
-	fmt.Fprint(w, ")\n\n")
+	return lines
+}
+
+// fileView is the template data for file.tmpl.
+type fileView struct {
+	Header      string
+	BuildTag    string
+	PkgName     string
+	ImportLines []string
+	Body        string
+}
+
+// assembleFile renders a complete generated file — the scaffold (header, build
+// tag, package clause, import block) plus the already-rendered body — through
+// file.tmpl.
+func assembleFile(pkgName string, imports map[string]string, body []byte) []byte {
+	var buf bytes.Buffer
+	renderTemplate(&buf, "file", fileView{
+		Header:      strings.TrimRight(generatedHeader, "\n"),
+		BuildTag:    strings.TrimRight(buildTag, "\n"),
+		PkgName:     pkgName,
+		ImportLines: importLines(imports),
+		Body:        string(body),
+	})
+	return buf.Bytes()
 }
 
 func emitDocGo(outDir, pkgName string, fw *meta.FrameworkMeta) error {
 	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(
-		&buf,
-		"// Package %s provides a fluent Go API over the macOS %s framework.\n",
-		pkgName,
-		fw.Framework,
-	)
-	fmt.Fprintf(&buf, "package %s\n", pkgName)
+	renderTemplate(&buf, "docfile", struct{ Header, BuildTag, PkgName, Framework string }{
+		Header:    strings.TrimRight(generatedHeader, "\n"),
+		BuildTag:  strings.TrimRight(buildTag, "\n"),
+		PkgName:   pkgName,
+		Framework: fw.Framework,
+	})
 	return emit.WriteGoFile(filepath.Join(outDir, "doc.go"), buf.Bytes())
 }
 
@@ -2615,15 +2634,9 @@ func emitProvidersFile(
 	candidates := map[string]string{rawPkgAlias: rawPkgPath, "objc": objcImportPath}
 	maps.Copy(candidates, providerImports)
 
-	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
-	writeImportBlock(&buf, usedImports(body.Bytes(), candidates))
-	buf.Write(body.Bytes())
-
 	fname := pkgName + "_providers_generated.go"
-	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
+	file := assembleFile(pkgName, usedImports(body.Bytes(), candidates), body.Bytes())
+	return emit.WriteGoFile(filepath.Join(outDir, fname), file)
 }
 
 // ── C function wrappers (CFErrorRef * / NSError ** out-parameters) ────────────
@@ -2749,11 +2762,6 @@ func emitFunctionWrappers(
 		return emittedNames, nil
 	}
 
-	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
-
 	imports := map[string]string{
 		rawPkgAlias:  rawPkgPath,
 		"fmt":        "fmt",
@@ -2763,8 +2771,8 @@ func emitFunctionWrappers(
 	if needsFoundation {
 		imports["foundation"] = foundationImportPath
 	}
-	writeImportBlock(&buf, imports)
 
+	var body bytes.Buffer
 	view := cfErrFunctionsView{RawAlias: rawPkgAlias}
 	for _, e := range entries {
 		var sigParts, callArgs []string
@@ -2786,10 +2794,11 @@ func emitFunctionWrappers(
 			RawFnName:  e.rawFnName,
 		})
 	}
-	renderTemplate(&buf, "cferr_functions", view)
+	renderTemplate(&body, "cferr_functions", view)
 
 	fname := pkgName + "_functions_generated.go"
-	if err := emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes()); err != nil {
+	file := assembleFile(pkgName, imports, body.Bytes())
+	if err := emit.WriteGoFile(filepath.Join(outDir, fname), file); err != nil {
 		return nil, err
 	}
 	return emittedNames, nil

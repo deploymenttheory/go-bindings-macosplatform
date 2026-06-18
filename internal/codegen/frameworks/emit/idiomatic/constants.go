@@ -4,7 +4,6 @@ package idiomatic
 
 import (
 	"bytes"
-	"fmt"
 	"path/filepath"
 	"strings"
 
@@ -90,15 +89,9 @@ func emitConstants(
 		"objc":      objcImportPath,
 	}
 
-	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
-	writeImportBlock(&buf, usedImports(body.Bytes(), imports))
-	buf.Write(body.Bytes())
-
 	fname := pkgName + "_constants_generated.go"
-	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
+	file := assembleFile(pkgName, usedImports(body.Bytes(), imports), body.Bytes())
+	return emit.WriteGoFile(filepath.Join(outDir, fname), file)
 }
 
 // constantItem / cfConstantsView are the template data for constants.tmpl.

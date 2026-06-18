@@ -177,15 +177,8 @@ func emitGenericFunctionWrappers(
 		) + crossPkg
 	}
 
-	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
-	writeImportBlock(&buf, imports)
-	buf.Write(body.Bytes())
-
 	fname := pkgName + "_cfunctions_generated.go"
-	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
+	return emit.WriteGoFile(filepath.Join(outDir, fname), assembleFile(pkgName, imports, body.Bytes()))
 }
 
 // emitClassMethodFunctions writes <pkgname>_classmethods_generated.go: one
@@ -287,15 +280,9 @@ func emitClassMethodFunctions(
 		return nil
 	}
 
-	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
-	writeImportBlock(&buf, usedImports(body.Bytes(), candidates))
-	buf.Write(body.Bytes())
-
 	fname := pkgName + "_classmethods_generated.go"
-	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
+	file := assembleFile(pkgName, usedImports(body.Bytes(), candidates), body.Bytes())
+	return emit.WriteGoFile(filepath.Join(outDir, fname), file)
 }
 
 // classRawMethodNames computes, per class-method selector, the exact Go
@@ -517,15 +504,8 @@ func emitCFFunctionWrappers(
 		imports[crossPkg] = strings.TrimSuffix(rawPkgPath, naming.PackageName(fw.Framework)) + crossPkg
 	}
 
-	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
-	writeImportBlock(&buf, imports)
-	buf.Write(body.Bytes())
-
 	fname := pkgName + "_cffunctions_generated.go"
-	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
+	return emit.WriteGoFile(filepath.Join(outDir, fname), assembleFile(pkgName, imports, body.Bytes()))
 }
 
 // cFunctionNameFor recovers the original C symbol for an exported Go function

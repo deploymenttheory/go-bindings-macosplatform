@@ -1,0 +1,11 @@
+{{/*
+    docfile.tmpl — the package doc.go: header, build constraint, and the package
+    doc comment immediately preceding the package clause.
+*/}}
+{{define "docfile"}}{{.Header}}
+
+{{.BuildTag}}
+
+// Package {{.PkgName}} provides a fluent Go API over the macOS {{.Framework}} framework.
+package {{.PkgName}}
+{{end}}

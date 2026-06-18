@@ -1,0 +1,16 @@
+{{/*
+    file.tmpl — the generated-file scaffold: the DO-NOT-EDIT header, the build
+    constraint, the package clause, the (already-sorted) import block, and the
+    rendered body. gofmt (via WriteGoFile) canonicalises the result.
+*/}}
+{{define "file"}}{{.Header}}
+
+{{.BuildTag}}
+
+package {{.PkgName}}
+
+{{if .ImportLines}}import (
+{{range .ImportLines}}{{.}}
+{{end}})
+
+{{end}}{{.Body}}{{end}}
