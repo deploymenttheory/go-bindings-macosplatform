@@ -1,0 +1,1705 @@
+{
+  "schema_version": 1,
+  "framework": "PHASE",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "PHASEAmbientMixerDefinition": {
+      "doc": "An audio-layering object that outputs sound in a particular direction in 3D space.",
+      "url": "https://developer.apple.com/documentation/phase/phaseambientmixerdefinition"
+    },
+    "PHASEAsset": {
+      "doc": "A base class that adds a name to framework assets.",
+      "url": "https://developer.apple.com/documentation/phase/phaseasset"
+    },
+    "PHASEAssetRegistry": {
+      "doc": "A central repository of audio assets.",
+      "url": "https://developer.apple.com/documentation/phase/phaseassetregistry"
+    },
+    "PHASEBlendNodeDefinition": {
+      "doc": "A node that smoothly fades between the audio of its child nodes.",
+      "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition"
+    },
+    "PHASECardioidDirectivityModelParameters": {
+      "doc": "An object that directs sound in a heart-shaped curve surrounding a sound source.",
+      "url": "https://developer.apple.com/documentation/phase/phasecardioiddirectivitymodelparameters"
+    },
+    "PHASECardioidDirectivityModelSubbandParameters": {
+      "doc": "A data set that projects sound of a certain frequency outward in the shape of a heart.",
+      "url": "https://developer.apple.com/documentation/phase/phasecardioiddirectivitymodelsubbandparameters"
+    },
+    "PHASEChannelMixerDefinition": {
+      "doc": "An audio-layering object that routes sound directly to the device’s output.",
+      "url": "https://developer.apple.com/documentation/phase/phasechannelmixerdefinition"
+    },
+    "PHASEConeDirectivityModelParameters": {
+      "doc": "An object that directs sound in a cone-shaped curve that extends from a sound source.",
+      "url": "https://developer.apple.com/documentation/phase/phaseconedirectivitymodelparameters"
+    },
+    "PHASEConeDirectivityModelSubbandParameters": {
+      "doc": "A data set that projects sound of a certain frequency outward in the shape of a cone.",
+      "url": "https://developer.apple.com/documentation/phase/phaseconedirectivitymodelsubbandparameters"
+    },
+    "PHASEContainerNodeDefinition": {
+      "doc": "A node that plays all its children at the same time.",
+      "url": "https://developer.apple.com/documentation/phase/phasecontainernodedefinition"
+    },
+    "PHASEDefinition": {
+      "doc": "A base class that adds a name to framework definitions.",
+      "url": "https://developer.apple.com/documentation/phase/phasedefinition"
+    },
+    "PHASEDirectivityModelParameters": {
+      "doc": "A base class for objects that direct sound.",
+      "url": "https://developer.apple.com/documentation/phase/phasedirectivitymodelparameters"
+    },
+    "PHASEDistanceModelFadeOutParameters": {
+      "doc": "A distance over which the framework fades out sound.",
+      "url": "https://developer.apple.com/documentation/phase/phasedistancemodelfadeoutparameters"
+    },
+    "PHASEDistanceModelParameters": {
+      "doc": "A base class for a sound’s rate of change over distance.",
+      "url": "https://developer.apple.com/documentation/phase/phasedistancemodelparameters"
+    },
+    "PHASEDucker": {
+      "doc": "An object that manages competing sounds.",
+      "url": "https://developer.apple.com/documentation/phase/phaseducker"
+    },
+    "PHASEEngine": {
+      "doc": "An object that manages audio assets, controls playback, and configures environmental effects.",
+      "url": "https://developer.apple.com/documentation/phase/phaseengine"
+    },
+    "PHASEEnvelope": {
+      "doc": "A collection of segments that connect to graph a complex curve over a linear input.",
+      "url": "https://developer.apple.com/documentation/phase/phaseenvelope"
+    },
+    "PHASEEnvelopeDistanceModelParameters": {
+      "doc": "A graph of points and curves that shapes the volume of a sound over distance.",
+      "url": "https://developer.apple.com/documentation/phase/phaseenvelopedistancemodelparameters"
+    },
+    "PHASEEnvelopeSegment": {
+      "doc": "A curved portion of an envelope.",
+      "url": "https://developer.apple.com/documentation/phase/phaseenvelopesegment"
+    },
+    "PHASEGeneratorNodeDefinition": {
+      "doc": "A base class for nodes that provide audio data to generate sound.",
+      "url": "https://developer.apple.com/documentation/phase/phasegeneratornodedefinition"
+    },
+    "PHASEGeometricSpreadingDistanceModelParameters": {
+      "doc": "An object that dissipates sound frequencies over distance.",
+      "url": "https://developer.apple.com/documentation/phase/phasegeometricspreadingdistancemodelparameters"
+    },
+    "PHASEGlobalMetaParameterAsset": {
+      "doc": "A reference to a registered metaparameter that the app can share with multiple sound events or sources.",
+      "url": "https://developer.apple.com/documentation/phase/phaseglobalmetaparameterasset"
+    },
+    "PHASEGroup": {
+      "doc": "A container that shares audio parameters with a collection of sounds.",
+      "url": "https://developer.apple.com/documentation/phase/phasegroup"
+    },
+    "PHASEGroupPreset": {
+      "doc": "A collection of settings for groups.",
+      "url": "https://developer.apple.com/documentation/phase/phasegrouppreset"
+    },
+    "PHASEGroupPresetSetting": {
+      "doc": "Settings for group presets.",
+      "url": "https://developer.apple.com/documentation/phase/phasegrouppresetsetting"
+    },
+    "PHASEListener": {
+      "doc": "A central point of reference that defines the location within the scene that’s most audible to the user.",
+      "url": "https://developer.apple.com/documentation/phase/phaselistener"
+    },
+    "PHASEMappedMetaParameterDefinition": {
+      "doc": "A metaparameter that graphs an input value on a set of mathematical curves.",
+      "url": "https://developer.apple.com/documentation/phase/phasemappedmetaparameterdefinition"
+    },
+    "PHASEMaterial": {
+      "doc": "Surface characteristics that determine the acoustic properties of an object.",
+      "url": "https://developer.apple.com/documentation/phase/phasematerial"
+    },
+    "PHASEMedium": {
+      "doc": "A property or quality of the environment that affects how sound travels.",
+      "url": "https://developer.apple.com/documentation/phase/phasemedium"
+    },
+    "PHASEMetaParameter": {
+      "doc": "A named parameter with a value that the app can change over time.",
+      "url": "https://developer.apple.com/documentation/phase/phasemetaparameter"
+    },
+    "PHASEMetaParameterDefinition": {
+      "doc": "A specification for a named parameter with a constant value.",
+      "url": "https://developer.apple.com/documentation/phase/phasemetaparameterdefinition"
+    },
+    "PHASEMixer": {
+      "doc": "An object that combines multiple audio signals into a single signal.",
+      "url": "https://developer.apple.com/documentation/phase/phasemixer"
+    },
+    "PHASEMixerDefinition": {
+      "doc": "An object to initialize a mixer with a given configuration.",
+      "url": "https://developer.apple.com/documentation/phase/phasemixerdefinition"
+    },
+    "PHASEMixerParameters": {
+      "doc": "An object that specifies a mixer for sound events and orients them in 3D space.",
+      "url": "https://developer.apple.com/documentation/phase/phasemixerparameters"
+    },
+    "PHASENumberMetaParameter": {
+      "doc": "A metaparameter defined by a number that can change over time.",
+      "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameter"
+    },
+    "PHASENumberMetaParameterDefinition": {
+      "doc": "A specification for a metaparameter defined by a number.",
+      "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameterdefinition"
+    },
+    "PHASENumericPair": {
+      "doc": "An ordered pair that defines a bounding box for an envelope.",
+      "url": "https://developer.apple.com/documentation/phase/phasenumericpair"
+    },
+    "PHASEObject": {
+      "doc": "An object in the scene.",
+      "url": "https://developer.apple.com/documentation/phase/phaseobject"
+    },
+    "PHASEOccluder": {
+      "doc": "An object with a shape and position that blocks audio from reaching the listener.",
+      "url": "https://developer.apple.com/documentation/phase/phaseoccluder"
+    },
+    "PHASEPullStreamNode": {
+      "url": "https://developer.apple.com/documentation/phase/phasepullstreamnode"
+    },
+    "PHASEPullStreamNodeDefinition": {
+      "url": "https://developer.apple.com/documentation/phase/phasepullstreamnodedefinition"
+    },
+    "PHASEPushStreamNode": {
+      "doc": "An audio stream you manage to provide a sound buffer data.",
+      "url": "https://developer.apple.com/documentation/phase/phasepushstreamnode"
+    },
+    "PHASEPushStreamNodeDefinition": {
+      "doc": "A node that plays a sequence of audio buffers.",
+      "url": "https://developer.apple.com/documentation/phase/phasepushstreamnodedefinition"
+    },
+    "PHASERandomNodeDefinition": {
+      "doc": "A sound event node that invokes one of its child nodes at random.",
+      "url": "https://developer.apple.com/documentation/phase/phaserandomnodedefinition"
+    },
+    "PHASESamplerNodeDefinition": {
+      "doc": "A node that plays complete audio data.",
+      "url": "https://developer.apple.com/documentation/phase/phasesamplernodedefinition"
+    },
+    "PHASEShape": {
+      "doc": "A collection of points that connect to form a 3D volume.",
+      "url": "https://developer.apple.com/documentation/phase/phaseshape"
+    },
+    "PHASEShapeElement": {
+      "doc": "An object that describes the characteristics of a physical surface.",
+      "url": "https://developer.apple.com/documentation/phase/phaseshapeelement"
+    },
+    "PHASESoundAsset": {
+      "doc": "A sound resource stored in the asset registry.",
+      "url": "https://developer.apple.com/documentation/phase/phasesoundasset"
+    },
+    "PHASESoundEvent": {
+      "doc": "An object that determines which audio to play.",
+      "url": "https://developer.apple.com/documentation/phase/phasesoundevent"
+    },
+    "PHASESoundEventNodeAsset": {
+      "doc": "A template object for sounds that can play in reaction to environmental state.",
+      "url": "https://developer.apple.com/documentation/phase/phasesoundeventnodeasset"
+    },
+    "PHASESoundEventNodeDefinition": {
+      "doc": "A base class for sound event nodes that connect to form a node hierarchy.",
+      "url": "https://developer.apple.com/documentation/phase/phasesoundeventnodedefinition"
+    },
+    "PHASESource": {
+      "doc": "An object that plays audio from a 3D location and orientation in a scene.",
+      "url": "https://developer.apple.com/documentation/phase/phasesource"
+    },
+    "PHASESpatialMixerDefinition": {
+      "doc": "An audio-layering object that produces environmental effects and plays sound with a 3D position and orientation.",
+      "url": "https://developer.apple.com/documentation/phase/phasespatialmixerdefinition"
+    },
+    "PHASESpatialPipeline": {
+      "doc": "An object that specifies the volume of optional environmental effects.",
+      "url": "https://developer.apple.com/documentation/phase/phasespatialpipeline"
+    },
+    "PHASESpatialPipelineEntry": {
+      "doc": "An audio layer with an adjustable volume for a spatial mixer’s output.",
+      "url": "https://developer.apple.com/documentation/phase/phasespatialpipelineentry"
+    },
+    "PHASEStreamNode": {
+      "url": "https://developer.apple.com/documentation/phase/phasestreamnode"
+    },
+    "PHASEStringMetaParameter": {
+      "doc": "A metaparameter with a text definition that can change over time.",
+      "url": "https://developer.apple.com/documentation/phase/phasestringmetaparameter"
+    },
+    "PHASEStringMetaParameterDefinition": {
+      "doc": "A specification for a metaparameter defined by text.",
+      "url": "https://developer.apple.com/documentation/phase/phasestringmetaparameterdefinition"
+    },
+    "PHASESwitchNodeDefinition": {
+      "doc": "A node that passes invocation to only one of its child nodes.",
+      "url": "https://developer.apple.com/documentation/phase/phaseswitchnodedefinition"
+    }
+  },
+  "enums": {
+    "PHASEAssetError": {
+      "doc": "An asset error that PHASE reports.",
+      "url": "https://developer.apple.com/documentation/phase/phaseasseterror"
+    },
+    "PHASEAssetType": {
+      "doc": "Options that determine how PHASE manages sound assets in memory.",
+      "url": "https://developer.apple.com/documentation/phase/phaseassettype"
+    },
+    "PHASEAutomaticHeadTrackingFlags": {
+      "url": "https://developer.apple.com/documentation/phase/phaseautomaticheadtrackingflags"
+    },
+    "PHASECalibrationMode": {
+      "doc": "Calibration options for sound pressure level.",
+      "url": "https://developer.apple.com/documentation/phase/phasecalibrationmode",
+      "members": {
+        "PHASECalibrationModeAbsoluteSpl": {
+          "doc": "A sound pressure level based on the current output device.",
+          "url": "https://developer.apple.com/documentation/phase/phasecalibrationmode/absolutespl"
+        },
+        "PHASECalibrationModeNone": {
+          "doc": "An option that specifies no loudness calibration.",
+          "url": "https://developer.apple.com/documentation/phase/phasecalibrationmode/none"
+        },
+        "PHASECalibrationModeRelativeSpl": {
+          "doc": "A sound pressure level that’s tuned for the device.",
+          "url": "https://developer.apple.com/documentation/phase/phasecalibrationmode/relativespl"
+        }
+      }
+    },
+    "PHASECullOption": {
+      "doc": "The actions the engine takes when it culls sound.",
+      "url": "https://developer.apple.com/documentation/phase/phaseculloption",
+      "members": {
+        "PHASECullOptionDoNotCull": {
+          "doc": "An option that indicates the framework takes no action to cull sound.",
+          "url": "https://developer.apple.com/documentation/phase/phaseculloption/donotcull"
+        },
+        "PHASECullOptionSleepWakeAtRandomOffset": {
+          "doc": "An option that pauses playback and resumes at a random position.",
+          "url": "https://developer.apple.com/documentation/phase/phaseculloption/sleepwakeatrandomoffset"
+        },
+        "PHASECullOptionSleepWakeAtRealtimeOffset": {
+          "doc": "An option that pauses playback and resumes where it left off.",
+          "url": "https://developer.apple.com/documentation/phase/phaseculloption/sleepwakeatrealtimeoffset"
+        },
+        "PHASECullOptionSleepWakeAtZero": {
+          "doc": "An option that pauses playback and resumes at the beginning.",
+          "url": "https://developer.apple.com/documentation/phase/phaseculloption/sleepwakeatzero"
+        },
+        "PHASECullOptionTerminate": {
+          "doc": "An option that culls sound by stopping playback.",
+          "url": "https://developer.apple.com/documentation/phase/phaseculloption/terminate"
+        }
+      }
+    },
+    "PHASECurveType": {
+      "doc": "Options that apply a mathematical function to an input value.",
+      "url": "https://developer.apple.com/documentation/phase/phasecurvetype",
+      "members": {
+        "PHASECurveTypeCubed": {
+          "doc": "A curve that increases at a rate that cubes its input.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/cubed"
+        },
+        "PHASECurveTypeHoldStartValue": {
+          "doc": "A curve that equals its start value for the entire duration.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/holdstartvalue"
+        },
+        "PHASECurveTypeInverseCubed": {
+          "doc": "A curve that increases at a rate of one divided by the input’s cube.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/inversecubed"
+        },
+        "PHASECurveTypeInverseSigmoid": {
+          "doc": "An inverse sigmoid curve.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/inversesigmoid"
+        },
+        "PHASECurveTypeInverseSine": {
+          "doc": "An inverse sine curve.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/inversesine"
+        },
+        "PHASECurveTypeInverseSquared": {
+          "doc": "A curve that increases at a rate of one divided by the input’s square.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/inversesquared"
+        },
+        "PHASECurveTypeJumpToEndValue": {
+          "doc": "A curve that equals its end value for the entire duration.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/jumptoendvalue"
+        },
+        "PHASECurveTypeLinear": {
+          "doc": "A curve that increases uniformly with its input.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/linear"
+        },
+        "PHASECurveTypeSigmoid": {
+          "doc": "A sigmoid curve.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/sigmoid"
+        },
+        "PHASECurveTypeSine": {
+          "doc": "A sine curve.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/sine"
+        },
+        "PHASECurveTypeSquared": {
+          "doc": "A curve that increases at a rate that squares its input.",
+          "url": "https://developer.apple.com/documentation/phase/phasecurvetype/squared"
+        }
+      }
+    },
+    "PHASEError": {
+      "doc": "An error that PHASE reports.",
+      "url": "https://developer.apple.com/documentation/phase/phaseerror"
+    },
+    "PHASEMaterialPreset": {
+      "doc": "A collection of physical surfaces that each add a unique acoustic quality to your app’s audio.",
+      "url": "https://developer.apple.com/documentation/phase/phasematerialpreset",
+      "members": {
+        "PHASEMaterialPresetBrick": {
+          "doc": "A surface characteristic that produces the acoustic quality of brick.",
+          "url": "https://developer.apple.com/documentation/phase/phasematerialpreset/brick"
+        },
+        "PHASEMaterialPresetCardboard": {
+          "doc": "A surface characteristic that produces the acoustic quality of cardboard.",
+          "url": "https://developer.apple.com/documentation/phase/phasematerialpreset/cardboard"
+        },
+        "PHASEMaterialPresetConcrete": {
+          "doc": "A surface characteristic that produces the acoustic quality of concrete.",
+          "url": "https://developer.apple.com/documentation/phase/phasematerialpreset/concrete"
+        },
+        "PHASEMaterialPresetDrywall": {
+          "doc": "A surface characteristic that produces the acoustic quality of drywall.",
+          "url": "https://developer.apple.com/documentation/phase/phasematerialpreset/drywall"
+        },
+        "PHASEMaterialPresetGlass": {
+          "doc": "A surface characteristic that produces the acoustic quality of glass.",
+          "url": "https://developer.apple.com/documentation/phase/phasematerialpreset/glass"
+        },
+        "PHASEMaterialPresetWood": {
+          "doc": "A surface characteristic that produces the acoustic quality of wood.",
+          "url": "https://developer.apple.com/documentation/phase/phasematerialpreset/wood"
+        }
+      }
+    },
+    "PHASEMediumPreset": {
+      "doc": "Predetermined qualities of an environment that affect how sound transmits.",
+      "url": "https://developer.apple.com/documentation/phase/phasemediumpreset"
+    },
+    "PHASENormalizationMode": {
+      "doc": "Options that determine whether the framework adjusts a sound asset’s loudness for the user’s output device.",
+      "url": "https://developer.apple.com/documentation/phase/phasenormalizationmode",
+      "members": {
+        "PHASENormalizationModeDynamic": {
+          "doc": "A mode that instructs the framework to adjust a sound’s volume according to the user’s output device.",
+          "url": "https://developer.apple.com/documentation/phase/phasenormalizationmode/dynamic"
+        },
+        "PHASENormalizationModeNone": {
+          "doc": "A mode that instructs the framework not to adjust a sound’s volume according to the user’s output device.",
+          "url": "https://developer.apple.com/documentation/phase/phasenormalizationmode/none"
+        }
+      }
+    },
+    "PHASEPlaybackMode": {
+      "doc": "Loop options for audio playback.",
+      "url": "https://developer.apple.com/documentation/phase/phaseplaybackmode",
+      "members": {
+        "PHASEPlaybackModeLooping": {
+          "doc": "An option that restarts a sound from the begining after it finishes.",
+          "url": "https://developer.apple.com/documentation/phase/phaseplaybackmode/looping"
+        },
+        "PHASEPlaybackModeOneShot": {
+          "doc": "An option that plays a sound only once.",
+          "url": "https://developer.apple.com/documentation/phase/phaseplaybackmode/oneshot"
+        }
+      }
+    },
+    "PHASEPushStreamBufferOptions": {
+      "doc": "Options that inform PHASE of an audio-stream buffer’s playback priority.",
+      "url": "https://developer.apple.com/documentation/phase/phasepushstreambufferoptions",
+      "members": {
+        "PHASEPushStreamBufferDefault": {
+          "doc": "Indicates a buffer processes after existing buffers in the queue.",
+          "url": "https://developer.apple.com/documentation/phase/phasepushstreambufferoptions/default"
+        },
+        "PHASEPushStreamBufferInterrupts": {
+          "doc": "Indicates a buffer begins processing immediately.",
+          "url": "https://developer.apple.com/documentation/phase/phasepushstreambufferoptions/interrupts"
+        },
+        "PHASEPushStreamBufferInterruptsAtLoop": {
+          "doc": "Indicates a buffer begins processing when an existing buffer loops.",
+          "url": "https://developer.apple.com/documentation/phase/phasepushstreambufferoptions/interruptsatloop"
+        },
+        "PHASEPushStreamBufferLoops": {
+          "doc": "Indicates a buffer restarts after it finishes processing.",
+          "url": "https://developer.apple.com/documentation/phase/phasepushstreambufferoptions/loops"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a push stream buffer option with the given raw value.",
+          "url": "https://developer.apple.com/documentation/phase/phasepushstreambufferoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "PHASEPushStreamCompletionCallbackCondition": {
+      "doc": "A status that describes the results after the app schedules a push-stream buffer.",
+      "url": "https://developer.apple.com/documentation/phase/phasepushstreamcompletioncallbackcondition",
+      "members": {
+        "PHASEPushStreamCompletionDataRendered": {
+          "doc": "Indicates the framework invokes the callback when the engine processes the audio for output.",
+          "url": "https://developer.apple.com/documentation/phase/phasepushstreamcompletioncallbackcondition/datarendered"
+        }
+      }
+    },
+    "PHASERenderingState": {
+      "doc": "The playback status of audio.",
+      "url": "https://developer.apple.com/documentation/phase/phaserenderingstate"
+    },
+    "PHASEReverbPreset": {
+      "doc": "The manner in which PHASE diffuses resonating sound.",
+      "url": "https://developer.apple.com/documentation/phase/phasereverbpreset",
+      "members": {
+        "PHASEReverbPresetCathedral": {
+          "doc": "A resonation that simulates the experience of hearing a sound in a cathedral.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/cathedral"
+        },
+        "PHASEReverbPresetLargeChamber": {
+          "doc": "A resonation that simulates the experience of hearing a sound in a large chamber with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/largechamber"
+        },
+        "PHASEReverbPresetLargeHall": {
+          "doc": "A resonation that simulates the experience of hearing a sound in a large hall with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/largehall"
+        },
+        "PHASEReverbPresetLargeHall2": {
+          "doc": "A resonation that simulates the experience of hearing a sound in one kind of large hall with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/largehall2"
+        },
+        "PHASEReverbPresetLargeRoom": {
+          "doc": "A resonation that simulates the experience of hearing a sound in a large room with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/largeroom"
+        },
+        "PHASEReverbPresetLargeRoom2": {
+          "doc": "A resonation that simulates the experience of hearing a sound in one kind of large room with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/largeroom2"
+        },
+        "PHASEReverbPresetMediumChamber": {
+          "doc": "A resonation that simulates the experience of hearing a sound in a medium-size chamber with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/mediumchamber"
+        },
+        "PHASEReverbPresetMediumHall": {
+          "doc": "A resonation that simulates the experience of hearing a sound in a medium-size hall with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/mediumhall"
+        },
+        "PHASEReverbPresetMediumHall2": {
+          "doc": "A resonation that simulates the experience of hearing a sound in one kind of medium-size hall with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/mediumhall2"
+        },
+        "PHASEReverbPresetMediumHall3": {
+          "doc": "A resonation that simulates the experience of hearing a sound in another kind of medium-size hall with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/mediumhall3"
+        },
+        "PHASEReverbPresetMediumRoom": {
+          "doc": "A resonation that simulates the experience of hearing a sound in a medium-size room with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/mediumroom"
+        },
+        "PHASEReverbPresetNone": {
+          "doc": "An option that adds no reverberation to a sound.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/none"
+        },
+        "PHASEReverbPresetSmallRoom": {
+          "doc": "A resonation that simulates the experience of hearing a sound in a small room with specific dimensions.",
+          "url": "https://developer.apple.com/documentation/phase/phasereverbpreset/smallroom"
+        }
+      }
+    },
+    "PHASESoundEventError": {
+      "doc": "A sound event error that PHASE reports.",
+      "url": "https://developer.apple.com/documentation/phase/phasesoundeventerror"
+    },
+    "PHASESoundEventPrepareHandlerReason": {
+      "doc": "Indicates the results of sound-event preparation.",
+      "url": "https://developer.apple.com/documentation/phase/phasesoundeventpreparehandlerreason"
+    },
+    "PHASESoundEventPrepareState": {
+      "doc": "Indicates the state of sound-event preparation.",
+      "url": "https://developer.apple.com/documentation/phase/phasesoundeventpreparestate"
+    },
+    "PHASESoundEventSeekHandlerReason": {
+      "doc": "Indicates the status after a sound event changes its playback position.",
+      "url": "https://developer.apple.com/documentation/phase/phasesoundeventseekhandlerreason"
+    },
+    "PHASESoundEventStartHandlerReason": {
+      "doc": "Indicates the status after starting a sound event.",
+      "url": "https://developer.apple.com/documentation/phase/phasesoundeventstarthandlerreason"
+    },
+    "PHASESpatialPipelineFlags": {
+      "doc": "Sound resonance options for a spatial pipeline.",
+      "url": "https://developer.apple.com/documentation/phase/phasespatialpipelineflags"
+    },
+    "PHASESpatializationMode": {
+      "doc": "The manner in which PHASE outputs spatial audio.",
+      "url": "https://developer.apple.com/documentation/phase/phasespatializationmode",
+      "members": {
+        "PHASESpatializationModeAlwaysUseBinaural": {
+          "doc": "A mode that introduces special processing to replicate a realistic spatial listening experience.",
+          "url": "https://developer.apple.com/documentation/phase/phasespatializationmode/alwaysusebinaural"
+        },
+        "PHASESpatializationModeAlwaysUseChannelBased": {
+          "doc": "A mode that adds a 3D position and orientation to sound by panning across the available output channels.",
+          "url": "https://developer.apple.com/documentation/phase/phasespatializationmode/alwaysusechannelbased"
+        },
+        "PHASESpatializationModeAutomatic": {
+          "doc": "A mode that indicates that the framework chooses the spatialization mode.",
+          "url": "https://developer.apple.com/documentation/phase/phasespatializationmode/automatic"
+        }
+      }
+    },
+    "PHASEUpdateMode": {
+      "doc": "Modes that determine when the framework consumes API calls and updates internal state.",
+      "url": "https://developer.apple.com/documentation/phase/phaseupdatemode"
+    }
+  },
+  "methods": {
+    "PHASEAmbientMixerDefinition": {
+      "-initWithChannelLayout:orientation:": {
+        "doc": "Creates an ambient mixer with the given channel layout and orientation.",
+        "url": "https://developer.apple.com/documentation/phase/phaseambientmixerdefinition/init(channellayout:orientation:)"
+      },
+      "-initWithChannelLayout:orientation:identifier:": {
+        "doc": "Creates a named ambient mixer with the given channel layout and orientation.",
+        "url": "https://developer.apple.com/documentation/phase/phaseambientmixerdefinition/init(channellayout:orientation:identifier:)"
+      }
+    },
+    "PHASEAssetRegistry": {
+      "-assetForIdentifier:": {
+        "doc": "Provides the asset named with the designated identifier.",
+        "url": "https://developer.apple.com/documentation/phase/phaseassetregistry/asset(foridentifier:)"
+      },
+      "-registerGlobalMetaParameter:error:": {
+        "doc": "Registers a global metaparameter with the asset registry.",
+        "url": "https://developer.apple.com/documentation/phase/phaseassetregistry/registerglobalmetaparameter(metaparameterdefinition:)"
+      },
+      "-registerSoundAssetAtURL:identifier:assetType:channelLayout:normalizationMode:error:": {
+        "doc": "Loads a sound asset from the argument URL and adds it to the engine’s list of registered assets.",
+        "url": "https://developer.apple.com/documentation/phase/phaseassetregistry/registersoundasset(url:identifier:assettype:channellayout:normalizationmode:)"
+      },
+      "-registerSoundAssetWithData:identifier:format:normalizationMode:error:": {
+        "doc": "Loads a sound asset from memory and adds it to the engine’s list of registered assets.",
+        "url": "https://developer.apple.com/documentation/phase/phaseassetregistry/registersoundasset(data:identifier:format:normalizationmode:)"
+      },
+      "-registerSoundEventAssetWithRootNode:identifier:error:": {
+        "doc": "Registers the root node of the sound event asset.",
+        "url": "https://developer.apple.com/documentation/phase/phaseassetregistry/registersoundeventasset(rootnode:identifier:)"
+      },
+      "-unregisterAssetWithIdentifier:completion:": {
+        "doc": "Deallocates system memory for a given asset and removes it from the engine’s list of registered assets.",
+        "url": "https://developer.apple.com/documentation/phase/phaseassetregistry/unregisterasset(identifier:completion:)"
+      }
+    },
+    "PHASEBlendNodeDefinition": {
+      "-addRangeForInputValuesAbove:fullGainAtValue:fadeCurveType:subtree:": {
+        "doc": "Adds a child node that blends above a given value.",
+        "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition/addrangeforinputvaluesabove(value:fullgainatvalue:fadecurvetype:subtree:)"
+      },
+      "-addRangeForInputValuesBelow:fullGainAtValue:fadeCurveType:subtree:": {
+        "doc": "Adds a child node that blends below a given value.",
+        "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition/addrangeforinputvaluesbelow(value:fullgainatvalue:fadecurvetype:subtree:)"
+      },
+      "-addRangeForInputValuesBetween:highValue:fullGainAtLowValue:fullGainAtHighValue:lowFadeCurveType:highFadeCurveType:subtree:": {
+        "doc": "Adds a child node that blends between a given high and low value.",
+        "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition/addrangeforinputvaluesbetween(lowvalue:highvalue:fullgainatlowvalue:fullgainathighvalue:lowfadecurvetype:highfadecurvetype:subtree:)"
+      },
+      "-addRangeWithEnvelope:subtree:": {
+        "doc": "Adds a child node with an envelope.",
+        "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition/addrange(envelope:subtree:)"
+      },
+      "-initDistanceBlendWithSpatialMixerDefinition:": {
+        "doc": "Creates a blend node for spatial audio output.",
+        "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition/init(spatialmixerdefinition:)"
+      },
+      "-initDistanceBlendWithSpatialMixerDefinition:identifier:": {
+        "doc": "Creates a named blend node for spatial audio output.",
+        "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition/init(spatialmixerdefinition:identifier:)"
+      },
+      "-initWithBlendMetaParameterDefinition:": {
+        "doc": "Creates a blend node with a maxiumum blend range value.",
+        "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition/init(blendmetaparameterdefinition:)"
+      },
+      "-initWithBlendMetaParameterDefinition:identifier:": {
+        "doc": "Creates a named blend node with a maxiumum blend range value.",
+        "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition/init(blendmetaparameterdefinition:identifier:)"
+      }
+    },
+    "PHASECardioidDirectivityModelParameters": {
+      "-initWithSubbandParameters:": {
+        "doc": "Creates an object that directs sound in a heart-shaped curve surrounding a sound source.",
+        "url": "https://developer.apple.com/documentation/phase/phasecardioiddirectivitymodelparameters/init(subbandparameters:)"
+      }
+    },
+    "PHASECardioidDirectivityModelSubbandParameters": {
+      "-init": {
+        "doc": "Creates a data set that projects sound of a certain frequency outward in the shape of a heart.",
+        "url": "https://developer.apple.com/documentation/phase/phasecardioiddirectivitymodelsubbandparameters/init()"
+      }
+    },
+    "PHASEChannelMixerDefinition": {
+      "-initWithChannelLayout:": {
+        "doc": "Creates a channel mixer with the given channel layout.",
+        "url": "https://developer.apple.com/documentation/phase/phasechannelmixerdefinition/init(channellayout:)"
+      },
+      "-initWithChannelLayout:identifier:": {
+        "doc": "Creates a named channel mixer with the given channel layout.",
+        "url": "https://developer.apple.com/documentation/phase/phasechannelmixerdefinition/init(channellayout:identifier:)"
+      }
+    },
+    "PHASEConeDirectivityModelParameters": {
+      "-initWithSubbandParameters:": {
+        "doc": "Creates an object that directs sound in a cone-shaped curve that extends from a sound source.",
+        "url": "https://developer.apple.com/documentation/phase/phaseconedirectivitymodelparameters/init(subbandparameters:)"
+      }
+    },
+    "PHASEConeDirectivityModelSubbandParameters": {
+      "-init": {
+        "doc": "Creates a data set that projects sound of a certain frequency outward in the shape of a cone.",
+        "url": "https://developer.apple.com/documentation/phase/phaseconedirectivitymodelsubbandparameters/init()"
+      },
+      "-setInnerAngle:outerAngle:": {
+        "doc": "Configures a focus area for cone-based sound directivity.",
+        "url": "https://developer.apple.com/documentation/phase/phaseconedirectivitymodelsubbandparameters/setangles(innerangle:outerangle:)"
+      }
+    },
+    "PHASEContainerNodeDefinition": {
+      "+new": {
+        "doc": "Creates a container node.",
+        "url": "https://developer.apple.com/documentation/phase/phasecontainernodedefinition/new()"
+      },
+      "-addSubtree:": {
+        "doc": "Adds a sound event node as a child.",
+        "url": "https://developer.apple.com/documentation/phase/phasecontainernodedefinition/addsubtree(_:)"
+      },
+      "-init": {
+        "doc": "Creates a container node.",
+        "url": "https://developer.apple.com/documentation/phase/phasecontainernodedefinition/init()"
+      },
+      "-initWithIdentifier:": {
+        "doc": "Creates a container node with the given name.",
+        "url": "https://developer.apple.com/documentation/phase/phasecontainernodedefinition/init(identifier:)"
+      }
+    },
+    "PHASEDistanceModelFadeOutParameters": {
+      "-initWithCullDistance:": {
+        "doc": "Creates a distance beyond which sound sources stop playing.",
+        "url": "https://developer.apple.com/documentation/phase/phasedistancemodelfadeoutparameters/init(culldistance:)"
+      }
+    },
+    "PHASEDucker": {
+      "-activate": {
+        "doc": "Instructs the ducker to begin altering sound.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/activate()"
+      },
+      "-deactivate": {
+        "doc": "Stops the ducker from altering sound.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/deactivate()"
+      },
+      "-initWithEngine:sourceGroups:targetGroups:gain:attackTime:releaseTime:attackCurve:releaseCurve:": {
+        "doc": "Creates an object that manages competing sounds.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/init(engine:sourcegroups:targetgroups:gain:attacktime:releasetime:attackcurve:releasecurve:)"
+      }
+    },
+    "PHASEEngine": {
+      "-initWithUpdateMode:": {
+        "doc": "Creates an engine updated by the app or framework.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/init(updatemode:)"
+      },
+      "-initWithUpdateMode:renderingMode:": {
+        "doc": "Creates a new engine that has both update and rendering modes.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/init(updatemode:renderingmode:)"
+      },
+      "-pause": {
+        "doc": "Pauses all audio playback.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/pause()"
+      },
+      "-startAndReturnError:": {
+        "doc": "Starts or resumes all audio playback.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/start()"
+      },
+      "-stop": {
+        "doc": "Stops all audio playback.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/stop()"
+      },
+      "-update": {
+        "doc": "Processes app commands and increments framework processing.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/update()"
+      }
+    },
+    "PHASEEnvelope": {
+      "-evaluateForValue:": {
+        "doc": "Provides the height of the envelope for an input value.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelope/evaluate(x:)"
+      },
+      "-initWithStartPoint:segments:": {
+        "doc": "Creates an envelope with a start point and segments.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelope/init(startpoint:segments:)"
+      }
+    },
+    "PHASEEnvelopeDistanceModelParameters": {
+      "-initWithEnvelope:": {
+        "doc": "Creates the distance model parameters with an envelope.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelopedistancemodelparameters/init(envelope:)"
+      }
+    },
+    "PHASEEnvelopeSegment": {
+      "-initWithEndPoint:curveType:": {
+        "doc": "Creates a curved portion of an envelope.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelopesegment/init(endpoint:curvetype:)"
+      }
+    },
+    "PHASEGeneratorNodeDefinition": {
+      "-setCalibrationMode:level:": {
+        "doc": "Selects a loudness correction strategy and reference level.",
+        "url": "https://developer.apple.com/documentation/phase/phasegeneratornodedefinition/setcalibrationmode(calibrationmode:level:)"
+      }
+    },
+    "PHASEGeometricSpreadingDistanceModelParameters": {
+      "-init": {
+        "doc": "Creates the geometric spreading distance model parameters.",
+        "url": "https://developer.apple.com/documentation/phase/phasegeometricspreadingdistancemodelparameters/init()"
+      }
+    },
+    "PHASEGroup": {
+      "-fadeGain:duration:curveType:": {
+        "doc": "Adjusts the volume of the sounds in a group gradually.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/fadegain(gain:duration:curvetype:)"
+      },
+      "-fadeRate:duration:curveType:": {
+        "doc": "Adjusts the playback speed of the sounds in a group gradually.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/faderate(rate:duration:curvetype:)"
+      },
+      "-initWithIdentifier:": {
+        "doc": "Creates a group with a unique name.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/init(identifier:)"
+      },
+      "-mute": {
+        "doc": "Silences the group.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/mute()"
+      },
+      "-registerWithEngine:": {
+        "doc": "Adds the group to the engine’s dictionary.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/register(engine:)"
+      },
+      "-solo": {
+        "doc": "Silences all other groups.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/solo()"
+      },
+      "-unmute": {
+        "doc": "Restores the group’s volume.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/unmute()"
+      },
+      "-unregisterFromEngine": {
+        "doc": "Removes the group from the engine’s dictionary.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/unregisterfromengine()"
+      },
+      "-unsolo": {
+        "doc": "Restores the other groups’ volume.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/unsolo()"
+      }
+    },
+    "PHASEGroupPreset": {
+      "-activate": {
+        "doc": "Applies settings to the designated groups.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppreset/activate()"
+      },
+      "-activateWithTimeToTargetOverride:": {
+        "doc": "Applies settings with an overriden fade duration.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppreset/activate(timetotargetoverride:)"
+      },
+      "-deactivate": {
+        "doc": "Reverts settings for the preset’s groups.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppreset/deactivate()"
+      },
+      "-deactivateWithTimeToResetOverride:": {
+        "doc": "Reverts settings for the preset’s groups using a timed adjustment.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppreset/deactivate(timetoresetoverride:)"
+      },
+      "-initWithEngine:settings:timeToTarget:timeToReset:": {
+        "doc": "Creates a group preset with the designated engine, settings, and fade parameters.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppreset/init(engine:settings:timetotarget:timetoreset:)"
+      }
+    },
+    "PHASEGroupPresetSetting": {
+      "-initWithGain:rate:gainCurveType:rateCurveType:": {
+        "doc": "Creates a group preset setting.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppresetsetting/init(gain:rate:gaincurvetype:ratecurvetype:)"
+      }
+    },
+    "PHASEListener": {
+      "-initWithEngine:": {
+        "doc": "Creates a listener with the given engine.",
+        "url": "https://developer.apple.com/documentation/phase/phaselistener/init(engine:)"
+      }
+    },
+    "PHASEMappedMetaParameterDefinition": {
+      "-initWithInputMetaParameterDefinition:envelope:": {
+        "doc": "Creates a specification for a metaparameter that the app plots on a graph defined by the given set of curves.",
+        "url": "https://developer.apple.com/documentation/phase/phasemappedmetaparameterdefinition/init(inputmetaparameterdefinition:envelope:)"
+      },
+      "-initWithInputMetaParameterDefinition:envelope:identifier:": {
+        "doc": "Creates a specification for a named metaparameter that the app plots on a graph defined by the given set of curves.",
+        "url": "https://developer.apple.com/documentation/phase/phasemappedmetaparameterdefinition/init(inputmetaparameterdefinition:envelope:identifier:)"
+      }
+    },
+    "PHASEMaterial": {
+      "-initWithEngine:preset:": {
+        "doc": "Creates a material with the given preset.",
+        "url": "https://developer.apple.com/documentation/phase/phasematerial/init(engine:preset:)"
+      }
+    },
+    "PHASEMedium": {
+      "-initWithEngine:preset:": {
+        "doc": "Creates a medium.",
+        "url": "https://developer.apple.com/documentation/phase/phasemedium/init(engine:preset:)"
+      }
+    },
+    "PHASEMixerParameters": {
+      "-addAmbientMixerParametersWithIdentifier:listener:": {
+        "doc": "Adds runtime parameters for an ambient mixer.",
+        "url": "https://developer.apple.com/documentation/phase/phasemixerparameters/addambientmixerparameters(identifier:listener:)"
+      },
+      "-addSpatialMixerParametersWithIdentifier:source:listener:": {
+        "doc": "Adds runtime parameters for a spatial mixer.",
+        "url": "https://developer.apple.com/documentation/phase/phasemixerparameters/addspatialmixerparameters(identifier:source:listener:)"
+      }
+    },
+    "PHASENumberMetaParameter": {
+      "-fadeToValue:duration:": {
+        "doc": "Sets the value gradually over the given amount of time.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameter/fade(value:duration:)"
+      }
+    },
+    "PHASENumberMetaParameterDefinition": {
+      "-initWithValue:": {
+        "doc": "Creates a specification for a metaparameter with the given numeric value.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameterdefinition/init(value:)"
+      },
+      "-initWithValue:identifier:": {
+        "doc": "Creates a specification for a named metaparameter with the given numeric value.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameterdefinition/init(value:identifier:)"
+      },
+      "-initWithValue:minimum:maximum:": {
+        "doc": "Creates a specification for a metaparameter with the given numeric value and range.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameterdefinition/init(value:minimum:maximum:)"
+      },
+      "-initWithValue:minimum:maximum:identifier:": {
+        "doc": "Creates a specification for a named metaparameter with the given numeric value and range.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameterdefinition/init(value:minimum:maximum:identifier:)"
+      }
+    },
+    "PHASENumericPair": {
+      "-initWithFirstValue:secondValue:": {
+        "doc": "Creates a pair of numbers with the given values.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumericpair/init(firstvalue:secondvalue:)"
+      }
+    },
+    "PHASEObject": {
+      "-addChild:error:": {
+        "doc": "Adds the given object as a child.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/addchild(_:)"
+      },
+      "-initWithEngine:": {
+        "doc": "Creates an object in the scene.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/init(engine:)"
+      },
+      "-removeChild:": {
+        "doc": "Removes the given object as a child.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/removechild(_:)"
+      },
+      "-removeChildren": {
+        "doc": "Removes all child objects from the given object.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/removechildren()"
+      }
+    },
+    "PHASEOccluder": {
+      "-initWithEngine:shapes:": {
+        "doc": "Creates an occluder with the given engine and shapes.",
+        "url": "https://developer.apple.com/documentation/phase/phaseoccluder/init(engine:shapes:)"
+      }
+    },
+    "PHASEPushStreamNode": {
+      "-scheduleBuffer:": {
+        "doc": "Schedules audio data for playback.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnode/schedulebuffer(buffer:)"
+      },
+      "-scheduleBuffer:atTime:options:": {
+        "doc": "Schedules audio data playback at a specific time.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnode/schedulebuffer(buffer:time:options:)"
+      },
+      "-scheduleBuffer:atTime:options:completionCallbackType:completionHandler:": {
+        "doc": "Schedules audio data playback at a specific time with a completion handler.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnode/schedulebuffer(buffer:time:options:completioncallbacktype:completionhandler:)"
+      },
+      "-scheduleBuffer:completionCallbackType:completionHandler:": {
+        "doc": "Schedules audio data playback with a completion handler.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnode/schedulebuffer(buffer:completioncallbacktype:completionhandler:)"
+      }
+    },
+    "PHASEPushStreamNodeDefinition": {
+      "-initWithMixerDefinition:format:": {
+        "doc": "Creates a node definition for audio streams.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnodedefinition/init(mixerdefinition:format:)"
+      },
+      "-initWithMixerDefinition:format:identifier:": {
+        "doc": "Creates a named node definition for audio streams.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnodedefinition/init(mixerdefinition:format:identifier:)"
+      }
+    },
+    "PHASERandomNodeDefinition": {
+      "-addSubtree:weight:": {
+        "doc": "Adds a node tree that’s one of the random-selection options.",
+        "url": "https://developer.apple.com/documentation/phase/phaserandomnodedefinition/addsubtree(_:weight:)"
+      },
+      "-init": {
+        "doc": "Creates a random node.",
+        "url": "https://developer.apple.com/documentation/phase/phaserandomnodedefinition/init()"
+      },
+      "-initWithIdentifier:": {
+        "doc": "Creates a random node with the name you specify.",
+        "url": "https://developer.apple.com/documentation/phase/phaserandomnodedefinition/init(identifier:)"
+      }
+    },
+    "PHASESamplerNodeDefinition": {
+      "-initWithSoundAssetIdentifier:mixerDefinition:": {
+        "doc": "Creates a sampler node with the given sound asset and mixer.",
+        "url": "https://developer.apple.com/documentation/phase/phasesamplernodedefinition/init(soundassetidentifier:mixerdefinition:)"
+      },
+      "-initWithSoundAssetIdentifier:mixerDefinition:identifier:": {
+        "doc": "Creates a named sampler node with the given sound asset and mixer.",
+        "url": "https://developer.apple.com/documentation/phase/phasesamplernodedefinition/init(soundassetidentifier:mixerdefinition:identifier:)"
+      }
+    },
+    "PHASEShape": {
+      "-initWithEngine:mesh:": {
+        "doc": "Creates an object that the given geometric data shapes.",
+        "url": "https://developer.apple.com/documentation/phase/phaseshape/init(engine:mesh:)"
+      },
+      "-initWithEngine:mesh:materials:": {
+        "doc": "Creates an object of a specific material that the given geometric data shapes.",
+        "url": "https://developer.apple.com/documentation/phase/phaseshape/init(engine:mesh:materials:)"
+      }
+    },
+    "PHASESoundEvent": {
+      "-initWithEngine:assetIdentifier:error:": {
+        "doc": "Creates a sound event node with the given asset.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/init(engine:assetidentifier:)"
+      },
+      "-initWithEngine:assetIdentifier:mixerParameters:error:": {
+        "doc": "Creates a sound event node with the given asset and mixer parameters.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/init(engine:assetidentifier:mixerparameters:)"
+      },
+      "-pause": {
+        "doc": "Pauses the sound event.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/pause()"
+      },
+      "-prepareWithCompletion:": {
+        "doc": "Enables a sound event to play and runs the argument code when the sound event plays back.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/prepare(completion:)"
+      },
+      "-resume": {
+        "doc": "Resumes the sound event.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/resume()"
+      },
+      "-seekToTime:completion:": {
+        "doc": "Advances the sound event’s playback position to a specific time.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/seek(to:completion:)"
+      },
+      "-startWithCompletion:": {
+        "doc": "Invokes the sound event and runs the specified code on completion.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/start(completion:)"
+      },
+      "-stopAndInvalidate": {
+        "doc": "Stops a sound event and prevents it from resuming.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/stopandinvalidate()"
+      }
+    },
+    "PHASESource": {
+      "-initWithEngine:": {
+        "doc": "Creates a single point in the environment from which sound emanates.",
+        "url": "https://developer.apple.com/documentation/phase/phasesource/init(engine:)"
+      },
+      "-initWithEngine:shapes:": {
+        "doc": "Creates a voluminous area in the environment from which sound emanates.",
+        "url": "https://developer.apple.com/documentation/phase/phasesource/init(engine:shapes:)"
+      }
+    },
+    "PHASESpatialMixerDefinition": {
+      "-initWithSpatialPipeline:": {
+        "doc": "Creates a mixer with the designated spatial pipeline.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialmixerdefinition/init(spatialpipeline:)"
+      },
+      "-initWithSpatialPipeline:identifier:": {
+        "doc": "Creates a named mixer with the designated spatial pipeline.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialmixerdefinition/init(spatialpipeline:identifier:)"
+      }
+    },
+    "PHASESpatialPipeline": {
+      "-initWithFlags:": {
+        "doc": "Creates a spatial pipeline with the specified flags.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialpipeline/init(flags:)"
+      }
+    },
+    "PHASEStringMetaParameterDefinition": {
+      "-initWithValue:": {
+        "doc": "Creates a specification for a textual metaparameter with the given value.",
+        "url": "https://developer.apple.com/documentation/phase/phasestringmetaparameterdefinition/init(value:)"
+      },
+      "-initWithValue:identifier:": {
+        "doc": "Creates a specification for a named textual metaparameter with the given value.",
+        "url": "https://developer.apple.com/documentation/phase/phasestringmetaparameterdefinition/init(value:identifier:)"
+      }
+    },
+    "PHASESwitchNodeDefinition": {
+      "-addSubtree:switchValue:": {
+        "doc": "Adds a child node with the given switch value.",
+        "url": "https://developer.apple.com/documentation/phase/phaseswitchnodedefinition/addsubtree(_:switchvalue:)"
+      },
+      "-initWithSwitchMetaParameterDefinition:": {
+        "doc": "Creates a node that invokes a child node based on the value of the given parameter.",
+        "url": "https://developer.apple.com/documentation/phase/phaseswitchnodedefinition/init(switchmetaparameterdefinition:)"
+      },
+      "-initWithSwitchMetaParameterDefinition:identifier:": {
+        "doc": "Creates a named node that invokes a child node based on the value of the given parameter.",
+        "url": "https://developer.apple.com/documentation/phase/phaseswitchnodedefinition/init(switchmetaparameterdefinition:identifier:)"
+      }
+    }
+  },
+  "properties": {
+    "PHASEAmbientMixerDefinition": {
+      "inputChannelLayout": {
+        "doc": "The channel layout of input audio.",
+        "url": "https://developer.apple.com/documentation/phase/phaseambientmixerdefinition/inputchannellayout"
+      },
+      "orientation": {
+        "doc": "A quaternion that describes the orientation of the speaker layout relative to the scene origin.",
+        "url": "https://developer.apple.com/documentation/phase/phaseambientmixerdefinition/orientation"
+      }
+    },
+    "PHASEAsset": {
+      "PHASEAssetType": {
+        "doc": "Options that determine how PHASE manages sound assets in memory.",
+        "url": "https://developer.apple.com/documentation/phase/phaseasset/assettype"
+      },
+      "identifier": {
+        "doc": "A unique name for the asset.",
+        "url": "https://developer.apple.com/documentation/phase/phaseasset/identifier"
+      }
+    },
+    "PHASEAssetRegistry": {
+      "globalMetaParameters": {
+        "doc": "A dictionary of metaparameters that all sound event assets share.",
+        "url": "https://developer.apple.com/documentation/phase/phaseassetregistry/globalmetaparameters"
+      }
+    },
+    "PHASEBlendNodeDefinition": {
+      "blendParameterDefinition": {
+        "doc": "The meta parameter definition that caps the blend range.",
+        "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition/blendparameterdefinition"
+      },
+      "spatialMixerDefinitionForDistance": {
+        "doc": "An object that combines spatial audio layers.",
+        "url": "https://developer.apple.com/documentation/phase/phaseblendnodedefinition/spatialmixerdefinitionfordistance"
+      }
+    },
+    "PHASECardioidDirectivityModelParameters": {
+      "subbandParameters": {
+        "doc": "An array of frequencies that describe varying sound emission across the spectrum.",
+        "url": "https://developer.apple.com/documentation/phase/phasecardioiddirectivitymodelparameters/subbandparameters"
+      }
+    },
+    "PHASECardioidDirectivityModelSubbandParameters": {
+      "frequency": {
+        "doc": "A frequency in the audio spectrum where the pattern and sharpness resonate most.",
+        "url": "https://developer.apple.com/documentation/phase/phasecardioiddirectivitymodelsubbandparameters/frequency"
+      },
+      "pattern": {
+        "doc": "A shape that determines the direction of sound.",
+        "url": "https://developer.apple.com/documentation/phase/phasecardioiddirectivitymodelsubbandparameters/pattern"
+      },
+      "sharpness": {
+        "doc": "The amount that the shape overlaps with bordering subbands.",
+        "url": "https://developer.apple.com/documentation/phase/phasecardioiddirectivitymodelsubbandparameters/sharpness"
+      }
+    },
+    "PHASEChannelMixerDefinition": {
+      "inputChannelLayout": {
+        "doc": "The channel layout of the mixer’s input audio.",
+        "url": "https://developer.apple.com/documentation/phase/phasechannelmixerdefinition/inputchannellayout"
+      }
+    },
+    "PHASEConeDirectivityModelParameters": {
+      "subbandParameters": {
+        "doc": "An array of frequencies that describe varying sound emission across the spectrum.",
+        "url": "https://developer.apple.com/documentation/phase/phaseconedirectivitymodelparameters/subbandparameters"
+      }
+    },
+    "PHASEConeDirectivityModelSubbandParameters": {
+      "frequency": {
+        "doc": "A frequency in the audio spectrum where the subband resonates most.",
+        "url": "https://developer.apple.com/documentation/phase/phaseconedirectivitymodelsubbandparameters/frequency"
+      },
+      "innerAngle": {
+        "doc": "An angle, in degrees, that determines the size of the audio emitting area inside the cone.",
+        "url": "https://developer.apple.com/documentation/phase/phaseconedirectivitymodelsubbandparameters/innerangle"
+      },
+      "outerAngle": {
+        "doc": "An angle, in degrees, that determines the size of the audio emitting area outside the cone.",
+        "url": "https://developer.apple.com/documentation/phase/phaseconedirectivitymodelsubbandparameters/outerangle"
+      },
+      "outerGain": {
+        "doc": "The loudness of the audio the outside area of the cone emits.",
+        "url": "https://developer.apple.com/documentation/phase/phaseconedirectivitymodelsubbandparameters/outergain"
+      }
+    },
+    "PHASEDefinition": {
+      "identifier": {
+        "doc": "A unique name for the definition.",
+        "url": "https://developer.apple.com/documentation/phase/phasedefinition/identifier"
+      }
+    },
+    "PHASEDistanceModelFadeOutParameters": {
+      "cullDistance": {
+        "doc": "The distance beyond which the framework doesn’t process the sound.",
+        "url": "https://developer.apple.com/documentation/phase/phasedistancemodelfadeoutparameters/culldistance"
+      }
+    },
+    "PHASEDistanceModelParameters": {
+      "fadeOutParameters": {
+        "doc": "A distance over which the framework fades out the mixer’s sound.",
+        "url": "https://developer.apple.com/documentation/phase/phasedistancemodelparameters/fadeoutparameters"
+      }
+    },
+    "PHASEDucker": {
+      "active": {
+        "doc": "A Boolean value that determines whether the ducker reduces sound.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/isactive"
+      },
+      "attackCurve": {
+        "doc": "A mathematical curve that shapes transition progress as sound reduction begins.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/attackcurve"
+      },
+      "attackTime": {
+        "doc": "The amount of time for sound reduction to reach maximum strength.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/attacktime"
+      },
+      "gain": {
+        "doc": "The amount of volume reduction.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/gain"
+      },
+      "identifier": {
+        "doc": "A unique value for the ducker.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/identifier"
+      },
+      "releaseCurve": {
+        "doc": "A mathematical curve that shapes transition progress as sound reduction ends.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/releasecurve"
+      },
+      "releaseTime": {
+        "doc": "The amount of time to transition from maximum sound reduction to no reduction.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/releasetime"
+      },
+      "sourceGroups": {
+        "doc": "The sounds that determine volume reduction.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/sourcegroups"
+      },
+      "targetGroups": {
+        "doc": "The sounds that reduce in volume.",
+        "url": "https://developer.apple.com/documentation/phase/phaseducker/targetgroups"
+      }
+    },
+    "PHASEEngine": {
+      "PHASERenderingMode": {
+        "doc": "Modes that determine whether the system renders audio in process or out of process.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/renderingmode"
+      },
+      "PHASEUpdateMode": {
+        "doc": "Modes that determine when the framework consumes API calls and updates internal state.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/updatemode"
+      },
+      "activeGroupPreset": {
+        "doc": "The settings that define playback for a group of sounds.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/activegrouppreset"
+      },
+      "assetRegistry": {
+        "doc": "An object that loads and unloads audio resources.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/assetregistry"
+      },
+      "defaultMedium": {
+        "doc": "The physical matter through which sound travels.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/defaultmedium"
+      },
+      "defaultReverbPreset": {
+        "doc": "The environmental surroundings that determine how sound resonates.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/defaultreverbpreset"
+      },
+      "duckers": {
+        "doc": "An array of objects that reduce the volume of simultaneously playing sounds.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/duckers"
+      },
+      "groups": {
+        "doc": "A list of named groups that contain sounds the app operates on collectively.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/groups"
+      },
+      "outputSpatializationMode": {
+        "doc": "The mode the engine implements to create a 3D sound experience.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/outputspatializationmode"
+      },
+      "renderingState": {
+        "doc": "The status of the engine’s audio playback.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/renderingstate"
+      },
+      "rootObject": {
+        "doc": "The main object to which the app adds child objects.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/rootobject"
+      },
+      "soundEvents": {
+        "doc": "A collection of the sounds that play under various runtime circumstances.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/soundevents"
+      },
+      "unitsPerMeter": {
+        "doc": "A conversion factor from meters to your app’s preferred unit of measurement.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/unitspermeter"
+      },
+      "unitsPerSecond": {
+        "doc": "A conversion factor from seconds to your app’s preferred unit of time.",
+        "url": "https://developer.apple.com/documentation/phase/phaseengine/unitspersecond"
+      }
+    },
+    "PHASEEnvelope": {
+      "domain": {
+        "doc": "The range of the envelope’s possible input values.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelope/domain"
+      },
+      "range": {
+        "doc": "The bounds of the output value.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelope/range"
+      },
+      "segments": {
+        "doc": "An array of the envelope’s segments.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelope/segments"
+      },
+      "startPoint": {
+        "doc": "The starting point along the envelope’s duration.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelope/startpoint"
+      }
+    },
+    "PHASEEnvelopeDistanceModelParameters": {
+      "envelope": {
+        "doc": "An envelope that shapes sound dissipation over distance.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelopedistancemodelparameters/envelope"
+      }
+    },
+    "PHASEEnvelopeSegment": {
+      "curveType": {
+        "doc": "A curve along the envelope that shapes the segment.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelopesegment/curvetype"
+      },
+      "endPoint": {
+        "doc": "A point that identifies the end of the segment along the envelope.",
+        "url": "https://developer.apple.com/documentation/phase/phaseenvelopesegment/endpoint"
+      }
+    },
+    "PHASEGeneratorNodeDefinition": {
+      "calibrationMode": {
+        "doc": "A sound pressure level strategy for loudness correction.",
+        "url": "https://developer.apple.com/documentation/phase/phasegeneratornodedefinition/calibrationmode"
+      },
+      "gainMetaParameterDefinition": {
+        "doc": "A meta parameter that dynamically changes the audio’s loudness.",
+        "url": "https://developer.apple.com/documentation/phase/phasegeneratornodedefinition/gainmetaparameterdefinition"
+      },
+      "group": {
+        "doc": "A group this node conforms to for gain and rate control.",
+        "url": "https://developer.apple.com/documentation/phase/phasegeneratornodedefinition/group"
+      },
+      "level": {
+        "doc": "The node’s loudness.",
+        "url": "https://developer.apple.com/documentation/phase/phasegeneratornodedefinition/level"
+      },
+      "mixerDefinition": {
+        "doc": "An object that combines audio layers for the node’s output.",
+        "url": "https://developer.apple.com/documentation/phase/phasegeneratornodedefinition/mixerdefinition"
+      },
+      "rate": {
+        "doc": "A playback speed for the node’s audio.",
+        "url": "https://developer.apple.com/documentation/phase/phasegeneratornodedefinition/rate"
+      },
+      "rateMetaParameterDefinition": {
+        "doc": "A meta parameter that dynamically changes the audio’s rate.",
+        "url": "https://developer.apple.com/documentation/phase/phasegeneratornodedefinition/ratemetaparameterdefinition"
+      }
+    },
+    "PHASEGeometricSpreadingDistanceModelParameters": {
+      "rolloffFactor": {
+        "doc": "A value that fades specific frequencies over a distance.",
+        "url": "https://developer.apple.com/documentation/phase/phasegeometricspreadingdistancemodelparameters/rollofffactor"
+      }
+    },
+    "PHASEGroup": {
+      "gain": {
+        "doc": "Modifies the volume of the group’s sounds.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/gain"
+      },
+      "identifier": {
+        "doc": "A unique name for the group.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/identifier"
+      },
+      "muted": {
+        "doc": "A Boolean value that indicates whether the app silences the group.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/ismuted"
+      },
+      "rate": {
+        "doc": "The group’s playback speed.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/rate"
+      },
+      "soloed": {
+        "doc": "A Boolean value that indicates whether the app silences all groups other than this group.",
+        "url": "https://developer.apple.com/documentation/phase/phasegroup/issoloed"
+      }
+    },
+    "PHASEGroupPreset": {
+      "settings": {
+        "doc": "A dictionary with preset setting values and group objects as keys.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppreset/settings"
+      },
+      "timeToReset": {
+        "doc": "A duration in which the framework restores the group’s original state.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppreset/timetoreset"
+      },
+      "timeToTarget": {
+        "doc": "A duration in which the engine fades the settings from their original value to their new value.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppreset/timetotarget"
+      }
+    },
+    "PHASEGroupPresetSetting": {
+      "gain": {
+        "doc": "The volume of audio playback.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppresetsetting/gain"
+      },
+      "gainCurveType": {
+        "doc": "A rate of change for the setting’s volume.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppresetsetting/gaincurvetype"
+      },
+      "rate": {
+        "doc": "The playback speed for audio.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppresetsetting/rate"
+      },
+      "rateCurveType": {
+        "doc": "A rate of change for the setting’s playback speed.",
+        "url": "https://developer.apple.com/documentation/phase/phasegrouppresetsetting/ratecurvetype"
+      }
+    },
+    "PHASEListener": {
+      "gain": {
+        "doc": "Modifies the volume of all audio playback for the listener’s mixers.",
+        "url": "https://developer.apple.com/documentation/phase/phaselistener/gain"
+      }
+    },
+    "PHASEMappedMetaParameterDefinition": {
+      "envelope": {
+        "doc": "A collection of line segments that curve and connect to form a graph.",
+        "url": "https://developer.apple.com/documentation/phase/phasemappedmetaparameterdefinition/envelope"
+      },
+      "inputMetaParameterDefinition": {
+        "doc": "A linear input value to plot on a curve.",
+        "url": "https://developer.apple.com/documentation/phase/phasemappedmetaparameterdefinition/inputmetaparameterdefinition"
+      }
+    },
+    "PHASEMedium": {
+      "PHASEMediumPreset": {
+        "doc": "Predetermined qualities of an environment that affect how sound transmits.",
+        "url": "https://developer.apple.com/documentation/phase/phasemedium/preset"
+      }
+    },
+    "PHASEMetaParameter": {
+      "identifier": {
+        "doc": "A unique name for the metaparameter.",
+        "url": "https://developer.apple.com/documentation/phase/phasemetaparameter/identifier"
+      },
+      "value": {
+        "doc": "A value for the metaparameter.",
+        "url": "https://developer.apple.com/documentation/phase/phasemetaparameter/value"
+      }
+    },
+    "PHASEMetaParameterDefinition": {
+      "value": {
+        "doc": "A constant value for the parameter definition.",
+        "url": "https://developer.apple.com/documentation/phase/phasemetaparameterdefinition/value"
+      }
+    },
+    "PHASEMixer": {
+      "gain": {
+        "doc": "The mixer’s volume.",
+        "url": "https://developer.apple.com/documentation/phase/phasemixer/gain"
+      },
+      "gainMetaParameter": {
+        "doc": "A parameter that changes the mixer’s volume gradually over a period of time.",
+        "url": "https://developer.apple.com/documentation/phase/phasemixer/gainmetaparameter"
+      },
+      "identifier": {
+        "doc": "A unique name for the mixer.",
+        "url": "https://developer.apple.com/documentation/phase/phasemixer/identifier"
+      }
+    },
+    "PHASEMixerDefinition": {
+      "gain": {
+        "doc": "The mixer’s volume.",
+        "url": "https://developer.apple.com/documentation/phase/phasemixerdefinition/gain"
+      },
+      "gainMetaParameterDefinition": {
+        "doc": "A template for a parameter that changes the mixer’s volume gradually over a period of time.",
+        "url": "https://developer.apple.com/documentation/phase/phasemixerdefinition/gainmetaparameterdefinition"
+      }
+    },
+    "PHASENumberMetaParameter": {
+      "maximum": {
+        "doc": "The highest possible number for the value.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameter/maximum"
+      },
+      "minimum": {
+        "doc": "The lowest possible number for the value.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameter/minimum"
+      }
+    },
+    "PHASENumberMetaParameterDefinition": {
+      "maximum": {
+        "doc": "The highest possible number for the value.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameterdefinition/maximum"
+      },
+      "minimum": {
+        "doc": "The lowest possible number for the value.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumbermetaparameterdefinition/minimum"
+      }
+    },
+    "PHASENumericPair": {
+      "first": {
+        "doc": "The first value in the pair.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumericpair/first"
+      },
+      "second": {
+        "doc": "The second value in the pair.",
+        "url": "https://developer.apple.com/documentation/phase/phasenumericpair/second"
+      }
+    },
+    "PHASEObject": {
+      "children": {
+        "doc": "Objects that position and orient in the scene relative to the given object.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/children"
+      },
+      "forward": {
+        "doc": "A vector that points forward in the local coordinate space.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/forward"
+      },
+      "parent": {
+        "doc": "The object that this instance positions and orients relative to in the scene.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/parent"
+      },
+      "right": {
+        "doc": "A vector that points right in the local coordinate space.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/right"
+      },
+      "transform": {
+        "doc": "A matrix, in local coordinates, that determines the object’s pose in the scene.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/transform"
+      },
+      "up": {
+        "doc": "A vector that points up in the local coordinate space.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/up"
+      },
+      "worldTransform": {
+        "doc": "A matrix, in scene coordinates, that determines the object’s pose in the scene.",
+        "url": "https://developer.apple.com/documentation/phase/phaseobject/worldtransform"
+      }
+    },
+    "PHASEOccluder": {
+      "shapes": {
+        "doc": "An array of shapes that collectively define the occluder’s audio-deflecting surface and texture.",
+        "url": "https://developer.apple.com/documentation/phase/phaseoccluder/shapes"
+      }
+    },
+    "PHASEPushStreamNode": {
+      "format": {
+        "doc": "The format of the audio stream data.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnode/format"
+      },
+      "gainMetaParameter": {
+        "doc": "A meta parameter for dynamic loudness control.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnode/gainmetaparameter"
+      },
+      "mixer": {
+        "doc": "The audio stream’s output pipeline.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnode/mixer"
+      },
+      "rateMetaParameter": {
+        "doc": "A meta parameter for dynamic rate control.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnode/ratemetaparameter"
+      }
+    },
+    "PHASEPushStreamNodeDefinition": {
+      "format": {
+        "doc": "The format of the audio stream data.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnodedefinition/format"
+      },
+      "normalize": {
+        "doc": "An option that resizes loudness of the audio stream for consistency.",
+        "url": "https://developer.apple.com/documentation/phase/phasepushstreamnodedefinition/normalize"
+      }
+    },
+    "PHASERandomNodeDefinition": {
+      "uniqueSelectionQueueLength": {
+        "doc": "The length of the unique selection queue.",
+        "url": "https://developer.apple.com/documentation/phase/phaserandomnodedefinition/uniqueselectionqueuelength"
+      }
+    },
+    "PHASESamplerNodeDefinition": {
+      "assetIdentifier": {
+        "doc": "The name of the audio this node plays.",
+        "url": "https://developer.apple.com/documentation/phase/phasesamplernodedefinition/assetidentifier"
+      },
+      "cullOption": {
+        "doc": "The action the engine performs after it temporarily removes the node’s sound from the audio output.",
+        "url": "https://developer.apple.com/documentation/phase/phasesamplernodedefinition/culloption"
+      },
+      "playbackMode": {
+        "doc": "An option that determines whether the node’s audio plays in a loop.",
+        "url": "https://developer.apple.com/documentation/phase/phasesamplernodedefinition/playbackmode"
+      }
+    },
+    "PHASEShape": {
+      "PHASEShapeElement": {
+        "doc": "An object that describes the characteristics of a physical surface.",
+        "url": "https://developer.apple.com/documentation/phase/phaseshape/element"
+      },
+      "elements": {
+        "doc": "An array of objects that collectively describe the physical characteristics of a surface.",
+        "url": "https://developer.apple.com/documentation/phase/phaseshape/elements"
+      }
+    },
+    "PHASESoundAsset": {
+      "data": {
+        "doc": "A storage buffer for the sound asset.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundasset/data"
+      },
+      "type": {
+        "doc": "The type of sound asset.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundasset/type"
+      },
+      "url": {
+        "doc": "The URL of the sound asset.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundasset/url"
+      }
+    },
+    "PHASESoundEvent": {
+      "PHASERenderingState": {
+        "doc": "The playback status of audio.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/renderingstate-swift.enum"
+      },
+      "PHASESoundEventPrepareHandlerReason": {
+        "doc": "Indicates the results of sound-event preparation.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/preparehandlerreason"
+      },
+      "PHASESoundEventPrepareState": {
+        "doc": "Indicates the state of sound-event preparation.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/preparestate-swift.enum"
+      },
+      "PHASESoundEventSeekHandlerReason": {
+        "doc": "Indicates the status after a sound event changes its playback position.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/seekhandlerreason"
+      },
+      "PHASESoundEventStartHandlerReason": {
+        "doc": "Indicates the status after starting a sound event.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/starthandlerreason"
+      },
+      "indefinite": {
+        "doc": "A Boolean value that indicates whether the sound loops or stops on its own.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/isindefinite"
+      },
+      "metaParameters": {
+        "doc": "The object’s meta parameters.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/metaparameters"
+      },
+      "mixers": {
+        "doc": "Nodes in the event tree that control the volume of their child nodes.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/mixers"
+      },
+      "prepareState": {
+        "doc": "The status of sound-event preparation.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/preparestate-swift.property"
+      },
+      "pushStreamNodes": {
+        "doc": "A collection of audio streams for playback.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/pushstreamnodes"
+      },
+      "renderingState": {
+        "doc": "The sound event’s playback status.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundevent/renderingstate-swift.property"
+      }
+    },
+    "PHASESoundEventNodeDefinition": {
+      "children": {
+        "doc": "An array of child sound event nodes.",
+        "url": "https://developer.apple.com/documentation/phase/phasesoundeventnodedefinition/children"
+      }
+    },
+    "PHASESource": {
+      "gain": {
+        "doc": "The amount of sound the source emanates.",
+        "url": "https://developer.apple.com/documentation/phase/phasesource/gain"
+      },
+      "shapes": {
+        "doc": "An array of shapes that collectively define the audio-emitting surface area of a volumetric source.",
+        "url": "https://developer.apple.com/documentation/phase/phasesource/shapes"
+      }
+    },
+    "PHASESpatialMixerDefinition": {
+      "distanceModelParameters": {
+        "doc": "An effect that changes sound as it carries over a distance.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialmixerdefinition/distancemodelparameters"
+      },
+      "listenerDirectivityModelParameters": {
+        "doc": "A data set that determines how well the listener hears depending on its direction relative to a sound source.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialmixerdefinition/listenerdirectivitymodelparameters"
+      },
+      "sourceDirectivityModelParameters": {
+        "doc": "A data set that directs sound such that it’s louder when directed at the listener.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialmixerdefinition/sourcedirectivitymodelparameters"
+      },
+      "spatialPipeline": {
+        "doc": "An object that adds sound layers for environmental effects.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialmixerdefinition/spatialpipeline"
+      }
+    },
+    "PHASESpatialPipeline": {
+      "PHASESpatialPipelineFlags": {
+        "doc": "Sound resonance options for a spatial pipeline.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialpipeline/flags-swift.struct"
+      },
+      "entries": {
+        "doc": "Audio layers for environmental effects to add to the output.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialpipeline/entries"
+      },
+      "flags": {
+        "doc": "A collection of environmental effects to include in the output.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialpipeline/flags-swift.property"
+      }
+    },
+    "PHASESpatialPipelineEntry": {
+      "sendLevel": {
+        "doc": "The amount of audio signal to add to the output.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialpipelineentry/sendlevel"
+      },
+      "sendLevelMetaParameterDefinition": {
+        "doc": "A parameter that gradually updates the amount of audio signal that passes through to the output.",
+        "url": "https://developer.apple.com/documentation/phase/phasespatialpipelineentry/sendlevelmetaparameterdefinition"
+      }
+    },
+    "PHASESwitchNodeDefinition": {
+      "switchMetaParameterDefinition": {
+        "doc": "The meta parameter that holds the name of the child node to invoke.",
+        "url": "https://developer.apple.com/documentation/phase/phaseswitchnodedefinition/switchmetaparameterdefinition"
+      }
+    }
+  }
+}

@@ -1,0 +1,2096 @@
+{
+  "schema_version": 1,
+  "framework": "AuthenticationServices",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "ASAccountAuthenticationModificationController": {
+      "doc": "An object that performs a request to modify an account’s authentication properties.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationcontroller"
+    },
+    "ASAccountAuthenticationModificationExtensionContext": {
+      "doc": "An object that you interact with to change an account’s password or to upgrade to Sign in with Apple.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationextensioncontext"
+    },
+    "ASAccountAuthenticationModificationReplacePasswordWithSignInWithAppleRequest": {
+      "doc": "A request to upgrade from using a password to using Sign in with Apple.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationreplacepasswordwithsigninwithapplerequest"
+    },
+    "ASAccountAuthenticationModificationUpgradePasswordToStrongPasswordRequest": {
+      "doc": "A request to automatically upgrade from a weak password to a strong password.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationupgradepasswordtostrongpasswordrequest"
+    },
+    "ASAccountAuthenticationModificationViewController": {
+      "doc": "A view controller that can upgrade user passwords to strong passwords, or convert accounts to use Sign in with Apple.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationviewcontroller"
+    },
+    "ASAuthorization": {
+      "doc": "The encapsulation of a successful authorization by a controller.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorization"
+    },
+    "ASAuthorizationAppleIDButton": {
+      "doc": "A control you add to your interface that enables users to initiate the Sign In with Apple flow.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbutton"
+    },
+    "ASAuthorizationAppleIDCredential": {
+      "doc": "A credential that results from a successful Apple ID authentication.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential"
+    },
+    "ASAuthorizationAppleIDProvider": {
+      "doc": "A mechanism for generating requests to authenticate users based on their Apple ID.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidprovider"
+    },
+    "ASAuthorizationAppleIDRequest": {
+      "doc": "An OpenID authorization request that relies on the user’s Apple ID.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidrequest"
+    },
+    "ASAuthorizationController": {
+      "doc": "A controller that manages authorization requests that a provider creates.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller"
+    },
+    "ASAuthorizationOpenIDRequest": {
+      "doc": "An OpenID authorization request.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationopenidrequest"
+    },
+    "ASAuthorizationPasswordProvider": {
+      "doc": "A mechanism for generating requests to perform keychain credential sharing.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpasswordprovider"
+    },
+    "ASAuthorizationPasswordRequest": {
+      "doc": "An authorization request that uses credentials stored in the keychain.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpasswordrequest"
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialAssertion": {
+      "doc": "A class that represents the platform credential assertion type.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertion"
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialAssertionRequest": {
+      "doc": "The concrete assertion request type for platform credentials.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertionrequest"
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialDescriptor": {
+      "doc": "An object that holds the credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialdescriptor"
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialProvider": {
+      "doc": "A mechanism for providing public key credential requests to an app or service with iCloud Keychain.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialprovider"
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialRegistration": {
+      "doc": "A newly created platform credential that results from a credential registration request.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistration"
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest": {
+      "doc": "The object for registering a new platform public key credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistrationrequest"
+    },
+    "ASAuthorizationProviderExtensionAuthorizationRequest": {
+      "doc": "An authorization request that your provider extension handles.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest"
+    },
+    "ASAuthorizationProviderExtensionAuthorizationResult": {
+      "doc": "The result of an authorization request.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationresult"
+    },
+    "ASAuthorizationProviderExtensionKerberosMapping": {
+      "doc": "A set of Kerberos mappings that the system login process uses.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkerberosmapping"
+    },
+    "ASAuthorizationProviderExtensionLoginConfiguration": {
+      "doc": "An interface for configuring platform single sign-on.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration"
+    },
+    "ASAuthorizationProviderExtensionLoginManager": {
+      "doc": "An interface to maintain platform single sign-on (SSO) during authentication and registration.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager"
+    },
+    "ASAuthorizationProviderExtensionUserLoginConfiguration": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionuserloginconfiguration"
+    },
+    "ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput": {
+      "doc": "A type that represents input for the binary large object extension in passkey assertion requests.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobassertioninput"
+    },
+    "ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput": {
+      "doc": "A type to represent the output of the requested large binary object operation, which returns in a passkey sign-in response.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobassertionoutput"
+    },
+    "ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput": {
+      "doc": "A type that encapsulates input for large binary object extensions during registration.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobregistrationinput"
+    },
+    "ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput": {
+      "doc": "The result of the large binary object support check, resulting from a passkey registration response.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobregistrationoutput"
+    },
+    "ASAuthorizationPublicKeyCredentialPRFAssertionInput": {
+      "doc": "A type that represents input for the web authentication PRF extension in passkey assertion requests.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertioninput"
+    },
+    "ASAuthorizationPublicKeyCredentialPRFAssertionInputValues": {
+      "doc": "The values to use as inputs to the salts for deriving the symmetric key.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertioninputvalues"
+    },
+    "ASAuthorizationPublicKeyCredentialPRFAssertionOutput": {
+      "doc": "A type to represent outputs of the web authentication PRF extension, when requesting them during an assertion.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertionoutput"
+    },
+    "ASAuthorizationPublicKeyCredentialPRFRegistrationInput": {
+      "doc": "A type that encapsulates input for PRF extensions during registration.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfregistrationinput"
+    },
+    "ASAuthorizationPublicKeyCredentialPRFRegistrationOutput": {
+      "doc": "A type to represent outputs of the web authentication PRF extension, when requesting them during a registration.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfregistrationoutput"
+    },
+    "ASAuthorizationPublicKeyCredentialParameters": {
+      "doc": "An object that provides required parameters for the credential during registration.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialparameters"
+    },
+    "ASAuthorizationRequest": {
+      "doc": "A base class for different kinds of authorization requests.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationrequest"
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialAssertion": {
+      "doc": "A class that represents the security key credential assertion type.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialassertion"
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest": {
+      "doc": "A class that defines the assertion request type for security key credentials.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialassertionrequest"
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor": {
+      "doc": "An object that holds public key credential transport information.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialdescriptor"
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialProvider": {
+      "doc": "A mechanism for providing public key credential requests to an app or service with a physical security key.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialprovider"
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialRegistration": {
+      "doc": "A newly created security key credential that results from a credential registration request.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialregistration"
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest": {
+      "doc": "The object for registering a new security key credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialregistrationrequest"
+    },
+    "ASAuthorizationSingleSignOnCredential": {
+      "doc": "A credential that results from a successful single sign-on (SSO) authentication.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignoncredential"
+    },
+    "ASAuthorizationSingleSignOnProvider": {
+      "doc": "A mechanism for generating requests to authenticate users with third-party providers.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignonprovider"
+    },
+    "ASAuthorizationSingleSignOnRequest": {
+      "doc": "An OpenID authorization request that provides single sign-on (SSO) functionality.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignonrequest"
+    },
+    "ASAuthorizationWebBrowserPlatformPublicKeyCredential": {
+      "doc": "A structure that describes a passkey stored in the keychain, or managed by a third-party credential manager.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserplatformpublickeycredential"
+    },
+    "ASAuthorizationWebBrowserPublicKeyCredentialManager": {
+      "doc": "A class that you use to request access to a person’s passkeys in a web browser, and that reports on the access status.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanager"
+    },
+    "ASCredentialIdentityStore": {
+      "doc": "A container that your extension fills to provide credentials through the QuickType bar.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore"
+    },
+    "ASCredentialIdentityStoreState": {
+      "doc": "A representation of the state of a credential identity store.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystorestate"
+    },
+    "ASCredentialProviderExtensionContext": {
+      "doc": "A mechanism that credential provider extensions use to communicate with the system.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext"
+    },
+    "ASCredentialProviderViewController": {
+      "doc": "A view controller that a credential manager app uses to extend AutoFill.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller"
+    },
+    "ASCredentialServiceIdentifier": {
+      "doc": "An identifier representing a particular service for which the user needs a credential, like a web site.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialserviceidentifier"
+    },
+    "ASGeneratePasswordsRequest": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asgeneratepasswordsrequest"
+    },
+    "ASGeneratedPassword": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asgeneratedpassword"
+    },
+    "ASOneTimeCodeCredential": {
+      "doc": "A one-time passcode (OTP) credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asonetimecodecredential"
+    },
+    "ASOneTimeCodeCredentialIdentity": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asonetimecodecredentialidentity"
+    },
+    "ASOneTimeCodeCredentialRequest": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asonetimecodecredentialrequest"
+    },
+    "ASPasskeyAssertionCredential": {
+      "doc": "A passkey assertion credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential"
+    },
+    "ASPasskeyAssertionCredentialExtensionInput": {
+      "doc": "A type that encapsulates input for various WebAuthn extensions during passkey assertion.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredentialextensioninput"
+    },
+    "ASPasskeyAssertionCredentialExtensionOutput": {
+      "doc": "A type that encapsulates output for various WebAuthn extensions during passkey assertion.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredentialextensionoutput"
+    },
+    "ASPasskeyCredentialIdentity": {
+      "doc": "A description that uniquely identifies a particular passkey credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity"
+    },
+    "ASPasskeyCredentialRequest": {
+      "doc": "A class that represents a request to supply a passkey credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest"
+    },
+    "ASPasskeyCredentialRequestParameters": {
+      "doc": "A class that represents information about a passkey credential request.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequestparameters"
+    },
+    "ASPasskeyRegistrationCredential": {
+      "doc": "A passkey registration credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential"
+    },
+    "ASPasskeyRegistrationCredentialExtensionInput": {
+      "doc": "A type that encapsulates input for various WebAuthn extensions during passkey registration.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredentialextensioninput"
+    },
+    "ASPasskeyRegistrationCredentialExtensionOutput": {
+      "doc": "A type that encapsulates output for various WebAuthn extensions during passkey assertion.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredentialextensionoutput"
+    },
+    "ASPasswordCredential": {
+      "doc": "A password credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredential"
+    },
+    "ASPasswordCredentialIdentity": {
+      "doc": "A description that uniquely identifies a particular password credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialidentity"
+    },
+    "ASPasswordCredentialRequest": {
+      "doc": "A class that represents a request to supply a password credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialrequest"
+    },
+    "ASPublicKeyCredentialClientData": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspublickeycredentialclientdata"
+    },
+    "ASSavePasswordRequest": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/assavepasswordrequest"
+    },
+    "ASSettingsHelper": {
+      "doc": "A class that opens Settings and navigates to the settings for configuring credential providers.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/assettingshelper"
+    },
+    "ASWebAuthenticationSession": {
+      "doc": "A session that an app uses to authenticate a user through a web service.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession"
+    },
+    "ASWebAuthenticationSessionCallback": {
+      "doc": "An object for evaluating navigation events in an authentication session.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessioncallback"
+    },
+    "ASWebAuthenticationSessionRequest": {
+      "doc": "A login session request that a web browser receives from an app.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest"
+    },
+    "ASWebAuthenticationSessionWebBrowserSessionManager": {
+      "doc": "A session manager that mediates sharing data between an app and a web browser.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionwebbrowsersessionmanager"
+    }
+  },
+  "protocols": {
+    "ASAccountAuthenticationModificationControllerDelegate": {
+      "doc": "An interface you implement for receiving success and failure statuses about modification of an account’s authentication properties.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationcontrollerdelegate"
+    },
+    "ASAccountAuthenticationModificationControllerPresentationContextProviding": {
+      "doc": "An interface you implement to coordinate presentation of the user interface when modifying an account’s authentication properties.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationcontrollerpresentationcontextproviding"
+    },
+    "ASAuthorizationControllerDelegate": {
+      "doc": "An interface for providing information about the outcome of an authorization request.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontrollerdelegate"
+    },
+    "ASAuthorizationControllerPresentationContextProviding": {
+      "doc": "An interface the controller uses to ask a delegate for a presentation context.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontrollerpresentationcontextproviding"
+    },
+    "ASAuthorizationCredential": {
+      "doc": "An interface that all credentials share.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcredential"
+    },
+    "ASAuthorizationProvider": {
+      "doc": "An interface that authorization providers must implement.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationprovider"
+    },
+    "ASAuthorizationProviderExtensionAuthorizationRequestHandler": {
+      "doc": "An interface through which a single sign-on (SSO) authentication provider extension handles authentication requests.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequesthandler"
+    },
+    "ASAuthorizationProviderExtensionRegistrationHandler": {
+      "doc": "An interface through which a single sign-on (SSO) authentication provider extension registers users and devices for platform SSO.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionregistrationhandler"
+    },
+    "ASAuthorizationPublicKeyCredentialAssertion": {
+      "doc": "An interface for establishing a public key-based assertion.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialassertion"
+    },
+    "ASAuthorizationPublicKeyCredentialAssertionRequest": {
+      "doc": "An interface for requesting a public key-based credential assertion.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialassertionrequest"
+    },
+    "ASAuthorizationPublicKeyCredentialDescriptor": {
+      "doc": "An interface that defines the credential identifier.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialdescriptor"
+    },
+    "ASAuthorizationPublicKeyCredentialRegistration": {
+      "doc": "An interface that credential registration requests adhere to.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialregistration"
+    },
+    "ASAuthorizationPublicKeyCredentialRegistrationRequest": {
+      "doc": "An interface that defines properties for a credential registration request.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialregistrationrequest"
+    },
+    "ASAuthorizationWebBrowserExternallyAuthenticatableRequest": {
+      "doc": "An authorization request for which a web browser can retrieve credentials.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserexternallyauthenticatablerequest"
+    },
+    "ASAuthorizationWebBrowserPlatformPublicKeyCredentialAssertionRequest": {
+      "doc": "An interface you use to respond to authentication challenges in a web browser.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserplatformpublickeycredentialassertionrequest"
+    },
+    "ASAuthorizationWebBrowserPlatformPublicKeyCredentialProvider": {
+      "doc": "A mechanism you use to provide public key credential requests to a browser app.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserplatformpublickeycredentialprovider"
+    },
+    "ASAuthorizationWebBrowserPlatformPublicKeyCredentialRegistrationRequest": {
+      "doc": "An interface you use to respond to passkey-creation challenges in a web browser.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserplatformpublickeycredentialregistrationrequest"
+    },
+    "ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialAssertionRequest": {
+      "doc": "An interface you use to respond to authentication challenges in a web browser.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowsersecuritykeypublickeycredentialassertionrequest"
+    },
+    "ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialProvider": {
+      "doc": "A protocol for creating passkey requests.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowsersecuritykeypublickeycredentialprovider"
+    },
+    "ASAuthorizationWebBrowserSecurityKeyPublicKeyCredentialRegistrationRequest": {
+      "doc": "An interface you use to respond to password-creation challenges in a web browser.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowsersecuritykeypublickeycredentialregistrationrequest"
+    },
+    "ASCredentialIdentity": {
+      "doc": "A protocol that credential identity classes conform to that uniquely identifies credentials.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentity"
+    },
+    "ASCredentialRequest": {
+      "doc": "A protocol that describes a request from the user for your extension to provide a credential.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialrequest"
+    },
+    "ASPublicKeyCredential": {
+      "doc": "An interface that defines the properties of the public key.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspublickeycredential"
+    },
+    "ASWebAuthenticationPresentationContextProviding": {
+      "doc": "An interface the session uses to ask a delegate for a presentation context.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationpresentationcontextproviding"
+    },
+    "ASWebAuthenticationSessionRequestDelegate": {
+      "doc": "An interface through which the session request can inform its delegate, which is typically a browser, about the outcome of the authentication attempt.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequestdelegate"
+    },
+    "ASWebAuthenticationSessionWebBrowserSessionHandling": {
+      "doc": "An interface that a session handler implements to handle login requests from an app.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionwebbrowsersessionhandling"
+    }
+  },
+  "enums": {
+    "ASAuthorizationAppleIDButtonStyle": {
+      "doc": "A style for the authorization button.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbuttonstyle"
+    },
+    "ASAuthorizationAppleIDButtonType": {
+      "doc": "A type for the authorization button.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbuttontype"
+    },
+    "ASAuthorizationAppleIDProviderCredentialState": {
+      "doc": "Possible values for the credential state of a user.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidprovidercredentialstate"
+    },
+    "ASAuthorizationControllerRequestOptions": {
+      "doc": "Options that modify how a controller performs authorization requests.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontrollerrequestoptions"
+    },
+    "ASAuthorizationError": {
+      "doc": "Errors that can occur during authorization.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationerror"
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistrationrequeststyle"
+    },
+    "ASAuthorizationProviderExtensionAuthenticationMethod": {
+      "doc": "The platform single sign-on method for the user.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthenticationmethod",
+      "members": {
+        "ASAuthorizationProviderExtensionAuthenticationMethodPassword": {
+          "doc": "Password authentication.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthenticationmethod/password"
+        },
+        "ASAuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey": {
+          "doc": "Secure Enclave key authentication.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthenticationmethod/usersecureenclavekey"
+        }
+      }
+    },
+    "ASAuthorizationProviderExtensionFederationType": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionfederationtype"
+    },
+    "ASAuthorizationProviderExtensionKeyType": {
+      "doc": "The key types for platform single sign-on.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkeytype",
+      "members": {
+        "ASAuthorizationProviderExtensionKeyTypeUserDeviceEncryption": {
+          "doc": "The user device encryption key.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkeytype/userdeviceencryption"
+        },
+        "ASAuthorizationProviderExtensionKeyTypeUserDeviceSigning": {
+          "doc": "The user device signing key.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkeytype/userdevicesigning"
+        },
+        "ASAuthorizationProviderExtensionKeyTypeUserSecureEnclaveKey": {
+          "doc": "The user Secure Enclave key.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkeytype/usersecureenclavekey"
+        }
+      }
+    },
+    "ASAuthorizationProviderExtensionPlatformSSOProtocolVersion": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionplatformssoprotocolversion"
+    },
+    "ASAuthorizationProviderExtensionRegistrationResult": {
+      "doc": "The registration result.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionregistrationresult",
+      "members": {
+        "ASAuthorizationProviderExtensionRegistrationResultFailed": {
+          "doc": "The registration fails to complete and the system retries later.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionregistrationresult/failed"
+        },
+        "ASAuthorizationProviderExtensionRegistrationResultFailedNoRetry": {
+          "doc": "The registration fails to complete and the system doesn’t retry later.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionregistrationresult/failednoretry"
+        },
+        "ASAuthorizationProviderExtensionRegistrationResultSuccess": {
+          "doc": "The registration succeeds.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionregistrationresult/success"
+        },
+        "ASAuthorizationProviderExtensionRegistrationResultUserInterfaceRequired": {
+          "doc": "The user interface is required to complete registration.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionregistrationresult/userinterfacerequired"
+        }
+      }
+    },
+    "ASAuthorizationProviderExtensionRequestOptions": {
+      "doc": "The options for the extension to obtain the status of the registration.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionrequestoptions",
+      "members": {
+        "ASAuthorizationProviderExtensionRequestOptionsNone": {
+          "doc": "Options aren’t available.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionrequestoptions/asauthorizationproviderextensionrequestoptionsnone"
+        },
+        "ASAuthorizationProviderExtensionRequestOptionsRegistrationRepair": {
+          "doc": "Indicates that the registration is undergoing repair.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionrequestoptions/registrationrepair"
+        },
+        "ASAuthorizationProviderExtensionRequestOptionsUserInteractionEnabled": {
+          "doc": "Indicates that the user interface is in an enabled state.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionrequestoptions/userinteractionenabled"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates the request options.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionrequestoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "ASAuthorizationProviderExtensionSupportedGrantTypes": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionsupportedgranttypes"
+    },
+    "ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionusersecureenclavekeybiometricpolicy"
+    },
+    "ASAuthorizationPublicKeyCredentialAttachment": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialattachment"
+    },
+    "ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation": {
+      "doc": "A type that represents the operation of the large blob assertion.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobassertionoperation",
+      "members": {
+        "ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationRead": {
+          "doc": "An operation to read data from the blob.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobassertionoperation/asauthorizationpublickeycredentiallargeblobassertionoperationread"
+        },
+        "ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperationWrite": {
+          "doc": "An operation to write data to the blob.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobassertionoperation/asauthorizationpublickeycredentiallargeblobassertionoperationwrite"
+        }
+      }
+    },
+    "ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirement": {
+      "doc": "An enumeration of large binary object support requirement values.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobsupportrequirement",
+      "members": {
+        "ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementPreferred": {
+          "doc": "A value that indicates the app needs large binary object support.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobsupportrequirement/asauthorizationpublickeycredentiallargeblobsupportrequirementpreferred"
+        },
+        "ASAuthorizationPublicKeyCredentialLargeBlobSupportRequirementRequired": {
+          "doc": "A value that indicates the app requires large binary object support.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentiallargeblobsupportrequirement/asauthorizationpublickeycredentiallargeblobsupportrequirementrequired"
+        }
+      }
+    },
+    "ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState": {
+      "doc": "An enumeration of values that indicate whether the browser app has access to a person’s passkeys.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanagerauthorizationstate"
+    },
+    "ASCredentialIdentityStoreErrorCode": {
+      "doc": "Constants that represent credential identity store error codes.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystoreerrorcode"
+    },
+    "ASCredentialIdentityTypes": {
+      "doc": "The defined identity types for use in retrieving credentials.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitytypes",
+      "members": {
+        "ASCredentialIdentityTypesAll": {
+          "doc": "A value that matches all identity types.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitytypes/ascredentialidentitytypesall"
+        }
+      }
+    },
+    "ASCredentialRequestType": {
+      "doc": "An enumeration that identifies different types of credentials that apps and websites can request.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialrequesttype",
+      "members": {
+        "ASCredentialRequestTypeOneTimeCode": {
+          "doc": "The app or website is requesting a one-time passcode.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialrequesttype/onetimecode"
+        },
+        "ASCredentialRequestTypePasskeyAssertion": {
+          "doc": "The app or website is requesting a passkey assertion credential.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialrequesttype/passkeyassertion"
+        },
+        "ASCredentialRequestTypePasskeyRegistration": {
+          "doc": "The app or website is requesting a passkey registration credential.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialrequesttype/passkeyregistration"
+        },
+        "ASCredentialRequestTypePassword": {
+          "doc": "The app or website is requesting a password credential.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialrequesttype/password"
+        }
+      }
+    },
+    "ASCredentialServiceIdentifierType": {
+      "doc": "Possible values for the service identifier type.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialserviceidentifiertype"
+    },
+    "ASExtensionErrorCode": {
+      "doc": "The codes for a credential provider extension error.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asextensionerrorcode"
+    },
+    "ASPublicKeyCredentialClientDataCrossOriginValue": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/aspublickeycredentialclientdatacrossoriginvalue"
+    },
+    "ASUserAgeRange": {
+      "url": "https://developer.apple.com/documentation/authenticationservices/asuseragerange"
+    },
+    "ASUserDetectionStatus": {
+      "doc": "Possible values for the real user indicator.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/asuserdetectionstatus",
+      "members": {
+        "ASUserDetectionStatusLikelyReal": {
+          "doc": "The user appears to be a real person.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asuserdetectionstatus/likelyreal"
+        },
+        "ASUserDetectionStatusUnknown": {
+          "doc": "The system hasn’t determined whether the user might be a real person.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asuserdetectionstatus/unknown"
+        },
+        "ASUserDetectionStatusUnsupported": {
+          "doc": "The system can’t determine this user’s status as a real person.",
+          "url": "https://developer.apple.com/documentation/authenticationservices/asuserdetectionstatus/unsupported"
+        }
+      }
+    },
+    "ASWebAuthenticationSessionErrorCode": {
+      "doc": "The error code for a web authentication session error.",
+      "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionerrorcode"
+    }
+  },
+  "methods": {
+    "ASAccountAuthenticationModificationController": {
+      "-performRequest:": {
+        "doc": "Performs a request to upgrade the authentication credentials for an account to a strong password, or to use Sign in with Apple.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationcontroller/perform(_:)"
+      }
+    },
+    "ASAccountAuthenticationModificationExtensionContext": {
+      "-cancelRequestWithError:": {
+        "doc": "Cancels a request with an error.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationextensioncontext/cancelrequest(witherror:)"
+      },
+      "-completeChangePasswordRequestWithUpdatedCredential:userInfo:": {
+        "doc": "Completes a request to update an account’s authentication credentials from using a weak password to using a strong password.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationextensioncontext/completechangepasswordrequest(updatedcredential:userinfo:)"
+      },
+      "-completeUpgradeToSignInWithAppleWithUserInfo:": {
+        "doc": "Completes the process of upgrading an account’s authentication credentials from using passwords to using Sign in with Apple.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationextensioncontext/completeupgradetosigninwithapple(userinfo:)"
+      },
+      "-getSignInWithAppleUpgradeAuthorizationWithState:nonce:completionHandler:": {
+        "doc": "Retrieves the user’s current Sign in with Apple authorization credentials.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationextensioncontext/getsigninwithappleupgradeauthorization(state:nonce:completionhandler:)"
+      }
+    },
+    "ASAccountAuthenticationModificationReplacePasswordWithSignInWithAppleRequest": {
+      "-initWithUser:serviceIdentifier:userInfo:": {
+        "doc": "Creates a request to upgrade from using passwords to using Sign in with Apple.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationreplacepasswordwithsigninwithapplerequest/init(user:serviceidentifier:userinfo:)"
+      }
+    },
+    "ASAccountAuthenticationModificationUpgradePasswordToStrongPasswordRequest": {
+      "-initWithUser:serviceIdentifier:userInfo:": {
+        "doc": "Creates a request to upgrade from using a weak password to using a strong system-generated password.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationupgradepasswordtostrongpasswordrequest/init(user:serviceidentifier:userinfo:)"
+      }
+    },
+    "ASAccountAuthenticationModificationViewController": {
+      "-cancelRequest": {
+        "doc": "Cancels a request that the user initiated.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationviewcontroller/cancelrequest()"
+      },
+      "-changePasswordWithoutUserInteractionForServiceIdentifier:existingCredential:newPassword:userInfo:": {
+        "doc": "Upgrades a user’s weak password to a strong password.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationviewcontroller/changepasswordwithoutuserinteraction(for:existingcredential:newpassword:userinfo:)"
+      },
+      "-convertAccountToSignInWithAppleWithoutUserInteractionForServiceIdentifier:existingCredential:userInfo:": {
+        "doc": "Converts an account’s authentication mechanism from using passwords to using Sign in with Apple.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationviewcontroller/convertaccounttosigninwithapplewithoutuserinteraction(for:existingcredential:userinfo:)"
+      },
+      "-prepareInterfaceToChangePasswordForServiceIdentifier:existingCredential:newPassword:userInfo:": {
+        "doc": "Prepares the view controller’s interface that displays when upgrading from a weak password to a strong password.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationviewcontroller/prepareinterfacetochangepassword(for:existingcredential:newpassword:userinfo:)"
+      },
+      "-prepareInterfaceToConvertAccountToSignInWithAppleForServiceIdentifier:existingCredential:userInfo:": {
+        "doc": "Prepares the view controller’s interface that displays when converting an account that uses password authentication to use Sign in with Apple.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationviewcontroller/prepareinterfacetoconvertaccounttosigninwithapple(for:existingcredential:userinfo:)"
+      }
+    },
+    "ASAuthorizationAppleIDButton": {
+      "+buttonWithType:style:": {
+        "doc": "Creates a new Sign In with Apple authorization button with the given type and style.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbutton/init(type:style:)"
+      },
+      "-initWithAuthorizationButtonType:authorizationButtonStyle:": {
+        "doc": "Creates a new Sign In with Apple authorization button with the given type and style.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbutton/init(authorizationbuttontype:authorizationbuttonstyle:)"
+      }
+    },
+    "ASAuthorizationAppleIDProvider": {
+      "-createRequest": {
+        "doc": "Creates a new Apple ID authorization request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidprovider/createrequest()"
+      },
+      "-getCredentialStateForUserID:completion:": {
+        "doc": "Returns the credential state for the given user in a completion handler.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidprovider/getcredentialstate(foruserid:completion:)"
+      }
+    },
+    "ASAuthorizationController": {
+      "-cancel": {
+        "doc": "Cancels any active authorization requests.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller/cancel()"
+      },
+      "-initWithAuthorizationRequests:": {
+        "doc": "Creates a controller from a collection of authorization requests.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller/init(authorizationrequests:)"
+      },
+      "-performAutoFillAssistedRequests": {
+        "doc": "Initiates the authorization flows for requests that support AutoFill presentation.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller/performautofillassistedrequests()"
+      },
+      "-performRequests": {
+        "doc": "Starts the specified authorization flows during controller initialization.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller/performrequests()"
+      },
+      "-performRequestsWithOptions:": {
+        "doc": "Starts the specified authorization flows during controller initialization.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller/performrequests(options:)"
+      }
+    },
+    "ASAuthorizationPasswordProvider": {
+      "-createRequest": {
+        "doc": "Creates a new password authorization request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpasswordprovider/createrequest()"
+      }
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialDescriptor": {
+      "-initWithCredentialID:": {
+        "doc": "Creates the descriptor with a credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialdescriptor/init(credentialid:)"
+      }
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialProvider": {
+      "-createCredentialAssertionRequestWithChallenge:": {
+        "doc": "Creates an assertion request with a challenge.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialprovider/createcredentialassertionrequest(challenge:)"
+      },
+      "-createCredentialRegistrationRequestWithChallenge:name:userID:": {
+        "doc": "Creates a registration request with a challenge, name, and user ID.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialprovider/createcredentialregistrationrequest(challenge:name:userid:)"
+      },
+      "-initWithRelyingPartyIdentifier:": {
+        "doc": "Creates the object with a relying party identifier.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialprovider/init(relyingpartyidentifier:)"
+      }
+    },
+    "ASAuthorizationProviderExtensionAuthorizationRequest": {
+      "-cancel": {
+        "doc": "Cancels the request, for example, because the user taps a cancel button.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/cancel()"
+      },
+      "-complete": {
+        "doc": "Indicates the requested authorization completed with no output.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/complete()"
+      },
+      "-completeWithError:": {
+        "doc": "Indicates the requested authorization failed.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/complete(error:)"
+      },
+      "-completeWithHTTPAuthorizationHeaders:": {
+        "doc": "Indicates the requested authorization succeeded with tokens in the HTTP headers.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/complete(httpauthorizationheaders:)"
+      },
+      "-completeWithHTTPResponse:httpBody:": {
+        "doc": "Indicates the requested authorization succeeded with an HTTP response.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/complete(httpresponse:httpbody:)"
+      },
+      "-doNotHandle": {
+        "doc": "Indicates the request wasn’t handled.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/donothandle()"
+      },
+      "-presentAuthorizationViewControllerWithCompletion:": {
+        "doc": "Asks the authorization service to show the extension’s view controller to the user.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/presentauthorizationviewcontroller(completion:)"
+      }
+    },
+    "ASAuthorizationProviderExtensionAuthorizationResult": {
+      "-initWithHTTPAuthorizationHeaders:": {
+        "doc": "Initializes an authorization with tokens stored in HTTP headers.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationresult/init(httpauthorizationheaders:)-ywja"
+      },
+      "-initWithHTTPResponse:httpBody:": {
+        "doc": "Initializes an authorization with a HTTP response and body.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationresult/init(httpresponse:httpbody:)-2j92m"
+      }
+    },
+    "ASAuthorizationProviderExtensionLoginConfiguration": {
+      "+configurationWithOpenIDConfigurationURL:clientID:issuer:completion:": {
+        "doc": "Creates a login configuration using the OpenID configuration.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/configuration(openidconfigurationurl:clientid:issuer:completion:)"
+      },
+      "-initWithClientID:issuer:tokenEndpointURL:jwksEndpointURL:audience:": {
+        "doc": "Creates a configuration with the required values.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/init(clientid:issuer:tokenendpointurl:jwksendpointurl:audience:)"
+      },
+      "-setCustomAssertionRequestBodyClaims:returningError:": {
+        "doc": "Adds the custom claims to the embedded assertion request body.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/setcustomassertionrequestbodyclaims(_:)"
+      },
+      "-setCustomAssertionRequestHeaderClaims:returningError:": {
+        "doc": "Adds the custom claims to the embedded assertion request header.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/setcustomassertionrequestheaderclaims(_:)"
+      },
+      "-setCustomLoginRequestBodyClaims:returningError:": {
+        "doc": "Adds the custom claims to the login request body.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/setcustomloginrequestbodyclaims(_:)"
+      },
+      "-setCustomLoginRequestHeaderClaims:returningError:": {
+        "doc": "Adds the custom claims to the login request header.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/setcustomloginrequestheaderclaims(_:)"
+      }
+    },
+    "ASAuthorizationProviderExtensionLoginManager": {
+      "-copyIdentityForKeyType:": {
+        "doc": "Retrieves the identity for the specified platform single sign-on key type.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/identity(for:)"
+      },
+      "-copyKeyForKeyType:": {
+        "doc": "Retrieves the key for the specified platform single sign-on key type.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/key(for:)"
+      },
+      "-deviceRegistrationsNeedsRepair": {
+        "doc": "Invokes the device registration to run again so the current user can repair it.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/deviceregistrationsneedsrepair()"
+      },
+      "-presentRegistrationViewControllerWithCompletion:": {
+        "doc": "Requests platform single sign-on to show the extension’s view controller to the user.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/presentregistrationviewcontroller(completion:)"
+      },
+      "-resetKeys": {
+        "doc": "Creates new encryption, signing, and Secure Enclave keys for the user.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/resetkeys()"
+      },
+      "-saveCertificate:keyType:": {
+        "doc": "Saves the provided certificate for the key type.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/savecertificate(_:keytype:)"
+      },
+      "-saveLoginConfiguration:error:": {
+        "doc": "Saves or replaces the login configuration.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/saveloginconfiguration(_:)"
+      },
+      "-userNeedsReauthenticationWithCompletion:": {
+        "doc": "Requests platform single sign-on to reauthenticate the current user.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/userneedsreauthentication(completion:)"
+      },
+      "-userRegistrationsNeedsRepair": {
+        "doc": "Invokes the user registration to run again so the current user can repair it.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/userregistrationsneedsrepair()"
+      }
+    },
+    "ASAuthorizationPublicKeyCredentialPRFAssertionInputValues": {
+      "-initWithSaltInput1:saltInput2:": {
+        "doc": "Initializes an input values object with the given salts.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertioninputvalues/initwithsaltinput1:saltinput2:"
+      }
+    },
+    "ASAuthorizationPublicKeyCredentialParameters": {
+      "-initWithAlgorithm:": {
+        "doc": "Creates the object with an algorithm.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialparameters/init(algorithm:)"
+      }
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor": {
+      "-initWithCredentialID:transports:": {
+        "doc": "Creates the object with the credential ID and the array of transports.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialdescriptor/init(credentialid:transports:)"
+      }
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialProvider": {
+      "-createCredentialAssertionRequestWithChallenge:": {
+        "doc": "Creates an assertion request with a challenge.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialprovider/createcredentialassertionrequest(challenge:)"
+      },
+      "-createCredentialRegistrationRequestWithChallenge:displayName:name:userID:": {
+        "doc": "Creates a registration request with a challenge, display name, and user ID.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialprovider/createcredentialregistrationrequest(challenge:displayname:name:userid:)"
+      },
+      "-initWithRelyingPartyIdentifier:": {
+        "doc": "Creates the object with a relying party identifier.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialprovider/init(relyingpartyidentifier:)"
+      }
+    },
+    "ASAuthorizationSingleSignOnProvider": {
+      "+authorizationProviderWithIdentityProviderURL:": {
+        "doc": "Creates a single sign-on (SSO) authorization provider.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignonprovider/init(identityprovider:)"
+      },
+      "-createRequest": {
+        "doc": "Creates a single sign-on (SSO) authorization request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignonprovider/createrequest()"
+      }
+    },
+    "ASAuthorizationWebBrowserPublicKeyCredentialManager": {
+      "-init": {
+        "doc": "Initializes a credential manager.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanager/init()"
+      },
+      "-platformCredentialsForRelyingParty:completionHandler:": {
+        "doc": "Gets a list of passkeys available for authenticating with the given relying party.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanager/platformcredentialsforrelyingparty:completionhandler:"
+      },
+      "-requestAuthorizationForPublicKeyCredentials:": {
+        "doc": "Requests a person’s permission to use their passkeys.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanager/requestauthorizationforpublickeycredentials(_:)"
+      }
+    },
+    "ASCredentialIdentityStore": {
+      "-getCredentialIdentitiesForService:credentialIdentityTypes:completionHandler:": {
+        "doc": "Retrieves an array of all previously saved credential identities in the store for your extension.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/getcredentialidentitiesforservice:credentialidentitytypes:completionhandler:"
+      },
+      "-getCredentialIdentityStoreStateWithCompletion:": {
+        "doc": "Gets the state of the credential identity store.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/getstate(_:)"
+      },
+      "-removeAllCredentialIdentitiesWithCompletion:": {
+        "doc": "Removes all existing credential identities from the store.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/removeallcredentialidentities(_:)"
+      },
+      "-removeCredentialIdentities:completion:": {
+        "doc": "Removes the given credential identities from the store.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/removecredentialidentities(_:completion:)-2ygnf"
+      },
+      "-removeCredentialIdentityEntries:completion:": {
+        "doc": "Remove the given credential identities from the store.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/removecredentialidentities(_:completion:)-67lcw"
+      },
+      "-replaceCredentialIdentitiesWithIdentities:completion:": {
+        "doc": "Replaces existing credential identities with new credential identities.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/replacecredentialidentities(with:completion:)"
+      },
+      "-replaceCredentialIdentityEntries:completion:": {
+        "doc": "Replaces existing credential identities with new credential identities.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/replacecredentialidentities(_:completion:)"
+      },
+      "-saveCredentialIdentities:completion:": {
+        "doc": "Saves the given credential identities to the store.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/savecredentialidentities(_:completion:)-5vs4m"
+      },
+      "-saveCredentialIdentityEntries:completion:": {
+        "doc": "Save the supplied credential identities to the store.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/savecredentialidentities(_:completion:)-1bbx6"
+      }
+    },
+    "ASCredentialProviderExtensionContext": {
+      "-cancelRequestWithError:": {
+        "doc": "Cancels the request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext/cancelrequest(witherror:)"
+      },
+      "-completeAssertionRequestWithSelectedPasskeyCredential:completionHandler:": {
+        "doc": "Complete the passkey assertion request by providing the user-selected passkey credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext/completeassertionrequest(using:completionhandler:)"
+      },
+      "-completeExtensionConfigurationRequest": {
+        "doc": "Completes the request to configure the extension.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext/completeextensionconfigurationrequest()"
+      },
+      "-completeGeneratePasswordRequestWithResults:completionHandler:": {
+        "doc": "Return potential passwords for the given request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext/completegeneratepasswordrequest(results:completionhandler:)"
+      },
+      "-completeOneTimeCodeRequestWithSelectedCredential:completionHandler:": {
+        "doc": "Provides the user-selected one-time passcode (OTP).",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext/completeonetimecoderequest(using:completionhandler:)"
+      },
+      "-completeRegistrationRequestWithSelectedPasskeyCredential:completionHandler:": {
+        "doc": "Complete the registration request by providing the newly-created passkey credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext/completeregistrationrequest(using:completionhandler:)"
+      },
+      "-completeRequestWithSelectedCredential:completionHandler:": {
+        "doc": "Provides the user-selected credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext/completerequest(withselectedcredential:completionhandler:)"
+      },
+      "-completeRequestWithTextToInsert:completionHandler:": {
+        "doc": "Provides the user-selected text.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext/completerequest(withtexttoinsert:completionhandler:)"
+      },
+      "-completeSavePasswordRequestWithCompletionHandler:": {
+        "doc": "Signal that a password request was successfully saved.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderextensioncontext/completesavepasswordrequest(completionhandler:)"
+      }
+    },
+    "ASCredentialProviderViewController": {
+      "-performGeneratePasswordsRequestWithoutUserInteraction:": {
+        "doc": "Attempt to generate passwords based on developer-specified rules.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/performwithoutuserinteraction(generatepasswordsrequest:)"
+      },
+      "-performPasskeyRegistrationWithoutUserInteractionIfPossible:": {
+        "doc": "Perform a conditional passkey registration, if possible.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/performwithoutuserinteractionifpossible(passkeyregistration:)"
+      },
+      "-performSavePasswordRequestWithoutUserInteractionIfPossible:": {
+        "doc": "Attempt to save a password credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/performwithoutuserinteractionifpossible(savepasswordrequest:)"
+      },
+      "-prepareCredentialListForServiceIdentifiers:": {
+        "doc": "Prepares the interface to display a list of credentials from which the user can select.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/preparecredentiallist(for:)"
+      },
+      "-prepareCredentialListForServiceIdentifiers:requestParameters:": {
+        "doc": "Prepares the interface to display a list of passkey and password credentials from which the user can select.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/preparecredentiallist(for:requestparameters:)"
+      },
+      "-prepareInterfaceForExtensionConfiguration": {
+        "doc": "Prepares the interface to enable the user to configure the extension.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/prepareinterfaceforextensionconfiguration()"
+      },
+      "-prepareInterfaceForGeneratePasswordsRequest:": {
+        "doc": "Prepares the interface to display a prompt to generate passwords based on developer-specified rules.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/prepareinterface(for:)-7ideq"
+      },
+      "-prepareInterfaceForPasskeyRegistration:": {
+        "doc": "Prepare the view controller to show user interface for registering a new passkey.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/prepareinterface(forpasskeyregistration:)"
+      },
+      "-prepareInterfaceForSavePasswordRequest:": {
+        "doc": "Prepares the interface to display a prompt to save a password credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/prepareinterface(for:)-69elg"
+      },
+      "-prepareInterfaceForUserChoosingTextToInsert": {
+        "doc": "Prepare the view controller to show a list of all insertable text with user selectable fields.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/prepareinterfaceforuserchoosingtexttoinsert()"
+      },
+      "-prepareInterfaceToProvideCredentialForIdentity:": {
+        "doc": "Prepares the interface for a user interaction, like a database login, that enables it to access and return the credential for the given identity.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/prepareinterfacetoprovidecredential(for:)-18ukb"
+      },
+      "-prepareInterfaceToProvideCredentialForRequest:": {
+        "doc": "Prepare the view controller to show user interface for providing the requested credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/prepareinterfacetoprovidecredential(for:)-68qpo"
+      },
+      "-prepareOneTimeCodeCredentialListForServiceIdentifiers:": {
+        "doc": "Prepares the interface to display a list of one-time passcodes (OTPs) that people can select from.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/prepareonetimecodecredentiallist(for:)"
+      },
+      "-provideCredentialWithoutUserInteractionForIdentity:": {
+        "doc": "Attempts to provide the user-requested credential with no further user interaction.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/providecredentialwithoutuserinteraction(for:)-7jlg0"
+      },
+      "-provideCredentialWithoutUserInteractionForRequest:": {
+        "doc": "Attempts to provide the user-requested credential with no further user interaction.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/providecredentialwithoutuserinteraction(for:)-3mo23"
+      },
+      "-reportAllAcceptedPublicKeyCredentialsForRelyingParty:userHandle:acceptedCredentialIDs:": {
+        "doc": "Receives a report from the system that a relying party sent a snapshot of all accepted credentials for an account.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/reportallacceptedpublickeycredentials(forrelyingparty:userhandle:acceptedcredentialids:)"
+      },
+      "-reportPublicKeyCredentialUpdateForRelyingParty:userHandle:newName:": {
+        "doc": "Receives a report from the system that a relying party indicated that a passkey’s user name updated.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/reportpublickeycredentialupdate(forrelyingparty:userhandle:newname:)"
+      },
+      "-reportUnknownPublicKeyCredentialForRelyingParty:credentialID:": {
+        "doc": "Receives a report from the system that a relying party indicated a passkey credential is invalid.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/reportunknownpublickeycredential(forrelyingparty:credentialid:)"
+      },
+      "-reportUnusedPasswordCredentialForDomain:userName:": {
+        "doc": "Receives a report from the system that a relying party indicatd that a password credential isn’t needed anymore for a given user name.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/reportunusedpasswordcredential(fordomain:username:)"
+      }
+    },
+    "ASCredentialServiceIdentifier": {
+      "-initWithIdentifier:type:": {
+        "doc": "Initializes a credential service identifier instance.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialserviceidentifier/init(identifier:type:)"
+      },
+      "-initWithIdentifier:type:displayName:": {
+        "doc": "Initializes an ASCredentialServiceIdentifier object.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialserviceidentifier/init(identifier:type:displayname:)"
+      }
+    },
+    "ASOneTimeCodeCredential": {
+      "-initWithCode:": {
+        "doc": "Creates a one-time passcode (OTP) credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asonetimecodecredential/init(code:)"
+      }
+    },
+    "ASPasskeyAssertionCredential": {
+      "+credentialWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:": {
+        "doc": "Creates and initializes a new passkey assertion credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/credentialwithuserhandle:relyingparty:signature:clientdatahash:authenticatordata:credentialid:"
+      },
+      "-initWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:": {
+        "doc": "Initializes a passkey assertion credential object.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/init(userhandle:relyingparty:signature:clientdatahash:authenticatordata:credentialid:)"
+      },
+      "-initWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:extensionOutput:": {
+        "doc": "Initializes a passkey assertion credential object, optionally specifying an extension output.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/initwithuserhandle:relyingparty:signature:clientdatahash:authenticatordata:credentialid:extensionoutput:"
+      }
+    },
+    "ASPasskeyCredentialIdentity": {
+      "+identityWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:": {
+        "doc": "Creates and initializes a passkey credential identity.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity/init(relyingpartyidentifier:username:credentialid:userhandle:recordidentifier:)-9iuhb"
+      },
+      "-initWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:": {
+        "doc": "Initializes a passkey credential identity.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity/initwithrelyingpartyidentifier:username:credentialid:userhandle:recordidentifier:"
+      }
+    },
+    "ASPasskeyCredentialRequest": {
+      "+requestWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:": {
+        "doc": "Initializes a passkey credential request, identifying supported algorithms by number.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:)-1jihy"
+      },
+      "-initWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:": {
+        "doc": "Initializes a passkey credential request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/initwithcredentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:"
+      },
+      "-initWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:assertionExtensionInput:": {
+        "doc": "Initializes a passkey credential request, providing additional passkey registration data.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/initwithcredentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:assertionextensioninput:"
+      },
+      "-initWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:registrationExtensionInput:": {
+        "doc": "Initializes a passkey credential request, providing additional passkey registration data.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/initwithcredentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:registrationextensioninput:"
+      }
+    },
+    "ASPasskeyRegistrationCredential": {
+      "+credentialWithRelyingParty:clientDataHash:credentialID:attestationObject:": {
+        "doc": "Creates and initializes a new passkey registration credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/credentialwithrelyingparty:clientdatahash:credentialid:attestationobject:"
+      },
+      "-initWithRelyingParty:clientDataHash:credentialID:attestationObject:": {
+        "doc": "Initializes a passkey registration credential object.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/init(relyingparty:clientdatahash:credentialid:attestationobject:)"
+      },
+      "-initWithRelyingParty:clientDataHash:credentialID:attestationObject:extensionOutput:": {
+        "doc": "Initializes a passkey registration credential object.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/initwithrelyingparty:clientdatahash:credentialid:attestationobject:extensionoutput:"
+      }
+    },
+    "ASPasswordCredential": {
+      "+credentialWithUser:password:": {
+        "doc": "Creates a password credential instance with a given user name and password.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredential/credentialwithuser:password:"
+      },
+      "-initWithUser:password:": {
+        "doc": "Initializes a password credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredential/init(user:password:)"
+      }
+    },
+    "ASPasswordCredentialIdentity": {
+      "+identityWithServiceIdentifier:user:recordIdentifier:": {
+        "doc": "Creates and returns a password credential identity object with a service identifier.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialidentity/identitywithserviceidentifier:user:recordidentifier:"
+      },
+      "-initWithServiceIdentifier:user:recordIdentifier:": {
+        "doc": "Initializes a password credential identity.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialidentity/init(serviceidentifier:user:recordidentifier:)"
+      }
+    },
+    "ASPasswordCredentialRequest": {
+      "+requestWithCredentialIdentity:": {
+        "doc": "Creates and initializes a password credential request object.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialrequest/requestwithcredentialidentity:"
+      },
+      "-initWithCredentialIdentity:": {
+        "doc": "Initializes a password credential request object.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialrequest/init(credentialidentity:)"
+      }
+    },
+    "ASSettingsHelper": {
+      "+openCredentialProviderAppSettingsWithCompletionHandler:": {
+        "doc": "Open the Settings app and navigate to the AutoFill provider settings.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/assettingshelper/opencredentialproviderappsettings(completionhandler:)"
+      },
+      "+openVerificationCodeAppSettingsWithCompletionHandler:": {
+        "doc": "Open the Settings app and navigate to the verification code provider settings.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/assettingshelper/openverificationcodeappsettings(completionhandler:)"
+      },
+      "+requestToTurnOnCredentialProviderExtensionWithCompletionHandler:": {
+        "doc": "Call this method from your containing app to request to turn on a contained Credential Provider Extension. If the extension is not currently enabled, a prompt will be shown to allow it to be turned on. The completion handler is called with YES or NO depending on whether the credential provider is enabled. You need to wait 10 seconds in order to make additional request to this API.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/assettingshelper/requesttoturnoncredentialproviderextension(completionhandler:)"
+      }
+    },
+    "ASWebAuthenticationSession": {
+      "-cancel": {
+        "doc": "Cancels a web authentication session.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/cancel()"
+      },
+      "-initWithURL:callback:completionHandler:": {
+        "doc": "Creates a web authentication session instance that uses a callback to evaluate a redirection URL.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/init(url:callback:completionhandler:)-6nut7"
+      },
+      "-initWithURL:callbackURLScheme:completionHandler:": {
+        "doc": "Creates a web authentication session instance.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/init(url:callbackurlscheme:completionhandler:)-7fpox"
+      },
+      "-start": {
+        "doc": "Starts a web authentication session.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/start()"
+      }
+    },
+    "ASWebAuthenticationSessionRequest": {
+      "-cancelWithError:": {
+        "doc": "Indicates that the browser canceled the authentication attempt.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest/cancelwitherror(_:)"
+      },
+      "-completeWithCallbackURL:": {
+        "doc": "Indicates that the browser successfully completed the authentication attempt.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest/complete(withcallbackurl:)"
+      }
+    }
+  },
+  "properties": {
+    "ASAccountAuthenticationModificationController": {
+      "delegate": {
+        "doc": "An object that receives notifications about the request’s status.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationcontroller/delegate"
+      },
+      "presentationContextProvider": {
+        "doc": "An object that provides a presentation context for the account modification request’s user interface.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationcontroller/presentationcontextprovider"
+      }
+    },
+    "ASAccountAuthenticationModificationReplacePasswordWithSignInWithAppleRequest": {
+      "serviceIdentifier": {
+        "doc": "An identifier that represents a particular service that the user needs a credential for, like a web site.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationreplacepasswordwithsigninwithapplerequest/serviceidentifier"
+      },
+      "user": {
+        "doc": "The user name of the account to upgrade.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationreplacepasswordwithsigninwithapplerequest/user"
+      },
+      "userInfo": {
+        "doc": "A dictionary that contains values to pass to your account modification extension.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationreplacepasswordwithsigninwithapplerequest/userinfo"
+      }
+    },
+    "ASAccountAuthenticationModificationUpgradePasswordToStrongPasswordRequest": {
+      "serviceIdentifier": {
+        "doc": "An identifier that represents a particular service that the user needs a credential for, like a web site.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationupgradepasswordtostrongpasswordrequest/serviceidentifier"
+      },
+      "user": {
+        "doc": "The user name of the account to upgrade.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationupgradepasswordtostrongpasswordrequest/user"
+      },
+      "userInfo": {
+        "doc": "A dictionary that contains values to pass to your account modification extension.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationupgradepasswordtostrongpasswordrequest/userinfo"
+      }
+    },
+    "ASAccountAuthenticationModificationViewController": {
+      "extensionContext": {
+        "doc": "The context your account authentication modification extension uses to provide information to the system.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asaccountauthenticationmodificationviewcontroller/extensioncontext"
+      }
+    },
+    "ASAuthorization": {
+      "ASAuthorizationOpenIDOperation": {
+        "doc": "The kinds of operations that you can perform with OpenID authentication.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorization/openidoperation"
+      },
+      "ASAuthorizationScope": {
+        "doc": "The kinds of contact information that can be requested from the user.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorization/scope"
+      },
+      "credential": {
+        "doc": "Information provided about a user after successful authentication.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorization/credential"
+      },
+      "provider": {
+        "doc": "The provider that created the request that resulted in the successful authorization.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorization/provider"
+      }
+    },
+    "ASAuthorizationAppleIDButton": {
+      "ASAuthorizationAppleIDButtonStyle": {
+        "doc": "A style for the authorization button.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbutton/style"
+      },
+      "ASAuthorizationAppleIDButtonType": {
+        "doc": "A type for the authorization button.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbutton/buttontype"
+      },
+      "cornerRadius": {
+        "doc": "The radius, in points, for the rounded corners on the Apple ID sign-in button.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidbutton/cornerradius"
+      }
+    },
+    "ASAuthorizationAppleIDCredential": {
+      "authorizationCode": {
+        "doc": "A token that the app uses to interact with the server.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential/authorizationcode"
+      },
+      "authorizedScopes": {
+        "doc": "The contact information the user authorized your app to access.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential/authorizedscopes"
+      },
+      "email": {
+        "doc": "The user’s email address.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential/email"
+      },
+      "fullName": {
+        "doc": "The user’s full name from their Apple ID or a user-submitted value provided from the Sign in with Apple UI.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential/fullname"
+      },
+      "identityToken": {
+        "doc": "A JSON Web Token (JWT) that securely communicates information about the user to the app.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential/identitytoken"
+      },
+      "realUserStatus": {
+        "doc": "A value that indicates whether the user appears to be a real person.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential/realuserstatus"
+      },
+      "state": {
+        "doc": "An arbitrary string that your app provides to the request that generates the credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential/state"
+      },
+      "user": {
+        "doc": "An identifier for the authenticated user.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidcredential/user"
+      }
+    },
+    "ASAuthorizationAppleIDProvider": {
+      "ASAuthorizationAppleIDProviderCredentialRevokedNotification": {
+        "doc": "A notification that indicates the user’s credentials have been revoked and they should be signed out.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidprovider/credentialrevokednotification"
+      },
+      "ASAuthorizationAppleIDProviderCredentialState": {
+        "doc": "Possible values for the credential state of a user.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidprovider/credentialstate"
+      }
+    },
+    "ASAuthorizationAppleIDRequest": {
+      "user": {
+        "doc": "An identifier associated with the user’s Apple ID.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationappleidrequest/user"
+      }
+    },
+    "ASAuthorizationController": {
+      "ASAuthorizationControllerRequestOptions": {
+        "doc": "Options that modify how a controller performs authorization requests.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller/requestoptions"
+      },
+      "authorizationRequests": {
+        "doc": "The authorization requests that the controller manages.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller/authorizationrequests"
+      },
+      "customAuthorizationMethods": {
+        "doc": "An array of custom authorization methods for the user to choose.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller/customauthorizationmethods"
+      },
+      "delegate": {
+        "doc": "A delegate that the authorization controller informs about the success or failure of an authorization attempt.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller/delegate"
+      },
+      "presentationContextProvider": {
+        "doc": "A delegate that provides a display context in which the system can present an authorization interface to the user.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationcontroller/presentationcontextprovider"
+      }
+    },
+    "ASAuthorizationOpenIDRequest": {
+      "nonce": {
+        "doc": "A string value to pass to the identity provider.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationopenidrequest/nonce"
+      },
+      "requestedOperation": {
+        "doc": "The OpenID authentication operation you want this request to perform.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationopenidrequest/requestedoperation"
+      },
+      "requestedScopes": {
+        "doc": "The contact information to be requested from the user during authentication.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationopenidrequest/requestedscopes"
+      },
+      "state": {
+        "doc": "Data that’s returned to you unmodified in the corresponding credential after a successful authentication.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationopenidrequest/state"
+      }
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialAssertion": {
+      "largeBlob": {
+        "doc": "The request’s binary large object value.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertion/largeblob-97tbp"
+      }
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialAssertionRequest": {
+      "allowedCredentials": {
+        "doc": "The array of allowed credentials.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertionrequest/allowedcredentials"
+      },
+      "largeBlob": {
+        "doc": "The request’s binary large object value.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialassertionrequest/largeblob-5mg1q"
+      }
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialProvider": {
+      "relyingPartyIdentifier": {
+        "doc": "The domain name of the service to register or authorize against.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialprovider/relyingpartyidentifier"
+      }
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialRegistration": {
+      "largeBlob": {
+        "doc": "The request’s binary large object value.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistration/largeblob-5nvj9"
+      }
+    },
+    "ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest": {
+      "largeBlob": {
+        "doc": "The request’s binary large object value.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationplatformpublickeycredentialregistrationrequest/largeblob-5ismm"
+      }
+    },
+    "ASAuthorizationProviderExtensionAuthorizationRequest": {
+      "authorizationOptions": {
+        "doc": "A collection of options associated with the request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/authorizationoptions"
+      },
+      "callerBundleIdentifier": {
+        "doc": "The bundle ID of the app making the request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/callerbundleidentifier"
+      },
+      "callerManaged": {
+        "doc": "A Boolean value that indicates whether the app making the request is managed.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/iscallermanaged"
+      },
+      "callerTeamIdentifier": {
+        "doc": "The team identifier of the app making the request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/callerteamidentifier"
+      },
+      "extensionData": {
+        "doc": "Extension data from the Mobile Device Management (MDM) configuration.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/extensiondata"
+      },
+      "httpBody": {
+        "doc": "The HTTP body of the request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/httpbody"
+      },
+      "httpHeaders": {
+        "doc": "The HTTP headers of the request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/httpheaders"
+      },
+      "localizedCallerDisplayName": {
+        "doc": "The localized display name of the app making the request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/localizedcallerdisplayname"
+      },
+      "loginManager": {
+        "doc": "The manager that interacts with Platform SSO.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/loginmanager"
+      },
+      "realm": {
+        "doc": "The realm to which the request applies.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/realm"
+      },
+      "requestedOperation": {
+        "doc": "The operation for the extension to execute.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/requestedoperation"
+      },
+      "url": {
+        "doc": "The complete URL of the request, including all components.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/url"
+      },
+      "userInterfaceEnabled": {
+        "doc": "Determines if user interface is available for the current request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationrequest/isuserinterfaceenabled"
+      }
+    },
+    "ASAuthorizationProviderExtensionAuthorizationResult": {
+      "httpAuthorizationHeaders": {
+        "doc": "A dictionary of authorization HTTP headers.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationresult/httpauthorizationheaders"
+      },
+      "httpBody": {
+        "doc": "The HTTP response body.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationresult/httpbody"
+      },
+      "httpResponse": {
+        "doc": "The HTTP response for authentications.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationresult/httpresponse"
+      },
+      "privateKeys": {
+        "doc": "An array of private security keys.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionauthorizationresult/privatekeys"
+      }
+    },
+    "ASAuthorizationProviderExtensionKerberosMapping": {
+      "clientNameKeyName": {
+        "doc": "The key name of the Kerberos client name string.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkerberosmapping/clientnamekeyname"
+      },
+      "encryptionKeyTypeKeyName": {
+        "doc": "The key name of the Kerberos session key type number.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkerberosmapping/encryptionkeytypekeyname"
+      },
+      "messageBufferKeyName": {
+        "doc": "The key name of the Base 64-encoded Kerberos AS-REP string.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkerberosmapping/messagebufferkeyname"
+      },
+      "realmKeyName": {
+        "doc": "The key name of the Kerberos realm string.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkerberosmapping/realmkeyname"
+      },
+      "serviceNameKeyName": {
+        "doc": "The key name of the Kerberos service name string.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkerberosmapping/servicenamekeyname"
+      },
+      "sessionKeyKeyName": {
+        "doc": "The key name of the Kerberos session key.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkerberosmapping/sessionkeykeyname"
+      },
+      "ticketKeyPath": {
+        "doc": "The keypath in the response JSON that uses this set of mappings.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionkerberosmapping/ticketkeypath"
+      }
+    },
+    "ASAuthorizationProviderExtensionLoginConfiguration": {
+      "accountDisplayName": {
+        "doc": "The display name for the account.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/accountdisplayname"
+      },
+      "additionalScopes": {
+        "doc": "A set of extra scopes to add to the base for the authentication request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/additionalscopes"
+      },
+      "audience": {
+        "doc": "The audience for validation and requests.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/audience"
+      },
+      "clientID": {
+        "doc": "The identifier for the client at the identity provider.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/clientid"
+      },
+      "customLoginRequestValues": {
+        "doc": "Provider-supplied values to add to the login POST request body.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/customloginrequestvalues"
+      },
+      "customNonceRequestValues": {
+        "doc": "Custom values to add to the server nonce POST request body.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/customnoncerequestvalues"
+      },
+      "includePreviousRefreshTokenInLoginRequest": {
+        "doc": "A Boolean value that indicates whether to include the previous refresh token in the authentation request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/includepreviousrefreshtokeninloginrequest"
+      },
+      "invalidCredentialPredicate": {
+        "doc": "The predicate string that identifies invalid credential errors.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/invalidcredentialpredicate"
+      },
+      "issuer": {
+        "doc": "The issuer of the identity token that the identity provider returns.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/issuer"
+      },
+      "jwksEndpointURL": {
+        "doc": "The JSON Web Key Set endpoint URL for keys.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/jwksendpointurl"
+      },
+      "kerberosTicketMappings": {
+        "doc": "The set of ticket mappings the system uses to import Kerberos tickets from the single sign-on token.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/kerberosticketmappings"
+      },
+      "nonceEndpointURL": {
+        "doc": "The URL to retrieve a one-time use value from the server.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/nonceendpointurl"
+      },
+      "nonceResponseKeypath": {
+        "doc": "The keypath in the response that contains the one-time use value.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/nonceresponsekeypath"
+      },
+      "previousRefreshTokenClaimName": {
+        "doc": "The claim name for the previous single sign-on token value in the authentication request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/previousrefreshtokenclaimname"
+      },
+      "serverNonceClaimName": {
+        "doc": "The name of the claim to include in authentication requests.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/servernonceclaimname"
+      },
+      "tokenEndpointURL": {
+        "doc": "The token endpoint URL for login requests.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginconfiguration/tokenendpointurl"
+      }
+    },
+    "ASAuthorizationProviderExtensionLoginManager": {
+      "deviceRegistered": {
+        "doc": "A Boolean value that indicates whether the device completes registration.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/isdeviceregistered"
+      },
+      "loginConfiguration": {
+        "doc": "The current login configuration for the extension.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/loginconfiguration"
+      },
+      "loginUserName": {
+        "doc": "The user name to use when authenticating with the identity provider.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/loginusername"
+      },
+      "registrationToken": {
+        "doc": "The device registration token from the mobile device management profile.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/registrationtoken"
+      },
+      "ssoTokens": {
+        "doc": "The single sign-on response tokens for the current user and extension.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/ssotokens"
+      },
+      "userRegistered": {
+        "doc": "A Boolean value that indicates whether the user completes registration.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationproviderextensionloginmanager/isuserregistered"
+      }
+    },
+    "ASAuthorizationPublicKeyCredentialPRFAssertionInputValues": {
+      "saltInput1": {
+        "doc": "A salt for the hashing function.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertioninputvalues/saltinput1"
+      },
+      "saltInput2": {
+        "doc": "An optional second salt for the hashing function.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialprfassertioninputvalues/saltinput2"
+      }
+    },
+    "ASAuthorizationPublicKeyCredentialParameters": {
+      "algorithm": {
+        "doc": "The algorithm to use for negitation between the authenticator and the relying party.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationpublickeycredentialparameters/algorithm"
+      }
+    },
+    "ASAuthorizationRequest": {
+      "provider": {
+        "doc": "The provider servicing the request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationrequest/provider"
+      }
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest": {
+      "allowedCredentials": {
+        "doc": "An array of allowed credentials.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialassertionrequest/allowedcredentials"
+      }
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor": {
+      "ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransport": {
+        "doc": "A structure that defines the security key credential transport type.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialdescriptor/transport"
+      },
+      "transports": {
+        "doc": "The array of transport types.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialdescriptor/transports"
+      }
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialProvider": {
+      "relyingPartyIdentifier": {
+        "doc": "The domain name of the service to authorize against.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialprovider/relyingpartyidentifier"
+      }
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialRegistration": {
+      "transports": {
+        "doc": "An array of transport types.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialregistration/transports"
+      }
+    },
+    "ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest": {
+      "credentialParameters": {
+        "doc": "An array of parameters for the credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialregistrationrequest/credentialparameters"
+      },
+      "excludedCredentials": {
+        "doc": "An array of excluded parameters for the credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialregistrationrequest/excludedcredentials"
+      },
+      "residentKeyPreference": {
+        "doc": "The preference that indicates where the resident key resides.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsecuritykeypublickeycredentialregistrationrequest/residentkeypreference"
+      }
+    },
+    "ASAuthorizationSingleSignOnCredential": {
+      "accessToken": {
+        "doc": "An access token used to get an identity token.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignoncredential/accesstoken"
+      },
+      "authenticatedResponse": {
+        "doc": "The complete response authentication, including technology-specific values.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignoncredential/authenticatedresponse"
+      },
+      "authorizedScopes": {
+        "doc": "The contact information the user authorized your app to access.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignoncredential/authorizedscopes"
+      },
+      "identityToken": {
+        "doc": "A JSON Web Token (JWT) that securely communicates information about the user to your app.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignoncredential/identitytoken"
+      },
+      "privateKeys": {
+        "doc": "An array of private keys.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignoncredential/privatekeys"
+      },
+      "state": {
+        "doc": "An arbitrary string that your app provided to the request that generated this credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignoncredential/state"
+      }
+    },
+    "ASAuthorizationSingleSignOnProvider": {
+      "canPerformAuthorization": {
+        "doc": "A Boolean value that indicates if the provider is capable of performing authorization within a given configuration.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignonprovider/canperformauthorization"
+      },
+      "url": {
+        "doc": "The URL of the identity provider.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignonprovider/url"
+      }
+    },
+    "ASAuthorizationSingleSignOnRequest": {
+      "authorizationOptions": {
+        "doc": "Options that control the authorization process.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationsinglesignonrequest/authorizationoptions"
+      }
+    },
+    "ASAuthorizationWebBrowserPublicKeyCredentialManager": {
+      "ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState": {
+        "doc": "An enumeration of values that indicate whether the browser app has access to a person’s passkeys.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanager/authorizationstate"
+      },
+      "authorizationStateForPlatformCredentials": {
+        "doc": "Returns a value that indicates whether the browser app has access to a person’s passkeys.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanager/authorizationstateforplatformcredentials"
+      },
+      "platformCredentials(forRelyingParty:)": {
+        "doc": "Gets a list of passkeys available for authenticating with the given relying party.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asauthorizationwebbrowserpublickeycredentialmanager/platformcredentials(forrelyingparty:)"
+      }
+    },
+    "ASCredentialIdentityStore": {
+      "ASCredentialIdentityTypes": {
+        "doc": "The defined identity types for use in retrieving credentials.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/identitytypes"
+      },
+      "credentialIdentities(forService:credentialIdentityTypes:)": {
+        "doc": "Retrieves an array of all previously saved credential identities in the store for your extension.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/credentialidentities(forservice:credentialidentitytypes:)"
+      },
+      "sharedStore": {
+        "doc": "The shared credential identity store.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystore/shared"
+      }
+    },
+    "ASCredentialIdentityStoreState": {
+      "enabled": {
+        "doc": "A Boolean value indicating whether the credential identity store is enabled.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystorestate/isenabled"
+      },
+      "supportsIncrementalUpdates": {
+        "doc": "A Boolean value indicating whether the credential identity store supports incremental updates.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialidentitystorestate/supportsincrementalupdates"
+      }
+    },
+    "ASCredentialProviderViewController": {
+      "extensionContext": {
+        "doc": "The context your credential provider extension uses to provide information to the system.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialproviderviewcontroller/extensioncontext"
+      }
+    },
+    "ASCredentialServiceIdentifier": {
+      "ASCredentialServiceIdentifierType": {
+        "doc": "Possible values for the service identifier type.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialserviceidentifier/identifiertype"
+      },
+      "displayName": {
+        "doc": "A user visible name for the identifier. For app types it will contain the localized name of the app. For URL types it will contain the host name of the URL if it contains a valid host. For URL type identifiers that do not contain a valid host and for domain type identifiers, this will be equal to identifier. This property is meant only as a best effort suggestion for display purposes. It is not used by the system to identify the service or suggest a credential for AutoFill.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialserviceidentifier/displayname"
+      },
+      "identifier": {
+        "doc": "A string that names the identified service.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialserviceidentifier/identifier"
+      },
+      "type": {
+        "doc": "The kind of services that the identifier represents.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/ascredentialserviceidentifier/type"
+      }
+    },
+    "ASGeneratePasswordsRequest": {
+      "confirmPasswordFieldPasswordRules": {
+        "doc": "Developer provided password rules for a “confirm password” field.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asgeneratepasswordsrequest/confirmpasswordfieldpasswordrules"
+      },
+      "passwordFieldPasswordRules": {
+        "doc": "Developer provided password rules.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asgeneratepasswordsrequest/passwordfieldpasswordrules"
+      },
+      "passwordRulesFromQuirks": {
+        "doc": "Password rules from https://github.com/apple/password-manager-resources",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asgeneratepasswordsrequest/passwordrulesfromquirks"
+      },
+      "serviceIdentifier": {
+        "doc": "The identifier of the service for which the the credential would be associated.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asgeneratepasswordsrequest/serviceidentifier"
+      }
+    },
+    "ASGeneratedPassword": {
+      "kind": {
+        "doc": "The kind of password that this represents.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asgeneratedpassword/kind-swift.property"
+      },
+      "localizedName": {
+        "doc": "The user-visible description of this password, derived from the kind.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asgeneratedpassword/localizedname"
+      },
+      "value": {
+        "doc": "The value of the password.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asgeneratedpassword/value"
+      }
+    },
+    "ASOneTimeCodeCredential": {
+      "code": {
+        "doc": "The one-time passcode.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/asonetimecodecredential/code"
+      }
+    },
+    "ASPasskeyAssertionCredential": {
+      "authenticatorData": {
+        "doc": "The authenticator data of the application that created this passkey assertion credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/authenticatordata"
+      },
+      "clientDataHash": {
+        "doc": "A hash of the client data for this credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/clientdatahash"
+      },
+      "credentialID": {
+        "doc": "The identifier for this credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/credentialid"
+      },
+      "extensionOutput": {
+        "doc": "An output from WebAuthn extensions.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/extensionoutput-46ib3"
+      },
+      "init(userHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:extensionOutput:)": {
+        "doc": "Initializes a passkey assertion credential object, optionally specifying an extension output.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/init(userhandle:relyingparty:signature:clientdatahash:authenticatordata:credentialid:extensionoutput:)"
+      },
+      "relyingParty": {
+        "doc": "The relying party associated with this passkey.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/relyingparty"
+      },
+      "signature": {
+        "doc": "The cryptographic signature of this credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/signature"
+      },
+      "userHandle": {
+        "doc": "The user handle of this passkey.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/userhandle"
+      }
+    },
+    "ASPasskeyCredentialIdentity": {
+      "credentialID": {
+        "doc": "The credential identifier for this passkey credential identity.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity/credentialid"
+      },
+      "init(relyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:)": {
+        "doc": "Initializes a passkey credential identity.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity/init(relyingpartyidentifier:username:credentialid:userhandle:recordidentifier:)-7u7p1"
+      },
+      "rank": {
+        "doc": "An indicator that enables you to prioritize credential identities relative to each other.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity/rank"
+      },
+      "recordIdentifier": {
+        "doc": "A string used to correlate this identity to a record in your app’s own database.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity/recordidentifier"
+      },
+      "relyingPartyIdentifier": {
+        "doc": "A string that identifies this identity’s relying party.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity/relyingpartyidentifier"
+      },
+      "userHandle": {
+        "doc": "The user handle of this passkey credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity/userhandle"
+      },
+      "userName": {
+        "doc": "The username of this passkey credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialidentity/username"
+      }
+    },
+    "ASPasskeyCredentialRequest": {
+      "assertionExtensionInput": {
+        "doc": "An input for WebAuthn extensions.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/assertionextensioninput"
+      },
+      "clientDataHash": {
+        "doc": "The hash of the client data for this assertion.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/clientdatahash"
+      },
+      "excludedCredentials": {
+        "doc": "A list of IDs that represent existing passkeys for the account, to prevent creation of duplicate passkeys.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/excludedcredentials"
+      },
+      "extensionInput": {
+        "doc": "An input for WebAuthn extensions.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/extensioninput"
+      },
+      "init(credentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:)": {
+        "doc": "Initializes a passkey credential request, identifying supported algorithms with constants.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:)-52txr"
+      },
+      "init(credentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:extensionInput:)": {
+        "doc": "Initializes a passkey credential request, providing additional passkey assertion data.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/init(credentialidentity:clientdatahash:userverificationpreference:supportedalgorithms:extensioninput:)-9hsyv"
+      },
+      "registrationExtensionInput": {
+        "doc": "An input for WebAuthn extensions.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/registrationextensioninput"
+      },
+      "supportedAlgorithms": {
+        "doc": "A list of cryptographic signature algorithms that the relying party supports.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/supportedalgorithms-27z68"
+      },
+      "userVerificationPreference": {
+        "doc": "The relying party’s user verification preference.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequest/userverificationpreference"
+      }
+    },
+    "ASPasskeyCredentialRequestParameters": {
+      "allowedCredentials": {
+        "doc": "A list of passkey credentials that the relying party accepts for this challenge.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequestparameters/allowedcredentials"
+      },
+      "clientDataHash": {
+        "doc": "The client data that you sign as part of the response.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequestparameters/clientdatahash"
+      },
+      "extensionInput": {
+        "doc": "An input for WebAuthn extensions.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequestparameters/extensioninput-2edlv"
+      },
+      "relyingPartyIdentifier": {
+        "doc": "The relying party that issues the challenge.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequestparameters/relyingpartyidentifier"
+      },
+      "userVerificationPreference": {
+        "doc": "The relying party’s preference for user verification.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequestparameters/userverificationpreference"
+      }
+    },
+    "ASPasskeyRegistrationCredential": {
+      "attestationObject": {
+        "doc": "The attestation object for this passkey.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/attestationobject"
+      },
+      "clientDataHash": {
+        "doc": "A hash of the client data for this credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/clientdatahash"
+      },
+      "credentialID": {
+        "doc": "The identifier for this credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/credentialid"
+      },
+      "extensionOutput": {
+        "doc": "An output from WebAuthn extensions.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/extensionoutput-2lf9m"
+      },
+      "init(relyingParty:clientDataHash:credentialID:attestationObject:extensionOutput:)": {
+        "doc": "Initializes a passkey registration credential object.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/init(relyingparty:clientdatahash:credentialid:attestationobject:extensionoutput:)"
+      },
+      "relyingParty": {
+        "doc": "The relying party associated with this passkey.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/relyingparty"
+      }
+    },
+    "ASPasswordCredential": {
+      "password": {
+        "doc": "The password for a password credential object.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredential/password"
+      },
+      "user": {
+        "doc": "The user for a password credential object.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredential/user"
+      }
+    },
+    "ASPasswordCredentialIdentity": {
+      "rank": {
+        "doc": "An indicator that enables you to prioritze credential identities relative to each other.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialidentity/rank"
+      },
+      "recordIdentifier": {
+        "doc": "A string used to correlate this identity to a record in your app’s own database.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialidentity/recordidentifier"
+      },
+      "serviceIdentifier": {
+        "doc": "An identifier that helps the system know with which apps or websites to associate this credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialidentity/serviceidentifier"
+      },
+      "user": {
+        "doc": "The username associated with the credential.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasswordcredentialidentity/user"
+      }
+    },
+    "ASSavePasswordRequest": {
+      "credential": {
+        "doc": "The credential to save.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/assavepasswordrequest/credential"
+      },
+      "event": {
+        "doc": "The type of event that the save request represents.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/assavepasswordrequest/event-swift.property"
+      },
+      "passwordKind": {
+        "doc": "For passwordFilled events, this is the kind of password that was created.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/assavepasswordrequest/passwordkind"
+      },
+      "serviceIdentifier": {
+        "doc": "The identifier of the service for which the the credential should be associated.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/assavepasswordrequest/serviceidentifier"
+      },
+      "sessionID": {
+        "doc": "An ID that represents a form’s session.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/assavepasswordrequest/sessionid"
+      },
+      "title": {
+        "doc": "A user-displayable name for the password credential to be saved.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/assavepasswordrequest/title"
+      }
+    },
+    "ASWebAuthenticationSession": {
+      "ASWebAuthenticationSessionCallback": {
+        "doc": "An object for evaluating navigation events in an authentication session.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/callback"
+      },
+      "ASWebAuthenticationSessionCompletionHandler": {
+        "doc": "A completion handler for the web authentication session.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/completionhandler"
+      },
+      "additionalHeaderFields": {
+        "doc": "Any additional header fields to set when loading the initial URL.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/additionalheaderfields"
+      },
+      "canStart": {
+        "doc": "A Boolean indicating whether the session can begin.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/canstart"
+      },
+      "prefersEphemeralWebBrowserSession": {
+        "doc": "A Boolean value that indicates whether the session should ask the browser for a private authentication session.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/prefersephemeralwebbrowsersession"
+      },
+      "presentationContextProvider": {
+        "doc": "A delegate that provides a display context in which the system can present an authentication session to the user.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession/presentationcontextprovider"
+      }
+    },
+    "ASWebAuthenticationSessionRequest": {
+      "URL": {
+        "doc": "The web address the browser should use to perform the authentication request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest/url"
+      },
+      "UUID": {
+        "doc": "A unique identifier for the request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest/uuid"
+      },
+      "additionalHeaderFields": {
+        "doc": "Additional headers to send when loading the initial URL.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest/additionalheaderfields"
+      },
+      "callback": {
+        "doc": "The callback to listen for, which completes the request.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest/callback"
+      },
+      "callbackURLScheme": {
+        "doc": "The scheme for the browser to use when returning the result of the authentication attempt to the app requesting it.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest/callbackurlscheme"
+      },
+      "delegate": {
+        "doc": "A delegate that the session request instance informs about authentication completion.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest/delegate"
+      },
+      "shouldUseEphemeralSession": {
+        "doc": "A Boolean that indicates whether the browser should use a private browsing session.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionrequest/shoulduseephemeralsession"
+      }
+    },
+    "ASWebAuthenticationSessionWebBrowserSessionManager": {
+      "sessionHandler": {
+        "doc": "A handler that a web browser provides to handle session requests from an app.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionwebbrowsersessionmanager/sessionhandler"
+      },
+      "sharedManager": {
+        "doc": "The shared manager for which a web browser acts as the session handler.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionwebbrowsersessionmanager/shared"
+      },
+      "wasLaunchedByAuthenticationServices": {
+        "doc": "A Boolean that indicates whether the session was launched by authentication services.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsessionwebbrowsersessionmanager/waslaunchedbyauthenticationservices"
+      }
+    }
+  }
+}
