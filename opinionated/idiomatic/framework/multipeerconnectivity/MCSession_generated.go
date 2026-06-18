@@ -41,9 +41,9 @@ func NewSessionWithPeer(myPeerID *raw.MCPeerID) *Session {
 }
 
 // NewSessionWithPeerSecurityIdentityEncryptionPreference creates a new [Session].
-func NewSessionWithPeerSecurityIdentityEncryptionPreference(myPeerID *raw.MCPeerID, identity *foundation.NSArray[objc.ID], encryptionPreference raw.MCEncryptionPreference) *Session {
+func NewSessionWithPeerSecurityIdentityEncryptionPreference(myPeerID *raw.MCPeerID, identity *foundation.NSArray[objc.ID], encryptionPreference MCEncryptionPreference) *Session {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:securityIdentity:encryptionPreference:"), myPeerID.Ptr(), identity.Ptr(), encryptionPreference)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:securityIdentity:encryptionPreference:"), myPeerID.Ptr(), identity.Ptr(), raw.MCEncryptionPreference(encryptionPreference))
 	return &Session{inner: raw.MCSessionFromID(_id)}
 }
 
@@ -54,8 +54,8 @@ func (x *Session) WithDelegate(delegate raw.MCSessionDelegate) *Session {
 }
 
 // SendDataToPeersWithModeError calls the underlying SendDataToPeersWithModeError.
-func (x *Session) SendDataToPeersWithModeError(data *foundation.NSData, peerIDs *foundation.NSArray[*raw.MCPeerID], mode raw.MCSessionSendDataMode) (bool, error) {
-	return x.inner.SendDataToPeersWithModeError(data, peerIDs, mode)
+func (x *Session) SendDataToPeersWithModeError(data *foundation.NSData, peerIDs *foundation.NSArray[*raw.MCPeerID], mode MCSessionSendDataMode) (bool, error) {
+	return x.inner.SendDataToPeersWithModeError(data, peerIDs, raw.MCSessionSendDataMode(mode))
 }
 
 // Disconnect calls the underlying Disconnect.
@@ -98,8 +98,8 @@ func (x *Session) SecurityIdentity() *foundation.NSArray[objc.ID] {
 }
 
 // EncryptionPreference calls the underlying EncryptionPreference.
-func (x *Session) EncryptionPreference() raw.MCEncryptionPreference {
-	return x.inner.EncryptionPreference()
+func (x *Session) EncryptionPreference() MCEncryptionPreference {
+	return MCEncryptionPreference(x.inner.EncryptionPreference())
 }
 
 // ConnectedPeers returns the collection as a Go slice.
@@ -151,7 +151,7 @@ func (x *Session) CancelConnectPeer(peerID *raw.MCPeerID) {
 type Sessionable interface {
 	Unwrap() *raw.MCSession
 	WithDelegate(delegate raw.MCSessionDelegate) *Session
-	SendDataToPeersWithModeError(data *foundation.NSData, peerIDs *foundation.NSArray[*raw.MCPeerID], mode raw.MCSessionSendDataMode) (bool, error)
+	SendDataToPeersWithModeError(data *foundation.NSData, peerIDs *foundation.NSArray[*raw.MCPeerID], mode MCSessionSendDataMode) (bool, error)
 	Disconnect()
 	SendResourceAtURLWithNameToPeerWithCompletionHandler(resourceURL string, resourceName string, peerID *raw.MCPeerID, completionHandler func(unsafe.Pointer)) *foundation.NSProgress
 	StartStreamWithNameToPeerError(streamName string, peerID *raw.MCPeerID) (*foundation.NSOutputStream, error)
@@ -159,7 +159,7 @@ type Sessionable interface {
 	SetDelegate(delegate raw.MCSessionDelegate)
 	MyPeerID() *PeerID
 	SecurityIdentity() *foundation.NSArray[objc.ID]
-	EncryptionPreference() raw.MCEncryptionPreference
+	EncryptionPreference() MCEncryptionPreference
 	ConnectedPeers() []*PeerID
 	NearbyConnectionDataForPeer(ctx context.Context, peerID *raw.MCPeerID) (*foundation.NSData, error)
 	ConnectPeerWithNearbyConnectionData(peerID *raw.MCPeerID, data *foundation.NSData)

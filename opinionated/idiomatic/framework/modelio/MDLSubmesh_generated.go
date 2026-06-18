@@ -32,30 +32,30 @@ func SubmeshFromID(id objc.ID) *Submesh {
 }
 
 // NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial creates a new [Submesh].
-func NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial(name string, indexBuffer raw.MDLMeshBuffer, indexCount uint, indexType raw.MDLIndexBitDepth, geometryType raw.MDLGeometryType, material *raw.MDLMaterial) *Submesh {
+func NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterial(name string, indexBuffer raw.MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *raw.MDLMaterial) *Submesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSubmesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:indexBuffer:indexCount:indexType:geometryType:material:"), foundation.NSStringStringWithUTF8String(name).Ptr(), indexBuffer, indexCount, indexType, geometryType, material.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:indexBuffer:indexCount:indexType:geometryType:material:"), foundation.NSStringStringWithUTF8String(name).Ptr(), indexBuffer, indexCount, raw.MDLIndexBitDepth(indexType), raw.MDLGeometryType(geometryType), material.Ptr())
 	return &Submesh{inner: raw.MDLSubmeshFromID(_id)}
 }
 
 // NewSubmeshWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial creates a new [Submesh].
-func NewSubmeshWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial(indexBuffer raw.MDLMeshBuffer, indexCount uint, indexType raw.MDLIndexBitDepth, geometryType raw.MDLGeometryType, material *raw.MDLMaterial) *Submesh {
+func NewSubmeshWithIndexBufferIndexCountIndexTypeGeometryTypeMaterial(indexBuffer raw.MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *raw.MDLMaterial) *Submesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSubmesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIndexBuffer:indexCount:indexType:geometryType:material:"), indexBuffer, indexCount, indexType, geometryType, material.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIndexBuffer:indexCount:indexType:geometryType:material:"), indexBuffer, indexCount, raw.MDLIndexBitDepth(indexType), raw.MDLGeometryType(geometryType), material.Ptr())
 	return &Submesh{inner: raw.MDLSubmeshFromID(_id)}
 }
 
 // NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopology creates a new [Submesh].
-func NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopology(name string, indexBuffer raw.MDLMeshBuffer, indexCount uint, indexType raw.MDLIndexBitDepth, geometryType raw.MDLGeometryType, material *raw.MDLMaterial, topology *raw.MDLSubmeshTopology) *Submesh {
+func NewSubmeshWithNameIndexBufferIndexCountIndexTypeGeometryTypeMaterialTopology(name string, indexBuffer raw.MDLMeshBuffer, indexCount uint, indexType MDLIndexBitDepth, geometryType MDLGeometryType, material *raw.MDLMaterial, topology *raw.MDLSubmeshTopology) *Submesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSubmesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:indexBuffer:indexCount:indexType:geometryType:material:topology:"), foundation.NSStringStringWithUTF8String(name).Ptr(), indexBuffer, indexCount, indexType, geometryType, material.Ptr(), topology.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:indexBuffer:indexCount:indexType:geometryType:material:topology:"), foundation.NSStringStringWithUTF8String(name).Ptr(), indexBuffer, indexCount, raw.MDLIndexBitDepth(indexType), raw.MDLGeometryType(geometryType), material.Ptr(), topology.Ptr())
 	return &Submesh{inner: raw.MDLSubmeshFromID(_id)}
 }
 
 // NewSubmeshWithMDLSubmeshIndexTypeGeometryType creates a new [Submesh].
-func NewSubmeshWithMDLSubmeshIndexTypeGeometryType(submesh *raw.MDLSubmesh, indexType raw.MDLIndexBitDepth, geometryType raw.MDLGeometryType) *Submesh {
+func NewSubmeshWithMDLSubmeshIndexTypeGeometryType(submesh *raw.MDLSubmesh, indexType MDLIndexBitDepth, geometryType MDLGeometryType) *Submesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSubmesh")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMDLSubmesh:indexType:geometryType:"), submesh.Ptr(), indexType, geometryType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMDLSubmesh:indexType:geometryType:"), submesh.Ptr(), raw.MDLIndexBitDepth(indexType), raw.MDLGeometryType(geometryType))
 	return &Submesh{inner: raw.MDLSubmeshFromID(_id)}
 }
 
@@ -78,8 +78,8 @@ func (x *Submesh) WithName(name string) *Submesh {
 }
 
 // IndexBufferAsIndexType calls the underlying IndexBufferAsIndexType.
-func (x *Submesh) IndexBufferAsIndexType(indexType raw.MDLIndexBitDepth) raw.MDLMeshBuffer {
-	return x.inner.IndexBufferAsIndexType(indexType)
+func (x *Submesh) IndexBufferAsIndexType(indexType MDLIndexBitDepth) raw.MDLMeshBuffer {
+	return x.inner.IndexBufferAsIndexType(raw.MDLIndexBitDepth(indexType))
 }
 
 // IndexBuffer calls the underlying IndexBuffer.
@@ -93,13 +93,13 @@ func (x *Submesh) IndexCount() uint {
 }
 
 // IndexType calls the underlying IndexType.
-func (x *Submesh) IndexType() raw.MDLIndexBitDepth {
-	return x.inner.IndexType()
+func (x *Submesh) IndexType() MDLIndexBitDepth {
+	return MDLIndexBitDepth(x.inner.IndexType())
 }
 
 // GeometryType calls the underlying GeometryType.
-func (x *Submesh) GeometryType() raw.MDLGeometryType {
-	return x.inner.GeometryType()
+func (x *Submesh) GeometryType() MDLGeometryType {
+	return MDLGeometryType(x.inner.GeometryType())
 }
 
 // Material calls the underlying Material.
@@ -150,11 +150,11 @@ type Submeshable interface {
 	WithMaterial(material *Material) *Submesh
 	WithTopology(topology *SubmeshTopology) *Submesh
 	WithName(name string) *Submesh
-	IndexBufferAsIndexType(indexType raw.MDLIndexBitDepth) raw.MDLMeshBuffer
+	IndexBufferAsIndexType(indexType MDLIndexBitDepth) raw.MDLMeshBuffer
 	IndexBuffer() raw.MDLMeshBuffer
 	IndexCount() uint
-	IndexType() raw.MDLIndexBitDepth
-	GeometryType() raw.MDLGeometryType
+	IndexType() MDLIndexBitDepth
+	GeometryType() MDLGeometryType
 	Material() *Material
 	SetMaterial(material *raw.MDLMaterial)
 	Topology() *SubmeshTopology

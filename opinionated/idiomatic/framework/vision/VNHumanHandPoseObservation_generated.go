@@ -77,8 +77,8 @@ func (x *HumanHandPoseObservation) AvailableJointsGroupNames() []*foundation.NSS
 }
 
 // Chirality calls the underlying Chirality.
-func (x *HumanHandPoseObservation) Chirality() raw.VNChirality {
-	return x.inner.Chirality()
+func (x *HumanHandPoseObservation) Chirality() VNChirality {
+	return VNChirality(x.inner.Chirality())
 }
 
 func (x *HumanHandPoseObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation {
@@ -96,7 +96,7 @@ type HumanHandPoseObservationable interface {
 	RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error)
 	AvailableJointNames() []*foundation.NSString
 	AvailableJointsGroupNames() []*foundation.NSString
-	Chirality() raw.VNChirality
+	Chirality() VNChirality
 }
 
 var _ HumanHandPoseObservationable = (*HumanHandPoseObservation)(nil)

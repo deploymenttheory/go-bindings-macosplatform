@@ -38,8 +38,8 @@ func NewMutableContact() *MutableContact {
 }
 
 // WithContactType sets the contactType property and returns the receiver for chaining.
-func (x *MutableContact) WithContactType(contactType raw.CNContactType) *MutableContact {
-	x.inner.SetContactType(contactType)
+func (x *MutableContact) WithContactType(contactType CNContactType) *MutableContact {
+	x.inner.SetContactType(raw.CNContactType(contactType))
 	return x
 }
 
@@ -296,8 +296,8 @@ func (x *MutableContact) WithDates(items ...*raw.CNLabeledValue[*foundation.NSDa
 }
 
 // SetContactType calls the underlying SetContactType.
-func (x *MutableContact) SetContactType(contactType raw.CNContactType) {
-	x.inner.SetContactType(contactType)
+func (x *MutableContact) SetContactType(contactType CNContactType) {
+	x.inner.SetContactType(raw.CNContactType(contactType))
 }
 
 // SetNamePrefix calls the underlying SetNamePrefix.
@@ -435,7 +435,7 @@ func (x *MutableContact) asContact() *raw.CNContact { return &x.inner.CNContact 
 // MutableContactable is the interface implemented by [MutableContact], for mocking and DI.
 type MutableContactable interface {
 	Unwrap() *raw.CNMutableContact
-	WithContactType(contactType raw.CNContactType) *MutableContact
+	WithContactType(contactType CNContactType) *MutableContact
 	WithNamePrefix(namePrefix string) *MutableContact
 	WithGivenName(givenName string) *MutableContact
 	WithMiddleName(middleName string) *MutableContact
@@ -462,7 +462,7 @@ type MutableContactable interface {
 	WithBirthday(birthday *foundation.NSDateComponents) *MutableContact
 	WithNonGregorianBirthday(nonGregorianBirthday *foundation.NSDateComponents) *MutableContact
 	WithDates(items ...*raw.CNLabeledValue[*foundation.NSDateComponents]) *MutableContact
-	SetContactType(contactType raw.CNContactType)
+	SetContactType(contactType CNContactType)
 	SetNamePrefix(namePrefix string)
 	SetGivenName(givenName string)
 	SetMiddleName(middleName string)

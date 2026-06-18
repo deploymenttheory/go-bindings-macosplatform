@@ -31,15 +31,15 @@ func HighlightChangeEventFromID(id objc.ID) *HighlightChangeEvent {
 }
 
 // NewHighlightChangeEventWithHighlightTrigger creates a new [HighlightChangeEvent].
-func NewHighlightChangeEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger raw.SWHighlightChangeEventTrigger) *HighlightChangeEvent {
+func NewHighlightChangeEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightChangeEventTrigger) *HighlightChangeEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightChangeEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), highlight.Ptr(), trigger)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), highlight.Ptr(), raw.SWHighlightChangeEventTrigger(trigger))
 	return &HighlightChangeEvent{inner: raw.SWHighlightChangeEventFromID(_id)}
 }
 
 // ChangeEventTrigger calls the underlying ChangeEventTrigger.
-func (x *HighlightChangeEvent) ChangeEventTrigger() raw.SWHighlightChangeEventTrigger {
-	return x.inner.ChangeEventTrigger()
+func (x *HighlightChangeEvent) ChangeEventTrigger() SWHighlightChangeEventTrigger {
+	return SWHighlightChangeEventTrigger(x.inner.ChangeEventTrigger())
 }
 
 // HighlightURL calls the underlying HighlightURL.
@@ -50,7 +50,7 @@ func (x *HighlightChangeEvent) HighlightURL() *foundation.NSURL {
 // HighlightChangeEventable is the interface implemented by [HighlightChangeEvent], for mocking and DI.
 type HighlightChangeEventable interface {
 	Unwrap() *raw.SWHighlightChangeEvent
-	ChangeEventTrigger() raw.SWHighlightChangeEventTrigger
+	ChangeEventTrigger() SWHighlightChangeEventTrigger
 	HighlightURL() *foundation.NSURL
 }
 

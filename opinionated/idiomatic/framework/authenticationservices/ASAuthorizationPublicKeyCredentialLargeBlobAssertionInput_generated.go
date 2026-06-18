@@ -33,9 +33,9 @@ func AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(id objc.ID) *
 }
 
 // NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation creates a new [AuthorizationPublicKeyCredentialLargeBlobAssertionInput].
-func NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation(operation raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+func NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation(operation ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOperation:"), operation)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOperation:"), raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation(operation))
 	return &AuthorizationPublicKeyCredentialLargeBlobAssertionInput{inner: raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_id)}
 }
 
@@ -46,8 +46,8 @@ func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) WithDataToWrit
 }
 
 // Operation calls the underlying Operation.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Operation() raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation {
-	return x.inner.Operation()
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Operation() ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation {
+	return ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation(x.inner.Operation())
 }
 
 // DataToWrite calls the underlying DataToWrite.
@@ -64,7 +64,7 @@ func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) SetDataToWrite
 type AuthorizationPublicKeyCredentialLargeBlobAssertionInputable interface {
 	Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput
 	WithDataToWrite(dataToWrite *foundation.NSData) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
-	Operation() raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation
+	Operation() ASAuthorizationPublicKeyCredentialLargeBlobAssertionOperation
 	DataToWrite() *foundation.NSData
 	SetDataToWrite(dataToWrite *foundation.NSData)
 }

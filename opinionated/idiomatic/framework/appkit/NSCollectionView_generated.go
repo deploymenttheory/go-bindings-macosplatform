@@ -192,8 +192,8 @@ func (x *CollectionView) WithAutoresizesSubviews(autoresizesSubviews bool) *Coll
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *CollectionView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *CollectionView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *CollectionView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *CollectionView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -252,14 +252,14 @@ func (x *CollectionView) WithWantsRestingTouches(wantsRestingTouches bool) *Coll
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *CollectionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *CollectionView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *CollectionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *CollectionView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *CollectionView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *CollectionView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *CollectionView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *CollectionView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -366,8 +366,8 @@ func (x *CollectionView) WithToolTip(toolTip string) *CollectionView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *CollectionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *CollectionView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *CollectionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *CollectionView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -384,8 +384,8 @@ func (x *CollectionView) WithNextKeyView(nextKeyView ViewProvider) *CollectionVi
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *CollectionView) WithFocusRingType(focusRingType raw.NSFocusRingType) *CollectionView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *CollectionView) WithFocusRingType(focusRingType NSFocusRingType) *CollectionView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -408,8 +408,8 @@ func (x *CollectionView) WithGestureRecognizers(items ...GestureRecognizerProvid
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *CollectionView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *CollectionView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *CollectionView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *CollectionView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -536,8 +536,8 @@ func (x *CollectionView) NumberOfItemsInSection(section int) int {
 }
 
 // SelectItemsAtIndexPathsScrollPosition calls the underlying SelectItemsAtIndexPathsScrollPosition.
-func (x *CollectionView) SelectItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition raw.NSCollectionViewScrollPosition) {
-	x.inner.SelectItemsAtIndexPathsScrollPosition(indexPaths, scrollPosition)
+func (x *CollectionView) SelectItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition NSCollectionViewScrollPosition) {
+	x.inner.SelectItemsAtIndexPathsScrollPosition(indexPaths, raw.NSCollectionViewScrollPosition(scrollPosition))
 }
 
 // DeselectItemsAtIndexPaths calls the underlying DeselectItemsAtIndexPaths.
@@ -707,13 +707,13 @@ func (x *CollectionView) ToggleSectionCollapse(sender objc.ID) {
 }
 
 // ScrollToItemsAtIndexPathsScrollPosition calls the underlying ScrollToItemsAtIndexPathsScrollPosition.
-func (x *CollectionView) ScrollToItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition raw.NSCollectionViewScrollPosition) {
-	x.inner.ScrollToItemsAtIndexPathsScrollPosition(indexPaths, scrollPosition)
+func (x *CollectionView) ScrollToItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition NSCollectionViewScrollPosition) {
+	x.inner.ScrollToItemsAtIndexPathsScrollPosition(indexPaths, raw.NSCollectionViewScrollPosition(scrollPosition))
 }
 
 // SetDraggingSourceOperationMaskForLocal calls the underlying SetDraggingSourceOperationMaskForLocal.
-func (x *CollectionView) SetDraggingSourceOperationMaskForLocal(dragOperationMask raw.NSDragOperation, localDestination bool) {
-	x.inner.SetDraggingSourceOperationMaskForLocal(dragOperationMask, localDestination)
+func (x *CollectionView) SetDraggingSourceOperationMaskForLocal(dragOperationMask NSDragOperation, localDestination bool) {
+	x.inner.SetDraggingSourceOperationMaskForLocal(raw.NSDragOperation(dragOperationMask), localDestination)
 }
 
 // DraggingImageForItemsAtIndexPathsWithEventOffset calls the underlying DraggingImageForItemsAtIndexPathsWithEventOffset.
@@ -979,7 +979,7 @@ type CollectionViewable interface {
 	WithHidden(hidden bool) *CollectionView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *CollectionView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *CollectionView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *CollectionView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *CollectionView
 	WithFrame(frame corefoundation.CGRect) *CollectionView
 	WithFrameRotation(frameRotation float64) *CollectionView
 	WithFrameCenterRotation(frameCenterRotation float64) *CollectionView
@@ -989,8 +989,8 @@ type CollectionViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *CollectionView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *CollectionView
 	WithWantsRestingTouches(wantsRestingTouches bool) *CollectionView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *CollectionView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *CollectionView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *CollectionView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *CollectionView
 	WithWantsLayer(wantsLayer bool) *CollectionView
 	WithLayer(layer *quartzcore.CALayer) *CollectionView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *CollectionView
@@ -1004,12 +1004,12 @@ type CollectionViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *CollectionView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *CollectionView
 	WithToolTip(toolTip string) *CollectionView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *CollectionView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *CollectionView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *CollectionView
 	WithNextKeyView(nextKeyView ViewProvider) *CollectionView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *CollectionView
+	WithFocusRingType(focusRingType NSFocusRingType) *CollectionView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *CollectionView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *CollectionView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *CollectionView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *CollectionView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *CollectionView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *CollectionView
@@ -1030,7 +1030,7 @@ type CollectionViewable interface {
 	FrameForItemAtIndex(index uint) corefoundation.CGRect
 	FrameForItemAtIndexWithNumberOfItems(index uint, numberOfItems uint) corefoundation.CGRect
 	NumberOfItemsInSection(section int) int
-	SelectItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition raw.NSCollectionViewScrollPosition)
+	SelectItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition NSCollectionViewScrollPosition)
 	DeselectItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath])
 	SelectAll(sender objc.ID)
 	DeselectAll(sender objc.ID)
@@ -1059,8 +1059,8 @@ type CollectionViewable interface {
 	MoveItemAtIndexPathToIndexPath(indexPath *foundation.NSIndexPath, newIndexPath *foundation.NSIndexPath)
 	PerformBatchUpdatesCompletionHandler(updates func(), completionHandler func(bool))
 	ToggleSectionCollapse(sender objc.ID)
-	ScrollToItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition raw.NSCollectionViewScrollPosition)
-	SetDraggingSourceOperationMaskForLocal(dragOperationMask raw.NSDragOperation, localDestination bool)
+	ScrollToItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition NSCollectionViewScrollPosition)
+	SetDraggingSourceOperationMaskForLocal(dragOperationMask NSDragOperation, localDestination bool)
 	DraggingImageForItemsAtIndexPathsWithEventOffset(indexPaths *foundation.NSSet[*foundation.NSIndexPath], event *raw.NSEvent, dragImageOffset *corefoundation.CGPoint) *Image
 	DraggingImageForItemsAtIndexesWithEventOffset(indexes *foundation.NSIndexSet, event *raw.NSEvent, dragImageOffset *corefoundation.CGPoint) *Image
 	DataSource() raw.NSCollectionViewDataSource

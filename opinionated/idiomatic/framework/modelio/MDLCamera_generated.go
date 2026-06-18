@@ -37,8 +37,8 @@ func NewCamera() *Camera {
 }
 
 // WithProjection sets the projection property and returns the receiver for chaining.
-func (x *Camera) WithProjection(projection raw.MDLCameraProjection) *Camera {
-	x.inner.SetProjection(projection)
+func (x *Camera) WithProjection(projection MDLCameraProjection) *Camera {
+	x.inner.SetProjection(raw.MDLCameraProjection(projection))
 	return x
 }
 
@@ -203,13 +203,13 @@ func (x *Camera) ProjectionMatrix() unsafe.Pointer {
 }
 
 // Projection calls the underlying Projection.
-func (x *Camera) Projection() raw.MDLCameraProjection {
-	return x.inner.Projection()
+func (x *Camera) Projection() MDLCameraProjection {
+	return MDLCameraProjection(x.inner.Projection())
 }
 
 // SetProjection calls the underlying SetProjection.
-func (x *Camera) SetProjection(projection raw.MDLCameraProjection) {
-	x.inner.SetProjection(projection)
+func (x *Camera) SetProjection(projection MDLCameraProjection) {
+	x.inner.SetProjection(raw.MDLCameraProjection(projection))
 }
 
 // NearVisibilityDistance calls the underlying NearVisibilityDistance.
@@ -429,7 +429,7 @@ func (x *Camera) asObject() *raw.MDLObject { return &x.inner.MDLObject }
 // Cameraable is the interface implemented by [Camera], for mocking and DI.
 type Cameraable interface {
 	Unwrap() *raw.MDLCamera
-	WithProjection(projection raw.MDLCameraProjection) *Camera
+	WithProjection(projection MDLCameraProjection) *Camera
 	WithNearVisibilityDistance(nearVisibilityDistance float32) *Camera
 	WithFarVisibilityDistance(farVisibilityDistance float32) *Camera
 	WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *Camera
@@ -457,8 +457,8 @@ type Cameraable interface {
 	RayToForViewPort(pixel unsafe.Pointer, size unsafe.Pointer) unsafe.Pointer
 	BokehKernelWithSize(size unsafe.Pointer) *Texture
 	ProjectionMatrix() unsafe.Pointer
-	Projection() raw.MDLCameraProjection
-	SetProjection(projection raw.MDLCameraProjection)
+	Projection() MDLCameraProjection
+	SetProjection(projection MDLCameraProjection)
 	NearVisibilityDistance() float32
 	SetNearVisibilityDistance(nearVisibilityDistance float32)
 	FarVisibilityDistance() float32

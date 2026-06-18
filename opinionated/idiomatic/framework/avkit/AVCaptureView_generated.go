@@ -45,8 +45,8 @@ func (x *CaptureView) WithDelegate(delegate raw.AVCaptureViewDelegate) *CaptureV
 }
 
 // WithControlsStyle sets the controlsStyle property and returns the receiver for chaining.
-func (x *CaptureView) WithControlsStyle(controlsStyle raw.AVCaptureViewControlsStyle) *CaptureView {
-	x.inner.SetControlsStyle(controlsStyle)
+func (x *CaptureView) WithControlsStyle(controlsStyle AVCaptureViewControlsStyle) *CaptureView {
+	x.inner.SetControlsStyle(raw.AVCaptureViewControlsStyle(controlsStyle))
 	return x
 }
 
@@ -82,13 +82,13 @@ func (x *CaptureView) SetDelegate(delegate raw.AVCaptureViewDelegate) {
 }
 
 // ControlsStyle calls the underlying ControlsStyle.
-func (x *CaptureView) ControlsStyle() raw.AVCaptureViewControlsStyle {
-	return x.inner.ControlsStyle()
+func (x *CaptureView) ControlsStyle() AVCaptureViewControlsStyle {
+	return AVCaptureViewControlsStyle(x.inner.ControlsStyle())
 }
 
 // SetControlsStyle calls the underlying SetControlsStyle.
-func (x *CaptureView) SetControlsStyle(controlsStyle raw.AVCaptureViewControlsStyle) {
-	x.inner.SetControlsStyle(controlsStyle)
+func (x *CaptureView) SetControlsStyle(controlsStyle AVCaptureViewControlsStyle) {
+	x.inner.SetControlsStyle(raw.AVCaptureViewControlsStyle(controlsStyle))
 }
 
 // VideoGravity calls the underlying VideoGravity.
@@ -109,15 +109,15 @@ func (x *CaptureView) SetVideoGravity(videoGravity *foundation.NSString) {
 type CaptureViewable interface {
 	Unwrap() *raw.AVCaptureView
 	WithDelegate(delegate raw.AVCaptureViewDelegate) *CaptureView
-	WithControlsStyle(controlsStyle raw.AVCaptureViewControlsStyle) *CaptureView
+	WithControlsStyle(controlsStyle AVCaptureViewControlsStyle) *CaptureView
 	WithVideoGravity(videoGravity *foundation.NSString) *CaptureView
 	SetSessionShowVideoPreviewShowAudioPreview(session *avfoundation.AVCaptureSession, showVideoPreview bool, showAudioPreview bool)
 	Session() *avfoundation.AVCaptureSession
 	FileOutput() *avfoundation.AVCaptureFileOutput
 	Delegate() raw.AVCaptureViewDelegate
 	SetDelegate(delegate raw.AVCaptureViewDelegate)
-	ControlsStyle() raw.AVCaptureViewControlsStyle
-	SetControlsStyle(controlsStyle raw.AVCaptureViewControlsStyle)
+	ControlsStyle() AVCaptureViewControlsStyle
+	SetControlsStyle(controlsStyle AVCaptureViewControlsStyle)
 	VideoGravity() string
 	SetVideoGravity(videoGravity *foundation.NSString)
 }

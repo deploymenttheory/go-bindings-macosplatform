@@ -69,8 +69,8 @@ func (x *CaptionConversionValidator) StopValidating() {
 }
 
 // Status calls the underlying Status.
-func (x *CaptionConversionValidator) Status() raw.AVCaptionConversionValidatorStatus {
-	return x.inner.Status()
+func (x *CaptionConversionValidator) Status() AVCaptionConversionValidatorStatus {
+	return AVCaptionConversionValidatorStatus(x.inner.Status())
 }
 
 // Captions returns the collection as a Go slice.
@@ -105,7 +105,7 @@ type CaptionConversionValidatorable interface {
 	Unwrap() *raw.AVCaptionConversionValidator
 	ValidateCaptionConversionWithWarningHandler(ctx context.Context) (*CaptionConversionWarning, error)
 	StopValidating()
-	Status() raw.AVCaptionConversionValidatorStatus
+	Status() AVCaptionConversionValidatorStatus
 	Captions() []*Caption
 	TimeRange() coremedia.CMTimeRange
 	Warnings() []*CaptionConversionWarning

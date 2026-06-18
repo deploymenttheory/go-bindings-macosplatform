@@ -35,10 +35,10 @@ func AudioUnitFromID(id objc.ID) *AudioUnit {
 }
 
 // NewAudioUnitWithComponentDescriptionOptionsError creates a new [AudioUnit].
-func NewAudioUnitWithComponentDescriptionOptionsError(componentDescription raw.AudioComponentDescription, options raw.AudioComponentInstantiationOptions) (*AudioUnit, error) {
+func NewAudioUnitWithComponentDescriptionOptionsError(componentDescription raw.AudioComponentDescription, options AudioComponentInstantiationOptions) (*AudioUnit, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUAudioUnit")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComponentDescription:options:error:"), componentDescription, options, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComponentDescription:options:error:"), componentDescription, raw.AudioComponentInstantiationOptions(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -211,8 +211,10 @@ func (x *AudioUnit) Reset() {
 }
 
 // TokenByAddingRenderObserver calls the underlying TokenByAddingRenderObserver.
-func (x *AudioUnit) TokenByAddingRenderObserver(observer func(raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) int {
-	return x.inner.TokenByAddingRenderObserver(observer)
+func (x *AudioUnit) TokenByAddingRenderObserver(observer func(AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) int {
+	return x.inner.TokenByAddingRenderObserver(func(_a0 raw.AudioUnitRenderActionFlags, _a1 *coreaudiotypes.AudioTimeStamp, _a2 uint32, _a3 unsafe.Pointer) {
+		observer(AudioUnitRenderActionFlags(_a0), _a1, _a2, _a3)
+	})
 }
 
 // RemoveRenderObserver calls the underlying RemoveRenderObserver.
@@ -796,7 +798,7 @@ type AudioUnitable interface {
 	AllocateRenderResourcesAndReturnError() error
 	DeallocateRenderResources()
 	Reset()
-	TokenByAddingRenderObserver(observer func(raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) int
+	TokenByAddingRenderObserver(observer func(AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) int
 	RemoveRenderObserver(token int)
 	ParametersForOverviewWithCount(count int) *foundation.NSArray[*foundation.NSNumber]
 	SaveUserPresetError(userPreset *raw.AUAudioUnitPreset) (bool, error)

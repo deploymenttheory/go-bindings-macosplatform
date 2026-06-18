@@ -54,8 +54,8 @@ func (x *ScatterLayer) Dimension() uint {
 }
 
 // ReductionType calls the underlying ReductionType.
-func (x *ScatterLayer) ReductionType() raw.MLCReductionType {
-	return x.inner.ReductionType()
+func (x *ScatterLayer) ReductionType() MLCReductionType {
+	return MLCReductionType(x.inner.ReductionType())
 }
 
 func (x *ScatterLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
@@ -66,7 +66,7 @@ type ScatterLayerable interface {
 	WithLabel(label string) *ScatterLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ScatterLayer
 	Dimension() uint
-	ReductionType() raw.MLCReductionType
+	ReductionType() MLCReductionType
 }
 
 var _ ScatterLayerable = (*ScatterLayer)(nil)

@@ -42,8 +42,8 @@ func (x *NEFilterFlow) URL() *foundation.NSURL {
 }
 
 // Direction calls the underlying Direction.
-func (x *NEFilterFlow) Direction() raw.NETrafficDirection {
-	return x.inner.Direction()
+func (x *NEFilterFlow) Direction() NETrafficDirection {
+	return NETrafficDirection(x.inner.Direction())
 }
 
 // SourceAppAuditToken calls the underlying SourceAppAuditToken.
@@ -67,7 +67,7 @@ func (x *NEFilterFlow) asNEFilterFlow() *raw.NEFilterFlow { return x.inner }
 type NEFilterFlowable interface {
 	Unwrap() *raw.NEFilterFlow
 	URL() *foundation.NSURL
-	Direction() raw.NETrafficDirection
+	Direction() NETrafficDirection
 	SourceAppAuditToken() *foundation.NSData
 	SourceProcessAuditToken() *foundation.NSData
 	Identifier() *foundation.NSUUID

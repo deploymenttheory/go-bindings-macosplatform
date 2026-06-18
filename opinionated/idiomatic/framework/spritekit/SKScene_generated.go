@@ -49,8 +49,8 @@ func (x *Scene) WithSize(size corefoundation.CGSize) *Scene {
 }
 
 // WithScaleMode sets the scaleMode property and returns the receiver for chaining.
-func (x *Scene) WithScaleMode(scaleMode raw.SKSceneScaleMode) *Scene {
-	x.inner.SetScaleMode(scaleMode)
+func (x *Scene) WithScaleMode(scaleMode SKSceneScaleMode) *Scene {
+	x.inner.SetScaleMode(raw.SKSceneScaleMode(scaleMode))
 	return x
 }
 
@@ -109,8 +109,8 @@ func (x *Scene) WithShouldRasterize(shouldRasterize bool) *Scene {
 }
 
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *Scene) WithBlendMode(blendMode raw.SKBlendMode) *Scene {
-	x.inner.SKEffectNode.SetBlendMode(blendMode)
+func (x *Scene) WithBlendMode(blendMode SKBlendMode) *Scene {
+	x.inner.SKEffectNode.SetBlendMode(raw.SKBlendMode(blendMode))
 	return x
 }
 
@@ -348,13 +348,13 @@ func (x *Scene) SetSize(size corefoundation.CGSize) {
 }
 
 // ScaleMode calls the underlying ScaleMode.
-func (x *Scene) ScaleMode() raw.SKSceneScaleMode {
-	return x.inner.ScaleMode()
+func (x *Scene) ScaleMode() SKSceneScaleMode {
+	return SKSceneScaleMode(x.inner.ScaleMode())
 }
 
 // SetScaleMode calls the underlying SetScaleMode.
-func (x *Scene) SetScaleMode(scaleMode raw.SKSceneScaleMode) {
-	x.inner.SetScaleMode(scaleMode)
+func (x *Scene) SetScaleMode(scaleMode SKSceneScaleMode) {
+	x.inner.SetScaleMode(raw.SKSceneScaleMode(scaleMode))
 }
 
 // Camera calls the underlying Camera.
@@ -446,7 +446,7 @@ func (x *Scene) asNode() *raw.SKNode { return &x.inner.SKEffectNode.SKNode }
 type Sceneable interface {
 	Unwrap() *raw.SKScene
 	WithSize(size corefoundation.CGSize) *Scene
-	WithScaleMode(scaleMode raw.SKSceneScaleMode) *Scene
+	WithScaleMode(scaleMode SKSceneScaleMode) *Scene
 	WithCamera(camera *CameraNode) *Scene
 	WithListener(listener NodeProvider) *Scene
 	WithBackgroundColor(backgroundColor *appkit.NSColor) *Scene
@@ -456,7 +456,7 @@ type Sceneable interface {
 	WithShouldCenterFilter(shouldCenterFilter bool) *Scene
 	WithShouldEnableEffects(shouldEnableEffects bool) *Scene
 	WithShouldRasterize(shouldRasterize bool) *Scene
-	WithBlendMode(blendMode raw.SKBlendMode) *Scene
+	WithBlendMode(blendMode SKBlendMode) *Scene
 	WithShader(shader *Shader) *Scene
 	WithPosition(position corefoundation.CGPoint) *Scene
 	WithZPosition(zPosition float64) *Scene
@@ -496,8 +496,8 @@ type Sceneable interface {
 	DidChangeSize(oldSize corefoundation.CGSize)
 	Size() corefoundation.CGSize
 	SetSize(size corefoundation.CGSize)
-	ScaleMode() raw.SKSceneScaleMode
-	SetScaleMode(scaleMode raw.SKSceneScaleMode)
+	ScaleMode() SKSceneScaleMode
+	SetScaleMode(scaleMode SKSceneScaleMode)
 	Camera() *CameraNode
 	SetCamera(camera *raw.SKCameraNode)
 	Listener() *Node

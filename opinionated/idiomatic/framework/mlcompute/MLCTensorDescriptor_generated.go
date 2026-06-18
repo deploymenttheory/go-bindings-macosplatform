@@ -38,8 +38,8 @@ func NewTensorDescriptor() *TensorDescriptor {
 }
 
 // DataType calls the underlying DataType.
-func (x *TensorDescriptor) DataType() raw.MLCDataType {
-	return x.inner.DataType()
+func (x *TensorDescriptor) DataType() MLCDataType {
+	return MLCDataType(x.inner.DataType())
 }
 
 // DimensionCount calls the underlying DimensionCount.
@@ -104,7 +104,7 @@ func (x *TensorDescriptor) BatchSizePerSequenceStep() []*foundation.NSNumber {
 // TensorDescriptorable is the interface implemented by [TensorDescriptor], for mocking and DI.
 type TensorDescriptorable interface {
 	Unwrap() *raw.MLCTensorDescriptor
-	DataType() raw.MLCDataType
+	DataType() MLCDataType
 	DimensionCount() uint
 	Shape() []*foundation.NSNumber
 	Stride() []*foundation.NSNumber

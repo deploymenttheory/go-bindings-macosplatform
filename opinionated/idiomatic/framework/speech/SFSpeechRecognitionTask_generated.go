@@ -47,8 +47,8 @@ func (x *SpeechRecognitionTask) Cancel() {
 }
 
 // State calls the underlying State.
-func (x *SpeechRecognitionTask) State() raw.SFSpeechRecognitionTaskState {
-	return x.inner.State()
+func (x *SpeechRecognitionTask) State() SFSpeechRecognitionTaskState {
+	return SFSpeechRecognitionTaskState(x.inner.State())
 }
 
 // IsFinishing calls the underlying IsFinishing.
@@ -71,7 +71,7 @@ type SpeechRecognitionTaskable interface {
 	Unwrap() *raw.SFSpeechRecognitionTask
 	Finish()
 	Cancel()
-	State() raw.SFSpeechRecognitionTaskState
+	State() SFSpeechRecognitionTaskState
 	IsFinishing() bool
 	IsCancelled() bool
 	Error() unsafe.Pointer

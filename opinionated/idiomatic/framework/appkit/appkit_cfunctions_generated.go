@@ -103,28 +103,28 @@ func NSBeginInformationalAlertSheet(title *foundation.NSString, defaultButton *f
 }
 
 // NSBestDepth calls [raw.NSBestDepth] (C function NSBestDepth).
-func NSBestDepth(colorSpace *foundation.NSString, bps int, bpp int, planar bool, exactMatch *bool) raw.NSWindowDepth {
-	return raw.NSBestDepth(colorSpace, bps, bpp, planar, exactMatch)
+func NSBestDepth(colorSpace *foundation.NSString, bps int, bpp int, planar bool, exactMatch *bool) NSWindowDepth {
+	return NSWindowDepth(raw.NSBestDepth(colorSpace, bps, bpp, planar, exactMatch))
 }
 
 // NSBitsPerPixelFromDepth calls [raw.NSBitsPerPixelFromDepth] (C function NSBitsPerPixelFromDepth).
-func NSBitsPerPixelFromDepth(depth raw.NSWindowDepth) int {
-	return raw.NSBitsPerPixelFromDepth(depth)
+func NSBitsPerPixelFromDepth(depth NSWindowDepth) int {
+	return raw.NSBitsPerPixelFromDepth(raw.NSWindowDepth(depth))
 }
 
 // NSBitsPerSampleFromDepth calls [raw.NSBitsPerSampleFromDepth] (C function NSBitsPerSampleFromDepth).
-func NSBitsPerSampleFromDepth(depth raw.NSWindowDepth) int {
-	return raw.NSBitsPerSampleFromDepth(depth)
+func NSBitsPerSampleFromDepth(depth NSWindowDepth) int {
+	return raw.NSBitsPerSampleFromDepth(raw.NSWindowDepth(depth))
 }
 
 // NSColorSpaceFromDepth calls [raw.NSColorSpaceFromDepth] (C function NSColorSpaceFromDepth).
-func NSColorSpaceFromDepth(depth raw.NSWindowDepth) *foundation.NSString {
-	return raw.NSColorSpaceFromDepth(depth)
+func NSColorSpaceFromDepth(depth NSWindowDepth) *foundation.NSString {
+	return raw.NSColorSpaceFromDepth(raw.NSWindowDepth(depth))
 }
 
 // NSConvertGlyphsToPackedGlyphs calls [raw.NSConvertGlyphsToPackedGlyphs] (C function NSConvertGlyphsToPackedGlyphs).
-func NSConvertGlyphsToPackedGlyphs(glBuf *uint, count int, packing raw.NSMultibyteGlyphPacking, packedGlyphs string) int {
-	return raw.NSConvertGlyphsToPackedGlyphs(glBuf, count, packing, packedGlyphs)
+func NSConvertGlyphsToPackedGlyphs(glBuf *uint, count int, packing NSMultibyteGlyphPacking, packedGlyphs string) int {
+	return raw.NSConvertGlyphsToPackedGlyphs(glBuf, count, raw.NSMultibyteGlyphPacking(packing), packedGlyphs)
 }
 
 // NSCopyBits calls [raw.NSCopyBits] (C function NSCopyBits).
@@ -203,13 +203,13 @@ func NSDrawLightBezel(rect corefoundation.CGRect, clipRect corefoundation.CGRect
 }
 
 // NSDrawNinePartImage calls [raw.NSDrawNinePartImage] (C function NSDrawNinePartImage).
-func NSDrawNinePartImage(frame corefoundation.CGRect, topLeftCorner *raw.NSImage, topEdgeFill *raw.NSImage, topRightCorner *raw.NSImage, leftEdgeFill *raw.NSImage, centerFill *raw.NSImage, rightEdgeFill *raw.NSImage, bottomLeftCorner *raw.NSImage, bottomEdgeFill *raw.NSImage, bottomRightCorner *raw.NSImage, op raw.NSCompositingOperation, alphaFraction float64, flipped bool) {
-	raw.NSDrawNinePartImage(frame, topLeftCorner, topEdgeFill, topRightCorner, leftEdgeFill, centerFill, rightEdgeFill, bottomLeftCorner, bottomEdgeFill, bottomRightCorner, op, alphaFraction, flipped)
+func NSDrawNinePartImage(frame corefoundation.CGRect, topLeftCorner *raw.NSImage, topEdgeFill *raw.NSImage, topRightCorner *raw.NSImage, leftEdgeFill *raw.NSImage, centerFill *raw.NSImage, rightEdgeFill *raw.NSImage, bottomLeftCorner *raw.NSImage, bottomEdgeFill *raw.NSImage, bottomRightCorner *raw.NSImage, op NSCompositingOperation, alphaFraction float64, flipped bool) {
+	raw.NSDrawNinePartImage(frame, topLeftCorner, topEdgeFill, topRightCorner, leftEdgeFill, centerFill, rightEdgeFill, bottomLeftCorner, bottomEdgeFill, bottomRightCorner, raw.NSCompositingOperation(op), alphaFraction, flipped)
 }
 
 // NSDrawThreePartImage calls [raw.NSDrawThreePartImage] (C function NSDrawThreePartImage).
-func NSDrawThreePartImage(frame corefoundation.CGRect, startCap *raw.NSImage, centerFill *raw.NSImage, endCap *raw.NSImage, vertical bool, op raw.NSCompositingOperation, alphaFraction float64, flipped bool) {
-	raw.NSDrawThreePartImage(frame, startCap, centerFill, endCap, vertical, op, alphaFraction, flipped)
+func NSDrawThreePartImage(frame corefoundation.CGRect, startCap *raw.NSImage, centerFill *raw.NSImage, endCap *raw.NSImage, vertical bool, op NSCompositingOperation, alphaFraction float64, flipped bool) {
+	raw.NSDrawThreePartImage(frame, startCap, centerFill, endCap, vertical, raw.NSCompositingOperation(op), alphaFraction, flipped)
 }
 
 // NSDrawTiledRects calls [raw.NSDrawTiledRects] (C function NSDrawTiledRects).
@@ -238,8 +238,8 @@ func NSEraseRect(rect corefoundation.CGRect) {
 }
 
 // NSEventMaskFromType calls [raw.NSEventMaskFromType] (C function NSEventMaskFromType).
-func NSEventMaskFromType(type_ raw.NSEventType) raw.NSEventMask {
-	return raw.NSEventMaskFromType(type_)
+func NSEventMaskFromType(type_ NSEventType) NSEventMask {
+	return NSEventMask(raw.NSEventMaskFromType(raw.NSEventType(type_)))
 }
 
 // NSFrameRect calls [raw.NSFrameRect] (C function NSFrameRect).
@@ -253,8 +253,8 @@ func NSFrameRectWithWidth(rect corefoundation.CGRect, frameWidth float64) {
 }
 
 // NSFrameRectWithWidthUsingOperation calls [raw.NSFrameRectWithWidthUsingOperation] (C function NSFrameRectWithWidthUsingOperation).
-func NSFrameRectWithWidthUsingOperation(rect corefoundation.CGRect, frameWidth float64, op raw.NSCompositingOperation) {
-	raw.NSFrameRectWithWidthUsingOperation(rect, frameWidth, op)
+func NSFrameRectWithWidthUsingOperation(rect corefoundation.CGRect, frameWidth float64, op NSCompositingOperation) {
+	raw.NSFrameRectWithWidthUsingOperation(rect, frameWidth, raw.NSCompositingOperation(op))
 }
 
 // NSGetFileType calls [raw.NSGetFileType] (C function NSGetFileType).
@@ -298,8 +298,8 @@ func NSNumberOfColorComponents(colorSpaceName *foundation.NSString) int {
 }
 
 // NSOpenGLGetOption calls [raw.NSOpenGLGetOption] (C function NSOpenGLGetOption).
-func NSOpenGLGetOption(pname raw.NSOpenGLGlobalOption, param *int32) {
-	raw.NSOpenGLGetOption(pname, param)
+func NSOpenGLGetOption(pname NSOpenGLGlobalOption, param *int32) {
+	raw.NSOpenGLGetOption(raw.NSOpenGLGlobalOption(pname), param)
 }
 
 // NSOpenGLGetVersion calls [raw.NSOpenGLGetVersion] (C function NSOpenGLGetVersion).
@@ -308,8 +308,8 @@ func NSOpenGLGetVersion(major *int32, minor *int32) {
 }
 
 // NSOpenGLSetOption calls [raw.NSOpenGLSetOption] (C function NSOpenGLSetOption).
-func NSOpenGLSetOption(pname raw.NSOpenGLGlobalOption, param int32) {
-	raw.NSOpenGLSetOption(pname, param)
+func NSOpenGLSetOption(pname NSOpenGLGlobalOption, param int32) {
+	raw.NSOpenGLSetOption(raw.NSOpenGLGlobalOption(pname), param)
 }
 
 // NSPerformService calls [raw.NSPerformService] (C function NSPerformService).
@@ -318,8 +318,8 @@ func NSPerformService(itemName *foundation.NSString, pboard *raw.NSPasteboard) b
 }
 
 // NSPlanarFromDepth calls [raw.NSPlanarFromDepth] (C function NSPlanarFromDepth).
-func NSPlanarFromDepth(depth raw.NSWindowDepth) bool {
-	return raw.NSPlanarFromDepth(depth)
+func NSPlanarFromDepth(depth NSWindowDepth) bool {
+	return raw.NSPlanarFromDepth(raw.NSWindowDepth(depth))
 }
 
 // NSReadPixel calls [raw.NSReadPixel] (C function NSReadPixel).
@@ -348,8 +348,8 @@ func NSRectFillList(rects *corefoundation.CGRect, count int) {
 }
 
 // NSRectFillListUsingOperation calls [raw.NSRectFillListUsingOperation] (C function NSRectFillListUsingOperation).
-func NSRectFillListUsingOperation(rects *corefoundation.CGRect, count int, op raw.NSCompositingOperation) {
-	raw.NSRectFillListUsingOperation(rects, count, op)
+func NSRectFillListUsingOperation(rects *corefoundation.CGRect, count int, op NSCompositingOperation) {
+	raw.NSRectFillListUsingOperation(rects, count, raw.NSCompositingOperation(op))
 }
 
 // NSRectFillListWithColors calls [raw.NSRectFillListWithColors] (C function NSRectFillListWithColors).
@@ -358,8 +358,8 @@ func NSRectFillListWithColors(rects *corefoundation.CGRect, colors unsafe.Pointe
 }
 
 // NSRectFillListWithColorsUsingOperation calls [raw.NSRectFillListWithColorsUsingOperation] (C function NSRectFillListWithColorsUsingOperation).
-func NSRectFillListWithColorsUsingOperation(rects *corefoundation.CGRect, colors unsafe.Pointer, num int, op raw.NSCompositingOperation) {
-	raw.NSRectFillListWithColorsUsingOperation(rects, colors, num, op)
+func NSRectFillListWithColorsUsingOperation(rects *corefoundation.CGRect, colors unsafe.Pointer, num int, op NSCompositingOperation) {
+	raw.NSRectFillListWithColorsUsingOperation(rects, colors, num, raw.NSCompositingOperation(op))
 }
 
 // NSRectFillListWithGrays calls [raw.NSRectFillListWithGrays] (C function NSRectFillListWithGrays).
@@ -368,8 +368,8 @@ func NSRectFillListWithGrays(rects *corefoundation.CGRect, grays *float64, num i
 }
 
 // NSRectFillUsingOperation calls [raw.NSRectFillUsingOperation] (C function NSRectFillUsingOperation).
-func NSRectFillUsingOperation(rect corefoundation.CGRect, op raw.NSCompositingOperation) {
-	raw.NSRectFillUsingOperation(rect, op)
+func NSRectFillUsingOperation(rect corefoundation.CGRect, op NSCompositingOperation) {
+	raw.NSRectFillUsingOperation(rect, raw.NSCompositingOperation(op))
 }
 
 // NSRegisterServicesProvider calls [raw.NSRegisterServicesProvider] (C function NSRegisterServicesProvider).
@@ -393,8 +393,8 @@ func NSRunInformationalAlertPanelRelativeToWindow(title *foundation.NSString, ms
 }
 
 // NSSetFocusRingStyle calls [raw.NSSetFocusRingStyle] (C function NSSetFocusRingStyle).
-func NSSetFocusRingStyle(placement raw.NSFocusRingPlacement) {
-	raw.NSSetFocusRingStyle(placement)
+func NSSetFocusRingStyle(placement NSFocusRingPlacement) {
+	raw.NSSetFocusRingStyle(raw.NSFocusRingPlacement(placement))
 }
 
 // NSSetShowsServicesMenuItem calls [raw.NSSetShowsServicesMenuItem] (C function NSSetShowsServicesMenuItem).
@@ -403,8 +403,8 @@ func NSSetShowsServicesMenuItem(itemName *foundation.NSString, enabled bool) int
 }
 
 // NSShowAnimationEffect calls [raw.NSShowAnimationEffect] (C function NSShowAnimationEffect).
-func NSShowAnimationEffect(animationEffect raw.NSAnimationEffect, centerLocation corefoundation.CGPoint, size corefoundation.CGSize, animationDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	raw.NSShowAnimationEffect(animationEffect, centerLocation, size, animationDelegate, didEndSelector, contextInfo)
+func NSShowAnimationEffect(animationEffect NSAnimationEffect, centerLocation corefoundation.CGPoint, size corefoundation.CGSize, animationDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
+	raw.NSShowAnimationEffect(raw.NSAnimationEffect(animationEffect), centerLocation, size, animationDelegate, didEndSelector, contextInfo)
 }
 
 // NSShowsServicesMenuItem calls [raw.NSShowsServicesMenuItem] (C function NSShowsServicesMenuItem).
@@ -413,8 +413,8 @@ func NSShowsServicesMenuItem(itemName *foundation.NSString) bool {
 }
 
 // NSTouchTypeMaskFromType calls [raw.NSTouchTypeMaskFromType] (C function NSTouchTypeMaskFromType).
-func NSTouchTypeMaskFromType(type_ raw.NSTouchType) raw.NSTouchTypeMask {
-	return raw.NSTouchTypeMaskFromType(type_)
+func NSTouchTypeMaskFromType(type_ NSTouchType) NSTouchTypeMask {
+	return NSTouchTypeMask(raw.NSTouchTypeMaskFromType(raw.NSTouchType(type_)))
 }
 
 // NSUnregisterServicesProvider calls [raw.NSUnregisterServicesProvider] (C function NSUnregisterServicesProvider).

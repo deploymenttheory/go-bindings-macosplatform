@@ -58,9 +58,9 @@ func (x *NEDNSProxyProvider) StartProxyWithOptions(ctx context.Context, options 
 }
 
 // StopProxyWithReason blocks until the operation completes or ctx is cancelled.
-func (x *NEDNSProxyProvider) StopProxyWithReason(ctx context.Context, reason raw.NEProviderStopReason) error {
+func (x *NEDNSProxyProvider) StopProxyWithReason(ctx context.Context, reason NEProviderStopReason) error {
 	_ch := make(chan error, 1)
-	x.inner.StopProxyWithReasonCompletionHandler(reason, func() {
+	x.inner.StopProxyWithReasonCompletionHandler(raw.NEProviderStopReason(reason), func() {
 		_ch <- nil
 	})
 	select {
@@ -108,7 +108,7 @@ func (x *NEDNSProxyProvider) asNEProvider() *raw.NEProvider { return &x.inner.NE
 type NEDNSProxyProviderable interface {
 	Unwrap() *raw.NEDNSProxyProvider
 	StartProxyWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error
-	StopProxyWithReason(ctx context.Context, reason raw.NEProviderStopReason) error
+	StopProxyWithReason(ctx context.Context, reason NEProviderStopReason) error
 	CancelProxyWithError(error_ unsafe.Pointer)
 	HandleNewFlow(flow *raw.NEAppProxyFlow) bool
 	HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint *foundation.NSObject) bool

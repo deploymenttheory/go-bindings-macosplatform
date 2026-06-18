@@ -12,8 +12,8 @@ import (
 )
 
 // DescriptorWithType calls the underlying MLCActivationDescriptorDescriptorWithType.
-func DescriptorWithType(activationType raw.MLCActivationType) *ActivationDescriptor {
-	_r := raw.MLCActivationDescriptorDescriptorWithType(activationType)
+func DescriptorWithType(activationType MLCActivationType) *ActivationDescriptor {
+	_r := raw.MLCActivationDescriptorDescriptorWithType(raw.MLCActivationType(activationType))
 	if _r == nil {
 		return nil
 	}
@@ -21,8 +21,8 @@ func DescriptorWithType(activationType raw.MLCActivationType) *ActivationDescrip
 }
 
 // DescriptorWithTypeA calls the underlying MLCActivationDescriptorDescriptorWithTypeA.
-func DescriptorWithTypeA(activationType raw.MLCActivationType, a float32) *ActivationDescriptor {
-	_r := raw.MLCActivationDescriptorDescriptorWithTypeA(activationType, a)
+func DescriptorWithTypeA(activationType MLCActivationType, a float32) *ActivationDescriptor {
+	_r := raw.MLCActivationDescriptorDescriptorWithTypeA(raw.MLCActivationType(activationType), a)
 	if _r == nil {
 		return nil
 	}
@@ -30,8 +30,8 @@ func DescriptorWithTypeA(activationType raw.MLCActivationType, a float32) *Activ
 }
 
 // DescriptorWithTypeAB calls the underlying MLCActivationDescriptorDescriptorWithTypeAB.
-func DescriptorWithTypeAB(activationType raw.MLCActivationType, a float32, b float32) *ActivationDescriptor {
-	_r := raw.MLCActivationDescriptorDescriptorWithTypeAB(activationType, a, b)
+func DescriptorWithTypeAB(activationType MLCActivationType, a float32, b float32) *ActivationDescriptor {
+	_r := raw.MLCActivationDescriptorDescriptorWithTypeAB(raw.MLCActivationType(activationType), a, b)
 	if _r == nil {
 		return nil
 	}
@@ -39,8 +39,8 @@ func DescriptorWithTypeAB(activationType raw.MLCActivationType, a float32, b flo
 }
 
 // DescriptorWithTypeABC calls the underlying MLCActivationDescriptorDescriptorWithTypeABC.
-func DescriptorWithTypeABC(activationType raw.MLCActivationType, a float32, b float32, c float32) *ActivationDescriptor {
-	_r := raw.MLCActivationDescriptorDescriptorWithTypeABC(activationType, a, b, c)
+func DescriptorWithTypeABC(activationType MLCActivationType, a float32, b float32, c float32) *ActivationDescriptor {
+	_r := raw.MLCActivationDescriptorDescriptorWithTypeABC(raw.MLCActivationType(activationType), a, b, c)
 	if _r == nil {
 		return nil
 	}
@@ -354,8 +354,8 @@ func MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeSte
 }
 
 // LayerWithOperation calls the underlying MLCArithmeticLayerLayerWithOperation.
-func LayerWithOperation(operation raw.MLCArithmeticOperation) *ArithmeticLayer {
-	_r := raw.MLCArithmeticLayerLayerWithOperation(operation)
+func LayerWithOperation(operation MLCArithmeticOperation) *ArithmeticLayer {
+	_r := raw.MLCArithmeticLayerLayerWithOperation(raw.MLCArithmeticOperation(operation))
 	if _r == nil {
 		return nil
 	}
@@ -381,8 +381,8 @@ func LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(fe
 }
 
 // MLCComparisonLayerLayerWithOperation calls the underlying MLCComparisonLayerLayerWithOperation.
-func MLCComparisonLayerLayerWithOperation(operation raw.MLCComparisonOperation) *ComparisonLayer {
-	_r := raw.MLCComparisonLayerLayerWithOperation(operation)
+func MLCComparisonLayerLayerWithOperation(operation MLCComparisonOperation) *ComparisonLayer {
+	_r := raw.MLCComparisonLayerLayerWithOperation(raw.MLCComparisonOperation(operation))
 	if _r == nil {
 		return nil
 	}
@@ -408,8 +408,8 @@ func LayerWithDimension(dimension uint) *ConcatenationLayer {
 }
 
 // DescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorDescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes.
-func DescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(convolutionType raw.MLCConvolutionType, kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(convolutionType, kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, paddingPolicy, paddingSizes)
+func DescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(convolutionType MLCConvolutionType, kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
+	_r := raw.MLCConvolutionDescriptorDescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(raw.MLCConvolutionType(convolutionType), kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -426,8 +426,8 @@ func DescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureC
 }
 
 // DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes.
-func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, strides, paddingPolicy, paddingSizes)
+func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
+	_r := raw.MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -435,8 +435,8 @@ func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountS
 }
 
 // DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes.
-func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, paddingPolicy, paddingSizes)
+func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
+	_r := raw.MLCConvolutionDescriptorDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -453,8 +453,8 @@ func ConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChanne
 }
 
 // ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes.
-func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, strides, paddingPolicy, paddingSizes)
+func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
+	_r := raw.MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -462,8 +462,8 @@ func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutput
 }
 
 // ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes.
-func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, paddingPolicy, paddingSizes)
+func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, outputFeatureChannelCount uint, groupCount uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
+	_r := raw.MLCConvolutionDescriptorConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, outputFeatureChannelCount, groupCount, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -480,8 +480,8 @@ func DepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChanne
 }
 
 // DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes.
-func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, channelMultiplier uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, channelMultiplier, strides, paddingPolicy, paddingSizes)
+func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, channelMultiplier uint, strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
+	_r := raw.MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, channelMultiplier, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -489,8 +489,8 @@ func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChanne
 }
 
 // DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes.
-func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, channelMultiplier uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
-	_r := raw.MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, channelMultiplier, strides, dilationRates, paddingPolicy, paddingSizes)
+func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], inputFeatureChannelCount uint, channelMultiplier uint, strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *ConvolutionDescriptor {
+	_r := raw.MLCConvolutionDescriptorDepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, inputFeatureChannelCount, channelMultiplier, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -534,8 +534,8 @@ func AneDevice() *Device {
 }
 
 // DeviceWithType calls the underlying MLCDeviceDeviceWithType.
-func DeviceWithType(type_ raw.MLCDeviceType) *Device {
-	_r := raw.MLCDeviceDeviceWithType(type_)
+func DeviceWithType(type_ MLCDeviceType) *Device {
+	_r := raw.MLCDeviceDeviceWithType(raw.MLCDeviceType(type_))
 	if _r == nil {
 		return nil
 	}
@@ -543,8 +543,8 @@ func DeviceWithType(type_ raw.MLCDeviceType) *Device {
 }
 
 // DeviceWithTypeSelectsMultipleComputeDevices calls the underlying MLCDeviceDeviceWithTypeSelectsMultipleComputeDevices.
-func DeviceWithTypeSelectsMultipleComputeDevices(type_ raw.MLCDeviceType, selectsMultipleComputeDevices bool) *Device {
-	_r := raw.MLCDeviceDeviceWithTypeSelectsMultipleComputeDevices(type_, selectsMultipleComputeDevices)
+func DeviceWithTypeSelectsMultipleComputeDevices(type_ MLCDeviceType, selectsMultipleComputeDevices bool) *Device {
+	_r := raw.MLCDeviceDeviceWithTypeSelectsMultipleComputeDevices(raw.MLCDeviceType(type_), selectsMultipleComputeDevices)
 	if _r == nil {
 		return nil
 	}
@@ -714,8 +714,8 @@ func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectio
 }
 
 // DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode calls the underlying MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode.
-func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode(inputSize uint, hiddenSize uint, layerCount uint, usesBiases bool, batchFirst bool, isBidirectional bool, returnsSequences bool, dropout float32, resultMode raw.MLCLSTMResultMode) *LSTMDescriptor {
-	_r := raw.MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode(inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, returnsSequences, dropout, resultMode)
+func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode(inputSize uint, hiddenSize uint, layerCount uint, usesBiases bool, batchFirst bool, isBidirectional bool, returnsSequences bool, dropout float32, resultMode MLCLSTMResultMode) *LSTMDescriptor {
+	_r := raw.MLCLSTMDescriptorDescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectionalReturnsSequencesDropoutResultMode(inputSize, hiddenSize, layerCount, usesBiases, batchFirst, isBidirectional, returnsSequences, dropout, raw.MLCLSTMResultMode(resultMode))
 	if _r == nil {
 		return nil
 	}
@@ -750,8 +750,8 @@ func LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActiva
 }
 
 // SupportsDataTypeOnDevice calls the underlying MLCLayerSupportsDataTypeOnDevice.
-func SupportsDataTypeOnDevice(dataType raw.MLCDataType, device *raw.MLCDevice) bool {
-	return raw.MLCLayerSupportsDataTypeOnDevice(dataType, device)
+func SupportsDataTypeOnDevice(dataType MLCDataType, device *raw.MLCDevice) bool {
+	return raw.MLCLayerSupportsDataTypeOnDevice(raw.MLCDataType(dataType), device)
 }
 
 // LayerWithNormalizedShapeBetaGammaVarianceEpsilon calls the underlying MLCLayerNormalizationLayerLayerWithNormalizedShapeBetaGammaVarianceEpsilon.
@@ -764,8 +764,8 @@ func LayerWithNormalizedShapeBetaGammaVarianceEpsilon(normalizedShape *foundatio
 }
 
 // DescriptorWithTypeReductionType calls the underlying MLCLossDescriptorDescriptorWithTypeReductionType.
-func DescriptorWithTypeReductionType(lossType raw.MLCLossType, reductionType raw.MLCReductionType) *LossDescriptor {
-	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionType(lossType, reductionType)
+func DescriptorWithTypeReductionType(lossType MLCLossType, reductionType MLCReductionType) *LossDescriptor {
+	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionType(raw.MLCLossType(lossType), raw.MLCReductionType(reductionType))
 	if _r == nil {
 		return nil
 	}
@@ -773,8 +773,8 @@ func DescriptorWithTypeReductionType(lossType raw.MLCLossType, reductionType raw
 }
 
 // DescriptorWithTypeReductionTypeWeight calls the underlying MLCLossDescriptorDescriptorWithTypeReductionTypeWeight.
-func DescriptorWithTypeReductionTypeWeight(lossType raw.MLCLossType, reductionType raw.MLCReductionType, weight float32) *LossDescriptor {
-	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionTypeWeight(lossType, reductionType, weight)
+func DescriptorWithTypeReductionTypeWeight(lossType MLCLossType, reductionType MLCReductionType, weight float32) *LossDescriptor {
+	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionTypeWeight(raw.MLCLossType(lossType), raw.MLCReductionType(reductionType), weight)
 	if _r == nil {
 		return nil
 	}
@@ -782,8 +782,8 @@ func DescriptorWithTypeReductionTypeWeight(lossType raw.MLCLossType, reductionTy
 }
 
 // DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount calls the underlying MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount.
-func DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount(lossType raw.MLCLossType, reductionType raw.MLCReductionType, weight float32, labelSmoothing float32, classCount uint) *LossDescriptor {
-	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount(lossType, reductionType, weight, labelSmoothing, classCount)
+func DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount(lossType MLCLossType, reductionType MLCReductionType, weight float32, labelSmoothing float32, classCount uint) *LossDescriptor {
+	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount(raw.MLCLossType(lossType), raw.MLCReductionType(reductionType), weight, labelSmoothing, classCount)
 	if _r == nil {
 		return nil
 	}
@@ -791,8 +791,8 @@ func DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCount(lossType raw.
 }
 
 // DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta calls the underlying MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta.
-func DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta(lossType raw.MLCLossType, reductionType raw.MLCReductionType, weight float32, labelSmoothing float32, classCount uint, epsilon float32, delta float32) *LossDescriptor {
-	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta(lossType, reductionType, weight, labelSmoothing, classCount, epsilon, delta)
+func DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta(lossType MLCLossType, reductionType MLCReductionType, weight float32, labelSmoothing float32, classCount uint, epsilon float32, delta float32) *LossDescriptor {
+	_r := raw.MLCLossDescriptorDescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta(raw.MLCLossType(lossType), raw.MLCReductionType(reductionType), weight, labelSmoothing, classCount, epsilon, delta)
 	if _r == nil {
 		return nil
 	}
@@ -818,8 +818,8 @@ func MLCLossLayerLayerWithDescriptorWeights(lossDescriptor *raw.MLCLossDescripto
 }
 
 // SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight calls the underlying MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight.
-func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType raw.MLCReductionType, labelSmoothing float32, classCount uint, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType, labelSmoothing, classCount, weight)
+func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weight float32) *LossLayer {
+	_r := raw.MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(raw.MLCReductionType(reductionType), labelSmoothing, classCount, weight)
 	if _r == nil {
 		return nil
 	}
@@ -827,8 +827,8 @@ func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(redu
 }
 
 // SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights calls the underlying MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights.
-func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType raw.MLCReductionType, labelSmoothing float32, classCount uint, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType, labelSmoothing, classCount, weights)
+func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weights *raw.MLCTensor) *LossLayer {
+	_r := raw.MLCLossLayerSoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(raw.MLCReductionType(reductionType), labelSmoothing, classCount, weights)
 	if _r == nil {
 		return nil
 	}
@@ -836,8 +836,8 @@ func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(red
 }
 
 // CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight calls the underlying MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight.
-func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType raw.MLCReductionType, labelSmoothing float32, classCount uint, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType, labelSmoothing, classCount, weight)
+func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weight float32) *LossLayer {
+	_r := raw.MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(raw.MLCReductionType(reductionType), labelSmoothing, classCount, weight)
 	if _r == nil {
 		return nil
 	}
@@ -845,8 +845,8 @@ func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(
 }
 
 // CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights calls the underlying MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights.
-func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType raw.MLCReductionType, labelSmoothing float32, classCount uint, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType, labelSmoothing, classCount, weights)
+func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType MLCReductionType, labelSmoothing float32, classCount uint, weights *raw.MLCTensor) *LossLayer {
+	_r := raw.MLCLossLayerCategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(raw.MLCReductionType(reductionType), labelSmoothing, classCount, weights)
 	if _r == nil {
 		return nil
 	}
@@ -854,8 +854,8 @@ func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights
 }
 
 // SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight calls the underlying MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight.
-func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight(reductionType raw.MLCReductionType, labelSmoothing float32, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight(reductionType, labelSmoothing, weight)
+func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight(reductionType MLCReductionType, labelSmoothing float32, weight float32) *LossLayer {
+	_r := raw.MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight(raw.MLCReductionType(reductionType), labelSmoothing, weight)
 	if _r == nil {
 		return nil
 	}
@@ -863,8 +863,8 @@ func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight(reductionType 
 }
 
 // SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights calls the underlying MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights.
-func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights(reductionType raw.MLCReductionType, labelSmoothing float32, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights(reductionType, labelSmoothing, weights)
+func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights(reductionType MLCReductionType, labelSmoothing float32, weights *raw.MLCTensor) *LossLayer {
+	_r := raw.MLCLossLayerSigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights(raw.MLCReductionType(reductionType), labelSmoothing, weights)
 	if _r == nil {
 		return nil
 	}
@@ -872,8 +872,8 @@ func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights(reductionType
 }
 
 // LogLossWithReductionTypeEpsilonWeight calls the underlying MLCLossLayerLogLossWithReductionTypeEpsilonWeight.
-func LogLossWithReductionTypeEpsilonWeight(reductionType raw.MLCReductionType, epsilon float32, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerLogLossWithReductionTypeEpsilonWeight(reductionType, epsilon, weight)
+func LogLossWithReductionTypeEpsilonWeight(reductionType MLCReductionType, epsilon float32, weight float32) *LossLayer {
+	_r := raw.MLCLossLayerLogLossWithReductionTypeEpsilonWeight(raw.MLCReductionType(reductionType), epsilon, weight)
 	if _r == nil {
 		return nil
 	}
@@ -881,8 +881,8 @@ func LogLossWithReductionTypeEpsilonWeight(reductionType raw.MLCReductionType, e
 }
 
 // LogLossWithReductionTypeEpsilonWeights calls the underlying MLCLossLayerLogLossWithReductionTypeEpsilonWeights.
-func LogLossWithReductionTypeEpsilonWeights(reductionType raw.MLCReductionType, epsilon float32, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerLogLossWithReductionTypeEpsilonWeights(reductionType, epsilon, weights)
+func LogLossWithReductionTypeEpsilonWeights(reductionType MLCReductionType, epsilon float32, weights *raw.MLCTensor) *LossLayer {
+	_r := raw.MLCLossLayerLogLossWithReductionTypeEpsilonWeights(raw.MLCReductionType(reductionType), epsilon, weights)
 	if _r == nil {
 		return nil
 	}
@@ -890,8 +890,8 @@ func LogLossWithReductionTypeEpsilonWeights(reductionType raw.MLCReductionType, 
 }
 
 // HuberLossWithReductionTypeDeltaWeight calls the underlying MLCLossLayerHuberLossWithReductionTypeDeltaWeight.
-func HuberLossWithReductionTypeDeltaWeight(reductionType raw.MLCReductionType, delta float32, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerHuberLossWithReductionTypeDeltaWeight(reductionType, delta, weight)
+func HuberLossWithReductionTypeDeltaWeight(reductionType MLCReductionType, delta float32, weight float32) *LossLayer {
+	_r := raw.MLCLossLayerHuberLossWithReductionTypeDeltaWeight(raw.MLCReductionType(reductionType), delta, weight)
 	if _r == nil {
 		return nil
 	}
@@ -899,8 +899,8 @@ func HuberLossWithReductionTypeDeltaWeight(reductionType raw.MLCReductionType, d
 }
 
 // HuberLossWithReductionTypeDeltaWeights calls the underlying MLCLossLayerHuberLossWithReductionTypeDeltaWeights.
-func HuberLossWithReductionTypeDeltaWeights(reductionType raw.MLCReductionType, delta float32, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerHuberLossWithReductionTypeDeltaWeights(reductionType, delta, weights)
+func HuberLossWithReductionTypeDeltaWeights(reductionType MLCReductionType, delta float32, weights *raw.MLCTensor) *LossLayer {
+	_r := raw.MLCLossLayerHuberLossWithReductionTypeDeltaWeights(raw.MLCReductionType(reductionType), delta, weights)
 	if _r == nil {
 		return nil
 	}
@@ -908,8 +908,8 @@ func HuberLossWithReductionTypeDeltaWeights(reductionType raw.MLCReductionType, 
 }
 
 // MeanAbsoluteErrorLossWithReductionTypeWeight calls the underlying MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeight.
-func MeanAbsoluteErrorLossWithReductionTypeWeight(reductionType raw.MLCReductionType, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeight(reductionType, weight)
+func MeanAbsoluteErrorLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *LossLayer {
+	_r := raw.MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeight(raw.MLCReductionType(reductionType), weight)
 	if _r == nil {
 		return nil
 	}
@@ -917,8 +917,8 @@ func MeanAbsoluteErrorLossWithReductionTypeWeight(reductionType raw.MLCReduction
 }
 
 // MeanAbsoluteErrorLossWithReductionTypeWeights calls the underlying MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeights.
-func MeanAbsoluteErrorLossWithReductionTypeWeights(reductionType raw.MLCReductionType, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeights(reductionType, weights)
+func MeanAbsoluteErrorLossWithReductionTypeWeights(reductionType MLCReductionType, weights *raw.MLCTensor) *LossLayer {
+	_r := raw.MLCLossLayerMeanAbsoluteErrorLossWithReductionTypeWeights(raw.MLCReductionType(reductionType), weights)
 	if _r == nil {
 		return nil
 	}
@@ -926,8 +926,8 @@ func MeanAbsoluteErrorLossWithReductionTypeWeights(reductionType raw.MLCReductio
 }
 
 // MeanSquaredErrorLossWithReductionTypeWeight calls the underlying MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeight.
-func MeanSquaredErrorLossWithReductionTypeWeight(reductionType raw.MLCReductionType, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeight(reductionType, weight)
+func MeanSquaredErrorLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *LossLayer {
+	_r := raw.MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeight(raw.MLCReductionType(reductionType), weight)
 	if _r == nil {
 		return nil
 	}
@@ -935,8 +935,8 @@ func MeanSquaredErrorLossWithReductionTypeWeight(reductionType raw.MLCReductionT
 }
 
 // MeanSquaredErrorLossWithReductionTypeWeights calls the underlying MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeights.
-func MeanSquaredErrorLossWithReductionTypeWeights(reductionType raw.MLCReductionType, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeights(reductionType, weights)
+func MeanSquaredErrorLossWithReductionTypeWeights(reductionType MLCReductionType, weights *raw.MLCTensor) *LossLayer {
+	_r := raw.MLCLossLayerMeanSquaredErrorLossWithReductionTypeWeights(raw.MLCReductionType(reductionType), weights)
 	if _r == nil {
 		return nil
 	}
@@ -944,8 +944,8 @@ func MeanSquaredErrorLossWithReductionTypeWeights(reductionType raw.MLCReduction
 }
 
 // HingeLossWithReductionTypeWeight calls the underlying MLCLossLayerHingeLossWithReductionTypeWeight.
-func HingeLossWithReductionTypeWeight(reductionType raw.MLCReductionType, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerHingeLossWithReductionTypeWeight(reductionType, weight)
+func HingeLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *LossLayer {
+	_r := raw.MLCLossLayerHingeLossWithReductionTypeWeight(raw.MLCReductionType(reductionType), weight)
 	if _r == nil {
 		return nil
 	}
@@ -953,8 +953,8 @@ func HingeLossWithReductionTypeWeight(reductionType raw.MLCReductionType, weight
 }
 
 // HingeLossWithReductionTypeWeights calls the underlying MLCLossLayerHingeLossWithReductionTypeWeights.
-func HingeLossWithReductionTypeWeights(reductionType raw.MLCReductionType, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerHingeLossWithReductionTypeWeights(reductionType, weights)
+func HingeLossWithReductionTypeWeights(reductionType MLCReductionType, weights *raw.MLCTensor) *LossLayer {
+	_r := raw.MLCLossLayerHingeLossWithReductionTypeWeights(raw.MLCReductionType(reductionType), weights)
 	if _r == nil {
 		return nil
 	}
@@ -962,8 +962,8 @@ func HingeLossWithReductionTypeWeights(reductionType raw.MLCReductionType, weigh
 }
 
 // CosineDistanceLossWithReductionTypeWeight calls the underlying MLCLossLayerCosineDistanceLossWithReductionTypeWeight.
-func CosineDistanceLossWithReductionTypeWeight(reductionType raw.MLCReductionType, weight float32) *LossLayer {
-	_r := raw.MLCLossLayerCosineDistanceLossWithReductionTypeWeight(reductionType, weight)
+func CosineDistanceLossWithReductionTypeWeight(reductionType MLCReductionType, weight float32) *LossLayer {
+	_r := raw.MLCLossLayerCosineDistanceLossWithReductionTypeWeight(raw.MLCReductionType(reductionType), weight)
 	if _r == nil {
 		return nil
 	}
@@ -971,8 +971,8 @@ func CosineDistanceLossWithReductionTypeWeight(reductionType raw.MLCReductionTyp
 }
 
 // CosineDistanceLossWithReductionTypeWeights calls the underlying MLCLossLayerCosineDistanceLossWithReductionTypeWeights.
-func CosineDistanceLossWithReductionTypeWeights(reductionType raw.MLCReductionType, weights *raw.MLCTensor) *LossLayer {
-	_r := raw.MLCLossLayerCosineDistanceLossWithReductionTypeWeights(reductionType, weights)
+func CosineDistanceLossWithReductionTypeWeights(reductionType MLCReductionType, weights *raw.MLCTensor) *LossLayer {
+	_r := raw.MLCLossLayerCosineDistanceLossWithReductionTypeWeights(raw.MLCReductionType(reductionType), weights)
 	if _r == nil {
 		return nil
 	}
@@ -1034,8 +1034,8 @@ func LayerWithDescriptorWeightsBiasesAttentionBiases(descriptor *raw.MLCMultihea
 }
 
 // DescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale calls the underlying MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale.
-func DescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType raw.MLCRegularizationType, regularizationScale float32) *OptimizerDescriptor {
-	_r := raw.MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate, gradientRescale, regularizationType, regularizationScale)
+func DescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType MLCRegularizationType, regularizationScale float32) *OptimizerDescriptor {
+	_r := raw.MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate, gradientRescale, raw.MLCRegularizationType(regularizationType), regularizationScale)
 	if _r == nil {
 		return nil
 	}
@@ -1043,8 +1043,8 @@ func DescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationSc
 }
 
 // DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale calls the underlying MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale.
-func DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType raw.MLCRegularizationType, regularizationScale float32) *OptimizerDescriptor {
-	_r := raw.MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate, gradientRescale, appliesGradientClipping, gradientClipMax, gradientClipMin, regularizationType, regularizationScale)
+func DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType MLCRegularizationType, regularizationScale float32) *OptimizerDescriptor {
+	_r := raw.MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate, gradientRescale, appliesGradientClipping, gradientClipMax, gradientClipMin, raw.MLCRegularizationType(regularizationType), regularizationScale)
 	if _r == nil {
 		return nil
 	}
@@ -1052,8 +1052,8 @@ func DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientCli
 }
 
 // DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale calls the underlying MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale.
-func DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClippingType raw.MLCGradientClippingType, gradientClipMax float32, gradientClipMin float32, maximumClippingNorm float32, customGlobalNorm float32, regularizationType raw.MLCRegularizationType, regularizationScale float32) *OptimizerDescriptor {
-	_r := raw.MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale(learningRate, gradientRescale, appliesGradientClipping, gradientClippingType, gradientClipMax, gradientClipMin, maximumClippingNorm, customGlobalNorm, regularizationType, regularizationScale)
+func DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, appliesGradientClipping bool, gradientClippingType MLCGradientClippingType, gradientClipMax float32, gradientClipMin float32, maximumClippingNorm float32, customGlobalNorm float32, regularizationType MLCRegularizationType, regularizationScale float32) *OptimizerDescriptor {
+	_r := raw.MLCOptimizerDescriptorDescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientClippingTypeGradientClipMaxGradientClipMinMaximumClippingNormCustomGlobalNormRegularizationTypeRegularizationScale(learningRate, gradientRescale, appliesGradientClipping, raw.MLCGradientClippingType(gradientClippingType), gradientClipMax, gradientClipMin, maximumClippingNorm, customGlobalNorm, raw.MLCRegularizationType(regularizationType), regularizationScale)
 	if _r == nil {
 		return nil
 	}
@@ -1107,8 +1107,8 @@ func GetRNGseed() *foundation.NSNumber {
 }
 
 // PoolingDescriptorWithTypeKernelSizeStride calls the underlying MLCPoolingDescriptorPoolingDescriptorWithTypeKernelSizeStride.
-func PoolingDescriptorWithTypeKernelSizeStride(poolingType raw.MLCPoolingType, kernelSize uint, stride uint) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorPoolingDescriptorWithTypeKernelSizeStride(poolingType, kernelSize, stride)
+func PoolingDescriptorWithTypeKernelSizeStride(poolingType MLCPoolingType, kernelSize uint, stride uint) *PoolingDescriptor {
+	_r := raw.MLCPoolingDescriptorPoolingDescriptorWithTypeKernelSizeStride(raw.MLCPoolingType(poolingType), kernelSize, stride)
 	if _r == nil {
 		return nil
 	}
@@ -1116,8 +1116,8 @@ func PoolingDescriptorWithTypeKernelSizeStride(poolingType raw.MLCPoolingType, k
 }
 
 // MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes calls the underlying MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes.
-func MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes, strides, paddingPolicy, paddingSizes)
+func MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
+	_r := raw.MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -1125,8 +1125,8 @@ func MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelS
 }
 
 // MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes.
-func MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, strides, dilationRates, paddingPolicy, paddingSizes)
+func MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
+	_r := raw.MLCPoolingDescriptorMaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -1134,8 +1134,8 @@ func MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPadding
 }
 
 // AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding calls the underlying MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding.
-func AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber], countIncludesPadding bool) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes, strides, paddingPolicy, paddingSizes, countIncludesPadding)
+func AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber], countIncludesPadding bool) *PoolingDescriptor {
+	_r := raw.MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes, countIncludesPadding)
 	if _r == nil {
 		return nil
 	}
@@ -1143,8 +1143,8 @@ func AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCoun
 }
 
 // AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding calls the underlying MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding.
-func AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber], countIncludesPadding bool) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes, strides, dilationRates, paddingPolicy, paddingSizes, countIncludesPadding)
+func AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber], countIncludesPadding bool) *PoolingDescriptor {
+	_r := raw.MLCPoolingDescriptorAveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes, countIncludesPadding)
 	if _r == nil {
 		return nil
 	}
@@ -1152,8 +1152,8 @@ func AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPad
 }
 
 // L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes calls the underlying MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes.
-func L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes, strides, paddingPolicy, paddingSizes)
+func L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
+	_r := raw.MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes, strides, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -1161,8 +1161,8 @@ func L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kern
 }
 
 // L2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes calls the underlying MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes.
-func L2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy raw.MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
-	_r := raw.MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, strides, dilationRates, paddingPolicy, paddingSizes)
+func L2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber], strides *foundation.NSArray[*foundation.NSNumber], dilationRates *foundation.NSArray[*foundation.NSNumber], paddingPolicy MLCPaddingPolicy, paddingSizes *foundation.NSArray[*foundation.NSNumber]) *PoolingDescriptor {
+	_r := raw.MLCPoolingDescriptorL2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes, strides, dilationRates, raw.MLCPaddingPolicy(paddingPolicy), paddingSizes)
 	if _r == nil {
 		return nil
 	}
@@ -1197,8 +1197,8 @@ func OptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered(optimizerDescrip
 }
 
 // LayerWithReductionTypeDimension calls the underlying MLCReductionLayerLayerWithReductionTypeDimension.
-func LayerWithReductionTypeDimension(reductionType raw.MLCReductionType, dimension uint) *ReductionLayer {
-	_r := raw.MLCReductionLayerLayerWithReductionTypeDimension(reductionType, dimension)
+func LayerWithReductionTypeDimension(reductionType MLCReductionType, dimension uint) *ReductionLayer {
+	_r := raw.MLCReductionLayerLayerWithReductionTypeDimension(raw.MLCReductionType(reductionType), dimension)
 	if _r == nil {
 		return nil
 	}
@@ -1206,8 +1206,8 @@ func LayerWithReductionTypeDimension(reductionType raw.MLCReductionType, dimensi
 }
 
 // LayerWithReductionTypeDimensions calls the underlying MLCReductionLayerLayerWithReductionTypeDimensions.
-func LayerWithReductionTypeDimensions(reductionType raw.MLCReductionType, dimensions *foundation.NSArray[*foundation.NSNumber]) *ReductionLayer {
-	_r := raw.MLCReductionLayerLayerWithReductionTypeDimensions(reductionType, dimensions)
+func LayerWithReductionTypeDimensions(reductionType MLCReductionType, dimensions *foundation.NSArray[*foundation.NSNumber]) *ReductionLayer {
+	_r := raw.MLCReductionLayerLayerWithReductionTypeDimensions(raw.MLCReductionType(reductionType), dimensions)
 	if _r == nil {
 		return nil
 	}
@@ -1242,8 +1242,8 @@ func OptimizerWithDescriptorMomentumScaleUsesNesterovMomentum(optimizerDescripto
 }
 
 // LayerWithDimensionReductionType calls the underlying MLCScatterLayerLayerWithDimensionReductionType.
-func LayerWithDimensionReductionType(dimension uint, reductionType raw.MLCReductionType) *ScatterLayer {
-	_r := raw.MLCScatterLayerLayerWithDimensionReductionType(dimension, reductionType)
+func LayerWithDimensionReductionType(dimension uint, reductionType MLCReductionType) *ScatterLayer {
+	_r := raw.MLCScatterLayerLayerWithDimensionReductionType(dimension, raw.MLCReductionType(reductionType))
 	if _r == nil {
 		return nil
 	}
@@ -1269,8 +1269,8 @@ func SliceLayerWithStartEndStride(start *foundation.NSArray[*foundation.NSNumber
 }
 
 // MLCSoftmaxLayerLayerWithOperation calls the underlying MLCSoftmaxLayerLayerWithOperation.
-func MLCSoftmaxLayerLayerWithOperation(operation raw.MLCSoftmaxOperation) *SoftmaxLayer {
-	_r := raw.MLCSoftmaxLayerLayerWithOperation(operation)
+func MLCSoftmaxLayerLayerWithOperation(operation MLCSoftmaxOperation) *SoftmaxLayer {
+	_r := raw.MLCSoftmaxLayerLayerWithOperation(raw.MLCSoftmaxOperation(operation))
 	if _r == nil {
 		return nil
 	}
@@ -1278,8 +1278,8 @@ func MLCSoftmaxLayerLayerWithOperation(operation raw.MLCSoftmaxOperation) *Softm
 }
 
 // LayerWithOperationDimension calls the underlying MLCSoftmaxLayerLayerWithOperationDimension.
-func LayerWithOperationDimension(operation raw.MLCSoftmaxOperation, dimension uint) *SoftmaxLayer {
-	_r := raw.MLCSoftmaxLayerLayerWithOperationDimension(operation, dimension)
+func LayerWithOperationDimension(operation MLCSoftmaxOperation, dimension uint) *SoftmaxLayer {
+	_r := raw.MLCSoftmaxLayerLayerWithOperationDimension(raw.MLCSoftmaxOperation(operation), dimension)
 	if _r == nil {
 		return nil
 	}
@@ -1314,8 +1314,8 @@ func TensorWithDescriptor(tensorDescriptor *raw.MLCTensorDescriptor) *Tensor {
 }
 
 // TensorWithDescriptorRandomInitializerType calls the underlying MLCTensorTensorWithDescriptorRandomInitializerType.
-func TensorWithDescriptorRandomInitializerType(tensorDescriptor *raw.MLCTensorDescriptor, randomInitializerType raw.MLCRandomInitializerType) *Tensor {
-	_r := raw.MLCTensorTensorWithDescriptorRandomInitializerType(tensorDescriptor, randomInitializerType)
+func TensorWithDescriptorRandomInitializerType(tensorDescriptor *raw.MLCTensorDescriptor, randomInitializerType MLCRandomInitializerType) *Tensor {
+	_r := raw.MLCTensorTensorWithDescriptorRandomInitializerType(tensorDescriptor, raw.MLCRandomInitializerType(randomInitializerType))
 	if _r == nil {
 		return nil
 	}
@@ -1350,8 +1350,8 @@ func TensorWithShape(shape *foundation.NSArray[*foundation.NSNumber]) *Tensor {
 }
 
 // TensorWithShapeRandomInitializerType calls the underlying MLCTensorTensorWithShapeRandomInitializerType.
-func TensorWithShapeRandomInitializerType(shape *foundation.NSArray[*foundation.NSNumber], randomInitializerType raw.MLCRandomInitializerType) *Tensor {
-	_r := raw.MLCTensorTensorWithShapeRandomInitializerType(shape, randomInitializerType)
+func TensorWithShapeRandomInitializerType(shape *foundation.NSArray[*foundation.NSNumber], randomInitializerType MLCRandomInitializerType) *Tensor {
+	_r := raw.MLCTensorTensorWithShapeRandomInitializerType(shape, raw.MLCRandomInitializerType(randomInitializerType))
 	if _r == nil {
 		return nil
 	}
@@ -1359,8 +1359,8 @@ func TensorWithShapeRandomInitializerType(shape *foundation.NSArray[*foundation.
 }
 
 // TensorWithShapeRandomInitializerTypeDataType calls the underlying MLCTensorTensorWithShapeRandomInitializerTypeDataType.
-func TensorWithShapeRandomInitializerTypeDataType(shape *foundation.NSArray[*foundation.NSNumber], randomInitializerType raw.MLCRandomInitializerType, dataType raw.MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithShapeRandomInitializerTypeDataType(shape, randomInitializerType, dataType)
+func TensorWithShapeRandomInitializerTypeDataType(shape *foundation.NSArray[*foundation.NSNumber], randomInitializerType MLCRandomInitializerType, dataType MLCDataType) *Tensor {
+	_r := raw.MLCTensorTensorWithShapeRandomInitializerTypeDataType(shape, raw.MLCRandomInitializerType(randomInitializerType), raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1368,8 +1368,8 @@ func TensorWithShapeRandomInitializerTypeDataType(shape *foundation.NSArray[*fou
 }
 
 // TensorWithShapeDataType calls the underlying MLCTensorTensorWithShapeDataType.
-func TensorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber], dataType raw.MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithShapeDataType(shape, dataType)
+func TensorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber], dataType MLCDataType) *Tensor {
+	_r := raw.MLCTensorTensorWithShapeDataType(shape, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1377,8 +1377,8 @@ func TensorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber], da
 }
 
 // TensorWithShapeDataDataType calls the underlying MLCTensorTensorWithShapeDataDataType.
-func TensorWithShapeDataDataType(shape *foundation.NSArray[*foundation.NSNumber], data *raw.MLCTensorData, dataType raw.MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithShapeDataDataType(shape, data, dataType)
+func TensorWithShapeDataDataType(shape *foundation.NSArray[*foundation.NSNumber], data *raw.MLCTensorData, dataType MLCDataType) *Tensor {
+	_r := raw.MLCTensorTensorWithShapeDataDataType(shape, data, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1386,8 +1386,8 @@ func TensorWithShapeDataDataType(shape *foundation.NSArray[*foundation.NSNumber]
 }
 
 // TensorWithShapeFillWithDataDataType calls the underlying MLCTensorTensorWithShapeFillWithDataDataType.
-func TensorWithShapeFillWithDataDataType(shape *foundation.NSArray[*foundation.NSNumber], fillData *foundation.NSNumber, dataType raw.MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithShapeFillWithDataDataType(shape, fillData, dataType)
+func TensorWithShapeFillWithDataDataType(shape *foundation.NSArray[*foundation.NSNumber], fillData *foundation.NSNumber, dataType MLCDataType) *Tensor {
+	_r := raw.MLCTensorTensorWithShapeFillWithDataDataType(shape, fillData, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1404,8 +1404,8 @@ func TensorWithWidthHeightFeatureChannelCountBatchSize(width uint, height uint, 
 }
 
 // TensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType calls the underlying MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType.
-func TensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType(width uint, height uint, featureChannelCount uint, batchSize uint, fillData float32, dataType raw.MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType(width, height, featureChannelCount, batchSize, fillData, dataType)
+func TensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType(width uint, height uint, featureChannelCount uint, batchSize uint, fillData float32, dataType MLCDataType) *Tensor {
+	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType(width, height, featureChannelCount, batchSize, fillData, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1413,8 +1413,8 @@ func TensorWithWidthHeightFeatureChannelCountBatchSizeFillWithDataDataType(width
 }
 
 // TensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType calls the underlying MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType.
-func TensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType(width uint, height uint, featureChannelCount uint, batchSize uint, randomInitializerType raw.MLCRandomInitializerType) *Tensor {
-	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType(width, height, featureChannelCount, batchSize, randomInitializerType)
+func TensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType(width uint, height uint, featureChannelCount uint, batchSize uint, randomInitializerType MLCRandomInitializerType) *Tensor {
+	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType(width, height, featureChannelCount, batchSize, raw.MLCRandomInitializerType(randomInitializerType))
 	if _r == nil {
 		return nil
 	}
@@ -1431,8 +1431,8 @@ func TensorWithWidthHeightFeatureChannelCountBatchSizeData(width uint, height ui
 }
 
 // TensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType calls the underlying MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType.
-func TensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType(width uint, height uint, featureChannelCount uint, batchSize uint, data *raw.MLCTensorData, dataType raw.MLCDataType) *Tensor {
-	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType(width, height, featureChannelCount, batchSize, data, dataType)
+func TensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType(width uint, height uint, featureChannelCount uint, batchSize uint, data *raw.MLCTensorData, dataType MLCDataType) *Tensor {
+	_r := raw.MLCTensorTensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType(width, height, featureChannelCount, batchSize, data, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1449,8 +1449,8 @@ func TensorWithSequenceLengthFeatureChannelCountBatchSize(sequenceLength uint, f
 }
 
 // TensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType calls the underlying MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType.
-func TensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType(sequenceLength uint, featureChannelCount uint, batchSize uint, randomInitializerType raw.MLCRandomInitializerType) *Tensor {
-	_r := raw.MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType(sequenceLength, featureChannelCount, batchSize, randomInitializerType)
+func TensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType(sequenceLength uint, featureChannelCount uint, batchSize uint, randomInitializerType MLCRandomInitializerType) *Tensor {
+	_r := raw.MLCTensorTensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType(sequenceLength, featureChannelCount, batchSize, raw.MLCRandomInitializerType(randomInitializerType))
 	if _r == nil {
 		return nil
 	}
@@ -1467,8 +1467,8 @@ func TensorWithSequenceLengthFeatureChannelCountBatchSizeData(sequenceLength uin
 }
 
 // TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType calls the underlying MLCTensorTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType.
-func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType(sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, featureChannelCount uint, batchSize uint, randomInitializerType raw.MLCRandomInitializerType) *Tensor {
-	_r := raw.MLCTensorTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType(sequenceLengths, sortedSequences, featureChannelCount, batchSize, randomInitializerType)
+func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType(sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, featureChannelCount uint, batchSize uint, randomInitializerType MLCRandomInitializerType) *Tensor {
+	_r := raw.MLCTensorTensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType(sequenceLengths, sortedSequences, featureChannelCount, batchSize, raw.MLCRandomInitializerType(randomInitializerType))
 	if _r == nil {
 		return nil
 	}
@@ -1512,8 +1512,8 @@ func DataWithBytesNoCopyLengthDeallocator(bytes_ unsafe.Pointer, length uint, de
 }
 
 // DescriptorWithShapeDataType calls the underlying MLCTensorDescriptorDescriptorWithShapeDataType.
-func DescriptorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber], dataType raw.MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorDescriptorWithShapeDataType(shape, dataType)
+func DescriptorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber], dataType MLCDataType) *TensorDescriptor {
+	_r := raw.MLCTensorDescriptorDescriptorWithShapeDataType(shape, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1521,8 +1521,8 @@ func DescriptorWithShapeDataType(shape *foundation.NSArray[*foundation.NSNumber]
 }
 
 // DescriptorWithShapeSequenceLengthsSortedSequencesDataType calls the underlying MLCTensorDescriptorDescriptorWithShapeSequenceLengthsSortedSequencesDataType.
-func DescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape *foundation.NSArray[*foundation.NSNumber], sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, dataType raw.MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorDescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape, sequenceLengths, sortedSequences, dataType)
+func DescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape *foundation.NSArray[*foundation.NSNumber], sequenceLengths *foundation.NSArray[*foundation.NSNumber], sortedSequences bool, dataType MLCDataType) *TensorDescriptor {
+	_r := raw.MLCTensorDescriptorDescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape, sequenceLengths, sortedSequences, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1539,8 +1539,8 @@ func DescriptorWithWidthHeightFeatureChannelCountBatchSize(width uint, height ui
 }
 
 // DescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType calls the underlying MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType.
-func DescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType(width uint, height uint, featureChannelCount uint, batchSize uint, dataType raw.MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType(width, height, featureChannelCount, batchSize, dataType)
+func DescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType(width uint, height uint, featureChannelCount uint, batchSize uint, dataType MLCDataType) *TensorDescriptor {
+	_r := raw.MLCTensorDescriptorDescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType(width, height, featureChannelCount, batchSize, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1548,8 +1548,8 @@ func DescriptorWithWidthHeightFeatureChannelCountBatchSizeDataType(width uint, h
 }
 
 // ConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType calls the underlying MLCTensorDescriptorConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType.
-func ConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType(width uint, height uint, inputFeatureChannelCount uint, outputFeatureChannelCount uint, dataType raw.MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType(width, height, inputFeatureChannelCount, outputFeatureChannelCount, dataType)
+func ConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType(width uint, height uint, inputFeatureChannelCount uint, outputFeatureChannelCount uint, dataType MLCDataType) *TensorDescriptor {
+	_r := raw.MLCTensorDescriptorConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFeatureChannelCountDataType(width, height, inputFeatureChannelCount, outputFeatureChannelCount, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1557,8 +1557,8 @@ func ConvolutionWeightsDescriptorWithWidthHeightInputFeatureChannelCountOutputFe
 }
 
 // ConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType calls the underlying MLCTensorDescriptorConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType.
-func ConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType(inputFeatureChannelCount uint, outputFeatureChannelCount uint, dataType raw.MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType(inputFeatureChannelCount, outputFeatureChannelCount, dataType)
+func ConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType(inputFeatureChannelCount uint, outputFeatureChannelCount uint, dataType MLCDataType) *TensorDescriptor {
+	_r := raw.MLCTensorDescriptorConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChannelCountDataType(inputFeatureChannelCount, outputFeatureChannelCount, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1566,8 +1566,8 @@ func ConvolutionWeightsDescriptorWithInputFeatureChannelCountOutputFeatureChanne
 }
 
 // ConvolutionBiasesDescriptorWithFeatureChannelCountDataType calls the underlying MLCTensorDescriptorConvolutionBiasesDescriptorWithFeatureChannelCountDataType.
-func ConvolutionBiasesDescriptorWithFeatureChannelCountDataType(featureChannelCount uint, dataType raw.MLCDataType) *TensorDescriptor {
-	_r := raw.MLCTensorDescriptorConvolutionBiasesDescriptorWithFeatureChannelCountDataType(featureChannelCount, dataType)
+func ConvolutionBiasesDescriptorWithFeatureChannelCountDataType(featureChannelCount uint, dataType MLCDataType) *TensorDescriptor {
+	_r := raw.MLCTensorDescriptorConvolutionBiasesDescriptorWithFeatureChannelCountDataType(featureChannelCount, raw.MLCDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -1625,8 +1625,8 @@ func MLCUpsampleLayerLayerWithShape(shape *foundation.NSArray[*foundation.NSNumb
 }
 
 // LayerWithShapeSampleModeAlignsCorners calls the underlying MLCUpsampleLayerLayerWithShapeSampleModeAlignsCorners.
-func LayerWithShapeSampleModeAlignsCorners(shape *foundation.NSArray[*foundation.NSNumber], sampleMode raw.MLCSampleMode, alignsCorners bool) *UpsampleLayer {
-	_r := raw.MLCUpsampleLayerLayerWithShapeSampleModeAlignsCorners(shape, sampleMode, alignsCorners)
+func LayerWithShapeSampleModeAlignsCorners(shape *foundation.NSArray[*foundation.NSNumber], sampleMode MLCSampleMode, alignsCorners bool) *UpsampleLayer {
+	_r := raw.MLCUpsampleLayerLayerWithShapeSampleModeAlignsCorners(shape, raw.MLCSampleMode(sampleMode), alignsCorners)
 	if _r == nil {
 		return nil
 	}

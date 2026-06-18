@@ -33,9 +33,9 @@ func ThumbnailGenerationRequestFromID(id objc.ID) *ThumbnailGenerationRequest {
 }
 
 // NewThumbnailGenerationRequestWithFileAtURLSizeScaleRepresentationTypes creates a new [ThumbnailGenerationRequest].
-func NewThumbnailGenerationRequestWithFileAtURLSizeScaleRepresentationTypes(url string, size corefoundation.CGSize, scale float64, representationTypes raw.QLThumbnailGenerationRequestRepresentationTypes) *ThumbnailGenerationRequest {
+func NewThumbnailGenerationRequestWithFileAtURLSizeScaleRepresentationTypes(url string, size corefoundation.CGSize, scale float64, representationTypes QLThumbnailGenerationRequestRepresentationTypes) *ThumbnailGenerationRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLThumbnailGenerationRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileAtURL:size:scale:representationTypes:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), size, scale, representationTypes)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileAtURL:size:scale:representationTypes:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), size, scale, raw.QLThumbnailGenerationRequestRepresentationTypes(representationTypes))
 	return &ThumbnailGenerationRequest{inner: raw.QLThumbnailGenerationRequestFromID(_id)}
 }
 
@@ -98,8 +98,8 @@ func (x *ThumbnailGenerationRequest) Scale() float64 {
 }
 
 // RepresentationTypes calls the underlying RepresentationTypes.
-func (x *ThumbnailGenerationRequest) RepresentationTypes() raw.QLThumbnailGenerationRequestRepresentationTypes {
-	return x.inner.RepresentationTypes()
+func (x *ThumbnailGenerationRequest) RepresentationTypes() QLThumbnailGenerationRequestRepresentationTypes {
+	return QLThumbnailGenerationRequestRepresentationTypes(x.inner.RepresentationTypes())
 }
 
 // ThumbnailGenerationRequestable is the interface implemented by [ThumbnailGenerationRequest], for mocking and DI.
@@ -116,7 +116,7 @@ type ThumbnailGenerationRequestable interface {
 	SetIconMode(iconMode bool)
 	Size() corefoundation.CGSize
 	Scale() float64
-	RepresentationTypes() raw.QLThumbnailGenerationRequestRepresentationTypes
+	RepresentationTypes() QLThumbnailGenerationRequestRepresentationTypes
 }
 
 var _ ThumbnailGenerationRequestable = (*ThumbnailGenerationRequest)(nil)

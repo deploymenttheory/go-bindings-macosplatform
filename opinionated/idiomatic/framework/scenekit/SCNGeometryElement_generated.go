@@ -66,8 +66,8 @@ func (x *GeometryElement) Data() *foundation.NSData {
 }
 
 // PrimitiveType calls the underlying PrimitiveType.
-func (x *GeometryElement) PrimitiveType() raw.SCNGeometryPrimitiveType {
-	return x.inner.PrimitiveType()
+func (x *GeometryElement) PrimitiveType() SCNGeometryPrimitiveType {
+	return SCNGeometryPrimitiveType(x.inner.PrimitiveType())
 }
 
 // PrimitiveCount calls the underlying PrimitiveCount.
@@ -138,7 +138,7 @@ type GeometryElementable interface {
 	WithMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius float64) *GeometryElement
 	WithMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius float64) *GeometryElement
 	Data() *foundation.NSData
-	PrimitiveType() raw.SCNGeometryPrimitiveType
+	PrimitiveType() SCNGeometryPrimitiveType
 	PrimitiveCount() int
 	HasInterleavedIndicesChannels() bool
 	IndicesChannelCount() int

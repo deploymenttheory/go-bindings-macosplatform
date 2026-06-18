@@ -31,9 +31,9 @@ func ChatButtonFromID(id objc.ID) *ChatButton {
 }
 
 // NewChatButtonWithStyle creates a new [ChatButton].
-func NewChatButtonWithStyle(style raw.BCChatButtonStyle) *ChatButton {
+func NewChatButtonWithStyle(style BCChatButtonStyle) *ChatButton {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BCChatButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), style)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), raw.BCChatButtonStyle(style))
 	return &ChatButton{inner: raw.BCChatButtonFromID(_id)}
 }
 

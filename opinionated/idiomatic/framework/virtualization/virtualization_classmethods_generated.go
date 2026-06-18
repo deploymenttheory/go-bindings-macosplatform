@@ -53,8 +53,8 @@ func InstallRosetta(ctx context.Context) error {
 }
 
 // Availability calls the underlying VZLinuxRosettaDirectoryShareAvailability.
-func Availability() raw.VZLinuxRosettaAvailability {
-	return raw.VZLinuxRosettaDirectoryShareAvailability()
+func Availability() VZLinuxRosettaAvailability {
+	return VZLinuxRosettaAvailability(raw.VZLinuxRosettaDirectoryShareAvailability())
 }
 
 // MaximumPathLength calls the underlying VZLinuxRosettaUnixSocketCachingOptionsMaximumPathLength.

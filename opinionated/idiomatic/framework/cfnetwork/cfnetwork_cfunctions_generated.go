@@ -176,8 +176,8 @@ func CFHTTPMessageSetHeaderFieldValue(message unsafe.Pointer, headerField unsafe
 }
 
 // CFHostCancelInfoResolution calls [raw.CFHostCancelInfoResolution] (C function CFHostCancelInfoResolution).
-func CFHostCancelInfoResolution(theHost unsafe.Pointer, info raw.CFHostInfoType) {
-	raw.CFHostCancelInfoResolution(theHost, info)
+func CFHostCancelInfoResolution(theHost unsafe.Pointer, info CFHostInfoType) {
+	raw.CFHostCancelInfoResolution(theHost, raw.CFHostInfoType(info))
 }
 
 // CFHostCreateCopy calls [raw.CFHostCreateCopy] (C function CFHostCreateCopy).
@@ -226,8 +226,8 @@ func CFHostSetClient(theHost unsafe.Pointer, clientCB unsafe.Pointer, clientCont
 }
 
 // CFHostStartInfoResolution calls [raw.CFHostStartInfoResolution] (C function CFHostStartInfoResolution).
-func CFHostStartInfoResolution(theHost unsafe.Pointer, info raw.CFHostInfoType, error_ *corefoundation.CFStreamError) uint8 {
-	return raw.CFHostStartInfoResolution(theHost, info, error_)
+func CFHostStartInfoResolution(theHost unsafe.Pointer, info CFHostInfoType, error_ *corefoundation.CFStreamError) uint8 {
+	return raw.CFHostStartInfoResolution(theHost, raw.CFHostInfoType(info), error_)
 }
 
 // CFHostUnscheduleFromRunLoop calls [raw.CFHostUnscheduleFromRunLoop] (C function CFHostUnscheduleFromRunLoop).
@@ -386,8 +386,8 @@ func CFNetServiceMonitorScheduleWithRunLoop(monitor unsafe.Pointer, runLoop unsa
 }
 
 // CFNetServiceMonitorStart calls [raw.CFNetServiceMonitorStart] (C function CFNetServiceMonitorStart).
-func CFNetServiceMonitorStart(monitor unsafe.Pointer, recordType raw.CFNetServiceMonitorType, error_ *corefoundation.CFStreamError) uint8 {
-	return raw.CFNetServiceMonitorStart(monitor, recordType, error_)
+func CFNetServiceMonitorStart(monitor unsafe.Pointer, recordType CFNetServiceMonitorType, error_ *corefoundation.CFStreamError) uint8 {
+	return raw.CFNetServiceMonitorStart(monitor, raw.CFNetServiceMonitorType(recordType), error_)
 }
 
 // CFNetServiceMonitorStop calls [raw.CFNetServiceMonitorStop] (C function CFNetServiceMonitorStop).

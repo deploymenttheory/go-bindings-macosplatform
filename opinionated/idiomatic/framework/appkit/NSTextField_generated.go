@@ -102,8 +102,8 @@ func (x *TextField) WithDelegate(delegate raw.NSTextFieldDelegate) *TextField {
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *TextField) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TextField {
-	x.inner.SetBezelStyle(bezelStyle)
+func (x *TextField) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TextField {
+	x.inner.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -126,8 +126,8 @@ func (x *TextField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighte
 }
 
 // WithLineBreakStrategy sets the lineBreakStrategy property and returns the receiver for chaining.
-func (x *TextField) WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *TextField {
-	x.inner.SetLineBreakStrategy(lineBreakStrategy)
+func (x *TextField) WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *TextField {
+	x.inner.SetLineBreakStrategy(raw.NSLineBreakStrategy(lineBreakStrategy))
 	return x
 }
 
@@ -258,8 +258,8 @@ func (x *TextField) WithHighlighted(highlighted bool) *TextField {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *TextField) WithControlSize(controlSize raw.NSControlSize) *TextField {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *TextField) WithControlSize(controlSize NSControlSize) *TextField {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -324,20 +324,20 @@ func (x *TextField) WithUsesSingleLineMode(usesSingleLineMode bool) *TextField {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TextField) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextField {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *TextField) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextField {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *TextField) WithAlignment(alignment raw.NSTextAlignment) *TextField {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *TextField) WithAlignment(alignment NSTextAlignment) *TextField {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *TextField) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextField {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *TextField) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextField {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -390,8 +390,8 @@ func (x *TextField) WithAutoresizesSubviews(autoresizesSubviews bool) *TextField
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TextField) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TextField {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *TextField) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TextField {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -450,14 +450,14 @@ func (x *TextField) WithWantsRestingTouches(wantsRestingTouches bool) *TextField
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *TextField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TextField {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *TextField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TextField {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *TextField) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TextField {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *TextField) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TextField {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -564,8 +564,8 @@ func (x *TextField) WithToolTip(toolTip string) *TextField {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TextField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextField {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TextField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextField {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -582,8 +582,8 @@ func (x *TextField) WithNextKeyView(nextKeyView ViewProvider) *TextField {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TextField) WithFocusRingType(focusRingType raw.NSFocusRingType) *TextField {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *TextField) WithFocusRingType(focusRingType NSFocusRingType) *TextField {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -606,8 +606,8 @@ func (x *TextField) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *TextField) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextField {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *TextField) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TextField {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -838,13 +838,13 @@ func (x *TextField) SetDelegate(delegate raw.NSTextFieldDelegate) {
 }
 
 // BezelStyle calls the underlying BezelStyle.
-func (x *TextField) BezelStyle() raw.NSTextFieldBezelStyle {
-	return x.inner.BezelStyle()
+func (x *TextField) BezelStyle() NSTextFieldBezelStyle {
+	return NSTextFieldBezelStyle(x.inner.BezelStyle())
 }
 
 // SetBezelStyle calls the underlying SetBezelStyle.
-func (x *TextField) SetBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) {
-	x.inner.SetBezelStyle(bezelStyle)
+func (x *TextField) SetBezelStyle(bezelStyle NSTextFieldBezelStyle) {
+	x.inner.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 }
 
 // PreferredMaxLayoutWidth calls the underlying PreferredMaxLayoutWidth.
@@ -878,13 +878,13 @@ func (x *TextField) SetAllowsDefaultTighteningForTruncation(allowsDefaultTighten
 }
 
 // LineBreakStrategy calls the underlying LineBreakStrategy.
-func (x *TextField) LineBreakStrategy() raw.NSLineBreakStrategy {
-	return x.inner.LineBreakStrategy()
+func (x *TextField) LineBreakStrategy() NSLineBreakStrategy {
+	return NSLineBreakStrategy(x.inner.LineBreakStrategy())
 }
 
 // SetLineBreakStrategy calls the underlying SetLineBreakStrategy.
-func (x *TextField) SetLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) {
-	x.inner.SetLineBreakStrategy(lineBreakStrategy)
+func (x *TextField) SetLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) {
+	x.inner.SetLineBreakStrategy(raw.NSLineBreakStrategy(lineBreakStrategy))
 }
 
 // AllowsWritingTools calls the underlying AllowsWritingTools.
@@ -1015,11 +1015,11 @@ type TextFieldable interface {
 	WithEditable(editable bool) *TextField
 	WithSelectable(selectable bool) *TextField
 	WithDelegate(delegate raw.NSTextFieldDelegate) *TextField
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TextField
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TextField
 	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *TextField
 	WithMaximumNumberOfLines(maximumNumberOfLines int) *TextField
 	WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *TextField
-	WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *TextField
+	WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *TextField
 	WithAllowsWritingTools(allowsWritingTools bool) *TextField
 	WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *TextField
 	WithPlaceholderStrings(items ...*foundation.NSString) *TextField
@@ -1037,7 +1037,7 @@ type TextFieldable interface {
 	WithEnabled(enabled bool) *TextField
 	WithRefusesFirstResponder(refusesFirstResponder bool) *TextField
 	WithHighlighted(highlighted bool) *TextField
-	WithControlSize(controlSize raw.NSControlSize) *TextField
+	WithControlSize(controlSize NSControlSize) *TextField
 	WithFormatter(formatter *foundation.NSFormatter) *TextField
 	WithObjectValue(objectValue objc.ID) *TextField
 	WithStringValue(stringValue string) *TextField
@@ -1048,16 +1048,16 @@ type TextFieldable interface {
 	WithDoubleValue(doubleValue float64) *TextField
 	WithFont(font *Font) *TextField
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TextField
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextField
-	WithAlignment(alignment raw.NSTextAlignment) *TextField
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextField
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextField
+	WithAlignment(alignment NSTextAlignment) *TextField
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextField
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TextField
 	WithCell(cell CellProvider) *TextField
 	WithSubviews(items ...ViewProvider) *TextField
 	WithHidden(hidden bool) *TextField
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextField
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TextField
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TextField
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TextField
 	WithFrame(frame corefoundation.CGRect) *TextField
 	WithFrameRotation(frameRotation float64) *TextField
 	WithFrameCenterRotation(frameCenterRotation float64) *TextField
@@ -1067,8 +1067,8 @@ type TextFieldable interface {
 	WithNeedsDisplay(needsDisplay bool) *TextField
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextField
 	WithWantsRestingTouches(wantsRestingTouches bool) *TextField
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TextField
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TextField
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TextField
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TextField
 	WithWantsLayer(wantsLayer bool) *TextField
 	WithLayer(layer *quartzcore.CALayer) *TextField
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextField
@@ -1082,12 +1082,12 @@ type TextFieldable interface {
 	WithClipsToBounds(clipsToBounds bool) *TextField
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextField
 	WithToolTip(toolTip string) *TextField
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextField
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextField
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextField
 	WithNextKeyView(nextKeyView ViewProvider) *TextField
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TextField
+	WithFocusRingType(focusRingType NSFocusRingType) *TextField
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TextField
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextField
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TextField
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextField
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextField
@@ -1128,16 +1128,16 @@ type TextFieldable interface {
 	SetSelectable(selectable bool)
 	Delegate() raw.NSTextFieldDelegate
 	SetDelegate(delegate raw.NSTextFieldDelegate)
-	BezelStyle() raw.NSTextFieldBezelStyle
-	SetBezelStyle(bezelStyle raw.NSTextFieldBezelStyle)
+	BezelStyle() NSTextFieldBezelStyle
+	SetBezelStyle(bezelStyle NSTextFieldBezelStyle)
 	PreferredMaxLayoutWidth() float64
 	SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64)
 	MaximumNumberOfLines() int
 	SetMaximumNumberOfLines(maximumNumberOfLines int)
 	AllowsDefaultTighteningForTruncation() bool
 	SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool)
-	LineBreakStrategy() raw.NSLineBreakStrategy
-	SetLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy)
+	LineBreakStrategy() NSLineBreakStrategy
+	SetLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy)
 	AllowsWritingTools() bool
 	SetAllowsWritingTools(allowsWritingTools bool)
 	AllowsWritingToolsAffordance() bool

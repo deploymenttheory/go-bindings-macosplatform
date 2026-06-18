@@ -41,8 +41,8 @@ func (x *PersistentHistoryResult) Result() objc.ID {
 }
 
 // ResultType calls the underlying ResultType.
-func (x *PersistentHistoryResult) ResultType() raw.NSPersistentHistoryResultType {
-	return x.inner.ResultType()
+func (x *PersistentHistoryResult) ResultType() NSPersistentHistoryResultType {
+	return NSPersistentHistoryResultType(x.inner.ResultType())
 }
 
 func (x *PersistentHistoryResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
@@ -53,7 +53,7 @@ func (x *PersistentHistoryResult) asPersistentStoreResult() *raw.NSPersistentSto
 type PersistentHistoryResultable interface {
 	Unwrap() *raw.NSPersistentHistoryResult
 	Result() objc.ID
-	ResultType() raw.NSPersistentHistoryResultType
+	ResultType() NSPersistentHistoryResultType
 }
 
 var _ PersistentHistoryResultable = (*PersistentHistoryResult)(nil)

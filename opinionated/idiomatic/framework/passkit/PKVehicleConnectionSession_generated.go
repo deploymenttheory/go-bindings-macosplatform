@@ -52,8 +52,8 @@ func (x *VehicleConnectionSession) Delegate() raw.PKVehicleConnectionDelegate {
 }
 
 // ConnectionStatus calls the underlying ConnectionStatus.
-func (x *VehicleConnectionSession) ConnectionStatus() raw.PKVehicleConnectionSessionConnectionState {
-	return x.inner.ConnectionStatus()
+func (x *VehicleConnectionSession) ConnectionStatus() PKVehicleConnectionSessionConnectionState {
+	return PKVehicleConnectionSessionConnectionState(x.inner.ConnectionStatus())
 }
 
 // VehicleConnectionSessionable is the interface implemented by [VehicleConnectionSession], for mocking and DI.
@@ -62,7 +62,7 @@ type VehicleConnectionSessionable interface {
 	SendDataError(message *foundation.NSData) (bool, error)
 	Invalidate()
 	Delegate() raw.PKVehicleConnectionDelegate
-	ConnectionStatus() raw.PKVehicleConnectionSessionConnectionState
+	ConnectionStatus() PKVehicleConnectionSessionConnectionState
 }
 
 var _ VehicleConnectionSessionable = (*VehicleConnectionSession)(nil)

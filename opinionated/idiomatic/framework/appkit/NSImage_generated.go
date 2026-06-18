@@ -153,8 +153,8 @@ func (x *Image) WithDelegate(delegate raw.NSImageDelegate) *Image {
 }
 
 // WithCacheMode sets the cacheMode property and returns the receiver for chaining.
-func (x *Image) WithCacheMode(cacheMode raw.NSImageCacheMode) *Image {
-	x.inner.SetCacheMode(cacheMode)
+func (x *Image) WithCacheMode(cacheMode NSImageCacheMode) *Image {
+	x.inner.SetCacheMode(raw.NSImageCacheMode(cacheMode))
 	return x
 }
 
@@ -183,8 +183,8 @@ func (x *Image) WithCapInsets(capInsets foundation.NSEdgeInsets) *Image {
 }
 
 // WithResizingMode sets the resizingMode property and returns the receiver for chaining.
-func (x *Image) WithResizingMode(resizingMode raw.NSImageResizingMode) *Image {
-	x.inner.SetResizingMode(resizingMode)
+func (x *Image) WithResizingMode(resizingMode NSImageResizingMode) *Image {
+	x.inner.SetResizingMode(raw.NSImageResizingMode(resizingMode))
 	return x
 }
 
@@ -203,18 +203,18 @@ func (x *Image) Name() string {
 }
 
 // DrawAtPointFromRectOperationFraction calls the underlying DrawAtPointFromRectOperationFraction.
-func (x *Image) DrawAtPointFromRectOperationFraction(point corefoundation.CGPoint, fromRect corefoundation.CGRect, op raw.NSCompositingOperation, delta float64) {
-	x.inner.DrawAtPointFromRectOperationFraction(point, fromRect, op, delta)
+func (x *Image) DrawAtPointFromRectOperationFraction(point corefoundation.CGPoint, fromRect corefoundation.CGRect, op NSCompositingOperation, delta float64) {
+	x.inner.DrawAtPointFromRectOperationFraction(point, fromRect, raw.NSCompositingOperation(op), delta)
 }
 
 // DrawInRectFromRectOperationFraction calls the underlying DrawInRectFromRectOperationFraction.
-func (x *Image) DrawInRectFromRectOperationFraction(rect corefoundation.CGRect, fromRect corefoundation.CGRect, op raw.NSCompositingOperation, delta float64) {
-	x.inner.DrawInRectFromRectOperationFraction(rect, fromRect, op, delta)
+func (x *Image) DrawInRectFromRectOperationFraction(rect corefoundation.CGRect, fromRect corefoundation.CGRect, op NSCompositingOperation, delta float64) {
+	x.inner.DrawInRectFromRectOperationFraction(rect, fromRect, raw.NSCompositingOperation(op), delta)
 }
 
 // DrawInRectFromRectOperationFractionRespectFlippedHints calls the underlying DrawInRectFromRectOperationFractionRespectFlippedHints.
-func (x *Image) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op raw.NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, hints)
+func (x *Image) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect, srcSpacePortionRect, raw.NSCompositingOperation(op), requestedAlpha, respectContextIsFlipped, hints)
 }
 
 // DrawRepresentationInRect calls the underlying DrawRepresentationInRect.
@@ -233,8 +233,8 @@ func (x *Image) Recache() {
 }
 
 // TIFFRepresentationUsingCompressionFactor calls the underlying TIFFRepresentationUsingCompressionFactor.
-func (x *Image) TIFFRepresentationUsingCompressionFactor(comp raw.NSTIFFCompression, factor float32) *foundation.NSData {
-	return x.inner.TIFFRepresentationUsingCompressionFactor(comp, factor)
+func (x *Image) TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression, factor float32) *foundation.NSData {
+	return x.inner.TIFFRepresentationUsingCompressionFactor(raw.NSTIFFCompression(comp), factor)
 }
 
 // AddRepresentations calls the underlying AddRepresentations.
@@ -395,13 +395,13 @@ func (x *Image) SetDelegate(delegate raw.NSImageDelegate) {
 }
 
 // CacheMode calls the underlying CacheMode.
-func (x *Image) CacheMode() raw.NSImageCacheMode {
-	return x.inner.CacheMode()
+func (x *Image) CacheMode() NSImageCacheMode {
+	return NSImageCacheMode(x.inner.CacheMode())
 }
 
 // SetCacheMode calls the underlying SetCacheMode.
-func (x *Image) SetCacheMode(cacheMode raw.NSImageCacheMode) {
-	x.inner.SetCacheMode(cacheMode)
+func (x *Image) SetCacheMode(cacheMode NSImageCacheMode) {
+	x.inner.SetCacheMode(raw.NSImageCacheMode(cacheMode))
 }
 
 // AlignmentRect calls the underlying AlignmentRect.
@@ -449,13 +449,13 @@ func (x *Image) SetCapInsets(capInsets foundation.NSEdgeInsets) {
 }
 
 // ResizingMode calls the underlying ResizingMode.
-func (x *Image) ResizingMode() raw.NSImageResizingMode {
-	return x.inner.ResizingMode()
+func (x *Image) ResizingMode() NSImageResizingMode {
+	return NSImageResizingMode(x.inner.ResizingMode())
 }
 
 // SetResizingMode calls the underlying SetResizingMode.
-func (x *Image) SetResizingMode(resizingMode raw.NSImageResizingMode) {
-	x.inner.SetResizingMode(resizingMode)
+func (x *Image) SetResizingMode(resizingMode NSImageResizingMode) {
+	x.inner.SetResizingMode(raw.NSImageResizingMode(resizingMode))
 }
 
 // SymbolConfiguration calls the underlying SymbolConfiguration.
@@ -557,23 +557,23 @@ func (x *Image) DissolveToPointFromRectFraction(point corefoundation.CGPoint, re
 }
 
 // CompositeToPointOperation calls the underlying CompositeToPointOperation.
-func (x *Image) CompositeToPointOperation(point corefoundation.CGPoint, operation raw.NSCompositingOperation) {
-	x.inner.CompositeToPointOperation(point, operation)
+func (x *Image) CompositeToPointOperation(point corefoundation.CGPoint, operation NSCompositingOperation) {
+	x.inner.CompositeToPointOperation(point, raw.NSCompositingOperation(operation))
 }
 
 // CompositeToPointFromRectOperation calls the underlying CompositeToPointFromRectOperation.
-func (x *Image) CompositeToPointFromRectOperation(point corefoundation.CGPoint, rect corefoundation.CGRect, operation raw.NSCompositingOperation) {
-	x.inner.CompositeToPointFromRectOperation(point, rect, operation)
+func (x *Image) CompositeToPointFromRectOperation(point corefoundation.CGPoint, rect corefoundation.CGRect, operation NSCompositingOperation) {
+	x.inner.CompositeToPointFromRectOperation(point, rect, raw.NSCompositingOperation(operation))
 }
 
 // CompositeToPointOperationFraction calls the underlying CompositeToPointOperationFraction.
-func (x *Image) CompositeToPointOperationFraction(point corefoundation.CGPoint, operation raw.NSCompositingOperation, fraction float64) {
-	x.inner.CompositeToPointOperationFraction(point, operation, fraction)
+func (x *Image) CompositeToPointOperationFraction(point corefoundation.CGPoint, operation NSCompositingOperation, fraction float64) {
+	x.inner.CompositeToPointOperationFraction(point, raw.NSCompositingOperation(operation), fraction)
 }
 
 // CompositeToPointFromRectOperationFraction calls the underlying CompositeToPointFromRectOperationFraction.
-func (x *Image) CompositeToPointFromRectOperationFraction(point corefoundation.CGPoint, rect corefoundation.CGRect, operation raw.NSCompositingOperation, fraction float64) {
-	x.inner.CompositeToPointFromRectOperationFraction(point, rect, operation, fraction)
+func (x *Image) CompositeToPointFromRectOperationFraction(point corefoundation.CGPoint, rect corefoundation.CGRect, operation NSCompositingOperation, fraction float64) {
+	x.inner.CompositeToPointFromRectOperationFraction(point, rect, raw.NSCompositingOperation(operation), fraction)
 }
 
 // LockFocusOnRepresentation calls the underlying LockFocusOnRepresentation.
@@ -596,21 +596,21 @@ type Imageable interface {
 	WithMatchesOnMultipleResolution(matchesOnMultipleResolution bool) *Image
 	WithMatchesOnlyOnBestFittingAxis(matchesOnlyOnBestFittingAxis bool) *Image
 	WithDelegate(delegate raw.NSImageDelegate) *Image
-	WithCacheMode(cacheMode raw.NSImageCacheMode) *Image
+	WithCacheMode(cacheMode NSImageCacheMode) *Image
 	WithAlignmentRect(alignmentRect corefoundation.CGRect) *Image
 	WithTemplate(template bool) *Image
 	WithAccessibilityDescription(accessibilityDescription string) *Image
 	WithCapInsets(capInsets foundation.NSEdgeInsets) *Image
-	WithResizingMode(resizingMode raw.NSImageResizingMode) *Image
+	WithResizingMode(resizingMode NSImageResizingMode) *Image
 	SetName(string_ *foundation.NSString) bool
 	Name() string
-	DrawAtPointFromRectOperationFraction(point corefoundation.CGPoint, fromRect corefoundation.CGRect, op raw.NSCompositingOperation, delta float64)
-	DrawInRectFromRectOperationFraction(rect corefoundation.CGRect, fromRect corefoundation.CGRect, op raw.NSCompositingOperation, delta float64)
-	DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op raw.NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	DrawAtPointFromRectOperationFraction(point corefoundation.CGPoint, fromRect corefoundation.CGRect, op NSCompositingOperation, delta float64)
+	DrawInRectFromRectOperationFraction(rect corefoundation.CGRect, fromRect corefoundation.CGRect, op NSCompositingOperation, delta float64)
+	DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID])
 	DrawRepresentationInRect(imageRep *raw.NSImageRep, rect corefoundation.CGRect) bool
 	DrawInRect(rect corefoundation.CGRect)
 	Recache()
-	TIFFRepresentationUsingCompressionFactor(comp raw.NSTIFFCompression, factor float32) *foundation.NSData
+	TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression, factor float32) *foundation.NSData
 	AddRepresentations(imageReps *foundation.NSArray[*raw.NSImageRep])
 	AddRepresentation(imageRep *raw.NSImageRep)
 	RemoveRepresentation(imageRep *raw.NSImageRep)
@@ -638,8 +638,8 @@ type Imageable interface {
 	IsValid() bool
 	Delegate() raw.NSImageDelegate
 	SetDelegate(delegate raw.NSImageDelegate)
-	CacheMode() raw.NSImageCacheMode
-	SetCacheMode(cacheMode raw.NSImageCacheMode)
+	CacheMode() NSImageCacheMode
+	SetCacheMode(cacheMode NSImageCacheMode)
 	AlignmentRect() corefoundation.CGRect
 	SetAlignmentRect(alignmentRect corefoundation.CGRect)
 	IsTemplate() bool
@@ -648,8 +648,8 @@ type Imageable interface {
 	SetAccessibilityDescription(accessibilityDescription string)
 	CapInsets() foundation.NSEdgeInsets
 	SetCapInsets(capInsets foundation.NSEdgeInsets)
-	ResizingMode() raw.NSImageResizingMode
-	SetResizingMode(resizingMode raw.NSImageResizingMode)
+	ResizingMode() NSImageResizingMode
+	SetResizingMode(resizingMode NSImageResizingMode)
 	SymbolConfiguration() *ImageSymbolConfiguration
 	Locale() *foundation.NSLocale
 	BestRepresentationForDevice(deviceDescription *foundation.NSDictionary[objc.ID, objc.ID]) *ImageRep
@@ -668,10 +668,10 @@ type Imageable interface {
 	CacheDepthMatchesImageDepth() bool
 	DissolveToPointFraction(point corefoundation.CGPoint, fraction float64)
 	DissolveToPointFromRectFraction(point corefoundation.CGPoint, rect corefoundation.CGRect, fraction float64)
-	CompositeToPointOperation(point corefoundation.CGPoint, operation raw.NSCompositingOperation)
-	CompositeToPointFromRectOperation(point corefoundation.CGPoint, rect corefoundation.CGRect, operation raw.NSCompositingOperation)
-	CompositeToPointOperationFraction(point corefoundation.CGPoint, operation raw.NSCompositingOperation, fraction float64)
-	CompositeToPointFromRectOperationFraction(point corefoundation.CGPoint, rect corefoundation.CGRect, operation raw.NSCompositingOperation, fraction float64)
+	CompositeToPointOperation(point corefoundation.CGPoint, operation NSCompositingOperation)
+	CompositeToPointFromRectOperation(point corefoundation.CGPoint, rect corefoundation.CGRect, operation NSCompositingOperation)
+	CompositeToPointOperationFraction(point corefoundation.CGPoint, operation NSCompositingOperation, fraction float64)
+	CompositeToPointFromRectOperationFraction(point corefoundation.CGPoint, rect corefoundation.CGRect, operation NSCompositingOperation, fraction float64)
 	LockFocusOnRepresentation(imageRepresentation *raw.NSImageRep)
 	CancelIncrementalLoad()
 }

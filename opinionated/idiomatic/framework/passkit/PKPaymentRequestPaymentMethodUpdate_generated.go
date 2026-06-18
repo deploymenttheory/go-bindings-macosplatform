@@ -41,8 +41,8 @@ func NewPaymentRequestPaymentMethodUpdateWithErrorsPaymentSummaryItems(errors_ *
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *PaymentRequestPaymentMethodUpdate) WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestPaymentMethodUpdate {
-	x.inner.PKPaymentRequestUpdate.SetStatus(status)
+func (x *PaymentRequestPaymentMethodUpdate) WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestPaymentMethodUpdate {
+	x.inner.PKPaymentRequestUpdate.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 	return x
 }
 
@@ -135,7 +135,7 @@ func (x *PaymentRequestPaymentMethodUpdate) asPaymentRequestUpdate() *raw.PKPaym
 // PaymentRequestPaymentMethodUpdateable is the interface implemented by [PaymentRequestPaymentMethodUpdate], for mocking and DI.
 type PaymentRequestPaymentMethodUpdateable interface {
 	Unwrap() *raw.PKPaymentRequestPaymentMethodUpdate
-	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestPaymentMethodUpdate
+	WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestPaymentMethodUpdate
 	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestPaymentMethodUpdate
 	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestPaymentMethodUpdate
 	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestPaymentMethodUpdate

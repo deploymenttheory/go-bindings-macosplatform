@@ -73,8 +73,8 @@ func (x *SecureElementPass) DeviceAccountNumberSuffix() string {
 }
 
 // PassActivationState calls the underlying PassActivationState.
-func (x *SecureElementPass) PassActivationState() raw.PKSecureElementPassActivationState {
-	return x.inner.PassActivationState()
+func (x *SecureElementPass) PassActivationState() PKSecureElementPassActivationState {
+	return PKSecureElementPassActivationState(x.inner.PassActivationState())
 }
 
 // DevicePassIdentifier calls the underlying DevicePassIdentifier.
@@ -106,7 +106,7 @@ type SecureElementPassable interface {
 	PrimaryAccountNumberSuffix() string
 	DeviceAccountIdentifier() string
 	DeviceAccountNumberSuffix() string
-	PassActivationState() raw.PKSecureElementPassActivationState
+	PassActivationState() PKSecureElementPassActivationState
 	DevicePassIdentifier() string
 	PairedTerminalIdentifier() string
 }

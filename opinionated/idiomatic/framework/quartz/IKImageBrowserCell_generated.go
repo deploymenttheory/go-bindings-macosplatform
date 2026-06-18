@@ -95,8 +95,8 @@ func (x *IKImageBrowserCell) IsSelected() bool {
 }
 
 // CellState calls the underlying CellState.
-func (x *IKImageBrowserCell) CellState() raw.IKImageBrowserCellState {
-	return x.inner.CellState()
+func (x *IKImageBrowserCell) CellState() IKImageBrowserCellState {
+	return IKImageBrowserCellState(x.inner.CellState())
 }
 
 // Opacity calls the underlying Opacity.
@@ -123,7 +123,7 @@ type IKImageBrowserCellable interface {
 	SubtitleFrame() corefoundation.CGRect
 	ImageAlignment() appkit.NSImageAlignment
 	IsSelected() bool
-	CellState() raw.IKImageBrowserCellState
+	CellState() IKImageBrowserCellState
 	Opacity() float64
 	LayerForType(type_ string) *quartzcore.CALayer
 }

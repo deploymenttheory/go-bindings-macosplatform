@@ -157,8 +157,8 @@ func NSDeallocateObject(object objc.ID) {
 }
 
 // NSDecimalAdd calls [raw.NSDecimalAdd] (C function NSDecimalAdd).
-func NSDecimalAdd(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode raw.NSRoundingMode) raw.NSCalculationError {
-	return raw.NSDecimalAdd(result, leftOperand, rightOperand, roundingMode)
+func NSDecimalAdd(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
+	return NSCalculationError(raw.NSDecimalAdd(result, leftOperand, rightOperand, raw.NSRoundingMode(roundingMode)))
 }
 
 // NSDecimalCompact calls [raw.NSDecimalCompact] (C function NSDecimalCompact).
@@ -167,8 +167,8 @@ func NSDecimalCompact(number *raw.NSDecimal) {
 }
 
 // NSDecimalCompare calls [raw.NSDecimalCompare] (C function NSDecimalCompare).
-func NSDecimalCompare(leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal) raw.NSComparisonResult {
-	return raw.NSDecimalCompare(leftOperand, rightOperand)
+func NSDecimalCompare(leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal) NSComparisonResult {
+	return NSComparisonResult(raw.NSDecimalCompare(leftOperand, rightOperand))
 }
 
 // NSDecimalCopy calls [raw.NSDecimalCopy] (C function NSDecimalCopy).
@@ -177,8 +177,8 @@ func NSDecimalCopy(destination *raw.NSDecimal, source *raw.NSDecimal) {
 }
 
 // NSDecimalDivide calls [raw.NSDecimalDivide] (C function NSDecimalDivide).
-func NSDecimalDivide(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode raw.NSRoundingMode) raw.NSCalculationError {
-	return raw.NSDecimalDivide(result, leftOperand, rightOperand, roundingMode)
+func NSDecimalDivide(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
+	return NSCalculationError(raw.NSDecimalDivide(result, leftOperand, rightOperand, raw.NSRoundingMode(roundingMode)))
 }
 
 // NSDecimalIsNotANumber calls [raw.NSDecimalIsNotANumber] (C function NSDecimalIsNotANumber).
@@ -187,28 +187,28 @@ func NSDecimalIsNotANumber(dcm *raw.NSDecimal) bool {
 }
 
 // NSDecimalMultiply calls [raw.NSDecimalMultiply] (C function NSDecimalMultiply).
-func NSDecimalMultiply(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode raw.NSRoundingMode) raw.NSCalculationError {
-	return raw.NSDecimalMultiply(result, leftOperand, rightOperand, roundingMode)
+func NSDecimalMultiply(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
+	return NSCalculationError(raw.NSDecimalMultiply(result, leftOperand, rightOperand, raw.NSRoundingMode(roundingMode)))
 }
 
 // NSDecimalMultiplyByPowerOf10 calls [raw.NSDecimalMultiplyByPowerOf10] (C function NSDecimalMultiplyByPowerOf10).
-func NSDecimalMultiplyByPowerOf10(result *raw.NSDecimal, number *raw.NSDecimal, power int16, roundingMode raw.NSRoundingMode) raw.NSCalculationError {
-	return raw.NSDecimalMultiplyByPowerOf10(result, number, power, roundingMode)
+func NSDecimalMultiplyByPowerOf10(result *raw.NSDecimal, number *raw.NSDecimal, power int16, roundingMode NSRoundingMode) NSCalculationError {
+	return NSCalculationError(raw.NSDecimalMultiplyByPowerOf10(result, number, power, raw.NSRoundingMode(roundingMode)))
 }
 
 // NSDecimalNormalize calls [raw.NSDecimalNormalize] (C function NSDecimalNormalize).
-func NSDecimalNormalize(number1 *raw.NSDecimal, number2 *raw.NSDecimal, roundingMode raw.NSRoundingMode) raw.NSCalculationError {
-	return raw.NSDecimalNormalize(number1, number2, roundingMode)
+func NSDecimalNormalize(number1 *raw.NSDecimal, number2 *raw.NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
+	return NSCalculationError(raw.NSDecimalNormalize(number1, number2, raw.NSRoundingMode(roundingMode)))
 }
 
 // NSDecimalPower calls [raw.NSDecimalPower] (C function NSDecimalPower).
-func NSDecimalPower(result *raw.NSDecimal, number *raw.NSDecimal, power uint, roundingMode raw.NSRoundingMode) raw.NSCalculationError {
-	return raw.NSDecimalPower(result, number, power, roundingMode)
+func NSDecimalPower(result *raw.NSDecimal, number *raw.NSDecimal, power uint, roundingMode NSRoundingMode) NSCalculationError {
+	return NSCalculationError(raw.NSDecimalPower(result, number, power, raw.NSRoundingMode(roundingMode)))
 }
 
 // NSDecimalRound calls [raw.NSDecimalRound] (C function NSDecimalRound).
-func NSDecimalRound(result *raw.NSDecimal, number *raw.NSDecimal, scale int, roundingMode raw.NSRoundingMode) {
-	raw.NSDecimalRound(result, number, scale, roundingMode)
+func NSDecimalRound(result *raw.NSDecimal, number *raw.NSDecimal, scale int, roundingMode NSRoundingMode) {
+	raw.NSDecimalRound(result, number, scale, raw.NSRoundingMode(roundingMode))
 }
 
 // NSDecimalString calls [raw.NSDecimalString] (C function NSDecimalString).
@@ -217,8 +217,8 @@ func NSDecimalString(dcm *raw.NSDecimal, locale objc.ID) *raw.NSString {
 }
 
 // NSDecimalSubtract calls [raw.NSDecimalSubtract] (C function NSDecimalSubtract).
-func NSDecimalSubtract(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode raw.NSRoundingMode) raw.NSCalculationError {
-	return raw.NSDecimalSubtract(result, leftOperand, rightOperand, roundingMode)
+func NSDecimalSubtract(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
+	return NSCalculationError(raw.NSDecimalSubtract(result, leftOperand, rightOperand, raw.NSRoundingMode(roundingMode)))
 }
 
 // NSDecrementExtraRefCountWasZero calls [raw.NSDecrementExtraRefCountWasZero] (C function NSDecrementExtraRefCountWasZero).
@@ -232,8 +232,8 @@ func NSDefaultMallocZone() unsafe.Pointer {
 }
 
 // NSDivideRect calls [raw.NSDivideRect] (C function NSDivideRect).
-func NSDivideRect(inRect corefoundation.CGRect, slice *corefoundation.CGRect, rem *corefoundation.CGRect, amount float64, edge raw.NSRectEdge) {
-	raw.NSDivideRect(inRect, slice, rem, amount, edge)
+func NSDivideRect(inRect corefoundation.CGRect, slice *corefoundation.CGRect, rem *corefoundation.CGRect, amount float64, edge NSRectEdge) {
+	raw.NSDivideRect(inRect, slice, rem, amount, raw.NSRectEdge(edge))
 }
 
 // NSEdgeInsetsEqual calls [raw.NSEdgeInsetsEqual] (C function NSEdgeInsetsEqual).
@@ -392,8 +392,8 @@ func NSIntegralRect(aRect corefoundation.CGRect) corefoundation.CGRect {
 }
 
 // NSIntegralRectWithOptions calls [raw.NSIntegralRectWithOptions] (C function NSIntegralRectWithOptions).
-func NSIntegralRectWithOptions(aRect corefoundation.CGRect, opts raw.NSAlignmentOptions) corefoundation.CGRect {
-	return raw.NSIntegralRectWithOptions(aRect, opts)
+func NSIntegralRectWithOptions(aRect corefoundation.CGRect, opts NSAlignmentOptions) corefoundation.CGRect {
+	return raw.NSIntegralRectWithOptions(aRect, raw.NSAlignmentOptions(opts))
 }
 
 // NSIntersectionRange calls [raw.NSIntersectionRange] (C function NSIntersectionRange).
@@ -632,8 +632,8 @@ func NSRoundUpToMultipleOfPageSize(bytes_ uint) uint {
 }
 
 // NSSearchPathForDirectoriesInDomains calls [raw.NSSearchPathForDirectoriesInDomains] (C function NSSearchPathForDirectoriesInDomains).
-func NSSearchPathForDirectoriesInDomains(directory raw.NSSearchPathDirectory, domainMask raw.NSSearchPathDomainMask, expandTilde bool) *raw.NSArray[*raw.NSString] {
-	return raw.NSSearchPathForDirectoriesInDomains(directory, domainMask, expandTilde)
+func NSSearchPathForDirectoriesInDomains(directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask, expandTilde bool) *raw.NSArray[*raw.NSString] {
+	return raw.NSSearchPathForDirectoriesInDomains(raw.NSSearchPathDirectory(directory), raw.NSSearchPathDomainMask(domainMask), expandTilde)
 }
 
 // NSSelectorFromString calls [raw.NSSelectorFromString] (C function NSSelectorFromString).

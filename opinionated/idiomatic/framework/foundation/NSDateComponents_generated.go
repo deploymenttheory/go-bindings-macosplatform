@@ -166,13 +166,13 @@ func (x *DateComponents) SetWeek(v int) {
 }
 
 // SetValueForComponent calls the underlying SetValueForComponent.
-func (x *DateComponents) SetValueForComponent(value int, unit raw.NSCalendarUnit) {
-	x.inner.SetValueForComponent(value, unit)
+func (x *DateComponents) SetValueForComponent(value int, unit NSCalendarUnit) {
+	x.inner.SetValueForComponent(value, raw.NSCalendarUnit(unit))
 }
 
 // ValueForComponent calls the underlying ValueForComponent.
-func (x *DateComponents) ValueForComponent(unit raw.NSCalendarUnit) int {
-	return x.inner.ValueForComponent(unit)
+func (x *DateComponents) ValueForComponent(unit NSCalendarUnit) int {
+	return x.inner.ValueForComponent(raw.NSCalendarUnit(unit))
 }
 
 // IsValidDateInCalendar calls the underlying IsValidDateInCalendar.
@@ -419,8 +419,8 @@ type DateComponentsable interface {
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateComponents
 	Week() int
 	SetWeek(v int)
-	SetValueForComponent(value int, unit raw.NSCalendarUnit)
-	ValueForComponent(unit raw.NSCalendarUnit) int
+	SetValueForComponent(value int, unit NSCalendarUnit)
+	ValueForComponent(unit NSCalendarUnit) int
 	IsValidDateInCalendar(calendar *raw.NSCalendar) bool
 	Calendar() *Calendar
 	SetCalendar(calendar *raw.NSCalendar)

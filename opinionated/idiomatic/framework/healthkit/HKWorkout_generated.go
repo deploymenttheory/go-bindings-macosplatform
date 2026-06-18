@@ -47,8 +47,8 @@ func (x *Workout) StatisticsForType(quantityType *raw.HKQuantityType) *Statistic
 }
 
 // WorkoutActivityType calls the underlying WorkoutActivityType.
-func (x *Workout) WorkoutActivityType() raw.HKWorkoutActivityType {
-	return x.inner.WorkoutActivityType()
+func (x *Workout) WorkoutActivityType() HKWorkoutActivityType {
+	return HKWorkoutActivityType(x.inner.WorkoutActivityType())
 }
 
 // WorkoutEvents returns the collection as a Go slice.
@@ -127,7 +127,7 @@ func (x *Workout) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 type Workoutable interface {
 	Unwrap() *raw.HKWorkout
 	StatisticsForType(quantityType *raw.HKQuantityType) *Statistics
-	WorkoutActivityType() raw.HKWorkoutActivityType
+	WorkoutActivityType() HKWorkoutActivityType
 	WorkoutEvents() []*WorkoutEvent
 	WorkoutActivities() []*WorkoutActivity
 	Duration() float64

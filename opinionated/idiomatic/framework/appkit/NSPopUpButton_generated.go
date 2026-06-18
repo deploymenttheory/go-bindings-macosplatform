@@ -121,8 +121,8 @@ func (x *PopUpButton) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *PopUpBut
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *PopUpButton) WithBezelStyle(bezelStyle raw.NSBezelStyle) *PopUpButton {
-	x.inner.NSButton.SetBezelStyle(bezelStyle)
+func (x *PopUpButton) WithBezelStyle(bezelStyle NSBezelStyle) *PopUpButton {
+	x.inner.NSButton.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 	return x
 }
 
@@ -157,8 +157,8 @@ func (x *PopUpButton) WithContentTintColor(contentTintColor *Color) *PopUpButton
 }
 
 // WithTintProminence sets the tintProminence property and returns the receiver for chaining.
-func (x *PopUpButton) WithTintProminence(tintProminence raw.NSTintProminence) *PopUpButton {
-	x.inner.NSButton.SetTintProminence(tintProminence)
+func (x *PopUpButton) WithTintProminence(tintProminence NSTintProminence) *PopUpButton {
+	x.inner.NSButton.SetTintProminence(raw.NSTintProminence(tintProminence))
 	return x
 }
 
@@ -175,14 +175,14 @@ func (x *PopUpButton) WithAlternateImage(alternateImage *Image) *PopUpButton {
 }
 
 // WithImagePosition sets the imagePosition property and returns the receiver for chaining.
-func (x *PopUpButton) WithImagePosition(imagePosition raw.NSCellImagePosition) *PopUpButton {
-	x.inner.NSButton.SetImagePosition(imagePosition)
+func (x *PopUpButton) WithImagePosition(imagePosition NSCellImagePosition) *PopUpButton {
+	x.inner.NSButton.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 	return x
 }
 
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *PopUpButton) WithImageScaling(imageScaling raw.NSImageScaling) *PopUpButton {
-	x.inner.NSButton.SetImageScaling(imageScaling)
+func (x *PopUpButton) WithImageScaling(imageScaling NSImageScaling) *PopUpButton {
+	x.inner.NSButton.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
@@ -217,14 +217,14 @@ func (x *PopUpButton) WithKeyEquivalent(keyEquivalent string) *PopUpButton {
 }
 
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
-func (x *PopUpButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *PopUpButton {
-	x.inner.NSButton.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+func (x *PopUpButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *PopUpButton {
+	x.inner.NSButton.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
 	return x
 }
 
 // WithBorderShape sets the borderShape property and returns the receiver for chaining.
-func (x *PopUpButton) WithBorderShape(borderShape raw.NSControlBorderShape) *PopUpButton {
-	x.inner.NSButton.SetBorderShape(borderShape)
+func (x *PopUpButton) WithBorderShape(borderShape NSControlBorderShape) *PopUpButton {
+	x.inner.NSButton.SetBorderShape(raw.NSControlBorderShape(borderShape))
 	return x
 }
 
@@ -277,8 +277,8 @@ func (x *PopUpButton) WithHighlighted(highlighted bool) *PopUpButton {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *PopUpButton) WithControlSize(controlSize raw.NSControlSize) *PopUpButton {
-	x.inner.NSButton.NSControl.SetControlSize(controlSize)
+func (x *PopUpButton) WithControlSize(controlSize NSControlSize) *PopUpButton {
+	x.inner.NSButton.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -343,20 +343,20 @@ func (x *PopUpButton) WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButt
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *PopUpButton) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PopUpButton {
-	x.inner.NSButton.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *PopUpButton) WithLineBreakMode(lineBreakMode NSLineBreakMode) *PopUpButton {
+	x.inner.NSButton.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *PopUpButton) WithAlignment(alignment raw.NSTextAlignment) *PopUpButton {
-	x.inner.NSButton.NSControl.SetAlignment(alignment)
+func (x *PopUpButton) WithAlignment(alignment NSTextAlignment) *PopUpButton {
+	x.inner.NSButton.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *PopUpButton) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PopUpButton {
-	x.inner.NSButton.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *PopUpButton) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PopUpButton {
+	x.inner.NSButton.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -409,8 +409,8 @@ func (x *PopUpButton) WithAutoresizesSubviews(autoresizesSubviews bool) *PopUpBu
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *PopUpButton) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *PopUpButton) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -469,14 +469,14 @@ func (x *PopUpButton) WithWantsRestingTouches(wantsRestingTouches bool) *PopUpBu
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *PopUpButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *PopUpButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *PopUpButton) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *PopUpButton) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -583,8 +583,8 @@ func (x *PopUpButton) WithToolTip(toolTip string) *PopUpButton {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *PopUpButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *PopUpButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -601,8 +601,8 @@ func (x *PopUpButton) WithNextKeyView(nextKeyView ViewProvider) *PopUpButton {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *PopUpButton) WithFocusRingType(focusRingType raw.NSFocusRingType) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *PopUpButton) WithFocusRingType(focusRingType NSFocusRingType) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -625,8 +625,8 @@ func (x *PopUpButton) WithGestureRecognizers(items ...GestureRecognizerProvider)
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *PopUpButton) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *PopUpButton) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PopUpButton {
+	x.inner.NSButton.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -956,24 +956,24 @@ type PopUpButtonable interface {
 	WithSound(sound *Sound) *PopUpButton
 	WithSpringLoaded(springLoaded bool) *PopUpButton
 	WithMaxAcceleratorLevel(maxAcceleratorLevel int) *PopUpButton
-	WithBezelStyle(bezelStyle raw.NSBezelStyle) *PopUpButton
+	WithBezelStyle(bezelStyle NSBezelStyle) *PopUpButton
 	WithBordered(bordered bool) *PopUpButton
 	WithTransparent(transparent bool) *PopUpButton
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButton
 	WithBezelColor(bezelColor *Color) *PopUpButton
 	WithContentTintColor(contentTintColor *Color) *PopUpButton
-	WithTintProminence(tintProminence raw.NSTintProminence) *PopUpButton
+	WithTintProminence(tintProminence NSTintProminence) *PopUpButton
 	WithImage(image *Image) *PopUpButton
 	WithAlternateImage(alternateImage *Image) *PopUpButton
-	WithImagePosition(imagePosition raw.NSCellImagePosition) *PopUpButton
-	WithImageScaling(imageScaling raw.NSImageScaling) *PopUpButton
+	WithImagePosition(imagePosition NSCellImagePosition) *PopUpButton
+	WithImageScaling(imageScaling NSImageScaling) *PopUpButton
 	WithImageHugsTitle(imageHugsTitle bool) *PopUpButton
 	WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *PopUpButton
 	WithState(state int) *PopUpButton
 	WithAllowsMixedState(allowsMixedState bool) *PopUpButton
 	WithKeyEquivalent(keyEquivalent string) *PopUpButton
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *PopUpButton
-	WithBorderShape(borderShape raw.NSControlBorderShape) *PopUpButton
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *PopUpButton
+	WithBorderShape(borderShape NSControlBorderShape) *PopUpButton
 	WithTarget(target objc.ID) *PopUpButton
 	WithAction(action objc.SEL) *PopUpButton
 	WithTag(tag int) *PopUpButton
@@ -982,7 +982,7 @@ type PopUpButtonable interface {
 	WithEnabled(enabled bool) *PopUpButton
 	WithRefusesFirstResponder(refusesFirstResponder bool) *PopUpButton
 	WithHighlighted(highlighted bool) *PopUpButton
-	WithControlSize(controlSize raw.NSControlSize) *PopUpButton
+	WithControlSize(controlSize NSControlSize) *PopUpButton
 	WithFormatter(formatter *foundation.NSFormatter) *PopUpButton
 	WithObjectValue(objectValue objc.ID) *PopUpButton
 	WithStringValue(stringValue string) *PopUpButton
@@ -993,16 +993,16 @@ type PopUpButtonable interface {
 	WithDoubleValue(doubleValue float64) *PopUpButton
 	WithFont(font *Font) *PopUpButton
 	WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButton
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PopUpButton
-	WithAlignment(alignment raw.NSTextAlignment) *PopUpButton
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PopUpButton
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *PopUpButton
+	WithAlignment(alignment NSTextAlignment) *PopUpButton
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PopUpButton
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PopUpButton
 	WithCell(cell CellProvider) *PopUpButton
 	WithSubviews(items ...ViewProvider) *PopUpButton
 	WithHidden(hidden bool) *PopUpButton
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PopUpButton
 	WithAutoresizesSubviews(autoresizesSubviews bool) *PopUpButton
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *PopUpButton
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *PopUpButton
 	WithFrame(frame corefoundation.CGRect) *PopUpButton
 	WithFrameRotation(frameRotation float64) *PopUpButton
 	WithFrameCenterRotation(frameCenterRotation float64) *PopUpButton
@@ -1012,8 +1012,8 @@ type PopUpButtonable interface {
 	WithNeedsDisplay(needsDisplay bool) *PopUpButton
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *PopUpButton
 	WithWantsRestingTouches(wantsRestingTouches bool) *PopUpButton
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *PopUpButton
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *PopUpButton
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *PopUpButton
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *PopUpButton
 	WithWantsLayer(wantsLayer bool) *PopUpButton
 	WithLayer(layer *quartzcore.CALayer) *PopUpButton
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PopUpButton
@@ -1027,12 +1027,12 @@ type PopUpButtonable interface {
 	WithClipsToBounds(clipsToBounds bool) *PopUpButton
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PopUpButton
 	WithToolTip(toolTip string) *PopUpButton
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PopUpButton
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PopUpButton
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PopUpButton
 	WithNextKeyView(nextKeyView ViewProvider) *PopUpButton
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *PopUpButton
+	WithFocusRingType(focusRingType NSFocusRingType) *PopUpButton
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *PopUpButton
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PopUpButton
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PopUpButton
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PopUpButton
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PopUpButton
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PopUpButton

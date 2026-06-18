@@ -90,8 +90,8 @@ func (x *OpenGLView) WithAutoresizesSubviews(autoresizesSubviews bool) *OpenGLVi
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *OpenGLView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *OpenGLView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *OpenGLView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *OpenGLView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -150,14 +150,14 @@ func (x *OpenGLView) WithWantsRestingTouches(wantsRestingTouches bool) *OpenGLVi
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *OpenGLView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *OpenGLView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *OpenGLView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *OpenGLView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *OpenGLView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *OpenGLView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *OpenGLView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *OpenGLView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -264,8 +264,8 @@ func (x *OpenGLView) WithToolTip(toolTip string) *OpenGLView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *OpenGLView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *OpenGLView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *OpenGLView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *OpenGLView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -282,8 +282,8 @@ func (x *OpenGLView) WithNextKeyView(nextKeyView ViewProvider) *OpenGLView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *OpenGLView) WithFocusRingType(focusRingType raw.NSFocusRingType) *OpenGLView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *OpenGLView) WithFocusRingType(focusRingType NSFocusRingType) *OpenGLView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -306,8 +306,8 @@ func (x *OpenGLView) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *OpenGLView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *OpenGLView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *OpenGLView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *OpenGLView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -456,7 +456,7 @@ type OpenGLViewable interface {
 	WithHidden(hidden bool) *OpenGLView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OpenGLView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *OpenGLView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *OpenGLView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *OpenGLView
 	WithFrame(frame corefoundation.CGRect) *OpenGLView
 	WithFrameRotation(frameRotation float64) *OpenGLView
 	WithFrameCenterRotation(frameCenterRotation float64) *OpenGLView
@@ -466,8 +466,8 @@ type OpenGLViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *OpenGLView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *OpenGLView
 	WithWantsRestingTouches(wantsRestingTouches bool) *OpenGLView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *OpenGLView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *OpenGLView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *OpenGLView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *OpenGLView
 	WithWantsLayer(wantsLayer bool) *OpenGLView
 	WithLayer(layer *quartzcore.CALayer) *OpenGLView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *OpenGLView
@@ -481,12 +481,12 @@ type OpenGLViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *OpenGLView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OpenGLView
 	WithToolTip(toolTip string) *OpenGLView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *OpenGLView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *OpenGLView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *OpenGLView
 	WithNextKeyView(nextKeyView ViewProvider) *OpenGLView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *OpenGLView
+	WithFocusRingType(focusRingType NSFocusRingType) *OpenGLView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *OpenGLView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *OpenGLView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *OpenGLView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OpenGLView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OpenGLView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OpenGLView

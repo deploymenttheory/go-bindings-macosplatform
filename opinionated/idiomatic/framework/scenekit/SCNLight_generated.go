@@ -100,8 +100,8 @@ func (x *Light) WithShadowSampleCount(shadowSampleCount uint) *Light {
 }
 
 // WithShadowMode sets the shadowMode property and returns the receiver for chaining.
-func (x *Light) WithShadowMode(shadowMode raw.SCNShadowMode) *Light {
-	x.inner.SetShadowMode(shadowMode)
+func (x *Light) WithShadowMode(shadowMode SCNShadowMode) *Light {
+	x.inner.SetShadowMode(raw.SCNShadowMode(shadowMode))
 	return x
 }
 
@@ -202,14 +202,14 @@ func (x *Light) WithIESProfileURL(iESProfileURL string) *Light {
 }
 
 // WithProbeType sets the probeType property and returns the receiver for chaining.
-func (x *Light) WithProbeType(probeType raw.SCNLightProbeType) *Light {
-	x.inner.SetProbeType(probeType)
+func (x *Light) WithProbeType(probeType SCNLightProbeType) *Light {
+	x.inner.SetProbeType(raw.SCNLightProbeType(probeType))
 	return x
 }
 
 // WithProbeUpdateType sets the probeUpdateType property and returns the receiver for chaining.
-func (x *Light) WithProbeUpdateType(probeUpdateType raw.SCNLightProbeUpdateType) *Light {
-	x.inner.SetProbeUpdateType(probeUpdateType)
+func (x *Light) WithProbeUpdateType(probeUpdateType SCNLightProbeUpdateType) *Light {
+	x.inner.SetProbeUpdateType(raw.SCNLightProbeUpdateType(probeUpdateType))
 	return x
 }
 
@@ -220,8 +220,8 @@ func (x *Light) WithParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) *L
 }
 
 // WithAreaType sets the areaType property and returns the receiver for chaining.
-func (x *Light) WithAreaType(areaType raw.SCNLightAreaType) *Light {
-	x.inner.SetAreaType(areaType)
+func (x *Light) WithAreaType(areaType SCNLightAreaType) *Light {
+	x.inner.SetAreaType(raw.SCNLightAreaType(areaType))
 	return x
 }
 
@@ -370,13 +370,13 @@ func (x *Light) SetShadowSampleCount(shadowSampleCount uint) {
 }
 
 // ShadowMode calls the underlying ShadowMode.
-func (x *Light) ShadowMode() raw.SCNShadowMode {
-	return x.inner.ShadowMode()
+func (x *Light) ShadowMode() SCNShadowMode {
+	return SCNShadowMode(x.inner.ShadowMode())
 }
 
 // SetShadowMode calls the underlying SetShadowMode.
-func (x *Light) SetShadowMode(shadowMode raw.SCNShadowMode) {
-	x.inner.SetShadowMode(shadowMode)
+func (x *Light) SetShadowMode(shadowMode SCNShadowMode) {
+	x.inner.SetShadowMode(raw.SCNShadowMode(shadowMode))
 }
 
 // ShadowBias calls the underlying ShadowBias.
@@ -545,23 +545,23 @@ func (x *Light) SphericalHarmonicsCoefficients() *foundation.NSData {
 }
 
 // ProbeType calls the underlying ProbeType.
-func (x *Light) ProbeType() raw.SCNLightProbeType {
-	return x.inner.ProbeType()
+func (x *Light) ProbeType() SCNLightProbeType {
+	return SCNLightProbeType(x.inner.ProbeType())
 }
 
 // SetProbeType calls the underlying SetProbeType.
-func (x *Light) SetProbeType(probeType raw.SCNLightProbeType) {
-	x.inner.SetProbeType(probeType)
+func (x *Light) SetProbeType(probeType SCNLightProbeType) {
+	x.inner.SetProbeType(raw.SCNLightProbeType(probeType))
 }
 
 // ProbeUpdateType calls the underlying ProbeUpdateType.
-func (x *Light) ProbeUpdateType() raw.SCNLightProbeUpdateType {
-	return x.inner.ProbeUpdateType()
+func (x *Light) ProbeUpdateType() SCNLightProbeUpdateType {
+	return SCNLightProbeUpdateType(x.inner.ProbeUpdateType())
 }
 
 // SetProbeUpdateType calls the underlying SetProbeUpdateType.
-func (x *Light) SetProbeUpdateType(probeUpdateType raw.SCNLightProbeUpdateType) {
-	x.inner.SetProbeUpdateType(probeUpdateType)
+func (x *Light) SetProbeUpdateType(probeUpdateType SCNLightProbeUpdateType) {
+	x.inner.SetProbeUpdateType(raw.SCNLightProbeUpdateType(probeUpdateType))
 }
 
 // ProbeExtents calls the underlying ProbeExtents.
@@ -624,13 +624,13 @@ func (x *Light) ProbeEnvironment() *MaterialProperty {
 }
 
 // AreaType calls the underlying AreaType.
-func (x *Light) AreaType() raw.SCNLightAreaType {
-	return x.inner.AreaType()
+func (x *Light) AreaType() SCNLightAreaType {
+	return SCNLightAreaType(x.inner.AreaType())
 }
 
 // SetAreaType calls the underlying SetAreaType.
-func (x *Light) SetAreaType(areaType raw.SCNLightAreaType) {
-	x.inner.SetAreaType(areaType)
+func (x *Light) SetAreaType(areaType SCNLightAreaType) {
+	x.inner.SetAreaType(raw.SCNLightAreaType(areaType))
 }
 
 // AreaExtents calls the underlying AreaExtents.
@@ -721,7 +721,7 @@ type Lightable interface {
 	WithShadowRadius(shadowRadius float64) *Light
 	WithShadowMapSize(shadowMapSize corefoundation.CGSize) *Light
 	WithShadowSampleCount(shadowSampleCount uint) *Light
-	WithShadowMode(shadowMode raw.SCNShadowMode) *Light
+	WithShadowMode(shadowMode SCNShadowMode) *Light
 	WithShadowBias(shadowBias float64) *Light
 	WithAutomaticallyAdjustsShadowProjection(automaticallyAdjustsShadowProjection bool) *Light
 	WithMaximumShadowDistance(maximumShadowDistance float64) *Light
@@ -738,10 +738,10 @@ type Lightable interface {
 	WithSpotInnerAngle(spotInnerAngle float64) *Light
 	WithSpotOuterAngle(spotOuterAngle float64) *Light
 	WithIESProfileURL(iESProfileURL string) *Light
-	WithProbeType(probeType raw.SCNLightProbeType) *Light
-	WithProbeUpdateType(probeUpdateType raw.SCNLightProbeUpdateType) *Light
+	WithProbeType(probeType SCNLightProbeType) *Light
+	WithProbeUpdateType(probeUpdateType SCNLightProbeUpdateType) *Light
 	WithParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) *Light
-	WithAreaType(areaType raw.SCNLightAreaType) *Light
+	WithAreaType(areaType SCNLightAreaType) *Light
 	WithAreaPolygonVertices(items ...*foundation.NSValue) *Light
 	WithDrawsArea(drawsArea bool) *Light
 	WithDoubleSided(doubleSided bool) *Light
@@ -766,8 +766,8 @@ type Lightable interface {
 	SetShadowMapSize(shadowMapSize corefoundation.CGSize)
 	ShadowSampleCount() uint
 	SetShadowSampleCount(shadowSampleCount uint)
-	ShadowMode() raw.SCNShadowMode
-	SetShadowMode(shadowMode raw.SCNShadowMode)
+	ShadowMode() SCNShadowMode
+	SetShadowMode(shadowMode SCNShadowMode)
 	ShadowBias() float64
 	SetShadowBias(shadowBias float64)
 	AutomaticallyAdjustsShadowProjection() bool
@@ -801,10 +801,10 @@ type Lightable interface {
 	IESProfileURL() *foundation.NSURL
 	SetIESProfileURL(iESProfileURL string)
 	SphericalHarmonicsCoefficients() *foundation.NSData
-	ProbeType() raw.SCNLightProbeType
-	SetProbeType(probeType raw.SCNLightProbeType)
-	ProbeUpdateType() raw.SCNLightProbeUpdateType
-	SetProbeUpdateType(probeUpdateType raw.SCNLightProbeUpdateType)
+	ProbeType() SCNLightProbeType
+	SetProbeType(probeType SCNLightProbeType)
+	ProbeUpdateType() SCNLightProbeUpdateType
+	SetProbeUpdateType(probeUpdateType SCNLightProbeUpdateType)
 	ProbeExtents() unsafe.Pointer
 	SetProbeExtents(probeExtents unsafe.Pointer)
 	ProbeOffset() unsafe.Pointer
@@ -816,8 +816,8 @@ type Lightable interface {
 	ParallaxCenterOffset() unsafe.Pointer
 	SetParallaxCenterOffset(parallaxCenterOffset unsafe.Pointer)
 	ProbeEnvironment() *MaterialProperty
-	AreaType() raw.SCNLightAreaType
-	SetAreaType(areaType raw.SCNLightAreaType)
+	AreaType() SCNLightAreaType
+	SetAreaType(areaType SCNLightAreaType)
 	AreaExtents() unsafe.Pointer
 	SetAreaExtents(areaExtents unsafe.Pointer)
 	AreaPolygonVertices() []*foundation.NSValue

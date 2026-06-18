@@ -71,14 +71,14 @@ func (x *FormCell) WithPlaceholderAttributedString(placeholderAttributedString *
 }
 
 // WithTitleAlignment sets the titleAlignment property and returns the receiver for chaining.
-func (x *FormCell) WithTitleAlignment(titleAlignment raw.NSTextAlignment) *FormCell {
-	x.inner.SetTitleAlignment(titleAlignment)
+func (x *FormCell) WithTitleAlignment(titleAlignment NSTextAlignment) *FormCell {
+	x.inner.SetTitleAlignment(raw.NSTextAlignment(titleAlignment))
 	return x
 }
 
 // WithTitleBaseWritingDirection sets the titleBaseWritingDirection property and returns the receiver for chaining.
-func (x *FormCell) WithTitleBaseWritingDirection(titleBaseWritingDirection raw.NSWritingDirection) *FormCell {
-	x.inner.SetTitleBaseWritingDirection(titleBaseWritingDirection)
+func (x *FormCell) WithTitleBaseWritingDirection(titleBaseWritingDirection NSWritingDirection) *FormCell {
+	x.inner.SetTitleBaseWritingDirection(raw.NSWritingDirection(titleBaseWritingDirection))
 	return x
 }
 
@@ -101,8 +101,8 @@ func (x *FormCell) WithControlView(controlView ViewProvider) *FormCell {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *FormCell) WithType(type_ raw.NSCellType) *FormCell {
-	x.inner.NSActionCell.NSCell.SetType(type_)
+func (x *FormCell) WithType(type_ NSCellType) *FormCell {
+	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -185,8 +185,8 @@ func (x *FormCell) WithHighlighted(highlighted bool) *FormCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *FormCell) WithAlignment(alignment raw.NSTextAlignment) *FormCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *FormCell) WithAlignment(alignment NSTextAlignment) *FormCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -251,8 +251,8 @@ func (x *FormCell) WithImage(image *Image) *FormCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *FormCell) WithControlSize(controlSize raw.NSControlSize) *FormCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *FormCell) WithControlSize(controlSize NSControlSize) *FormCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -275,14 +275,14 @@ func (x *FormCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *Fo
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *FormCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *FormCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *FormCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *FormCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *FormCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *FormCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *FormCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *FormCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -299,8 +299,8 @@ func (x *FormCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *FormCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *FormCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *FormCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *FormCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -323,8 +323,8 @@ func (x *FormCell) WithShowsFirstResponder(showsFirstResponder bool) *FormCell {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *FormCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *FormCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *FormCell) WithFocusRingType(focusRingType NSFocusRingType) *FormCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -353,14 +353,14 @@ func (x *FormCell) WithAllowsMixedState(allowsMixedState bool) *FormCell {
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *FormCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *FormCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *FormCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *FormCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *FormCell) WithControlTint(controlTint raw.NSControlTint) *FormCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *FormCell) WithControlTint(controlTint NSControlTint) *FormCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -418,23 +418,23 @@ func (x *FormCell) SetPlaceholderAttributedString(placeholderAttributedString *f
 }
 
 // TitleAlignment calls the underlying TitleAlignment.
-func (x *FormCell) TitleAlignment() raw.NSTextAlignment {
-	return x.inner.TitleAlignment()
+func (x *FormCell) TitleAlignment() NSTextAlignment {
+	return NSTextAlignment(x.inner.TitleAlignment())
 }
 
 // SetTitleAlignment calls the underlying SetTitleAlignment.
-func (x *FormCell) SetTitleAlignment(titleAlignment raw.NSTextAlignment) {
-	x.inner.SetTitleAlignment(titleAlignment)
+func (x *FormCell) SetTitleAlignment(titleAlignment NSTextAlignment) {
+	x.inner.SetTitleAlignment(raw.NSTextAlignment(titleAlignment))
 }
 
 // TitleBaseWritingDirection calls the underlying TitleBaseWritingDirection.
-func (x *FormCell) TitleBaseWritingDirection() raw.NSWritingDirection {
-	return x.inner.TitleBaseWritingDirection()
+func (x *FormCell) TitleBaseWritingDirection() NSWritingDirection {
+	return NSWritingDirection(x.inner.TitleBaseWritingDirection())
 }
 
 // SetTitleBaseWritingDirection calls the underlying SetTitleBaseWritingDirection.
-func (x *FormCell) SetTitleBaseWritingDirection(titleBaseWritingDirection raw.NSWritingDirection) {
-	x.inner.SetTitleBaseWritingDirection(titleBaseWritingDirection)
+func (x *FormCell) SetTitleBaseWritingDirection(titleBaseWritingDirection NSWritingDirection) {
+	x.inner.SetTitleBaseWritingDirection(raw.NSWritingDirection(titleBaseWritingDirection))
 }
 
 // PreferredTextFieldWidth calls the underlying PreferredTextFieldWidth.
@@ -468,12 +468,12 @@ type FormCellable interface {
 	WithTitleFont(titleFont *Font) *FormCell
 	WithPlaceholderString(placeholderString string) *FormCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *FormCell
-	WithTitleAlignment(titleAlignment raw.NSTextAlignment) *FormCell
-	WithTitleBaseWritingDirection(titleBaseWritingDirection raw.NSWritingDirection) *FormCell
+	WithTitleAlignment(titleAlignment NSTextAlignment) *FormCell
+	WithTitleBaseWritingDirection(titleBaseWritingDirection NSWritingDirection) *FormCell
 	WithPreferredTextFieldWidth(preferredTextFieldWidth float64) *FormCell
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *FormCell
 	WithControlView(controlView ViewProvider) *FormCell
-	WithType(type_ raw.NSCellType) *FormCell
+	WithType(type_ NSCellType) *FormCell
 	WithState(state int) *FormCell
 	WithTarget(target objc.ID) *FormCell
 	WithAction(action objc.SEL) *FormCell
@@ -487,7 +487,7 @@ type FormCellable interface {
 	WithBezeled(bezeled bool) *FormCell
 	WithScrollable(scrollable bool) *FormCell
 	WithHighlighted(highlighted bool) *FormCell
-	WithAlignment(alignment raw.NSTextAlignment) *FormCell
+	WithAlignment(alignment NSTextAlignment) *FormCell
 	WithWraps(wraps bool) *FormCell
 	WithFont(font *Font) *FormCell
 	WithFormatter(formatter *foundation.NSFormatter) *FormCell
@@ -498,25 +498,25 @@ type FormCellable interface {
 	WithDoubleValue(doubleValue float64) *FormCell
 	WithIntegerValue(integerValue int) *FormCell
 	WithImage(image *Image) *FormCell
-	WithControlSize(controlSize raw.NSControlSize) *FormCell
+	WithControlSize(controlSize NSControlSize) *FormCell
 	WithRepresentedObject(representedObject objc.ID) *FormCell
 	WithMenu(menu *Menu) *FormCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *FormCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *FormCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *FormCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *FormCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *FormCell
 	WithAllowsUndo(allowsUndo bool) *FormCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *FormCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *FormCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *FormCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *FormCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *FormCell
 	WithShowsFirstResponder(showsFirstResponder bool) *FormCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *FormCell
+	WithFocusRingType(focusRingType NSFocusRingType) *FormCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *FormCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *FormCell
 	WithImportsGraphics(importsGraphics bool) *FormCell
 	WithAllowsMixedState(allowsMixedState bool) *FormCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *FormCell
-	WithControlTint(controlTint raw.NSControlTint) *FormCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *FormCell
+	WithControlTint(controlTint NSControlTint) *FormCell
 	TitleWidth(size corefoundation.CGSize) float64
 	TitleWidth2() float64
 	SetTitleWidth(titleWidth float64)
@@ -526,10 +526,10 @@ type FormCellable interface {
 	SetPlaceholderString(placeholderString string)
 	PlaceholderAttributedString() *foundation.NSAttributedString
 	SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString)
-	TitleAlignment() raw.NSTextAlignment
-	SetTitleAlignment(titleAlignment raw.NSTextAlignment)
-	TitleBaseWritingDirection() raw.NSWritingDirection
-	SetTitleBaseWritingDirection(titleBaseWritingDirection raw.NSWritingDirection)
+	TitleAlignment() NSTextAlignment
+	SetTitleAlignment(titleAlignment NSTextAlignment)
+	TitleBaseWritingDirection() NSWritingDirection
+	SetTitleBaseWritingDirection(titleBaseWritingDirection NSWritingDirection)
 	PreferredTextFieldWidth() float64
 	SetPreferredTextFieldWidth(preferredTextFieldWidth float64)
 	AttributedTitle() *foundation.NSAttributedString

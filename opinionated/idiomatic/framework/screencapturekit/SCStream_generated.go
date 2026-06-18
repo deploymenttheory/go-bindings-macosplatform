@@ -41,13 +41,13 @@ func NewStreamWithFilterConfigurationDelegate(contentFilter *raw.SCContentFilter
 }
 
 // AddStreamOutputTypeSampleHandlerQueueError calls the underlying AddStreamOutputTypeSampleHandlerQueueError.
-func (x *Stream) AddStreamOutputTypeSampleHandlerQueueError(output raw.SCStreamOutput, type_ raw.SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error) {
-	return x.inner.AddStreamOutputTypeSampleHandlerQueueError(output, type_, sampleHandlerQueue)
+func (x *Stream) AddStreamOutputTypeSampleHandlerQueueError(output raw.SCStreamOutput, type_ SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error) {
+	return x.inner.AddStreamOutputTypeSampleHandlerQueueError(output, raw.SCStreamOutputType(type_), sampleHandlerQueue)
 }
 
 // RemoveStreamOutputTypeError calls the underlying RemoveStreamOutputTypeError.
-func (x *Stream) RemoveStreamOutputTypeError(output raw.SCStreamOutput, type_ raw.SCStreamOutputType) (bool, error) {
-	return x.inner.RemoveStreamOutputTypeError(output, type_)
+func (x *Stream) RemoveStreamOutputTypeError(output raw.SCStreamOutput, type_ SCStreamOutputType) (bool, error) {
+	return x.inner.RemoveStreamOutputTypeError(output, raw.SCStreamOutputType(type_))
 }
 
 // UpdateContentFilter blocks until the operation completes or ctx is cancelled.
@@ -140,8 +140,8 @@ func (x *Stream) SynchronizationClock() unsafe.Pointer {
 // Streamable is the interface implemented by [Stream], for mocking and DI.
 type Streamable interface {
 	Unwrap() *raw.SCStream
-	AddStreamOutputTypeSampleHandlerQueueError(output raw.SCStreamOutput, type_ raw.SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error)
-	RemoveStreamOutputTypeError(output raw.SCStreamOutput, type_ raw.SCStreamOutputType) (bool, error)
+	AddStreamOutputTypeSampleHandlerQueueError(output raw.SCStreamOutput, type_ SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error)
+	RemoveStreamOutputTypeError(output raw.SCStreamOutput, type_ SCStreamOutputType) (bool, error)
 	UpdateContentFilter(ctx context.Context, contentFilter *raw.SCContentFilter) error
 	UpdateConfiguration(ctx context.Context, streamConfig *raw.SCStreamConfiguration) error
 	StartCapture(ctx context.Context) error

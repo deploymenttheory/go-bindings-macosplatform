@@ -66,13 +66,13 @@ func (x *UMPEndpoint) Name() string {
 }
 
 // MIDIProtocol calls the underlying MIDIProtocol.
-func (x *UMPEndpoint) MIDIProtocol() raw.MIDIProtocolID {
-	return x.inner.MIDIProtocol()
+func (x *UMPEndpoint) MIDIProtocol() MIDIProtocolID {
+	return MIDIProtocolID(x.inner.MIDIProtocol())
 }
 
 // SupportedMIDIProtocols calls the underlying SupportedMIDIProtocols.
-func (x *UMPEndpoint) SupportedMIDIProtocols() raw.MIDIUMPProtocolOptions {
-	return x.inner.SupportedMIDIProtocols()
+func (x *UMPEndpoint) SupportedMIDIProtocols() MIDIUMPProtocolOptions {
+	return MIDIUMPProtocolOptions(x.inner.SupportedMIDIProtocols())
 }
 
 // MIDIDestination calls the underlying MIDIDestination.
@@ -119,8 +119,8 @@ func (x *UMPEndpoint) HasJRTSTransmitCapability() bool {
 }
 
 // EndpointType calls the underlying EndpointType.
-func (x *UMPEndpoint) EndpointType() raw.MIDIUMPCIObjectBackingType {
-	return x.inner.EndpointType()
+func (x *UMPEndpoint) EndpointType() MIDIUMPCIObjectBackingType {
+	return MIDIUMPCIObjectBackingType(x.inner.EndpointType())
 }
 
 // FunctionBlocks returns the collection as a Go slice.
@@ -146,8 +146,8 @@ type UMPEndpointable interface {
 	Unwrap() *raw.MIDIUMPEndpoint
 	WithFunctionBlocks(items ...UMPFunctionBlockProvider) *UMPEndpoint
 	Name() string
-	MIDIProtocol() raw.MIDIProtocolID
-	SupportedMIDIProtocols() raw.MIDIUMPProtocolOptions
+	MIDIProtocol() MIDIProtocolID
+	SupportedMIDIProtocols() MIDIUMPProtocolOptions
 	MIDIDestination() uint
 	MIDISource() uint
 	DeviceInfo() *MIDI2DeviceInfo
@@ -155,7 +155,7 @@ type UMPEndpointable interface {
 	HasStaticFunctionBlocks() bool
 	HasJRTSReceiveCapability() bool
 	HasJRTSTransmitCapability() bool
-	EndpointType() raw.MIDIUMPCIObjectBackingType
+	EndpointType() MIDIUMPCIObjectBackingType
 	FunctionBlocks() []*UMPFunctionBlock
 	SetFunctionBlocks(functionBlocks *foundation.NSArray[*raw.MIDIUMPFunctionBlock])
 }

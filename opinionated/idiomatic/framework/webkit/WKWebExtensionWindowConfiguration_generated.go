@@ -41,13 +41,13 @@ func NewWKWebExtensionWindowConfiguration() *WKWebExtensionWindowConfiguration {
 }
 
 // WindowType calls the underlying WindowType.
-func (x *WKWebExtensionWindowConfiguration) WindowType() raw.WKWebExtensionWindowType {
-	return x.inner.WindowType()
+func (x *WKWebExtensionWindowConfiguration) WindowType() WKWebExtensionWindowType {
+	return WKWebExtensionWindowType(x.inner.WindowType())
 }
 
 // WindowState calls the underlying WindowState.
-func (x *WKWebExtensionWindowConfiguration) WindowState() raw.WKWebExtensionWindowState {
-	return x.inner.WindowState()
+func (x *WKWebExtensionWindowConfiguration) WindowState() WKWebExtensionWindowState {
+	return WKWebExtensionWindowState(x.inner.WindowState())
 }
 
 // Frame calls the underlying Frame.
@@ -84,8 +84,8 @@ func (x *WKWebExtensionWindowConfiguration) ShouldBePrivate() bool {
 // WKWebExtensionWindowConfigurationable is the interface implemented by [WKWebExtensionWindowConfiguration], for mocking and DI.
 type WKWebExtensionWindowConfigurationable interface {
 	Unwrap() *raw.WKWebExtensionWindowConfiguration
-	WindowType() raw.WKWebExtensionWindowType
-	WindowState() raw.WKWebExtensionWindowState
+	WindowType() WKWebExtensionWindowType
+	WindowState() WKWebExtensionWindowState
 	Frame() corefoundation.CGRect
 	TabURLs() []*foundation.NSURL
 	Tabs() *foundation.NSArray[raw.WKWebExtensionTab]

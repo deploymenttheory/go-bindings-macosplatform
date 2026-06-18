@@ -36,8 +36,8 @@ func NewChangeRepeatModeCommand() *ChangeRepeatModeCommand {
 }
 
 // WithCurrentRepeatType sets the currentRepeatType property and returns the receiver for chaining.
-func (x *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType raw.MPRepeatType) *ChangeRepeatModeCommand {
-	x.inner.SetCurrentRepeatType(currentRepeatType)
+func (x *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType MPRepeatType) *ChangeRepeatModeCommand {
+	x.inner.SetCurrentRepeatType(raw.MPRepeatType(currentRepeatType))
 	return x
 }
 
@@ -48,13 +48,13 @@ func (x *ChangeRepeatModeCommand) WithEnabled(enabled bool) *ChangeRepeatModeCom
 }
 
 // CurrentRepeatType calls the underlying CurrentRepeatType.
-func (x *ChangeRepeatModeCommand) CurrentRepeatType() raw.MPRepeatType {
-	return x.inner.CurrentRepeatType()
+func (x *ChangeRepeatModeCommand) CurrentRepeatType() MPRepeatType {
+	return MPRepeatType(x.inner.CurrentRepeatType())
 }
 
 // SetCurrentRepeatType calls the underlying SetCurrentRepeatType.
-func (x *ChangeRepeatModeCommand) SetCurrentRepeatType(currentRepeatType raw.MPRepeatType) {
-	x.inner.SetCurrentRepeatType(currentRepeatType)
+func (x *ChangeRepeatModeCommand) SetCurrentRepeatType(currentRepeatType MPRepeatType) {
+	x.inner.SetCurrentRepeatType(raw.MPRepeatType(currentRepeatType))
 }
 
 func (x *ChangeRepeatModeCommand) asRemoteCommand() *raw.MPRemoteCommand {
@@ -64,10 +64,10 @@ func (x *ChangeRepeatModeCommand) asRemoteCommand() *raw.MPRemoteCommand {
 // ChangeRepeatModeCommandable is the interface implemented by [ChangeRepeatModeCommand], for mocking and DI.
 type ChangeRepeatModeCommandable interface {
 	Unwrap() *raw.MPChangeRepeatModeCommand
-	WithCurrentRepeatType(currentRepeatType raw.MPRepeatType) *ChangeRepeatModeCommand
+	WithCurrentRepeatType(currentRepeatType MPRepeatType) *ChangeRepeatModeCommand
 	WithEnabled(enabled bool) *ChangeRepeatModeCommand
-	CurrentRepeatType() raw.MPRepeatType
-	SetCurrentRepeatType(currentRepeatType raw.MPRepeatType)
+	CurrentRepeatType() MPRepeatType
+	SetCurrentRepeatType(currentRepeatType MPRepeatType)
 }
 
 var _ ChangeRepeatModeCommandable = (*ChangeRepeatModeCommand)(nil)

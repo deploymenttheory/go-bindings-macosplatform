@@ -38,8 +38,8 @@ func NewContactFormatter() *ContactFormatter {
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *ContactFormatter) WithStyle(style raw.CNContactFormatterStyle) *ContactFormatter {
-	x.inner.SetStyle(style)
+func (x *ContactFormatter) WithStyle(style CNContactFormatterStyle) *ContactFormatter {
+	x.inner.SetStyle(raw.CNContactFormatterStyle(style))
 	return x
 }
 
@@ -58,23 +58,23 @@ func (x *ContactFormatter) AttributedStringFromContactDefaultAttributes(contact 
 }
 
 // Style calls the underlying Style.
-func (x *ContactFormatter) Style() raw.CNContactFormatterStyle {
-	return x.inner.Style()
+func (x *ContactFormatter) Style() CNContactFormatterStyle {
+	return CNContactFormatterStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *ContactFormatter) SetStyle(style raw.CNContactFormatterStyle) {
-	x.inner.SetStyle(style)
+func (x *ContactFormatter) SetStyle(style CNContactFormatterStyle) {
+	x.inner.SetStyle(raw.CNContactFormatterStyle(style))
 }
 
 // ContactFormatterable is the interface implemented by [ContactFormatter], for mocking and DI.
 type ContactFormatterable interface {
 	Unwrap() *raw.CNContactFormatter
-	WithStyle(style raw.CNContactFormatterStyle) *ContactFormatter
+	WithStyle(style CNContactFormatterStyle) *ContactFormatter
 	StringFromContact(contact *raw.CNContact) string
 	AttributedStringFromContactDefaultAttributes(contact *raw.CNContact, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString
-	Style() raw.CNContactFormatterStyle
-	SetStyle(style raw.CNContactFormatterStyle)
+	Style() CNContactFormatterStyle
+	SetStyle(style CNContactFormatterStyle)
 }
 
 var _ ContactFormatterable = (*ContactFormatter)(nil)

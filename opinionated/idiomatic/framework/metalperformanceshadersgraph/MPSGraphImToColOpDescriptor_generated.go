@@ -96,8 +96,8 @@ func (x *GraphImToColOpDescriptor) WithPaddingBottom(paddingBottom uint) *GraphI
 }
 
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
-func (x *GraphImToColOpDescriptor) WithDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
-	x.inner.SetDataLayout(dataLayout)
+func (x *GraphImToColOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
+	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 	return x
 }
 
@@ -207,13 +207,13 @@ func (x *GraphImToColOpDescriptor) SetPaddingBottom(paddingBottom uint) {
 }
 
 // DataLayout calls the underlying DataLayout.
-func (x *GraphImToColOpDescriptor) DataLayout() raw.MPSGraphTensorNamedDataLayout {
-	return x.inner.DataLayout()
+func (x *GraphImToColOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout {
+	return MPSGraphTensorNamedDataLayout(x.inner.DataLayout())
 }
 
 // SetDataLayout calls the underlying SetDataLayout.
-func (x *GraphImToColOpDescriptor) SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) {
-	x.inner.SetDataLayout(dataLayout)
+func (x *GraphImToColOpDescriptor) SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout) {
+	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 }
 
 func (x *GraphImToColOpDescriptor) asGraphObject() *raw.MPSGraphObject {
@@ -233,7 +233,7 @@ type GraphImToColOpDescriptorable interface {
 	WithPaddingRight(paddingRight uint) *GraphImToColOpDescriptor
 	WithPaddingTop(paddingTop uint) *GraphImToColOpDescriptor
 	WithPaddingBottom(paddingBottom uint) *GraphImToColOpDescriptor
-	WithDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor
+	WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor
 	SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint)
 	KernelWidth() uint
 	SetKernelWidth(kernelWidth uint)
@@ -255,8 +255,8 @@ type GraphImToColOpDescriptorable interface {
 	SetPaddingTop(paddingTop uint)
 	PaddingBottom() uint
 	SetPaddingBottom(paddingBottom uint)
-	DataLayout() raw.MPSGraphTensorNamedDataLayout
-	SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout)
+	DataLayout() MPSGraphTensorNamedDataLayout
+	SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout)
 }
 
 var _ GraphImToColOpDescriptorable = (*GraphImToColOpDescriptor)(nil)

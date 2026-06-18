@@ -49,8 +49,8 @@ func (x *VertexAttributeData) WithStride(stride uint) *VertexAttributeData {
 }
 
 // WithFormat sets the format property and returns the receiver for chaining.
-func (x *VertexAttributeData) WithFormat(format raw.MDLVertexFormat) *VertexAttributeData {
-	x.inner.SetFormat(format)
+func (x *VertexAttributeData) WithFormat(format MDLVertexFormat) *VertexAttributeData {
+	x.inner.SetFormat(raw.MDLVertexFormat(format))
 	return x
 }
 
@@ -95,13 +95,13 @@ func (x *VertexAttributeData) SetStride(stride uint) {
 }
 
 // Format calls the underlying Format.
-func (x *VertexAttributeData) Format() raw.MDLVertexFormat {
-	return x.inner.Format()
+func (x *VertexAttributeData) Format() MDLVertexFormat {
+	return MDLVertexFormat(x.inner.Format())
 }
 
 // SetFormat calls the underlying SetFormat.
-func (x *VertexAttributeData) SetFormat(format raw.MDLVertexFormat) {
-	x.inner.SetFormat(format)
+func (x *VertexAttributeData) SetFormat(format MDLVertexFormat) {
+	x.inner.SetFormat(raw.MDLVertexFormat(format))
 }
 
 // BufferSize calls the underlying BufferSize.
@@ -119,7 +119,7 @@ type VertexAttributeDataable interface {
 	Unwrap() *raw.MDLVertexAttributeData
 	WithMap(map_ *MeshBufferMap) *VertexAttributeData
 	WithStride(stride uint) *VertexAttributeData
-	WithFormat(format raw.MDLVertexFormat) *VertexAttributeData
+	WithFormat(format MDLVertexFormat) *VertexAttributeData
 	WithBufferSize(bufferSize uint) *VertexAttributeData
 	Map() *MeshBufferMap
 	SetMap(map_ *raw.MDLMeshBufferMap)
@@ -127,8 +127,8 @@ type VertexAttributeDataable interface {
 	SetDataStart(dataStart unsafe.Pointer)
 	Stride() uint
 	SetStride(stride uint)
-	Format() raw.MDLVertexFormat
-	SetFormat(format raw.MDLVertexFormat)
+	Format() MDLVertexFormat
+	SetFormat(format MDLVertexFormat)
 	BufferSize() uint
 	SetBufferSize(bufferSize uint)
 }

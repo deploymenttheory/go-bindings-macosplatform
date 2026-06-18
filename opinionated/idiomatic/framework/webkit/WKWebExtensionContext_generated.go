@@ -133,63 +133,63 @@ func (x *WKWebExtensionContext) HasInjectedContentForURL(url string) bool {
 }
 
 // PermissionStatusForPermission calls the underlying PermissionStatusForPermission.
-func (x *WKWebExtensionContext) PermissionStatusForPermission(permission *foundation.NSString) raw.WKWebExtensionContextPermissionStatus {
-	return x.inner.PermissionStatusForPermission(permission)
+func (x *WKWebExtensionContext) PermissionStatusForPermission(permission *foundation.NSString) WKWebExtensionContextPermissionStatus {
+	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForPermission(permission))
 }
 
 // PermissionStatusForPermissionInTab calls the underlying PermissionStatusForPermissionInTab.
-func (x *WKWebExtensionContext) PermissionStatusForPermissionInTab(permission *foundation.NSString, tab raw.WKWebExtensionTab) raw.WKWebExtensionContextPermissionStatus {
-	return x.inner.PermissionStatusForPermissionInTab(permission, tab)
+func (x *WKWebExtensionContext) PermissionStatusForPermissionInTab(permission *foundation.NSString, tab raw.WKWebExtensionTab) WKWebExtensionContextPermissionStatus {
+	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForPermissionInTab(permission, tab))
 }
 
 // SetPermissionStatusForPermission calls the underlying SetPermissionStatusForPermission.
-func (x *WKWebExtensionContext) SetPermissionStatusForPermission(status raw.WKWebExtensionContextPermissionStatus, permission *foundation.NSString) {
-	x.inner.SetPermissionStatusForPermission(status, permission)
+func (x *WKWebExtensionContext) SetPermissionStatusForPermission(status WKWebExtensionContextPermissionStatus, permission *foundation.NSString) {
+	x.inner.SetPermissionStatusForPermission(raw.WKWebExtensionContextPermissionStatus(status), permission)
 }
 
 // SetPermissionStatusForPermissionExpirationDate calls the underlying SetPermissionStatusForPermissionExpirationDate.
-func (x *WKWebExtensionContext) SetPermissionStatusForPermissionExpirationDate(status raw.WKWebExtensionContextPermissionStatus, permission *foundation.NSString, expirationDate *foundation.NSDate) {
-	x.inner.SetPermissionStatusForPermissionExpirationDate(status, permission, expirationDate)
+func (x *WKWebExtensionContext) SetPermissionStatusForPermissionExpirationDate(status WKWebExtensionContextPermissionStatus, permission *foundation.NSString, expirationDate *foundation.NSDate) {
+	x.inner.SetPermissionStatusForPermissionExpirationDate(raw.WKWebExtensionContextPermissionStatus(status), permission, expirationDate)
 }
 
 // PermissionStatusForURL calls the underlying PermissionStatusForURL.
-func (x *WKWebExtensionContext) PermissionStatusForURL(url string) raw.WKWebExtensionContextPermissionStatus {
-	return x.inner.PermissionStatusForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+func (x *WKWebExtensionContext) PermissionStatusForURL(url string) WKWebExtensionContextPermissionStatus {
+	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url))))
 }
 
 // PermissionStatusForURLInTab calls the underlying PermissionStatusForURLInTab.
-func (x *WKWebExtensionContext) PermissionStatusForURLInTab(url string, tab raw.WKWebExtensionTab) raw.WKWebExtensionContextPermissionStatus {
-	return x.inner.PermissionStatusForURLInTab(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), tab)
+func (x *WKWebExtensionContext) PermissionStatusForURLInTab(url string, tab raw.WKWebExtensionTab) WKWebExtensionContextPermissionStatus {
+	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForURLInTab(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), tab))
 }
 
 // SetPermissionStatusForURL calls the underlying SetPermissionStatusForURL.
-func (x *WKWebExtensionContext) SetPermissionStatusForURL(status raw.WKWebExtensionContextPermissionStatus, url string) {
-	x.inner.SetPermissionStatusForURL(status, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+func (x *WKWebExtensionContext) SetPermissionStatusForURL(status WKWebExtensionContextPermissionStatus, url string) {
+	x.inner.SetPermissionStatusForURL(raw.WKWebExtensionContextPermissionStatus(status), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
 // SetPermissionStatusForURLExpirationDate calls the underlying SetPermissionStatusForURLExpirationDate.
-func (x *WKWebExtensionContext) SetPermissionStatusForURLExpirationDate(status raw.WKWebExtensionContextPermissionStatus, url string, expirationDate *foundation.NSDate) {
-	x.inner.SetPermissionStatusForURLExpirationDate(status, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), expirationDate)
+func (x *WKWebExtensionContext) SetPermissionStatusForURLExpirationDate(status WKWebExtensionContextPermissionStatus, url string, expirationDate *foundation.NSDate) {
+	x.inner.SetPermissionStatusForURLExpirationDate(raw.WKWebExtensionContextPermissionStatus(status), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), expirationDate)
 }
 
 // PermissionStatusForMatchPattern calls the underlying PermissionStatusForMatchPattern.
-func (x *WKWebExtensionContext) PermissionStatusForMatchPattern(pattern *raw.WKWebExtensionMatchPattern) raw.WKWebExtensionContextPermissionStatus {
-	return x.inner.PermissionStatusForMatchPattern(pattern)
+func (x *WKWebExtensionContext) PermissionStatusForMatchPattern(pattern *raw.WKWebExtensionMatchPattern) WKWebExtensionContextPermissionStatus {
+	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForMatchPattern(pattern))
 }
 
 // PermissionStatusForMatchPatternInTab calls the underlying PermissionStatusForMatchPatternInTab.
-func (x *WKWebExtensionContext) PermissionStatusForMatchPatternInTab(pattern *raw.WKWebExtensionMatchPattern, tab raw.WKWebExtensionTab) raw.WKWebExtensionContextPermissionStatus {
-	return x.inner.PermissionStatusForMatchPatternInTab(pattern, tab)
+func (x *WKWebExtensionContext) PermissionStatusForMatchPatternInTab(pattern *raw.WKWebExtensionMatchPattern, tab raw.WKWebExtensionTab) WKWebExtensionContextPermissionStatus {
+	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForMatchPatternInTab(pattern, tab))
 }
 
 // SetPermissionStatusForMatchPattern calls the underlying SetPermissionStatusForMatchPattern.
-func (x *WKWebExtensionContext) SetPermissionStatusForMatchPattern(status raw.WKWebExtensionContextPermissionStatus, pattern *raw.WKWebExtensionMatchPattern) {
-	x.inner.SetPermissionStatusForMatchPattern(status, pattern)
+func (x *WKWebExtensionContext) SetPermissionStatusForMatchPattern(status WKWebExtensionContextPermissionStatus, pattern *raw.WKWebExtensionMatchPattern) {
+	x.inner.SetPermissionStatusForMatchPattern(raw.WKWebExtensionContextPermissionStatus(status), pattern)
 }
 
 // SetPermissionStatusForMatchPatternExpirationDate calls the underlying SetPermissionStatusForMatchPatternExpirationDate.
-func (x *WKWebExtensionContext) SetPermissionStatusForMatchPatternExpirationDate(status raw.WKWebExtensionContextPermissionStatus, pattern *raw.WKWebExtensionMatchPattern, expirationDate *foundation.NSDate) {
-	x.inner.SetPermissionStatusForMatchPatternExpirationDate(status, pattern, expirationDate)
+func (x *WKWebExtensionContext) SetPermissionStatusForMatchPatternExpirationDate(status WKWebExtensionContextPermissionStatus, pattern *raw.WKWebExtensionMatchPattern, expirationDate *foundation.NSDate) {
+	x.inner.SetPermissionStatusForMatchPatternExpirationDate(raw.WKWebExtensionContextPermissionStatus(status), pattern, expirationDate)
 }
 
 // LoadBackgroundContent blocks until the operation completes or ctx is cancelled.
@@ -314,8 +314,8 @@ func (x *WKWebExtensionContext) DidReplaceTabWithTab(oldTab raw.WKWebExtensionTa
 }
 
 // DidChangeTabPropertiesForTab calls the underlying DidChangeTabPropertiesForTab.
-func (x *WKWebExtensionContext) DidChangeTabPropertiesForTab(properties raw.WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab) {
-	x.inner.DidChangeTabPropertiesForTab(properties, changedTab)
+func (x *WKWebExtensionContext) DidChangeTabPropertiesForTab(properties WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab) {
+	x.inner.DidChangeTabPropertiesForTab(raw.WKWebExtensionTabChangedProperties(properties), changedTab)
 }
 
 // WebExtension calls the underlying WebExtension.
@@ -558,18 +558,18 @@ type WKWebExtensionContextable interface {
 	HasAccessToURL(url string) bool
 	HasAccessToURLInTab(url string, tab raw.WKWebExtensionTab) bool
 	HasInjectedContentForURL(url string) bool
-	PermissionStatusForPermission(permission *foundation.NSString) raw.WKWebExtensionContextPermissionStatus
-	PermissionStatusForPermissionInTab(permission *foundation.NSString, tab raw.WKWebExtensionTab) raw.WKWebExtensionContextPermissionStatus
-	SetPermissionStatusForPermission(status raw.WKWebExtensionContextPermissionStatus, permission *foundation.NSString)
-	SetPermissionStatusForPermissionExpirationDate(status raw.WKWebExtensionContextPermissionStatus, permission *foundation.NSString, expirationDate *foundation.NSDate)
-	PermissionStatusForURL(url string) raw.WKWebExtensionContextPermissionStatus
-	PermissionStatusForURLInTab(url string, tab raw.WKWebExtensionTab) raw.WKWebExtensionContextPermissionStatus
-	SetPermissionStatusForURL(status raw.WKWebExtensionContextPermissionStatus, url string)
-	SetPermissionStatusForURLExpirationDate(status raw.WKWebExtensionContextPermissionStatus, url string, expirationDate *foundation.NSDate)
-	PermissionStatusForMatchPattern(pattern *raw.WKWebExtensionMatchPattern) raw.WKWebExtensionContextPermissionStatus
-	PermissionStatusForMatchPatternInTab(pattern *raw.WKWebExtensionMatchPattern, tab raw.WKWebExtensionTab) raw.WKWebExtensionContextPermissionStatus
-	SetPermissionStatusForMatchPattern(status raw.WKWebExtensionContextPermissionStatus, pattern *raw.WKWebExtensionMatchPattern)
-	SetPermissionStatusForMatchPatternExpirationDate(status raw.WKWebExtensionContextPermissionStatus, pattern *raw.WKWebExtensionMatchPattern, expirationDate *foundation.NSDate)
+	PermissionStatusForPermission(permission *foundation.NSString) WKWebExtensionContextPermissionStatus
+	PermissionStatusForPermissionInTab(permission *foundation.NSString, tab raw.WKWebExtensionTab) WKWebExtensionContextPermissionStatus
+	SetPermissionStatusForPermission(status WKWebExtensionContextPermissionStatus, permission *foundation.NSString)
+	SetPermissionStatusForPermissionExpirationDate(status WKWebExtensionContextPermissionStatus, permission *foundation.NSString, expirationDate *foundation.NSDate)
+	PermissionStatusForURL(url string) WKWebExtensionContextPermissionStatus
+	PermissionStatusForURLInTab(url string, tab raw.WKWebExtensionTab) WKWebExtensionContextPermissionStatus
+	SetPermissionStatusForURL(status WKWebExtensionContextPermissionStatus, url string)
+	SetPermissionStatusForURLExpirationDate(status WKWebExtensionContextPermissionStatus, url string, expirationDate *foundation.NSDate)
+	PermissionStatusForMatchPattern(pattern *raw.WKWebExtensionMatchPattern) WKWebExtensionContextPermissionStatus
+	PermissionStatusForMatchPatternInTab(pattern *raw.WKWebExtensionMatchPattern, tab raw.WKWebExtensionTab) WKWebExtensionContextPermissionStatus
+	SetPermissionStatusForMatchPattern(status WKWebExtensionContextPermissionStatus, pattern *raw.WKWebExtensionMatchPattern)
+	SetPermissionStatusForMatchPatternExpirationDate(status WKWebExtensionContextPermissionStatus, pattern *raw.WKWebExtensionMatchPattern, expirationDate *foundation.NSDate)
 	LoadBackgroundContent(ctx context.Context) error
 	ActionForTab(tab raw.WKWebExtensionTab) *WKWebExtensionAction
 	PerformActionForTab(tab raw.WKWebExtensionTab)
@@ -590,7 +590,7 @@ type WKWebExtensionContextable interface {
 	DidDeselectTabs(deselectedTabs *foundation.NSArray[raw.WKWebExtensionTab])
 	DidMoveTabFromIndexInWindow(movedTab raw.WKWebExtensionTab, index uint, oldWindow raw.WKWebExtensionWindow)
 	DidReplaceTabWithTab(oldTab raw.WKWebExtensionTab, newTab raw.WKWebExtensionTab)
-	DidChangeTabPropertiesForTab(properties raw.WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab)
+	DidChangeTabPropertiesForTab(properties WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab)
 	WebExtension() *WKWebExtension
 	WebExtensionController() *WKWebExtensionController
 	IsLoaded() bool

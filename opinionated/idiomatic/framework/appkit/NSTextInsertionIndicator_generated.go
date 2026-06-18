@@ -42,8 +42,8 @@ func NewTextInsertionIndicator() *TextInsertionIndicator {
 }
 
 // WithDisplayMode sets the displayMode property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithDisplayMode(displayMode raw.NSTextInsertionIndicatorDisplayMode) *TextInsertionIndicator {
-	x.inner.SetDisplayMode(displayMode)
+func (x *TextInsertionIndicator) WithDisplayMode(displayMode NSTextInsertionIndicatorDisplayMode) *TextInsertionIndicator {
+	x.inner.SetDisplayMode(raw.NSTextInsertionIndicatorDisplayMode(displayMode))
 	return x
 }
 
@@ -54,8 +54,8 @@ func (x *TextInsertionIndicator) WithColor(color *Color) *TextInsertionIndicator
 }
 
 // WithAutomaticModeOptions sets the automaticModeOptions property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithAutomaticModeOptions(automaticModeOptions raw.NSTextInsertionIndicatorAutomaticModeOptions) *TextInsertionIndicator {
-	x.inner.SetAutomaticModeOptions(automaticModeOptions)
+func (x *TextInsertionIndicator) WithAutomaticModeOptions(automaticModeOptions NSTextInsertionIndicatorAutomaticModeOptions) *TextInsertionIndicator {
+	x.inner.SetAutomaticModeOptions(raw.NSTextInsertionIndicatorAutomaticModeOptions(automaticModeOptions))
 	return x
 }
 
@@ -102,8 +102,8 @@ func (x *TextInsertionIndicator) WithAutoresizesSubviews(autoresizesSubviews boo
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TextInsertionIndicator {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *TextInsertionIndicator) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TextInsertionIndicator {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -162,14 +162,14 @@ func (x *TextInsertionIndicator) WithWantsRestingTouches(wantsRestingTouches boo
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TextInsertionIndicator {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *TextInsertionIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TextInsertionIndicator {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TextInsertionIndicator {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *TextInsertionIndicator) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TextInsertionIndicator {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -276,8 +276,8 @@ func (x *TextInsertionIndicator) WithToolTip(toolTip string) *TextInsertionIndic
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextInsertionIndicator {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TextInsertionIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextInsertionIndicator {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -294,8 +294,8 @@ func (x *TextInsertionIndicator) WithNextKeyView(nextKeyView ViewProvider) *Text
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithFocusRingType(focusRingType raw.NSFocusRingType) *TextInsertionIndicator {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *TextInsertionIndicator) WithFocusRingType(focusRingType NSFocusRingType) *TextInsertionIndicator {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -318,8 +318,8 @@ func (x *TextInsertionIndicator) WithGestureRecognizers(items ...GestureRecogniz
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *TextInsertionIndicator) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextInsertionIndicator {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *TextInsertionIndicator) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TextInsertionIndicator {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -408,13 +408,13 @@ func (x *TextInsertionIndicator) WithTouchBar(touchBar *TouchBar) *TextInsertion
 }
 
 // DisplayMode calls the underlying DisplayMode.
-func (x *TextInsertionIndicator) DisplayMode() raw.NSTextInsertionIndicatorDisplayMode {
-	return x.inner.DisplayMode()
+func (x *TextInsertionIndicator) DisplayMode() NSTextInsertionIndicatorDisplayMode {
+	return NSTextInsertionIndicatorDisplayMode(x.inner.DisplayMode())
 }
 
 // SetDisplayMode calls the underlying SetDisplayMode.
-func (x *TextInsertionIndicator) SetDisplayMode(displayMode raw.NSTextInsertionIndicatorDisplayMode) {
-	x.inner.SetDisplayMode(displayMode)
+func (x *TextInsertionIndicator) SetDisplayMode(displayMode NSTextInsertionIndicatorDisplayMode) {
+	x.inner.SetDisplayMode(raw.NSTextInsertionIndicatorDisplayMode(displayMode))
 }
 
 // Color calls the underlying Color.
@@ -432,13 +432,13 @@ func (x *TextInsertionIndicator) SetColor(color *raw.NSColor) {
 }
 
 // AutomaticModeOptions calls the underlying AutomaticModeOptions.
-func (x *TextInsertionIndicator) AutomaticModeOptions() raw.NSTextInsertionIndicatorAutomaticModeOptions {
-	return x.inner.AutomaticModeOptions()
+func (x *TextInsertionIndicator) AutomaticModeOptions() NSTextInsertionIndicatorAutomaticModeOptions {
+	return NSTextInsertionIndicatorAutomaticModeOptions(x.inner.AutomaticModeOptions())
 }
 
 // SetAutomaticModeOptions calls the underlying SetAutomaticModeOptions.
-func (x *TextInsertionIndicator) SetAutomaticModeOptions(automaticModeOptions raw.NSTextInsertionIndicatorAutomaticModeOptions) {
-	x.inner.SetAutomaticModeOptions(automaticModeOptions)
+func (x *TextInsertionIndicator) SetAutomaticModeOptions(automaticModeOptions NSTextInsertionIndicatorAutomaticModeOptions) {
+	x.inner.SetAutomaticModeOptions(raw.NSTextInsertionIndicatorAutomaticModeOptions(automaticModeOptions))
 }
 
 // EffectsViewInserter calls the underlying EffectsViewInserter.
@@ -476,15 +476,15 @@ func (x *TextInsertionIndicator) asResponder() *raw.NSResponder { return &x.inne
 // TextInsertionIndicatorable is the interface implemented by [TextInsertionIndicator], for mocking and DI.
 type TextInsertionIndicatorable interface {
 	Unwrap() *raw.NSTextInsertionIndicator
-	WithDisplayMode(displayMode raw.NSTextInsertionIndicatorDisplayMode) *TextInsertionIndicator
+	WithDisplayMode(displayMode NSTextInsertionIndicatorDisplayMode) *TextInsertionIndicator
 	WithColor(color *Color) *TextInsertionIndicator
-	WithAutomaticModeOptions(automaticModeOptions raw.NSTextInsertionIndicatorAutomaticModeOptions) *TextInsertionIndicator
+	WithAutomaticModeOptions(automaticModeOptions NSTextInsertionIndicatorAutomaticModeOptions) *TextInsertionIndicator
 	WithEffectsViewInserter(effectsViewInserter func(*raw.NSView)) *TextInsertionIndicator
 	WithSubviews(items ...ViewProvider) *TextInsertionIndicator
 	WithHidden(hidden bool) *TextInsertionIndicator
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextInsertionIndicator
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TextInsertionIndicator
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TextInsertionIndicator
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TextInsertionIndicator
 	WithFrame(frame corefoundation.CGRect) *TextInsertionIndicator
 	WithFrameRotation(frameRotation float64) *TextInsertionIndicator
 	WithFrameCenterRotation(frameCenterRotation float64) *TextInsertionIndicator
@@ -494,8 +494,8 @@ type TextInsertionIndicatorable interface {
 	WithNeedsDisplay(needsDisplay bool) *TextInsertionIndicator
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextInsertionIndicator
 	WithWantsRestingTouches(wantsRestingTouches bool) *TextInsertionIndicator
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TextInsertionIndicator
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TextInsertionIndicator
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TextInsertionIndicator
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TextInsertionIndicator
 	WithWantsLayer(wantsLayer bool) *TextInsertionIndicator
 	WithLayer(layer *quartzcore.CALayer) *TextInsertionIndicator
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextInsertionIndicator
@@ -509,12 +509,12 @@ type TextInsertionIndicatorable interface {
 	WithClipsToBounds(clipsToBounds bool) *TextInsertionIndicator
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextInsertionIndicator
 	WithToolTip(toolTip string) *TextInsertionIndicator
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextInsertionIndicator
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextInsertionIndicator
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextInsertionIndicator
 	WithNextKeyView(nextKeyView ViewProvider) *TextInsertionIndicator
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TextInsertionIndicator
+	WithFocusRingType(focusRingType NSFocusRingType) *TextInsertionIndicator
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TextInsertionIndicator
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TextInsertionIndicator
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TextInsertionIndicator
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextInsertionIndicator
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextInsertionIndicator
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextInsertionIndicator
@@ -529,12 +529,12 @@ type TextInsertionIndicatorable interface {
 	WithMenu(menu *Menu) *TextInsertionIndicator
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TextInsertionIndicator
 	WithTouchBar(touchBar *TouchBar) *TextInsertionIndicator
-	DisplayMode() raw.NSTextInsertionIndicatorDisplayMode
-	SetDisplayMode(displayMode raw.NSTextInsertionIndicatorDisplayMode)
+	DisplayMode() NSTextInsertionIndicatorDisplayMode
+	SetDisplayMode(displayMode NSTextInsertionIndicatorDisplayMode)
 	Color() *Color
 	SetColor(color *raw.NSColor)
-	AutomaticModeOptions() raw.NSTextInsertionIndicatorAutomaticModeOptions
-	SetAutomaticModeOptions(automaticModeOptions raw.NSTextInsertionIndicatorAutomaticModeOptions)
+	AutomaticModeOptions() NSTextInsertionIndicatorAutomaticModeOptions
+	SetAutomaticModeOptions(automaticModeOptions NSTextInsertionIndicatorAutomaticModeOptions)
 	EffectsViewInserter() objc.Block
 	SetEffectsViewInserter(ctx context.Context) (*View, error)
 }

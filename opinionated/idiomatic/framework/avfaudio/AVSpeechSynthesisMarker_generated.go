@@ -32,9 +32,9 @@ func SpeechSynthesisMarkerFromID(id objc.ID) *SpeechSynthesisMarker {
 }
 
 // NewSpeechSynthesisMarkerWithMarkerTypeForTextRangeAtByteSampleOffset creates a new [SpeechSynthesisMarker].
-func NewSpeechSynthesisMarkerWithMarkerTypeForTextRangeAtByteSampleOffset(type_ raw.AVSpeechSynthesisMarkerMark, range_ foundation.NSRange, byteSampleOffset uint) *SpeechSynthesisMarker {
+func NewSpeechSynthesisMarkerWithMarkerTypeForTextRangeAtByteSampleOffset(type_ AVSpeechSynthesisMarkerMark, range_ foundation.NSRange, byteSampleOffset uint) *SpeechSynthesisMarker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisMarker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkerType:forTextRange:atByteSampleOffset:"), type_, range_, byteSampleOffset)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkerType:forTextRange:atByteSampleOffset:"), raw.AVSpeechSynthesisMarkerMark(type_), range_, byteSampleOffset)
 	return &SpeechSynthesisMarker{inner: raw.AVSpeechSynthesisMarkerFromID(_id)}
 }
 
@@ -74,8 +74,8 @@ func NewSpeechSynthesisMarkerWithBookmarkNameAtByteSampleOffset(mark string, byt
 }
 
 // WithMark sets the mark property and returns the receiver for chaining.
-func (x *SpeechSynthesisMarker) WithMark(mark raw.AVSpeechSynthesisMarkerMark) *SpeechSynthesisMarker {
-	x.inner.SetMark(mark)
+func (x *SpeechSynthesisMarker) WithMark(mark AVSpeechSynthesisMarkerMark) *SpeechSynthesisMarker {
+	x.inner.SetMark(raw.AVSpeechSynthesisMarkerMark(mark))
 	return x
 }
 
@@ -104,13 +104,13 @@ func (x *SpeechSynthesisMarker) WithPhoneme(phoneme string) *SpeechSynthesisMark
 }
 
 // Mark calls the underlying Mark.
-func (x *SpeechSynthesisMarker) Mark() raw.AVSpeechSynthesisMarkerMark {
-	return x.inner.Mark()
+func (x *SpeechSynthesisMarker) Mark() AVSpeechSynthesisMarkerMark {
+	return AVSpeechSynthesisMarkerMark(x.inner.Mark())
 }
 
 // SetMark calls the underlying SetMark.
-func (x *SpeechSynthesisMarker) SetMark(mark raw.AVSpeechSynthesisMarkerMark) {
-	x.inner.SetMark(mark)
+func (x *SpeechSynthesisMarker) SetMark(mark AVSpeechSynthesisMarkerMark) {
+	x.inner.SetMark(raw.AVSpeechSynthesisMarkerMark(mark))
 }
 
 // ByteSampleOffset calls the underlying ByteSampleOffset.
@@ -164,13 +164,13 @@ func (x *SpeechSynthesisMarker) SetPhoneme(phoneme string) {
 // SpeechSynthesisMarkerable is the interface implemented by [SpeechSynthesisMarker], for mocking and DI.
 type SpeechSynthesisMarkerable interface {
 	Unwrap() *raw.AVSpeechSynthesisMarker
-	WithMark(mark raw.AVSpeechSynthesisMarkerMark) *SpeechSynthesisMarker
+	WithMark(mark AVSpeechSynthesisMarkerMark) *SpeechSynthesisMarker
 	WithByteSampleOffset(byteSampleOffset uint) *SpeechSynthesisMarker
 	WithTextRange(textRange foundation.NSRange) *SpeechSynthesisMarker
 	WithBookmarkName(bookmarkName string) *SpeechSynthesisMarker
 	WithPhoneme(phoneme string) *SpeechSynthesisMarker
-	Mark() raw.AVSpeechSynthesisMarkerMark
-	SetMark(mark raw.AVSpeechSynthesisMarkerMark)
+	Mark() AVSpeechSynthesisMarkerMark
+	SetMark(mark AVSpeechSynthesisMarkerMark)
 	ByteSampleOffset() uint
 	SetByteSampleOffset(byteSampleOffset uint)
 	TextRange() foundation.NSRange

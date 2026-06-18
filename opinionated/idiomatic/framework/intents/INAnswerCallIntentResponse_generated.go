@@ -33,9 +33,9 @@ func AnswerCallIntentResponseFromID(id objc.ID) *AnswerCallIntentResponse {
 }
 
 // NewAnswerCallIntentResponseWithCodeUserActivity creates a new [AnswerCallIntentResponse].
-func NewAnswerCallIntentResponseWithCodeUserActivity(code raw.INAnswerCallIntentResponseCode, userActivity *foundation.NSUserActivity) *AnswerCallIntentResponse {
+func NewAnswerCallIntentResponseWithCodeUserActivity(code INAnswerCallIntentResponseCode, userActivity *foundation.NSUserActivity) *AnswerCallIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INAnswerCallIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, userActivity.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INAnswerCallIntentResponseCode(code), userActivity.Ptr())
 	return &AnswerCallIntentResponse{inner: raw.INAnswerCallIntentResponseFromID(_id)}
 }
 
@@ -64,8 +64,8 @@ func (x *AnswerCallIntentResponse) WithUserActivity(userActivity *foundation.NSU
 }
 
 // Code calls the underlying Code.
-func (x *AnswerCallIntentResponse) Code() raw.INAnswerCallIntentResponseCode {
-	return x.inner.Code()
+func (x *AnswerCallIntentResponse) Code() INAnswerCallIntentResponseCode {
+	return INAnswerCallIntentResponseCode(x.inner.Code())
 }
 
 // CallRecords returns the collection as a Go slice.
@@ -93,7 +93,7 @@ type AnswerCallIntentResponseable interface {
 	Unwrap() *raw.INAnswerCallIntentResponse
 	WithCallRecords(items ...*raw.INCallRecord) *AnswerCallIntentResponse
 	WithUserActivity(userActivity *foundation.NSUserActivity) *AnswerCallIntentResponse
-	Code() raw.INAnswerCallIntentResponseCode
+	Code() INAnswerCallIntentResponseCode
 	CallRecords() []*CallRecord
 	SetCallRecords(callRecords *foundation.NSArray[*raw.INCallRecord])
 }

@@ -38,8 +38,8 @@ func NewHostStream() *HostStream {
 }
 
 // AbortWithOptionError calls the underlying AbortWithOptionError.
-func (x *HostStream) AbortWithOptionError(option raw.IOUSBHostAbortOption) (bool, error) {
-	return x.inner.AbortWithOptionError(option)
+func (x *HostStream) AbortWithOptionError(option IOUSBHostAbortOption) (bool, error) {
+	return x.inner.AbortWithOptionError(raw.IOUSBHostAbortOption(option))
 }
 
 // Abort returns any validation error.
@@ -77,7 +77,7 @@ func (x *HostStream) asHostIOSource() *raw.IOUSBHostIOSource { return &x.inner.I
 // HostStreamable is the interface implemented by [HostStream], for mocking and DI.
 type HostStreamable interface {
 	Unwrap() *raw.IOUSBHostStream
-	AbortWithOptionError(option raw.IOUSBHostAbortOption) (bool, error)
+	AbortWithOptionError(option IOUSBHostAbortOption) (bool, error)
 	Abort() error
 	SendIORequestWithDataBytesTransferredError(data *foundation.NSMutableData, bytesTransferred *uint) (bool, error)
 	EnqueueIORequestWithDataErrorCompletionHandler(data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool

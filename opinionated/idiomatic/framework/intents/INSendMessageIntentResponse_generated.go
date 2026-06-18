@@ -31,9 +31,9 @@ func SendMessageIntentResponseFromID(id objc.ID) *SendMessageIntentResponse {
 }
 
 // NewSendMessageIntentResponseWithCodeUserActivity creates a new [SendMessageIntentResponse].
-func NewSendMessageIntentResponseWithCodeUserActivity(code raw.INSendMessageIntentResponseCode, userActivity *foundation.NSUserActivity) *SendMessageIntentResponse {
+func NewSendMessageIntentResponseWithCodeUserActivity(code INSendMessageIntentResponseCode, userActivity *foundation.NSUserActivity) *SendMessageIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, userActivity.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INSendMessageIntentResponseCode(code), userActivity.Ptr())
 	return &SendMessageIntentResponse{inner: raw.INSendMessageIntentResponseFromID(_id)}
 }
 
@@ -44,8 +44,8 @@ func (x *SendMessageIntentResponse) WithUserActivity(userActivity *foundation.NS
 }
 
 // Code calls the underlying Code.
-func (x *SendMessageIntentResponse) Code() raw.INSendMessageIntentResponseCode {
-	return x.inner.Code()
+func (x *SendMessageIntentResponse) Code() INSendMessageIntentResponseCode {
+	return INSendMessageIntentResponseCode(x.inner.Code())
 }
 
 // SentMessages calls the underlying SentMessages.
@@ -66,7 +66,7 @@ func (x *SendMessageIntentResponse) asIntentResponse() *raw.INIntentResponse {
 type SendMessageIntentResponseable interface {
 	Unwrap() *raw.INSendMessageIntentResponse
 	WithUserActivity(userActivity *foundation.NSUserActivity) *SendMessageIntentResponse
-	Code() raw.INSendMessageIntentResponseCode
+	Code() INSendMessageIntentResponseCode
 	SentMessages() *foundation.NSArray[objc.ID]
 	SetSentMessages(sentMessages *foundation.NSArray[objc.ID])
 }

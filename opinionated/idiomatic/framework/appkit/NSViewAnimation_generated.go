@@ -69,8 +69,8 @@ func (x *ViewAnimation) WithDuration(duration float64) *ViewAnimation {
 }
 
 // WithAnimationBlockingMode sets the animationBlockingMode property and returns the receiver for chaining.
-func (x *ViewAnimation) WithAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode) *ViewAnimation {
-	x.inner.NSAnimation.SetAnimationBlockingMode(animationBlockingMode)
+func (x *ViewAnimation) WithAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) *ViewAnimation {
+	x.inner.NSAnimation.SetAnimationBlockingMode(raw.NSAnimationBlockingMode(animationBlockingMode))
 	return x
 }
 
@@ -81,8 +81,8 @@ func (x *ViewAnimation) WithFrameRate(frameRate float32) *ViewAnimation {
 }
 
 // WithAnimationCurve sets the animationCurve property and returns the receiver for chaining.
-func (x *ViewAnimation) WithAnimationCurve(animationCurve raw.NSAnimationCurve) *ViewAnimation {
-	x.inner.NSAnimation.SetAnimationCurve(animationCurve)
+func (x *ViewAnimation) WithAnimationCurve(animationCurve NSAnimationCurve) *ViewAnimation {
+	x.inner.NSAnimation.SetAnimationCurve(raw.NSAnimationCurve(animationCurve))
 	return x
 }
 
@@ -128,9 +128,9 @@ type ViewAnimationable interface {
 	WithViewAnimations(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *ViewAnimation
 	WithCurrentProgress(currentProgress float32) *ViewAnimation
 	WithDuration(duration float64) *ViewAnimation
-	WithAnimationBlockingMode(animationBlockingMode raw.NSAnimationBlockingMode) *ViewAnimation
+	WithAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) *ViewAnimation
 	WithFrameRate(frameRate float32) *ViewAnimation
-	WithAnimationCurve(animationCurve raw.NSAnimationCurve) *ViewAnimation
+	WithAnimationCurve(animationCurve NSAnimationCurve) *ViewAnimation
 	WithDelegate(delegate raw.NSAnimationDelegate) *ViewAnimation
 	WithProgressMarks(items ...*foundation.NSNumber) *ViewAnimation
 	ViewAnimations() *foundation.NSArray[objc.ID]

@@ -31,9 +31,9 @@ func UnsendMessagesIntentResponseFromID(id objc.ID) *UnsendMessagesIntentRespons
 }
 
 // NewUnsendMessagesIntentResponseWithCodeUserActivity creates a new [UnsendMessagesIntentResponse].
-func NewUnsendMessagesIntentResponseWithCodeUserActivity(code raw.INUnsendMessagesIntentResponseCode, userActivity *foundation.NSUserActivity) *UnsendMessagesIntentResponse {
+func NewUnsendMessagesIntentResponseWithCodeUserActivity(code INUnsendMessagesIntentResponseCode, userActivity *foundation.NSUserActivity) *UnsendMessagesIntentResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INUnsendMessagesIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, userActivity.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INUnsendMessagesIntentResponseCode(code), userActivity.Ptr())
 	return &UnsendMessagesIntentResponse{inner: raw.INUnsendMessagesIntentResponseFromID(_id)}
 }
 
@@ -44,8 +44,8 @@ func (x *UnsendMessagesIntentResponse) WithUserActivity(userActivity *foundation
 }
 
 // Code calls the underlying Code.
-func (x *UnsendMessagesIntentResponse) Code() raw.INUnsendMessagesIntentResponseCode {
-	return x.inner.Code()
+func (x *UnsendMessagesIntentResponse) Code() INUnsendMessagesIntentResponseCode {
+	return INUnsendMessagesIntentResponseCode(x.inner.Code())
 }
 
 func (x *UnsendMessagesIntentResponse) asIntentResponse() *raw.INIntentResponse {
@@ -56,7 +56,7 @@ func (x *UnsendMessagesIntentResponse) asIntentResponse() *raw.INIntentResponse 
 type UnsendMessagesIntentResponseable interface {
 	Unwrap() *raw.INUnsendMessagesIntentResponse
 	WithUserActivity(userActivity *foundation.NSUserActivity) *UnsendMessagesIntentResponse
-	Code() raw.INUnsendMessagesIntentResponseCode
+	Code() INUnsendMessagesIntentResponseCode
 }
 
 var _ UnsendMessagesIntentResponseable = (*UnsendMessagesIntentResponse)(nil)

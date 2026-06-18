@@ -60,8 +60,8 @@ func (x *Interface) WlanChannel() *Channel {
 }
 
 // ActivePHYMode calls the underlying ActivePHYMode.
-func (x *Interface) ActivePHYMode() raw.CWPHYMode {
-	return x.inner.ActivePHYMode()
+func (x *Interface) ActivePHYMode() CWPHYMode {
+	return CWPHYMode(x.inner.ActivePHYMode())
 }
 
 // Ssid calls the underlying Ssid.
@@ -98,8 +98,8 @@ func (x *Interface) NoiseMeasurement() int {
 }
 
 // Security calls the underlying Security.
-func (x *Interface) Security() raw.CWSecurity {
-	return x.inner.Security()
+func (x *Interface) Security() CWSecurity {
+	return CWSecurity(x.inner.Security())
 }
 
 // TransmitRate calls the underlying TransmitRate.
@@ -117,8 +117,8 @@ func (x *Interface) CountryCode() string {
 }
 
 // InterfaceMode calls the underlying InterfaceMode.
-func (x *Interface) InterfaceMode() raw.CWInterfaceMode {
-	return x.inner.InterfaceMode()
+func (x *Interface) InterfaceMode() CWInterfaceMode {
+	return CWInterfaceMode(x.inner.InterfaceMode())
 }
 
 // TransmitPower calls the underlying TransmitPower.
@@ -170,8 +170,8 @@ func (x *Interface) SetPairwiseMasterKeyError(key *foundation.NSData) (bool, err
 }
 
 // SetWEPKeyFlagsIndexError calls the underlying SetWEPKeyFlagsIndexError.
-func (x *Interface) SetWEPKeyFlagsIndexError(key *foundation.NSData, flags raw.CWCipherKeyFlags, index int) (bool, error) {
-	return x.inner.SetWEPKeyFlagsIndexError(key, flags, index)
+func (x *Interface) SetWEPKeyFlagsIndexError(key *foundation.NSData, flags CWCipherKeyFlags, index int) (bool, error) {
+	return x.inner.SetWEPKeyFlagsIndexError(key, raw.CWCipherKeyFlags(flags), index)
 }
 
 // ScanForNetworksWithSSIDError calls the underlying ScanForNetworksWithSSIDError.
@@ -210,8 +210,8 @@ func (x *Interface) AssociateToEnterpriseNetworkIdentityUsernamePasswordError(ne
 }
 
 // StartIBSSModeWithSSIDSecurityChannelPasswordError calls the underlying StartIBSSModeWithSSIDSecurityChannelPasswordError.
-func (x *Interface) StartIBSSModeWithSSIDSecurityChannelPasswordError(ssidData *foundation.NSData, security raw.CWIBSSModeSecurity, channel uint, password string) (bool, error) {
-	return x.inner.StartIBSSModeWithSSIDSecurityChannelPasswordError(ssidData, security, channel, foundation.NSStringStringWithUTF8String(password))
+func (x *Interface) StartIBSSModeWithSSIDSecurityChannelPasswordError(ssidData *foundation.NSData, security CWIBSSModeSecurity, channel uint, password string) (bool, error) {
+	return x.inner.StartIBSSModeWithSSIDSecurityChannelPasswordError(ssidData, raw.CWIBSSModeSecurity(security), channel, foundation.NSStringStringWithUTF8String(password))
 }
 
 // CommitConfigurationAuthorizationError calls the underlying CommitConfigurationAuthorizationError.
@@ -234,16 +234,16 @@ type Interfaceable interface {
 	PowerOn() bool
 	SupportedWLANChannels() *foundation.NSSet[*raw.CWChannel]
 	WlanChannel() *Channel
-	ActivePHYMode() raw.CWPHYMode
+	ActivePHYMode() CWPHYMode
 	Ssid() string
 	SsidData() *foundation.NSData
 	Bssid() string
 	RssiValue() int
 	NoiseMeasurement() int
-	Security() raw.CWSecurity
+	Security() CWSecurity
 	TransmitRate() float64
 	CountryCode() string
-	InterfaceMode() raw.CWInterfaceMode
+	InterfaceMode() CWInterfaceMode
 	TransmitPower() int
 	HardwareAddress() string
 	ServiceActive() bool
@@ -252,7 +252,7 @@ type Interfaceable interface {
 	SetPowerError(power bool) (bool, error)
 	SetWLANChannelError(channel *raw.CWChannel) (bool, error)
 	SetPairwiseMasterKeyError(key *foundation.NSData) (bool, error)
-	SetWEPKeyFlagsIndexError(key *foundation.NSData, flags raw.CWCipherKeyFlags, index int) (bool, error)
+	SetWEPKeyFlagsIndexError(key *foundation.NSData, flags CWCipherKeyFlags, index int) (bool, error)
 	ScanForNetworksWithSSIDError(ssid *foundation.NSData) (*foundation.NSSet[*raw.CWNetwork], error)
 	ScanForNetworksWithSSIDIncludeHiddenError(ssid *foundation.NSData, includeHidden bool) (*foundation.NSSet[*raw.CWNetwork], error)
 	ScanForNetworksWithNameError(networkName string) (*foundation.NSSet[*raw.CWNetwork], error)
@@ -260,7 +260,7 @@ type Interfaceable interface {
 	AssociateToNetworkPasswordError(network *raw.CWNetwork, password string) (bool, error)
 	Disassociate()
 	AssociateToEnterpriseNetworkIdentityUsernamePasswordError(network *raw.CWNetwork, identity unsafe.Pointer, username string, password string) (bool, error)
-	StartIBSSModeWithSSIDSecurityChannelPasswordError(ssidData *foundation.NSData, security raw.CWIBSSModeSecurity, channel uint, password string) (bool, error)
+	StartIBSSModeWithSSIDSecurityChannelPasswordError(ssidData *foundation.NSData, security CWIBSSModeSecurity, channel uint, password string) (bool, error)
 	CommitConfigurationAuthorizationError(configuration *raw.CWConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error)
 	InterfaceName() string
 }

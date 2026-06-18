@@ -113,20 +113,20 @@ func (x *AnnotationChoiceWidget) WithEndPoint(endPoint corefoundation.CGPoint) *
 }
 
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationChoiceWidget) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationChoiceWidget {
-	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+func (x *AnnotationChoiceWidget) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationChoiceWidget {
+	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationChoiceWidget) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationChoiceWidget {
-	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+func (x *AnnotationChoiceWidget) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationChoiceWidget {
+	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
 // WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationChoiceWidget) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationChoiceWidget {
-	x.inner.PDFAnnotation.SetIconType(iconType)
+func (x *AnnotationChoiceWidget) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationChoiceWidget {
+	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
@@ -149,14 +149,14 @@ func (x *AnnotationChoiceWidget) WithQuadrilateralPoints(items ...*foundation.NS
 }
 
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationChoiceWidget) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationChoiceWidget {
-	x.inner.PDFAnnotation.SetMarkupType(markupType)
+func (x *AnnotationChoiceWidget) WithMarkupType(markupType PDFMarkupType) *AnnotationChoiceWidget {
+	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationChoiceWidget) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationChoiceWidget {
-	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+func (x *AnnotationChoiceWidget) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationChoiceWidget {
+	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
@@ -251,8 +251,8 @@ func (x *AnnotationChoiceWidget) WithValues(items ...*foundation.NSString) *Anno
 }
 
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationChoiceWidget) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationChoiceWidget {
-	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+func (x *AnnotationChoiceWidget) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationChoiceWidget {
+	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
@@ -340,12 +340,12 @@ type AnnotationChoiceWidgetable interface {
 	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationChoiceWidget
 	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationChoiceWidget
 	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationChoiceWidget
-	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationChoiceWidget
-	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationChoiceWidget
-	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationChoiceWidget
+	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationChoiceWidget
+	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationChoiceWidget
+	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationChoiceWidget
 	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationChoiceWidget
-	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationChoiceWidget
-	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationChoiceWidget
+	WithMarkupType(markupType PDFMarkupType) *AnnotationChoiceWidget
+	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationChoiceWidget
 	WithMultiline(multiline bool) *AnnotationChoiceWidget
 	WithComb(comb bool) *AnnotationChoiceWidget
 	WithMaximumLength(maximumLength int) *AnnotationChoiceWidget
@@ -357,7 +357,7 @@ type AnnotationChoiceWidgetable interface {
 	WithListChoice(listChoice bool) *AnnotationChoiceWidget
 	WithChoices(items ...*foundation.NSString) *AnnotationChoiceWidget
 	WithValues(items ...*foundation.NSString) *AnnotationChoiceWidget
-	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationChoiceWidget
+	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationChoiceWidget
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationChoiceWidget
 	WithOpen(open bool) *AnnotationChoiceWidget
 	WithDestination(destination *Destination) *AnnotationChoiceWidget

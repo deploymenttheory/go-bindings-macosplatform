@@ -46,8 +46,8 @@ func HvGicGetDistributorBaseAlignment(distributor_base_alignment *uint) int {
 }
 
 // HvGicGetDistributorReg calls [raw.HvGicGetDistributorReg] (C function hv_gic_get_distributor_reg).
-func HvGicGetDistributorReg(reg raw.Hv_gic_distributor_reg_t, value *uint64) int {
-	return raw.HvGicGetDistributorReg(reg, value)
+func HvGicGetDistributorReg(reg Hv_gic_distributor_reg_t, value *uint64) int {
+	return raw.HvGicGetDistributorReg(raw.Hv_gic_distributor_reg_t(reg), value)
 }
 
 // HvGicGetDistributorSize calls [raw.HvGicGetDistributorSize] (C function hv_gic_get_distributor_size).
@@ -56,28 +56,28 @@ func HvGicGetDistributorSize(distributor_size *uint) int {
 }
 
 // HvGicGetIccReg calls [raw.HvGicGetIccReg] (C function hv_gic_get_icc_reg).
-func HvGicGetIccReg(vcpu uint64, reg raw.Hv_gic_icc_reg_t, value *uint64) int {
-	return raw.HvGicGetIccReg(vcpu, reg, value)
+func HvGicGetIccReg(vcpu uint64, reg Hv_gic_icc_reg_t, value *uint64) int {
+	return raw.HvGicGetIccReg(vcpu, raw.Hv_gic_icc_reg_t(reg), value)
 }
 
 // HvGicGetIchReg calls [raw.HvGicGetIchReg] (C function hv_gic_get_ich_reg).
-func HvGicGetIchReg(vcpu uint64, reg raw.Hv_gic_ich_reg_t, value *uint64) int {
-	return raw.HvGicGetIchReg(vcpu, reg, value)
+func HvGicGetIchReg(vcpu uint64, reg Hv_gic_ich_reg_t, value *uint64) int {
+	return raw.HvGicGetIchReg(vcpu, raw.Hv_gic_ich_reg_t(reg), value)
 }
 
 // HvGicGetIcvReg calls [raw.HvGicGetIcvReg] (C function hv_gic_get_icv_reg).
-func HvGicGetIcvReg(vcpu uint64, reg raw.Hv_gic_icv_reg_t, value *uint64) int {
-	return raw.HvGicGetIcvReg(vcpu, reg, value)
+func HvGicGetIcvReg(vcpu uint64, reg Hv_gic_icv_reg_t, value *uint64) int {
+	return raw.HvGicGetIcvReg(vcpu, raw.Hv_gic_icv_reg_t(reg), value)
 }
 
 // HvGicGetIntid calls [raw.HvGicGetIntid] (C function hv_gic_get_intid).
-func HvGicGetIntid(interrupt raw.Hv_gic_intid_t, intid *uint32) int {
-	return raw.HvGicGetIntid(interrupt, intid)
+func HvGicGetIntid(interrupt Hv_gic_intid_t, intid *uint32) int {
+	return raw.HvGicGetIntid(raw.Hv_gic_intid_t(interrupt), intid)
 }
 
 // HvGicGetMsiReg calls [raw.HvGicGetMsiReg] (C function hv_gic_get_msi_reg).
-func HvGicGetMsiReg(reg raw.Hv_gic_msi_reg_t, value *uint64) int {
-	return raw.HvGicGetMsiReg(reg, value)
+func HvGicGetMsiReg(reg Hv_gic_msi_reg_t, value *uint64) int {
+	return raw.HvGicGetMsiReg(raw.Hv_gic_msi_reg_t(reg), value)
 }
 
 // HvGicGetMsiRegionBaseAlignment calls [raw.HvGicGetMsiRegionBaseAlignment] (C function hv_gic_get_msi_region_base_alignment).
@@ -101,8 +101,8 @@ func HvGicGetRedistributorBaseAlignment(redistributor_base_alignment *uint) int 
 }
 
 // HvGicGetRedistributorReg calls [raw.HvGicGetRedistributorReg] (C function hv_gic_get_redistributor_reg).
-func HvGicGetRedistributorReg(vcpu uint64, reg raw.Hv_gic_redistributor_reg_t, value *uint64) int {
-	return raw.HvGicGetRedistributorReg(vcpu, reg, value)
+func HvGicGetRedistributorReg(vcpu uint64, reg Hv_gic_redistributor_reg_t, value *uint64) int {
+	return raw.HvGicGetRedistributorReg(vcpu, raw.Hv_gic_redistributor_reg_t(reg), value)
 }
 
 // HvGicGetRedistributorRegionSize calls [raw.HvGicGetRedistributorRegionSize] (C function hv_gic_get_redistributor_region_size).
@@ -131,33 +131,33 @@ func HvGicSendMsi(address uint64, intid uint32) int {
 }
 
 // HvGicSetDistributorReg calls [raw.HvGicSetDistributorReg] (C function hv_gic_set_distributor_reg).
-func HvGicSetDistributorReg(reg raw.Hv_gic_distributor_reg_t, value uint64) int {
-	return raw.HvGicSetDistributorReg(reg, value)
+func HvGicSetDistributorReg(reg Hv_gic_distributor_reg_t, value uint64) int {
+	return raw.HvGicSetDistributorReg(raw.Hv_gic_distributor_reg_t(reg), value)
 }
 
 // HvGicSetIccReg calls [raw.HvGicSetIccReg] (C function hv_gic_set_icc_reg).
-func HvGicSetIccReg(vcpu uint64, reg raw.Hv_gic_icc_reg_t, value uint64) int {
-	return raw.HvGicSetIccReg(vcpu, reg, value)
+func HvGicSetIccReg(vcpu uint64, reg Hv_gic_icc_reg_t, value uint64) int {
+	return raw.HvGicSetIccReg(vcpu, raw.Hv_gic_icc_reg_t(reg), value)
 }
 
 // HvGicSetIchReg calls [raw.HvGicSetIchReg] (C function hv_gic_set_ich_reg).
-func HvGicSetIchReg(vcpu uint64, reg raw.Hv_gic_ich_reg_t, value uint64) int {
-	return raw.HvGicSetIchReg(vcpu, reg, value)
+func HvGicSetIchReg(vcpu uint64, reg Hv_gic_ich_reg_t, value uint64) int {
+	return raw.HvGicSetIchReg(vcpu, raw.Hv_gic_ich_reg_t(reg), value)
 }
 
 // HvGicSetIcvReg calls [raw.HvGicSetIcvReg] (C function hv_gic_set_icv_reg).
-func HvGicSetIcvReg(vcpu uint64, reg raw.Hv_gic_icv_reg_t, value uint64) int {
-	return raw.HvGicSetIcvReg(vcpu, reg, value)
+func HvGicSetIcvReg(vcpu uint64, reg Hv_gic_icv_reg_t, value uint64) int {
+	return raw.HvGicSetIcvReg(vcpu, raw.Hv_gic_icv_reg_t(reg), value)
 }
 
 // HvGicSetMsiReg calls [raw.HvGicSetMsiReg] (C function hv_gic_set_msi_reg).
-func HvGicSetMsiReg(reg raw.Hv_gic_msi_reg_t, value uint64) int {
-	return raw.HvGicSetMsiReg(reg, value)
+func HvGicSetMsiReg(reg Hv_gic_msi_reg_t, value uint64) int {
+	return raw.HvGicSetMsiReg(raw.Hv_gic_msi_reg_t(reg), value)
 }
 
 // HvGicSetRedistributorReg calls [raw.HvGicSetRedistributorReg] (C function hv_gic_set_redistributor_reg).
-func HvGicSetRedistributorReg(vcpu uint64, reg raw.Hv_gic_redistributor_reg_t, value uint64) int {
-	return raw.HvGicSetRedistributorReg(vcpu, reg, value)
+func HvGicSetRedistributorReg(vcpu uint64, reg Hv_gic_redistributor_reg_t, value uint64) int {
+	return raw.HvGicSetRedistributorReg(vcpu, raw.Hv_gic_redistributor_reg_t(reg), value)
 }
 
 // HvGicSetSpi calls [raw.HvGicSetSpi] (C function hv_gic_set_spi).
@@ -196,13 +196,13 @@ func HvVcpuConfigCreate() unsafe.Pointer {
 }
 
 // HvVcpuConfigGetCcsidrEl1SysRegValues calls [raw.HvVcpuConfigGetCcsidrEl1SysRegValues] (C function hv_vcpu_config_get_ccsidr_el1_sys_reg_values).
-func HvVcpuConfigGetCcsidrEl1SysRegValues(config *foundation.NSObject, cache_type raw.Hv_cache_type_t, values *uint64) int {
-	return raw.HvVcpuConfigGetCcsidrEl1SysRegValues(config, cache_type, values)
+func HvVcpuConfigGetCcsidrEl1SysRegValues(config *foundation.NSObject, cache_type Hv_cache_type_t, values *uint64) int {
+	return raw.HvVcpuConfigGetCcsidrEl1SysRegValues(config, raw.Hv_cache_type_t(cache_type), values)
 }
 
 // HvVcpuConfigGetFeatureReg calls [raw.HvVcpuConfigGetFeatureReg] (C function hv_vcpu_config_get_feature_reg).
-func HvVcpuConfigGetFeatureReg(config *foundation.NSObject, feature_reg raw.Hv_feature_reg_t, value *uint64) int {
-	return raw.HvVcpuConfigGetFeatureReg(config, feature_reg, value)
+func HvVcpuConfigGetFeatureReg(config *foundation.NSObject, feature_reg Hv_feature_reg_t, value *uint64) int {
+	return raw.HvVcpuConfigGetFeatureReg(config, raw.Hv_feature_reg_t(feature_reg), value)
 }
 
 // HvVcpuCreate calls [raw.HvVcpuCreate] (C function hv_vcpu_create).
@@ -221,23 +221,23 @@ func HvVcpuGetExecTime(vcpu uint64, time_ *uint64) int {
 }
 
 // HvVcpuGetPendingInterrupt calls [raw.HvVcpuGetPendingInterrupt] (C function hv_vcpu_get_pending_interrupt).
-func HvVcpuGetPendingInterrupt(vcpu uint64, type_ raw.Hv_interrupt_type_t, pending unsafe.Pointer) int {
-	return raw.HvVcpuGetPendingInterrupt(vcpu, type_, pending)
+func HvVcpuGetPendingInterrupt(vcpu uint64, type_ Hv_interrupt_type_t, pending unsafe.Pointer) int {
+	return raw.HvVcpuGetPendingInterrupt(vcpu, raw.Hv_interrupt_type_t(type_), pending)
 }
 
 // HvVcpuGetReg calls [raw.HvVcpuGetReg] (C function hv_vcpu_get_reg).
-func HvVcpuGetReg(vcpu uint64, reg raw.Hv_reg_t, value *uint64) int {
-	return raw.HvVcpuGetReg(vcpu, reg, value)
+func HvVcpuGetReg(vcpu uint64, reg Hv_reg_t, value *uint64) int {
+	return raw.HvVcpuGetReg(vcpu, raw.Hv_reg_t(reg), value)
 }
 
 // HvVcpuGetSimdFpReg calls [raw.HvVcpuGetSimdFpReg] (C function hv_vcpu_get_simd_fp_reg).
-func HvVcpuGetSimdFpReg(vcpu uint64, reg raw.Hv_simd_fp_reg_t, value unsafe.Pointer) int {
-	return raw.HvVcpuGetSimdFpReg(vcpu, reg, value)
+func HvVcpuGetSimdFpReg(vcpu uint64, reg Hv_simd_fp_reg_t, value unsafe.Pointer) int {
+	return raw.HvVcpuGetSimdFpReg(vcpu, raw.Hv_simd_fp_reg_t(reg), value)
 }
 
 // HvVcpuGetSmePReg calls [raw.HvVcpuGetSmePReg] (C function hv_vcpu_get_sme_p_reg).
-func HvVcpuGetSmePReg(vcpu uint64, reg raw.Hv_sme_p_reg_t, value *uint8, length uint) int {
-	return raw.HvVcpuGetSmePReg(vcpu, reg, value, length)
+func HvVcpuGetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, value *uint8, length uint) int {
+	return raw.HvVcpuGetSmePReg(vcpu, raw.Hv_sme_p_reg_t(reg), value, length)
 }
 
 // HvVcpuGetSmeState calls [raw.HvVcpuGetSmeState] (C function hv_vcpu_get_sme_state).
@@ -246,8 +246,8 @@ func HvVcpuGetSmeState(vcpu uint64, sme_state *raw.HvVcpuSmeStateT) int {
 }
 
 // HvVcpuGetSmeZReg calls [raw.HvVcpuGetSmeZReg] (C function hv_vcpu_get_sme_z_reg).
-func HvVcpuGetSmeZReg(vcpu uint64, reg raw.Hv_sme_z_reg_t, value *uint8, length uint) int {
-	return raw.HvVcpuGetSmeZReg(vcpu, reg, value, length)
+func HvVcpuGetSmeZReg(vcpu uint64, reg Hv_sme_z_reg_t, value *uint8, length uint) int {
+	return raw.HvVcpuGetSmeZReg(vcpu, raw.Hv_sme_z_reg_t(reg), value, length)
 }
 
 // HvVcpuGetSmeZaReg calls [raw.HvVcpuGetSmeZaReg] (C function hv_vcpu_get_sme_za_reg).
@@ -261,8 +261,8 @@ func HvVcpuGetSmeZt0Reg(vcpu uint64, value unsafe.Pointer) int {
 }
 
 // HvVcpuGetSysReg calls [raw.HvVcpuGetSysReg] (C function hv_vcpu_get_sys_reg).
-func HvVcpuGetSysReg(vcpu uint64, reg raw.Hv_sys_reg_t, value *uint64) int {
-	return raw.HvVcpuGetSysReg(vcpu, reg, value)
+func HvVcpuGetSysReg(vcpu uint64, reg Hv_sys_reg_t, value *uint64) int {
+	return raw.HvVcpuGetSysReg(vcpu, raw.Hv_sys_reg_t(reg), value)
 }
 
 // HvVcpuGetTrapDebugExceptions calls [raw.HvVcpuGetTrapDebugExceptions] (C function hv_vcpu_get_trap_debug_exceptions).
@@ -291,23 +291,23 @@ func HvVcpuRun(vcpu uint64) int {
 }
 
 // HvVcpuSetPendingInterrupt calls [raw.HvVcpuSetPendingInterrupt] (C function hv_vcpu_set_pending_interrupt).
-func HvVcpuSetPendingInterrupt(vcpu uint64, type_ raw.Hv_interrupt_type_t, pending bool) int {
-	return raw.HvVcpuSetPendingInterrupt(vcpu, type_, pending)
+func HvVcpuSetPendingInterrupt(vcpu uint64, type_ Hv_interrupt_type_t, pending bool) int {
+	return raw.HvVcpuSetPendingInterrupt(vcpu, raw.Hv_interrupt_type_t(type_), pending)
 }
 
 // HvVcpuSetReg calls [raw.HvVcpuSetReg] (C function hv_vcpu_set_reg).
-func HvVcpuSetReg(vcpu uint64, reg raw.Hv_reg_t, value uint64) int {
-	return raw.HvVcpuSetReg(vcpu, reg, value)
+func HvVcpuSetReg(vcpu uint64, reg Hv_reg_t, value uint64) int {
+	return raw.HvVcpuSetReg(vcpu, raw.Hv_reg_t(reg), value)
 }
 
 // HvVcpuSetSimdFpReg calls [raw.HvVcpuSetSimdFpReg] (C function hv_vcpu_set_simd_fp_reg).
-func HvVcpuSetSimdFpReg(vcpu uint64, reg raw.Hv_simd_fp_reg_t, value unsafe.Pointer) int {
-	return raw.HvVcpuSetSimdFpReg(vcpu, reg, value)
+func HvVcpuSetSimdFpReg(vcpu uint64, reg Hv_simd_fp_reg_t, value unsafe.Pointer) int {
+	return raw.HvVcpuSetSimdFpReg(vcpu, raw.Hv_simd_fp_reg_t(reg), value)
 }
 
 // HvVcpuSetSmePReg calls [raw.HvVcpuSetSmePReg] (C function hv_vcpu_set_sme_p_reg).
-func HvVcpuSetSmePReg(vcpu uint64, reg raw.Hv_sme_p_reg_t, value *uint8, length uint) int {
-	return raw.HvVcpuSetSmePReg(vcpu, reg, value, length)
+func HvVcpuSetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, value *uint8, length uint) int {
+	return raw.HvVcpuSetSmePReg(vcpu, raw.Hv_sme_p_reg_t(reg), value, length)
 }
 
 // HvVcpuSetSmeState calls [raw.HvVcpuSetSmeState] (C function hv_vcpu_set_sme_state).
@@ -316,8 +316,8 @@ func HvVcpuSetSmeState(vcpu uint64, sme_state *raw.HvVcpuSmeStateT) int {
 }
 
 // HvVcpuSetSmeZReg calls [raw.HvVcpuSetSmeZReg] (C function hv_vcpu_set_sme_z_reg).
-func HvVcpuSetSmeZReg(vcpu uint64, reg raw.Hv_sme_z_reg_t, value *uint8, length uint) int {
-	return raw.HvVcpuSetSmeZReg(vcpu, reg, value, length)
+func HvVcpuSetSmeZReg(vcpu uint64, reg Hv_sme_z_reg_t, value *uint8, length uint) int {
+	return raw.HvVcpuSetSmeZReg(vcpu, raw.Hv_sme_z_reg_t(reg), value, length)
 }
 
 // HvVcpuSetSmeZaReg calls [raw.HvVcpuSetSmeZaReg] (C function hv_vcpu_set_sme_za_reg).
@@ -331,8 +331,8 @@ func HvVcpuSetSmeZt0Reg(vcpu uint64, value unsafe.Pointer) int {
 }
 
 // HvVcpuSetSysReg calls [raw.HvVcpuSetSysReg] (C function hv_vcpu_set_sys_reg).
-func HvVcpuSetSysReg(vcpu uint64, reg raw.Hv_sys_reg_t, value uint64) int {
-	return raw.HvVcpuSetSysReg(vcpu, reg, value)
+func HvVcpuSetSysReg(vcpu uint64, reg Hv_sys_reg_t, value uint64) int {
+	return raw.HvVcpuSetSysReg(vcpu, raw.Hv_sys_reg_t(reg), value)
 }
 
 // HvVcpuSetTrapDebugExceptions calls [raw.HvVcpuSetTrapDebugExceptions] (C function hv_vcpu_set_trap_debug_exceptions).
@@ -371,8 +371,13 @@ func HvVmConfigCreate() unsafe.Pointer {
 }
 
 // HvVmConfigGetDefaultIpaGranule calls [raw.HvVmConfigGetDefaultIpaGranule] (C function hv_vm_config_get_default_ipa_granule).
-func HvVmConfigGetDefaultIpaGranule(granule *raw.Hv_ipa_granule_t) int {
-	return raw.HvVmConfigGetDefaultIpaGranule(granule)
+func HvVmConfigGetDefaultIpaGranule(granule *Hv_ipa_granule_t) int {
+	var _granule raw.Hv_ipa_granule_t
+	_ret := raw.HvVmConfigGetDefaultIpaGranule(&_granule)
+	if granule != nil {
+		*granule = Hv_ipa_granule_t(_granule)
+	}
+	return _ret
 }
 
 // HvVmConfigGetDefaultIpaSize calls [raw.HvVmConfigGetDefaultIpaSize] (C function hv_vm_config_get_default_ipa_size).
@@ -391,8 +396,13 @@ func HvVmConfigGetEl2Supported(el2_supported unsafe.Pointer) int {
 }
 
 // HvVmConfigGetIpaGranule calls [raw.HvVmConfigGetIpaGranule] (C function hv_vm_config_get_ipa_granule).
-func HvVmConfigGetIpaGranule(config *foundation.NSObject, granule *raw.Hv_ipa_granule_t) int {
-	return raw.HvVmConfigGetIpaGranule(config, granule)
+func HvVmConfigGetIpaGranule(config *foundation.NSObject, granule *Hv_ipa_granule_t) int {
+	var _granule raw.Hv_ipa_granule_t
+	_ret := raw.HvVmConfigGetIpaGranule(config, &_granule)
+	if granule != nil {
+		*granule = Hv_ipa_granule_t(_granule)
+	}
+	return _ret
 }
 
 // HvVmConfigGetIpaSize calls [raw.HvVmConfigGetIpaSize] (C function hv_vm_config_get_ipa_size).
@@ -411,8 +421,8 @@ func HvVmConfigSetEl2Enabled(config *foundation.NSObject, el2_enabled bool) int 
 }
 
 // HvVmConfigSetIpaGranule calls [raw.HvVmConfigSetIpaGranule] (C function hv_vm_config_set_ipa_granule).
-func HvVmConfigSetIpaGranule(config *foundation.NSObject, granule raw.Hv_ipa_granule_t) int {
-	return raw.HvVmConfigSetIpaGranule(config, granule)
+func HvVmConfigSetIpaGranule(config *foundation.NSObject, granule Hv_ipa_granule_t) int {
+	return raw.HvVmConfigSetIpaGranule(config, raw.Hv_ipa_granule_t(granule))
 }
 
 // HvVmConfigSetIpaSize calls [raw.HvVmConfigSetIpaSize] (C function hv_vm_config_set_ipa_size).

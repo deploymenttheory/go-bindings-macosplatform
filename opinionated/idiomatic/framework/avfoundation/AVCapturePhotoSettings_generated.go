@@ -39,14 +39,14 @@ func NewCapturePhotoSettings() *CapturePhotoSettings {
 }
 
 // WithFlashMode sets the flashMode property and returns the receiver for chaining.
-func (x *CapturePhotoSettings) WithFlashMode(flashMode raw.AVCaptureFlashMode) *CapturePhotoSettings {
-	x.inner.SetFlashMode(flashMode)
+func (x *CapturePhotoSettings) WithFlashMode(flashMode AVCaptureFlashMode) *CapturePhotoSettings {
+	x.inner.SetFlashMode(raw.AVCaptureFlashMode(flashMode))
 	return x
 }
 
 // WithPhotoQualityPrioritization sets the photoQualityPrioritization property and returns the receiver for chaining.
-func (x *CapturePhotoSettings) WithPhotoQualityPrioritization(photoQualityPrioritization raw.AVCapturePhotoQualityPrioritization) *CapturePhotoSettings {
-	x.inner.SetPhotoQualityPrioritization(photoQualityPrioritization)
+func (x *CapturePhotoSettings) WithPhotoQualityPrioritization(photoQualityPrioritization AVCapturePhotoQualityPrioritization) *CapturePhotoSettings {
+	x.inner.SetPhotoQualityPrioritization(raw.AVCapturePhotoQualityPrioritization(photoQualityPrioritization))
 	return x
 }
 
@@ -100,23 +100,23 @@ func (x *CapturePhotoSettings) ProcessedFileType() string {
 }
 
 // FlashMode calls the underlying FlashMode.
-func (x *CapturePhotoSettings) FlashMode() raw.AVCaptureFlashMode {
-	return x.inner.FlashMode()
+func (x *CapturePhotoSettings) FlashMode() AVCaptureFlashMode {
+	return AVCaptureFlashMode(x.inner.FlashMode())
 }
 
 // SetFlashMode calls the underlying SetFlashMode.
-func (x *CapturePhotoSettings) SetFlashMode(flashMode raw.AVCaptureFlashMode) {
-	x.inner.SetFlashMode(flashMode)
+func (x *CapturePhotoSettings) SetFlashMode(flashMode AVCaptureFlashMode) {
+	x.inner.SetFlashMode(raw.AVCaptureFlashMode(flashMode))
 }
 
 // PhotoQualityPrioritization calls the underlying PhotoQualityPrioritization.
-func (x *CapturePhotoSettings) PhotoQualityPrioritization() raw.AVCapturePhotoQualityPrioritization {
-	return x.inner.PhotoQualityPrioritization()
+func (x *CapturePhotoSettings) PhotoQualityPrioritization() AVCapturePhotoQualityPrioritization {
+	return AVCapturePhotoQualityPrioritization(x.inner.PhotoQualityPrioritization())
 }
 
 // SetPhotoQualityPrioritization calls the underlying SetPhotoQualityPrioritization.
-func (x *CapturePhotoSettings) SetPhotoQualityPrioritization(photoQualityPrioritization raw.AVCapturePhotoQualityPrioritization) {
-	x.inner.SetPhotoQualityPrioritization(photoQualityPrioritization)
+func (x *CapturePhotoSettings) SetPhotoQualityPrioritization(photoQualityPrioritization AVCapturePhotoQualityPrioritization) {
+	x.inner.SetPhotoQualityPrioritization(raw.AVCapturePhotoQualityPrioritization(photoQualityPrioritization))
 }
 
 // IsHighResolutionPhotoEnabled calls the underlying IsHighResolutionPhotoEnabled.
@@ -172,8 +172,8 @@ func (x *CapturePhotoSettings) SetShutterSoundSuppressionEnabled(shutterSoundSup
 // CapturePhotoSettingsable is the interface implemented by [CapturePhotoSettings], for mocking and DI.
 type CapturePhotoSettingsable interface {
 	Unwrap() *raw.AVCapturePhotoSettings
-	WithFlashMode(flashMode raw.AVCaptureFlashMode) *CapturePhotoSettings
-	WithPhotoQualityPrioritization(photoQualityPrioritization raw.AVCapturePhotoQualityPrioritization) *CapturePhotoSettings
+	WithFlashMode(flashMode AVCaptureFlashMode) *CapturePhotoSettings
+	WithPhotoQualityPrioritization(photoQualityPrioritization AVCapturePhotoQualityPrioritization) *CapturePhotoSettings
 	WithHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool) *CapturePhotoSettings
 	WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoSettings
 	WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoSettings
@@ -182,10 +182,10 @@ type CapturePhotoSettingsable interface {
 	UniqueID() int64
 	Format() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	ProcessedFileType() string
-	FlashMode() raw.AVCaptureFlashMode
-	SetFlashMode(flashMode raw.AVCaptureFlashMode)
-	PhotoQualityPrioritization() raw.AVCapturePhotoQualityPrioritization
-	SetPhotoQualityPrioritization(photoQualityPrioritization raw.AVCapturePhotoQualityPrioritization)
+	FlashMode() AVCaptureFlashMode
+	SetFlashMode(flashMode AVCaptureFlashMode)
+	PhotoQualityPrioritization() AVCapturePhotoQualityPrioritization
+	SetPhotoQualityPrioritization(photoQualityPrioritization AVCapturePhotoQualityPrioritization)
 	IsHighResolutionPhotoEnabled() bool
 	SetHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool)
 	MaxPhotoDimensions() coremedia.CMVideoDimensions

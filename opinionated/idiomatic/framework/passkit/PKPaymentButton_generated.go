@@ -30,9 +30,9 @@ func PaymentButtonFromID(id objc.ID) *PaymentButton {
 }
 
 // NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle creates a new [PaymentButton].
-func NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle(type_ raw.PKPaymentButtonType, style raw.PKPaymentButtonStyle) *PaymentButton {
+func NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle(type_ PKPaymentButtonType, style PKPaymentButtonStyle) *PaymentButton {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentButtonType:paymentButtonStyle:"), type_, style)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentButtonType:paymentButtonStyle:"), raw.PKPaymentButtonType(type_), raw.PKPaymentButtonStyle(style))
 	return &PaymentButton{inner: raw.PKPaymentButtonFromID(_id)}
 }
 

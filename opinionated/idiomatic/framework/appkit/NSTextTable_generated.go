@@ -44,8 +44,8 @@ func (x *TextTable) WithNumberOfColumns(numberOfColumns uint) *TextTable {
 }
 
 // WithLayoutAlgorithm sets the layoutAlgorithm property and returns the receiver for chaining.
-func (x *TextTable) WithLayoutAlgorithm(layoutAlgorithm raw.NSTextTableLayoutAlgorithm) *TextTable {
-	x.inner.SetLayoutAlgorithm(layoutAlgorithm)
+func (x *TextTable) WithLayoutAlgorithm(layoutAlgorithm NSTextTableLayoutAlgorithm) *TextTable {
+	x.inner.SetLayoutAlgorithm(raw.NSTextTableLayoutAlgorithm(layoutAlgorithm))
 	return x
 }
 
@@ -62,8 +62,8 @@ func (x *TextTable) WithHidesEmptyCells(hidesEmptyCells bool) *TextTable {
 }
 
 // WithVerticalAlignment sets the verticalAlignment property and returns the receiver for chaining.
-func (x *TextTable) WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) *TextTable {
-	x.inner.NSTextBlock.SetVerticalAlignment(verticalAlignment)
+func (x *TextTable) WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextTable {
+	x.inner.NSTextBlock.SetVerticalAlignment(raw.NSTextBlockVerticalAlignment(verticalAlignment))
 	return x
 }
 
@@ -99,13 +99,13 @@ func (x *TextTable) SetNumberOfColumns(numberOfColumns uint) {
 }
 
 // LayoutAlgorithm calls the underlying LayoutAlgorithm.
-func (x *TextTable) LayoutAlgorithm() raw.NSTextTableLayoutAlgorithm {
-	return x.inner.LayoutAlgorithm()
+func (x *TextTable) LayoutAlgorithm() NSTextTableLayoutAlgorithm {
+	return NSTextTableLayoutAlgorithm(x.inner.LayoutAlgorithm())
 }
 
 // SetLayoutAlgorithm calls the underlying SetLayoutAlgorithm.
-func (x *TextTable) SetLayoutAlgorithm(layoutAlgorithm raw.NSTextTableLayoutAlgorithm) {
-	x.inner.SetLayoutAlgorithm(layoutAlgorithm)
+func (x *TextTable) SetLayoutAlgorithm(layoutAlgorithm NSTextTableLayoutAlgorithm) {
+	x.inner.SetLayoutAlgorithm(raw.NSTextTableLayoutAlgorithm(layoutAlgorithm))
 }
 
 // CollapsesBorders calls the underlying CollapsesBorders.
@@ -134,18 +134,18 @@ func (x *TextTable) asTextBlock() *raw.NSTextBlock { return &x.inner.NSTextBlock
 type TextTableable interface {
 	Unwrap() *raw.NSTextTable
 	WithNumberOfColumns(numberOfColumns uint) *TextTable
-	WithLayoutAlgorithm(layoutAlgorithm raw.NSTextTableLayoutAlgorithm) *TextTable
+	WithLayoutAlgorithm(layoutAlgorithm NSTextTableLayoutAlgorithm) *TextTable
 	WithCollapsesBorders(collapsesBorders bool) *TextTable
 	WithHidesEmptyCells(hidesEmptyCells bool) *TextTable
-	WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) *TextTable
+	WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextTable
 	WithBackgroundColor(backgroundColor *Color) *TextTable
 	RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect
 	BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect
 	DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block *raw.NSTextTableBlock, frameRect corefoundation.CGRect, controlView *raw.NSView, charRange foundation.NSRange, layoutManager *raw.NSLayoutManager)
 	NumberOfColumns() uint
 	SetNumberOfColumns(numberOfColumns uint)
-	LayoutAlgorithm() raw.NSTextTableLayoutAlgorithm
-	SetLayoutAlgorithm(layoutAlgorithm raw.NSTextTableLayoutAlgorithm)
+	LayoutAlgorithm() NSTextTableLayoutAlgorithm
+	SetLayoutAlgorithm(layoutAlgorithm NSTextTableLayoutAlgorithm)
 	CollapsesBorders() bool
 	SetCollapsesBorders(collapsesBorders bool)
 	HidesEmptyCells() bool

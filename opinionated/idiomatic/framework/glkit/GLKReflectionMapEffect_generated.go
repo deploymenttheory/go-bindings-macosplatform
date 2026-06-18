@@ -56,8 +56,8 @@ func (x *ReflectionMapEffect) WithUseConstantColor(useConstantColor uint8) *Refl
 }
 
 // WithLightingType sets the lightingType property and returns the receiver for chaining.
-func (x *ReflectionMapEffect) WithLightingType(lightingType raw.GLKLightingType) *ReflectionMapEffect {
-	x.inner.GLKBaseEffect.SetLightingType(lightingType)
+func (x *ReflectionMapEffect) WithLightingType(lightingType GLKLightingType) *ReflectionMapEffect {
+	x.inner.GLKBaseEffect.SetLightingType(raw.GLKLightingType(lightingType))
 	return x
 }
 
@@ -112,7 +112,7 @@ type ReflectionMapEffectable interface {
 	WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect
 	WithLightModelTwoSided(lightModelTwoSided uint8) *ReflectionMapEffect
 	WithUseConstantColor(useConstantColor uint8) *ReflectionMapEffect
-	WithLightingType(lightingType raw.GLKLightingType) *ReflectionMapEffect
+	WithLightingType(lightingType GLKLightingType) *ReflectionMapEffect
 	WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *ReflectionMapEffect
 	WithLabel(label string) *ReflectionMapEffect
 	TextureCubeMap() *EffectPropertyTexture

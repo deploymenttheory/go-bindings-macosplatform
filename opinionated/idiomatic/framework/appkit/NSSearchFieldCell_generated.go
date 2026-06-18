@@ -126,8 +126,8 @@ func (x *SearchFieldCell) WithTextColor(textColor *Color) *SearchFieldCell {
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SearchFieldCell {
-	x.inner.NSTextFieldCell.SetBezelStyle(bezelStyle)
+func (x *SearchFieldCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *SearchFieldCell {
+	x.inner.NSTextFieldCell.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -168,8 +168,8 @@ func (x *SearchFieldCell) WithControlView(controlView ViewProvider) *SearchField
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithType(type_ raw.NSCellType) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(type_)
+func (x *SearchFieldCell) WithType(type_ NSCellType) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -252,8 +252,8 @@ func (x *SearchFieldCell) WithHighlighted(highlighted bool) *SearchFieldCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithAlignment(alignment raw.NSTextAlignment) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *SearchFieldCell) WithAlignment(alignment NSTextAlignment) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -318,8 +318,8 @@ func (x *SearchFieldCell) WithImage(image *Image) *SearchFieldCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithControlSize(controlSize raw.NSControlSize) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *SearchFieldCell) WithControlSize(controlSize NSControlSize) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -342,14 +342,14 @@ func (x *SearchFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bo
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *SearchFieldCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *SearchFieldCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -366,8 +366,8 @@ func (x *SearchFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine 
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *SearchFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -390,8 +390,8 @@ func (x *SearchFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *Sea
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *SearchFieldCell) WithFocusRingType(focusRingType NSFocusRingType) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -420,14 +420,14 @@ func (x *SearchFieldCell) WithAllowsMixedState(allowsMixedState bool) *SearchFie
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *SearchFieldCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *SearchFieldCell) WithControlTint(controlTint raw.NSControlTint) *SearchFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *SearchFieldCell) WithControlTint(controlTint NSControlTint) *SearchFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -580,12 +580,12 @@ type SearchFieldCellable interface {
 	WithBackgroundColor(backgroundColor *Color) *SearchFieldCell
 	WithDrawsBackground(drawsBackground bool) *SearchFieldCell
 	WithTextColor(textColor *Color) *SearchFieldCell
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SearchFieldCell
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *SearchFieldCell
 	WithPlaceholderString(placeholderString string) *SearchFieldCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SearchFieldCell
 	WithAllowedInputSourceLocales(items ...*foundation.NSString) *SearchFieldCell
 	WithControlView(controlView ViewProvider) *SearchFieldCell
-	WithType(type_ raw.NSCellType) *SearchFieldCell
+	WithType(type_ NSCellType) *SearchFieldCell
 	WithState(state int) *SearchFieldCell
 	WithTarget(target objc.ID) *SearchFieldCell
 	WithAction(action objc.SEL) *SearchFieldCell
@@ -599,7 +599,7 @@ type SearchFieldCellable interface {
 	WithBezeled(bezeled bool) *SearchFieldCell
 	WithScrollable(scrollable bool) *SearchFieldCell
 	WithHighlighted(highlighted bool) *SearchFieldCell
-	WithAlignment(alignment raw.NSTextAlignment) *SearchFieldCell
+	WithAlignment(alignment NSTextAlignment) *SearchFieldCell
 	WithWraps(wraps bool) *SearchFieldCell
 	WithFont(font *Font) *SearchFieldCell
 	WithFormatter(formatter *foundation.NSFormatter) *SearchFieldCell
@@ -610,25 +610,25 @@ type SearchFieldCellable interface {
 	WithDoubleValue(doubleValue float64) *SearchFieldCell
 	WithIntegerValue(integerValue int) *SearchFieldCell
 	WithImage(image *Image) *SearchFieldCell
-	WithControlSize(controlSize raw.NSControlSize) *SearchFieldCell
+	WithControlSize(controlSize NSControlSize) *SearchFieldCell
 	WithRepresentedObject(representedObject objc.ID) *SearchFieldCell
 	WithMenu(menu *Menu) *SearchFieldCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SearchFieldCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SearchFieldCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SearchFieldCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SearchFieldCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *SearchFieldCell
 	WithAllowsUndo(allowsUndo bool) *SearchFieldCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SearchFieldCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SearchFieldCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SearchFieldCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SearchFieldCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *SearchFieldCell
 	WithShowsFirstResponder(showsFirstResponder bool) *SearchFieldCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *SearchFieldCell
+	WithFocusRingType(focusRingType NSFocusRingType) *SearchFieldCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SearchFieldCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SearchFieldCell
 	WithImportsGraphics(importsGraphics bool) *SearchFieldCell
 	WithAllowsMixedState(allowsMixedState bool) *SearchFieldCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SearchFieldCell
-	WithControlTint(controlTint raw.NSControlTint) *SearchFieldCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SearchFieldCell
+	WithControlTint(controlTint NSControlTint) *SearchFieldCell
 	ResetSearchButtonCell()
 	ResetCancelButtonCell()
 	SearchTextRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect

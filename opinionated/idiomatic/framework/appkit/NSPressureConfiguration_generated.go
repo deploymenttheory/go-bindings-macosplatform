@@ -30,9 +30,9 @@ func PressureConfigurationFromID(id objc.ID) *PressureConfiguration {
 }
 
 // NewPressureConfigurationWithPressureBehavior creates a new [PressureConfiguration].
-func NewPressureConfigurationWithPressureBehavior(pressureBehavior raw.NSPressureBehavior) *PressureConfiguration {
+func NewPressureConfigurationWithPressureBehavior(pressureBehavior NSPressureBehavior) *PressureConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPressureConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPressureBehavior:"), pressureBehavior)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPressureBehavior:"), raw.NSPressureBehavior(pressureBehavior))
 	return &PressureConfiguration{inner: raw.NSPressureConfigurationFromID(_id)}
 }
 
@@ -42,15 +42,15 @@ func (x *PressureConfiguration) Set() {
 }
 
 // PressureBehavior calls the underlying PressureBehavior.
-func (x *PressureConfiguration) PressureBehavior() raw.NSPressureBehavior {
-	return x.inner.PressureBehavior()
+func (x *PressureConfiguration) PressureBehavior() NSPressureBehavior {
+	return NSPressureBehavior(x.inner.PressureBehavior())
 }
 
 // PressureConfigurationable is the interface implemented by [PressureConfiguration], for mocking and DI.
 type PressureConfigurationable interface {
 	Unwrap() *raw.NSPressureConfiguration
 	Set()
-	PressureBehavior() raw.NSPressureBehavior
+	PressureBehavior() NSPressureBehavior
 }
 
 var _ PressureConfigurationable = (*PressureConfiguration)(nil)

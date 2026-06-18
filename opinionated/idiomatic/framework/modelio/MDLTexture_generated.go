@@ -38,9 +38,9 @@ func NewTexture() *Texture {
 }
 
 // NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube creates a new [Texture].
-func NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube(pixelData *foundation.NSData, topLeftOrigin bool, name string, dimensions unsafe.Pointer, rowStride int, channelCount uint, channelEncoding raw.MDLTextureChannelEncoding, isCube bool) *Texture {
+func NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube(pixelData *foundation.NSData, topLeftOrigin bool, name string, dimensions unsafe.Pointer, rowStride int, channelCount uint, channelEncoding MDLTextureChannelEncoding, isCube bool) *Texture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:topLeftOrigin:name:dimensions:rowStride:channelCount:channelEncoding:isCube:"), pixelData.Ptr(), topLeftOrigin, foundation.NSStringStringWithUTF8String(name).Ptr(), dimensions, rowStride, channelCount, channelEncoding, isCube)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:topLeftOrigin:name:dimensions:rowStride:channelCount:channelEncoding:isCube:"), pixelData.Ptr(), topLeftOrigin, foundation.NSStringStringWithUTF8String(name).Ptr(), dimensions, rowStride, channelCount, raw.MDLTextureChannelEncoding(channelEncoding), isCube)
 	return &Texture{inner: raw.MDLTextureFromID(_id)}
 }
 
@@ -127,8 +127,8 @@ func (x *Texture) MipLevelCount() uint {
 }
 
 // ChannelEncoding calls the underlying ChannelEncoding.
-func (x *Texture) ChannelEncoding() raw.MDLTextureChannelEncoding {
-	return x.inner.ChannelEncoding()
+func (x *Texture) ChannelEncoding() MDLTextureChannelEncoding {
+	return MDLTextureChannelEncoding(x.inner.ChannelEncoding())
 }
 
 // IsCube calls the underlying IsCube.
@@ -172,7 +172,7 @@ type Textureable interface {
 	RowStride() int
 	ChannelCount() uint
 	MipLevelCount() uint
-	ChannelEncoding() raw.MDLTextureChannelEncoding
+	ChannelEncoding() MDLTextureChannelEncoding
 	IsCube() bool
 	SetIsCube(isCube bool)
 	HasAlphaValues() bool

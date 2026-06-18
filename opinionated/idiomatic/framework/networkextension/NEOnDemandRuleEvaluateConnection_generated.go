@@ -95,8 +95,8 @@ func (x *NEOnDemandRuleEvaluateConnection) WithDNSServerAddressMatch(items ...*f
 }
 
 // WithInterfaceTypeMatch sets the interfaceTypeMatch property and returns the receiver for chaining.
-func (x *NEOnDemandRuleEvaluateConnection) WithInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection {
-	x.inner.NEOnDemandRule.SetInterfaceTypeMatch(interfaceTypeMatch)
+func (x *NEOnDemandRuleEvaluateConnection) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection {
+	x.inner.NEOnDemandRule.SetInterfaceTypeMatch(raw.NEOnDemandRuleInterfaceType(interfaceTypeMatch))
 	return x
 }
 
@@ -150,7 +150,7 @@ type NEOnDemandRuleEvaluateConnectionable interface {
 	WithConnectionRules(items ...*raw.NEEvaluateConnectionRule) *NEOnDemandRuleEvaluateConnection
 	WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection
 	WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection
-	WithInterfaceTypeMatch(interfaceTypeMatch raw.NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection
+	WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleEvaluateConnection
 	WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleEvaluateConnection
 	WithProbeURL(probeURL string) *NEOnDemandRuleEvaluateConnection
 	ConnectionRules() []*NEEvaluateConnectionRule

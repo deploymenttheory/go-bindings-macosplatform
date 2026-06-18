@@ -65,8 +65,8 @@ func (x *CapturePhotoOutputReadinessCoordinator) SetDelegate(delegate raw.AVCapt
 }
 
 // CaptureReadiness calls the underlying CaptureReadiness.
-func (x *CapturePhotoOutputReadinessCoordinator) CaptureReadiness() raw.AVCapturePhotoOutputCaptureReadiness {
-	return x.inner.CaptureReadiness()
+func (x *CapturePhotoOutputReadinessCoordinator) CaptureReadiness() AVCapturePhotoOutputCaptureReadiness {
+	return AVCapturePhotoOutputCaptureReadiness(x.inner.CaptureReadiness())
 }
 
 // CapturePhotoOutputReadinessCoordinatorable is the interface implemented by [CapturePhotoOutputReadinessCoordinator], for mocking and DI.
@@ -77,7 +77,7 @@ type CapturePhotoOutputReadinessCoordinatorable interface {
 	StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID int64)
 	Delegate() raw.AVCapturePhotoOutputReadinessCoordinatorDelegate
 	SetDelegate(delegate raw.AVCapturePhotoOutputReadinessCoordinatorDelegate)
-	CaptureReadiness() raw.AVCapturePhotoOutputCaptureReadiness
+	CaptureReadiness() AVCapturePhotoOutputCaptureReadiness
 }
 
 var _ CapturePhotoOutputReadinessCoordinatorable = (*CapturePhotoOutputReadinessCoordinator)(nil)

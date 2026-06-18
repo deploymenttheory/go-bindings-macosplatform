@@ -40,14 +40,14 @@ func NewMarkerAnnotationView() *MarkerAnnotationView {
 }
 
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithTitleVisibility(titleVisibility raw.MKFeatureVisibility) *MarkerAnnotationView {
-	x.inner.SetTitleVisibility(titleVisibility)
+func (x *MarkerAnnotationView) WithTitleVisibility(titleVisibility MKFeatureVisibility) *MarkerAnnotationView {
+	x.inner.SetTitleVisibility(raw.MKFeatureVisibility(titleVisibility))
 	return x
 }
 
 // WithSubtitleVisibility sets the subtitleVisibility property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithSubtitleVisibility(subtitleVisibility raw.MKFeatureVisibility) *MarkerAnnotationView {
-	x.inner.SetSubtitleVisibility(subtitleVisibility)
+func (x *MarkerAnnotationView) WithSubtitleVisibility(subtitleVisibility MKFeatureVisibility) *MarkerAnnotationView {
+	x.inner.SetSubtitleVisibility(raw.MKFeatureVisibility(subtitleVisibility))
 	return x
 }
 
@@ -178,8 +178,8 @@ func (x *MarkerAnnotationView) WithDraggable(draggable bool) *MarkerAnnotationVi
 }
 
 // WithDragState sets the dragState property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithDragState(dragState raw.MKAnnotationViewDragState) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetDragState(dragState)
+func (x *MarkerAnnotationView) WithDragState(dragState MKAnnotationViewDragState) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetDragState(raw.MKAnnotationViewDragState(dragState))
 	return x
 }
 
@@ -208,29 +208,29 @@ func (x *MarkerAnnotationView) WithSelectedZPriority(selectedZPriority float32) 
 }
 
 // WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
-func (x *MarkerAnnotationView) WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *MarkerAnnotationView {
-	x.inner.MKAnnotationView.SetCollisionMode(collisionMode)
+func (x *MarkerAnnotationView) WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))
 	return x
 }
 
 // TitleVisibility calls the underlying TitleVisibility.
-func (x *MarkerAnnotationView) TitleVisibility() raw.MKFeatureVisibility {
-	return x.inner.TitleVisibility()
+func (x *MarkerAnnotationView) TitleVisibility() MKFeatureVisibility {
+	return MKFeatureVisibility(x.inner.TitleVisibility())
 }
 
 // SetTitleVisibility calls the underlying SetTitleVisibility.
-func (x *MarkerAnnotationView) SetTitleVisibility(titleVisibility raw.MKFeatureVisibility) {
-	x.inner.SetTitleVisibility(titleVisibility)
+func (x *MarkerAnnotationView) SetTitleVisibility(titleVisibility MKFeatureVisibility) {
+	x.inner.SetTitleVisibility(raw.MKFeatureVisibility(titleVisibility))
 }
 
 // SubtitleVisibility calls the underlying SubtitleVisibility.
-func (x *MarkerAnnotationView) SubtitleVisibility() raw.MKFeatureVisibility {
-	return x.inner.SubtitleVisibility()
+func (x *MarkerAnnotationView) SubtitleVisibility() MKFeatureVisibility {
+	return MKFeatureVisibility(x.inner.SubtitleVisibility())
 }
 
 // SetSubtitleVisibility calls the underlying SetSubtitleVisibility.
-func (x *MarkerAnnotationView) SetSubtitleVisibility(subtitleVisibility raw.MKFeatureVisibility) {
-	x.inner.SetSubtitleVisibility(subtitleVisibility)
+func (x *MarkerAnnotationView) SetSubtitleVisibility(subtitleVisibility MKFeatureVisibility) {
+	x.inner.SetSubtitleVisibility(raw.MKFeatureVisibility(subtitleVisibility))
 }
 
 // MarkerTintColor calls the underlying MarkerTintColor.
@@ -304,8 +304,8 @@ func (x *MarkerAnnotationView) asAnnotationView() *raw.MKAnnotationView {
 // MarkerAnnotationViewable is the interface implemented by [MarkerAnnotationView], for mocking and DI.
 type MarkerAnnotationViewable interface {
 	Unwrap() *raw.MKMarkerAnnotationView
-	WithTitleVisibility(titleVisibility raw.MKFeatureVisibility) *MarkerAnnotationView
-	WithSubtitleVisibility(subtitleVisibility raw.MKFeatureVisibility) *MarkerAnnotationView
+	WithTitleVisibility(titleVisibility MKFeatureVisibility) *MarkerAnnotationView
+	WithSubtitleVisibility(subtitleVisibility MKFeatureVisibility) *MarkerAnnotationView
 	WithMarkerTintColor(markerTintColor *appkit.NSColor) *MarkerAnnotationView
 	WithGlyphTintColor(glyphTintColor *appkit.NSColor) *MarkerAnnotationView
 	WithGlyphText(glyphText string) *MarkerAnnotationView
@@ -327,16 +327,16 @@ type MarkerAnnotationViewable interface {
 	WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView
 	WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView
 	WithDraggable(draggable bool) *MarkerAnnotationView
-	WithDragState(dragState raw.MKAnnotationViewDragState) *MarkerAnnotationView
+	WithDragState(dragState MKAnnotationViewDragState) *MarkerAnnotationView
 	WithClusteringIdentifier(clusteringIdentifier string) *MarkerAnnotationView
 	WithDisplayPriority(displayPriority float32) *MarkerAnnotationView
 	WithZPriority(zPriority float32) *MarkerAnnotationView
 	WithSelectedZPriority(selectedZPriority float32) *MarkerAnnotationView
-	WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *MarkerAnnotationView
-	TitleVisibility() raw.MKFeatureVisibility
-	SetTitleVisibility(titleVisibility raw.MKFeatureVisibility)
-	SubtitleVisibility() raw.MKFeatureVisibility
-	SetSubtitleVisibility(subtitleVisibility raw.MKFeatureVisibility)
+	WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *MarkerAnnotationView
+	TitleVisibility() MKFeatureVisibility
+	SetTitleVisibility(titleVisibility MKFeatureVisibility)
+	SubtitleVisibility() MKFeatureVisibility
+	SetSubtitleVisibility(subtitleVisibility MKFeatureVisibility)
 	MarkerTintColor() *appkit.NSColor
 	SetMarkerTintColor(markerTintColor *appkit.NSColor)
 	GlyphTintColor() *appkit.NSColor

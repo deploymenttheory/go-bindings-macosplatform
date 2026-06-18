@@ -35,8 +35,8 @@ func DefaultAllocator() raw.MPSImageAllocator {
 }
 
 // ImageDescriptorWithChannelFormatWidthHeightFeatureChannels calls the underlying MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannels.
-func ImageDescriptorWithChannelFormatWidthHeightFeatureChannels(channelFormat raw.MPSImageFeatureChannelFormat, width uint, height uint, featureChannels uint) *ImageDescriptor {
-	_r := raw.MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannels(channelFormat, width, height, featureChannels)
+func ImageDescriptorWithChannelFormatWidthHeightFeatureChannels(channelFormat MPSImageFeatureChannelFormat, width uint, height uint, featureChannels uint) *ImageDescriptor {
+	_r := raw.MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannels(raw.MPSImageFeatureChannelFormat(channelFormat), width, height, featureChannels)
 	if _r == nil {
 		return nil
 	}
@@ -44,8 +44,8 @@ func ImageDescriptorWithChannelFormatWidthHeightFeatureChannels(channelFormat ra
 }
 
 // ImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage calls the underlying MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage.
-func ImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage(channelFormat raw.MPSImageFeatureChannelFormat, width uint, height uint, featureChannels uint, numberOfImages uint, usage metal.MTLTextureUsage) *ImageDescriptor {
-	_r := raw.MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage(channelFormat, width, height, featureChannels, numberOfImages, usage)
+func ImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage(channelFormat MPSImageFeatureChannelFormat, width uint, height uint, featureChannels uint, numberOfImages uint, usage metal.MTLTextureUsage) *ImageDescriptor {
+	_r := raw.MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage(raw.MPSImageFeatureChannelFormat(channelFormat), width, height, featureChannels, numberOfImages, usage)
 	if _r == nil {
 		return nil
 	}
@@ -73,8 +73,8 @@ func UnarchiveObjectWithFileDevice(path string, device metal.MTLDevice) objc.ID 
 }
 
 // MatrixDescriptorWithDimensionsColumnsRowBytesDataType calls the underlying MPSMatrixDescriptorMatrixDescriptorWithDimensionsColumnsRowBytesDataType.
-func MatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows uint, columns uint, rowBytes uint, dataType raw.MPSDataType) *MatrixDescriptor {
-	_r := raw.MPSMatrixDescriptorMatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows, columns, rowBytes, dataType)
+func MatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows uint, columns uint, rowBytes uint, dataType MPSDataType) *MatrixDescriptor {
+	_r := raw.MPSMatrixDescriptorMatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows, columns, rowBytes, raw.MPSDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -82,8 +82,8 @@ func MatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows uint, columns ui
 }
 
 // MatrixDescriptorWithRowsColumnsRowBytesDataType calls the underlying MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsRowBytesDataType.
-func MatrixDescriptorWithRowsColumnsRowBytesDataType(rows uint, columns uint, rowBytes uint, dataType raw.MPSDataType) *MatrixDescriptor {
-	_r := raw.MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsRowBytesDataType(rows, columns, rowBytes, dataType)
+func MatrixDescriptorWithRowsColumnsRowBytesDataType(rows uint, columns uint, rowBytes uint, dataType MPSDataType) *MatrixDescriptor {
+	_r := raw.MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsRowBytesDataType(rows, columns, rowBytes, raw.MPSDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -91,8 +91,8 @@ func MatrixDescriptorWithRowsColumnsRowBytesDataType(rows uint, columns uint, ro
 }
 
 // MatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType calls the underlying MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType.
-func MatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType(rows uint, columns uint, matrices uint, rowBytes uint, matrixBytes uint, dataType raw.MPSDataType) *MatrixDescriptor {
-	_r := raw.MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType(rows, columns, matrices, rowBytes, matrixBytes, dataType)
+func MatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType(rows uint, columns uint, matrices uint, rowBytes uint, matrixBytes uint, dataType MPSDataType) *MatrixDescriptor {
+	_r := raw.MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType(rows, columns, matrices, rowBytes, matrixBytes, raw.MPSDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -100,13 +100,13 @@ func MatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType(rows uin
 }
 
 // RowBytesFromColumnsDataType calls the underlying MPSMatrixDescriptorRowBytesFromColumnsDataType.
-func RowBytesFromColumnsDataType(columns uint, dataType raw.MPSDataType) uint {
-	return raw.MPSMatrixDescriptorRowBytesFromColumnsDataType(columns, dataType)
+func RowBytesFromColumnsDataType(columns uint, dataType MPSDataType) uint {
+	return raw.MPSMatrixDescriptorRowBytesFromColumnsDataType(columns, raw.MPSDataType(dataType))
 }
 
 // RowBytesForColumnsDataType calls the underlying MPSMatrixDescriptorRowBytesForColumnsDataType.
-func RowBytesForColumnsDataType(columns uint, dataType raw.MPSDataType) uint {
-	return raw.MPSMatrixDescriptorRowBytesForColumnsDataType(columns, dataType)
+func RowBytesForColumnsDataType(columns uint, dataType MPSDataType) uint {
+	return raw.MPSMatrixDescriptorRowBytesForColumnsDataType(columns, raw.MPSDataType(dataType))
 }
 
 // MPSNDArrayDefaultAllocator calls the underlying MPSNDArrayDefaultAllocator.
@@ -115,8 +115,8 @@ func MPSNDArrayDefaultAllocator() raw.MPSNDArrayAllocator {
 }
 
 // DescriptorWithDataTypeDimensionCountDimensionSizes calls the underlying MPSNDArrayDescriptorDescriptorWithDataTypeDimensionCountDimensionSizes.
-func DescriptorWithDataTypeDimensionCountDimensionSizes(dataType raw.MPSDataType, numberOfDimensions uint, dimensionSizes *uint) *NDArrayDescriptor {
-	_r := raw.MPSNDArrayDescriptorDescriptorWithDataTypeDimensionCountDimensionSizes(dataType, numberOfDimensions, dimensionSizes)
+func DescriptorWithDataTypeDimensionCountDimensionSizes(dataType MPSDataType, numberOfDimensions uint, dimensionSizes *uint) *NDArrayDescriptor {
+	_r := raw.MPSNDArrayDescriptorDescriptorWithDataTypeDimensionCountDimensionSizes(raw.MPSDataType(dataType), numberOfDimensions, dimensionSizes)
 	if _r == nil {
 		return nil
 	}
@@ -124,8 +124,8 @@ func DescriptorWithDataTypeDimensionCountDimensionSizes(dataType raw.MPSDataType
 }
 
 // DescriptorWithDataTypeShape calls the underlying MPSNDArrayDescriptorDescriptorWithDataTypeShape.
-func DescriptorWithDataTypeShape(dataType raw.MPSDataType, shape *foundation.NSArray[*foundation.NSNumber]) *NDArrayDescriptor {
-	_r := raw.MPSNDArrayDescriptorDescriptorWithDataTypeShape(dataType, shape)
+func DescriptorWithDataTypeShape(dataType MPSDataType, shape *foundation.NSArray[*foundation.NSNumber]) *NDArrayDescriptor {
+	_r := raw.MPSNDArrayDescriptorDescriptorWithDataTypeShape(raw.MPSDataType(dataType), shape)
 	if _r == nil {
 		return nil
 	}
@@ -266,8 +266,8 @@ func PrefetchStorageWithCommandBufferDescriptorList(commandBuffer metal.MTLComma
 }
 
 // VectorDescriptorWithLengthDataType calls the underlying MPSVectorDescriptorVectorDescriptorWithLengthDataType.
-func VectorDescriptorWithLengthDataType(length uint, dataType raw.MPSDataType) *VectorDescriptor {
-	_r := raw.MPSVectorDescriptorVectorDescriptorWithLengthDataType(length, dataType)
+func VectorDescriptorWithLengthDataType(length uint, dataType MPSDataType) *VectorDescriptor {
+	_r := raw.MPSVectorDescriptorVectorDescriptorWithLengthDataType(length, raw.MPSDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -275,8 +275,8 @@ func VectorDescriptorWithLengthDataType(length uint, dataType raw.MPSDataType) *
 }
 
 // VectorDescriptorWithLengthVectorsVectorBytesDataType calls the underlying MPSVectorDescriptorVectorDescriptorWithLengthVectorsVectorBytesDataType.
-func VectorDescriptorWithLengthVectorsVectorBytesDataType(length uint, vectors uint, vectorBytes uint, dataType raw.MPSDataType) *VectorDescriptor {
-	_r := raw.MPSVectorDescriptorVectorDescriptorWithLengthVectorsVectorBytesDataType(length, vectors, vectorBytes, dataType)
+func VectorDescriptorWithLengthVectorsVectorBytesDataType(length uint, vectors uint, vectorBytes uint, dataType MPSDataType) *VectorDescriptor {
+	_r := raw.MPSVectorDescriptorVectorDescriptorWithLengthVectorsVectorBytesDataType(length, vectors, vectorBytes, raw.MPSDataType(dataType))
 	if _r == nil {
 		return nil
 	}
@@ -284,6 +284,6 @@ func VectorDescriptorWithLengthVectorsVectorBytesDataType(length uint, vectors u
 }
 
 // VectorBytesForLengthDataType calls the underlying MPSVectorDescriptorVectorBytesForLengthDataType.
-func VectorBytesForLengthDataType(length uint, dataType raw.MPSDataType) uint {
-	return raw.MPSVectorDescriptorVectorBytesForLengthDataType(length, dataType)
+func VectorBytesForLengthDataType(length uint, dataType MPSDataType) uint {
+	return raw.MPSVectorDescriptorVectorBytesForLengthDataType(length, raw.MPSDataType(dataType))
 }

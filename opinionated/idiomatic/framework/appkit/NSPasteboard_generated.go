@@ -43,8 +43,8 @@ func (x *Pasteboard) ReleaseGlobally() {
 }
 
 // PrepareForNewContentsWithOptions calls the underlying PrepareForNewContentsWithOptions.
-func (x *Pasteboard) PrepareForNewContentsWithOptions(options raw.NSPasteboardContentsOptions) int {
-	return x.inner.PrepareForNewContentsWithOptions(options)
+func (x *Pasteboard) PrepareForNewContentsWithOptions(options NSPasteboardContentsOptions) int {
+	return x.inner.PrepareForNewContentsWithOptions(raw.NSPasteboardContentsOptions(options))
 }
 
 // ClearContents calls the underlying ClearContents.
@@ -160,8 +160,8 @@ func (x *Pasteboard) ChangeCount() int {
 }
 
 // AccessBehavior calls the underlying AccessBehavior.
-func (x *Pasteboard) AccessBehavior() raw.NSPasteboardAccessBehavior {
-	return x.inner.AccessBehavior()
+func (x *Pasteboard) AccessBehavior() NSPasteboardAccessBehavior {
+	return NSPasteboardAccessBehavior(x.inner.AccessBehavior())
 }
 
 // PasteboardItems returns the collection as a Go slice.
@@ -214,7 +214,7 @@ func (x *Pasteboard) ReadFileWrapper() *foundation.NSFileWrapper {
 type Pasteboardable interface {
 	Unwrap() *raw.NSPasteboard
 	ReleaseGlobally()
-	PrepareForNewContentsWithOptions(options raw.NSPasteboardContentsOptions) int
+	PrepareForNewContentsWithOptions(options NSPasteboardContentsOptions) int
 	ClearContents() int
 	WriteObjects(objects *foundation.NSArray[raw.NSPasteboardWriting]) bool
 	ReadObjectsForClassesOptions(classArray *foundation.NSArray[objc.Class], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[objc.ID]
@@ -235,7 +235,7 @@ type Pasteboardable interface {
 	DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler objc.Block)
 	Name() string
 	ChangeCount() int
-	AccessBehavior() raw.NSPasteboardAccessBehavior
+	AccessBehavior() NSPasteboardAccessBehavior
 	PasteboardItems() []*PasteboardItem
 	Types() []*foundation.NSString
 	WriteFileContents(filename string) bool

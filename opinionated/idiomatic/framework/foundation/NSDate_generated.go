@@ -127,8 +127,8 @@ func (x *Date) LaterDate(anotherDate *raw.NSDate) *Date {
 }
 
 // Compare calls the underlying Compare.
-func (x *Date) Compare(other *raw.NSDate) raw.NSComparisonResult {
-	return x.inner.Compare(other)
+func (x *Date) Compare(other *raw.NSDate) NSComparisonResult {
+	return NSComparisonResult(x.inner.Compare(other))
 }
 
 // IsEqualToDate calls the underlying IsEqualToDate.
@@ -187,7 +187,7 @@ type Dateable interface {
 	DateByAddingTimeInterval(ti float64) *Date
 	EarlierDate(anotherDate *raw.NSDate) *Date
 	LaterDate(anotherDate *raw.NSDate) *Date
-	Compare(other *raw.NSDate) raw.NSComparisonResult
+	Compare(other *raw.NSDate) NSComparisonResult
 	IsEqualToDate(otherDate *raw.NSDate) bool
 	DescriptionWithLocale(locale objc.ID) *String
 	TimeIntervalSinceNow() float64

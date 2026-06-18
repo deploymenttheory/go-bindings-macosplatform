@@ -32,9 +32,9 @@ func CheckerboardTextureFromID(id objc.ID) *CheckerboardTexture {
 }
 
 // NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2 creates a new [CheckerboardTexture].
-func NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2(divisions float32, name string, dimensions unsafe.Pointer, channelCount int, channelEncoding raw.MDLTextureChannelEncoding, color1 unsafe.Pointer, color2 unsafe.Pointer) *CheckerboardTexture {
+func NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2(divisions float32, name string, dimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, color1 unsafe.Pointer, color2 unsafe.Pointer) *CheckerboardTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLCheckerboardTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDivisions:name:dimensions:channelCount:channelEncoding:color1:color2:"), divisions, foundation.NSStringStringWithUTF8String(name).Ptr(), dimensions, channelCount, channelEncoding, color1, color2)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDivisions:name:dimensions:channelCount:channelEncoding:color1:color2:"), divisions, foundation.NSStringStringWithUTF8String(name).Ptr(), dimensions, channelCount, raw.MDLTextureChannelEncoding(channelEncoding), color1, color2)
 	return &CheckerboardTexture{inner: raw.MDLCheckerboardTextureFromID(_id)}
 }
 

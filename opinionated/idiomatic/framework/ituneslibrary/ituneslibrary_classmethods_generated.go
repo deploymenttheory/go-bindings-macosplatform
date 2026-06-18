@@ -22,8 +22,8 @@ func LibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error) {
 }
 
 // LibraryWithAPIVersionOptionsError calls the underlying ITLibraryLibraryWithAPIVersionOptionsError.
-func LibraryWithAPIVersionOptionsError(requestedAPIVersion string, options raw.ITLibInitOptions) (*Library, error) {
-	_r, _err := raw.ITLibraryLibraryWithAPIVersionOptionsError(foundation.NSStringStringWithUTF8String(requestedAPIVersion), options)
+func LibraryWithAPIVersionOptionsError(requestedAPIVersion string, options ITLibInitOptions) (*Library, error) {
+	_r, _err := raw.ITLibraryLibraryWithAPIVersionOptionsError(foundation.NSStringStringWithUTF8String(requestedAPIVersion), raw.ITLibInitOptions(options))
 	if _err != nil {
 		return nil, _err
 	}

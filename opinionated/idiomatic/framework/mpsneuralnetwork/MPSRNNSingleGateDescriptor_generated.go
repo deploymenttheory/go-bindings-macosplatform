@@ -72,8 +72,8 @@ func (x *RNNSingleGateDescriptor) WithUseFloat32Weights(useFloat32Weights bool) 
 }
 
 // WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
-func (x *RNNSingleGateDescriptor) WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *RNNSingleGateDescriptor {
-	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(layerSequenceDirection)
+func (x *RNNSingleGateDescriptor) WithLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) *RNNSingleGateDescriptor {
+	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(raw.MPSRNNSequenceDirection(layerSequenceDirection))
 	return x
 }
 
@@ -110,7 +110,7 @@ type RNNSingleGateDescriptorable interface {
 	WithOutputFeatureChannels(outputFeatureChannels uint) *RNNSingleGateDescriptor
 	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNSingleGateDescriptor
 	WithUseFloat32Weights(useFloat32Weights bool) *RNNSingleGateDescriptor
-	WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *RNNSingleGateDescriptor
+	WithLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) *RNNSingleGateDescriptor
 	InputWeights() raw.MPSCNNConvolutionDataSource
 	SetInputWeights(inputWeights raw.MPSCNNConvolutionDataSource)
 	RecurrentWeights() raw.MPSCNNConvolutionDataSource

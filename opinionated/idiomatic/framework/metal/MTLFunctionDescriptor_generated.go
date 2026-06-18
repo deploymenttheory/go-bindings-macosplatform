@@ -56,8 +56,8 @@ func (x *FunctionDescriptor) WithConstantValues(constantValues *FunctionConstant
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *FunctionDescriptor) WithOptions(options raw.MTLFunctionOptions) *FunctionDescriptor {
-	x.inner.SetOptions(options)
+func (x *FunctionDescriptor) WithOptions(options MTLFunctionOptions) *FunctionDescriptor {
+	x.inner.SetOptions(raw.MTLFunctionOptions(options))
 	return x
 }
 
@@ -104,13 +104,13 @@ func (x *FunctionDescriptor) SetConstantValues(constantValues *raw.MTLFunctionCo
 }
 
 // Options calls the underlying Options.
-func (x *FunctionDescriptor) Options() raw.MTLFunctionOptions {
-	return x.inner.Options()
+func (x *FunctionDescriptor) Options() MTLFunctionOptions {
+	return MTLFunctionOptions(x.inner.Options())
 }
 
 // SetOptions calls the underlying SetOptions.
-func (x *FunctionDescriptor) SetOptions(options raw.MTLFunctionOptions) {
-	x.inner.SetOptions(options)
+func (x *FunctionDescriptor) SetOptions(options MTLFunctionOptions) {
+	x.inner.SetOptions(raw.MTLFunctionOptions(options))
 }
 
 // BinaryArchives calls the underlying BinaryArchives.
@@ -131,15 +131,15 @@ type FunctionDescriptorable interface {
 	WithName(name string) *FunctionDescriptor
 	WithSpecializedName(specializedName string) *FunctionDescriptor
 	WithConstantValues(constantValues *FunctionConstantValues) *FunctionDescriptor
-	WithOptions(options raw.MTLFunctionOptions) *FunctionDescriptor
+	WithOptions(options MTLFunctionOptions) *FunctionDescriptor
 	Name() string
 	SetName(name string)
 	SpecializedName() string
 	SetSpecializedName(specializedName string)
 	ConstantValues() *FunctionConstantValues
 	SetConstantValues(constantValues *raw.MTLFunctionConstantValues)
-	Options() raw.MTLFunctionOptions
-	SetOptions(options raw.MTLFunctionOptions)
+	Options() MTLFunctionOptions
+	SetOptions(options MTLFunctionOptions)
 	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
 	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
 }

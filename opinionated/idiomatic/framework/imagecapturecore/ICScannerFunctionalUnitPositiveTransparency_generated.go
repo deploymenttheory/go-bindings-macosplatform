@@ -40,26 +40,26 @@ func NewScannerFunctionalUnitPositiveTransparency() *ScannerFunctionalUnitPositi
 }
 
 // WithDocumentType sets the documentType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithDocumentType(documentType raw.ICScannerDocumentType) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.SetDocumentType(documentType)
+func (x *ScannerFunctionalUnitPositiveTransparency) WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitPositiveTransparency {
+	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
 	return x
 }
 
 // WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithPixelDataType(pixelDataType raw.ICScannerPixelDataType) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetPixelDataType(pixelDataType)
+func (x *ScannerFunctionalUnitPositiveTransparency) WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitPositiveTransparency {
+	x.inner.ICScannerFunctionalUnit.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
 	return x
 }
 
 // WithBitDepth sets the bitDepth property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithBitDepth(bitDepth raw.ICScannerBitDepth) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetBitDepth(bitDepth)
+func (x *ScannerFunctionalUnitPositiveTransparency) WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitPositiveTransparency {
+	x.inner.ICScannerFunctionalUnit.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
 	return x
 }
 
 // WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(measurementUnit)
+func (x *ScannerFunctionalUnitPositiveTransparency) WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitPositiveTransparency {
+	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
 	return x
 }
 
@@ -82,8 +82,8 @@ func (x *ScannerFunctionalUnitPositiveTransparency) WithScanArea(scanArea corefo
 }
 
 // WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(scanAreaOrientation)
+func (x *ScannerFunctionalUnitPositiveTransparency) WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitPositiveTransparency {
+	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
 	return x
 }
 
@@ -111,13 +111,13 @@ func (x *ScannerFunctionalUnitPositiveTransparency) SupportedDocumentTypes() *fo
 }
 
 // DocumentType calls the underlying DocumentType.
-func (x *ScannerFunctionalUnitPositiveTransparency) DocumentType() raw.ICScannerDocumentType {
-	return x.inner.DocumentType()
+func (x *ScannerFunctionalUnitPositiveTransparency) DocumentType() ICScannerDocumentType {
+	return ICScannerDocumentType(x.inner.DocumentType())
 }
 
 // SetDocumentType calls the underlying SetDocumentType.
-func (x *ScannerFunctionalUnitPositiveTransparency) SetDocumentType(documentType raw.ICScannerDocumentType) {
-	x.inner.SetDocumentType(documentType)
+func (x *ScannerFunctionalUnitPositiveTransparency) SetDocumentType(documentType ICScannerDocumentType) {
+	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
 }
 
 // DocumentSize calls the underlying DocumentSize.
@@ -132,20 +132,20 @@ func (x *ScannerFunctionalUnitPositiveTransparency) asScannerFunctionalUnit() *r
 // ScannerFunctionalUnitPositiveTransparencyable is the interface implemented by [ScannerFunctionalUnitPositiveTransparency], for mocking and DI.
 type ScannerFunctionalUnitPositiveTransparencyable interface {
 	Unwrap() *raw.ICScannerFunctionalUnitPositiveTransparency
-	WithDocumentType(documentType raw.ICScannerDocumentType) *ScannerFunctionalUnitPositiveTransparency
-	WithPixelDataType(pixelDataType raw.ICScannerPixelDataType) *ScannerFunctionalUnitPositiveTransparency
-	WithBitDepth(bitDepth raw.ICScannerBitDepth) *ScannerFunctionalUnitPositiveTransparency
-	WithMeasurementUnit(measurementUnit raw.ICScannerMeasurementUnit) *ScannerFunctionalUnitPositiveTransparency
+	WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitPositiveTransparency
+	WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitPositiveTransparency
+	WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitPositiveTransparency
+	WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitPositiveTransparency
 	WithResolution(resolution uint) *ScannerFunctionalUnitPositiveTransparency
 	WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitPositiveTransparency
 	WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitPositiveTransparency
-	WithScanAreaOrientation(scanAreaOrientation raw.ICEXIFOrientationType) *ScannerFunctionalUnitPositiveTransparency
+	WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitPositiveTransparency
 	WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitPositiveTransparency
 	WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitPositiveTransparency
 	WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitPositiveTransparency
 	SupportedDocumentTypes() *foundation.NSIndexSet
-	DocumentType() raw.ICScannerDocumentType
-	SetDocumentType(documentType raw.ICScannerDocumentType)
+	DocumentType() ICScannerDocumentType
+	SetDocumentType(documentType ICScannerDocumentType)
 	DocumentSize() corefoundation.CGSize
 }
 

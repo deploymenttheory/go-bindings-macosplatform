@@ -30,16 +30,16 @@ func VisionPrismFromID(id objc.ID) *VisionPrism {
 }
 
 // NewVisionPrismWithAmountAngleEye creates a new [VisionPrism].
-func NewVisionPrismWithAmountAngleEye(amount *raw.HKQuantity, angle *raw.HKQuantity, eye raw.HKVisionEye) *VisionPrism {
+func NewVisionPrismWithAmountAngleEye(amount *raw.HKQuantity, angle *raw.HKQuantity, eye HKVisionEye) *VisionPrism {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKVisionPrism")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAmount:angle:eye:"), amount.Ptr(), angle.Ptr(), eye)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAmount:angle:eye:"), amount.Ptr(), angle.Ptr(), raw.HKVisionEye(eye))
 	return &VisionPrism{inner: raw.HKVisionPrismFromID(_id)}
 }
 
 // NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye creates a new [VisionPrism].
-func NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye(verticalAmount *raw.HKQuantity, verticalBase raw.HKPrismBase, horizontalAmount *raw.HKQuantity, horizontalBase raw.HKPrismBase, eye raw.HKVisionEye) *VisionPrism {
+func NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye(verticalAmount *raw.HKQuantity, verticalBase HKPrismBase, horizontalAmount *raw.HKQuantity, horizontalBase HKPrismBase, eye HKVisionEye) *VisionPrism {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKVisionPrism")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVerticalAmount:verticalBase:horizontalAmount:horizontalBase:eye:"), verticalAmount.Ptr(), verticalBase, horizontalAmount.Ptr(), horizontalBase, eye)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVerticalAmount:verticalBase:horizontalAmount:horizontalBase:eye:"), verticalAmount.Ptr(), raw.HKPrismBase(verticalBase), horizontalAmount.Ptr(), raw.HKPrismBase(horizontalBase), raw.HKVisionEye(eye))
 	return &VisionPrism{inner: raw.HKVisionPrismFromID(_id)}
 }
 
@@ -80,18 +80,18 @@ func (x *VisionPrism) HorizontalAmount() *Quantity {
 }
 
 // VerticalBase calls the underlying VerticalBase.
-func (x *VisionPrism) VerticalBase() raw.HKPrismBase {
-	return x.inner.VerticalBase()
+func (x *VisionPrism) VerticalBase() HKPrismBase {
+	return HKPrismBase(x.inner.VerticalBase())
 }
 
 // HorizontalBase calls the underlying HorizontalBase.
-func (x *VisionPrism) HorizontalBase() raw.HKPrismBase {
-	return x.inner.HorizontalBase()
+func (x *VisionPrism) HorizontalBase() HKPrismBase {
+	return HKPrismBase(x.inner.HorizontalBase())
 }
 
 // Eye calls the underlying Eye.
-func (x *VisionPrism) Eye() raw.HKVisionEye {
-	return x.inner.Eye()
+func (x *VisionPrism) Eye() HKVisionEye {
+	return HKVisionEye(x.inner.Eye())
 }
 
 // VisionPrismable is the interface implemented by [VisionPrism], for mocking and DI.
@@ -101,9 +101,9 @@ type VisionPrismable interface {
 	Angle() *Quantity
 	VerticalAmount() *Quantity
 	HorizontalAmount() *Quantity
-	VerticalBase() raw.HKPrismBase
-	HorizontalBase() raw.HKPrismBase
-	Eye() raw.HKVisionEye
+	VerticalBase() HKPrismBase
+	HorizontalBase() HKPrismBase
+	Eye() HKVisionEye
 }
 
 var _ VisionPrismable = (*VisionPrism)(nil)

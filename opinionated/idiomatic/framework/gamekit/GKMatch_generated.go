@@ -46,13 +46,13 @@ func (x *Match) WithDelegate(delegate raw.GKMatchDelegate) *Match {
 }
 
 // SendDataToPlayersDataModeError calls the underlying SendDataToPlayersDataModeError.
-func (x *Match) SendDataToPlayersDataModeError(data *foundation.NSData, players *foundation.NSArray[*raw.GKPlayer], mode raw.GKMatchSendDataMode) (bool, error) {
-	return x.inner.SendDataToPlayersDataModeError(data, players, mode)
+func (x *Match) SendDataToPlayersDataModeError(data *foundation.NSData, players *foundation.NSArray[*raw.GKPlayer], mode GKMatchSendDataMode) (bool, error) {
+	return x.inner.SendDataToPlayersDataModeError(data, players, raw.GKMatchSendDataMode(mode))
 }
 
 // SendDataToAllPlayersWithDataModeError calls the underlying SendDataToAllPlayersWithDataModeError.
-func (x *Match) SendDataToAllPlayersWithDataModeError(data *foundation.NSData, mode raw.GKMatchSendDataMode) (bool, error) {
-	return x.inner.SendDataToAllPlayersWithDataModeError(data, mode)
+func (x *Match) SendDataToAllPlayersWithDataModeError(data *foundation.NSData, mode GKMatchSendDataMode) (bool, error) {
+	return x.inner.SendDataToAllPlayersWithDataModeError(data, raw.GKMatchSendDataMode(mode))
 }
 
 // Disconnect calls the underlying Disconnect.
@@ -178,8 +178,8 @@ func (x *Match) ChooseBestHostPlayer(ctx context.Context) (string, error) {
 }
 
 // SendDataToPlayersWithDataModeError calls the underlying SendDataToPlayersWithDataModeError.
-func (x *Match) SendDataToPlayersWithDataModeError(data *foundation.NSData, playerIDs *foundation.NSArray[*foundation.NSString], mode raw.GKMatchSendDataMode) (bool, error) {
-	return x.inner.SendDataToPlayersWithDataModeError(data, playerIDs, mode)
+func (x *Match) SendDataToPlayersWithDataModeError(data *foundation.NSData, playerIDs *foundation.NSArray[*foundation.NSString], mode GKMatchSendDataMode) (bool, error) {
+	return x.inner.SendDataToPlayersWithDataModeError(data, playerIDs, raw.GKMatchSendDataMode(mode))
 }
 
 // PlayerIDs returns the collection as a Go slice.
@@ -197,8 +197,8 @@ func (x *Match) PlayerIDs() []string {
 type Matchable interface {
 	Unwrap() *raw.GKMatch
 	WithDelegate(delegate raw.GKMatchDelegate) *Match
-	SendDataToPlayersDataModeError(data *foundation.NSData, players *foundation.NSArray[*raw.GKPlayer], mode raw.GKMatchSendDataMode) (bool, error)
-	SendDataToAllPlayersWithDataModeError(data *foundation.NSData, mode raw.GKMatchSendDataMode) (bool, error)
+	SendDataToPlayersDataModeError(data *foundation.NSData, players *foundation.NSArray[*raw.GKPlayer], mode GKMatchSendDataMode) (bool, error)
+	SendDataToAllPlayersWithDataModeError(data *foundation.NSData, mode GKMatchSendDataMode) (bool, error)
 	Disconnect()
 	ChooseBestHostingPlayer(ctx context.Context) (*Player, error)
 	Rematch(ctx context.Context) (*Match, error)
@@ -210,7 +210,7 @@ type Matchable interface {
 	Properties() unsafe.Pointer
 	PlayerProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.ID]
 	ChooseBestHostPlayer(ctx context.Context) (string, error)
-	SendDataToPlayersWithDataModeError(data *foundation.NSData, playerIDs *foundation.NSArray[*foundation.NSString], mode raw.GKMatchSendDataMode) (bool, error)
+	SendDataToPlayersWithDataModeError(data *foundation.NSData, playerIDs *foundation.NSArray[*foundation.NSString], mode GKMatchSendDataMode) (bool, error)
 	PlayerIDs() []string
 }
 

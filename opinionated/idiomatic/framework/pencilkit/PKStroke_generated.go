@@ -96,8 +96,8 @@ func (x *Stroke) RandomSeed() uint32 {
 }
 
 // RequiredContentVersion calls the underlying RequiredContentVersion.
-func (x *Stroke) RequiredContentVersion() raw.PKContentVersion {
-	return x.inner.RequiredContentVersion()
+func (x *Stroke) RequiredContentVersion() PKContentVersion {
+	return PKContentVersion(x.inner.RequiredContentVersion())
 }
 
 // Strokeable is the interface implemented by [Stroke], for mocking and DI.
@@ -110,7 +110,7 @@ type Strokeable interface {
 	RenderBounds() corefoundation.CGRect
 	MaskedPathRanges() []*FloatRange
 	RandomSeed() uint32
-	RequiredContentVersion() raw.PKContentVersion
+	RequiredContentVersion() PKContentVersion
 }
 
 var _ Strokeable = (*Stroke)(nil)

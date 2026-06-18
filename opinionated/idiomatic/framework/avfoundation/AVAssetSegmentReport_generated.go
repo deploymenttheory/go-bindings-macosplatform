@@ -37,8 +37,8 @@ func NewAssetSegmentReport() *AssetSegmentReport {
 }
 
 // SegmentType calls the underlying SegmentType.
-func (x *AssetSegmentReport) SegmentType() raw.AVAssetSegmentType {
-	return x.inner.SegmentType()
+func (x *AssetSegmentReport) SegmentType() AVAssetSegmentType {
+	return AVAssetSegmentType(x.inner.SegmentType())
 }
 
 // TrackReports returns the collection as a Go slice.
@@ -55,7 +55,7 @@ func (x *AssetSegmentReport) TrackReports() []*AssetSegmentTrackReport {
 // AssetSegmentReportable is the interface implemented by [AssetSegmentReport], for mocking and DI.
 type AssetSegmentReportable interface {
 	Unwrap() *raw.AVAssetSegmentReport
-	SegmentType() raw.AVAssetSegmentType
+	SegmentType() AVAssetSegmentType
 	TrackReports() []*AssetSegmentTrackReport
 }
 

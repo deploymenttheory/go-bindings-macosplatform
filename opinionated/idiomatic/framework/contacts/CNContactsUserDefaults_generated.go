@@ -37,8 +37,8 @@ func NewContactsUserDefaults() *ContactsUserDefaults {
 }
 
 // SortOrder calls the underlying SortOrder.
-func (x *ContactsUserDefaults) SortOrder() raw.CNContactSortOrder {
-	return x.inner.SortOrder()
+func (x *ContactsUserDefaults) SortOrder() CNContactSortOrder {
+	return CNContactSortOrder(x.inner.SortOrder())
 }
 
 // CountryCode calls the underlying CountryCode.
@@ -53,7 +53,7 @@ func (x *ContactsUserDefaults) CountryCode() string {
 // ContactsUserDefaultsable is the interface implemented by [ContactsUserDefaults], for mocking and DI.
 type ContactsUserDefaultsable interface {
 	Unwrap() *raw.CNContactsUserDefaults
-	SortOrder() raw.CNContactSortOrder
+	SortOrder() CNContactSortOrder
 	CountryCode() string
 }
 

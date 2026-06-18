@@ -48,8 +48,8 @@ func (x *HostCIEndpointStateMachine) InspectCommandError(command *raw.IOUSBHostC
 }
 
 // RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
-func (x *HostCIEndpointStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error) {
-	return x.inner.RespondToCommandStatusError(command, status)
+func (x *HostCIEndpointStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error) {
+	return x.inner.RespondToCommandStatusError(command, raw.IOUSBHostCIMessageStatus(status))
 }
 
 // ProcessDoorbellError calls the underlying ProcessDoorbellError.
@@ -58,13 +58,13 @@ func (x *HostCIEndpointStateMachine) ProcessDoorbellError(doorbell uint32) (bool
 }
 
 // EnqueueTransferCompletionForMessageStatusTransferLengthError calls the underlying EnqueueTransferCompletionForMessageStatusTransferLengthError.
-func (x *HostCIEndpointStateMachine) EnqueueTransferCompletionForMessageStatusTransferLengthError(message *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus, transferLength uint) (bool, error) {
-	return x.inner.EnqueueTransferCompletionForMessageStatusTransferLengthError(message, status, transferLength)
+func (x *HostCIEndpointStateMachine) EnqueueTransferCompletionForMessageStatusTransferLengthError(message *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus, transferLength uint) (bool, error) {
+	return x.inner.EnqueueTransferCompletionForMessageStatusTransferLengthError(message, raw.IOUSBHostCIMessageStatus(status), transferLength)
 }
 
 // EndpointState calls the underlying EndpointState.
-func (x *HostCIEndpointStateMachine) EndpointState() raw.IOUSBHostCIEndpointState {
-	return x.inner.EndpointState()
+func (x *HostCIEndpointStateMachine) EndpointState() IOUSBHostCIEndpointState {
+	return IOUSBHostCIEndpointState(x.inner.EndpointState())
 }
 
 // DeviceAddress calls the underlying DeviceAddress.
@@ -95,10 +95,10 @@ func (x *HostCIEndpointStateMachine) ControllerInterface() *HostControllerInterf
 type HostCIEndpointStateMachineable interface {
 	Unwrap() *raw.IOUSBHostCIEndpointStateMachine
 	InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error)
-	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus) (bool, error)
+	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error)
 	ProcessDoorbellError(doorbell uint32) (bool, error)
-	EnqueueTransferCompletionForMessageStatusTransferLengthError(message *raw.IOUSBHostCIMessage, status raw.IOUSBHostCIMessageStatus, transferLength uint) (bool, error)
-	EndpointState() raw.IOUSBHostCIEndpointState
+	EnqueueTransferCompletionForMessageStatusTransferLengthError(message *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus, transferLength uint) (bool, error)
+	EndpointState() IOUSBHostCIEndpointState
 	DeviceAddress() uint
 	EndpointAddress() uint
 	CurrentTransferMessage() *raw.IOUSBHostCIMessage

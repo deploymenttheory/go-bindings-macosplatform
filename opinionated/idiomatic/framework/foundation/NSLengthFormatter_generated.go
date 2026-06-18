@@ -42,8 +42,8 @@ func (x *LengthFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) 
 }
 
 // WithUnitStyle sets the unitStyle property and returns the receiver for chaining.
-func (x *LengthFormatter) WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *LengthFormatter {
-	x.inner.SetUnitStyle(unitStyle)
+func (x *LengthFormatter) WithUnitStyle(unitStyle NSFormattingUnitStyle) *LengthFormatter {
+	x.inner.SetUnitStyle(raw.NSFormattingUnitStyle(unitStyle))
 	return x
 }
 
@@ -60,8 +60,8 @@ func (x *LengthFormatter) WithScriptingProperties(scriptingProperties *raw.NSDic
 }
 
 // StringFromValueUnit calls the underlying StringFromValueUnit.
-func (x *LengthFormatter) StringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String {
-	_r := x.inner.StringFromValueUnit(value, unit)
+func (x *LengthFormatter) StringFromValueUnit(value float64, unit NSLengthFormatterUnit) *String {
+	_r := x.inner.StringFromValueUnit(value, raw.NSLengthFormatterUnit(unit))
 	if _r == nil {
 		return nil
 	}
@@ -78,8 +78,8 @@ func (x *LengthFormatter) StringFromMeters(numberInMeters float64) *String {
 }
 
 // UnitStringFromValueUnit calls the underlying UnitStringFromValueUnit.
-func (x *LengthFormatter) UnitStringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String {
-	_r := x.inner.UnitStringFromValueUnit(value, unit)
+func (x *LengthFormatter) UnitStringFromValueUnit(value float64, unit NSLengthFormatterUnit) *String {
+	_r := x.inner.UnitStringFromValueUnit(value, raw.NSLengthFormatterUnit(unit))
 	if _r == nil {
 		return nil
 	}
@@ -110,13 +110,13 @@ func (x *LengthFormatter) SetNumberFormatter(numberFormatter *raw.NSNumberFormat
 }
 
 // UnitStyle calls the underlying UnitStyle.
-func (x *LengthFormatter) UnitStyle() raw.NSFormattingUnitStyle {
-	return x.inner.UnitStyle()
+func (x *LengthFormatter) UnitStyle() NSFormattingUnitStyle {
+	return NSFormattingUnitStyle(x.inner.UnitStyle())
 }
 
 // SetUnitStyle calls the underlying SetUnitStyle.
-func (x *LengthFormatter) SetUnitStyle(unitStyle raw.NSFormattingUnitStyle) {
-	x.inner.SetUnitStyle(unitStyle)
+func (x *LengthFormatter) SetUnitStyle(unitStyle NSFormattingUnitStyle) {
+	x.inner.SetUnitStyle(raw.NSFormattingUnitStyle(unitStyle))
 }
 
 // IsForPersonHeightUse calls the underlying IsForPersonHeightUse.
@@ -137,17 +137,17 @@ func (x *LengthFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter
 type LengthFormatterable interface {
 	Unwrap() *raw.NSLengthFormatter
 	WithNumberFormatter(numberFormatter *NumberFormatter) *LengthFormatter
-	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *LengthFormatter
+	WithUnitStyle(unitStyle NSFormattingUnitStyle) *LengthFormatter
 	WithForPersonHeightUse(forPersonHeightUse bool) *LengthFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LengthFormatter
-	StringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String
+	StringFromValueUnit(value float64, unit NSLengthFormatterUnit) *String
 	StringFromMeters(numberInMeters float64) *String
-	UnitStringFromValueUnit(value float64, unit raw.NSLengthFormatterUnit) *String
+	UnitStringFromValueUnit(value float64, unit NSLengthFormatterUnit) *String
 	UnitStringFromMetersUsedUnit(numberInMeters float64, unitp *raw.NSLengthFormatterUnit) *String
 	NumberFormatter() *NumberFormatter
 	SetNumberFormatter(numberFormatter *raw.NSNumberFormatter)
-	UnitStyle() raw.NSFormattingUnitStyle
-	SetUnitStyle(unitStyle raw.NSFormattingUnitStyle)
+	UnitStyle() NSFormattingUnitStyle
+	SetUnitStyle(unitStyle NSFormattingUnitStyle)
 	IsForPersonHeightUse() bool
 	SetForPersonHeightUse(forPersonHeightUse bool)
 }

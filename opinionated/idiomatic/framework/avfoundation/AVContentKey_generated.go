@@ -50,8 +50,8 @@ func (x *ContentKey) ContentKeySpecifier() *ContentKeySpecifier {
 }
 
 // ExternalContentProtectionStatus calls the underlying ExternalContentProtectionStatus.
-func (x *ContentKey) ExternalContentProtectionStatus() raw.AVExternalContentProtectionStatus {
-	return x.inner.ExternalContentProtectionStatus()
+func (x *ContentKey) ExternalContentProtectionStatus() AVExternalContentProtectionStatus {
+	return AVExternalContentProtectionStatus(x.inner.ExternalContentProtectionStatus())
 }
 
 // ContentKeyable is the interface implemented by [ContentKey], for mocking and DI.
@@ -59,7 +59,7 @@ type ContentKeyable interface {
 	Unwrap() *raw.AVContentKey
 	Revoke()
 	ContentKeySpecifier() *ContentKeySpecifier
-	ExternalContentProtectionStatus() raw.AVExternalContentProtectionStatus
+	ExternalContentProtectionStatus() AVExternalContentProtectionStatus
 }
 
 var _ ContentKeyable = (*ContentKey)(nil)

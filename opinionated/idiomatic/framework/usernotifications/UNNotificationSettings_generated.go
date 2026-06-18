@@ -36,43 +36,43 @@ func NewNotificationSettings() *NotificationSettings {
 }
 
 // AuthorizationStatus calls the underlying AuthorizationStatus.
-func (x *NotificationSettings) AuthorizationStatus() raw.UNAuthorizationStatus {
-	return x.inner.AuthorizationStatus()
+func (x *NotificationSettings) AuthorizationStatus() UNAuthorizationStatus {
+	return UNAuthorizationStatus(x.inner.AuthorizationStatus())
 }
 
 // SoundSetting calls the underlying SoundSetting.
-func (x *NotificationSettings) SoundSetting() raw.UNNotificationSetting {
-	return x.inner.SoundSetting()
+func (x *NotificationSettings) SoundSetting() UNNotificationSetting {
+	return UNNotificationSetting(x.inner.SoundSetting())
 }
 
 // BadgeSetting calls the underlying BadgeSetting.
-func (x *NotificationSettings) BadgeSetting() raw.UNNotificationSetting {
-	return x.inner.BadgeSetting()
+func (x *NotificationSettings) BadgeSetting() UNNotificationSetting {
+	return UNNotificationSetting(x.inner.BadgeSetting())
 }
 
 // AlertSetting calls the underlying AlertSetting.
-func (x *NotificationSettings) AlertSetting() raw.UNNotificationSetting {
-	return x.inner.AlertSetting()
+func (x *NotificationSettings) AlertSetting() UNNotificationSetting {
+	return UNNotificationSetting(x.inner.AlertSetting())
 }
 
 // NotificationCenterSetting calls the underlying NotificationCenterSetting.
-func (x *NotificationSettings) NotificationCenterSetting() raw.UNNotificationSetting {
-	return x.inner.NotificationCenterSetting()
+func (x *NotificationSettings) NotificationCenterSetting() UNNotificationSetting {
+	return UNNotificationSetting(x.inner.NotificationCenterSetting())
 }
 
 // LockScreenSetting calls the underlying LockScreenSetting.
-func (x *NotificationSettings) LockScreenSetting() raw.UNNotificationSetting {
-	return x.inner.LockScreenSetting()
+func (x *NotificationSettings) LockScreenSetting() UNNotificationSetting {
+	return UNNotificationSetting(x.inner.LockScreenSetting())
 }
 
 // ShowPreviewsSetting calls the underlying ShowPreviewsSetting.
-func (x *NotificationSettings) ShowPreviewsSetting() raw.UNShowPreviewsSetting {
-	return x.inner.ShowPreviewsSetting()
+func (x *NotificationSettings) ShowPreviewsSetting() UNShowPreviewsSetting {
+	return UNShowPreviewsSetting(x.inner.ShowPreviewsSetting())
 }
 
 // CriticalAlertSetting calls the underlying CriticalAlertSetting.
-func (x *NotificationSettings) CriticalAlertSetting() raw.UNNotificationSetting {
-	return x.inner.CriticalAlertSetting()
+func (x *NotificationSettings) CriticalAlertSetting() UNNotificationSetting {
+	return UNNotificationSetting(x.inner.CriticalAlertSetting())
 }
 
 // ProvidesAppNotificationSettings calls the underlying ProvidesAppNotificationSettings.
@@ -81,35 +81,35 @@ func (x *NotificationSettings) ProvidesAppNotificationSettings() bool {
 }
 
 // TimeSensitiveSetting calls the underlying TimeSensitiveSetting.
-func (x *NotificationSettings) TimeSensitiveSetting() raw.UNNotificationSetting {
-	return x.inner.TimeSensitiveSetting()
+func (x *NotificationSettings) TimeSensitiveSetting() UNNotificationSetting {
+	return UNNotificationSetting(x.inner.TimeSensitiveSetting())
 }
 
 // ScheduledDeliverySetting calls the underlying ScheduledDeliverySetting.
-func (x *NotificationSettings) ScheduledDeliverySetting() raw.UNNotificationSetting {
-	return x.inner.ScheduledDeliverySetting()
+func (x *NotificationSettings) ScheduledDeliverySetting() UNNotificationSetting {
+	return UNNotificationSetting(x.inner.ScheduledDeliverySetting())
 }
 
 // DirectMessagesSetting calls the underlying DirectMessagesSetting.
-func (x *NotificationSettings) DirectMessagesSetting() raw.UNNotificationSetting {
-	return x.inner.DirectMessagesSetting()
+func (x *NotificationSettings) DirectMessagesSetting() UNNotificationSetting {
+	return UNNotificationSetting(x.inner.DirectMessagesSetting())
 }
 
 // NotificationSettingsable is the interface implemented by [NotificationSettings], for mocking and DI.
 type NotificationSettingsable interface {
 	Unwrap() *raw.UNNotificationSettings
-	AuthorizationStatus() raw.UNAuthorizationStatus
-	SoundSetting() raw.UNNotificationSetting
-	BadgeSetting() raw.UNNotificationSetting
-	AlertSetting() raw.UNNotificationSetting
-	NotificationCenterSetting() raw.UNNotificationSetting
-	LockScreenSetting() raw.UNNotificationSetting
-	ShowPreviewsSetting() raw.UNShowPreviewsSetting
-	CriticalAlertSetting() raw.UNNotificationSetting
+	AuthorizationStatus() UNAuthorizationStatus
+	SoundSetting() UNNotificationSetting
+	BadgeSetting() UNNotificationSetting
+	AlertSetting() UNNotificationSetting
+	NotificationCenterSetting() UNNotificationSetting
+	LockScreenSetting() UNNotificationSetting
+	ShowPreviewsSetting() UNShowPreviewsSetting
+	CriticalAlertSetting() UNNotificationSetting
 	ProvidesAppNotificationSettings() bool
-	TimeSensitiveSetting() raw.UNNotificationSetting
-	ScheduledDeliverySetting() raw.UNNotificationSetting
-	DirectMessagesSetting() raw.UNNotificationSetting
+	TimeSensitiveSetting() UNNotificationSetting
+	ScheduledDeliverySetting() UNNotificationSetting
+	DirectMessagesSetting() UNNotificationSetting
 }
 
 var _ NotificationSettingsable = (*NotificationSettings)(nil)

@@ -41,8 +41,8 @@ func NewTableRowView() *TableRowView {
 }
 
 // WithSelectionHighlightStyle sets the selectionHighlightStyle property and returns the receiver for chaining.
-func (x *TableRowView) WithSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) *TableRowView {
-	x.inner.SetSelectionHighlightStyle(selectionHighlightStyle)
+func (x *TableRowView) WithSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) *TableRowView {
+	x.inner.SetSelectionHighlightStyle(raw.NSTableViewSelectionHighlightStyle(selectionHighlightStyle))
 	return x
 }
 
@@ -89,8 +89,8 @@ func (x *TableRowView) WithTargetForDropOperation(targetForDropOperation bool) *
 }
 
 // WithDraggingDestinationFeedbackStyle sets the draggingDestinationFeedbackStyle property and returns the receiver for chaining.
-func (x *TableRowView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) *TableRowView {
-	x.inner.SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle)
+func (x *TableRowView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) *TableRowView {
+	x.inner.SetDraggingDestinationFeedbackStyle(raw.NSTableViewDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle))
 	return x
 }
 
@@ -143,8 +143,8 @@ func (x *TableRowView) WithAutoresizesSubviews(autoresizesSubviews bool) *TableR
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TableRowView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableRowView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *TableRowView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TableRowView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -203,14 +203,14 @@ func (x *TableRowView) WithWantsRestingTouches(wantsRestingTouches bool) *TableR
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *TableRowView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableRowView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *TableRowView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TableRowView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *TableRowView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableRowView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *TableRowView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TableRowView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -317,8 +317,8 @@ func (x *TableRowView) WithToolTip(toolTip string) *TableRowView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TableRowView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableRowView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TableRowView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableRowView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -335,8 +335,8 @@ func (x *TableRowView) WithNextKeyView(nextKeyView ViewProvider) *TableRowView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TableRowView) WithFocusRingType(focusRingType raw.NSFocusRingType) *TableRowView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *TableRowView) WithFocusRingType(focusRingType NSFocusRingType) *TableRowView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -359,8 +359,8 @@ func (x *TableRowView) WithGestureRecognizers(items ...GestureRecognizerProvider
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *TableRowView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableRowView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *TableRowView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TableRowView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -474,13 +474,13 @@ func (x *TableRowView) ViewAtColumn(column int) objc.ID {
 }
 
 // SelectionHighlightStyle calls the underlying SelectionHighlightStyle.
-func (x *TableRowView) SelectionHighlightStyle() raw.NSTableViewSelectionHighlightStyle {
-	return x.inner.SelectionHighlightStyle()
+func (x *TableRowView) SelectionHighlightStyle() NSTableViewSelectionHighlightStyle {
+	return NSTableViewSelectionHighlightStyle(x.inner.SelectionHighlightStyle())
 }
 
 // SetSelectionHighlightStyle calls the underlying SetSelectionHighlightStyle.
-func (x *TableRowView) SetSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) {
-	x.inner.SetSelectionHighlightStyle(selectionHighlightStyle)
+func (x *TableRowView) SetSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) {
+	x.inner.SetSelectionHighlightStyle(raw.NSTableViewSelectionHighlightStyle(selectionHighlightStyle))
 }
 
 // IsEmphasized calls the underlying IsEmphasized.
@@ -554,13 +554,13 @@ func (x *TableRowView) SetTargetForDropOperation(targetForDropOperation bool) {
 }
 
 // DraggingDestinationFeedbackStyle calls the underlying DraggingDestinationFeedbackStyle.
-func (x *TableRowView) DraggingDestinationFeedbackStyle() raw.NSTableViewDraggingDestinationFeedbackStyle {
-	return x.inner.DraggingDestinationFeedbackStyle()
+func (x *TableRowView) DraggingDestinationFeedbackStyle() NSTableViewDraggingDestinationFeedbackStyle {
+	return NSTableViewDraggingDestinationFeedbackStyle(x.inner.DraggingDestinationFeedbackStyle())
 }
 
 // SetDraggingDestinationFeedbackStyle calls the underlying SetDraggingDestinationFeedbackStyle.
-func (x *TableRowView) SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) {
-	x.inner.SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle)
+func (x *TableRowView) SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) {
+	x.inner.SetDraggingDestinationFeedbackStyle(raw.NSTableViewDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle))
 }
 
 // IndentationForDropOperation calls the underlying IndentationForDropOperation.
@@ -574,8 +574,8 @@ func (x *TableRowView) SetIndentationForDropOperation(indentationForDropOperatio
 }
 
 // InteriorBackgroundStyle calls the underlying InteriorBackgroundStyle.
-func (x *TableRowView) InteriorBackgroundStyle() raw.NSBackgroundStyle {
-	return x.inner.InteriorBackgroundStyle()
+func (x *TableRowView) InteriorBackgroundStyle() NSBackgroundStyle {
+	return NSBackgroundStyle(x.inner.InteriorBackgroundStyle())
 }
 
 // BackgroundColor calls the underlying BackgroundColor.
@@ -604,7 +604,7 @@ func (x *TableRowView) asResponder() *raw.NSResponder { return &x.inner.NSView.N
 // TableRowViewable is the interface implemented by [TableRowView], for mocking and DI.
 type TableRowViewable interface {
 	Unwrap() *raw.NSTableRowView
-	WithSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) *TableRowView
+	WithSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) *TableRowView
 	WithEmphasized(emphasized bool) *TableRowView
 	WithGroupRowStyle(groupRowStyle bool) *TableRowView
 	WithSelected(selected bool) *TableRowView
@@ -612,14 +612,14 @@ type TableRowViewable interface {
 	WithNextRowSelected(nextRowSelected bool) *TableRowView
 	WithFloating(floating bool) *TableRowView
 	WithTargetForDropOperation(targetForDropOperation bool) *TableRowView
-	WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) *TableRowView
+	WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) *TableRowView
 	WithIndentationForDropOperation(indentationForDropOperation float64) *TableRowView
 	WithBackgroundColor(backgroundColor *Color) *TableRowView
 	WithSubviews(items ...ViewProvider) *TableRowView
 	WithHidden(hidden bool) *TableRowView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableRowView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TableRowView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableRowView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TableRowView
 	WithFrame(frame corefoundation.CGRect) *TableRowView
 	WithFrameRotation(frameRotation float64) *TableRowView
 	WithFrameCenterRotation(frameCenterRotation float64) *TableRowView
@@ -629,8 +629,8 @@ type TableRowViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *TableRowView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableRowView
 	WithWantsRestingTouches(wantsRestingTouches bool) *TableRowView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableRowView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableRowView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TableRowView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TableRowView
 	WithWantsLayer(wantsLayer bool) *TableRowView
 	WithLayer(layer *quartzcore.CALayer) *TableRowView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableRowView
@@ -644,12 +644,12 @@ type TableRowViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *TableRowView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableRowView
 	WithToolTip(toolTip string) *TableRowView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableRowView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableRowView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableRowView
 	WithNextKeyView(nextKeyView ViewProvider) *TableRowView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TableRowView
+	WithFocusRingType(focusRingType NSFocusRingType) *TableRowView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TableRowView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableRowView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TableRowView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableRowView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableRowView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableRowView
@@ -669,8 +669,8 @@ type TableRowViewable interface {
 	DrawSeparatorInRect(dirtyRect corefoundation.CGRect)
 	DrawDraggingDestinationFeedbackInRect(dirtyRect corefoundation.CGRect)
 	ViewAtColumn(column int) objc.ID
-	SelectionHighlightStyle() raw.NSTableViewSelectionHighlightStyle
-	SetSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle)
+	SelectionHighlightStyle() NSTableViewSelectionHighlightStyle
+	SetSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle)
 	IsEmphasized() bool
 	SetEmphasized(emphasized bool)
 	IsGroupRowStyle() bool
@@ -685,11 +685,11 @@ type TableRowViewable interface {
 	SetFloating(floating bool)
 	IsTargetForDropOperation() bool
 	SetTargetForDropOperation(targetForDropOperation bool)
-	DraggingDestinationFeedbackStyle() raw.NSTableViewDraggingDestinationFeedbackStyle
-	SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle)
+	DraggingDestinationFeedbackStyle() NSTableViewDraggingDestinationFeedbackStyle
+	SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle)
 	IndentationForDropOperation() float64
 	SetIndentationForDropOperation(indentationForDropOperation float64)
-	InteriorBackgroundStyle() raw.NSBackgroundStyle
+	InteriorBackgroundStyle() NSBackgroundStyle
 	BackgroundColor() *Color
 	SetBackgroundColor(backgroundColor *raw.NSColor)
 	NumberOfColumns() int

@@ -52,8 +52,8 @@ func (x *SampleBufferAudioRenderer) WithAudioTimePitchAlgorithm(audioTimePitchAl
 }
 
 // WithAllowedAudioSpatializationFormats sets the allowedAudioSpatializationFormats property and returns the receiver for chaining.
-func (x *SampleBufferAudioRenderer) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats) *SampleBufferAudioRenderer {
-	x.inner.SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats)
+func (x *SampleBufferAudioRenderer) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) *SampleBufferAudioRenderer {
+	x.inner.SetAllowedAudioSpatializationFormats(raw.AVAudioSpatializationFormats(allowedAudioSpatializationFormats))
 	return x
 }
 
@@ -70,8 +70,8 @@ func (x *SampleBufferAudioRenderer) WithMuted(muted bool) *SampleBufferAudioRend
 }
 
 // Status calls the underlying Status.
-func (x *SampleBufferAudioRenderer) Status() raw.AVQueuedSampleBufferRenderingStatus {
-	return x.inner.Status()
+func (x *SampleBufferAudioRenderer) Status() AVQueuedSampleBufferRenderingStatus {
+	return AVQueuedSampleBufferRenderingStatus(x.inner.Status())
 }
 
 // Error calls the underlying Error.
@@ -108,13 +108,13 @@ func (x *SampleBufferAudioRenderer) SetAudioTimePitchAlgorithm(audioTimePitchAlg
 }
 
 // AllowedAudioSpatializationFormats calls the underlying AllowedAudioSpatializationFormats.
-func (x *SampleBufferAudioRenderer) AllowedAudioSpatializationFormats() raw.AVAudioSpatializationFormats {
-	return x.inner.AllowedAudioSpatializationFormats()
+func (x *SampleBufferAudioRenderer) AllowedAudioSpatializationFormats() AVAudioSpatializationFormats {
+	return AVAudioSpatializationFormats(x.inner.AllowedAudioSpatializationFormats())
 }
 
 // SetAllowedAudioSpatializationFormats calls the underlying SetAllowedAudioSpatializationFormats.
-func (x *SampleBufferAudioRenderer) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats) {
-	x.inner.SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats)
+func (x *SampleBufferAudioRenderer) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) {
+	x.inner.SetAllowedAudioSpatializationFormats(raw.AVAudioSpatializationFormats(allowedAudioSpatializationFormats))
 }
 
 // Volume calls the underlying Volume.
@@ -147,17 +147,17 @@ type SampleBufferAudioRendererable interface {
 	Unwrap() *raw.AVSampleBufferAudioRenderer
 	WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *SampleBufferAudioRenderer
 	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *SampleBufferAudioRenderer
-	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats) *SampleBufferAudioRenderer
+	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) *SampleBufferAudioRenderer
 	WithVolume(volume float32) *SampleBufferAudioRenderer
 	WithMuted(muted bool) *SampleBufferAudioRenderer
-	Status() raw.AVQueuedSampleBufferRenderingStatus
+	Status() AVQueuedSampleBufferRenderingStatus
 	Error() unsafe.Pointer
 	AudioOutputDeviceUniqueID() string
 	SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string)
 	AudioTimePitchAlgorithm() string
 	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
-	AllowedAudioSpatializationFormats() raw.AVAudioSpatializationFormats
-	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats)
+	AllowedAudioSpatializationFormats() AVAudioSpatializationFormats
+	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats)
 	Volume() float32
 	SetVolume(volume float32)
 	IsMuted() bool

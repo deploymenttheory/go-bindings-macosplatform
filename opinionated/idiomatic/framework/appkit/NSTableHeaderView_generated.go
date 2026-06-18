@@ -83,8 +83,8 @@ func (x *TableHeaderView) WithAutoresizesSubviews(autoresizesSubviews bool) *Tab
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TableHeaderView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableHeaderView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *TableHeaderView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TableHeaderView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -143,14 +143,14 @@ func (x *TableHeaderView) WithWantsRestingTouches(wantsRestingTouches bool) *Tab
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *TableHeaderView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableHeaderView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *TableHeaderView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TableHeaderView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *TableHeaderView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableHeaderView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *TableHeaderView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TableHeaderView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -257,8 +257,8 @@ func (x *TableHeaderView) WithToolTip(toolTip string) *TableHeaderView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TableHeaderView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableHeaderView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TableHeaderView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableHeaderView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -275,8 +275,8 @@ func (x *TableHeaderView) WithNextKeyView(nextKeyView ViewProvider) *TableHeader
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TableHeaderView) WithFocusRingType(focusRingType raw.NSFocusRingType) *TableHeaderView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *TableHeaderView) WithFocusRingType(focusRingType NSFocusRingType) *TableHeaderView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -299,8 +299,8 @@ func (x *TableHeaderView) WithGestureRecognizers(items ...GestureRecognizerProvi
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *TableHeaderView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableHeaderView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *TableHeaderView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TableHeaderView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -439,7 +439,7 @@ type TableHeaderViewable interface {
 	WithHidden(hidden bool) *TableHeaderView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableHeaderView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TableHeaderView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableHeaderView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TableHeaderView
 	WithFrame(frame corefoundation.CGRect) *TableHeaderView
 	WithFrameRotation(frameRotation float64) *TableHeaderView
 	WithFrameCenterRotation(frameCenterRotation float64) *TableHeaderView
@@ -449,8 +449,8 @@ type TableHeaderViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *TableHeaderView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableHeaderView
 	WithWantsRestingTouches(wantsRestingTouches bool) *TableHeaderView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableHeaderView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableHeaderView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TableHeaderView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TableHeaderView
 	WithWantsLayer(wantsLayer bool) *TableHeaderView
 	WithLayer(layer *quartzcore.CALayer) *TableHeaderView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableHeaderView
@@ -464,12 +464,12 @@ type TableHeaderViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *TableHeaderView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableHeaderView
 	WithToolTip(toolTip string) *TableHeaderView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableHeaderView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableHeaderView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableHeaderView
 	WithNextKeyView(nextKeyView ViewProvider) *TableHeaderView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TableHeaderView
+	WithFocusRingType(focusRingType NSFocusRingType) *TableHeaderView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TableHeaderView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableHeaderView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TableHeaderView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableHeaderView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableHeaderView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableHeaderView

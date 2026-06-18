@@ -47,8 +47,8 @@ func (x *ChangeLanguageOptionCommandEvent) LanguageOption() *NowPlayingInfoLangu
 }
 
 // Setting calls the underlying Setting.
-func (x *ChangeLanguageOptionCommandEvent) Setting() raw.MPChangeLanguageOptionSetting {
-	return x.inner.Setting()
+func (x *ChangeLanguageOptionCommandEvent) Setting() MPChangeLanguageOptionSetting {
+	return MPChangeLanguageOptionSetting(x.inner.Setting())
 }
 
 func (x *ChangeLanguageOptionCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
@@ -59,7 +59,7 @@ func (x *ChangeLanguageOptionCommandEvent) asRemoteCommandEvent() *raw.MPRemoteC
 type ChangeLanguageOptionCommandEventable interface {
 	Unwrap() *raw.MPChangeLanguageOptionCommandEvent
 	LanguageOption() *NowPlayingInfoLanguageOption
-	Setting() raw.MPChangeLanguageOptionSetting
+	Setting() MPChangeLanguageOptionSetting
 }
 
 var _ ChangeLanguageOptionCommandEventable = (*ChangeLanguageOptionCommandEvent)(nil)

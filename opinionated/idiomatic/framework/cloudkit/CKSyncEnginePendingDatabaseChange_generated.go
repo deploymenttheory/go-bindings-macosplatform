@@ -47,8 +47,8 @@ func (x *SyncEnginePendingDatabaseChange) ZoneID() *RecordZoneID {
 }
 
 // Type calls the underlying Type.
-func (x *SyncEnginePendingDatabaseChange) Type() raw.CKSyncEnginePendingDatabaseChangeType {
-	return x.inner.Type()
+func (x *SyncEnginePendingDatabaseChange) Type() CKSyncEnginePendingDatabaseChangeType {
+	return CKSyncEnginePendingDatabaseChangeType(x.inner.Type())
 }
 
 func (x *SyncEnginePendingDatabaseChange) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange {
@@ -59,7 +59,7 @@ func (x *SyncEnginePendingDatabaseChange) asSyncEnginePendingDatabaseChange() *r
 type SyncEnginePendingDatabaseChangeable interface {
 	Unwrap() *raw.CKSyncEnginePendingDatabaseChange
 	ZoneID() *RecordZoneID
-	Type() raw.CKSyncEnginePendingDatabaseChangeType
+	Type() CKSyncEnginePendingDatabaseChangeType
 }
 
 var _ SyncEnginePendingDatabaseChangeable = (*SyncEnginePendingDatabaseChange)(nil)

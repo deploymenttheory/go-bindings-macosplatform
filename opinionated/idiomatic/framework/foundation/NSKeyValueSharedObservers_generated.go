@@ -45,8 +45,8 @@ func (x *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties *r
 }
 
 // AddSharedObserverForKeyOptionsContext calls the underlying AddSharedObserverForKeyOptionsContext.
-func (x *KeyValueSharedObservers) AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options raw.NSKeyValueObservingOptions, context_ unsafe.Pointer) {
-	x.inner.AddSharedObserverForKeyOptionsContext(observer, foundation.NSStringStringWithUTF8String(key), options, context_)
+func (x *KeyValueSharedObservers) AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options NSKeyValueObservingOptions, context_ unsafe.Pointer) {
+	x.inner.AddSharedObserverForKeyOptionsContext(observer, foundation.NSStringStringWithUTF8String(key), raw.NSKeyValueObservingOptions(options), context_)
 }
 
 // Snapshot calls the underlying Snapshot.
@@ -64,7 +64,7 @@ func (x *KeyValueSharedObservers) asObject() *raw.NSObject { return &x.inner.NSO
 type KeyValueSharedObserversable interface {
 	Unwrap() *raw.NSKeyValueSharedObservers
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyValueSharedObservers
-	AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options raw.NSKeyValueObservingOptions, context_ unsafe.Pointer)
+	AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options NSKeyValueObservingOptions, context_ unsafe.Pointer)
 	Snapshot() *KeyValueSharedObserversSnapshot
 }
 

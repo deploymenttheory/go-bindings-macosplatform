@@ -299,8 +299,8 @@ func (x *Object) ObserveValueForKeyPathOfObjectChangeContext(keyPath string, obj
 }
 
 // AddObserverForKeyPathOptionsContext calls the underlying AddObserverForKeyPathOptionsContext.
-func (x *Object) AddObserverForKeyPathOptionsContext(observer *raw.NSObject, keyPath string, options raw.NSKeyValueObservingOptions, context_ unsafe.Pointer) {
-	x.inner.AddObserverForKeyPathOptionsContext(observer, foundation.NSStringStringWithUTF8String(keyPath), options, context_)
+func (x *Object) AddObserverForKeyPathOptionsContext(observer *raw.NSObject, keyPath string, options NSKeyValueObservingOptions, context_ unsafe.Pointer) {
+	x.inner.AddObserverForKeyPathOptionsContext(observer, foundation.NSStringStringWithUTF8String(keyPath), raw.NSKeyValueObservingOptions(options), context_)
 }
 
 // RemoveObserverForKeyPathContext calls the underlying RemoveObserverForKeyPathContext.
@@ -324,23 +324,23 @@ func (x *Object) DidChangeValueForKey(key string) {
 }
 
 // WillChangeValuesAtIndexesForKey calls the underlying WillChangeValuesAtIndexesForKey.
-func (x *Object) WillChangeValuesAtIndexesForKey(changeKind raw.NSKeyValueChange, indexes *raw.NSIndexSet, key string) {
-	x.inner.WillChangeValuesAtIndexesForKey(changeKind, indexes, foundation.NSStringStringWithUTF8String(key))
+func (x *Object) WillChangeValuesAtIndexesForKey(changeKind NSKeyValueChange, indexes *raw.NSIndexSet, key string) {
+	x.inner.WillChangeValuesAtIndexesForKey(raw.NSKeyValueChange(changeKind), indexes, foundation.NSStringStringWithUTF8String(key))
 }
 
 // DidChangeValuesAtIndexesForKey calls the underlying DidChangeValuesAtIndexesForKey.
-func (x *Object) DidChangeValuesAtIndexesForKey(changeKind raw.NSKeyValueChange, indexes *raw.NSIndexSet, key string) {
-	x.inner.DidChangeValuesAtIndexesForKey(changeKind, indexes, foundation.NSStringStringWithUTF8String(key))
+func (x *Object) DidChangeValuesAtIndexesForKey(changeKind NSKeyValueChange, indexes *raw.NSIndexSet, key string) {
+	x.inner.DidChangeValuesAtIndexesForKey(raw.NSKeyValueChange(changeKind), indexes, foundation.NSStringStringWithUTF8String(key))
 }
 
 // WillChangeValueForKeyWithSetMutationUsingObjects calls the underlying WillChangeValueForKeyWithSetMutationUsingObjects.
-func (x *Object) WillChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind raw.NSKeyValueSetMutationKind, objects *raw.NSSet[objc.ID]) {
-	x.inner.WillChangeValueForKeyWithSetMutationUsingObjects(foundation.NSStringStringWithUTF8String(key), mutationKind, objects)
+func (x *Object) WillChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind NSKeyValueSetMutationKind, objects *raw.NSSet[objc.ID]) {
+	x.inner.WillChangeValueForKeyWithSetMutationUsingObjects(foundation.NSStringStringWithUTF8String(key), raw.NSKeyValueSetMutationKind(mutationKind), objects)
 }
 
 // DidChangeValueForKeyWithSetMutationUsingObjects calls the underlying DidChangeValueForKeyWithSetMutationUsingObjects.
-func (x *Object) DidChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind raw.NSKeyValueSetMutationKind, objects *raw.NSSet[objc.ID]) {
-	x.inner.DidChangeValueForKeyWithSetMutationUsingObjects(foundation.NSStringStringWithUTF8String(key), mutationKind, objects)
+func (x *Object) DidChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind NSKeyValueSetMutationKind, objects *raw.NSSet[objc.ID]) {
+	x.inner.DidChangeValueForKeyWithSetMutationUsingObjects(foundation.NSStringStringWithUTF8String(key), raw.NSKeyValueSetMutationKind(mutationKind), objects)
 }
 
 // ObservationInfo calls the underlying ObservationInfo.
@@ -698,15 +698,15 @@ type Objectable interface {
 	ValuesForKeys(keys *raw.NSArray[objc.ID]) *raw.NSDictionary[objc.ID, objc.ID]
 	TakeValuesFromDictionary(properties *raw.NSDictionary[objc.ID, objc.ID])
 	ObserveValueForKeyPathOfObjectChangeContext(keyPath string, object objc.ID, change *raw.NSDictionary[*raw.NSString, objc.ID], context_ unsafe.Pointer)
-	AddObserverForKeyPathOptionsContext(observer *raw.NSObject, keyPath string, options raw.NSKeyValueObservingOptions, context_ unsafe.Pointer)
+	AddObserverForKeyPathOptionsContext(observer *raw.NSObject, keyPath string, options NSKeyValueObservingOptions, context_ unsafe.Pointer)
 	RemoveObserverForKeyPathContext(observer *raw.NSObject, keyPath string, context_ unsafe.Pointer)
 	RemoveObserverForKeyPath(observer *raw.NSObject, keyPath string)
 	WillChangeValueForKey(key string)
 	DidChangeValueForKey(key string)
-	WillChangeValuesAtIndexesForKey(changeKind raw.NSKeyValueChange, indexes *raw.NSIndexSet, key string)
-	DidChangeValuesAtIndexesForKey(changeKind raw.NSKeyValueChange, indexes *raw.NSIndexSet, key string)
-	WillChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind raw.NSKeyValueSetMutationKind, objects *raw.NSSet[objc.ID])
-	DidChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind raw.NSKeyValueSetMutationKind, objects *raw.NSSet[objc.ID])
+	WillChangeValuesAtIndexesForKey(changeKind NSKeyValueChange, indexes *raw.NSIndexSet, key string)
+	DidChangeValuesAtIndexesForKey(changeKind NSKeyValueChange, indexes *raw.NSIndexSet, key string)
+	WillChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind NSKeyValueSetMutationKind, objects *raw.NSSet[objc.ID])
+	DidChangeValueForKeyWithSetMutationUsingObjects(key string, mutationKind NSKeyValueSetMutationKind, objects *raw.NSSet[objc.ID])
 	ObservationInfo() unsafe.Pointer
 	SetObservationInfo(observationInfo unsafe.Pointer)
 	SetSharedObservers(sharedObservers *raw.NSKeyValueSharedObserversSnapshot)

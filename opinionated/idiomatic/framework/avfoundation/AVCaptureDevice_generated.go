@@ -89,20 +89,20 @@ func (x *CaptureDevice) WithFallbackPrimaryConstituentDevices(items ...*raw.AVCa
 }
 
 // WithFlashMode sets the flashMode property and returns the receiver for chaining.
-func (x *CaptureDevice) WithFlashMode(flashMode raw.AVCaptureFlashMode) *CaptureDevice {
-	x.inner.SetFlashMode(flashMode)
+func (x *CaptureDevice) WithFlashMode(flashMode AVCaptureFlashMode) *CaptureDevice {
+	x.inner.SetFlashMode(raw.AVCaptureFlashMode(flashMode))
 	return x
 }
 
 // WithTorchMode sets the torchMode property and returns the receiver for chaining.
-func (x *CaptureDevice) WithTorchMode(torchMode raw.AVCaptureTorchMode) *CaptureDevice {
-	x.inner.SetTorchMode(torchMode)
+func (x *CaptureDevice) WithTorchMode(torchMode AVCaptureTorchMode) *CaptureDevice {
+	x.inner.SetTorchMode(raw.AVCaptureTorchMode(torchMode))
 	return x
 }
 
 // WithFocusMode sets the focusMode property and returns the receiver for chaining.
-func (x *CaptureDevice) WithFocusMode(focusMode raw.AVCaptureFocusMode) *CaptureDevice {
-	x.inner.SetFocusMode(focusMode)
+func (x *CaptureDevice) WithFocusMode(focusMode AVCaptureFocusMode) *CaptureDevice {
+	x.inner.SetFocusMode(raw.AVCaptureFocusMode(focusMode))
 	return x
 }
 
@@ -119,8 +119,8 @@ func (x *CaptureDevice) WithFocusRectOfInterest(focusRectOfInterest corefoundati
 }
 
 // WithExposureMode sets the exposureMode property and returns the receiver for chaining.
-func (x *CaptureDevice) WithExposureMode(exposureMode raw.AVCaptureExposureMode) *CaptureDevice {
-	x.inner.SetExposureMode(exposureMode)
+func (x *CaptureDevice) WithExposureMode(exposureMode AVCaptureExposureMode) *CaptureDevice {
+	x.inner.SetExposureMode(raw.AVCaptureExposureMode(exposureMode))
 	return x
 }
 
@@ -137,14 +137,14 @@ func (x *CaptureDevice) WithExposureRectOfInterest(exposureRectOfInterest corefo
 }
 
 // WithWhiteBalanceMode sets the whiteBalanceMode property and returns the receiver for chaining.
-func (x *CaptureDevice) WithWhiteBalanceMode(whiteBalanceMode raw.AVCaptureWhiteBalanceMode) *CaptureDevice {
-	x.inner.SetWhiteBalanceMode(whiteBalanceMode)
+func (x *CaptureDevice) WithWhiteBalanceMode(whiteBalanceMode AVCaptureWhiteBalanceMode) *CaptureDevice {
+	x.inner.SetWhiteBalanceMode(raw.AVCaptureWhiteBalanceMode(whiteBalanceMode))
 	return x
 }
 
 // WithActiveColorSpace sets the activeColorSpace property and returns the receiver for chaining.
-func (x *CaptureDevice) WithActiveColorSpace(activeColorSpace raw.AVCaptureColorSpace) *CaptureDevice {
-	x.inner.SetActiveColorSpace(activeColorSpace)
+func (x *CaptureDevice) WithActiveColorSpace(activeColorSpace AVCaptureColorSpace) *CaptureDevice {
+	x.inner.SetActiveColorSpace(raw.AVCaptureColorSpace(activeColorSpace))
 	return x
 }
 
@@ -343,8 +343,8 @@ func (x *CaptureDevice) SetActiveInputSource(activeInputSource *raw.AVCaptureDev
 }
 
 // Position calls the underlying Position.
-func (x *CaptureDevice) Position() raw.AVCaptureDevicePosition {
-	return x.inner.Position()
+func (x *CaptureDevice) Position() AVCaptureDevicePosition {
+	return AVCaptureDevicePosition(x.inner.Position())
 }
 
 // DeviceType calls the underlying DeviceType.
@@ -357,28 +357,28 @@ func (x *CaptureDevice) DeviceType() string {
 }
 
 // SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions calls the underlying SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions.
-func (x *CaptureDevice) SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions(switchingBehavior raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
-	x.inner.SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions(switchingBehavior, restrictedSwitchingBehaviorConditions)
+func (x *CaptureDevice) SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions(switchingBehavior AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
+	x.inner.SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions(raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior(switchingBehavior), raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions(restrictedSwitchingBehaviorConditions))
 }
 
 // PrimaryConstituentDeviceSwitchingBehavior calls the underlying PrimaryConstituentDeviceSwitchingBehavior.
-func (x *CaptureDevice) PrimaryConstituentDeviceSwitchingBehavior() raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior {
-	return x.inner.PrimaryConstituentDeviceSwitchingBehavior()
+func (x *CaptureDevice) PrimaryConstituentDeviceSwitchingBehavior() AVCapturePrimaryConstituentDeviceSwitchingBehavior {
+	return AVCapturePrimaryConstituentDeviceSwitchingBehavior(x.inner.PrimaryConstituentDeviceSwitchingBehavior())
 }
 
 // PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions calls the underlying PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions.
-func (x *CaptureDevice) PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions {
-	return x.inner.PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions()
+func (x *CaptureDevice) PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions {
+	return AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions(x.inner.PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions())
 }
 
 // ActivePrimaryConstituentDeviceSwitchingBehavior calls the underlying ActivePrimaryConstituentDeviceSwitchingBehavior.
-func (x *CaptureDevice) ActivePrimaryConstituentDeviceSwitchingBehavior() raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior {
-	return x.inner.ActivePrimaryConstituentDeviceSwitchingBehavior()
+func (x *CaptureDevice) ActivePrimaryConstituentDeviceSwitchingBehavior() AVCapturePrimaryConstituentDeviceSwitchingBehavior {
+	return AVCapturePrimaryConstituentDeviceSwitchingBehavior(x.inner.ActivePrimaryConstituentDeviceSwitchingBehavior())
 }
 
 // ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions calls the underlying ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions.
-func (x *CaptureDevice) ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions {
-	return x.inner.ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions()
+func (x *CaptureDevice) ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions {
+	return AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions(x.inner.ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions())
 }
 
 // ActivePrimaryConstituentDevice calls the underlying ActivePrimaryConstituentDevice.
@@ -418,8 +418,8 @@ func (x *CaptureDevice) SetFallbackPrimaryConstituentDevices(fallbackPrimaryCons
 }
 
 // IsFlashModeSupported calls the underlying IsFlashModeSupported.
-func (x *CaptureDevice) IsFlashModeSupported(flashMode raw.AVCaptureFlashMode) bool {
-	return x.inner.IsFlashModeSupported(flashMode)
+func (x *CaptureDevice) IsFlashModeSupported(flashMode AVCaptureFlashMode) bool {
+	return x.inner.IsFlashModeSupported(raw.AVCaptureFlashMode(flashMode))
 }
 
 // HasFlash calls the underlying HasFlash.
@@ -433,18 +433,18 @@ func (x *CaptureDevice) IsFlashAvailable() bool {
 }
 
 // FlashMode calls the underlying FlashMode.
-func (x *CaptureDevice) FlashMode() raw.AVCaptureFlashMode {
-	return x.inner.FlashMode()
+func (x *CaptureDevice) FlashMode() AVCaptureFlashMode {
+	return AVCaptureFlashMode(x.inner.FlashMode())
 }
 
 // SetFlashMode calls the underlying SetFlashMode.
-func (x *CaptureDevice) SetFlashMode(flashMode raw.AVCaptureFlashMode) {
-	x.inner.SetFlashMode(flashMode)
+func (x *CaptureDevice) SetFlashMode(flashMode AVCaptureFlashMode) {
+	x.inner.SetFlashMode(raw.AVCaptureFlashMode(flashMode))
 }
 
 // IsTorchModeSupported calls the underlying IsTorchModeSupported.
-func (x *CaptureDevice) IsTorchModeSupported(torchMode raw.AVCaptureTorchMode) bool {
-	return x.inner.IsTorchModeSupported(torchMode)
+func (x *CaptureDevice) IsTorchModeSupported(torchMode AVCaptureTorchMode) bool {
+	return x.inner.IsTorchModeSupported(raw.AVCaptureTorchMode(torchMode))
 }
 
 // SetTorchModeOnWithLevelError calls the underlying SetTorchModeOnWithLevelError.
@@ -473,18 +473,18 @@ func (x *CaptureDevice) TorchLevel() float32 {
 }
 
 // TorchMode calls the underlying TorchMode.
-func (x *CaptureDevice) TorchMode() raw.AVCaptureTorchMode {
-	return x.inner.TorchMode()
+func (x *CaptureDevice) TorchMode() AVCaptureTorchMode {
+	return AVCaptureTorchMode(x.inner.TorchMode())
 }
 
 // SetTorchMode calls the underlying SetTorchMode.
-func (x *CaptureDevice) SetTorchMode(torchMode raw.AVCaptureTorchMode) {
-	x.inner.SetTorchMode(torchMode)
+func (x *CaptureDevice) SetTorchMode(torchMode AVCaptureTorchMode) {
+	x.inner.SetTorchMode(raw.AVCaptureTorchMode(torchMode))
 }
 
 // IsFocusModeSupported calls the underlying IsFocusModeSupported.
-func (x *CaptureDevice) IsFocusModeSupported(focusMode raw.AVCaptureFocusMode) bool {
-	return x.inner.IsFocusModeSupported(focusMode)
+func (x *CaptureDevice) IsFocusModeSupported(focusMode AVCaptureFocusMode) bool {
+	return x.inner.IsFocusModeSupported(raw.AVCaptureFocusMode(focusMode))
 }
 
 // DefaultRectForFocusPointOfInterest calls the underlying DefaultRectForFocusPointOfInterest.
@@ -493,28 +493,28 @@ func (x *CaptureDevice) DefaultRectForFocusPointOfInterest(pointOfInterest coref
 }
 
 // SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode calls the underlying SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode.
-func (x *CaptureDevice) SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode(detectedObjectID int, focusMode raw.AVCaptureCinematicVideoFocusMode) {
-	x.inner.SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode(detectedObjectID, focusMode)
+func (x *CaptureDevice) SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode(detectedObjectID int, focusMode AVCaptureCinematicVideoFocusMode) {
+	x.inner.SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode(detectedObjectID, raw.AVCaptureCinematicVideoFocusMode(focusMode))
 }
 
 // SetCinematicVideoTrackingFocusAtPointFocusMode calls the underlying SetCinematicVideoTrackingFocusAtPointFocusMode.
-func (x *CaptureDevice) SetCinematicVideoTrackingFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode raw.AVCaptureCinematicVideoFocusMode) {
-	x.inner.SetCinematicVideoTrackingFocusAtPointFocusMode(point, focusMode)
+func (x *CaptureDevice) SetCinematicVideoTrackingFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode AVCaptureCinematicVideoFocusMode) {
+	x.inner.SetCinematicVideoTrackingFocusAtPointFocusMode(point, raw.AVCaptureCinematicVideoFocusMode(focusMode))
 }
 
 // SetCinematicVideoFixedFocusAtPointFocusMode calls the underlying SetCinematicVideoFixedFocusAtPointFocusMode.
-func (x *CaptureDevice) SetCinematicVideoFixedFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode raw.AVCaptureCinematicVideoFocusMode) {
-	x.inner.SetCinematicVideoFixedFocusAtPointFocusMode(point, focusMode)
+func (x *CaptureDevice) SetCinematicVideoFixedFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode AVCaptureCinematicVideoFocusMode) {
+	x.inner.SetCinematicVideoFixedFocusAtPointFocusMode(point, raw.AVCaptureCinematicVideoFocusMode(focusMode))
 }
 
 // FocusMode calls the underlying FocusMode.
-func (x *CaptureDevice) FocusMode() raw.AVCaptureFocusMode {
-	return x.inner.FocusMode()
+func (x *CaptureDevice) FocusMode() AVCaptureFocusMode {
+	return AVCaptureFocusMode(x.inner.FocusMode())
 }
 
 // SetFocusMode calls the underlying SetFocusMode.
-func (x *CaptureDevice) SetFocusMode(focusMode raw.AVCaptureFocusMode) {
-	x.inner.SetFocusMode(focusMode)
+func (x *CaptureDevice) SetFocusMode(focusMode AVCaptureFocusMode) {
+	x.inner.SetFocusMode(raw.AVCaptureFocusMode(focusMode))
 }
 
 // IsFocusPointOfInterestSupported calls the underlying IsFocusPointOfInterestSupported.
@@ -563,8 +563,8 @@ func (x *CaptureDevice) MinimumFocusDistance() int {
 }
 
 // IsExposureModeSupported calls the underlying IsExposureModeSupported.
-func (x *CaptureDevice) IsExposureModeSupported(exposureMode raw.AVCaptureExposureMode) bool {
-	return x.inner.IsExposureModeSupported(exposureMode)
+func (x *CaptureDevice) IsExposureModeSupported(exposureMode AVCaptureExposureMode) bool {
+	return x.inner.IsExposureModeSupported(raw.AVCaptureExposureMode(exposureMode))
 }
 
 // DefaultRectForExposurePointOfInterest calls the underlying DefaultRectForExposurePointOfInterest.
@@ -573,13 +573,13 @@ func (x *CaptureDevice) DefaultRectForExposurePointOfInterest(pointOfInterest co
 }
 
 // ExposureMode calls the underlying ExposureMode.
-func (x *CaptureDevice) ExposureMode() raw.AVCaptureExposureMode {
-	return x.inner.ExposureMode()
+func (x *CaptureDevice) ExposureMode() AVCaptureExposureMode {
+	return AVCaptureExposureMode(x.inner.ExposureMode())
 }
 
 // SetExposureMode calls the underlying SetExposureMode.
-func (x *CaptureDevice) SetExposureMode(exposureMode raw.AVCaptureExposureMode) {
-	x.inner.SetExposureMode(exposureMode)
+func (x *CaptureDevice) SetExposureMode(exposureMode AVCaptureExposureMode) {
+	x.inner.SetExposureMode(raw.AVCaptureExposureMode(exposureMode))
 }
 
 // IsExposurePointOfInterestSupported calls the underlying IsExposurePointOfInterestSupported.
@@ -623,18 +623,18 @@ func (x *CaptureDevice) IsAdjustingExposure() bool {
 }
 
 // IsWhiteBalanceModeSupported calls the underlying IsWhiteBalanceModeSupported.
-func (x *CaptureDevice) IsWhiteBalanceModeSupported(whiteBalanceMode raw.AVCaptureWhiteBalanceMode) bool {
-	return x.inner.IsWhiteBalanceModeSupported(whiteBalanceMode)
+func (x *CaptureDevice) IsWhiteBalanceModeSupported(whiteBalanceMode AVCaptureWhiteBalanceMode) bool {
+	return x.inner.IsWhiteBalanceModeSupported(raw.AVCaptureWhiteBalanceMode(whiteBalanceMode))
 }
 
 // WhiteBalanceMode calls the underlying WhiteBalanceMode.
-func (x *CaptureDevice) WhiteBalanceMode() raw.AVCaptureWhiteBalanceMode {
-	return x.inner.WhiteBalanceMode()
+func (x *CaptureDevice) WhiteBalanceMode() AVCaptureWhiteBalanceMode {
+	return AVCaptureWhiteBalanceMode(x.inner.WhiteBalanceMode())
 }
 
 // SetWhiteBalanceMode calls the underlying SetWhiteBalanceMode.
-func (x *CaptureDevice) SetWhiteBalanceMode(whiteBalanceMode raw.AVCaptureWhiteBalanceMode) {
-	x.inner.SetWhiteBalanceMode(whiteBalanceMode)
+func (x *CaptureDevice) SetWhiteBalanceMode(whiteBalanceMode AVCaptureWhiteBalanceMode) {
+	x.inner.SetWhiteBalanceMode(raw.AVCaptureWhiteBalanceMode(whiteBalanceMode))
 }
 
 // IsAdjustingWhiteBalance calls the underlying IsAdjustingWhiteBalance.
@@ -648,8 +648,8 @@ func (x *CaptureDevice) DisplayVideoZoomFactorMultiplier() float64 {
 }
 
 // SetTransportControlsPlaybackModeSpeed calls the underlying SetTransportControlsPlaybackModeSpeed.
-func (x *CaptureDevice) SetTransportControlsPlaybackModeSpeed(mode raw.AVCaptureDeviceTransportControlsPlaybackMode, speed float32) {
-	x.inner.SetTransportControlsPlaybackModeSpeed(mode, speed)
+func (x *CaptureDevice) SetTransportControlsPlaybackModeSpeed(mode AVCaptureDeviceTransportControlsPlaybackMode, speed float32) {
+	x.inner.SetTransportControlsPlaybackModeSpeed(raw.AVCaptureDeviceTransportControlsPlaybackMode(mode), speed)
 }
 
 // TransportControlsSupported calls the underlying TransportControlsSupported.
@@ -658,8 +658,8 @@ func (x *CaptureDevice) TransportControlsSupported() bool {
 }
 
 // TransportControlsPlaybackMode calls the underlying TransportControlsPlaybackMode.
-func (x *CaptureDevice) TransportControlsPlaybackMode() raw.AVCaptureDeviceTransportControlsPlaybackMode {
-	return x.inner.TransportControlsPlaybackMode()
+func (x *CaptureDevice) TransportControlsPlaybackMode() AVCaptureDeviceTransportControlsPlaybackMode {
+	return AVCaptureDeviceTransportControlsPlaybackMode(x.inner.TransportControlsPlaybackMode())
 }
 
 // TransportControlsSpeed calls the underlying TransportControlsSpeed.
@@ -668,13 +668,13 @@ func (x *CaptureDevice) TransportControlsSpeed() float32 {
 }
 
 // ActiveColorSpace calls the underlying ActiveColorSpace.
-func (x *CaptureDevice) ActiveColorSpace() raw.AVCaptureColorSpace {
-	return x.inner.ActiveColorSpace()
+func (x *CaptureDevice) ActiveColorSpace() AVCaptureColorSpace {
+	return AVCaptureColorSpace(x.inner.ActiveColorSpace())
 }
 
 // SetActiveColorSpace calls the underlying SetActiveColorSpace.
-func (x *CaptureDevice) SetActiveColorSpace(activeColorSpace raw.AVCaptureColorSpace) {
-	x.inner.SetActiveColorSpace(activeColorSpace)
+func (x *CaptureDevice) SetActiveColorSpace(activeColorSpace AVCaptureColorSpace) {
+	x.inner.SetActiveColorSpace(raw.AVCaptureColorSpace(activeColorSpace))
 }
 
 // IsCenterStageActive calls the underlying IsCenterStageActive.
@@ -797,8 +797,8 @@ func (x *CaptureDevice) CameraLensSmudgeDetectionInterval() coremedia.CMTime {
 }
 
 // CameraLensSmudgeDetectionStatus calls the underlying CameraLensSmudgeDetectionStatus.
-func (x *CaptureDevice) CameraLensSmudgeDetectionStatus() raw.AVCaptureCameraLensSmudgeDetectionStatus {
-	return x.inner.CameraLensSmudgeDetectionStatus()
+func (x *CaptureDevice) CameraLensSmudgeDetectionStatus() AVCaptureCameraLensSmudgeDetectionStatus {
+	return AVCaptureCameraLensSmudgeDetectionStatus(x.inner.CameraLensSmudgeDetectionStatus())
 }
 
 // CaptureDeviceable is the interface implemented by [CaptureDevice], for mocking and DI.
@@ -810,16 +810,16 @@ type CaptureDeviceable interface {
 	WithAutoVideoFrameRateEnabled(autoVideoFrameRateEnabled bool) *CaptureDevice
 	WithActiveInputSource(activeInputSource *CaptureDeviceInputSource) *CaptureDevice
 	WithFallbackPrimaryConstituentDevices(items ...*raw.AVCaptureDevice) *CaptureDevice
-	WithFlashMode(flashMode raw.AVCaptureFlashMode) *CaptureDevice
-	WithTorchMode(torchMode raw.AVCaptureTorchMode) *CaptureDevice
-	WithFocusMode(focusMode raw.AVCaptureFocusMode) *CaptureDevice
+	WithFlashMode(flashMode AVCaptureFlashMode) *CaptureDevice
+	WithTorchMode(torchMode AVCaptureTorchMode) *CaptureDevice
+	WithFocusMode(focusMode AVCaptureFocusMode) *CaptureDevice
 	WithFocusPointOfInterest(focusPointOfInterest corefoundation.CGPoint) *CaptureDevice
 	WithFocusRectOfInterest(focusRectOfInterest corefoundation.CGRect) *CaptureDevice
-	WithExposureMode(exposureMode raw.AVCaptureExposureMode) *CaptureDevice
+	WithExposureMode(exposureMode AVCaptureExposureMode) *CaptureDevice
 	WithExposurePointOfInterest(exposurePointOfInterest corefoundation.CGPoint) *CaptureDevice
 	WithExposureRectOfInterest(exposureRectOfInterest corefoundation.CGRect) *CaptureDevice
-	WithWhiteBalanceMode(whiteBalanceMode raw.AVCaptureWhiteBalanceMode) *CaptureDevice
-	WithActiveColorSpace(activeColorSpace raw.AVCaptureColorSpace) *CaptureDevice
+	WithWhiteBalanceMode(whiteBalanceMode AVCaptureWhiteBalanceMode) *CaptureDevice
+	WithActiveColorSpace(activeColorSpace AVCaptureColorSpace) *CaptureDevice
 	WithCenterStageRectOfInterest(centerStageRectOfInterest corefoundation.CGRect) *CaptureDevice
 	HasMediaType(mediaType *foundation.NSString) bool
 	LockForConfiguration() error
@@ -850,37 +850,37 @@ type CaptureDeviceable interface {
 	InputSources() []*CaptureDeviceInputSource
 	ActiveInputSource() *CaptureDeviceInputSource
 	SetActiveInputSource(activeInputSource *raw.AVCaptureDeviceInputSource)
-	Position() raw.AVCaptureDevicePosition
+	Position() AVCaptureDevicePosition
 	DeviceType() string
-	SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions(switchingBehavior raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions)
-	PrimaryConstituentDeviceSwitchingBehavior() raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior
-	PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions
-	ActivePrimaryConstituentDeviceSwitchingBehavior() raw.AVCapturePrimaryConstituentDeviceSwitchingBehavior
-	ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() raw.AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions
+	SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions(switchingBehavior AVCapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions)
+	PrimaryConstituentDeviceSwitchingBehavior() AVCapturePrimaryConstituentDeviceSwitchingBehavior
+	PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions
+	ActivePrimaryConstituentDeviceSwitchingBehavior() AVCapturePrimaryConstituentDeviceSwitchingBehavior
+	ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions
 	ActivePrimaryConstituentDevice() *CaptureDevice
 	SupportedFallbackPrimaryConstituentDevices() []*CaptureDevice
 	FallbackPrimaryConstituentDevices() []*CaptureDevice
 	SetFallbackPrimaryConstituentDevices(fallbackPrimaryConstituentDevices *foundation.NSArray[*raw.AVCaptureDevice])
-	IsFlashModeSupported(flashMode raw.AVCaptureFlashMode) bool
+	IsFlashModeSupported(flashMode AVCaptureFlashMode) bool
 	HasFlash() bool
 	IsFlashAvailable() bool
-	FlashMode() raw.AVCaptureFlashMode
-	SetFlashMode(flashMode raw.AVCaptureFlashMode)
-	IsTorchModeSupported(torchMode raw.AVCaptureTorchMode) bool
+	FlashMode() AVCaptureFlashMode
+	SetFlashMode(flashMode AVCaptureFlashMode)
+	IsTorchModeSupported(torchMode AVCaptureTorchMode) bool
 	SetTorchModeOnWithLevelError(torchLevel float32) (bool, error)
 	HasTorch() bool
 	IsTorchAvailable() bool
 	IsTorchActive() bool
 	TorchLevel() float32
-	TorchMode() raw.AVCaptureTorchMode
-	SetTorchMode(torchMode raw.AVCaptureTorchMode)
-	IsFocusModeSupported(focusMode raw.AVCaptureFocusMode) bool
+	TorchMode() AVCaptureTorchMode
+	SetTorchMode(torchMode AVCaptureTorchMode)
+	IsFocusModeSupported(focusMode AVCaptureFocusMode) bool
 	DefaultRectForFocusPointOfInterest(pointOfInterest corefoundation.CGPoint) corefoundation.CGRect
-	SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode(detectedObjectID int, focusMode raw.AVCaptureCinematicVideoFocusMode)
-	SetCinematicVideoTrackingFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode raw.AVCaptureCinematicVideoFocusMode)
-	SetCinematicVideoFixedFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode raw.AVCaptureCinematicVideoFocusMode)
-	FocusMode() raw.AVCaptureFocusMode
-	SetFocusMode(focusMode raw.AVCaptureFocusMode)
+	SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode(detectedObjectID int, focusMode AVCaptureCinematicVideoFocusMode)
+	SetCinematicVideoTrackingFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode AVCaptureCinematicVideoFocusMode)
+	SetCinematicVideoFixedFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode AVCaptureCinematicVideoFocusMode)
+	FocusMode() AVCaptureFocusMode
+	SetFocusMode(focusMode AVCaptureFocusMode)
 	IsFocusPointOfInterestSupported() bool
 	FocusPointOfInterest() corefoundation.CGPoint
 	SetFocusPointOfInterest(focusPointOfInterest corefoundation.CGPoint)
@@ -890,10 +890,10 @@ type CaptureDeviceable interface {
 	SetFocusRectOfInterest(focusRectOfInterest corefoundation.CGRect)
 	IsAdjustingFocus() bool
 	MinimumFocusDistance() int
-	IsExposureModeSupported(exposureMode raw.AVCaptureExposureMode) bool
+	IsExposureModeSupported(exposureMode AVCaptureExposureMode) bool
 	DefaultRectForExposurePointOfInterest(pointOfInterest corefoundation.CGPoint) corefoundation.CGRect
-	ExposureMode() raw.AVCaptureExposureMode
-	SetExposureMode(exposureMode raw.AVCaptureExposureMode)
+	ExposureMode() AVCaptureExposureMode
+	SetExposureMode(exposureMode AVCaptureExposureMode)
 	IsExposurePointOfInterestSupported() bool
 	ExposurePointOfInterest() corefoundation.CGPoint
 	SetExposurePointOfInterest(exposurePointOfInterest corefoundation.CGPoint)
@@ -902,17 +902,17 @@ type CaptureDeviceable interface {
 	ExposureRectOfInterest() corefoundation.CGRect
 	SetExposureRectOfInterest(exposureRectOfInterest corefoundation.CGRect)
 	IsAdjustingExposure() bool
-	IsWhiteBalanceModeSupported(whiteBalanceMode raw.AVCaptureWhiteBalanceMode) bool
-	WhiteBalanceMode() raw.AVCaptureWhiteBalanceMode
-	SetWhiteBalanceMode(whiteBalanceMode raw.AVCaptureWhiteBalanceMode)
+	IsWhiteBalanceModeSupported(whiteBalanceMode AVCaptureWhiteBalanceMode) bool
+	WhiteBalanceMode() AVCaptureWhiteBalanceMode
+	SetWhiteBalanceMode(whiteBalanceMode AVCaptureWhiteBalanceMode)
 	IsAdjustingWhiteBalance() bool
 	DisplayVideoZoomFactorMultiplier() float64
-	SetTransportControlsPlaybackModeSpeed(mode raw.AVCaptureDeviceTransportControlsPlaybackMode, speed float32)
+	SetTransportControlsPlaybackModeSpeed(mode AVCaptureDeviceTransportControlsPlaybackMode, speed float32)
 	TransportControlsSupported() bool
-	TransportControlsPlaybackMode() raw.AVCaptureDeviceTransportControlsPlaybackMode
+	TransportControlsPlaybackMode() AVCaptureDeviceTransportControlsPlaybackMode
 	TransportControlsSpeed() float32
-	ActiveColorSpace() raw.AVCaptureColorSpace
-	SetActiveColorSpace(activeColorSpace raw.AVCaptureColorSpace)
+	ActiveColorSpace() AVCaptureColorSpace
+	SetActiveColorSpace(activeColorSpace AVCaptureColorSpace)
 	IsCenterStageActive() bool
 	CenterStageRectOfInterest() corefoundation.CGRect
 	SetCenterStageRectOfInterest(centerStageRectOfInterest corefoundation.CGRect)
@@ -934,7 +934,7 @@ type CaptureDeviceable interface {
 	SetCameraLensSmudgeDetectionEnabledDetectionInterval(cameraLensSmudgeDetectionEnabled bool, detectionInterval coremedia.CMTime)
 	IsCameraLensSmudgeDetectionEnabled() bool
 	CameraLensSmudgeDetectionInterval() coremedia.CMTime
-	CameraLensSmudgeDetectionStatus() raw.AVCaptureCameraLensSmudgeDetectionStatus
+	CameraLensSmudgeDetectionStatus() AVCaptureCameraLensSmudgeDetectionStatus
 }
 
 var _ CaptureDeviceable = (*CaptureDevice)(nil)

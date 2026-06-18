@@ -44,8 +44,8 @@ func (x *FeatureValue) IsEqualToFeatureValue(value *raw.MLFeatureValue) bool {
 }
 
 // Type calls the underlying Type.
-func (x *FeatureValue) Type() raw.MLFeatureType {
-	return x.inner.Type()
+func (x *FeatureValue) Type() MLFeatureType {
+	return MLFeatureType(x.inner.Type())
 }
 
 // IsUndefined calls the underlying IsUndefined.
@@ -104,7 +104,7 @@ func (x *FeatureValue) SequenceValue() *Sequence {
 type FeatureValueable interface {
 	Unwrap() *raw.MLFeatureValue
 	IsEqualToFeatureValue(value *raw.MLFeatureValue) bool
-	Type() raw.MLFeatureType
+	Type() MLFeatureType
 	IsUndefined() bool
 	Int64Value() int64
 	DoubleValue() float64

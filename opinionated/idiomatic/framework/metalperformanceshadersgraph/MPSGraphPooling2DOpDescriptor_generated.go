@@ -97,20 +97,20 @@ func (x *GraphPooling2DOpDescriptor) WithPaddingBottom(paddingBottom uint) *Grap
 }
 
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
-func (x *GraphPooling2DOpDescriptor) WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphPooling2DOpDescriptor {
-	x.inner.SetPaddingStyle(paddingStyle)
+func (x *GraphPooling2DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphPooling2DOpDescriptor {
+	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	return x
 }
 
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
-func (x *GraphPooling2DOpDescriptor) WithDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
-	x.inner.SetDataLayout(dataLayout)
+func (x *GraphPooling2DOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
+	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 	return x
 }
 
 // WithReturnIndicesMode sets the returnIndicesMode property and returns the receiver for chaining.
-func (x *GraphPooling2DOpDescriptor) WithReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode) *GraphPooling2DOpDescriptor {
-	x.inner.SetReturnIndicesMode(returnIndicesMode)
+func (x *GraphPooling2DOpDescriptor) WithReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) *GraphPooling2DOpDescriptor {
+	x.inner.SetReturnIndicesMode(raw.MPSGraphPoolingReturnIndicesMode(returnIndicesMode))
 	return x
 }
 
@@ -238,33 +238,33 @@ func (x *GraphPooling2DOpDescriptor) SetPaddingBottom(paddingBottom uint) {
 }
 
 // PaddingStyle calls the underlying PaddingStyle.
-func (x *GraphPooling2DOpDescriptor) PaddingStyle() raw.MPSGraphPaddingStyle {
-	return x.inner.PaddingStyle()
+func (x *GraphPooling2DOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
+	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
 }
 
 // SetPaddingStyle calls the underlying SetPaddingStyle.
-func (x *GraphPooling2DOpDescriptor) SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) {
-	x.inner.SetPaddingStyle(paddingStyle)
+func (x *GraphPooling2DOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPaddingStyle) {
+	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 }
 
 // DataLayout calls the underlying DataLayout.
-func (x *GraphPooling2DOpDescriptor) DataLayout() raw.MPSGraphTensorNamedDataLayout {
-	return x.inner.DataLayout()
+func (x *GraphPooling2DOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout {
+	return MPSGraphTensorNamedDataLayout(x.inner.DataLayout())
 }
 
 // SetDataLayout calls the underlying SetDataLayout.
-func (x *GraphPooling2DOpDescriptor) SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) {
-	x.inner.SetDataLayout(dataLayout)
+func (x *GraphPooling2DOpDescriptor) SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout) {
+	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 }
 
 // ReturnIndicesMode calls the underlying ReturnIndicesMode.
-func (x *GraphPooling2DOpDescriptor) ReturnIndicesMode() raw.MPSGraphPoolingReturnIndicesMode {
-	return x.inner.ReturnIndicesMode()
+func (x *GraphPooling2DOpDescriptor) ReturnIndicesMode() MPSGraphPoolingReturnIndicesMode {
+	return MPSGraphPoolingReturnIndicesMode(x.inner.ReturnIndicesMode())
 }
 
 // SetReturnIndicesMode calls the underlying SetReturnIndicesMode.
-func (x *GraphPooling2DOpDescriptor) SetReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode) {
-	x.inner.SetReturnIndicesMode(returnIndicesMode)
+func (x *GraphPooling2DOpDescriptor) SetReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) {
+	x.inner.SetReturnIndicesMode(raw.MPSGraphPoolingReturnIndicesMode(returnIndicesMode))
 }
 
 // ReturnIndicesDataType calls the underlying ReturnIndicesDataType.
@@ -314,9 +314,9 @@ type GraphPooling2DOpDescriptorable interface {
 	WithPaddingRight(paddingRight uint) *GraphPooling2DOpDescriptor
 	WithPaddingTop(paddingTop uint) *GraphPooling2DOpDescriptor
 	WithPaddingBottom(paddingBottom uint) *GraphPooling2DOpDescriptor
-	WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphPooling2DOpDescriptor
-	WithDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor
-	WithReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode) *GraphPooling2DOpDescriptor
+	WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphPooling2DOpDescriptor
+	WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor
+	WithReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) *GraphPooling2DOpDescriptor
 	WithReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) *GraphPooling2DOpDescriptor
 	WithCeilMode(ceilMode bool) *GraphPooling2DOpDescriptor
 	WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling2DOpDescriptor
@@ -341,12 +341,12 @@ type GraphPooling2DOpDescriptorable interface {
 	SetPaddingTop(paddingTop uint)
 	PaddingBottom() uint
 	SetPaddingBottom(paddingBottom uint)
-	PaddingStyle() raw.MPSGraphPaddingStyle
-	SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle)
-	DataLayout() raw.MPSGraphTensorNamedDataLayout
-	SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout)
-	ReturnIndicesMode() raw.MPSGraphPoolingReturnIndicesMode
-	SetReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode)
+	PaddingStyle() MPSGraphPaddingStyle
+	SetPaddingStyle(paddingStyle MPSGraphPaddingStyle)
+	DataLayout() MPSGraphTensorNamedDataLayout
+	SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout)
+	ReturnIndicesMode() MPSGraphPoolingReturnIndicesMode
+	SetReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode)
 	ReturnIndicesDataType() mpscore.MPSDataType
 	SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType)
 	CeilMode() bool

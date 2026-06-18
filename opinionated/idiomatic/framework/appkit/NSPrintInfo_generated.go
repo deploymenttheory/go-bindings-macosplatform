@@ -66,8 +66,8 @@ func (x *PrintInfo) WithPaperSize(paperSize corefoundation.CGSize) *PrintInfo {
 }
 
 // WithOrientation sets the orientation property and returns the receiver for chaining.
-func (x *PrintInfo) WithOrientation(orientation raw.NSPaperOrientation) *PrintInfo {
-	x.inner.SetOrientation(orientation)
+func (x *PrintInfo) WithOrientation(orientation NSPaperOrientation) *PrintInfo {
+	x.inner.SetOrientation(raw.NSPaperOrientation(orientation))
 	return x
 }
 
@@ -114,14 +114,14 @@ func (x *PrintInfo) WithVerticallyCentered(verticallyCentered bool) *PrintInfo {
 }
 
 // WithHorizontalPagination sets the horizontalPagination property and returns the receiver for chaining.
-func (x *PrintInfo) WithHorizontalPagination(horizontalPagination raw.NSPrintingPaginationMode) *PrintInfo {
-	x.inner.SetHorizontalPagination(horizontalPagination)
+func (x *PrintInfo) WithHorizontalPagination(horizontalPagination NSPrintingPaginationMode) *PrintInfo {
+	x.inner.SetHorizontalPagination(raw.NSPrintingPaginationMode(horizontalPagination))
 	return x
 }
 
 // WithVerticalPagination sets the verticalPagination property and returns the receiver for chaining.
-func (x *PrintInfo) WithVerticalPagination(verticalPagination raw.NSPrintingPaginationMode) *PrintInfo {
-	x.inner.SetVerticalPagination(verticalPagination)
+func (x *PrintInfo) WithVerticalPagination(verticalPagination NSPrintingPaginationMode) *PrintInfo {
+	x.inner.SetVerticalPagination(raw.NSPrintingPaginationMode(verticalPagination))
 	return x
 }
 
@@ -208,13 +208,13 @@ func (x *PrintInfo) SetPaperSize(paperSize corefoundation.CGSize) {
 }
 
 // Orientation calls the underlying Orientation.
-func (x *PrintInfo) Orientation() raw.NSPaperOrientation {
-	return x.inner.Orientation()
+func (x *PrintInfo) Orientation() NSPaperOrientation {
+	return NSPaperOrientation(x.inner.Orientation())
 }
 
 // SetOrientation calls the underlying SetOrientation.
-func (x *PrintInfo) SetOrientation(orientation raw.NSPaperOrientation) {
-	x.inner.SetOrientation(orientation)
+func (x *PrintInfo) SetOrientation(orientation NSPaperOrientation) {
+	x.inner.SetOrientation(raw.NSPaperOrientation(orientation))
 }
 
 // ScalingFactor calls the underlying ScalingFactor.
@@ -288,23 +288,23 @@ func (x *PrintInfo) SetVerticallyCentered(verticallyCentered bool) {
 }
 
 // HorizontalPagination calls the underlying HorizontalPagination.
-func (x *PrintInfo) HorizontalPagination() raw.NSPrintingPaginationMode {
-	return x.inner.HorizontalPagination()
+func (x *PrintInfo) HorizontalPagination() NSPrintingPaginationMode {
+	return NSPrintingPaginationMode(x.inner.HorizontalPagination())
 }
 
 // SetHorizontalPagination calls the underlying SetHorizontalPagination.
-func (x *PrintInfo) SetHorizontalPagination(horizontalPagination raw.NSPrintingPaginationMode) {
-	x.inner.SetHorizontalPagination(horizontalPagination)
+func (x *PrintInfo) SetHorizontalPagination(horizontalPagination NSPrintingPaginationMode) {
+	x.inner.SetHorizontalPagination(raw.NSPrintingPaginationMode(horizontalPagination))
 }
 
 // VerticalPagination calls the underlying VerticalPagination.
-func (x *PrintInfo) VerticalPagination() raw.NSPrintingPaginationMode {
-	return x.inner.VerticalPagination()
+func (x *PrintInfo) VerticalPagination() NSPrintingPaginationMode {
+	return NSPrintingPaginationMode(x.inner.VerticalPagination())
 }
 
 // SetVerticalPagination calls the underlying SetVerticalPagination.
-func (x *PrintInfo) SetVerticalPagination(verticalPagination raw.NSPrintingPaginationMode) {
-	x.inner.SetVerticalPagination(verticalPagination)
+func (x *PrintInfo) SetVerticalPagination(verticalPagination NSPrintingPaginationMode) {
+	x.inner.SetVerticalPagination(raw.NSPrintingPaginationMode(verticalPagination))
 }
 
 // JobDisposition calls the underlying JobDisposition.
@@ -369,7 +369,7 @@ type PrintInfoable interface {
 	Unwrap() *raw.NSPrintInfo
 	WithPaperName(paperName *foundation.NSString) *PrintInfo
 	WithPaperSize(paperSize corefoundation.CGSize) *PrintInfo
-	WithOrientation(orientation raw.NSPaperOrientation) *PrintInfo
+	WithOrientation(orientation NSPaperOrientation) *PrintInfo
 	WithScalingFactor(scalingFactor float64) *PrintInfo
 	WithLeftMargin(leftMargin float64) *PrintInfo
 	WithRightMargin(rightMargin float64) *PrintInfo
@@ -377,8 +377,8 @@ type PrintInfoable interface {
 	WithBottomMargin(bottomMargin float64) *PrintInfo
 	WithHorizontallyCentered(horizontallyCentered bool) *PrintInfo
 	WithVerticallyCentered(verticallyCentered bool) *PrintInfo
-	WithHorizontalPagination(horizontalPagination raw.NSPrintingPaginationMode) *PrintInfo
-	WithVerticalPagination(verticalPagination raw.NSPrintingPaginationMode) *PrintInfo
+	WithHorizontalPagination(horizontalPagination NSPrintingPaginationMode) *PrintInfo
+	WithVerticalPagination(verticalPagination NSPrintingPaginationMode) *PrintInfo
 	WithJobDisposition(jobDisposition *foundation.NSString) *PrintInfo
 	WithPrinter(printer *Printer) *PrintInfo
 	WithSelectionOnly(selectionOnly bool) *PrintInfo
@@ -394,8 +394,8 @@ type PrintInfoable interface {
 	SetPaperName(paperName *foundation.NSString)
 	PaperSize() corefoundation.CGSize
 	SetPaperSize(paperSize corefoundation.CGSize)
-	Orientation() raw.NSPaperOrientation
-	SetOrientation(orientation raw.NSPaperOrientation)
+	Orientation() NSPaperOrientation
+	SetOrientation(orientation NSPaperOrientation)
 	ScalingFactor() float64
 	SetScalingFactor(scalingFactor float64)
 	LeftMargin() float64
@@ -410,10 +410,10 @@ type PrintInfoable interface {
 	SetHorizontallyCentered(horizontallyCentered bool)
 	IsVerticallyCentered() bool
 	SetVerticallyCentered(verticallyCentered bool)
-	HorizontalPagination() raw.NSPrintingPaginationMode
-	SetHorizontalPagination(horizontalPagination raw.NSPrintingPaginationMode)
-	VerticalPagination() raw.NSPrintingPaginationMode
-	SetVerticalPagination(verticalPagination raw.NSPrintingPaginationMode)
+	HorizontalPagination() NSPrintingPaginationMode
+	SetHorizontalPagination(horizontalPagination NSPrintingPaginationMode)
+	VerticalPagination() NSPrintingPaginationMode
+	SetVerticalPagination(verticalPagination NSPrintingPaginationMode)
 	JobDisposition() string
 	SetJobDisposition(jobDisposition *foundation.NSString)
 	Printer() *Printer

@@ -32,9 +32,9 @@ func TrackingAreaFromID(id objc.ID) *TrackingArea {
 }
 
 // NewTrackingAreaWithRectOptionsOwnerUserInfo creates a new [TrackingArea].
-func NewTrackingAreaWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, options raw.NSTrackingAreaOptions, owner objc.ID, userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *TrackingArea {
+func NewTrackingAreaWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, options NSTrackingAreaOptions, owner objc.ID, userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *TrackingArea {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTrackingArea")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRect:options:owner:userInfo:"), rect, options, owner, userInfo.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRect:options:owner:userInfo:"), rect, raw.NSTrackingAreaOptions(options), owner, userInfo.Ptr())
 	return &TrackingArea{inner: raw.NSTrackingAreaFromID(_id)}
 }
 
@@ -44,8 +44,8 @@ func (x *TrackingArea) Rect() corefoundation.CGRect {
 }
 
 // Options calls the underlying Options.
-func (x *TrackingArea) Options() raw.NSTrackingAreaOptions {
-	return x.inner.Options()
+func (x *TrackingArea) Options() NSTrackingAreaOptions {
+	return NSTrackingAreaOptions(x.inner.Options())
 }
 
 // Owner calls the underlying Owner.
@@ -62,7 +62,7 @@ func (x *TrackingArea) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
 type TrackingAreaable interface {
 	Unwrap() *raw.NSTrackingArea
 	Rect() corefoundation.CGRect
-	Options() raw.NSTrackingAreaOptions
+	Options() NSTrackingAreaOptions
 	Owner() objc.ID
 	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
 }

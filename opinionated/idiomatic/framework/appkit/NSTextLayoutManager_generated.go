@@ -157,8 +157,8 @@ func (x *TextLayoutManager) TextLayoutFragmentForLocation(location raw.NSTextLoc
 }
 
 // EnumerateTextLayoutFragmentsFromLocationOptionsUsing calls the underlying EnumerateTextLayoutFragmentsFromLocationOptionsUsing.
-func (x *TextLayoutManager) EnumerateTextLayoutFragmentsFromLocationOptionsUsing(location raw.NSTextLocation, options raw.NSTextLayoutFragmentEnumerationOptions, block func(*raw.NSTextLayoutFragment) bool) raw.NSTextLocation {
-	return x.inner.EnumerateTextLayoutFragmentsFromLocationOptionsUsing(location, options, block)
+func (x *TextLayoutManager) EnumerateTextLayoutFragmentsFromLocationOptionsUsing(location raw.NSTextLocation, options NSTextLayoutFragmentEnumerationOptions, block func(*raw.NSTextLayoutFragment) bool) raw.NSTextLocation {
+	return x.inner.EnumerateTextLayoutFragmentsFromLocationOptionsUsing(location, raw.NSTextLayoutFragmentEnumerationOptions(options), block)
 }
 
 // EnumerateRenderingAttributesFromLocationReverseUsing calls the underlying EnumerateRenderingAttributesFromLocationReverseUsing.
@@ -192,8 +192,8 @@ func (x *TextLayoutManager) RenderingAttributesForLinkAtLocation(link objc.ID, l
 }
 
 // EnumerateTextSegmentsInRangeTypeOptionsUsing calls the underlying EnumerateTextSegmentsInRangeTypeOptionsUsing.
-func (x *TextLayoutManager) EnumerateTextSegmentsInRangeTypeOptionsUsing(textRange *raw.NSTextRange, type_ raw.NSTextLayoutManagerSegmentType, options raw.NSTextLayoutManagerSegmentOptions, block objc.Block) {
-	x.inner.EnumerateTextSegmentsInRangeTypeOptionsUsing(textRange, type_, options, block)
+func (x *TextLayoutManager) EnumerateTextSegmentsInRangeTypeOptionsUsing(textRange *raw.NSTextRange, type_ NSTextLayoutManagerSegmentType, options NSTextLayoutManagerSegmentOptions, block objc.Block) {
+	x.inner.EnumerateTextSegmentsInRangeTypeOptionsUsing(textRange, raw.NSTextLayoutManagerSegmentType(type_), raw.NSTextLayoutManagerSegmentOptions(options), block)
 }
 
 // ReplaceContentsInRangeWithTextElements calls the underlying ReplaceContentsInRangeWithTextElements.
@@ -362,14 +362,14 @@ type TextLayoutManagerable interface {
 	InvalidateLayoutForRange(range_ *raw.NSTextRange)
 	TextLayoutFragmentForPosition(position corefoundation.CGPoint) *TextLayoutFragment
 	TextLayoutFragmentForLocation(location raw.NSTextLocation) *TextLayoutFragment
-	EnumerateTextLayoutFragmentsFromLocationOptionsUsing(location raw.NSTextLocation, options raw.NSTextLayoutFragmentEnumerationOptions, block func(*raw.NSTextLayoutFragment) bool) raw.NSTextLocation
+	EnumerateTextLayoutFragmentsFromLocationOptionsUsing(location raw.NSTextLocation, options NSTextLayoutFragmentEnumerationOptions, block func(*raw.NSTextLayoutFragment) bool) raw.NSTextLocation
 	EnumerateRenderingAttributesFromLocationReverseUsing(location raw.NSTextLocation, reverse bool, block objc.Block)
 	SetRenderingAttributesForTextRange(renderingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textRange *raw.NSTextRange)
 	AddRenderingAttributeValueForTextRange(renderingAttribute *foundation.NSString, value objc.ID, textRange *raw.NSTextRange)
 	RemoveRenderingAttributeForTextRange(renderingAttribute *foundation.NSString, textRange *raw.NSTextRange)
 	InvalidateRenderingAttributesForTextRange(textRange *raw.NSTextRange)
 	RenderingAttributesForLinkAtLocation(link objc.ID, location raw.NSTextLocation) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	EnumerateTextSegmentsInRangeTypeOptionsUsing(textRange *raw.NSTextRange, type_ raw.NSTextLayoutManagerSegmentType, options raw.NSTextLayoutManagerSegmentOptions, block objc.Block)
+	EnumerateTextSegmentsInRangeTypeOptionsUsing(textRange *raw.NSTextRange, type_ NSTextLayoutManagerSegmentType, options NSTextLayoutManagerSegmentOptions, block objc.Block)
 	ReplaceContentsInRangeWithTextElements(range_ *raw.NSTextRange, textElements *foundation.NSArray[*raw.NSTextElement])
 	ReplaceContentsInRangeWithAttributedString(range_ *raw.NSTextRange, attributedString *foundation.NSAttributedString)
 	Delegate() raw.NSTextLayoutManagerDelegate

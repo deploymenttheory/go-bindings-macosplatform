@@ -32,9 +32,9 @@ func DetectionFromID(id objc.ID) *Detection {
 }
 
 // NewDetectionWithTimeDetectionTypeNormalizedRectFocusDisparity creates a new [Detection].
-func NewDetectionWithTimeDetectionTypeNormalizedRectFocusDisparity(time_ coremedia.CMTime, detectionType raw.CNDetectionType, normalizedRect corefoundation.CGRect, focusDisparity float32) *Detection {
+func NewDetectionWithTimeDetectionTypeNormalizedRectFocusDisparity(time_ coremedia.CMTime, detectionType CNDetectionType, normalizedRect corefoundation.CGRect, focusDisparity float32) *Detection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNDetection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTime:detectionType:normalizedRect:focusDisparity:"), time_, detectionType, normalizedRect, focusDisparity)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTime:detectionType:normalizedRect:focusDisparity:"), time_, raw.CNDetectionType(detectionType), normalizedRect, focusDisparity)
 	return &Detection{inner: raw.CNDetectionFromID(_id)}
 }
 
@@ -44,8 +44,8 @@ func (x *Detection) Time() coremedia.CMTime {
 }
 
 // DetectionType calls the underlying DetectionType.
-func (x *Detection) DetectionType() raw.CNDetectionType {
-	return x.inner.DetectionType()
+func (x *Detection) DetectionType() CNDetectionType {
+	return CNDetectionType(x.inner.DetectionType())
 }
 
 // NormalizedRect calls the underlying NormalizedRect.
@@ -72,7 +72,7 @@ func (x *Detection) DetectionGroupID() int64 {
 type Detectionable interface {
 	Unwrap() *raw.CNDetection
 	Time() coremedia.CMTime
-	DetectionType() raw.CNDetectionType
+	DetectionType() CNDetectionType
 	NormalizedRect() corefoundation.CGRect
 	FocusDisparity() float32
 	DetectionID() int64

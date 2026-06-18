@@ -40,10 +40,10 @@ func NewEFIVariableStoreWithURL(uRL string) *EFIVariableStore {
 }
 
 // NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError creates a new [EFIVariableStore].
-func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, options raw.VZEFIVariableStoreInitializationOptions) (*EFIVariableStore, error) {
+func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, options VZEFIVariableStoreInitializationOptions) (*EFIVariableStore, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZEFIVariableStore")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingVariableStoreAtURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), options, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingVariableStoreAtURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), raw.VZEFIVariableStoreInitializationOptions(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

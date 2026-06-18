@@ -44,8 +44,8 @@ func (x *NetworkSession) WithEnabled(enabled bool) *NetworkSession {
 }
 
 // WithConnectionPolicy sets the connectionPolicy property and returns the receiver for chaining.
-func (x *NetworkSession) WithConnectionPolicy(connectionPolicy raw.MIDINetworkConnectionPolicy) *NetworkSession {
-	x.inner.SetConnectionPolicy(connectionPolicy)
+func (x *NetworkSession) WithConnectionPolicy(connectionPolicy MIDINetworkConnectionPolicy) *NetworkSession {
+	x.inner.SetConnectionPolicy(raw.MIDINetworkConnectionPolicy(connectionPolicy))
 	return x
 }
 
@@ -123,20 +123,20 @@ func (x *NetworkSession) LocalName() string {
 }
 
 // ConnectionPolicy calls the underlying ConnectionPolicy.
-func (x *NetworkSession) ConnectionPolicy() raw.MIDINetworkConnectionPolicy {
-	return x.inner.ConnectionPolicy()
+func (x *NetworkSession) ConnectionPolicy() MIDINetworkConnectionPolicy {
+	return MIDINetworkConnectionPolicy(x.inner.ConnectionPolicy())
 }
 
 // SetConnectionPolicy calls the underlying SetConnectionPolicy.
-func (x *NetworkSession) SetConnectionPolicy(connectionPolicy raw.MIDINetworkConnectionPolicy) {
-	x.inner.SetConnectionPolicy(connectionPolicy)
+func (x *NetworkSession) SetConnectionPolicy(connectionPolicy MIDINetworkConnectionPolicy) {
+	x.inner.SetConnectionPolicy(raw.MIDINetworkConnectionPolicy(connectionPolicy))
 }
 
 // NetworkSessionable is the interface implemented by [NetworkSession], for mocking and DI.
 type NetworkSessionable interface {
 	Unwrap() *raw.MIDINetworkSession
 	WithEnabled(enabled bool) *NetworkSession
-	WithConnectionPolicy(connectionPolicy raw.MIDINetworkConnectionPolicy) *NetworkSession
+	WithConnectionPolicy(connectionPolicy MIDINetworkConnectionPolicy) *NetworkSession
 	Contacts() *foundation.NSSet[*raw.MIDINetworkHost]
 	AddContact(contact *raw.MIDINetworkHost) bool
 	RemoveContact(contact *raw.MIDINetworkHost) bool
@@ -150,8 +150,8 @@ type NetworkSessionable interface {
 	NetworkPort() uint
 	NetworkName() string
 	LocalName() string
-	ConnectionPolicy() raw.MIDINetworkConnectionPolicy
-	SetConnectionPolicy(connectionPolicy raw.MIDINetworkConnectionPolicy)
+	ConnectionPolicy() MIDINetworkConnectionPolicy
+	SetConnectionPolicy(connectionPolicy MIDINetworkConnectionPolicy)
 }
 
 var _ NetworkSessionable = (*NetworkSession)(nil)

@@ -49,8 +49,8 @@ func NewGeneratePersonSegmentationRequestWithCompletionHandler(completionHandler
 }
 
 // WithQualityLevel sets the qualityLevel property and returns the receiver for chaining.
-func (x *GeneratePersonSegmentationRequest) WithQualityLevel(qualityLevel raw.VNGeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest {
-	x.inner.SetQualityLevel(qualityLevel)
+func (x *GeneratePersonSegmentationRequest) WithQualityLevel(qualityLevel VNGeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest {
+	x.inner.SetQualityLevel(raw.VNGeneratePersonSegmentationRequestQualityLevel(qualityLevel))
 	return x
 }
 
@@ -99,13 +99,13 @@ func (x *GeneratePersonSegmentationRequest) SupportedOutputPixelFormats() ([]*fo
 }
 
 // QualityLevel calls the underlying QualityLevel.
-func (x *GeneratePersonSegmentationRequest) QualityLevel() raw.VNGeneratePersonSegmentationRequestQualityLevel {
-	return x.inner.QualityLevel()
+func (x *GeneratePersonSegmentationRequest) QualityLevel() VNGeneratePersonSegmentationRequestQualityLevel {
+	return VNGeneratePersonSegmentationRequestQualityLevel(x.inner.QualityLevel())
 }
 
 // SetQualityLevel calls the underlying SetQualityLevel.
-func (x *GeneratePersonSegmentationRequest) SetQualityLevel(qualityLevel raw.VNGeneratePersonSegmentationRequestQualityLevel) {
-	x.inner.SetQualityLevel(qualityLevel)
+func (x *GeneratePersonSegmentationRequest) SetQualityLevel(qualityLevel VNGeneratePersonSegmentationRequestQualityLevel) {
+	x.inner.SetQualityLevel(raw.VNGeneratePersonSegmentationRequestQualityLevel(qualityLevel))
 }
 
 // OutputPixelFormat calls the underlying OutputPixelFormat.
@@ -133,15 +133,15 @@ func (x *GeneratePersonSegmentationRequest) asRequest() *raw.VNRequest {
 // GeneratePersonSegmentationRequestable is the interface implemented by [GeneratePersonSegmentationRequest], for mocking and DI.
 type GeneratePersonSegmentationRequestable interface {
 	Unwrap() *raw.VNGeneratePersonSegmentationRequest
-	WithQualityLevel(qualityLevel raw.VNGeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest
+	WithQualityLevel(qualityLevel VNGeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest
 	WithOutputPixelFormat(outputPixelFormat uint) *GeneratePersonSegmentationRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonSegmentationRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonSegmentationRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonSegmentationRequest
 	WithRevision(revision uint) *GeneratePersonSegmentationRequest
 	SupportedOutputPixelFormats() ([]*foundation.NSNumber, error)
-	QualityLevel() raw.VNGeneratePersonSegmentationRequestQualityLevel
-	SetQualityLevel(qualityLevel raw.VNGeneratePersonSegmentationRequestQualityLevel)
+	QualityLevel() VNGeneratePersonSegmentationRequestQualityLevel
+	SetQualityLevel(qualityLevel VNGeneratePersonSegmentationRequestQualityLevel)
 	OutputPixelFormat() uint
 	SetOutputPixelFormat(outputPixelFormat uint)
 }

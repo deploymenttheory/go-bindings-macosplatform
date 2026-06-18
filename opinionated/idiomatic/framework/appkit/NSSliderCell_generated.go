@@ -56,8 +56,8 @@ func (x *SliderCell) WithAltIncrementValue(altIncrementValue float64) *SliderCel
 }
 
 // WithSliderType sets the sliderType property and returns the receiver for chaining.
-func (x *SliderCell) WithSliderType(sliderType raw.NSSliderType) *SliderCell {
-	x.inner.SetSliderType(sliderType)
+func (x *SliderCell) WithSliderType(sliderType NSSliderType) *SliderCell {
+	x.inner.SetSliderType(raw.NSSliderType(sliderType))
 	return x
 }
 
@@ -80,8 +80,8 @@ func (x *SliderCell) WithNumberOfTickMarks(numberOfTickMarks int) *SliderCell {
 }
 
 // WithTickMarkPosition sets the tickMarkPosition property and returns the receiver for chaining.
-func (x *SliderCell) WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *SliderCell {
-	x.inner.SetTickMarkPosition(tickMarkPosition)
+func (x *SliderCell) WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *SliderCell {
+	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 	return x
 }
 
@@ -98,8 +98,8 @@ func (x *SliderCell) WithControlView(controlView ViewProvider) *SliderCell {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *SliderCell) WithType(type_ raw.NSCellType) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetType(type_)
+func (x *SliderCell) WithType(type_ NSCellType) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -182,8 +182,8 @@ func (x *SliderCell) WithHighlighted(highlighted bool) *SliderCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *SliderCell) WithAlignment(alignment raw.NSTextAlignment) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *SliderCell) WithAlignment(alignment NSTextAlignment) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -248,8 +248,8 @@ func (x *SliderCell) WithImage(image *Image) *SliderCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *SliderCell) WithControlSize(controlSize raw.NSControlSize) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *SliderCell) WithControlSize(controlSize NSControlSize) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -272,14 +272,14 @@ func (x *SliderCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *SliderCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *SliderCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *SliderCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *SliderCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -296,8 +296,8 @@ func (x *SliderCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool)
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SliderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *SliderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -320,8 +320,8 @@ func (x *SliderCell) WithShowsFirstResponder(showsFirstResponder bool) *SliderCe
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SliderCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *SliderCell) WithFocusRingType(focusRingType NSFocusRingType) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -350,14 +350,14 @@ func (x *SliderCell) WithAllowsMixedState(allowsMixedState bool) *SliderCell {
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *SliderCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *SliderCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *SliderCell) WithControlTint(controlTint raw.NSControlTint) *SliderCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *SliderCell) WithControlTint(controlTint NSControlTint) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -417,13 +417,13 @@ func (x *SliderCell) SetAltIncrementValue(altIncrementValue float64) {
 }
 
 // SliderType calls the underlying SliderType.
-func (x *SliderCell) SliderType() raw.NSSliderType {
-	return x.inner.SliderType()
+func (x *SliderCell) SliderType() NSSliderType {
+	return NSSliderType(x.inner.SliderType())
 }
 
 // SetSliderType calls the underlying SetSliderType.
-func (x *SliderCell) SetSliderType(sliderType raw.NSSliderType) {
-	x.inner.SetSliderType(sliderType)
+func (x *SliderCell) SetSliderType(sliderType NSSliderType) {
+	x.inner.SetSliderType(raw.NSSliderType(sliderType))
 }
 
 // IsVertical calls the underlying IsVertical.
@@ -482,13 +482,13 @@ func (x *SliderCell) SetNumberOfTickMarks(numberOfTickMarks int) {
 }
 
 // TickMarkPosition calls the underlying TickMarkPosition.
-func (x *SliderCell) TickMarkPosition() raw.NSTickMarkPosition {
-	return x.inner.TickMarkPosition()
+func (x *SliderCell) TickMarkPosition() NSTickMarkPosition {
+	return NSTickMarkPosition(x.inner.TickMarkPosition())
 }
 
 // SetTickMarkPosition calls the underlying SetTickMarkPosition.
-func (x *SliderCell) SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) {
-	x.inner.SetTickMarkPosition(tickMarkPosition)
+func (x *SliderCell) SetTickMarkPosition(tickMarkPosition NSTickMarkPosition) {
+	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 }
 
 // AllowsTickMarkValuesOnly calls the underlying AllowsTickMarkValuesOnly.
@@ -554,14 +554,14 @@ type SliderCellable interface {
 	WithMinValue(minValue float64) *SliderCell
 	WithMaxValue(maxValue float64) *SliderCell
 	WithAltIncrementValue(altIncrementValue float64) *SliderCell
-	WithSliderType(sliderType raw.NSSliderType) *SliderCell
+	WithSliderType(sliderType NSSliderType) *SliderCell
 	WithVertical(vertical bool) *SliderCell
 	WithKnobThickness(knobThickness float64) *SliderCell
 	WithNumberOfTickMarks(numberOfTickMarks int) *SliderCell
-	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *SliderCell
+	WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *SliderCell
 	WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *SliderCell
 	WithControlView(controlView ViewProvider) *SliderCell
-	WithType(type_ raw.NSCellType) *SliderCell
+	WithType(type_ NSCellType) *SliderCell
 	WithState(state int) *SliderCell
 	WithTarget(target objc.ID) *SliderCell
 	WithAction(action objc.SEL) *SliderCell
@@ -575,7 +575,7 @@ type SliderCellable interface {
 	WithBezeled(bezeled bool) *SliderCell
 	WithScrollable(scrollable bool) *SliderCell
 	WithHighlighted(highlighted bool) *SliderCell
-	WithAlignment(alignment raw.NSTextAlignment) *SliderCell
+	WithAlignment(alignment NSTextAlignment) *SliderCell
 	WithWraps(wraps bool) *SliderCell
 	WithFont(font *Font) *SliderCell
 	WithFormatter(formatter *foundation.NSFormatter) *SliderCell
@@ -586,25 +586,25 @@ type SliderCellable interface {
 	WithDoubleValue(doubleValue float64) *SliderCell
 	WithIntegerValue(integerValue int) *SliderCell
 	WithImage(image *Image) *SliderCell
-	WithControlSize(controlSize raw.NSControlSize) *SliderCell
+	WithControlSize(controlSize NSControlSize) *SliderCell
 	WithRepresentedObject(representedObject objc.ID) *SliderCell
 	WithMenu(menu *Menu) *SliderCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SliderCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SliderCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SliderCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SliderCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *SliderCell
 	WithAllowsUndo(allowsUndo bool) *SliderCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SliderCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SliderCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SliderCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SliderCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *SliderCell
 	WithShowsFirstResponder(showsFirstResponder bool) *SliderCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *SliderCell
+	WithFocusRingType(focusRingType NSFocusRingType) *SliderCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SliderCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SliderCell
 	WithImportsGraphics(importsGraphics bool) *SliderCell
 	WithAllowsMixedState(allowsMixedState bool) *SliderCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SliderCell
-	WithControlTint(controlTint raw.NSControlTint) *SliderCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SliderCell
+	WithControlTint(controlTint NSControlTint) *SliderCell
 	KnobRectFlipped(flipped bool) corefoundation.CGRect
 	BarRectFlipped(flipped bool) corefoundation.CGRect
 	DrawKnob(knobRect corefoundation.CGRect)
@@ -616,8 +616,8 @@ type SliderCellable interface {
 	SetMaxValue(maxValue float64)
 	AltIncrementValue() float64
 	SetAltIncrementValue(altIncrementValue float64)
-	SliderType() raw.NSSliderType
-	SetSliderType(sliderType raw.NSSliderType)
+	SliderType() NSSliderType
+	SetSliderType(sliderType NSSliderType)
 	IsVertical() bool
 	SetVertical(vertical bool)
 	TrackRect() corefoundation.CGRect
@@ -629,8 +629,8 @@ type SliderCellable interface {
 	DrawTickMarks()
 	NumberOfTickMarks() int
 	SetNumberOfTickMarks(numberOfTickMarks int)
-	TickMarkPosition() raw.NSTickMarkPosition
-	SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition)
+	TickMarkPosition() NSTickMarkPosition
+	SetTickMarkPosition(tickMarkPosition NSTickMarkPosition)
 	AllowsTickMarkValuesOnly() bool
 	SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool)
 	SetTitleCell(cell *raw.NSCell)

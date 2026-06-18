@@ -263,23 +263,23 @@ func (x *WKWebView) SuspendAllMediaPlayback(completionHandler func()) {
 }
 
 // RequestMediaPlaybackStateWithCompletionHandler calls the underlying RequestMediaPlaybackStateWithCompletionHandler.
-func (x *WKWebView) RequestMediaPlaybackStateWithCompletionHandler(completionHandler func(raw.WKMediaPlaybackState)) {
-	x.inner.RequestMediaPlaybackStateWithCompletionHandler(completionHandler)
+func (x *WKWebView) RequestMediaPlaybackStateWithCompletionHandler(completionHandler func(WKMediaPlaybackState)) {
+	x.inner.RequestMediaPlaybackStateWithCompletionHandler(func(_a0 raw.WKMediaPlaybackState) { completionHandler(WKMediaPlaybackState(_a0)) })
 }
 
 // RequestMediaPlaybackState calls the underlying RequestMediaPlaybackState.
-func (x *WKWebView) RequestMediaPlaybackState(completionHandler func(raw.WKMediaPlaybackState)) {
-	x.inner.RequestMediaPlaybackState(completionHandler)
+func (x *WKWebView) RequestMediaPlaybackState(completionHandler func(WKMediaPlaybackState)) {
+	x.inner.RequestMediaPlaybackState(func(_a0 raw.WKMediaPlaybackState) { completionHandler(WKMediaPlaybackState(_a0)) })
 }
 
 // SetCameraCaptureStateCompletionHandler calls the underlying SetCameraCaptureStateCompletionHandler.
-func (x *WKWebView) SetCameraCaptureStateCompletionHandler(state raw.WKMediaCaptureState, completionHandler func()) {
-	x.inner.SetCameraCaptureStateCompletionHandler(state, completionHandler)
+func (x *WKWebView) SetCameraCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func()) {
+	x.inner.SetCameraCaptureStateCompletionHandler(raw.WKMediaCaptureState(state), completionHandler)
 }
 
 // SetMicrophoneCaptureStateCompletionHandler calls the underlying SetMicrophoneCaptureStateCompletionHandler.
-func (x *WKWebView) SetMicrophoneCaptureStateCompletionHandler(state raw.WKMediaCaptureState, completionHandler func()) {
-	x.inner.SetMicrophoneCaptureStateCompletionHandler(state, completionHandler)
+func (x *WKWebView) SetMicrophoneCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func()) {
+	x.inner.SetMicrophoneCaptureStateCompletionHandler(raw.WKMediaCaptureState(state), completionHandler)
 }
 
 // TakeSnapshotWithConfigurationCompletionHandler calls the underlying TakeSnapshotWithConfigurationCompletionHandler.
@@ -373,8 +373,8 @@ func (x *WKWebView) SetMinimumViewportInsetMaximumViewportInset(minimumViewportI
 }
 
 // FetchDataOfTypesCompletionHandler calls the underlying FetchDataOfTypesCompletionHandler.
-func (x *WKWebView) FetchDataOfTypesCompletionHandler(dataTypes raw.WKWebViewDataType, completionHandler func(*foundation.NSData, unsafe.Pointer)) {
-	x.inner.FetchDataOfTypesCompletionHandler(dataTypes, completionHandler)
+func (x *WKWebView) FetchDataOfTypesCompletionHandler(dataTypes WKWebViewDataType, completionHandler func(*foundation.NSData, unsafe.Pointer)) {
+	x.inner.FetchDataOfTypesCompletionHandler(raw.WKWebViewDataType(dataTypes), completionHandler)
 }
 
 // RestoreDataCompletionHandler calls the underlying RestoreDataCompletionHandler.
@@ -465,13 +465,13 @@ func (x *WKWebView) CanGoForward() bool {
 }
 
 // CameraCaptureState calls the underlying CameraCaptureState.
-func (x *WKWebView) CameraCaptureState() raw.WKMediaCaptureState {
-	return x.inner.CameraCaptureState()
+func (x *WKWebView) CameraCaptureState() WKMediaCaptureState {
+	return WKMediaCaptureState(x.inner.CameraCaptureState())
 }
 
 // MicrophoneCaptureState calls the underlying MicrophoneCaptureState.
-func (x *WKWebView) MicrophoneCaptureState() raw.WKMediaCaptureState {
-	return x.inner.MicrophoneCaptureState()
+func (x *WKWebView) MicrophoneCaptureState() WKMediaCaptureState {
+	return WKMediaCaptureState(x.inner.MicrophoneCaptureState())
 }
 
 // AllowsBackForwardNavigationGestures calls the underlying AllowsBackForwardNavigationGestures.
@@ -583,8 +583,8 @@ func (x *WKWebView) SetUnderPageBackgroundColor(underPageBackgroundColor *appkit
 }
 
 // FullscreenState calls the underlying FullscreenState.
-func (x *WKWebView) FullscreenState() raw.WKFullscreenState {
-	return x.inner.FullscreenState()
+func (x *WKWebView) FullscreenState() WKFullscreenState {
+	return WKFullscreenState(x.inner.FullscreenState())
 }
 
 // MinimumViewportInset calls the underlying MinimumViewportInset.
@@ -688,10 +688,10 @@ type WKWebViewable interface {
 	SetAllMediaPlaybackSuspendedCompletionHandler(suspended bool, completionHandler func())
 	ResumeAllMediaPlayback(completionHandler func())
 	SuspendAllMediaPlayback(completionHandler func())
-	RequestMediaPlaybackStateWithCompletionHandler(completionHandler func(raw.WKMediaPlaybackState))
-	RequestMediaPlaybackState(completionHandler func(raw.WKMediaPlaybackState))
-	SetCameraCaptureStateCompletionHandler(state raw.WKMediaCaptureState, completionHandler func())
-	SetMicrophoneCaptureStateCompletionHandler(state raw.WKMediaCaptureState, completionHandler func())
+	RequestMediaPlaybackStateWithCompletionHandler(completionHandler func(WKMediaPlaybackState))
+	RequestMediaPlaybackState(completionHandler func(WKMediaPlaybackState))
+	SetCameraCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func())
+	SetMicrophoneCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func())
 	TakeSnapshotWithConfigurationCompletionHandler(snapshotConfiguration *raw.WKSnapshotConfiguration, completionHandler func(*appkit.NSImage, unsafe.Pointer))
 	CreatePDFWithConfigurationCompletionHandler(pdfConfiguration *raw.WKPDFConfiguration, completionHandler func(*foundation.NSData, unsafe.Pointer))
 	CreateWebArchiveDataWithCompletionHandler(completionHandler func(*foundation.NSData, unsafe.Pointer))
@@ -706,7 +706,7 @@ type WKWebViewable interface {
 	LoadSimulatedRequestWithResponseHTMLString(request *foundation.NSURLRequest, string_ string) *WKNavigation
 	PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation
 	SetMinimumViewportInsetMaximumViewportInset(minimumViewportInset foundation.NSEdgeInsets, maximumViewportInset foundation.NSEdgeInsets)
-	FetchDataOfTypesCompletionHandler(dataTypes raw.WKWebViewDataType, completionHandler func(*foundation.NSData, unsafe.Pointer))
+	FetchDataOfTypesCompletionHandler(dataTypes WKWebViewDataType, completionHandler func(*foundation.NSData, unsafe.Pointer))
 	RestoreDataCompletionHandler(data *foundation.NSData, completionHandler func(unsafe.Pointer))
 	Configuration() *WKWebViewConfiguration
 	NavigationDelegate() raw.WKNavigationDelegate
@@ -722,8 +722,8 @@ type WKWebViewable interface {
 	ServerTrust() unsafe.Pointer
 	CanGoBack() bool
 	CanGoForward() bool
-	CameraCaptureState() raw.WKMediaCaptureState
-	MicrophoneCaptureState() raw.WKMediaCaptureState
+	CameraCaptureState() WKMediaCaptureState
+	MicrophoneCaptureState() WKMediaCaptureState
 	AllowsBackForwardNavigationGestures() bool
 	SetAllowsBackForwardNavigationGestures(allowsBackForwardNavigationGestures bool)
 	CustomUserAgent() string
@@ -744,7 +744,7 @@ type WKWebViewable interface {
 	ThemeColor() *appkit.NSColor
 	UnderPageBackgroundColor() *appkit.NSColor
 	SetUnderPageBackgroundColor(underPageBackgroundColor *appkit.NSColor)
-	FullscreenState() raw.WKFullscreenState
+	FullscreenState() WKFullscreenState
 	MinimumViewportInset() foundation.NSEdgeInsets
 	MaximumViewportInset() foundation.NSEdgeInsets
 	IsInspectable() bool

@@ -48,8 +48,8 @@ func (x *SplitView) WithVertical(vertical bool) *SplitView {
 }
 
 // WithDividerStyle sets the dividerStyle property and returns the receiver for chaining.
-func (x *SplitView) WithDividerStyle(dividerStyle raw.NSSplitViewDividerStyle) *SplitView {
-	x.inner.SetDividerStyle(dividerStyle)
+func (x *SplitView) WithDividerStyle(dividerStyle NSSplitViewDividerStyle) *SplitView {
+	x.inner.SetDividerStyle(raw.NSSplitViewDividerStyle(dividerStyle))
 	return x
 }
 
@@ -108,8 +108,8 @@ func (x *SplitView) WithAutoresizesSubviews(autoresizesSubviews bool) *SplitView
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *SplitView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *SplitView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *SplitView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SplitView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -168,14 +168,14 @@ func (x *SplitView) WithWantsRestingTouches(wantsRestingTouches bool) *SplitView
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *SplitView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *SplitView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *SplitView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SplitView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *SplitView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *SplitView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *SplitView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SplitView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -282,8 +282,8 @@ func (x *SplitView) WithToolTip(toolTip string) *SplitView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SplitView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SplitView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *SplitView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SplitView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -300,8 +300,8 @@ func (x *SplitView) WithNextKeyView(nextKeyView ViewProvider) *SplitView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SplitView) WithFocusRingType(focusRingType raw.NSFocusRingType) *SplitView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *SplitView) WithFocusRingType(focusRingType NSFocusRingType) *SplitView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -324,8 +324,8 @@ func (x *SplitView) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *SplitView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SplitView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *SplitView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SplitView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -464,13 +464,13 @@ func (x *SplitView) SetVertical(vertical bool) {
 }
 
 // DividerStyle calls the underlying DividerStyle.
-func (x *SplitView) DividerStyle() raw.NSSplitViewDividerStyle {
-	return x.inner.DividerStyle()
+func (x *SplitView) DividerStyle() NSSplitViewDividerStyle {
+	return NSSplitViewDividerStyle(x.inner.DividerStyle())
 }
 
 // SetDividerStyle calls the underlying SetDividerStyle.
-func (x *SplitView) SetDividerStyle(dividerStyle raw.NSSplitViewDividerStyle) {
-	x.inner.SetDividerStyle(dividerStyle)
+func (x *SplitView) SetDividerStyle(dividerStyle NSSplitViewDividerStyle) {
+	x.inner.SetDividerStyle(raw.NSSplitViewDividerStyle(dividerStyle))
 }
 
 // AutosaveName calls the underlying AutosaveName.
@@ -565,7 +565,7 @@ func (x *SplitView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSRe
 type SplitViewable interface {
 	Unwrap() *raw.NSSplitView
 	WithVertical(vertical bool) *SplitView
-	WithDividerStyle(dividerStyle raw.NSSplitViewDividerStyle) *SplitView
+	WithDividerStyle(dividerStyle NSSplitViewDividerStyle) *SplitView
 	WithAutosaveName(autosaveName *foundation.NSString) *SplitView
 	WithDelegate(delegate raw.NSSplitViewDelegate) *SplitView
 	WithArrangesAllSubviews(arrangesAllSubviews bool) *SplitView
@@ -573,7 +573,7 @@ type SplitViewable interface {
 	WithHidden(hidden bool) *SplitView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SplitView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *SplitView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *SplitView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SplitView
 	WithFrame(frame corefoundation.CGRect) *SplitView
 	WithFrameRotation(frameRotation float64) *SplitView
 	WithFrameCenterRotation(frameCenterRotation float64) *SplitView
@@ -583,8 +583,8 @@ type SplitViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *SplitView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *SplitView
 	WithWantsRestingTouches(wantsRestingTouches bool) *SplitView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *SplitView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *SplitView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SplitView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SplitView
 	WithWantsLayer(wantsLayer bool) *SplitView
 	WithLayer(layer *quartzcore.CALayer) *SplitView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SplitView
@@ -598,12 +598,12 @@ type SplitViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *SplitView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SplitView
 	WithToolTip(toolTip string) *SplitView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SplitView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SplitView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SplitView
 	WithNextKeyView(nextKeyView ViewProvider) *SplitView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *SplitView
+	WithFocusRingType(focusRingType NSFocusRingType) *SplitView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *SplitView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SplitView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SplitView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SplitView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SplitView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SplitView
@@ -628,8 +628,8 @@ type SplitViewable interface {
 	SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int)
 	IsVertical() bool
 	SetVertical(vertical bool)
-	DividerStyle() raw.NSSplitViewDividerStyle
-	SetDividerStyle(dividerStyle raw.NSSplitViewDividerStyle)
+	DividerStyle() NSSplitViewDividerStyle
+	SetDividerStyle(dividerStyle NSSplitViewDividerStyle)
 	AutosaveName() string
 	SetAutosaveName(autosaveName *foundation.NSString)
 	Delegate() raw.NSSplitViewDelegate

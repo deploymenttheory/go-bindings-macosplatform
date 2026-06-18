@@ -1,11 +1,20 @@
 {{/*
     cfunctions.tmpl — idiomatic forwarding wrappers for raw C functions.
-    Signature/arg strings are pre-built in the view-model (params, callArgs);
-    the template only shapes the func. gofmt canonicalises the result.
+    Signature/arg strings are pre-built in the view-model (params, callArgs); the
+    template only shapes the func. The simple path is a one-line forward; the
+    complex path (PreLines/PostLines, used for enum out-parameters) captures the
+    result, runs the copy-back statements, then returns. gofmt canonicalises both.
 */}}
 {{define "cfunctions"}}{{range .Entries}}// {{.GoName}} calls [{{$.RawAlias}}.{{.RawGoName}}] (C function {{.CName}}).
 func {{.GoName}}({{.Params}}){{.RetSig}} {
-	{{if .RetType}}return {{end}}{{$.RawAlias}}.{{.RawGoName}}({{.CallArgs}})
+{{- if or .PreLines .PostLines}}
+{{range .PreLines}}{{.}}
+{{end}}{{if .RetType}}_ret := {{end}}{{if .EnumCast}}{{.EnumCast}}({{$.RawAlias}}.{{.RawGoName}}({{.CallArgs}})){{else}}{{$.RawAlias}}.{{.RawGoName}}({{.CallArgs}}){{end}}
+{{range .PostLines}}{{.}}
+{{end}}{{if .RetType}}return _ret{{end}}
+{{- else}}
+	{{if .EnumCast}}return {{.EnumCast}}({{$.RawAlias}}.{{.RawGoName}}({{.CallArgs}})){{else}}{{if .RetType}}return {{end}}{{$.RawAlias}}.{{.RawGoName}}({{.CallArgs}}){{end}}
+{{- end}}
 }
 
 {{end}}{{end}}

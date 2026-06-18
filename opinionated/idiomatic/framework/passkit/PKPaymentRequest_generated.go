@@ -75,8 +75,8 @@ func (x *PaymentRequest) WithSupportedNetworks(items ...*foundation.NSString) *P
 }
 
 // WithMerchantCapabilities sets the merchantCapabilities property and returns the receiver for chaining.
-func (x *PaymentRequest) WithMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability) *PaymentRequest {
-	x.inner.SetMerchantCapabilities(merchantCapabilities)
+func (x *PaymentRequest) WithMerchantCapabilities(merchantCapabilities PKMerchantCapability) *PaymentRequest {
+	x.inner.SetMerchantCapabilities(raw.PKMerchantCapability(merchantCapabilities))
 	return x
 }
 
@@ -129,8 +129,8 @@ func (x *PaymentRequest) WithRequiredBillingContactFields(requiredBillingContact
 }
 
 // WithRequiredBillingAddressFields sets the requiredBillingAddressFields property and returns the receiver for chaining.
-func (x *PaymentRequest) WithRequiredBillingAddressFields(requiredBillingAddressFields raw.PKAddressField) *PaymentRequest {
-	x.inner.SetRequiredBillingAddressFields(requiredBillingAddressFields)
+func (x *PaymentRequest) WithRequiredBillingAddressFields(requiredBillingAddressFields PKAddressField) *PaymentRequest {
+	x.inner.SetRequiredBillingAddressFields(raw.PKAddressField(requiredBillingAddressFields))
 	return x
 }
 
@@ -147,8 +147,8 @@ func (x *PaymentRequest) WithRequiredShippingContactFields(requiredShippingConta
 }
 
 // WithRequiredShippingAddressFields sets the requiredShippingAddressFields property and returns the receiver for chaining.
-func (x *PaymentRequest) WithRequiredShippingAddressFields(requiredShippingAddressFields raw.PKAddressField) *PaymentRequest {
-	x.inner.SetRequiredShippingAddressFields(requiredShippingAddressFields)
+func (x *PaymentRequest) WithRequiredShippingAddressFields(requiredShippingAddressFields PKAddressField) *PaymentRequest {
+	x.inner.SetRequiredShippingAddressFields(raw.PKAddressField(requiredShippingAddressFields))
 	return x
 }
 
@@ -177,14 +177,14 @@ func (x *PaymentRequest) WithShippingMethods(items ...*raw.PKShippingMethod) *Pa
 }
 
 // WithShippingType sets the shippingType property and returns the receiver for chaining.
-func (x *PaymentRequest) WithShippingType(shippingType raw.PKShippingType) *PaymentRequest {
-	x.inner.SetShippingType(shippingType)
+func (x *PaymentRequest) WithShippingType(shippingType PKShippingType) *PaymentRequest {
+	x.inner.SetShippingType(raw.PKShippingType(shippingType))
 	return x
 }
 
 // WithShippingContactEditingMode sets the shippingContactEditingMode property and returns the receiver for chaining.
-func (x *PaymentRequest) WithShippingContactEditingMode(shippingContactEditingMode raw.PKShippingContactEditingMode) *PaymentRequest {
-	x.inner.SetShippingContactEditingMode(shippingContactEditingMode)
+func (x *PaymentRequest) WithShippingContactEditingMode(shippingContactEditingMode PKShippingContactEditingMode) *PaymentRequest {
+	x.inner.SetShippingContactEditingMode(raw.PKShippingContactEditingMode(shippingContactEditingMode))
 	return x
 }
 
@@ -237,8 +237,8 @@ func (x *PaymentRequest) WithDeferredPaymentRequest(deferredPaymentRequest *Defe
 }
 
 // WithApplePayLaterAvailability sets the applePayLaterAvailability property and returns the receiver for chaining.
-func (x *PaymentRequest) WithApplePayLaterAvailability(applePayLaterAvailability raw.PKApplePayLaterAvailability) *PaymentRequest {
-	x.inner.SetApplePayLaterAvailability(applePayLaterAvailability)
+func (x *PaymentRequest) WithApplePayLaterAvailability(applePayLaterAvailability PKApplePayLaterAvailability) *PaymentRequest {
+	x.inner.SetApplePayLaterAvailability(raw.PKApplePayLaterAvailability(applePayLaterAvailability))
 	return x
 }
 
@@ -307,13 +307,13 @@ func (x *PaymentRequest) SetSupportedNetworks(supportedNetworks *foundation.NSAr
 }
 
 // MerchantCapabilities calls the underlying MerchantCapabilities.
-func (x *PaymentRequest) MerchantCapabilities() raw.PKMerchantCapability {
-	return x.inner.MerchantCapabilities()
+func (x *PaymentRequest) MerchantCapabilities() PKMerchantCapability {
+	return PKMerchantCapability(x.inner.MerchantCapabilities())
 }
 
 // SetMerchantCapabilities calls the underlying SetMerchantCapabilities.
-func (x *PaymentRequest) SetMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability) {
-	x.inner.SetMerchantCapabilities(merchantCapabilities)
+func (x *PaymentRequest) SetMerchantCapabilities(merchantCapabilities PKMerchantCapability) {
+	x.inner.SetMerchantCapabilities(raw.PKMerchantCapability(merchantCapabilities))
 }
 
 // SupportsCouponCode calls the underlying SupportsCouponCode.
@@ -391,13 +391,13 @@ func (x *PaymentRequest) SetRequiredBillingContactFields(requiredBillingContactF
 }
 
 // RequiredBillingAddressFields calls the underlying RequiredBillingAddressFields.
-func (x *PaymentRequest) RequiredBillingAddressFields() raw.PKAddressField {
-	return x.inner.RequiredBillingAddressFields()
+func (x *PaymentRequest) RequiredBillingAddressFields() PKAddressField {
+	return PKAddressField(x.inner.RequiredBillingAddressFields())
 }
 
 // SetRequiredBillingAddressFields calls the underlying SetRequiredBillingAddressFields.
-func (x *PaymentRequest) SetRequiredBillingAddressFields(requiredBillingAddressFields raw.PKAddressField) {
-	x.inner.SetRequiredBillingAddressFields(requiredBillingAddressFields)
+func (x *PaymentRequest) SetRequiredBillingAddressFields(requiredBillingAddressFields PKAddressField) {
+	x.inner.SetRequiredBillingAddressFields(raw.PKAddressField(requiredBillingAddressFields))
 }
 
 // BillingContact calls the underlying BillingContact.
@@ -425,13 +425,13 @@ func (x *PaymentRequest) SetRequiredShippingContactFields(requiredShippingContac
 }
 
 // RequiredShippingAddressFields calls the underlying RequiredShippingAddressFields.
-func (x *PaymentRequest) RequiredShippingAddressFields() raw.PKAddressField {
-	return x.inner.RequiredShippingAddressFields()
+func (x *PaymentRequest) RequiredShippingAddressFields() PKAddressField {
+	return PKAddressField(x.inner.RequiredShippingAddressFields())
 }
 
 // SetRequiredShippingAddressFields calls the underlying SetRequiredShippingAddressFields.
-func (x *PaymentRequest) SetRequiredShippingAddressFields(requiredShippingAddressFields raw.PKAddressField) {
-	x.inner.SetRequiredShippingAddressFields(requiredShippingAddressFields)
+func (x *PaymentRequest) SetRequiredShippingAddressFields(requiredShippingAddressFields PKAddressField) {
+	x.inner.SetRequiredShippingAddressFields(raw.PKAddressField(requiredShippingAddressFields))
 }
 
 // ShippingContact calls the underlying ShippingContact.
@@ -465,23 +465,23 @@ func (x *PaymentRequest) SetShippingMethods(shippingMethods *foundation.NSArray[
 }
 
 // ShippingType calls the underlying ShippingType.
-func (x *PaymentRequest) ShippingType() raw.PKShippingType {
-	return x.inner.ShippingType()
+func (x *PaymentRequest) ShippingType() PKShippingType {
+	return PKShippingType(x.inner.ShippingType())
 }
 
 // SetShippingType calls the underlying SetShippingType.
-func (x *PaymentRequest) SetShippingType(shippingType raw.PKShippingType) {
-	x.inner.SetShippingType(shippingType)
+func (x *PaymentRequest) SetShippingType(shippingType PKShippingType) {
+	x.inner.SetShippingType(raw.PKShippingType(shippingType))
 }
 
 // ShippingContactEditingMode calls the underlying ShippingContactEditingMode.
-func (x *PaymentRequest) ShippingContactEditingMode() raw.PKShippingContactEditingMode {
-	return x.inner.ShippingContactEditingMode()
+func (x *PaymentRequest) ShippingContactEditingMode() PKShippingContactEditingMode {
+	return PKShippingContactEditingMode(x.inner.ShippingContactEditingMode())
 }
 
 // SetShippingContactEditingMode calls the underlying SetShippingContactEditingMode.
-func (x *PaymentRequest) SetShippingContactEditingMode(shippingContactEditingMode raw.PKShippingContactEditingMode) {
-	x.inner.SetShippingContactEditingMode(shippingContactEditingMode)
+func (x *PaymentRequest) SetShippingContactEditingMode(shippingContactEditingMode PKShippingContactEditingMode) {
+	x.inner.SetShippingContactEditingMode(raw.PKShippingContactEditingMode(shippingContactEditingMode))
 }
 
 // ApplicationData calls the underlying ApplicationData.
@@ -563,13 +563,13 @@ func (x *PaymentRequest) SetDeferredPaymentRequest(deferredPaymentRequest *raw.P
 }
 
 // ApplePayLaterAvailability calls the underlying ApplePayLaterAvailability.
-func (x *PaymentRequest) ApplePayLaterAvailability() raw.PKApplePayLaterAvailability {
-	return x.inner.ApplePayLaterAvailability()
+func (x *PaymentRequest) ApplePayLaterAvailability() PKApplePayLaterAvailability {
+	return PKApplePayLaterAvailability(x.inner.ApplePayLaterAvailability())
 }
 
 // SetApplePayLaterAvailability calls the underlying SetApplePayLaterAvailability.
-func (x *PaymentRequest) SetApplePayLaterAvailability(applePayLaterAvailability raw.PKApplePayLaterAvailability) {
-	x.inner.SetApplePayLaterAvailability(applePayLaterAvailability)
+func (x *PaymentRequest) SetApplePayLaterAvailability(applePayLaterAvailability PKApplePayLaterAvailability) {
+	x.inner.SetApplePayLaterAvailability(raw.PKApplePayLaterAvailability(applePayLaterAvailability))
 }
 
 // IsDelegatedRequest calls the underlying IsDelegatedRequest.
@@ -589,28 +589,28 @@ type PaymentRequestable interface {
 	WithAttributionIdentifier(attributionIdentifier string) *PaymentRequest
 	WithCountryCode(countryCode string) *PaymentRequest
 	WithSupportedNetworks(items ...*foundation.NSString) *PaymentRequest
-	WithMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability) *PaymentRequest
+	WithMerchantCapabilities(merchantCapabilities PKMerchantCapability) *PaymentRequest
 	WithSupportsCouponCode(supportsCouponCode bool) *PaymentRequest
 	WithCouponCode(couponCode string) *PaymentRequest
 	WithMerchantCategoryCode(merchantCategoryCode int16) *PaymentRequest
 	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequest
 	WithCurrencyCode(currencyCode string) *PaymentRequest
 	WithRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest
-	WithRequiredBillingAddressFields(requiredBillingAddressFields raw.PKAddressField) *PaymentRequest
+	WithRequiredBillingAddressFields(requiredBillingAddressFields PKAddressField) *PaymentRequest
 	WithBillingContact(billingContact *Contact) *PaymentRequest
 	WithRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest
-	WithRequiredShippingAddressFields(requiredShippingAddressFields raw.PKAddressField) *PaymentRequest
+	WithRequiredShippingAddressFields(requiredShippingAddressFields PKAddressField) *PaymentRequest
 	WithShippingContact(shippingContact *Contact) *PaymentRequest
 	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequest
-	WithShippingType(shippingType raw.PKShippingType) *PaymentRequest
-	WithShippingContactEditingMode(shippingContactEditingMode raw.PKShippingContactEditingMode) *PaymentRequest
+	WithShippingType(shippingType PKShippingType) *PaymentRequest
+	WithShippingContactEditingMode(shippingContactEditingMode PKShippingContactEditingMode) *PaymentRequest
 	WithApplicationData(applicationData *foundation.NSData) *PaymentRequest
 	WithSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString]) *PaymentRequest
 	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequest
 	WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequest
 	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequest
 	WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequest
-	WithApplePayLaterAvailability(applePayLaterAvailability raw.PKApplePayLaterAvailability) *PaymentRequest
+	WithApplePayLaterAvailability(applePayLaterAvailability PKApplePayLaterAvailability) *PaymentRequest
 	WithIsDelegatedRequest(isDelegatedRequest bool) *PaymentRequest
 	MerchantIdentifier() string
 	SetMerchantIdentifier(merchantIdentifier string)
@@ -620,8 +620,8 @@ type PaymentRequestable interface {
 	SetCountryCode(countryCode string)
 	SupportedNetworks() []*foundation.NSString
 	SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString])
-	MerchantCapabilities() raw.PKMerchantCapability
-	SetMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability)
+	MerchantCapabilities() PKMerchantCapability
+	SetMerchantCapabilities(merchantCapabilities PKMerchantCapability)
 	SupportsCouponCode() bool
 	SetSupportsCouponCode(supportsCouponCode bool)
 	CouponCode() string
@@ -634,22 +634,22 @@ type PaymentRequestable interface {
 	SetCurrencyCode(currencyCode string)
 	RequiredBillingContactFields() *foundation.NSSet[*foundation.NSString]
 	SetRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString])
-	RequiredBillingAddressFields() raw.PKAddressField
-	SetRequiredBillingAddressFields(requiredBillingAddressFields raw.PKAddressField)
+	RequiredBillingAddressFields() PKAddressField
+	SetRequiredBillingAddressFields(requiredBillingAddressFields PKAddressField)
 	BillingContact() *Contact
 	SetBillingContact(billingContact *raw.PKContact)
 	RequiredShippingContactFields() *foundation.NSSet[*foundation.NSString]
 	SetRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString])
-	RequiredShippingAddressFields() raw.PKAddressField
-	SetRequiredShippingAddressFields(requiredShippingAddressFields raw.PKAddressField)
+	RequiredShippingAddressFields() PKAddressField
+	SetRequiredShippingAddressFields(requiredShippingAddressFields PKAddressField)
 	ShippingContact() *Contact
 	SetShippingContact(shippingContact *raw.PKContact)
 	ShippingMethods() []*ShippingMethod
 	SetShippingMethods(shippingMethods *foundation.NSArray[*raw.PKShippingMethod])
-	ShippingType() raw.PKShippingType
-	SetShippingType(shippingType raw.PKShippingType)
-	ShippingContactEditingMode() raw.PKShippingContactEditingMode
-	SetShippingContactEditingMode(shippingContactEditingMode raw.PKShippingContactEditingMode)
+	ShippingType() PKShippingType
+	SetShippingType(shippingType PKShippingType)
+	ShippingContactEditingMode() PKShippingContactEditingMode
+	SetShippingContactEditingMode(shippingContactEditingMode PKShippingContactEditingMode)
 	ApplicationData() *foundation.NSData
 	SetApplicationData(applicationData *foundation.NSData)
 	SupportedCountries() *foundation.NSSet[*foundation.NSString]
@@ -662,8 +662,8 @@ type PaymentRequestable interface {
 	SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest)
 	DeferredPaymentRequest() *DeferredPaymentRequest
 	SetDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest)
-	ApplePayLaterAvailability() raw.PKApplePayLaterAvailability
-	SetApplePayLaterAvailability(applePayLaterAvailability raw.PKApplePayLaterAvailability)
+	ApplePayLaterAvailability() PKApplePayLaterAvailability
+	SetApplePayLaterAvailability(applePayLaterAvailability PKApplePayLaterAvailability)
 	IsDelegatedRequest() bool
 	SetIsDelegatedRequest(isDelegatedRequest bool)
 }

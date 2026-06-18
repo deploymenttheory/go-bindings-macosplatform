@@ -112,20 +112,20 @@ func (x *AnnotationLink) WithEndPoint(endPoint corefoundation.CGPoint) *Annotati
 }
 
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationLink) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationLink {
-	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+func (x *AnnotationLink) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationLink {
+	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationLink) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationLink {
-	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+func (x *AnnotationLink) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationLink {
+	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
 // WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationLink) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationLink {
-	x.inner.PDFAnnotation.SetIconType(iconType)
+func (x *AnnotationLink) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationLink {
+	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
@@ -148,14 +148,14 @@ func (x *AnnotationLink) WithQuadrilateralPoints(items ...*foundation.NSValue) *
 }
 
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationLink) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationLink {
-	x.inner.PDFAnnotation.SetMarkupType(markupType)
+func (x *AnnotationLink) WithMarkupType(markupType PDFMarkupType) *AnnotationLink {
+	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationLink) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationLink {
-	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+func (x *AnnotationLink) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationLink {
+	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
@@ -250,8 +250,8 @@ func (x *AnnotationLink) WithValues(items ...*foundation.NSString) *AnnotationLi
 }
 
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationLink) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationLink {
-	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+func (x *AnnotationLink) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationLink {
+	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
@@ -320,12 +320,12 @@ type AnnotationLinkable interface {
 	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationLink
 	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationLink
 	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationLink
-	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationLink
-	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationLink
-	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationLink
+	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationLink
+	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationLink
+	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationLink
 	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationLink
-	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationLink
-	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationLink
+	WithMarkupType(markupType PDFMarkupType) *AnnotationLink
+	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationLink
 	WithMultiline(multiline bool) *AnnotationLink
 	WithComb(comb bool) *AnnotationLink
 	WithMaximumLength(maximumLength int) *AnnotationLink
@@ -337,7 +337,7 @@ type AnnotationLinkable interface {
 	WithListChoice(listChoice bool) *AnnotationLink
 	WithChoices(items ...*foundation.NSString) *AnnotationLink
 	WithValues(items ...*foundation.NSString) *AnnotationLink
-	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationLink
+	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationLink
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationLink
 	WithOpen(open bool) *AnnotationLink
 	WithDestination(destination *Destination) *AnnotationLink

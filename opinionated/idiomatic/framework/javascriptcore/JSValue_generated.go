@@ -124,23 +124,23 @@ func (x *Value) IsEqualWithTypeCoercionToObject(value objc.ID) bool {
 }
 
 // CompareJSValue calls the underlying CompareJSValue.
-func (x *Value) CompareJSValue(other *raw.JSValue) raw.JSRelationCondition {
-	return x.inner.CompareJSValue(other)
+func (x *Value) CompareJSValue(other *raw.JSValue) JSRelationCondition {
+	return JSRelationCondition(x.inner.CompareJSValue(other))
 }
 
 // CompareInt64 calls the underlying CompareInt64.
-func (x *Value) CompareInt64(other int64) raw.JSRelationCondition {
-	return x.inner.CompareInt64(other)
+func (x *Value) CompareInt64(other int64) JSRelationCondition {
+	return JSRelationCondition(x.inner.CompareInt64(other))
 }
 
 // CompareUInt64 calls the underlying CompareUInt64.
-func (x *Value) CompareUInt64(other uint64) raw.JSRelationCondition {
-	return x.inner.CompareUInt64(other)
+func (x *Value) CompareUInt64(other uint64) JSRelationCondition {
+	return JSRelationCondition(x.inner.CompareUInt64(other))
 }
 
 // CompareDouble calls the underlying CompareDouble.
-func (x *Value) CompareDouble(other float64) raw.JSRelationCondition {
-	return x.inner.CompareDouble(other)
+func (x *Value) CompareDouble(other float64) JSRelationCondition {
+	return JSRelationCondition(x.inner.CompareDouble(other))
 }
 
 // CallWithArguments calls the underlying CallWithArguments.
@@ -344,10 +344,10 @@ type Valueable interface {
 	IsInstanceOf(value objc.ID) bool
 	IsEqualToObject(value objc.ID) bool
 	IsEqualWithTypeCoercionToObject(value objc.ID) bool
-	CompareJSValue(other *raw.JSValue) raw.JSRelationCondition
-	CompareInt64(other int64) raw.JSRelationCondition
-	CompareUInt64(other uint64) raw.JSRelationCondition
-	CompareDouble(other float64) raw.JSRelationCondition
+	CompareJSValue(other *raw.JSValue) JSRelationCondition
+	CompareInt64(other int64) JSRelationCondition
+	CompareUInt64(other uint64) JSRelationCondition
+	CompareDouble(other float64) JSRelationCondition
 	CallWithArguments(arguments *foundation.NSArray[objc.ID]) *Value
 	ConstructWithArguments(arguments *foundation.NSArray[objc.ID]) *Value
 	InvokeMethodWithArguments(method string, arguments *foundation.NSArray[objc.ID]) *Value

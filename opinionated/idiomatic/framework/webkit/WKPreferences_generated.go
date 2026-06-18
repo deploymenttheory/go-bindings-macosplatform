@@ -84,8 +84,8 @@ func (x *WKPreferences) WithElementFullscreenEnabled(elementFullscreenEnabled bo
 }
 
 // WithInactiveSchedulingPolicy sets the inactiveSchedulingPolicy property and returns the receiver for chaining.
-func (x *WKPreferences) WithInactiveSchedulingPolicy(inactiveSchedulingPolicy raw.WKInactiveSchedulingPolicy) *WKPreferences {
-	x.inner.SetInactiveSchedulingPolicy(inactiveSchedulingPolicy)
+func (x *WKPreferences) WithInactiveSchedulingPolicy(inactiveSchedulingPolicy WKInactiveSchedulingPolicy) *WKPreferences {
+	x.inner.SetInactiveSchedulingPolicy(raw.WKInactiveSchedulingPolicy(inactiveSchedulingPolicy))
 	return x
 }
 
@@ -188,13 +188,13 @@ func (x *WKPreferences) SetElementFullscreenEnabled(elementFullscreenEnabled boo
 }
 
 // InactiveSchedulingPolicy calls the underlying InactiveSchedulingPolicy.
-func (x *WKPreferences) InactiveSchedulingPolicy() raw.WKInactiveSchedulingPolicy {
-	return x.inner.InactiveSchedulingPolicy()
+func (x *WKPreferences) InactiveSchedulingPolicy() WKInactiveSchedulingPolicy {
+	return WKInactiveSchedulingPolicy(x.inner.InactiveSchedulingPolicy())
 }
 
 // SetInactiveSchedulingPolicy calls the underlying SetInactiveSchedulingPolicy.
-func (x *WKPreferences) SetInactiveSchedulingPolicy(inactiveSchedulingPolicy raw.WKInactiveSchedulingPolicy) {
-	x.inner.SetInactiveSchedulingPolicy(inactiveSchedulingPolicy)
+func (x *WKPreferences) SetInactiveSchedulingPolicy(inactiveSchedulingPolicy WKInactiveSchedulingPolicy) {
+	x.inner.SetInactiveSchedulingPolicy(raw.WKInactiveSchedulingPolicy(inactiveSchedulingPolicy))
 }
 
 // JavaEnabled calls the underlying JavaEnabled.
@@ -238,7 +238,7 @@ type WKPreferencesable interface {
 	WithTextInteractionEnabled(textInteractionEnabled bool) *WKPreferences
 	WithSiteSpecificQuirksModeEnabled(siteSpecificQuirksModeEnabled bool) *WKPreferences
 	WithElementFullscreenEnabled(elementFullscreenEnabled bool) *WKPreferences
-	WithInactiveSchedulingPolicy(inactiveSchedulingPolicy raw.WKInactiveSchedulingPolicy) *WKPreferences
+	WithInactiveSchedulingPolicy(inactiveSchedulingPolicy WKInactiveSchedulingPolicy) *WKPreferences
 	WithJavaEnabled(javaEnabled bool) *WKPreferences
 	WithPlugInsEnabled(plugInsEnabled bool) *WKPreferences
 	WithJavaScriptEnabled(javaScriptEnabled bool) *WKPreferences
@@ -258,8 +258,8 @@ type WKPreferencesable interface {
 	SetSiteSpecificQuirksModeEnabled(siteSpecificQuirksModeEnabled bool)
 	IsElementFullscreenEnabled() bool
 	SetElementFullscreenEnabled(elementFullscreenEnabled bool)
-	InactiveSchedulingPolicy() raw.WKInactiveSchedulingPolicy
-	SetInactiveSchedulingPolicy(inactiveSchedulingPolicy raw.WKInactiveSchedulingPolicy)
+	InactiveSchedulingPolicy() WKInactiveSchedulingPolicy
+	SetInactiveSchedulingPolicy(inactiveSchedulingPolicy WKInactiveSchedulingPolicy)
 	JavaEnabled() bool
 	SetJavaEnabled(javaEnabled bool)
 	PlugInsEnabled() bool

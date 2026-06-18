@@ -49,8 +49,8 @@ func (x *SoftmaxLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxL
 }
 
 // Operation calls the underlying Operation.
-func (x *SoftmaxLayer) Operation() raw.MLCSoftmaxOperation {
-	return x.inner.Operation()
+func (x *SoftmaxLayer) Operation() MLCSoftmaxOperation {
+	return MLCSoftmaxOperation(x.inner.Operation())
 }
 
 // Dimension calls the underlying Dimension.
@@ -65,7 +65,7 @@ type SoftmaxLayerable interface {
 	Unwrap() *raw.MLCSoftmaxLayer
 	WithLabel(label string) *SoftmaxLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxLayer
-	Operation() raw.MLCSoftmaxOperation
+	Operation() MLCSoftmaxOperation
 	Dimension() uint
 }
 

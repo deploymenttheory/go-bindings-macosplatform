@@ -62,8 +62,8 @@ func (x *MapSnapshotOptions) WithRegion(region raw.MKCoordinateRegion) *MapSnaps
 }
 
 // WithMapType sets the mapType property and returns the receiver for chaining.
-func (x *MapSnapshotOptions) WithMapType(mapType raw.MKMapType) *MapSnapshotOptions {
-	x.inner.SetMapType(mapType)
+func (x *MapSnapshotOptions) WithMapType(mapType MKMapType) *MapSnapshotOptions {
+	x.inner.SetMapType(raw.MKMapType(mapType))
 	return x
 }
 
@@ -146,13 +146,13 @@ func (x *MapSnapshotOptions) SetRegion(region raw.MKCoordinateRegion) {
 }
 
 // MapType calls the underlying MapType.
-func (x *MapSnapshotOptions) MapType() raw.MKMapType {
-	return x.inner.MapType()
+func (x *MapSnapshotOptions) MapType() MKMapType {
+	return MKMapType(x.inner.MapType())
 }
 
 // SetMapType calls the underlying SetMapType.
-func (x *MapSnapshotOptions) SetMapType(mapType raw.MKMapType) {
-	x.inner.SetMapType(mapType)
+func (x *MapSnapshotOptions) SetMapType(mapType MKMapType) {
+	x.inner.SetMapType(raw.MKMapType(mapType))
 }
 
 // PointOfInterestFilter calls the underlying PointOfInterestFilter.
@@ -216,7 +216,7 @@ type MapSnapshotOptionsable interface {
 	WithCamera(camera *MapCamera) *MapSnapshotOptions
 	WithMapRect(mapRect raw.MKMapRect) *MapSnapshotOptions
 	WithRegion(region raw.MKCoordinateRegion) *MapSnapshotOptions
-	WithMapType(mapType raw.MKMapType) *MapSnapshotOptions
+	WithMapType(mapType MKMapType) *MapSnapshotOptions
 	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapSnapshotOptions
 	WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapSnapshotOptions
 	WithShowsBuildings(showsBuildings bool) *MapSnapshotOptions
@@ -230,8 +230,8 @@ type MapSnapshotOptionsable interface {
 	SetMapRect(mapRect raw.MKMapRect)
 	Region() raw.MKCoordinateRegion
 	SetRegion(region raw.MKCoordinateRegion)
-	MapType() raw.MKMapType
-	SetMapType(mapType raw.MKMapType)
+	MapType() MKMapType
+	SetMapType(mapType MKMapType)
 	PointOfInterestFilter() *PointOfInterestFilter
 	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
 	ShowsPointsOfInterest() bool

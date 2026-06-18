@@ -50,8 +50,8 @@ func (x *ReductionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Reduct
 }
 
 // ReductionType calls the underlying ReductionType.
-func (x *ReductionLayer) ReductionType() raw.MLCReductionType {
-	return x.inner.ReductionType()
+func (x *ReductionLayer) ReductionType() MLCReductionType {
+	return MLCReductionType(x.inner.ReductionType())
 }
 
 // Dimension calls the underlying Dimension.
@@ -77,7 +77,7 @@ type ReductionLayerable interface {
 	Unwrap() *raw.MLCReductionLayer
 	WithLabel(label string) *ReductionLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ReductionLayer
-	ReductionType() raw.MLCReductionType
+	ReductionType() MLCReductionType
 	Dimension() uint
 	Dimensions() []*foundation.NSNumber
 }

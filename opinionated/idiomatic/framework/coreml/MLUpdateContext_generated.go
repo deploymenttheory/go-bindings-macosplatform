@@ -55,8 +55,8 @@ func (x *UpdateContext) Model() *Model {
 }
 
 // Event calls the underlying Event.
-func (x *UpdateContext) Event() raw.MLUpdateProgressEvent {
-	return x.inner.Event()
+func (x *UpdateContext) Event() MLUpdateProgressEvent {
+	return MLUpdateProgressEvent(x.inner.Event())
 }
 
 // Metrics calls the underlying Metrics.
@@ -74,7 +74,7 @@ type UpdateContextable interface {
 	Unwrap() *raw.MLUpdateContext
 	Task() *UpdateTask
 	Model() *Model
-	Event() raw.MLUpdateProgressEvent
+	Event() MLUpdateProgressEvent
 	Metrics() *foundation.NSDictionary[*raw.MLMetricKey, objc.ID]
 	Parameters() *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]
 }

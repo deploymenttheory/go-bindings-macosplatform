@@ -36,8 +36,8 @@ func NewConvolutionDescriptor() *ConvolutionDescriptor {
 }
 
 // ConvolutionType calls the underlying ConvolutionType.
-func (x *ConvolutionDescriptor) ConvolutionType() raw.MLCConvolutionType {
-	return x.inner.ConvolutionType()
+func (x *ConvolutionDescriptor) ConvolutionType() MLCConvolutionType {
+	return MLCConvolutionType(x.inner.ConvolutionType())
 }
 
 // KernelWidth calls the underlying KernelWidth.
@@ -86,8 +86,8 @@ func (x *ConvolutionDescriptor) GroupCount() uint {
 }
 
 // PaddingPolicy calls the underlying PaddingPolicy.
-func (x *ConvolutionDescriptor) PaddingPolicy() raw.MLCPaddingPolicy {
-	return x.inner.PaddingPolicy()
+func (x *ConvolutionDescriptor) PaddingPolicy() MLCPaddingPolicy {
+	return MLCPaddingPolicy(x.inner.PaddingPolicy())
 }
 
 // PaddingSizeInX calls the underlying PaddingSizeInX.
@@ -113,7 +113,7 @@ func (x *ConvolutionDescriptor) UsesDepthwiseConvolution() bool {
 // ConvolutionDescriptorable is the interface implemented by [ConvolutionDescriptor], for mocking and DI.
 type ConvolutionDescriptorable interface {
 	Unwrap() *raw.MLCConvolutionDescriptor
-	ConvolutionType() raw.MLCConvolutionType
+	ConvolutionType() MLCConvolutionType
 	KernelWidth() uint
 	KernelHeight() uint
 	InputFeatureChannelCount() uint
@@ -123,7 +123,7 @@ type ConvolutionDescriptorable interface {
 	DilationRateInX() uint
 	DilationRateInY() uint
 	GroupCount() uint
-	PaddingPolicy() raw.MLCPaddingPolicy
+	PaddingPolicy() MLCPaddingPolicy
 	PaddingSizeInX() uint
 	PaddingSizeInY() uint
 	IsConvolutionTranspose() bool

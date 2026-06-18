@@ -40,8 +40,8 @@ func NewDateFormatterWithDateFormatAllowNaturalLanguage(format string, flag bool
 }
 
 // WithFormattingContext sets the formattingContext property and returns the receiver for chaining.
-func (x *DateFormatter) WithFormattingContext(formattingContext raw.NSFormattingContext) *DateFormatter {
-	x.inner.SetFormattingContext(formattingContext)
+func (x *DateFormatter) WithFormattingContext(formattingContext NSFormattingContext) *DateFormatter {
+	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
 	return x
 }
 
@@ -52,14 +52,14 @@ func (x *DateFormatter) WithDateFormat(dateFormat string) *DateFormatter {
 }
 
 // WithDateStyle sets the dateStyle property and returns the receiver for chaining.
-func (x *DateFormatter) WithDateStyle(dateStyle raw.NSDateFormatterStyle) *DateFormatter {
-	x.inner.SetDateStyle(dateStyle)
+func (x *DateFormatter) WithDateStyle(dateStyle NSDateFormatterStyle) *DateFormatter {
+	x.inner.SetDateStyle(raw.NSDateFormatterStyle(dateStyle))
 	return x
 }
 
 // WithTimeStyle sets the timeStyle property and returns the receiver for chaining.
-func (x *DateFormatter) WithTimeStyle(timeStyle raw.NSDateFormatterStyle) *DateFormatter {
-	x.inner.SetTimeStyle(timeStyle)
+func (x *DateFormatter) WithTimeStyle(timeStyle NSDateFormatterStyle) *DateFormatter {
+	x.inner.SetTimeStyle(raw.NSDateFormatterStyle(timeStyle))
 	return x
 }
 
@@ -76,8 +76,8 @@ func (x *DateFormatter) WithGeneratesCalendarDates(generatesCalendarDates bool) 
 }
 
 // WithFormatterBehavior sets the formatterBehavior property and returns the receiver for chaining.
-func (x *DateFormatter) WithFormatterBehavior(formatterBehavior raw.NSDateFormatterBehavior) *DateFormatter {
-	x.inner.SetFormatterBehavior(formatterBehavior)
+func (x *DateFormatter) WithFormatterBehavior(formatterBehavior NSDateFormatterBehavior) *DateFormatter {
+	x.inner.SetFormatterBehavior(raw.NSDateFormatterBehavior(formatterBehavior))
 	return x
 }
 
@@ -494,13 +494,13 @@ func (x *DateFormatter) SetLocalizedDateFormatFromTemplate(dateFormatTemplate st
 }
 
 // FormattingContext calls the underlying FormattingContext.
-func (x *DateFormatter) FormattingContext() raw.NSFormattingContext {
-	return x.inner.FormattingContext()
+func (x *DateFormatter) FormattingContext() NSFormattingContext {
+	return NSFormattingContext(x.inner.FormattingContext())
 }
 
 // SetFormattingContext calls the underlying SetFormattingContext.
-func (x *DateFormatter) SetFormattingContext(formattingContext raw.NSFormattingContext) {
-	x.inner.SetFormattingContext(formattingContext)
+func (x *DateFormatter) SetFormattingContext(formattingContext NSFormattingContext) {
+	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
 }
 
 // DateFormat calls the underlying DateFormat.
@@ -518,23 +518,23 @@ func (x *DateFormatter) SetDateFormat(dateFormat string) {
 }
 
 // DateStyle calls the underlying DateStyle.
-func (x *DateFormatter) DateStyle() raw.NSDateFormatterStyle {
-	return x.inner.DateStyle()
+func (x *DateFormatter) DateStyle() NSDateFormatterStyle {
+	return NSDateFormatterStyle(x.inner.DateStyle())
 }
 
 // SetDateStyle calls the underlying SetDateStyle.
-func (x *DateFormatter) SetDateStyle(dateStyle raw.NSDateFormatterStyle) {
-	x.inner.SetDateStyle(dateStyle)
+func (x *DateFormatter) SetDateStyle(dateStyle NSDateFormatterStyle) {
+	x.inner.SetDateStyle(raw.NSDateFormatterStyle(dateStyle))
 }
 
 // TimeStyle calls the underlying TimeStyle.
-func (x *DateFormatter) TimeStyle() raw.NSDateFormatterStyle {
-	return x.inner.TimeStyle()
+func (x *DateFormatter) TimeStyle() NSDateFormatterStyle {
+	return NSDateFormatterStyle(x.inner.TimeStyle())
 }
 
 // SetTimeStyle calls the underlying SetTimeStyle.
-func (x *DateFormatter) SetTimeStyle(timeStyle raw.NSDateFormatterStyle) {
-	x.inner.SetTimeStyle(timeStyle)
+func (x *DateFormatter) SetTimeStyle(timeStyle NSDateFormatterStyle) {
+	x.inner.SetTimeStyle(raw.NSDateFormatterStyle(timeStyle))
 }
 
 // Locale calls the underlying Locale.
@@ -562,13 +562,13 @@ func (x *DateFormatter) SetGeneratesCalendarDates(generatesCalendarDates bool) {
 }
 
 // FormatterBehavior calls the underlying FormatterBehavior.
-func (x *DateFormatter) FormatterBehavior() raw.NSDateFormatterBehavior {
-	return x.inner.FormatterBehavior()
+func (x *DateFormatter) FormatterBehavior() NSDateFormatterBehavior {
+	return NSDateFormatterBehavior(x.inner.FormatterBehavior())
 }
 
 // SetFormatterBehavior calls the underlying SetFormatterBehavior.
-func (x *DateFormatter) SetFormatterBehavior(formatterBehavior raw.NSDateFormatterBehavior) {
-	x.inner.SetFormatterBehavior(formatterBehavior)
+func (x *DateFormatter) SetFormatterBehavior(formatterBehavior NSDateFormatterBehavior) {
+	x.inner.SetFormatterBehavior(raw.NSDateFormatterBehavior(formatterBehavior))
 }
 
 // TimeZone calls the underlying TimeZone.
@@ -989,13 +989,13 @@ func (x *DateFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.N
 // DateFormatterable is the interface implemented by [DateFormatter], for mocking and DI.
 type DateFormatterable interface {
 	Unwrap() *raw.NSDateFormatter
-	WithFormattingContext(formattingContext raw.NSFormattingContext) *DateFormatter
+	WithFormattingContext(formattingContext NSFormattingContext) *DateFormatter
 	WithDateFormat(dateFormat string) *DateFormatter
-	WithDateStyle(dateStyle raw.NSDateFormatterStyle) *DateFormatter
-	WithTimeStyle(timeStyle raw.NSDateFormatterStyle) *DateFormatter
+	WithDateStyle(dateStyle NSDateFormatterStyle) *DateFormatter
+	WithTimeStyle(timeStyle NSDateFormatterStyle) *DateFormatter
 	WithLocale(locale *Locale) *DateFormatter
 	WithGeneratesCalendarDates(generatesCalendarDates bool) *DateFormatter
-	WithFormatterBehavior(formatterBehavior raw.NSDateFormatterBehavior) *DateFormatter
+	WithFormatterBehavior(formatterBehavior NSDateFormatterBehavior) *DateFormatter
 	WithTimeZone(timeZone *TimeZone) *DateFormatter
 	WithCalendar(calendar *Calendar) *DateFormatter
 	WithLenient(lenient bool) *DateFormatter
@@ -1028,20 +1028,20 @@ type DateFormatterable interface {
 	StringFromDate(date *raw.NSDate) *String
 	DateFromString(string_ string) *Date
 	SetLocalizedDateFormatFromTemplate(dateFormatTemplate string)
-	FormattingContext() raw.NSFormattingContext
-	SetFormattingContext(formattingContext raw.NSFormattingContext)
+	FormattingContext() NSFormattingContext
+	SetFormattingContext(formattingContext NSFormattingContext)
 	DateFormat() *String
 	SetDateFormat(dateFormat string)
-	DateStyle() raw.NSDateFormatterStyle
-	SetDateStyle(dateStyle raw.NSDateFormatterStyle)
-	TimeStyle() raw.NSDateFormatterStyle
-	SetTimeStyle(timeStyle raw.NSDateFormatterStyle)
+	DateStyle() NSDateFormatterStyle
+	SetDateStyle(dateStyle NSDateFormatterStyle)
+	TimeStyle() NSDateFormatterStyle
+	SetTimeStyle(timeStyle NSDateFormatterStyle)
 	Locale() *Locale
 	SetLocale(locale *raw.NSLocale)
 	GeneratesCalendarDates() bool
 	SetGeneratesCalendarDates(generatesCalendarDates bool)
-	FormatterBehavior() raw.NSDateFormatterBehavior
-	SetFormatterBehavior(formatterBehavior raw.NSDateFormatterBehavior)
+	FormatterBehavior() NSDateFormatterBehavior
+	SetFormatterBehavior(formatterBehavior NSDateFormatterBehavior)
 	TimeZone() *TimeZone
 	SetTimeZone(timeZone *raw.NSTimeZone)
 	Calendar() *Calendar

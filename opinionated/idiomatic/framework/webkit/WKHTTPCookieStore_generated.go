@@ -67,13 +67,13 @@ func (x *WKHTTPCookieStore) RemoveObserver(observer raw.WKHTTPCookieStoreObserve
 }
 
 // SetCookiePolicyCompletionHandler calls the underlying SetCookiePolicyCompletionHandler.
-func (x *WKHTTPCookieStore) SetCookiePolicyCompletionHandler(policy raw.WKCookiePolicy, completionHandler func()) {
-	x.inner.SetCookiePolicyCompletionHandler(policy, completionHandler)
+func (x *WKHTTPCookieStore) SetCookiePolicyCompletionHandler(policy WKCookiePolicy, completionHandler func()) {
+	x.inner.SetCookiePolicyCompletionHandler(raw.WKCookiePolicy(policy), completionHandler)
 }
 
 // GetCookiePolicy calls the underlying GetCookiePolicy.
-func (x *WKHTTPCookieStore) GetCookiePolicy(completionHandler func(raw.WKCookiePolicy)) {
-	x.inner.GetCookiePolicy(completionHandler)
+func (x *WKHTTPCookieStore) GetCookiePolicy(completionHandler func(WKCookiePolicy)) {
+	x.inner.GetCookiePolicy(func(_a0 raw.WKCookiePolicy) { completionHandler(WKCookiePolicy(_a0)) })
 }
 
 // WKHTTPCookieStoreable is the interface implemented by [WKHTTPCookieStore], for mocking and DI.
@@ -85,8 +85,8 @@ type WKHTTPCookieStoreable interface {
 	DeleteCookieCompletionHandler(cookie *foundation.NSHTTPCookie, completionHandler func())
 	AddObserver(observer raw.WKHTTPCookieStoreObserver)
 	RemoveObserver(observer raw.WKHTTPCookieStoreObserver)
-	SetCookiePolicyCompletionHandler(policy raw.WKCookiePolicy, completionHandler func())
-	GetCookiePolicy(completionHandler func(raw.WKCookiePolicy))
+	SetCookiePolicyCompletionHandler(policy WKCookiePolicy, completionHandler func())
+	GetCookiePolicy(completionHandler func(WKCookiePolicy))
 }
 
 var _ WKHTTPCookieStoreable = (*WKHTTPCookieStore)(nil)

@@ -38,8 +38,8 @@ func NewTextBlock() *TextBlock {
 }
 
 // WithVerticalAlignment sets the verticalAlignment property and returns the receiver for chaining.
-func (x *TextBlock) WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) *TextBlock {
-	x.inner.SetVerticalAlignment(verticalAlignment)
+func (x *TextBlock) WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextBlock {
+	x.inner.SetVerticalAlignment(raw.NSTextBlockVerticalAlignment(verticalAlignment))
 	return x
 }
 
@@ -50,43 +50,43 @@ func (x *TextBlock) WithBackgroundColor(backgroundColor *Color) *TextBlock {
 }
 
 // SetValueTypeForDimension calls the underlying SetValueTypeForDimension.
-func (x *TextBlock) SetValueTypeForDimension(val float64, type_ raw.NSTextBlockValueType, dimension raw.NSTextBlockDimension) {
-	x.inner.SetValueTypeForDimension(val, type_, dimension)
+func (x *TextBlock) SetValueTypeForDimension(val float64, type_ NSTextBlockValueType, dimension NSTextBlockDimension) {
+	x.inner.SetValueTypeForDimension(val, raw.NSTextBlockValueType(type_), raw.NSTextBlockDimension(dimension))
 }
 
 // ValueForDimension calls the underlying ValueForDimension.
-func (x *TextBlock) ValueForDimension(dimension raw.NSTextBlockDimension) float64 {
-	return x.inner.ValueForDimension(dimension)
+func (x *TextBlock) ValueForDimension(dimension NSTextBlockDimension) float64 {
+	return x.inner.ValueForDimension(raw.NSTextBlockDimension(dimension))
 }
 
 // ValueTypeForDimension calls the underlying ValueTypeForDimension.
-func (x *TextBlock) ValueTypeForDimension(dimension raw.NSTextBlockDimension) raw.NSTextBlockValueType {
-	return x.inner.ValueTypeForDimension(dimension)
+func (x *TextBlock) ValueTypeForDimension(dimension NSTextBlockDimension) NSTextBlockValueType {
+	return NSTextBlockValueType(x.inner.ValueTypeForDimension(raw.NSTextBlockDimension(dimension)))
 }
 
 // SetContentWidthType calls the underlying SetContentWidthType.
-func (x *TextBlock) SetContentWidthType(val float64, type_ raw.NSTextBlockValueType) {
-	x.inner.SetContentWidthType(val, type_)
+func (x *TextBlock) SetContentWidthType(val float64, type_ NSTextBlockValueType) {
+	x.inner.SetContentWidthType(val, raw.NSTextBlockValueType(type_))
 }
 
 // SetWidthTypeForLayerEdge calls the underlying SetWidthTypeForLayerEdge.
-func (x *TextBlock) SetWidthTypeForLayerEdge(val float64, type_ raw.NSTextBlockValueType, layer raw.NSTextBlockLayer, edge foundation.NSRectEdge) {
-	x.inner.SetWidthTypeForLayerEdge(val, type_, layer, edge)
+func (x *TextBlock) SetWidthTypeForLayerEdge(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer, edge foundation.NSRectEdge) {
+	x.inner.SetWidthTypeForLayerEdge(val, raw.NSTextBlockValueType(type_), raw.NSTextBlockLayer(layer), edge)
 }
 
 // SetWidthTypeForLayer calls the underlying SetWidthTypeForLayer.
-func (x *TextBlock) SetWidthTypeForLayer(val float64, type_ raw.NSTextBlockValueType, layer raw.NSTextBlockLayer) {
-	x.inner.SetWidthTypeForLayer(val, type_, layer)
+func (x *TextBlock) SetWidthTypeForLayer(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer) {
+	x.inner.SetWidthTypeForLayer(val, raw.NSTextBlockValueType(type_), raw.NSTextBlockLayer(layer))
 }
 
 // WidthForLayerEdge calls the underlying WidthForLayerEdge.
-func (x *TextBlock) WidthForLayerEdge(layer raw.NSTextBlockLayer, edge foundation.NSRectEdge) float64 {
-	return x.inner.WidthForLayerEdge(layer, edge)
+func (x *TextBlock) WidthForLayerEdge(layer NSTextBlockLayer, edge foundation.NSRectEdge) float64 {
+	return x.inner.WidthForLayerEdge(raw.NSTextBlockLayer(layer), edge)
 }
 
 // WidthValueTypeForLayerEdge calls the underlying WidthValueTypeForLayerEdge.
-func (x *TextBlock) WidthValueTypeForLayerEdge(layer raw.NSTextBlockLayer, edge foundation.NSRectEdge) raw.NSTextBlockValueType {
-	return x.inner.WidthValueTypeForLayerEdge(layer, edge)
+func (x *TextBlock) WidthValueTypeForLayerEdge(layer NSTextBlockLayer, edge foundation.NSRectEdge) NSTextBlockValueType {
+	return NSTextBlockValueType(x.inner.WidthValueTypeForLayerEdge(raw.NSTextBlockLayer(layer), edge))
 }
 
 // SetBorderColorForEdge calls the underlying SetBorderColorForEdge.
@@ -129,18 +129,18 @@ func (x *TextBlock) ContentWidth() float64 {
 }
 
 // ContentWidthValueType calls the underlying ContentWidthValueType.
-func (x *TextBlock) ContentWidthValueType() raw.NSTextBlockValueType {
-	return x.inner.ContentWidthValueType()
+func (x *TextBlock) ContentWidthValueType() NSTextBlockValueType {
+	return NSTextBlockValueType(x.inner.ContentWidthValueType())
 }
 
 // VerticalAlignment calls the underlying VerticalAlignment.
-func (x *TextBlock) VerticalAlignment() raw.NSTextBlockVerticalAlignment {
-	return x.inner.VerticalAlignment()
+func (x *TextBlock) VerticalAlignment() NSTextBlockVerticalAlignment {
+	return NSTextBlockVerticalAlignment(x.inner.VerticalAlignment())
 }
 
 // SetVerticalAlignment calls the underlying SetVerticalAlignment.
-func (x *TextBlock) SetVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) {
-	x.inner.SetVerticalAlignment(verticalAlignment)
+func (x *TextBlock) SetVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) {
+	x.inner.SetVerticalAlignment(raw.NSTextBlockVerticalAlignment(verticalAlignment))
 }
 
 // BackgroundColor calls the underlying BackgroundColor.
@@ -162,16 +162,16 @@ func (x *TextBlock) asTextBlock() *raw.NSTextBlock { return x.inner }
 // TextBlockable is the interface implemented by [TextBlock], for mocking and DI.
 type TextBlockable interface {
 	Unwrap() *raw.NSTextBlock
-	WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) *TextBlock
+	WithVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment) *TextBlock
 	WithBackgroundColor(backgroundColor *Color) *TextBlock
-	SetValueTypeForDimension(val float64, type_ raw.NSTextBlockValueType, dimension raw.NSTextBlockDimension)
-	ValueForDimension(dimension raw.NSTextBlockDimension) float64
-	ValueTypeForDimension(dimension raw.NSTextBlockDimension) raw.NSTextBlockValueType
-	SetContentWidthType(val float64, type_ raw.NSTextBlockValueType)
-	SetWidthTypeForLayerEdge(val float64, type_ raw.NSTextBlockValueType, layer raw.NSTextBlockLayer, edge foundation.NSRectEdge)
-	SetWidthTypeForLayer(val float64, type_ raw.NSTextBlockValueType, layer raw.NSTextBlockLayer)
-	WidthForLayerEdge(layer raw.NSTextBlockLayer, edge foundation.NSRectEdge) float64
-	WidthValueTypeForLayerEdge(layer raw.NSTextBlockLayer, edge foundation.NSRectEdge) raw.NSTextBlockValueType
+	SetValueTypeForDimension(val float64, type_ NSTextBlockValueType, dimension NSTextBlockDimension)
+	ValueForDimension(dimension NSTextBlockDimension) float64
+	ValueTypeForDimension(dimension NSTextBlockDimension) NSTextBlockValueType
+	SetContentWidthType(val float64, type_ NSTextBlockValueType)
+	SetWidthTypeForLayerEdge(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer, edge foundation.NSRectEdge)
+	SetWidthTypeForLayer(val float64, type_ NSTextBlockValueType, layer NSTextBlockLayer)
+	WidthForLayerEdge(layer NSTextBlockLayer, edge foundation.NSRectEdge) float64
+	WidthValueTypeForLayerEdge(layer NSTextBlockLayer, edge foundation.NSRectEdge) NSTextBlockValueType
 	SetBorderColorForEdge(color *raw.NSColor, edge foundation.NSRectEdge)
 	SetBorderColor(color *raw.NSColor)
 	BorderColorForEdge(edge foundation.NSRectEdge) *Color
@@ -179,9 +179,9 @@ type TextBlockable interface {
 	BoundsRectForContentRectInRectTextContainerCharacterRange(contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect
 	DrawBackgroundWithFrameInViewCharacterRangeLayoutManager(frameRect corefoundation.CGRect, controlView *raw.NSView, charRange foundation.NSRange, layoutManager *raw.NSLayoutManager)
 	ContentWidth() float64
-	ContentWidthValueType() raw.NSTextBlockValueType
-	VerticalAlignment() raw.NSTextBlockVerticalAlignment
-	SetVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment)
+	ContentWidthValueType() NSTextBlockValueType
+	VerticalAlignment() NSTextBlockVerticalAlignment
+	SetVerticalAlignment(verticalAlignment NSTextBlockVerticalAlignment)
 	BackgroundColor() *Color
 	SetBackgroundColor(backgroundColor *raw.NSColor)
 }

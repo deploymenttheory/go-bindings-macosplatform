@@ -86,8 +86,8 @@ func (x *Language) Manufacturer() uint {
 }
 
 // Features calls the underlying Features.
-func (x *Language) Features() raw.OSALanguageFeatures {
-	return x.inner.Features()
+func (x *Language) Features() OSALanguageFeatures {
+	return OSALanguageFeatures(x.inner.Features())
 }
 
 // IsThreadSafe calls the underlying IsThreadSafe.
@@ -105,7 +105,7 @@ type Languageable interface {
 	Type() uint
 	SubType() uint
 	Manufacturer() uint
-	Features() raw.OSALanguageFeatures
+	Features() OSALanguageFeatures
 	IsThreadSafe() bool
 }
 

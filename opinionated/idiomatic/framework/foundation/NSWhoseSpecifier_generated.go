@@ -51,8 +51,8 @@ func (x *WhoseSpecifier) WithTest(test ScriptWhoseTestProvider) *WhoseSpecifier 
 }
 
 // WithStartSubelementIdentifier sets the startSubelementIdentifier property and returns the receiver for chaining.
-func (x *WhoseSpecifier) WithStartSubelementIdentifier(startSubelementIdentifier raw.NSWhoseSubelementIdentifier) *WhoseSpecifier {
-	x.inner.SetStartSubelementIdentifier(startSubelementIdentifier)
+func (x *WhoseSpecifier) WithStartSubelementIdentifier(startSubelementIdentifier NSWhoseSubelementIdentifier) *WhoseSpecifier {
+	x.inner.SetStartSubelementIdentifier(raw.NSWhoseSubelementIdentifier(startSubelementIdentifier))
 	return x
 }
 
@@ -63,8 +63,8 @@ func (x *WhoseSpecifier) WithStartSubelementIndex(startSubelementIndex int) *Who
 }
 
 // WithEndSubelementIdentifier sets the endSubelementIdentifier property and returns the receiver for chaining.
-func (x *WhoseSpecifier) WithEndSubelementIdentifier(endSubelementIdentifier raw.NSWhoseSubelementIdentifier) *WhoseSpecifier {
-	x.inner.SetEndSubelementIdentifier(endSubelementIdentifier)
+func (x *WhoseSpecifier) WithEndSubelementIdentifier(endSubelementIdentifier NSWhoseSubelementIdentifier) *WhoseSpecifier {
+	x.inner.SetEndSubelementIdentifier(raw.NSWhoseSubelementIdentifier(endSubelementIdentifier))
 	return x
 }
 
@@ -137,13 +137,13 @@ func (x *WhoseSpecifier) SetTest(test *raw.NSScriptWhoseTest) {
 }
 
 // StartSubelementIdentifier calls the underlying StartSubelementIdentifier.
-func (x *WhoseSpecifier) StartSubelementIdentifier() raw.NSWhoseSubelementIdentifier {
-	return x.inner.StartSubelementIdentifier()
+func (x *WhoseSpecifier) StartSubelementIdentifier() NSWhoseSubelementIdentifier {
+	return NSWhoseSubelementIdentifier(x.inner.StartSubelementIdentifier())
 }
 
 // SetStartSubelementIdentifier calls the underlying SetStartSubelementIdentifier.
-func (x *WhoseSpecifier) SetStartSubelementIdentifier(startSubelementIdentifier raw.NSWhoseSubelementIdentifier) {
-	x.inner.SetStartSubelementIdentifier(startSubelementIdentifier)
+func (x *WhoseSpecifier) SetStartSubelementIdentifier(startSubelementIdentifier NSWhoseSubelementIdentifier) {
+	x.inner.SetStartSubelementIdentifier(raw.NSWhoseSubelementIdentifier(startSubelementIdentifier))
 }
 
 // StartSubelementIndex calls the underlying StartSubelementIndex.
@@ -157,13 +157,13 @@ func (x *WhoseSpecifier) SetStartSubelementIndex(startSubelementIndex int) {
 }
 
 // EndSubelementIdentifier calls the underlying EndSubelementIdentifier.
-func (x *WhoseSpecifier) EndSubelementIdentifier() raw.NSWhoseSubelementIdentifier {
-	return x.inner.EndSubelementIdentifier()
+func (x *WhoseSpecifier) EndSubelementIdentifier() NSWhoseSubelementIdentifier {
+	return NSWhoseSubelementIdentifier(x.inner.EndSubelementIdentifier())
 }
 
 // SetEndSubelementIdentifier calls the underlying SetEndSubelementIdentifier.
-func (x *WhoseSpecifier) SetEndSubelementIdentifier(endSubelementIdentifier raw.NSWhoseSubelementIdentifier) {
-	x.inner.SetEndSubelementIdentifier(endSubelementIdentifier)
+func (x *WhoseSpecifier) SetEndSubelementIdentifier(endSubelementIdentifier NSWhoseSubelementIdentifier) {
+	x.inner.SetEndSubelementIdentifier(raw.NSWhoseSubelementIdentifier(endSubelementIdentifier))
 }
 
 // EndSubelementIndex calls the underlying EndSubelementIndex.
@@ -186,9 +186,9 @@ func (x *WhoseSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObje
 type WhoseSpecifierable interface {
 	Unwrap() *raw.NSWhoseSpecifier
 	WithTest(test ScriptWhoseTestProvider) *WhoseSpecifier
-	WithStartSubelementIdentifier(startSubelementIdentifier raw.NSWhoseSubelementIdentifier) *WhoseSpecifier
+	WithStartSubelementIdentifier(startSubelementIdentifier NSWhoseSubelementIdentifier) *WhoseSpecifier
 	WithStartSubelementIndex(startSubelementIndex int) *WhoseSpecifier
-	WithEndSubelementIdentifier(endSubelementIdentifier raw.NSWhoseSubelementIdentifier) *WhoseSpecifier
+	WithEndSubelementIdentifier(endSubelementIdentifier NSWhoseSubelementIdentifier) *WhoseSpecifier
 	WithEndSubelementIndex(endSubelementIndex int) *WhoseSpecifier
 	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier
 	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier
@@ -200,12 +200,12 @@ type WhoseSpecifierable interface {
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *WhoseSpecifier
 	Test() *ScriptWhoseTest
 	SetTest(test *raw.NSScriptWhoseTest)
-	StartSubelementIdentifier() raw.NSWhoseSubelementIdentifier
-	SetStartSubelementIdentifier(startSubelementIdentifier raw.NSWhoseSubelementIdentifier)
+	StartSubelementIdentifier() NSWhoseSubelementIdentifier
+	SetStartSubelementIdentifier(startSubelementIdentifier NSWhoseSubelementIdentifier)
 	StartSubelementIndex() int
 	SetStartSubelementIndex(startSubelementIndex int)
-	EndSubelementIdentifier() raw.NSWhoseSubelementIdentifier
-	SetEndSubelementIdentifier(endSubelementIdentifier raw.NSWhoseSubelementIdentifier)
+	EndSubelementIdentifier() NSWhoseSubelementIdentifier
+	SetEndSubelementIdentifier(endSubelementIdentifier NSWhoseSubelementIdentifier)
 	EndSubelementIndex() int
 	SetEndSubelementIndex(endSubelementIndex int)
 }

@@ -40,8 +40,8 @@ func NewTabViewController() *TabViewController {
 }
 
 // WithTabStyle sets the tabStyle property and returns the receiver for chaining.
-func (x *TabViewController) WithTabStyle(tabStyle raw.NSTabViewControllerTabStyle) *TabViewController {
-	x.inner.SetTabStyle(tabStyle)
+func (x *TabViewController) WithTabStyle(tabStyle NSTabViewControllerTabStyle) *TabViewController {
+	x.inner.SetTabStyle(raw.NSTabViewControllerTabStyle(tabStyle))
 	return x
 }
 
@@ -52,8 +52,8 @@ func (x *TabViewController) WithTabView(tabView *TabView) *TabViewController {
 }
 
 // WithTransitionOptions sets the transitionOptions property and returns the receiver for chaining.
-func (x *TabViewController) WithTransitionOptions(transitionOptions raw.NSViewControllerTransitionOptions) *TabViewController {
-	x.inner.SetTransitionOptions(transitionOptions)
+func (x *TabViewController) WithTransitionOptions(transitionOptions NSViewControllerTransitionOptions) *TabViewController {
+	x.inner.SetTransitionOptions(raw.NSViewControllerTransitionOptions(transitionOptions))
 	return x
 }
 
@@ -229,13 +229,13 @@ func (x *TabViewController) ToolbarSelectableItemIdentifiers(toolbar *raw.NSTool
 }
 
 // TabStyle calls the underlying TabStyle.
-func (x *TabViewController) TabStyle() raw.NSTabViewControllerTabStyle {
-	return x.inner.TabStyle()
+func (x *TabViewController) TabStyle() NSTabViewControllerTabStyle {
+	return NSTabViewControllerTabStyle(x.inner.TabStyle())
 }
 
 // SetTabStyle calls the underlying SetTabStyle.
-func (x *TabViewController) SetTabStyle(tabStyle raw.NSTabViewControllerTabStyle) {
-	x.inner.SetTabStyle(tabStyle)
+func (x *TabViewController) SetTabStyle(tabStyle NSTabViewControllerTabStyle) {
+	x.inner.SetTabStyle(raw.NSTabViewControllerTabStyle(tabStyle))
 }
 
 // TabView calls the underlying TabView.
@@ -253,13 +253,13 @@ func (x *TabViewController) SetTabView(tabView *raw.NSTabView) {
 }
 
 // TransitionOptions calls the underlying TransitionOptions.
-func (x *TabViewController) TransitionOptions() raw.NSViewControllerTransitionOptions {
-	return x.inner.TransitionOptions()
+func (x *TabViewController) TransitionOptions() NSViewControllerTransitionOptions {
+	return NSViewControllerTransitionOptions(x.inner.TransitionOptions())
 }
 
 // SetTransitionOptions calls the underlying SetTransitionOptions.
-func (x *TabViewController) SetTransitionOptions(transitionOptions raw.NSViewControllerTransitionOptions) {
-	x.inner.SetTransitionOptions(transitionOptions)
+func (x *TabViewController) SetTransitionOptions(transitionOptions NSViewControllerTransitionOptions) {
+	x.inner.SetTransitionOptions(raw.NSViewControllerTransitionOptions(transitionOptions))
 }
 
 // CanPropagateSelectedChildViewControllerTitle calls the underlying CanPropagateSelectedChildViewControllerTitle.
@@ -309,9 +309,9 @@ func (x *TabViewController) asResponder() *raw.NSResponder {
 // TabViewControllerable is the interface implemented by [TabViewController], for mocking and DI.
 type TabViewControllerable interface {
 	Unwrap() *raw.NSTabViewController
-	WithTabStyle(tabStyle raw.NSTabViewControllerTabStyle) *TabViewController
+	WithTabStyle(tabStyle NSTabViewControllerTabStyle) *TabViewController
 	WithTabView(tabView *TabView) *TabViewController
-	WithTransitionOptions(transitionOptions raw.NSViewControllerTransitionOptions) *TabViewController
+	WithTransitionOptions(transitionOptions NSViewControllerTransitionOptions) *TabViewController
 	WithCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle bool) *TabViewController
 	WithTabViewItems(items ...*raw.NSTabViewItem) *TabViewController
 	WithSelectedTabViewItemIndex(selectedTabViewItemIndex int) *TabViewController
@@ -337,12 +337,12 @@ type TabViewControllerable interface {
 	ToolbarDefaultItemIdentifiers(toolbar *raw.NSToolbar) *foundation.NSArray[*foundation.NSString]
 	ToolbarAllowedItemIdentifiers(toolbar *raw.NSToolbar) *foundation.NSArray[*foundation.NSString]
 	ToolbarSelectableItemIdentifiers(toolbar *raw.NSToolbar) *foundation.NSArray[*foundation.NSString]
-	TabStyle() raw.NSTabViewControllerTabStyle
-	SetTabStyle(tabStyle raw.NSTabViewControllerTabStyle)
+	TabStyle() NSTabViewControllerTabStyle
+	SetTabStyle(tabStyle NSTabViewControllerTabStyle)
 	TabView() *TabView
 	SetTabView(tabView *raw.NSTabView)
-	TransitionOptions() raw.NSViewControllerTransitionOptions
-	SetTransitionOptions(transitionOptions raw.NSViewControllerTransitionOptions)
+	TransitionOptions() NSViewControllerTransitionOptions
+	SetTransitionOptions(transitionOptions NSViewControllerTransitionOptions)
 	CanPropagateSelectedChildViewControllerTitle() bool
 	SetCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle bool)
 	TabViewItems() []*TabViewItem

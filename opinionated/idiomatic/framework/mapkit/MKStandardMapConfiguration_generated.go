@@ -36,29 +36,29 @@ func NewStandardMapConfiguration() *StandardMapConfiguration {
 }
 
 // NewStandardMapConfigurationWithElevationStyle creates a new [StandardMapConfiguration].
-func NewStandardMapConfigurationWithElevationStyle(elevationStyle raw.MKMapElevationStyle) *StandardMapConfiguration {
+func NewStandardMapConfigurationWithElevationStyle(elevationStyle MKMapElevationStyle) *StandardMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), elevationStyle)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), raw.MKMapElevationStyle(elevationStyle))
 	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
 }
 
 // NewStandardMapConfigurationWithElevationStyleEmphasisStyle creates a new [StandardMapConfiguration].
-func NewStandardMapConfigurationWithElevationStyleEmphasisStyle(elevationStyle raw.MKMapElevationStyle, emphasisStyle raw.MKStandardMapEmphasisStyle) *StandardMapConfiguration {
+func NewStandardMapConfigurationWithElevationStyleEmphasisStyle(elevationStyle MKMapElevationStyle, emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:emphasisStyle:"), elevationStyle, emphasisStyle)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:emphasisStyle:"), raw.MKMapElevationStyle(elevationStyle), raw.MKStandardMapEmphasisStyle(emphasisStyle))
 	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
 }
 
 // NewStandardMapConfigurationWithEmphasisStyle creates a new [StandardMapConfiguration].
-func NewStandardMapConfigurationWithEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle) *StandardMapConfiguration {
+func NewStandardMapConfigurationWithEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEmphasisStyle:"), emphasisStyle)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEmphasisStyle:"), raw.MKStandardMapEmphasisStyle(emphasisStyle))
 	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
 }
 
 // WithEmphasisStyle sets the emphasisStyle property and returns the receiver for chaining.
-func (x *StandardMapConfiguration) WithEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle) *StandardMapConfiguration {
-	x.inner.SetEmphasisStyle(emphasisStyle)
+func (x *StandardMapConfiguration) WithEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration {
+	x.inner.SetEmphasisStyle(raw.MKStandardMapEmphasisStyle(emphasisStyle))
 	return x
 }
 
@@ -75,19 +75,19 @@ func (x *StandardMapConfiguration) WithShowsTraffic(showsTraffic bool) *Standard
 }
 
 // WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
-func (x *StandardMapConfiguration) WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *StandardMapConfiguration {
-	x.inner.MKMapConfiguration.SetElevationStyle(elevationStyle)
+func (x *StandardMapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *StandardMapConfiguration {
+	x.inner.MKMapConfiguration.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))
 	return x
 }
 
 // EmphasisStyle calls the underlying EmphasisStyle.
-func (x *StandardMapConfiguration) EmphasisStyle() raw.MKStandardMapEmphasisStyle {
-	return x.inner.EmphasisStyle()
+func (x *StandardMapConfiguration) EmphasisStyle() MKStandardMapEmphasisStyle {
+	return MKStandardMapEmphasisStyle(x.inner.EmphasisStyle())
 }
 
 // SetEmphasisStyle calls the underlying SetEmphasisStyle.
-func (x *StandardMapConfiguration) SetEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle) {
-	x.inner.SetEmphasisStyle(emphasisStyle)
+func (x *StandardMapConfiguration) SetEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) {
+	x.inner.SetEmphasisStyle(raw.MKStandardMapEmphasisStyle(emphasisStyle))
 }
 
 // PointOfInterestFilter calls the underlying PointOfInterestFilter.
@@ -121,12 +121,12 @@ func (x *StandardMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration 
 // StandardMapConfigurationable is the interface implemented by [StandardMapConfiguration], for mocking and DI.
 type StandardMapConfigurationable interface {
 	Unwrap() *raw.MKStandardMapConfiguration
-	WithEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle) *StandardMapConfiguration
+	WithEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration
 	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration
 	WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration
-	WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *StandardMapConfiguration
-	EmphasisStyle() raw.MKStandardMapEmphasisStyle
-	SetEmphasisStyle(emphasisStyle raw.MKStandardMapEmphasisStyle)
+	WithElevationStyle(elevationStyle MKMapElevationStyle) *StandardMapConfiguration
+	EmphasisStyle() MKStandardMapEmphasisStyle
+	SetEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle)
 	PointOfInterestFilter() *PointOfInterestFilter
 	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
 	ShowsTraffic() bool

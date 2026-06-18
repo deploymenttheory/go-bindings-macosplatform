@@ -91,11 +91,13 @@ func SupportedLocales() *foundation.NSSet[*foundation.NSLocale] {
 }
 
 // AuthorizationStatusClass calls the underlying SFSpeechRecognizerAuthorizationStatusClass.
-func AuthorizationStatusClass() raw.SFSpeechRecognizerAuthorizationStatus {
-	return raw.SFSpeechRecognizerAuthorizationStatusClass()
+func AuthorizationStatusClass() SFSpeechRecognizerAuthorizationStatus {
+	return SFSpeechRecognizerAuthorizationStatus(raw.SFSpeechRecognizerAuthorizationStatusClass())
 }
 
 // RequestAuthorization calls the underlying SFSpeechRecognizerRequestAuthorization.
-func RequestAuthorization(handler func(raw.SFSpeechRecognizerAuthorizationStatus)) {
-	raw.SFSpeechRecognizerRequestAuthorization(handler)
+func RequestAuthorization(handler func(SFSpeechRecognizerAuthorizationStatus)) {
+	raw.SFSpeechRecognizerRequestAuthorization(func(_a0 raw.SFSpeechRecognizerAuthorizationStatus) {
+		handler(SFSpeechRecognizerAuthorizationStatus(_a0))
+	})
 }

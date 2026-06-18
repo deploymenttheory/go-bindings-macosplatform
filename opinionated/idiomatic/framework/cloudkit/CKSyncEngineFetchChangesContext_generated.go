@@ -36,8 +36,8 @@ func NewSyncEngineFetchChangesContext() *SyncEngineFetchChangesContext {
 }
 
 // Reason calls the underlying Reason.
-func (x *SyncEngineFetchChangesContext) Reason() raw.CKSyncEngineSyncReason {
-	return x.inner.Reason()
+func (x *SyncEngineFetchChangesContext) Reason() CKSyncEngineSyncReason {
+	return CKSyncEngineSyncReason(x.inner.Reason())
 }
 
 // Options calls the underlying Options.
@@ -52,7 +52,7 @@ func (x *SyncEngineFetchChangesContext) Options() *SyncEngineFetchChangesOptions
 // SyncEngineFetchChangesContextable is the interface implemented by [SyncEngineFetchChangesContext], for mocking and DI.
 type SyncEngineFetchChangesContextable interface {
 	Unwrap() *raw.CKSyncEngineFetchChangesContext
-	Reason() raw.CKSyncEngineSyncReason
+	Reason() CKSyncEngineSyncReason
 	Options() *SyncEngineFetchChangesOptions
 }
 

@@ -37,8 +37,8 @@ func NewMotionActivity() *MotionActivity {
 }
 
 // Confidence calls the underlying Confidence.
-func (x *MotionActivity) Confidence() raw.CMMotionActivityConfidence {
-	return x.inner.Confidence()
+func (x *MotionActivity) Confidence() CMMotionActivityConfidence {
+	return CMMotionActivityConfidence(x.inner.Confidence())
 }
 
 // StartDate calls the underlying StartDate.
@@ -76,7 +76,7 @@ func (x *MotionActivity) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem 
 // MotionActivityable is the interface implemented by [MotionActivity], for mocking and DI.
 type MotionActivityable interface {
 	Unwrap() *raw.CMMotionActivity
-	Confidence() raw.CMMotionActivityConfidence
+	Confidence() CMMotionActivityConfidence
 	StartDate() *foundation.NSDate
 	Unknown() bool
 	Stationary() bool

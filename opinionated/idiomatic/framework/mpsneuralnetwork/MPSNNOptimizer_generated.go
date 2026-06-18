@@ -88,8 +88,8 @@ func (x *NNOptimizer) RegularizationScale() float32 {
 }
 
 // RegularizationType calls the underlying RegularizationType.
-func (x *NNOptimizer) RegularizationType() raw.MPSNNRegularizationType {
-	return x.inner.RegularizationType()
+func (x *NNOptimizer) RegularizationType() MPSNNRegularizationType {
+	return MPSNNRegularizationType(x.inner.RegularizationType())
 }
 
 func (x *NNOptimizer) asNNOptimizer() *raw.MPSNNOptimizer { return x.inner }
@@ -107,7 +107,7 @@ type NNOptimizerable interface {
 	GradientClipMax() float32
 	GradientClipMin() float32
 	RegularizationScale() float32
-	RegularizationType() raw.MPSNNRegularizationType
+	RegularizationType() MPSNNRegularizationType
 }
 
 var _ NNOptimizerable = (*NNOptimizer)(nil)

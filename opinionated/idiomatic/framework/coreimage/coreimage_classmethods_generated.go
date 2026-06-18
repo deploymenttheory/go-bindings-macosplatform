@@ -660,8 +660,8 @@ func ContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext(index uint, color
 }
 
 // DescriptorWithPayloadRowCountColumnCountEccVersion calls the underlying CIDataMatrixCodeDescriptorDescriptorWithPayloadRowCountColumnCountEccVersion.
-func DescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion raw.CIDataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
-	_r := raw.CIDataMatrixCodeDescriptorDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload, rowCount, columnCount, eccVersion)
+func DescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion CIDataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {
+	_r := raw.CIDataMatrixCodeDescriptorDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload, rowCount, columnCount, raw.CIDataMatrixCodeECCVersion(eccVersion))
 	if _r == nil {
 		return nil
 	}
@@ -1322,8 +1322,8 @@ func LoadNonExecutablePlugIn(url string) {
 }
 
 // DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel calls the underlying CIQRCodeDescriptorDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel.
-func DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel raw.CIQRCodeErrorCorrectionLevel) *QRCodeDescriptor {
-	_r := raw.CIQRCodeDescriptorDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload, symbolVersion, maskPattern, errorCorrectionLevel)
+func DescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel CIQRCodeErrorCorrectionLevel) *QRCodeDescriptor {
+	_r := raw.CIQRCodeDescriptorDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload, symbolVersion, maskPattern, raw.CIQRCodeErrorCorrectionLevel(errorCorrectionLevel))
 	if _r == nil {
 		return nil
 	}

@@ -68,8 +68,8 @@ func (x *Route) ExpectedTravelTime() float64 {
 }
 
 // TransportType calls the underlying TransportType.
-func (x *Route) TransportType() raw.MKDirectionsTransportType {
-	return x.inner.TransportType()
+func (x *Route) TransportType() MKDirectionsTransportType {
+	return MKDirectionsTransportType(x.inner.TransportType())
 }
 
 // Polyline calls the underlying Polyline.
@@ -109,7 +109,7 @@ type Routeable interface {
 	AdvisoryNotices() []string
 	Distance() unsafe.Pointer
 	ExpectedTravelTime() float64
-	TransportType() raw.MKDirectionsTransportType
+	TransportType() MKDirectionsTransportType
 	Polyline() *Polyline
 	Steps() []*RouteStep
 	HasTolls() bool

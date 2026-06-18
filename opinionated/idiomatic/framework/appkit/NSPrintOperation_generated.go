@@ -75,8 +75,8 @@ func (x *PrintOperation) WithCanSpawnSeparateThread(canSpawnSeparateThread bool)
 }
 
 // WithPageOrder sets the pageOrder property and returns the receiver for chaining.
-func (x *PrintOperation) WithPageOrder(pageOrder raw.NSPrintingPageOrder) *PrintOperation {
-	x.inner.SetPageOrder(pageOrder)
+func (x *PrintOperation) WithPageOrder(pageOrder NSPrintingPageOrder) *PrintOperation {
+	x.inner.SetPageOrder(raw.NSPrintingPageOrder(pageOrder))
 	return x
 }
 
@@ -126,8 +126,8 @@ func (x *PrintOperation) IsCopyingOperation() bool {
 }
 
 // PreferredRenderingQuality calls the underlying PreferredRenderingQuality.
-func (x *PrintOperation) PreferredRenderingQuality() raw.NSPrintRenderingQuality {
-	return x.inner.PreferredRenderingQuality()
+func (x *PrintOperation) PreferredRenderingQuality() NSPrintRenderingQuality {
+	return NSPrintRenderingQuality(x.inner.PreferredRenderingQuality())
 }
 
 // JobTitle calls the underlying JobTitle.
@@ -203,13 +203,13 @@ func (x *PrintOperation) SetCanSpawnSeparateThread(canSpawnSeparateThread bool) 
 }
 
 // PageOrder calls the underlying PageOrder.
-func (x *PrintOperation) PageOrder() raw.NSPrintingPageOrder {
-	return x.inner.PageOrder()
+func (x *PrintOperation) PageOrder() NSPrintingPageOrder {
+	return NSPrintingPageOrder(x.inner.PageOrder())
 }
 
 // SetPageOrder calls the underlying SetPageOrder.
-func (x *PrintOperation) SetPageOrder(pageOrder raw.NSPrintingPageOrder) {
-	x.inner.SetPageOrder(pageOrder)
+func (x *PrintOperation) SetPageOrder(pageOrder NSPrintingPageOrder) {
+	x.inner.SetPageOrder(raw.NSPrintingPageOrder(pageOrder))
 }
 
 // View calls the underlying View.
@@ -301,7 +301,7 @@ type PrintOperationable interface {
 	WithPrintPanel(printPanel *PrintPanel) *PrintOperation
 	WithPDFPanel(pDFPanel *PDFPanel) *PrintOperation
 	WithCanSpawnSeparateThread(canSpawnSeparateThread bool) *PrintOperation
-	WithPageOrder(pageOrder raw.NSPrintingPageOrder) *PrintOperation
+	WithPageOrder(pageOrder NSPrintingPageOrder) *PrintOperation
 	WithPrintInfo(printInfo *PrintInfo) *PrintOperation
 	RunOperationModalForWindowDelegateDidRunSelectorContextInfo(docWindow *raw.NSWindow, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer)
 	RunOperation() bool
@@ -310,7 +310,7 @@ type PrintOperationable interface {
 	DeliverResult() bool
 	CleanUpOperation()
 	IsCopyingOperation() bool
-	PreferredRenderingQuality() raw.NSPrintRenderingQuality
+	PreferredRenderingQuality() NSPrintRenderingQuality
 	JobTitle() string
 	SetJobTitle(jobTitle string)
 	ShowsPrintPanel() bool
@@ -323,8 +323,8 @@ type PrintOperationable interface {
 	SetPDFPanel(pDFPanel *raw.NSPDFPanel)
 	CanSpawnSeparateThread() bool
 	SetCanSpawnSeparateThread(canSpawnSeparateThread bool)
-	PageOrder() raw.NSPrintingPageOrder
-	SetPageOrder(pageOrder raw.NSPrintingPageOrder)
+	PageOrder() NSPrintingPageOrder
+	SetPageOrder(pageOrder NSPrintingPageOrder)
 	View() *View
 	PrintInfo() *PrintInfo
 	SetPrintInfo(printInfo *raw.NSPrintInfo)

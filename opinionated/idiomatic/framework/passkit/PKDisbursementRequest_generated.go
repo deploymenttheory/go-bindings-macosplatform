@@ -33,9 +33,9 @@ func DisbursementRequestFromID(id objc.ID) *DisbursementRequest {
 }
 
 // NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems creates a new [DisbursementRequest].
-func NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems(merchantIdentifier string, currencyCode string, regionCode string, supportedNetworks *foundation.NSArray[*foundation.NSString], merchantCapabilities raw.PKMerchantCapability, summaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) *DisbursementRequest {
+func NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems(merchantIdentifier string, currencyCode string, regionCode string, supportedNetworks *foundation.NSArray[*foundation.NSString], merchantCapabilities PKMerchantCapability, summaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) *DisbursementRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDisbursementRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMerchantIdentifier:currencyCode:regionCode:supportedNetworks:merchantCapabilities:summaryItems:"), foundation.NSStringStringWithUTF8String(merchantIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(currencyCode).Ptr(), foundation.NSStringStringWithUTF8String(regionCode).Ptr(), supportedNetworks.Ptr(), merchantCapabilities, summaryItems.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMerchantIdentifier:currencyCode:regionCode:supportedNetworks:merchantCapabilities:summaryItems:"), foundation.NSStringStringWithUTF8String(merchantIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(currencyCode).Ptr(), foundation.NSStringStringWithUTF8String(regionCode).Ptr(), supportedNetworks.Ptr(), raw.PKMerchantCapability(merchantCapabilities), summaryItems.Ptr())
 	return &DisbursementRequest{inner: raw.PKDisbursementRequestFromID(_id)}
 }
 
@@ -70,8 +70,8 @@ func (x *DisbursementRequest) WithSupportedNetworks(items ...*foundation.NSStrin
 }
 
 // WithMerchantCapabilities sets the merchantCapabilities property and returns the receiver for chaining.
-func (x *DisbursementRequest) WithMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability) *DisbursementRequest {
-	x.inner.SetMerchantCapabilities(merchantCapabilities)
+func (x *DisbursementRequest) WithMerchantCapabilities(merchantCapabilities PKMerchantCapability) *DisbursementRequest {
+	x.inner.SetMerchantCapabilities(raw.PKMerchantCapability(merchantCapabilities))
 	return x
 }
 
@@ -198,13 +198,13 @@ func (x *DisbursementRequest) SetSupportedNetworks(supportedNetworks *foundation
 }
 
 // MerchantCapabilities calls the underlying MerchantCapabilities.
-func (x *DisbursementRequest) MerchantCapabilities() raw.PKMerchantCapability {
-	return x.inner.MerchantCapabilities()
+func (x *DisbursementRequest) MerchantCapabilities() PKMerchantCapability {
+	return PKMerchantCapability(x.inner.MerchantCapabilities())
 }
 
 // SetMerchantCapabilities calls the underlying SetMerchantCapabilities.
-func (x *DisbursementRequest) SetMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability) {
-	x.inner.SetMerchantCapabilities(merchantCapabilities)
+func (x *DisbursementRequest) SetMerchantCapabilities(merchantCapabilities PKMerchantCapability) {
+	x.inner.SetMerchantCapabilities(raw.PKMerchantCapability(merchantCapabilities))
 }
 
 // SummaryItems returns the collection as a Go slice.
@@ -309,7 +309,7 @@ type DisbursementRequestable interface {
 	WithMerchantIdentifier(merchantIdentifier string) *DisbursementRequest
 	WithRegionCode(regionCode string) *DisbursementRequest
 	WithSupportedNetworks(items ...*foundation.NSString) *DisbursementRequest
-	WithMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability) *DisbursementRequest
+	WithMerchantCapabilities(merchantCapabilities PKMerchantCapability) *DisbursementRequest
 	WithSummaryItems(items ...PaymentSummaryItemProvider) *DisbursementRequest
 	WithCurrencyCode(currencyCode string) *DisbursementRequest
 	WithRequiredRecipientContactFields(items ...*foundation.NSString) *DisbursementRequest
@@ -323,8 +323,8 @@ type DisbursementRequestable interface {
 	SetRegionCode(regionCode string)
 	SupportedNetworks() []*foundation.NSString
 	SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString])
-	MerchantCapabilities() raw.PKMerchantCapability
-	SetMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability)
+	MerchantCapabilities() PKMerchantCapability
+	SetMerchantCapabilities(merchantCapabilities PKMerchantCapability)
 	SummaryItems() []*PaymentSummaryItem
 	SetSummaryItems(summaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem])
 	CurrencyCode() string

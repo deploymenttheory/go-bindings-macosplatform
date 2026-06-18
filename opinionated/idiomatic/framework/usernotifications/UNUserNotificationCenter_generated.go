@@ -46,8 +46,8 @@ func (x *UserNotificationCenter) WithDelegate(delegate raw.UNUserNotificationCen
 }
 
 // RequestAuthorizationWithOptionsCompletionHandler calls the underlying RequestAuthorizationWithOptionsCompletionHandler.
-func (x *UserNotificationCenter) RequestAuthorizationWithOptionsCompletionHandler(options raw.UNAuthorizationOptions, completionHandler func(bool, unsafe.Pointer)) {
-	x.inner.RequestAuthorizationWithOptionsCompletionHandler(options, completionHandler)
+func (x *UserNotificationCenter) RequestAuthorizationWithOptionsCompletionHandler(options UNAuthorizationOptions, completionHandler func(bool, unsafe.Pointer)) {
+	x.inner.RequestAuthorizationWithOptionsCompletionHandler(raw.UNAuthorizationOptions(options), completionHandler)
 }
 
 // SetNotificationCategories calls the underlying SetNotificationCategories.
@@ -216,7 +216,7 @@ func (x *UserNotificationCenter) SupportsContentExtensions() bool {
 type UserNotificationCenterable interface {
 	Unwrap() *raw.UNUserNotificationCenter
 	WithDelegate(delegate raw.UNUserNotificationCenterDelegate) *UserNotificationCenter
-	RequestAuthorizationWithOptionsCompletionHandler(options raw.UNAuthorizationOptions, completionHandler func(bool, unsafe.Pointer))
+	RequestAuthorizationWithOptionsCompletionHandler(options UNAuthorizationOptions, completionHandler func(bool, unsafe.Pointer))
 	SetNotificationCategories(categories *foundation.NSSet[*raw.UNNotificationCategory])
 	GetNotificationCategories(ctx context.Context) (*foundation.NSSet[*raw.UNNotificationCategory], error)
 	GetNotificationSettings(ctx context.Context) (*NotificationSettings, error)

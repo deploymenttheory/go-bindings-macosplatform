@@ -39,9 +39,9 @@ func NewEventStore() *EventStore {
 }
 
 // NewEventStoreWithAccessToEntityTypes creates a new [EventStore].
-func NewEventStoreWithAccessToEntityTypes(entityTypes raw.EKEntityMask) *EventStore {
+func NewEventStoreWithAccessToEntityTypes(entityTypes EKEntityMask) *EventStore {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKEventStore")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccessToEntityTypes:"), entityTypes)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccessToEntityTypes:"), raw.EKEntityMask(entityTypes))
 	return &EventStore{inner: raw.EKEventStoreFromID(_id)}
 }
 
@@ -68,8 +68,8 @@ func (x *EventStore) RequestFullAccessToRemindersWithCompletion(completion func(
 }
 
 // RequestAccessToEntityTypeCompletion calls the underlying RequestAccessToEntityTypeCompletion.
-func (x *EventStore) RequestAccessToEntityTypeCompletion(entityType raw.EKEntityType, completion func(bool, unsafe.Pointer)) {
-	x.inner.RequestAccessToEntityTypeCompletion(entityType, completion)
+func (x *EventStore) RequestAccessToEntityTypeCompletion(entityType EKEntityType, completion func(bool, unsafe.Pointer)) {
+	x.inner.RequestAccessToEntityTypeCompletion(raw.EKEntityType(entityType), completion)
 }
 
 // SourceWithIdentifier calls the underlying SourceWithIdentifier.
@@ -82,8 +82,8 @@ func (x *EventStore) SourceWithIdentifier(identifier string) *Source {
 }
 
 // CalendarsForEntityType calls the underlying CalendarsForEntityType.
-func (x *EventStore) CalendarsForEntityType(entityType raw.EKEntityType) *foundation.NSArray[*raw.EKCalendar] {
-	return x.inner.CalendarsForEntityType(entityType)
+func (x *EventStore) CalendarsForEntityType(entityType EKEntityType) *foundation.NSArray[*raw.EKCalendar] {
+	return x.inner.CalendarsForEntityType(raw.EKEntityType(entityType))
 }
 
 // DefaultCalendarForNewReminders calls the underlying DefaultCalendarForNewReminders.
@@ -129,23 +129,23 @@ func (x *EventStore) CalendarItemsWithExternalIdentifier(externalIdentifier stri
 }
 
 // SaveEventSpanError calls the underlying SaveEventSpanError.
-func (x *EventStore) SaveEventSpanError(event *raw.EKEvent, span raw.EKSpan) (bool, error) {
-	return x.inner.SaveEventSpanError(event, span)
+func (x *EventStore) SaveEventSpanError(event *raw.EKEvent, span EKSpan) (bool, error) {
+	return x.inner.SaveEventSpanError(event, raw.EKSpan(span))
 }
 
 // RemoveEventSpanError calls the underlying RemoveEventSpanError.
-func (x *EventStore) RemoveEventSpanError(event *raw.EKEvent, span raw.EKSpan) (bool, error) {
-	return x.inner.RemoveEventSpanError(event, span)
+func (x *EventStore) RemoveEventSpanError(event *raw.EKEvent, span EKSpan) (bool, error) {
+	return x.inner.RemoveEventSpanError(event, raw.EKSpan(span))
 }
 
 // SaveEventSpanCommitError calls the underlying SaveEventSpanCommitError.
-func (x *EventStore) SaveEventSpanCommitError(event *raw.EKEvent, span raw.EKSpan, commit bool) (bool, error) {
-	return x.inner.SaveEventSpanCommitError(event, span, commit)
+func (x *EventStore) SaveEventSpanCommitError(event *raw.EKEvent, span EKSpan, commit bool) (bool, error) {
+	return x.inner.SaveEventSpanCommitError(event, raw.EKSpan(span), commit)
 }
 
 // RemoveEventSpanCommitError calls the underlying RemoveEventSpanCommitError.
-func (x *EventStore) RemoveEventSpanCommitError(event *raw.EKEvent, span raw.EKSpan, commit bool) (bool, error) {
-	return x.inner.RemoveEventSpanCommitError(event, span, commit)
+func (x *EventStore) RemoveEventSpanCommitError(event *raw.EKEvent, span EKSpan, commit bool) (bool, error) {
+	return x.inner.RemoveEventSpanCommitError(event, raw.EKSpan(span), commit)
 }
 
 // EventWithIdentifier calls the underlying EventWithIdentifier.
@@ -269,19 +269,19 @@ type EventStoreable interface {
 	RequestFullAccessToEventsWithCompletion(completion func(bool, unsafe.Pointer))
 	RequestWriteOnlyAccessToEventsWithCompletion(completion func(bool, unsafe.Pointer))
 	RequestFullAccessToRemindersWithCompletion(completion func(bool, unsafe.Pointer))
-	RequestAccessToEntityTypeCompletion(entityType raw.EKEntityType, completion func(bool, unsafe.Pointer))
+	RequestAccessToEntityTypeCompletion(entityType EKEntityType, completion func(bool, unsafe.Pointer))
 	SourceWithIdentifier(identifier string) *Source
-	CalendarsForEntityType(entityType raw.EKEntityType) *foundation.NSArray[*raw.EKCalendar]
+	CalendarsForEntityType(entityType EKEntityType) *foundation.NSArray[*raw.EKCalendar]
 	DefaultCalendarForNewReminders() *Calendar
 	CalendarWithIdentifier(identifier string) *Calendar
 	SaveCalendarCommitError(calendar *raw.EKCalendar, commit bool) (bool, error)
 	RemoveCalendarCommitError(calendar *raw.EKCalendar, commit bool) (bool, error)
 	CalendarItemWithIdentifier(identifier string) *CalendarItem
 	CalendarItemsWithExternalIdentifier(externalIdentifier string) *foundation.NSArray[*raw.EKCalendarItem]
-	SaveEventSpanError(event *raw.EKEvent, span raw.EKSpan) (bool, error)
-	RemoveEventSpanError(event *raw.EKEvent, span raw.EKSpan) (bool, error)
-	SaveEventSpanCommitError(event *raw.EKEvent, span raw.EKSpan, commit bool) (bool, error)
-	RemoveEventSpanCommitError(event *raw.EKEvent, span raw.EKSpan, commit bool) (bool, error)
+	SaveEventSpanError(event *raw.EKEvent, span EKSpan) (bool, error)
+	RemoveEventSpanError(event *raw.EKEvent, span EKSpan) (bool, error)
+	SaveEventSpanCommitError(event *raw.EKEvent, span EKSpan, commit bool) (bool, error)
+	RemoveEventSpanCommitError(event *raw.EKEvent, span EKSpan, commit bool) (bool, error)
 	EventWithIdentifier(identifier string) *Event
 	EventsMatchingPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*raw.EKEvent]
 	EnumerateEventsMatchingPredicateUsing(predicate *foundation.NSPredicate, block func(*raw.EKEvent, *bool))

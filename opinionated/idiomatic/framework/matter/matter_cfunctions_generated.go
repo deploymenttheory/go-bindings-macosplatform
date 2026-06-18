@@ -11,13 +11,13 @@ import (
 )
 
 // MTRAttributeNameForID calls [raw.MTRAttributeNameForID] (C function MTRAttributeNameForID).
-func MTRAttributeNameForID(clusterID raw.MTRClusterIDType, attributeID raw.MTRAttributeIDType) *foundation.NSString {
-	return raw.MTRAttributeNameForID(clusterID, attributeID)
+func MTRAttributeNameForID(clusterID MTRClusterIDType, attributeID MTRAttributeIDType) *foundation.NSString {
+	return raw.MTRAttributeNameForID(raw.MTRClusterIDType(clusterID), raw.MTRAttributeIDType(attributeID))
 }
 
 // MTRClusterNameForID calls [raw.MTRClusterNameForID] (C function MTRClusterNameForID).
-func MTRClusterNameForID(clusterID raw.MTRClusterIDType) *foundation.NSString {
-	return raw.MTRClusterNameForID(clusterID)
+func MTRClusterNameForID(clusterID MTRClusterIDType) *foundation.NSString {
+	return raw.MTRClusterNameForID(raw.MTRClusterIDType(clusterID))
 }
 
 // MTRDeviceControllerStorageClasses calls [raw.MTRDeviceControllerStorageClasses] (C function MTRDeviceControllerStorageClasses).
@@ -26,23 +26,25 @@ func MTRDeviceControllerStorageClasses() *foundation.NSSet[objc.Class] {
 }
 
 // MTREventNameForID calls [raw.MTREventNameForID] (C function MTREventNameForID).
-func MTREventNameForID(clusterID raw.MTRClusterIDType, eventID raw.MTREventIDType) *foundation.NSString {
-	return raw.MTREventNameForID(clusterID, eventID)
+func MTREventNameForID(clusterID MTRClusterIDType, eventID MTREventIDType) *foundation.NSString {
+	return raw.MTREventNameForID(raw.MTRClusterIDType(clusterID), raw.MTREventIDType(eventID))
 }
 
 // MTRRequestCommandNameForID calls [raw.MTRRequestCommandNameForID] (C function MTRRequestCommandNameForID).
-func MTRRequestCommandNameForID(clusterID raw.MTRClusterIDType, commandID raw.MTRCommandIDType) *foundation.NSString {
-	return raw.MTRRequestCommandNameForID(clusterID, commandID)
+func MTRRequestCommandNameForID(clusterID MTRClusterIDType, commandID MTRCommandIDType) *foundation.NSString {
+	return raw.MTRRequestCommandNameForID(raw.MTRClusterIDType(clusterID), raw.MTRCommandIDType(commandID))
 }
 
 // MTRResponseCommandNameForID calls [raw.MTRResponseCommandNameForID] (C function MTRResponseCommandNameForID).
-func MTRResponseCommandNameForID(clusterID raw.MTRClusterIDType, commandID raw.MTRCommandIDType) *foundation.NSString {
-	return raw.MTRResponseCommandNameForID(clusterID, commandID)
+func MTRResponseCommandNameForID(clusterID MTRClusterIDType, commandID MTRCommandIDType) *foundation.NSString {
+	return raw.MTRResponseCommandNameForID(raw.MTRClusterIDType(clusterID), raw.MTRCommandIDType(commandID))
 }
 
 // MTRSetLogCallback calls [raw.MTRSetLogCallback] (C function MTRSetLogCallback).
-func MTRSetLogCallback(logTypeThreshold raw.MTRLogType, callback func(raw.MTRLogType, *foundation.NSString, *foundation.NSString)) {
-	raw.MTRSetLogCallback(logTypeThreshold, callback)
+func MTRSetLogCallback(logTypeThreshold MTRLogType, callback func(MTRLogType, *foundation.NSString, *foundation.NSString)) {
+	raw.MTRSetLogCallback(raw.MTRLogType(logTypeThreshold), func(_a0 raw.MTRLogType, _a1 *foundation.NSString, _a2 *foundation.NSString) {
+		callback(MTRLogType(_a0), _a1, _a2)
+	})
 }
 
 // MTRSetMessageReliabilityParameters calls [raw.MTRSetMessageReliabilityParameters] (C function MTRSetMessageReliabilityParameters).

@@ -36,14 +36,14 @@ func NewExtentPacker() *ExtentPacker {
 }
 
 // PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength calls the underlying PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength.
-func (x *ExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *raw.FSBlockDeviceResource, type_ raw.FSExtentType, logicalOffset int64, physicalOffset int64, length uint) bool {
-	return x.inner.PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource, type_, logicalOffset, physicalOffset, length)
+func (x *ExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *raw.FSBlockDeviceResource, type_ FSExtentType, logicalOffset int64, physicalOffset int64, length uint) bool {
+	return x.inner.PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource, raw.FSExtentType(type_), logicalOffset, physicalOffset, length)
 }
 
 // ExtentPackerable is the interface implemented by [ExtentPacker], for mocking and DI.
 type ExtentPackerable interface {
 	Unwrap() *raw.FSExtentPacker
-	PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *raw.FSBlockDeviceResource, type_ raw.FSExtentType, logicalOffset int64, physicalOffset int64, length uint) bool
+	PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *raw.FSBlockDeviceResource, type_ FSExtentType, logicalOffset int64, physicalOffset int64, length uint) bool
 }
 
 var _ ExtentPackerable = (*ExtentPacker)(nil)

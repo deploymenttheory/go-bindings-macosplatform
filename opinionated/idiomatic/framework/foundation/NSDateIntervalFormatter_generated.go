@@ -61,14 +61,14 @@ func (x *DateIntervalFormatter) WithDateTemplate(dateTemplate string) *DateInter
 }
 
 // WithDateStyle sets the dateStyle property and returns the receiver for chaining.
-func (x *DateIntervalFormatter) WithDateStyle(dateStyle raw.NSDateIntervalFormatterStyle) *DateIntervalFormatter {
-	x.inner.SetDateStyle(dateStyle)
+func (x *DateIntervalFormatter) WithDateStyle(dateStyle NSDateIntervalFormatterStyle) *DateIntervalFormatter {
+	x.inner.SetDateStyle(raw.NSDateIntervalFormatterStyle(dateStyle))
 	return x
 }
 
 // WithTimeStyle sets the timeStyle property and returns the receiver for chaining.
-func (x *DateIntervalFormatter) WithTimeStyle(timeStyle raw.NSDateIntervalFormatterStyle) *DateIntervalFormatter {
-	x.inner.SetTimeStyle(timeStyle)
+func (x *DateIntervalFormatter) WithTimeStyle(timeStyle NSDateIntervalFormatterStyle) *DateIntervalFormatter {
+	x.inner.SetTimeStyle(raw.NSDateIntervalFormatterStyle(timeStyle))
 	return x
 }
 
@@ -153,23 +153,23 @@ func (x *DateIntervalFormatter) SetDateTemplate(dateTemplate string) {
 }
 
 // DateStyle calls the underlying DateStyle.
-func (x *DateIntervalFormatter) DateStyle() raw.NSDateIntervalFormatterStyle {
-	return x.inner.DateStyle()
+func (x *DateIntervalFormatter) DateStyle() NSDateIntervalFormatterStyle {
+	return NSDateIntervalFormatterStyle(x.inner.DateStyle())
 }
 
 // SetDateStyle calls the underlying SetDateStyle.
-func (x *DateIntervalFormatter) SetDateStyle(dateStyle raw.NSDateIntervalFormatterStyle) {
-	x.inner.SetDateStyle(dateStyle)
+func (x *DateIntervalFormatter) SetDateStyle(dateStyle NSDateIntervalFormatterStyle) {
+	x.inner.SetDateStyle(raw.NSDateIntervalFormatterStyle(dateStyle))
 }
 
 // TimeStyle calls the underlying TimeStyle.
-func (x *DateIntervalFormatter) TimeStyle() raw.NSDateIntervalFormatterStyle {
-	return x.inner.TimeStyle()
+func (x *DateIntervalFormatter) TimeStyle() NSDateIntervalFormatterStyle {
+	return NSDateIntervalFormatterStyle(x.inner.TimeStyle())
 }
 
 // SetTimeStyle calls the underlying SetTimeStyle.
-func (x *DateIntervalFormatter) SetTimeStyle(timeStyle raw.NSDateIntervalFormatterStyle) {
-	x.inner.SetTimeStyle(timeStyle)
+func (x *DateIntervalFormatter) SetTimeStyle(timeStyle NSDateIntervalFormatterStyle) {
+	x.inner.SetTimeStyle(raw.NSDateIntervalFormatterStyle(timeStyle))
 }
 
 func (x *DateIntervalFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
@@ -183,8 +183,8 @@ type DateIntervalFormatterable interface {
 	WithCalendar(calendar *Calendar) *DateIntervalFormatter
 	WithTimeZone(timeZone *TimeZone) *DateIntervalFormatter
 	WithDateTemplate(dateTemplate string) *DateIntervalFormatter
-	WithDateStyle(dateStyle raw.NSDateIntervalFormatterStyle) *DateIntervalFormatter
-	WithTimeStyle(timeStyle raw.NSDateIntervalFormatterStyle) *DateIntervalFormatter
+	WithDateStyle(dateStyle NSDateIntervalFormatterStyle) *DateIntervalFormatter
+	WithTimeStyle(timeStyle NSDateIntervalFormatterStyle) *DateIntervalFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateIntervalFormatter
 	StringFromDateToDate(fromDate *raw.NSDate, toDate *raw.NSDate) *String
 	StringFromDateInterval(dateInterval *raw.NSDateInterval) *String
@@ -196,10 +196,10 @@ type DateIntervalFormatterable interface {
 	SetTimeZone(timeZone *raw.NSTimeZone)
 	DateTemplate() *String
 	SetDateTemplate(dateTemplate string)
-	DateStyle() raw.NSDateIntervalFormatterStyle
-	SetDateStyle(dateStyle raw.NSDateIntervalFormatterStyle)
-	TimeStyle() raw.NSDateIntervalFormatterStyle
-	SetTimeStyle(timeStyle raw.NSDateIntervalFormatterStyle)
+	DateStyle() NSDateIntervalFormatterStyle
+	SetDateStyle(dateStyle NSDateIntervalFormatterStyle)
+	TimeStyle() NSDateIntervalFormatterStyle
+	SetTimeStyle(timeStyle NSDateIntervalFormatterStyle)
 }
 
 var _ DateIntervalFormatterable = (*DateIntervalFormatter)(nil)

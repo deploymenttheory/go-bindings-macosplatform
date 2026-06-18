@@ -59,8 +59,8 @@ func (x *BatchUpdateRequest) WithIncludesSubentities(includesSubentities bool) *
 }
 
 // WithResultType sets the resultType property and returns the receiver for chaining.
-func (x *BatchUpdateRequest) WithResultType(resultType raw.NSBatchUpdateRequestResultType) *BatchUpdateRequest {
-	x.inner.SetResultType(resultType)
+func (x *BatchUpdateRequest) WithResultType(resultType NSBatchUpdateRequestResultType) *BatchUpdateRequest {
+	x.inner.SetResultType(raw.NSBatchUpdateRequestResultType(resultType))
 	return x
 }
 
@@ -127,13 +127,13 @@ func (x *BatchUpdateRequest) SetIncludesSubentities(includesSubentities bool) {
 }
 
 // ResultType calls the underlying ResultType.
-func (x *BatchUpdateRequest) ResultType() raw.NSBatchUpdateRequestResultType {
-	return x.inner.ResultType()
+func (x *BatchUpdateRequest) ResultType() NSBatchUpdateRequestResultType {
+	return NSBatchUpdateRequestResultType(x.inner.ResultType())
 }
 
 // SetResultType calls the underlying SetResultType.
-func (x *BatchUpdateRequest) SetResultType(resultType raw.NSBatchUpdateRequestResultType) {
-	x.inner.SetResultType(resultType)
+func (x *BatchUpdateRequest) SetResultType(resultType NSBatchUpdateRequestResultType) {
+	x.inner.SetResultType(raw.NSBatchUpdateRequestResultType(resultType))
 }
 
 // PropertiesToUpdate calls the underlying PropertiesToUpdate.
@@ -155,7 +155,7 @@ type BatchUpdateRequestable interface {
 	Unwrap() *raw.NSBatchUpdateRequest
 	WithPredicate(predicate *foundation.NSPredicate) *BatchUpdateRequest
 	WithIncludesSubentities(includesSubentities bool) *BatchUpdateRequest
-	WithResultType(resultType raw.NSBatchUpdateRequestResultType) *BatchUpdateRequest
+	WithResultType(resultType NSBatchUpdateRequestResultType) *BatchUpdateRequest
 	WithPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) *BatchUpdateRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *BatchUpdateRequest
 	EntityName() string
@@ -164,8 +164,8 @@ type BatchUpdateRequestable interface {
 	SetPredicate(predicate *foundation.NSPredicate)
 	IncludesSubentities() bool
 	SetIncludesSubentities(includesSubentities bool)
-	ResultType() raw.NSBatchUpdateRequestResultType
-	SetResultType(resultType raw.NSBatchUpdateRequestResultType)
+	ResultType() NSBatchUpdateRequestResultType
+	SetResultType(resultType NSBatchUpdateRequestResultType)
 	PropertiesToUpdate() *foundation.NSDictionary[objc.ID, objc.ID]
 	SetPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID])
 }

@@ -39,8 +39,8 @@ func NewGenerateImageFeaturePrintRequest() *GenerateImageFeaturePrintRequest {
 }
 
 // WithImageCropAndScaleOption sets the imageCropAndScaleOption property and returns the receiver for chaining.
-func (x *GenerateImageFeaturePrintRequest) WithImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) *GenerateImageFeaturePrintRequest {
-	x.inner.SetImageCropAndScaleOption(imageCropAndScaleOption)
+func (x *GenerateImageFeaturePrintRequest) WithImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) *GenerateImageFeaturePrintRequest {
+	x.inner.SetImageCropAndScaleOption(raw.VNImageCropAndScaleOption(imageCropAndScaleOption))
 	return x
 }
 
@@ -69,13 +69,13 @@ func (x *GenerateImageFeaturePrintRequest) WithRevision(revision uint) *Generate
 }
 
 // ImageCropAndScaleOption calls the underlying ImageCropAndScaleOption.
-func (x *GenerateImageFeaturePrintRequest) ImageCropAndScaleOption() raw.VNImageCropAndScaleOption {
-	return x.inner.ImageCropAndScaleOption()
+func (x *GenerateImageFeaturePrintRequest) ImageCropAndScaleOption() VNImageCropAndScaleOption {
+	return VNImageCropAndScaleOption(x.inner.ImageCropAndScaleOption())
 }
 
 // SetImageCropAndScaleOption calls the underlying SetImageCropAndScaleOption.
-func (x *GenerateImageFeaturePrintRequest) SetImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) {
-	x.inner.SetImageCropAndScaleOption(imageCropAndScaleOption)
+func (x *GenerateImageFeaturePrintRequest) SetImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) {
+	x.inner.SetImageCropAndScaleOption(raw.VNImageCropAndScaleOption(imageCropAndScaleOption))
 }
 
 func (x *GenerateImageFeaturePrintRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
@@ -89,13 +89,13 @@ func (x *GenerateImageFeaturePrintRequest) asRequest() *raw.VNRequest {
 // GenerateImageFeaturePrintRequestable is the interface implemented by [GenerateImageFeaturePrintRequest], for mocking and DI.
 type GenerateImageFeaturePrintRequestable interface {
 	Unwrap() *raw.VNGenerateImageFeaturePrintRequest
-	WithImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) *GenerateImageFeaturePrintRequest
+	WithImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) *GenerateImageFeaturePrintRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateImageFeaturePrintRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateImageFeaturePrintRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *GenerateImageFeaturePrintRequest
 	WithRevision(revision uint) *GenerateImageFeaturePrintRequest
-	ImageCropAndScaleOption() raw.VNImageCropAndScaleOption
-	SetImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption)
+	ImageCropAndScaleOption() VNImageCropAndScaleOption
+	SetImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption)
 }
 
 var _ GenerateImageFeaturePrintRequestable = (*GenerateImageFeaturePrintRequest)(nil)

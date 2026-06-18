@@ -61,8 +61,8 @@ func (x *DualSenseAdaptiveTrigger) WithValue(value float32) *DualSenseAdaptiveTr
 }
 
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *DualSenseAdaptiveTrigger) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *DualSenseAdaptiveTrigger {
-	x.inner.GCControllerButtonInput.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+func (x *DualSenseAdaptiveTrigger) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *DualSenseAdaptiveTrigger {
+	x.inner.GCControllerButtonInput.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
@@ -126,13 +126,13 @@ func (x *DualSenseAdaptiveTrigger) SetModeOff() {
 }
 
 // Mode calls the underlying Mode.
-func (x *DualSenseAdaptiveTrigger) Mode() raw.GCDualSenseAdaptiveTriggerMode {
-	return x.inner.Mode()
+func (x *DualSenseAdaptiveTrigger) Mode() GCDualSenseAdaptiveTriggerMode {
+	return GCDualSenseAdaptiveTriggerMode(x.inner.Mode())
 }
 
 // Status calls the underlying Status.
-func (x *DualSenseAdaptiveTrigger) Status() raw.GCDualSenseAdaptiveTriggerStatus {
-	return x.inner.Status()
+func (x *DualSenseAdaptiveTrigger) Status() GCDualSenseAdaptiveTriggerStatus {
+	return GCDualSenseAdaptiveTriggerStatus(x.inner.Status())
 }
 
 // ArmPosition calls the underlying ArmPosition.
@@ -155,7 +155,7 @@ type DualSenseAdaptiveTriggerable interface {
 	WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *DualSenseAdaptiveTrigger
 	WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *DualSenseAdaptiveTrigger
 	WithValue(value float32) *DualSenseAdaptiveTrigger
-	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *DualSenseAdaptiveTrigger
+	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *DualSenseAdaptiveTrigger
 	WithSfSymbolsName(sfSymbolsName string) *DualSenseAdaptiveTrigger
 	WithLocalizedName(localizedName string) *DualSenseAdaptiveTrigger
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DualSenseAdaptiveTrigger
@@ -167,8 +167,8 @@ type DualSenseAdaptiveTriggerable interface {
 	SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition float32, amplitude float32, frequency float32)
 	SetModeVibrationWithAmplitudesFrequency(positionalAmplitudes raw.GCDualSenseAdaptiveTriggerPositionalAmplitudes, frequency float32)
 	SetModeOff()
-	Mode() raw.GCDualSenseAdaptiveTriggerMode
-	Status() raw.GCDualSenseAdaptiveTriggerStatus
+	Mode() GCDualSenseAdaptiveTriggerMode
+	Status() GCDualSenseAdaptiveTriggerStatus
 	ArmPosition() float32
 }
 

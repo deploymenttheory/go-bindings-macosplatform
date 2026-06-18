@@ -67,13 +67,13 @@ func (x *MatrixBatchNormalizationGradient) WithEpsilon(epsilon float32) *MatrixB
 }
 
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
-func (x *MatrixBatchNormalizationGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+func (x *MatrixBatchNormalizationGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	x.inner.SetNeuronTypeParameterAParameterBParameterC(raw.MPSCNNNeuronType(neuronType), parameterA, parameterB, parameterC)
 }
 
 // NeuronType calls the underlying NeuronType.
-func (x *MatrixBatchNormalizationGradient) NeuronType() raw.MPSCNNNeuronType {
-	return x.inner.NeuronType()
+func (x *MatrixBatchNormalizationGradient) NeuronType() MPSCNNNeuronType {
+	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
 // NeuronParameterA calls the underlying NeuronParameterA.
@@ -132,8 +132,8 @@ type MatrixBatchNormalizationGradientable interface {
 	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixBatchNormalizationGradient
 	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixBatchNormalizationGradient
 	WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient
-	SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() raw.MPSCNNNeuronType
+	SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() MPSCNNNeuronType
 	NeuronParameterA() float32
 	NeuronParameterB() float32
 	NeuronParameterC() float32

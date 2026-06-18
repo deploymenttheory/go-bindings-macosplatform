@@ -39,8 +39,8 @@ func FetchAssetsWithOptions(options *raw.PHFetchOptions) *raw.PHFetchResult[*raw
 }
 
 // FetchAssetsWithMediaTypeOptions calls the underlying PHAssetFetchAssetsWithMediaTypeOptions.
-func FetchAssetsWithMediaTypeOptions(mediaType raw.PHAssetMediaType, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAsset] {
-	return raw.PHAssetFetchAssetsWithMediaTypeOptions(mediaType, options)
+func FetchAssetsWithMediaTypeOptions(mediaType PHAssetMediaType, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAsset] {
+	return raw.PHAssetFetchAssetsWithMediaTypeOptions(raw.PHAssetMediaType(mediaType), options)
 }
 
 // CreationRequestForAssetFromImage calls the underlying PHAssetChangeRequestCreationRequestForAssetFromImage.
@@ -90,13 +90,13 @@ func FetchAssetCollectionsWithLocalIdentifiersOptions(identifiers *foundation.NS
 }
 
 // FetchAssetCollectionsWithTypeSubtypeOptions calls the underlying PHAssetCollectionFetchAssetCollectionsWithTypeSubtypeOptions.
-func FetchAssetCollectionsWithTypeSubtypeOptions(type_ raw.PHAssetCollectionType, subtype unsafe.Pointer, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAssetCollection] {
-	return raw.PHAssetCollectionFetchAssetCollectionsWithTypeSubtypeOptions(type_, subtype, options)
+func FetchAssetCollectionsWithTypeSubtypeOptions(type_ PHAssetCollectionType, subtype unsafe.Pointer, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAssetCollection] {
+	return raw.PHAssetCollectionFetchAssetCollectionsWithTypeSubtypeOptions(raw.PHAssetCollectionType(type_), subtype, options)
 }
 
 // FetchAssetCollectionsContainingAssetWithTypeOptions calls the underlying PHAssetCollectionFetchAssetCollectionsContainingAssetWithTypeOptions.
-func FetchAssetCollectionsContainingAssetWithTypeOptions(asset *raw.PHAsset, type_ raw.PHAssetCollectionType, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAssetCollection] {
-	return raw.PHAssetCollectionFetchAssetCollectionsContainingAssetWithTypeOptions(asset, type_, options)
+func FetchAssetCollectionsContainingAssetWithTypeOptions(asset *raw.PHAsset, type_ PHAssetCollectionType, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAssetCollection] {
+	return raw.PHAssetCollectionFetchAssetCollectionsContainingAssetWithTypeOptions(asset, raw.PHAssetCollectionType(type_), options)
 }
 
 // FetchAssetCollectionsWithALAssetGroupURLsOptions calls the underlying PHAssetCollectionFetchAssetCollectionsWithALAssetGroupURLsOptions.
@@ -213,8 +213,8 @@ func FetchCollectionListsWithLocalIdentifiersOptions(identifiers *foundation.NSA
 }
 
 // FetchCollectionListsWithTypeSubtypeOptions calls the underlying PHCollectionListFetchCollectionListsWithTypeSubtypeOptions.
-func FetchCollectionListsWithTypeSubtypeOptions(collectionListType raw.PHCollectionListType, subtype raw.PHCollectionListSubtype, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHCollectionList] {
-	return raw.PHCollectionListFetchCollectionListsWithTypeSubtypeOptions(collectionListType, subtype, options)
+func FetchCollectionListsWithTypeSubtypeOptions(collectionListType raw.PHCollectionListType, subtype PHCollectionListSubtype, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHCollectionList] {
+	return raw.PHCollectionListFetchCollectionListsWithTypeSubtypeOptions(collectionListType, raw.PHCollectionListSubtype(subtype), options)
 }
 
 // TransientCollectionListWithCollectionsTitle calls the underlying PHCollectionListTransientCollectionListWithCollectionsTitle.
@@ -291,8 +291,8 @@ func PHImageManagerDefaultManager() *ImageManager {
 }
 
 // RequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler calls the underlying PHLivePhotoRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler.
-func RequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs *foundation.NSArray[*foundation.NSURL], image *appkit.NSImage, targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, resultHandler objc.Block) int32 {
-	return raw.PHLivePhotoRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs, image, targetSize, contentMode, resultHandler)
+func RequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs *foundation.NSArray[*foundation.NSURL], image *appkit.NSImage, targetSize corefoundation.CGSize, contentMode PHImageContentMode, resultHandler objc.Block) int32 {
+	return raw.PHLivePhotoRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs, image, targetSize, raw.PHImageContentMode(contentMode), resultHandler)
 }
 
 // CancelLivePhotoRequestWithRequestID calls the underlying PHLivePhotoCancelLivePhotoRequestWithRequestID.
@@ -310,21 +310,21 @@ func SharedPhotoLibrary() *PhotoLibrary {
 }
 
 // AuthorizationStatusForAccessLevel calls the underlying PHPhotoLibraryAuthorizationStatusForAccessLevel.
-func AuthorizationStatusForAccessLevel(accessLevel raw.PHAccessLevel) raw.PHAuthorizationStatus {
-	return raw.PHPhotoLibraryAuthorizationStatusForAccessLevel(accessLevel)
+func AuthorizationStatusForAccessLevel(accessLevel PHAccessLevel) PHAuthorizationStatus {
+	return PHAuthorizationStatus(raw.PHPhotoLibraryAuthorizationStatusForAccessLevel(raw.PHAccessLevel(accessLevel)))
 }
 
 // RequestAuthorizationForAccessLevelHandler calls the underlying PHPhotoLibraryRequestAuthorizationForAccessLevelHandler.
-func RequestAuthorizationForAccessLevelHandler(accessLevel raw.PHAccessLevel, handler func(raw.PHAuthorizationStatus)) {
-	raw.PHPhotoLibraryRequestAuthorizationForAccessLevelHandler(accessLevel, handler)
+func RequestAuthorizationForAccessLevelHandler(accessLevel PHAccessLevel, handler func(PHAuthorizationStatus)) {
+	raw.PHPhotoLibraryRequestAuthorizationForAccessLevelHandler(raw.PHAccessLevel(accessLevel), func(_a0 raw.PHAuthorizationStatus) { handler(PHAuthorizationStatus(_a0)) })
 }
 
 // AuthorizationStatus calls the underlying PHPhotoLibraryAuthorizationStatus.
-func AuthorizationStatus() raw.PHAuthorizationStatus {
-	return raw.PHPhotoLibraryAuthorizationStatus()
+func AuthorizationStatus() PHAuthorizationStatus {
+	return PHAuthorizationStatus(raw.PHPhotoLibraryAuthorizationStatus())
 }
 
 // RequestAuthorization calls the underlying PHPhotoLibraryRequestAuthorization.
-func RequestAuthorization(handler func(raw.PHAuthorizationStatus)) {
-	raw.PHPhotoLibraryRequestAuthorization(handler)
+func RequestAuthorization(handler func(PHAuthorizationStatus)) {
+	raw.PHPhotoLibraryRequestAuthorization(func(_a0 raw.PHAuthorizationStatus) { handler(PHAuthorizationStatus(_a0)) })
 }

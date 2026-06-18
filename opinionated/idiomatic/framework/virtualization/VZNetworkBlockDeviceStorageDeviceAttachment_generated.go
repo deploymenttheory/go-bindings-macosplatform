@@ -35,10 +35,10 @@ func NetworkBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *NetworkBlockDe
 }
 
 // NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError creates a new [NetworkBlockDeviceStorageDeviceAttachment].
-func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL string, timeout float64, forcedReadOnly bool, synchronizationMode raw.VZDiskSynchronizationMode) (*NetworkBlockDeviceStorageDeviceAttachment, error) {
+func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL string, timeout float64, forcedReadOnly bool, synchronizationMode VZDiskSynchronizationMode) (*NetworkBlockDeviceStorageDeviceAttachment, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:timeout:forcedReadOnly:synchronizationMode:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), timeout, forcedReadOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:timeout:forcedReadOnly:synchronizationMode:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), timeout, forcedReadOnly, raw.VZDiskSynchronizationMode(synchronizationMode), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -78,8 +78,8 @@ func (x *NetworkBlockDeviceStorageDeviceAttachment) IsForcedReadOnly() bool {
 }
 
 // SynchronizationMode calls the underlying SynchronizationMode.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) SynchronizationMode() raw.VZDiskSynchronizationMode {
-	return x.inner.SynchronizationMode()
+func (x *NetworkBlockDeviceStorageDeviceAttachment) SynchronizationMode() VZDiskSynchronizationMode {
+	return VZDiskSynchronizationMode(x.inner.SynchronizationMode())
 }
 
 // Delegate calls the underlying Delegate.
@@ -103,7 +103,7 @@ type NetworkBlockDeviceStorageDeviceAttachmentable interface {
 	URL() *foundation.NSURL
 	Timeout() float64
 	IsForcedReadOnly() bool
-	SynchronizationMode() raw.VZDiskSynchronizationMode
+	SynchronizationMode() VZDiskSynchronizationMode
 	Delegate() raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate
 	SetDelegate(delegate raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate)
 }

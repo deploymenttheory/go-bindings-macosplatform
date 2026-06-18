@@ -129,8 +129,8 @@ func (x *AudioEngine) OutputConnectionPointsForNodeOutputBus(node *raw.AVAudioNo
 }
 
 // EnableManualRenderingModeFormatMaximumFrameCountError calls the underlying EnableManualRenderingModeFormatMaximumFrameCountError.
-func (x *AudioEngine) EnableManualRenderingModeFormatMaximumFrameCountError(mode raw.AVAudioEngineManualRenderingMode, pcmFormat *raw.AVAudioFormat, maximumFrameCount uint32) (bool, error) {
-	return x.inner.EnableManualRenderingModeFormatMaximumFrameCountError(mode, pcmFormat, maximumFrameCount)
+func (x *AudioEngine) EnableManualRenderingModeFormatMaximumFrameCountError(mode AVAudioEngineManualRenderingMode, pcmFormat *raw.AVAudioFormat, maximumFrameCount uint32) (bool, error) {
+	return x.inner.EnableManualRenderingModeFormatMaximumFrameCountError(raw.AVAudioEngineManualRenderingMode(mode), pcmFormat, maximumFrameCount)
 }
 
 // DisableManualRenderingMode calls the underlying DisableManualRenderingMode.
@@ -139,8 +139,13 @@ func (x *AudioEngine) DisableManualRenderingMode() {
 }
 
 // RenderOfflineToBufferError calls the underlying RenderOfflineToBufferError.
-func (x *AudioEngine) RenderOfflineToBufferError(numberOfFrames uint32, buffer *raw.AVAudioPCMBuffer) (raw.AVAudioEngineManualRenderingStatus, error) {
-	return x.inner.RenderOfflineToBufferError(numberOfFrames, buffer)
+func (x *AudioEngine) RenderOfflineToBufferError(numberOfFrames uint32, buffer *raw.AVAudioPCMBuffer) (AVAudioEngineManualRenderingStatus, error) {
+	_r, _err := x.inner.RenderOfflineToBufferError(numberOfFrames, buffer)
+	if _err != nil {
+		var _zero AVAudioEngineManualRenderingStatus
+		return _zero, _err
+	}
+	return AVAudioEngineManualRenderingStatus(_r), nil
 }
 
 // ConnectMIDIToFormatBlock calls the underlying ConnectMIDIToFormatBlock.
@@ -251,8 +256,8 @@ func (x *AudioEngine) IsInManualRenderingMode() bool {
 }
 
 // ManualRenderingMode calls the underlying ManualRenderingMode.
-func (x *AudioEngine) ManualRenderingMode() raw.AVAudioEngineManualRenderingMode {
-	return x.inner.ManualRenderingMode()
+func (x *AudioEngine) ManualRenderingMode() AVAudioEngineManualRenderingMode {
+	return AVAudioEngineManualRenderingMode(x.inner.ManualRenderingMode())
 }
 
 // ManualRenderingFormat calls the underlying ManualRenderingFormat.
@@ -294,9 +299,9 @@ type AudioEngineable interface {
 	Stop()
 	InputConnectionPointForNodeInputBus(node *raw.AVAudioNode, bus uint) *AudioConnectionPoint
 	OutputConnectionPointsForNodeOutputBus(node *raw.AVAudioNode, bus uint) *foundation.NSArray[*raw.AVAudioConnectionPoint]
-	EnableManualRenderingModeFormatMaximumFrameCountError(mode raw.AVAudioEngineManualRenderingMode, pcmFormat *raw.AVAudioFormat, maximumFrameCount uint32) (bool, error)
+	EnableManualRenderingModeFormatMaximumFrameCountError(mode AVAudioEngineManualRenderingMode, pcmFormat *raw.AVAudioFormat, maximumFrameCount uint32) (bool, error)
 	DisableManualRenderingMode()
-	RenderOfflineToBufferError(numberOfFrames uint32, buffer *raw.AVAudioPCMBuffer) (raw.AVAudioEngineManualRenderingStatus, error)
+	RenderOfflineToBufferError(numberOfFrames uint32, buffer *raw.AVAudioPCMBuffer) (AVAudioEngineManualRenderingStatus, error)
 	ConnectMIDIToFormatBlock(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode, format *raw.AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int)
 	ConnectMIDIToFormatEventListBlock(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode, format *raw.AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int)
 	ConnectMIDIToNodesFormatBlock(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode], format *raw.AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int)
@@ -316,7 +321,7 @@ type AudioEngineable interface {
 	AttachedNodes() *foundation.NSSet[*raw.AVAudioNode]
 	ManualRenderingBlock() objc.Block
 	IsInManualRenderingMode() bool
-	ManualRenderingMode() raw.AVAudioEngineManualRenderingMode
+	ManualRenderingMode() AVAudioEngineManualRenderingMode
 	ManualRenderingFormat() *AudioFormat
 	ManualRenderingMaximumFrameCount() uint32
 	ManualRenderingSampleTime() int64

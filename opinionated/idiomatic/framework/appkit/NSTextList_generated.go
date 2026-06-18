@@ -32,9 +32,9 @@ func TextListFromID(id objc.ID) *TextList {
 }
 
 // NewTextListWithMarkerFormatOptionsStartingItemNumber creates a new [TextList].
-func NewTextListWithMarkerFormatOptionsStartingItemNumber(markerFormat *foundation.NSString, options raw.NSTextListOptions, startingItemNumber int) *TextList {
+func NewTextListWithMarkerFormatOptionsStartingItemNumber(markerFormat *foundation.NSString, options NSTextListOptions, startingItemNumber int) *TextList {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextList")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkerFormat:options:startingItemNumber:"), markerFormat.Ptr(), options, startingItemNumber)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkerFormat:options:startingItemNumber:"), markerFormat.Ptr(), raw.NSTextListOptions(options), startingItemNumber)
 	return &TextList{inner: raw.NSTextListFromID(_id)}
 }
 
@@ -77,8 +77,8 @@ func (x *TextList) MarkerFormat() string {
 }
 
 // ListOptions calls the underlying ListOptions.
-func (x *TextList) ListOptions() raw.NSTextListOptions {
-	return x.inner.ListOptions()
+func (x *TextList) ListOptions() NSTextListOptions {
+	return NSTextListOptions(x.inner.ListOptions())
 }
 
 // StartingItemNumber calls the underlying StartingItemNumber.
@@ -102,7 +102,7 @@ type TextListable interface {
 	WithStartingItemNumber(startingItemNumber int) *TextList
 	MarkerForItemNumber(itemNumber int) string
 	MarkerFormat() string
-	ListOptions() raw.NSTextListOptions
+	ListOptions() NSTextListOptions
 	StartingItemNumber() int
 	SetStartingItemNumber(startingItemNumber int)
 	IsOrdered() bool

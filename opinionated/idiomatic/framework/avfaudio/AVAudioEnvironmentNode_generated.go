@@ -38,8 +38,8 @@ func NewAudioEnvironmentNode() *AudioEnvironmentNode {
 }
 
 // WithOutputType sets the outputType property and returns the receiver for chaining.
-func (x *AudioEnvironmentNode) WithOutputType(outputType raw.AVAudioEnvironmentOutputType) *AudioEnvironmentNode {
-	x.inner.SetOutputType(outputType)
+func (x *AudioEnvironmentNode) WithOutputType(outputType AVAudioEnvironmentOutputType) *AudioEnvironmentNode {
+	x.inner.SetOutputType(raw.AVAudioEnvironmentOutputType(outputType))
 	return x
 }
 
@@ -74,13 +74,13 @@ func (x *AudioEnvironmentNode) WithListenerHeadTrackingEnabled(listenerHeadTrack
 }
 
 // OutputType calls the underlying OutputType.
-func (x *AudioEnvironmentNode) OutputType() raw.AVAudioEnvironmentOutputType {
-	return x.inner.OutputType()
+func (x *AudioEnvironmentNode) OutputType() AVAudioEnvironmentOutputType {
+	return AVAudioEnvironmentOutputType(x.inner.OutputType())
 }
 
 // SetOutputType calls the underlying SetOutputType.
-func (x *AudioEnvironmentNode) SetOutputType(outputType raw.AVAudioEnvironmentOutputType) {
-	x.inner.SetOutputType(outputType)
+func (x *AudioEnvironmentNode) SetOutputType(outputType AVAudioEnvironmentOutputType) {
+	x.inner.SetOutputType(raw.AVAudioEnvironmentOutputType(outputType))
 }
 
 // OutputVolume calls the underlying OutputVolume.
@@ -172,14 +172,14 @@ func (x *AudioEnvironmentNode) asAudioNode() *raw.AVAudioNode { return &x.inner.
 // AudioEnvironmentNodeable is the interface implemented by [AudioEnvironmentNode], for mocking and DI.
 type AudioEnvironmentNodeable interface {
 	Unwrap() *raw.AVAudioEnvironmentNode
-	WithOutputType(outputType raw.AVAudioEnvironmentOutputType) *AudioEnvironmentNode
+	WithOutputType(outputType AVAudioEnvironmentOutputType) *AudioEnvironmentNode
 	WithOutputVolume(outputVolume float32) *AudioEnvironmentNode
 	WithListenerPosition(listenerPosition raw.AVAudio3DPoint) *AudioEnvironmentNode
 	WithListenerVectorOrientation(listenerVectorOrientation raw.AVAudio3DVectorOrientation) *AudioEnvironmentNode
 	WithListenerAngularOrientation(listenerAngularOrientation raw.AVAudio3DAngularOrientation) *AudioEnvironmentNode
 	WithListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool) *AudioEnvironmentNode
-	OutputType() raw.AVAudioEnvironmentOutputType
-	SetOutputType(outputType raw.AVAudioEnvironmentOutputType)
+	OutputType() AVAudioEnvironmentOutputType
+	SetOutputType(outputType AVAudioEnvironmentOutputType)
 	OutputVolume() float32
 	SetOutputVolume(outputVolume float32)
 	NextAvailableInputBus() uint

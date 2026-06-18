@@ -244,8 +244,8 @@ func (x *Font) GetAdvancementsForPackedGlyphsLength(advancements *corefoundation
 }
 
 // ScreenFontWithRenderingMode calls the underlying ScreenFontWithRenderingMode.
-func (x *Font) ScreenFontWithRenderingMode(renderingMode raw.NSFontRenderingMode) *Font {
-	_r := x.inner.ScreenFontWithRenderingMode(renderingMode)
+func (x *Font) ScreenFontWithRenderingMode(renderingMode NSFontRenderingMode) *Font {
+	_r := x.inner.ScreenFontWithRenderingMode(raw.NSFontRenderingMode(renderingMode))
 	if _r == nil {
 		return nil
 	}
@@ -271,8 +271,8 @@ func (x *Font) ScreenFont() *Font {
 }
 
 // RenderingMode calls the underlying RenderingMode.
-func (x *Font) RenderingMode() raw.NSFontRenderingMode {
-	return x.inner.RenderingMode()
+func (x *Font) RenderingMode() NSFontRenderingMode {
+	return NSFontRenderingMode(x.inner.RenderingMode())
 }
 
 // Fontable is the interface implemented by [Font], for mocking and DI.
@@ -314,10 +314,10 @@ type Fontable interface {
 	GetBoundingRectsForGlyphsCount(bounds *corefoundation.CGRect, glyphs *uint, glyphCount uint)
 	GetAdvancementsForGlyphsCount(advancements *corefoundation.CGSize, glyphs *uint, glyphCount uint)
 	GetAdvancementsForPackedGlyphsLength(advancements *corefoundation.CGSize, packedGlyphs unsafe.Pointer, length uint)
-	ScreenFontWithRenderingMode(renderingMode raw.NSFontRenderingMode) *Font
+	ScreenFontWithRenderingMode(renderingMode NSFontRenderingMode) *Font
 	PrinterFont() *Font
 	ScreenFont() *Font
-	RenderingMode() raw.NSFontRenderingMode
+	RenderingMode() NSFontRenderingMode
 }
 
 var _ Fontable = (*Font)(nil)

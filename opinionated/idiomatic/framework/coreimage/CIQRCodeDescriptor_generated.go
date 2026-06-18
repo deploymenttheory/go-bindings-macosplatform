@@ -31,9 +31,9 @@ func QRCodeDescriptorFromID(id objc.ID) *QRCodeDescriptor {
 }
 
 // NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel creates a new [QRCodeDescriptor].
-func NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel raw.CIQRCodeErrorCorrectionLevel) *QRCodeDescriptor {
+func NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel CIQRCodeErrorCorrectionLevel) *QRCodeDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIQRCodeDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), errorCorrectedPayload.Ptr(), symbolVersion, maskPattern, errorCorrectionLevel)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), errorCorrectedPayload.Ptr(), symbolVersion, maskPattern, raw.CIQRCodeErrorCorrectionLevel(errorCorrectionLevel))
 	return &QRCodeDescriptor{inner: raw.CIQRCodeDescriptorFromID(_id)}
 }
 
@@ -53,8 +53,8 @@ func (x *QRCodeDescriptor) MaskPattern() uint8 {
 }
 
 // ErrorCorrectionLevel calls the underlying ErrorCorrectionLevel.
-func (x *QRCodeDescriptor) ErrorCorrectionLevel() raw.CIQRCodeErrorCorrectionLevel {
-	return x.inner.ErrorCorrectionLevel()
+func (x *QRCodeDescriptor) ErrorCorrectionLevel() CIQRCodeErrorCorrectionLevel {
+	return CIQRCodeErrorCorrectionLevel(x.inner.ErrorCorrectionLevel())
 }
 
 func (x *QRCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor {
@@ -67,7 +67,7 @@ type QRCodeDescriptorable interface {
 	ErrorCorrectedPayload() *foundation.NSData
 	SymbolVersion() int
 	MaskPattern() uint8
-	ErrorCorrectionLevel() raw.CIQRCodeErrorCorrectionLevel
+	ErrorCorrectionLevel() CIQRCodeErrorCorrectionLevel
 }
 
 var _ QRCodeDescriptorable = (*QRCodeDescriptor)(nil)

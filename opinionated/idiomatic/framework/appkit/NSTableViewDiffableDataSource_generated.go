@@ -52,8 +52,8 @@ func (x *TableViewDiffableDataSource) WithSectionHeaderViewProvider(sectionHeade
 }
 
 // WithDefaultRowAnimation sets the defaultRowAnimation property and returns the receiver for chaining.
-func (x *TableViewDiffableDataSource) WithDefaultRowAnimation(defaultRowAnimation raw.NSTableViewAnimationOptions) *TableViewDiffableDataSource {
-	x.inner.SetDefaultRowAnimation(defaultRowAnimation)
+func (x *TableViewDiffableDataSource) WithDefaultRowAnimation(defaultRowAnimation NSTableViewAnimationOptions) *TableViewDiffableDataSource {
+	x.inner.SetDefaultRowAnimation(raw.NSTableViewAnimationOptions(defaultRowAnimation))
 	return x
 }
 
@@ -122,13 +122,13 @@ func (x *TableViewDiffableDataSource) SetSectionHeaderViewProvider(sectionHeader
 }
 
 // DefaultRowAnimation calls the underlying DefaultRowAnimation.
-func (x *TableViewDiffableDataSource) DefaultRowAnimation() raw.NSTableViewAnimationOptions {
-	return x.inner.DefaultRowAnimation()
+func (x *TableViewDiffableDataSource) DefaultRowAnimation() NSTableViewAnimationOptions {
+	return NSTableViewAnimationOptions(x.inner.DefaultRowAnimation())
 }
 
 // SetDefaultRowAnimation calls the underlying SetDefaultRowAnimation.
-func (x *TableViewDiffableDataSource) SetDefaultRowAnimation(defaultRowAnimation raw.NSTableViewAnimationOptions) {
-	x.inner.SetDefaultRowAnimation(defaultRowAnimation)
+func (x *TableViewDiffableDataSource) SetDefaultRowAnimation(defaultRowAnimation NSTableViewAnimationOptions) {
+	x.inner.SetDefaultRowAnimation(raw.NSTableViewAnimationOptions(defaultRowAnimation))
 }
 
 // TableViewDiffableDataSourceable is the interface implemented by [TableViewDiffableDataSource], for mocking and DI.
@@ -136,7 +136,7 @@ type TableViewDiffableDataSourceable interface {
 	Unwrap() *raw.NSTableViewDiffableDataSource[objc.ID, objc.ID]
 	WithRowViewProvider(rowViewProvider objc.Block) *TableViewDiffableDataSource
 	WithSectionHeaderViewProvider(sectionHeaderViewProvider objc.Block) *TableViewDiffableDataSource
-	WithDefaultRowAnimation(defaultRowAnimation raw.NSTableViewAnimationOptions) *TableViewDiffableDataSource
+	WithDefaultRowAnimation(defaultRowAnimation NSTableViewAnimationOptions) *TableViewDiffableDataSource
 	Snapshot() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID]
 	ApplySnapshotAnimatingDifferences(snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool)
 	ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool) error
@@ -148,8 +148,8 @@ type TableViewDiffableDataSourceable interface {
 	SetRowViewProvider(rowViewProvider objc.Block)
 	SectionHeaderViewProvider() objc.Block
 	SetSectionHeaderViewProvider(sectionHeaderViewProvider objc.Block)
-	DefaultRowAnimation() raw.NSTableViewAnimationOptions
-	SetDefaultRowAnimation(defaultRowAnimation raw.NSTableViewAnimationOptions)
+	DefaultRowAnimation() NSTableViewAnimationOptions
+	SetDefaultRowAnimation(defaultRowAnimation NSTableViewAnimationOptions)
 }
 
 var _ TableViewDiffableDataSourceable = (*TableViewDiffableDataSource)(nil)

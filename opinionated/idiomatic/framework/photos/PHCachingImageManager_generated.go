@@ -44,13 +44,13 @@ func (x *CachingImageManager) WithAllowsCachingHighQualityImages(allowsCachingHi
 }
 
 // StartCachingImagesForAssetsTargetSizeContentModeOptions calls the underlying StartCachingImagesForAssetsTargetSizeContentModeOptions.
-func (x *CachingImageManager) StartCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions) {
-	x.inner.StartCachingImagesForAssetsTargetSizeContentModeOptions(assets, targetSize, contentMode, options)
+func (x *CachingImageManager) StartCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions) {
+	x.inner.StartCachingImagesForAssetsTargetSizeContentModeOptions(assets, targetSize, raw.PHImageContentMode(contentMode), options)
 }
 
 // StopCachingImagesForAssetsTargetSizeContentModeOptions calls the underlying StopCachingImagesForAssetsTargetSizeContentModeOptions.
-func (x *CachingImageManager) StopCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions) {
-	x.inner.StopCachingImagesForAssetsTargetSizeContentModeOptions(assets, targetSize, contentMode, options)
+func (x *CachingImageManager) StopCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions) {
+	x.inner.StopCachingImagesForAssetsTargetSizeContentModeOptions(assets, targetSize, raw.PHImageContentMode(contentMode), options)
 }
 
 // StopCachingImagesForAllAssets calls the underlying StopCachingImagesForAllAssets.
@@ -74,8 +74,8 @@ func (x *CachingImageManager) asImageManager() *raw.PHImageManager { return &x.i
 type CachingImageManagerable interface {
 	Unwrap() *raw.PHCachingImageManager
 	WithAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) *CachingImageManager
-	StartCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions)
-	StopCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions)
+	StartCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions)
+	StopCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions)
 	StopCachingImagesForAllAssets()
 	AllowsCachingHighQualityImages() bool
 	SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool)

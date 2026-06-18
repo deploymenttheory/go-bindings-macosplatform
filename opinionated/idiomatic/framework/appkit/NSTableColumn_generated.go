@@ -100,8 +100,8 @@ func (x *TableColumn) WithSortDescriptorPrototype(sortDescriptorPrototype *found
 }
 
 // WithResizingMask sets the resizingMask property and returns the receiver for chaining.
-func (x *TableColumn) WithResizingMask(resizingMask raw.NSTableColumnResizingOptions) *TableColumn {
-	x.inner.SetResizingMask(resizingMask)
+func (x *TableColumn) WithResizingMask(resizingMask NSTableColumnResizingOptions) *TableColumn {
+	x.inner.SetResizingMask(raw.NSTableColumnResizingOptions(resizingMask))
 	return x
 }
 
@@ -235,13 +235,13 @@ func (x *TableColumn) SetSortDescriptorPrototype(sortDescriptorPrototype *founda
 }
 
 // ResizingMask calls the underlying ResizingMask.
-func (x *TableColumn) ResizingMask() raw.NSTableColumnResizingOptions {
-	return x.inner.ResizingMask()
+func (x *TableColumn) ResizingMask() NSTableColumnResizingOptions {
+	return NSTableColumnResizingOptions(x.inner.ResizingMask())
 }
 
 // SetResizingMask calls the underlying SetResizingMask.
-func (x *TableColumn) SetResizingMask(resizingMask raw.NSTableColumnResizingOptions) {
-	x.inner.SetResizingMask(resizingMask)
+func (x *TableColumn) SetResizingMask(resizingMask NSTableColumnResizingOptions) {
+	x.inner.SetResizingMask(raw.NSTableColumnResizingOptions(resizingMask))
 }
 
 // HeaderToolTip calls the underlying HeaderToolTip.
@@ -305,7 +305,7 @@ type TableColumnable interface {
 	WithHeaderCell(headerCell *TableHeaderCell) *TableColumn
 	WithEditable(editable bool) *TableColumn
 	WithSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor) *TableColumn
-	WithResizingMask(resizingMask raw.NSTableColumnResizingOptions) *TableColumn
+	WithResizingMask(resizingMask NSTableColumnResizingOptions) *TableColumn
 	WithHeaderToolTip(headerToolTip string) *TableColumn
 	WithHidden(hidden bool) *TableColumn
 	WithDataCell(dataCell objc.ID) *TableColumn
@@ -328,8 +328,8 @@ type TableColumnable interface {
 	SetEditable(editable bool)
 	SortDescriptorPrototype() *foundation.NSSortDescriptor
 	SetSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor)
-	ResizingMask() raw.NSTableColumnResizingOptions
-	SetResizingMask(resizingMask raw.NSTableColumnResizingOptions)
+	ResizingMask() NSTableColumnResizingOptions
+	SetResizingMask(resizingMask NSTableColumnResizingOptions)
 	HeaderToolTip() string
 	SetHeaderToolTip(headerToolTip string)
 	IsHidden() bool

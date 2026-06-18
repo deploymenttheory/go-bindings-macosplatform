@@ -30,21 +30,21 @@ func HighlightPersistenceEventFromID(id objc.ID) *HighlightPersistenceEvent {
 }
 
 // NewHighlightPersistenceEventWithHighlightTrigger creates a new [HighlightPersistenceEvent].
-func NewHighlightPersistenceEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger raw.SWHighlightPersistenceEventTrigger) *HighlightPersistenceEvent {
+func NewHighlightPersistenceEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightPersistenceEventTrigger) *HighlightPersistenceEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightPersistenceEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), highlight.Ptr(), trigger)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), highlight.Ptr(), raw.SWHighlightPersistenceEventTrigger(trigger))
 	return &HighlightPersistenceEvent{inner: raw.SWHighlightPersistenceEventFromID(_id)}
 }
 
 // PersistenceEventTrigger calls the underlying PersistenceEventTrigger.
-func (x *HighlightPersistenceEvent) PersistenceEventTrigger() raw.SWHighlightPersistenceEventTrigger {
-	return x.inner.PersistenceEventTrigger()
+func (x *HighlightPersistenceEvent) PersistenceEventTrigger() SWHighlightPersistenceEventTrigger {
+	return SWHighlightPersistenceEventTrigger(x.inner.PersistenceEventTrigger())
 }
 
 // HighlightPersistenceEventable is the interface implemented by [HighlightPersistenceEvent], for mocking and DI.
 type HighlightPersistenceEventable interface {
 	Unwrap() *raw.SWHighlightPersistenceEvent
-	PersistenceEventTrigger() raw.SWHighlightPersistenceEventTrigger
+	PersistenceEventTrigger() SWHighlightPersistenceEventTrigger
 }
 
 var _ HighlightPersistenceEventable = (*HighlightPersistenceEvent)(nil)

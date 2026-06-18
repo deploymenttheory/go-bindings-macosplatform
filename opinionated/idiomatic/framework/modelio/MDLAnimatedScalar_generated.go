@@ -36,8 +36,8 @@ func NewAnimatedScalar() *AnimatedScalar {
 }
 
 // WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedScalar) WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedScalar {
-	x.inner.MDLAnimatedValue.SetInterpolation(interpolation)
+func (x *AnimatedScalar) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedScalar {
+	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
 	return x
 }
 
@@ -86,7 +86,7 @@ func (x *AnimatedScalar) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inn
 // AnimatedScalarable is the interface implemented by [AnimatedScalar], for mocking and DI.
 type AnimatedScalarable interface {
 	Unwrap() *raw.MDLAnimatedScalar
-	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedScalar
+	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedScalar
 	SetFloatAtTime(value float32, time_ float64)
 	SetDoubleAtTime(value float64, time_ float64)
 	FloatAtTime(time_ float64) float32

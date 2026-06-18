@@ -51,8 +51,8 @@ func (x *Attribute) AttributeIndex() uint {
 }
 
 // AttributeType calls the underlying AttributeType.
-func (x *Attribute) AttributeType() raw.MTLDataType {
-	return x.inner.AttributeType()
+func (x *Attribute) AttributeType() MTLDataType {
+	return MTLDataType(x.inner.AttributeType())
 }
 
 // IsActive calls the underlying IsActive.
@@ -75,7 +75,7 @@ type Attributeable interface {
 	Unwrap() *raw.MTLAttribute
 	Name() string
 	AttributeIndex() uint
-	AttributeType() raw.MTLDataType
+	AttributeType() MTLDataType
 	IsActive() bool
 	IsPatchData() bool
 	IsPatchControlPointData() bool

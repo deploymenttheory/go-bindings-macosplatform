@@ -168,8 +168,8 @@ func (x *Browser) WithLastColumn(lastColumn int) *Browser {
 }
 
 // WithColumnResizingType sets the columnResizingType property and returns the receiver for chaining.
-func (x *Browser) WithColumnResizingType(columnResizingType raw.NSBrowserColumnResizingType) *Browser {
-	x.inner.SetColumnResizingType(columnResizingType)
+func (x *Browser) WithColumnResizingType(columnResizingType NSBrowserColumnResizingType) *Browser {
+	x.inner.SetColumnResizingType(raw.NSBrowserColumnResizingType(columnResizingType))
 	return x
 }
 
@@ -252,8 +252,8 @@ func (x *Browser) WithHighlighted(highlighted bool) *Browser {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Browser) WithControlSize(controlSize raw.NSControlSize) *Browser {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *Browser) WithControlSize(controlSize NSControlSize) *Browser {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -318,20 +318,20 @@ func (x *Browser) WithUsesSingleLineMode(usesSingleLineMode bool) *Browser {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Browser) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Browser {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *Browser) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Browser {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Browser) WithAlignment(alignment raw.NSTextAlignment) *Browser {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *Browser) WithAlignment(alignment NSTextAlignment) *Browser {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Browser) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Browser {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *Browser) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Browser {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -384,8 +384,8 @@ func (x *Browser) WithAutoresizesSubviews(autoresizesSubviews bool) *Browser {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Browser) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Browser {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Browser) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Browser {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -444,14 +444,14 @@ func (x *Browser) WithWantsRestingTouches(wantsRestingTouches bool) *Browser {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Browser) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Browser {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Browser) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Browser {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Browser) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Browser {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Browser) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Browser {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -558,8 +558,8 @@ func (x *Browser) WithToolTip(toolTip string) *Browser {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Browser) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Browser {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Browser) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Browser {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -576,8 +576,8 @@ func (x *Browser) WithNextKeyView(nextKeyView ViewProvider) *Browser {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Browser) WithFocusRingType(focusRingType raw.NSFocusRingType) *Browser {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *Browser) WithFocusRingType(focusRingType NSFocusRingType) *Browser {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -600,8 +600,8 @@ func (x *Browser) WithGestureRecognizers(items ...GestureRecognizerProvider) *Br
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Browser) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Browser {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Browser) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Browser {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -931,8 +931,8 @@ func (x *Browser) DraggingImageForRowsWithIndexesInColumnWithEventOffset(rowInde
 }
 
 // SetDraggingSourceOperationMaskForLocal calls the underlying SetDraggingSourceOperationMaskForLocal.
-func (x *Browser) SetDraggingSourceOperationMaskForLocal(mask raw.NSDragOperation, isLocal bool) {
-	x.inner.SetDraggingSourceOperationMaskForLocal(mask, isLocal)
+func (x *Browser) SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool) {
+	x.inner.SetDraggingSourceOperationMaskForLocal(raw.NSDragOperation(mask), isLocal)
 }
 
 // EditItemAtIndexPathWithEventSelect calls the underlying EditItemAtIndexPathWithEventSelect.
@@ -1192,13 +1192,13 @@ func (x *Browser) TitleHeight() float64 {
 }
 
 // ColumnResizingType calls the underlying ColumnResizingType.
-func (x *Browser) ColumnResizingType() raw.NSBrowserColumnResizingType {
-	return x.inner.ColumnResizingType()
+func (x *Browser) ColumnResizingType() NSBrowserColumnResizingType {
+	return NSBrowserColumnResizingType(x.inner.ColumnResizingType())
 }
 
 // SetColumnResizingType calls the underlying SetColumnResizingType.
-func (x *Browser) SetColumnResizingType(columnResizingType raw.NSBrowserColumnResizingType) {
-	x.inner.SetColumnResizingType(columnResizingType)
+func (x *Browser) SetColumnResizingType(columnResizingType NSBrowserColumnResizingType) {
+	x.inner.SetColumnResizingType(raw.NSBrowserColumnResizingType(columnResizingType))
 }
 
 // PrefersAllColumnUserResizing calls the underlying PrefersAllColumnUserResizing.
@@ -1341,7 +1341,7 @@ type Browserable interface {
 	WithSelectionIndexPath(selectionIndexPath *foundation.NSIndexPath) *Browser
 	WithSelectionIndexPaths(items ...*foundation.NSIndexPath) *Browser
 	WithLastColumn(lastColumn int) *Browser
-	WithColumnResizingType(columnResizingType raw.NSBrowserColumnResizingType) *Browser
+	WithColumnResizingType(columnResizingType NSBrowserColumnResizingType) *Browser
 	WithPrefersAllColumnUserResizing(prefersAllColumnUserResizing bool) *Browser
 	WithRowHeight(rowHeight float64) *Browser
 	WithColumnsAutosaveName(columnsAutosaveName *foundation.NSString) *Browser
@@ -1355,7 +1355,7 @@ type Browserable interface {
 	WithEnabled(enabled bool) *Browser
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Browser
 	WithHighlighted(highlighted bool) *Browser
-	WithControlSize(controlSize raw.NSControlSize) *Browser
+	WithControlSize(controlSize NSControlSize) *Browser
 	WithFormatter(formatter *foundation.NSFormatter) *Browser
 	WithObjectValue(objectValue objc.ID) *Browser
 	WithStringValue(stringValue string) *Browser
@@ -1366,16 +1366,16 @@ type Browserable interface {
 	WithDoubleValue(doubleValue float64) *Browser
 	WithFont(font *Font) *Browser
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Browser
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Browser
-	WithAlignment(alignment raw.NSTextAlignment) *Browser
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Browser
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Browser
+	WithAlignment(alignment NSTextAlignment) *Browser
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Browser
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Browser
 	WithCell(cell CellProvider) *Browser
 	WithSubviews(items ...ViewProvider) *Browser
 	WithHidden(hidden bool) *Browser
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Browser
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Browser
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Browser
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Browser
 	WithFrame(frame corefoundation.CGRect) *Browser
 	WithFrameRotation(frameRotation float64) *Browser
 	WithFrameCenterRotation(frameCenterRotation float64) *Browser
@@ -1385,8 +1385,8 @@ type Browserable interface {
 	WithNeedsDisplay(needsDisplay bool) *Browser
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Browser
 	WithWantsRestingTouches(wantsRestingTouches bool) *Browser
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Browser
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Browser
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Browser
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Browser
 	WithWantsLayer(wantsLayer bool) *Browser
 	WithLayer(layer *quartzcore.CALayer) *Browser
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Browser
@@ -1400,12 +1400,12 @@ type Browserable interface {
 	WithClipsToBounds(clipsToBounds bool) *Browser
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Browser
 	WithToolTip(toolTip string) *Browser
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Browser
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Browser
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Browser
 	WithNextKeyView(nextKeyView ViewProvider) *Browser
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Browser
+	WithFocusRingType(focusRingType NSFocusRingType) *Browser
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Browser
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Browser
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Browser
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Browser
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Browser
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Browser
@@ -1465,7 +1465,7 @@ type Browserable interface {
 	DefaultColumnWidth() float64
 	CanDragRowsWithIndexesInColumnWithEvent(rowIndexes *foundation.NSIndexSet, column int, event *raw.NSEvent) bool
 	DraggingImageForRowsWithIndexesInColumnWithEventOffset(rowIndexes *foundation.NSIndexSet, column int, event *raw.NSEvent, dragImageOffset *corefoundation.CGPoint) *Image
-	SetDraggingSourceOperationMaskForLocal(mask raw.NSDragOperation, isLocal bool)
+	SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool)
 	EditItemAtIndexPathWithEventSelect(indexPath *foundation.NSIndexPath, event *raw.NSEvent, select_ bool)
 	IsLoaded() bool
 	DoubleAction() objc.SEL
@@ -1514,8 +1514,8 @@ type Browserable interface {
 	FirstVisibleColumn() int
 	LastVisibleColumn() int
 	TitleHeight() float64
-	ColumnResizingType() raw.NSBrowserColumnResizingType
-	SetColumnResizingType(columnResizingType raw.NSBrowserColumnResizingType)
+	ColumnResizingType() NSBrowserColumnResizingType
+	SetColumnResizingType(columnResizingType NSBrowserColumnResizingType)
 	PrefersAllColumnUserResizing() bool
 	SetPrefersAllColumnUserResizing(prefersAllColumnUserResizing bool)
 	RowHeight() float64

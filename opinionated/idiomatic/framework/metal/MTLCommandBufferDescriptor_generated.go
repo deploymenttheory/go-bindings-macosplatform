@@ -42,8 +42,8 @@ func (x *CommandBufferDescriptor) WithRetainedReferences(retainedReferences bool
 }
 
 // WithErrorOptions sets the errorOptions property and returns the receiver for chaining.
-func (x *CommandBufferDescriptor) WithErrorOptions(errorOptions raw.MTLCommandBufferErrorOption) *CommandBufferDescriptor {
-	x.inner.SetErrorOptions(errorOptions)
+func (x *CommandBufferDescriptor) WithErrorOptions(errorOptions MTLCommandBufferErrorOption) *CommandBufferDescriptor {
+	x.inner.SetErrorOptions(raw.MTLCommandBufferErrorOption(errorOptions))
 	return x
 }
 
@@ -64,13 +64,13 @@ func (x *CommandBufferDescriptor) SetRetainedReferences(retainedReferences bool)
 }
 
 // ErrorOptions calls the underlying ErrorOptions.
-func (x *CommandBufferDescriptor) ErrorOptions() raw.MTLCommandBufferErrorOption {
-	return x.inner.ErrorOptions()
+func (x *CommandBufferDescriptor) ErrorOptions() MTLCommandBufferErrorOption {
+	return MTLCommandBufferErrorOption(x.inner.ErrorOptions())
 }
 
 // SetErrorOptions calls the underlying SetErrorOptions.
-func (x *CommandBufferDescriptor) SetErrorOptions(errorOptions raw.MTLCommandBufferErrorOption) {
-	x.inner.SetErrorOptions(errorOptions)
+func (x *CommandBufferDescriptor) SetErrorOptions(errorOptions MTLCommandBufferErrorOption) {
+	x.inner.SetErrorOptions(raw.MTLCommandBufferErrorOption(errorOptions))
 }
 
 // LogState calls the underlying LogState.
@@ -87,12 +87,12 @@ func (x *CommandBufferDescriptor) SetLogState(logState raw.MTLLogState) {
 type CommandBufferDescriptorable interface {
 	Unwrap() *raw.MTLCommandBufferDescriptor
 	WithRetainedReferences(retainedReferences bool) *CommandBufferDescriptor
-	WithErrorOptions(errorOptions raw.MTLCommandBufferErrorOption) *CommandBufferDescriptor
+	WithErrorOptions(errorOptions MTLCommandBufferErrorOption) *CommandBufferDescriptor
 	WithLogState(logState raw.MTLLogState) *CommandBufferDescriptor
 	RetainedReferences() bool
 	SetRetainedReferences(retainedReferences bool)
-	ErrorOptions() raw.MTLCommandBufferErrorOption
-	SetErrorOptions(errorOptions raw.MTLCommandBufferErrorOption)
+	ErrorOptions() MTLCommandBufferErrorOption
+	SetErrorOptions(errorOptions MTLCommandBufferErrorOption)
 	LogState() raw.MTLLogState
 	SetLogState(logState raw.MTLLogState)
 }

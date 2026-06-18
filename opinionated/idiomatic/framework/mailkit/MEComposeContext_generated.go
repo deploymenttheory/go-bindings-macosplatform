@@ -45,8 +45,8 @@ func (x *ComposeContext) OriginalMessage() *Message {
 }
 
 // Action calls the underlying Action.
-func (x *ComposeContext) Action() raw.MEComposeUserAction {
-	return x.inner.Action()
+func (x *ComposeContext) Action() MEComposeUserAction {
+	return MEComposeUserAction(x.inner.Action())
 }
 
 // IsEncrypted calls the underlying IsEncrypted.
@@ -73,7 +73,7 @@ func (x *ComposeContext) ShouldSign() bool {
 type ComposeContextable interface {
 	Unwrap() *raw.MEComposeContext
 	OriginalMessage() *Message
-	Action() raw.MEComposeUserAction
+	Action() MEComposeUserAction
 	IsEncrypted() bool
 	ShouldEncrypt() bool
 	IsSigned() bool

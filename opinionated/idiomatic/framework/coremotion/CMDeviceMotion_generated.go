@@ -70,8 +70,8 @@ func (x *DeviceMotion) Heading() float64 {
 }
 
 // SensorLocation calls the underlying SensorLocation.
-func (x *DeviceMotion) SensorLocation() raw.CMDeviceMotionSensorLocation {
-	return x.inner.SensorLocation()
+func (x *DeviceMotion) SensorLocation() CMDeviceMotionSensorLocation {
+	return CMDeviceMotionSensorLocation(x.inner.SensorLocation())
 }
 
 func (x *DeviceMotion) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
@@ -85,7 +85,7 @@ type DeviceMotionable interface {
 	UserAcceleration() raw.CMAcceleration
 	MagneticField() raw.CMCalibratedMagneticField
 	Heading() float64
-	SensorLocation() raw.CMDeviceMotionSensorLocation
+	SensorLocation() CMDeviceMotionSensorLocation
 }
 
 var _ DeviceMotionable = (*DeviceMotion)(nil)

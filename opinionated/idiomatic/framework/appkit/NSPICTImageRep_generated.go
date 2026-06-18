@@ -81,8 +81,8 @@ func (x *PICTImageRep) WithPixelsHigh(pixelsHigh int) *PICTImageRep {
 }
 
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *PICTImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *PICTImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+func (x *PICTImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *PICTImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
@@ -108,7 +108,7 @@ type PICTImageRepable interface {
 	WithBitsPerSample(bitsPerSample int) *PICTImageRep
 	WithPixelsWide(pixelsWide int) *PICTImageRep
 	WithPixelsHigh(pixelsHigh int) *PICTImageRep
-	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *PICTImageRep
+	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *PICTImageRep
 	PICTRepresentation() *foundation.NSData
 	BoundingBox() corefoundation.CGRect
 }

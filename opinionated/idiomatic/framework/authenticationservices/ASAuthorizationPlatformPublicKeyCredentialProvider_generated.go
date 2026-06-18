@@ -50,8 +50,8 @@ func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegis
 }
 
 // CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle calls the underlying CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle.
-func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge *foundation.NSData, name string, userID *foundation.NSData, requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
-	_r := x.inner.CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge, foundation.NSStringStringWithUTF8String(name), userID, requestStyle)
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge *foundation.NSData, name string, userID *foundation.NSData, requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	_r := x.inner.CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge, foundation.NSStringStringWithUTF8String(name), userID, raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle(requestStyle))
 	if _r == nil {
 		return nil
 	}
@@ -80,7 +80,7 @@ func (x *AuthorizationPlatformPublicKeyCredentialProvider) RelyingPartyIdentifie
 type AuthorizationPlatformPublicKeyCredentialProviderable interface {
 	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialProvider
 	CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge *foundation.NSData, name string, userID *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
-	CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge *foundation.NSData, name string, userID *foundation.NSData, requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge *foundation.NSData, name string, userID *foundation.NSData, requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
 	CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
 	RelyingPartyIdentifier() string
 }

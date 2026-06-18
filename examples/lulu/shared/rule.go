@@ -33,9 +33,9 @@ type Rule struct {
 	Creation   time.Time  `json:"creation"`
 	Expiration *time.Time `json:"expiration,omitempty"`
 
-	// Managed is set on rules created by declarative `lulu apply`. Only managed
-	// rules are pruned during reconciliation, so hand-added rules are never
-	// removed by an apply.
+	// Managed marks rules that originate from the declarative config (provenance,
+	// e.g. for display). Reconciliation is authoritative and prunes any rule not
+	// in the config regardless of this flag, so it is not a safety gate.
 	Managed bool `json:"managed,omitempty"`
 }
 

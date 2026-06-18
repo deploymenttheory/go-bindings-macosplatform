@@ -70,8 +70,8 @@ func (x *PDFInfo) WithTagNames(items ...*foundation.NSString) *PDFInfo {
 }
 
 // WithOrientation sets the orientation property and returns the receiver for chaining.
-func (x *PDFInfo) WithOrientation(orientation raw.NSPaperOrientation) *PDFInfo {
-	x.inner.SetOrientation(orientation)
+func (x *PDFInfo) WithOrientation(orientation NSPaperOrientation) *PDFInfo {
+	x.inner.SetOrientation(raw.NSPaperOrientation(orientation))
 	return x
 }
 
@@ -118,13 +118,13 @@ func (x *PDFInfo) SetTagNames(tagNames *foundation.NSArray[*foundation.NSString]
 }
 
 // Orientation calls the underlying Orientation.
-func (x *PDFInfo) Orientation() raw.NSPaperOrientation {
-	return x.inner.Orientation()
+func (x *PDFInfo) Orientation() NSPaperOrientation {
+	return NSPaperOrientation(x.inner.Orientation())
 }
 
 // SetOrientation calls the underlying SetOrientation.
-func (x *PDFInfo) SetOrientation(orientation raw.NSPaperOrientation) {
-	x.inner.SetOrientation(orientation)
+func (x *PDFInfo) SetOrientation(orientation NSPaperOrientation) {
+	x.inner.SetOrientation(raw.NSPaperOrientation(orientation))
 }
 
 // PaperSize calls the underlying PaperSize.
@@ -148,7 +148,7 @@ type PDFInfoable interface {
 	WithURL(uRL string) *PDFInfo
 	WithFileExtensionHidden(fileExtensionHidden bool) *PDFInfo
 	WithTagNames(items ...*foundation.NSString) *PDFInfo
-	WithOrientation(orientation raw.NSPaperOrientation) *PDFInfo
+	WithOrientation(orientation NSPaperOrientation) *PDFInfo
 	WithPaperSize(paperSize corefoundation.CGSize) *PDFInfo
 	URL() *foundation.NSURL
 	SetURL(uRL string)
@@ -156,8 +156,8 @@ type PDFInfoable interface {
 	SetFileExtensionHidden(fileExtensionHidden bool)
 	TagNames() []string
 	SetTagNames(tagNames *foundation.NSArray[*foundation.NSString])
-	Orientation() raw.NSPaperOrientation
-	SetOrientation(orientation raw.NSPaperOrientation)
+	Orientation() NSPaperOrientation
+	SetOrientation(orientation NSPaperOrientation)
 	PaperSize() corefoundation.CGSize
 	SetPaperSize(paperSize corefoundation.CGSize)
 	Attributes() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]

@@ -3125,13 +3125,13 @@ func RbRationalRaw(arg uint, arg2 uint) uint {
 }
 
 // RbReadwriteSysFail calls [raw.RbReadwriteSysFail] (C function rb_readwrite_sys_fail).
-func RbReadwriteSysFail(arg raw.Rb_io_wait_readwrite, arg2 string) {
-	raw.RbReadwriteSysFail(arg, arg2)
+func RbReadwriteSysFail(arg Rb_io_wait_readwrite, arg2 string) {
+	raw.RbReadwriteSysFail(raw.Rb_io_wait_readwrite(arg), arg2)
 }
 
 // RbReadwriteSyserrFail calls [raw.RbReadwriteSyserrFail] (C function rb_readwrite_syserr_fail).
-func RbReadwriteSyserrFail(arg raw.Rb_io_wait_readwrite, arg2 int, arg3 string) {
-	raw.RbReadwriteSyserrFail(arg, arg2, arg3)
+func RbReadwriteSyserrFail(arg Rb_io_wait_readwrite, arg2 int, arg3 string) {
+	raw.RbReadwriteSyserrFail(raw.Rb_io_wait_readwrite(arg), arg2, arg3)
 }
 
 // RbRegAlloc calls [raw.RbRegAlloc] (C function rb_reg_alloc).

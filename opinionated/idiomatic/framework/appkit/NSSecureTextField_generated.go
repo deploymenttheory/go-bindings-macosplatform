@@ -101,8 +101,8 @@ func (x *SecureTextField) WithDelegate(delegate raw.NSTextFieldDelegate) *Secure
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *SecureTextField) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SecureTextField {
-	x.inner.NSTextField.SetBezelStyle(bezelStyle)
+func (x *SecureTextField) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *SecureTextField {
+	x.inner.NSTextField.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -125,8 +125,8 @@ func (x *SecureTextField) WithAllowsDefaultTighteningForTruncation(allowsDefault
 }
 
 // WithLineBreakStrategy sets the lineBreakStrategy property and returns the receiver for chaining.
-func (x *SecureTextField) WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *SecureTextField {
-	x.inner.NSTextField.SetLineBreakStrategy(lineBreakStrategy)
+func (x *SecureTextField) WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *SecureTextField {
+	x.inner.NSTextField.SetLineBreakStrategy(raw.NSLineBreakStrategy(lineBreakStrategy))
 	return x
 }
 
@@ -257,8 +257,8 @@ func (x *SecureTextField) WithHighlighted(highlighted bool) *SecureTextField {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *SecureTextField) WithControlSize(controlSize raw.NSControlSize) *SecureTextField {
-	x.inner.NSTextField.NSControl.SetControlSize(controlSize)
+func (x *SecureTextField) WithControlSize(controlSize NSControlSize) *SecureTextField {
+	x.inner.NSTextField.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -323,20 +323,20 @@ func (x *SecureTextField) WithUsesSingleLineMode(usesSingleLineMode bool) *Secur
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *SecureTextField) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SecureTextField {
-	x.inner.NSTextField.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *SecureTextField) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SecureTextField {
+	x.inner.NSTextField.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *SecureTextField) WithAlignment(alignment raw.NSTextAlignment) *SecureTextField {
-	x.inner.NSTextField.NSControl.SetAlignment(alignment)
+func (x *SecureTextField) WithAlignment(alignment NSTextAlignment) *SecureTextField {
+	x.inner.NSTextField.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *SecureTextField) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SecureTextField {
-	x.inner.NSTextField.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *SecureTextField) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SecureTextField {
+	x.inner.NSTextField.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -389,8 +389,8 @@ func (x *SecureTextField) WithAutoresizesSubviews(autoresizesSubviews bool) *Sec
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *SecureTextField) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *SecureTextField) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -449,14 +449,14 @@ func (x *SecureTextField) WithWantsRestingTouches(wantsRestingTouches bool) *Sec
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *SecureTextField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *SecureTextField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *SecureTextField) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *SecureTextField) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -563,8 +563,8 @@ func (x *SecureTextField) WithToolTip(toolTip string) *SecureTextField {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SecureTextField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *SecureTextField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -581,8 +581,8 @@ func (x *SecureTextField) WithNextKeyView(nextKeyView ViewProvider) *SecureTextF
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SecureTextField) WithFocusRingType(focusRingType raw.NSFocusRingType) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *SecureTextField) WithFocusRingType(focusRingType NSFocusRingType) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -605,8 +605,8 @@ func (x *SecureTextField) WithGestureRecognizers(items ...GestureRecognizerProvi
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *SecureTextField) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SecureTextField {
-	x.inner.NSTextField.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *SecureTextField) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SecureTextField {
+	x.inner.NSTextField.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -717,11 +717,11 @@ type SecureTextFieldable interface {
 	WithEditable(editable bool) *SecureTextField
 	WithSelectable(selectable bool) *SecureTextField
 	WithDelegate(delegate raw.NSTextFieldDelegate) *SecureTextField
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SecureTextField
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *SecureTextField
 	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *SecureTextField
 	WithMaximumNumberOfLines(maximumNumberOfLines int) *SecureTextField
 	WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *SecureTextField
-	WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *SecureTextField
+	WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *SecureTextField
 	WithAllowsWritingTools(allowsWritingTools bool) *SecureTextField
 	WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *SecureTextField
 	WithPlaceholderStrings(items ...*foundation.NSString) *SecureTextField
@@ -739,7 +739,7 @@ type SecureTextFieldable interface {
 	WithEnabled(enabled bool) *SecureTextField
 	WithRefusesFirstResponder(refusesFirstResponder bool) *SecureTextField
 	WithHighlighted(highlighted bool) *SecureTextField
-	WithControlSize(controlSize raw.NSControlSize) *SecureTextField
+	WithControlSize(controlSize NSControlSize) *SecureTextField
 	WithFormatter(formatter *foundation.NSFormatter) *SecureTextField
 	WithObjectValue(objectValue objc.ID) *SecureTextField
 	WithStringValue(stringValue string) *SecureTextField
@@ -750,16 +750,16 @@ type SecureTextFieldable interface {
 	WithDoubleValue(doubleValue float64) *SecureTextField
 	WithFont(font *Font) *SecureTextField
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SecureTextField
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SecureTextField
-	WithAlignment(alignment raw.NSTextAlignment) *SecureTextField
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SecureTextField
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *SecureTextField
+	WithAlignment(alignment NSTextAlignment) *SecureTextField
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SecureTextField
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SecureTextField
 	WithCell(cell CellProvider) *SecureTextField
 	WithSubviews(items ...ViewProvider) *SecureTextField
 	WithHidden(hidden bool) *SecureTextField
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SecureTextField
 	WithAutoresizesSubviews(autoresizesSubviews bool) *SecureTextField
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *SecureTextField
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SecureTextField
 	WithFrame(frame corefoundation.CGRect) *SecureTextField
 	WithFrameRotation(frameRotation float64) *SecureTextField
 	WithFrameCenterRotation(frameCenterRotation float64) *SecureTextField
@@ -769,8 +769,8 @@ type SecureTextFieldable interface {
 	WithNeedsDisplay(needsDisplay bool) *SecureTextField
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *SecureTextField
 	WithWantsRestingTouches(wantsRestingTouches bool) *SecureTextField
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *SecureTextField
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *SecureTextField
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SecureTextField
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SecureTextField
 	WithWantsLayer(wantsLayer bool) *SecureTextField
 	WithLayer(layer *quartzcore.CALayer) *SecureTextField
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SecureTextField
@@ -784,12 +784,12 @@ type SecureTextFieldable interface {
 	WithClipsToBounds(clipsToBounds bool) *SecureTextField
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SecureTextField
 	WithToolTip(toolTip string) *SecureTextField
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SecureTextField
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SecureTextField
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SecureTextField
 	WithNextKeyView(nextKeyView ViewProvider) *SecureTextField
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *SecureTextField
+	WithFocusRingType(focusRingType NSFocusRingType) *SecureTextField
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *SecureTextField
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SecureTextField
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SecureTextField
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SecureTextField
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SecureTextField
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SecureTextField

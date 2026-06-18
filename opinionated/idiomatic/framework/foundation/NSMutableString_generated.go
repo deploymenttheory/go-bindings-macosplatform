@@ -74,8 +74,8 @@ func (x *MutableString) SetString(aString string) {
 }
 
 // ReplaceOccurrencesOfStringWithStringOptionsRange calls the underlying ReplaceOccurrencesOfStringWithStringOptionsRange.
-func (x *MutableString) ReplaceOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options raw.NSStringCompareOptions, searchRange raw.NSRange) uint {
-	return x.inner.ReplaceOccurrencesOfStringWithStringOptionsRange(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement), options, searchRange)
+func (x *MutableString) ReplaceOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options NSStringCompareOptions, searchRange raw.NSRange) uint {
+	return x.inner.ReplaceOccurrencesOfStringWithStringOptionsRange(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement), raw.NSStringCompareOptions(options), searchRange)
 }
 
 // ApplyTransformReverseRangeUpdatedRange calls the underlying ApplyTransformReverseRangeUpdatedRange.
@@ -97,7 +97,7 @@ type MutableStringable interface {
 	AppendString(aString string)
 	AppendFormat(format string)
 	SetString(aString string)
-	ReplaceOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options raw.NSStringCompareOptions, searchRange raw.NSRange) uint
+	ReplaceOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options NSStringCompareOptions, searchRange raw.NSRange) uint
 	ApplyTransformReverseRangeUpdatedRange(transform *raw.NSString, reverse bool, range_ raw.NSRange, resultingRange *raw.NSRange) bool
 }
 

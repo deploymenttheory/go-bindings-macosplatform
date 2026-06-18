@@ -149,8 +149,8 @@ func (x *ComboBox) WithDelegate(delegate raw.NSTextFieldDelegate) *ComboBox {
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *ComboBox) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *ComboBox {
-	x.inner.NSTextField.SetBezelStyle(bezelStyle)
+func (x *ComboBox) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *ComboBox {
+	x.inner.NSTextField.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -173,8 +173,8 @@ func (x *ComboBox) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighten
 }
 
 // WithLineBreakStrategy sets the lineBreakStrategy property and returns the receiver for chaining.
-func (x *ComboBox) WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *ComboBox {
-	x.inner.NSTextField.SetLineBreakStrategy(lineBreakStrategy)
+func (x *ComboBox) WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *ComboBox {
+	x.inner.NSTextField.SetLineBreakStrategy(raw.NSLineBreakStrategy(lineBreakStrategy))
 	return x
 }
 
@@ -305,8 +305,8 @@ func (x *ComboBox) WithHighlighted(highlighted bool) *ComboBox {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ComboBox) WithControlSize(controlSize raw.NSControlSize) *ComboBox {
-	x.inner.NSTextField.NSControl.SetControlSize(controlSize)
+func (x *ComboBox) WithControlSize(controlSize NSControlSize) *ComboBox {
+	x.inner.NSTextField.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -371,20 +371,20 @@ func (x *ComboBox) WithUsesSingleLineMode(usesSingleLineMode bool) *ComboBox {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ComboBox) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ComboBox {
-	x.inner.NSTextField.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *ComboBox) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboBox {
+	x.inner.NSTextField.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ComboBox) WithAlignment(alignment raw.NSTextAlignment) *ComboBox {
-	x.inner.NSTextField.NSControl.SetAlignment(alignment)
+func (x *ComboBox) WithAlignment(alignment NSTextAlignment) *ComboBox {
+	x.inner.NSTextField.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ComboBox) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ComboBox {
-	x.inner.NSTextField.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *ComboBox) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboBox {
+	x.inner.NSTextField.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -437,8 +437,8 @@ func (x *ComboBox) WithAutoresizesSubviews(autoresizesSubviews bool) *ComboBox {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ComboBox) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *ComboBox) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -497,14 +497,14 @@ func (x *ComboBox) WithWantsRestingTouches(wantsRestingTouches bool) *ComboBox {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ComboBox) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *ComboBox) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ComboBox) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *ComboBox) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -611,8 +611,8 @@ func (x *ComboBox) WithToolTip(toolTip string) *ComboBox {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ComboBox) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ComboBox) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -629,8 +629,8 @@ func (x *ComboBox) WithNextKeyView(nextKeyView ViewProvider) *ComboBox {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ComboBox) WithFocusRingType(focusRingType raw.NSFocusRingType) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *ComboBox) WithFocusRingType(focusRingType NSFocusRingType) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -653,8 +653,8 @@ func (x *ComboBox) WithGestureRecognizers(items ...GestureRecognizerProvider) *C
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ComboBox) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ComboBox {
-	x.inner.NSTextField.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ComboBox) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ComboBox {
+	x.inner.NSTextField.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -948,11 +948,11 @@ type ComboBoxable interface {
 	WithEditable(editable bool) *ComboBox
 	WithSelectable(selectable bool) *ComboBox
 	WithDelegate(delegate raw.NSTextFieldDelegate) *ComboBox
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *ComboBox
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *ComboBox
 	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *ComboBox
 	WithMaximumNumberOfLines(maximumNumberOfLines int) *ComboBox
 	WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *ComboBox
-	WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *ComboBox
+	WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *ComboBox
 	WithAllowsWritingTools(allowsWritingTools bool) *ComboBox
 	WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *ComboBox
 	WithPlaceholderStrings(items ...*foundation.NSString) *ComboBox
@@ -970,7 +970,7 @@ type ComboBoxable interface {
 	WithEnabled(enabled bool) *ComboBox
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ComboBox
 	WithHighlighted(highlighted bool) *ComboBox
-	WithControlSize(controlSize raw.NSControlSize) *ComboBox
+	WithControlSize(controlSize NSControlSize) *ComboBox
 	WithFormatter(formatter *foundation.NSFormatter) *ComboBox
 	WithObjectValue(objectValue objc.ID) *ComboBox
 	WithStringValue(stringValue string) *ComboBox
@@ -981,16 +981,16 @@ type ComboBoxable interface {
 	WithDoubleValue(doubleValue float64) *ComboBox
 	WithFont(font *Font) *ComboBox
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ComboBox
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ComboBox
-	WithAlignment(alignment raw.NSTextAlignment) *ComboBox
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ComboBox
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboBox
+	WithAlignment(alignment NSTextAlignment) *ComboBox
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboBox
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ComboBox
 	WithCell(cell CellProvider) *ComboBox
 	WithSubviews(items ...ViewProvider) *ComboBox
 	WithHidden(hidden bool) *ComboBox
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboBox
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ComboBox
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ComboBox
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ComboBox
 	WithFrame(frame corefoundation.CGRect) *ComboBox
 	WithFrameRotation(frameRotation float64) *ComboBox
 	WithFrameCenterRotation(frameCenterRotation float64) *ComboBox
@@ -1000,8 +1000,8 @@ type ComboBoxable interface {
 	WithNeedsDisplay(needsDisplay bool) *ComboBox
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboBox
 	WithWantsRestingTouches(wantsRestingTouches bool) *ComboBox
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ComboBox
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ComboBox
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ComboBox
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ComboBox
 	WithWantsLayer(wantsLayer bool) *ComboBox
 	WithLayer(layer *quartzcore.CALayer) *ComboBox
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboBox
@@ -1015,12 +1015,12 @@ type ComboBoxable interface {
 	WithClipsToBounds(clipsToBounds bool) *ComboBox
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboBox
 	WithToolTip(toolTip string) *ComboBox
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ComboBox
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ComboBox
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboBox
 	WithNextKeyView(nextKeyView ViewProvider) *ComboBox
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ComboBox
+	WithFocusRingType(focusRingType NSFocusRingType) *ComboBox
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboBox
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ComboBox
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ComboBox
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboBox
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboBox
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboBox

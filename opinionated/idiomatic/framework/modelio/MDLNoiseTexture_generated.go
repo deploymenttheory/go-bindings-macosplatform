@@ -32,23 +32,23 @@ func NoiseTextureFromID(id objc.ID) *NoiseTexture {
 }
 
 // NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding creates a new [NoiseTexture].
-func NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding(smoothness float32, name string, textureDimensions unsafe.Pointer, channelEncoding raw.MDLTextureChannelEncoding) *NoiseTexture {
+func NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding(smoothness float32, name string, textureDimensions unsafe.Pointer, channelEncoding MDLTextureChannelEncoding) *NoiseTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNoiseTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initVectorNoiseWithSmoothness:name:textureDimensions:channelEncoding:"), smoothness, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions, channelEncoding)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initVectorNoiseWithSmoothness:name:textureDimensions:channelEncoding:"), smoothness, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions, raw.MDLTextureChannelEncoding(channelEncoding))
 	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
 }
 
 // NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale creates a new [NoiseTexture].
-func NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale(smoothness float32, name string, textureDimensions unsafe.Pointer, channelCount int, channelEncoding raw.MDLTextureChannelEncoding, grayscale bool) *NoiseTexture {
+func NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale(smoothness float32, name string, textureDimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, grayscale bool) *NoiseTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNoiseTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initScalarNoiseWithSmoothness:name:textureDimensions:channelCount:channelEncoding:grayscale:"), smoothness, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions, channelCount, channelEncoding, grayscale)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initScalarNoiseWithSmoothness:name:textureDimensions:channelCount:channelEncoding:grayscale:"), smoothness, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions, channelCount, raw.MDLTextureChannelEncoding(channelEncoding), grayscale)
 	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
 }
 
 // NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding creates a new [NoiseTexture].
-func NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding(frequency float32, name string, textureDimensions unsafe.Pointer, channelEncoding raw.MDLTextureChannelEncoding) *NoiseTexture {
+func NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding(frequency float32, name string, textureDimensions unsafe.Pointer, channelEncoding MDLTextureChannelEncoding) *NoiseTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNoiseTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCellularNoiseWithFrequency:name:textureDimensions:channelEncoding:"), frequency, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions, channelEncoding)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCellularNoiseWithFrequency:name:textureDimensions:channelEncoding:"), frequency, foundation.NSStringStringWithUTF8String(name).Ptr(), textureDimensions, raw.MDLTextureChannelEncoding(channelEncoding))
 	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
 }
 

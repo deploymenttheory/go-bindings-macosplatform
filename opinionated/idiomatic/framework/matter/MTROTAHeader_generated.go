@@ -81,8 +81,8 @@ func (x *MTROTAHeader) WithImageDigest(imageDigest *foundation.NSData) *MTROTAHe
 }
 
 // WithImageDigestType sets the imageDigestType property and returns the receiver for chaining.
-func (x *MTROTAHeader) WithImageDigestType(imageDigestType raw.MTROTAImageDigestType) *MTROTAHeader {
-	x.inner.SetImageDigestType(imageDigestType)
+func (x *MTROTAHeader) WithImageDigestType(imageDigestType MTROTAImageDigestType) *MTROTAHeader {
+	x.inner.SetImageDigestType(raw.MTROTAImageDigestType(imageDigestType))
 	return x
 }
 
@@ -177,13 +177,13 @@ func (x *MTROTAHeader) SetImageDigest(imageDigest *foundation.NSData) {
 }
 
 // ImageDigestType calls the underlying ImageDigestType.
-func (x *MTROTAHeader) ImageDigestType() raw.MTROTAImageDigestType {
-	return x.inner.ImageDigestType()
+func (x *MTROTAHeader) ImageDigestType() MTROTAImageDigestType {
+	return MTROTAImageDigestType(x.inner.ImageDigestType())
 }
 
 // SetImageDigestType calls the underlying SetImageDigestType.
-func (x *MTROTAHeader) SetImageDigestType(imageDigestType raw.MTROTAImageDigestType) {
-	x.inner.SetImageDigestType(imageDigestType)
+func (x *MTROTAHeader) SetImageDigestType(imageDigestType MTROTAImageDigestType) {
+	x.inner.SetImageDigestType(raw.MTROTAImageDigestType(imageDigestType))
 }
 
 // MinApplicableVersion calls the underlying MinApplicableVersion.
@@ -216,7 +216,7 @@ type MTROTAHeaderable interface {
 	WithSoftwareVersionString(softwareVersionString string) *MTROTAHeader
 	WithReleaseNotesURL(releaseNotesURL string) *MTROTAHeader
 	WithImageDigest(imageDigest *foundation.NSData) *MTROTAHeader
-	WithImageDigestType(imageDigestType raw.MTROTAImageDigestType) *MTROTAHeader
+	WithImageDigestType(imageDigestType MTROTAImageDigestType) *MTROTAHeader
 	WithMinApplicableVersion(minApplicableVersion *foundation.NSNumber) *MTROTAHeader
 	WithMaxApplicableVersion(maxApplicableVersion *foundation.NSNumber) *MTROTAHeader
 	VendorID() *foundation.NSNumber
@@ -233,8 +233,8 @@ type MTROTAHeaderable interface {
 	SetReleaseNotesURL(releaseNotesURL string)
 	ImageDigest() *foundation.NSData
 	SetImageDigest(imageDigest *foundation.NSData)
-	ImageDigestType() raw.MTROTAImageDigestType
-	SetImageDigestType(imageDigestType raw.MTROTAImageDigestType)
+	ImageDigestType() MTROTAImageDigestType
+	SetImageDigestType(imageDigestType MTROTAImageDigestType)
 	MinApplicableVersion() *foundation.NSNumber
 	SetMinApplicableVersion(minApplicableVersion *foundation.NSNumber)
 	MaxApplicableVersion() *foundation.NSNumber

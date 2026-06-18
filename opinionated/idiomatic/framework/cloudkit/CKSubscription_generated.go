@@ -52,8 +52,8 @@ func (x *Subscription) SubscriptionID() string {
 }
 
 // SubscriptionType calls the underlying SubscriptionType.
-func (x *Subscription) SubscriptionType() raw.CKSubscriptionType {
-	return x.inner.SubscriptionType()
+func (x *Subscription) SubscriptionType() CKSubscriptionType {
+	return CKSubscriptionType(x.inner.SubscriptionType())
 }
 
 // NotificationInfo calls the underlying NotificationInfo.
@@ -77,7 +77,7 @@ type Subscriptionable interface {
 	Unwrap() *raw.CKSubscription
 	WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription
 	SubscriptionID() string
-	SubscriptionType() raw.CKSubscriptionType
+	SubscriptionType() CKSubscriptionType
 	NotificationInfo() *NotificationInfo
 	SetNotificationInfo(notificationInfo *raw.CKNotificationInfo)
 }

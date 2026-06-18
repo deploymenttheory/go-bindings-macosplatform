@@ -59,8 +59,8 @@ func (x *ColorPicker) DetachColorList(colorList *raw.NSColorList) {
 }
 
 // SetMode calls the underlying SetMode.
-func (x *ColorPicker) SetMode(mode raw.NSColorPanelMode) {
-	x.inner.SetMode(mode)
+func (x *ColorPicker) SetMode(mode NSColorPanelMode) {
+	x.inner.SetMode(raw.NSColorPanelMode(mode))
 }
 
 // ColorPanel calls the underlying ColorPanel.
@@ -102,7 +102,7 @@ type ColorPickerable interface {
 	ViewSizeChanged(sender objc.ID)
 	AttachColorList(colorList *raw.NSColorList)
 	DetachColorList(colorList *raw.NSColorList)
-	SetMode(mode raw.NSColorPanelMode)
+	SetMode(mode NSColorPanelMode)
 	ColorPanel() *ColorPanel
 	ProvideNewButtonImage() *Image
 	ButtonToolTip() string

@@ -184,13 +184,13 @@ func (x *NNLossGradient) EncodeBatchToCommandBufferSourceGradientsSourceImagesLa
 }
 
 // LossType calls the underlying LossType.
-func (x *NNLossGradient) LossType() raw.MPSCNNLossType {
-	return x.inner.LossType()
+func (x *NNLossGradient) LossType() MPSCNNLossType {
+	return MPSCNNLossType(x.inner.LossType())
 }
 
 // ReductionType calls the underlying ReductionType.
-func (x *NNLossGradient) ReductionType() raw.MPSCNNReductionType {
-	return x.inner.ReductionType()
+func (x *NNLossGradient) ReductionType() MPSCNNReductionType {
+	return MPSCNNReductionType(x.inner.ReductionType())
 }
 
 // ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
@@ -283,8 +283,8 @@ type NNLossGradientable interface {
 	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNLossGradient
 	EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, sourceStates unsafe.Pointer) unsafe.Pointer
 	EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, sourceStates unsafe.Pointer, destinationGradients unsafe.Pointer)
-	LossType() raw.MPSCNNLossType
-	ReductionType() raw.MPSCNNReductionType
+	LossType() MPSCNNLossType
+	ReductionType() MPSCNNReductionType
 	ReduceAcrossBatch() bool
 	NumberOfClasses() uint
 	Weight() float32

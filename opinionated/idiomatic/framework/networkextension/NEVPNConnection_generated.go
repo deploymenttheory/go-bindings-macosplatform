@@ -74,8 +74,8 @@ func (x *NEVPNConnection) FetchLastDisconnectError(ctx context.Context) error {
 }
 
 // Status calls the underlying Status.
-func (x *NEVPNConnection) Status() raw.NEVPNStatus {
-	return x.inner.Status()
+func (x *NEVPNConnection) Status() NEVPNStatus {
+	return NEVPNStatus(x.inner.Status())
 }
 
 // ConnectedDate calls the underlying ConnectedDate.
@@ -101,7 +101,7 @@ type NEVPNConnectionable interface {
 	StartVPNTunnelWithOptionsAndReturnError(options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) (bool, error)
 	StopVPNTunnel()
 	FetchLastDisconnectError(ctx context.Context) error
-	Status() raw.NEVPNStatus
+	Status() NEVPNStatus
 	ConnectedDate() *foundation.NSDate
 	Manager() *NEVPNManager
 }

@@ -38,14 +38,14 @@ func NewCNNConvolutionNodeWithSourceWeights(sourceNode *raw.MPSNNImageNode, weig
 }
 
 // WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
-func (x *CNNConvolutionNode) WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNConvolutionNode {
-	x.inner.SetTrainingStyle(trainingStyle)
+func (x *CNNConvolutionNode) WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNConvolutionNode {
+	x.inner.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
 	return x
 }
 
 // WithAccumulatorPrecision sets the accumulatorPrecision property and returns the receiver for chaining.
-func (x *CNNConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode {
-	x.inner.SetAccumulatorPrecision(accumulatorPrecision)
+func (x *CNNConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode {
+	x.inner.SetAccumulatorPrecision(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecision))
 	return x
 }
 
@@ -62,23 +62,23 @@ func (x *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
 }
 
 // TrainingStyle calls the underlying TrainingStyle.
-func (x *CNNConvolutionNode) TrainingStyle() raw.MPSNNTrainingStyle {
-	return x.inner.TrainingStyle()
+func (x *CNNConvolutionNode) TrainingStyle() MPSNNTrainingStyle {
+	return MPSNNTrainingStyle(x.inner.TrainingStyle())
 }
 
 // SetTrainingStyle calls the underlying SetTrainingStyle.
-func (x *CNNConvolutionNode) SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) {
-	x.inner.SetTrainingStyle(trainingStyle)
+func (x *CNNConvolutionNode) SetTrainingStyle(trainingStyle MPSNNTrainingStyle) {
+	x.inner.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
 }
 
 // AccumulatorPrecision calls the underlying AccumulatorPrecision.
-func (x *CNNConvolutionNode) AccumulatorPrecision() raw.MPSNNConvolutionAccumulatorPrecisionOption {
-	return x.inner.AccumulatorPrecision()
+func (x *CNNConvolutionNode) AccumulatorPrecision() MPSNNConvolutionAccumulatorPrecisionOption {
+	return MPSNNConvolutionAccumulatorPrecisionOption(x.inner.AccumulatorPrecision())
 }
 
 // SetAccumulatorPrecision calls the underlying SetAccumulatorPrecision.
-func (x *CNNConvolutionNode) SetAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) {
-	x.inner.SetAccumulatorPrecision(accumulatorPrecision)
+func (x *CNNConvolutionNode) SetAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) {
+	x.inner.SetAccumulatorPrecision(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecision))
 }
 
 // ConvolutionGradientState calls the underlying ConvolutionGradientState.
@@ -97,14 +97,14 @@ func (x *CNNConvolutionNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.i
 // CNNConvolutionNodeable is the interface implemented by [CNNConvolutionNode], for mocking and DI.
 type CNNConvolutionNodeable interface {
 	Unwrap() *raw.MPSCNNConvolutionNode
-	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNConvolutionNode
-	WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode
+	WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNConvolutionNode
+	WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode
 	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNConvolutionNode
 	WithLabel(label string) *CNNConvolutionNode
-	TrainingStyle() raw.MPSNNTrainingStyle
-	SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle)
-	AccumulatorPrecision() raw.MPSNNConvolutionAccumulatorPrecisionOption
-	SetAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption)
+	TrainingStyle() MPSNNTrainingStyle
+	SetTrainingStyle(trainingStyle MPSNNTrainingStyle)
+	AccumulatorPrecision() MPSNNConvolutionAccumulatorPrecisionOption
+	SetAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption)
 	ConvolutionGradientState() *CNNConvolutionGradientStateNode
 }
 

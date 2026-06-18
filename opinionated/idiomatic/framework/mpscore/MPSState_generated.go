@@ -96,8 +96,8 @@ func (x *State) TextureInfoAtIndex(index uint) raw.MPSStateTextureInfo {
 }
 
 // ResourceTypeAtIndex calls the underlying ResourceTypeAtIndex.
-func (x *State) ResourceTypeAtIndex(index uint) raw.MPSStateResourceType {
-	return x.inner.ResourceTypeAtIndex(index)
+func (x *State) ResourceTypeAtIndex(index uint) MPSStateResourceType {
+	return MPSStateResourceType(x.inner.ResourceTypeAtIndex(index))
 }
 
 // SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
@@ -166,7 +166,7 @@ type Stateable interface {
 	ResourceAtIndexAllocateMemory(index uint, allocateMemory bool) metal.MTLResource
 	BufferSizeAtIndex(index uint) uint
 	TextureInfoAtIndex(index uint) raw.MPSStateTextureInfo
-	ResourceTypeAtIndex(index uint) raw.MPSStateResourceType
+	ResourceTypeAtIndex(index uint) MPSStateResourceType
 	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
 	ResourceSize() uint
 	DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor(sourceImages *foundation.NSArray[*raw.MPSImage], sourceStates *foundation.NSArray[*raw.MPSState], kernel *raw.MPSKernel, inDescriptor *raw.MPSImageDescriptor) *ImageDescriptor

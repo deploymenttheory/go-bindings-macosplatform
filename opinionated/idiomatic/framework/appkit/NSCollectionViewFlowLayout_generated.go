@@ -62,8 +62,8 @@ func (x *CollectionViewFlowLayout) WithEstimatedItemSize(estimatedItemSize coref
 }
 
 // WithScrollDirection sets the scrollDirection property and returns the receiver for chaining.
-func (x *CollectionViewFlowLayout) WithScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection) *CollectionViewFlowLayout {
-	x.inner.SetScrollDirection(scrollDirection)
+func (x *CollectionViewFlowLayout) WithScrollDirection(scrollDirection NSCollectionViewScrollDirection) *CollectionViewFlowLayout {
+	x.inner.SetScrollDirection(raw.NSCollectionViewScrollDirection(scrollDirection))
 	return x
 }
 
@@ -153,13 +153,13 @@ func (x *CollectionViewFlowLayout) SetEstimatedItemSize(estimatedItemSize corefo
 }
 
 // ScrollDirection calls the underlying ScrollDirection.
-func (x *CollectionViewFlowLayout) ScrollDirection() raw.NSCollectionViewScrollDirection {
-	return x.inner.ScrollDirection()
+func (x *CollectionViewFlowLayout) ScrollDirection() NSCollectionViewScrollDirection {
+	return NSCollectionViewScrollDirection(x.inner.ScrollDirection())
 }
 
 // SetScrollDirection calls the underlying SetScrollDirection.
-func (x *CollectionViewFlowLayout) SetScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection) {
-	x.inner.SetScrollDirection(scrollDirection)
+func (x *CollectionViewFlowLayout) SetScrollDirection(scrollDirection NSCollectionViewScrollDirection) {
+	x.inner.SetScrollDirection(raw.NSCollectionViewScrollDirection(scrollDirection))
 }
 
 // HeaderReferenceSize calls the underlying HeaderReferenceSize.
@@ -223,7 +223,7 @@ type CollectionViewFlowLayoutable interface {
 	WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewFlowLayout
 	WithItemSize(itemSize corefoundation.CGSize) *CollectionViewFlowLayout
 	WithEstimatedItemSize(estimatedItemSize corefoundation.CGSize) *CollectionViewFlowLayout
-	WithScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection) *CollectionViewFlowLayout
+	WithScrollDirection(scrollDirection NSCollectionViewScrollDirection) *CollectionViewFlowLayout
 	WithHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout
 	WithFooterReferenceSize(footerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout
 	WithSectionInset(sectionInset foundation.NSEdgeInsets) *CollectionViewFlowLayout
@@ -240,8 +240,8 @@ type CollectionViewFlowLayoutable interface {
 	SetItemSize(itemSize corefoundation.CGSize)
 	EstimatedItemSize() corefoundation.CGSize
 	SetEstimatedItemSize(estimatedItemSize corefoundation.CGSize)
-	ScrollDirection() raw.NSCollectionViewScrollDirection
-	SetScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection)
+	ScrollDirection() NSCollectionViewScrollDirection
+	SetScrollDirection(scrollDirection NSCollectionViewScrollDirection)
 	HeaderReferenceSize() corefoundation.CGSize
 	SetHeaderReferenceSize(headerReferenceSize corefoundation.CGSize)
 	FooterReferenceSize() corefoundation.CGSize

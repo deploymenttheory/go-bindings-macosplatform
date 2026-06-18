@@ -86,14 +86,14 @@ func (x *TableView) WithAllowsColumnResizing(allowsColumnResizing bool) *TableVi
 }
 
 // WithColumnAutoresizingStyle sets the columnAutoresizingStyle property and returns the receiver for chaining.
-func (x *TableView) WithColumnAutoresizingStyle(columnAutoresizingStyle raw.NSTableViewColumnAutoresizingStyle) *TableView {
-	x.inner.SetColumnAutoresizingStyle(columnAutoresizingStyle)
+func (x *TableView) WithColumnAutoresizingStyle(columnAutoresizingStyle NSTableViewColumnAutoresizingStyle) *TableView {
+	x.inner.SetColumnAutoresizingStyle(raw.NSTableViewColumnAutoresizingStyle(columnAutoresizingStyle))
 	return x
 }
 
 // WithGridStyleMask sets the gridStyleMask property and returns the receiver for chaining.
-func (x *TableView) WithGridStyleMask(gridStyleMask raw.NSTableViewGridLineStyle) *TableView {
-	x.inner.SetGridStyleMask(gridStyleMask)
+func (x *TableView) WithGridStyleMask(gridStyleMask NSTableViewGridLineStyle) *TableView {
+	x.inner.SetGridStyleMask(raw.NSTableViewGridLineStyle(gridStyleMask))
 	return x
 }
 
@@ -122,8 +122,8 @@ func (x *TableView) WithGridColor(gridColor *Color) *TableView {
 }
 
 // WithRowSizeStyle sets the rowSizeStyle property and returns the receiver for chaining.
-func (x *TableView) WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *TableView {
-	x.inner.SetRowSizeStyle(rowSizeStyle)
+func (x *TableView) WithRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) *TableView {
+	x.inner.SetRowSizeStyle(raw.NSTableViewRowSizeStyle(rowSizeStyle))
 	return x
 }
 
@@ -194,20 +194,20 @@ func (x *TableView) WithAllowsTypeSelect(allowsTypeSelect bool) *TableView {
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *TableView) WithStyle(style raw.NSTableViewStyle) *TableView {
-	x.inner.SetStyle(style)
+func (x *TableView) WithStyle(style NSTableViewStyle) *TableView {
+	x.inner.SetStyle(raw.NSTableViewStyle(style))
 	return x
 }
 
 // WithSelectionHighlightStyle sets the selectionHighlightStyle property and returns the receiver for chaining.
-func (x *TableView) WithSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) *TableView {
-	x.inner.SetSelectionHighlightStyle(selectionHighlightStyle)
+func (x *TableView) WithSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) *TableView {
+	x.inner.SetSelectionHighlightStyle(raw.NSTableViewSelectionHighlightStyle(selectionHighlightStyle))
 	return x
 }
 
 // WithDraggingDestinationFeedbackStyle sets the draggingDestinationFeedbackStyle property and returns the receiver for chaining.
-func (x *TableView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) *TableView {
-	x.inner.SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle)
+func (x *TableView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) *TableView {
+	x.inner.SetDraggingDestinationFeedbackStyle(raw.NSTableViewDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle))
 	return x
 }
 
@@ -296,8 +296,8 @@ func (x *TableView) WithHighlighted(highlighted bool) *TableView {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *TableView) WithControlSize(controlSize raw.NSControlSize) *TableView {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *TableView) WithControlSize(controlSize NSControlSize) *TableView {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -362,20 +362,20 @@ func (x *TableView) WithUsesSingleLineMode(usesSingleLineMode bool) *TableView {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TableView) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TableView {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *TableView) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TableView {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *TableView) WithAlignment(alignment raw.NSTextAlignment) *TableView {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *TableView) WithAlignment(alignment NSTextAlignment) *TableView {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *TableView) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TableView {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *TableView) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TableView {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -428,8 +428,8 @@ func (x *TableView) WithAutoresizesSubviews(autoresizesSubviews bool) *TableView
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TableView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableView {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *TableView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TableView {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -488,14 +488,14 @@ func (x *TableView) WithWantsRestingTouches(wantsRestingTouches bool) *TableView
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *TableView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableView {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *TableView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TableView {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *TableView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableView {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *TableView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TableView {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -602,8 +602,8 @@ func (x *TableView) WithToolTip(toolTip string) *TableView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TableView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableView {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TableView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableView {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -620,8 +620,8 @@ func (x *TableView) WithNextKeyView(nextKeyView ViewProvider) *TableView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TableView) WithFocusRingType(focusRingType raw.NSFocusRingType) *TableView {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *TableView) WithFocusRingType(focusRingType NSFocusRingType) *TableView {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -644,8 +644,8 @@ func (x *TableView) WithGestureRecognizers(items ...GestureRecognizerProvider) *
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *TableView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableView {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *TableView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TableView {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -831,13 +831,13 @@ func (x *TableView) DragImageForRowsWithIndexesTableColumnsEventOffset(dragRows 
 }
 
 // SetDraggingSourceOperationMaskForLocal calls the underlying SetDraggingSourceOperationMaskForLocal.
-func (x *TableView) SetDraggingSourceOperationMaskForLocal(mask raw.NSDragOperation, isLocal bool) {
-	x.inner.SetDraggingSourceOperationMaskForLocal(mask, isLocal)
+func (x *TableView) SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool) {
+	x.inner.SetDraggingSourceOperationMaskForLocal(raw.NSDragOperation(mask), isLocal)
 }
 
 // SetDropRowDropOperation calls the underlying SetDropRowDropOperation.
-func (x *TableView) SetDropRowDropOperation(row int, dropOperation raw.NSTableViewDropOperation) {
-	x.inner.SetDropRowDropOperation(row, dropOperation)
+func (x *TableView) SetDropRowDropOperation(row int, dropOperation NSTableViewDropOperation) {
+	x.inner.SetDropRowDropOperation(row, raw.NSTableViewDropOperation(dropOperation))
 }
 
 // SelectAll calls the underlying SelectAll.
@@ -993,13 +993,13 @@ func (x *TableView) EndUpdates() {
 }
 
 // InsertRowsAtIndexesWithAnimation calls the underlying InsertRowsAtIndexesWithAnimation.
-func (x *TableView) InsertRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions raw.NSTableViewAnimationOptions) {
-	x.inner.InsertRowsAtIndexesWithAnimation(indexes, animationOptions)
+func (x *TableView) InsertRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions NSTableViewAnimationOptions) {
+	x.inner.InsertRowsAtIndexesWithAnimation(indexes, raw.NSTableViewAnimationOptions(animationOptions))
 }
 
 // RemoveRowsAtIndexesWithAnimation calls the underlying RemoveRowsAtIndexesWithAnimation.
-func (x *TableView) RemoveRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions raw.NSTableViewAnimationOptions) {
-	x.inner.RemoveRowsAtIndexesWithAnimation(indexes, animationOptions)
+func (x *TableView) RemoveRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions NSTableViewAnimationOptions) {
+	x.inner.RemoveRowsAtIndexesWithAnimation(indexes, raw.NSTableViewAnimationOptions(animationOptions))
 }
 
 // MoveRowAtIndexToIndex calls the underlying MoveRowAtIndexToIndex.
@@ -1008,13 +1008,13 @@ func (x *TableView) MoveRowAtIndexToIndex(oldIndex int, newIndex int) {
 }
 
 // HideRowsAtIndexesWithAnimation calls the underlying HideRowsAtIndexesWithAnimation.
-func (x *TableView) HideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation raw.NSTableViewAnimationOptions) {
-	x.inner.HideRowsAtIndexesWithAnimation(indexes, rowAnimation)
+func (x *TableView) HideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation NSTableViewAnimationOptions) {
+	x.inner.HideRowsAtIndexesWithAnimation(indexes, raw.NSTableViewAnimationOptions(rowAnimation))
 }
 
 // UnhideRowsAtIndexesWithAnimation calls the underlying UnhideRowsAtIndexesWithAnimation.
-func (x *TableView) UnhideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation raw.NSTableViewAnimationOptions) {
-	x.inner.UnhideRowsAtIndexesWithAnimation(indexes, rowAnimation)
+func (x *TableView) UnhideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation NSTableViewAnimationOptions) {
+	x.inner.UnhideRowsAtIndexesWithAnimation(indexes, raw.NSTableViewAnimationOptions(rowAnimation))
 }
 
 // RegisterNibForIdentifier calls the underlying RegisterNibForIdentifier.
@@ -1101,23 +1101,23 @@ func (x *TableView) SetAllowsColumnResizing(allowsColumnResizing bool) {
 }
 
 // ColumnAutoresizingStyle calls the underlying ColumnAutoresizingStyle.
-func (x *TableView) ColumnAutoresizingStyle() raw.NSTableViewColumnAutoresizingStyle {
-	return x.inner.ColumnAutoresizingStyle()
+func (x *TableView) ColumnAutoresizingStyle() NSTableViewColumnAutoresizingStyle {
+	return NSTableViewColumnAutoresizingStyle(x.inner.ColumnAutoresizingStyle())
 }
 
 // SetColumnAutoresizingStyle calls the underlying SetColumnAutoresizingStyle.
-func (x *TableView) SetColumnAutoresizingStyle(columnAutoresizingStyle raw.NSTableViewColumnAutoresizingStyle) {
-	x.inner.SetColumnAutoresizingStyle(columnAutoresizingStyle)
+func (x *TableView) SetColumnAutoresizingStyle(columnAutoresizingStyle NSTableViewColumnAutoresizingStyle) {
+	x.inner.SetColumnAutoresizingStyle(raw.NSTableViewColumnAutoresizingStyle(columnAutoresizingStyle))
 }
 
 // GridStyleMask calls the underlying GridStyleMask.
-func (x *TableView) GridStyleMask() raw.NSTableViewGridLineStyle {
-	return x.inner.GridStyleMask()
+func (x *TableView) GridStyleMask() NSTableViewGridLineStyle {
+	return NSTableViewGridLineStyle(x.inner.GridStyleMask())
 }
 
 // SetGridStyleMask calls the underlying SetGridStyleMask.
-func (x *TableView) SetGridStyleMask(gridStyleMask raw.NSTableViewGridLineStyle) {
-	x.inner.SetGridStyleMask(gridStyleMask)
+func (x *TableView) SetGridStyleMask(gridStyleMask NSTableViewGridLineStyle) {
+	x.inner.SetGridStyleMask(raw.NSTableViewGridLineStyle(gridStyleMask))
 }
 
 // IntercellSpacing calls the underlying IntercellSpacing.
@@ -1169,18 +1169,18 @@ func (x *TableView) SetGridColor(gridColor *raw.NSColor) {
 }
 
 // RowSizeStyle calls the underlying RowSizeStyle.
-func (x *TableView) RowSizeStyle() raw.NSTableViewRowSizeStyle {
-	return x.inner.RowSizeStyle()
+func (x *TableView) RowSizeStyle() NSTableViewRowSizeStyle {
+	return NSTableViewRowSizeStyle(x.inner.RowSizeStyle())
 }
 
 // SetRowSizeStyle calls the underlying SetRowSizeStyle.
-func (x *TableView) SetRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) {
-	x.inner.SetRowSizeStyle(rowSizeStyle)
+func (x *TableView) SetRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) {
+	x.inner.SetRowSizeStyle(raw.NSTableViewRowSizeStyle(rowSizeStyle))
 }
 
 // EffectiveRowSizeStyle calls the underlying EffectiveRowSizeStyle.
-func (x *TableView) EffectiveRowSizeStyle() raw.NSTableViewRowSizeStyle {
-	return x.inner.EffectiveRowSizeStyle()
+func (x *TableView) EffectiveRowSizeStyle() NSTableViewRowSizeStyle {
+	return NSTableViewRowSizeStyle(x.inner.EffectiveRowSizeStyle())
 }
 
 // RowHeight calls the underlying RowHeight.
@@ -1355,38 +1355,38 @@ func (x *TableView) SetAllowsTypeSelect(allowsTypeSelect bool) {
 }
 
 // Style calls the underlying Style.
-func (x *TableView) Style() raw.NSTableViewStyle {
-	return x.inner.Style()
+func (x *TableView) Style() NSTableViewStyle {
+	return NSTableViewStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *TableView) SetStyle(style raw.NSTableViewStyle) {
-	x.inner.SetStyle(style)
+func (x *TableView) SetStyle(style NSTableViewStyle) {
+	x.inner.SetStyle(raw.NSTableViewStyle(style))
 }
 
 // EffectiveStyle calls the underlying EffectiveStyle.
-func (x *TableView) EffectiveStyle() raw.NSTableViewStyle {
-	return x.inner.EffectiveStyle()
+func (x *TableView) EffectiveStyle() NSTableViewStyle {
+	return NSTableViewStyle(x.inner.EffectiveStyle())
 }
 
 // SelectionHighlightStyle calls the underlying SelectionHighlightStyle.
-func (x *TableView) SelectionHighlightStyle() raw.NSTableViewSelectionHighlightStyle {
-	return x.inner.SelectionHighlightStyle()
+func (x *TableView) SelectionHighlightStyle() NSTableViewSelectionHighlightStyle {
+	return NSTableViewSelectionHighlightStyle(x.inner.SelectionHighlightStyle())
 }
 
 // SetSelectionHighlightStyle calls the underlying SetSelectionHighlightStyle.
-func (x *TableView) SetSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) {
-	x.inner.SetSelectionHighlightStyle(selectionHighlightStyle)
+func (x *TableView) SetSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) {
+	x.inner.SetSelectionHighlightStyle(raw.NSTableViewSelectionHighlightStyle(selectionHighlightStyle))
 }
 
 // DraggingDestinationFeedbackStyle calls the underlying DraggingDestinationFeedbackStyle.
-func (x *TableView) DraggingDestinationFeedbackStyle() raw.NSTableViewDraggingDestinationFeedbackStyle {
-	return x.inner.DraggingDestinationFeedbackStyle()
+func (x *TableView) DraggingDestinationFeedbackStyle() NSTableViewDraggingDestinationFeedbackStyle {
+	return NSTableViewDraggingDestinationFeedbackStyle(x.inner.DraggingDestinationFeedbackStyle())
 }
 
 // SetDraggingDestinationFeedbackStyle calls the underlying SetDraggingDestinationFeedbackStyle.
-func (x *TableView) SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) {
-	x.inner.SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle)
+func (x *TableView) SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) {
+	x.inner.SetDraggingDestinationFeedbackStyle(raw.NSTableViewDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle))
 }
 
 // AutosaveName calls the underlying AutosaveName.
@@ -1588,13 +1588,13 @@ type TableViewable interface {
 	WithCornerView(cornerView ViewProvider) *TableView
 	WithAllowsColumnReordering(allowsColumnReordering bool) *TableView
 	WithAllowsColumnResizing(allowsColumnResizing bool) *TableView
-	WithColumnAutoresizingStyle(columnAutoresizingStyle raw.NSTableViewColumnAutoresizingStyle) *TableView
-	WithGridStyleMask(gridStyleMask raw.NSTableViewGridLineStyle) *TableView
+	WithColumnAutoresizingStyle(columnAutoresizingStyle NSTableViewColumnAutoresizingStyle) *TableView
+	WithGridStyleMask(gridStyleMask NSTableViewGridLineStyle) *TableView
 	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *TableView
 	WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors bool) *TableView
 	WithBackgroundColor(backgroundColor *Color) *TableView
 	WithGridColor(gridColor *Color) *TableView
-	WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *TableView
+	WithRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) *TableView
 	WithRowHeight(rowHeight float64) *TableView
 	WithDoubleAction(doubleAction objc.SEL) *TableView
 	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *TableView
@@ -1604,9 +1604,9 @@ type TableViewable interface {
 	WithAllowsEmptySelection(allowsEmptySelection bool) *TableView
 	WithAllowsColumnSelection(allowsColumnSelection bool) *TableView
 	WithAllowsTypeSelect(allowsTypeSelect bool) *TableView
-	WithStyle(style raw.NSTableViewStyle) *TableView
-	WithSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) *TableView
-	WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) *TableView
+	WithStyle(style NSTableViewStyle) *TableView
+	WithSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) *TableView
+	WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) *TableView
 	WithAutosaveName(autosaveName *foundation.NSString) *TableView
 	WithAutosaveTableColumns(autosaveTableColumns bool) *TableView
 	WithFloatsGroupRows(floatsGroupRows bool) *TableView
@@ -1621,7 +1621,7 @@ type TableViewable interface {
 	WithEnabled(enabled bool) *TableView
 	WithRefusesFirstResponder(refusesFirstResponder bool) *TableView
 	WithHighlighted(highlighted bool) *TableView
-	WithControlSize(controlSize raw.NSControlSize) *TableView
+	WithControlSize(controlSize NSControlSize) *TableView
 	WithFormatter(formatter *foundation.NSFormatter) *TableView
 	WithObjectValue(objectValue objc.ID) *TableView
 	WithStringValue(stringValue string) *TableView
@@ -1632,16 +1632,16 @@ type TableViewable interface {
 	WithDoubleValue(doubleValue float64) *TableView
 	WithFont(font *Font) *TableView
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TableView
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TableView
-	WithAlignment(alignment raw.NSTextAlignment) *TableView
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TableView
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TableView
+	WithAlignment(alignment NSTextAlignment) *TableView
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TableView
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TableView
 	WithCell(cell CellProvider) *TableView
 	WithSubviews(items ...ViewProvider) *TableView
 	WithHidden(hidden bool) *TableView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TableView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TableView
 	WithFrame(frame corefoundation.CGRect) *TableView
 	WithFrameRotation(frameRotation float64) *TableView
 	WithFrameCenterRotation(frameCenterRotation float64) *TableView
@@ -1651,8 +1651,8 @@ type TableViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *TableView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableView
 	WithWantsRestingTouches(wantsRestingTouches bool) *TableView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TableView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TableView
 	WithWantsLayer(wantsLayer bool) *TableView
 	WithLayer(layer *quartzcore.CALayer) *TableView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableView
@@ -1666,12 +1666,12 @@ type TableViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *TableView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableView
 	WithToolTip(toolTip string) *TableView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableView
 	WithNextKeyView(nextKeyView ViewProvider) *TableView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TableView
+	WithFocusRingType(focusRingType NSFocusRingType) *TableView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TableView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TableView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableView
@@ -1703,8 +1703,8 @@ type TableViewable interface {
 	IndicatorImageInTableColumn(tableColumn *raw.NSTableColumn) *Image
 	CanDragRowsWithIndexesAtPoint(rowIndexes *foundation.NSIndexSet, mouseDownPoint corefoundation.CGPoint) bool
 	DragImageForRowsWithIndexesTableColumnsEventOffset(dragRows *foundation.NSIndexSet, tableColumns *foundation.NSArray[*raw.NSTableColumn], dragEvent *raw.NSEvent, dragImageOffset *corefoundation.CGPoint) *Image
-	SetDraggingSourceOperationMaskForLocal(mask raw.NSDragOperation, isLocal bool)
-	SetDropRowDropOperation(row int, dropOperation raw.NSTableViewDropOperation)
+	SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool)
+	SetDropRowDropOperation(row int, dropOperation NSTableViewDropOperation)
 	SelectAll(sender objc.ID)
 	DeselectAll(sender objc.ID)
 	SelectColumnIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool)
@@ -1733,11 +1733,11 @@ type TableViewable interface {
 	EnumerateAvailableRowViewsUsing(handler func(*raw.NSTableRowView, int))
 	BeginUpdates()
 	EndUpdates()
-	InsertRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions raw.NSTableViewAnimationOptions)
-	RemoveRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions raw.NSTableViewAnimationOptions)
+	InsertRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions NSTableViewAnimationOptions)
+	RemoveRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, animationOptions NSTableViewAnimationOptions)
 	MoveRowAtIndexToIndex(oldIndex int, newIndex int)
-	HideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation raw.NSTableViewAnimationOptions)
-	UnhideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation raw.NSTableViewAnimationOptions)
+	HideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation NSTableViewAnimationOptions)
+	UnhideRowsAtIndexesWithAnimation(indexes *foundation.NSIndexSet, rowAnimation NSTableViewAnimationOptions)
 	RegisterNibForIdentifier(nib *raw.NSNib, identifier *foundation.NSString)
 	DidAddRowViewForRow(rowView *raw.NSTableRowView, row int)
 	DidRemoveRowViewForRow(rowView *raw.NSTableRowView, row int)
@@ -1753,10 +1753,10 @@ type TableViewable interface {
 	SetAllowsColumnReordering(allowsColumnReordering bool)
 	AllowsColumnResizing() bool
 	SetAllowsColumnResizing(allowsColumnResizing bool)
-	ColumnAutoresizingStyle() raw.NSTableViewColumnAutoresizingStyle
-	SetColumnAutoresizingStyle(columnAutoresizingStyle raw.NSTableViewColumnAutoresizingStyle)
-	GridStyleMask() raw.NSTableViewGridLineStyle
-	SetGridStyleMask(gridStyleMask raw.NSTableViewGridLineStyle)
+	ColumnAutoresizingStyle() NSTableViewColumnAutoresizingStyle
+	SetColumnAutoresizingStyle(columnAutoresizingStyle NSTableViewColumnAutoresizingStyle)
+	GridStyleMask() NSTableViewGridLineStyle
+	SetGridStyleMask(gridStyleMask NSTableViewGridLineStyle)
 	IntercellSpacing() corefoundation.CGSize
 	SetIntercellSpacing(intercellSpacing corefoundation.CGSize)
 	UsesAlternatingRowBackgroundColors() bool
@@ -1765,9 +1765,9 @@ type TableViewable interface {
 	SetBackgroundColor(backgroundColor *raw.NSColor)
 	GridColor() *Color
 	SetGridColor(gridColor *raw.NSColor)
-	RowSizeStyle() raw.NSTableViewRowSizeStyle
-	SetRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle)
-	EffectiveRowSizeStyle() raw.NSTableViewRowSizeStyle
+	RowSizeStyle() NSTableViewRowSizeStyle
+	SetRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle)
+	EffectiveRowSizeStyle() NSTableViewRowSizeStyle
 	RowHeight() float64
 	SetRowHeight(rowHeight float64)
 	TableColumns() []*TableColumn
@@ -1799,13 +1799,13 @@ type TableViewable interface {
 	NumberOfSelectedRows() int
 	AllowsTypeSelect() bool
 	SetAllowsTypeSelect(allowsTypeSelect bool)
-	Style() raw.NSTableViewStyle
-	SetStyle(style raw.NSTableViewStyle)
-	EffectiveStyle() raw.NSTableViewStyle
-	SelectionHighlightStyle() raw.NSTableViewSelectionHighlightStyle
-	SetSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle)
-	DraggingDestinationFeedbackStyle() raw.NSTableViewDraggingDestinationFeedbackStyle
-	SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle)
+	Style() NSTableViewStyle
+	SetStyle(style NSTableViewStyle)
+	EffectiveStyle() NSTableViewStyle
+	SelectionHighlightStyle() NSTableViewSelectionHighlightStyle
+	SetSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle)
+	DraggingDestinationFeedbackStyle() NSTableViewDraggingDestinationFeedbackStyle
+	SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle)
 	AutosaveName() string
 	SetAutosaveName(autosaveName *foundation.NSString)
 	AutosaveTableColumns() bool

@@ -36,8 +36,8 @@ func NewSyncEngineEvent() *SyncEngineEvent {
 }
 
 // Type calls the underlying Type.
-func (x *SyncEngineEvent) Type() raw.CKSyncEngineEventType {
-	return x.inner.Type()
+func (x *SyncEngineEvent) Type() CKSyncEngineEventType {
+	return CKSyncEngineEventType(x.inner.Type())
 }
 
 // StateUpdateEvent calls the underlying StateUpdateEvent.
@@ -153,7 +153,7 @@ func (x *SyncEngineEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return x.
 // SyncEngineEventable is the interface implemented by [SyncEngineEvent], for mocking and DI.
 type SyncEngineEventable interface {
 	Unwrap() *raw.CKSyncEngineEvent
-	Type() raw.CKSyncEngineEventType
+	Type() CKSyncEngineEventType
 	StateUpdateEvent() *SyncEngineStateUpdateEvent
 	AccountChangeEvent() *SyncEngineAccountChangeEvent
 	WillFetchChangesEvent() *SyncEngineWillFetchChangesEvent

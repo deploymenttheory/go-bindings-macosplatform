@@ -42,8 +42,8 @@ func NewAddPaymentPassRequestConfigurationWithEncryptionScheme(encryptionScheme 
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *AddPaymentPassRequestConfiguration) WithStyle(style raw.PKAddPaymentPassStyle) *AddPaymentPassRequestConfiguration {
-	x.inner.SetStyle(style)
+func (x *AddPaymentPassRequestConfiguration) WithStyle(style PKAddPaymentPassStyle) *AddPaymentPassRequestConfiguration {
+	x.inner.SetStyle(raw.PKAddPaymentPassStyle(style))
 	return x
 }
 
@@ -117,13 +117,13 @@ func (x *AddPaymentPassRequestConfiguration) EncryptionScheme() string {
 }
 
 // Style calls the underlying Style.
-func (x *AddPaymentPassRequestConfiguration) Style() raw.PKAddPaymentPassStyle {
-	return x.inner.Style()
+func (x *AddPaymentPassRequestConfiguration) Style() PKAddPaymentPassStyle {
+	return PKAddPaymentPassStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *AddPaymentPassRequestConfiguration) SetStyle(style raw.PKAddPaymentPassStyle) {
-	x.inner.SetStyle(style)
+func (x *AddPaymentPassRequestConfiguration) SetStyle(style PKAddPaymentPassStyle) {
+	x.inner.SetStyle(raw.PKAddPaymentPassStyle(style))
 }
 
 // CardholderName calls the underlying CardholderName.
@@ -235,7 +235,7 @@ func (x *AddPaymentPassRequestConfiguration) SetRequiresFelicaSecureElement(requ
 // AddPaymentPassRequestConfigurationable is the interface implemented by [AddPaymentPassRequestConfiguration], for mocking and DI.
 type AddPaymentPassRequestConfigurationable interface {
 	Unwrap() *raw.PKAddPaymentPassRequestConfiguration
-	WithStyle(style raw.PKAddPaymentPassStyle) *AddPaymentPassRequestConfiguration
+	WithStyle(style PKAddPaymentPassStyle) *AddPaymentPassRequestConfiguration
 	WithCardholderName(cardholderName string) *AddPaymentPassRequestConfiguration
 	WithPrimaryAccountSuffix(primaryAccountSuffix string) *AddPaymentPassRequestConfiguration
 	WithCardDetails(items ...*raw.PKLabeledValue) *AddPaymentPassRequestConfiguration
@@ -245,8 +245,8 @@ type AddPaymentPassRequestConfigurationable interface {
 	WithProductIdentifiers(productIdentifiers *foundation.NSSet[*foundation.NSString]) *AddPaymentPassRequestConfiguration
 	WithRequiresFelicaSecureElement(requiresFelicaSecureElement bool) *AddPaymentPassRequestConfiguration
 	EncryptionScheme() string
-	Style() raw.PKAddPaymentPassStyle
-	SetStyle(style raw.PKAddPaymentPassStyle)
+	Style() PKAddPaymentPassStyle
+	SetStyle(style PKAddPaymentPassStyle)
 	CardholderName() string
 	SetCardholderName(cardholderName string)
 	PrimaryAccountSuffix() string

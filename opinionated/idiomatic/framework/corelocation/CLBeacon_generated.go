@@ -63,8 +63,8 @@ func (x *Beacon) Minor() *foundation.NSNumber {
 }
 
 // Proximity calls the underlying Proximity.
-func (x *Beacon) Proximity() raw.CLProximity {
-	return x.inner.Proximity()
+func (x *Beacon) Proximity() CLProximity {
+	return CLProximity(x.inner.Proximity())
 }
 
 // Accuracy calls the underlying Accuracy.
@@ -85,7 +85,7 @@ type Beaconable interface {
 	ProximityUUID() *foundation.NSUUID
 	Major() *foundation.NSNumber
 	Minor() *foundation.NSNumber
-	Proximity() raw.CLProximity
+	Proximity() CLProximity
 	Accuracy() unsafe.Pointer
 	Rssi() int
 }

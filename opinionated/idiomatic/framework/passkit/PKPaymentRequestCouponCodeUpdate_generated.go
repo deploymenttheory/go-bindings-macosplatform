@@ -41,8 +41,8 @@ func NewPaymentRequestCouponCodeUpdateWithErrorsPaymentSummaryItemsShippingMetho
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *PaymentRequestCouponCodeUpdate) WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestCouponCodeUpdate {
-	x.inner.PKPaymentRequestUpdate.SetStatus(status)
+func (x *PaymentRequestCouponCodeUpdate) WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestCouponCodeUpdate {
+	x.inner.PKPaymentRequestUpdate.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 	return x
 }
 
@@ -135,7 +135,7 @@ func (x *PaymentRequestCouponCodeUpdate) asPaymentRequestUpdate() *raw.PKPayment
 // PaymentRequestCouponCodeUpdateable is the interface implemented by [PaymentRequestCouponCodeUpdate], for mocking and DI.
 type PaymentRequestCouponCodeUpdateable interface {
 	Unwrap() *raw.PKPaymentRequestCouponCodeUpdate
-	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestCouponCodeUpdate
+	WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestCouponCodeUpdate
 	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestCouponCodeUpdate
 	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestCouponCodeUpdate
 	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestCouponCodeUpdate

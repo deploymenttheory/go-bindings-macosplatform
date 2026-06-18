@@ -62,8 +62,8 @@ func (x *PathComponentCell) WithTextColor(textColor *Color) *PathComponentCell {
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *PathComponentCell) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *PathComponentCell {
-	x.inner.NSTextFieldCell.SetBezelStyle(bezelStyle)
+func (x *PathComponentCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *PathComponentCell {
+	x.inner.NSTextFieldCell.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -104,8 +104,8 @@ func (x *PathComponentCell) WithControlView(controlView ViewProvider) *PathCompo
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *PathComponentCell) WithType(type_ raw.NSCellType) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(type_)
+func (x *PathComponentCell) WithType(type_ NSCellType) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -188,8 +188,8 @@ func (x *PathComponentCell) WithHighlighted(highlighted bool) *PathComponentCell
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *PathComponentCell) WithAlignment(alignment raw.NSTextAlignment) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *PathComponentCell) WithAlignment(alignment NSTextAlignment) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -254,8 +254,8 @@ func (x *PathComponentCell) WithImage(image *Image) *PathComponentCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *PathComponentCell) WithControlSize(controlSize raw.NSControlSize) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *PathComponentCell) WithControlSize(controlSize NSControlSize) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -278,14 +278,14 @@ func (x *PathComponentCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing 
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *PathComponentCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *PathComponentCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *PathComponentCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *PathComponentCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -302,8 +302,8 @@ func (x *PathComponentCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLin
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *PathComponentCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *PathComponentCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -326,8 +326,8 @@ func (x *PathComponentCell) WithShowsFirstResponder(showsFirstResponder bool) *P
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *PathComponentCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *PathComponentCell) WithFocusRingType(focusRingType NSFocusRingType) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -356,14 +356,14 @@ func (x *PathComponentCell) WithAllowsMixedState(allowsMixedState bool) *PathCom
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *PathComponentCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *PathComponentCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *PathComponentCell) WithControlTint(controlTint raw.NSControlTint) *PathComponentCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *PathComponentCell) WithControlTint(controlTint NSControlTint) *PathComponentCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -392,12 +392,12 @@ type PathComponentCellable interface {
 	WithBackgroundColor(backgroundColor *Color) *PathComponentCell
 	WithDrawsBackground(drawsBackground bool) *PathComponentCell
 	WithTextColor(textColor *Color) *PathComponentCell
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *PathComponentCell
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *PathComponentCell
 	WithPlaceholderString(placeholderString string) *PathComponentCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *PathComponentCell
 	WithAllowedInputSourceLocales(items ...*foundation.NSString) *PathComponentCell
 	WithControlView(controlView ViewProvider) *PathComponentCell
-	WithType(type_ raw.NSCellType) *PathComponentCell
+	WithType(type_ NSCellType) *PathComponentCell
 	WithState(state int) *PathComponentCell
 	WithTarget(target objc.ID) *PathComponentCell
 	WithAction(action objc.SEL) *PathComponentCell
@@ -411,7 +411,7 @@ type PathComponentCellable interface {
 	WithBezeled(bezeled bool) *PathComponentCell
 	WithScrollable(scrollable bool) *PathComponentCell
 	WithHighlighted(highlighted bool) *PathComponentCell
-	WithAlignment(alignment raw.NSTextAlignment) *PathComponentCell
+	WithAlignment(alignment NSTextAlignment) *PathComponentCell
 	WithWraps(wraps bool) *PathComponentCell
 	WithFont(font *Font) *PathComponentCell
 	WithFormatter(formatter *foundation.NSFormatter) *PathComponentCell
@@ -422,25 +422,25 @@ type PathComponentCellable interface {
 	WithDoubleValue(doubleValue float64) *PathComponentCell
 	WithIntegerValue(integerValue int) *PathComponentCell
 	WithImage(image *Image) *PathComponentCell
-	WithControlSize(controlSize raw.NSControlSize) *PathComponentCell
+	WithControlSize(controlSize NSControlSize) *PathComponentCell
 	WithRepresentedObject(representedObject objc.ID) *PathComponentCell
 	WithMenu(menu *Menu) *PathComponentCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathComponentCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PathComponentCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathComponentCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PathComponentCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *PathComponentCell
 	WithAllowsUndo(allowsUndo bool) *PathComponentCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PathComponentCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PathComponentCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PathComponentCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *PathComponentCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *PathComponentCell
 	WithShowsFirstResponder(showsFirstResponder bool) *PathComponentCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *PathComponentCell
+	WithFocusRingType(focusRingType NSFocusRingType) *PathComponentCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PathComponentCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PathComponentCell
 	WithImportsGraphics(importsGraphics bool) *PathComponentCell
 	WithAllowsMixedState(allowsMixedState bool) *PathComponentCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *PathComponentCell
-	WithControlTint(controlTint raw.NSControlTint) *PathComponentCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *PathComponentCell
+	WithControlTint(controlTint NSControlTint) *PathComponentCell
 	URL() *foundation.NSURL
 	SetURL(uRL string)
 }

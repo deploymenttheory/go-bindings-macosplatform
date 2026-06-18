@@ -36,14 +36,14 @@ func NewByteCountFormatter() *ByteCountFormatter {
 }
 
 // WithAllowedUnits sets the allowedUnits property and returns the receiver for chaining.
-func (x *ByteCountFormatter) WithAllowedUnits(allowedUnits raw.NSByteCountFormatterUnits) *ByteCountFormatter {
-	x.inner.SetAllowedUnits(allowedUnits)
+func (x *ByteCountFormatter) WithAllowedUnits(allowedUnits NSByteCountFormatterUnits) *ByteCountFormatter {
+	x.inner.SetAllowedUnits(raw.NSByteCountFormatterUnits(allowedUnits))
 	return x
 }
 
 // WithCountStyle sets the countStyle property and returns the receiver for chaining.
-func (x *ByteCountFormatter) WithCountStyle(countStyle raw.NSByteCountFormatterCountStyle) *ByteCountFormatter {
-	x.inner.SetCountStyle(countStyle)
+func (x *ByteCountFormatter) WithCountStyle(countStyle NSByteCountFormatterCountStyle) *ByteCountFormatter {
+	x.inner.SetCountStyle(raw.NSByteCountFormatterCountStyle(countStyle))
 	return x
 }
 
@@ -84,8 +84,8 @@ func (x *ByteCountFormatter) WithZeroPadsFractionDigits(zeroPadsFractionDigits b
 }
 
 // WithFormattingContext sets the formattingContext property and returns the receiver for chaining.
-func (x *ByteCountFormatter) WithFormattingContext(formattingContext raw.NSFormattingContext) *ByteCountFormatter {
-	x.inner.SetFormattingContext(formattingContext)
+func (x *ByteCountFormatter) WithFormattingContext(formattingContext NSFormattingContext) *ByteCountFormatter {
+	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
 	return x
 }
 
@@ -114,23 +114,23 @@ func (x *ByteCountFormatter) StringFromMeasurement(measurement *raw.NSMeasuremen
 }
 
 // AllowedUnits calls the underlying AllowedUnits.
-func (x *ByteCountFormatter) AllowedUnits() raw.NSByteCountFormatterUnits {
-	return x.inner.AllowedUnits()
+func (x *ByteCountFormatter) AllowedUnits() NSByteCountFormatterUnits {
+	return NSByteCountFormatterUnits(x.inner.AllowedUnits())
 }
 
 // SetAllowedUnits calls the underlying SetAllowedUnits.
-func (x *ByteCountFormatter) SetAllowedUnits(allowedUnits raw.NSByteCountFormatterUnits) {
-	x.inner.SetAllowedUnits(allowedUnits)
+func (x *ByteCountFormatter) SetAllowedUnits(allowedUnits NSByteCountFormatterUnits) {
+	x.inner.SetAllowedUnits(raw.NSByteCountFormatterUnits(allowedUnits))
 }
 
 // CountStyle calls the underlying CountStyle.
-func (x *ByteCountFormatter) CountStyle() raw.NSByteCountFormatterCountStyle {
-	return x.inner.CountStyle()
+func (x *ByteCountFormatter) CountStyle() NSByteCountFormatterCountStyle {
+	return NSByteCountFormatterCountStyle(x.inner.CountStyle())
 }
 
 // SetCountStyle calls the underlying SetCountStyle.
-func (x *ByteCountFormatter) SetCountStyle(countStyle raw.NSByteCountFormatterCountStyle) {
-	x.inner.SetCountStyle(countStyle)
+func (x *ByteCountFormatter) SetCountStyle(countStyle NSByteCountFormatterCountStyle) {
+	x.inner.SetCountStyle(raw.NSByteCountFormatterCountStyle(countStyle))
 }
 
 // AllowsNonnumericFormatting calls the underlying AllowsNonnumericFormatting.
@@ -194,13 +194,13 @@ func (x *ByteCountFormatter) SetZeroPadsFractionDigits(zeroPadsFractionDigits bo
 }
 
 // FormattingContext calls the underlying FormattingContext.
-func (x *ByteCountFormatter) FormattingContext() raw.NSFormattingContext {
-	return x.inner.FormattingContext()
+func (x *ByteCountFormatter) FormattingContext() NSFormattingContext {
+	return NSFormattingContext(x.inner.FormattingContext())
 }
 
 // SetFormattingContext calls the underlying SetFormattingContext.
-func (x *ByteCountFormatter) SetFormattingContext(formattingContext raw.NSFormattingContext) {
-	x.inner.SetFormattingContext(formattingContext)
+func (x *ByteCountFormatter) SetFormattingContext(formattingContext NSFormattingContext) {
+	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
 }
 
 func (x *ByteCountFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
@@ -210,22 +210,22 @@ func (x *ByteCountFormatter) asObject() *raw.NSObject { return &x.inner.NSFormat
 // ByteCountFormatterable is the interface implemented by [ByteCountFormatter], for mocking and DI.
 type ByteCountFormatterable interface {
 	Unwrap() *raw.NSByteCountFormatter
-	WithAllowedUnits(allowedUnits raw.NSByteCountFormatterUnits) *ByteCountFormatter
-	WithCountStyle(countStyle raw.NSByteCountFormatterCountStyle) *ByteCountFormatter
+	WithAllowedUnits(allowedUnits NSByteCountFormatterUnits) *ByteCountFormatter
+	WithCountStyle(countStyle NSByteCountFormatterCountStyle) *ByteCountFormatter
 	WithAllowsNonnumericFormatting(allowsNonnumericFormatting bool) *ByteCountFormatter
 	WithIncludesUnit(includesUnit bool) *ByteCountFormatter
 	WithIncludesCount(includesCount bool) *ByteCountFormatter
 	WithIncludesActualByteCount(includesActualByteCount bool) *ByteCountFormatter
 	WithAdaptive(adaptive bool) *ByteCountFormatter
 	WithZeroPadsFractionDigits(zeroPadsFractionDigits bool) *ByteCountFormatter
-	WithFormattingContext(formattingContext raw.NSFormattingContext) *ByteCountFormatter
+	WithFormattingContext(formattingContext NSFormattingContext) *ByteCountFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ByteCountFormatter
 	StringFromByteCount(byteCount int64) *String
 	StringFromMeasurement(measurement *raw.NSMeasurement[*raw.NSUnitInformationStorage]) *String
-	AllowedUnits() raw.NSByteCountFormatterUnits
-	SetAllowedUnits(allowedUnits raw.NSByteCountFormatterUnits)
-	CountStyle() raw.NSByteCountFormatterCountStyle
-	SetCountStyle(countStyle raw.NSByteCountFormatterCountStyle)
+	AllowedUnits() NSByteCountFormatterUnits
+	SetAllowedUnits(allowedUnits NSByteCountFormatterUnits)
+	CountStyle() NSByteCountFormatterCountStyle
+	SetCountStyle(countStyle NSByteCountFormatterCountStyle)
 	AllowsNonnumericFormatting() bool
 	SetAllowsNonnumericFormatting(allowsNonnumericFormatting bool)
 	IncludesUnit() bool
@@ -238,8 +238,8 @@ type ByteCountFormatterable interface {
 	SetAdaptive(adaptive bool)
 	ZeroPadsFractionDigits() bool
 	SetZeroPadsFractionDigits(zeroPadsFractionDigits bool)
-	FormattingContext() raw.NSFormattingContext
-	SetFormattingContext(formattingContext raw.NSFormattingContext)
+	FormattingContext() NSFormattingContext
+	SetFormattingContext(formattingContext NSFormattingContext)
 }
 
 var _ ByteCountFormatterable = (*ByteCountFormatter)(nil)

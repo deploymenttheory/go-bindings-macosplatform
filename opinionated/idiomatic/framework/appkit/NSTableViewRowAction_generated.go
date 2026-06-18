@@ -56,8 +56,8 @@ func (x *TableViewRowAction) WithImage(image *Image) *TableViewRowAction {
 }
 
 // Style calls the underlying Style.
-func (x *TableViewRowAction) Style() raw.NSTableViewRowActionStyle {
-	return x.inner.Style()
+func (x *TableViewRowAction) Style() NSTableViewRowActionStyle {
+	return NSTableViewRowActionStyle(x.inner.Style())
 }
 
 // Title calls the underlying Title.
@@ -108,7 +108,7 @@ type TableViewRowActionable interface {
 	WithTitle(title string) *TableViewRowAction
 	WithBackgroundColor(backgroundColor *Color) *TableViewRowAction
 	WithImage(image *Image) *TableViewRowAction
-	Style() raw.NSTableViewRowActionStyle
+	Style() NSTableViewRowActionStyle
 	Title() string
 	SetTitle(title string)
 	BackgroundColor() *Color

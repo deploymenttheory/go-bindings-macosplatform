@@ -128,8 +128,8 @@ func (x *TrackingSeparatorToolbarItem) WithBackgroundTintColor(backgroundTintCol
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *TrackingSeparatorToolbarItem) WithStyle(style raw.NSToolbarItemStyle) *TrackingSeparatorToolbarItem {
-	x.inner.NSToolbarItem.SetStyle(style)
+func (x *TrackingSeparatorToolbarItem) WithStyle(style NSToolbarItemStyle) *TrackingSeparatorToolbarItem {
+	x.inner.NSToolbarItem.SetStyle(raw.NSToolbarItemStyle(style))
 	return x
 }
 
@@ -227,7 +227,7 @@ type TrackingSeparatorToolbarItemable interface {
 	WithTitle(title string) *TrackingSeparatorToolbarItem
 	WithBordered(bordered bool) *TrackingSeparatorToolbarItem
 	WithBackgroundTintColor(backgroundTintColor *Color) *TrackingSeparatorToolbarItem
-	WithStyle(style raw.NSToolbarItemStyle) *TrackingSeparatorToolbarItem
+	WithStyle(style NSToolbarItemStyle) *TrackingSeparatorToolbarItem
 	WithNavigational(navigational bool) *TrackingSeparatorToolbarItem
 	WithView(view ViewProvider) *TrackingSeparatorToolbarItem
 	WithHidden(hidden bool) *TrackingSeparatorToolbarItem

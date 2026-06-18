@@ -71,13 +71,13 @@ func (x *MatrixBatchNormalization) WithComputeStatistics(computeStatistics bool)
 }
 
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
-func (x *MatrixBatchNormalization) SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+func (x *MatrixBatchNormalization) SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	x.inner.SetNeuronTypeParameterAParameterBParameterC(raw.MPSCNNNeuronType(neuronType), parameterA, parameterB, parameterC)
 }
 
 // NeuronType calls the underlying NeuronType.
-func (x *MatrixBatchNormalization) NeuronType() raw.MPSCNNNeuronType {
-	return x.inner.NeuronType()
+func (x *MatrixBatchNormalization) NeuronType() MPSCNNNeuronType {
+	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
 // NeuronParameterA calls the underlying NeuronParameterA.
@@ -147,8 +147,8 @@ type MatrixBatchNormalizationable interface {
 	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixBatchNormalization
 	WithEpsilon(epsilon float32) *MatrixBatchNormalization
 	WithComputeStatistics(computeStatistics bool) *MatrixBatchNormalization
-	SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() raw.MPSCNNNeuronType
+	SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() MPSCNNNeuronType
 	NeuronParameterA() float32
 	NeuronParameterB() float32
 	NeuronParameterC() float32

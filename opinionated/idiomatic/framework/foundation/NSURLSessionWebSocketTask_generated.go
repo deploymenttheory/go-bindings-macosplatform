@@ -156,8 +156,8 @@ func (x *URLSessionWebSocketTask) SendPingWithPongReceiveHandler(ctx context.Con
 }
 
 // CancelWithCloseCodeReason calls the underlying CancelWithCloseCodeReason.
-func (x *URLSessionWebSocketTask) CancelWithCloseCodeReason(closeCode raw.NSURLSessionWebSocketCloseCode, reason *raw.NSData) {
-	x.inner.CancelWithCloseCodeReason(closeCode, reason)
+func (x *URLSessionWebSocketTask) CancelWithCloseCodeReason(closeCode NSURLSessionWebSocketCloseCode, reason *raw.NSData) {
+	x.inner.CancelWithCloseCodeReason(raw.NSURLSessionWebSocketCloseCode(closeCode), reason)
 }
 
 // MaximumMessageSize calls the underlying MaximumMessageSize.
@@ -171,8 +171,8 @@ func (x *URLSessionWebSocketTask) SetMaximumMessageSize(maximumMessageSize int) 
 }
 
 // CloseCode calls the underlying CloseCode.
-func (x *URLSessionWebSocketTask) CloseCode() raw.NSURLSessionWebSocketCloseCode {
-	return x.inner.CloseCode()
+func (x *URLSessionWebSocketTask) CloseCode() NSURLSessionWebSocketCloseCode {
+	return NSURLSessionWebSocketCloseCode(x.inner.CloseCode())
 }
 
 // CloseReason calls the underlying CloseReason.
@@ -205,10 +205,10 @@ type URLSessionWebSocketTaskable interface {
 	SendMessage(ctx context.Context, message *raw.NSURLSessionWebSocketMessage) error
 	ReceiveMessage(ctx context.Context) (*URLSessionWebSocketMessage, error)
 	SendPingWithPongReceiveHandler(ctx context.Context) error
-	CancelWithCloseCodeReason(closeCode raw.NSURLSessionWebSocketCloseCode, reason *raw.NSData)
+	CancelWithCloseCodeReason(closeCode NSURLSessionWebSocketCloseCode, reason *raw.NSData)
 	MaximumMessageSize() int
 	SetMaximumMessageSize(maximumMessageSize int)
-	CloseCode() raw.NSURLSessionWebSocketCloseCode
+	CloseCode() NSURLSessionWebSocketCloseCode
 	CloseReason() *Data
 }
 

@@ -51,14 +51,14 @@ func (x *SegmentedCell) WithSelectedSegment(selectedSegment int) *SegmentedCell 
 }
 
 // WithTrackingMode sets the trackingMode property and returns the receiver for chaining.
-func (x *SegmentedCell) WithTrackingMode(trackingMode raw.NSSegmentSwitchTracking) *SegmentedCell {
-	x.inner.SetTrackingMode(trackingMode)
+func (x *SegmentedCell) WithTrackingMode(trackingMode NSSegmentSwitchTracking) *SegmentedCell {
+	x.inner.SetTrackingMode(raw.NSSegmentSwitchTracking(trackingMode))
 	return x
 }
 
 // WithSegmentStyle sets the segmentStyle property and returns the receiver for chaining.
-func (x *SegmentedCell) WithSegmentStyle(segmentStyle raw.NSSegmentStyle) *SegmentedCell {
-	x.inner.SetSegmentStyle(segmentStyle)
+func (x *SegmentedCell) WithSegmentStyle(segmentStyle NSSegmentStyle) *SegmentedCell {
+	x.inner.SetSegmentStyle(raw.NSSegmentStyle(segmentStyle))
 	return x
 }
 
@@ -69,8 +69,8 @@ func (x *SegmentedCell) WithControlView(controlView ViewProvider) *SegmentedCell
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *SegmentedCell) WithType(type_ raw.NSCellType) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetType(type_)
+func (x *SegmentedCell) WithType(type_ NSCellType) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -153,8 +153,8 @@ func (x *SegmentedCell) WithHighlighted(highlighted bool) *SegmentedCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *SegmentedCell) WithAlignment(alignment raw.NSTextAlignment) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *SegmentedCell) WithAlignment(alignment NSTextAlignment) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -219,8 +219,8 @@ func (x *SegmentedCell) WithImage(image *Image) *SegmentedCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *SegmentedCell) WithControlSize(controlSize raw.NSControlSize) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *SegmentedCell) WithControlSize(controlSize NSControlSize) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -243,14 +243,14 @@ func (x *SegmentedCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *SegmentedCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *SegmentedCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *SegmentedCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *SegmentedCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -267,8 +267,8 @@ func (x *SegmentedCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bo
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SegmentedCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *SegmentedCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -291,8 +291,8 @@ func (x *SegmentedCell) WithShowsFirstResponder(showsFirstResponder bool) *Segme
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SegmentedCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *SegmentedCell) WithFocusRingType(focusRingType NSFocusRingType) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -321,14 +321,14 @@ func (x *SegmentedCell) WithAllowsMixedState(allowsMixedState bool) *SegmentedCe
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *SegmentedCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *SegmentedCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *SegmentedCell) WithControlTint(controlTint raw.NSControlTint) *SegmentedCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *SegmentedCell) WithControlTint(controlTint NSControlTint) *SegmentedCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -372,13 +372,13 @@ func (x *SegmentedCell) ImageForSegment(segment int) *Image {
 }
 
 // SetImageScalingForSegment calls the underlying SetImageScalingForSegment.
-func (x *SegmentedCell) SetImageScalingForSegment(scaling raw.NSImageScaling, segment int) {
-	x.inner.SetImageScalingForSegment(scaling, segment)
+func (x *SegmentedCell) SetImageScalingForSegment(scaling NSImageScaling, segment int) {
+	x.inner.SetImageScalingForSegment(raw.NSImageScaling(scaling), segment)
 }
 
 // ImageScalingForSegment calls the underlying ImageScalingForSegment.
-func (x *SegmentedCell) ImageScalingForSegment(segment int) raw.NSImageScaling {
-	return x.inner.ImageScalingForSegment(segment)
+func (x *SegmentedCell) ImageScalingForSegment(segment int) NSImageScaling {
+	return NSImageScaling(x.inner.ImageScalingForSegment(segment))
 }
 
 // SetLabelForSegment calls the underlying SetLabelForSegment.
@@ -479,28 +479,28 @@ func (x *SegmentedCell) SetSelectedSegment(selectedSegment int) {
 }
 
 // TrackingMode calls the underlying TrackingMode.
-func (x *SegmentedCell) TrackingMode() raw.NSSegmentSwitchTracking {
-	return x.inner.TrackingMode()
+func (x *SegmentedCell) TrackingMode() NSSegmentSwitchTracking {
+	return NSSegmentSwitchTracking(x.inner.TrackingMode())
 }
 
 // SetTrackingMode calls the underlying SetTrackingMode.
-func (x *SegmentedCell) SetTrackingMode(trackingMode raw.NSSegmentSwitchTracking) {
-	x.inner.SetTrackingMode(trackingMode)
+func (x *SegmentedCell) SetTrackingMode(trackingMode NSSegmentSwitchTracking) {
+	x.inner.SetTrackingMode(raw.NSSegmentSwitchTracking(trackingMode))
 }
 
 // SegmentStyle calls the underlying SegmentStyle.
-func (x *SegmentedCell) SegmentStyle() raw.NSSegmentStyle {
-	return x.inner.SegmentStyle()
+func (x *SegmentedCell) SegmentStyle() NSSegmentStyle {
+	return NSSegmentStyle(x.inner.SegmentStyle())
 }
 
 // SetSegmentStyle calls the underlying SetSegmentStyle.
-func (x *SegmentedCell) SetSegmentStyle(segmentStyle raw.NSSegmentStyle) {
-	x.inner.SetSegmentStyle(segmentStyle)
+func (x *SegmentedCell) SetSegmentStyle(segmentStyle NSSegmentStyle) {
+	x.inner.SetSegmentStyle(raw.NSSegmentStyle(segmentStyle))
 }
 
 // InteriorBackgroundStyleForSegment calls the underlying InteriorBackgroundStyleForSegment.
-func (x *SegmentedCell) InteriorBackgroundStyleForSegment(segment int) raw.NSBackgroundStyle {
-	return x.inner.InteriorBackgroundStyleForSegment(segment)
+func (x *SegmentedCell) InteriorBackgroundStyleForSegment(segment int) NSBackgroundStyle {
+	return NSBackgroundStyle(x.inner.InteriorBackgroundStyleForSegment(segment))
 }
 
 func (x *SegmentedCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
@@ -512,10 +512,10 @@ type SegmentedCellable interface {
 	Unwrap() *raw.NSSegmentedCell
 	WithSegmentCount(segmentCount int) *SegmentedCell
 	WithSelectedSegment(selectedSegment int) *SegmentedCell
-	WithTrackingMode(trackingMode raw.NSSegmentSwitchTracking) *SegmentedCell
-	WithSegmentStyle(segmentStyle raw.NSSegmentStyle) *SegmentedCell
+	WithTrackingMode(trackingMode NSSegmentSwitchTracking) *SegmentedCell
+	WithSegmentStyle(segmentStyle NSSegmentStyle) *SegmentedCell
 	WithControlView(controlView ViewProvider) *SegmentedCell
-	WithType(type_ raw.NSCellType) *SegmentedCell
+	WithType(type_ NSCellType) *SegmentedCell
 	WithState(state int) *SegmentedCell
 	WithTarget(target objc.ID) *SegmentedCell
 	WithAction(action objc.SEL) *SegmentedCell
@@ -529,7 +529,7 @@ type SegmentedCellable interface {
 	WithBezeled(bezeled bool) *SegmentedCell
 	WithScrollable(scrollable bool) *SegmentedCell
 	WithHighlighted(highlighted bool) *SegmentedCell
-	WithAlignment(alignment raw.NSTextAlignment) *SegmentedCell
+	WithAlignment(alignment NSTextAlignment) *SegmentedCell
 	WithWraps(wraps bool) *SegmentedCell
 	WithFont(font *Font) *SegmentedCell
 	WithFormatter(formatter *foundation.NSFormatter) *SegmentedCell
@@ -540,25 +540,25 @@ type SegmentedCellable interface {
 	WithDoubleValue(doubleValue float64) *SegmentedCell
 	WithIntegerValue(integerValue int) *SegmentedCell
 	WithImage(image *Image) *SegmentedCell
-	WithControlSize(controlSize raw.NSControlSize) *SegmentedCell
+	WithControlSize(controlSize NSControlSize) *SegmentedCell
 	WithRepresentedObject(representedObject objc.ID) *SegmentedCell
 	WithMenu(menu *Menu) *SegmentedCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SegmentedCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SegmentedCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SegmentedCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SegmentedCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *SegmentedCell
 	WithAllowsUndo(allowsUndo bool) *SegmentedCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SegmentedCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SegmentedCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SegmentedCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedCell
 	WithShowsFirstResponder(showsFirstResponder bool) *SegmentedCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *SegmentedCell
+	WithFocusRingType(focusRingType NSFocusRingType) *SegmentedCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SegmentedCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SegmentedCell
 	WithImportsGraphics(importsGraphics bool) *SegmentedCell
 	WithAllowsMixedState(allowsMixedState bool) *SegmentedCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SegmentedCell
-	WithControlTint(controlTint raw.NSControlTint) *SegmentedCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SegmentedCell
+	WithControlTint(controlTint NSControlTint) *SegmentedCell
 	SelectSegmentWithTag(tag int) bool
 	MakeNextSegmentKey()
 	MakePreviousSegmentKey()
@@ -566,8 +566,8 @@ type SegmentedCellable interface {
 	WidthForSegment(segment int) float64
 	SetImageForSegment(image *raw.NSImage, segment int)
 	ImageForSegment(segment int) *Image
-	SetImageScalingForSegment(scaling raw.NSImageScaling, segment int)
-	ImageScalingForSegment(segment int) raw.NSImageScaling
+	SetImageScalingForSegment(scaling NSImageScaling, segment int)
+	ImageScalingForSegment(segment int) NSImageScaling
 	SetLabelForSegment(label string, segment int)
 	LabelForSegment(segment int) string
 	SetSelectedForSegment(selected bool, segment int)
@@ -585,11 +585,11 @@ type SegmentedCellable interface {
 	SetSegmentCount(segmentCount int)
 	SelectedSegment() int
 	SetSelectedSegment(selectedSegment int)
-	TrackingMode() raw.NSSegmentSwitchTracking
-	SetTrackingMode(trackingMode raw.NSSegmentSwitchTracking)
-	SegmentStyle() raw.NSSegmentStyle
-	SetSegmentStyle(segmentStyle raw.NSSegmentStyle)
-	InteriorBackgroundStyleForSegment(segment int) raw.NSBackgroundStyle
+	TrackingMode() NSSegmentSwitchTracking
+	SetTrackingMode(trackingMode NSSegmentSwitchTracking)
+	SegmentStyle() NSSegmentStyle
+	SetSegmentStyle(segmentStyle NSSegmentStyle)
+	InteriorBackgroundStyleForSegment(segment int) NSBackgroundStyle
 }
 
 var _ SegmentedCellable = (*SegmentedCell)(nil)

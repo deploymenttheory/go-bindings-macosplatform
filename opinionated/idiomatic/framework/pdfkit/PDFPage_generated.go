@@ -67,13 +67,13 @@ func (x *Page) WithDisplaysAnnotations(displaysAnnotations bool) *Page {
 }
 
 // BoundsForBox calls the underlying BoundsForBox.
-func (x *Page) BoundsForBox(box raw.PDFDisplayBox) corefoundation.CGRect {
-	return x.inner.BoundsForBox(box)
+func (x *Page) BoundsForBox(box PDFDisplayBox) corefoundation.CGRect {
+	return x.inner.BoundsForBox(raw.PDFDisplayBox(box))
 }
 
 // SetBoundsForBox calls the underlying SetBoundsForBox.
-func (x *Page) SetBoundsForBox(bounds corefoundation.CGRect, box raw.PDFDisplayBox) {
-	x.inner.SetBoundsForBox(bounds, box)
+func (x *Page) SetBoundsForBox(bounds corefoundation.CGRect, box PDFDisplayBox) {
+	x.inner.SetBoundsForBox(bounds, raw.PDFDisplayBox(box))
 }
 
 // AddAnnotation calls the underlying AddAnnotation.
@@ -96,23 +96,23 @@ func (x *Page) AnnotationAtPoint(point corefoundation.CGPoint) *Annotation {
 }
 
 // TransformForBox calls the underlying TransformForBox.
-func (x *Page) TransformForBox(box raw.PDFDisplayBox) corefoundation.CGAffineTransform {
-	return x.inner.TransformForBox(box)
+func (x *Page) TransformForBox(box PDFDisplayBox) corefoundation.CGAffineTransform {
+	return x.inner.TransformForBox(raw.PDFDisplayBox(box))
 }
 
 // DrawWithBoxToContext calls the underlying DrawWithBoxToContext.
-func (x *Page) DrawWithBoxToContext(box raw.PDFDisplayBox, context_ unsafe.Pointer) {
-	x.inner.DrawWithBoxToContext(box, context_)
+func (x *Page) DrawWithBoxToContext(box PDFDisplayBox, context_ unsafe.Pointer) {
+	x.inner.DrawWithBoxToContext(raw.PDFDisplayBox(box), context_)
 }
 
 // TransformContextForBox calls the underlying TransformContextForBox.
-func (x *Page) TransformContextForBox(context_ unsafe.Pointer, box raw.PDFDisplayBox) {
-	x.inner.TransformContextForBox(context_, box)
+func (x *Page) TransformContextForBox(context_ unsafe.Pointer, box PDFDisplayBox) {
+	x.inner.TransformContextForBox(context_, raw.PDFDisplayBox(box))
 }
 
 // ThumbnailOfSizeForBox calls the underlying ThumbnailOfSizeForBox.
-func (x *Page) ThumbnailOfSizeForBox(size corefoundation.CGSize, box raw.PDFDisplayBox) *appkit.NSImage {
-	return x.inner.ThumbnailOfSizeForBox(size, box)
+func (x *Page) ThumbnailOfSizeForBox(size corefoundation.CGSize, box PDFDisplayBox) *appkit.NSImage {
+	return x.inner.ThumbnailOfSizeForBox(size, raw.PDFDisplayBox(box))
 }
 
 // CharacterBoundsAtIndex calls the underlying CharacterBoundsAtIndex.
@@ -249,13 +249,13 @@ func (x *Page) DataRepresentation() *foundation.NSData {
 }
 
 // DrawWithBox calls the underlying DrawWithBox.
-func (x *Page) DrawWithBox(box raw.PDFDisplayBox) {
-	x.inner.DrawWithBox(box)
+func (x *Page) DrawWithBox(box PDFDisplayBox) {
+	x.inner.DrawWithBox(raw.PDFDisplayBox(box))
 }
 
 // TransformContextForBox2 calls the underlying TransformContextForBox2.
-func (x *Page) TransformContextForBox2(box raw.PDFDisplayBox) {
-	x.inner.TransformContextForBox2(box)
+func (x *Page) TransformContextForBox2(box PDFDisplayBox) {
+	x.inner.TransformContextForBox2(raw.PDFDisplayBox(box))
 }
 
 // Pageable is the interface implemented by [Page], for mocking and DI.
@@ -263,15 +263,15 @@ type Pageable interface {
 	Unwrap() *raw.PDFPage
 	WithRotation(rotation int) *Page
 	WithDisplaysAnnotations(displaysAnnotations bool) *Page
-	BoundsForBox(box raw.PDFDisplayBox) corefoundation.CGRect
-	SetBoundsForBox(bounds corefoundation.CGRect, box raw.PDFDisplayBox)
+	BoundsForBox(box PDFDisplayBox) corefoundation.CGRect
+	SetBoundsForBox(bounds corefoundation.CGRect, box PDFDisplayBox)
 	AddAnnotation(annotation *raw.PDFAnnotation)
 	RemoveAnnotation(annotation *raw.PDFAnnotation)
 	AnnotationAtPoint(point corefoundation.CGPoint) *Annotation
-	TransformForBox(box raw.PDFDisplayBox) corefoundation.CGAffineTransform
-	DrawWithBoxToContext(box raw.PDFDisplayBox, context_ unsafe.Pointer)
-	TransformContextForBox(context_ unsafe.Pointer, box raw.PDFDisplayBox)
-	ThumbnailOfSizeForBox(size corefoundation.CGSize, box raw.PDFDisplayBox) *appkit.NSImage
+	TransformForBox(box PDFDisplayBox) corefoundation.CGAffineTransform
+	DrawWithBoxToContext(box PDFDisplayBox, context_ unsafe.Pointer)
+	TransformContextForBox(context_ unsafe.Pointer, box PDFDisplayBox)
+	ThumbnailOfSizeForBox(size corefoundation.CGSize, box PDFDisplayBox) *appkit.NSImage
 	CharacterBoundsAtIndex(index int) corefoundation.CGRect
 	CharacterIndexAtPoint(point corefoundation.CGPoint) int
 	SelectionForRect(rect corefoundation.CGRect) *Selection
@@ -291,8 +291,8 @@ type Pageable interface {
 	String() string
 	AttributedString() *foundation.NSAttributedString
 	DataRepresentation() *foundation.NSData
-	DrawWithBox(box raw.PDFDisplayBox)
-	TransformContextForBox2(box raw.PDFDisplayBox)
+	DrawWithBox(box PDFDisplayBox)
+	TransformContextForBox2(box PDFDisplayBox)
 }
 
 var _ Pageable = (*Page)(nil)

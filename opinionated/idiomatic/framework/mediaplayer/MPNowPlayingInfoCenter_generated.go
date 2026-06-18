@@ -43,8 +43,8 @@ func (x *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo *foundation.NSD
 }
 
 // WithPlaybackState sets the playbackState property and returns the receiver for chaining.
-func (x *NowPlayingInfoCenter) WithPlaybackState(playbackState raw.MPNowPlayingPlaybackState) *NowPlayingInfoCenter {
-	x.inner.SetPlaybackState(playbackState)
+func (x *NowPlayingInfoCenter) WithPlaybackState(playbackState MPNowPlayingPlaybackState) *NowPlayingInfoCenter {
+	x.inner.SetPlaybackState(raw.MPNowPlayingPlaybackState(playbackState))
 	return x
 }
 
@@ -59,24 +59,24 @@ func (x *NowPlayingInfoCenter) SetNowPlayingInfo(nowPlayingInfo *foundation.NSDi
 }
 
 // PlaybackState calls the underlying PlaybackState.
-func (x *NowPlayingInfoCenter) PlaybackState() raw.MPNowPlayingPlaybackState {
-	return x.inner.PlaybackState()
+func (x *NowPlayingInfoCenter) PlaybackState() MPNowPlayingPlaybackState {
+	return MPNowPlayingPlaybackState(x.inner.PlaybackState())
 }
 
 // SetPlaybackState calls the underlying SetPlaybackState.
-func (x *NowPlayingInfoCenter) SetPlaybackState(playbackState raw.MPNowPlayingPlaybackState) {
-	x.inner.SetPlaybackState(playbackState)
+func (x *NowPlayingInfoCenter) SetPlaybackState(playbackState MPNowPlayingPlaybackState) {
+	x.inner.SetPlaybackState(raw.MPNowPlayingPlaybackState(playbackState))
 }
 
 // NowPlayingInfoCenterable is the interface implemented by [NowPlayingInfoCenter], for mocking and DI.
 type NowPlayingInfoCenterable interface {
 	Unwrap() *raw.MPNowPlayingInfoCenter
 	WithNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NowPlayingInfoCenter
-	WithPlaybackState(playbackState raw.MPNowPlayingPlaybackState) *NowPlayingInfoCenter
+	WithPlaybackState(playbackState MPNowPlayingPlaybackState) *NowPlayingInfoCenter
 	NowPlayingInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	PlaybackState() raw.MPNowPlayingPlaybackState
-	SetPlaybackState(playbackState raw.MPNowPlayingPlaybackState)
+	PlaybackState() MPNowPlayingPlaybackState
+	SetPlaybackState(playbackState MPNowPlayingPlaybackState)
 }
 
 var _ NowPlayingInfoCenterable = (*NowPlayingInfoCenter)(nil)

@@ -60,8 +60,8 @@ func (x *RuleEditor) WithFormattingDictionary(formattingDictionary *foundation.N
 }
 
 // WithNestingMode sets the nestingMode property and returns the receiver for chaining.
-func (x *RuleEditor) WithNestingMode(nestingMode raw.NSRuleEditorNestingMode) *RuleEditor {
-	x.inner.SetNestingMode(nestingMode)
+func (x *RuleEditor) WithNestingMode(nestingMode NSRuleEditorNestingMode) *RuleEditor {
+	x.inner.SetNestingMode(raw.NSRuleEditorNestingMode(nestingMode))
 	return x
 }
 
@@ -162,8 +162,8 @@ func (x *RuleEditor) WithHighlighted(highlighted bool) *RuleEditor {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *RuleEditor) WithControlSize(controlSize raw.NSControlSize) *RuleEditor {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *RuleEditor) WithControlSize(controlSize NSControlSize) *RuleEditor {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -228,20 +228,20 @@ func (x *RuleEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *RuleEditor
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *RuleEditor) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *RuleEditor {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *RuleEditor) WithLineBreakMode(lineBreakMode NSLineBreakMode) *RuleEditor {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *RuleEditor) WithAlignment(alignment raw.NSTextAlignment) *RuleEditor {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *RuleEditor) WithAlignment(alignment NSTextAlignment) *RuleEditor {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *RuleEditor) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *RuleEditor {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *RuleEditor) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *RuleEditor {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -294,8 +294,8 @@ func (x *RuleEditor) WithAutoresizesSubviews(autoresizesSubviews bool) *RuleEdit
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *RuleEditor) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *RuleEditor {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *RuleEditor) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *RuleEditor {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -354,14 +354,14 @@ func (x *RuleEditor) WithWantsRestingTouches(wantsRestingTouches bool) *RuleEdit
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *RuleEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *RuleEditor {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *RuleEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *RuleEditor {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *RuleEditor) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *RuleEditor {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *RuleEditor) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *RuleEditor {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -468,8 +468,8 @@ func (x *RuleEditor) WithToolTip(toolTip string) *RuleEditor {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *RuleEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *RuleEditor {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *RuleEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *RuleEditor {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -486,8 +486,8 @@ func (x *RuleEditor) WithNextKeyView(nextKeyView ViewProvider) *RuleEditor {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *RuleEditor) WithFocusRingType(focusRingType raw.NSFocusRingType) *RuleEditor {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *RuleEditor) WithFocusRingType(focusRingType NSFocusRingType) *RuleEditor {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -510,8 +510,8 @@ func (x *RuleEditor) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *RuleEditor) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RuleEditor {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *RuleEditor) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *RuleEditor {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -635,8 +635,8 @@ func (x *RuleEditor) RowForDisplayValue(displayValue objc.ID) int {
 }
 
 // RowTypeForRow calls the underlying RowTypeForRow.
-func (x *RuleEditor) RowTypeForRow(rowIndex int) raw.NSRuleEditorRowType {
-	return x.inner.RowTypeForRow(rowIndex)
+func (x *RuleEditor) RowTypeForRow(rowIndex int) NSRuleEditorRowType {
+	return NSRuleEditorRowType(x.inner.RowTypeForRow(rowIndex))
 }
 
 // ParentRowForRow calls the underlying ParentRowForRow.
@@ -650,8 +650,8 @@ func (x *RuleEditor) AddRow(sender objc.ID) {
 }
 
 // InsertRowAtIndexWithTypeAsSubrowOfRowAnimate calls the underlying InsertRowAtIndexWithTypeAsSubrowOfRowAnimate.
-func (x *RuleEditor) InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int, rowType raw.NSRuleEditorRowType, parentRow int, shouldAnimate bool) {
-	x.inner.InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex, rowType, parentRow, shouldAnimate)
+func (x *RuleEditor) InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int, rowType NSRuleEditorRowType, parentRow int, shouldAnimate bool) {
+	x.inner.InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex, raw.NSRuleEditorRowType(rowType), parentRow, shouldAnimate)
 }
 
 // SetCriteriaAndDisplayValuesForRowAtIndex calls the underlying SetCriteriaAndDisplayValuesForRowAtIndex.
@@ -709,13 +709,13 @@ func (x *RuleEditor) SetFormattingDictionary(formattingDictionary *foundation.NS
 }
 
 // NestingMode calls the underlying NestingMode.
-func (x *RuleEditor) NestingMode() raw.NSRuleEditorNestingMode {
-	return x.inner.NestingMode()
+func (x *RuleEditor) NestingMode() NSRuleEditorNestingMode {
+	return NSRuleEditorNestingMode(x.inner.NestingMode())
 }
 
 // SetNestingMode calls the underlying SetNestingMode.
-func (x *RuleEditor) SetNestingMode(nestingMode raw.NSRuleEditorNestingMode) {
-	x.inner.SetNestingMode(nestingMode)
+func (x *RuleEditor) SetNestingMode(nestingMode NSRuleEditorNestingMode) {
+	x.inner.SetNestingMode(raw.NSRuleEditorNestingMode(nestingMode))
 }
 
 // RowHeight calls the underlying RowHeight.
@@ -843,7 +843,7 @@ type RuleEditorable interface {
 	WithDelegate(delegate raw.NSRuleEditorDelegate) *RuleEditor
 	WithFormattingStringsFilename(formattingStringsFilename string) *RuleEditor
 	WithFormattingDictionary(formattingDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *RuleEditor
-	WithNestingMode(nestingMode raw.NSRuleEditorNestingMode) *RuleEditor
+	WithNestingMode(nestingMode NSRuleEditorNestingMode) *RuleEditor
 	WithRowHeight(rowHeight float64) *RuleEditor
 	WithEditable(editable bool) *RuleEditor
 	WithCanRemoveAllRows(canRemoveAllRows bool) *RuleEditor
@@ -860,7 +860,7 @@ type RuleEditorable interface {
 	WithEnabled(enabled bool) *RuleEditor
 	WithRefusesFirstResponder(refusesFirstResponder bool) *RuleEditor
 	WithHighlighted(highlighted bool) *RuleEditor
-	WithControlSize(controlSize raw.NSControlSize) *RuleEditor
+	WithControlSize(controlSize NSControlSize) *RuleEditor
 	WithFormatter(formatter *foundation.NSFormatter) *RuleEditor
 	WithObjectValue(objectValue objc.ID) *RuleEditor
 	WithStringValue(stringValue string) *RuleEditor
@@ -871,16 +871,16 @@ type RuleEditorable interface {
 	WithDoubleValue(doubleValue float64) *RuleEditor
 	WithFont(font *Font) *RuleEditor
 	WithUsesSingleLineMode(usesSingleLineMode bool) *RuleEditor
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *RuleEditor
-	WithAlignment(alignment raw.NSTextAlignment) *RuleEditor
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *RuleEditor
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *RuleEditor
+	WithAlignment(alignment NSTextAlignment) *RuleEditor
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *RuleEditor
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *RuleEditor
 	WithCell(cell CellProvider) *RuleEditor
 	WithSubviews(items ...ViewProvider) *RuleEditor
 	WithHidden(hidden bool) *RuleEditor
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RuleEditor
 	WithAutoresizesSubviews(autoresizesSubviews bool) *RuleEditor
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *RuleEditor
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *RuleEditor
 	WithFrame(frame corefoundation.CGRect) *RuleEditor
 	WithFrameRotation(frameRotation float64) *RuleEditor
 	WithFrameCenterRotation(frameCenterRotation float64) *RuleEditor
@@ -890,8 +890,8 @@ type RuleEditorable interface {
 	WithNeedsDisplay(needsDisplay bool) *RuleEditor
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *RuleEditor
 	WithWantsRestingTouches(wantsRestingTouches bool) *RuleEditor
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *RuleEditor
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *RuleEditor
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *RuleEditor
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *RuleEditor
 	WithWantsLayer(wantsLayer bool) *RuleEditor
 	WithLayer(layer *quartzcore.CALayer) *RuleEditor
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RuleEditor
@@ -905,12 +905,12 @@ type RuleEditorable interface {
 	WithClipsToBounds(clipsToBounds bool) *RuleEditor
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RuleEditor
 	WithToolTip(toolTip string) *RuleEditor
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *RuleEditor
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *RuleEditor
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RuleEditor
 	WithNextKeyView(nextKeyView ViewProvider) *RuleEditor
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *RuleEditor
+	WithFocusRingType(focusRingType NSFocusRingType) *RuleEditor
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *RuleEditor
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RuleEditor
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *RuleEditor
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RuleEditor
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RuleEditor
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RuleEditor
@@ -932,10 +932,10 @@ type RuleEditorable interface {
 	CriteriaForRow(row int) *foundation.NSArray[objc.ID]
 	DisplayValuesForRow(row int) *foundation.NSArray[objc.ID]
 	RowForDisplayValue(displayValue objc.ID) int
-	RowTypeForRow(rowIndex int) raw.NSRuleEditorRowType
+	RowTypeForRow(rowIndex int) NSRuleEditorRowType
 	ParentRowForRow(rowIndex int) int
 	AddRow(sender objc.ID)
-	InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int, rowType raw.NSRuleEditorRowType, parentRow int, shouldAnimate bool)
+	InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int, rowType NSRuleEditorRowType, parentRow int, shouldAnimate bool)
 	SetCriteriaAndDisplayValuesForRowAtIndex(criteria *foundation.NSArray[objc.ID], values *foundation.NSArray[objc.ID], rowIndex int)
 	RemoveRowAtIndex(rowIndex int)
 	RemoveRowsAtIndexesIncludeSubrows(rowIndexes *foundation.NSIndexSet, includeSubrows bool)
@@ -946,8 +946,8 @@ type RuleEditorable interface {
 	SetFormattingStringsFilename(formattingStringsFilename string)
 	FormattingDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
 	SetFormattingDictionary(formattingDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
-	NestingMode() raw.NSRuleEditorNestingMode
-	SetNestingMode(nestingMode raw.NSRuleEditorNestingMode)
+	NestingMode() NSRuleEditorNestingMode
+	SetNestingMode(nestingMode NSRuleEditorNestingMode)
 	RowHeight() float64
 	SetRowHeight(rowHeight float64)
 	IsEditable() bool

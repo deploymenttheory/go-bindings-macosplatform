@@ -57,8 +57,8 @@ func (x *PublicKeyCredentialClientData) WithTopOrigin(topOrigin string) *PublicK
 }
 
 // WithCrossOrigin sets the crossOrigin property and returns the receiver for chaining.
-func (x *PublicKeyCredentialClientData) WithCrossOrigin(crossOrigin raw.ASPublicKeyCredentialClientDataCrossOriginValue) *PublicKeyCredentialClientData {
-	x.inner.SetCrossOrigin(crossOrigin)
+func (x *PublicKeyCredentialClientData) WithCrossOrigin(crossOrigin ASPublicKeyCredentialClientDataCrossOriginValue) *PublicKeyCredentialClientData {
+	x.inner.SetCrossOrigin(raw.ASPublicKeyCredentialClientDataCrossOriginValue(crossOrigin))
 	return x
 }
 
@@ -101,13 +101,13 @@ func (x *PublicKeyCredentialClientData) SetTopOrigin(topOrigin string) {
 }
 
 // CrossOrigin calls the underlying CrossOrigin.
-func (x *PublicKeyCredentialClientData) CrossOrigin() raw.ASPublicKeyCredentialClientDataCrossOriginValue {
-	return x.inner.CrossOrigin()
+func (x *PublicKeyCredentialClientData) CrossOrigin() ASPublicKeyCredentialClientDataCrossOriginValue {
+	return ASPublicKeyCredentialClientDataCrossOriginValue(x.inner.CrossOrigin())
 }
 
 // SetCrossOrigin calls the underlying SetCrossOrigin.
-func (x *PublicKeyCredentialClientData) SetCrossOrigin(crossOrigin raw.ASPublicKeyCredentialClientDataCrossOriginValue) {
-	x.inner.SetCrossOrigin(crossOrigin)
+func (x *PublicKeyCredentialClientData) SetCrossOrigin(crossOrigin ASPublicKeyCredentialClientDataCrossOriginValue) {
+	x.inner.SetCrossOrigin(raw.ASPublicKeyCredentialClientDataCrossOriginValue(crossOrigin))
 }
 
 // PublicKeyCredentialClientDataable is the interface implemented by [PublicKeyCredentialClientData], for mocking and DI.
@@ -116,15 +116,15 @@ type PublicKeyCredentialClientDataable interface {
 	WithChallenge(challenge *foundation.NSData) *PublicKeyCredentialClientData
 	WithOrigin(origin string) *PublicKeyCredentialClientData
 	WithTopOrigin(topOrigin string) *PublicKeyCredentialClientData
-	WithCrossOrigin(crossOrigin raw.ASPublicKeyCredentialClientDataCrossOriginValue) *PublicKeyCredentialClientData
+	WithCrossOrigin(crossOrigin ASPublicKeyCredentialClientDataCrossOriginValue) *PublicKeyCredentialClientData
 	Challenge() *foundation.NSData
 	SetChallenge(challenge *foundation.NSData)
 	Origin() string
 	SetOrigin(origin string)
 	TopOrigin() string
 	SetTopOrigin(topOrigin string)
-	CrossOrigin() raw.ASPublicKeyCredentialClientDataCrossOriginValue
-	SetCrossOrigin(crossOrigin raw.ASPublicKeyCredentialClientDataCrossOriginValue)
+	CrossOrigin() ASPublicKeyCredentialClientDataCrossOriginValue
+	SetCrossOrigin(crossOrigin ASPublicKeyCredentialClientDataCrossOriginValue)
 }
 
 var _ PublicKeyCredentialClientDataable = (*PublicKeyCredentialClientData)(nil)

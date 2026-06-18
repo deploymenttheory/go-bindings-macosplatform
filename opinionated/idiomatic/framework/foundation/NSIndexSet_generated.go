@@ -117,13 +117,13 @@ func (x *IndexSet) EnumerateIndexesUsing(block func(uint, *bool)) {
 }
 
 // EnumerateIndexesWithOptionsUsing calls the underlying EnumerateIndexesWithOptionsUsing.
-func (x *IndexSet) EnumerateIndexesWithOptionsUsing(opts raw.NSEnumerationOptions, block func(uint, *bool)) {
-	x.inner.EnumerateIndexesWithOptionsUsing(opts, block)
+func (x *IndexSet) EnumerateIndexesWithOptionsUsing(opts NSEnumerationOptions, block func(uint, *bool)) {
+	x.inner.EnumerateIndexesWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
 // EnumerateIndexesInRangeOptionsUsing calls the underlying EnumerateIndexesInRangeOptionsUsing.
-func (x *IndexSet) EnumerateIndexesInRangeOptionsUsing(range_ raw.NSRange, opts raw.NSEnumerationOptions, block func(uint, *bool)) {
-	x.inner.EnumerateIndexesInRangeOptionsUsing(range_, opts, block)
+func (x *IndexSet) EnumerateIndexesInRangeOptionsUsing(range_ raw.NSRange, opts NSEnumerationOptions, block func(uint, *bool)) {
+	x.inner.EnumerateIndexesInRangeOptionsUsing(range_, raw.NSEnumerationOptions(opts), block)
 }
 
 // IndexPassingTest calls the underlying IndexPassingTest.
@@ -132,13 +132,13 @@ func (x *IndexSet) IndexPassingTest(predicate func(uint, *bool) bool) uint {
 }
 
 // IndexWithOptionsPassingTest calls the underlying IndexWithOptionsPassingTest.
-func (x *IndexSet) IndexWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate func(uint, *bool) bool) uint {
-	return x.inner.IndexWithOptionsPassingTest(opts, predicate)
+func (x *IndexSet) IndexWithOptionsPassingTest(opts NSEnumerationOptions, predicate func(uint, *bool) bool) uint {
+	return x.inner.IndexWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
 }
 
 // IndexInRangeOptionsPassingTest calls the underlying IndexInRangeOptionsPassingTest.
-func (x *IndexSet) IndexInRangeOptionsPassingTest(range_ raw.NSRange, opts raw.NSEnumerationOptions, predicate func(uint, *bool) bool) uint {
-	return x.inner.IndexInRangeOptionsPassingTest(range_, opts, predicate)
+func (x *IndexSet) IndexInRangeOptionsPassingTest(range_ raw.NSRange, opts NSEnumerationOptions, predicate func(uint, *bool) bool) uint {
+	return x.inner.IndexInRangeOptionsPassingTest(range_, raw.NSEnumerationOptions(opts), predicate)
 }
 
 // IndexesPassingTest calls the underlying IndexesPassingTest.
@@ -151,8 +151,8 @@ func (x *IndexSet) IndexesPassingTest(predicate func(uint, *bool) bool) *IndexSe
 }
 
 // IndexesWithOptionsPassingTest calls the underlying IndexesWithOptionsPassingTest.
-func (x *IndexSet) IndexesWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate func(uint, *bool) bool) *IndexSet {
-	_r := x.inner.IndexesWithOptionsPassingTest(opts, predicate)
+func (x *IndexSet) IndexesWithOptionsPassingTest(opts NSEnumerationOptions, predicate func(uint, *bool) bool) *IndexSet {
+	_r := x.inner.IndexesWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
 	if _r == nil {
 		return nil
 	}
@@ -160,8 +160,8 @@ func (x *IndexSet) IndexesWithOptionsPassingTest(opts raw.NSEnumerationOptions, 
 }
 
 // IndexesInRangeOptionsPassingTest calls the underlying IndexesInRangeOptionsPassingTest.
-func (x *IndexSet) IndexesInRangeOptionsPassingTest(range_ raw.NSRange, opts raw.NSEnumerationOptions, predicate func(uint, *bool) bool) *IndexSet {
-	_r := x.inner.IndexesInRangeOptionsPassingTest(range_, opts, predicate)
+func (x *IndexSet) IndexesInRangeOptionsPassingTest(range_ raw.NSRange, opts NSEnumerationOptions, predicate func(uint, *bool) bool) *IndexSet {
+	_r := x.inner.IndexesInRangeOptionsPassingTest(range_, raw.NSEnumerationOptions(opts), predicate)
 	if _r == nil {
 		return nil
 	}
@@ -174,13 +174,13 @@ func (x *IndexSet) EnumerateRangesUsing(block objc.Block) {
 }
 
 // EnumerateRangesWithOptionsUsing calls the underlying EnumerateRangesWithOptionsUsing.
-func (x *IndexSet) EnumerateRangesWithOptionsUsing(opts raw.NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateRangesWithOptionsUsing(opts, block)
+func (x *IndexSet) EnumerateRangesWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateRangesWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
 // EnumerateRangesInRangeOptionsUsing calls the underlying EnumerateRangesInRangeOptionsUsing.
-func (x *IndexSet) EnumerateRangesInRangeOptionsUsing(range_ raw.NSRange, opts raw.NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateRangesInRangeOptionsUsing(range_, opts, block)
+func (x *IndexSet) EnumerateRangesInRangeOptionsUsing(range_ raw.NSRange, opts NSEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateRangesInRangeOptionsUsing(range_, raw.NSEnumerationOptions(opts), block)
 }
 
 // Count calls the underlying Count.
@@ -218,17 +218,17 @@ type IndexSetable interface {
 	ContainsIndexes(indexSet *raw.NSIndexSet) bool
 	IntersectsIndexesInRange(range_ raw.NSRange) bool
 	EnumerateIndexesUsing(block func(uint, *bool))
-	EnumerateIndexesWithOptionsUsing(opts raw.NSEnumerationOptions, block func(uint, *bool))
-	EnumerateIndexesInRangeOptionsUsing(range_ raw.NSRange, opts raw.NSEnumerationOptions, block func(uint, *bool))
+	EnumerateIndexesWithOptionsUsing(opts NSEnumerationOptions, block func(uint, *bool))
+	EnumerateIndexesInRangeOptionsUsing(range_ raw.NSRange, opts NSEnumerationOptions, block func(uint, *bool))
 	IndexPassingTest(predicate func(uint, *bool) bool) uint
-	IndexWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate func(uint, *bool) bool) uint
-	IndexInRangeOptionsPassingTest(range_ raw.NSRange, opts raw.NSEnumerationOptions, predicate func(uint, *bool) bool) uint
+	IndexWithOptionsPassingTest(opts NSEnumerationOptions, predicate func(uint, *bool) bool) uint
+	IndexInRangeOptionsPassingTest(range_ raw.NSRange, opts NSEnumerationOptions, predicate func(uint, *bool) bool) uint
 	IndexesPassingTest(predicate func(uint, *bool) bool) *IndexSet
-	IndexesWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate func(uint, *bool) bool) *IndexSet
-	IndexesInRangeOptionsPassingTest(range_ raw.NSRange, opts raw.NSEnumerationOptions, predicate func(uint, *bool) bool) *IndexSet
+	IndexesWithOptionsPassingTest(opts NSEnumerationOptions, predicate func(uint, *bool) bool) *IndexSet
+	IndexesInRangeOptionsPassingTest(range_ raw.NSRange, opts NSEnumerationOptions, predicate func(uint, *bool) bool) *IndexSet
 	EnumerateRangesUsing(block objc.Block)
-	EnumerateRangesWithOptionsUsing(opts raw.NSEnumerationOptions, block objc.Block)
-	EnumerateRangesInRangeOptionsUsing(range_ raw.NSRange, opts raw.NSEnumerationOptions, block objc.Block)
+	EnumerateRangesWithOptionsUsing(opts NSEnumerationOptions, block objc.Block)
+	EnumerateRangesInRangeOptionsUsing(range_ raw.NSRange, opts NSEnumerationOptions, block objc.Block)
 	Count() uint
 	FirstIndex() uint
 	LastIndex() uint

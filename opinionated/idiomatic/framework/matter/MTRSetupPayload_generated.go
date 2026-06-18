@@ -83,14 +83,14 @@ func (x *MTRSetupPayload) WithProductID(productID *foundation.NSNumber) *MTRSetu
 }
 
 // WithCommissioningFlow sets the commissioningFlow property and returns the receiver for chaining.
-func (x *MTRSetupPayload) WithCommissioningFlow(commissioningFlow raw.MTRCommissioningFlow) *MTRSetupPayload {
-	x.inner.SetCommissioningFlow(commissioningFlow)
+func (x *MTRSetupPayload) WithCommissioningFlow(commissioningFlow MTRCommissioningFlow) *MTRSetupPayload {
+	x.inner.SetCommissioningFlow(raw.MTRCommissioningFlow(commissioningFlow))
 	return x
 }
 
 // WithDiscoveryCapabilities sets the discoveryCapabilities property and returns the receiver for chaining.
-func (x *MTRSetupPayload) WithDiscoveryCapabilities(discoveryCapabilities raw.MTRDiscoveryCapabilities) *MTRSetupPayload {
-	x.inner.SetDiscoveryCapabilities(discoveryCapabilities)
+func (x *MTRSetupPayload) WithDiscoveryCapabilities(discoveryCapabilities MTRDiscoveryCapabilities) *MTRSetupPayload {
+	x.inner.SetDiscoveryCapabilities(raw.MTRDiscoveryCapabilities(discoveryCapabilities))
 	return x
 }
 
@@ -209,23 +209,23 @@ func (x *MTRSetupPayload) SetProductID(productID *foundation.NSNumber) {
 }
 
 // CommissioningFlow calls the underlying CommissioningFlow.
-func (x *MTRSetupPayload) CommissioningFlow() raw.MTRCommissioningFlow {
-	return x.inner.CommissioningFlow()
+func (x *MTRSetupPayload) CommissioningFlow() MTRCommissioningFlow {
+	return MTRCommissioningFlow(x.inner.CommissioningFlow())
 }
 
 // SetCommissioningFlow calls the underlying SetCommissioningFlow.
-func (x *MTRSetupPayload) SetCommissioningFlow(commissioningFlow raw.MTRCommissioningFlow) {
-	x.inner.SetCommissioningFlow(commissioningFlow)
+func (x *MTRSetupPayload) SetCommissioningFlow(commissioningFlow MTRCommissioningFlow) {
+	x.inner.SetCommissioningFlow(raw.MTRCommissioningFlow(commissioningFlow))
 }
 
 // DiscoveryCapabilities calls the underlying DiscoveryCapabilities.
-func (x *MTRSetupPayload) DiscoveryCapabilities() raw.MTRDiscoveryCapabilities {
-	return x.inner.DiscoveryCapabilities()
+func (x *MTRSetupPayload) DiscoveryCapabilities() MTRDiscoveryCapabilities {
+	return MTRDiscoveryCapabilities(x.inner.DiscoveryCapabilities())
 }
 
 // SetDiscoveryCapabilities calls the underlying SetDiscoveryCapabilities.
-func (x *MTRSetupPayload) SetDiscoveryCapabilities(discoveryCapabilities raw.MTRDiscoveryCapabilities) {
-	x.inner.SetDiscoveryCapabilities(discoveryCapabilities)
+func (x *MTRSetupPayload) SetDiscoveryCapabilities(discoveryCapabilities MTRDiscoveryCapabilities) {
+	x.inner.SetDiscoveryCapabilities(raw.MTRDiscoveryCapabilities(discoveryCapabilities))
 }
 
 // Discriminator calls the underlying Discriminator.
@@ -335,8 +335,8 @@ type MTRSetupPayloadable interface {
 	WithSubPayloads(items ...*raw.MTRSetupPayload) *MTRSetupPayload
 	WithVendorID(vendorID *foundation.NSNumber) *MTRSetupPayload
 	WithProductID(productID *foundation.NSNumber) *MTRSetupPayload
-	WithCommissioningFlow(commissioningFlow raw.MTRCommissioningFlow) *MTRSetupPayload
-	WithDiscoveryCapabilities(discoveryCapabilities raw.MTRDiscoveryCapabilities) *MTRSetupPayload
+	WithCommissioningFlow(commissioningFlow MTRCommissioningFlow) *MTRSetupPayload
+	WithDiscoveryCapabilities(discoveryCapabilities MTRDiscoveryCapabilities) *MTRSetupPayload
 	WithDiscriminator(discriminator *foundation.NSNumber) *MTRSetupPayload
 	WithHasShortDiscriminator(hasShortDiscriminator bool) *MTRSetupPayload
 	WithSetupPasscode(setupPasscode *foundation.NSNumber) *MTRSetupPayload
@@ -355,10 +355,10 @@ type MTRSetupPayloadable interface {
 	SetVendorID(vendorID *foundation.NSNumber)
 	ProductID() *foundation.NSNumber
 	SetProductID(productID *foundation.NSNumber)
-	CommissioningFlow() raw.MTRCommissioningFlow
-	SetCommissioningFlow(commissioningFlow raw.MTRCommissioningFlow)
-	DiscoveryCapabilities() raw.MTRDiscoveryCapabilities
-	SetDiscoveryCapabilities(discoveryCapabilities raw.MTRDiscoveryCapabilities)
+	CommissioningFlow() MTRCommissioningFlow
+	SetCommissioningFlow(commissioningFlow MTRCommissioningFlow)
+	DiscoveryCapabilities() MTRDiscoveryCapabilities
+	SetDiscoveryCapabilities(discoveryCapabilities MTRDiscoveryCapabilities)
 	Discriminator() *foundation.NSNumber
 	SetDiscriminator(discriminator *foundation.NSNumber)
 	HasShortDiscriminator() bool

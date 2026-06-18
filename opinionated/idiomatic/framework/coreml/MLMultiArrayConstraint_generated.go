@@ -49,8 +49,8 @@ func (x *MultiArrayConstraint) Shape() []*foundation.NSNumber {
 }
 
 // DataType calls the underlying DataType.
-func (x *MultiArrayConstraint) DataType() raw.MLMultiArrayDataType {
-	return x.inner.DataType()
+func (x *MultiArrayConstraint) DataType() MLMultiArrayDataType {
+	return MLMultiArrayDataType(x.inner.DataType())
 }
 
 // ShapeConstraint calls the underlying ShapeConstraint.
@@ -66,7 +66,7 @@ func (x *MultiArrayConstraint) ShapeConstraint() *MultiArrayShapeConstraint {
 type MultiArrayConstraintable interface {
 	Unwrap() *raw.MLMultiArrayConstraint
 	Shape() []*foundation.NSNumber
-	DataType() raw.MLMultiArrayDataType
+	DataType() MLMultiArrayDataType
 	ShapeConstraint() *MultiArrayShapeConstraint
 }
 

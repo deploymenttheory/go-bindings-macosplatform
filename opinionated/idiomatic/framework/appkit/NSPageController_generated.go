@@ -45,8 +45,8 @@ func (x *PageController) WithDelegate(delegate raw.NSPageControllerDelegate) *Pa
 }
 
 // WithTransitionStyle sets the transitionStyle property and returns the receiver for chaining.
-func (x *PageController) WithTransitionStyle(transitionStyle raw.NSPageControllerTransitionStyle) *PageController {
-	x.inner.SetTransitionStyle(transitionStyle)
+func (x *PageController) WithTransitionStyle(transitionStyle NSPageControllerTransitionStyle) *PageController {
+	x.inner.SetTransitionStyle(raw.NSPageControllerTransitionStyle(transitionStyle))
 	return x
 }
 
@@ -179,13 +179,13 @@ func (x *PageController) SelectedViewController() *ViewController {
 }
 
 // TransitionStyle calls the underlying TransitionStyle.
-func (x *PageController) TransitionStyle() raw.NSPageControllerTransitionStyle {
-	return x.inner.TransitionStyle()
+func (x *PageController) TransitionStyle() NSPageControllerTransitionStyle {
+	return NSPageControllerTransitionStyle(x.inner.TransitionStyle())
 }
 
 // SetTransitionStyle calls the underlying SetTransitionStyle.
-func (x *PageController) SetTransitionStyle(transitionStyle raw.NSPageControllerTransitionStyle) {
-	x.inner.SetTransitionStyle(transitionStyle)
+func (x *PageController) SetTransitionStyle(transitionStyle NSPageControllerTransitionStyle) {
+	x.inner.SetTransitionStyle(raw.NSPageControllerTransitionStyle(transitionStyle))
 }
 
 // ArrangedObjects calls the underlying ArrangedObjects.
@@ -216,7 +216,7 @@ func (x *PageController) asResponder() *raw.NSResponder { return &x.inner.NSView
 type PageControllerable interface {
 	Unwrap() *raw.NSPageController
 	WithDelegate(delegate raw.NSPageControllerDelegate) *PageController
-	WithTransitionStyle(transitionStyle raw.NSPageControllerTransitionStyle) *PageController
+	WithTransitionStyle(transitionStyle NSPageControllerTransitionStyle) *PageController
 	WithSelectedIndex(selectedIndex int) *PageController
 	WithRepresentedObject(representedObject objc.ID) *PageController
 	WithTitle(title string) *PageController
@@ -237,8 +237,8 @@ type PageControllerable interface {
 	Delegate() raw.NSPageControllerDelegate
 	SetDelegate(delegate raw.NSPageControllerDelegate)
 	SelectedViewController() *ViewController
-	TransitionStyle() raw.NSPageControllerTransitionStyle
-	SetTransitionStyle(transitionStyle raw.NSPageControllerTransitionStyle)
+	TransitionStyle() NSPageControllerTransitionStyle
+	SetTransitionStyle(transitionStyle NSPageControllerTransitionStyle)
 	ArrangedObjects() *foundation.NSArray[objc.ID]
 	SetArrangedObjects(arrangedObjects *foundation.NSArray[objc.ID])
 	SelectedIndex() int

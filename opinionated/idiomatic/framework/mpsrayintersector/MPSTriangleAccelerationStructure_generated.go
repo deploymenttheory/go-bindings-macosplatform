@@ -48,8 +48,8 @@ func (x *TriangleAccelerationStructure) WithTriangleCount(triangleCount uint) *T
 }
 
 // WithPolygonType sets the polygonType property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithPolygonType(polygonType raw.MPSPolygonType) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetPolygonType(polygonType)
+func (x *TriangleAccelerationStructure) WithPolygonType(polygonType MPSPolygonType) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetPolygonType(raw.MPSPolygonType(polygonType))
 	return x
 }
 
@@ -126,8 +126,8 @@ func (x *TriangleAccelerationStructure) WithPolygonBuffers(items ...*raw.MPSPoly
 }
 
 // WithUsage sets the usage property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithUsage(usage raw.MPSAccelerationStructureUsage) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.SetUsage(usage)
+func (x *TriangleAccelerationStructure) WithUsage(usage MPSAccelerationStructureUsage) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.SetUsage(raw.MPSAccelerationStructureUsage(usage))
 	return x
 }
 
@@ -153,7 +153,7 @@ func (x *TriangleAccelerationStructure) asAccelerationStructure() *raw.MPSAccele
 type TriangleAccelerationStructureable interface {
 	Unwrap() *raw.MPSTriangleAccelerationStructure
 	WithTriangleCount(triangleCount uint) *TriangleAccelerationStructure
-	WithPolygonType(polygonType raw.MPSPolygonType) *TriangleAccelerationStructure
+	WithPolygonType(polygonType MPSPolygonType) *TriangleAccelerationStructure
 	WithVertexStride(vertexStride uint) *TriangleAccelerationStructure
 	WithIndexType(indexType mpscore.MPSDataType) *TriangleAccelerationStructure
 	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *TriangleAccelerationStructure
@@ -164,7 +164,7 @@ type TriangleAccelerationStructureable interface {
 	WithMaskBufferOffset(maskBufferOffset uint) *TriangleAccelerationStructure
 	WithPolygonCount(polygonCount uint) *TriangleAccelerationStructure
 	WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *TriangleAccelerationStructure
-	WithUsage(usage raw.MPSAccelerationStructureUsage) *TriangleAccelerationStructure
+	WithUsage(usage MPSAccelerationStructureUsage) *TriangleAccelerationStructure
 	TriangleCount() uint
 	SetTriangleCount(triangleCount uint)
 }

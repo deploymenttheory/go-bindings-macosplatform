@@ -30,26 +30,26 @@ func ActionNamedFromID(id objc.ID) *ActionNamed {
 }
 
 // NewActionNamedWithName creates a new [ActionNamed].
-func NewActionNamedWithName(name raw.PDFActionNamedName) *ActionNamed {
+func NewActionNamedWithName(name PDFActionNamedName) *ActionNamed {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFActionNamed")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), name)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), raw.PDFActionNamedName(name))
 	return &ActionNamed{inner: raw.PDFActionNamedFromID(_id)}
 }
 
 // WithName sets the name property and returns the receiver for chaining.
-func (x *ActionNamed) WithName(name raw.PDFActionNamedName) *ActionNamed {
-	x.inner.SetName(name)
+func (x *ActionNamed) WithName(name PDFActionNamedName) *ActionNamed {
+	x.inner.SetName(raw.PDFActionNamedName(name))
 	return x
 }
 
 // Name calls the underlying Name.
-func (x *ActionNamed) Name() raw.PDFActionNamedName {
-	return x.inner.Name()
+func (x *ActionNamed) Name() PDFActionNamedName {
+	return PDFActionNamedName(x.inner.Name())
 }
 
 // SetName calls the underlying SetName.
-func (x *ActionNamed) SetName(name raw.PDFActionNamedName) {
-	x.inner.SetName(name)
+func (x *ActionNamed) SetName(name PDFActionNamedName) {
+	x.inner.SetName(raw.PDFActionNamedName(name))
 }
 
 func (x *ActionNamed) asAction() *raw.PDFAction { return &x.inner.PDFAction }
@@ -57,9 +57,9 @@ func (x *ActionNamed) asAction() *raw.PDFAction { return &x.inner.PDFAction }
 // ActionNamedable is the interface implemented by [ActionNamed], for mocking and DI.
 type ActionNamedable interface {
 	Unwrap() *raw.PDFActionNamed
-	WithName(name raw.PDFActionNamedName) *ActionNamed
-	Name() raw.PDFActionNamedName
-	SetName(name raw.PDFActionNamedName)
+	WithName(name PDFActionNamedName) *ActionNamed
+	Name() PDFActionNamedName
+	SetName(name PDFActionNamedName)
 }
 
 var _ ActionNamedable = (*ActionNamed)(nil)

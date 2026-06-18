@@ -120,8 +120,8 @@ func PMGetUnadjustedPaperRect(pageFormat unsafe.Pointer, paperRect *raw.PMRect) 
 }
 
 // PMPageFormatCreateDataRepresentation calls [raw.PMPageFormatCreateDataRepresentation] (C function PMPageFormatCreateDataRepresentation).
-func PMPageFormatCreateDataRepresentation(pageFormat unsafe.Pointer, data unsafe.Pointer, format raw.PMDataFormat) int {
-	return raw.PMPageFormatCreateDataRepresentation(pageFormat, data, format)
+func PMPageFormatCreateDataRepresentation(pageFormat unsafe.Pointer, data unsafe.Pointer, format PMDataFormat) int {
+	return raw.PMPageFormatCreateDataRepresentation(pageFormat, data, raw.PMDataFormat(format))
 }
 
 // PMPageFormatCreateWithDataRepresentation calls [raw.PMPageFormatCreateWithDataRepresentation] (C function PMPageFormatCreateWithDataRepresentation).
@@ -205,8 +205,8 @@ func PMPrintSettingsCopyKeys(printSettings unsafe.Pointer, settingsKeys unsafe.P
 }
 
 // PMPrintSettingsCreateDataRepresentation calls [raw.PMPrintSettingsCreateDataRepresentation] (C function PMPrintSettingsCreateDataRepresentation).
-func PMPrintSettingsCreateDataRepresentation(printSettings unsafe.Pointer, data unsafe.Pointer, format raw.PMDataFormat) int {
-	return raw.PMPrintSettingsCreateDataRepresentation(printSettings, data, format)
+func PMPrintSettingsCreateDataRepresentation(printSettings unsafe.Pointer, data unsafe.Pointer, format PMDataFormat) int {
+	return raw.PMPrintSettingsCreateDataRepresentation(printSettings, data, raw.PMDataFormat(format))
 }
 
 // PMPrintSettingsCreateWithDataRepresentation calls [raw.PMPrintSettingsCreateWithDataRepresentation] (C function PMPrintSettingsCreateWithDataRepresentation).

@@ -47,8 +47,8 @@ func (x *Characteristic) Service() *Service {
 }
 
 // Properties calls the underlying Properties.
-func (x *Characteristic) Properties() raw.CBCharacteristicProperties {
-	return x.inner.Properties()
+func (x *Characteristic) Properties() CBCharacteristicProperties {
+	return CBCharacteristicProperties(x.inner.Properties())
 }
 
 // Value calls the underlying Value.
@@ -85,7 +85,7 @@ func (x *Characteristic) asAttribute() *raw.CBAttribute { return &x.inner.CBAttr
 type Characteristicable interface {
 	Unwrap() *raw.CBCharacteristic
 	Service() *Service
-	Properties() raw.CBCharacteristicProperties
+	Properties() CBCharacteristicProperties
 	Value() *foundation.NSData
 	Descriptors() []*Descriptor
 	IsBroadcasted() bool

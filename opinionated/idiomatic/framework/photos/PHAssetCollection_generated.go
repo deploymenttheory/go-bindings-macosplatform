@@ -39,8 +39,8 @@ func NewAssetCollection() *AssetCollection {
 }
 
 // AssetCollectionType calls the underlying AssetCollectionType.
-func (x *AssetCollection) AssetCollectionType() raw.PHAssetCollectionType {
-	return x.inner.AssetCollectionType()
+func (x *AssetCollection) AssetCollectionType() PHAssetCollectionType {
+	return PHAssetCollectionType(x.inner.AssetCollectionType())
 }
 
 // AssetCollectionSubtype calls the underlying AssetCollectionSubtype.
@@ -88,7 +88,7 @@ func (x *AssetCollection) asObject() *raw.PHObject { return &x.inner.PHCollectio
 // AssetCollectionable is the interface implemented by [AssetCollection], for mocking and DI.
 type AssetCollectionable interface {
 	Unwrap() *raw.PHAssetCollection
-	AssetCollectionType() raw.PHAssetCollectionType
+	AssetCollectionType() PHAssetCollectionType
 	AssetCollectionSubtype() unsafe.Pointer
 	EstimatedAssetCount() uint
 	StartDate() *foundation.NSDate

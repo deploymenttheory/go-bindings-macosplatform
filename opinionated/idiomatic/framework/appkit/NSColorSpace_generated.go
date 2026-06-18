@@ -74,8 +74,8 @@ func (x *ColorSpace) NumberOfColorComponents() int {
 }
 
 // ColorSpaceModel calls the underlying ColorSpaceModel.
-func (x *ColorSpace) ColorSpaceModel() raw.NSColorSpaceModel {
-	return x.inner.ColorSpaceModel()
+func (x *ColorSpace) ColorSpaceModel() NSColorSpaceModel {
+	return NSColorSpaceModel(x.inner.ColorSpaceModel())
 }
 
 // LocalizedName calls the underlying LocalizedName.
@@ -94,7 +94,7 @@ type ColorSpaceable interface {
 	ColorSyncProfile() unsafe.Pointer
 	CGColorSpace() unsafe.Pointer
 	NumberOfColorComponents() int
-	ColorSpaceModel() raw.NSColorSpaceModel
+	ColorSpaceModel() NSColorSpaceModel
 	LocalizedName() string
 }
 

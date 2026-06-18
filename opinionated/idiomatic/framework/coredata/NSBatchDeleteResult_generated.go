@@ -41,8 +41,8 @@ func (x *BatchDeleteResult) Result() objc.ID {
 }
 
 // ResultType calls the underlying ResultType.
-func (x *BatchDeleteResult) ResultType() raw.NSBatchDeleteRequestResultType {
-	return x.inner.ResultType()
+func (x *BatchDeleteResult) ResultType() NSBatchDeleteRequestResultType {
+	return NSBatchDeleteRequestResultType(x.inner.ResultType())
 }
 
 func (x *BatchDeleteResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
@@ -53,7 +53,7 @@ func (x *BatchDeleteResult) asPersistentStoreResult() *raw.NSPersistentStoreResu
 type BatchDeleteResultable interface {
 	Unwrap() *raw.NSBatchDeleteResult
 	Result() objc.ID
-	ResultType() raw.NSBatchDeleteRequestResultType
+	ResultType() NSBatchDeleteRequestResultType
 }
 
 var _ BatchDeleteResultable = (*BatchDeleteResult)(nil)

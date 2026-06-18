@@ -33,9 +33,9 @@ func UMPMutableEndpointFromID(id objc.ID) *UMPMutableEndpoint {
 }
 
 // NewUMPMutableEndpointWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback creates a new [UMPMutableEndpoint].
-func NewUMPMutableEndpointWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback(name string, deviceInfo *raw.MIDI2DeviceInfo, productInstanceID string, mIDIProtocol raw.MIDIProtocolID, destinationCallback func(*raw.MIDIEventList, unsafe.Pointer)) *UMPMutableEndpoint {
+func NewUMPMutableEndpointWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback(name string, deviceInfo *raw.MIDI2DeviceInfo, productInstanceID string, mIDIProtocol MIDIProtocolID, destinationCallback func(*raw.MIDIEventList, unsafe.Pointer)) *UMPMutableEndpoint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDIUMPMutableEndpoint")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:deviceInfo:productInstanceID:MIDIProtocol:destinationCallback:"), foundation.NSStringStringWithUTF8String(name).Ptr(), deviceInfo.Ptr(), foundation.NSStringStringWithUTF8String(productInstanceID).Ptr(), mIDIProtocol, destinationCallback)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:deviceInfo:productInstanceID:MIDIProtocol:destinationCallback:"), foundation.NSStringStringWithUTF8String(name).Ptr(), deviceInfo.Ptr(), foundation.NSStringStringWithUTF8String(productInstanceID).Ptr(), raw.MIDIProtocolID(mIDIProtocol), destinationCallback)
 	return &UMPMutableEndpoint{inner: raw.MIDIUMPMutableEndpointFromID(_id)}
 }
 

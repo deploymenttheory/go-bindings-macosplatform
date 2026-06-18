@@ -37,8 +37,8 @@ func NewAVB17221AECPAddressAccessTLV() *AVB17221AECPAddressAccessTLV {
 }
 
 // WithMode sets the mode property and returns the receiver for chaining.
-func (x *AVB17221AECPAddressAccessTLV) WithMode(mode raw.AVB17221AECPAddressAccessTLVMode) *AVB17221AECPAddressAccessTLV {
-	x.inner.SetMode(mode)
+func (x *AVB17221AECPAddressAccessTLV) WithMode(mode AVB17221AECPAddressAccessTLVMode) *AVB17221AECPAddressAccessTLV {
+	x.inner.SetMode(raw.AVB17221AECPAddressAccessTLVMode(mode))
 	return x
 }
 
@@ -55,13 +55,13 @@ func (x *AVB17221AECPAddressAccessTLV) WithMemoryData(memoryData *foundation.NSD
 }
 
 // Mode calls the underlying Mode.
-func (x *AVB17221AECPAddressAccessTLV) Mode() raw.AVB17221AECPAddressAccessTLVMode {
-	return x.inner.Mode()
+func (x *AVB17221AECPAddressAccessTLV) Mode() AVB17221AECPAddressAccessTLVMode {
+	return AVB17221AECPAddressAccessTLVMode(x.inner.Mode())
 }
 
 // SetMode calls the underlying SetMode.
-func (x *AVB17221AECPAddressAccessTLV) SetMode(mode raw.AVB17221AECPAddressAccessTLVMode) {
-	x.inner.SetMode(mode)
+func (x *AVB17221AECPAddressAccessTLV) SetMode(mode AVB17221AECPAddressAccessTLVMode) {
+	x.inner.SetMode(raw.AVB17221AECPAddressAccessTLVMode(mode))
 }
 
 // Address calls the underlying Address.
@@ -87,11 +87,11 @@ func (x *AVB17221AECPAddressAccessTLV) SetMemoryData(memoryData *foundation.NSDa
 // AVB17221AECPAddressAccessTLVable is the interface implemented by [AVB17221AECPAddressAccessTLV], for mocking and DI.
 type AVB17221AECPAddressAccessTLVable interface {
 	Unwrap() *raw.AVB17221AECPAddressAccessTLV
-	WithMode(mode raw.AVB17221AECPAddressAccessTLVMode) *AVB17221AECPAddressAccessTLV
+	WithMode(mode AVB17221AECPAddressAccessTLVMode) *AVB17221AECPAddressAccessTLV
 	WithAddress(address uint64) *AVB17221AECPAddressAccessTLV
 	WithMemoryData(memoryData *foundation.NSData) *AVB17221AECPAddressAccessTLV
-	Mode() raw.AVB17221AECPAddressAccessTLVMode
-	SetMode(mode raw.AVB17221AECPAddressAccessTLVMode)
+	Mode() AVB17221AECPAddressAccessTLVMode
+	SetMode(mode AVB17221AECPAddressAccessTLVMode)
 	Address() uint64
 	SetAddress(address uint64)
 	MemoryData() *foundation.NSData

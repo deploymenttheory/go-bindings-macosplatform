@@ -241,8 +241,8 @@ func InfoForFilter(filter *raw.SCContentFilter) *ShareableContentInfo {
 }
 
 // StreamConfigurationWithPreset calls the underlying SCStreamConfigurationStreamConfigurationWithPreset.
-func StreamConfigurationWithPreset(preset raw.SCStreamConfigurationPreset) *StreamConfiguration {
-	_r := raw.SCStreamConfigurationStreamConfigurationWithPreset(preset)
+func StreamConfigurationWithPreset(preset SCStreamConfigurationPreset) *StreamConfiguration {
+	_r := raw.SCStreamConfigurationStreamConfigurationWithPreset(raw.SCStreamConfigurationPreset(preset))
 	if _r == nil {
 		return nil
 	}

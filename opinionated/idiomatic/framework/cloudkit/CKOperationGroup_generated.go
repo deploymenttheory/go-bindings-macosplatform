@@ -63,14 +63,14 @@ func (x *OperationGroup) WithQuantity(quantity uint) *OperationGroup {
 }
 
 // WithExpectedSendSize sets the expectedSendSize property and returns the receiver for chaining.
-func (x *OperationGroup) WithExpectedSendSize(expectedSendSize raw.CKOperationGroupTransferSize) *OperationGroup {
-	x.inner.SetExpectedSendSize(expectedSendSize)
+func (x *OperationGroup) WithExpectedSendSize(expectedSendSize CKOperationGroupTransferSize) *OperationGroup {
+	x.inner.SetExpectedSendSize(raw.CKOperationGroupTransferSize(expectedSendSize))
 	return x
 }
 
 // WithExpectedReceiveSize sets the expectedReceiveSize property and returns the receiver for chaining.
-func (x *OperationGroup) WithExpectedReceiveSize(expectedReceiveSize raw.CKOperationGroupTransferSize) *OperationGroup {
-	x.inner.SetExpectedReceiveSize(expectedReceiveSize)
+func (x *OperationGroup) WithExpectedReceiveSize(expectedReceiveSize CKOperationGroupTransferSize) *OperationGroup {
+	x.inner.SetExpectedReceiveSize(raw.CKOperationGroupTransferSize(expectedReceiveSize))
 	return x
 }
 
@@ -122,23 +122,23 @@ func (x *OperationGroup) SetQuantity(quantity uint) {
 }
 
 // ExpectedSendSize calls the underlying ExpectedSendSize.
-func (x *OperationGroup) ExpectedSendSize() raw.CKOperationGroupTransferSize {
-	return x.inner.ExpectedSendSize()
+func (x *OperationGroup) ExpectedSendSize() CKOperationGroupTransferSize {
+	return CKOperationGroupTransferSize(x.inner.ExpectedSendSize())
 }
 
 // SetExpectedSendSize calls the underlying SetExpectedSendSize.
-func (x *OperationGroup) SetExpectedSendSize(expectedSendSize raw.CKOperationGroupTransferSize) {
-	x.inner.SetExpectedSendSize(expectedSendSize)
+func (x *OperationGroup) SetExpectedSendSize(expectedSendSize CKOperationGroupTransferSize) {
+	x.inner.SetExpectedSendSize(raw.CKOperationGroupTransferSize(expectedSendSize))
 }
 
 // ExpectedReceiveSize calls the underlying ExpectedReceiveSize.
-func (x *OperationGroup) ExpectedReceiveSize() raw.CKOperationGroupTransferSize {
-	return x.inner.ExpectedReceiveSize()
+func (x *OperationGroup) ExpectedReceiveSize() CKOperationGroupTransferSize {
+	return CKOperationGroupTransferSize(x.inner.ExpectedReceiveSize())
 }
 
 // SetExpectedReceiveSize calls the underlying SetExpectedReceiveSize.
-func (x *OperationGroup) SetExpectedReceiveSize(expectedReceiveSize raw.CKOperationGroupTransferSize) {
-	x.inner.SetExpectedReceiveSize(expectedReceiveSize)
+func (x *OperationGroup) SetExpectedReceiveSize(expectedReceiveSize CKOperationGroupTransferSize) {
+	x.inner.SetExpectedReceiveSize(raw.CKOperationGroupTransferSize(expectedReceiveSize))
 }
 
 // OperationGroupable is the interface implemented by [OperationGroup], for mocking and DI.
@@ -147,8 +147,8 @@ type OperationGroupable interface {
 	WithDefaultConfiguration(defaultConfiguration *OperationConfiguration) *OperationGroup
 	WithName(name string) *OperationGroup
 	WithQuantity(quantity uint) *OperationGroup
-	WithExpectedSendSize(expectedSendSize raw.CKOperationGroupTransferSize) *OperationGroup
-	WithExpectedReceiveSize(expectedReceiveSize raw.CKOperationGroupTransferSize) *OperationGroup
+	WithExpectedSendSize(expectedSendSize CKOperationGroupTransferSize) *OperationGroup
+	WithExpectedReceiveSize(expectedReceiveSize CKOperationGroupTransferSize) *OperationGroup
 	OperationGroupID() string
 	DefaultConfiguration() *OperationConfiguration
 	SetDefaultConfiguration(defaultConfiguration *raw.CKOperationConfiguration)
@@ -156,10 +156,10 @@ type OperationGroupable interface {
 	SetName(name string)
 	Quantity() uint
 	SetQuantity(quantity uint)
-	ExpectedSendSize() raw.CKOperationGroupTransferSize
-	SetExpectedSendSize(expectedSendSize raw.CKOperationGroupTransferSize)
-	ExpectedReceiveSize() raw.CKOperationGroupTransferSize
-	SetExpectedReceiveSize(expectedReceiveSize raw.CKOperationGroupTransferSize)
+	ExpectedSendSize() CKOperationGroupTransferSize
+	SetExpectedSendSize(expectedSendSize CKOperationGroupTransferSize)
+	ExpectedReceiveSize() CKOperationGroupTransferSize
+	SetExpectedReceiveSize(expectedReceiveSize CKOperationGroupTransferSize)
 }
 
 var _ OperationGroupable = (*OperationGroup)(nil)

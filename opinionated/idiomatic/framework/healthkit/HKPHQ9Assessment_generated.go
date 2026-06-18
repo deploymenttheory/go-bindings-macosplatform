@@ -49,8 +49,8 @@ func (x *PHQ9Assessment) Answers() []*foundation.NSNumber {
 }
 
 // Risk calls the underlying Risk.
-func (x *PHQ9Assessment) Risk() raw.HKPHQ9AssessmentRisk {
-	return x.inner.Risk()
+func (x *PHQ9Assessment) Risk() HKPHQ9AssessmentRisk {
+	return HKPHQ9AssessmentRisk(x.inner.Risk())
 }
 
 func (x *PHQ9Assessment) asScoredAssessment() *raw.HKScoredAssessment {
@@ -67,7 +67,7 @@ func (x *PHQ9Assessment) asObject() *raw.HKObject {
 type PHQ9Assessmentable interface {
 	Unwrap() *raw.HKPHQ9Assessment
 	Answers() []*foundation.NSNumber
-	Risk() raw.HKPHQ9AssessmentRisk
+	Risk() HKPHQ9AssessmentRisk
 }
 
 var _ PHQ9Assessmentable = (*PHQ9Assessment)(nil)

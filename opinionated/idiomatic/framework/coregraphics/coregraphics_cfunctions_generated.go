@@ -11,8 +11,8 @@ import (
 )
 
 // CGAcquireDisplayFadeReservation calls [raw.CGAcquireDisplayFadeReservation] (C function CGAcquireDisplayFadeReservation).
-func CGAcquireDisplayFadeReservation(seconds float32, token *uint32) raw.CGError {
-	return raw.CGAcquireDisplayFadeReservation(seconds, token)
+func CGAcquireDisplayFadeReservation(seconds float32, token *uint32) CGError {
+	return CGError(raw.CGAcquireDisplayFadeReservation(seconds, token))
 }
 
 // CGAffineTransformConcat calls [raw.CGAffineTransformConcat] (C function CGAffineTransformConcat).
@@ -81,18 +81,18 @@ func CGAffineTransformTranslate(t corefoundation.CGAffineTransform, tx float64, 
 }
 
 // CGAssociateMouseAndMouseCursorPosition calls [raw.CGAssociateMouseAndMouseCursorPosition] (C function CGAssociateMouseAndMouseCursorPosition).
-func CGAssociateMouseAndMouseCursorPosition(connected int) raw.CGError {
-	return raw.CGAssociateMouseAndMouseCursorPosition(connected)
+func CGAssociateMouseAndMouseCursorPosition(connected int) CGError {
+	return CGError(raw.CGAssociateMouseAndMouseCursorPosition(connected))
 }
 
 // CGBeginDisplayConfiguration calls [raw.CGBeginDisplayConfiguration] (C function CGBeginDisplayConfiguration).
-func CGBeginDisplayConfiguration(config unsafe.Pointer) raw.CGError {
-	return raw.CGBeginDisplayConfiguration(config)
+func CGBeginDisplayConfiguration(config unsafe.Pointer) CGError {
+	return CGError(raw.CGBeginDisplayConfiguration(config))
 }
 
 // CGBitmapContextCreate calls [raw.CGBitmapContextCreate] (C function CGBitmapContextCreate).
-func CGBitmapContextCreate(data unsafe.Pointer, width uint, height uint, bitsPerComponent uint, bytesPerRow uint, space unsafe.Pointer, bitmapInfo raw.CGBitmapInfo) unsafe.Pointer {
-	return raw.CGBitmapContextCreate(data, width, height, bitsPerComponent, bytesPerRow, space, bitmapInfo)
+func CGBitmapContextCreate(data unsafe.Pointer, width uint, height uint, bitsPerComponent uint, bytesPerRow uint, space unsafe.Pointer, bitmapInfo CGBitmapInfo) unsafe.Pointer {
+	return raw.CGBitmapContextCreate(data, width, height, bitsPerComponent, bytesPerRow, space, raw.CGBitmapInfo(bitmapInfo))
 }
 
 // CGBitmapContextCreateAdaptive calls [raw.CGBitmapContextCreateAdaptive] (C function CGBitmapContextCreateAdaptive).
@@ -106,18 +106,18 @@ func CGBitmapContextCreateImage(context_ unsafe.Pointer) unsafe.Pointer {
 }
 
 // CGBitmapContextCreateWithData calls [raw.CGBitmapContextCreateWithData] (C function CGBitmapContextCreateWithData).
-func CGBitmapContextCreateWithData(data unsafe.Pointer, width uint, height uint, bitsPerComponent uint, bytesPerRow uint, space unsafe.Pointer, bitmapInfo raw.CGBitmapInfo, releaseCallback unsafe.Pointer, releaseInfo unsafe.Pointer) unsafe.Pointer {
-	return raw.CGBitmapContextCreateWithData(data, width, height, bitsPerComponent, bytesPerRow, space, bitmapInfo, releaseCallback, releaseInfo)
+func CGBitmapContextCreateWithData(data unsafe.Pointer, width uint, height uint, bitsPerComponent uint, bytesPerRow uint, space unsafe.Pointer, bitmapInfo CGBitmapInfo, releaseCallback unsafe.Pointer, releaseInfo unsafe.Pointer) unsafe.Pointer {
+	return raw.CGBitmapContextCreateWithData(data, width, height, bitsPerComponent, bytesPerRow, space, raw.CGBitmapInfo(bitmapInfo), releaseCallback, releaseInfo)
 }
 
 // CGBitmapContextGetAlphaInfo calls [raw.CGBitmapContextGetAlphaInfo] (C function CGBitmapContextGetAlphaInfo).
-func CGBitmapContextGetAlphaInfo(context_ unsafe.Pointer) raw.CGImageAlphaInfo {
-	return raw.CGBitmapContextGetAlphaInfo(context_)
+func CGBitmapContextGetAlphaInfo(context_ unsafe.Pointer) CGImageAlphaInfo {
+	return CGImageAlphaInfo(raw.CGBitmapContextGetAlphaInfo(context_))
 }
 
 // CGBitmapContextGetBitmapInfo calls [raw.CGBitmapContextGetBitmapInfo] (C function CGBitmapContextGetBitmapInfo).
-func CGBitmapContextGetBitmapInfo(context_ unsafe.Pointer) raw.CGBitmapInfo {
-	return raw.CGBitmapContextGetBitmapInfo(context_)
+func CGBitmapContextGetBitmapInfo(context_ unsafe.Pointer) CGBitmapInfo {
+	return CGBitmapInfo(raw.CGBitmapContextGetBitmapInfo(context_))
 }
 
 // CGBitmapContextGetBitsPerComponent calls [raw.CGBitmapContextGetBitsPerComponent] (C function CGBitmapContextGetBitsPerComponent).
@@ -156,23 +156,23 @@ func CGBitmapContextGetWidth(context_ unsafe.Pointer) uint {
 }
 
 // CGBitmapInfoMake calls [raw.CGBitmapInfoMake] (C function CGBitmapInfoMake).
-func CGBitmapInfoMake(alpha raw.CGImageAlphaInfo, component raw.CGImageComponentInfo, byteOrder raw.CGImageByteOrderInfo, pixelFormat raw.CGImagePixelFormatInfo) raw.CGBitmapInfo {
-	return raw.CGBitmapInfoMake(alpha, component, byteOrder, pixelFormat)
+func CGBitmapInfoMake(alpha CGImageAlphaInfo, component CGImageComponentInfo, byteOrder CGImageByteOrderInfo, pixelFormat CGImagePixelFormatInfo) CGBitmapInfo {
+	return CGBitmapInfo(raw.CGBitmapInfoMake(raw.CGImageAlphaInfo(alpha), raw.CGImageComponentInfo(component), raw.CGImageByteOrderInfo(byteOrder), raw.CGImagePixelFormatInfo(pixelFormat)))
 }
 
 // CGCancelDisplayConfiguration calls [raw.CGCancelDisplayConfiguration] (C function CGCancelDisplayConfiguration).
-func CGCancelDisplayConfiguration(config unsafe.Pointer) raw.CGError {
-	return raw.CGCancelDisplayConfiguration(config)
+func CGCancelDisplayConfiguration(config unsafe.Pointer) CGError {
+	return CGError(raw.CGCancelDisplayConfiguration(config))
 }
 
 // CGCaptureAllDisplays calls [raw.CGCaptureAllDisplays] (C function CGCaptureAllDisplays).
-func CGCaptureAllDisplays() raw.CGError {
-	return raw.CGCaptureAllDisplays()
+func CGCaptureAllDisplays() CGError {
+	return CGError(raw.CGCaptureAllDisplays())
 }
 
 // CGCaptureAllDisplaysWithOptions calls [raw.CGCaptureAllDisplaysWithOptions] (C function CGCaptureAllDisplaysWithOptions).
-func CGCaptureAllDisplaysWithOptions(options raw.CGCaptureOptions) raw.CGError {
-	return raw.CGCaptureAllDisplaysWithOptions(options)
+func CGCaptureAllDisplaysWithOptions(options CGCaptureOptions) CGError {
+	return CGError(raw.CGCaptureAllDisplaysWithOptions(raw.CGCaptureOptions(options)))
 }
 
 // CGColorConversionInfoConvertData calls [raw.CGColorConversionInfoConvertData] (C function CGColorConversionInfoConvertData).
@@ -186,13 +186,13 @@ func CGColorConversionInfoCreate(src unsafe.Pointer, dst unsafe.Pointer) unsafe.
 }
 
 // CGColorConversionInfoCreateForToneMapping calls [raw.CGColorConversionInfoCreateForToneMapping] (C function CGColorConversionInfoCreateForToneMapping).
-func CGColorConversionInfoCreateForToneMapping(from unsafe.Pointer, source_headroom float32, to unsafe.Pointer, target_headroom float32, method raw.CGToneMapping, options unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.CGColorConversionInfoCreateForToneMapping(from, source_headroom, to, target_headroom, method, options, error_)
+func CGColorConversionInfoCreateForToneMapping(from unsafe.Pointer, source_headroom float32, to unsafe.Pointer, target_headroom float32, method CGToneMapping, options unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
+	return raw.CGColorConversionInfoCreateForToneMapping(from, source_headroom, to, target_headroom, raw.CGToneMapping(method), options, error_)
 }
 
 // CGColorConversionInfoCreateFromListWithArguments calls [raw.CGColorConversionInfoCreateFromListWithArguments] (C function CGColorConversionInfoCreateFromListWithArguments).
-func CGColorConversionInfoCreateFromListWithArguments(options unsafe.Pointer, arg unsafe.Pointer, arg2 raw.CGColorConversionInfoTransformType, arg3 raw.CGColorRenderingIntent, arg4 string) unsafe.Pointer {
-	return raw.CGColorConversionInfoCreateFromListWithArguments(options, arg, arg2, arg3, arg4)
+func CGColorConversionInfoCreateFromListWithArguments(options unsafe.Pointer, arg unsafe.Pointer, arg2 CGColorConversionInfoTransformType, arg3 CGColorRenderingIntent, arg4 string) unsafe.Pointer {
+	return raw.CGColorConversionInfoCreateFromListWithArguments(options, arg, raw.CGColorConversionInfoTransformType(arg2), raw.CGColorRenderingIntent(arg3), arg4)
 }
 
 // CGColorConversionInfoCreateWithOptions calls [raw.CGColorConversionInfoCreateWithOptions] (C function CGColorConversionInfoCreateWithOptions).
@@ -216,8 +216,8 @@ func CGColorCreateCopy(color unsafe.Pointer) unsafe.Pointer {
 }
 
 // CGColorCreateCopyByMatchingToColorSpace calls [raw.CGColorCreateCopyByMatchingToColorSpace] (C function CGColorCreateCopyByMatchingToColorSpace).
-func CGColorCreateCopyByMatchingToColorSpace(arg unsafe.Pointer, intent raw.CGColorRenderingIntent, color unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
-	return raw.CGColorCreateCopyByMatchingToColorSpace(arg, intent, color, options)
+func CGColorCreateCopyByMatchingToColorSpace(arg unsafe.Pointer, intent CGColorRenderingIntent, color unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
+	return raw.CGColorCreateCopyByMatchingToColorSpace(arg, raw.CGColorRenderingIntent(intent), color, options)
 }
 
 // CGColorCreateCopyWithAlpha calls [raw.CGColorCreateCopyWithAlpha] (C function CGColorCreateCopyWithAlpha).
@@ -451,8 +451,8 @@ func CGColorSpaceGetColorTableCount(space unsafe.Pointer) uint {
 }
 
 // CGColorSpaceGetModel calls [raw.CGColorSpaceGetModel] (C function CGColorSpaceGetModel).
-func CGColorSpaceGetModel(space unsafe.Pointer) raw.CGColorSpaceModel {
-	return raw.CGColorSpaceGetModel(space)
+func CGColorSpaceGetModel(space unsafe.Pointer) CGColorSpaceModel {
+	return CGColorSpaceModel(raw.CGColorSpaceGetModel(space))
 }
 
 // CGColorSpaceGetName calls [raw.CGColorSpaceGetName] (C function CGColorSpaceGetName).
@@ -516,38 +516,38 @@ func CGColorSpaceUsesITUR_2100TF(arg unsafe.Pointer) bool {
 }
 
 // CGCompleteDisplayConfiguration calls [raw.CGCompleteDisplayConfiguration] (C function CGCompleteDisplayConfiguration).
-func CGCompleteDisplayConfiguration(config unsafe.Pointer, option raw.CGConfigureOption) raw.CGError {
-	return raw.CGCompleteDisplayConfiguration(config, option)
+func CGCompleteDisplayConfiguration(config unsafe.Pointer, option CGConfigureOption) CGError {
+	return CGError(raw.CGCompleteDisplayConfiguration(config, raw.CGConfigureOption(option)))
 }
 
 // CGConfigureDisplayFadeEffect calls [raw.CGConfigureDisplayFadeEffect] (C function CGConfigureDisplayFadeEffect).
-func CGConfigureDisplayFadeEffect(config unsafe.Pointer, fadeOutSeconds float32, fadeInSeconds float32, fadeRed float32, fadeGreen float32, fadeBlue float32) raw.CGError {
-	return raw.CGConfigureDisplayFadeEffect(config, fadeOutSeconds, fadeInSeconds, fadeRed, fadeGreen, fadeBlue)
+func CGConfigureDisplayFadeEffect(config unsafe.Pointer, fadeOutSeconds float32, fadeInSeconds float32, fadeRed float32, fadeGreen float32, fadeBlue float32) CGError {
+	return CGError(raw.CGConfigureDisplayFadeEffect(config, fadeOutSeconds, fadeInSeconds, fadeRed, fadeGreen, fadeBlue))
 }
 
 // CGConfigureDisplayMirrorOfDisplay calls [raw.CGConfigureDisplayMirrorOfDisplay] (C function CGConfigureDisplayMirrorOfDisplay).
-func CGConfigureDisplayMirrorOfDisplay(config unsafe.Pointer, display uint32, master uint32) raw.CGError {
-	return raw.CGConfigureDisplayMirrorOfDisplay(config, display, master)
+func CGConfigureDisplayMirrorOfDisplay(config unsafe.Pointer, display uint32, master uint32) CGError {
+	return CGError(raw.CGConfigureDisplayMirrorOfDisplay(config, display, master))
 }
 
 // CGConfigureDisplayMode calls [raw.CGConfigureDisplayMode] (C function CGConfigureDisplayMode).
-func CGConfigureDisplayMode(config unsafe.Pointer, display uint32, mode unsafe.Pointer) raw.CGError {
-	return raw.CGConfigureDisplayMode(config, display, mode)
+func CGConfigureDisplayMode(config unsafe.Pointer, display uint32, mode unsafe.Pointer) CGError {
+	return CGError(raw.CGConfigureDisplayMode(config, display, mode))
 }
 
 // CGConfigureDisplayOrigin calls [raw.CGConfigureDisplayOrigin] (C function CGConfigureDisplayOrigin).
-func CGConfigureDisplayOrigin(config unsafe.Pointer, display uint32, x int32, y int32) raw.CGError {
-	return raw.CGConfigureDisplayOrigin(config, display, x, y)
+func CGConfigureDisplayOrigin(config unsafe.Pointer, display uint32, x int32, y int32) CGError {
+	return CGError(raw.CGConfigureDisplayOrigin(config, display, x, y))
 }
 
 // CGConfigureDisplayStereoOperation calls [raw.CGConfigureDisplayStereoOperation] (C function CGConfigureDisplayStereoOperation).
-func CGConfigureDisplayStereoOperation(config unsafe.Pointer, display uint32, stereo int, forceBlueLine int) raw.CGError {
-	return raw.CGConfigureDisplayStereoOperation(config, display, stereo, forceBlueLine)
+func CGConfigureDisplayStereoOperation(config unsafe.Pointer, display uint32, stereo int, forceBlueLine int) CGError {
+	return CGError(raw.CGConfigureDisplayStereoOperation(config, display, stereo, forceBlueLine))
 }
 
 // CGConfigureDisplayWithDisplayMode calls [raw.CGConfigureDisplayWithDisplayMode] (C function CGConfigureDisplayWithDisplayMode).
-func CGConfigureDisplayWithDisplayMode(config unsafe.Pointer, display uint32, mode unsafe.Pointer, options unsafe.Pointer) raw.CGError {
-	return raw.CGConfigureDisplayWithDisplayMode(config, display, mode, options)
+func CGConfigureDisplayWithDisplayMode(config unsafe.Pointer, display uint32, mode unsafe.Pointer, options unsafe.Pointer) CGError {
+	return CGError(raw.CGConfigureDisplayWithDisplayMode(config, display, mode, options))
 }
 
 // CGContextAddArc calls [raw.CGContextAddArc] (C function CGContextAddArc).
@@ -701,8 +701,8 @@ func CGContextDrawImage(c unsafe.Pointer, rect corefoundation.CGRect, image unsa
 }
 
 // CGContextDrawImageApplyingToneMapping calls [raw.CGContextDrawImageApplyingToneMapping] (C function CGContextDrawImageApplyingToneMapping).
-func CGContextDrawImageApplyingToneMapping(c unsafe.Pointer, r corefoundation.CGRect, image unsafe.Pointer, method raw.CGToneMapping, options unsafe.Pointer) bool {
-	return raw.CGContextDrawImageApplyingToneMapping(c, r, image, method, options)
+func CGContextDrawImageApplyingToneMapping(c unsafe.Pointer, r corefoundation.CGRect, image unsafe.Pointer, method CGToneMapping, options unsafe.Pointer) bool {
+	return raw.CGContextDrawImageApplyingToneMapping(c, r, image, raw.CGToneMapping(method), options)
 }
 
 // CGContextDrawLayerAtPoint calls [raw.CGContextDrawLayerAtPoint] (C function CGContextDrawLayerAtPoint).
@@ -716,8 +716,8 @@ func CGContextDrawLayerInRect(context_ unsafe.Pointer, rect corefoundation.CGRec
 }
 
 // CGContextDrawLinearGradient calls [raw.CGContextDrawLinearGradient] (C function CGContextDrawLinearGradient).
-func CGContextDrawLinearGradient(c unsafe.Pointer, gradient unsafe.Pointer, startPoint corefoundation.CGPoint, endPoint corefoundation.CGPoint, options raw.CGGradientDrawingOptions) {
-	raw.CGContextDrawLinearGradient(c, gradient, startPoint, endPoint, options)
+func CGContextDrawLinearGradient(c unsafe.Pointer, gradient unsafe.Pointer, startPoint corefoundation.CGPoint, endPoint corefoundation.CGPoint, options CGGradientDrawingOptions) {
+	raw.CGContextDrawLinearGradient(c, gradient, startPoint, endPoint, raw.CGGradientDrawingOptions(options))
 }
 
 // CGContextDrawPDFDocument calls [raw.CGContextDrawPDFDocument] (C function CGContextDrawPDFDocument).
@@ -731,13 +731,13 @@ func CGContextDrawPDFPage(c unsafe.Pointer, page unsafe.Pointer) {
 }
 
 // CGContextDrawPath calls [raw.CGContextDrawPath] (C function CGContextDrawPath).
-func CGContextDrawPath(c unsafe.Pointer, mode raw.CGPathDrawingMode) {
-	raw.CGContextDrawPath(c, mode)
+func CGContextDrawPath(c unsafe.Pointer, mode CGPathDrawingMode) {
+	raw.CGContextDrawPath(c, raw.CGPathDrawingMode(mode))
 }
 
 // CGContextDrawRadialGradient calls [raw.CGContextDrawRadialGradient] (C function CGContextDrawRadialGradient).
-func CGContextDrawRadialGradient(c unsafe.Pointer, gradient unsafe.Pointer, startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options raw.CGGradientDrawingOptions) {
-	raw.CGContextDrawRadialGradient(c, gradient, startCenter, startRadius, endCenter, endRadius, options)
+func CGContextDrawRadialGradient(c unsafe.Pointer, gradient unsafe.Pointer, startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options CGGradientDrawingOptions) {
+	raw.CGContextDrawRadialGradient(c, gradient, startCenter, startRadius, endCenter, endRadius, raw.CGGradientDrawingOptions(options))
 }
 
 // CGContextDrawShading calls [raw.CGContextDrawShading] (C function CGContextDrawShading).
@@ -816,8 +816,8 @@ func CGContextGetEDRTargetHeadroom(c unsafe.Pointer) float32 {
 }
 
 // CGContextGetInterpolationQuality calls [raw.CGContextGetInterpolationQuality] (C function CGContextGetInterpolationQuality).
-func CGContextGetInterpolationQuality(c unsafe.Pointer) raw.CGInterpolationQuality {
-	return raw.CGContextGetInterpolationQuality(c)
+func CGContextGetInterpolationQuality(c unsafe.Pointer) CGInterpolationQuality {
+	return CGInterpolationQuality(raw.CGContextGetInterpolationQuality(c))
 }
 
 // CGContextGetPathBoundingBox calls [raw.CGContextGetPathBoundingBox] (C function CGContextGetPathBoundingBox).
@@ -861,8 +861,8 @@ func CGContextMoveToPoint(c unsafe.Pointer, x float64, y float64) {
 }
 
 // CGContextPathContainsPoint calls [raw.CGContextPathContainsPoint] (C function CGContextPathContainsPoint).
-func CGContextPathContainsPoint(c unsafe.Pointer, point corefoundation.CGPoint, mode raw.CGPathDrawingMode) bool {
-	return raw.CGContextPathContainsPoint(c, point, mode)
+func CGContextPathContainsPoint(c unsafe.Pointer, point corefoundation.CGPoint, mode CGPathDrawingMode) bool {
+	return raw.CGContextPathContainsPoint(c, point, raw.CGPathDrawingMode(mode))
 }
 
 // CGContextRelease calls [raw.CGContextRelease] (C function CGContextRelease).
@@ -906,8 +906,8 @@ func CGContextScaleCTM(c unsafe.Pointer, sx float64, sy float64) {
 }
 
 // CGContextSelectFont calls [raw.CGContextSelectFont] (C function CGContextSelectFont).
-func CGContextSelectFont(c unsafe.Pointer, name string, size float64, textEncoding raw.CGTextEncoding) {
-	raw.CGContextSelectFont(c, name, size, textEncoding)
+func CGContextSelectFont(c unsafe.Pointer, name string, size float64, textEncoding CGTextEncoding) {
+	raw.CGContextSelectFont(c, name, size, raw.CGTextEncoding(textEncoding))
 }
 
 // CGContextSetAllowsAntialiasing calls [raw.CGContextSetAllowsAntialiasing] (C function CGContextSetAllowsAntialiasing).
@@ -936,8 +936,8 @@ func CGContextSetAlpha(c unsafe.Pointer, alpha float64) {
 }
 
 // CGContextSetBlendMode calls [raw.CGContextSetBlendMode] (C function CGContextSetBlendMode).
-func CGContextSetBlendMode(c unsafe.Pointer, mode raw.CGBlendMode) {
-	raw.CGContextSetBlendMode(c, mode)
+func CGContextSetBlendMode(c unsafe.Pointer, mode CGBlendMode) {
+	raw.CGContextSetBlendMode(c, raw.CGBlendMode(mode))
 }
 
 // CGContextSetCMYKFillColor calls [raw.CGContextSetCMYKFillColor] (C function CGContextSetCMYKFillColor).
@@ -1011,13 +1011,13 @@ func CGContextSetGrayStrokeColor(c unsafe.Pointer, gray float64, alpha float64) 
 }
 
 // CGContextSetInterpolationQuality calls [raw.CGContextSetInterpolationQuality] (C function CGContextSetInterpolationQuality).
-func CGContextSetInterpolationQuality(c unsafe.Pointer, quality raw.CGInterpolationQuality) {
-	raw.CGContextSetInterpolationQuality(c, quality)
+func CGContextSetInterpolationQuality(c unsafe.Pointer, quality CGInterpolationQuality) {
+	raw.CGContextSetInterpolationQuality(c, raw.CGInterpolationQuality(quality))
 }
 
 // CGContextSetLineCap calls [raw.CGContextSetLineCap] (C function CGContextSetLineCap).
-func CGContextSetLineCap(c unsafe.Pointer, cap_ raw.CGLineCap) {
-	raw.CGContextSetLineCap(c, cap_)
+func CGContextSetLineCap(c unsafe.Pointer, cap_ CGLineCap) {
+	raw.CGContextSetLineCap(c, raw.CGLineCap(cap_))
 }
 
 // CGContextSetLineDash calls [raw.CGContextSetLineDash] (C function CGContextSetLineDash).
@@ -1026,8 +1026,8 @@ func CGContextSetLineDash(c unsafe.Pointer, phase float64, lengths *float64, cou
 }
 
 // CGContextSetLineJoin calls [raw.CGContextSetLineJoin] (C function CGContextSetLineJoin).
-func CGContextSetLineJoin(c unsafe.Pointer, join raw.CGLineJoin) {
-	raw.CGContextSetLineJoin(c, join)
+func CGContextSetLineJoin(c unsafe.Pointer, join CGLineJoin) {
+	raw.CGContextSetLineJoin(c, raw.CGLineJoin(join))
 }
 
 // CGContextSetLineWidth calls [raw.CGContextSetLineWidth] (C function CGContextSetLineWidth).
@@ -1056,8 +1056,8 @@ func CGContextSetRGBStrokeColor(c unsafe.Pointer, red float64, green float64, bl
 }
 
 // CGContextSetRenderingIntent calls [raw.CGContextSetRenderingIntent] (C function CGContextSetRenderingIntent).
-func CGContextSetRenderingIntent(c unsafe.Pointer, intent raw.CGColorRenderingIntent) {
-	raw.CGContextSetRenderingIntent(c, intent)
+func CGContextSetRenderingIntent(c unsafe.Pointer, intent CGColorRenderingIntent) {
+	raw.CGContextSetRenderingIntent(c, raw.CGColorRenderingIntent(intent))
 }
 
 // CGContextSetShadow calls [raw.CGContextSetShadow] (C function CGContextSetShadow).
@@ -1111,8 +1111,8 @@ func CGContextSetStrokePattern(c unsafe.Pointer, pattern unsafe.Pointer, compone
 }
 
 // CGContextSetTextDrawingMode calls [raw.CGContextSetTextDrawingMode] (C function CGContextSetTextDrawingMode).
-func CGContextSetTextDrawingMode(c unsafe.Pointer, mode raw.CGTextDrawingMode) {
-	raw.CGContextSetTextDrawingMode(c, mode)
+func CGContextSetTextDrawingMode(c unsafe.Pointer, mode CGTextDrawingMode) {
+	raw.CGContextSetTextDrawingMode(c, raw.CGTextDrawingMode(mode))
 }
 
 // CGContextSetTextMatrix calls [raw.CGContextSetTextMatrix] (C function CGContextSetTextMatrix).
@@ -1321,13 +1321,13 @@ func CGDisplayBounds(display uint32) corefoundation.CGRect {
 }
 
 // CGDisplayCapture calls [raw.CGDisplayCapture] (C function CGDisplayCapture).
-func CGDisplayCapture(display uint32) raw.CGError {
-	return raw.CGDisplayCapture(display)
+func CGDisplayCapture(display uint32) CGError {
+	return CGError(raw.CGDisplayCapture(display))
 }
 
 // CGDisplayCaptureWithOptions calls [raw.CGDisplayCaptureWithOptions] (C function CGDisplayCaptureWithOptions).
-func CGDisplayCaptureWithOptions(display uint32, options raw.CGCaptureOptions) raw.CGError {
-	return raw.CGDisplayCaptureWithOptions(display, options)
+func CGDisplayCaptureWithOptions(display uint32, options CGCaptureOptions) CGError {
+	return CGError(raw.CGDisplayCaptureWithOptions(display, raw.CGCaptureOptions(options)))
 }
 
 // CGDisplayCopyAllDisplayModes calls [raw.CGDisplayCopyAllDisplayModes] (C function CGDisplayCopyAllDisplayModes).
@@ -1351,8 +1351,8 @@ func CGDisplayCurrentMode(display uint32) unsafe.Pointer {
 }
 
 // CGDisplayFade calls [raw.CGDisplayFade] (C function CGDisplayFade).
-func CGDisplayFade(token uint32, duration float32, startBlend float32, endBlend float32, redBlend float32, greenBlend float32, blueBlend float32, synchronous int) raw.CGError {
-	return raw.CGDisplayFade(token, duration, startBlend, endBlend, redBlend, greenBlend, blueBlend, synchronous)
+func CGDisplayFade(token uint32, duration float32, startBlend float32, endBlend float32, redBlend float32, greenBlend float32, blueBlend float32, synchronous int) CGError {
+	return CGError(raw.CGDisplayFade(token, duration, startBlend, endBlend, redBlend, greenBlend, blueBlend, synchronous))
 }
 
 // CGDisplayFadeOperationInProgress calls [raw.CGDisplayFadeOperationInProgress] (C function CGDisplayFadeOperationInProgress).
@@ -1371,8 +1371,8 @@ func CGDisplayGetDrawingContext(display uint32) unsafe.Pointer {
 }
 
 // CGDisplayHideCursor calls [raw.CGDisplayHideCursor] (C function CGDisplayHideCursor).
-func CGDisplayHideCursor(display uint32) raw.CGError {
-	return raw.CGDisplayHideCursor(display)
+func CGDisplayHideCursor(display uint32) CGError {
+	return CGError(raw.CGDisplayHideCursor(display))
 }
 
 // CGDisplayIDToOpenGLDisplayMask calls [raw.CGDisplayIDToOpenGLDisplayMask] (C function CGDisplayIDToOpenGLDisplayMask).
@@ -1506,8 +1506,8 @@ func CGDisplayModelNumber(display uint32) uint32 {
 }
 
 // CGDisplayMoveCursorToPoint calls [raw.CGDisplayMoveCursorToPoint] (C function CGDisplayMoveCursorToPoint).
-func CGDisplayMoveCursorToPoint(display uint32, point corefoundation.CGPoint) raw.CGError {
-	return raw.CGDisplayMoveCursorToPoint(display, point)
+func CGDisplayMoveCursorToPoint(display uint32, point corefoundation.CGPoint) CGError {
+	return CGError(raw.CGDisplayMoveCursorToPoint(display, point))
 }
 
 // CGDisplayPixelsHigh calls [raw.CGDisplayPixelsHigh] (C function CGDisplayPixelsHigh).
@@ -1526,18 +1526,18 @@ func CGDisplayPrimaryDisplay(display uint32) uint32 {
 }
 
 // CGDisplayRegisterReconfigurationCallback calls [raw.CGDisplayRegisterReconfigurationCallback] (C function CGDisplayRegisterReconfigurationCallback).
-func CGDisplayRegisterReconfigurationCallback(callback unsafe.Pointer, userInfo unsafe.Pointer) raw.CGError {
-	return raw.CGDisplayRegisterReconfigurationCallback(callback, userInfo)
+func CGDisplayRegisterReconfigurationCallback(callback unsafe.Pointer, userInfo unsafe.Pointer) CGError {
+	return CGError(raw.CGDisplayRegisterReconfigurationCallback(callback, userInfo))
 }
 
 // CGDisplayRelease calls [raw.CGDisplayRelease] (C function CGDisplayRelease).
-func CGDisplayRelease(display uint32) raw.CGError {
-	return raw.CGDisplayRelease(display)
+func CGDisplayRelease(display uint32) CGError {
+	return CGError(raw.CGDisplayRelease(display))
 }
 
 // CGDisplayRemoveReconfigurationCallback calls [raw.CGDisplayRemoveReconfigurationCallback] (C function CGDisplayRemoveReconfigurationCallback).
-func CGDisplayRemoveReconfigurationCallback(callback unsafe.Pointer, userInfo unsafe.Pointer) raw.CGError {
-	return raw.CGDisplayRemoveReconfigurationCallback(callback, userInfo)
+func CGDisplayRemoveReconfigurationCallback(callback unsafe.Pointer, userInfo unsafe.Pointer) CGError {
+	return CGError(raw.CGDisplayRemoveReconfigurationCallback(callback, userInfo))
 }
 
 // CGDisplayRestoreColorSyncSettings calls [raw.CGDisplayRestoreColorSyncSettings] (C function CGDisplayRestoreColorSyncSettings).
@@ -1561,23 +1561,23 @@ func CGDisplaySerialNumber(display uint32) uint32 {
 }
 
 // CGDisplaySetDisplayMode calls [raw.CGDisplaySetDisplayMode] (C function CGDisplaySetDisplayMode).
-func CGDisplaySetDisplayMode(display uint32, mode unsafe.Pointer, options unsafe.Pointer) raw.CGError {
-	return raw.CGDisplaySetDisplayMode(display, mode, options)
+func CGDisplaySetDisplayMode(display uint32, mode unsafe.Pointer, options unsafe.Pointer) CGError {
+	return CGError(raw.CGDisplaySetDisplayMode(display, mode, options))
 }
 
 // CGDisplaySetStereoOperation calls [raw.CGDisplaySetStereoOperation] (C function CGDisplaySetStereoOperation).
-func CGDisplaySetStereoOperation(display uint32, stereo int, forceBlueLine int, option raw.CGConfigureOption) raw.CGError {
-	return raw.CGDisplaySetStereoOperation(display, stereo, forceBlueLine, option)
+func CGDisplaySetStereoOperation(display uint32, stereo int, forceBlueLine int, option CGConfigureOption) CGError {
+	return CGError(raw.CGDisplaySetStereoOperation(display, stereo, forceBlueLine, raw.CGConfigureOption(option)))
 }
 
 // CGDisplayShowCursor calls [raw.CGDisplayShowCursor] (C function CGDisplayShowCursor).
-func CGDisplayShowCursor(display uint32) raw.CGError {
-	return raw.CGDisplayShowCursor(display)
+func CGDisplayShowCursor(display uint32) CGError {
+	return CGError(raw.CGDisplayShowCursor(display))
 }
 
 // CGDisplaySwitchToMode calls [raw.CGDisplaySwitchToMode] (C function CGDisplaySwitchToMode).
-func CGDisplaySwitchToMode(display uint32, mode unsafe.Pointer) raw.CGError {
-	return raw.CGDisplaySwitchToMode(display, mode)
+func CGDisplaySwitchToMode(display uint32, mode unsafe.Pointer) CGError {
+	return CGError(raw.CGDisplaySwitchToMode(display, mode))
 }
 
 // CGDisplayUnitNumber calls [raw.CGDisplayUnitNumber] (C function CGDisplayUnitNumber).
@@ -1601,8 +1601,8 @@ func CGEXRToneMappingGammaGetDefaultOptions() unsafe.Pointer {
 }
 
 // CGEnableEventStateCombining calls [raw.CGEnableEventStateCombining] (C function CGEnableEventStateCombining).
-func CGEnableEventStateCombining(combineState int) raw.CGError {
-	return raw.CGEnableEventStateCombining(combineState)
+func CGEnableEventStateCombining(combineState int) CGError {
+	return CGError(raw.CGEnableEventStateCombining(combineState))
 }
 
 // CGErrorSetCallback calls [raw.CGErrorSetCallback] (C function CGErrorSetCallback).
@@ -1636,13 +1636,13 @@ func CGEventCreateKeyboardEvent(source unsafe.Pointer, virtualKey uint16, keyDow
 }
 
 // CGEventCreateMouseEvent calls [raw.CGEventCreateMouseEvent] (C function CGEventCreateMouseEvent).
-func CGEventCreateMouseEvent(source unsafe.Pointer, mouseType raw.CGEventType, mouseCursorPosition corefoundation.CGPoint, mouseButton raw.CGMouseButton) unsafe.Pointer {
-	return raw.CGEventCreateMouseEvent(source, mouseType, mouseCursorPosition, mouseButton)
+func CGEventCreateMouseEvent(source unsafe.Pointer, mouseType CGEventType, mouseCursorPosition corefoundation.CGPoint, mouseButton CGMouseButton) unsafe.Pointer {
+	return raw.CGEventCreateMouseEvent(source, raw.CGEventType(mouseType), mouseCursorPosition, raw.CGMouseButton(mouseButton))
 }
 
 // CGEventCreateScrollWheelEvent2 calls [raw.CGEventCreateScrollWheelEvent2] (C function CGEventCreateScrollWheelEvent2).
-func CGEventCreateScrollWheelEvent2(source unsafe.Pointer, units raw.CGScrollEventUnit, wheelCount uint32, wheel1 int32, wheel2 int32, wheel3 int32) unsafe.Pointer {
-	return raw.CGEventCreateScrollWheelEvent2(source, units, wheelCount, wheel1, wheel2, wheel3)
+func CGEventCreateScrollWheelEvent2(source unsafe.Pointer, units CGScrollEventUnit, wheelCount uint32, wheel1 int32, wheel2 int32, wheel3 int32) unsafe.Pointer {
+	return raw.CGEventCreateScrollWheelEvent2(source, raw.CGScrollEventUnit(units), wheelCount, wheel1, wheel2, wheel3)
 }
 
 // CGEventCreateSourceFromEvent calls [raw.CGEventCreateSourceFromEvent] (C function CGEventCreateSourceFromEvent).
@@ -1651,18 +1651,18 @@ func CGEventCreateSourceFromEvent(event unsafe.Pointer) unsafe.Pointer {
 }
 
 // CGEventGetDoubleValueField calls [raw.CGEventGetDoubleValueField] (C function CGEventGetDoubleValueField).
-func CGEventGetDoubleValueField(event unsafe.Pointer, field raw.CGEventField) float64 {
-	return raw.CGEventGetDoubleValueField(event, field)
+func CGEventGetDoubleValueField(event unsafe.Pointer, field CGEventField) float64 {
+	return raw.CGEventGetDoubleValueField(event, raw.CGEventField(field))
 }
 
 // CGEventGetFlags calls [raw.CGEventGetFlags] (C function CGEventGetFlags).
-func CGEventGetFlags(event unsafe.Pointer) raw.CGEventFlags {
-	return raw.CGEventGetFlags(event)
+func CGEventGetFlags(event unsafe.Pointer) CGEventFlags {
+	return CGEventFlags(raw.CGEventGetFlags(event))
 }
 
 // CGEventGetIntegerValueField calls [raw.CGEventGetIntegerValueField] (C function CGEventGetIntegerValueField).
-func CGEventGetIntegerValueField(event unsafe.Pointer, field raw.CGEventField) int64 {
-	return raw.CGEventGetIntegerValueField(event, field)
+func CGEventGetIntegerValueField(event unsafe.Pointer, field CGEventField) int64 {
+	return raw.CGEventGetIntegerValueField(event, raw.CGEventField(field))
 }
 
 // CGEventGetLocation calls [raw.CGEventGetLocation] (C function CGEventGetLocation).
@@ -1676,8 +1676,8 @@ func CGEventGetTimestamp(event unsafe.Pointer) uint64 {
 }
 
 // CGEventGetType calls [raw.CGEventGetType] (C function CGEventGetType).
-func CGEventGetType(event unsafe.Pointer) raw.CGEventType {
-	return raw.CGEventGetType(event)
+func CGEventGetType(event unsafe.Pointer) CGEventType {
+	return CGEventType(raw.CGEventGetType(event))
 }
 
 // CGEventGetTypeID calls [raw.CGEventGetTypeID] (C function CGEventGetTypeID).
@@ -1701,8 +1701,8 @@ func CGEventKeyboardSetUnicodeString(event unsafe.Pointer, stringLength uint, un
 }
 
 // CGEventPost calls [raw.CGEventPost] (C function CGEventPost).
-func CGEventPost(tap raw.CGEventTapLocation, event unsafe.Pointer) {
-	raw.CGEventPost(tap, event)
+func CGEventPost(tap CGEventTapLocation, event unsafe.Pointer) {
+	raw.CGEventPost(raw.CGEventTapLocation(tap), event)
 }
 
 // CGEventPostToPSN calls [raw.CGEventPostToPSN] (C function CGEventPostToPSN).
@@ -1716,18 +1716,18 @@ func CGEventPostToPid(pid int, event unsafe.Pointer) {
 }
 
 // CGEventSetDoubleValueField calls [raw.CGEventSetDoubleValueField] (C function CGEventSetDoubleValueField).
-func CGEventSetDoubleValueField(event unsafe.Pointer, field raw.CGEventField, value float64) {
-	raw.CGEventSetDoubleValueField(event, field, value)
+func CGEventSetDoubleValueField(event unsafe.Pointer, field CGEventField, value float64) {
+	raw.CGEventSetDoubleValueField(event, raw.CGEventField(field), value)
 }
 
 // CGEventSetFlags calls [raw.CGEventSetFlags] (C function CGEventSetFlags).
-func CGEventSetFlags(event unsafe.Pointer, flags raw.CGEventFlags) {
-	raw.CGEventSetFlags(event, flags)
+func CGEventSetFlags(event unsafe.Pointer, flags CGEventFlags) {
+	raw.CGEventSetFlags(event, raw.CGEventFlags(flags))
 }
 
 // CGEventSetIntegerValueField calls [raw.CGEventSetIntegerValueField] (C function CGEventSetIntegerValueField).
-func CGEventSetIntegerValueField(event unsafe.Pointer, field raw.CGEventField, value int64) {
-	raw.CGEventSetIntegerValueField(event, field, value)
+func CGEventSetIntegerValueField(event unsafe.Pointer, field CGEventField, value int64) {
+	raw.CGEventSetIntegerValueField(event, raw.CGEventField(field), value)
 }
 
 // CGEventSetLocation calls [raw.CGEventSetLocation] (C function CGEventSetLocation).
@@ -1746,28 +1746,28 @@ func CGEventSetTimestamp(event unsafe.Pointer, timestamp uint64) {
 }
 
 // CGEventSetType calls [raw.CGEventSetType] (C function CGEventSetType).
-func CGEventSetType(event unsafe.Pointer, type_ raw.CGEventType) {
-	raw.CGEventSetType(event, type_)
+func CGEventSetType(event unsafe.Pointer, type_ CGEventType) {
+	raw.CGEventSetType(event, raw.CGEventType(type_))
 }
 
 // CGEventSourceButtonState calls [raw.CGEventSourceButtonState] (C function CGEventSourceButtonState).
-func CGEventSourceButtonState(stateID raw.CGEventSourceStateID, button raw.CGMouseButton) bool {
-	return raw.CGEventSourceButtonState(stateID, button)
+func CGEventSourceButtonState(stateID CGEventSourceStateID, button CGMouseButton) bool {
+	return raw.CGEventSourceButtonState(raw.CGEventSourceStateID(stateID), raw.CGMouseButton(button))
 }
 
 // CGEventSourceCounterForEventType calls [raw.CGEventSourceCounterForEventType] (C function CGEventSourceCounterForEventType).
-func CGEventSourceCounterForEventType(stateID raw.CGEventSourceStateID, eventType raw.CGEventType) uint32 {
-	return raw.CGEventSourceCounterForEventType(stateID, eventType)
+func CGEventSourceCounterForEventType(stateID CGEventSourceStateID, eventType CGEventType) uint32 {
+	return raw.CGEventSourceCounterForEventType(raw.CGEventSourceStateID(stateID), raw.CGEventType(eventType))
 }
 
 // CGEventSourceCreate calls [raw.CGEventSourceCreate] (C function CGEventSourceCreate).
-func CGEventSourceCreate(stateID raw.CGEventSourceStateID) unsafe.Pointer {
-	return raw.CGEventSourceCreate(stateID)
+func CGEventSourceCreate(stateID CGEventSourceStateID) unsafe.Pointer {
+	return raw.CGEventSourceCreate(raw.CGEventSourceStateID(stateID))
 }
 
 // CGEventSourceFlagsState calls [raw.CGEventSourceFlagsState] (C function CGEventSourceFlagsState).
-func CGEventSourceFlagsState(stateID raw.CGEventSourceStateID) raw.CGEventFlags {
-	return raw.CGEventSourceFlagsState(stateID)
+func CGEventSourceFlagsState(stateID CGEventSourceStateID) CGEventFlags {
+	return CGEventFlags(raw.CGEventSourceFlagsState(raw.CGEventSourceStateID(stateID)))
 }
 
 // CGEventSourceGetKeyboardType calls [raw.CGEventSourceGetKeyboardType] (C function CGEventSourceGetKeyboardType).
@@ -1776,8 +1776,8 @@ func CGEventSourceGetKeyboardType(source unsafe.Pointer) uint32 {
 }
 
 // CGEventSourceGetLocalEventsFilterDuringSuppressionState calls [raw.CGEventSourceGetLocalEventsFilterDuringSuppressionState] (C function CGEventSourceGetLocalEventsFilterDuringSuppressionState).
-func CGEventSourceGetLocalEventsFilterDuringSuppressionState(source unsafe.Pointer, state raw.CGEventSuppressionState) raw.CGEventFilterMask {
-	return raw.CGEventSourceGetLocalEventsFilterDuringSuppressionState(source, state)
+func CGEventSourceGetLocalEventsFilterDuringSuppressionState(source unsafe.Pointer, state CGEventSuppressionState) CGEventFilterMask {
+	return CGEventFilterMask(raw.CGEventSourceGetLocalEventsFilterDuringSuppressionState(source, raw.CGEventSuppressionState(state)))
 }
 
 // CGEventSourceGetLocalEventsSuppressionInterval calls [raw.CGEventSourceGetLocalEventsSuppressionInterval] (C function CGEventSourceGetLocalEventsSuppressionInterval).
@@ -1791,8 +1791,8 @@ func CGEventSourceGetPixelsPerLine(source unsafe.Pointer) float64 {
 }
 
 // CGEventSourceGetSourceStateID calls [raw.CGEventSourceGetSourceStateID] (C function CGEventSourceGetSourceStateID).
-func CGEventSourceGetSourceStateID(source unsafe.Pointer) raw.CGEventSourceStateID {
-	return raw.CGEventSourceGetSourceStateID(source)
+func CGEventSourceGetSourceStateID(source unsafe.Pointer) CGEventSourceStateID {
+	return CGEventSourceStateID(raw.CGEventSourceGetSourceStateID(source))
 }
 
 // CGEventSourceGetTypeID calls [raw.CGEventSourceGetTypeID] (C function CGEventSourceGetTypeID).
@@ -1806,13 +1806,13 @@ func CGEventSourceGetUserData(source unsafe.Pointer) int64 {
 }
 
 // CGEventSourceKeyState calls [raw.CGEventSourceKeyState] (C function CGEventSourceKeyState).
-func CGEventSourceKeyState(stateID raw.CGEventSourceStateID, key uint16) bool {
-	return raw.CGEventSourceKeyState(stateID, key)
+func CGEventSourceKeyState(stateID CGEventSourceStateID, key uint16) bool {
+	return raw.CGEventSourceKeyState(raw.CGEventSourceStateID(stateID), key)
 }
 
 // CGEventSourceSecondsSinceLastEventType calls [raw.CGEventSourceSecondsSinceLastEventType] (C function CGEventSourceSecondsSinceLastEventType).
-func CGEventSourceSecondsSinceLastEventType(stateID raw.CGEventSourceStateID, eventType raw.CGEventType) float64 {
-	return raw.CGEventSourceSecondsSinceLastEventType(stateID, eventType)
+func CGEventSourceSecondsSinceLastEventType(stateID CGEventSourceStateID, eventType CGEventType) float64 {
+	return raw.CGEventSourceSecondsSinceLastEventType(raw.CGEventSourceStateID(stateID), raw.CGEventType(eventType))
 }
 
 // CGEventSourceSetKeyboardType calls [raw.CGEventSourceSetKeyboardType] (C function CGEventSourceSetKeyboardType).
@@ -1821,8 +1821,8 @@ func CGEventSourceSetKeyboardType(source unsafe.Pointer, keyboardType uint32) {
 }
 
 // CGEventSourceSetLocalEventsFilterDuringSuppressionState calls [raw.CGEventSourceSetLocalEventsFilterDuringSuppressionState] (C function CGEventSourceSetLocalEventsFilterDuringSuppressionState).
-func CGEventSourceSetLocalEventsFilterDuringSuppressionState(source unsafe.Pointer, filter raw.CGEventFilterMask, state raw.CGEventSuppressionState) {
-	raw.CGEventSourceSetLocalEventsFilterDuringSuppressionState(source, filter, state)
+func CGEventSourceSetLocalEventsFilterDuringSuppressionState(source unsafe.Pointer, filter CGEventFilterMask, state CGEventSuppressionState) {
+	raw.CGEventSourceSetLocalEventsFilterDuringSuppressionState(source, raw.CGEventFilterMask(filter), raw.CGEventSuppressionState(state))
 }
 
 // CGEventSourceSetLocalEventsSuppressionInterval calls [raw.CGEventSourceSetLocalEventsSuppressionInterval] (C function CGEventSourceSetLocalEventsSuppressionInterval).
@@ -1841,18 +1841,18 @@ func CGEventSourceSetUserData(source unsafe.Pointer, userData int64) {
 }
 
 // CGEventTapCreate calls [raw.CGEventTapCreate] (C function CGEventTapCreate).
-func CGEventTapCreate(tap raw.CGEventTapLocation, place raw.CGEventTapPlacement, options raw.CGEventTapOptions, eventsOfInterest uint64, callback unsafe.Pointer, userInfo unsafe.Pointer) unsafe.Pointer {
-	return raw.CGEventTapCreate(tap, place, options, eventsOfInterest, callback, userInfo)
+func CGEventTapCreate(tap CGEventTapLocation, place CGEventTapPlacement, options CGEventTapOptions, eventsOfInterest uint64, callback unsafe.Pointer, userInfo unsafe.Pointer) unsafe.Pointer {
+	return raw.CGEventTapCreate(raw.CGEventTapLocation(tap), raw.CGEventTapPlacement(place), raw.CGEventTapOptions(options), eventsOfInterest, callback, userInfo)
 }
 
 // CGEventTapCreateForPSN calls [raw.CGEventTapCreateForPSN] (C function CGEventTapCreateForPSN).
-func CGEventTapCreateForPSN(processSerialNumber unsafe.Pointer, place raw.CGEventTapPlacement, options raw.CGEventTapOptions, eventsOfInterest uint64, callback unsafe.Pointer, userInfo unsafe.Pointer) unsafe.Pointer {
-	return raw.CGEventTapCreateForPSN(processSerialNumber, place, options, eventsOfInterest, callback, userInfo)
+func CGEventTapCreateForPSN(processSerialNumber unsafe.Pointer, place CGEventTapPlacement, options CGEventTapOptions, eventsOfInterest uint64, callback unsafe.Pointer, userInfo unsafe.Pointer) unsafe.Pointer {
+	return raw.CGEventTapCreateForPSN(processSerialNumber, raw.CGEventTapPlacement(place), raw.CGEventTapOptions(options), eventsOfInterest, callback, userInfo)
 }
 
 // CGEventTapCreateForPid calls [raw.CGEventTapCreateForPid] (C function CGEventTapCreateForPid).
-func CGEventTapCreateForPid(pid int, place raw.CGEventTapPlacement, options raw.CGEventTapOptions, eventsOfInterest uint64, callback unsafe.Pointer, userInfo unsafe.Pointer) unsafe.Pointer {
-	return raw.CGEventTapCreateForPid(pid, place, options, eventsOfInterest, callback, userInfo)
+func CGEventTapCreateForPid(pid int, place CGEventTapPlacement, options CGEventTapOptions, eventsOfInterest uint64, callback unsafe.Pointer, userInfo unsafe.Pointer) unsafe.Pointer {
+	return raw.CGEventTapCreateForPid(pid, raw.CGEventTapPlacement(place), raw.CGEventTapOptions(options), eventsOfInterest, callback, userInfo)
 }
 
 // CGEventTapEnable calls [raw.CGEventTapEnable] (C function CGEventTapEnable).
@@ -1871,8 +1871,8 @@ func CGEventTapPostEvent(proxy unsafe.Pointer, event unsafe.Pointer) {
 }
 
 // CGFontCanCreatePostScriptSubset calls [raw.CGFontCanCreatePostScriptSubset] (C function CGFontCanCreatePostScriptSubset).
-func CGFontCanCreatePostScriptSubset(font unsafe.Pointer, format raw.CGFontPostScriptFormat) bool {
-	return raw.CGFontCanCreatePostScriptSubset(font, format)
+func CGFontCanCreatePostScriptSubset(font unsafe.Pointer, format CGFontPostScriptFormat) bool {
+	return raw.CGFontCanCreatePostScriptSubset(font, raw.CGFontPostScriptFormat(format))
 }
 
 // CGFontCopyFullName calls [raw.CGFontCopyFullName] (C function CGFontCopyFullName).
@@ -1921,8 +1921,8 @@ func CGFontCreatePostScriptEncoding(font unsafe.Pointer, encoding *uint16) unsaf
 }
 
 // CGFontCreatePostScriptSubset calls [raw.CGFontCreatePostScriptSubset] (C function CGFontCreatePostScriptSubset).
-func CGFontCreatePostScriptSubset(font unsafe.Pointer, subsetName unsafe.Pointer, format raw.CGFontPostScriptFormat, glyphs *uint16, count uint, encoding *uint16) unsafe.Pointer {
-	return raw.CGFontCreatePostScriptSubset(font, subsetName, format, glyphs, count, encoding)
+func CGFontCreatePostScriptSubset(font unsafe.Pointer, subsetName unsafe.Pointer, format CGFontPostScriptFormat, glyphs *uint16, count uint, encoding *uint16) unsafe.Pointer {
+	return raw.CGFontCreatePostScriptSubset(font, subsetName, raw.CGFontPostScriptFormat(format), glyphs, count, encoding)
 }
 
 // CGFontCreateWithDataProvider calls [raw.CGFontCreateWithDataProvider] (C function CGFontCreateWithDataProvider).
@@ -2041,38 +2041,38 @@ func CGFunctionRetain(function unsafe.Pointer) unsafe.Pointer {
 }
 
 // CGGetActiveDisplayList calls [raw.CGGetActiveDisplayList] (C function CGGetActiveDisplayList).
-func CGGetActiveDisplayList(maxDisplays uint32, activeDisplays *uint32, displayCount *uint32) raw.CGError {
-	return raw.CGGetActiveDisplayList(maxDisplays, activeDisplays, displayCount)
+func CGGetActiveDisplayList(maxDisplays uint32, activeDisplays *uint32, displayCount *uint32) CGError {
+	return CGError(raw.CGGetActiveDisplayList(maxDisplays, activeDisplays, displayCount))
 }
 
 // CGGetDisplayTransferByFormula calls [raw.CGGetDisplayTransferByFormula] (C function CGGetDisplayTransferByFormula).
-func CGGetDisplayTransferByFormula(display uint32, redMin *float32, redMax *float32, redGamma *float32, greenMin *float32, greenMax *float32, greenGamma *float32, blueMin *float32, blueMax *float32, blueGamma *float32) raw.CGError {
-	return raw.CGGetDisplayTransferByFormula(display, redMin, redMax, redGamma, greenMin, greenMax, greenGamma, blueMin, blueMax, blueGamma)
+func CGGetDisplayTransferByFormula(display uint32, redMin *float32, redMax *float32, redGamma *float32, greenMin *float32, greenMax *float32, greenGamma *float32, blueMin *float32, blueMax *float32, blueGamma *float32) CGError {
+	return CGError(raw.CGGetDisplayTransferByFormula(display, redMin, redMax, redGamma, greenMin, greenMax, greenGamma, blueMin, blueMax, blueGamma))
 }
 
 // CGGetDisplayTransferByTable calls [raw.CGGetDisplayTransferByTable] (C function CGGetDisplayTransferByTable).
-func CGGetDisplayTransferByTable(display uint32, capacity uint32, redTable *float32, greenTable *float32, blueTable *float32, sampleCount *uint32) raw.CGError {
-	return raw.CGGetDisplayTransferByTable(display, capacity, redTable, greenTable, blueTable, sampleCount)
+func CGGetDisplayTransferByTable(display uint32, capacity uint32, redTable *float32, greenTable *float32, blueTable *float32, sampleCount *uint32) CGError {
+	return CGError(raw.CGGetDisplayTransferByTable(display, capacity, redTable, greenTable, blueTable, sampleCount))
 }
 
 // CGGetDisplaysWithOpenGLDisplayMask calls [raw.CGGetDisplaysWithOpenGLDisplayMask] (C function CGGetDisplaysWithOpenGLDisplayMask).
-func CGGetDisplaysWithOpenGLDisplayMask(mask uint32, maxDisplays uint32, displays *uint32, matchingDisplayCount *uint32) raw.CGError {
-	return raw.CGGetDisplaysWithOpenGLDisplayMask(mask, maxDisplays, displays, matchingDisplayCount)
+func CGGetDisplaysWithOpenGLDisplayMask(mask uint32, maxDisplays uint32, displays *uint32, matchingDisplayCount *uint32) CGError {
+	return CGError(raw.CGGetDisplaysWithOpenGLDisplayMask(mask, maxDisplays, displays, matchingDisplayCount))
 }
 
 // CGGetDisplaysWithPoint calls [raw.CGGetDisplaysWithPoint] (C function CGGetDisplaysWithPoint).
-func CGGetDisplaysWithPoint(point corefoundation.CGPoint, maxDisplays uint32, displays *uint32, matchingDisplayCount *uint32) raw.CGError {
-	return raw.CGGetDisplaysWithPoint(point, maxDisplays, displays, matchingDisplayCount)
+func CGGetDisplaysWithPoint(point corefoundation.CGPoint, maxDisplays uint32, displays *uint32, matchingDisplayCount *uint32) CGError {
+	return CGError(raw.CGGetDisplaysWithPoint(point, maxDisplays, displays, matchingDisplayCount))
 }
 
 // CGGetDisplaysWithRect calls [raw.CGGetDisplaysWithRect] (C function CGGetDisplaysWithRect).
-func CGGetDisplaysWithRect(rect corefoundation.CGRect, maxDisplays uint32, displays *uint32, matchingDisplayCount *uint32) raw.CGError {
-	return raw.CGGetDisplaysWithRect(rect, maxDisplays, displays, matchingDisplayCount)
+func CGGetDisplaysWithRect(rect corefoundation.CGRect, maxDisplays uint32, displays *uint32, matchingDisplayCount *uint32) CGError {
+	return CGError(raw.CGGetDisplaysWithRect(rect, maxDisplays, displays, matchingDisplayCount))
 }
 
 // CGGetEventTapList calls [raw.CGGetEventTapList] (C function CGGetEventTapList).
-func CGGetEventTapList(maxNumberOfTaps uint32, tapList *raw.CGEventTapInformation, eventTapCount *uint32) raw.CGError {
-	return raw.CGGetEventTapList(maxNumberOfTaps, tapList, eventTapCount)
+func CGGetEventTapList(maxNumberOfTaps uint32, tapList *raw.CGEventTapInformation, eventTapCount *uint32) CGError {
+	return CGError(raw.CGGetEventTapList(maxNumberOfTaps, tapList, eventTapCount))
 }
 
 // CGGetLastMouseDelta calls [raw.CGGetLastMouseDelta] (C function CGGetLastMouseDelta).
@@ -2081,8 +2081,8 @@ func CGGetLastMouseDelta(deltaX *int32, deltaY *int32) {
 }
 
 // CGGetOnlineDisplayList calls [raw.CGGetOnlineDisplayList] (C function CGGetOnlineDisplayList).
-func CGGetOnlineDisplayList(maxDisplays uint32, onlineDisplays *uint32, displayCount *uint32) raw.CGError {
-	return raw.CGGetOnlineDisplayList(maxDisplays, onlineDisplays, displayCount)
+func CGGetOnlineDisplayList(maxDisplays uint32, onlineDisplays *uint32, displayCount *uint32) CGError {
+	return CGError(raw.CGGetOnlineDisplayList(maxDisplays, onlineDisplays, displayCount))
 }
 
 // CGGradientCreateWithColorComponents calls [raw.CGGradientCreateWithColorComponents] (C function CGGradientCreateWithColorComponents).
@@ -2136,8 +2136,8 @@ func CGImageContainsImageSpecificToneMappingMetadata(image unsafe.Pointer) bool 
 }
 
 // CGImageCreate calls [raw.CGImageCreate] (C function CGImageCreate).
-func CGImageCreate(width uint, height uint, bitsPerComponent uint, bitsPerPixel uint, bytesPerRow uint, space unsafe.Pointer, bitmapInfo raw.CGBitmapInfo, provider unsafe.Pointer, decode *float64, shouldInterpolate bool, intent raw.CGColorRenderingIntent) unsafe.Pointer {
-	return raw.CGImageCreate(width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, space, bitmapInfo, provider, decode, shouldInterpolate, intent)
+func CGImageCreate(width uint, height uint, bitsPerComponent uint, bitsPerPixel uint, bytesPerRow uint, space unsafe.Pointer, bitmapInfo CGBitmapInfo, provider unsafe.Pointer, decode *float64, shouldInterpolate bool, intent CGColorRenderingIntent) unsafe.Pointer {
+	return raw.CGImageCreate(width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, space, raw.CGBitmapInfo(bitmapInfo), provider, decode, shouldInterpolate, raw.CGColorRenderingIntent(intent))
 }
 
 // CGImageCreateCopy calls [raw.CGImageCreateCopy] (C function CGImageCreateCopy).
@@ -2166,8 +2166,8 @@ func CGImageCreateCopyWithContentHeadroom(headroom float32, image unsafe.Pointer
 }
 
 // CGImageCreateWithContentHeadroom calls [raw.CGImageCreateWithContentHeadroom] (C function CGImageCreateWithContentHeadroom).
-func CGImageCreateWithContentHeadroom(headroom float32, width uint, height uint, bitsPerComponent uint, bitsPerPixel uint, bytesPerRow uint, space unsafe.Pointer, bitmapInfo raw.CGBitmapInfo, provider unsafe.Pointer, decode *float64, shouldInterpolate bool, intent raw.CGColorRenderingIntent) unsafe.Pointer {
-	return raw.CGImageCreateWithContentHeadroom(headroom, width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, space, bitmapInfo, provider, decode, shouldInterpolate, intent)
+func CGImageCreateWithContentHeadroom(headroom float32, width uint, height uint, bitsPerComponent uint, bitsPerPixel uint, bytesPerRow uint, space unsafe.Pointer, bitmapInfo CGBitmapInfo, provider unsafe.Pointer, decode *float64, shouldInterpolate bool, intent CGColorRenderingIntent) unsafe.Pointer {
+	return raw.CGImageCreateWithContentHeadroom(headroom, width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, space, raw.CGBitmapInfo(bitmapInfo), provider, decode, shouldInterpolate, raw.CGColorRenderingIntent(intent))
 }
 
 // CGImageCreateWithImageInRect calls [raw.CGImageCreateWithImageInRect] (C function CGImageCreateWithImageInRect).
@@ -2176,8 +2176,8 @@ func CGImageCreateWithImageInRect(image unsafe.Pointer, rect corefoundation.CGRe
 }
 
 // CGImageCreateWithJPEGDataProvider calls [raw.CGImageCreateWithJPEGDataProvider] (C function CGImageCreateWithJPEGDataProvider).
-func CGImageCreateWithJPEGDataProvider(source unsafe.Pointer, decode *float64, shouldInterpolate bool, intent raw.CGColorRenderingIntent) unsafe.Pointer {
-	return raw.CGImageCreateWithJPEGDataProvider(source, decode, shouldInterpolate, intent)
+func CGImageCreateWithJPEGDataProvider(source unsafe.Pointer, decode *float64, shouldInterpolate bool, intent CGColorRenderingIntent) unsafe.Pointer {
+	return raw.CGImageCreateWithJPEGDataProvider(source, decode, shouldInterpolate, raw.CGColorRenderingIntent(intent))
 }
 
 // CGImageCreateWithMask calls [raw.CGImageCreateWithMask] (C function CGImageCreateWithMask).
@@ -2191,18 +2191,18 @@ func CGImageCreateWithMaskingColors(image unsafe.Pointer, components *float64) u
 }
 
 // CGImageCreateWithPNGDataProvider calls [raw.CGImageCreateWithPNGDataProvider] (C function CGImageCreateWithPNGDataProvider).
-func CGImageCreateWithPNGDataProvider(source unsafe.Pointer, decode *float64, shouldInterpolate bool, intent raw.CGColorRenderingIntent) unsafe.Pointer {
-	return raw.CGImageCreateWithPNGDataProvider(source, decode, shouldInterpolate, intent)
+func CGImageCreateWithPNGDataProvider(source unsafe.Pointer, decode *float64, shouldInterpolate bool, intent CGColorRenderingIntent) unsafe.Pointer {
+	return raw.CGImageCreateWithPNGDataProvider(source, decode, shouldInterpolate, raw.CGColorRenderingIntent(intent))
 }
 
 // CGImageGetAlphaInfo calls [raw.CGImageGetAlphaInfo] (C function CGImageGetAlphaInfo).
-func CGImageGetAlphaInfo(image unsafe.Pointer) raw.CGImageAlphaInfo {
-	return raw.CGImageGetAlphaInfo(image)
+func CGImageGetAlphaInfo(image unsafe.Pointer) CGImageAlphaInfo {
+	return CGImageAlphaInfo(raw.CGImageGetAlphaInfo(image))
 }
 
 // CGImageGetBitmapInfo calls [raw.CGImageGetBitmapInfo] (C function CGImageGetBitmapInfo).
-func CGImageGetBitmapInfo(image unsafe.Pointer) raw.CGBitmapInfo {
-	return raw.CGImageGetBitmapInfo(image)
+func CGImageGetBitmapInfo(image unsafe.Pointer) CGBitmapInfo {
+	return CGBitmapInfo(raw.CGImageGetBitmapInfo(image))
 }
 
 // CGImageGetBitsPerComponent calls [raw.CGImageGetBitsPerComponent] (C function CGImageGetBitsPerComponent).
@@ -2216,8 +2216,8 @@ func CGImageGetBitsPerPixel(image unsafe.Pointer) uint {
 }
 
 // CGImageGetByteOrderInfo calls [raw.CGImageGetByteOrderInfo] (C function CGImageGetByteOrderInfo).
-func CGImageGetByteOrderInfo(image unsafe.Pointer) raw.CGImageByteOrderInfo {
-	return raw.CGImageGetByteOrderInfo(image)
+func CGImageGetByteOrderInfo(image unsafe.Pointer) CGImageByteOrderInfo {
+	return CGImageByteOrderInfo(raw.CGImageGetByteOrderInfo(image))
 }
 
 // CGImageGetBytesPerRow calls [raw.CGImageGetBytesPerRow] (C function CGImageGetBytesPerRow).
@@ -2256,13 +2256,13 @@ func CGImageGetHeight(image unsafe.Pointer) uint {
 }
 
 // CGImageGetPixelFormatInfo calls [raw.CGImageGetPixelFormatInfo] (C function CGImageGetPixelFormatInfo).
-func CGImageGetPixelFormatInfo(image unsafe.Pointer) raw.CGImagePixelFormatInfo {
-	return raw.CGImageGetPixelFormatInfo(image)
+func CGImageGetPixelFormatInfo(image unsafe.Pointer) CGImagePixelFormatInfo {
+	return CGImagePixelFormatInfo(raw.CGImageGetPixelFormatInfo(image))
 }
 
 // CGImageGetRenderingIntent calls [raw.CGImageGetRenderingIntent] (C function CGImageGetRenderingIntent).
-func CGImageGetRenderingIntent(image unsafe.Pointer) raw.CGColorRenderingIntent {
-	return raw.CGImageGetRenderingIntent(image)
+func CGImageGetRenderingIntent(image unsafe.Pointer) CGColorRenderingIntent {
+	return CGColorRenderingIntent(raw.CGImageGetRenderingIntent(image))
 }
 
 // CGImageGetShouldInterpolate calls [raw.CGImageGetShouldInterpolate] (C function CGImageGetShouldInterpolate).
@@ -2311,8 +2311,8 @@ func CGImageShouldToneMap(image unsafe.Pointer) bool {
 }
 
 // CGInhibitLocalEvents calls [raw.CGInhibitLocalEvents] (C function CGInhibitLocalEvents).
-func CGInhibitLocalEvents(inhibit int) raw.CGError {
-	return raw.CGInhibitLocalEvents(inhibit)
+func CGInhibitLocalEvents(inhibit int) CGError {
+	return CGError(raw.CGInhibitLocalEvents(inhibit))
 }
 
 // CGLayerCreateWithContext calls [raw.CGLayerCreateWithContext] (C function CGLayerCreateWithContext).
@@ -2461,8 +2461,8 @@ func CGPDFContextBeginPage(context_ unsafe.Pointer, pageInfo unsafe.Pointer) {
 }
 
 // CGPDFContextBeginTag calls [raw.CGPDFContextBeginTag] (C function CGPDFContextBeginTag).
-func CGPDFContextBeginTag(context_ unsafe.Pointer, tagType raw.CGPDFTagType, tagProperties unsafe.Pointer) {
-	raw.CGPDFContextBeginTag(context_, tagType, tagProperties)
+func CGPDFContextBeginTag(context_ unsafe.Pointer, tagType CGPDFTagType, tagProperties unsafe.Pointer) {
+	raw.CGPDFContextBeginTag(context_, raw.CGPDFTagType(tagType), tagProperties)
 }
 
 // CGPDFContextClose calls [raw.CGPDFContextClose] (C function CGPDFContextClose).
@@ -2601,8 +2601,8 @@ func CGPDFDocumentCreateWithURL(url unsafe.Pointer) unsafe.Pointer {
 }
 
 // CGPDFDocumentGetAccessPermissions calls [raw.CGPDFDocumentGetAccessPermissions] (C function CGPDFDocumentGetAccessPermissions).
-func CGPDFDocumentGetAccessPermissions(document unsafe.Pointer) raw.CGPDFAccessPermissions {
-	return raw.CGPDFDocumentGetAccessPermissions(document)
+func CGPDFDocumentGetAccessPermissions(document unsafe.Pointer) CGPDFAccessPermissions {
+	return CGPDFAccessPermissions(raw.CGPDFDocumentGetAccessPermissions(document))
 }
 
 // CGPDFDocumentGetArtBox calls [raw.CGPDFDocumentGetArtBox] (C function CGPDFDocumentGetArtBox).
@@ -2701,13 +2701,13 @@ func CGPDFDocumentUnlockWithPassword(document unsafe.Pointer, password string) b
 }
 
 // CGPDFObjectGetType calls [raw.CGPDFObjectGetType] (C function CGPDFObjectGetType).
-func CGPDFObjectGetType(object unsafe.Pointer) raw.CGPDFObjectType {
-	return raw.CGPDFObjectGetType(object)
+func CGPDFObjectGetType(object unsafe.Pointer) CGPDFObjectType {
+	return CGPDFObjectType(raw.CGPDFObjectGetType(object))
 }
 
 // CGPDFObjectGetValue calls [raw.CGPDFObjectGetValue] (C function CGPDFObjectGetValue).
-func CGPDFObjectGetValue(object unsafe.Pointer, type_ raw.CGPDFObjectType, value unsafe.Pointer) bool {
-	return raw.CGPDFObjectGetValue(object, type_, value)
+func CGPDFObjectGetValue(object unsafe.Pointer, type_ CGPDFObjectType, value unsafe.Pointer) bool {
+	return raw.CGPDFObjectGetValue(object, raw.CGPDFObjectType(type_), value)
 }
 
 // CGPDFOperatorTableCreate calls [raw.CGPDFOperatorTableCreate] (C function CGPDFOperatorTableCreate).
@@ -2731,8 +2731,8 @@ func CGPDFOperatorTableSetCallback(table unsafe.Pointer, name string, callback u
 }
 
 // CGPDFPageGetBoxRect calls [raw.CGPDFPageGetBoxRect] (C function CGPDFPageGetBoxRect).
-func CGPDFPageGetBoxRect(page unsafe.Pointer, box raw.CGPDFBox) corefoundation.CGRect {
-	return raw.CGPDFPageGetBoxRect(page, box)
+func CGPDFPageGetBoxRect(page unsafe.Pointer, box CGPDFBox) corefoundation.CGRect {
+	return raw.CGPDFPageGetBoxRect(page, raw.CGPDFBox(box))
 }
 
 // CGPDFPageGetDictionary calls [raw.CGPDFPageGetDictionary] (C function CGPDFPageGetDictionary).
@@ -2746,8 +2746,8 @@ func CGPDFPageGetDocument(page unsafe.Pointer) unsafe.Pointer {
 }
 
 // CGPDFPageGetDrawingTransform calls [raw.CGPDFPageGetDrawingTransform] (C function CGPDFPageGetDrawingTransform).
-func CGPDFPageGetDrawingTransform(page unsafe.Pointer, box raw.CGPDFBox, rect corefoundation.CGRect, rotate int, preserveAspectRatio bool) corefoundation.CGAffineTransform {
-	return raw.CGPDFPageGetDrawingTransform(page, box, rect, rotate, preserveAspectRatio)
+func CGPDFPageGetDrawingTransform(page unsafe.Pointer, box CGPDFBox, rect corefoundation.CGRect, rotate int, preserveAspectRatio bool) corefoundation.CGAffineTransform {
+	return raw.CGPDFPageGetDrawingTransform(page, raw.CGPDFBox(box), rect, rotate, preserveAspectRatio)
 }
 
 // CGPDFPageGetPageNumber calls [raw.CGPDFPageGetPageNumber] (C function CGPDFPageGetPageNumber).
@@ -2851,8 +2851,13 @@ func CGPDFScannerStop(s unsafe.Pointer) {
 }
 
 // CGPDFStreamCopyData calls [raw.CGPDFStreamCopyData] (C function CGPDFStreamCopyData).
-func CGPDFStreamCopyData(stream unsafe.Pointer, format *raw.CGPDFDataFormat) unsafe.Pointer {
-	return raw.CGPDFStreamCopyData(stream, format)
+func CGPDFStreamCopyData(stream unsafe.Pointer, format *CGPDFDataFormat) unsafe.Pointer {
+	var _format raw.CGPDFDataFormat
+	_ret := raw.CGPDFStreamCopyData(stream, &_format)
+	if format != nil {
+		*format = CGPDFDataFormat(_format)
+	}
+	return _ret
 }
 
 // CGPDFStreamGetDictionary calls [raw.CGPDFStreamGetDictionary] (C function CGPDFStreamGetDictionary).
@@ -2881,8 +2886,8 @@ func CGPDFStringGetLength(string_ unsafe.Pointer) uint {
 }
 
 // CGPDFTagTypeGetName calls [raw.CGPDFTagTypeGetName] (C function CGPDFTagTypeGetName).
-func CGPDFTagTypeGetName(tagType raw.CGPDFTagType) string {
-	return raw.CGPDFTagTypeGetName(tagType)
+func CGPDFTagTypeGetName(tagType CGPDFTagType) string {
+	return raw.CGPDFTagTypeGetName(raw.CGPDFTagType(tagType))
 }
 
 // CGPSConverterAbort calls [raw.CGPSConverterAbort] (C function CGPSConverterAbort).
@@ -3016,8 +3021,8 @@ func CGPathCreateCopyByNormalizing(path unsafe.Pointer, evenOddFillRule bool) un
 }
 
 // CGPathCreateCopyByStrokingPath calls [raw.CGPathCreateCopyByStrokingPath] (C function CGPathCreateCopyByStrokingPath).
-func CGPathCreateCopyByStrokingPath(path unsafe.Pointer, transform *corefoundation.CGAffineTransform, lineWidth float64, lineCap raw.CGLineCap, lineJoin raw.CGLineJoin, miterLimit float64) unsafe.Pointer {
-	return raw.CGPathCreateCopyByStrokingPath(path, transform, lineWidth, lineCap, lineJoin, miterLimit)
+func CGPathCreateCopyByStrokingPath(path unsafe.Pointer, transform *corefoundation.CGAffineTransform, lineWidth float64, lineCap CGLineCap, lineJoin CGLineJoin, miterLimit float64) unsafe.Pointer {
+	return raw.CGPathCreateCopyByStrokingPath(path, transform, lineWidth, raw.CGLineCap(lineCap), raw.CGLineJoin(lineJoin), miterLimit)
 }
 
 // CGPathCreateCopyBySubtractingPath calls [raw.CGPathCreateCopyBySubtractingPath] (C function CGPathCreateCopyBySubtractingPath).
@@ -3141,8 +3146,8 @@ func CGPathRetain(path unsafe.Pointer) unsafe.Pointer {
 }
 
 // CGPatternCreate calls [raw.CGPatternCreate] (C function CGPatternCreate).
-func CGPatternCreate(info unsafe.Pointer, bounds corefoundation.CGRect, matrix corefoundation.CGAffineTransform, xStep float64, yStep float64, tiling raw.CGPatternTiling, isColored bool, callbacks *raw.CGPatternCallbacks) unsafe.Pointer {
-	return raw.CGPatternCreate(info, bounds, matrix, xStep, yStep, tiling, isColored, callbacks)
+func CGPatternCreate(info unsafe.Pointer, bounds corefoundation.CGRect, matrix corefoundation.CGAffineTransform, xStep float64, yStep float64, tiling CGPatternTiling, isColored bool, callbacks *raw.CGPatternCallbacks) unsafe.Pointer {
+	return raw.CGPatternCreate(info, bounds, matrix, xStep, yStep, raw.CGPatternTiling(tiling), isColored, callbacks)
 }
 
 // CGPatternGetTypeID calls [raw.CGPatternGetTypeID] (C function CGPatternGetTypeID).
@@ -3186,8 +3191,8 @@ func CGPointMakeWithDictionaryRepresentation(dict unsafe.Pointer, point *corefou
 }
 
 // CGPostKeyboardEvent calls [raw.CGPostKeyboardEvent] (C function CGPostKeyboardEvent).
-func CGPostKeyboardEvent(keyChar uint16, virtualKey uint16, keyDown int) raw.CGError {
-	return raw.CGPostKeyboardEvent(keyChar, virtualKey, keyDown)
+func CGPostKeyboardEvent(keyChar uint16, virtualKey uint16, keyDown int) CGError {
+	return CGError(raw.CGPostKeyboardEvent(keyChar, virtualKey, keyDown))
 }
 
 // CGPreflightListenEventAccess calls [raw.CGPreflightListenEventAccess] (C function CGPreflightListenEventAccess).
@@ -3336,18 +3341,18 @@ func CGRectUnion(r1 corefoundation.CGRect, r2 corefoundation.CGRect) corefoundat
 }
 
 // CGRegisterScreenRefreshCallback calls [raw.CGRegisterScreenRefreshCallback] (C function CGRegisterScreenRefreshCallback).
-func CGRegisterScreenRefreshCallback(callback unsafe.Pointer, userInfo unsafe.Pointer) raw.CGError {
-	return raw.CGRegisterScreenRefreshCallback(callback, userInfo)
+func CGRegisterScreenRefreshCallback(callback unsafe.Pointer, userInfo unsafe.Pointer) CGError {
+	return CGError(raw.CGRegisterScreenRefreshCallback(callback, userInfo))
 }
 
 // CGReleaseAllDisplays calls [raw.CGReleaseAllDisplays] (C function CGReleaseAllDisplays).
-func CGReleaseAllDisplays() raw.CGError {
-	return raw.CGReleaseAllDisplays()
+func CGReleaseAllDisplays() CGError {
+	return CGError(raw.CGReleaseAllDisplays())
 }
 
 // CGReleaseDisplayFadeReservation calls [raw.CGReleaseDisplayFadeReservation] (C function CGReleaseDisplayFadeReservation).
-func CGReleaseDisplayFadeReservation(token uint32) raw.CGError {
-	return raw.CGReleaseDisplayFadeReservation(token)
+func CGReleaseDisplayFadeReservation(token uint32) CGError {
+	return CGError(raw.CGReleaseDisplayFadeReservation(token))
 }
 
 // CGReleaseScreenRefreshRects calls [raw.CGReleaseScreenRefreshRects] (C function CGReleaseScreenRefreshRects).
@@ -3406,8 +3411,8 @@ func CGRestorePermanentDisplayConfiguration() {
 }
 
 // CGScreenRegisterMoveCallback calls [raw.CGScreenRegisterMoveCallback] (C function CGScreenRegisterMoveCallback).
-func CGScreenRegisterMoveCallback(callback unsafe.Pointer, userInfo unsafe.Pointer) raw.CGError {
-	return raw.CGScreenRegisterMoveCallback(callback, userInfo)
+func CGScreenRegisterMoveCallback(callback unsafe.Pointer, userInfo unsafe.Pointer) CGError {
+	return CGError(raw.CGScreenRegisterMoveCallback(callback, userInfo))
 }
 
 // CGScreenUnregisterMoveCallback calls [raw.CGScreenUnregisterMoveCallback] (C function CGScreenUnregisterMoveCallback).
@@ -3421,28 +3426,28 @@ func CGSessionCopyCurrentDictionary() unsafe.Pointer {
 }
 
 // CGSetDisplayTransferByByteTable calls [raw.CGSetDisplayTransferByByteTable] (C function CGSetDisplayTransferByByteTable).
-func CGSetDisplayTransferByByteTable(display uint32, tableSize uint32, redTable *uint8, greenTable *uint8, blueTable *uint8) raw.CGError {
-	return raw.CGSetDisplayTransferByByteTable(display, tableSize, redTable, greenTable, blueTable)
+func CGSetDisplayTransferByByteTable(display uint32, tableSize uint32, redTable *uint8, greenTable *uint8, blueTable *uint8) CGError {
+	return CGError(raw.CGSetDisplayTransferByByteTable(display, tableSize, redTable, greenTable, blueTable))
 }
 
 // CGSetDisplayTransferByFormula calls [raw.CGSetDisplayTransferByFormula] (C function CGSetDisplayTransferByFormula).
-func CGSetDisplayTransferByFormula(display uint32, redMin float32, redMax float32, redGamma float32, greenMin float32, greenMax float32, greenGamma float32, blueMin float32, blueMax float32, blueGamma float32) raw.CGError {
-	return raw.CGSetDisplayTransferByFormula(display, redMin, redMax, redGamma, greenMin, greenMax, greenGamma, blueMin, blueMax, blueGamma)
+func CGSetDisplayTransferByFormula(display uint32, redMin float32, redMax float32, redGamma float32, greenMin float32, greenMax float32, greenGamma float32, blueMin float32, blueMax float32, blueGamma float32) CGError {
+	return CGError(raw.CGSetDisplayTransferByFormula(display, redMin, redMax, redGamma, greenMin, greenMax, greenGamma, blueMin, blueMax, blueGamma))
 }
 
 // CGSetDisplayTransferByTable calls [raw.CGSetDisplayTransferByTable] (C function CGSetDisplayTransferByTable).
-func CGSetDisplayTransferByTable(display uint32, tableSize uint32, redTable *float32, greenTable *float32, blueTable *float32) raw.CGError {
-	return raw.CGSetDisplayTransferByTable(display, tableSize, redTable, greenTable, blueTable)
+func CGSetDisplayTransferByTable(display uint32, tableSize uint32, redTable *float32, greenTable *float32, blueTable *float32) CGError {
+	return CGError(raw.CGSetDisplayTransferByTable(display, tableSize, redTable, greenTable, blueTable))
 }
 
 // CGSetLocalEventsFilterDuringSuppressionState calls [raw.CGSetLocalEventsFilterDuringSuppressionState] (C function CGSetLocalEventsFilterDuringSuppressionState).
-func CGSetLocalEventsFilterDuringSuppressionState(filter raw.CGEventFilterMask, state raw.CGEventSuppressionState) raw.CGError {
-	return raw.CGSetLocalEventsFilterDuringSuppressionState(filter, state)
+func CGSetLocalEventsFilterDuringSuppressionState(filter CGEventFilterMask, state CGEventSuppressionState) CGError {
+	return CGError(raw.CGSetLocalEventsFilterDuringSuppressionState(raw.CGEventFilterMask(filter), raw.CGEventSuppressionState(state)))
 }
 
 // CGSetLocalEventsSuppressionInterval calls [raw.CGSetLocalEventsSuppressionInterval] (C function CGSetLocalEventsSuppressionInterval).
-func CGSetLocalEventsSuppressionInterval(seconds float64) raw.CGError {
-	return raw.CGSetLocalEventsSuppressionInterval(seconds)
+func CGSetLocalEventsSuppressionInterval(seconds float64) CGError {
+	return CGError(raw.CGSetLocalEventsSuppressionInterval(seconds))
 }
 
 // CGShadingCreateAxial calls [raw.CGShadingCreateAxial] (C function CGShadingCreateAxial).
@@ -3531,33 +3536,38 @@ func CGVectorMake(dx float64, dy float64) corefoundation.CGVector {
 }
 
 // CGWaitForScreenRefreshRects calls [raw.CGWaitForScreenRefreshRects] (C function CGWaitForScreenRefreshRects).
-func CGWaitForScreenRefreshRects(rects *corefoundation.CGRect, count *uint32) raw.CGError {
-	return raw.CGWaitForScreenRefreshRects(rects, count)
+func CGWaitForScreenRefreshRects(rects *corefoundation.CGRect, count *uint32) CGError {
+	return CGError(raw.CGWaitForScreenRefreshRects(rects, count))
 }
 
 // CGWaitForScreenUpdateRects calls [raw.CGWaitForScreenUpdateRects] (C function CGWaitForScreenUpdateRects).
-func CGWaitForScreenUpdateRects(requestedOperations raw.CGScreenUpdateOperation, currentOperation *raw.CGScreenUpdateOperation, rects *corefoundation.CGRect, rectCount *uint, delta *raw.CGScreenUpdateMoveDelta) raw.CGError {
-	return raw.CGWaitForScreenUpdateRects(requestedOperations, currentOperation, rects, rectCount, delta)
+func CGWaitForScreenUpdateRects(requestedOperations CGScreenUpdateOperation, currentOperation *CGScreenUpdateOperation, rects *corefoundation.CGRect, rectCount *uint, delta *raw.CGScreenUpdateMoveDelta) CGError {
+	var _currentOperation raw.CGScreenUpdateOperation
+	_ret := CGError(raw.CGWaitForScreenUpdateRects(raw.CGScreenUpdateOperation(requestedOperations), &_currentOperation, rects, rectCount, delta))
+	if currentOperation != nil {
+		*currentOperation = CGScreenUpdateOperation(_currentOperation)
+	}
+	return _ret
 }
 
 // CGWarpMouseCursorPosition calls [raw.CGWarpMouseCursorPosition] (C function CGWarpMouseCursorPosition).
-func CGWarpMouseCursorPosition(newCursorPosition corefoundation.CGPoint) raw.CGError {
-	return raw.CGWarpMouseCursorPosition(newCursorPosition)
+func CGWarpMouseCursorPosition(newCursorPosition corefoundation.CGPoint) CGError {
+	return CGError(raw.CGWarpMouseCursorPosition(newCursorPosition))
 }
 
 // CGWindowLevelForKey calls [raw.CGWindowLevelForKey] (C function CGWindowLevelForKey).
-func CGWindowLevelForKey(key raw.CGWindowLevelKey) int32 {
-	return raw.CGWindowLevelForKey(key)
+func CGWindowLevelForKey(key CGWindowLevelKey) int32 {
+	return raw.CGWindowLevelForKey(raw.CGWindowLevelKey(key))
 }
 
 // CGWindowListCopyWindowInfo calls [raw.CGWindowListCopyWindowInfo] (C function CGWindowListCopyWindowInfo).
-func CGWindowListCopyWindowInfo(option raw.CGWindowListOption, relativeToWindow uint32) unsafe.Pointer {
-	return raw.CGWindowListCopyWindowInfo(option, relativeToWindow)
+func CGWindowListCopyWindowInfo(option CGWindowListOption, relativeToWindow uint32) unsafe.Pointer {
+	return raw.CGWindowListCopyWindowInfo(raw.CGWindowListOption(option), relativeToWindow)
 }
 
 // CGWindowListCreate calls [raw.CGWindowListCreate] (C function CGWindowListCreate).
-func CGWindowListCreate(option raw.CGWindowListOption, relativeToWindow uint32) unsafe.Pointer {
-	return raw.CGWindowListCreate(option, relativeToWindow)
+func CGWindowListCreate(option CGWindowListOption, relativeToWindow uint32) unsafe.Pointer {
+	return raw.CGWindowListCreate(raw.CGWindowListOption(option), relativeToWindow)
 }
 
 // CGWindowListCreateDescriptionFromArray calls [raw.CGWindowListCreateDescriptionFromArray] (C function CGWindowListCreateDescriptionFromArray).
@@ -3566,13 +3576,13 @@ func CGWindowListCreateDescriptionFromArray(windowArray unsafe.Pointer) unsafe.P
 }
 
 // CGWindowListCreateImage calls [raw.CGWindowListCreateImage] (C function CGWindowListCreateImage).
-func CGWindowListCreateImage(screenBounds corefoundation.CGRect, listOption raw.CGWindowListOption, windowID uint32, imageOption raw.CGWindowImageOption) unsafe.Pointer {
-	return raw.CGWindowListCreateImage(screenBounds, listOption, windowID, imageOption)
+func CGWindowListCreateImage(screenBounds corefoundation.CGRect, listOption CGWindowListOption, windowID uint32, imageOption CGWindowImageOption) unsafe.Pointer {
+	return raw.CGWindowListCreateImage(screenBounds, raw.CGWindowListOption(listOption), windowID, raw.CGWindowImageOption(imageOption))
 }
 
 // CGWindowListCreateImageFromArray calls [raw.CGWindowListCreateImageFromArray] (C function CGWindowListCreateImageFromArray).
-func CGWindowListCreateImageFromArray(screenBounds corefoundation.CGRect, windowArray unsafe.Pointer, imageOption raw.CGWindowImageOption) unsafe.Pointer {
-	return raw.CGWindowListCreateImageFromArray(screenBounds, windowArray, imageOption)
+func CGWindowListCreateImageFromArray(screenBounds corefoundation.CGRect, windowArray unsafe.Pointer, imageOption CGWindowImageOption) unsafe.Pointer {
+	return raw.CGWindowListCreateImageFromArray(screenBounds, windowArray, raw.CGWindowImageOption(imageOption))
 }
 
 // CGWindowServerCFMachPort calls [raw.CGWindowServerCFMachPort] (C function CGWindowServerCFMachPort).

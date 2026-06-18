@@ -51,8 +51,8 @@ func (x *TurnBasedMatchmakerViewController) WithShowExistingMatches(showExisting
 }
 
 // WithMatchmakingMode sets the matchmakingMode property and returns the receiver for chaining.
-func (x *TurnBasedMatchmakerViewController) WithMatchmakingMode(matchmakingMode raw.GKMatchmakingMode) *TurnBasedMatchmakerViewController {
-	x.inner.SetMatchmakingMode(matchmakingMode)
+func (x *TurnBasedMatchmakerViewController) WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *TurnBasedMatchmakerViewController {
+	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))
 	return x
 }
 
@@ -77,13 +77,13 @@ func (x *TurnBasedMatchmakerViewController) SetShowExistingMatches(showExistingM
 }
 
 // MatchmakingMode calls the underlying MatchmakingMode.
-func (x *TurnBasedMatchmakerViewController) MatchmakingMode() raw.GKMatchmakingMode {
-	return x.inner.MatchmakingMode()
+func (x *TurnBasedMatchmakerViewController) MatchmakingMode() GKMatchmakingMode {
+	return GKMatchmakingMode(x.inner.MatchmakingMode())
 }
 
 // SetMatchmakingMode calls the underlying SetMatchmakingMode.
-func (x *TurnBasedMatchmakerViewController) SetMatchmakingMode(matchmakingMode raw.GKMatchmakingMode) {
-	x.inner.SetMatchmakingMode(matchmakingMode)
+func (x *TurnBasedMatchmakerViewController) SetMatchmakingMode(matchmakingMode GKMatchmakingMode) {
+	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))
 }
 
 // TurnBasedMatchmakerViewControllerable is the interface implemented by [TurnBasedMatchmakerViewController], for mocking and DI.
@@ -91,13 +91,13 @@ type TurnBasedMatchmakerViewControllerable interface {
 	Unwrap() *raw.GKTurnBasedMatchmakerViewController
 	WithTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate raw.GKTurnBasedMatchmakerViewControllerDelegate) *TurnBasedMatchmakerViewController
 	WithShowExistingMatches(showExistingMatches bool) *TurnBasedMatchmakerViewController
-	WithMatchmakingMode(matchmakingMode raw.GKMatchmakingMode) *TurnBasedMatchmakerViewController
+	WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *TurnBasedMatchmakerViewController
 	TurnBasedMatchmakerDelegate() raw.GKTurnBasedMatchmakerViewControllerDelegate
 	SetTurnBasedMatchmakerDelegate(turnBasedMatchmakerDelegate raw.GKTurnBasedMatchmakerViewControllerDelegate)
 	ShowExistingMatches() bool
 	SetShowExistingMatches(showExistingMatches bool)
-	MatchmakingMode() raw.GKMatchmakingMode
-	SetMatchmakingMode(matchmakingMode raw.GKMatchmakingMode)
+	MatchmakingMode() GKMatchmakingMode
+	SetMatchmakingMode(matchmakingMode GKMatchmakingMode)
 }
 
 var _ TurnBasedMatchmakerViewControllerable = (*TurnBasedMatchmakerViewController)(nil)

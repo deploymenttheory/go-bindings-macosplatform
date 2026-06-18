@@ -111,28 +111,28 @@ func (x *InstallerPane) NextPane() *InstallerPane {
 }
 
 // WillEnterPane calls the underlying WillEnterPane.
-func (x *InstallerPane) WillEnterPane(dir raw.InstallerSectionDirection) {
-	x.inner.WillEnterPane(dir)
+func (x *InstallerPane) WillEnterPane(dir InstallerSectionDirection) {
+	x.inner.WillEnterPane(raw.InstallerSectionDirection(dir))
 }
 
 // DidEnterPane calls the underlying DidEnterPane.
-func (x *InstallerPane) DidEnterPane(dir raw.InstallerSectionDirection) {
-	x.inner.DidEnterPane(dir)
+func (x *InstallerPane) DidEnterPane(dir InstallerSectionDirection) {
+	x.inner.DidEnterPane(raw.InstallerSectionDirection(dir))
 }
 
 // ShouldExitPane calls the underlying ShouldExitPane.
-func (x *InstallerPane) ShouldExitPane(dir raw.InstallerSectionDirection) bool {
-	return x.inner.ShouldExitPane(dir)
+func (x *InstallerPane) ShouldExitPane(dir InstallerSectionDirection) bool {
+	return x.inner.ShouldExitPane(raw.InstallerSectionDirection(dir))
 }
 
 // WillExitPane calls the underlying WillExitPane.
-func (x *InstallerPane) WillExitPane(dir raw.InstallerSectionDirection) {
-	x.inner.WillExitPane(dir)
+func (x *InstallerPane) WillExitPane(dir InstallerSectionDirection) {
+	x.inner.WillExitPane(raw.InstallerSectionDirection(dir))
 }
 
 // DidExitPane calls the underlying DidExitPane.
-func (x *InstallerPane) DidExitPane(dir raw.InstallerSectionDirection) {
-	x.inner.DidExitPane(dir)
+func (x *InstallerPane) DidExitPane(dir InstallerSectionDirection) {
+	x.inner.DidExitPane(raw.InstallerSectionDirection(dir))
 }
 
 // SetContentView calls the underlying SetContentView.
@@ -222,11 +222,11 @@ type InstallerPaneable interface {
 	FirstKeyView() *appkit.NSView
 	LastKeyView() *appkit.NSView
 	NextPane() *InstallerPane
-	WillEnterPane(dir raw.InstallerSectionDirection)
-	DidEnterPane(dir raw.InstallerSectionDirection)
-	ShouldExitPane(dir raw.InstallerSectionDirection) bool
-	WillExitPane(dir raw.InstallerSectionDirection)
-	DidExitPane(dir raw.InstallerSectionDirection)
+	WillEnterPane(dir InstallerSectionDirection)
+	DidEnterPane(dir InstallerSectionDirection)
+	ShouldExitPane(dir InstallerSectionDirection) bool
+	WillExitPane(dir InstallerSectionDirection)
+	DidExitPane(dir InstallerSectionDirection)
 	SetContentView(contentView *appkit.NSView)
 	SetInitialKeyView(initialKeyView *appkit.NSView)
 	SetFirstKeyView(firstKeyView *appkit.NSView)

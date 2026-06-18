@@ -41,8 +41,8 @@ func (x *BatchUpdateResult) Result() objc.ID {
 }
 
 // ResultType calls the underlying ResultType.
-func (x *BatchUpdateResult) ResultType() raw.NSBatchUpdateRequestResultType {
-	return x.inner.ResultType()
+func (x *BatchUpdateResult) ResultType() NSBatchUpdateRequestResultType {
+	return NSBatchUpdateRequestResultType(x.inner.ResultType())
 }
 
 func (x *BatchUpdateResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
@@ -53,7 +53,7 @@ func (x *BatchUpdateResult) asPersistentStoreResult() *raw.NSPersistentStoreResu
 type BatchUpdateResultable interface {
 	Unwrap() *raw.NSBatchUpdateResult
 	Result() objc.ID
-	ResultType() raw.NSBatchUpdateRequestResultType
+	ResultType() NSBatchUpdateRequestResultType
 }
 
 var _ BatchUpdateResultable = (*BatchUpdateResult)(nil)

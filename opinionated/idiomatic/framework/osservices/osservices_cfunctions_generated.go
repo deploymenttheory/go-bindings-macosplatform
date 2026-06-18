@@ -492,13 +492,13 @@ func UpdateSystemActivity(activity uint8) int16 {
 }
 
 // WSGetCFTypeIDFromWSTypeID calls [raw.WSGetCFTypeIDFromWSTypeID] (C function WSGetCFTypeIDFromWSTypeID).
-func WSGetCFTypeIDFromWSTypeID(typeID raw.WSTypeID) uint {
-	return raw.WSGetCFTypeIDFromWSTypeID(typeID)
+func WSGetCFTypeIDFromWSTypeID(typeID WSTypeID) uint {
+	return raw.WSGetCFTypeIDFromWSTypeID(raw.WSTypeID(typeID))
 }
 
 // WSGetWSTypeIDFromCFType calls [raw.WSGetWSTypeIDFromCFType] (C function WSGetWSTypeIDFromCFType).
-func WSGetWSTypeIDFromCFType(ref unsafe.Pointer) raw.WSTypeID {
-	return raw.WSGetWSTypeIDFromCFType(ref)
+func WSGetWSTypeIDFromCFType(ref unsafe.Pointer) WSTypeID {
+	return WSTypeID(raw.WSGetWSTypeIDFromCFType(ref))
 }
 
 // WSMethodInvocationAddDeserializationOverride calls [raw.WSMethodInvocationAddDeserializationOverride] (C function WSMethodInvocationAddDeserializationOverride).

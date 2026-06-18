@@ -112,20 +112,20 @@ func (x *AnnotationInk) WithEndPoint(endPoint corefoundation.CGPoint) *Annotatio
 }
 
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationInk) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationInk {
-	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+func (x *AnnotationInk) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationInk {
+	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationInk) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationInk {
-	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+func (x *AnnotationInk) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationInk {
+	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
 // WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationInk) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationInk {
-	x.inner.PDFAnnotation.SetIconType(iconType)
+func (x *AnnotationInk) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationInk {
+	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
@@ -148,14 +148,14 @@ func (x *AnnotationInk) WithQuadrilateralPoints(items ...*foundation.NSValue) *A
 }
 
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationInk) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationInk {
-	x.inner.PDFAnnotation.SetMarkupType(markupType)
+func (x *AnnotationInk) WithMarkupType(markupType PDFMarkupType) *AnnotationInk {
+	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationInk) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationInk {
-	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+func (x *AnnotationInk) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationInk {
+	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
@@ -250,8 +250,8 @@ func (x *AnnotationInk) WithValues(items ...*foundation.NSString) *AnnotationInk
 }
 
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationInk) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationInk {
-	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+func (x *AnnotationInk) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationInk {
+	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
@@ -320,12 +320,12 @@ type AnnotationInkable interface {
 	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationInk
 	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationInk
 	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationInk
-	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationInk
-	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationInk
-	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationInk
+	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationInk
+	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationInk
+	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationInk
 	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationInk
-	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationInk
-	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationInk
+	WithMarkupType(markupType PDFMarkupType) *AnnotationInk
+	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationInk
 	WithMultiline(multiline bool) *AnnotationInk
 	WithComb(comb bool) *AnnotationInk
 	WithMaximumLength(maximumLength int) *AnnotationInk
@@ -337,7 +337,7 @@ type AnnotationInkable interface {
 	WithListChoice(listChoice bool) *AnnotationInk
 	WithChoices(items ...*foundation.NSString) *AnnotationInk
 	WithValues(items ...*foundation.NSString) *AnnotationInk
-	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationInk
+	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationInk
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationInk
 	WithOpen(open bool) *AnnotationInk
 	WithDestination(destination *Destination) *AnnotationInk

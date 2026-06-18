@@ -36,14 +36,14 @@ func NewCNNLossDescriptor() *CNNLossDescriptor {
 }
 
 // WithLossType sets the lossType property and returns the receiver for chaining.
-func (x *CNNLossDescriptor) WithLossType(lossType raw.MPSCNNLossType) *CNNLossDescriptor {
-	x.inner.SetLossType(lossType)
+func (x *CNNLossDescriptor) WithLossType(lossType MPSCNNLossType) *CNNLossDescriptor {
+	x.inner.SetLossType(raw.MPSCNNLossType(lossType))
 	return x
 }
 
 // WithReductionType sets the reductionType property and returns the receiver for chaining.
-func (x *CNNLossDescriptor) WithReductionType(reductionType raw.MPSCNNReductionType) *CNNLossDescriptor {
-	x.inner.SetReductionType(reductionType)
+func (x *CNNLossDescriptor) WithReductionType(reductionType MPSCNNReductionType) *CNNLossDescriptor {
+	x.inner.SetReductionType(raw.MPSCNNReductionType(reductionType))
 	return x
 }
 
@@ -84,23 +84,23 @@ func (x *CNNLossDescriptor) WithDelta(delta float32) *CNNLossDescriptor {
 }
 
 // LossType calls the underlying LossType.
-func (x *CNNLossDescriptor) LossType() raw.MPSCNNLossType {
-	return x.inner.LossType()
+func (x *CNNLossDescriptor) LossType() MPSCNNLossType {
+	return MPSCNNLossType(x.inner.LossType())
 }
 
 // SetLossType calls the underlying SetLossType.
-func (x *CNNLossDescriptor) SetLossType(lossType raw.MPSCNNLossType) {
-	x.inner.SetLossType(lossType)
+func (x *CNNLossDescriptor) SetLossType(lossType MPSCNNLossType) {
+	x.inner.SetLossType(raw.MPSCNNLossType(lossType))
 }
 
 // ReductionType calls the underlying ReductionType.
-func (x *CNNLossDescriptor) ReductionType() raw.MPSCNNReductionType {
-	return x.inner.ReductionType()
+func (x *CNNLossDescriptor) ReductionType() MPSCNNReductionType {
+	return MPSCNNReductionType(x.inner.ReductionType())
 }
 
 // SetReductionType calls the underlying SetReductionType.
-func (x *CNNLossDescriptor) SetReductionType(reductionType raw.MPSCNNReductionType) {
-	x.inner.SetReductionType(reductionType)
+func (x *CNNLossDescriptor) SetReductionType(reductionType MPSCNNReductionType) {
+	x.inner.SetReductionType(raw.MPSCNNReductionType(reductionType))
 }
 
 // ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
@@ -166,18 +166,18 @@ func (x *CNNLossDescriptor) SetDelta(delta float32) {
 // CNNLossDescriptorable is the interface implemented by [CNNLossDescriptor], for mocking and DI.
 type CNNLossDescriptorable interface {
 	Unwrap() *raw.MPSCNNLossDescriptor
-	WithLossType(lossType raw.MPSCNNLossType) *CNNLossDescriptor
-	WithReductionType(reductionType raw.MPSCNNReductionType) *CNNLossDescriptor
+	WithLossType(lossType MPSCNNLossType) *CNNLossDescriptor
+	WithReductionType(reductionType MPSCNNReductionType) *CNNLossDescriptor
 	WithReduceAcrossBatch(reduceAcrossBatch bool) *CNNLossDescriptor
 	WithWeight(weight float32) *CNNLossDescriptor
 	WithLabelSmoothing(labelSmoothing float32) *CNNLossDescriptor
 	WithNumberOfClasses(numberOfClasses uint) *CNNLossDescriptor
 	WithEpsilon(epsilon float32) *CNNLossDescriptor
 	WithDelta(delta float32) *CNNLossDescriptor
-	LossType() raw.MPSCNNLossType
-	SetLossType(lossType raw.MPSCNNLossType)
-	ReductionType() raw.MPSCNNReductionType
-	SetReductionType(reductionType raw.MPSCNNReductionType)
+	LossType() MPSCNNLossType
+	SetLossType(lossType MPSCNNLossType)
+	ReductionType() MPSCNNReductionType
+	SetReductionType(reductionType MPSCNNReductionType)
 	ReduceAcrossBatch() bool
 	SetReduceAcrossBatch(reduceAcrossBatch bool)
 	Weight() float32

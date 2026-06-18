@@ -89,8 +89,8 @@ func (x *ImageRep) WithPixelsHigh(pixelsHigh int) *ImageRep {
 }
 
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *ImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *ImageRep {
-	x.inner.SetLayoutDirection(layoutDirection)
+func (x *ImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *ImageRep {
+	x.inner.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
@@ -110,8 +110,8 @@ func (x *ImageRep) DrawInRect(rect corefoundation.CGRect) bool {
 }
 
 // DrawInRectFromRectOperationFractionRespectFlippedHints calls the underlying DrawInRectFromRectOperationFractionRespectFlippedHints.
-func (x *ImageRep) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op raw.NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	return x.inner.DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, hints)
+func (x *ImageRep) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
+	return x.inner.DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect, srcSpacePortionRect, raw.NSCompositingOperation(op), requestedAlpha, respectContextIsFlipped, hints)
 }
 
 // CGImageForProposedRectContextHints calls the underlying CGImageForProposedRectContextHints.
@@ -194,13 +194,13 @@ func (x *ImageRep) SetPixelsHigh(pixelsHigh int) {
 }
 
 // LayoutDirection calls the underlying LayoutDirection.
-func (x *ImageRep) LayoutDirection() raw.NSImageLayoutDirection {
-	return x.inner.LayoutDirection()
+func (x *ImageRep) LayoutDirection() NSImageLayoutDirection {
+	return NSImageLayoutDirection(x.inner.LayoutDirection())
 }
 
 // SetLayoutDirection calls the underlying SetLayoutDirection.
-func (x *ImageRep) SetLayoutDirection(layoutDirection raw.NSImageLayoutDirection) {
-	x.inner.SetLayoutDirection(layoutDirection)
+func (x *ImageRep) SetLayoutDirection(layoutDirection NSImageLayoutDirection) {
+	x.inner.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 }
 
 func (x *ImageRep) asImageRep() *raw.NSImageRep { return x.inner }
@@ -215,11 +215,11 @@ type ImageRepable interface {
 	WithBitsPerSample(bitsPerSample int) *ImageRep
 	WithPixelsWide(pixelsWide int) *ImageRep
 	WithPixelsHigh(pixelsHigh int) *ImageRep
-	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *ImageRep
+	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *ImageRep
 	Draw() bool
 	DrawAtPoint(point corefoundation.CGPoint) bool
 	DrawInRect(rect corefoundation.CGRect) bool
-	DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op raw.NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
+	DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op NSCompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
 	CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, context_ *raw.NSGraphicsContext, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) unsafe.Pointer
 	Size() corefoundation.CGSize
 	SetSize(size corefoundation.CGSize)
@@ -235,8 +235,8 @@ type ImageRepable interface {
 	SetPixelsWide(pixelsWide int)
 	PixelsHigh() int
 	SetPixelsHigh(pixelsHigh int)
-	LayoutDirection() raw.NSImageLayoutDirection
-	SetLayoutDirection(layoutDirection raw.NSImageLayoutDirection)
+	LayoutDirection() NSImageLayoutDirection
+	SetLayoutDirection(layoutDirection NSImageLayoutDirection)
 }
 
 var _ ImageRepable = (*ImageRep)(nil)

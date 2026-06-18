@@ -43,8 +43,8 @@ func (x *ExpressionDescription) WithExpression(expression *foundation.NSExpressi
 }
 
 // WithExpressionResultType sets the expressionResultType property and returns the receiver for chaining.
-func (x *ExpressionDescription) WithExpressionResultType(expressionResultType raw.NSAttributeType) *ExpressionDescription {
-	x.inner.SetExpressionResultType(expressionResultType)
+func (x *ExpressionDescription) WithExpressionResultType(expressionResultType NSAttributeType) *ExpressionDescription {
+	x.inner.SetExpressionResultType(raw.NSAttributeType(expressionResultType))
 	return x
 }
 
@@ -113,13 +113,13 @@ func (x *ExpressionDescription) SetExpression(expression *foundation.NSExpressio
 }
 
 // ExpressionResultType calls the underlying ExpressionResultType.
-func (x *ExpressionDescription) ExpressionResultType() raw.NSAttributeType {
-	return x.inner.ExpressionResultType()
+func (x *ExpressionDescription) ExpressionResultType() NSAttributeType {
+	return NSAttributeType(x.inner.ExpressionResultType())
 }
 
 // SetExpressionResultType calls the underlying SetExpressionResultType.
-func (x *ExpressionDescription) SetExpressionResultType(expressionResultType raw.NSAttributeType) {
-	x.inner.SetExpressionResultType(expressionResultType)
+func (x *ExpressionDescription) SetExpressionResultType(expressionResultType NSAttributeType) {
+	x.inner.SetExpressionResultType(raw.NSAttributeType(expressionResultType))
 }
 
 func (x *ExpressionDescription) asPropertyDescription() *raw.NSPropertyDescription {
@@ -130,7 +130,7 @@ func (x *ExpressionDescription) asPropertyDescription() *raw.NSPropertyDescripti
 type ExpressionDescriptionable interface {
 	Unwrap() *raw.NSExpressionDescription
 	WithExpression(expression *foundation.NSExpression) *ExpressionDescription
-	WithExpressionResultType(expressionResultType raw.NSAttributeType) *ExpressionDescription
+	WithExpressionResultType(expressionResultType NSAttributeType) *ExpressionDescription
 	WithName(name string) *ExpressionDescription
 	WithOptional(optional bool) *ExpressionDescription
 	WithTransient(transient bool) *ExpressionDescription
@@ -142,8 +142,8 @@ type ExpressionDescriptionable interface {
 	WithRenamingIdentifier(renamingIdentifier string) *ExpressionDescription
 	Expression() *foundation.NSExpression
 	SetExpression(expression *foundation.NSExpression)
-	ExpressionResultType() raw.NSAttributeType
-	SetExpressionResultType(expressionResultType raw.NSAttributeType)
+	ExpressionResultType() NSAttributeType
+	SetExpressionResultType(expressionResultType NSAttributeType)
 }
 
 var _ ExpressionDescriptionable = (*ExpressionDescription)(nil)

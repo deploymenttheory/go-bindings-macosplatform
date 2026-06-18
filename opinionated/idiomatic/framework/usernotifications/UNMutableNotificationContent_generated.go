@@ -116,8 +116,8 @@ func (x *MutableNotificationContent) WithTargetContentIdentifier(targetContentId
 }
 
 // WithInterruptionLevel sets the interruptionLevel property and returns the receiver for chaining.
-func (x *MutableNotificationContent) WithInterruptionLevel(interruptionLevel raw.UNNotificationInterruptionLevel) *MutableNotificationContent {
-	x.inner.SetInterruptionLevel(interruptionLevel)
+func (x *MutableNotificationContent) WithInterruptionLevel(interruptionLevel UNNotificationInterruptionLevel) *MutableNotificationContent {
+	x.inner.SetInterruptionLevel(raw.UNNotificationInterruptionLevel(interruptionLevel))
 	return x
 }
 
@@ -189,8 +189,8 @@ func (x *MutableNotificationContent) SetTargetContentIdentifier(targetContentIde
 }
 
 // SetInterruptionLevel calls the underlying SetInterruptionLevel.
-func (x *MutableNotificationContent) SetInterruptionLevel(interruptionLevel raw.UNNotificationInterruptionLevel) {
-	x.inner.SetInterruptionLevel(interruptionLevel)
+func (x *MutableNotificationContent) SetInterruptionLevel(interruptionLevel UNNotificationInterruptionLevel) {
+	x.inner.SetInterruptionLevel(raw.UNNotificationInterruptionLevel(interruptionLevel))
 }
 
 // SetRelevanceScore calls the underlying SetRelevanceScore.
@@ -221,7 +221,7 @@ type MutableNotificationContentable interface {
 	WithSummaryArgument(summaryArgument string) *MutableNotificationContent
 	WithSummaryArgumentCount(summaryArgumentCount uint) *MutableNotificationContent
 	WithTargetContentIdentifier(targetContentIdentifier string) *MutableNotificationContent
-	WithInterruptionLevel(interruptionLevel raw.UNNotificationInterruptionLevel) *MutableNotificationContent
+	WithInterruptionLevel(interruptionLevel UNNotificationInterruptionLevel) *MutableNotificationContent
 	WithRelevanceScore(relevanceScore float64) *MutableNotificationContent
 	WithFilterCriteria(filterCriteria string) *MutableNotificationContent
 	SetAttachments(attachments *foundation.NSArray[*raw.UNNotificationAttachment])
@@ -235,7 +235,7 @@ type MutableNotificationContentable interface {
 	SetSummaryArgument(summaryArgument string)
 	SetSummaryArgumentCount(summaryArgumentCount uint)
 	SetTargetContentIdentifier(targetContentIdentifier string)
-	SetInterruptionLevel(interruptionLevel raw.UNNotificationInterruptionLevel)
+	SetInterruptionLevel(interruptionLevel UNNotificationInterruptionLevel)
 	SetRelevanceScore(relevanceScore float64)
 	SetFilterCriteria(filterCriteria string)
 }

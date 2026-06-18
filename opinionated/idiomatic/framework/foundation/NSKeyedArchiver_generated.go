@@ -57,8 +57,8 @@ func (x *KeyedArchiver) WithDelegate(delegate raw.NSKeyedArchiverDelegate) *Keye
 }
 
 // WithOutputFormat sets the outputFormat property and returns the receiver for chaining.
-func (x *KeyedArchiver) WithOutputFormat(outputFormat raw.NSPropertyListFormat) *KeyedArchiver {
-	x.inner.SetOutputFormat(outputFormat)
+func (x *KeyedArchiver) WithOutputFormat(outputFormat NSPropertyListFormat) *KeyedArchiver {
+	x.inner.SetOutputFormat(raw.NSPropertyListFormat(outputFormat))
 	return x
 }
 
@@ -104,13 +104,13 @@ func (x *KeyedArchiver) SetDelegate(delegate raw.NSKeyedArchiverDelegate) {
 }
 
 // OutputFormat calls the underlying OutputFormat.
-func (x *KeyedArchiver) OutputFormat() raw.NSPropertyListFormat {
-	return x.inner.OutputFormat()
+func (x *KeyedArchiver) OutputFormat() NSPropertyListFormat {
+	return NSPropertyListFormat(x.inner.OutputFormat())
 }
 
 // SetOutputFormat calls the underlying SetOutputFormat.
-func (x *KeyedArchiver) SetOutputFormat(outputFormat raw.NSPropertyListFormat) {
-	x.inner.SetOutputFormat(outputFormat)
+func (x *KeyedArchiver) SetOutputFormat(outputFormat NSPropertyListFormat) {
+	x.inner.SetOutputFormat(raw.NSPropertyListFormat(outputFormat))
 }
 
 // EncodedData calls the underlying EncodedData.
@@ -135,7 +135,7 @@ func (x *KeyedArchiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObj
 type KeyedArchiverable interface {
 	Unwrap() *raw.NSKeyedArchiver
 	WithDelegate(delegate raw.NSKeyedArchiverDelegate) *KeyedArchiver
-	WithOutputFormat(outputFormat raw.NSPropertyListFormat) *KeyedArchiver
+	WithOutputFormat(outputFormat NSPropertyListFormat) *KeyedArchiver
 	WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedArchiver
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyedArchiver
 	FinishEncoding()
@@ -143,8 +143,8 @@ type KeyedArchiverable interface {
 	ClassNameForClass(cls objc.Class) *String
 	Delegate() raw.NSKeyedArchiverDelegate
 	SetDelegate(delegate raw.NSKeyedArchiverDelegate)
-	OutputFormat() raw.NSPropertyListFormat
-	SetOutputFormat(outputFormat raw.NSPropertyListFormat)
+	OutputFormat() NSPropertyListFormat
+	SetOutputFormat(outputFormat NSPropertyListFormat)
 	EncodedData() *Data
 	SetRequiresSecureCoding(requiresSecureCoding bool)
 }

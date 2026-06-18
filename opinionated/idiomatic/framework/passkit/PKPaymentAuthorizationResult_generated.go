@@ -33,10 +33,10 @@ func PaymentAuthorizationResultFromID(id objc.ID) *PaymentAuthorizationResult {
 }
 
 // NewPaymentAuthorizationResultWithStatusErrors creates a new [PaymentAuthorizationResult].
-func NewPaymentAuthorizationResultWithStatusErrors(status raw.PKPaymentAuthorizationStatus) (*PaymentAuthorizationResult, error) {
+func NewPaymentAuthorizationResultWithStatusErrors(status PKPaymentAuthorizationStatus) (*PaymentAuthorizationResult, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentAuthorizationResult")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStatus:errors:"), status, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStatus:errors:"), raw.PKPaymentAuthorizationStatus(status), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -44,8 +44,8 @@ func NewPaymentAuthorizationResultWithStatusErrors(status raw.PKPaymentAuthoriza
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *PaymentAuthorizationResult) WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentAuthorizationResult {
-	x.inner.SetStatus(status)
+func (x *PaymentAuthorizationResult) WithStatus(status PKPaymentAuthorizationStatus) *PaymentAuthorizationResult {
+	x.inner.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 	return x
 }
 
@@ -56,13 +56,13 @@ func (x *PaymentAuthorizationResult) WithOrderDetails(orderDetails *PaymentOrder
 }
 
 // Status calls the underlying Status.
-func (x *PaymentAuthorizationResult) Status() raw.PKPaymentAuthorizationStatus {
-	return x.inner.Status()
+func (x *PaymentAuthorizationResult) Status() PKPaymentAuthorizationStatus {
+	return PKPaymentAuthorizationStatus(x.inner.Status())
 }
 
 // SetStatus calls the underlying SetStatus.
-func (x *PaymentAuthorizationResult) SetStatus(status raw.PKPaymentAuthorizationStatus) {
-	x.inner.SetStatus(status)
+func (x *PaymentAuthorizationResult) SetStatus(status PKPaymentAuthorizationStatus) {
+	x.inner.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 }
 
 // Errors calls the underlying Errors.
@@ -92,10 +92,10 @@ func (x *PaymentAuthorizationResult) SetOrderDetails(orderDetails *raw.PKPayment
 // PaymentAuthorizationResultable is the interface implemented by [PaymentAuthorizationResult], for mocking and DI.
 type PaymentAuthorizationResultable interface {
 	Unwrap() *raw.PKPaymentAuthorizationResult
-	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentAuthorizationResult
+	WithStatus(status PKPaymentAuthorizationStatus) *PaymentAuthorizationResult
 	WithOrderDetails(orderDetails *PaymentOrderDetails) *PaymentAuthorizationResult
-	Status() raw.PKPaymentAuthorizationStatus
-	SetStatus(status raw.PKPaymentAuthorizationStatus)
+	Status() PKPaymentAuthorizationStatus
+	SetStatus(status PKPaymentAuthorizationStatus)
 	Errors() *foundation.NSArray[objc.ID]
 	SetErrors() error
 	OrderDetails() *PaymentOrderDetails

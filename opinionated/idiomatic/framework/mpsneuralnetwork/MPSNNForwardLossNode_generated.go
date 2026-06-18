@@ -70,13 +70,13 @@ func (x *NNForwardLossNode) WithLabel(label string) *NNForwardLossNode {
 }
 
 // LossType calls the underlying LossType.
-func (x *NNForwardLossNode) LossType() raw.MPSCNNLossType {
-	return x.inner.LossType()
+func (x *NNForwardLossNode) LossType() MPSCNNLossType {
+	return MPSCNNLossType(x.inner.LossType())
 }
 
 // ReductionType calls the underlying ReductionType.
-func (x *NNForwardLossNode) ReductionType() raw.MPSCNNReductionType {
-	return x.inner.ReductionType()
+func (x *NNForwardLossNode) ReductionType() MPSCNNReductionType {
+	return MPSCNNReductionType(x.inner.ReductionType())
 }
 
 // NumberOfClasses calls the underlying NumberOfClasses.
@@ -127,8 +127,8 @@ type NNForwardLossNodeable interface {
 	WithPropertyCallBack(propertyCallBack raw.MPSNNLossCallback) *NNForwardLossNode
 	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNForwardLossNode
 	WithLabel(label string) *NNForwardLossNode
-	LossType() raw.MPSCNNLossType
-	ReductionType() raw.MPSCNNReductionType
+	LossType() MPSCNNLossType
+	ReductionType() MPSCNNReductionType
 	NumberOfClasses() uint
 	ReduceAcrossBatch() bool
 	Weight() float32

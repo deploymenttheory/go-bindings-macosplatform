@@ -41,20 +41,20 @@ func NewNEVPNIKEv2SecurityAssociationParameters() *NEVPNIKEv2SecurityAssociation
 }
 
 // WithEncryptionAlgorithm sets the encryptionAlgorithm property and returns the receiver for chaining.
-func (x *NEVPNIKEv2SecurityAssociationParameters) WithEncryptionAlgorithm(encryptionAlgorithm raw.NEVPNIKEv2EncryptionAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
-	x.inner.SetEncryptionAlgorithm(encryptionAlgorithm)
+func (x *NEVPNIKEv2SecurityAssociationParameters) WithEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
+	x.inner.SetEncryptionAlgorithm(raw.NEVPNIKEv2EncryptionAlgorithm(encryptionAlgorithm))
 	return x
 }
 
 // WithIntegrityAlgorithm sets the integrityAlgorithm property and returns the receiver for chaining.
-func (x *NEVPNIKEv2SecurityAssociationParameters) WithIntegrityAlgorithm(integrityAlgorithm raw.NEVPNIKEv2IntegrityAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
-	x.inner.SetIntegrityAlgorithm(integrityAlgorithm)
+func (x *NEVPNIKEv2SecurityAssociationParameters) WithIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
+	x.inner.SetIntegrityAlgorithm(raw.NEVPNIKEv2IntegrityAlgorithm(integrityAlgorithm))
 	return x
 }
 
 // WithDiffieHellmanGroup sets the diffieHellmanGroup property and returns the receiver for chaining.
-func (x *NEVPNIKEv2SecurityAssociationParameters) WithDiffieHellmanGroup(diffieHellmanGroup raw.NEVPNIKEv2DiffieHellmanGroup) *NEVPNIKEv2SecurityAssociationParameters {
-	x.inner.SetDiffieHellmanGroup(diffieHellmanGroup)
+func (x *NEVPNIKEv2SecurityAssociationParameters) WithDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) *NEVPNIKEv2SecurityAssociationParameters {
+	x.inner.SetDiffieHellmanGroup(raw.NEVPNIKEv2DiffieHellmanGroup(diffieHellmanGroup))
 	return x
 }
 
@@ -83,33 +83,33 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) WithLifetimeMinutes(lifetimeMi
 }
 
 // EncryptionAlgorithm calls the underlying EncryptionAlgorithm.
-func (x *NEVPNIKEv2SecurityAssociationParameters) EncryptionAlgorithm() raw.NEVPNIKEv2EncryptionAlgorithm {
-	return x.inner.EncryptionAlgorithm()
+func (x *NEVPNIKEv2SecurityAssociationParameters) EncryptionAlgorithm() NEVPNIKEv2EncryptionAlgorithm {
+	return NEVPNIKEv2EncryptionAlgorithm(x.inner.EncryptionAlgorithm())
 }
 
 // SetEncryptionAlgorithm calls the underlying SetEncryptionAlgorithm.
-func (x *NEVPNIKEv2SecurityAssociationParameters) SetEncryptionAlgorithm(encryptionAlgorithm raw.NEVPNIKEv2EncryptionAlgorithm) {
-	x.inner.SetEncryptionAlgorithm(encryptionAlgorithm)
+func (x *NEVPNIKEv2SecurityAssociationParameters) SetEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) {
+	x.inner.SetEncryptionAlgorithm(raw.NEVPNIKEv2EncryptionAlgorithm(encryptionAlgorithm))
 }
 
 // IntegrityAlgorithm calls the underlying IntegrityAlgorithm.
-func (x *NEVPNIKEv2SecurityAssociationParameters) IntegrityAlgorithm() raw.NEVPNIKEv2IntegrityAlgorithm {
-	return x.inner.IntegrityAlgorithm()
+func (x *NEVPNIKEv2SecurityAssociationParameters) IntegrityAlgorithm() NEVPNIKEv2IntegrityAlgorithm {
+	return NEVPNIKEv2IntegrityAlgorithm(x.inner.IntegrityAlgorithm())
 }
 
 // SetIntegrityAlgorithm calls the underlying SetIntegrityAlgorithm.
-func (x *NEVPNIKEv2SecurityAssociationParameters) SetIntegrityAlgorithm(integrityAlgorithm raw.NEVPNIKEv2IntegrityAlgorithm) {
-	x.inner.SetIntegrityAlgorithm(integrityAlgorithm)
+func (x *NEVPNIKEv2SecurityAssociationParameters) SetIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) {
+	x.inner.SetIntegrityAlgorithm(raw.NEVPNIKEv2IntegrityAlgorithm(integrityAlgorithm))
 }
 
 // DiffieHellmanGroup calls the underlying DiffieHellmanGroup.
-func (x *NEVPNIKEv2SecurityAssociationParameters) DiffieHellmanGroup() raw.NEVPNIKEv2DiffieHellmanGroup {
-	return x.inner.DiffieHellmanGroup()
+func (x *NEVPNIKEv2SecurityAssociationParameters) DiffieHellmanGroup() NEVPNIKEv2DiffieHellmanGroup {
+	return NEVPNIKEv2DiffieHellmanGroup(x.inner.DiffieHellmanGroup())
 }
 
 // SetDiffieHellmanGroup calls the underlying SetDiffieHellmanGroup.
-func (x *NEVPNIKEv2SecurityAssociationParameters) SetDiffieHellmanGroup(diffieHellmanGroup raw.NEVPNIKEv2DiffieHellmanGroup) {
-	x.inner.SetDiffieHellmanGroup(diffieHellmanGroup)
+func (x *NEVPNIKEv2SecurityAssociationParameters) SetDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) {
+	x.inner.SetDiffieHellmanGroup(raw.NEVPNIKEv2DiffieHellmanGroup(diffieHellmanGroup))
 }
 
 // PostQuantumKeyExchangeMethods returns the collection as a Go slice.
@@ -141,17 +141,17 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) SetLifetimeMinutes(lifetimeMin
 // NEVPNIKEv2SecurityAssociationParametersable is the interface implemented by [NEVPNIKEv2SecurityAssociationParameters], for mocking and DI.
 type NEVPNIKEv2SecurityAssociationParametersable interface {
 	Unwrap() *raw.NEVPNIKEv2SecurityAssociationParameters
-	WithEncryptionAlgorithm(encryptionAlgorithm raw.NEVPNIKEv2EncryptionAlgorithm) *NEVPNIKEv2SecurityAssociationParameters
-	WithIntegrityAlgorithm(integrityAlgorithm raw.NEVPNIKEv2IntegrityAlgorithm) *NEVPNIKEv2SecurityAssociationParameters
-	WithDiffieHellmanGroup(diffieHellmanGroup raw.NEVPNIKEv2DiffieHellmanGroup) *NEVPNIKEv2SecurityAssociationParameters
+	WithEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) *NEVPNIKEv2SecurityAssociationParameters
+	WithIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) *NEVPNIKEv2SecurityAssociationParameters
+	WithDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) *NEVPNIKEv2SecurityAssociationParameters
 	WithPostQuantumKeyExchangeMethods(items ...*foundation.NSNumber) *NEVPNIKEv2SecurityAssociationParameters
 	WithLifetimeMinutes(lifetimeMinutes int32) *NEVPNIKEv2SecurityAssociationParameters
-	EncryptionAlgorithm() raw.NEVPNIKEv2EncryptionAlgorithm
-	SetEncryptionAlgorithm(encryptionAlgorithm raw.NEVPNIKEv2EncryptionAlgorithm)
-	IntegrityAlgorithm() raw.NEVPNIKEv2IntegrityAlgorithm
-	SetIntegrityAlgorithm(integrityAlgorithm raw.NEVPNIKEv2IntegrityAlgorithm)
-	DiffieHellmanGroup() raw.NEVPNIKEv2DiffieHellmanGroup
-	SetDiffieHellmanGroup(diffieHellmanGroup raw.NEVPNIKEv2DiffieHellmanGroup)
+	EncryptionAlgorithm() NEVPNIKEv2EncryptionAlgorithm
+	SetEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm)
+	IntegrityAlgorithm() NEVPNIKEv2IntegrityAlgorithm
+	SetIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm)
+	DiffieHellmanGroup() NEVPNIKEv2DiffieHellmanGroup
+	SetDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup)
 	PostQuantumKeyExchangeMethods() []*foundation.NSNumber
 	SetPostQuantumKeyExchangeMethods(postQuantumKeyExchangeMethods *foundation.NSArray[*foundation.NSNumber])
 	LifetimeMinutes() int32

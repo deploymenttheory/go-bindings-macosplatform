@@ -43,8 +43,8 @@ func (x *CollectionList) CollectionListType() raw.PHCollectionListType {
 }
 
 // CollectionListSubtype calls the underlying CollectionListSubtype.
-func (x *CollectionList) CollectionListSubtype() raw.PHCollectionListSubtype {
-	return x.inner.CollectionListSubtype()
+func (x *CollectionList) CollectionListSubtype() PHCollectionListSubtype {
+	return PHCollectionListSubtype(x.inner.CollectionListSubtype())
 }
 
 // StartDate calls the underlying StartDate.
@@ -76,7 +76,7 @@ func (x *CollectionList) asObject() *raw.PHObject { return &x.inner.PHCollection
 type CollectionListable interface {
 	Unwrap() *raw.PHCollectionList
 	CollectionListType() raw.PHCollectionListType
-	CollectionListSubtype() raw.PHCollectionListSubtype
+	CollectionListSubtype() PHCollectionListSubtype
 	StartDate() *foundation.NSDate
 	EndDate() *foundation.NSDate
 	LocalizedLocationNames() []string

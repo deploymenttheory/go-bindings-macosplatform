@@ -49,8 +49,8 @@ func (x *Pass) LocalizedValueForFieldKey(key string) objc.ID {
 }
 
 // PassType calls the underlying PassType.
-func (x *Pass) PassType() raw.PKPassType {
-	return x.inner.PassType()
+func (x *Pass) PassType() PKPassType {
+	return PKPassType(x.inner.PassType())
 }
 
 // PaymentPass calls the underlying PaymentPass.
@@ -176,7 +176,7 @@ func (x *Pass) asPass() *raw.PKPass { return x.inner }
 type Passable interface {
 	Unwrap() *raw.PKPass
 	LocalizedValueForFieldKey(key string) objc.ID
-	PassType() raw.PKPassType
+	PassType() PKPassType
 	PaymentPass() *PaymentPass
 	SecureElementPass() *SecureElementPass
 	SerialNumber() string

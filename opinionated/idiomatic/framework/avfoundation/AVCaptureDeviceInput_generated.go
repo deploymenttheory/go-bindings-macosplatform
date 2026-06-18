@@ -50,8 +50,8 @@ func (x *CaptureDeviceInput) WithActiveLockedVideoFrameDuration(activeLockedVide
 }
 
 // WithMultichannelAudioMode sets the multichannelAudioMode property and returns the receiver for chaining.
-func (x *CaptureDeviceInput) WithMultichannelAudioMode(multichannelAudioMode raw.AVCaptureMultichannelAudioMode) *CaptureDeviceInput {
-	x.inner.SetMultichannelAudioMode(multichannelAudioMode)
+func (x *CaptureDeviceInput) WithMultichannelAudioMode(multichannelAudioMode AVCaptureMultichannelAudioMode) *CaptureDeviceInput {
+	x.inner.SetMultichannelAudioMode(raw.AVCaptureMultichannelAudioMode(multichannelAudioMode))
 	return x
 }
 
@@ -90,8 +90,8 @@ func (x *CaptureDeviceInput) UnfollowExternalSyncDevice() {
 }
 
 // IsMultichannelAudioModeSupported calls the underlying IsMultichannelAudioModeSupported.
-func (x *CaptureDeviceInput) IsMultichannelAudioModeSupported(multichannelAudioMode raw.AVCaptureMultichannelAudioMode) bool {
-	return x.inner.IsMultichannelAudioModeSupported(multichannelAudioMode)
+func (x *CaptureDeviceInput) IsMultichannelAudioModeSupported(multichannelAudioMode AVCaptureMultichannelAudioMode) bool {
+	return x.inner.IsMultichannelAudioModeSupported(raw.AVCaptureMultichannelAudioMode(multichannelAudioMode))
 }
 
 // Device calls the underlying Device.
@@ -138,13 +138,13 @@ func (x *CaptureDeviceInput) ExternalSyncDevice() *ExternalSyncDevice {
 }
 
 // MultichannelAudioMode calls the underlying MultichannelAudioMode.
-func (x *CaptureDeviceInput) MultichannelAudioMode() raw.AVCaptureMultichannelAudioMode {
-	return x.inner.MultichannelAudioMode()
+func (x *CaptureDeviceInput) MultichannelAudioMode() AVCaptureMultichannelAudioMode {
+	return AVCaptureMultichannelAudioMode(x.inner.MultichannelAudioMode())
 }
 
 // SetMultichannelAudioMode calls the underlying SetMultichannelAudioMode.
-func (x *CaptureDeviceInput) SetMultichannelAudioMode(multichannelAudioMode raw.AVCaptureMultichannelAudioMode) {
-	x.inner.SetMultichannelAudioMode(multichannelAudioMode)
+func (x *CaptureDeviceInput) SetMultichannelAudioMode(multichannelAudioMode AVCaptureMultichannelAudioMode) {
+	x.inner.SetMultichannelAudioMode(raw.AVCaptureMultichannelAudioMode(multichannelAudioMode))
 }
 
 // IsWindNoiseRemovalSupported calls the underlying IsWindNoiseRemovalSupported.
@@ -208,14 +208,14 @@ func (x *CaptureDeviceInput) asCaptureInput() *raw.AVCaptureInput { return &x.in
 type CaptureDeviceInputable interface {
 	Unwrap() *raw.AVCaptureDeviceInput
 	WithActiveLockedVideoFrameDuration(activeLockedVideoFrameDuration coremedia.CMTime) *CaptureDeviceInput
-	WithMultichannelAudioMode(multichannelAudioMode raw.AVCaptureMultichannelAudioMode) *CaptureDeviceInput
+	WithMultichannelAudioMode(multichannelAudioMode AVCaptureMultichannelAudioMode) *CaptureDeviceInput
 	WithWindNoiseRemovalEnabled(windNoiseRemovalEnabled bool) *CaptureDeviceInput
 	WithAudioZoomEnabled(audioZoomEnabled bool) *CaptureDeviceInput
 	WithCinematicVideoCaptureEnabled(cinematicVideoCaptureEnabled bool) *CaptureDeviceInput
 	WithSimulatedAperture(simulatedAperture float32) *CaptureDeviceInput
 	FollowExternalSyncDeviceVideoFrameDurationDelegate(externalSyncDevice *raw.AVExternalSyncDevice, frameDuration coremedia.CMTime, delegate raw.AVExternalSyncDeviceDelegate)
 	UnfollowExternalSyncDevice()
-	IsMultichannelAudioModeSupported(multichannelAudioMode raw.AVCaptureMultichannelAudioMode) bool
+	IsMultichannelAudioModeSupported(multichannelAudioMode AVCaptureMultichannelAudioMode) bool
 	Device() *CaptureDevice
 	IsLockedVideoFrameDurationSupported() bool
 	ActiveLockedVideoFrameDuration() coremedia.CMTime
@@ -223,8 +223,8 @@ type CaptureDeviceInputable interface {
 	IsExternalSyncSupported() bool
 	ActiveExternalSyncVideoFrameDuration() coremedia.CMTime
 	ExternalSyncDevice() *ExternalSyncDevice
-	MultichannelAudioMode() raw.AVCaptureMultichannelAudioMode
-	SetMultichannelAudioMode(multichannelAudioMode raw.AVCaptureMultichannelAudioMode)
+	MultichannelAudioMode() AVCaptureMultichannelAudioMode
+	SetMultichannelAudioMode(multichannelAudioMode AVCaptureMultichannelAudioMode)
 	IsWindNoiseRemovalSupported() bool
 	IsWindNoiseRemovalEnabled() bool
 	SetWindNoiseRemovalEnabled(windNoiseRemovalEnabled bool)

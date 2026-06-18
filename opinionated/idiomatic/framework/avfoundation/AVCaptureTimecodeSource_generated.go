@@ -47,8 +47,8 @@ func (x *CaptureTimecodeSource) DisplayName() string {
 }
 
 // Type calls the underlying Type.
-func (x *CaptureTimecodeSource) Type() raw.AVCaptureTimecodeSourceType {
-	return x.inner.Type()
+func (x *CaptureTimecodeSource) Type() AVCaptureTimecodeSourceType {
+	return AVCaptureTimecodeSourceType(x.inner.Type())
 }
 
 // Uuid calls the underlying Uuid.
@@ -60,7 +60,7 @@ func (x *CaptureTimecodeSource) Uuid() *foundation.NSUUID {
 type CaptureTimecodeSourceable interface {
 	Unwrap() *raw.AVCaptureTimecodeSource
 	DisplayName() string
-	Type() raw.AVCaptureTimecodeSourceType
+	Type() AVCaptureTimecodeSourceType
 	Uuid() *foundation.NSUUID
 }
 

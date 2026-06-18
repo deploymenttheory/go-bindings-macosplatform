@@ -146,8 +146,8 @@ func AutomaticWithPresentationViewController(presentationViewController *appkit.
 }
 
 // CalloutWithCalloutStyle calls the underlying MKMapItemDetailSelectionAccessoryPresentationStyleCalloutWithCalloutStyle.
-func CalloutWithCalloutStyle(style raw.MKMapItemDetailSelectionAccessoryCalloutStyle) *MapItemDetailSelectionAccessoryPresentationStyle {
-	_r := raw.MKMapItemDetailSelectionAccessoryPresentationStyleCalloutWithCalloutStyle(style)
+func CalloutWithCalloutStyle(style MKMapItemDetailSelectionAccessoryCalloutStyle) *MapItemDetailSelectionAccessoryPresentationStyle {
+	_r := raw.MKMapItemDetailSelectionAccessoryPresentationStyleCalloutWithCalloutStyle(raw.MKMapItemDetailSelectionAccessoryCalloutStyle(style))
 	if _r == nil {
 		return nil
 	}

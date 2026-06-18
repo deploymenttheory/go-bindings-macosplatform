@@ -47,8 +47,8 @@ func NewCNNFullyConnectedGradientWithCoderDevice(aDecoder *foundation.NSCoder, d
 }
 
 // WithGradientOption sets the gradientOption property and returns the receiver for chaining.
-func (x *CNNFullyConnectedGradient) WithGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) *CNNFullyConnectedGradient {
-	x.inner.MPSCNNConvolutionGradient.SetGradientOption(gradientOption)
+func (x *CNNFullyConnectedGradient) WithGradientOption(gradientOption MPSCNNConvolutionGradientOption) *CNNFullyConnectedGradient {
+	x.inner.MPSCNNConvolutionGradient.SetGradientOption(raw.MPSCNNConvolutionGradientOption(gradientOption))
 	return x
 }
 
@@ -181,7 +181,7 @@ func (x *CNNFullyConnectedGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel 
 // CNNFullyConnectedGradientable is the interface implemented by [CNNFullyConnectedGradient], for mocking and DI.
 type CNNFullyConnectedGradientable interface {
 	Unwrap() *raw.MPSCNNFullyConnectedGradient
-	WithGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) *CNNFullyConnectedGradient
+	WithGradientOption(gradientOption MPSCNNConvolutionGradientOption) *CNNFullyConnectedGradient
 	WithSerializeWeightsAndBiases(serializeWeightsAndBiases bool) *CNNFullyConnectedGradient
 	WithKernelOffsetX(kernelOffsetX int) *CNNFullyConnectedGradient
 	WithKernelOffsetY(kernelOffsetY int) *CNNFullyConnectedGradient

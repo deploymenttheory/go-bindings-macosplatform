@@ -109,13 +109,13 @@ func (x *CNNConvolutionDescriptor) SetBatchNormalizationParametersForInferenceWi
 }
 
 // SetNeuronTypeParameterAParameterB calls the underlying SetNeuronTypeParameterAParameterB.
-func (x *CNNConvolutionDescriptor) SetNeuronTypeParameterAParameterB(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32) {
-	x.inner.SetNeuronTypeParameterAParameterB(neuronType, parameterA, parameterB)
+func (x *CNNConvolutionDescriptor) SetNeuronTypeParameterAParameterB(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32) {
+	x.inner.SetNeuronTypeParameterAParameterB(raw.MPSCNNNeuronType(neuronType), parameterA, parameterB)
 }
 
 // NeuronType calls the underlying NeuronType.
-func (x *CNNConvolutionDescriptor) NeuronType() raw.MPSCNNNeuronType {
-	return x.inner.NeuronType()
+func (x *CNNConvolutionDescriptor) NeuronType() MPSCNNNeuronType {
+	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
 // NeuronParameterA calls the underlying NeuronParameterA.
@@ -266,8 +266,8 @@ type CNNConvolutionDescriptorable interface {
 	WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNConvolutionDescriptor
 	EncodeWithCoder(aCoder *foundation.NSCoder)
 	SetBatchNormalizationParametersForInferenceWithMeanVarianceGammaBetaEpsilon(mean *float32, variance *float32, gamma *float32, beta *float32, epsilon unsafe.Pointer)
-	SetNeuronTypeParameterAParameterB(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32)
-	NeuronType() raw.MPSCNNNeuronType
+	SetNeuronTypeParameterAParameterB(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32)
+	NeuronType() MPSCNNNeuronType
 	NeuronParameterA() float32
 	NeuronParameterB() float32
 	SetNeuronToPReLUWithParametersA(a *foundation.NSData)

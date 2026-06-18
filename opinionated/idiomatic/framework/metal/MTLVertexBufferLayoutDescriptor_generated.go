@@ -42,8 +42,8 @@ func (x *VertexBufferLayoutDescriptor) WithStride(stride uint) *VertexBufferLayo
 }
 
 // WithStepFunction sets the stepFunction property and returns the receiver for chaining.
-func (x *VertexBufferLayoutDescriptor) WithStepFunction(stepFunction raw.MTLVertexStepFunction) *VertexBufferLayoutDescriptor {
-	x.inner.SetStepFunction(stepFunction)
+func (x *VertexBufferLayoutDescriptor) WithStepFunction(stepFunction MTLVertexStepFunction) *VertexBufferLayoutDescriptor {
+	x.inner.SetStepFunction(raw.MTLVertexStepFunction(stepFunction))
 	return x
 }
 
@@ -64,13 +64,13 @@ func (x *VertexBufferLayoutDescriptor) SetStride(stride uint) {
 }
 
 // StepFunction calls the underlying StepFunction.
-func (x *VertexBufferLayoutDescriptor) StepFunction() raw.MTLVertexStepFunction {
-	return x.inner.StepFunction()
+func (x *VertexBufferLayoutDescriptor) StepFunction() MTLVertexStepFunction {
+	return MTLVertexStepFunction(x.inner.StepFunction())
 }
 
 // SetStepFunction calls the underlying SetStepFunction.
-func (x *VertexBufferLayoutDescriptor) SetStepFunction(stepFunction raw.MTLVertexStepFunction) {
-	x.inner.SetStepFunction(stepFunction)
+func (x *VertexBufferLayoutDescriptor) SetStepFunction(stepFunction MTLVertexStepFunction) {
+	x.inner.SetStepFunction(raw.MTLVertexStepFunction(stepFunction))
 }
 
 // StepRate calls the underlying StepRate.
@@ -87,12 +87,12 @@ func (x *VertexBufferLayoutDescriptor) SetStepRate(stepRate uint) {
 type VertexBufferLayoutDescriptorable interface {
 	Unwrap() *raw.MTLVertexBufferLayoutDescriptor
 	WithStride(stride uint) *VertexBufferLayoutDescriptor
-	WithStepFunction(stepFunction raw.MTLVertexStepFunction) *VertexBufferLayoutDescriptor
+	WithStepFunction(stepFunction MTLVertexStepFunction) *VertexBufferLayoutDescriptor
 	WithStepRate(stepRate uint) *VertexBufferLayoutDescriptor
 	Stride() uint
 	SetStride(stride uint)
-	StepFunction() raw.MTLVertexStepFunction
-	SetStepFunction(stepFunction raw.MTLVertexStepFunction)
+	StepFunction() MTLVertexStepFunction
+	SetStepFunction(stepFunction MTLVertexStepFunction)
 	StepRate() uint
 	SetStepRate(stepRate uint)
 }

@@ -57,14 +57,14 @@ func (x *MutableCaption) WithRegion(region CaptionRegionProvider) *MutableCaptio
 }
 
 // WithTextAlignment sets the textAlignment property and returns the receiver for chaining.
-func (x *MutableCaption) WithTextAlignment(textAlignment raw.AVCaptionTextAlignment) *MutableCaption {
-	x.inner.SetTextAlignment(textAlignment)
+func (x *MutableCaption) WithTextAlignment(textAlignment AVCaptionTextAlignment) *MutableCaption {
+	x.inner.SetTextAlignment(raw.AVCaptionTextAlignment(textAlignment))
 	return x
 }
 
 // WithAnimation sets the animation property and returns the receiver for chaining.
-func (x *MutableCaption) WithAnimation(animation raw.AVCaptionAnimation) *MutableCaption {
-	x.inner.SetAnimation(animation)
+func (x *MutableCaption) WithAnimation(animation AVCaptionAnimation) *MutableCaption {
+	x.inner.SetAnimation(raw.AVCaptionAnimation(animation))
 	return x
 }
 
@@ -89,23 +89,23 @@ func (x *MutableCaption) SetBackgroundColorInRange(color unsafe.Pointer, range_ 
 }
 
 // SetFontWeightInRange calls the underlying SetFontWeightInRange.
-func (x *MutableCaption) SetFontWeightInRange(fontWeight raw.AVCaptionFontWeight, range_ foundation.NSRange) {
-	x.inner.SetFontWeightInRange(fontWeight, range_)
+func (x *MutableCaption) SetFontWeightInRange(fontWeight AVCaptionFontWeight, range_ foundation.NSRange) {
+	x.inner.SetFontWeightInRange(raw.AVCaptionFontWeight(fontWeight), range_)
 }
 
 // SetFontStyleInRange calls the underlying SetFontStyleInRange.
-func (x *MutableCaption) SetFontStyleInRange(fontStyle raw.AVCaptionFontStyle, range_ foundation.NSRange) {
-	x.inner.SetFontStyleInRange(fontStyle, range_)
+func (x *MutableCaption) SetFontStyleInRange(fontStyle AVCaptionFontStyle, range_ foundation.NSRange) {
+	x.inner.SetFontStyleInRange(raw.AVCaptionFontStyle(fontStyle), range_)
 }
 
 // SetDecorationInRange calls the underlying SetDecorationInRange.
-func (x *MutableCaption) SetDecorationInRange(decoration raw.AVCaptionDecoration, range_ foundation.NSRange) {
-	x.inner.SetDecorationInRange(decoration, range_)
+func (x *MutableCaption) SetDecorationInRange(decoration AVCaptionDecoration, range_ foundation.NSRange) {
+	x.inner.SetDecorationInRange(raw.AVCaptionDecoration(decoration), range_)
 }
 
 // SetTextCombineInRange calls the underlying SetTextCombineInRange.
-func (x *MutableCaption) SetTextCombineInRange(textCombine raw.AVCaptionTextCombine, range_ foundation.NSRange) {
-	x.inner.SetTextCombineInRange(textCombine, range_)
+func (x *MutableCaption) SetTextCombineInRange(textCombine AVCaptionTextCombine, range_ foundation.NSRange) {
+	x.inner.SetTextCombineInRange(raw.AVCaptionTextCombine(textCombine), range_)
 }
 
 // SetRubyInRange calls the underlying SetRubyInRange.
@@ -154,13 +154,13 @@ func (x *MutableCaption) SetRegion(region *raw.AVCaptionRegion) {
 }
 
 // SetTextAlignment calls the underlying SetTextAlignment.
-func (x *MutableCaption) SetTextAlignment(textAlignment raw.AVCaptionTextAlignment) {
-	x.inner.SetTextAlignment(textAlignment)
+func (x *MutableCaption) SetTextAlignment(textAlignment AVCaptionTextAlignment) {
+	x.inner.SetTextAlignment(raw.AVCaptionTextAlignment(textAlignment))
 }
 
 // SetAnimation calls the underlying SetAnimation.
-func (x *MutableCaption) SetAnimation(animation raw.AVCaptionAnimation) {
-	x.inner.SetAnimation(animation)
+func (x *MutableCaption) SetAnimation(animation AVCaptionAnimation) {
+	x.inner.SetAnimation(raw.AVCaptionAnimation(animation))
 }
 
 func (x *MutableCaption) asCaption() *raw.AVCaption { return &x.inner.AVCaption }
@@ -171,16 +171,16 @@ type MutableCaptionable interface {
 	WithText(text string) *MutableCaption
 	WithTimeRange(timeRange coremedia.CMTimeRange) *MutableCaption
 	WithRegion(region CaptionRegionProvider) *MutableCaption
-	WithTextAlignment(textAlignment raw.AVCaptionTextAlignment) *MutableCaption
-	WithAnimation(animation raw.AVCaptionAnimation) *MutableCaption
+	WithTextAlignment(textAlignment AVCaptionTextAlignment) *MutableCaption
+	WithAnimation(animation AVCaptionAnimation) *MutableCaption
 	SetText(text string)
 	SetTimeRange(timeRange coremedia.CMTimeRange)
 	SetTextColorInRange(color unsafe.Pointer, range_ foundation.NSRange)
 	SetBackgroundColorInRange(color unsafe.Pointer, range_ foundation.NSRange)
-	SetFontWeightInRange(fontWeight raw.AVCaptionFontWeight, range_ foundation.NSRange)
-	SetFontStyleInRange(fontStyle raw.AVCaptionFontStyle, range_ foundation.NSRange)
-	SetDecorationInRange(decoration raw.AVCaptionDecoration, range_ foundation.NSRange)
-	SetTextCombineInRange(textCombine raw.AVCaptionTextCombine, range_ foundation.NSRange)
+	SetFontWeightInRange(fontWeight AVCaptionFontWeight, range_ foundation.NSRange)
+	SetFontStyleInRange(fontStyle AVCaptionFontStyle, range_ foundation.NSRange)
+	SetDecorationInRange(decoration AVCaptionDecoration, range_ foundation.NSRange)
+	SetTextCombineInRange(textCombine AVCaptionTextCombine, range_ foundation.NSRange)
 	SetRubyInRange(ruby *raw.AVCaptionRuby, range_ foundation.NSRange)
 	RemoveTextColorInRange(range_ foundation.NSRange)
 	RemoveBackgroundColorInRange(range_ foundation.NSRange)
@@ -190,8 +190,8 @@ type MutableCaptionable interface {
 	RemoveTextCombineInRange(range_ foundation.NSRange)
 	RemoveRubyInRange(range_ foundation.NSRange)
 	SetRegion(region *raw.AVCaptionRegion)
-	SetTextAlignment(textAlignment raw.AVCaptionTextAlignment)
-	SetAnimation(animation raw.AVCaptionAnimation)
+	SetTextAlignment(textAlignment AVCaptionTextAlignment)
+	SetAnimation(animation AVCaptionAnimation)
 }
 
 var _ MutableCaptionable = (*MutableCaption)(nil)

@@ -119,8 +119,8 @@ func (x *Stepper) WithHighlighted(highlighted bool) *Stepper {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Stepper) WithControlSize(controlSize raw.NSControlSize) *Stepper {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *Stepper) WithControlSize(controlSize NSControlSize) *Stepper {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -185,20 +185,20 @@ func (x *Stepper) WithUsesSingleLineMode(usesSingleLineMode bool) *Stepper {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Stepper) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Stepper {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *Stepper) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Stepper {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Stepper) WithAlignment(alignment raw.NSTextAlignment) *Stepper {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *Stepper) WithAlignment(alignment NSTextAlignment) *Stepper {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Stepper) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Stepper {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *Stepper) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Stepper {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -251,8 +251,8 @@ func (x *Stepper) WithAutoresizesSubviews(autoresizesSubviews bool) *Stepper {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Stepper) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Stepper {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Stepper) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Stepper {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -311,14 +311,14 @@ func (x *Stepper) WithWantsRestingTouches(wantsRestingTouches bool) *Stepper {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Stepper) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Stepper {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Stepper) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Stepper {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Stepper) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Stepper {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Stepper) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Stepper {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -425,8 +425,8 @@ func (x *Stepper) WithToolTip(toolTip string) *Stepper {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Stepper) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Stepper {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Stepper) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Stepper {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -443,8 +443,8 @@ func (x *Stepper) WithNextKeyView(nextKeyView ViewProvider) *Stepper {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Stepper) WithFocusRingType(focusRingType raw.NSFocusRingType) *Stepper {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *Stepper) WithFocusRingType(focusRingType NSFocusRingType) *Stepper {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -467,8 +467,8 @@ func (x *Stepper) WithGestureRecognizers(items ...GestureRecognizerProvider) *St
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Stepper) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Stepper {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Stepper) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Stepper {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -628,7 +628,7 @@ type Stepperable interface {
 	WithEnabled(enabled bool) *Stepper
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Stepper
 	WithHighlighted(highlighted bool) *Stepper
-	WithControlSize(controlSize raw.NSControlSize) *Stepper
+	WithControlSize(controlSize NSControlSize) *Stepper
 	WithFormatter(formatter *foundation.NSFormatter) *Stepper
 	WithObjectValue(objectValue objc.ID) *Stepper
 	WithStringValue(stringValue string) *Stepper
@@ -639,16 +639,16 @@ type Stepperable interface {
 	WithDoubleValue(doubleValue float64) *Stepper
 	WithFont(font *Font) *Stepper
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Stepper
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Stepper
-	WithAlignment(alignment raw.NSTextAlignment) *Stepper
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Stepper
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Stepper
+	WithAlignment(alignment NSTextAlignment) *Stepper
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Stepper
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Stepper
 	WithCell(cell CellProvider) *Stepper
 	WithSubviews(items ...ViewProvider) *Stepper
 	WithHidden(hidden bool) *Stepper
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Stepper
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Stepper
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Stepper
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Stepper
 	WithFrame(frame corefoundation.CGRect) *Stepper
 	WithFrameRotation(frameRotation float64) *Stepper
 	WithFrameCenterRotation(frameCenterRotation float64) *Stepper
@@ -658,8 +658,8 @@ type Stepperable interface {
 	WithNeedsDisplay(needsDisplay bool) *Stepper
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Stepper
 	WithWantsRestingTouches(wantsRestingTouches bool) *Stepper
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Stepper
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Stepper
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Stepper
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Stepper
 	WithWantsLayer(wantsLayer bool) *Stepper
 	WithLayer(layer *quartzcore.CALayer) *Stepper
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Stepper
@@ -673,12 +673,12 @@ type Stepperable interface {
 	WithClipsToBounds(clipsToBounds bool) *Stepper
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Stepper
 	WithToolTip(toolTip string) *Stepper
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Stepper
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Stepper
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Stepper
 	WithNextKeyView(nextKeyView ViewProvider) *Stepper
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Stepper
+	WithFocusRingType(focusRingType NSFocusRingType) *Stepper
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Stepper
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Stepper
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Stepper
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Stepper
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Stepper
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Stepper

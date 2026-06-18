@@ -75,8 +75,8 @@ func (x *ContentSharingPicker) Present() {
 }
 
 // PresentPickerUsingContentStyle calls the underlying PresentPickerUsingContentStyle.
-func (x *ContentSharingPicker) PresentPickerUsingContentStyle(contentStyle raw.SCShareableContentStyle) {
-	x.inner.PresentPickerUsingContentStyle(contentStyle)
+func (x *ContentSharingPicker) PresentPickerUsingContentStyle(contentStyle SCShareableContentStyle) {
+	x.inner.PresentPickerUsingContentStyle(raw.SCShareableContentStyle(contentStyle))
 }
 
 // PresentPickerForStream calls the underlying PresentPickerForStream.
@@ -85,8 +85,8 @@ func (x *ContentSharingPicker) PresentPickerForStream(stream *raw.SCStream) {
 }
 
 // PresentPickerForStreamUsingContentStyle calls the underlying PresentPickerForStreamUsingContentStyle.
-func (x *ContentSharingPicker) PresentPickerForStreamUsingContentStyle(stream *raw.SCStream, contentStyle raw.SCShareableContentStyle) {
-	x.inner.PresentPickerForStreamUsingContentStyle(stream, contentStyle)
+func (x *ContentSharingPicker) PresentPickerForStreamUsingContentStyle(stream *raw.SCStream, contentStyle SCShareableContentStyle) {
+	x.inner.PresentPickerForStreamUsingContentStyle(stream, raw.SCShareableContentStyle(contentStyle))
 }
 
 // DefaultConfiguration calls the underlying DefaultConfiguration.
@@ -129,9 +129,9 @@ type ContentSharingPickerable interface {
 	RemoveObserver(observer raw.SCContentSharingPickerObserver)
 	SetConfigurationForStream(pickerConfig *raw.SCContentSharingPickerConfiguration[objc.ID], stream *raw.SCStream)
 	Present()
-	PresentPickerUsingContentStyle(contentStyle raw.SCShareableContentStyle)
+	PresentPickerUsingContentStyle(contentStyle SCShareableContentStyle)
 	PresentPickerForStream(stream *raw.SCStream)
-	PresentPickerForStreamUsingContentStyle(stream *raw.SCStream, contentStyle raw.SCShareableContentStyle)
+	PresentPickerForStreamUsingContentStyle(stream *raw.SCStream, contentStyle SCShareableContentStyle)
 	DefaultConfiguration() *raw.SCContentSharingPickerConfiguration[objc.ID]
 	SetDefaultConfiguration(defaultConfiguration *raw.SCContentSharingPickerConfiguration[objc.ID])
 	MaximumStreamCount() *foundation.NSNumber

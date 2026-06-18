@@ -79,8 +79,8 @@ func (x *NetService) Publish() {
 }
 
 // PublishWithOptions calls the underlying PublishWithOptions.
-func (x *NetService) PublishWithOptions(options raw.NSNetServiceOptions) {
-	x.inner.PublishWithOptions(options)
+func (x *NetService) PublishWithOptions(options NSNetServiceOptions) {
+	x.inner.PublishWithOptions(raw.NSNetServiceOptions(options))
 }
 
 // Resolve calls the underlying Resolve.
@@ -210,7 +210,7 @@ type NetServiceable interface {
 	ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
 	RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
 	Publish()
-	PublishWithOptions(options raw.NSNetServiceOptions)
+	PublishWithOptions(options NSNetServiceOptions)
 	Resolve()
 	Stop()
 	ResolveWithTimeout(timeout float64)

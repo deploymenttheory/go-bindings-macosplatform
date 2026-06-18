@@ -37,8 +37,8 @@ func NewActivitySummary() *ActivitySummary {
 }
 
 // WithActivityMoveMode sets the activityMoveMode property and returns the receiver for chaining.
-func (x *ActivitySummary) WithActivityMoveMode(activityMoveMode raw.HKActivityMoveMode) *ActivitySummary {
-	x.inner.SetActivityMoveMode(activityMoveMode)
+func (x *ActivitySummary) WithActivityMoveMode(activityMoveMode HKActivityMoveMode) *ActivitySummary {
+	x.inner.SetActivityMoveMode(raw.HKActivityMoveMode(activityMoveMode))
 	return x
 }
 
@@ -114,13 +114,13 @@ func (x *ActivitySummary) DateComponentsForCalendar(calendar *foundation.NSCalen
 }
 
 // ActivityMoveMode calls the underlying ActivityMoveMode.
-func (x *ActivitySummary) ActivityMoveMode() raw.HKActivityMoveMode {
-	return x.inner.ActivityMoveMode()
+func (x *ActivitySummary) ActivityMoveMode() HKActivityMoveMode {
+	return HKActivityMoveMode(x.inner.ActivityMoveMode())
 }
 
 // SetActivityMoveMode calls the underlying SetActivityMoveMode.
-func (x *ActivitySummary) SetActivityMoveMode(activityMoveMode raw.HKActivityMoveMode) {
-	x.inner.SetActivityMoveMode(activityMoveMode)
+func (x *ActivitySummary) SetActivityMoveMode(activityMoveMode HKActivityMoveMode) {
+	x.inner.SetActivityMoveMode(raw.HKActivityMoveMode(activityMoveMode))
 }
 
 // IsPaused calls the underlying IsPaused.
@@ -276,7 +276,7 @@ func (x *ActivitySummary) SetStandHoursGoal(standHoursGoal *raw.HKQuantity) {
 // ActivitySummaryable is the interface implemented by [ActivitySummary], for mocking and DI.
 type ActivitySummaryable interface {
 	Unwrap() *raw.HKActivitySummary
-	WithActivityMoveMode(activityMoveMode raw.HKActivityMoveMode) *ActivitySummary
+	WithActivityMoveMode(activityMoveMode HKActivityMoveMode) *ActivitySummary
 	WithPaused(paused bool) *ActivitySummary
 	WithActiveEnergyBurned(activeEnergyBurned *Quantity) *ActivitySummary
 	WithAppleMoveTime(appleMoveTime *Quantity) *ActivitySummary
@@ -289,8 +289,8 @@ type ActivitySummaryable interface {
 	WithAppleStandHoursGoal(appleStandHoursGoal *Quantity) *ActivitySummary
 	WithStandHoursGoal(standHoursGoal *Quantity) *ActivitySummary
 	DateComponentsForCalendar(calendar *foundation.NSCalendar) *foundation.NSDateComponents
-	ActivityMoveMode() raw.HKActivityMoveMode
-	SetActivityMoveMode(activityMoveMode raw.HKActivityMoveMode)
+	ActivityMoveMode() HKActivityMoveMode
+	SetActivityMoveMode(activityMoveMode HKActivityMoveMode)
 	IsPaused() bool
 	SetPaused(paused bool)
 	ActiveEnergyBurned() *Quantity

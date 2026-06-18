@@ -65,8 +65,8 @@ func (x *GlyphInfo) CharacterIdentifier() uint {
 }
 
 // CharacterCollection calls the underlying CharacterCollection.
-func (x *GlyphInfo) CharacterCollection() raw.NSCharacterCollection {
-	return x.inner.CharacterCollection()
+func (x *GlyphInfo) CharacterCollection() NSCharacterCollection {
+	return NSCharacterCollection(x.inner.CharacterCollection())
 }
 
 // GlyphInfoable is the interface implemented by [GlyphInfo], for mocking and DI.
@@ -76,7 +76,7 @@ type GlyphInfoable interface {
 	BaseString() string
 	GlyphName() string
 	CharacterIdentifier() uint
-	CharacterCollection() raw.NSCharacterCollection
+	CharacterCollection() NSCharacterCollection
 }
 
 var _ GlyphInfoable = (*GlyphInfo)(nil)

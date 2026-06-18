@@ -60,14 +60,14 @@ func (x *TableCellView) WithImageView(imageView *ImageView) *TableCellView {
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *TableCellView) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TableCellView {
-	x.inner.SetBackgroundStyle(backgroundStyle)
+func (x *TableCellView) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TableCellView {
+	x.inner.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithRowSizeStyle sets the rowSizeStyle property and returns the receiver for chaining.
-func (x *TableCellView) WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *TableCellView {
-	x.inner.SetRowSizeStyle(rowSizeStyle)
+func (x *TableCellView) WithRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) *TableCellView {
+	x.inner.SetRowSizeStyle(raw.NSTableViewRowSizeStyle(rowSizeStyle))
 	return x
 }
 
@@ -108,8 +108,8 @@ func (x *TableCellView) WithAutoresizesSubviews(autoresizesSubviews bool) *Table
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TableCellView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableCellView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *TableCellView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TableCellView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -168,14 +168,14 @@ func (x *TableCellView) WithWantsRestingTouches(wantsRestingTouches bool) *Table
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *TableCellView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableCellView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *TableCellView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TableCellView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *TableCellView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableCellView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *TableCellView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TableCellView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -282,8 +282,8 @@ func (x *TableCellView) WithToolTip(toolTip string) *TableCellView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TableCellView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableCellView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TableCellView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableCellView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -300,8 +300,8 @@ func (x *TableCellView) WithNextKeyView(nextKeyView ViewProvider) *TableCellView
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TableCellView) WithFocusRingType(focusRingType raw.NSFocusRingType) *TableCellView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *TableCellView) WithFocusRingType(focusRingType NSFocusRingType) *TableCellView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -324,8 +324,8 @@ func (x *TableCellView) WithGestureRecognizers(items ...GestureRecognizerProvide
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *TableCellView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableCellView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *TableCellView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TableCellView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -452,23 +452,23 @@ func (x *TableCellView) SetImageView(imageView *raw.NSImageView) {
 }
 
 // BackgroundStyle calls the underlying BackgroundStyle.
-func (x *TableCellView) BackgroundStyle() raw.NSBackgroundStyle {
-	return x.inner.BackgroundStyle()
+func (x *TableCellView) BackgroundStyle() NSBackgroundStyle {
+	return NSBackgroundStyle(x.inner.BackgroundStyle())
 }
 
 // SetBackgroundStyle calls the underlying SetBackgroundStyle.
-func (x *TableCellView) SetBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) {
-	x.inner.SetBackgroundStyle(backgroundStyle)
+func (x *TableCellView) SetBackgroundStyle(backgroundStyle NSBackgroundStyle) {
+	x.inner.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 }
 
 // RowSizeStyle calls the underlying RowSizeStyle.
-func (x *TableCellView) RowSizeStyle() raw.NSTableViewRowSizeStyle {
-	return x.inner.RowSizeStyle()
+func (x *TableCellView) RowSizeStyle() NSTableViewRowSizeStyle {
+	return NSTableViewRowSizeStyle(x.inner.RowSizeStyle())
 }
 
 // SetRowSizeStyle calls the underlying SetRowSizeStyle.
-func (x *TableCellView) SetRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) {
-	x.inner.SetRowSizeStyle(rowSizeStyle)
+func (x *TableCellView) SetRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) {
+	x.inner.SetRowSizeStyle(raw.NSTableViewRowSizeStyle(rowSizeStyle))
 }
 
 // DraggingImageComponents returns the collection as a Go slice.
@@ -492,13 +492,13 @@ type TableCellViewable interface {
 	WithObjectValue(objectValue objc.ID) *TableCellView
 	WithTextField(textField TextFieldProvider) *TableCellView
 	WithImageView(imageView *ImageView) *TableCellView
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TableCellView
-	WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *TableCellView
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TableCellView
+	WithRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) *TableCellView
 	WithSubviews(items ...ViewProvider) *TableCellView
 	WithHidden(hidden bool) *TableCellView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableCellView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TableCellView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TableCellView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TableCellView
 	WithFrame(frame corefoundation.CGRect) *TableCellView
 	WithFrameRotation(frameRotation float64) *TableCellView
 	WithFrameCenterRotation(frameCenterRotation float64) *TableCellView
@@ -508,8 +508,8 @@ type TableCellViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *TableCellView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableCellView
 	WithWantsRestingTouches(wantsRestingTouches bool) *TableCellView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TableCellView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TableCellView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TableCellView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TableCellView
 	WithWantsLayer(wantsLayer bool) *TableCellView
 	WithLayer(layer *quartzcore.CALayer) *TableCellView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableCellView
@@ -523,12 +523,12 @@ type TableCellViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *TableCellView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableCellView
 	WithToolTip(toolTip string) *TableCellView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableCellView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableCellView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableCellView
 	WithNextKeyView(nextKeyView ViewProvider) *TableCellView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TableCellView
+	WithFocusRingType(focusRingType NSFocusRingType) *TableCellView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TableCellView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TableCellView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TableCellView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableCellView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableCellView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableCellView
@@ -549,10 +549,10 @@ type TableCellViewable interface {
 	SetTextField(textField *raw.NSTextField)
 	ImageView() *ImageView
 	SetImageView(imageView *raw.NSImageView)
-	BackgroundStyle() raw.NSBackgroundStyle
-	SetBackgroundStyle(backgroundStyle raw.NSBackgroundStyle)
-	RowSizeStyle() raw.NSTableViewRowSizeStyle
-	SetRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle)
+	BackgroundStyle() NSBackgroundStyle
+	SetBackgroundStyle(backgroundStyle NSBackgroundStyle)
+	RowSizeStyle() NSTableViewRowSizeStyle
+	SetRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle)
 	DraggingImageComponents() []*DraggingImageComponent
 }
 

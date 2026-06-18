@@ -36,8 +36,8 @@ func NewPhysicsBody() *PhysicsBody {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *PhysicsBody) WithType(type_ raw.SCNPhysicsBodyType) *PhysicsBody {
-	x.inner.SetType(type_)
+func (x *PhysicsBody) WithType(type_ SCNPhysicsBodyType) *PhysicsBody {
+	x.inner.SetType(raw.SCNPhysicsBodyType(type_))
 	return x
 }
 
@@ -210,13 +210,13 @@ func (x *PhysicsBody) SetResting(resting bool) {
 }
 
 // Type calls the underlying Type.
-func (x *PhysicsBody) Type() raw.SCNPhysicsBodyType {
-	return x.inner.Type()
+func (x *PhysicsBody) Type() SCNPhysicsBodyType {
+	return SCNPhysicsBodyType(x.inner.Type())
 }
 
 // SetType calls the underlying SetType.
-func (x *PhysicsBody) SetType(type_ raw.SCNPhysicsBodyType) {
-	x.inner.SetType(type_)
+func (x *PhysicsBody) SetType(type_ SCNPhysicsBodyType) {
+	x.inner.SetType(raw.SCNPhysicsBodyType(type_))
 }
 
 // Mass calls the underlying Mass.
@@ -461,7 +461,7 @@ func (x *PhysicsBody) SetAngularRestingThreshold(angularRestingThreshold float64
 // PhysicsBodyable is the interface implemented by [PhysicsBody], for mocking and DI.
 type PhysicsBodyable interface {
 	Unwrap() *raw.SCNPhysicsBody
-	WithType(type_ raw.SCNPhysicsBodyType) *PhysicsBody
+	WithType(type_ SCNPhysicsBodyType) *PhysicsBody
 	WithMass(mass float64) *PhysicsBody
 	WithMomentOfInertia(momentOfInertia raw.SCNVector3) *PhysicsBody
 	WithUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) *PhysicsBody
@@ -491,8 +491,8 @@ type PhysicsBodyable interface {
 	ClearAllForces()
 	ResetTransform()
 	SetResting(resting bool)
-	Type() raw.SCNPhysicsBodyType
-	SetType(type_ raw.SCNPhysicsBodyType)
+	Type() SCNPhysicsBodyType
+	SetType(type_ SCNPhysicsBodyType)
 	Mass() float64
 	SetMass(mass float64)
 	MomentOfInertia() raw.SCNVector3

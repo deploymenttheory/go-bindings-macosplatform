@@ -37,8 +37,8 @@ func NewShareableContentInfo() *ShareableContentInfo {
 }
 
 // Style calls the underlying Style.
-func (x *ShareableContentInfo) Style() raw.SCShareableContentStyle {
-	return x.inner.Style()
+func (x *ShareableContentInfo) Style() SCShareableContentStyle {
+	return SCShareableContentStyle(x.inner.Style())
 }
 
 // PointPixelScale calls the underlying PointPixelScale.
@@ -54,7 +54,7 @@ func (x *ShareableContentInfo) ContentRect() corefoundation.CGRect {
 // ShareableContentInfoable is the interface implemented by [ShareableContentInfo], for mocking and DI.
 type ShareableContentInfoable interface {
 	Unwrap() *raw.SCShareableContentInfo
-	Style() raw.SCShareableContentStyle
+	Style() SCShareableContentStyle
 	PointPixelScale() float32
 	ContentRect() corefoundation.CGRect
 }

@@ -76,8 +76,8 @@ func (x *BrowserCell) WithControlView(controlView ViewProvider) *BrowserCell {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *BrowserCell) WithType(type_ raw.NSCellType) *BrowserCell {
-	x.inner.NSCell.SetType(type_)
+func (x *BrowserCell) WithType(type_ NSCellType) *BrowserCell {
+	x.inner.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -160,8 +160,8 @@ func (x *BrowserCell) WithHighlighted(highlighted bool) *BrowserCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *BrowserCell) WithAlignment(alignment raw.NSTextAlignment) *BrowserCell {
-	x.inner.NSCell.SetAlignment(alignment)
+func (x *BrowserCell) WithAlignment(alignment NSTextAlignment) *BrowserCell {
+	x.inner.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -226,8 +226,8 @@ func (x *BrowserCell) WithImage(image *Image) *BrowserCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *BrowserCell) WithControlSize(controlSize raw.NSControlSize) *BrowserCell {
-	x.inner.NSCell.SetControlSize(controlSize)
+func (x *BrowserCell) WithControlSize(controlSize NSControlSize) *BrowserCell {
+	x.inner.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -250,14 +250,14 @@ func (x *BrowserCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) 
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *BrowserCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *BrowserCell {
-	x.inner.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *BrowserCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *BrowserCell {
+	x.inner.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *BrowserCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *BrowserCell {
-	x.inner.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *BrowserCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *BrowserCell {
+	x.inner.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -274,8 +274,8 @@ func (x *BrowserCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *BrowserCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *BrowserCell {
-	x.inner.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *BrowserCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *BrowserCell {
+	x.inner.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -298,8 +298,8 @@ func (x *BrowserCell) WithShowsFirstResponder(showsFirstResponder bool) *Browser
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *BrowserCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *BrowserCell {
-	x.inner.NSCell.SetFocusRingType(focusRingType)
+func (x *BrowserCell) WithFocusRingType(focusRingType NSFocusRingType) *BrowserCell {
+	x.inner.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -328,14 +328,14 @@ func (x *BrowserCell) WithAllowsMixedState(allowsMixedState bool) *BrowserCell {
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *BrowserCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *BrowserCell {
-	x.inner.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *BrowserCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *BrowserCell {
+	x.inner.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *BrowserCell) WithControlTint(controlTint raw.NSControlTint) *BrowserCell {
-	x.inner.NSCell.SetControlTint(controlTint)
+func (x *BrowserCell) WithControlTint(controlTint NSControlTint) *BrowserCell {
+	x.inner.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -401,7 +401,7 @@ type BrowserCellable interface {
 	WithLoaded(loaded bool) *BrowserCell
 	WithAlternateImage(alternateImage *Image) *BrowserCell
 	WithControlView(controlView ViewProvider) *BrowserCell
-	WithType(type_ raw.NSCellType) *BrowserCell
+	WithType(type_ NSCellType) *BrowserCell
 	WithState(state int) *BrowserCell
 	WithTarget(target objc.ID) *BrowserCell
 	WithAction(action objc.SEL) *BrowserCell
@@ -415,7 +415,7 @@ type BrowserCellable interface {
 	WithBezeled(bezeled bool) *BrowserCell
 	WithScrollable(scrollable bool) *BrowserCell
 	WithHighlighted(highlighted bool) *BrowserCell
-	WithAlignment(alignment raw.NSTextAlignment) *BrowserCell
+	WithAlignment(alignment NSTextAlignment) *BrowserCell
 	WithWraps(wraps bool) *BrowserCell
 	WithFont(font *Font) *BrowserCell
 	WithFormatter(formatter *foundation.NSFormatter) *BrowserCell
@@ -426,25 +426,25 @@ type BrowserCellable interface {
 	WithDoubleValue(doubleValue float64) *BrowserCell
 	WithIntegerValue(integerValue int) *BrowserCell
 	WithImage(image *Image) *BrowserCell
-	WithControlSize(controlSize raw.NSControlSize) *BrowserCell
+	WithControlSize(controlSize NSControlSize) *BrowserCell
 	WithRepresentedObject(representedObject objc.ID) *BrowserCell
 	WithMenu(menu *Menu) *BrowserCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *BrowserCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *BrowserCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *BrowserCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *BrowserCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *BrowserCell
 	WithAllowsUndo(allowsUndo bool) *BrowserCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *BrowserCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *BrowserCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *BrowserCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *BrowserCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *BrowserCell
 	WithShowsFirstResponder(showsFirstResponder bool) *BrowserCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *BrowserCell
+	WithFocusRingType(focusRingType NSFocusRingType) *BrowserCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *BrowserCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *BrowserCell
 	WithImportsGraphics(importsGraphics bool) *BrowserCell
 	WithAllowsMixedState(allowsMixedState bool) *BrowserCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *BrowserCell
-	WithControlTint(controlTint raw.NSControlTint) *BrowserCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *BrowserCell
+	WithControlTint(controlTint NSControlTint) *BrowserCell
 	HighlightColorInView(controlView *raw.NSView) *Color
 	Reset()
 	Set()

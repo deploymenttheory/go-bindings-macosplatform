@@ -33,10 +33,10 @@ func FileWrapperFromID(id objc.ID) *FileWrapper {
 }
 
 // NewFileWrapperWithURLOptionsError creates a new [FileWrapper].
-func NewFileWrapperWithURLOptionsError(url string, options raw.NSFileWrapperReadingOptions) (*FileWrapper, error) {
+func NewFileWrapperWithURLOptionsError(url string, options NSFileWrapperReadingOptions) (*FileWrapper, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileWrapper")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), options, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), raw.NSFileWrapperReadingOptions(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -122,13 +122,13 @@ func (x *FileWrapper) MatchesContentsOfURL(url string) bool {
 }
 
 // ReadFromURLOptionsError calls the underlying ReadFromURLOptionsError.
-func (x *FileWrapper) ReadFromURLOptionsError(url string, options raw.NSFileWrapperReadingOptions) (bool, error) {
-	return x.inner.ReadFromURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+func (x *FileWrapper) ReadFromURLOptionsError(url string, options NSFileWrapperReadingOptions) (bool, error) {
+	return x.inner.ReadFromURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileWrapperReadingOptions(options))
 }
 
 // WriteToURLOptionsOriginalContentsURLError calls the underlying WriteToURLOptionsOriginalContentsURLError.
-func (x *FileWrapper) WriteToURLOptionsOriginalContentsURLError(url string, options raw.NSFileWrapperWritingOptions, originalContentsURL string) (bool, error) {
-	return x.inner.WriteToURLOptionsOriginalContentsURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(originalContentsURL)))
+func (x *FileWrapper) WriteToURLOptionsOriginalContentsURLError(url string, options NSFileWrapperWritingOptions, originalContentsURL string) (bool, error) {
+	return x.inner.WriteToURLOptionsOriginalContentsURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileWrapperWritingOptions(options), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(originalContentsURL)))
 }
 
 // AddFileWrapper calls the underlying AddFileWrapper.
@@ -300,8 +300,8 @@ type FileWrapperable interface {
 	WithFileAttributes(fileAttributes *raw.NSDictionary[*raw.NSString, objc.ID]) *FileWrapper
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileWrapper
 	MatchesContentsOfURL(url string) bool
-	ReadFromURLOptionsError(url string, options raw.NSFileWrapperReadingOptions) (bool, error)
-	WriteToURLOptionsOriginalContentsURLError(url string, options raw.NSFileWrapperWritingOptions, originalContentsURL string) (bool, error)
+	ReadFromURLOptionsError(url string, options NSFileWrapperReadingOptions) (bool, error)
+	WriteToURLOptionsOriginalContentsURLError(url string, options NSFileWrapperWritingOptions, originalContentsURL string) (bool, error)
 	AddFileWrapper(child *raw.NSFileWrapper) *String
 	AddRegularFileWithContentsPreferredFilename(data *raw.NSData, fileName string) *String
 	RemoveFileWrapper(child *raw.NSFileWrapper)

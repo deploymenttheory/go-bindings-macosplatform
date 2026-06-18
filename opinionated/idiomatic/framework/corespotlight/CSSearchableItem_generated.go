@@ -69,8 +69,8 @@ func (x *SearchableItem) WithIsUpdate(isUpdate bool) *SearchableItem {
 }
 
 // WithUpdateListenerOptions sets the updateListenerOptions property and returns the receiver for chaining.
-func (x *SearchableItem) WithUpdateListenerOptions(updateListenerOptions raw.CSSearchableItemUpdateListenerOptions) *SearchableItem {
-	x.inner.SetUpdateListenerOptions(updateListenerOptions)
+func (x *SearchableItem) WithUpdateListenerOptions(updateListenerOptions CSSearchableItemUpdateListenerOptions) *SearchableItem {
+	x.inner.SetUpdateListenerOptions(raw.CSSearchableItemUpdateListenerOptions(updateListenerOptions))
 	return x
 }
 
@@ -142,13 +142,13 @@ func (x *SearchableItem) SetIsUpdate(isUpdate bool) {
 }
 
 // UpdateListenerOptions calls the underlying UpdateListenerOptions.
-func (x *SearchableItem) UpdateListenerOptions() raw.CSSearchableItemUpdateListenerOptions {
-	return x.inner.UpdateListenerOptions()
+func (x *SearchableItem) UpdateListenerOptions() CSSearchableItemUpdateListenerOptions {
+	return CSSearchableItemUpdateListenerOptions(x.inner.UpdateListenerOptions())
 }
 
 // SetUpdateListenerOptions calls the underlying SetUpdateListenerOptions.
-func (x *SearchableItem) SetUpdateListenerOptions(updateListenerOptions raw.CSSearchableItemUpdateListenerOptions) {
-	x.inner.SetUpdateListenerOptions(updateListenerOptions)
+func (x *SearchableItem) SetUpdateListenerOptions(updateListenerOptions CSSearchableItemUpdateListenerOptions) {
+	x.inner.SetUpdateListenerOptions(raw.CSSearchableItemUpdateListenerOptions(updateListenerOptions))
 }
 
 // SearchableItemable is the interface implemented by [SearchableItem], for mocking and DI.
@@ -159,7 +159,7 @@ type SearchableItemable interface {
 	WithExpirationDate(expirationDate *foundation.NSDate) *SearchableItem
 	WithAttributeSet(attributeSet *SearchableItemAttributeSet) *SearchableItem
 	WithIsUpdate(isUpdate bool) *SearchableItem
-	WithUpdateListenerOptions(updateListenerOptions raw.CSSearchableItemUpdateListenerOptions) *SearchableItem
+	WithUpdateListenerOptions(updateListenerOptions CSSearchableItemUpdateListenerOptions) *SearchableItem
 	CompareByRank(other *raw.CSSearchableItem) foundation.NSComparisonResult
 	UniqueIdentifier() string
 	SetUniqueIdentifier(uniqueIdentifier string)
@@ -171,8 +171,8 @@ type SearchableItemable interface {
 	SetAttributeSet(attributeSet *raw.CSSearchableItemAttributeSet)
 	IsUpdate() bool
 	SetIsUpdate(isUpdate bool)
-	UpdateListenerOptions() raw.CSSearchableItemUpdateListenerOptions
-	SetUpdateListenerOptions(updateListenerOptions raw.CSSearchableItemUpdateListenerOptions)
+	UpdateListenerOptions() CSSearchableItemUpdateListenerOptions
+	SetUpdateListenerOptions(updateListenerOptions CSSearchableItemUpdateListenerOptions)
 }
 
 var _ SearchableItemable = (*SearchableItem)(nil)

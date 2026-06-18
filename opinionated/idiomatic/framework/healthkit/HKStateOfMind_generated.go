@@ -38,8 +38,8 @@ func NewStateOfMind() *StateOfMind {
 }
 
 // Kind calls the underlying Kind.
-func (x *StateOfMind) Kind() raw.HKStateOfMindKind {
-	return x.inner.Kind()
+func (x *StateOfMind) Kind() HKStateOfMindKind {
+	return HKStateOfMindKind(x.inner.Kind())
 }
 
 // Valence calls the underlying Valence.
@@ -48,8 +48,8 @@ func (x *StateOfMind) Valence() float64 {
 }
 
 // ValenceClassification calls the underlying ValenceClassification.
-func (x *StateOfMind) ValenceClassification() raw.HKStateOfMindValenceClassification {
-	return x.inner.ValenceClassification()
+func (x *StateOfMind) ValenceClassification() HKStateOfMindValenceClassification {
+	return HKStateOfMindValenceClassification(x.inner.ValenceClassification())
 }
 
 // Labels returns the collection as a Go slice.
@@ -81,9 +81,9 @@ func (x *StateOfMind) asObject() *raw.HKObject { return &x.inner.HKSample.HKObje
 // StateOfMindable is the interface implemented by [StateOfMind], for mocking and DI.
 type StateOfMindable interface {
 	Unwrap() *raw.HKStateOfMind
-	Kind() raw.HKStateOfMindKind
+	Kind() HKStateOfMindKind
 	Valence() float64
-	ValenceClassification() raw.HKStateOfMindValenceClassification
+	ValenceClassification() HKStateOfMindValenceClassification
 	Labels() []*foundation.NSNumber
 	Associations() []*foundation.NSNumber
 }

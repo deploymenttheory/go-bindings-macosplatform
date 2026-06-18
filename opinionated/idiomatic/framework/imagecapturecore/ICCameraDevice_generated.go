@@ -40,8 +40,8 @@ func NewCameraDevice() *CameraDevice {
 }
 
 // WithMediaPresentation sets the mediaPresentation property and returns the receiver for chaining.
-func (x *CameraDevice) WithMediaPresentation(mediaPresentation raw.ICMediaPresentation) *CameraDevice {
-	x.inner.SetMediaPresentation(mediaPresentation)
+func (x *CameraDevice) WithMediaPresentation(mediaPresentation ICMediaPresentation) *CameraDevice {
+	x.inner.SetMediaPresentation(raw.ICMediaPresentation(mediaPresentation))
 	return x
 }
 
@@ -180,13 +180,13 @@ func (x *CameraDevice) MountPoint() unsafe.Pointer {
 }
 
 // MediaPresentation calls the underlying MediaPresentation.
-func (x *CameraDevice) MediaPresentation() raw.ICMediaPresentation {
-	return x.inner.MediaPresentation()
+func (x *CameraDevice) MediaPresentation() ICMediaPresentation {
+	return ICMediaPresentation(x.inner.MediaPresentation())
 }
 
 // SetMediaPresentation calls the underlying SetMediaPresentation.
-func (x *CameraDevice) SetMediaPresentation(mediaPresentation raw.ICMediaPresentation) {
-	x.inner.SetMediaPresentation(mediaPresentation)
+func (x *CameraDevice) SetMediaPresentation(mediaPresentation ICMediaPresentation) {
+	x.inner.SetMediaPresentation(raw.ICMediaPresentation(mediaPresentation))
 }
 
 // TimeOffset calls the underlying TimeOffset.
@@ -240,7 +240,7 @@ func (x *CameraDevice) asDevice() *raw.ICDevice { return &x.inner.ICDevice }
 // CameraDeviceable is the interface implemented by [CameraDevice], for mocking and DI.
 type CameraDeviceable interface {
 	Unwrap() *raw.ICCameraDevice
-	WithMediaPresentation(mediaPresentation raw.ICMediaPresentation) *CameraDevice
+	WithMediaPresentation(mediaPresentation ICMediaPresentation) *CameraDevice
 	WithPtpEventHandler(ptpEventHandler func(*foundation.NSData)) *CameraDevice
 	WithDelegate(delegate raw.ICDeviceDelegate) *CameraDevice
 	FilesOfType(fileUTType string) *foundation.NSArray[*foundation.NSString]
@@ -265,8 +265,8 @@ type CameraDeviceable interface {
 	IsAccessRestrictedAppleDevice() bool
 	ICloudPhotosEnabled() bool
 	MountPoint() unsafe.Pointer
-	MediaPresentation() raw.ICMediaPresentation
-	SetMediaPresentation(mediaPresentation raw.ICMediaPresentation)
+	MediaPresentation() ICMediaPresentation
+	SetMediaPresentation(mediaPresentation ICMediaPresentation)
 	TimeOffset() float64
 	BatteryLevelAvailable() bool
 	BatteryLevel() uint

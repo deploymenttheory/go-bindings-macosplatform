@@ -35,10 +35,10 @@ func DiskBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *DiskBlockDeviceSt
 }
 
 // NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError creates a new [DiskBlockDeviceStorageDeviceAttachment].
-func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError(fileHandle *foundation.NSFileHandle, readOnly bool, synchronizationMode raw.VZDiskSynchronizationMode) (*DiskBlockDeviceStorageDeviceAttachment, error) {
+func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError(fileHandle *foundation.NSFileHandle, readOnly bool, synchronizationMode VZDiskSynchronizationMode) (*DiskBlockDeviceStorageDeviceAttachment, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDiskBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandle:readOnly:synchronizationMode:error:"), fileHandle.Ptr(), readOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandle:readOnly:synchronizationMode:error:"), fileHandle.Ptr(), readOnly, raw.VZDiskSynchronizationMode(synchronizationMode), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -56,8 +56,8 @@ func (x *DiskBlockDeviceStorageDeviceAttachment) IsReadOnly() bool {
 }
 
 // SynchronizationMode calls the underlying SynchronizationMode.
-func (x *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() raw.VZDiskSynchronizationMode {
-	return x.inner.SynchronizationMode()
+func (x *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() VZDiskSynchronizationMode {
+	return VZDiskSynchronizationMode(x.inner.SynchronizationMode())
 }
 
 func (x *DiskBlockDeviceStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment {
@@ -69,7 +69,7 @@ type DiskBlockDeviceStorageDeviceAttachmentable interface {
 	Unwrap() *raw.VZDiskBlockDeviceStorageDeviceAttachment
 	FileHandle() *foundation.NSFileHandle
 	IsReadOnly() bool
-	SynchronizationMode() raw.VZDiskSynchronizationMode
+	SynchronizationMode() VZDiskSynchronizationMode
 }
 
 var _ DiskBlockDeviceStorageDeviceAttachmentable = (*DiskBlockDeviceStorageDeviceAttachment)(nil)

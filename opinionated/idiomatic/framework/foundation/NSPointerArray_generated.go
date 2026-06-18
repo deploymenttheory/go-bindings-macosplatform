@@ -31,9 +31,9 @@ func PointerArrayFromID(id objc.ID) *PointerArray {
 }
 
 // NewPointerArrayWithOptions creates a new [PointerArray].
-func NewPointerArrayWithOptions(options raw.NSPointerFunctionsOptions) *PointerArray {
+func NewPointerArrayWithOptions(options NSPointerFunctionsOptions) *PointerArray {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPointerArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), raw.NSPointerFunctionsOptions(options))
 	return &PointerArray{inner: raw.NSPointerArrayFromID(_id)}
 }
 

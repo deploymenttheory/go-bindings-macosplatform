@@ -57,8 +57,8 @@ func (x *SpeechRecognizer) WithDelegate(delegate raw.SFSpeechRecognizerDelegate)
 }
 
 // WithDefaultTaskHint sets the defaultTaskHint property and returns the receiver for chaining.
-func (x *SpeechRecognizer) WithDefaultTaskHint(defaultTaskHint raw.SFSpeechRecognitionTaskHint) *SpeechRecognizer {
-	x.inner.SetDefaultTaskHint(defaultTaskHint)
+func (x *SpeechRecognizer) WithDefaultTaskHint(defaultTaskHint SFSpeechRecognitionTaskHint) *SpeechRecognizer {
+	x.inner.SetDefaultTaskHint(raw.SFSpeechRecognitionTaskHint(defaultTaskHint))
 	return x
 }
 
@@ -117,13 +117,13 @@ func (x *SpeechRecognizer) SetDelegate(delegate raw.SFSpeechRecognizerDelegate) 
 }
 
 // DefaultTaskHint calls the underlying DefaultTaskHint.
-func (x *SpeechRecognizer) DefaultTaskHint() raw.SFSpeechRecognitionTaskHint {
-	return x.inner.DefaultTaskHint()
+func (x *SpeechRecognizer) DefaultTaskHint() SFSpeechRecognitionTaskHint {
+	return SFSpeechRecognitionTaskHint(x.inner.DefaultTaskHint())
 }
 
 // SetDefaultTaskHint calls the underlying SetDefaultTaskHint.
-func (x *SpeechRecognizer) SetDefaultTaskHint(defaultTaskHint raw.SFSpeechRecognitionTaskHint) {
-	x.inner.SetDefaultTaskHint(defaultTaskHint)
+func (x *SpeechRecognizer) SetDefaultTaskHint(defaultTaskHint SFSpeechRecognitionTaskHint) {
+	x.inner.SetDefaultTaskHint(raw.SFSpeechRecognitionTaskHint(defaultTaskHint))
 }
 
 // Queue calls the underlying Queue.
@@ -141,7 +141,7 @@ type SpeechRecognizerable interface {
 	Unwrap() *raw.SFSpeechRecognizer
 	WithSupportsOnDeviceRecognition(supportsOnDeviceRecognition bool) *SpeechRecognizer
 	WithDelegate(delegate raw.SFSpeechRecognizerDelegate) *SpeechRecognizer
-	WithDefaultTaskHint(defaultTaskHint raw.SFSpeechRecognitionTaskHint) *SpeechRecognizer
+	WithDefaultTaskHint(defaultTaskHint SFSpeechRecognitionTaskHint) *SpeechRecognizer
 	WithQueue(queue *foundation.NSOperationQueue) *SpeechRecognizer
 	RecognitionTaskWithRequestResultHandler(request *raw.SFSpeechRecognitionRequest, resultHandler func(*raw.SFSpeechRecognitionResult, unsafe.Pointer)) *SpeechRecognitionTask
 	RecognitionTaskWithRequestDelegate(request *raw.SFSpeechRecognitionRequest, delegate raw.SFSpeechRecognitionTaskDelegate) *SpeechRecognitionTask
@@ -151,8 +151,8 @@ type SpeechRecognizerable interface {
 	SetSupportsOnDeviceRecognition(supportsOnDeviceRecognition bool)
 	Delegate() raw.SFSpeechRecognizerDelegate
 	SetDelegate(delegate raw.SFSpeechRecognizerDelegate)
-	DefaultTaskHint() raw.SFSpeechRecognitionTaskHint
-	SetDefaultTaskHint(defaultTaskHint raw.SFSpeechRecognitionTaskHint)
+	DefaultTaskHint() SFSpeechRecognitionTaskHint
+	SetDefaultTaskHint(defaultTaskHint SFSpeechRecognitionTaskHint)
 	Queue() *foundation.NSOperationQueue
 	SetQueue(queue *foundation.NSOperationQueue)
 }

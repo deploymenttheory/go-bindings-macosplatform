@@ -180,13 +180,13 @@ func CGImageMetadataTagCopyValue(tag unsafe.Pointer) unsafe.Pointer {
 }
 
 // CGImageMetadataTagCreate calls [raw.CGImageMetadataTagCreate] (C function CGImageMetadataTagCreate).
-func CGImageMetadataTagCreate(xmlns unsafe.Pointer, prefix unsafe.Pointer, name unsafe.Pointer, type_ raw.CGImageMetadataType, value unsafe.Pointer) unsafe.Pointer {
-	return raw.CGImageMetadataTagCreate(xmlns, prefix, name, type_, value)
+func CGImageMetadataTagCreate(xmlns unsafe.Pointer, prefix unsafe.Pointer, name unsafe.Pointer, type_ CGImageMetadataType, value unsafe.Pointer) unsafe.Pointer {
+	return raw.CGImageMetadataTagCreate(xmlns, prefix, name, raw.CGImageMetadataType(type_), value)
 }
 
 // CGImageMetadataTagGetType calls [raw.CGImageMetadataTagGetType] (C function CGImageMetadataTagGetType).
-func CGImageMetadataTagGetType(tag unsafe.Pointer) raw.CGImageMetadataType {
-	return raw.CGImageMetadataTagGetType(tag)
+func CGImageMetadataTagGetType(tag unsafe.Pointer) CGImageMetadataType {
+	return CGImageMetadataType(raw.CGImageMetadataTagGetType(tag))
 }
 
 // CGImageMetadataTagGetTypeID calls [raw.CGImageMetadataTagGetTypeID] (C function CGImageMetadataTagGetTypeID).
@@ -260,13 +260,13 @@ func CGImageSourceGetPrimaryImageIndex(isrc unsafe.Pointer) uint {
 }
 
 // CGImageSourceGetStatus calls [raw.CGImageSourceGetStatus] (C function CGImageSourceGetStatus).
-func CGImageSourceGetStatus(isrc unsafe.Pointer) raw.CGImageSourceStatus {
-	return raw.CGImageSourceGetStatus(isrc)
+func CGImageSourceGetStatus(isrc unsafe.Pointer) CGImageSourceStatus {
+	return CGImageSourceStatus(raw.CGImageSourceGetStatus(isrc))
 }
 
 // CGImageSourceGetStatusAtIndex calls [raw.CGImageSourceGetStatusAtIndex] (C function CGImageSourceGetStatusAtIndex).
-func CGImageSourceGetStatusAtIndex(isrc unsafe.Pointer, index uint) raw.CGImageSourceStatus {
-	return raw.CGImageSourceGetStatusAtIndex(isrc, index)
+func CGImageSourceGetStatusAtIndex(isrc unsafe.Pointer, index uint) CGImageSourceStatus {
+	return CGImageSourceStatus(raw.CGImageSourceGetStatusAtIndex(isrc, index))
 }
 
 // CGImageSourceGetType calls [raw.CGImageSourceGetType] (C function CGImageSourceGetType).

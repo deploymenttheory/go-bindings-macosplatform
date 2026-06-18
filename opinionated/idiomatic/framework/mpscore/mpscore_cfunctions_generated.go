@@ -12,8 +12,8 @@ import (
 )
 
 // MPSDataTypeBitsCount calls [raw.MPSDataTypeBitsCount] (C function MPSDataTypeBitsCount).
-func MPSDataTypeBitsCount(t raw.MPSDataType) uint {
-	return raw.MPSDataTypeBitsCount(t)
+func MPSDataTypeBitsCount(t MPSDataType) uint {
+	return raw.MPSDataTypeBitsCount(raw.MPSDataType(t))
 }
 
 // MPSFindIntegerDivisionParams calls [raw.MPSFindIntegerDivisionParams] (C function MPSFindIntegerDivisionParams).
@@ -67,8 +67,8 @@ func MPSImageBatchSynchronize(batch unsafe.Pointer, cmdBuf metal.MTLCommandBuffe
 }
 
 // MPSSizeofMPSDataType calls [raw.MPSSizeofMPSDataType] (C function MPSSizeofMPSDataType).
-func MPSSizeofMPSDataType(t raw.MPSDataType) uint {
-	return raw.MPSSizeofMPSDataType(t)
+func MPSSizeofMPSDataType(t MPSDataType) uint {
+	return raw.MPSSizeofMPSDataType(raw.MPSDataType(t))
 }
 
 // MPSStateBatchIncrementReadCount calls [raw.MPSStateBatchIncrementReadCount] (C function MPSStateBatchIncrementReadCount).

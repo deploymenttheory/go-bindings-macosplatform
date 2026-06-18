@@ -44,15 +44,15 @@ func NewXMLDTDNodeWithXMLString(string_ string) *XMLDTDNode {
 }
 
 // NewXMLDTDNodeWithKindOptions creates a new [XMLDTDNode].
-func NewXMLDTDNodeWithKindOptions(kind raw.NSXMLNodeKind, options raw.NSXMLNodeOptions) *XMLDTDNode {
+func NewXMLDTDNodeWithKindOptions(kind NSXMLNodeKind, options NSXMLNodeOptions) *XMLDTDNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDTDNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:options:"), kind, options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKind:options:"), raw.NSXMLNodeKind(kind), raw.NSXMLNodeOptions(options))
 	return &XMLDTDNode{inner: raw.NSXMLDTDNodeFromID(_id)}
 }
 
 // WithDTDKind sets the dTDKind property and returns the receiver for chaining.
-func (x *XMLDTDNode) WithDTDKind(dTDKind raw.NSXMLDTDNodeKind) *XMLDTDNode {
-	x.inner.SetDTDKind(dTDKind)
+func (x *XMLDTDNode) WithDTDKind(dTDKind NSXMLDTDNodeKind) *XMLDTDNode {
+	x.inner.SetDTDKind(raw.NSXMLDTDNodeKind(dTDKind))
 	return x
 }
 
@@ -105,13 +105,13 @@ func (x *XMLDTDNode) WithScriptingProperties(scriptingProperties *raw.NSDictiona
 }
 
 // DTDKind calls the underlying DTDKind.
-func (x *XMLDTDNode) DTDKind() raw.NSXMLDTDNodeKind {
-	return x.inner.DTDKind()
+func (x *XMLDTDNode) DTDKind() NSXMLDTDNodeKind {
+	return NSXMLDTDNodeKind(x.inner.DTDKind())
 }
 
 // SetDTDKind calls the underlying SetDTDKind.
-func (x *XMLDTDNode) SetDTDKind(dTDKind raw.NSXMLDTDNodeKind) {
-	x.inner.SetDTDKind(dTDKind)
+func (x *XMLDTDNode) SetDTDKind(dTDKind NSXMLDTDNodeKind) {
+	x.inner.SetDTDKind(raw.NSXMLDTDNodeKind(dTDKind))
 }
 
 // IsExternal calls the underlying IsExternal.
@@ -168,7 +168,7 @@ func (x *XMLDTDNode) asObject() *raw.NSObject { return &x.inner.NSXMLNode.NSObje
 // XMLDTDNodeable is the interface implemented by [XMLDTDNode], for mocking and DI.
 type XMLDTDNodeable interface {
 	Unwrap() *raw.NSXMLDTDNode
-	WithDTDKind(dTDKind raw.NSXMLDTDNodeKind) *XMLDTDNode
+	WithDTDKind(dTDKind NSXMLDTDNodeKind) *XMLDTDNode
 	WithPublicID(publicID string) *XMLDTDNode
 	WithSystemID(systemID string) *XMLDTDNode
 	WithNotationName(notationName string) *XMLDTDNode
@@ -177,8 +177,8 @@ type XMLDTDNodeable interface {
 	WithStringValue(stringValue string) *XMLDTDNode
 	WithURI(uRI string) *XMLDTDNode
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDTDNode
-	DTDKind() raw.NSXMLDTDNodeKind
-	SetDTDKind(dTDKind raw.NSXMLDTDNodeKind)
+	DTDKind() NSXMLDTDNodeKind
+	SetDTDKind(dTDKind NSXMLDTDNodeKind)
 	IsExternal() bool
 	PublicID() *String
 	SetPublicID(publicID string)

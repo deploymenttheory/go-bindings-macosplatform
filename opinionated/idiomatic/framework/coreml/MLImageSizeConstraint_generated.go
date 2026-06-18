@@ -38,8 +38,8 @@ func NewImageSizeConstraint() *ImageSizeConstraint {
 }
 
 // Type calls the underlying Type.
-func (x *ImageSizeConstraint) Type() raw.MLImageSizeConstraintType {
-	return x.inner.Type()
+func (x *ImageSizeConstraint) Type() MLImageSizeConstraintType {
+	return MLImageSizeConstraintType(x.inner.Type())
 }
 
 // PixelsWideRange calls the underlying PixelsWideRange.
@@ -66,7 +66,7 @@ func (x *ImageSizeConstraint) EnumeratedImageSizes() []*ImageSize {
 // ImageSizeConstraintable is the interface implemented by [ImageSizeConstraint], for mocking and DI.
 type ImageSizeConstraintable interface {
 	Unwrap() *raw.MLImageSizeConstraint
-	Type() raw.MLImageSizeConstraintType
+	Type() MLImageSizeConstraintType
 	PixelsWideRange() foundation.NSRange
 	PixelsHighRange() foundation.NSRange
 	EnumeratedImageSizes() []*ImageSize

@@ -64,8 +64,8 @@ func (x *NetworkProfile) SsidData() *foundation.NSData {
 }
 
 // Security calls the underlying Security.
-func (x *NetworkProfile) Security() raw.CWSecurity {
-	return x.inner.Security()
+func (x *NetworkProfile) Security() CWSecurity {
+	return CWSecurity(x.inner.Security())
 }
 
 func (x *NetworkProfile) asNetworkProfile() *raw.CWNetworkProfile { return x.inner }
@@ -76,7 +76,7 @@ type NetworkProfileable interface {
 	IsEqualToNetworkProfile(networkProfile *raw.CWNetworkProfile) bool
 	Ssid() string
 	SsidData() *foundation.NSData
-	Security() raw.CWSecurity
+	Security() CWSecurity
 }
 
 var _ NetworkProfileable = (*NetworkProfile)(nil)

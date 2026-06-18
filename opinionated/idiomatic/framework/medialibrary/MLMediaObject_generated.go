@@ -71,8 +71,8 @@ func (x *MediaObject) Attributes() *foundation.NSDictionary[*foundation.NSString
 }
 
 // MediaType calls the underlying MediaType.
-func (x *MediaObject) MediaType() raw.MLMediaType {
-	return x.inner.MediaType()
+func (x *MediaObject) MediaType() MLMediaType {
+	return MLMediaType(x.inner.MediaType())
 }
 
 // ContentType calls the underlying ContentType.
@@ -130,7 +130,7 @@ type MediaObjectable interface {
 	Identifier() string
 	MediaSourceIdentifier() string
 	Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	MediaType() raw.MLMediaType
+	MediaType() MLMediaType
 	ContentType() string
 	Name() string
 	URL() *foundation.NSURL

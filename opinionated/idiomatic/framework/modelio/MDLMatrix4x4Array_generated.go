@@ -68,8 +68,8 @@ func (x *Matrix4x4Array) ElementCount() uint {
 }
 
 // Precision calls the underlying Precision.
-func (x *Matrix4x4Array) Precision() raw.MDLDataPrecision {
-	return x.inner.Precision()
+func (x *Matrix4x4Array) Precision() MDLDataPrecision {
+	return MDLDataPrecision(x.inner.Precision())
 }
 
 // Matrix4x4Arrayable is the interface implemented by [Matrix4x4Array], for mocking and DI.
@@ -81,7 +81,7 @@ type Matrix4x4Arrayable interface {
 	GetFloat4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
 	GetDouble4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
 	ElementCount() uint
-	Precision() raw.MDLDataPrecision
+	Precision() MDLDataPrecision
 }
 
 var _ Matrix4x4Arrayable = (*Matrix4x4Array)(nil)

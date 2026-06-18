@@ -220,8 +220,8 @@ func (x *URLSessionTask) SetTaskDescription(taskDescription string) {
 }
 
 // State calls the underlying State.
-func (x *URLSessionTask) State() raw.NSURLSessionTaskState {
-	return x.inner.State()
+func (x *URLSessionTask) State() NSURLSessionTaskState {
+	return NSURLSessionTaskState(x.inner.State())
 }
 
 // Error calls the underlying Error.
@@ -286,7 +286,7 @@ type URLSessionTaskable interface {
 	CountOfBytesExpectedToReceive() int64
 	TaskDescription() *String
 	SetTaskDescription(taskDescription string)
-	State() raw.NSURLSessionTaskState
+	State() NSURLSessionTaskState
 	Error() unsafe.Pointer
 	Priority() float32
 	SetPriority(priority float32)

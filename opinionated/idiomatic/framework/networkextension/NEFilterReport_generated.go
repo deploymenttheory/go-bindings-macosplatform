@@ -45,13 +45,13 @@ func (x *NEFilterReport) Flow() *NEFilterFlow {
 }
 
 // Action calls the underlying Action.
-func (x *NEFilterReport) Action() raw.NEFilterAction {
-	return x.inner.Action()
+func (x *NEFilterReport) Action() NEFilterAction {
+	return NEFilterAction(x.inner.Action())
 }
 
 // Event calls the underlying Event.
-func (x *NEFilterReport) Event() raw.NEFilterReportEvent {
-	return x.inner.Event()
+func (x *NEFilterReport) Event() NEFilterReportEvent {
+	return NEFilterReportEvent(x.inner.Event())
 }
 
 // BytesInboundCount calls the underlying BytesInboundCount.
@@ -68,8 +68,8 @@ func (x *NEFilterReport) BytesOutboundCount() uint {
 type NEFilterReportable interface {
 	Unwrap() *raw.NEFilterReport
 	Flow() *NEFilterFlow
-	Action() raw.NEFilterAction
-	Event() raw.NEFilterReportEvent
+	Action() NEFilterAction
+	Event() NEFilterReportEvent
 	BytesInboundCount() uint
 	BytesOutboundCount() uint
 }

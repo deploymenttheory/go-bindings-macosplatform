@@ -42,14 +42,14 @@ func (x *IOCommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCou
 }
 
 // WithPriority sets the priority property and returns the receiver for chaining.
-func (x *IOCommandQueueDescriptor) WithPriority(priority raw.MTLIOPriority) *IOCommandQueueDescriptor {
-	x.inner.SetPriority(priority)
+func (x *IOCommandQueueDescriptor) WithPriority(priority MTLIOPriority) *IOCommandQueueDescriptor {
+	x.inner.SetPriority(raw.MTLIOPriority(priority))
 	return x
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *IOCommandQueueDescriptor) WithType(type_ raw.MTLIOCommandQueueType) *IOCommandQueueDescriptor {
-	x.inner.SetType(type_)
+func (x *IOCommandQueueDescriptor) WithType(type_ MTLIOCommandQueueType) *IOCommandQueueDescriptor {
+	x.inner.SetType(raw.MTLIOCommandQueueType(type_))
 	return x
 }
 
@@ -76,23 +76,23 @@ func (x *IOCommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCoun
 }
 
 // Priority calls the underlying Priority.
-func (x *IOCommandQueueDescriptor) Priority() raw.MTLIOPriority {
-	return x.inner.Priority()
+func (x *IOCommandQueueDescriptor) Priority() MTLIOPriority {
+	return MTLIOPriority(x.inner.Priority())
 }
 
 // SetPriority calls the underlying SetPriority.
-func (x *IOCommandQueueDescriptor) SetPriority(priority raw.MTLIOPriority) {
-	x.inner.SetPriority(priority)
+func (x *IOCommandQueueDescriptor) SetPriority(priority MTLIOPriority) {
+	x.inner.SetPriority(raw.MTLIOPriority(priority))
 }
 
 // Type calls the underlying Type.
-func (x *IOCommandQueueDescriptor) Type() raw.MTLIOCommandQueueType {
-	return x.inner.Type()
+func (x *IOCommandQueueDescriptor) Type() MTLIOCommandQueueType {
+	return MTLIOCommandQueueType(x.inner.Type())
 }
 
 // SetType calls the underlying SetType.
-func (x *IOCommandQueueDescriptor) SetType(type_ raw.MTLIOCommandQueueType) {
-	x.inner.SetType(type_)
+func (x *IOCommandQueueDescriptor) SetType(type_ MTLIOCommandQueueType) {
+	x.inner.SetType(raw.MTLIOCommandQueueType(type_))
 }
 
 // MaxCommandsInFlight calls the underlying MaxCommandsInFlight.
@@ -119,16 +119,16 @@ func (x *IOCommandQueueDescriptor) SetScratchBufferAllocator(scratchBufferAlloca
 type IOCommandQueueDescriptorable interface {
 	Unwrap() *raw.MTLIOCommandQueueDescriptor
 	WithMaxCommandBufferCount(maxCommandBufferCount uint) *IOCommandQueueDescriptor
-	WithPriority(priority raw.MTLIOPriority) *IOCommandQueueDescriptor
-	WithType(type_ raw.MTLIOCommandQueueType) *IOCommandQueueDescriptor
+	WithPriority(priority MTLIOPriority) *IOCommandQueueDescriptor
+	WithType(type_ MTLIOCommandQueueType) *IOCommandQueueDescriptor
 	WithMaxCommandsInFlight(maxCommandsInFlight uint) *IOCommandQueueDescriptor
 	WithScratchBufferAllocator(scratchBufferAllocator raw.MTLIOScratchBufferAllocator) *IOCommandQueueDescriptor
 	MaxCommandBufferCount() uint
 	SetMaxCommandBufferCount(maxCommandBufferCount uint)
-	Priority() raw.MTLIOPriority
-	SetPriority(priority raw.MTLIOPriority)
-	Type() raw.MTLIOCommandQueueType
-	SetType(type_ raw.MTLIOCommandQueueType)
+	Priority() MTLIOPriority
+	SetPriority(priority MTLIOPriority)
+	Type() MTLIOCommandQueueType
+	SetType(type_ MTLIOCommandQueueType)
 	MaxCommandsInFlight() uint
 	SetMaxCommandsInFlight(maxCommandsInFlight uint)
 	ScratchBufferAllocator() raw.MTLIOScratchBufferAllocator

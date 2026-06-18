@@ -16,63 +16,68 @@ func CopySharedInterfaceList() unsafe.Pointer {
 }
 
 // InterfaceAddIpPortForwardingRule calls [raw.VmnetInterfaceAddIpPortForwardingRule] (C function vmnet_interface_add_ip_port_forwarding_rule).
-func InterfaceAddIpPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, address_family uint8, internal_address unsafe.Pointer, internal_port uint16, handler func(raw.Vmnet_return_t)) raw.Vmnet_return_t {
-	return raw.VmnetInterfaceAddIpPortForwardingRule(interface_, protocol, external_port, address_family, internal_address, internal_port, handler)
+func InterfaceAddIpPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, address_family uint8, internal_address unsafe.Pointer, internal_port uint16, handler func(Vmnet_return_t)) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetInterfaceAddIpPortForwardingRule(interface_, protocol, external_port, address_family, internal_address, internal_port, func(_a0 raw.Vmnet_return_t) { handler(Vmnet_return_t(_a0)) }))
 }
 
 // InterfaceAddPortForwardingRule calls [raw.VmnetInterfaceAddPortForwardingRule] (C function vmnet_interface_add_port_forwarding_rule).
-func InterfaceAddPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, internal_address unsafe.Pointer, internal_port uint16, handler func(raw.Vmnet_return_t)) raw.Vmnet_return_t {
-	return raw.VmnetInterfaceAddPortForwardingRule(interface_, protocol, external_port, internal_address, internal_port, handler)
+func InterfaceAddPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, internal_address unsafe.Pointer, internal_port uint16, handler func(Vmnet_return_t)) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetInterfaceAddPortForwardingRule(interface_, protocol, external_port, internal_address, internal_port, func(_a0 raw.Vmnet_return_t) { handler(Vmnet_return_t(_a0)) }))
 }
 
 // InterfaceGetIpPortForwardingRules calls [raw.VmnetInterfaceGetIpPortForwardingRules] (C function vmnet_interface_get_ip_port_forwarding_rules).
-func InterfaceGetIpPortForwardingRules(interface_ unsafe.Pointer, address_family uint8, handler func(*foundation.NSObject)) raw.Vmnet_return_t {
-	return raw.VmnetInterfaceGetIpPortForwardingRules(interface_, address_family, handler)
+func InterfaceGetIpPortForwardingRules(interface_ unsafe.Pointer, address_family uint8, handler func(*foundation.NSObject)) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetInterfaceGetIpPortForwardingRules(interface_, address_family, handler))
 }
 
 // InterfaceGetPortForwardingRules calls [raw.VmnetInterfaceGetPortForwardingRules] (C function vmnet_interface_get_port_forwarding_rules).
-func InterfaceGetPortForwardingRules(interface_ unsafe.Pointer, handler func(*foundation.NSObject)) raw.Vmnet_return_t {
-	return raw.VmnetInterfaceGetPortForwardingRules(interface_, handler)
+func InterfaceGetPortForwardingRules(interface_ unsafe.Pointer, handler func(*foundation.NSObject)) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetInterfaceGetPortForwardingRules(interface_, handler))
 }
 
 // InterfaceRemoveIpPortForwardingRule calls [raw.VmnetInterfaceRemoveIpPortForwardingRule] (C function vmnet_interface_remove_ip_port_forwarding_rule).
-func InterfaceRemoveIpPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, address_family uint8, handler func(raw.Vmnet_return_t)) raw.Vmnet_return_t {
-	return raw.VmnetInterfaceRemoveIpPortForwardingRule(interface_, protocol, external_port, address_family, handler)
+func InterfaceRemoveIpPortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, address_family uint8, handler func(Vmnet_return_t)) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetInterfaceRemoveIpPortForwardingRule(interface_, protocol, external_port, address_family, func(_a0 raw.Vmnet_return_t) { handler(Vmnet_return_t(_a0)) }))
 }
 
 // InterfaceRemovePortForwardingRule calls [raw.VmnetInterfaceRemovePortForwardingRule] (C function vmnet_interface_remove_port_forwarding_rule).
-func InterfaceRemovePortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, handler func(raw.Vmnet_return_t)) raw.Vmnet_return_t {
-	return raw.VmnetInterfaceRemovePortForwardingRule(interface_, protocol, external_port, handler)
+func InterfaceRemovePortForwardingRule(interface_ unsafe.Pointer, protocol uint8, external_port uint16, handler func(Vmnet_return_t)) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetInterfaceRemovePortForwardingRule(interface_, protocol, external_port, func(_a0 raw.Vmnet_return_t) { handler(Vmnet_return_t(_a0)) }))
 }
 
 // InterfaceSetEventCallback calls [raw.VmnetInterfaceSetEventCallback] (C function vmnet_interface_set_event_callback).
-func InterfaceSetEventCallback(interface_ unsafe.Pointer, event_mask raw.Interface_event_t, queue *foundation.NSObject, callback func(raw.Interface_event_t, *foundation.NSObject)) raw.Vmnet_return_t {
-	return raw.VmnetInterfaceSetEventCallback(interface_, event_mask, queue, callback)
+func InterfaceSetEventCallback(interface_ unsafe.Pointer, event_mask Interface_event_t, queue *foundation.NSObject, callback func(Interface_event_t, *foundation.NSObject)) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetInterfaceSetEventCallback(interface_, raw.Interface_event_t(event_mask), queue, func(_a0 raw.Interface_event_t, _a1 *foundation.NSObject) { callback(Interface_event_t(_a0), _a1) }))
 }
 
 // InterfaceStartWithNetwork calls [raw.VmnetInterfaceStartWithNetwork] (C function vmnet_interface_start_with_network).
-func InterfaceStartWithNetwork(network unsafe.Pointer, interface_desc *foundation.NSObject, queue *foundation.NSObject, start_block func(raw.Vmnet_return_t, *foundation.NSObject)) unsafe.Pointer {
-	return raw.VmnetInterfaceStartWithNetwork(network, interface_desc, queue, start_block)
+func InterfaceStartWithNetwork(network unsafe.Pointer, interface_desc *foundation.NSObject, queue *foundation.NSObject, start_block func(Vmnet_return_t, *foundation.NSObject)) unsafe.Pointer {
+	return raw.VmnetInterfaceStartWithNetwork(network, interface_desc, queue, func(_a0 raw.Vmnet_return_t, _a1 *foundation.NSObject) { start_block(Vmnet_return_t(_a0), _a1) })
 }
 
 // IpPortForwardingRuleGetDetails calls [raw.VmnetIpPortForwardingRuleGetDetails] (C function vmnet_ip_port_forwarding_rule_get_details).
-func IpPortForwardingRuleGetDetails(rule *foundation.NSObject, protocol *uint8, external_port *uint16, address_family uint8, internal_address unsafe.Pointer, internal_port *uint16) raw.Vmnet_return_t {
-	return raw.VmnetIpPortForwardingRuleGetDetails(rule, protocol, external_port, address_family, internal_address, internal_port)
+func IpPortForwardingRuleGetDetails(rule *foundation.NSObject, protocol *uint8, external_port *uint16, address_family uint8, internal_address unsafe.Pointer, internal_port *uint16) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetIpPortForwardingRuleGetDetails(rule, protocol, external_port, address_family, internal_address, internal_port))
 }
 
 // NetworkConfigurationAddDhcpReservation calls [raw.VmnetNetworkConfigurationAddDhcpReservation] (C function vmnet_network_configuration_add_dhcp_reservation).
-func NetworkConfigurationAddDhcpReservation(config unsafe.Pointer, client unsafe.Pointer, reservation unsafe.Pointer) raw.Vmnet_return_t {
-	return raw.VmnetNetworkConfigurationAddDhcpReservation(config, client, reservation)
+func NetworkConfigurationAddDhcpReservation(config unsafe.Pointer, client unsafe.Pointer, reservation unsafe.Pointer) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetNetworkConfigurationAddDhcpReservation(config, client, reservation))
 }
 
 // NetworkConfigurationAddPortForwardingRule calls [raw.VmnetNetworkConfigurationAddPortForwardingRule] (C function vmnet_network_configuration_add_port_forwarding_rule).
-func NetworkConfigurationAddPortForwardingRule(config unsafe.Pointer, protocol uint8, address_family uint8, internal_port uint16, external_port uint16, internal_address unsafe.Pointer) raw.Vmnet_return_t {
-	return raw.VmnetNetworkConfigurationAddPortForwardingRule(config, protocol, address_family, internal_port, external_port, internal_address)
+func NetworkConfigurationAddPortForwardingRule(config unsafe.Pointer, protocol uint8, address_family uint8, internal_port uint16, external_port uint16, internal_address unsafe.Pointer) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetNetworkConfigurationAddPortForwardingRule(config, protocol, address_family, internal_port, external_port, internal_address))
 }
 
 // NetworkConfigurationCreate calls [raw.VmnetNetworkConfigurationCreate] (C function vmnet_network_configuration_create).
-func NetworkConfigurationCreate(mode raw.Operating_modes_t, status *raw.Vmnet_return_t) unsafe.Pointer {
-	return raw.VmnetNetworkConfigurationCreate(mode, status)
+func NetworkConfigurationCreate(mode Operating_modes_t, status *Vmnet_return_t) unsafe.Pointer {
+	var _status raw.Vmnet_return_t
+	_ret := raw.VmnetNetworkConfigurationCreate(raw.Operating_modes_t(mode), &_status)
+	if status != nil {
+		*status = Vmnet_return_t(_status)
+	}
+	return _ret
 }
 
 // NetworkConfigurationDisableDhcp calls [raw.VmnetNetworkConfigurationDisableDhcp] (C function vmnet_network_configuration_disable_dhcp).
@@ -101,38 +106,53 @@ func NetworkConfigurationDisableRouterAdvertisement(config unsafe.Pointer) {
 }
 
 // NetworkConfigurationSetExternalInterface calls [raw.VmnetNetworkConfigurationSetExternalInterface] (C function vmnet_network_configuration_set_external_interface).
-func NetworkConfigurationSetExternalInterface(config unsafe.Pointer, interface_name string) raw.Vmnet_return_t {
-	return raw.VmnetNetworkConfigurationSetExternalInterface(config, interface_name)
+func NetworkConfigurationSetExternalInterface(config unsafe.Pointer, interface_name string) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetNetworkConfigurationSetExternalInterface(config, interface_name))
 }
 
 // NetworkConfigurationSetIpv4Subnet calls [raw.VmnetNetworkConfigurationSetIpv4Subnet] (C function vmnet_network_configuration_set_ipv4_subnet).
-func NetworkConfigurationSetIpv4Subnet(config unsafe.Pointer, subnet_addr unsafe.Pointer, subnet_mask unsafe.Pointer) raw.Vmnet_return_t {
-	return raw.VmnetNetworkConfigurationSetIpv4Subnet(config, subnet_addr, subnet_mask)
+func NetworkConfigurationSetIpv4Subnet(config unsafe.Pointer, subnet_addr unsafe.Pointer, subnet_mask unsafe.Pointer) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetNetworkConfigurationSetIpv4Subnet(config, subnet_addr, subnet_mask))
 }
 
 // NetworkConfigurationSetIpv6Prefix calls [raw.VmnetNetworkConfigurationSetIpv6Prefix] (C function vmnet_network_configuration_set_ipv6_prefix).
-func NetworkConfigurationSetIpv6Prefix(config unsafe.Pointer, prefix unsafe.Pointer, len_ uint8) raw.Vmnet_return_t {
-	return raw.VmnetNetworkConfigurationSetIpv6Prefix(config, prefix, len_)
+func NetworkConfigurationSetIpv6Prefix(config unsafe.Pointer, prefix unsafe.Pointer, len_ uint8) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetNetworkConfigurationSetIpv6Prefix(config, prefix, len_))
 }
 
 // NetworkConfigurationSetMtu calls [raw.VmnetNetworkConfigurationSetMtu] (C function vmnet_network_configuration_set_mtu).
-func NetworkConfigurationSetMtu(config unsafe.Pointer, mtu uint32) raw.Vmnet_return_t {
-	return raw.VmnetNetworkConfigurationSetMtu(config, mtu)
+func NetworkConfigurationSetMtu(config unsafe.Pointer, mtu uint32) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetNetworkConfigurationSetMtu(config, mtu))
 }
 
 // NetworkCopySerialization calls [raw.VmnetNetworkCopySerialization] (C function vmnet_network_copy_serialization).
-func NetworkCopySerialization(network unsafe.Pointer, status *raw.Vmnet_return_t) unsafe.Pointer {
-	return raw.VmnetNetworkCopySerialization(network, status)
+func NetworkCopySerialization(network unsafe.Pointer, status *Vmnet_return_t) unsafe.Pointer {
+	var _status raw.Vmnet_return_t
+	_ret := raw.VmnetNetworkCopySerialization(network, &_status)
+	if status != nil {
+		*status = Vmnet_return_t(_status)
+	}
+	return _ret
 }
 
 // NetworkCreate calls [raw.VmnetNetworkCreate] (C function vmnet_network_create).
-func NetworkCreate(configuration unsafe.Pointer, status *raw.Vmnet_return_t) unsafe.Pointer {
-	return raw.VmnetNetworkCreate(configuration, status)
+func NetworkCreate(configuration unsafe.Pointer, status *Vmnet_return_t) unsafe.Pointer {
+	var _status raw.Vmnet_return_t
+	_ret := raw.VmnetNetworkCreate(configuration, &_status)
+	if status != nil {
+		*status = Vmnet_return_t(_status)
+	}
+	return _ret
 }
 
 // NetworkCreateWithSerialization calls [raw.VmnetNetworkCreateWithSerialization] (C function vmnet_network_create_with_serialization).
-func NetworkCreateWithSerialization(network *foundation.NSObject, status *raw.Vmnet_return_t) unsafe.Pointer {
-	return raw.VmnetNetworkCreateWithSerialization(network, status)
+func NetworkCreateWithSerialization(network *foundation.NSObject, status *Vmnet_return_t) unsafe.Pointer {
+	var _status raw.Vmnet_return_t
+	_ret := raw.VmnetNetworkCreateWithSerialization(network, &_status)
+	if status != nil {
+		*status = Vmnet_return_t(_status)
+	}
+	return _ret
 }
 
 // NetworkGetIpv4Subnet calls [raw.VmnetNetworkGetIpv4Subnet] (C function vmnet_network_get_ipv4_subnet).
@@ -146,26 +166,26 @@ func NetworkGetIpv6Prefix(network unsafe.Pointer, prefix unsafe.Pointer, prefix_
 }
 
 // PortForwardingRuleGetDetails calls [raw.VmnetPortForwardingRuleGetDetails] (C function vmnet_port_forwarding_rule_get_details).
-func PortForwardingRuleGetDetails(rule *foundation.NSObject, protocol *uint8, external_port *uint16, internal_address unsafe.Pointer, internal_port *uint16) raw.Vmnet_return_t {
-	return raw.VmnetPortForwardingRuleGetDetails(rule, protocol, external_port, internal_address, internal_port)
+func PortForwardingRuleGetDetails(rule *foundation.NSObject, protocol *uint8, external_port *uint16, internal_address unsafe.Pointer, internal_port *uint16) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetPortForwardingRuleGetDetails(rule, protocol, external_port, internal_address, internal_port))
 }
 
 // Read calls [raw.VmnetRead] (C function vmnet_read).
-func Read(interface_ unsafe.Pointer, packets *raw.Vmpktdesc, pktcnt *int32) raw.Vmnet_return_t {
-	return raw.VmnetRead(interface_, packets, pktcnt)
+func Read(interface_ unsafe.Pointer, packets *raw.Vmpktdesc, pktcnt *int32) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetRead(interface_, packets, pktcnt))
 }
 
 // StartInterface calls [raw.VmnetStartInterface] (C function vmnet_start_interface).
-func StartInterface(interface_desc *foundation.NSObject, queue *foundation.NSObject, handler func(raw.Vmnet_return_t, *foundation.NSObject)) unsafe.Pointer {
-	return raw.VmnetStartInterface(interface_desc, queue, handler)
+func StartInterface(interface_desc *foundation.NSObject, queue *foundation.NSObject, handler func(Vmnet_return_t, *foundation.NSObject)) unsafe.Pointer {
+	return raw.VmnetStartInterface(interface_desc, queue, func(_a0 raw.Vmnet_return_t, _a1 *foundation.NSObject) { handler(Vmnet_return_t(_a0), _a1) })
 }
 
 // StopInterface calls [raw.VmnetStopInterface] (C function vmnet_stop_interface).
-func StopInterface(interface_ unsafe.Pointer, queue *foundation.NSObject, handler func(raw.Vmnet_return_t)) raw.Vmnet_return_t {
-	return raw.VmnetStopInterface(interface_, queue, handler)
+func StopInterface(interface_ unsafe.Pointer, queue *foundation.NSObject, handler func(Vmnet_return_t)) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetStopInterface(interface_, queue, func(_a0 raw.Vmnet_return_t) { handler(Vmnet_return_t(_a0)) }))
 }
 
 // Write calls [raw.VmnetWrite] (C function vmnet_write).
-func Write(interface_ unsafe.Pointer, packets *raw.Vmpktdesc, pktcnt *int32) raw.Vmnet_return_t {
-	return raw.VmnetWrite(interface_, packets, pktcnt)
+func Write(interface_ unsafe.Pointer, packets *raw.Vmpktdesc, pktcnt *int32) Vmnet_return_t {
+	return Vmnet_return_t(raw.VmnetWrite(interface_, packets, pktcnt))
 }

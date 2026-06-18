@@ -41,8 +41,8 @@ func NewPolygonAccelerationStructure() *PolygonAccelerationStructure {
 }
 
 // WithPolygonType sets the polygonType property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithPolygonType(polygonType raw.MPSPolygonType) *PolygonAccelerationStructure {
-	x.inner.SetPolygonType(polygonType)
+func (x *PolygonAccelerationStructure) WithPolygonType(polygonType MPSPolygonType) *PolygonAccelerationStructure {
+	x.inner.SetPolygonType(raw.MPSPolygonType(polygonType))
 	return x
 }
 
@@ -119,19 +119,19 @@ func (x *PolygonAccelerationStructure) WithPolygonBuffers(items ...*raw.MPSPolyg
 }
 
 // WithUsage sets the usage property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithUsage(usage raw.MPSAccelerationStructureUsage) *PolygonAccelerationStructure {
-	x.inner.MPSAccelerationStructure.SetUsage(usage)
+func (x *PolygonAccelerationStructure) WithUsage(usage MPSAccelerationStructureUsage) *PolygonAccelerationStructure {
+	x.inner.MPSAccelerationStructure.SetUsage(raw.MPSAccelerationStructureUsage(usage))
 	return x
 }
 
 // PolygonType calls the underlying PolygonType.
-func (x *PolygonAccelerationStructure) PolygonType() raw.MPSPolygonType {
-	return x.inner.PolygonType()
+func (x *PolygonAccelerationStructure) PolygonType() MPSPolygonType {
+	return MPSPolygonType(x.inner.PolygonType())
 }
 
 // SetPolygonType calls the underlying SetPolygonType.
-func (x *PolygonAccelerationStructure) SetPolygonType(polygonType raw.MPSPolygonType) {
-	x.inner.SetPolygonType(polygonType)
+func (x *PolygonAccelerationStructure) SetPolygonType(polygonType MPSPolygonType) {
+	x.inner.SetPolygonType(raw.MPSPolygonType(polygonType))
 }
 
 // VertexStride calls the underlying VertexStride.
@@ -251,7 +251,7 @@ func (x *PolygonAccelerationStructure) asAccelerationStructure() *raw.MPSAcceler
 // PolygonAccelerationStructureable is the interface implemented by [PolygonAccelerationStructure], for mocking and DI.
 type PolygonAccelerationStructureable interface {
 	Unwrap() *raw.MPSPolygonAccelerationStructure
-	WithPolygonType(polygonType raw.MPSPolygonType) *PolygonAccelerationStructure
+	WithPolygonType(polygonType MPSPolygonType) *PolygonAccelerationStructure
 	WithVertexStride(vertexStride uint) *PolygonAccelerationStructure
 	WithIndexType(indexType mpscore.MPSDataType) *PolygonAccelerationStructure
 	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *PolygonAccelerationStructure
@@ -262,9 +262,9 @@ type PolygonAccelerationStructureable interface {
 	WithMaskBufferOffset(maskBufferOffset uint) *PolygonAccelerationStructure
 	WithPolygonCount(polygonCount uint) *PolygonAccelerationStructure
 	WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *PolygonAccelerationStructure
-	WithUsage(usage raw.MPSAccelerationStructureUsage) *PolygonAccelerationStructure
-	PolygonType() raw.MPSPolygonType
-	SetPolygonType(polygonType raw.MPSPolygonType)
+	WithUsage(usage MPSAccelerationStructureUsage) *PolygonAccelerationStructure
+	PolygonType() MPSPolygonType
+	SetPolygonType(polygonType MPSPolygonType)
 	VertexStride() uint
 	SetVertexStride(vertexStride uint)
 	IndexType() mpscore.MPSDataType

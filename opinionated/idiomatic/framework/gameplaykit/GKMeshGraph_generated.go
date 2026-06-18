@@ -47,8 +47,8 @@ func NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32
 }
 
 // WithTriangulationMode sets the triangulationMode property and returns the receiver for chaining.
-func (x *MeshGraph) WithTriangulationMode(triangulationMode raw.GKMeshGraphTriangulationMode) *MeshGraph {
-	x.inner.SetTriangulationMode(triangulationMode)
+func (x *MeshGraph) WithTriangulationMode(triangulationMode GKMeshGraphTriangulationMode) *MeshGraph {
+	x.inner.SetTriangulationMode(raw.GKMeshGraphTriangulationMode(triangulationMode))
 	return x
 }
 
@@ -99,13 +99,13 @@ func (x *MeshGraph) BufferRadius() float32 {
 }
 
 // TriangulationMode calls the underlying TriangulationMode.
-func (x *MeshGraph) TriangulationMode() raw.GKMeshGraphTriangulationMode {
-	return x.inner.TriangulationMode()
+func (x *MeshGraph) TriangulationMode() GKMeshGraphTriangulationMode {
+	return GKMeshGraphTriangulationMode(x.inner.TriangulationMode())
 }
 
 // SetTriangulationMode calls the underlying SetTriangulationMode.
-func (x *MeshGraph) SetTriangulationMode(triangulationMode raw.GKMeshGraphTriangulationMode) {
-	x.inner.SetTriangulationMode(triangulationMode)
+func (x *MeshGraph) SetTriangulationMode(triangulationMode GKMeshGraphTriangulationMode) {
+	x.inner.SetTriangulationMode(raw.GKMeshGraphTriangulationMode(triangulationMode))
 }
 
 // TriangleCount calls the underlying TriangleCount.
@@ -118,7 +118,7 @@ func (x *MeshGraph) asGraph() *raw.GKGraph { return &x.inner.GKGraph }
 // MeshGraphable is the interface implemented by [MeshGraph], for mocking and DI.
 type MeshGraphable interface {
 	Unwrap() *raw.GKMeshGraph[objc.ID]
-	WithTriangulationMode(triangulationMode raw.GKMeshGraphTriangulationMode) *MeshGraph
+	WithTriangulationMode(triangulationMode GKMeshGraphTriangulationMode) *MeshGraph
 	AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle])
 	RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle])
 	ConnectNodeUsingObstacles(node objc.ID)
@@ -127,8 +127,8 @@ type MeshGraphable interface {
 	ClassForGenericArgumentAtIndex(index uint) objc.Class
 	Obstacles() []*PolygonObstacle
 	BufferRadius() float32
-	TriangulationMode() raw.GKMeshGraphTriangulationMode
-	SetTriangulationMode(triangulationMode raw.GKMeshGraphTriangulationMode)
+	TriangulationMode() GKMeshGraphTriangulationMode
+	SetTriangulationMode(triangulationMode GKMeshGraphTriangulationMode)
 	TriangleCount() uint
 }
 

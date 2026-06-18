@@ -40,8 +40,8 @@ func NewPaymentRequestShippingMethodUpdate() *PaymentRequestShippingMethodUpdate
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *PaymentRequestShippingMethodUpdate) WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate {
-	x.inner.PKPaymentRequestUpdate.SetStatus(status)
+func (x *PaymentRequestShippingMethodUpdate) WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate {
+	x.inner.PKPaymentRequestUpdate.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 	return x
 }
 
@@ -124,7 +124,7 @@ func (x *PaymentRequestShippingMethodUpdate) asPaymentRequestUpdate() *raw.PKPay
 // PaymentRequestShippingMethodUpdateable is the interface implemented by [PaymentRequestShippingMethodUpdate], for mocking and DI.
 type PaymentRequestShippingMethodUpdateable interface {
 	Unwrap() *raw.PKPaymentRequestShippingMethodUpdate
-	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate
+	WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate
 	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingMethodUpdate
 	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestShippingMethodUpdate
 	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestShippingMethodUpdate

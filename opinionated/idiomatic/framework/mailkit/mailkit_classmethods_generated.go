@@ -77,8 +77,8 @@ func ReloadVisibleMessages(ctx context.Context) error {
 }
 
 // FlagActionWithFlag calls the underlying MEMessageActionFlagActionWithFlag.
-func FlagActionWithFlag(flag raw.MEMessageActionFlag) *MessageAction {
-	_r := raw.MEMessageActionFlagActionWithFlag(flag)
+func FlagActionWithFlag(flag MEMessageActionFlag) *MessageAction {
+	_r := raw.MEMessageActionFlagActionWithFlag(raw.MEMessageActionFlag(flag))
 	if _r == nil {
 		return nil
 	}
@@ -86,8 +86,8 @@ func FlagActionWithFlag(flag raw.MEMessageActionFlag) *MessageAction {
 }
 
 // SetBackgroundColorActionWithColor calls the underlying MEMessageActionSetBackgroundColorActionWithColor.
-func SetBackgroundColorActionWithColor(color raw.MEMessageActionMessageColor) *MessageAction {
-	_r := raw.MEMessageActionSetBackgroundColorActionWithColor(color)
+func SetBackgroundColorActionWithColor(color MEMessageActionMessageColor) *MessageAction {
+	_r := raw.MEMessageActionSetBackgroundColorActionWithColor(raw.MEMessageActionMessageColor(color))
 	if _r == nil {
 		return nil
 	}

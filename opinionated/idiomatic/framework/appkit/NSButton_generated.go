@@ -90,8 +90,8 @@ func (x *Button) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *Button {
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *Button) WithBezelStyle(bezelStyle raw.NSBezelStyle) *Button {
-	x.inner.SetBezelStyle(bezelStyle)
+func (x *Button) WithBezelStyle(bezelStyle NSBezelStyle) *Button {
+	x.inner.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 	return x
 }
 
@@ -126,8 +126,8 @@ func (x *Button) WithContentTintColor(contentTintColor *Color) *Button {
 }
 
 // WithTintProminence sets the tintProminence property and returns the receiver for chaining.
-func (x *Button) WithTintProminence(tintProminence raw.NSTintProminence) *Button {
-	x.inner.SetTintProminence(tintProminence)
+func (x *Button) WithTintProminence(tintProminence NSTintProminence) *Button {
+	x.inner.SetTintProminence(raw.NSTintProminence(tintProminence))
 	return x
 }
 
@@ -144,14 +144,14 @@ func (x *Button) WithAlternateImage(alternateImage *Image) *Button {
 }
 
 // WithImagePosition sets the imagePosition property and returns the receiver for chaining.
-func (x *Button) WithImagePosition(imagePosition raw.NSCellImagePosition) *Button {
-	x.inner.SetImagePosition(imagePosition)
+func (x *Button) WithImagePosition(imagePosition NSCellImagePosition) *Button {
+	x.inner.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 	return x
 }
 
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *Button) WithImageScaling(imageScaling raw.NSImageScaling) *Button {
-	x.inner.SetImageScaling(imageScaling)
+func (x *Button) WithImageScaling(imageScaling NSImageScaling) *Button {
+	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
@@ -186,14 +186,14 @@ func (x *Button) WithKeyEquivalent(keyEquivalent string) *Button {
 }
 
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
-func (x *Button) WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *Button {
-	x.inner.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+func (x *Button) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *Button {
+	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
 	return x
 }
 
 // WithBorderShape sets the borderShape property and returns the receiver for chaining.
-func (x *Button) WithBorderShape(borderShape raw.NSControlBorderShape) *Button {
-	x.inner.SetBorderShape(borderShape)
+func (x *Button) WithBorderShape(borderShape NSControlBorderShape) *Button {
+	x.inner.SetBorderShape(raw.NSControlBorderShape(borderShape))
 	return x
 }
 
@@ -246,8 +246,8 @@ func (x *Button) WithHighlighted(highlighted bool) *Button {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Button) WithControlSize(controlSize raw.NSControlSize) *Button {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *Button) WithControlSize(controlSize NSControlSize) *Button {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -312,20 +312,20 @@ func (x *Button) WithUsesSingleLineMode(usesSingleLineMode bool) *Button {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Button) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Button {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *Button) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Button {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Button) WithAlignment(alignment raw.NSTextAlignment) *Button {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *Button) WithAlignment(alignment NSTextAlignment) *Button {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Button) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Button {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *Button) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Button {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -378,8 +378,8 @@ func (x *Button) WithAutoresizesSubviews(autoresizesSubviews bool) *Button {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Button) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Button {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Button) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Button {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -438,14 +438,14 @@ func (x *Button) WithWantsRestingTouches(wantsRestingTouches bool) *Button {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Button) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Button {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Button) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Button {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Button) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Button {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Button) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Button {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -552,8 +552,8 @@ func (x *Button) WithToolTip(toolTip string) *Button {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Button) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Button {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Button) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Button {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -570,8 +570,8 @@ func (x *Button) WithNextKeyView(nextKeyView ViewProvider) *Button {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Button) WithFocusRingType(focusRingType raw.NSFocusRingType) *Button {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *Button) WithFocusRingType(focusRingType NSFocusRingType) *Button {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -594,8 +594,8 @@ func (x *Button) WithGestureRecognizers(items ...GestureRecognizerProvider) *But
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Button) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Button {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Button) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Button {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -684,8 +684,8 @@ func (x *Button) WithTouchBar(touchBar *TouchBar) *Button {
 }
 
 // SetButtonType calls the underlying SetButtonType.
-func (x *Button) SetButtonType(type_ raw.NSButtonType) {
-	x.inner.SetButtonType(type_)
+func (x *Button) SetButtonType(type_ NSButtonType) {
+	x.inner.SetButtonType(raw.NSButtonType(type_))
 }
 
 // SetPeriodicDelayInterval calls the underlying SetPeriodicDelayInterval.
@@ -811,13 +811,13 @@ func (x *Button) SetMaxAcceleratorLevel(maxAcceleratorLevel int) {
 }
 
 // BezelStyle calls the underlying BezelStyle.
-func (x *Button) BezelStyle() raw.NSBezelStyle {
-	return x.inner.BezelStyle()
+func (x *Button) BezelStyle() NSBezelStyle {
+	return NSBezelStyle(x.inner.BezelStyle())
 }
 
 // SetBezelStyle calls the underlying SetBezelStyle.
-func (x *Button) SetBezelStyle(bezelStyle raw.NSBezelStyle) {
-	x.inner.SetBezelStyle(bezelStyle)
+func (x *Button) SetBezelStyle(bezelStyle NSBezelStyle) {
+	x.inner.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 }
 
 // IsBordered calls the underlying IsBordered.
@@ -879,13 +879,13 @@ func (x *Button) SetContentTintColor(contentTintColor *raw.NSColor) {
 }
 
 // TintProminence calls the underlying TintProminence.
-func (x *Button) TintProminence() raw.NSTintProminence {
-	return x.inner.TintProminence()
+func (x *Button) TintProminence() NSTintProminence {
+	return NSTintProminence(x.inner.TintProminence())
 }
 
 // SetTintProminence calls the underlying SetTintProminence.
-func (x *Button) SetTintProminence(tintProminence raw.NSTintProminence) {
-	x.inner.SetTintProminence(tintProminence)
+func (x *Button) SetTintProminence(tintProminence NSTintProminence) {
+	x.inner.SetTintProminence(raw.NSTintProminence(tintProminence))
 }
 
 // Image calls the underlying Image.
@@ -917,23 +917,23 @@ func (x *Button) SetAlternateImage(alternateImage *raw.NSImage) {
 }
 
 // ImagePosition calls the underlying ImagePosition.
-func (x *Button) ImagePosition() raw.NSCellImagePosition {
-	return x.inner.ImagePosition()
+func (x *Button) ImagePosition() NSCellImagePosition {
+	return NSCellImagePosition(x.inner.ImagePosition())
 }
 
 // SetImagePosition calls the underlying SetImagePosition.
-func (x *Button) SetImagePosition(imagePosition raw.NSCellImagePosition) {
-	x.inner.SetImagePosition(imagePosition)
+func (x *Button) SetImagePosition(imagePosition NSCellImagePosition) {
+	x.inner.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 }
 
 // ImageScaling calls the underlying ImageScaling.
-func (x *Button) ImageScaling() raw.NSImageScaling {
-	return x.inner.ImageScaling()
+func (x *Button) ImageScaling() NSImageScaling {
+	return NSImageScaling(x.inner.ImageScaling())
 }
 
 // SetImageScaling calls the underlying SetImageScaling.
-func (x *Button) SetImageScaling(imageScaling raw.NSImageScaling) {
-	x.inner.SetImageScaling(imageScaling)
+func (x *Button) SetImageScaling(imageScaling NSImageScaling) {
+	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 }
 
 // ImageHugsTitle calls the underlying ImageHugsTitle.
@@ -995,13 +995,13 @@ func (x *Button) SetKeyEquivalent(keyEquivalent string) {
 }
 
 // KeyEquivalentModifierMask calls the underlying KeyEquivalentModifierMask.
-func (x *Button) KeyEquivalentModifierMask() raw.NSEventModifierFlags {
-	return x.inner.KeyEquivalentModifierMask()
+func (x *Button) KeyEquivalentModifierMask() NSEventModifierFlags {
+	return NSEventModifierFlags(x.inner.KeyEquivalentModifierMask())
 }
 
 // SetKeyEquivalentModifierMask calls the underlying SetKeyEquivalentModifierMask.
-func (x *Button) SetKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) {
-	x.inner.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+func (x *Button) SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) {
+	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
 }
 
 // ActiveCompressionOptions calls the underlying ActiveCompressionOptions.
@@ -1014,13 +1014,13 @@ func (x *Button) ActiveCompressionOptions() *UserInterfaceCompressionOptions {
 }
 
 // BorderShape calls the underlying BorderShape.
-func (x *Button) BorderShape() raw.NSControlBorderShape {
-	return x.inner.BorderShape()
+func (x *Button) BorderShape() NSControlBorderShape {
+	return NSControlBorderShape(x.inner.BorderShape())
 }
 
 // SetBorderShape calls the underlying SetBorderShape.
-func (x *Button) SetBorderShape(borderShape raw.NSControlBorderShape) {
-	x.inner.SetBorderShape(borderShape)
+func (x *Button) SetBorderShape(borderShape NSControlBorderShape) {
+	x.inner.SetBorderShape(raw.NSControlBorderShape(borderShape))
 }
 
 // SetTitleWithMnemonic calls the underlying SetTitleWithMnemonic.
@@ -1047,24 +1047,24 @@ type Buttonable interface {
 	WithSound(sound *Sound) *Button
 	WithSpringLoaded(springLoaded bool) *Button
 	WithMaxAcceleratorLevel(maxAcceleratorLevel int) *Button
-	WithBezelStyle(bezelStyle raw.NSBezelStyle) *Button
+	WithBezelStyle(bezelStyle NSBezelStyle) *Button
 	WithBordered(bordered bool) *Button
 	WithTransparent(transparent bool) *Button
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *Button
 	WithBezelColor(bezelColor *Color) *Button
 	WithContentTintColor(contentTintColor *Color) *Button
-	WithTintProminence(tintProminence raw.NSTintProminence) *Button
+	WithTintProminence(tintProminence NSTintProminence) *Button
 	WithImage(image *Image) *Button
 	WithAlternateImage(alternateImage *Image) *Button
-	WithImagePosition(imagePosition raw.NSCellImagePosition) *Button
-	WithImageScaling(imageScaling raw.NSImageScaling) *Button
+	WithImagePosition(imagePosition NSCellImagePosition) *Button
+	WithImageScaling(imageScaling NSImageScaling) *Button
 	WithImageHugsTitle(imageHugsTitle bool) *Button
 	WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *Button
 	WithState(state int) *Button
 	WithAllowsMixedState(allowsMixedState bool) *Button
 	WithKeyEquivalent(keyEquivalent string) *Button
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *Button
-	WithBorderShape(borderShape raw.NSControlBorderShape) *Button
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *Button
+	WithBorderShape(borderShape NSControlBorderShape) *Button
 	WithTarget(target objc.ID) *Button
 	WithAction(action objc.SEL) *Button
 	WithTag(tag int) *Button
@@ -1073,7 +1073,7 @@ type Buttonable interface {
 	WithEnabled(enabled bool) *Button
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Button
 	WithHighlighted(highlighted bool) *Button
-	WithControlSize(controlSize raw.NSControlSize) *Button
+	WithControlSize(controlSize NSControlSize) *Button
 	WithFormatter(formatter *foundation.NSFormatter) *Button
 	WithObjectValue(objectValue objc.ID) *Button
 	WithStringValue(stringValue string) *Button
@@ -1084,16 +1084,16 @@ type Buttonable interface {
 	WithDoubleValue(doubleValue float64) *Button
 	WithFont(font *Font) *Button
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Button
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Button
-	WithAlignment(alignment raw.NSTextAlignment) *Button
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Button
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Button
+	WithAlignment(alignment NSTextAlignment) *Button
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Button
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Button
 	WithCell(cell CellProvider) *Button
 	WithSubviews(items ...ViewProvider) *Button
 	WithHidden(hidden bool) *Button
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Button
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Button
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Button
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Button
 	WithFrame(frame corefoundation.CGRect) *Button
 	WithFrameRotation(frameRotation float64) *Button
 	WithFrameCenterRotation(frameCenterRotation float64) *Button
@@ -1103,8 +1103,8 @@ type Buttonable interface {
 	WithNeedsDisplay(needsDisplay bool) *Button
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Button
 	WithWantsRestingTouches(wantsRestingTouches bool) *Button
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Button
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Button
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Button
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Button
 	WithWantsLayer(wantsLayer bool) *Button
 	WithLayer(layer *quartzcore.CALayer) *Button
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Button
@@ -1118,12 +1118,12 @@ type Buttonable interface {
 	WithClipsToBounds(clipsToBounds bool) *Button
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Button
 	WithToolTip(toolTip string) *Button
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Button
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Button
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Button
 	WithNextKeyView(nextKeyView ViewProvider) *Button
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Button
+	WithFocusRingType(focusRingType NSFocusRingType) *Button
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Button
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Button
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Button
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Button
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Button
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Button
@@ -1138,7 +1138,7 @@ type Buttonable interface {
 	WithMenu(menu *Menu) *Button
 	WithUserActivity(userActivity *foundation.NSUserActivity) *Button
 	WithTouchBar(touchBar *TouchBar) *Button
-	SetButtonType(type_ raw.NSButtonType)
+	SetButtonType(type_ NSButtonType)
 	SetPeriodicDelayInterval(delay float32, interval float32)
 	GetPeriodicDelayInterval(delay *float32, interval *float32)
 	SetNextState()
@@ -1161,8 +1161,8 @@ type Buttonable interface {
 	SetSpringLoaded(springLoaded bool)
 	MaxAcceleratorLevel() int
 	SetMaxAcceleratorLevel(maxAcceleratorLevel int)
-	BezelStyle() raw.NSBezelStyle
-	SetBezelStyle(bezelStyle raw.NSBezelStyle)
+	BezelStyle() NSBezelStyle
+	SetBezelStyle(bezelStyle NSBezelStyle)
 	IsBordered() bool
 	SetBordered(bordered bool)
 	IsTransparent() bool
@@ -1173,16 +1173,16 @@ type Buttonable interface {
 	SetBezelColor(bezelColor *raw.NSColor)
 	ContentTintColor() *Color
 	SetContentTintColor(contentTintColor *raw.NSColor)
-	TintProminence() raw.NSTintProminence
-	SetTintProminence(tintProminence raw.NSTintProminence)
+	TintProminence() NSTintProminence
+	SetTintProminence(tintProminence NSTintProminence)
 	Image() *Image
 	SetImage(image *raw.NSImage)
 	AlternateImage() *Image
 	SetAlternateImage(alternateImage *raw.NSImage)
-	ImagePosition() raw.NSCellImagePosition
-	SetImagePosition(imagePosition raw.NSCellImagePosition)
-	ImageScaling() raw.NSImageScaling
-	SetImageScaling(imageScaling raw.NSImageScaling)
+	ImagePosition() NSCellImagePosition
+	SetImagePosition(imagePosition NSCellImagePosition)
+	ImageScaling() NSImageScaling
+	SetImageScaling(imageScaling NSImageScaling)
 	ImageHugsTitle() bool
 	SetImageHugsTitle(imageHugsTitle bool)
 	SymbolConfiguration() *ImageSymbolConfiguration
@@ -1193,11 +1193,11 @@ type Buttonable interface {
 	SetAllowsMixedState(allowsMixedState bool)
 	KeyEquivalent() string
 	SetKeyEquivalent(keyEquivalent string)
-	KeyEquivalentModifierMask() raw.NSEventModifierFlags
-	SetKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags)
+	KeyEquivalentModifierMask() NSEventModifierFlags
+	SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags)
 	ActiveCompressionOptions() *UserInterfaceCompressionOptions
-	BorderShape() raw.NSControlBorderShape
-	SetBorderShape(borderShape raw.NSControlBorderShape)
+	BorderShape() NSControlBorderShape
+	SetBorderShape(borderShape NSControlBorderShape)
 	SetTitleWithMnemonic(stringWithAmpersand string)
 }
 

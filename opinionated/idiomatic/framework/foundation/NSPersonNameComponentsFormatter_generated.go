@@ -37,8 +37,8 @@ func NewPersonNameComponentsFormatter() *PersonNameComponentsFormatter {
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *PersonNameComponentsFormatter) WithStyle(style raw.NSPersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter {
-	x.inner.SetStyle(style)
+func (x *PersonNameComponentsFormatter) WithStyle(style NSPersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter {
+	x.inner.SetStyle(raw.NSPersonNameComponentsFormatterStyle(style))
 	return x
 }
 
@@ -88,13 +88,13 @@ func (x *PersonNameComponentsFormatter) PersonNameComponentsFromString(string_ s
 }
 
 // Style calls the underlying Style.
-func (x *PersonNameComponentsFormatter) Style() raw.NSPersonNameComponentsFormatterStyle {
-	return x.inner.Style()
+func (x *PersonNameComponentsFormatter) Style() NSPersonNameComponentsFormatterStyle {
+	return NSPersonNameComponentsFormatterStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *PersonNameComponentsFormatter) SetStyle(style raw.NSPersonNameComponentsFormatterStyle) {
-	x.inner.SetStyle(style)
+func (x *PersonNameComponentsFormatter) SetStyle(style NSPersonNameComponentsFormatterStyle) {
+	x.inner.SetStyle(raw.NSPersonNameComponentsFormatterStyle(style))
 }
 
 // IsPhonetic calls the underlying IsPhonetic.
@@ -130,15 +130,15 @@ func (x *PersonNameComponentsFormatter) asObject() *raw.NSObject {
 // PersonNameComponentsFormatterable is the interface implemented by [PersonNameComponentsFormatter], for mocking and DI.
 type PersonNameComponentsFormatterable interface {
 	Unwrap() *raw.NSPersonNameComponentsFormatter
-	WithStyle(style raw.NSPersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter
+	WithStyle(style NSPersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter
 	WithPhonetic(phonetic bool) *PersonNameComponentsFormatter
 	WithLocale(locale *Locale) *PersonNameComponentsFormatter
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponentsFormatter
 	StringFromPersonNameComponents(components *raw.NSPersonNameComponents) *String
 	AnnotatedStringFromPersonNameComponents(components *raw.NSPersonNameComponents) *AttributedString
 	PersonNameComponentsFromString(string_ string) *PersonNameComponents
-	Style() raw.NSPersonNameComponentsFormatterStyle
-	SetStyle(style raw.NSPersonNameComponentsFormatterStyle)
+	Style() NSPersonNameComponentsFormatterStyle
+	SetStyle(style NSPersonNameComponentsFormatterStyle)
 	IsPhonetic() bool
 	SetPhonetic(phonetic bool)
 	Locale() *Locale

@@ -48,8 +48,8 @@ func (x *PlayerView) WithPlayer(player *avfoundation.AVPlayer) *PlayerView {
 }
 
 // WithControlsStyle sets the controlsStyle property and returns the receiver for chaining.
-func (x *PlayerView) WithControlsStyle(controlsStyle raw.AVPlayerViewControlsStyle) *PlayerView {
-	x.inner.SetControlsStyle(controlsStyle)
+func (x *PlayerView) WithControlsStyle(controlsStyle AVPlayerViewControlsStyle) *PlayerView {
+	x.inner.SetControlsStyle(raw.AVPlayerViewControlsStyle(controlsStyle))
 	return x
 }
 
@@ -96,8 +96,8 @@ func (x *PlayerView) WithAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool)
 }
 
 // WithVideoFrameAnalysisTypes sets the videoFrameAnalysisTypes property and returns the receiver for chaining.
-func (x *PlayerView) WithVideoFrameAnalysisTypes(videoFrameAnalysisTypes raw.AVVideoFrameAnalysisType) *PlayerView {
-	x.inner.SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes)
+func (x *PlayerView) WithVideoFrameAnalysisTypes(videoFrameAnalysisTypes AVVideoFrameAnalysisType) *PlayerView {
+	x.inner.SetVideoFrameAnalysisTypes(raw.AVVideoFrameAnalysisType(videoFrameAnalysisTypes))
 	return x
 }
 
@@ -114,8 +114,8 @@ func (x *PlayerView) WithMagnification(magnification float64) *PlayerView {
 }
 
 // WithPreferredDisplayDynamicRange sets the preferredDisplayDynamicRange property and returns the receiver for chaining.
-func (x *PlayerView) WithPreferredDisplayDynamicRange(preferredDisplayDynamicRange raw.AVDisplayDynamicRange) *PlayerView {
-	x.inner.SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange)
+func (x *PlayerView) WithPreferredDisplayDynamicRange(preferredDisplayDynamicRange AVDisplayDynamicRange) *PlayerView {
+	x.inner.SetPreferredDisplayDynamicRange(raw.AVDisplayDynamicRange(preferredDisplayDynamicRange))
 	return x
 }
 
@@ -182,13 +182,13 @@ func (x *PlayerView) SetPlayer(player *avfoundation.AVPlayer) {
 }
 
 // ControlsStyle calls the underlying ControlsStyle.
-func (x *PlayerView) ControlsStyle() raw.AVPlayerViewControlsStyle {
-	return x.inner.ControlsStyle()
+func (x *PlayerView) ControlsStyle() AVPlayerViewControlsStyle {
+	return AVPlayerViewControlsStyle(x.inner.ControlsStyle())
 }
 
 // SetControlsStyle calls the underlying SetControlsStyle.
-func (x *PlayerView) SetControlsStyle(controlsStyle raw.AVPlayerViewControlsStyle) {
-	x.inner.SetControlsStyle(controlsStyle)
+func (x *PlayerView) SetControlsStyle(controlsStyle AVPlayerViewControlsStyle) {
+	x.inner.SetControlsStyle(raw.AVPlayerViewControlsStyle(controlsStyle))
 }
 
 // VideoGravity calls the underlying VideoGravity.
@@ -276,13 +276,13 @@ func (x *PlayerView) SetAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool) 
 }
 
 // VideoFrameAnalysisTypes calls the underlying VideoFrameAnalysisTypes.
-func (x *PlayerView) VideoFrameAnalysisTypes() raw.AVVideoFrameAnalysisType {
-	return x.inner.VideoFrameAnalysisTypes()
+func (x *PlayerView) VideoFrameAnalysisTypes() AVVideoFrameAnalysisType {
+	return AVVideoFrameAnalysisType(x.inner.VideoFrameAnalysisTypes())
 }
 
 // SetVideoFrameAnalysisTypes calls the underlying SetVideoFrameAnalysisTypes.
-func (x *PlayerView) SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes raw.AVVideoFrameAnalysisType) {
-	x.inner.SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes)
+func (x *PlayerView) SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes AVVideoFrameAnalysisType) {
+	x.inner.SetVideoFrameAnalysisTypes(raw.AVVideoFrameAnalysisType(videoFrameAnalysisTypes))
 }
 
 // AllowsMagnification calls the underlying AllowsMagnification.
@@ -306,13 +306,13 @@ func (x *PlayerView) SetMagnification(magnification float64) {
 }
 
 // PreferredDisplayDynamicRange calls the underlying PreferredDisplayDynamicRange.
-func (x *PlayerView) PreferredDisplayDynamicRange() raw.AVDisplayDynamicRange {
-	return x.inner.PreferredDisplayDynamicRange()
+func (x *PlayerView) PreferredDisplayDynamicRange() AVDisplayDynamicRange {
+	return AVDisplayDynamicRange(x.inner.PreferredDisplayDynamicRange())
 }
 
 // SetPreferredDisplayDynamicRange calls the underlying SetPreferredDisplayDynamicRange.
-func (x *PlayerView) SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange raw.AVDisplayDynamicRange) {
-	x.inner.SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange)
+func (x *PlayerView) SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange AVDisplayDynamicRange) {
+	x.inner.SetPreferredDisplayDynamicRange(raw.AVDisplayDynamicRange(preferredDisplayDynamicRange))
 }
 
 // ShowsFrameSteppingButtons calls the underlying ShowsFrameSteppingButtons.
@@ -366,8 +366,8 @@ func (x *PlayerView) SetShowsTimecodes(showsTimecodes bool) {
 }
 
 // BeginTrimmingWithCompletionHandler calls the underlying BeginTrimmingWithCompletionHandler.
-func (x *PlayerView) BeginTrimmingWithCompletionHandler(handler func(raw.AVPlayerViewTrimResult)) {
-	x.inner.BeginTrimmingWithCompletionHandler(handler)
+func (x *PlayerView) BeginTrimmingWithCompletionHandler(handler func(AVPlayerViewTrimResult)) {
+	x.inner.BeginTrimmingWithCompletionHandler(func(_a0 raw.AVPlayerViewTrimResult) { handler(AVPlayerViewTrimResult(_a0)) })
 }
 
 // CanBeginTrimming calls the underlying CanBeginTrimming.
@@ -404,16 +404,16 @@ func (x *PlayerView) SetPictureInPictureDelegate(pictureInPictureDelegate raw.AV
 type PlayerViewable interface {
 	Unwrap() *raw.AVPlayerView
 	WithPlayer(player *avfoundation.AVPlayer) *PlayerView
-	WithControlsStyle(controlsStyle raw.AVPlayerViewControlsStyle) *PlayerView
+	WithControlsStyle(controlsStyle AVPlayerViewControlsStyle) *PlayerView
 	WithVideoGravity(videoGravity *foundation.NSString) *PlayerView
 	WithUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool) *PlayerView
 	WithDelegate(delegate raw.AVPlayerViewDelegate) *PlayerView
 	WithSpeeds(items ...*raw.AVPlaybackSpeed) *PlayerView
 	WithAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool) *PlayerView
-	WithVideoFrameAnalysisTypes(videoFrameAnalysisTypes raw.AVVideoFrameAnalysisType) *PlayerView
+	WithVideoFrameAnalysisTypes(videoFrameAnalysisTypes AVVideoFrameAnalysisType) *PlayerView
 	WithAllowsMagnification(allowsMagnification bool) *PlayerView
 	WithMagnification(magnification float64) *PlayerView
-	WithPreferredDisplayDynamicRange(preferredDisplayDynamicRange raw.AVDisplayDynamicRange) *PlayerView
+	WithPreferredDisplayDynamicRange(preferredDisplayDynamicRange AVDisplayDynamicRange) *PlayerView
 	WithShowsFrameSteppingButtons(showsFrameSteppingButtons bool) *PlayerView
 	WithShowsSharingServiceButton(showsSharingServiceButton bool) *PlayerView
 	WithActionPopUpButtonMenu(actionPopUpButtonMenu *appkit.NSMenu) *PlayerView
@@ -425,8 +425,8 @@ type PlayerViewable interface {
 	SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint)
 	Player() *avfoundation.AVPlayer
 	SetPlayer(player *avfoundation.AVPlayer)
-	ControlsStyle() raw.AVPlayerViewControlsStyle
-	SetControlsStyle(controlsStyle raw.AVPlayerViewControlsStyle)
+	ControlsStyle() AVPlayerViewControlsStyle
+	SetControlsStyle(controlsStyle AVPlayerViewControlsStyle)
 	VideoGravity() string
 	SetVideoGravity(videoGravity *foundation.NSString)
 	IsReadyForDisplay() bool
@@ -441,14 +441,14 @@ type PlayerViewable interface {
 	SelectedSpeed() *PlaybackSpeed
 	AllowsVideoFrameAnalysis() bool
 	SetAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool)
-	VideoFrameAnalysisTypes() raw.AVVideoFrameAnalysisType
-	SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes raw.AVVideoFrameAnalysisType)
+	VideoFrameAnalysisTypes() AVVideoFrameAnalysisType
+	SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes AVVideoFrameAnalysisType)
 	AllowsMagnification() bool
 	SetAllowsMagnification(allowsMagnification bool)
 	Magnification() float64
 	SetMagnification(magnification float64)
-	PreferredDisplayDynamicRange() raw.AVDisplayDynamicRange
-	SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange raw.AVDisplayDynamicRange)
+	PreferredDisplayDynamicRange() AVDisplayDynamicRange
+	SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange AVDisplayDynamicRange)
 	ShowsFrameSteppingButtons() bool
 	SetShowsFrameSteppingButtons(showsFrameSteppingButtons bool)
 	ShowsSharingServiceButton() bool
@@ -459,7 +459,7 @@ type PlayerViewable interface {
 	SetShowsFullScreenToggleButton(showsFullScreenToggleButton bool)
 	ShowsTimecodes() bool
 	SetShowsTimecodes(showsTimecodes bool)
-	BeginTrimmingWithCompletionHandler(handler func(raw.AVPlayerViewTrimResult))
+	BeginTrimmingWithCompletionHandler(handler func(AVPlayerViewTrimResult))
 	CanBeginTrimming() bool
 	FlashChapterNumberChapterTitle(chapterNumber uint, chapterTitle string)
 	AllowsPictureInPicturePlayback() bool

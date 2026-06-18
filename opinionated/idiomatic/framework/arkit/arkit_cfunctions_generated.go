@@ -26,13 +26,13 @@ func ArAnchorGetTimestamp(anchor *foundation.NSObject) float64 {
 }
 
 // ArAuthorizationResultGetAuthorizationType calls [raw.ArAuthorizationResultGetAuthorizationType] (C function ar_authorization_result_get_authorization_type).
-func ArAuthorizationResultGetAuthorizationType(authorization_result *foundation.NSObject) raw.Ar_authorization_type_t {
-	return raw.ArAuthorizationResultGetAuthorizationType(authorization_result)
+func ArAuthorizationResultGetAuthorizationType(authorization_result *foundation.NSObject) Ar_authorization_type_t {
+	return Ar_authorization_type_t(raw.ArAuthorizationResultGetAuthorizationType(authorization_result))
 }
 
 // ArAuthorizationResultGetStatus calls [raw.ArAuthorizationResultGetStatus] (C function ar_authorization_result_get_status).
-func ArAuthorizationResultGetStatus(authorization_result *foundation.NSObject) raw.Ar_authorization_status_t {
-	return raw.ArAuthorizationResultGetStatus(authorization_result)
+func ArAuthorizationResultGetStatus(authorization_result *foundation.NSObject) Ar_authorization_status_t {
+	return Ar_authorization_status_t(raw.ArAuthorizationResultGetStatus(authorization_result))
 }
 
 // ArAuthorizationResultsEnumerateResults calls [raw.ArAuthorizationResultsEnumerateResults] (C function ar_authorization_results_enumerate_results).
@@ -51,13 +51,13 @@ func ArAuthorizationResultsGetCount(authorization_results *foundation.NSObject) 
 }
 
 // ArDataProviderGetRequiredAuthorizationType calls [raw.ArDataProviderGetRequiredAuthorizationType] (C function ar_data_provider_get_required_authorization_type).
-func ArDataProviderGetRequiredAuthorizationType(data_provider *foundation.NSObject) raw.Ar_authorization_type_t {
-	return raw.ArDataProviderGetRequiredAuthorizationType(data_provider)
+func ArDataProviderGetRequiredAuthorizationType(data_provider *foundation.NSObject) Ar_authorization_type_t {
+	return Ar_authorization_type_t(raw.ArDataProviderGetRequiredAuthorizationType(data_provider))
 }
 
 // ArDataProviderGetState calls [raw.ArDataProviderGetState] (C function ar_data_provider_get_state).
-func ArDataProviderGetState(data_provider *foundation.NSObject) raw.Ar_data_provider_state_t {
-	return raw.ArDataProviderGetState(data_provider)
+func ArDataProviderGetState(data_provider *foundation.NSObject) Ar_data_provider_state_t {
+	return Ar_data_provider_state_t(raw.ArDataProviderGetState(data_provider))
 }
 
 // ArDataProvidersAddDataProvider calls [raw.ArDataProvidersAddDataProvider] (C function ar_data_providers_add_data_provider).
@@ -121,8 +121,8 @@ func ArDeviceAnchorGetTimestamp(anchor *foundation.NSObject) float64 {
 }
 
 // ArDeviceAnchorGetTrackingState calls [raw.ArDeviceAnchorGetTrackingState] (C function ar_device_anchor_get_tracking_state).
-func ArDeviceAnchorGetTrackingState(anchor *foundation.NSObject) raw.Ar_device_anchor_tracking_state_t {
-	return raw.ArDeviceAnchorGetTrackingState(anchor)
+func ArDeviceAnchorGetTrackingState(anchor *foundation.NSObject) Ar_device_anchor_tracking_state_t {
+	return Ar_device_anchor_tracking_state_t(raw.ArDeviceAnchorGetTrackingState(anchor))
 }
 
 // ArDeviceAnchorIsTracked calls [raw.ArDeviceAnchorIsTracked] (C function ar_device_anchor_is_tracked).
@@ -166,8 +166,10 @@ func ArSessionRun(session *foundation.NSObject, data_providers *foundation.NSObj
 }
 
 // ArSessionSetDataProviderStateChangeHandler calls [raw.ArSessionSetDataProviderStateChangeHandler] (C function ar_session_set_data_provider_state_change_handler).
-func ArSessionSetDataProviderStateChangeHandler(session *foundation.NSObject, queue *foundation.NSObject, data_provider_state_change_handler func(*foundation.NSObject, raw.Ar_data_provider_state_t, *foundation.NSObject, *foundation.NSObject)) {
-	raw.ArSessionSetDataProviderStateChangeHandler(session, queue, data_provider_state_change_handler)
+func ArSessionSetDataProviderStateChangeHandler(session *foundation.NSObject, queue *foundation.NSObject, data_provider_state_change_handler func(*foundation.NSObject, Ar_data_provider_state_t, *foundation.NSObject, *foundation.NSObject)) {
+	raw.ArSessionSetDataProviderStateChangeHandler(session, queue, func(_a0 *foundation.NSObject, _a1 raw.Ar_data_provider_state_t, _a2 *foundation.NSObject, _a3 *foundation.NSObject) {
+		data_provider_state_change_handler(_a0, Ar_data_provider_state_t(_a1), _a2, _a3)
+	})
 }
 
 // ArSessionSetDataProviderStateChangeHandlerF calls [raw.ArSessionSetDataProviderStateChangeHandlerF] (C function ar_session_set_data_provider_state_change_handler_f).
@@ -196,8 +198,8 @@ func ArWorldTrackingProviderCreate(world_tracking_configuration *foundation.NSOb
 }
 
 // ArWorldTrackingProviderGetRequiredAuthorizationType calls [raw.ArWorldTrackingProviderGetRequiredAuthorizationType] (C function ar_world_tracking_provider_get_required_authorization_type).
-func ArWorldTrackingProviderGetRequiredAuthorizationType() raw.Ar_authorization_type_t {
-	return raw.ArWorldTrackingProviderGetRequiredAuthorizationType()
+func ArWorldTrackingProviderGetRequiredAuthorizationType() Ar_authorization_type_t {
+	return Ar_authorization_type_t(raw.ArWorldTrackingProviderGetRequiredAuthorizationType())
 }
 
 // ArWorldTrackingProviderIsSupported calls [raw.ArWorldTrackingProviderIsSupported] (C function ar_world_tracking_provider_is_supported).
@@ -206,6 +208,6 @@ func ArWorldTrackingProviderIsSupported() bool {
 }
 
 // ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp calls [raw.ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp] (C function ar_world_tracking_provider_query_device_anchor_at_timestamp).
-func ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(world_tracking_provider *foundation.NSObject, timestamp float64, device_anchor *foundation.NSObject) raw.Ar_device_anchor_query_status_t {
-	return raw.ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(world_tracking_provider, timestamp, device_anchor)
+func ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(world_tracking_provider *foundation.NSObject, timestamp float64, device_anchor *foundation.NSObject) Ar_device_anchor_query_status_t {
+	return Ar_device_anchor_query_status_t(raw.ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(world_tracking_provider, timestamp, device_anchor))
 }

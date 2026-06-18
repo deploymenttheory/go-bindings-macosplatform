@@ -31,28 +31,28 @@ func CNNBinaryConvolutionNodeFromID(id objc.ID) *CNNBinaryConvolutionNode {
 }
 
 // NewCNNBinaryConvolutionNodeWithSourceWeightsScaleValueTypeFlags creates a new [CNNBinaryConvolutionNode].
-func NewCNNBinaryConvolutionNodeWithSourceWeightsScaleValueTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ raw.MPSCNNBinaryConvolutionType, flags raw.MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolutionNode {
+func NewCNNBinaryConvolutionNodeWithSourceWeightsScaleValueTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolutionNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryConvolutionNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:weights:scaleValue:type:flags:"), sourceNode.Ptr(), weights, scaleValue, type_, flags)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:weights:scaleValue:type:flags:"), sourceNode.Ptr(), weights, scaleValue, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
 	return &CNNBinaryConvolutionNode{inner: raw.MPSCNNBinaryConvolutionNodeFromID(_id)}
 }
 
 // NewCNNBinaryConvolutionNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags creates a new [CNNBinaryConvolutionNode].
-func NewCNNBinaryConvolutionNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ raw.MPSCNNBinaryConvolutionType, flags raw.MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolutionNode {
+func NewCNNBinaryConvolutionNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolutionNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryConvolutionNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:weights:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:"), sourceNode.Ptr(), weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, type_, flags)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:weights:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:"), sourceNode.Ptr(), weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
 	return &CNNBinaryConvolutionNode{inner: raw.MPSCNNBinaryConvolutionNodeFromID(_id)}
 }
 
 // WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
-func (x *CNNBinaryConvolutionNode) WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNBinaryConvolutionNode {
-	x.inner.MPSCNNConvolutionNode.SetTrainingStyle(trainingStyle)
+func (x *CNNBinaryConvolutionNode) WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNBinaryConvolutionNode {
+	x.inner.MPSCNNConvolutionNode.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
 	return x
 }
 
 // WithAccumulatorPrecision sets the accumulatorPrecision property and returns the receiver for chaining.
-func (x *CNNBinaryConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNBinaryConvolutionNode {
-	x.inner.MPSCNNConvolutionNode.SetAccumulatorPrecision(accumulatorPrecision)
+func (x *CNNBinaryConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNBinaryConvolutionNode {
+	x.inner.MPSCNNConvolutionNode.SetAccumulatorPrecision(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecision))
 	return x
 }
 
@@ -83,8 +83,8 @@ func (x *CNNBinaryConvolutionNode) asNNFilterNode() *raw.MPSNNFilterNode {
 // CNNBinaryConvolutionNodeable is the interface implemented by [CNNBinaryConvolutionNode], for mocking and DI.
 type CNNBinaryConvolutionNodeable interface {
 	Unwrap() *raw.MPSCNNBinaryConvolutionNode
-	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNBinaryConvolutionNode
-	WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNBinaryConvolutionNode
+	WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNBinaryConvolutionNode
+	WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNBinaryConvolutionNode
 	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNBinaryConvolutionNode
 	WithLabel(label string) *CNNBinaryConvolutionNode
 }

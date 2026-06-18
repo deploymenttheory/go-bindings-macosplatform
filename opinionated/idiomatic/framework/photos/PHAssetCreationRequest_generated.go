@@ -61,13 +61,13 @@ func (x *AssetCreationRequest) WithContentEditingOutput(contentEditingOutput *Co
 }
 
 // AddResourceWithTypeFileURLOptions calls the underlying AddResourceWithTypeFileURLOptions.
-func (x *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ raw.PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions) {
-	x.inner.AddResourceWithTypeFileURLOptions(type_, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options)
+func (x *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions) {
+	x.inner.AddResourceWithTypeFileURLOptions(raw.PHAssetResourceType(type_), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options)
 }
 
 // AddResourceWithTypeDataOptions calls the underlying AddResourceWithTypeDataOptions.
-func (x *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ raw.PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions) {
-	x.inner.AddResourceWithTypeDataOptions(type_, data, options)
+func (x *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions) {
+	x.inner.AddResourceWithTypeDataOptions(raw.PHAssetResourceType(type_), data, options)
 }
 
 func (x *AssetCreationRequest) asAssetChangeRequest() *raw.PHAssetChangeRequest {
@@ -85,8 +85,8 @@ type AssetCreationRequestable interface {
 	WithFavorite(favorite bool) *AssetCreationRequest
 	WithHidden(hidden bool) *AssetCreationRequest
 	WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest
-	AddResourceWithTypeFileURLOptions(type_ raw.PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions)
-	AddResourceWithTypeDataOptions(type_ raw.PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions)
+	AddResourceWithTypeFileURLOptions(type_ PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions)
+	AddResourceWithTypeDataOptions(type_ PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions)
 }
 
 var _ AssetCreationRequestable = (*AssetCreationRequest)(nil)

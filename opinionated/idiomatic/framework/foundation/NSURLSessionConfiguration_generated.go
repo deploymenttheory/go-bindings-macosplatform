@@ -38,8 +38,8 @@ func NewURLSessionConfiguration() *URLSessionConfiguration {
 }
 
 // WithRequestCachePolicy sets the requestCachePolicy property and returns the receiver for chaining.
-func (x *URLSessionConfiguration) WithRequestCachePolicy(requestCachePolicy raw.NSURLRequestCachePolicy) *URLSessionConfiguration {
-	x.inner.SetRequestCachePolicy(requestCachePolicy)
+func (x *URLSessionConfiguration) WithRequestCachePolicy(requestCachePolicy NSURLRequestCachePolicy) *URLSessionConfiguration {
+	x.inner.SetRequestCachePolicy(raw.NSURLRequestCachePolicy(requestCachePolicy))
 	return x
 }
 
@@ -56,8 +56,8 @@ func (x *URLSessionConfiguration) WithTimeoutIntervalForResource(timeoutInterval
 }
 
 // WithNetworkServiceType sets the networkServiceType property and returns the receiver for chaining.
-func (x *URLSessionConfiguration) WithNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType) *URLSessionConfiguration {
-	x.inner.SetNetworkServiceType(networkServiceType)
+func (x *URLSessionConfiguration) WithNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType) *URLSessionConfiguration {
+	x.inner.SetNetworkServiceType(raw.NSURLRequestNetworkServiceType(networkServiceType))
 	return x
 }
 
@@ -158,8 +158,8 @@ func (x *URLSessionConfiguration) WithHTTPShouldSetCookies(hTTPShouldSetCookies 
 }
 
 // WithHTTPCookieAcceptPolicy sets the hTTPCookieAcceptPolicy property and returns the receiver for chaining.
-func (x *URLSessionConfiguration) WithHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy) *URLSessionConfiguration {
-	x.inner.SetHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy)
+func (x *URLSessionConfiguration) WithHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy NSHTTPCookieAcceptPolicy) *URLSessionConfiguration {
+	x.inner.SetHTTPCookieAcceptPolicy(raw.NSHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy))
 	return x
 }
 
@@ -227,13 +227,13 @@ func (x *URLSessionConfiguration) Identifier() *String {
 }
 
 // RequestCachePolicy calls the underlying RequestCachePolicy.
-func (x *URLSessionConfiguration) RequestCachePolicy() raw.NSURLRequestCachePolicy {
-	return x.inner.RequestCachePolicy()
+func (x *URLSessionConfiguration) RequestCachePolicy() NSURLRequestCachePolicy {
+	return NSURLRequestCachePolicy(x.inner.RequestCachePolicy())
 }
 
 // SetRequestCachePolicy calls the underlying SetRequestCachePolicy.
-func (x *URLSessionConfiguration) SetRequestCachePolicy(requestCachePolicy raw.NSURLRequestCachePolicy) {
-	x.inner.SetRequestCachePolicy(requestCachePolicy)
+func (x *URLSessionConfiguration) SetRequestCachePolicy(requestCachePolicy NSURLRequestCachePolicy) {
+	x.inner.SetRequestCachePolicy(raw.NSURLRequestCachePolicy(requestCachePolicy))
 }
 
 // TimeoutIntervalForRequest calls the underlying TimeoutIntervalForRequest.
@@ -257,13 +257,13 @@ func (x *URLSessionConfiguration) SetTimeoutIntervalForResource(timeoutIntervalF
 }
 
 // NetworkServiceType calls the underlying NetworkServiceType.
-func (x *URLSessionConfiguration) NetworkServiceType() raw.NSURLRequestNetworkServiceType {
-	return x.inner.NetworkServiceType()
+func (x *URLSessionConfiguration) NetworkServiceType() NSURLRequestNetworkServiceType {
+	return NSURLRequestNetworkServiceType(x.inner.NetworkServiceType())
 }
 
 // SetNetworkServiceType calls the underlying SetNetworkServiceType.
-func (x *URLSessionConfiguration) SetNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType) {
-	x.inner.SetNetworkServiceType(networkServiceType)
+func (x *URLSessionConfiguration) SetNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType) {
+	x.inner.SetNetworkServiceType(raw.NSURLRequestNetworkServiceType(networkServiceType))
 }
 
 // AllowsCellularAccess calls the underlying AllowsCellularAccess.
@@ -431,13 +431,13 @@ func (x *URLSessionConfiguration) SetHTTPShouldSetCookies(hTTPShouldSetCookies b
 }
 
 // HTTPCookieAcceptPolicy calls the underlying HTTPCookieAcceptPolicy.
-func (x *URLSessionConfiguration) HTTPCookieAcceptPolicy() raw.NSHTTPCookieAcceptPolicy {
-	return x.inner.HTTPCookieAcceptPolicy()
+func (x *URLSessionConfiguration) HTTPCookieAcceptPolicy() NSHTTPCookieAcceptPolicy {
+	return NSHTTPCookieAcceptPolicy(x.inner.HTTPCookieAcceptPolicy())
 }
 
 // SetHTTPCookieAcceptPolicy calls the underlying SetHTTPCookieAcceptPolicy.
-func (x *URLSessionConfiguration) SetHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy) {
-	x.inner.SetHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy)
+func (x *URLSessionConfiguration) SetHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy NSHTTPCookieAcceptPolicy) {
+	x.inner.SetHTTPCookieAcceptPolicy(raw.NSHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy))
 }
 
 // HTTPAdditionalHeaders calls the underlying HTTPAdditionalHeaders.
@@ -547,10 +547,10 @@ func (x *URLSessionConfiguration) asObject() *raw.NSObject { return &x.inner.NSO
 // URLSessionConfigurationable is the interface implemented by [URLSessionConfiguration], for mocking and DI.
 type URLSessionConfigurationable interface {
 	Unwrap() *raw.NSURLSessionConfiguration
-	WithRequestCachePolicy(requestCachePolicy raw.NSURLRequestCachePolicy) *URLSessionConfiguration
+	WithRequestCachePolicy(requestCachePolicy NSURLRequestCachePolicy) *URLSessionConfiguration
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *URLSessionConfiguration
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *URLSessionConfiguration
-	WithNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType) *URLSessionConfiguration
+	WithNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType) *URLSessionConfiguration
 	WithAllowsCellularAccess(allowsCellularAccess bool) *URLSessionConfiguration
 	WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *URLSessionConfiguration
 	WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *URLSessionConfiguration
@@ -567,7 +567,7 @@ type URLSessionConfigurationable interface {
 	WithTLSMaximumSupportedProtocolVersion(tLSMaximumSupportedProtocolVersion security.Tls_protocol_version_t) *URLSessionConfiguration
 	WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *URLSessionConfiguration
 	WithHTTPShouldSetCookies(hTTPShouldSetCookies bool) *URLSessionConfiguration
-	WithHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy) *URLSessionConfiguration
+	WithHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy NSHTTPCookieAcceptPolicy) *URLSessionConfiguration
 	WithHTTPAdditionalHeaders(hTTPAdditionalHeaders *raw.NSDictionary[objc.ID, objc.ID]) *URLSessionConfiguration
 	WithHTTPMaximumConnectionsPerHost(hTTPMaximumConnectionsPerHost int) *URLSessionConfiguration
 	WithHTTPCookieStorage(hTTPCookieStorage *HTTPCookieStorage) *URLSessionConfiguration
@@ -578,14 +578,14 @@ type URLSessionConfigurationable interface {
 	WithEnablesEarlyData(enablesEarlyData bool) *URLSessionConfiguration
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionConfiguration
 	Identifier() *String
-	RequestCachePolicy() raw.NSURLRequestCachePolicy
-	SetRequestCachePolicy(requestCachePolicy raw.NSURLRequestCachePolicy)
+	RequestCachePolicy() NSURLRequestCachePolicy
+	SetRequestCachePolicy(requestCachePolicy NSURLRequestCachePolicy)
 	TimeoutIntervalForRequest() float64
 	SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64)
 	TimeoutIntervalForResource() float64
 	SetTimeoutIntervalForResource(timeoutIntervalForResource float64)
-	NetworkServiceType() raw.NSURLRequestNetworkServiceType
-	SetNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType)
+	NetworkServiceType() NSURLRequestNetworkServiceType
+	SetNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType)
 	AllowsCellularAccess() bool
 	SetAllowsCellularAccess(allowsCellularAccess bool)
 	AllowsExpensiveNetworkAccess() bool
@@ -618,8 +618,8 @@ type URLSessionConfigurationable interface {
 	SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool)
 	HTTPShouldSetCookies() bool
 	SetHTTPShouldSetCookies(hTTPShouldSetCookies bool)
-	HTTPCookieAcceptPolicy() raw.NSHTTPCookieAcceptPolicy
-	SetHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy raw.NSHTTPCookieAcceptPolicy)
+	HTTPCookieAcceptPolicy() NSHTTPCookieAcceptPolicy
+	SetHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy NSHTTPCookieAcceptPolicy)
 	HTTPAdditionalHeaders() *raw.NSDictionary[objc.ID, objc.ID]
 	SetHTTPAdditionalHeaders(hTTPAdditionalHeaders *raw.NSDictionary[objc.ID, objc.ID])
 	HTTPMaximumConnectionsPerHost() int

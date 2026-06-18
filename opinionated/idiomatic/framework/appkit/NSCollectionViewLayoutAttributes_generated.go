@@ -137,8 +137,8 @@ func (x *CollectionViewLayoutAttributes) SetIndexPath(indexPath *foundation.NSIn
 }
 
 // RepresentedElementCategory calls the underlying RepresentedElementCategory.
-func (x *CollectionViewLayoutAttributes) RepresentedElementCategory() raw.NSCollectionElementCategory {
-	return x.inner.RepresentedElementCategory()
+func (x *CollectionViewLayoutAttributes) RepresentedElementCategory() NSCollectionElementCategory {
+	return NSCollectionElementCategory(x.inner.RepresentedElementCategory())
 }
 
 // RepresentedElementKind calls the underlying RepresentedElementKind.
@@ -171,7 +171,7 @@ type CollectionViewLayoutAttributesable interface {
 	SetHidden(hidden bool)
 	IndexPath() *foundation.NSIndexPath
 	SetIndexPath(indexPath *foundation.NSIndexPath)
-	RepresentedElementCategory() raw.NSCollectionElementCategory
+	RepresentedElementCategory() NSCollectionElementCategory
 	RepresentedElementKind() string
 }
 

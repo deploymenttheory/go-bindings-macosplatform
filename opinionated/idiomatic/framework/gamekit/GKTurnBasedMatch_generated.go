@@ -162,9 +162,9 @@ func (x *TurnBasedMatch) EndTurnWithNextParticipantsTurnTimeoutMatchData(ctx con
 }
 
 // ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData blocks until the operation completes or ctx is cancelled.
-func (x *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData(ctx context.Context, matchOutcome raw.GKTurnBasedMatchOutcome, nextParticipants *foundation.NSArray[*raw.GKTurnBasedParticipant], timeout float64, matchData *foundation.NSData) error {
+func (x *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData(ctx context.Context, matchOutcome GKTurnBasedMatchOutcome, nextParticipants *foundation.NSArray[*raw.GKTurnBasedParticipant], timeout float64, matchData *foundation.NSData) error {
 	_ch := make(chan error, 1)
-	x.inner.ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchDataCompletionHandler(matchOutcome, nextParticipants, timeout, matchData, func(_p0 unsafe.Pointer) {
+	x.inner.ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchDataCompletionHandler(raw.GKTurnBasedMatchOutcome(matchOutcome), nextParticipants, timeout, matchData, func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -180,9 +180,9 @@ func (x *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTim
 }
 
 // ParticipantQuitOutOfTurnWithOutcome blocks until the operation completes or ctx is cancelled.
-func (x *TurnBasedMatch) ParticipantQuitOutOfTurnWithOutcome(ctx context.Context, matchOutcome raw.GKTurnBasedMatchOutcome) error {
+func (x *TurnBasedMatch) ParticipantQuitOutOfTurnWithOutcome(ctx context.Context, matchOutcome GKTurnBasedMatchOutcome) error {
 	_ch := make(chan error, 1)
-	x.inner.ParticipantQuitOutOfTurnWithOutcomeWithCompletionHandler(matchOutcome, func(_p0 unsafe.Pointer) {
+	x.inner.ParticipantQuitOutOfTurnWithOutcomeWithCompletionHandler(raw.GKTurnBasedMatchOutcome(matchOutcome), func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -350,9 +350,9 @@ func (x *TurnBasedMatch) EndTurnWithNextParticipantMatchData(ctx context.Context
 }
 
 // ParticipantQuitInTurnWithOutcomeNextParticipantMatchData blocks until the operation completes or ctx is cancelled.
-func (x *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantMatchData(ctx context.Context, matchOutcome raw.GKTurnBasedMatchOutcome, nextParticipant *raw.GKTurnBasedParticipant, matchData *foundation.NSData) error {
+func (x *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantMatchData(ctx context.Context, matchOutcome GKTurnBasedMatchOutcome, nextParticipant *raw.GKTurnBasedParticipant, matchData *foundation.NSData) error {
 	_ch := make(chan error, 1)
-	x.inner.ParticipantQuitInTurnWithOutcomeNextParticipantMatchDataCompletionHandler(matchOutcome, nextParticipant, matchData, func(_p0 unsafe.Pointer) {
+	x.inner.ParticipantQuitInTurnWithOutcomeNextParticipantMatchDataCompletionHandler(raw.GKTurnBasedMatchOutcome(matchOutcome), nextParticipant, matchData, func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -393,8 +393,8 @@ func (x *TurnBasedMatch) Participants() []*TurnBasedParticipant {
 }
 
 // Status calls the underlying Status.
-func (x *TurnBasedMatch) Status() raw.GKTurnBasedMatchStatus {
-	return x.inner.Status()
+func (x *TurnBasedMatch) Status() GKTurnBasedMatchStatus {
+	return GKTurnBasedMatchStatus(x.inner.Status())
 }
 
 // CurrentParticipant calls the underlying CurrentParticipant.
@@ -484,8 +484,8 @@ type TurnBasedMatchable interface {
 	Remove(ctx context.Context) error
 	LoadMatchDataWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer))
 	EndTurnWithNextParticipantsTurnTimeoutMatchData(ctx context.Context, nextParticipants *foundation.NSArray[*raw.GKTurnBasedParticipant], timeout float64, matchData *foundation.NSData) error
-	ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData(ctx context.Context, matchOutcome raw.GKTurnBasedMatchOutcome, nextParticipants *foundation.NSArray[*raw.GKTurnBasedParticipant], timeout float64, matchData *foundation.NSData) error
-	ParticipantQuitOutOfTurnWithOutcome(ctx context.Context, matchOutcome raw.GKTurnBasedMatchOutcome) error
+	ParticipantQuitInTurnWithOutcomeNextParticipantsTurnTimeoutMatchData(ctx context.Context, matchOutcome GKTurnBasedMatchOutcome, nextParticipants *foundation.NSArray[*raw.GKTurnBasedParticipant], timeout float64, matchData *foundation.NSData) error
+	ParticipantQuitOutOfTurnWithOutcome(ctx context.Context, matchOutcome GKTurnBasedMatchOutcome) error
 	EndMatchInTurnWithMatchData(ctx context.Context, matchData *foundation.NSData) error
 	EndMatchInTurnWithMatchDataScoresAchievements(ctx context.Context, matchData *foundation.NSData, scores *foundation.NSArray[*raw.GKScore], achievements *foundation.NSArray[*raw.GKAchievement]) error
 	EndMatchInTurnWithMatchDataLeaderboardScoresAchievements(ctx context.Context, matchData *foundation.NSData, scores *foundation.NSArray[*raw.GKLeaderboardScore], achievements *foundation.NSArray[objc.ID]) error
@@ -494,11 +494,11 @@ type TurnBasedMatchable interface {
 	SendExchangeToParticipantsDataLocalizableMessageKeyArgumentsTimeout(ctx context.Context, participants *foundation.NSArray[*raw.GKTurnBasedParticipant], data *foundation.NSData, key string, arguments *foundation.NSArray[*foundation.NSString], timeout float64) (*TurnBasedExchange, error)
 	SendReminderToParticipantsLocalizableMessageKeyArguments(ctx context.Context, participants *foundation.NSArray[*raw.GKTurnBasedParticipant], key string, arguments *foundation.NSArray[*foundation.NSString]) error
 	EndTurnWithNextParticipantMatchData(ctx context.Context, nextParticipant *raw.GKTurnBasedParticipant, matchData *foundation.NSData) error
-	ParticipantQuitInTurnWithOutcomeNextParticipantMatchData(ctx context.Context, matchOutcome raw.GKTurnBasedMatchOutcome, nextParticipant *raw.GKTurnBasedParticipant, matchData *foundation.NSData) error
+	ParticipantQuitInTurnWithOutcomeNextParticipantMatchData(ctx context.Context, matchOutcome GKTurnBasedMatchOutcome, nextParticipant *raw.GKTurnBasedParticipant, matchData *foundation.NSData) error
 	MatchID() string
 	CreationDate() *foundation.NSDate
 	Participants() []*TurnBasedParticipant
-	Status() raw.GKTurnBasedMatchStatus
+	Status() GKTurnBasedMatchStatus
 	CurrentParticipant() *TurnBasedParticipant
 	MatchData() *foundation.NSData
 	Message() string

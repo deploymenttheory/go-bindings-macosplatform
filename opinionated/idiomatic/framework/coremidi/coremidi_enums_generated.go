@@ -118,45 +118,6 @@ func (e MIDINetworkConnectionPolicy) String() string {
 	}
 }
 
-type MIDIObjectType int64
-
-const (
-	KMIDIObjectType_Other               MIDIObjectType = -1
-	KMIDIObjectType_Device              MIDIObjectType = 0
-	KMIDIObjectType_Entity              MIDIObjectType = 1
-	KMIDIObjectType_Source              MIDIObjectType = 2
-	KMIDIObjectType_Destination         MIDIObjectType = 3
-	KMIDIObjectType_ExternalDevice      MIDIObjectType = 16
-	KMIDIObjectType_ExternalEntity      MIDIObjectType = 17
-	KMIDIObjectType_ExternalSource      MIDIObjectType = 18
-	KMIDIObjectType_ExternalDestination MIDIObjectType = 19
-)
-
-func (e MIDIObjectType) String() string {
-	switch e {
-	case KMIDIObjectType_Other:
-		return "KMIDIObjectType_Other"
-	case KMIDIObjectType_Device:
-		return "KMIDIObjectType_Device"
-	case KMIDIObjectType_Entity:
-		return "KMIDIObjectType_Entity"
-	case KMIDIObjectType_Source:
-		return "KMIDIObjectType_Source"
-	case KMIDIObjectType_Destination:
-		return "KMIDIObjectType_Destination"
-	case KMIDIObjectType_ExternalDevice:
-		return "KMIDIObjectType_ExternalDevice"
-	case KMIDIObjectType_ExternalEntity:
-		return "KMIDIObjectType_ExternalEntity"
-	case KMIDIObjectType_ExternalSource:
-		return "KMIDIObjectType_ExternalSource"
-	case KMIDIObjectType_ExternalDestination:
-		return "KMIDIObjectType_ExternalDestination"
-	default:
-		return fmt.Sprintf("MIDIObjectType(%d)", int64(e))
-	}
-}
-
 type MIDIProtocolID int64
 
 const (

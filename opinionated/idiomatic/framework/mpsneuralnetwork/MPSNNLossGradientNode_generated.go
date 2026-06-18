@@ -70,13 +70,13 @@ func (x *NNLossGradientNode) WithLabel(label string) *NNLossGradientNode {
 }
 
 // LossType calls the underlying LossType.
-func (x *NNLossGradientNode) LossType() raw.MPSCNNLossType {
-	return x.inner.LossType()
+func (x *NNLossGradientNode) LossType() MPSCNNLossType {
+	return MPSCNNLossType(x.inner.LossType())
 }
 
 // ReductionType calls the underlying ReductionType.
-func (x *NNLossGradientNode) ReductionType() raw.MPSCNNReductionType {
-	return x.inner.ReductionType()
+func (x *NNLossGradientNode) ReductionType() MPSCNNReductionType {
+	return MPSCNNReductionType(x.inner.ReductionType())
 }
 
 // NumberOfClasses calls the underlying NumberOfClasses.
@@ -138,8 +138,8 @@ type NNLossGradientNodeable interface {
 	WithPropertyCallBack(propertyCallBack raw.MPSNNLossCallback) *NNLossGradientNode
 	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNLossGradientNode
 	WithLabel(label string) *NNLossGradientNode
-	LossType() raw.MPSCNNLossType
-	ReductionType() raw.MPSCNNReductionType
+	LossType() MPSCNNLossType
+	ReductionType() MPSCNNReductionType
 	NumberOfClasses() uint
 	ReduceAcrossBatch() bool
 	Weight() float32

@@ -51,8 +51,8 @@ func (x *StatusItem) WithMenu(menu *Menu) *StatusItem {
 }
 
 // WithBehavior sets the behavior property and returns the receiver for chaining.
-func (x *StatusItem) WithBehavior(behavior raw.NSStatusItemBehavior) *StatusItem {
-	x.inner.SetBehavior(behavior)
+func (x *StatusItem) WithBehavior(behavior NSStatusItemBehavior) *StatusItem {
+	x.inner.SetBehavior(raw.NSStatusItemBehavior(behavior))
 	return x
 }
 
@@ -177,13 +177,13 @@ func (x *StatusItem) Button() *StatusBarButton {
 }
 
 // Behavior calls the underlying Behavior.
-func (x *StatusItem) Behavior() raw.NSStatusItemBehavior {
-	return x.inner.Behavior()
+func (x *StatusItem) Behavior() NSStatusItemBehavior {
+	return NSStatusItemBehavior(x.inner.Behavior())
 }
 
 // SetBehavior calls the underlying SetBehavior.
-func (x *StatusItem) SetBehavior(behavior raw.NSStatusItemBehavior) {
-	x.inner.SetBehavior(behavior)
+func (x *StatusItem) SetBehavior(behavior NSStatusItemBehavior) {
+	x.inner.SetBehavior(raw.NSStatusItemBehavior(behavior))
 }
 
 // IsVisible calls the underlying IsVisible.
@@ -211,8 +211,8 @@ func (x *StatusItem) SetAutosaveName(autosaveName *foundation.NSString) {
 }
 
 // SendActionOn calls the underlying SendActionOn.
-func (x *StatusItem) SendActionOn(mask raw.NSEventMask) int {
-	return x.inner.SendActionOn(mask)
+func (x *StatusItem) SendActionOn(mask NSEventMask) int {
+	return x.inner.SendActionOn(raw.NSEventMask(mask))
 }
 
 // DrawStatusBarBackgroundInRectWithHighlight calls the underlying DrawStatusBarBackgroundInRectWithHighlight.
@@ -360,7 +360,7 @@ type StatusItemable interface {
 	Unwrap() *raw.NSStatusItem
 	WithLength(length float64) *StatusItem
 	WithMenu(menu *Menu) *StatusItem
-	WithBehavior(behavior raw.NSStatusItemBehavior) *StatusItem
+	WithBehavior(behavior NSStatusItemBehavior) *StatusItem
 	WithVisible(visible bool) *StatusItem
 	WithAutosaveName(autosaveName *foundation.NSString) *StatusItem
 	WithAction(action objc.SEL) *StatusItem
@@ -380,13 +380,13 @@ type StatusItemable interface {
 	Menu() *Menu
 	SetMenu(menu *raw.NSMenu)
 	Button() *StatusBarButton
-	Behavior() raw.NSStatusItemBehavior
-	SetBehavior(behavior raw.NSStatusItemBehavior)
+	Behavior() NSStatusItemBehavior
+	SetBehavior(behavior NSStatusItemBehavior)
 	IsVisible() bool
 	SetVisible(visible bool)
 	AutosaveName() string
 	SetAutosaveName(autosaveName *foundation.NSString)
-	SendActionOn(mask raw.NSEventMask) int
+	SendActionOn(mask NSEventMask) int
 	DrawStatusBarBackgroundInRectWithHighlight(rect corefoundation.CGRect, highlight bool)
 	PopUpStatusItemMenu(menu *raw.NSMenu)
 	Action() objc.SEL

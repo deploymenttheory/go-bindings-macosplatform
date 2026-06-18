@@ -75,8 +75,8 @@ func (x *TransformStack) AddRotateZOpInverse(animatedValueName string, inverse b
 }
 
 // AddRotateOpOrderInverse calls the underlying AddRotateOpOrderInverse.
-func (x *TransformStack) AddRotateOpOrderInverse(animatedValueName string, order raw.MDLTransformOpRotationOrder, inverse bool) *TransformRotateOp {
-	_r := x.inner.AddRotateOpOrderInverse(foundation.NSStringStringWithUTF8String(animatedValueName), order, inverse)
+func (x *TransformStack) AddRotateOpOrderInverse(animatedValueName string, order MDLTransformOpRotationOrder, inverse bool) *TransformRotateOp {
+	_r := x.inner.AddRotateOpOrderInverse(foundation.NSStringStringWithUTF8String(animatedValueName), raw.MDLTransformOpRotationOrder(order), inverse)
 	if _r == nil {
 		return nil
 	}
@@ -157,7 +157,7 @@ type TransformStackable interface {
 	AddRotateXOpInverse(animatedValueName string, inverse bool) *TransformRotateXOp
 	AddRotateYOpInverse(animatedValueName string, inverse bool) *TransformRotateYOp
 	AddRotateZOpInverse(animatedValueName string, inverse bool) *TransformRotateZOp
-	AddRotateOpOrderInverse(animatedValueName string, order raw.MDLTransformOpRotationOrder, inverse bool) *TransformRotateOp
+	AddRotateOpOrderInverse(animatedValueName string, order MDLTransformOpRotationOrder, inverse bool) *TransformRotateOp
 	AddScaleOpInverse(animatedValueName string, inverse bool) *TransformScaleOp
 	AddMatrixOpInverse(animatedValueName string, inverse bool) *TransformMatrixOp
 	AddOrientOpInverse(animatedValueName string, inverse bool) *TransformOrientOp

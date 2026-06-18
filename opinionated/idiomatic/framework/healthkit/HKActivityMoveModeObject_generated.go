@@ -36,14 +36,14 @@ func NewActivityMoveModeObject() *ActivityMoveModeObject {
 }
 
 // ActivityMoveMode calls the underlying ActivityMoveMode.
-func (x *ActivityMoveModeObject) ActivityMoveMode() raw.HKActivityMoveMode {
-	return x.inner.ActivityMoveMode()
+func (x *ActivityMoveModeObject) ActivityMoveMode() HKActivityMoveMode {
+	return HKActivityMoveMode(x.inner.ActivityMoveMode())
 }
 
 // ActivityMoveModeObjectable is the interface implemented by [ActivityMoveModeObject], for mocking and DI.
 type ActivityMoveModeObjectable interface {
 	Unwrap() *raw.HKActivityMoveModeObject
-	ActivityMoveMode() raw.HKActivityMoveMode
+	ActivityMoveMode() HKActivityMoveMode
 }
 
 var _ ActivityMoveModeObjectable = (*ActivityMoveModeObject)(nil)

@@ -52,8 +52,8 @@ func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithPrf(pr
 }
 
 // WithRequestStyle sets the requestStyle property and returns the receiver for chaining.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithRequestStyle(requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
-	x.inner.SetRequestStyle(requestStyle)
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithRequestStyle(requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	x.inner.SetRequestStyle(raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle(requestStyle))
 	return x
 }
 
@@ -86,13 +86,13 @@ func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetPrf(prf
 }
 
 // RequestStyle calls the underlying RequestStyle.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) RequestStyle() raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle {
-	return x.inner.RequestStyle()
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) RequestStyle() ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle {
+	return ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle(x.inner.RequestStyle())
 }
 
 // SetRequestStyle calls the underlying SetRequestStyle.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetRequestStyle(requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) {
-	x.inner.SetRequestStyle(requestStyle)
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetRequestStyle(requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) {
+	x.inner.SetRequestStyle(raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle(requestStyle))
 }
 
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
@@ -104,13 +104,13 @@ type AuthorizationPlatformPublicKeyCredentialRegistrationRequestable interface {
 	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest
 	WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
 	WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
-	WithRequestStyle(requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	WithRequestStyle(requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
 	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput
 	SetLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput)
 	Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput
 	SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput)
-	RequestStyle() raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle
-	SetRequestStyle(requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle)
+	RequestStyle() ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle
+	SetRequestStyle(requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle)
 }
 
 var _ AuthorizationPlatformPublicKeyCredentialRegistrationRequestable = (*AuthorizationPlatformPublicKeyCredentialRegistrationRequest)(nil)

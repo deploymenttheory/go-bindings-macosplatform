@@ -41,8 +41,8 @@ func NewLevelIndicator() *LevelIndicator {
 }
 
 // WithLevelIndicatorStyle sets the levelIndicatorStyle property and returns the receiver for chaining.
-func (x *LevelIndicator) WithLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle) *LevelIndicator {
-	x.inner.SetLevelIndicatorStyle(levelIndicatorStyle)
+func (x *LevelIndicator) WithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *LevelIndicator {
+	x.inner.SetLevelIndicatorStyle(raw.NSLevelIndicatorStyle(levelIndicatorStyle))
 	return x
 }
 
@@ -77,8 +77,8 @@ func (x *LevelIndicator) WithCriticalValue(criticalValue float64) *LevelIndicato
 }
 
 // WithTickMarkPosition sets the tickMarkPosition property and returns the receiver for chaining.
-func (x *LevelIndicator) WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *LevelIndicator {
-	x.inner.SetTickMarkPosition(tickMarkPosition)
+func (x *LevelIndicator) WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *LevelIndicator {
+	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 	return x
 }
 
@@ -119,8 +119,8 @@ func (x *LevelIndicator) WithDrawsTieredCapacityLevels(drawsTieredCapacityLevels
 }
 
 // WithPlaceholderVisibility sets the placeholderVisibility property and returns the receiver for chaining.
-func (x *LevelIndicator) WithPlaceholderVisibility(placeholderVisibility raw.NSLevelIndicatorPlaceholderVisibility) *LevelIndicator {
-	x.inner.SetPlaceholderVisibility(placeholderVisibility)
+func (x *LevelIndicator) WithPlaceholderVisibility(placeholderVisibility NSLevelIndicatorPlaceholderVisibility) *LevelIndicator {
+	x.inner.SetPlaceholderVisibility(raw.NSLevelIndicatorPlaceholderVisibility(placeholderVisibility))
 	return x
 }
 
@@ -185,8 +185,8 @@ func (x *LevelIndicator) WithHighlighted(highlighted bool) *LevelIndicator {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *LevelIndicator) WithControlSize(controlSize raw.NSControlSize) *LevelIndicator {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *LevelIndicator) WithControlSize(controlSize NSControlSize) *LevelIndicator {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -251,20 +251,20 @@ func (x *LevelIndicator) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelI
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *LevelIndicator) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *LevelIndicator {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *LevelIndicator) WithLineBreakMode(lineBreakMode NSLineBreakMode) *LevelIndicator {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *LevelIndicator) WithAlignment(alignment raw.NSTextAlignment) *LevelIndicator {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *LevelIndicator) WithAlignment(alignment NSTextAlignment) *LevelIndicator {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *LevelIndicator) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *LevelIndicator {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *LevelIndicator) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *LevelIndicator {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -317,8 +317,8 @@ func (x *LevelIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *Leve
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *LevelIndicator) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *LevelIndicator {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *LevelIndicator) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *LevelIndicator {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -377,14 +377,14 @@ func (x *LevelIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *Leve
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *LevelIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *LevelIndicator {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *LevelIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *LevelIndicator {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *LevelIndicator) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *LevelIndicator {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *LevelIndicator) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *LevelIndicator {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -491,8 +491,8 @@ func (x *LevelIndicator) WithToolTip(toolTip string) *LevelIndicator {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *LevelIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *LevelIndicator {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *LevelIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *LevelIndicator {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -509,8 +509,8 @@ func (x *LevelIndicator) WithNextKeyView(nextKeyView ViewProvider) *LevelIndicat
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *LevelIndicator) WithFocusRingType(focusRingType raw.NSFocusRingType) *LevelIndicator {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *LevelIndicator) WithFocusRingType(focusRingType NSFocusRingType) *LevelIndicator {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -533,8 +533,8 @@ func (x *LevelIndicator) WithGestureRecognizers(items ...GestureRecognizerProvid
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *LevelIndicator) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *LevelIndicator {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *LevelIndicator) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *LevelIndicator {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -633,13 +633,13 @@ func (x *LevelIndicator) RectOfTickMarkAtIndex(index int) corefoundation.CGRect 
 }
 
 // LevelIndicatorStyle calls the underlying LevelIndicatorStyle.
-func (x *LevelIndicator) LevelIndicatorStyle() raw.NSLevelIndicatorStyle {
-	return x.inner.LevelIndicatorStyle()
+func (x *LevelIndicator) LevelIndicatorStyle() NSLevelIndicatorStyle {
+	return NSLevelIndicatorStyle(x.inner.LevelIndicatorStyle())
 }
 
 // SetLevelIndicatorStyle calls the underlying SetLevelIndicatorStyle.
-func (x *LevelIndicator) SetLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle) {
-	x.inner.SetLevelIndicatorStyle(levelIndicatorStyle)
+func (x *LevelIndicator) SetLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) {
+	x.inner.SetLevelIndicatorStyle(raw.NSLevelIndicatorStyle(levelIndicatorStyle))
 }
 
 // IsEditable calls the underlying IsEditable.
@@ -693,13 +693,13 @@ func (x *LevelIndicator) SetCriticalValue(criticalValue float64) {
 }
 
 // TickMarkPosition calls the underlying TickMarkPosition.
-func (x *LevelIndicator) TickMarkPosition() raw.NSTickMarkPosition {
-	return x.inner.TickMarkPosition()
+func (x *LevelIndicator) TickMarkPosition() NSTickMarkPosition {
+	return NSTickMarkPosition(x.inner.TickMarkPosition())
 }
 
 // SetTickMarkPosition calls the underlying SetTickMarkPosition.
-func (x *LevelIndicator) SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) {
-	x.inner.SetTickMarkPosition(tickMarkPosition)
+func (x *LevelIndicator) SetTickMarkPosition(tickMarkPosition NSTickMarkPosition) {
+	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 }
 
 // NumberOfTickMarks calls the underlying NumberOfTickMarks.
@@ -775,13 +775,13 @@ func (x *LevelIndicator) SetDrawsTieredCapacityLevels(drawsTieredCapacityLevels 
 }
 
 // PlaceholderVisibility calls the underlying PlaceholderVisibility.
-func (x *LevelIndicator) PlaceholderVisibility() raw.NSLevelIndicatorPlaceholderVisibility {
-	return x.inner.PlaceholderVisibility()
+func (x *LevelIndicator) PlaceholderVisibility() NSLevelIndicatorPlaceholderVisibility {
+	return NSLevelIndicatorPlaceholderVisibility(x.inner.PlaceholderVisibility())
 }
 
 // SetPlaceholderVisibility calls the underlying SetPlaceholderVisibility.
-func (x *LevelIndicator) SetPlaceholderVisibility(placeholderVisibility raw.NSLevelIndicatorPlaceholderVisibility) {
-	x.inner.SetPlaceholderVisibility(placeholderVisibility)
+func (x *LevelIndicator) SetPlaceholderVisibility(placeholderVisibility NSLevelIndicatorPlaceholderVisibility) {
+	x.inner.SetPlaceholderVisibility(raw.NSLevelIndicatorPlaceholderVisibility(placeholderVisibility))
 }
 
 // RatingImage calls the underlying RatingImage.
@@ -821,20 +821,20 @@ func (x *LevelIndicator) asResponder() *raw.NSResponder { return &x.inner.NSCont
 // LevelIndicatorable is the interface implemented by [LevelIndicator], for mocking and DI.
 type LevelIndicatorable interface {
 	Unwrap() *raw.NSLevelIndicator
-	WithLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle) *LevelIndicator
+	WithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *LevelIndicator
 	WithEditable(editable bool) *LevelIndicator
 	WithMinValue(minValue float64) *LevelIndicator
 	WithMaxValue(maxValue float64) *LevelIndicator
 	WithWarningValue(warningValue float64) *LevelIndicator
 	WithCriticalValue(criticalValue float64) *LevelIndicator
-	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *LevelIndicator
+	WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *LevelIndicator
 	WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicator
 	WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicator
 	WithFillColor(fillColor *Color) *LevelIndicator
 	WithWarningFillColor(warningFillColor *Color) *LevelIndicator
 	WithCriticalFillColor(criticalFillColor *Color) *LevelIndicator
 	WithDrawsTieredCapacityLevels(drawsTieredCapacityLevels bool) *LevelIndicator
-	WithPlaceholderVisibility(placeholderVisibility raw.NSLevelIndicatorPlaceholderVisibility) *LevelIndicator
+	WithPlaceholderVisibility(placeholderVisibility NSLevelIndicatorPlaceholderVisibility) *LevelIndicator
 	WithRatingImage(ratingImage *Image) *LevelIndicator
 	WithRatingPlaceholderImage(ratingPlaceholderImage *Image) *LevelIndicator
 	WithTarget(target objc.ID) *LevelIndicator
@@ -845,7 +845,7 @@ type LevelIndicatorable interface {
 	WithEnabled(enabled bool) *LevelIndicator
 	WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicator
 	WithHighlighted(highlighted bool) *LevelIndicator
-	WithControlSize(controlSize raw.NSControlSize) *LevelIndicator
+	WithControlSize(controlSize NSControlSize) *LevelIndicator
 	WithFormatter(formatter *foundation.NSFormatter) *LevelIndicator
 	WithObjectValue(objectValue objc.ID) *LevelIndicator
 	WithStringValue(stringValue string) *LevelIndicator
@@ -856,16 +856,16 @@ type LevelIndicatorable interface {
 	WithDoubleValue(doubleValue float64) *LevelIndicator
 	WithFont(font *Font) *LevelIndicator
 	WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicator
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *LevelIndicator
-	WithAlignment(alignment raw.NSTextAlignment) *LevelIndicator
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *LevelIndicator
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *LevelIndicator
+	WithAlignment(alignment NSTextAlignment) *LevelIndicator
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *LevelIndicator
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *LevelIndicator
 	WithCell(cell CellProvider) *LevelIndicator
 	WithSubviews(items ...ViewProvider) *LevelIndicator
 	WithHidden(hidden bool) *LevelIndicator
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *LevelIndicator
 	WithAutoresizesSubviews(autoresizesSubviews bool) *LevelIndicator
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *LevelIndicator
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *LevelIndicator
 	WithFrame(frame corefoundation.CGRect) *LevelIndicator
 	WithFrameRotation(frameRotation float64) *LevelIndicator
 	WithFrameCenterRotation(frameCenterRotation float64) *LevelIndicator
@@ -875,8 +875,8 @@ type LevelIndicatorable interface {
 	WithNeedsDisplay(needsDisplay bool) *LevelIndicator
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *LevelIndicator
 	WithWantsRestingTouches(wantsRestingTouches bool) *LevelIndicator
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *LevelIndicator
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *LevelIndicator
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *LevelIndicator
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *LevelIndicator
 	WithWantsLayer(wantsLayer bool) *LevelIndicator
 	WithLayer(layer *quartzcore.CALayer) *LevelIndicator
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *LevelIndicator
@@ -890,12 +890,12 @@ type LevelIndicatorable interface {
 	WithClipsToBounds(clipsToBounds bool) *LevelIndicator
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *LevelIndicator
 	WithToolTip(toolTip string) *LevelIndicator
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *LevelIndicator
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *LevelIndicator
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *LevelIndicator
 	WithNextKeyView(nextKeyView ViewProvider) *LevelIndicator
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *LevelIndicator
+	WithFocusRingType(focusRingType NSFocusRingType) *LevelIndicator
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *LevelIndicator
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *LevelIndicator
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *LevelIndicator
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *LevelIndicator
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *LevelIndicator
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *LevelIndicator
@@ -912,8 +912,8 @@ type LevelIndicatorable interface {
 	WithTouchBar(touchBar *TouchBar) *LevelIndicator
 	TickMarkValueAtIndex(index int) float64
 	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
-	LevelIndicatorStyle() raw.NSLevelIndicatorStyle
-	SetLevelIndicatorStyle(levelIndicatorStyle raw.NSLevelIndicatorStyle)
+	LevelIndicatorStyle() NSLevelIndicatorStyle
+	SetLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle)
 	IsEditable() bool
 	SetEditable(editable bool)
 	MinValue() float64
@@ -924,8 +924,8 @@ type LevelIndicatorable interface {
 	SetWarningValue(warningValue float64)
 	CriticalValue() float64
 	SetCriticalValue(criticalValue float64)
-	TickMarkPosition() raw.NSTickMarkPosition
-	SetTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition)
+	TickMarkPosition() NSTickMarkPosition
+	SetTickMarkPosition(tickMarkPosition NSTickMarkPosition)
 	NumberOfTickMarks() int
 	SetNumberOfTickMarks(numberOfTickMarks int)
 	NumberOfMajorTickMarks() int
@@ -938,8 +938,8 @@ type LevelIndicatorable interface {
 	SetCriticalFillColor(criticalFillColor *raw.NSColor)
 	DrawsTieredCapacityLevels() bool
 	SetDrawsTieredCapacityLevels(drawsTieredCapacityLevels bool)
-	PlaceholderVisibility() raw.NSLevelIndicatorPlaceholderVisibility
-	SetPlaceholderVisibility(placeholderVisibility raw.NSLevelIndicatorPlaceholderVisibility)
+	PlaceholderVisibility() NSLevelIndicatorPlaceholderVisibility
+	SetPlaceholderVisibility(placeholderVisibility NSLevelIndicatorPlaceholderVisibility)
 	RatingImage() *Image
 	SetRatingImage(ratingImage *raw.NSImage)
 	RatingPlaceholderImage() *Image

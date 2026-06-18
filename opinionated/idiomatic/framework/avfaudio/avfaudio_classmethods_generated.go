@@ -180,13 +180,15 @@ func VoiceWithIdentifier(identifier string) *SpeechSynthesisVoice {
 }
 
 // RequestPersonalVoiceAuthorizationWithCompletionHandler calls the underlying AVSpeechSynthesizerRequestPersonalVoiceAuthorizationWithCompletionHandler.
-func RequestPersonalVoiceAuthorizationWithCompletionHandler(handler func(raw.AVSpeechSynthesisPersonalVoiceAuthorizationStatus)) {
-	raw.AVSpeechSynthesizerRequestPersonalVoiceAuthorizationWithCompletionHandler(handler)
+func RequestPersonalVoiceAuthorizationWithCompletionHandler(handler func(AVSpeechSynthesisPersonalVoiceAuthorizationStatus)) {
+	raw.AVSpeechSynthesizerRequestPersonalVoiceAuthorizationWithCompletionHandler(func(_a0 raw.AVSpeechSynthesisPersonalVoiceAuthorizationStatus) {
+		handler(AVSpeechSynthesisPersonalVoiceAuthorizationStatus(_a0))
+	})
 }
 
 // PersonalVoiceAuthorizationStatus calls the underlying AVSpeechSynthesizerPersonalVoiceAuthorizationStatus.
-func PersonalVoiceAuthorizationStatus() raw.AVSpeechSynthesisPersonalVoiceAuthorizationStatus {
-	return raw.AVSpeechSynthesizerPersonalVoiceAuthorizationStatus()
+func PersonalVoiceAuthorizationStatus() AVSpeechSynthesisPersonalVoiceAuthorizationStatus {
+	return AVSpeechSynthesisPersonalVoiceAuthorizationStatus(raw.AVSpeechSynthesizerPersonalVoiceAuthorizationStatus())
 }
 
 // SpeechUtteranceWithString calls the underlying AVSpeechUtteranceSpeechUtteranceWithString.

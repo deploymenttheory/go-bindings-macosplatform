@@ -38,9 +38,9 @@ func NewURLRequestWithURL(uRL string) *URLRequest {
 }
 
 // NewURLRequestWithURLCachePolicyTimeoutInterval creates a new [URLRequest].
-func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy raw.NSURLRequestCachePolicy, timeoutInterval float64) *URLRequest {
+func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy NSURLRequestCachePolicy, timeoutInterval float64) *URLRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:cachePolicy:timeoutInterval:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), cachePolicy, timeoutInterval)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:cachePolicy:timeoutInterval:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), raw.NSURLRequestCachePolicy(cachePolicy), timeoutInterval)
 	return &URLRequest{inner: raw.NSURLRequestFromID(_id)}
 }
 
@@ -60,8 +60,8 @@ func (x *URLRequest) URL() *URL {
 }
 
 // CachePolicy calls the underlying CachePolicy.
-func (x *URLRequest) CachePolicy() raw.NSURLRequestCachePolicy {
-	return x.inner.CachePolicy()
+func (x *URLRequest) CachePolicy() NSURLRequestCachePolicy {
+	return NSURLRequestCachePolicy(x.inner.CachePolicy())
 }
 
 // TimeoutInterval calls the underlying TimeoutInterval.
@@ -79,8 +79,8 @@ func (x *URLRequest) MainDocumentURL() *URL {
 }
 
 // NetworkServiceType calls the underlying NetworkServiceType.
-func (x *URLRequest) NetworkServiceType() raw.NSURLRequestNetworkServiceType {
-	return x.inner.NetworkServiceType()
+func (x *URLRequest) NetworkServiceType() NSURLRequestNetworkServiceType {
+	return NSURLRequestNetworkServiceType(x.inner.NetworkServiceType())
 }
 
 // AllowsCellularAccess calls the underlying AllowsCellularAccess.
@@ -109,8 +109,8 @@ func (x *URLRequest) AssumesHTTP3Capable() bool {
 }
 
 // Attribution calls the underlying Attribution.
-func (x *URLRequest) Attribution() raw.NSURLRequestAttribution {
-	return x.inner.Attribution()
+func (x *URLRequest) Attribution() NSURLRequestAttribution {
+	return NSURLRequestAttribution(x.inner.Attribution())
 }
 
 // RequiresDNSSECValidation calls the underlying RequiresDNSSECValidation.
@@ -192,16 +192,16 @@ type URLRequestable interface {
 	Unwrap() *raw.NSURLRequest
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLRequest
 	URL() *URL
-	CachePolicy() raw.NSURLRequestCachePolicy
+	CachePolicy() NSURLRequestCachePolicy
 	TimeoutInterval() float64
 	MainDocumentURL() *URL
-	NetworkServiceType() raw.NSURLRequestNetworkServiceType
+	NetworkServiceType() NSURLRequestNetworkServiceType
 	AllowsCellularAccess() bool
 	AllowsExpensiveNetworkAccess() bool
 	AllowsConstrainedNetworkAccess() bool
 	AllowsUltraConstrainedNetworkAccess() bool
 	AssumesHTTP3Capable() bool
-	Attribution() raw.NSURLRequestAttribution
+	Attribution() NSURLRequestAttribution
 	RequiresDNSSECValidation() bool
 	AllowsPersistentDNS() bool
 	CookiePartitionIdentifier() *String

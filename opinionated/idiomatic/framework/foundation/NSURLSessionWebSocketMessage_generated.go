@@ -51,8 +51,8 @@ func (x *URLSessionWebSocketMessage) WithScriptingProperties(scriptingProperties
 }
 
 // Type calls the underlying Type.
-func (x *URLSessionWebSocketMessage) Type() raw.NSURLSessionWebSocketMessageType {
-	return x.inner.Type()
+func (x *URLSessionWebSocketMessage) Type() NSURLSessionWebSocketMessageType {
+	return NSURLSessionWebSocketMessageType(x.inner.Type())
 }
 
 // Data calls the underlying Data.
@@ -79,7 +79,7 @@ func (x *URLSessionWebSocketMessage) asObject() *raw.NSObject { return &x.inner.
 type URLSessionWebSocketMessageable interface {
 	Unwrap() *raw.NSURLSessionWebSocketMessage
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionWebSocketMessage
-	Type() raw.NSURLSessionWebSocketMessageType
+	Type() NSURLSessionWebSocketMessageType
 	Data() *Data
 	String() *String
 }

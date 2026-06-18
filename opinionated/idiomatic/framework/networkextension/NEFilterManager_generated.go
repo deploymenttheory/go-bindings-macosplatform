@@ -58,8 +58,8 @@ func (x *NEFilterManager) WithEnabled(enabled bool) *NEFilterManager {
 }
 
 // WithGrade sets the grade property and returns the receiver for chaining.
-func (x *NEFilterManager) WithGrade(grade raw.NEFilterManagerGrade) *NEFilterManager {
-	x.inner.SetGrade(grade)
+func (x *NEFilterManager) WithGrade(grade NEFilterManagerGrade) *NEFilterManager {
+	x.inner.SetGrade(raw.NEFilterManagerGrade(grade))
 	return x
 }
 
@@ -162,13 +162,13 @@ func (x *NEFilterManager) SetEnabled(enabled bool) {
 }
 
 // Grade calls the underlying Grade.
-func (x *NEFilterManager) Grade() raw.NEFilterManagerGrade {
-	return x.inner.Grade()
+func (x *NEFilterManager) Grade() NEFilterManagerGrade {
+	return NEFilterManagerGrade(x.inner.Grade())
 }
 
 // SetGrade calls the underlying SetGrade.
-func (x *NEFilterManager) SetGrade(grade raw.NEFilterManagerGrade) {
-	x.inner.SetGrade(grade)
+func (x *NEFilterManager) SetGrade(grade NEFilterManagerGrade) {
+	x.inner.SetGrade(raw.NEFilterManagerGrade(grade))
 }
 
 // DisableEncryptedDNSSettings calls the underlying DisableEncryptedDNSSettings.
@@ -187,7 +187,7 @@ type NEFilterManagerable interface {
 	WithLocalizedDescription(localizedDescription string) *NEFilterManager
 	WithProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration) *NEFilterManager
 	WithEnabled(enabled bool) *NEFilterManager
-	WithGrade(grade raw.NEFilterManagerGrade) *NEFilterManager
+	WithGrade(grade NEFilterManagerGrade) *NEFilterManager
 	WithDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool) *NEFilterManager
 	LoadFromPreferences(ctx context.Context) error
 	RemoveFromPreferences(ctx context.Context) error
@@ -198,8 +198,8 @@ type NEFilterManagerable interface {
 	SetProviderConfiguration(providerConfiguration *raw.NEFilterProviderConfiguration)
 	IsEnabled() bool
 	SetEnabled(enabled bool)
-	Grade() raw.NEFilterManagerGrade
-	SetGrade(grade raw.NEFilterManagerGrade)
+	Grade() NEFilterManagerGrade
+	SetGrade(grade NEFilterManagerGrade)
 	DisableEncryptedDNSSettings() bool
 	SetDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool)
 }

@@ -39,8 +39,8 @@ func NewPlayerItemSegment() *PlayerItemSegment {
 }
 
 // SegmentType calls the underlying SegmentType.
-func (x *PlayerItemSegment) SegmentType() raw.AVPlayerItemSegmentType {
-	return x.inner.SegmentType()
+func (x *PlayerItemSegment) SegmentType() AVPlayerItemSegmentType {
+	return AVPlayerItemSegmentType(x.inner.SegmentType())
 }
 
 // TimeMapping calls the underlying TimeMapping.
@@ -76,7 +76,7 @@ func (x *PlayerItemSegment) InterstitialEvent() *PlayerInterstitialEvent {
 // PlayerItemSegmentable is the interface implemented by [PlayerItemSegment], for mocking and DI.
 type PlayerItemSegmentable interface {
 	Unwrap() *raw.AVPlayerItemSegment
-	SegmentType() raw.AVPlayerItemSegmentType
+	SegmentType() AVPlayerItemSegmentType
 	TimeMapping() coremedia.CMTimeMapping
 	LoadedTimeRanges() []*foundation.NSValue
 	StartDate() *foundation.NSDate

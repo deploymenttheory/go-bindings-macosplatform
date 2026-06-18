@@ -45,8 +45,8 @@ func NewDatePickerCellWithCoder(coder *foundation.NSCoder) *DatePickerCell {
 }
 
 // WithDatePickerStyle sets the datePickerStyle property and returns the receiver for chaining.
-func (x *DatePickerCell) WithDatePickerStyle(datePickerStyle raw.NSDatePickerStyle) *DatePickerCell {
-	x.inner.SetDatePickerStyle(datePickerStyle)
+func (x *DatePickerCell) WithDatePickerStyle(datePickerStyle NSDatePickerStyle) *DatePickerCell {
+	x.inner.SetDatePickerStyle(raw.NSDatePickerStyle(datePickerStyle))
 	return x
 }
 
@@ -69,14 +69,14 @@ func (x *DatePickerCell) WithTextColor(textColor *Color) *DatePickerCell {
 }
 
 // WithDatePickerMode sets the datePickerMode property and returns the receiver for chaining.
-func (x *DatePickerCell) WithDatePickerMode(datePickerMode raw.NSDatePickerMode) *DatePickerCell {
-	x.inner.SetDatePickerMode(datePickerMode)
+func (x *DatePickerCell) WithDatePickerMode(datePickerMode NSDatePickerMode) *DatePickerCell {
+	x.inner.SetDatePickerMode(raw.NSDatePickerMode(datePickerMode))
 	return x
 }
 
 // WithDatePickerElements sets the datePickerElements property and returns the receiver for chaining.
-func (x *DatePickerCell) WithDatePickerElements(datePickerElements raw.NSDatePickerElementFlags) *DatePickerCell {
-	x.inner.SetDatePickerElements(datePickerElements)
+func (x *DatePickerCell) WithDatePickerElements(datePickerElements NSDatePickerElementFlags) *DatePickerCell {
+	x.inner.SetDatePickerElements(raw.NSDatePickerElementFlags(datePickerElements))
 	return x
 }
 
@@ -135,8 +135,8 @@ func (x *DatePickerCell) WithControlView(controlView ViewProvider) *DatePickerCe
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *DatePickerCell) WithType(type_ raw.NSCellType) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetType(type_)
+func (x *DatePickerCell) WithType(type_ NSCellType) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -219,8 +219,8 @@ func (x *DatePickerCell) WithHighlighted(highlighted bool) *DatePickerCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *DatePickerCell) WithAlignment(alignment raw.NSTextAlignment) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *DatePickerCell) WithAlignment(alignment NSTextAlignment) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -285,8 +285,8 @@ func (x *DatePickerCell) WithImage(image *Image) *DatePickerCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *DatePickerCell) WithControlSize(controlSize raw.NSControlSize) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *DatePickerCell) WithControlSize(controlSize NSControlSize) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -309,14 +309,14 @@ func (x *DatePickerCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing boo
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *DatePickerCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *DatePickerCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *DatePickerCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *DatePickerCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -333,8 +333,8 @@ func (x *DatePickerCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine b
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *DatePickerCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *DatePickerCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -357,8 +357,8 @@ func (x *DatePickerCell) WithShowsFirstResponder(showsFirstResponder bool) *Date
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *DatePickerCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *DatePickerCell) WithFocusRingType(focusRingType NSFocusRingType) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -387,25 +387,25 @@ func (x *DatePickerCell) WithAllowsMixedState(allowsMixedState bool) *DatePicker
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *DatePickerCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *DatePickerCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *DatePickerCell) WithControlTint(controlTint raw.NSControlTint) *DatePickerCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *DatePickerCell) WithControlTint(controlTint NSControlTint) *DatePickerCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
 // DatePickerStyle calls the underlying DatePickerStyle.
-func (x *DatePickerCell) DatePickerStyle() raw.NSDatePickerStyle {
-	return x.inner.DatePickerStyle()
+func (x *DatePickerCell) DatePickerStyle() NSDatePickerStyle {
+	return NSDatePickerStyle(x.inner.DatePickerStyle())
 }
 
 // SetDatePickerStyle calls the underlying SetDatePickerStyle.
-func (x *DatePickerCell) SetDatePickerStyle(datePickerStyle raw.NSDatePickerStyle) {
-	x.inner.SetDatePickerStyle(datePickerStyle)
+func (x *DatePickerCell) SetDatePickerStyle(datePickerStyle NSDatePickerStyle) {
+	x.inner.SetDatePickerStyle(raw.NSDatePickerStyle(datePickerStyle))
 }
 
 // DrawsBackground calls the underlying DrawsBackground.
@@ -447,23 +447,23 @@ func (x *DatePickerCell) SetTextColor(textColor *raw.NSColor) {
 }
 
 // DatePickerMode calls the underlying DatePickerMode.
-func (x *DatePickerCell) DatePickerMode() raw.NSDatePickerMode {
-	return x.inner.DatePickerMode()
+func (x *DatePickerCell) DatePickerMode() NSDatePickerMode {
+	return NSDatePickerMode(x.inner.DatePickerMode())
 }
 
 // SetDatePickerMode calls the underlying SetDatePickerMode.
-func (x *DatePickerCell) SetDatePickerMode(datePickerMode raw.NSDatePickerMode) {
-	x.inner.SetDatePickerMode(datePickerMode)
+func (x *DatePickerCell) SetDatePickerMode(datePickerMode NSDatePickerMode) {
+	x.inner.SetDatePickerMode(raw.NSDatePickerMode(datePickerMode))
 }
 
 // DatePickerElements calls the underlying DatePickerElements.
-func (x *DatePickerCell) DatePickerElements() raw.NSDatePickerElementFlags {
-	return x.inner.DatePickerElements()
+func (x *DatePickerCell) DatePickerElements() NSDatePickerElementFlags {
+	return NSDatePickerElementFlags(x.inner.DatePickerElements())
 }
 
 // SetDatePickerElements calls the underlying SetDatePickerElements.
-func (x *DatePickerCell) SetDatePickerElements(datePickerElements raw.NSDatePickerElementFlags) {
-	x.inner.SetDatePickerElements(datePickerElements)
+func (x *DatePickerCell) SetDatePickerElements(datePickerElements NSDatePickerElementFlags) {
+	x.inner.SetDatePickerElements(raw.NSDatePickerElementFlags(datePickerElements))
 }
 
 // Calendar calls the underlying Calendar.
@@ -553,12 +553,12 @@ func (x *DatePickerCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSC
 // DatePickerCellable is the interface implemented by [DatePickerCell], for mocking and DI.
 type DatePickerCellable interface {
 	Unwrap() *raw.NSDatePickerCell
-	WithDatePickerStyle(datePickerStyle raw.NSDatePickerStyle) *DatePickerCell
+	WithDatePickerStyle(datePickerStyle NSDatePickerStyle) *DatePickerCell
 	WithDrawsBackground(drawsBackground bool) *DatePickerCell
 	WithBackgroundColor(backgroundColor *Color) *DatePickerCell
 	WithTextColor(textColor *Color) *DatePickerCell
-	WithDatePickerMode(datePickerMode raw.NSDatePickerMode) *DatePickerCell
-	WithDatePickerElements(datePickerElements raw.NSDatePickerElementFlags) *DatePickerCell
+	WithDatePickerMode(datePickerMode NSDatePickerMode) *DatePickerCell
+	WithDatePickerElements(datePickerElements NSDatePickerElementFlags) *DatePickerCell
 	WithCalendar(calendar *foundation.NSCalendar) *DatePickerCell
 	WithLocale(locale *foundation.NSLocale) *DatePickerCell
 	WithTimeZone(timeZone *foundation.NSTimeZone) *DatePickerCell
@@ -568,7 +568,7 @@ type DatePickerCellable interface {
 	WithMaxDate(maxDate *foundation.NSDate) *DatePickerCell
 	WithDelegate(delegate raw.NSDatePickerCellDelegate) *DatePickerCell
 	WithControlView(controlView ViewProvider) *DatePickerCell
-	WithType(type_ raw.NSCellType) *DatePickerCell
+	WithType(type_ NSCellType) *DatePickerCell
 	WithState(state int) *DatePickerCell
 	WithTarget(target objc.ID) *DatePickerCell
 	WithAction(action objc.SEL) *DatePickerCell
@@ -582,7 +582,7 @@ type DatePickerCellable interface {
 	WithBezeled(bezeled bool) *DatePickerCell
 	WithScrollable(scrollable bool) *DatePickerCell
 	WithHighlighted(highlighted bool) *DatePickerCell
-	WithAlignment(alignment raw.NSTextAlignment) *DatePickerCell
+	WithAlignment(alignment NSTextAlignment) *DatePickerCell
 	WithWraps(wraps bool) *DatePickerCell
 	WithFont(font *Font) *DatePickerCell
 	WithFormatter(formatter *foundation.NSFormatter) *DatePickerCell
@@ -593,37 +593,37 @@ type DatePickerCellable interface {
 	WithDoubleValue(doubleValue float64) *DatePickerCell
 	WithIntegerValue(integerValue int) *DatePickerCell
 	WithImage(image *Image) *DatePickerCell
-	WithControlSize(controlSize raw.NSControlSize) *DatePickerCell
+	WithControlSize(controlSize NSControlSize) *DatePickerCell
 	WithRepresentedObject(representedObject objc.ID) *DatePickerCell
 	WithMenu(menu *Menu) *DatePickerCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *DatePickerCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *DatePickerCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *DatePickerCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *DatePickerCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *DatePickerCell
 	WithAllowsUndo(allowsUndo bool) *DatePickerCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *DatePickerCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *DatePickerCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *DatePickerCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *DatePickerCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *DatePickerCell
 	WithShowsFirstResponder(showsFirstResponder bool) *DatePickerCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *DatePickerCell
+	WithFocusRingType(focusRingType NSFocusRingType) *DatePickerCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *DatePickerCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *DatePickerCell
 	WithImportsGraphics(importsGraphics bool) *DatePickerCell
 	WithAllowsMixedState(allowsMixedState bool) *DatePickerCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *DatePickerCell
-	WithControlTint(controlTint raw.NSControlTint) *DatePickerCell
-	DatePickerStyle() raw.NSDatePickerStyle
-	SetDatePickerStyle(datePickerStyle raw.NSDatePickerStyle)
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *DatePickerCell
+	WithControlTint(controlTint NSControlTint) *DatePickerCell
+	DatePickerStyle() NSDatePickerStyle
+	SetDatePickerStyle(datePickerStyle NSDatePickerStyle)
 	DrawsBackground() bool
 	SetDrawsBackground(drawsBackground bool)
 	BackgroundColor() *Color
 	SetBackgroundColor(backgroundColor *raw.NSColor)
 	TextColor() *Color
 	SetTextColor(textColor *raw.NSColor)
-	DatePickerMode() raw.NSDatePickerMode
-	SetDatePickerMode(datePickerMode raw.NSDatePickerMode)
-	DatePickerElements() raw.NSDatePickerElementFlags
-	SetDatePickerElements(datePickerElements raw.NSDatePickerElementFlags)
+	DatePickerMode() NSDatePickerMode
+	SetDatePickerMode(datePickerMode NSDatePickerMode)
+	DatePickerElements() NSDatePickerElementFlags
+	SetDatePickerElements(datePickerElements NSDatePickerElementFlags)
 	Calendar() *foundation.NSCalendar
 	SetCalendar(calendar *foundation.NSCalendar)
 	Locale() *foundation.NSLocale

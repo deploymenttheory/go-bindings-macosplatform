@@ -108,8 +108,8 @@ func (x *MTL4RenderPassDescriptor) WithVisibilityResultBuffer(visibilityResultBu
 }
 
 // WithVisibilityResultType sets the visibilityResultType property and returns the receiver for chaining.
-func (x *MTL4RenderPassDescriptor) WithVisibilityResultType(visibilityResultType raw.MTLVisibilityResultType) *MTL4RenderPassDescriptor {
-	x.inner.SetVisibilityResultType(visibilityResultType)
+func (x *MTL4RenderPassDescriptor) WithVisibilityResultType(visibilityResultType MTLVisibilityResultType) *MTL4RenderPassDescriptor {
+	x.inner.SetVisibilityResultType(raw.MTLVisibilityResultType(visibilityResultType))
 	return x
 }
 
@@ -267,13 +267,13 @@ func (x *MTL4RenderPassDescriptor) SetVisibilityResultBuffer(visibilityResultBuf
 }
 
 // VisibilityResultType calls the underlying VisibilityResultType.
-func (x *MTL4RenderPassDescriptor) VisibilityResultType() raw.MTLVisibilityResultType {
-	return x.inner.VisibilityResultType()
+func (x *MTL4RenderPassDescriptor) VisibilityResultType() MTLVisibilityResultType {
+	return MTLVisibilityResultType(x.inner.VisibilityResultType())
 }
 
 // SetVisibilityResultType calls the underlying SetVisibilityResultType.
-func (x *MTL4RenderPassDescriptor) SetVisibilityResultType(visibilityResultType raw.MTLVisibilityResultType) {
-	x.inner.SetVisibilityResultType(visibilityResultType)
+func (x *MTL4RenderPassDescriptor) SetVisibilityResultType(visibilityResultType MTLVisibilityResultType) {
+	x.inner.SetVisibilityResultType(raw.MTLVisibilityResultType(visibilityResultType))
 }
 
 // SupportColorAttachmentMapping calls the underlying SupportColorAttachmentMapping.
@@ -301,7 +301,7 @@ type MTL4RenderPassDescriptorable interface {
 	WithRenderTargetHeight(renderTargetHeight uint) *MTL4RenderPassDescriptor
 	WithRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap) *MTL4RenderPassDescriptor
 	WithVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer) *MTL4RenderPassDescriptor
-	WithVisibilityResultType(visibilityResultType raw.MTLVisibilityResultType) *MTL4RenderPassDescriptor
+	WithVisibilityResultType(visibilityResultType MTLVisibilityResultType) *MTL4RenderPassDescriptor
 	WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *MTL4RenderPassDescriptor
 	SetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint)
 	GetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) uint
@@ -330,8 +330,8 @@ type MTL4RenderPassDescriptorable interface {
 	SetRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap)
 	VisibilityResultBuffer() raw.MTLBuffer
 	SetVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer)
-	VisibilityResultType() raw.MTLVisibilityResultType
-	SetVisibilityResultType(visibilityResultType raw.MTLVisibilityResultType)
+	VisibilityResultType() MTLVisibilityResultType
+	SetVisibilityResultType(visibilityResultType MTLVisibilityResultType)
 	SupportColorAttachmentMapping() bool
 	SetSupportColorAttachmentMapping(supportColorAttachmentMapping bool)
 }

@@ -36,8 +36,8 @@ func NewMTL4CounterHeapDescriptor() *MTL4CounterHeapDescriptor {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *MTL4CounterHeapDescriptor) WithType(type_ raw.MTL4CounterHeapType) *MTL4CounterHeapDescriptor {
-	x.inner.SetType(type_)
+func (x *MTL4CounterHeapDescriptor) WithType(type_ MTL4CounterHeapType) *MTL4CounterHeapDescriptor {
+	x.inner.SetType(raw.MTL4CounterHeapType(type_))
 	return x
 }
 
@@ -48,13 +48,13 @@ func (x *MTL4CounterHeapDescriptor) WithCount(count uint) *MTL4CounterHeapDescri
 }
 
 // Type calls the underlying Type.
-func (x *MTL4CounterHeapDescriptor) Type() raw.MTL4CounterHeapType {
-	return x.inner.Type()
+func (x *MTL4CounterHeapDescriptor) Type() MTL4CounterHeapType {
+	return MTL4CounterHeapType(x.inner.Type())
 }
 
 // SetType calls the underlying SetType.
-func (x *MTL4CounterHeapDescriptor) SetType(type_ raw.MTL4CounterHeapType) {
-	x.inner.SetType(type_)
+func (x *MTL4CounterHeapDescriptor) SetType(type_ MTL4CounterHeapType) {
+	x.inner.SetType(raw.MTL4CounterHeapType(type_))
 }
 
 // Count calls the underlying Count.
@@ -70,10 +70,10 @@ func (x *MTL4CounterHeapDescriptor) SetCount(count uint) {
 // MTL4CounterHeapDescriptorable is the interface implemented by [MTL4CounterHeapDescriptor], for mocking and DI.
 type MTL4CounterHeapDescriptorable interface {
 	Unwrap() *raw.MTL4CounterHeapDescriptor
-	WithType(type_ raw.MTL4CounterHeapType) *MTL4CounterHeapDescriptor
+	WithType(type_ MTL4CounterHeapType) *MTL4CounterHeapDescriptor
 	WithCount(count uint) *MTL4CounterHeapDescriptor
-	Type() raw.MTL4CounterHeapType
-	SetType(type_ raw.MTL4CounterHeapType)
+	Type() MTL4CounterHeapType
+	SetType(type_ MTL4CounterHeapType)
 	Count() uint
 	SetCount(count uint)
 }

@@ -26,6 +26,13 @@ if _r == nil {
 return nil, nil
 }
 return &{{.TrialType}}{inner: _r}, nil
+{{- else if eq .RetMode "enumcast"}}
+_r, _err := {{.Call}}
+if _err != nil {
+var _zero {{.EnumType}}
+return _zero, _err
+}
+return {{.EnumType}}(_r), nil
 {{- end}}
 {{- else}}
 {{- if eq .RetMode "void"}}
@@ -44,6 +51,8 @@ if _r == nil {
 return nil
 }
 return &{{.TrialType}}{inner: _r}
+{{- else if eq .RetMode "enumcast"}}
+return {{.EnumType}}({{.Call}})
 {{- end}}
 {{- end}}
 }

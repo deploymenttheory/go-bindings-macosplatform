@@ -43,8 +43,8 @@ func (x *ControllerDirectionPad) WithValueChangedHandler(valueChangedHandler fun
 }
 
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerDirectionPad {
-	x.inner.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+func (x *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerDirectionPad {
+	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
@@ -153,7 +153,7 @@ func (x *ControllerDirectionPad) asControllerElement() *raw.GCControllerElement 
 type ControllerDirectionPadable interface {
 	Unwrap() *raw.GCControllerDirectionPad
 	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *ControllerDirectionPad
-	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerDirectionPad
+	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerDirectionPad
 	WithSfSymbolsName(sfSymbolsName string) *ControllerDirectionPad
 	WithLocalizedName(localizedName string) *ControllerDirectionPad
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerDirectionPad

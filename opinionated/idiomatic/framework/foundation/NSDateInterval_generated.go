@@ -63,8 +63,8 @@ func (x *DateInterval) WithScriptingProperties(scriptingProperties *raw.NSDictio
 }
 
 // Compare calls the underlying Compare.
-func (x *DateInterval) Compare(dateInterval *raw.NSDateInterval) raw.NSComparisonResult {
-	return x.inner.Compare(dateInterval)
+func (x *DateInterval) Compare(dateInterval *raw.NSDateInterval) NSComparisonResult {
+	return NSComparisonResult(x.inner.Compare(dateInterval))
 }
 
 // IsEqualToDateInterval calls the underlying IsEqualToDateInterval.
@@ -120,7 +120,7 @@ func (x *DateInterval) asObject() *raw.NSObject { return &x.inner.NSObject }
 type DateIntervalable interface {
 	Unwrap() *raw.NSDateInterval
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateInterval
-	Compare(dateInterval *raw.NSDateInterval) raw.NSComparisonResult
+	Compare(dateInterval *raw.NSDateInterval) NSComparisonResult
 	IsEqualToDateInterval(dateInterval *raw.NSDateInterval) bool
 	IntersectsDateInterval(dateInterval *raw.NSDateInterval) bool
 	IntersectionWithDateInterval(dateInterval *raw.NSDateInterval) *DateInterval

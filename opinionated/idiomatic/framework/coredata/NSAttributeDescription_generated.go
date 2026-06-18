@@ -38,8 +38,8 @@ func NewAttributeDescription() *AttributeDescription {
 }
 
 // WithAttributeType sets the attributeType property and returns the receiver for chaining.
-func (x *AttributeDescription) WithAttributeType(attributeType raw.NSAttributeType) *AttributeDescription {
-	x.inner.SetAttributeType(attributeType)
+func (x *AttributeDescription) WithAttributeType(attributeType NSAttributeType) *AttributeDescription {
+	x.inner.SetAttributeType(raw.NSAttributeType(attributeType))
 	return x
 }
 
@@ -134,13 +134,13 @@ func (x *AttributeDescription) WithRenamingIdentifier(renamingIdentifier string)
 }
 
 // AttributeType calls the underlying AttributeType.
-func (x *AttributeDescription) AttributeType() raw.NSAttributeType {
-	return x.inner.AttributeType()
+func (x *AttributeDescription) AttributeType() NSAttributeType {
+	return NSAttributeType(x.inner.AttributeType())
 }
 
 // SetAttributeType calls the underlying SetAttributeType.
-func (x *AttributeDescription) SetAttributeType(attributeType raw.NSAttributeType) {
-	x.inner.SetAttributeType(attributeType)
+func (x *AttributeDescription) SetAttributeType(attributeType NSAttributeType) {
+	x.inner.SetAttributeType(raw.NSAttributeType(attributeType))
 }
 
 // AttributeValueClassName calls the underlying AttributeValueClassName.
@@ -220,7 +220,7 @@ func (x *AttributeDescription) asPropertyDescription() *raw.NSPropertyDescriptio
 // AttributeDescriptionable is the interface implemented by [AttributeDescription], for mocking and DI.
 type AttributeDescriptionable interface {
 	Unwrap() *raw.NSAttributeDescription
-	WithAttributeType(attributeType raw.NSAttributeType) *AttributeDescription
+	WithAttributeType(attributeType NSAttributeType) *AttributeDescription
 	WithAttributeValueClassName(attributeValueClassName string) *AttributeDescription
 	WithDefaultValue(defaultValue objc.ID) *AttributeDescription
 	WithValueTransformerName(valueTransformerName string) *AttributeDescription
@@ -236,8 +236,8 @@ type AttributeDescriptionable interface {
 	WithIndexedBySpotlight(indexedBySpotlight bool) *AttributeDescription
 	WithStoredInExternalRecord(storedInExternalRecord bool) *AttributeDescription
 	WithRenamingIdentifier(renamingIdentifier string) *AttributeDescription
-	AttributeType() raw.NSAttributeType
-	SetAttributeType(attributeType raw.NSAttributeType)
+	AttributeType() NSAttributeType
+	SetAttributeType(attributeType NSAttributeType)
 	AttributeValueClassName() string
 	SetAttributeValueClassName(attributeValueClassName string)
 	DefaultValue() objc.ID

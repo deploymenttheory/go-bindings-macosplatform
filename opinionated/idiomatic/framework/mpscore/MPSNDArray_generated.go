@@ -85,8 +85,8 @@ func (x *NDArray) ResourceSize() uint {
 }
 
 // ArrayViewWithCommandBufferDescriptorAliasing calls the underlying ArrayViewWithCommandBufferDescriptorAliasing.
-func (x *NDArray) ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf metal.MTLCommandBuffer, descriptor *raw.MPSNDArrayDescriptor, aliasing raw.MPSAliasingStrategy) *NDArray {
-	_r := x.inner.ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf, descriptor, aliasing)
+func (x *NDArray) ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf metal.MTLCommandBuffer, descriptor *raw.MPSNDArrayDescriptor, aliasing MPSAliasingStrategy) *NDArray {
+	_r := x.inner.ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf, descriptor, raw.MPSAliasingStrategy(aliasing))
 	if _r == nil {
 		return nil
 	}
@@ -121,13 +121,13 @@ func (x *NDArray) ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimen
 }
 
 // ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides calls the underlying ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides.
-func (x *NDArray) ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, destinationDataType raw.MPSDataType, offset uint, rowStrides *int64) {
-	x.inner.ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf, buffer, destinationDataType, offset, rowStrides)
+func (x *NDArray) ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, destinationDataType MPSDataType, offset uint, rowStrides *int64) {
+	x.inner.ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf, buffer, raw.MPSDataType(destinationDataType), offset, rowStrides)
 }
 
 // ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides calls the underlying ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides.
-func (x *NDArray) ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, sourceDataType raw.MPSDataType, offset uint, rowStrides *int64) {
-	x.inner.ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf, buffer, sourceDataType, offset, rowStrides)
+func (x *NDArray) ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, sourceDataType MPSDataType, offset uint, rowStrides *int64) {
+	x.inner.ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf, buffer, raw.MPSDataType(sourceDataType), offset, rowStrides)
 }
 
 // ExportDataWithCommandBufferToImagesOffset calls the underlying ExportDataWithCommandBufferToImagesOffset.
@@ -170,8 +170,8 @@ func (x *NDArray) SetLabel(label string) {
 }
 
 // DataType calls the underlying DataType.
-func (x *NDArray) DataType() raw.MPSDataType {
-	return x.inner.DataType()
+func (x *NDArray) DataType() MPSDataType {
+	return MPSDataType(x.inner.DataType())
 }
 
 // DataTypeSize calls the underlying DataTypeSize.
@@ -208,12 +208,12 @@ type NDArrayable interface {
 	Descriptor() *NDArrayDescriptor
 	UserBuffer() metal.MTLBuffer
 	ResourceSize() uint
-	ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf metal.MTLCommandBuffer, descriptor *raw.MPSNDArrayDescriptor, aliasing raw.MPSAliasingStrategy) *NDArray
+	ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf metal.MTLCommandBuffer, descriptor *raw.MPSNDArrayDescriptor, aliasing MPSAliasingStrategy) *NDArray
 	ArrayViewWithDescriptor(descriptor *raw.MPSNDArrayDescriptor) *NDArray
 	ArrayViewWithShapeStrides(shape unsafe.Pointer, strides unsafe.Pointer) *NDArray
 	ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions uint, dimensionSizes *uint, dimStrides *uint) *NDArray
-	ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, destinationDataType raw.MPSDataType, offset uint, rowStrides *int64)
-	ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, sourceDataType raw.MPSDataType, offset uint, rowStrides *int64)
+	ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, destinationDataType MPSDataType, offset uint, rowStrides *int64)
+	ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, sourceDataType MPSDataType, offset uint, rowStrides *int64)
 	ExportDataWithCommandBufferToImagesOffset(cmdBuf metal.MTLCommandBuffer, images unsafe.Pointer, offset raw.MPSImageCoordinate)
 	ImportDataWithCommandBufferFromImagesOffset(cmdBuf metal.MTLCommandBuffer, images unsafe.Pointer, offset raw.MPSImageCoordinate)
 	ReadBytesStrideBytes(buffer unsafe.Pointer, strideBytesPerDimension *int64)
@@ -221,7 +221,7 @@ type NDArrayable interface {
 	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
 	Label() string
 	SetLabel(label string)
-	DataType() raw.MPSDataType
+	DataType() MPSDataType
 	DataTypeSize() uint
 	NumberOfDimensions() uint
 	Device() metal.MTLDevice

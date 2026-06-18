@@ -59,8 +59,8 @@ func (x *ScreenRecorder) WithCameraEnabled(cameraEnabled bool) *ScreenRecorder {
 }
 
 // WithCameraPosition sets the cameraPosition property and returns the receiver for chaining.
-func (x *ScreenRecorder) WithCameraPosition(cameraPosition raw.RPCameraPosition) *ScreenRecorder {
-	x.inner.SetCameraPosition(cameraPosition)
+func (x *ScreenRecorder) WithCameraPosition(cameraPosition RPCameraPosition) *ScreenRecorder {
+	x.inner.SetCameraPosition(raw.RPCameraPosition(cameraPosition))
 	return x
 }
 
@@ -141,9 +141,11 @@ func (x *ScreenRecorder) DiscardRecordingWithHandler(ctx context.Context) error 
 }
 
 // StartCaptureWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *ScreenRecorder) StartCaptureWithHandler(ctx context.Context, captureHandler func(unsafe.Pointer, raw.RPSampleBufferType, unsafe.Pointer)) error {
+func (x *ScreenRecorder) StartCaptureWithHandler(ctx context.Context, captureHandler func(unsafe.Pointer, RPSampleBufferType, unsafe.Pointer)) error {
 	_ch := make(chan error, 1)
-	x.inner.StartCaptureWithHandlerCompletionHandler(captureHandler, func(_p0 unsafe.Pointer) {
+	x.inner.StartCaptureWithHandlerCompletionHandler(func(_a0 unsafe.Pointer, _a1 raw.RPSampleBufferType, _a2 unsafe.Pointer) {
+		captureHandler(_a0, RPSampleBufferType(_a1), _a2)
+	}, func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -271,13 +273,13 @@ func (x *ScreenRecorder) SetCameraEnabled(cameraEnabled bool) {
 }
 
 // CameraPosition calls the underlying CameraPosition.
-func (x *ScreenRecorder) CameraPosition() raw.RPCameraPosition {
-	return x.inner.CameraPosition()
+func (x *ScreenRecorder) CameraPosition() RPCameraPosition {
+	return RPCameraPosition(x.inner.CameraPosition())
 }
 
 // SetCameraPosition calls the underlying SetCameraPosition.
-func (x *ScreenRecorder) SetCameraPosition(cameraPosition raw.RPCameraPosition) {
-	x.inner.SetCameraPosition(cameraPosition)
+func (x *ScreenRecorder) SetCameraPosition(cameraPosition RPCameraPosition) {
+	x.inner.SetCameraPosition(raw.RPCameraPosition(cameraPosition))
 }
 
 // CameraPreviewView calls the underlying CameraPreviewView.
@@ -291,12 +293,12 @@ type ScreenRecorderable interface {
 	WithDelegate(delegate raw.RPScreenRecorderDelegate) *ScreenRecorder
 	WithMicrophoneEnabled(microphoneEnabled bool) *ScreenRecorder
 	WithCameraEnabled(cameraEnabled bool) *ScreenRecorder
-	WithCameraPosition(cameraPosition raw.RPCameraPosition) *ScreenRecorder
+	WithCameraPosition(cameraPosition RPCameraPosition) *ScreenRecorder
 	StartRecordingWithHandler(ctx context.Context) error
 	StopRecordingWithHandler(ctx context.Context) (*PreviewViewController, error)
 	StopRecordingWithOutputURL(ctx context.Context, url string) error
 	DiscardRecordingWithHandler(ctx context.Context) error
-	StartCaptureWithHandler(ctx context.Context, captureHandler func(unsafe.Pointer, raw.RPSampleBufferType, unsafe.Pointer)) error
+	StartCaptureWithHandler(ctx context.Context, captureHandler func(unsafe.Pointer, RPSampleBufferType, unsafe.Pointer)) error
 	StopCaptureWithHandler(ctx context.Context) error
 	StartClipBuffering(ctx context.Context) error
 	StopClipBuffering(ctx context.Context) error
@@ -309,8 +311,8 @@ type ScreenRecorderable interface {
 	SetMicrophoneEnabled(microphoneEnabled bool)
 	IsCameraEnabled() bool
 	SetCameraEnabled(cameraEnabled bool)
-	CameraPosition() raw.RPCameraPosition
-	SetCameraPosition(cameraPosition raw.RPCameraPosition)
+	CameraPosition() RPCameraPosition
+	SetCameraPosition(cameraPosition RPCameraPosition)
 	CameraPreviewView() *appkit.NSView
 }
 

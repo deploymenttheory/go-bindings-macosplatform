@@ -153,8 +153,8 @@ func (x *MetadataQuery) EnumerateResultsUsing(block func(objc.ID, uint, *bool)) 
 }
 
 // EnumerateResultsWithOptionsUsing calls the underlying EnumerateResultsWithOptionsUsing.
-func (x *MetadataQuery) EnumerateResultsWithOptionsUsing(opts raw.NSEnumerationOptions, block func(objc.ID, uint, *bool)) {
-	x.inner.EnumerateResultsWithOptionsUsing(opts, block)
+func (x *MetadataQuery) EnumerateResultsWithOptionsUsing(opts NSEnumerationOptions, block func(objc.ID, uint, *bool)) {
+	x.inner.EnumerateResultsWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
 // IndexOfResult calls the underlying IndexOfResult.
@@ -343,7 +343,7 @@ type MetadataQueryable interface {
 	EnableUpdates()
 	ResultAtIndex(idx uint) objc.ID
 	EnumerateResultsUsing(block func(objc.ID, uint, *bool))
-	EnumerateResultsWithOptionsUsing(opts raw.NSEnumerationOptions, block func(objc.ID, uint, *bool))
+	EnumerateResultsWithOptionsUsing(opts NSEnumerationOptions, block func(objc.ID, uint, *bool))
 	IndexOfResult(result objc.ID) uint
 	ValueOfAttributeForResultAtIndex(attrName string, idx uint) objc.ID
 	Delegate() raw.NSMetadataQueryDelegate

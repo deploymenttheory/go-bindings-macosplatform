@@ -948,8 +948,8 @@ func CMTagCollectionApplyUntil(tagCollection unsafe.Pointer, applier unsafe.Poin
 }
 
 // CMTagCollectionContainsCategory calls [raw.CMTagCollectionContainsCategory] (C function CMTagCollectionContainsCategory).
-func CMTagCollectionContainsCategory(tagCollection unsafe.Pointer, category raw.CMTagCategory) uint8 {
-	return raw.CMTagCollectionContainsCategory(tagCollection, category)
+func CMTagCollectionContainsCategory(tagCollection unsafe.Pointer, category CMTagCategory) uint8 {
+	return raw.CMTagCollectionContainsCategory(tagCollection, raw.CMTagCategory(category))
 }
 
 // CMTagCollectionContainsSpecifiedTags calls [raw.CMTagCollectionContainsSpecifiedTags] (C function CMTagCollectionContainsSpecifiedTags).
@@ -983,8 +983,13 @@ func CMTagCollectionCopyDescription(allocator unsafe.Pointer, tagCollection unsa
 }
 
 // CMTagCollectionCopyTagsOfCategories calls [raw.CMTagCollectionCopyTagsOfCategories] (C function CMTagCollectionCopyTagsOfCategories).
-func CMTagCollectionCopyTagsOfCategories(allocator unsafe.Pointer, tagCollection unsafe.Pointer, categories *raw.CMTagCategory, categoriesCount int, collectionWithTagsOfCategories unsafe.Pointer) int {
-	return raw.CMTagCollectionCopyTagsOfCategories(allocator, tagCollection, categories, categoriesCount, collectionWithTagsOfCategories)
+func CMTagCollectionCopyTagsOfCategories(allocator unsafe.Pointer, tagCollection unsafe.Pointer, categories *CMTagCategory, categoriesCount int, collectionWithTagsOfCategories unsafe.Pointer) int {
+	var _categories raw.CMTagCategory
+	_ret := raw.CMTagCollectionCopyTagsOfCategories(allocator, tagCollection, &_categories, categoriesCount, collectionWithTagsOfCategories)
+	if categories != nil {
+		*categories = CMTagCategory(_categories)
+	}
+	return _ret
 }
 
 // CMTagCollectionCountTagsWithFilterFunction calls [raw.CMTagCollectionCountTagsWithFilterFunction] (C function CMTagCollectionCountTagsWithFilterFunction).
@@ -1048,8 +1053,8 @@ func CMTagCollectionGetCount(tagCollection unsafe.Pointer) int {
 }
 
 // CMTagCollectionGetCountOfCategory calls [raw.CMTagCollectionGetCountOfCategory] (C function CMTagCollectionGetCountOfCategory).
-func CMTagCollectionGetCountOfCategory(tagCollection unsafe.Pointer, category raw.CMTagCategory) int {
-	return raw.CMTagCollectionGetCountOfCategory(tagCollection, category)
+func CMTagCollectionGetCountOfCategory(tagCollection unsafe.Pointer, category CMTagCategory) int {
+	return raw.CMTagCollectionGetCountOfCategory(tagCollection, raw.CMTagCategory(category))
 }
 
 // CMTagCollectionGetTags calls [raw.CMTagCollectionGetTags] (C function CMTagCollectionGetTags).
@@ -1058,8 +1063,8 @@ func CMTagCollectionGetTags(tagCollection unsafe.Pointer, tagBuffer *raw.CMTag, 
 }
 
 // CMTagCollectionGetTagsWithCategory calls [raw.CMTagCollectionGetTagsWithCategory] (C function CMTagCollectionGetTagsWithCategory).
-func CMTagCollectionGetTagsWithCategory(tagCollection unsafe.Pointer, category raw.CMTagCategory, tagBuffer *raw.CMTag, tagBufferCount int, numberOfTagsCopied *int) int {
-	return raw.CMTagCollectionGetTagsWithCategory(tagCollection, category, tagBuffer, tagBufferCount, numberOfTagsCopied)
+func CMTagCollectionGetTagsWithCategory(tagCollection unsafe.Pointer, category CMTagCategory, tagBuffer *raw.CMTag, tagBufferCount int, numberOfTagsCopied *int) int {
+	return raw.CMTagCollectionGetTagsWithCategory(tagCollection, raw.CMTagCategory(category), tagBuffer, tagBufferCount, numberOfTagsCopied)
 }
 
 // CMTagCollectionGetTagsWithFilterFunction calls [raw.CMTagCollectionGetTagsWithFilterFunction] (C function CMTagCollectionGetTagsWithFilterFunction).
@@ -1083,8 +1088,8 @@ func CMTagCollectionRemoveAllTags(tagCollection unsafe.Pointer) int {
 }
 
 // CMTagCollectionRemoveAllTagsOfCategory calls [raw.CMTagCollectionRemoveAllTagsOfCategory] (C function CMTagCollectionRemoveAllTagsOfCategory).
-func CMTagCollectionRemoveAllTagsOfCategory(tagCollection unsafe.Pointer, category raw.CMTagCategory) int {
-	return raw.CMTagCollectionRemoveAllTagsOfCategory(tagCollection, category)
+func CMTagCollectionRemoveAllTagsOfCategory(tagCollection unsafe.Pointer, category CMTagCategory) int {
+	return raw.CMTagCollectionRemoveAllTagsOfCategory(tagCollection, raw.CMTagCategory(category))
 }
 
 // CMTagCollectionRemoveTag calls [raw.CMTagCollectionRemoveTag] (C function CMTagCollectionRemoveTag).
@@ -1113,8 +1118,8 @@ func CMTagEqualToTag(tag1 raw.CMTag, tag2 raw.CMTag) uint8 {
 }
 
 // CMTagGetCategory calls [raw.CMTagGetCategory] (C function CMTagGetCategory).
-func CMTagGetCategory(tag raw.CMTag) raw.CMTagCategory {
-	return raw.CMTagGetCategory(tag)
+func CMTagGetCategory(tag raw.CMTag) CMTagCategory {
+	return CMTagCategory(raw.CMTagGetCategory(tag))
 }
 
 // CMTagGetFlagsValue calls [raw.CMTagGetFlagsValue] (C function CMTagGetFlagsValue).
@@ -1143,13 +1148,13 @@ func CMTagGetValue(tag raw.CMTag) uint64 {
 }
 
 // CMTagGetValueDataType calls [raw.CMTagGetValueDataType] (C function CMTagGetValueDataType).
-func CMTagGetValueDataType(tag raw.CMTag) raw.CMTagDataType {
-	return raw.CMTagGetValueDataType(tag)
+func CMTagGetValueDataType(tag raw.CMTag) CMTagDataType {
+	return CMTagDataType(raw.CMTagGetValueDataType(tag))
 }
 
 // CMTagHasCategory calls [raw.CMTagHasCategory] (C function CMTagHasCategory).
-func CMTagHasCategory(tag raw.CMTag, category raw.CMTagCategory) uint8 {
-	return raw.CMTagHasCategory(tag, category)
+func CMTagHasCategory(tag raw.CMTag, category CMTagCategory) uint8 {
+	return raw.CMTagHasCategory(tag, raw.CMTagCategory(category))
 }
 
 // CMTagHasFlagsValue calls [raw.CMTagHasFlagsValue] (C function CMTagHasFlagsValue).
@@ -1188,23 +1193,23 @@ func CMTagMakeFromDictionary(dict unsafe.Pointer) raw.CMTag {
 }
 
 // CMTagMakeWithFlagsValue calls [raw.CMTagMakeWithFlagsValue] (C function CMTagMakeWithFlagsValue).
-func CMTagMakeWithFlagsValue(category raw.CMTagCategory, flagsForTag uint64) raw.CMTag {
-	return raw.CMTagMakeWithFlagsValue(category, flagsForTag)
+func CMTagMakeWithFlagsValue(category CMTagCategory, flagsForTag uint64) raw.CMTag {
+	return raw.CMTagMakeWithFlagsValue(raw.CMTagCategory(category), flagsForTag)
 }
 
 // CMTagMakeWithFloat64Value calls [raw.CMTagMakeWithFloat64Value] (C function CMTagMakeWithFloat64Value).
-func CMTagMakeWithFloat64Value(category raw.CMTagCategory, value float64) raw.CMTag {
-	return raw.CMTagMakeWithFloat64Value(category, value)
+func CMTagMakeWithFloat64Value(category CMTagCategory, value float64) raw.CMTag {
+	return raw.CMTagMakeWithFloat64Value(raw.CMTagCategory(category), value)
 }
 
 // CMTagMakeWithOSTypeValue calls [raw.CMTagMakeWithOSTypeValue] (C function CMTagMakeWithOSTypeValue).
-func CMTagMakeWithOSTypeValue(category raw.CMTagCategory, value uint) raw.CMTag {
-	return raw.CMTagMakeWithOSTypeValue(category, value)
+func CMTagMakeWithOSTypeValue(category CMTagCategory, value uint) raw.CMTag {
+	return raw.CMTagMakeWithOSTypeValue(raw.CMTagCategory(category), value)
 }
 
 // CMTagMakeWithSInt64Value calls [raw.CMTagMakeWithSInt64Value] (C function CMTagMakeWithSInt64Value).
-func CMTagMakeWithSInt64Value(category raw.CMTagCategory, value int64) raw.CMTag {
-	return raw.CMTagMakeWithSInt64Value(category, value)
+func CMTagMakeWithSInt64Value(category CMTagCategory, value int64) raw.CMTag {
+	return raw.CMTagMakeWithSInt64Value(raw.CMTagCategory(category), value)
 }
 
 // CMTaggedBufferGroupCreate calls [raw.CMTaggedBufferGroupCreate] (C function CMTaggedBufferGroupCreate).
@@ -1378,8 +1383,8 @@ func CMTimeCompare(time1 raw.CMTime, time2 raw.CMTime) int32 {
 }
 
 // CMTimeConvertScale calls [raw.CMTimeConvertScale] (C function CMTimeConvertScale).
-func CMTimeConvertScale(time_ raw.CMTime, newTimescale int32, method raw.CMTimeRoundingMethod) raw.CMTime {
-	return raw.CMTimeConvertScale(time_, newTimescale, method)
+func CMTimeConvertScale(time_ raw.CMTime, newTimescale int32, method CMTimeRoundingMethod) raw.CMTime {
+	return raw.CMTimeConvertScale(time_, newTimescale, raw.CMTimeRoundingMethod(method))
 }
 
 // CMTimeCopyAsDictionary calls [raw.CMTimeCopyAsDictionary] (C function CMTimeCopyAsDictionary).
@@ -1663,8 +1668,8 @@ func CMTimebaseGetTimeAndRate(timebase unsafe.Pointer, timeOut *raw.CMTime, rate
 }
 
 // CMTimebaseGetTimeWithTimeScale calls [raw.CMTimebaseGetTimeWithTimeScale] (C function CMTimebaseGetTimeWithTimeScale).
-func CMTimebaseGetTimeWithTimeScale(timebase unsafe.Pointer, timescale int32, method raw.CMTimeRoundingMethod) raw.CMTime {
-	return raw.CMTimebaseGetTimeWithTimeScale(timebase, timescale, method)
+func CMTimebaseGetTimeWithTimeScale(timebase unsafe.Pointer, timescale int32, method CMTimeRoundingMethod) raw.CMTime {
+	return raw.CMTimebaseGetTimeWithTimeScale(timebase, timescale, raw.CMTimeRoundingMethod(method))
 }
 
 // CMTimebaseGetTypeID calls [raw.CMTimebaseGetTypeID] (C function CMTimebaseGetTypeID).

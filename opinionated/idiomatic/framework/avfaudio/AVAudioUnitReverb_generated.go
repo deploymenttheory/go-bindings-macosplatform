@@ -48,8 +48,8 @@ func (x *AudioUnitReverb) WithBypass(bypass bool) *AudioUnitReverb {
 }
 
 // LoadFactoryPreset calls the underlying LoadFactoryPreset.
-func (x *AudioUnitReverb) LoadFactoryPreset(preset raw.AVAudioUnitReverbPreset) {
-	x.inner.LoadFactoryPreset(preset)
+func (x *AudioUnitReverb) LoadFactoryPreset(preset AVAudioUnitReverbPreset) {
+	x.inner.LoadFactoryPreset(raw.AVAudioUnitReverbPreset(preset))
 }
 
 // WetDryMix calls the underlying WetDryMix.
@@ -79,7 +79,7 @@ type AudioUnitReverbable interface {
 	Unwrap() *raw.AVAudioUnitReverb
 	WithWetDryMix(wetDryMix float32) *AudioUnitReverb
 	WithBypass(bypass bool) *AudioUnitReverb
-	LoadFactoryPreset(preset raw.AVAudioUnitReverbPreset)
+	LoadFactoryPreset(preset AVAudioUnitReverbPreset)
 	WetDryMix() float32
 	SetWetDryMix(wetDryMix float32)
 }

@@ -40,8 +40,8 @@ func NewPaymentRequestUpdateWithPaymentSummaryItems(paymentSummaryItems *foundat
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *PaymentRequestUpdate) WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestUpdate {
-	x.inner.SetStatus(status)
+func (x *PaymentRequestUpdate) WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestUpdate {
+	x.inner.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 	return x
 }
 
@@ -118,13 +118,13 @@ func (x *PaymentRequestUpdate) WithDeferredPaymentRequest(deferredPaymentRequest
 }
 
 // Status calls the underlying Status.
-func (x *PaymentRequestUpdate) Status() raw.PKPaymentAuthorizationStatus {
-	return x.inner.Status()
+func (x *PaymentRequestUpdate) Status() PKPaymentAuthorizationStatus {
+	return PKPaymentAuthorizationStatus(x.inner.Status())
 }
 
 // SetStatus calls the underlying SetStatus.
-func (x *PaymentRequestUpdate) SetStatus(status raw.PKPaymentAuthorizationStatus) {
-	x.inner.SetStatus(status)
+func (x *PaymentRequestUpdate) SetStatus(status PKPaymentAuthorizationStatus) {
+	x.inner.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 }
 
 // PaymentSummaryItems returns the collection as a Go slice.
@@ -222,15 +222,15 @@ func (x *PaymentRequestUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpd
 // PaymentRequestUpdateable is the interface implemented by [PaymentRequestUpdate], for mocking and DI.
 type PaymentRequestUpdateable interface {
 	Unwrap() *raw.PKPaymentRequestUpdate
-	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestUpdate
+	WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestUpdate
 	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestUpdate
 	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestUpdate
 	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestUpdate
 	WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestUpdate
 	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestUpdate
 	WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestUpdate
-	Status() raw.PKPaymentAuthorizationStatus
-	SetStatus(status raw.PKPaymentAuthorizationStatus)
+	Status() PKPaymentAuthorizationStatus
+	SetStatus(status PKPaymentAuthorizationStatus)
 	PaymentSummaryItems() []*PaymentSummaryItem
 	SetPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem])
 	ShippingMethods() []*ShippingMethod

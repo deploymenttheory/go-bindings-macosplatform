@@ -121,8 +121,13 @@ func (x *MetadataItem) DataValue() *foundation.NSData {
 }
 
 // StatusOfValueForKeyError calls the underlying StatusOfValueForKeyError.
-func (x *MetadataItem) StatusOfValueForKeyError(key string) (raw.AVKeyValueStatus, error) {
-	return x.inner.StatusOfValueForKeyError(foundation.NSStringStringWithUTF8String(key))
+func (x *MetadataItem) StatusOfValueForKeyError(key string) (AVKeyValueStatus, error) {
+	_r, _err := x.inner.StatusOfValueForKeyError(foundation.NSStringStringWithUTF8String(key))
+	if _err != nil {
+		var _zero AVKeyValueStatus
+		return _zero, _err
+	}
+	return AVKeyValueStatus(_r), nil
 }
 
 // LoadValuesAsynchronouslyForKeys blocks until the operation completes or ctx is cancelled.
@@ -180,7 +185,7 @@ type MetadataItemable interface {
 	NumberValue() *foundation.NSNumber
 	DateValue() *foundation.NSDate
 	DataValue() *foundation.NSData
-	StatusOfValueForKeyError(key string) (raw.AVKeyValueStatus, error)
+	StatusOfValueForKeyError(key string) (AVKeyValueStatus, error)
 	LoadValuesAsynchronouslyForKeys(ctx context.Context, keys *foundation.NSArray[*foundation.NSString]) error
 	Key() objc.ID
 	CommonKey() string

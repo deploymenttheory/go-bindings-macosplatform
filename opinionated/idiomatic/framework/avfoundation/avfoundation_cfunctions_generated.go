@@ -13,8 +13,8 @@ import (
 )
 
 // AVCaptionDimensionMake calls [raw.AVCaptionDimensionMake] (C function AVCaptionDimensionMake).
-func AVCaptionDimensionMake(value float64, units raw.AVCaptionUnitsType) raw.AVCaptionDimension {
-	return raw.AVCaptionDimensionMake(value, units)
+func AVCaptionDimensionMake(value float64, units AVCaptionUnitsType) raw.AVCaptionDimension {
+	return raw.AVCaptionDimensionMake(value, raw.AVCaptionUnitsType(units))
 }
 
 // AVCaptionPointMake calls [raw.AVCaptionPointMake] (C function AVCaptionPointMake).
@@ -58,6 +58,6 @@ func AVSampleBufferAttachContentKey(sbuf unsafe.Pointer, contentKey *raw.AVConte
 }
 
 // CMTagCollectionCreateWithVideoOutputPreset calls [raw.CMTagCollectionCreateWithVideoOutputPreset] (C function CMTagCollectionCreateWithVideoOutputPreset).
-func CMTagCollectionCreateWithVideoOutputPreset(allocator unsafe.Pointer, preset raw.CMTagCollectionVideoOutputPreset, newCollectionOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateWithVideoOutputPreset(allocator, preset, newCollectionOut)
+func CMTagCollectionCreateWithVideoOutputPreset(allocator unsafe.Pointer, preset CMTagCollectionVideoOutputPreset, newCollectionOut unsafe.Pointer) int {
+	return raw.CMTagCollectionCreateWithVideoOutputPreset(allocator, raw.CMTagCollectionVideoOutputPreset(preset), newCollectionOut)
 }

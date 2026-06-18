@@ -298,8 +298,8 @@ func (x *ShapeLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *ShapeLay
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *ShapeLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *ShapeLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *ShapeLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *ShapeLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -316,8 +316,8 @@ func (x *ShapeLayer) WithCornerRadius(cornerRadius float64) *ShapeLayer {
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *ShapeLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *ShapeLayer {
-	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+func (x *ShapeLayer) WithMaskedCorners(maskedCorners CACornerMask) *ShapeLayer {
+	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -382,8 +382,8 @@ func (x *ShapeLayer) WithShadowRadius(shadowRadius float64) *ShapeLayer {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ShapeLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *ShapeLayer {
-	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+func (x *ShapeLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *ShapeLayer {
+	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -617,10 +617,10 @@ type ShapeLayerable interface {
 	WithOpaque(opaque bool) *ShapeLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ShapeLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *ShapeLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *ShapeLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *ShapeLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ShapeLayer
 	WithCornerRadius(cornerRadius float64) *ShapeLayer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *ShapeLayer
+	WithMaskedCorners(maskedCorners CACornerMask) *ShapeLayer
 	WithCornerCurve(cornerCurve *foundation.NSString) *ShapeLayer
 	WithBorderWidth(borderWidth float64) *ShapeLayer
 	WithOpacity(opacity float32) *ShapeLayer
@@ -631,7 +631,7 @@ type ShapeLayerable interface {
 	WithShadowOpacity(shadowOpacity float32) *ShapeLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *ShapeLayer
 	WithShadowRadius(shadowRadius float64) *ShapeLayer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *ShapeLayer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *ShapeLayer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *ShapeLayer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *ShapeLayer
 	WithName(name string) *ShapeLayer

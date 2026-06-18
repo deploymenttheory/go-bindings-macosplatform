@@ -30,9 +30,9 @@ func MaterialFromID(id objc.ID) *Material {
 }
 
 // NewMaterialWithEnginePreset creates a new [Material].
-func NewMaterialWithEnginePreset(engine *raw.PHASEEngine, preset raw.PHASEMaterialPreset) *Material {
+func NewMaterialWithEnginePreset(engine *raw.PHASEEngine, preset PHASEMaterialPreset) *Material {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMaterial")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), engine.Ptr(), preset)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), engine.Ptr(), raw.PHASEMaterialPreset(preset))
 	return &Material{inner: raw.PHASEMaterialFromID(_id)}
 }
 

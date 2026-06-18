@@ -263,8 +263,8 @@ func (x *OpenPanel) WithSubtitle(subtitle string) *OpenPanel {
 }
 
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
-func (x *OpenPanel) WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetTitleVisibility(titleVisibility)
+func (x *OpenPanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
 	return x
 }
 
@@ -275,8 +275,8 @@ func (x *OpenPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bo
 }
 
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
-func (x *OpenPanel) WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetToolbarStyle(toolbarStyle)
+func (x *OpenPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
 	return x
 }
 
@@ -329,8 +329,8 @@ func (x *OpenPanel) WithDelegate(delegate raw.NSWindowDelegate) *OpenPanel {
 }
 
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
-func (x *OpenPanel) WithStyleMask(styleMask raw.NSWindowStyleMask) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetStyleMask(styleMask)
+func (x *OpenPanel) WithStyleMask(styleMask NSWindowStyleMask) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetStyleMask(raw.NSWindowStyleMask(styleMask))
 	return x
 }
 
@@ -437,8 +437,8 @@ func (x *OpenPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWh
 }
 
 // WithBackingType sets the backingType property and returns the receiver for chaining.
-func (x *OpenPanel) WithBackingType(backingType raw.NSBackingStoreType) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetBackingType(backingType)
+func (x *OpenPanel) WithBackingType(backingType NSBackingStoreType) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
@@ -449,8 +449,8 @@ func (x *OpenPanel) WithLevel(level int) *OpenPanel {
 }
 
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
-func (x *OpenPanel) WithDepthLimit(depthLimit raw.NSWindowDepth) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetDepthLimit(depthLimit)
+func (x *OpenPanel) WithDepthLimit(depthLimit NSWindowDepth) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
@@ -473,8 +473,8 @@ func (x *OpenPanel) WithOpaque(opaque bool) *OpenPanel {
 }
 
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
-func (x *OpenPanel) WithSharingType(sharingType raw.NSWindowSharingType) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetSharingType(sharingType)
+func (x *OpenPanel) WithSharingType(sharingType NSWindowSharingType) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetSharingType(raw.NSWindowSharingType(sharingType))
 	return x
 }
 
@@ -497,14 +497,14 @@ func (x *OpenPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogi
 }
 
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
-func (x *OpenPanel) WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetCollectionBehavior(collectionBehavior)
+func (x *OpenPanel) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
-func (x *OpenPanel) WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetAnimationBehavior(animationBehavior)
+func (x *OpenPanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
 	return x
 }
 
@@ -575,8 +575,8 @@ func (x *OpenPanel) WithColorSpace(colorSpace *ColorSpace) *OpenPanel {
 }
 
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
-func (x *OpenPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+func (x *OpenPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 	return x
 }
 
@@ -617,8 +617,8 @@ func (x *OpenPanel) WithShowsToolbarButton(showsToolbarButton bool) *OpenPanel {
 }
 
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
-func (x *OpenPanel) WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetTabbingMode(tabbingMode)
+func (x *OpenPanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
 	return x
 }
 
@@ -653,8 +653,8 @@ func (x *OpenPanel) WithOneShot(oneShot bool) *OpenPanel {
 }
 
 // WithPreferredBackingLocation sets the preferredBackingLocation property and returns the receiver for chaining.
-func (x *OpenPanel) WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *OpenPanel {
-	x.inner.NSSavePanel.NSPanel.NSWindow.SetPreferredBackingLocation(preferredBackingLocation)
+func (x *OpenPanel) WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetPreferredBackingLocation(raw.NSWindowBackingLocation(preferredBackingLocation))
 	return x
 }
 
@@ -850,16 +850,16 @@ type OpenPanelable interface {
 	WithWorksWhenModal(worksWhenModal bool) *OpenPanel
 	WithTitle(title string) *OpenPanel
 	WithSubtitle(subtitle string) *OpenPanel
-	WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *OpenPanel
+	WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *OpenPanel
 	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *OpenPanel
-	WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *OpenPanel
+	WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *OpenPanel
 	WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *OpenPanel
 	WithRepresentedURL(representedURL string) *OpenPanel
 	WithRepresentedFilename(representedFilename string) *OpenPanel
 	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *OpenPanel
 	WithContentView(contentView ViewProvider) *OpenPanel
 	WithDelegate(delegate raw.NSWindowDelegate) *OpenPanel
-	WithStyleMask(styleMask raw.NSWindowStyleMask) *OpenPanel
+	WithStyleMask(styleMask NSWindowStyleMask) *OpenPanel
 	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *OpenPanel
 	WithAspectRatio(aspectRatio corefoundation.CGSize) *OpenPanel
 	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *OpenPanel
@@ -877,18 +877,18 @@ type OpenPanelable interface {
 	WithDocumentEdited(documentEdited bool) *OpenPanel
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *OpenPanel
 	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *OpenPanel
-	WithBackingType(backingType raw.NSBackingStoreType) *OpenPanel
+	WithBackingType(backingType NSBackingStoreType) *OpenPanel
 	WithLevel(level int) *OpenPanel
-	WithDepthLimit(depthLimit raw.NSWindowDepth) *OpenPanel
+	WithDepthLimit(depthLimit NSWindowDepth) *OpenPanel
 	WithHasShadow(hasShadow bool) *OpenPanel
 	WithAlphaValue(alphaValue float64) *OpenPanel
 	WithOpaque(opaque bool) *OpenPanel
-	WithSharingType(sharingType raw.NSWindowSharingType) *OpenPanel
+	WithSharingType(sharingType NSWindowSharingType) *OpenPanel
 	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *OpenPanel
 	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *OpenPanel
 	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *OpenPanel
-	WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *OpenPanel
-	WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *OpenPanel
+	WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *OpenPanel
+	WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *OpenPanel
 	WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *OpenPanel
 	WithMinSize(minSize corefoundation.CGSize) *OpenPanel
 	WithMaxSize(maxSize corefoundation.CGSize) *OpenPanel
@@ -900,20 +900,20 @@ type OpenPanelable interface {
 	WithParentWindow(parentWindow WindowProvider) *OpenPanel
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *OpenPanel
 	WithColorSpace(colorSpace *ColorSpace) *OpenPanel
-	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *OpenPanel
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *OpenPanel
 	WithContentViewController(contentViewController ViewControllerProvider) *OpenPanel
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *OpenPanel
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *OpenPanel
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *OpenPanel
 	WithToolbar(toolbar *Toolbar) *OpenPanel
 	WithShowsToolbarButton(showsToolbarButton bool) *OpenPanel
-	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *OpenPanel
+	WithTabbingMode(tabbingMode NSWindowTabbingMode) *OpenPanel
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *OpenPanel
 	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *OpenPanel
 	WithIgnoresMouseEvents(ignoresMouseEvents bool) *OpenPanel
 	WithAutodisplay(autodisplay bool) *OpenPanel
 	WithOneShot(oneShot bool) *OpenPanel
-	WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *OpenPanel
+	WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *OpenPanel
 	WithShowsResizeIndicator(showsResizeIndicator bool) *OpenPanel
 	WithOrderedIndex(orderedIndex int) *OpenPanel
 	WithRestorable(restorable bool) *OpenPanel

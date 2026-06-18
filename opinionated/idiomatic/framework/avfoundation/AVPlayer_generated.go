@@ -66,8 +66,8 @@ func (x *Player) WithDefaultRate(defaultRate float32) *Player {
 }
 
 // WithActionAtItemEnd sets the actionAtItemEnd property and returns the receiver for chaining.
-func (x *Player) WithActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd) *Player {
-	x.inner.SetActionAtItemEnd(actionAtItemEnd)
+func (x *Player) WithActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd) *Player {
+	x.inner.SetActionAtItemEnd(raw.AVPlayerActionAtItemEnd(actionAtItemEnd))
 	return x
 }
 
@@ -120,8 +120,8 @@ func (x *Player) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySlee
 }
 
 // WithAudiovisualBackgroundPlaybackPolicy sets the audiovisualBackgroundPlaybackPolicy property and returns the receiver for chaining.
-func (x *Player) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) *Player {
-	x.inner.SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy)
+func (x *Player) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy AVPlayerAudiovisualBackgroundPlaybackPolicy) *Player {
+	x.inner.SetAudiovisualBackgroundPlaybackPolicy(raw.AVPlayerAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy))
 	return x
 }
 
@@ -132,8 +132,8 @@ func (x *Player) WithVideoOutput(videoOutput *PlayerVideoOutput) *Player {
 }
 
 // WithNetworkResourcePriority sets the networkResourcePriority property and returns the receiver for chaining.
-func (x *Player) WithNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) *Player {
-	x.inner.SetNetworkResourcePriority(networkResourcePriority)
+func (x *Player) WithNetworkResourcePriority(networkResourcePriority AVPlayerNetworkResourcePriority) *Player {
+	x.inner.SetNetworkResourcePriority(raw.AVPlayerNetworkResourcePriority(networkResourcePriority))
 	return x
 }
 
@@ -150,8 +150,8 @@ func (x *Player) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled boo
 }
 
 // Status calls the underlying Status.
-func (x *Player) Status() raw.AVPlayerStatus {
-	return x.inner.Status()
+func (x *Player) Status() AVPlayerStatus {
+	return AVPlayerStatus(x.inner.Status())
 }
 
 // Error calls the underlying Error.
@@ -195,8 +195,8 @@ func (x *Player) SetDefaultRate(defaultRate float32) {
 }
 
 // TimeControlStatus calls the underlying TimeControlStatus.
-func (x *Player) TimeControlStatus() raw.AVPlayerTimeControlStatus {
-	return x.inner.TimeControlStatus()
+func (x *Player) TimeControlStatus() AVPlayerTimeControlStatus {
+	return AVPlayerTimeControlStatus(x.inner.TimeControlStatus())
 }
 
 // ReasonForWaitingToPlay calls the underlying ReasonForWaitingToPlay.
@@ -223,13 +223,13 @@ func (x *Player) CurrentItem() *PlayerItem {
 }
 
 // ActionAtItemEnd calls the underlying ActionAtItemEnd.
-func (x *Player) ActionAtItemEnd() raw.AVPlayerActionAtItemEnd {
-	return x.inner.ActionAtItemEnd()
+func (x *Player) ActionAtItemEnd() AVPlayerActionAtItemEnd {
+	return AVPlayerActionAtItemEnd(x.inner.ActionAtItemEnd())
 }
 
 // SetActionAtItemEnd calls the underlying SetActionAtItemEnd.
-func (x *Player) SetActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd) {
-	x.inner.SetActionAtItemEnd(actionAtItemEnd)
+func (x *Player) SetActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd) {
+	x.inner.SetActionAtItemEnd(raw.AVPlayerActionAtItemEnd(actionAtItemEnd))
 }
 
 // CurrentTime calls the underlying CurrentTime.
@@ -416,13 +416,13 @@ func (x *Player) SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleep
 }
 
 // AudiovisualBackgroundPlaybackPolicy calls the underlying AudiovisualBackgroundPlaybackPolicy.
-func (x *Player) AudiovisualBackgroundPlaybackPolicy() raw.AVPlayerAudiovisualBackgroundPlaybackPolicy {
-	return x.inner.AudiovisualBackgroundPlaybackPolicy()
+func (x *Player) AudiovisualBackgroundPlaybackPolicy() AVPlayerAudiovisualBackgroundPlaybackPolicy {
+	return AVPlayerAudiovisualBackgroundPlaybackPolicy(x.inner.AudiovisualBackgroundPlaybackPolicy())
 }
 
 // SetAudiovisualBackgroundPlaybackPolicy calls the underlying SetAudiovisualBackgroundPlaybackPolicy.
-func (x *Player) SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) {
-	x.inner.SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy)
+func (x *Player) SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy AVPlayerAudiovisualBackgroundPlaybackPolicy) {
+	x.inner.SetAudiovisualBackgroundPlaybackPolicy(raw.AVPlayerAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy))
 }
 
 // PlaybackCoordinator calls the underlying PlaybackCoordinator.
@@ -449,13 +449,13 @@ func (x *Player) SetVideoOutput(videoOutput *raw.AVPlayerVideoOutput) {
 }
 
 // NetworkResourcePriority calls the underlying NetworkResourcePriority.
-func (x *Player) NetworkResourcePriority() raw.AVPlayerNetworkResourcePriority {
-	return x.inner.NetworkResourcePriority()
+func (x *Player) NetworkResourcePriority() AVPlayerNetworkResourcePriority {
+	return AVPlayerNetworkResourcePriority(x.inner.NetworkResourcePriority())
 }
 
 // SetNetworkResourcePriority calls the underlying SetNetworkResourcePriority.
-func (x *Player) SetNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) {
-	x.inner.SetNetworkResourcePriority(networkResourcePriority)
+func (x *Player) SetNetworkResourcePriority(networkResourcePriority AVPlayerNetworkResourcePriority) {
+	x.inner.SetNetworkResourcePriority(raw.AVPlayerNetworkResourcePriority(networkResourcePriority))
 }
 
 // IntendedSpatialAudioExperience calls the underlying IntendedSpatialAudioExperience.
@@ -505,7 +505,7 @@ type Playerable interface {
 	Unwrap() *raw.AVPlayer
 	WithRate(rate float32) *Player
 	WithDefaultRate(defaultRate float32) *Player
-	WithActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd) *Player
+	WithActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd) *Player
 	WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *Player
 	WithVolume(volume float32) *Player
 	WithMuted(muted bool) *Player
@@ -514,12 +514,12 @@ type Playerable interface {
 	WithAllowsExternalPlayback(allowsExternalPlayback bool) *Player
 	WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *Player
 	WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *Player
-	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) *Player
+	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy AVPlayerAudiovisualBackgroundPlaybackPolicy) *Player
 	WithVideoOutput(videoOutput *PlayerVideoOutput) *Player
-	WithNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) *Player
+	WithNetworkResourcePriority(networkResourcePriority AVPlayerNetworkResourcePriority) *Player
 	WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *Player
 	WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *Player
-	Status() raw.AVPlayerStatus
+	Status() AVPlayerStatus
 	Error() unsafe.Pointer
 	Play()
 	Pause()
@@ -528,12 +528,12 @@ type Playerable interface {
 	SetRate(rate float32)
 	DefaultRate() float32
 	SetDefaultRate(defaultRate float32)
-	TimeControlStatus() raw.AVPlayerTimeControlStatus
+	TimeControlStatus() AVPlayerTimeControlStatus
 	ReasonForWaitingToPlay() string
 	ReplaceCurrentItemWithPlayerItem(item *raw.AVPlayerItem)
 	CurrentItem() *PlayerItem
-	ActionAtItemEnd() raw.AVPlayerActionAtItemEnd
-	SetActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd)
+	ActionAtItemEnd() AVPlayerActionAtItemEnd
+	SetActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd)
 	CurrentTime() coremedia.CMTime
 	SeekToDate(date *foundation.NSDate)
 	SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool))
@@ -569,13 +569,13 @@ type Playerable interface {
 	SetPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64)
 	PreventsDisplaySleepDuringVideoPlayback() bool
 	SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool)
-	AudiovisualBackgroundPlaybackPolicy() raw.AVPlayerAudiovisualBackgroundPlaybackPolicy
-	SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy)
+	AudiovisualBackgroundPlaybackPolicy() AVPlayerAudiovisualBackgroundPlaybackPolicy
+	SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy AVPlayerAudiovisualBackgroundPlaybackPolicy)
 	PlaybackCoordinator() *PlayerPlaybackCoordinator
 	VideoOutput() *PlayerVideoOutput
 	SetVideoOutput(videoOutput *raw.AVPlayerVideoOutput)
-	NetworkResourcePriority() raw.AVPlayerNetworkResourcePriority
-	SetNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority)
+	NetworkResourcePriority() AVPlayerNetworkResourcePriority
+	SetNetworkResourcePriority(networkResourcePriority AVPlayerNetworkResourcePriority)
 	IntendedSpatialAudioExperience() unsafe.Pointer
 	SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer)
 	AllowsCaptureOfClearKeyVideo() bool

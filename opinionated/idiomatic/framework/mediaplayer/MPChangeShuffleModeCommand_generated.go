@@ -36,8 +36,8 @@ func NewChangeShuffleModeCommand() *ChangeShuffleModeCommand {
 }
 
 // WithCurrentShuffleType sets the currentShuffleType property and returns the receiver for chaining.
-func (x *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType raw.MPShuffleType) *ChangeShuffleModeCommand {
-	x.inner.SetCurrentShuffleType(currentShuffleType)
+func (x *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType MPShuffleType) *ChangeShuffleModeCommand {
+	x.inner.SetCurrentShuffleType(raw.MPShuffleType(currentShuffleType))
 	return x
 }
 
@@ -48,13 +48,13 @@ func (x *ChangeShuffleModeCommand) WithEnabled(enabled bool) *ChangeShuffleModeC
 }
 
 // CurrentShuffleType calls the underlying CurrentShuffleType.
-func (x *ChangeShuffleModeCommand) CurrentShuffleType() raw.MPShuffleType {
-	return x.inner.CurrentShuffleType()
+func (x *ChangeShuffleModeCommand) CurrentShuffleType() MPShuffleType {
+	return MPShuffleType(x.inner.CurrentShuffleType())
 }
 
 // SetCurrentShuffleType calls the underlying SetCurrentShuffleType.
-func (x *ChangeShuffleModeCommand) SetCurrentShuffleType(currentShuffleType raw.MPShuffleType) {
-	x.inner.SetCurrentShuffleType(currentShuffleType)
+func (x *ChangeShuffleModeCommand) SetCurrentShuffleType(currentShuffleType MPShuffleType) {
+	x.inner.SetCurrentShuffleType(raw.MPShuffleType(currentShuffleType))
 }
 
 func (x *ChangeShuffleModeCommand) asRemoteCommand() *raw.MPRemoteCommand {
@@ -64,10 +64,10 @@ func (x *ChangeShuffleModeCommand) asRemoteCommand() *raw.MPRemoteCommand {
 // ChangeShuffleModeCommandable is the interface implemented by [ChangeShuffleModeCommand], for mocking and DI.
 type ChangeShuffleModeCommandable interface {
 	Unwrap() *raw.MPChangeShuffleModeCommand
-	WithCurrentShuffleType(currentShuffleType raw.MPShuffleType) *ChangeShuffleModeCommand
+	WithCurrentShuffleType(currentShuffleType MPShuffleType) *ChangeShuffleModeCommand
 	WithEnabled(enabled bool) *ChangeShuffleModeCommand
-	CurrentShuffleType() raw.MPShuffleType
-	SetCurrentShuffleType(currentShuffleType raw.MPShuffleType)
+	CurrentShuffleType() MPShuffleType
+	SetCurrentShuffleType(currentShuffleType MPShuffleType)
 }
 
 var _ ChangeShuffleModeCommandable = (*ChangeShuffleModeCommand)(nil)

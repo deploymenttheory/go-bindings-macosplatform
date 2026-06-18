@@ -21,8 +21,8 @@ func CanExportFileExtension(extension string) bool {
 }
 
 // PlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource calls the underlying MDLAssetPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource.
-func PlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource(value float32, type_ raw.MDLProbePlacement, dataSource raw.MDLLightProbeIrradianceDataSource) *foundation.NSArray[*raw.MDLLightProbe] {
-	return raw.MDLAssetPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource(value, type_, dataSource)
+func PlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource(value float32, type_ MDLProbePlacement, dataSource raw.MDLLightProbeIrradianceDataSource) *foundation.NSArray[*raw.MDLLightProbe] {
+	return raw.MDLAssetPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource(value, raw.MDLProbePlacement(type_), dataSource)
 }
 
 // LightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap calls the underlying MDLLightProbeLightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap.
@@ -35,8 +35,8 @@ func LightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflec
 }
 
 // NewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator calls the underlying MDLMeshNewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator.
-func NewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator(dimensions unsafe.Pointer, segments unsafe.Pointer, geometryType raw.MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator(dimensions, segments, geometryType, inwardNormals, allocator)
+func NewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator(dimensions unsafe.Pointer, segments unsafe.Pointer, geometryType MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
+	_r := raw.MDLMeshNewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator(dimensions, segments, raw.MDLGeometryType(geometryType), inwardNormals, allocator)
 	if _r == nil {
 		return nil
 	}
@@ -44,8 +44,8 @@ func NewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator(dimensions u
 }
 
 // NewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator calls the underlying MDLMeshNewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator.
-func NewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator(radii unsafe.Pointer, radialSegments uint, verticalSegments uint, geometryType raw.MDLGeometryType, inwardNormals bool, hemisphere bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator(radii, radialSegments, verticalSegments, geometryType, inwardNormals, hemisphere, allocator)
+func NewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator(radii unsafe.Pointer, radialSegments uint, verticalSegments uint, geometryType MDLGeometryType, inwardNormals bool, hemisphere bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
+	_r := raw.MDLMeshNewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator(radii, radialSegments, verticalSegments, raw.MDLGeometryType(geometryType), inwardNormals, hemisphere, allocator)
 	if _r == nil {
 		return nil
 	}
@@ -53,8 +53,8 @@ func NewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormal
 }
 
 // NewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator calls the underlying MDLMeshNewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator.
-func NewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height float32, radii unsafe.Pointer, radialSegments uint, verticalSegments uint, geometryType raw.MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height, radii, radialSegments, verticalSegments, geometryType, inwardNormals, allocator)
+func NewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height float32, radii unsafe.Pointer, radialSegments uint, verticalSegments uint, geometryType MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
+	_r := raw.MDLMeshNewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height, radii, radialSegments, verticalSegments, raw.MDLGeometryType(geometryType), inwardNormals, allocator)
 	if _r == nil {
 		return nil
 	}
@@ -62,8 +62,8 @@ func NewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardN
 }
 
 // NewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator calls the underlying MDLMeshNewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator.
-func NewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator(height float32, radii unsafe.Pointer, radialSegments uint, verticalSegments uint, hemisphereSegments uint, geometryType raw.MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator(height, radii, radialSegments, verticalSegments, hemisphereSegments, geometryType, inwardNormals, allocator)
+func NewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator(height float32, radii unsafe.Pointer, radialSegments uint, verticalSegments uint, hemisphereSegments uint, geometryType MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
+	_r := raw.MDLMeshNewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator(height, radii, radialSegments, verticalSegments, hemisphereSegments, raw.MDLGeometryType(geometryType), inwardNormals, allocator)
 	if _r == nil {
 		return nil
 	}
@@ -71,8 +71,8 @@ func NewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGe
 }
 
 // NewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator calls the underlying MDLMeshNewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator.
-func NewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height float32, radii unsafe.Pointer, radialSegments uint, verticalSegments uint, geometryType raw.MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height, radii, radialSegments, verticalSegments, geometryType, inwardNormals, allocator)
+func NewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height float32, radii unsafe.Pointer, radialSegments uint, verticalSegments uint, geometryType MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
+	_r := raw.MDLMeshNewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height, radii, radialSegments, verticalSegments, raw.MDLGeometryType(geometryType), inwardNormals, allocator)
 	if _r == nil {
 		return nil
 	}
@@ -80,8 +80,8 @@ func NewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeI
 }
 
 // NewPlaneWithDimensionsSegmentsGeometryTypeAllocator calls the underlying MDLMeshNewPlaneWithDimensionsSegmentsGeometryTypeAllocator.
-func NewPlaneWithDimensionsSegmentsGeometryTypeAllocator(dimensions unsafe.Pointer, segments unsafe.Pointer, geometryType raw.MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewPlaneWithDimensionsSegmentsGeometryTypeAllocator(dimensions, segments, geometryType, allocator)
+func NewPlaneWithDimensionsSegmentsGeometryTypeAllocator(dimensions unsafe.Pointer, segments unsafe.Pointer, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
+	_r := raw.MDLMeshNewPlaneWithDimensionsSegmentsGeometryTypeAllocator(dimensions, segments, raw.MDLGeometryType(geometryType), allocator)
 	if _r == nil {
 		return nil
 	}
@@ -89,8 +89,8 @@ func NewPlaneWithDimensionsSegmentsGeometryTypeAllocator(dimensions unsafe.Point
 }
 
 // NewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator calls the underlying MDLMeshNewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator.
-func NewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator(radius float32, inwardNormals bool, geometryType raw.MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator(radius, inwardNormals, geometryType, allocator)
+func NewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator(radius float32, inwardNormals bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
+	_r := raw.MDLMeshNewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator(radius, inwardNormals, raw.MDLGeometryType(geometryType), allocator)
 	if _r == nil {
 		return nil
 	}

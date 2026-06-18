@@ -37,8 +37,8 @@ func NewPersistentObjectChangeDetails() *PersistentObjectChangeDetails {
 }
 
 // ObjectType calls the underlying ObjectType.
-func (x *PersistentObjectChangeDetails) ObjectType() raw.PHObjectType {
-	return x.inner.ObjectType()
+func (x *PersistentObjectChangeDetails) ObjectType() PHObjectType {
+	return PHObjectType(x.inner.ObjectType())
 }
 
 // InsertedLocalIdentifiers calls the underlying InsertedLocalIdentifiers.
@@ -59,7 +59,7 @@ func (x *PersistentObjectChangeDetails) DeletedLocalIdentifiers() *foundation.NS
 // PersistentObjectChangeDetailsable is the interface implemented by [PersistentObjectChangeDetails], for mocking and DI.
 type PersistentObjectChangeDetailsable interface {
 	Unwrap() *raw.PHPersistentObjectChangeDetails
-	ObjectType() raw.PHObjectType
+	ObjectType() PHObjectType
 	InsertedLocalIdentifiers() *foundation.NSSet[*foundation.NSString]
 	UpdatedLocalIdentifiers() *foundation.NSSet[*foundation.NSString]
 	DeletedLocalIdentifiers() *foundation.NSSet[*foundation.NSString]

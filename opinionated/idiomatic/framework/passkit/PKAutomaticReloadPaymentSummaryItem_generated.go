@@ -57,8 +57,8 @@ func (x *AutomaticReloadPaymentSummaryItem) WithAmount(amount *foundation.NSDeci
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *AutomaticReloadPaymentSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetType(type_)
+func (x *AutomaticReloadPaymentSummaryItem) WithType(type_ PKPaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))
 	return x
 }
 
@@ -82,7 +82,7 @@ type AutomaticReloadPaymentSummaryItemable interface {
 	WithThresholdAmount(thresholdAmount *foundation.NSDecimalNumber) *AutomaticReloadPaymentSummaryItem
 	WithLabel(label string) *AutomaticReloadPaymentSummaryItem
 	WithAmount(amount *foundation.NSDecimalNumber) *AutomaticReloadPaymentSummaryItem
-	WithType(type_ raw.PKPaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem
+	WithType(type_ PKPaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem
 	ThresholdAmount() *foundation.NSDecimalNumber
 	SetThresholdAmount(thresholdAmount *foundation.NSDecimalNumber)
 }

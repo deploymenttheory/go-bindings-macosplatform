@@ -50,8 +50,8 @@ func (x *PaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *Pay
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *PaymentSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *PaymentSummaryItem {
-	x.inner.SetType(type_)
+func (x *PaymentSummaryItem) WithType(type_ PKPaymentSummaryItemType) *PaymentSummaryItem {
+	x.inner.SetType(raw.PKPaymentSummaryItemType(type_))
 	return x
 }
 
@@ -80,13 +80,13 @@ func (x *PaymentSummaryItem) SetAmount(amount *foundation.NSDecimalNumber) {
 }
 
 // Type calls the underlying Type.
-func (x *PaymentSummaryItem) Type() raw.PKPaymentSummaryItemType {
-	return x.inner.Type()
+func (x *PaymentSummaryItem) Type() PKPaymentSummaryItemType {
+	return PKPaymentSummaryItemType(x.inner.Type())
 }
 
 // SetType calls the underlying SetType.
-func (x *PaymentSummaryItem) SetType(type_ raw.PKPaymentSummaryItemType) {
-	x.inner.SetType(type_)
+func (x *PaymentSummaryItem) SetType(type_ PKPaymentSummaryItemType) {
+	x.inner.SetType(raw.PKPaymentSummaryItemType(type_))
 }
 
 func (x *PaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return x.inner }
@@ -96,13 +96,13 @@ type PaymentSummaryItemable interface {
 	Unwrap() *raw.PKPaymentSummaryItem
 	WithLabel(label string) *PaymentSummaryItem
 	WithAmount(amount *foundation.NSDecimalNumber) *PaymentSummaryItem
-	WithType(type_ raw.PKPaymentSummaryItemType) *PaymentSummaryItem
+	WithType(type_ PKPaymentSummaryItemType) *PaymentSummaryItem
 	Label() string
 	SetLabel(label string)
 	Amount() *foundation.NSDecimalNumber
 	SetAmount(amount *foundation.NSDecimalNumber)
-	Type() raw.PKPaymentSummaryItemType
-	SetType(type_ raw.PKPaymentSummaryItemType)
+	Type() PKPaymentSummaryItemType
+	SetType(type_ PKPaymentSummaryItemType)
 }
 
 var _ PaymentSummaryItemable = (*PaymentSummaryItem)(nil)

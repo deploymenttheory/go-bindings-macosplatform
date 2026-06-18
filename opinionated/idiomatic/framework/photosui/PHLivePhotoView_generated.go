@@ -51,8 +51,8 @@ func (x *LivePhotoView) WithLivePhoto(livePhoto *photos.PHLivePhoto) *LivePhotoV
 }
 
 // WithContentMode sets the contentMode property and returns the receiver for chaining.
-func (x *LivePhotoView) WithContentMode(contentMode raw.PHLivePhotoViewContentMode) *LivePhotoView {
-	x.inner.SetContentMode(contentMode)
+func (x *LivePhotoView) WithContentMode(contentMode PHLivePhotoViewContentMode) *LivePhotoView {
+	x.inner.SetContentMode(raw.PHLivePhotoViewContentMode(contentMode))
 	return x
 }
 
@@ -75,8 +75,8 @@ func (x *LivePhotoView) WithMuted(muted bool) *LivePhotoView {
 }
 
 // StartPlaybackWithStyle calls the underlying StartPlaybackWithStyle.
-func (x *LivePhotoView) StartPlaybackWithStyle(playbackStyle raw.PHLivePhotoViewPlaybackStyle) {
-	x.inner.StartPlaybackWithStyle(playbackStyle)
+func (x *LivePhotoView) StartPlaybackWithStyle(playbackStyle PHLivePhotoViewPlaybackStyle) {
+	x.inner.StartPlaybackWithStyle(raw.PHLivePhotoViewPlaybackStyle(playbackStyle))
 }
 
 // StopPlayback calls the underlying StopPlayback.
@@ -110,13 +110,13 @@ func (x *LivePhotoView) SetLivePhoto(livePhoto *photos.PHLivePhoto) {
 }
 
 // ContentMode calls the underlying ContentMode.
-func (x *LivePhotoView) ContentMode() raw.PHLivePhotoViewContentMode {
-	return x.inner.ContentMode()
+func (x *LivePhotoView) ContentMode() PHLivePhotoViewContentMode {
+	return PHLivePhotoViewContentMode(x.inner.ContentMode())
 }
 
 // SetContentMode calls the underlying SetContentMode.
-func (x *LivePhotoView) SetContentMode(contentMode raw.PHLivePhotoViewContentMode) {
-	x.inner.SetContentMode(contentMode)
+func (x *LivePhotoView) SetContentMode(contentMode PHLivePhotoViewContentMode) {
+	x.inner.SetContentMode(raw.PHLivePhotoViewContentMode(contentMode))
 }
 
 // ContentsRect calls the underlying ContentsRect.
@@ -159,19 +159,19 @@ type LivePhotoViewable interface {
 	Unwrap() *raw.PHLivePhotoView
 	WithDelegate(delegate raw.PHLivePhotoViewDelegate) *LivePhotoView
 	WithLivePhoto(livePhoto *photos.PHLivePhoto) *LivePhotoView
-	WithContentMode(contentMode raw.PHLivePhotoViewContentMode) *LivePhotoView
+	WithContentMode(contentMode PHLivePhotoViewContentMode) *LivePhotoView
 	WithContentsRect(contentsRect corefoundation.CGRect) *LivePhotoView
 	WithAudioVolume(audioVolume float32) *LivePhotoView
 	WithMuted(muted bool) *LivePhotoView
-	StartPlaybackWithStyle(playbackStyle raw.PHLivePhotoViewPlaybackStyle)
+	StartPlaybackWithStyle(playbackStyle PHLivePhotoViewPlaybackStyle)
 	StopPlayback()
 	StopPlaybackAnimated(animated bool)
 	Delegate() raw.PHLivePhotoViewDelegate
 	SetDelegate(delegate raw.PHLivePhotoViewDelegate)
 	LivePhoto() *photos.PHLivePhoto
 	SetLivePhoto(livePhoto *photos.PHLivePhoto)
-	ContentMode() raw.PHLivePhotoViewContentMode
-	SetContentMode(contentMode raw.PHLivePhotoViewContentMode)
+	ContentMode() PHLivePhotoViewContentMode
+	SetContentMode(contentMode PHLivePhotoViewContentMode)
 	ContentsRect() corefoundation.CGRect
 	SetContentsRect(contentsRect corefoundation.CGRect)
 	AudioVolume() float32

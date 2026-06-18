@@ -42,14 +42,16 @@ func NewProductStorePromotionController() *ProductStorePromotionController {
 }
 
 // FetchStorePromotionVisibilityForProductCompletionHandler calls the underlying FetchStorePromotionVisibilityForProductCompletionHandler.
-func (x *ProductStorePromotionController) FetchStorePromotionVisibilityForProductCompletionHandler(product *raw.SKProduct, completionHandler func(raw.SKProductStorePromotionVisibility, unsafe.Pointer)) {
-	x.inner.FetchStorePromotionVisibilityForProductCompletionHandler(product, completionHandler)
+func (x *ProductStorePromotionController) FetchStorePromotionVisibilityForProductCompletionHandler(product *raw.SKProduct, completionHandler func(SKProductStorePromotionVisibility, unsafe.Pointer)) {
+	x.inner.FetchStorePromotionVisibilityForProductCompletionHandler(product, func(_a0 raw.SKProductStorePromotionVisibility, _a1 unsafe.Pointer) {
+		completionHandler(SKProductStorePromotionVisibility(_a0), _a1)
+	})
 }
 
 // UpdateStorePromotionVisibilityForProduct blocks until the operation completes or ctx is cancelled.
-func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility raw.SKProductStorePromotionVisibility, product *raw.SKProduct) error {
+func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility SKProductStorePromotionVisibility, product *raw.SKProduct) error {
 	_ch := make(chan error, 1)
-	x.inner.UpdateStorePromotionVisibilityForProductCompletionHandler(promotionVisibility, product, func(_p0 unsafe.Pointer) {
+	x.inner.UpdateStorePromotionVisibilityForProductCompletionHandler(raw.SKProductStorePromotionVisibility(promotionVisibility), product, func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -109,8 +111,8 @@ func (x *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.
 // ProductStorePromotionControllerable is the interface implemented by [ProductStorePromotionController], for mocking and DI.
 type ProductStorePromotionControllerable interface {
 	Unwrap() *raw.SKProductStorePromotionController
-	FetchStorePromotionVisibilityForProductCompletionHandler(product *raw.SKProduct, completionHandler func(raw.SKProductStorePromotionVisibility, unsafe.Pointer))
-	UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility raw.SKProductStorePromotionVisibility, product *raw.SKProduct) error
+	FetchStorePromotionVisibilityForProductCompletionHandler(product *raw.SKProduct, completionHandler func(SKProductStorePromotionVisibility, unsafe.Pointer))
+	UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility SKProductStorePromotionVisibility, product *raw.SKProduct) error
 	FetchStorePromotionOrder(ctx context.Context) (*foundation.NSArray[*raw.SKProduct], error)
 	UpdateStorePromotionOrder(ctx context.Context, promotionOrder *foundation.NSArray[*raw.SKProduct]) error
 }

@@ -36,8 +36,8 @@ func NewNEFilterDataVerdict() *NEFilterDataVerdict {
 }
 
 // WithStatisticsReportFrequency sets the statisticsReportFrequency property and returns the receiver for chaining.
-func (x *NEFilterDataVerdict) WithStatisticsReportFrequency(statisticsReportFrequency raw.NEFilterReportFrequency) *NEFilterDataVerdict {
-	x.inner.SetStatisticsReportFrequency(statisticsReportFrequency)
+func (x *NEFilterDataVerdict) WithStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) *NEFilterDataVerdict {
+	x.inner.SetStatisticsReportFrequency(raw.NEFilterReportFrequency(statisticsReportFrequency))
 	return x
 }
 
@@ -48,13 +48,13 @@ func (x *NEFilterDataVerdict) WithShouldReport(shouldReport bool) *NEFilterDataV
 }
 
 // StatisticsReportFrequency calls the underlying StatisticsReportFrequency.
-func (x *NEFilterDataVerdict) StatisticsReportFrequency() raw.NEFilterReportFrequency {
-	return x.inner.StatisticsReportFrequency()
+func (x *NEFilterDataVerdict) StatisticsReportFrequency() NEFilterReportFrequency {
+	return NEFilterReportFrequency(x.inner.StatisticsReportFrequency())
 }
 
 // SetStatisticsReportFrequency calls the underlying SetStatisticsReportFrequency.
-func (x *NEFilterDataVerdict) SetStatisticsReportFrequency(statisticsReportFrequency raw.NEFilterReportFrequency) {
-	x.inner.SetStatisticsReportFrequency(statisticsReportFrequency)
+func (x *NEFilterDataVerdict) SetStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) {
+	x.inner.SetStatisticsReportFrequency(raw.NEFilterReportFrequency(statisticsReportFrequency))
 }
 
 func (x *NEFilterDataVerdict) asNEFilterVerdict() *raw.NEFilterVerdict {
@@ -64,10 +64,10 @@ func (x *NEFilterDataVerdict) asNEFilterVerdict() *raw.NEFilterVerdict {
 // NEFilterDataVerdictable is the interface implemented by [NEFilterDataVerdict], for mocking and DI.
 type NEFilterDataVerdictable interface {
 	Unwrap() *raw.NEFilterDataVerdict
-	WithStatisticsReportFrequency(statisticsReportFrequency raw.NEFilterReportFrequency) *NEFilterDataVerdict
+	WithStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency) *NEFilterDataVerdict
 	WithShouldReport(shouldReport bool) *NEFilterDataVerdict
-	StatisticsReportFrequency() raw.NEFilterReportFrequency
-	SetStatisticsReportFrequency(statisticsReportFrequency raw.NEFilterReportFrequency)
+	StatisticsReportFrequency() NEFilterReportFrequency
+	SetStatisticsReportFrequency(statisticsReportFrequency NEFilterReportFrequency)
 }
 
 var _ NEFilterDataVerdictable = (*NEFilterDataVerdict)(nil)

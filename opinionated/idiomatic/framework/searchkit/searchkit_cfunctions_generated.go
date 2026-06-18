@@ -106,13 +106,13 @@ func SKIndexCopyTermStringForTermID(inIndex unsafe.Pointer, inTermID int) unsafe
 }
 
 // SKIndexCreateWithMutableData calls [raw.SKIndexCreateWithMutableData] (C function SKIndexCreateWithMutableData).
-func SKIndexCreateWithMutableData(inData unsafe.Pointer, inIndexName unsafe.Pointer, inIndexType raw.SKIndexType, inAnalysisProperties unsafe.Pointer) unsafe.Pointer {
-	return raw.SKIndexCreateWithMutableData(inData, inIndexName, inIndexType, inAnalysisProperties)
+func SKIndexCreateWithMutableData(inData unsafe.Pointer, inIndexName unsafe.Pointer, inIndexType SKIndexType, inAnalysisProperties unsafe.Pointer) unsafe.Pointer {
+	return raw.SKIndexCreateWithMutableData(inData, inIndexName, raw.SKIndexType(inIndexType), inAnalysisProperties)
 }
 
 // SKIndexCreateWithURL calls [raw.SKIndexCreateWithURL] (C function SKIndexCreateWithURL).
-func SKIndexCreateWithURL(inURL unsafe.Pointer, inIndexName unsafe.Pointer, inIndexType raw.SKIndexType, inAnalysisProperties unsafe.Pointer) unsafe.Pointer {
-	return raw.SKIndexCreateWithURL(inURL, inIndexName, inIndexType, inAnalysisProperties)
+func SKIndexCreateWithURL(inURL unsafe.Pointer, inIndexName unsafe.Pointer, inIndexType SKIndexType, inAnalysisProperties unsafe.Pointer) unsafe.Pointer {
+	return raw.SKIndexCreateWithURL(inURL, inIndexName, raw.SKIndexType(inIndexType), inAnalysisProperties)
 }
 
 // SKIndexDocumentIteratorCopyNext calls [raw.SKIndexDocumentIteratorCopyNext] (C function SKIndexDocumentIteratorCopyNext).
@@ -151,8 +151,8 @@ func SKIndexGetDocumentID(inIndex unsafe.Pointer, inDocument unsafe.Pointer) int
 }
 
 // SKIndexGetDocumentState calls [raw.SKIndexGetDocumentState] (C function SKIndexGetDocumentState).
-func SKIndexGetDocumentState(inIndex unsafe.Pointer, inDocument unsafe.Pointer) raw.SKDocumentIndexState {
-	return raw.SKIndexGetDocumentState(inIndex, inDocument)
+func SKIndexGetDocumentState(inIndex unsafe.Pointer, inDocument unsafe.Pointer) SKDocumentIndexState {
+	return SKDocumentIndexState(raw.SKIndexGetDocumentState(inIndex, inDocument))
 }
 
 // SKIndexGetDocumentTermCount calls [raw.SKIndexGetDocumentTermCount] (C function SKIndexGetDocumentTermCount).
@@ -166,8 +166,8 @@ func SKIndexGetDocumentTermFrequency(inIndex unsafe.Pointer, inDocumentID int, i
 }
 
 // SKIndexGetIndexType calls [raw.SKIndexGetIndexType] (C function SKIndexGetIndexType).
-func SKIndexGetIndexType(inIndex unsafe.Pointer) raw.SKIndexType {
-	return raw.SKIndexGetIndexType(inIndex)
+func SKIndexGetIndexType(inIndex unsafe.Pointer) SKIndexType {
+	return SKIndexType(raw.SKIndexGetIndexType(inIndex))
 }
 
 // SKIndexGetMaximumBytesBeforeFlush calls [raw.SKIndexGetMaximumBytesBeforeFlush] (C function SKIndexGetMaximumBytesBeforeFlush).
@@ -291,8 +291,8 @@ func SKSearchResultsCreateWithDocuments(inSearchGroup unsafe.Pointer, inExampleD
 }
 
 // SKSearchResultsCreateWithQuery calls [raw.SKSearchResultsCreateWithQuery] (C function SKSearchResultsCreateWithQuery).
-func SKSearchResultsCreateWithQuery(inSearchGroup unsafe.Pointer, inQuery unsafe.Pointer, inSearchType raw.SKSearchType, inMaxFoundDocuments int, inContext unsafe.Pointer, inFilterCallBack unsafe.Pointer) unsafe.Pointer {
-	return raw.SKSearchResultsCreateWithQuery(inSearchGroup, inQuery, inSearchType, inMaxFoundDocuments, inContext, inFilterCallBack)
+func SKSearchResultsCreateWithQuery(inSearchGroup unsafe.Pointer, inQuery unsafe.Pointer, inSearchType SKSearchType, inMaxFoundDocuments int, inContext unsafe.Pointer, inFilterCallBack unsafe.Pointer) unsafe.Pointer {
+	return raw.SKSearchResultsCreateWithQuery(inSearchGroup, inQuery, raw.SKSearchType(inSearchType), inMaxFoundDocuments, inContext, inFilterCallBack)
 }
 
 // SKSearchResultsGetCount calls [raw.SKSearchResultsGetCount] (C function SKSearchResultsGetCount).

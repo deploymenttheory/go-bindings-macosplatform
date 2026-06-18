@@ -11,13 +11,13 @@ import (
 )
 
 // LineStyleFromName calls the underlying PDFAnnotationLineStyleFromName.
-func LineStyleFromName(name string) raw.PDFLineStyle {
-	return raw.PDFAnnotationLineStyleFromName(foundation.NSStringStringWithUTF8String(name))
+func LineStyleFromName(name string) PDFLineStyle {
+	return PDFLineStyle(raw.PDFAnnotationLineStyleFromName(foundation.NSStringStringWithUTF8String(name)))
 }
 
 // NameForLineStyle calls the underlying PDFAnnotationNameForLineStyle.
-func NameForLineStyle(style raw.PDFLineStyle) string {
-	_r := raw.PDFAnnotationNameForLineStyle(style)
+func NameForLineStyle(style PDFLineStyle) string {
+	_r := raw.PDFAnnotationNameForLineStyle(raw.PDFLineStyle(style))
 	if _r == nil {
 		return ""
 	}

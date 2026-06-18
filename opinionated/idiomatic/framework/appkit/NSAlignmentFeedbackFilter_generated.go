@@ -63,8 +63,8 @@ func (x *AlignmentFeedbackFilter) AlignmentFeedbackTokenForVerticalMovementInVie
 }
 
 // PerformFeedbackPerformanceTime calls the underlying PerformFeedbackPerformanceTime.
-func (x *AlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens *foundation.NSArray[raw.NSAlignmentFeedbackToken], performanceTime raw.NSHapticFeedbackPerformanceTime) {
-	x.inner.PerformFeedbackPerformanceTime(alignmentFeedbackTokens, performanceTime)
+func (x *AlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens *foundation.NSArray[raw.NSAlignmentFeedbackToken], performanceTime NSHapticFeedbackPerformanceTime) {
+	x.inner.PerformFeedbackPerformanceTime(alignmentFeedbackTokens, raw.NSHapticFeedbackPerformanceTime(performanceTime))
 }
 
 // AlignmentFeedbackFilterable is the interface implemented by [AlignmentFeedbackFilter], for mocking and DI.
@@ -75,7 +75,7 @@ type AlignmentFeedbackFilterable interface {
 	AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint(view *raw.NSView, previousPoint corefoundation.CGPoint, alignedPoint corefoundation.CGPoint, defaultPoint corefoundation.CGPoint) raw.NSAlignmentFeedbackToken
 	AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX(view *raw.NSView, previousX float64, alignedX float64, defaultX float64) raw.NSAlignmentFeedbackToken
 	AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY(view *raw.NSView, previousY float64, alignedY float64, defaultY float64) raw.NSAlignmentFeedbackToken
-	PerformFeedbackPerformanceTime(alignmentFeedbackTokens *foundation.NSArray[raw.NSAlignmentFeedbackToken], performanceTime raw.NSHapticFeedbackPerformanceTime)
+	PerformFeedbackPerformanceTime(alignmentFeedbackTokens *foundation.NSArray[raw.NSAlignmentFeedbackToken], performanceTime NSHapticFeedbackPerformanceTime)
 }
 
 var _ AlignmentFeedbackFilterable = (*AlignmentFeedbackFilter)(nil)

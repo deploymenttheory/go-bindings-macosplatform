@@ -83,8 +83,8 @@ func (x *OdometerData) VerticalAccuracy() unsafe.Pointer {
 }
 
 // OriginDevice calls the underlying OriginDevice.
-func (x *OdometerData) OriginDevice() raw.CMOdometerOriginDevice {
-	return x.inner.OriginDevice()
+func (x *OdometerData) OriginDevice() CMOdometerOriginDevice {
+	return CMOdometerOriginDevice(x.inner.OriginDevice())
 }
 
 // Slope calls the underlying Slope.
@@ -109,7 +109,7 @@ type OdometerDataable interface {
 	GpsDate() *foundation.NSDate
 	DeltaAltitude() unsafe.Pointer
 	VerticalAccuracy() unsafe.Pointer
-	OriginDevice() raw.CMOdometerOriginDevice
+	OriginDevice() CMOdometerOriginDevice
 	Slope() *foundation.NSNumber
 	MaxAbsSlope() *foundation.NSNumber
 }

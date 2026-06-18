@@ -334,8 +334,8 @@ func (x *EmitterLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *Emitte
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *EmitterLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *EmitterLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *EmitterLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *EmitterLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -352,8 +352,8 @@ func (x *EmitterLayer) WithCornerRadius(cornerRadius float64) *EmitterLayer {
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *EmitterLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *EmitterLayer {
-	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+func (x *EmitterLayer) WithMaskedCorners(maskedCorners CACornerMask) *EmitterLayer {
+	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -418,8 +418,8 @@ func (x *EmitterLayer) WithShadowRadius(shadowRadius float64) *EmitterLayer {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *EmitterLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *EmitterLayer {
-	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+func (x *EmitterLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *EmitterLayer {
+	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -689,10 +689,10 @@ type EmitterLayerable interface {
 	WithOpaque(opaque bool) *EmitterLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *EmitterLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *EmitterLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *EmitterLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *EmitterLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *EmitterLayer
 	WithCornerRadius(cornerRadius float64) *EmitterLayer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *EmitterLayer
+	WithMaskedCorners(maskedCorners CACornerMask) *EmitterLayer
 	WithCornerCurve(cornerCurve *foundation.NSString) *EmitterLayer
 	WithBorderWidth(borderWidth float64) *EmitterLayer
 	WithOpacity(opacity float32) *EmitterLayer
@@ -703,7 +703,7 @@ type EmitterLayerable interface {
 	WithShadowOpacity(shadowOpacity float32) *EmitterLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *EmitterLayer
 	WithShadowRadius(shadowRadius float64) *EmitterLayer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *EmitterLayer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *EmitterLayer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *EmitterLayer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *EmitterLayer
 	WithName(name string) *EmitterLayer

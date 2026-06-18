@@ -64,9 +64,9 @@ func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, opt
 }
 
 // StopTunnelWithReason blocks until the operation completes or ctx is cancelled.
-func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reason raw.NEProviderStopReason) error {
+func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reason NEProviderStopReason) error {
 	_ch := make(chan error, 1)
-	x.inner.StopTunnelWithReasonCompletionHandler(reason, func() {
+	x.inner.StopTunnelWithReasonCompletionHandler(raw.NEProviderStopReason(reason), func() {
 		_ch <- nil
 	})
 	select {
@@ -131,7 +131,7 @@ type NEPacketTunnelProviderable interface {
 	Unwrap() *raw.NEPacketTunnelProvider
 	WithReasserting(reasserting bool) *NEPacketTunnelProvider
 	StartTunnelWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) error
-	StopTunnelWithReason(ctx context.Context, reason raw.NEProviderStopReason) error
+	StopTunnelWithReason(ctx context.Context, reason NEProviderStopReason) error
 	CancelTunnelWithError(error_ unsafe.Pointer)
 	CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection
 	CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession

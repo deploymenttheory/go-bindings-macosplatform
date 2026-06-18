@@ -33,10 +33,10 @@ func RegularExpressionFromID(id objc.ID) *RegularExpression {
 }
 
 // NewRegularExpressionWithPatternOptionsError creates a new [RegularExpression].
-func NewRegularExpressionWithPatternOptionsError(pattern string, options raw.NSRegularExpressionOptions) (*RegularExpression, error) {
+func NewRegularExpressionWithPatternOptionsError(pattern string, options NSRegularExpressionOptions) (*RegularExpression, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRegularExpression")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPattern:options:error:"), foundation.NSStringStringWithUTF8String(pattern).Ptr(), options, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPattern:options:error:"), foundation.NSStringStringWithUTF8String(pattern).Ptr(), raw.NSRegularExpressionOptions(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -59,8 +59,8 @@ func (x *RegularExpression) Pattern() *String {
 }
 
 // Options calls the underlying Options.
-func (x *RegularExpression) Options() raw.NSRegularExpressionOptions {
-	return x.inner.Options()
+func (x *RegularExpression) Options() NSRegularExpressionOptions {
+	return NSRegularExpressionOptions(x.inner.Options())
 }
 
 // NumberOfCaptureGroups calls the underlying NumberOfCaptureGroups.
@@ -69,23 +69,25 @@ func (x *RegularExpression) NumberOfCaptureGroups() uint {
 }
 
 // EnumerateMatchesInStringOptionsRangeUsing calls the underlying EnumerateMatchesInStringOptionsRangeUsing.
-func (x *RegularExpression) EnumerateMatchesInStringOptionsRangeUsing(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange, block func(*raw.NSTextCheckingResult, raw.NSMatchingFlags, *bool)) {
-	x.inner.EnumerateMatchesInStringOptionsRangeUsing(foundation.NSStringStringWithUTF8String(string_), options, range_, block)
+func (x *RegularExpression) EnumerateMatchesInStringOptionsRangeUsing(string_ string, options NSMatchingOptions, range_ raw.NSRange, block func(*raw.NSTextCheckingResult, NSMatchingFlags, *bool)) {
+	x.inner.EnumerateMatchesInStringOptionsRangeUsing(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_, func(_a0 *raw.NSTextCheckingResult, _a1 raw.NSMatchingFlags, _a2 *bool) {
+		block(_a0, NSMatchingFlags(_a1), _a2)
+	})
 }
 
 // MatchesInStringOptionsRange calls the underlying MatchesInStringOptionsRange.
-func (x *RegularExpression) MatchesInStringOptionsRange(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange) *raw.NSArray[*raw.NSTextCheckingResult] {
-	return x.inner.MatchesInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), options, range_)
+func (x *RegularExpression) MatchesInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) *raw.NSArray[*raw.NSTextCheckingResult] {
+	return x.inner.MatchesInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
 }
 
 // NumberOfMatchesInStringOptionsRange calls the underlying NumberOfMatchesInStringOptionsRange.
-func (x *RegularExpression) NumberOfMatchesInStringOptionsRange(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange) uint {
-	return x.inner.NumberOfMatchesInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), options, range_)
+func (x *RegularExpression) NumberOfMatchesInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) uint {
+	return x.inner.NumberOfMatchesInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
 }
 
 // FirstMatchInStringOptionsRange calls the underlying FirstMatchInStringOptionsRange.
-func (x *RegularExpression) FirstMatchInStringOptionsRange(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange) *TextCheckingResult {
-	_r := x.inner.FirstMatchInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), options, range_)
+func (x *RegularExpression) FirstMatchInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) *TextCheckingResult {
+	_r := x.inner.FirstMatchInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
 	if _r == nil {
 		return nil
 	}
@@ -93,13 +95,13 @@ func (x *RegularExpression) FirstMatchInStringOptionsRange(string_ string, optio
 }
 
 // RangeOfFirstMatchInStringOptionsRange calls the underlying RangeOfFirstMatchInStringOptionsRange.
-func (x *RegularExpression) RangeOfFirstMatchInStringOptionsRange(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange) raw.NSRange {
-	return x.inner.RangeOfFirstMatchInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), options, range_)
+func (x *RegularExpression) RangeOfFirstMatchInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) raw.NSRange {
+	return x.inner.RangeOfFirstMatchInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
 }
 
 // StringByReplacingMatchesInStringOptionsRangeWithTemplate calls the underlying StringByReplacingMatchesInStringOptionsRangeWithTemplate.
-func (x *RegularExpression) StringByReplacingMatchesInStringOptionsRangeWithTemplate(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange, templ string) *String {
-	_r := x.inner.StringByReplacingMatchesInStringOptionsRangeWithTemplate(foundation.NSStringStringWithUTF8String(string_), options, range_, foundation.NSStringStringWithUTF8String(templ))
+func (x *RegularExpression) StringByReplacingMatchesInStringOptionsRangeWithTemplate(string_ string, options NSMatchingOptions, range_ raw.NSRange, templ string) *String {
+	_r := x.inner.StringByReplacingMatchesInStringOptionsRangeWithTemplate(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_, foundation.NSStringStringWithUTF8String(templ))
 	if _r == nil {
 		return nil
 	}
@@ -107,8 +109,8 @@ func (x *RegularExpression) StringByReplacingMatchesInStringOptionsRangeWithTemp
 }
 
 // ReplaceMatchesInStringOptionsRangeWithTemplate calls the underlying ReplaceMatchesInStringOptionsRangeWithTemplate.
-func (x *RegularExpression) ReplaceMatchesInStringOptionsRangeWithTemplate(string_ *raw.NSMutableString, options raw.NSMatchingOptions, range_ raw.NSRange, templ string) uint {
-	return x.inner.ReplaceMatchesInStringOptionsRangeWithTemplate(string_, options, range_, foundation.NSStringStringWithUTF8String(templ))
+func (x *RegularExpression) ReplaceMatchesInStringOptionsRangeWithTemplate(string_ *raw.NSMutableString, options NSMatchingOptions, range_ raw.NSRange, templ string) uint {
+	return x.inner.ReplaceMatchesInStringOptionsRangeWithTemplate(string_, raw.NSMatchingOptions(options), range_, foundation.NSStringStringWithUTF8String(templ))
 }
 
 // ReplacementStringForResultInStringOffsetTemplate calls the underlying ReplacementStringForResultInStringOffsetTemplate.
@@ -129,15 +131,15 @@ type RegularExpressionable interface {
 	Unwrap() *raw.NSRegularExpression
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RegularExpression
 	Pattern() *String
-	Options() raw.NSRegularExpressionOptions
+	Options() NSRegularExpressionOptions
 	NumberOfCaptureGroups() uint
-	EnumerateMatchesInStringOptionsRangeUsing(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange, block func(*raw.NSTextCheckingResult, raw.NSMatchingFlags, *bool))
-	MatchesInStringOptionsRange(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange) *raw.NSArray[*raw.NSTextCheckingResult]
-	NumberOfMatchesInStringOptionsRange(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange) uint
-	FirstMatchInStringOptionsRange(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange) *TextCheckingResult
-	RangeOfFirstMatchInStringOptionsRange(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange) raw.NSRange
-	StringByReplacingMatchesInStringOptionsRangeWithTemplate(string_ string, options raw.NSMatchingOptions, range_ raw.NSRange, templ string) *String
-	ReplaceMatchesInStringOptionsRangeWithTemplate(string_ *raw.NSMutableString, options raw.NSMatchingOptions, range_ raw.NSRange, templ string) uint
+	EnumerateMatchesInStringOptionsRangeUsing(string_ string, options NSMatchingOptions, range_ raw.NSRange, block func(*raw.NSTextCheckingResult, NSMatchingFlags, *bool))
+	MatchesInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) *raw.NSArray[*raw.NSTextCheckingResult]
+	NumberOfMatchesInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) uint
+	FirstMatchInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) *TextCheckingResult
+	RangeOfFirstMatchInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) raw.NSRange
+	StringByReplacingMatchesInStringOptionsRangeWithTemplate(string_ string, options NSMatchingOptions, range_ raw.NSRange, templ string) *String
+	ReplaceMatchesInStringOptionsRangeWithTemplate(string_ *raw.NSMutableString, options NSMatchingOptions, range_ raw.NSRange, templ string) uint
 	ReplacementStringForResultInStringOffsetTemplate(result *raw.NSTextCheckingResult, string_ string, offset int, templ string) *String
 }
 

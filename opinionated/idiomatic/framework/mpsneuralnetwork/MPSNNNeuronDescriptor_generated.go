@@ -37,8 +37,8 @@ func NewNNNeuronDescriptor() *NNNeuronDescriptor {
 }
 
 // WithNeuronType sets the neuronType property and returns the receiver for chaining.
-func (x *NNNeuronDescriptor) WithNeuronType(neuronType raw.MPSCNNNeuronType) *NNNeuronDescriptor {
-	x.inner.SetNeuronType(neuronType)
+func (x *NNNeuronDescriptor) WithNeuronType(neuronType MPSCNNNeuronType) *NNNeuronDescriptor {
+	x.inner.SetNeuronType(raw.MPSCNNNeuronType(neuronType))
 	return x
 }
 
@@ -67,13 +67,13 @@ func (x *NNNeuronDescriptor) WithData(data *foundation.NSData) *NNNeuronDescript
 }
 
 // NeuronType calls the underlying NeuronType.
-func (x *NNNeuronDescriptor) NeuronType() raw.MPSCNNNeuronType {
-	return x.inner.NeuronType()
+func (x *NNNeuronDescriptor) NeuronType() MPSCNNNeuronType {
+	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
 // SetNeuronType calls the underlying SetNeuronType.
-func (x *NNNeuronDescriptor) SetNeuronType(neuronType raw.MPSCNNNeuronType) {
-	x.inner.SetNeuronType(neuronType)
+func (x *NNNeuronDescriptor) SetNeuronType(neuronType MPSCNNNeuronType) {
+	x.inner.SetNeuronType(raw.MPSCNNNeuronType(neuronType))
 }
 
 // A calls the underlying A.
@@ -119,13 +119,13 @@ func (x *NNNeuronDescriptor) SetData(data *foundation.NSData) {
 // NNNeuronDescriptorable is the interface implemented by [NNNeuronDescriptor], for mocking and DI.
 type NNNeuronDescriptorable interface {
 	Unwrap() *raw.MPSNNNeuronDescriptor
-	WithNeuronType(neuronType raw.MPSCNNNeuronType) *NNNeuronDescriptor
+	WithNeuronType(neuronType MPSCNNNeuronType) *NNNeuronDescriptor
 	WithA(a float32) *NNNeuronDescriptor
 	WithB(b float32) *NNNeuronDescriptor
 	WithC(c float32) *NNNeuronDescriptor
 	WithData(data *foundation.NSData) *NNNeuronDescriptor
-	NeuronType() raw.MPSCNNNeuronType
-	SetNeuronType(neuronType raw.MPSCNNNeuronType)
+	NeuronType() MPSCNNNeuronType
+	SetNeuronType(neuronType MPSCNNNeuronType)
 	A() float32
 	SetA(a float32)
 	B() float32

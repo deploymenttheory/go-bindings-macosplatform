@@ -52,8 +52,8 @@ func (x *LogEntry) Date() *foundation.NSDate {
 }
 
 // StoreCategory calls the underlying StoreCategory.
-func (x *LogEntry) StoreCategory() raw.OSLogEntryStoreCategory {
-	return x.inner.StoreCategory()
+func (x *LogEntry) StoreCategory() OSLogEntryStoreCategory {
+	return OSLogEntryStoreCategory(x.inner.StoreCategory())
 }
 
 func (x *LogEntry) asLogEntry() *raw.OSLogEntry { return x.inner }
@@ -63,7 +63,7 @@ type LogEntryable interface {
 	Unwrap() *raw.OSLogEntry
 	ComposedMessage() string
 	Date() *foundation.NSDate
-	StoreCategory() raw.OSLogEntryStoreCategory
+	StoreCategory() OSLogEntryStoreCategory
 }
 
 var _ LogEntryable = (*LogEntry)(nil)

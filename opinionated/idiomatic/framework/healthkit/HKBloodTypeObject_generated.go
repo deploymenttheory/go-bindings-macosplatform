@@ -36,14 +36,14 @@ func NewBloodTypeObject() *BloodTypeObject {
 }
 
 // BloodType calls the underlying BloodType.
-func (x *BloodTypeObject) BloodType() raw.HKBloodType {
-	return x.inner.BloodType()
+func (x *BloodTypeObject) BloodType() HKBloodType {
+	return HKBloodType(x.inner.BloodType())
 }
 
 // BloodTypeObjectable is the interface implemented by [BloodTypeObject], for mocking and DI.
 type BloodTypeObjectable interface {
 	Unwrap() *raw.HKBloodTypeObject
-	BloodType() raw.HKBloodType
+	BloodType() HKBloodType
 }
 
 var _ BloodTypeObjectable = (*BloodTypeObject)(nil)

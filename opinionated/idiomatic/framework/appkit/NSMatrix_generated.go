@@ -43,16 +43,16 @@ func NewMatrixWithFrame(frameRect corefoundation.CGRect) *Matrix {
 }
 
 // NewMatrixWithFrameModePrototypeNumberOfRowsNumberOfColumns creates a new [Matrix].
-func NewMatrixWithFrameModePrototypeNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode raw.NSMatrixMode, cell *raw.NSCell, rowsHigh int, colsWide int) *Matrix {
+func NewMatrixWithFrameModePrototypeNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode NSMatrixMode, cell *raw.NSCell, rowsHigh int, colsWide int) *Matrix {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMatrix")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:mode:prototype:numberOfRows:numberOfColumns:"), frameRect, mode, cell.Ptr(), rowsHigh, colsWide)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:mode:prototype:numberOfRows:numberOfColumns:"), frameRect, raw.NSMatrixMode(mode), cell.Ptr(), rowsHigh, colsWide)
 	return &Matrix{inner: raw.NSMatrixFromID(_id)}
 }
 
 // NewMatrixWithFrameModeCellClassNumberOfRowsNumberOfColumns creates a new [Matrix].
-func NewMatrixWithFrameModeCellClassNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode raw.NSMatrixMode, factoryId objc.Class, rowsHigh int, colsWide int) *Matrix {
+func NewMatrixWithFrameModeCellClassNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode NSMatrixMode, factoryId objc.Class, rowsHigh int, colsWide int) *Matrix {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMatrix")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:mode:cellClass:numberOfRows:numberOfColumns:"), frameRect, mode, factoryId, rowsHigh, colsWide)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:mode:cellClass:numberOfRows:numberOfColumns:"), frameRect, raw.NSMatrixMode(mode), factoryId, rowsHigh, colsWide)
 	return &Matrix{inner: raw.NSMatrixFromID(_id)}
 }
 
@@ -63,8 +63,8 @@ func (x *Matrix) WithPrototype(prototype CellProvider) *Matrix {
 }
 
 // WithMode sets the mode property and returns the receiver for chaining.
-func (x *Matrix) WithMode(mode raw.NSMatrixMode) *Matrix {
-	x.inner.SetMode(mode)
+func (x *Matrix) WithMode(mode NSMatrixMode) *Matrix {
+	x.inner.SetMode(raw.NSMatrixMode(mode))
 	return x
 }
 
@@ -207,8 +207,8 @@ func (x *Matrix) WithHighlighted(highlighted bool) *Matrix {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Matrix) WithControlSize(controlSize raw.NSControlSize) *Matrix {
-	x.inner.NSControl.SetControlSize(controlSize)
+func (x *Matrix) WithControlSize(controlSize NSControlSize) *Matrix {
+	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -273,20 +273,20 @@ func (x *Matrix) WithUsesSingleLineMode(usesSingleLineMode bool) *Matrix {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Matrix) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Matrix {
-	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *Matrix) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Matrix {
+	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Matrix) WithAlignment(alignment raw.NSTextAlignment) *Matrix {
-	x.inner.NSControl.SetAlignment(alignment)
+func (x *Matrix) WithAlignment(alignment NSTextAlignment) *Matrix {
+	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Matrix) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Matrix {
-	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *Matrix) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Matrix {
+	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -339,8 +339,8 @@ func (x *Matrix) WithAutoresizesSubviews(autoresizesSubviews bool) *Matrix {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Matrix) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Matrix {
-	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Matrix) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Matrix {
+	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -399,14 +399,14 @@ func (x *Matrix) WithWantsRestingTouches(wantsRestingTouches bool) *Matrix {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Matrix) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Matrix {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Matrix) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Matrix {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Matrix) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Matrix {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Matrix) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Matrix {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -513,8 +513,8 @@ func (x *Matrix) WithToolTip(toolTip string) *Matrix {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Matrix) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Matrix {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Matrix) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Matrix {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -531,8 +531,8 @@ func (x *Matrix) WithNextKeyView(nextKeyView ViewProvider) *Matrix {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Matrix) WithFocusRingType(focusRingType raw.NSFocusRingType) *Matrix {
-	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *Matrix) WithFocusRingType(focusRingType NSFocusRingType) *Matrix {
+	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -555,8 +555,8 @@ func (x *Matrix) WithGestureRecognizers(items ...GestureRecognizerProvider) *Mat
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Matrix) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Matrix {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Matrix) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Matrix {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -909,13 +909,13 @@ func (x *Matrix) SetPrototype(prototype *raw.NSCell) {
 }
 
 // Mode calls the underlying Mode.
-func (x *Matrix) Mode() raw.NSMatrixMode {
-	return x.inner.Mode()
+func (x *Matrix) Mode() NSMatrixMode {
+	return NSMatrixMode(x.inner.Mode())
 }
 
 // SetMode calls the underlying SetMode.
-func (x *Matrix) SetMode(mode raw.NSMatrixMode) {
-	x.inner.SetMode(mode)
+func (x *Matrix) SetMode(mode NSMatrixMode) {
+	x.inner.SetMode(raw.NSMatrixMode(mode))
 }
 
 // AllowsEmptySelection calls the underlying AllowsEmptySelection.
@@ -1139,7 +1139,7 @@ func (x *Matrix) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSVi
 type Matrixable interface {
 	Unwrap() *raw.NSMatrix
 	WithPrototype(prototype CellProvider) *Matrix
-	WithMode(mode raw.NSMatrixMode) *Matrix
+	WithMode(mode NSMatrixMode) *Matrix
 	WithAllowsEmptySelection(allowsEmptySelection bool) *Matrix
 	WithSelectionByRect(selectionByRect bool) *Matrix
 	WithCellSize(cellSize corefoundation.CGSize) *Matrix
@@ -1163,7 +1163,7 @@ type Matrixable interface {
 	WithEnabled(enabled bool) *Matrix
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Matrix
 	WithHighlighted(highlighted bool) *Matrix
-	WithControlSize(controlSize raw.NSControlSize) *Matrix
+	WithControlSize(controlSize NSControlSize) *Matrix
 	WithFormatter(formatter *foundation.NSFormatter) *Matrix
 	WithObjectValue(objectValue objc.ID) *Matrix
 	WithStringValue(stringValue string) *Matrix
@@ -1174,16 +1174,16 @@ type Matrixable interface {
 	WithDoubleValue(doubleValue float64) *Matrix
 	WithFont(font *Font) *Matrix
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Matrix
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Matrix
-	WithAlignment(alignment raw.NSTextAlignment) *Matrix
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Matrix
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Matrix
+	WithAlignment(alignment NSTextAlignment) *Matrix
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Matrix
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Matrix
 	WithCell(cell CellProvider) *Matrix
 	WithSubviews(items ...ViewProvider) *Matrix
 	WithHidden(hidden bool) *Matrix
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Matrix
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Matrix
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Matrix
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Matrix
 	WithFrame(frame corefoundation.CGRect) *Matrix
 	WithFrameRotation(frameRotation float64) *Matrix
 	WithFrameCenterRotation(frameCenterRotation float64) *Matrix
@@ -1193,8 +1193,8 @@ type Matrixable interface {
 	WithNeedsDisplay(needsDisplay bool) *Matrix
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Matrix
 	WithWantsRestingTouches(wantsRestingTouches bool) *Matrix
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Matrix
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Matrix
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Matrix
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Matrix
 	WithWantsLayer(wantsLayer bool) *Matrix
 	WithLayer(layer *quartzcore.CALayer) *Matrix
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Matrix
@@ -1208,12 +1208,12 @@ type Matrixable interface {
 	WithClipsToBounds(clipsToBounds bool) *Matrix
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Matrix
 	WithToolTip(toolTip string) *Matrix
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Matrix
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Matrix
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Matrix
 	WithNextKeyView(nextKeyView ViewProvider) *Matrix
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Matrix
+	WithFocusRingType(focusRingType NSFocusRingType) *Matrix
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Matrix
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Matrix
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Matrix
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Matrix
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Matrix
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Matrix
@@ -1276,8 +1276,8 @@ type Matrixable interface {
 	ToolTipForCell(cell *raw.NSCell) string
 	Prototype() *Cell
 	SetPrototype(prototype *raw.NSCell)
-	Mode() raw.NSMatrixMode
-	SetMode(mode raw.NSMatrixMode)
+	Mode() NSMatrixMode
+	SetMode(mode NSMatrixMode)
 	AllowsEmptySelection() bool
 	SetAllowsEmptySelection(allowsEmptySelection bool)
 	Cells() []*Cell

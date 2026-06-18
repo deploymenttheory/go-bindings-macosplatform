@@ -95,8 +95,8 @@ func (x *StatusBarButton) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *Stat
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *StatusBarButton) WithBezelStyle(bezelStyle raw.NSBezelStyle) *StatusBarButton {
-	x.inner.NSButton.SetBezelStyle(bezelStyle)
+func (x *StatusBarButton) WithBezelStyle(bezelStyle NSBezelStyle) *StatusBarButton {
+	x.inner.NSButton.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 	return x
 }
 
@@ -131,8 +131,8 @@ func (x *StatusBarButton) WithContentTintColor(contentTintColor *Color) *StatusB
 }
 
 // WithTintProminence sets the tintProminence property and returns the receiver for chaining.
-func (x *StatusBarButton) WithTintProminence(tintProminence raw.NSTintProminence) *StatusBarButton {
-	x.inner.NSButton.SetTintProminence(tintProminence)
+func (x *StatusBarButton) WithTintProminence(tintProminence NSTintProminence) *StatusBarButton {
+	x.inner.NSButton.SetTintProminence(raw.NSTintProminence(tintProminence))
 	return x
 }
 
@@ -149,14 +149,14 @@ func (x *StatusBarButton) WithAlternateImage(alternateImage *Image) *StatusBarBu
 }
 
 // WithImagePosition sets the imagePosition property and returns the receiver for chaining.
-func (x *StatusBarButton) WithImagePosition(imagePosition raw.NSCellImagePosition) *StatusBarButton {
-	x.inner.NSButton.SetImagePosition(imagePosition)
+func (x *StatusBarButton) WithImagePosition(imagePosition NSCellImagePosition) *StatusBarButton {
+	x.inner.NSButton.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 	return x
 }
 
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *StatusBarButton) WithImageScaling(imageScaling raw.NSImageScaling) *StatusBarButton {
-	x.inner.NSButton.SetImageScaling(imageScaling)
+func (x *StatusBarButton) WithImageScaling(imageScaling NSImageScaling) *StatusBarButton {
+	x.inner.NSButton.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
@@ -191,14 +191,14 @@ func (x *StatusBarButton) WithKeyEquivalent(keyEquivalent string) *StatusBarButt
 }
 
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
-func (x *StatusBarButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *StatusBarButton {
-	x.inner.NSButton.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+func (x *StatusBarButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *StatusBarButton {
+	x.inner.NSButton.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
 	return x
 }
 
 // WithBorderShape sets the borderShape property and returns the receiver for chaining.
-func (x *StatusBarButton) WithBorderShape(borderShape raw.NSControlBorderShape) *StatusBarButton {
-	x.inner.NSButton.SetBorderShape(borderShape)
+func (x *StatusBarButton) WithBorderShape(borderShape NSControlBorderShape) *StatusBarButton {
+	x.inner.NSButton.SetBorderShape(raw.NSControlBorderShape(borderShape))
 	return x
 }
 
@@ -251,8 +251,8 @@ func (x *StatusBarButton) WithHighlighted(highlighted bool) *StatusBarButton {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *StatusBarButton) WithControlSize(controlSize raw.NSControlSize) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetControlSize(controlSize)
+func (x *StatusBarButton) WithControlSize(controlSize NSControlSize) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -317,20 +317,20 @@ func (x *StatusBarButton) WithUsesSingleLineMode(usesSingleLineMode bool) *Statu
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *StatusBarButton) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *StatusBarButton) WithLineBreakMode(lineBreakMode NSLineBreakMode) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAlignment(alignment raw.NSTextAlignment) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetAlignment(alignment)
+func (x *StatusBarButton) WithAlignment(alignment NSTextAlignment) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *StatusBarButton) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *StatusBarButton) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *StatusBarButton {
+	x.inner.NSButton.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -383,8 +383,8 @@ func (x *StatusBarButton) WithAutoresizesSubviews(autoresizesSubviews bool) *Sta
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *StatusBarButton) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -443,14 +443,14 @@ func (x *StatusBarButton) WithWantsRestingTouches(wantsRestingTouches bool) *Sta
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *StatusBarButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *StatusBarButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *StatusBarButton) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *StatusBarButton) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -557,8 +557,8 @@ func (x *StatusBarButton) WithToolTip(toolTip string) *StatusBarButton {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *StatusBarButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *StatusBarButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -575,8 +575,8 @@ func (x *StatusBarButton) WithNextKeyView(nextKeyView ViewProvider) *StatusBarBu
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *StatusBarButton) WithFocusRingType(focusRingType raw.NSFocusRingType) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *StatusBarButton) WithFocusRingType(focusRingType NSFocusRingType) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -599,8 +599,8 @@ func (x *StatusBarButton) WithGestureRecognizers(items ...GestureRecognizerProvi
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *StatusBarButton) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *StatusBarButton {
+	x.inner.NSButton.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -720,24 +720,24 @@ type StatusBarButtonable interface {
 	WithSound(sound *Sound) *StatusBarButton
 	WithSpringLoaded(springLoaded bool) *StatusBarButton
 	WithMaxAcceleratorLevel(maxAcceleratorLevel int) *StatusBarButton
-	WithBezelStyle(bezelStyle raw.NSBezelStyle) *StatusBarButton
+	WithBezelStyle(bezelStyle NSBezelStyle) *StatusBarButton
 	WithBordered(bordered bool) *StatusBarButton
 	WithTransparent(transparent bool) *StatusBarButton
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *StatusBarButton
 	WithBezelColor(bezelColor *Color) *StatusBarButton
 	WithContentTintColor(contentTintColor *Color) *StatusBarButton
-	WithTintProminence(tintProminence raw.NSTintProminence) *StatusBarButton
+	WithTintProminence(tintProminence NSTintProminence) *StatusBarButton
 	WithImage(image *Image) *StatusBarButton
 	WithAlternateImage(alternateImage *Image) *StatusBarButton
-	WithImagePosition(imagePosition raw.NSCellImagePosition) *StatusBarButton
-	WithImageScaling(imageScaling raw.NSImageScaling) *StatusBarButton
+	WithImagePosition(imagePosition NSCellImagePosition) *StatusBarButton
+	WithImageScaling(imageScaling NSImageScaling) *StatusBarButton
 	WithImageHugsTitle(imageHugsTitle bool) *StatusBarButton
 	WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *StatusBarButton
 	WithState(state int) *StatusBarButton
 	WithAllowsMixedState(allowsMixedState bool) *StatusBarButton
 	WithKeyEquivalent(keyEquivalent string) *StatusBarButton
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *StatusBarButton
-	WithBorderShape(borderShape raw.NSControlBorderShape) *StatusBarButton
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *StatusBarButton
+	WithBorderShape(borderShape NSControlBorderShape) *StatusBarButton
 	WithTarget(target objc.ID) *StatusBarButton
 	WithAction(action objc.SEL) *StatusBarButton
 	WithTag(tag int) *StatusBarButton
@@ -746,7 +746,7 @@ type StatusBarButtonable interface {
 	WithEnabled(enabled bool) *StatusBarButton
 	WithRefusesFirstResponder(refusesFirstResponder bool) *StatusBarButton
 	WithHighlighted(highlighted bool) *StatusBarButton
-	WithControlSize(controlSize raw.NSControlSize) *StatusBarButton
+	WithControlSize(controlSize NSControlSize) *StatusBarButton
 	WithFormatter(formatter *foundation.NSFormatter) *StatusBarButton
 	WithObjectValue(objectValue objc.ID) *StatusBarButton
 	WithStringValue(stringValue string) *StatusBarButton
@@ -757,16 +757,16 @@ type StatusBarButtonable interface {
 	WithDoubleValue(doubleValue float64) *StatusBarButton
 	WithFont(font *Font) *StatusBarButton
 	WithUsesSingleLineMode(usesSingleLineMode bool) *StatusBarButton
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *StatusBarButton
-	WithAlignment(alignment raw.NSTextAlignment) *StatusBarButton
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *StatusBarButton
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *StatusBarButton
+	WithAlignment(alignment NSTextAlignment) *StatusBarButton
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *StatusBarButton
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *StatusBarButton
 	WithCell(cell CellProvider) *StatusBarButton
 	WithSubviews(items ...ViewProvider) *StatusBarButton
 	WithHidden(hidden bool) *StatusBarButton
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StatusBarButton
 	WithAutoresizesSubviews(autoresizesSubviews bool) *StatusBarButton
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *StatusBarButton
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *StatusBarButton
 	WithFrame(frame corefoundation.CGRect) *StatusBarButton
 	WithFrameRotation(frameRotation float64) *StatusBarButton
 	WithFrameCenterRotation(frameCenterRotation float64) *StatusBarButton
@@ -776,8 +776,8 @@ type StatusBarButtonable interface {
 	WithNeedsDisplay(needsDisplay bool) *StatusBarButton
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *StatusBarButton
 	WithWantsRestingTouches(wantsRestingTouches bool) *StatusBarButton
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *StatusBarButton
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *StatusBarButton
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *StatusBarButton
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *StatusBarButton
 	WithWantsLayer(wantsLayer bool) *StatusBarButton
 	WithLayer(layer *quartzcore.CALayer) *StatusBarButton
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StatusBarButton
@@ -791,12 +791,12 @@ type StatusBarButtonable interface {
 	WithClipsToBounds(clipsToBounds bool) *StatusBarButton
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StatusBarButton
 	WithToolTip(toolTip string) *StatusBarButton
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StatusBarButton
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StatusBarButton
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StatusBarButton
 	WithNextKeyView(nextKeyView ViewProvider) *StatusBarButton
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *StatusBarButton
+	WithFocusRingType(focusRingType NSFocusRingType) *StatusBarButton
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *StatusBarButton
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *StatusBarButton
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *StatusBarButton
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StatusBarButton
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StatusBarButton
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StatusBarButton

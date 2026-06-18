@@ -37,9 +37,9 @@ func NewSpecifierTestWithCoder(inCoder *raw.NSCoder) *SpecifierTest {
 }
 
 // NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject creates a new [SpecifierTest].
-func NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject(obj1 *raw.NSScriptObjectSpecifier, compOp raw.NSTestComparisonOperation, obj2 objc.ID) *SpecifierTest {
+func NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject(obj1 *raw.NSScriptObjectSpecifier, compOp NSTestComparisonOperation, obj2 objc.ID) *SpecifierTest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSpecifierTest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectSpecifier:comparisonOperator:testObject:"), obj1.Ptr(), compOp, obj2)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectSpecifier:comparisonOperator:testObject:"), obj1.Ptr(), raw.NSTestComparisonOperation(compOp), obj2)
 	return &SpecifierTest{inner: raw.NSSpecifierTestFromID(_id)}
 }
 

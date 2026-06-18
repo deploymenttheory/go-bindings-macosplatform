@@ -87,8 +87,8 @@ func (x *PDFImageRep) WithPixelsHigh(pixelsHigh int) *PDFImageRep {
 }
 
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *PDFImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *PDFImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+func (x *PDFImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *PDFImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
@@ -130,7 +130,7 @@ type PDFImageRepable interface {
 	WithBitsPerSample(bitsPerSample int) *PDFImageRep
 	WithPixelsWide(pixelsWide int) *PDFImageRep
 	WithPixelsHigh(pixelsHigh int) *PDFImageRep
-	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *PDFImageRep
+	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *PDFImageRep
 	PDFRepresentation() *foundation.NSData
 	Bounds() corefoundation.CGRect
 	CurrentPage() int

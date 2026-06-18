@@ -61,8 +61,8 @@ func (x *ControllerTouchpad) WithReportsAbsoluteTouchSurfaceValues(reportsAbsolu
 }
 
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *ControllerTouchpad) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerTouchpad {
-	x.inner.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+func (x *ControllerTouchpad) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerTouchpad {
+	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
@@ -144,8 +144,8 @@ func (x *ControllerTouchpad) TouchSurface() *ControllerDirectionPad {
 }
 
 // TouchState calls the underlying TouchState.
-func (x *ControllerTouchpad) TouchState() raw.GCTouchState {
-	return x.inner.TouchState()
+func (x *ControllerTouchpad) TouchState() GCTouchState {
+	return GCTouchState(x.inner.TouchState())
 }
 
 // ReportsAbsoluteTouchSurfaceValues calls the underlying ReportsAbsoluteTouchSurfaceValues.
@@ -169,7 +169,7 @@ type ControllerTouchpadable interface {
 	WithTouchMoved(touchMoved func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad
 	WithTouchUp(touchUp func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad
 	WithReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool) *ControllerTouchpad
-	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerTouchpad
+	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerTouchpad
 	WithSfSymbolsName(sfSymbolsName string) *ControllerTouchpad
 	WithLocalizedName(localizedName string) *ControllerTouchpad
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerTouchpad
@@ -183,7 +183,7 @@ type ControllerTouchpadable interface {
 	TouchUp() objc.Block
 	SetTouchUp(touchUp func(*raw.GCControllerTouchpad, float32, float32, float32, bool))
 	TouchSurface() *ControllerDirectionPad
-	TouchState() raw.GCTouchState
+	TouchState() GCTouchState
 	ReportsAbsoluteTouchSurfaceValues() bool
 	SetReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool)
 }

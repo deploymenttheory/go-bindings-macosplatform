@@ -37,20 +37,20 @@ func NewImageCell() *ImageCell {
 }
 
 // WithImageAlignment sets the imageAlignment property and returns the receiver for chaining.
-func (x *ImageCell) WithImageAlignment(imageAlignment raw.NSImageAlignment) *ImageCell {
-	x.inner.SetImageAlignment(imageAlignment)
+func (x *ImageCell) WithImageAlignment(imageAlignment NSImageAlignment) *ImageCell {
+	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
 	return x
 }
 
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *ImageCell) WithImageScaling(imageScaling raw.NSImageScaling) *ImageCell {
-	x.inner.SetImageScaling(imageScaling)
+func (x *ImageCell) WithImageScaling(imageScaling NSImageScaling) *ImageCell {
+	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
 // WithImageFrameStyle sets the imageFrameStyle property and returns the receiver for chaining.
-func (x *ImageCell) WithImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) *ImageCell {
-	x.inner.SetImageFrameStyle(imageFrameStyle)
+func (x *ImageCell) WithImageFrameStyle(imageFrameStyle NSImageFrameStyle) *ImageCell {
+	x.inner.SetImageFrameStyle(raw.NSImageFrameStyle(imageFrameStyle))
 	return x
 }
 
@@ -61,8 +61,8 @@ func (x *ImageCell) WithControlView(controlView ViewProvider) *ImageCell {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *ImageCell) WithType(type_ raw.NSCellType) *ImageCell {
-	x.inner.NSCell.SetType(type_)
+func (x *ImageCell) WithType(type_ NSCellType) *ImageCell {
+	x.inner.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -145,8 +145,8 @@ func (x *ImageCell) WithHighlighted(highlighted bool) *ImageCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ImageCell) WithAlignment(alignment raw.NSTextAlignment) *ImageCell {
-	x.inner.NSCell.SetAlignment(alignment)
+func (x *ImageCell) WithAlignment(alignment NSTextAlignment) *ImageCell {
+	x.inner.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -211,8 +211,8 @@ func (x *ImageCell) WithImage(image *Image) *ImageCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ImageCell) WithControlSize(controlSize raw.NSControlSize) *ImageCell {
-	x.inner.NSCell.SetControlSize(controlSize)
+func (x *ImageCell) WithControlSize(controlSize NSControlSize) *ImageCell {
+	x.inner.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -235,14 +235,14 @@ func (x *ImageCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *I
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ImageCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ImageCell {
-	x.inner.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *ImageCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ImageCell {
+	x.inner.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ImageCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ImageCell {
-	x.inner.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *ImageCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ImageCell {
+	x.inner.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -259,8 +259,8 @@ func (x *ImageCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) 
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ImageCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ImageCell {
-	x.inner.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ImageCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ImageCell {
+	x.inner.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -283,8 +283,8 @@ func (x *ImageCell) WithShowsFirstResponder(showsFirstResponder bool) *ImageCell
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ImageCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *ImageCell {
-	x.inner.NSCell.SetFocusRingType(focusRingType)
+func (x *ImageCell) WithFocusRingType(focusRingType NSFocusRingType) *ImageCell {
+	x.inner.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -313,45 +313,45 @@ func (x *ImageCell) WithAllowsMixedState(allowsMixedState bool) *ImageCell {
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *ImageCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ImageCell {
-	x.inner.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *ImageCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ImageCell {
+	x.inner.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *ImageCell) WithControlTint(controlTint raw.NSControlTint) *ImageCell {
-	x.inner.NSCell.SetControlTint(controlTint)
+func (x *ImageCell) WithControlTint(controlTint NSControlTint) *ImageCell {
+	x.inner.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
 // ImageAlignment calls the underlying ImageAlignment.
-func (x *ImageCell) ImageAlignment() raw.NSImageAlignment {
-	return x.inner.ImageAlignment()
+func (x *ImageCell) ImageAlignment() NSImageAlignment {
+	return NSImageAlignment(x.inner.ImageAlignment())
 }
 
 // SetImageAlignment calls the underlying SetImageAlignment.
-func (x *ImageCell) SetImageAlignment(imageAlignment raw.NSImageAlignment) {
-	x.inner.SetImageAlignment(imageAlignment)
+func (x *ImageCell) SetImageAlignment(imageAlignment NSImageAlignment) {
+	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
 }
 
 // ImageScaling calls the underlying ImageScaling.
-func (x *ImageCell) ImageScaling() raw.NSImageScaling {
-	return x.inner.ImageScaling()
+func (x *ImageCell) ImageScaling() NSImageScaling {
+	return NSImageScaling(x.inner.ImageScaling())
 }
 
 // SetImageScaling calls the underlying SetImageScaling.
-func (x *ImageCell) SetImageScaling(imageScaling raw.NSImageScaling) {
-	x.inner.SetImageScaling(imageScaling)
+func (x *ImageCell) SetImageScaling(imageScaling NSImageScaling) {
+	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 }
 
 // ImageFrameStyle calls the underlying ImageFrameStyle.
-func (x *ImageCell) ImageFrameStyle() raw.NSImageFrameStyle {
-	return x.inner.ImageFrameStyle()
+func (x *ImageCell) ImageFrameStyle() NSImageFrameStyle {
+	return NSImageFrameStyle(x.inner.ImageFrameStyle())
 }
 
 // SetImageFrameStyle calls the underlying SetImageFrameStyle.
-func (x *ImageCell) SetImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) {
-	x.inner.SetImageFrameStyle(imageFrameStyle)
+func (x *ImageCell) SetImageFrameStyle(imageFrameStyle NSImageFrameStyle) {
+	x.inner.SetImageFrameStyle(raw.NSImageFrameStyle(imageFrameStyle))
 }
 
 func (x *ImageCell) asCell() *raw.NSCell { return &x.inner.NSCell }
@@ -359,11 +359,11 @@ func (x *ImageCell) asCell() *raw.NSCell { return &x.inner.NSCell }
 // ImageCellable is the interface implemented by [ImageCell], for mocking and DI.
 type ImageCellable interface {
 	Unwrap() *raw.NSImageCell
-	WithImageAlignment(imageAlignment raw.NSImageAlignment) *ImageCell
-	WithImageScaling(imageScaling raw.NSImageScaling) *ImageCell
-	WithImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) *ImageCell
+	WithImageAlignment(imageAlignment NSImageAlignment) *ImageCell
+	WithImageScaling(imageScaling NSImageScaling) *ImageCell
+	WithImageFrameStyle(imageFrameStyle NSImageFrameStyle) *ImageCell
 	WithControlView(controlView ViewProvider) *ImageCell
-	WithType(type_ raw.NSCellType) *ImageCell
+	WithType(type_ NSCellType) *ImageCell
 	WithState(state int) *ImageCell
 	WithTarget(target objc.ID) *ImageCell
 	WithAction(action objc.SEL) *ImageCell
@@ -377,7 +377,7 @@ type ImageCellable interface {
 	WithBezeled(bezeled bool) *ImageCell
 	WithScrollable(scrollable bool) *ImageCell
 	WithHighlighted(highlighted bool) *ImageCell
-	WithAlignment(alignment raw.NSTextAlignment) *ImageCell
+	WithAlignment(alignment NSTextAlignment) *ImageCell
 	WithWraps(wraps bool) *ImageCell
 	WithFont(font *Font) *ImageCell
 	WithFormatter(formatter *foundation.NSFormatter) *ImageCell
@@ -388,31 +388,31 @@ type ImageCellable interface {
 	WithDoubleValue(doubleValue float64) *ImageCell
 	WithIntegerValue(integerValue int) *ImageCell
 	WithImage(image *Image) *ImageCell
-	WithControlSize(controlSize raw.NSControlSize) *ImageCell
+	WithControlSize(controlSize NSControlSize) *ImageCell
 	WithRepresentedObject(representedObject objc.ID) *ImageCell
 	WithMenu(menu *Menu) *ImageCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ImageCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ImageCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ImageCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ImageCell
 	WithAllowsUndo(allowsUndo bool) *ImageCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ImageCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ImageCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ImageCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ImageCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ImageCell
 	WithShowsFirstResponder(showsFirstResponder bool) *ImageCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ImageCell
+	WithFocusRingType(focusRingType NSFocusRingType) *ImageCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ImageCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ImageCell
 	WithImportsGraphics(importsGraphics bool) *ImageCell
 	WithAllowsMixedState(allowsMixedState bool) *ImageCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ImageCell
-	WithControlTint(controlTint raw.NSControlTint) *ImageCell
-	ImageAlignment() raw.NSImageAlignment
-	SetImageAlignment(imageAlignment raw.NSImageAlignment)
-	ImageScaling() raw.NSImageScaling
-	SetImageScaling(imageScaling raw.NSImageScaling)
-	ImageFrameStyle() raw.NSImageFrameStyle
-	SetImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle)
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ImageCell
+	WithControlTint(controlTint NSControlTint) *ImageCell
+	ImageAlignment() NSImageAlignment
+	SetImageAlignment(imageAlignment NSImageAlignment)
+	ImageScaling() NSImageScaling
+	SetImageScaling(imageScaling NSImageScaling)
+	ImageFrameStyle() NSImageFrameStyle
+	SetImageFrameStyle(imageFrameStyle NSImageFrameStyle)
 }
 
 var _ ImageCellable = (*ImageCell)(nil)

@@ -214,8 +214,8 @@ func (x *AssetWriter) AvailableMediaTypes() []*foundation.NSString {
 }
 
 // Status calls the underlying Status.
-func (x *AssetWriter) Status() raw.AVAssetWriterStatus {
-	return x.inner.Status()
+func (x *AssetWriter) Status() AVAssetWriterStatus {
+	return AVAssetWriterStatus(x.inner.Status())
 }
 
 // Error calls the underlying Error.
@@ -412,7 +412,7 @@ type AssetWriterable interface {
 	OutputURL() *foundation.NSURL
 	OutputFileType() string
 	AvailableMediaTypes() []*foundation.NSString
-	Status() raw.AVAssetWriterStatus
+	Status() AVAssetWriterStatus
 	Error() unsafe.Pointer
 	Metadata() []*MetadataItem
 	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])

@@ -67,8 +67,8 @@ func (x *FontDescriptor) FontDescriptorByAddingAttributes(attributes *foundation
 }
 
 // FontDescriptorWithSymbolicTraits calls the underlying FontDescriptorWithSymbolicTraits.
-func (x *FontDescriptor) FontDescriptorWithSymbolicTraits(symbolicTraits raw.NSFontDescriptorSymbolicTraits) *FontDescriptor {
-	_r := x.inner.FontDescriptorWithSymbolicTraits(symbolicTraits)
+func (x *FontDescriptor) FontDescriptorWithSymbolicTraits(symbolicTraits NSFontDescriptorSymbolicTraits) *FontDescriptor {
+	_r := x.inner.FontDescriptorWithSymbolicTraits(raw.NSFontDescriptorSymbolicTraits(symbolicTraits))
 	if _r == nil {
 		return nil
 	}
@@ -140,8 +140,8 @@ func (x *FontDescriptor) Matrix() *foundation.NSAffineTransform {
 }
 
 // SymbolicTraits calls the underlying SymbolicTraits.
-func (x *FontDescriptor) SymbolicTraits() raw.NSFontDescriptorSymbolicTraits {
-	return x.inner.SymbolicTraits()
+func (x *FontDescriptor) SymbolicTraits() NSFontDescriptorSymbolicTraits {
+	return NSFontDescriptorSymbolicTraits(x.inner.SymbolicTraits())
 }
 
 // RequiresFontAssetRequest calls the underlying RequiresFontAssetRequest.
@@ -161,7 +161,7 @@ type FontDescriptorable interface {
 	MatchingFontDescriptorsWithMandatoryKeys(mandatoryKeys *foundation.NSSet[*foundation.NSString]) *foundation.NSArray[*raw.NSFontDescriptor]
 	MatchingFontDescriptorWithMandatoryKeys(mandatoryKeys *foundation.NSSet[*foundation.NSString]) *FontDescriptor
 	FontDescriptorByAddingAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *FontDescriptor
-	FontDescriptorWithSymbolicTraits(symbolicTraits raw.NSFontDescriptorSymbolicTraits) *FontDescriptor
+	FontDescriptorWithSymbolicTraits(symbolicTraits NSFontDescriptorSymbolicTraits) *FontDescriptor
 	FontDescriptorWithSize(newPointSize float64) *FontDescriptor
 	FontDescriptorWithMatrix(matrix *foundation.NSAffineTransform) *FontDescriptor
 	FontDescriptorWithFace(newFace string) *FontDescriptor
@@ -170,7 +170,7 @@ type FontDescriptorable interface {
 	PostscriptName() string
 	PointSize() float64
 	Matrix() *foundation.NSAffineTransform
-	SymbolicTraits() raw.NSFontDescriptorSymbolicTraits
+	SymbolicTraits() NSFontDescriptorSymbolicTraits
 	RequiresFontAssetRequest() bool
 	FontAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 }

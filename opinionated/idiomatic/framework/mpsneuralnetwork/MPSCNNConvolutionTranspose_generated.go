@@ -60,8 +60,8 @@ func (x *CNNConvolutionTranspose) WithKernelOffsetY(kernelOffsetY int) *CNNConvo
 }
 
 // WithAccumulatorPrecisionOption sets the accumulatorPrecisionOption property and returns the receiver for chaining.
-func (x *CNNConvolutionTranspose) WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTranspose {
-	x.inner.SetAccumulatorPrecisionOption(accumulatorPrecisionOption)
+func (x *CNNConvolutionTranspose) WithAccumulatorPrecisionOption(accumulatorPrecisionOption MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTranspose {
+	x.inner.SetAccumulatorPrecisionOption(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecisionOption))
 	return x
 }
 
@@ -198,13 +198,13 @@ func (x *CNNConvolutionTranspose) Groups() uint {
 }
 
 // AccumulatorPrecisionOption calls the underlying AccumulatorPrecisionOption.
-func (x *CNNConvolutionTranspose) AccumulatorPrecisionOption() raw.MPSNNConvolutionAccumulatorPrecisionOption {
-	return x.inner.AccumulatorPrecisionOption()
+func (x *CNNConvolutionTranspose) AccumulatorPrecisionOption() MPSNNConvolutionAccumulatorPrecisionOption {
+	return MPSNNConvolutionAccumulatorPrecisionOption(x.inner.AccumulatorPrecisionOption())
 }
 
 // SetAccumulatorPrecisionOption calls the underlying SetAccumulatorPrecisionOption.
-func (x *CNNConvolutionTranspose) SetAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) {
-	x.inner.SetAccumulatorPrecisionOption(accumulatorPrecisionOption)
+func (x *CNNConvolutionTranspose) SetAccumulatorPrecisionOption(accumulatorPrecisionOption MPSNNConvolutionAccumulatorPrecisionOption) {
+	x.inner.SetAccumulatorPrecisionOption(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecisionOption))
 }
 
 // DataSource calls the underlying DataSource.
@@ -219,7 +219,7 @@ type CNNConvolutionTransposeable interface {
 	Unwrap() *raw.MPSCNNConvolutionTranspose
 	WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionTranspose
 	WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionTranspose
-	WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTranspose
+	WithAccumulatorPrecisionOption(accumulatorPrecisionOption MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTranspose
 	WithOffset(offset mpscore.MPSOffset) *CNNConvolutionTranspose
 	WithClipRect(clipRect metal.MTLRegion) *CNNConvolutionTranspose
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolutionTranspose
@@ -244,8 +244,8 @@ type CNNConvolutionTransposeable interface {
 	KernelOffsetY() int
 	SetKernelOffsetY(kernelOffsetY int)
 	Groups() uint
-	AccumulatorPrecisionOption() raw.MPSNNConvolutionAccumulatorPrecisionOption
-	SetAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption)
+	AccumulatorPrecisionOption() MPSNNConvolutionAccumulatorPrecisionOption
+	SetAccumulatorPrecisionOption(accumulatorPrecisionOption MPSNNConvolutionAccumulatorPrecisionOption)
 	DataSource() raw.MPSCNNConvolutionDataSource
 }
 

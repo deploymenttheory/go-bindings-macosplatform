@@ -50,8 +50,8 @@ func (x *AudioEnvironmentReverbParameters) WithLevel(level float32) *AudioEnviro
 }
 
 // LoadFactoryReverbPreset calls the underlying LoadFactoryReverbPreset.
-func (x *AudioEnvironmentReverbParameters) LoadFactoryReverbPreset(preset raw.AVAudioUnitReverbPreset) {
-	x.inner.LoadFactoryReverbPreset(preset)
+func (x *AudioEnvironmentReverbParameters) LoadFactoryReverbPreset(preset AVAudioUnitReverbPreset) {
+	x.inner.LoadFactoryReverbPreset(raw.AVAudioUnitReverbPreset(preset))
 }
 
 // Enable calls the underlying Enable.
@@ -88,7 +88,7 @@ type AudioEnvironmentReverbParametersable interface {
 	Unwrap() *raw.AVAudioEnvironmentReverbParameters
 	WithEnable(enable bool) *AudioEnvironmentReverbParameters
 	WithLevel(level float32) *AudioEnvironmentReverbParameters
-	LoadFactoryReverbPreset(preset raw.AVAudioUnitReverbPreset)
+	LoadFactoryReverbPreset(preset AVAudioUnitReverbPreset)
 	Enable() bool
 	SetEnable(enable bool)
 	Level() float32

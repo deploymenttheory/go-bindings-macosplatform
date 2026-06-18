@@ -75,8 +75,8 @@ func (x *ManagedObject) AwakeFromInsert() {
 }
 
 // AwakeFromSnapshotEvents calls the underlying AwakeFromSnapshotEvents.
-func (x *ManagedObject) AwakeFromSnapshotEvents(flags raw.NSSnapshotEventType) {
-	x.inner.AwakeFromSnapshotEvents(flags)
+func (x *ManagedObject) AwakeFromSnapshotEvents(flags NSSnapshotEventType) {
+	x.inner.AwakeFromSnapshotEvents(raw.NSSnapshotEventType(flags))
 }
 
 // PrepareForDeletion calls the underlying PrepareForDeletion.
@@ -218,7 +218,7 @@ type ManagedObjectable interface {
 	DidAccessValueForKey(key string)
 	AwakeFromFetch()
 	AwakeFromInsert()
-	AwakeFromSnapshotEvents(flags raw.NSSnapshotEventType)
+	AwakeFromSnapshotEvents(flags NSSnapshotEventType)
 	PrepareForDeletion()
 	WillSave()
 	DidSave()

@@ -561,8 +561,8 @@ func GKLocalPlayerLocalPlayer() *LocalPlayer {
 }
 
 // MaxPlayersAllowedForMatchOfType calls the underlying GKMatchRequestMaxPlayersAllowedForMatchOfType.
-func MaxPlayersAllowedForMatchOfType(matchType raw.GKMatchType) uint {
-	return raw.GKMatchRequestMaxPlayersAllowedForMatchOfType(matchType)
+func MaxPlayersAllowedForMatchOfType(matchType GKMatchType) uint {
+	return raw.GKMatchRequestMaxPlayersAllowedForMatchOfType(raw.GKMatchType(matchType))
 }
 
 // SharedMatchmaker calls the underlying GKMatchmakerSharedMatchmaker.

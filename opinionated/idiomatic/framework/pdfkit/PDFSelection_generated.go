@@ -97,8 +97,8 @@ func (x *Selection) DrawForPageActive(page *raw.PDFPage, active bool) {
 }
 
 // DrawForPageWithBoxActive calls the underlying DrawForPageWithBoxActive.
-func (x *Selection) DrawForPageWithBoxActive(page *raw.PDFPage, box raw.PDFDisplayBox, active bool) {
-	x.inner.DrawForPageWithBoxActive(page, box, active)
+func (x *Selection) DrawForPageWithBoxActive(page *raw.PDFPage, box PDFDisplayBox, active bool) {
+	x.inner.DrawForPageWithBoxActive(page, raw.PDFDisplayBox(box), active)
 }
 
 // Pages returns the collection as a Go slice.
@@ -149,7 +149,7 @@ type Selectionable interface {
 	ExtendSelectionAtStart(precede int)
 	ExtendSelectionForLineBoundaries()
 	DrawForPageActive(page *raw.PDFPage, active bool)
-	DrawForPageWithBoxActive(page *raw.PDFPage, box raw.PDFDisplayBox, active bool)
+	DrawForPageWithBoxActive(page *raw.PDFPage, box PDFDisplayBox, active bool)
 	Pages() []*Page
 	Color() unsafe.Pointer
 	SetColor(color unsafe.Pointer)

@@ -52,8 +52,8 @@ func NewMTROptionalQRCodeInfoWithTagInt32Value(tag *foundation.NSNumber, value i
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *MTROptionalQRCodeInfo) WithType(type_ raw.MTROptionalQRCodeInfoType) *MTROptionalQRCodeInfo {
-	x.inner.SetType(type_)
+func (x *MTROptionalQRCodeInfo) WithType(type_ MTROptionalQRCodeInfoType) *MTROptionalQRCodeInfo {
+	x.inner.SetType(raw.MTROptionalQRCodeInfoType(type_))
 	return x
 }
 
@@ -82,8 +82,8 @@ func (x *MTROptionalQRCodeInfo) WithInfoType(infoType *foundation.NSNumber) *MTR
 }
 
 // Type calls the underlying Type.
-func (x *MTROptionalQRCodeInfo) Type() raw.MTROptionalQRCodeInfoType {
-	return x.inner.Type()
+func (x *MTROptionalQRCodeInfo) Type() MTROptionalQRCodeInfoType {
+	return MTROptionalQRCodeInfoType(x.inner.Type())
 }
 
 // Tag calls the underlying Tag.
@@ -106,8 +106,8 @@ func (x *MTROptionalQRCodeInfo) StringValue() string {
 }
 
 // SetType calls the underlying SetType.
-func (x *MTROptionalQRCodeInfo) SetType(type_ raw.MTROptionalQRCodeInfoType) {
-	x.inner.SetType(type_)
+func (x *MTROptionalQRCodeInfo) SetType(type_ MTROptionalQRCodeInfoType) {
+	x.inner.SetType(raw.MTROptionalQRCodeInfoType(type_))
 }
 
 // SetTag calls the underlying SetTag.
@@ -138,16 +138,16 @@ func (x *MTROptionalQRCodeInfo) SetInfoType(infoType *foundation.NSNumber) {
 // MTROptionalQRCodeInfoable is the interface implemented by [MTROptionalQRCodeInfo], for mocking and DI.
 type MTROptionalQRCodeInfoable interface {
 	Unwrap() *raw.MTROptionalQRCodeInfo
-	WithType(type_ raw.MTROptionalQRCodeInfoType) *MTROptionalQRCodeInfo
+	WithType(type_ MTROptionalQRCodeInfoType) *MTROptionalQRCodeInfo
 	WithTag(tag *foundation.NSNumber) *MTROptionalQRCodeInfo
 	WithIntegerValue(integerValue *foundation.NSNumber) *MTROptionalQRCodeInfo
 	WithStringValue(stringValue string) *MTROptionalQRCodeInfo
 	WithInfoType(infoType *foundation.NSNumber) *MTROptionalQRCodeInfo
-	Type() raw.MTROptionalQRCodeInfoType
+	Type() MTROptionalQRCodeInfoType
 	Tag() *foundation.NSNumber
 	IntegerValue() *foundation.NSNumber
 	StringValue() string
-	SetType(type_ raw.MTROptionalQRCodeInfoType)
+	SetType(type_ MTROptionalQRCodeInfoType)
 	SetTag(tag *foundation.NSNumber)
 	SetIntegerValue(integerValue *foundation.NSNumber)
 	SetStringValue(stringValue string)

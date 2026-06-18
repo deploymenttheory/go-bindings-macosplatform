@@ -47,8 +47,8 @@ func NewCNNFullyConnectedWithCoderDevice(aDecoder *foundation.NSCoder, device me
 }
 
 // WithAccumulatorPrecisionOption sets the accumulatorPrecisionOption property and returns the receiver for chaining.
-func (x *CNNFullyConnected) WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnected {
-	x.inner.MPSCNNConvolution.SetAccumulatorPrecisionOption(accumulatorPrecisionOption)
+func (x *CNNFullyConnected) WithAccumulatorPrecisionOption(accumulatorPrecisionOption MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnected {
+	x.inner.MPSCNNConvolution.SetAccumulatorPrecisionOption(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecisionOption))
 	return x
 }
 
@@ -111,7 +111,7 @@ func (x *CNNFullyConnected) asCNNKernel() *raw.MPSCNNKernel {
 // CNNFullyConnectedable is the interface implemented by [CNNFullyConnected], for mocking and DI.
 type CNNFullyConnectedable interface {
 	Unwrap() *raw.MPSCNNFullyConnected
-	WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnected
+	WithAccumulatorPrecisionOption(accumulatorPrecisionOption MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnected
 	WithOffset(offset mpscore.MPSOffset) *CNNFullyConnected
 	WithClipRect(clipRect metal.MTLRegion) *CNNFullyConnected
 	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNFullyConnected

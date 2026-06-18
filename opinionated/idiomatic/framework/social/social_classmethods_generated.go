@@ -11,8 +11,8 @@ import (
 )
 
 // RequestForServiceTypeRequestMethodURLParameters calls the underlying SLRequestRequestForServiceTypeRequestMethodURLParameters.
-func RequestForServiceTypeRequestMethodURLParameters(serviceType string, requestMethod raw.SLRequestMethod, url string, parameters *foundation.NSDictionary[objc.ID, objc.ID]) *Request {
-	_r := raw.SLRequestRequestForServiceTypeRequestMethodURLParameters(foundation.NSStringStringWithUTF8String(serviceType), requestMethod, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), parameters)
+func RequestForServiceTypeRequestMethodURLParameters(serviceType string, requestMethod SLRequestMethod, url string, parameters *foundation.NSDictionary[objc.ID, objc.ID]) *Request {
+	_r := raw.SLRequestRequestForServiceTypeRequestMethodURLParameters(foundation.NSStringStringWithUTF8String(serviceType), raw.SLRequestMethod(requestMethod), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), parameters)
 	if _r == nil {
 		return nil
 	}

@@ -102,13 +102,13 @@ func (x *MutableData) ReplaceBytesInRangeWithBytesLength(range_ raw.NSRange, rep
 }
 
 // DecompressUsingAlgorithmError calls the underlying DecompressUsingAlgorithmError.
-func (x *MutableData) DecompressUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (bool, error) {
-	return x.inner.DecompressUsingAlgorithmError(algorithm)
+func (x *MutableData) DecompressUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (bool, error) {
+	return x.inner.DecompressUsingAlgorithmError(raw.NSDataCompressionAlgorithm(algorithm))
 }
 
 // CompressUsingAlgorithmError calls the underlying CompressUsingAlgorithmError.
-func (x *MutableData) CompressUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (bool, error) {
-	return x.inner.CompressUsingAlgorithmError(algorithm)
+func (x *MutableData) CompressUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (bool, error) {
+	return x.inner.CompressUsingAlgorithmError(raw.NSDataCompressionAlgorithm(algorithm))
 }
 
 func (x *MutableData) asMutableData() *raw.NSMutableData { return x.inner }
@@ -131,8 +131,8 @@ type MutableDataable interface {
 	ResetBytesInRange(range_ raw.NSRange)
 	SetData(data *raw.NSData)
 	ReplaceBytesInRangeWithBytesLength(range_ raw.NSRange, replacementBytes unsafe.Pointer, replacementLength uint)
-	DecompressUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (bool, error)
-	CompressUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (bool, error)
+	DecompressUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (bool, error)
+	CompressUsingAlgorithmError(algorithm NSDataCompressionAlgorithm) (bool, error)
 }
 
 var _ MutableDataable = (*MutableData)(nil)

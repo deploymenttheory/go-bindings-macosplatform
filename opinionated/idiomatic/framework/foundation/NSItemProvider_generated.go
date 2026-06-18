@@ -78,18 +78,18 @@ func (x *ItemProvider) WithScriptingProperties(scriptingProperties *raw.NSDictio
 }
 
 // RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler calls the underlying RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler.
-func (x *ItemProvider) RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(typeIdentifier string, visibility raw.NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
-	x.inner.RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), visibility, loadHandler)
+func (x *ItemProvider) RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(typeIdentifier string, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
+	x.inner.RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), raw.NSItemProviderRepresentationVisibility(visibility), loadHandler)
 }
 
 // RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler calls the underlying RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler.
-func (x *ItemProvider) RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(typeIdentifier string, fileOptions raw.NSItemProviderFileOptions, visibility raw.NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
-	x.inner.RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), fileOptions, visibility, loadHandler)
+func (x *ItemProvider) RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(typeIdentifier string, fileOptions NSItemProviderFileOptions, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
+	x.inner.RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), raw.NSItemProviderFileOptions(fileOptions), raw.NSItemProviderRepresentationVisibility(visibility), loadHandler)
 }
 
 // RegisteredTypeIdentifiersWithFileOptions calls the underlying RegisteredTypeIdentifiersWithFileOptions.
-func (x *ItemProvider) RegisteredTypeIdentifiersWithFileOptions(fileOptions raw.NSItemProviderFileOptions) *raw.NSArray[*raw.NSString] {
-	return x.inner.RegisteredTypeIdentifiersWithFileOptions(fileOptions)
+func (x *ItemProvider) RegisteredTypeIdentifiersWithFileOptions(fileOptions NSItemProviderFileOptions) *raw.NSArray[*raw.NSString] {
+	return x.inner.RegisteredTypeIdentifiersWithFileOptions(raw.NSItemProviderFileOptions(fileOptions))
 }
 
 // HasItemConformingToTypeIdentifier calls the underlying HasItemConformingToTypeIdentifier.
@@ -98,8 +98,8 @@ func (x *ItemProvider) HasItemConformingToTypeIdentifier(typeIdentifier string) 
 }
 
 // HasRepresentationConformingToTypeIdentifierFileOptions calls the underlying HasRepresentationConformingToTypeIdentifierFileOptions.
-func (x *ItemProvider) HasRepresentationConformingToTypeIdentifierFileOptions(typeIdentifier string, fileOptions raw.NSItemProviderFileOptions) bool {
-	return x.inner.HasRepresentationConformingToTypeIdentifierFileOptions(foundation.NSStringStringWithUTF8String(typeIdentifier), fileOptions)
+func (x *ItemProvider) HasRepresentationConformingToTypeIdentifierFileOptions(typeIdentifier string, fileOptions NSItemProviderFileOptions) bool {
+	return x.inner.HasRepresentationConformingToTypeIdentifierFileOptions(foundation.NSStringStringWithUTF8String(typeIdentifier), raw.NSItemProviderFileOptions(fileOptions))
 }
 
 // LoadDataRepresentationForTypeIdentifierCompletionHandler calls the underlying LoadDataRepresentationForTypeIdentifierCompletionHandler.
@@ -130,13 +130,13 @@ func (x *ItemProvider) LoadInPlaceFileRepresentationForTypeIdentifierCompletionH
 }
 
 // RegisterObjectVisibility calls the underlying RegisterObjectVisibility.
-func (x *ItemProvider) RegisterObjectVisibility(object raw.NSItemProviderWriting, visibility raw.NSItemProviderRepresentationVisibility) {
-	x.inner.RegisterObjectVisibility(object, visibility)
+func (x *ItemProvider) RegisterObjectVisibility(object raw.NSItemProviderWriting, visibility NSItemProviderRepresentationVisibility) {
+	x.inner.RegisterObjectVisibility(object, raw.NSItemProviderRepresentationVisibility(visibility))
 }
 
 // RegisterObjectOfClassVisibilityLoadHandler calls the underlying RegisterObjectOfClassVisibilityLoadHandler.
-func (x *ItemProvider) RegisterObjectOfClassVisibilityLoadHandler(aClass unsafe.Pointer, visibility raw.NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
-	x.inner.RegisterObjectOfClassVisibilityLoadHandler(aClass, visibility, loadHandler)
+func (x *ItemProvider) RegisterObjectOfClassVisibilityLoadHandler(aClass unsafe.Pointer, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
+	x.inner.RegisterObjectOfClassVisibilityLoadHandler(aClass, raw.NSItemProviderRepresentationVisibility(visibility), loadHandler)
 }
 
 // CanLoadObjectOfClass calls the underlying CanLoadObjectOfClass.
@@ -211,16 +211,16 @@ type ItemProviderable interface {
 	WithSuggestedName(suggestedName string) *ItemProvider
 	WithPreviewImageHandler(previewImageHandler objc.Block) *ItemProvider
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ItemProvider
-	RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(typeIdentifier string, visibility raw.NSItemProviderRepresentationVisibility, loadHandler objc.Block)
-	RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(typeIdentifier string, fileOptions raw.NSItemProviderFileOptions, visibility raw.NSItemProviderRepresentationVisibility, loadHandler objc.Block)
-	RegisteredTypeIdentifiersWithFileOptions(fileOptions raw.NSItemProviderFileOptions) *raw.NSArray[*raw.NSString]
+	RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(typeIdentifier string, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block)
+	RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(typeIdentifier string, fileOptions NSItemProviderFileOptions, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block)
+	RegisteredTypeIdentifiersWithFileOptions(fileOptions NSItemProviderFileOptions) *raw.NSArray[*raw.NSString]
 	HasItemConformingToTypeIdentifier(typeIdentifier string) bool
-	HasRepresentationConformingToTypeIdentifierFileOptions(typeIdentifier string, fileOptions raw.NSItemProviderFileOptions) bool
+	HasRepresentationConformingToTypeIdentifierFileOptions(typeIdentifier string, fileOptions NSItemProviderFileOptions) bool
 	LoadDataRepresentationForTypeIdentifierCompletionHandler(typeIdentifier string, completionHandler func(*raw.NSData, unsafe.Pointer)) *Progress
 	LoadFileRepresentationForTypeIdentifierCompletionHandler(typeIdentifier string, completionHandler func(*raw.NSURL, unsafe.Pointer)) *Progress
 	LoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler(typeIdentifier string, completionHandler func(*raw.NSURL, bool, unsafe.Pointer)) *Progress
-	RegisterObjectVisibility(object raw.NSItemProviderWriting, visibility raw.NSItemProviderRepresentationVisibility)
-	RegisterObjectOfClassVisibilityLoadHandler(aClass unsafe.Pointer, visibility raw.NSItemProviderRepresentationVisibility, loadHandler objc.Block)
+	RegisterObjectVisibility(object raw.NSItemProviderWriting, visibility NSItemProviderRepresentationVisibility)
+	RegisterObjectOfClassVisibilityLoadHandler(aClass unsafe.Pointer, visibility NSItemProviderRepresentationVisibility, loadHandler objc.Block)
 	CanLoadObjectOfClass(aClass unsafe.Pointer) bool
 	LoadObjectOfClassCompletionHandler(aClass unsafe.Pointer, completionHandler func(objc.ID, unsafe.Pointer)) *Progress
 	RegisterItemForTypeIdentifierLoadHandler(typeIdentifier string, loadHandler objc.Block)

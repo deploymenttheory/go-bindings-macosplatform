@@ -250,18 +250,18 @@ func (x *Document) UnblockUserInteraction() {
 }
 
 // WriteSafelyToURLOfTypeForSaveOperationError calls the underlying WriteSafelyToURLOfTypeForSaveOperationError.
-func (x *Document) WriteSafelyToURLOfTypeForSaveOperationError(url string, typeName string, saveOperation raw.NSSaveOperationType) (bool, error) {
-	return x.inner.WriteSafelyToURLOfTypeForSaveOperationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), saveOperation)
+func (x *Document) WriteSafelyToURLOfTypeForSaveOperationError(url string, typeName string, saveOperation NSSaveOperationType) (bool, error) {
+	return x.inner.WriteSafelyToURLOfTypeForSaveOperationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation))
 }
 
 // WriteToURLOfTypeForSaveOperationOriginalContentsURLError calls the underlying WriteToURLOfTypeForSaveOperationOriginalContentsURLError.
-func (x *Document) WriteToURLOfTypeForSaveOperationOriginalContentsURLError(url string, typeName string, saveOperation raw.NSSaveOperationType, absoluteOriginalContentsURL string) (bool, error) {
-	return x.inner.WriteToURLOfTypeForSaveOperationOriginalContentsURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), saveOperation, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(absoluteOriginalContentsURL)))
+func (x *Document) WriteToURLOfTypeForSaveOperationOriginalContentsURLError(url string, typeName string, saveOperation NSSaveOperationType, absoluteOriginalContentsURL string) (bool, error) {
+	return x.inner.WriteToURLOfTypeForSaveOperationOriginalContentsURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(absoluteOriginalContentsURL)))
 }
 
 // FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError calls the underlying FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError.
-func (x *Document) FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError(url string, typeName string, saveOperation raw.NSSaveOperationType, absoluteOriginalContentsURL string) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
-	return x.inner.FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), saveOperation, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(absoluteOriginalContentsURL)))
+func (x *Document) FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError(url string, typeName string, saveOperation NSSaveOperationType, absoluteOriginalContentsURL string) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
+	return x.inner.FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(absoluteOriginalContentsURL)))
 }
 
 // SaveDocument calls the underlying SaveDocument.
@@ -285,8 +285,8 @@ func (x *Document) SaveDocumentWithDelegateDidSaveSelectorContextInfo(delegate o
 }
 
 // RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo calls the underlying RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo.
-func (x *Document) RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo(saveOperation raw.NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo(saveOperation, delegate, didSaveSelector, contextInfo)
+func (x *Document) RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo(saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo(raw.NSSaveOperationType(saveOperation), delegate, didSaveSelector, contextInfo)
 }
 
 // PrepareSavePanel calls the underlying PrepareSavePanel.
@@ -295,14 +295,14 @@ func (x *Document) PrepareSavePanel(savePanel *raw.NSSavePanel) bool {
 }
 
 // SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo calls the underlying SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo.
-func (x *Document) SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo(url string, typeName string, saveOperation raw.NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), saveOperation, delegate, didSaveSelector, contextInfo)
+func (x *Document) SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo(url string, typeName string, saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation), delegate, didSaveSelector, contextInfo)
 }
 
 // SaveToURLOfTypeForSaveOperation blocks until the operation completes or ctx is cancelled.
-func (x *Document) SaveToURLOfTypeForSaveOperation(ctx context.Context, url string, typeName string, saveOperation raw.NSSaveOperationType) error {
+func (x *Document) SaveToURLOfTypeForSaveOperation(ctx context.Context, url string, typeName string, saveOperation NSSaveOperationType) error {
 	_ch := make(chan error, 1)
-	x.inner.SaveToURLOfTypeForSaveOperationCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), saveOperation, func(_p0 unsafe.Pointer) {
+	x.inner.SaveToURLOfTypeForSaveOperationCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation), func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -318,8 +318,8 @@ func (x *Document) SaveToURLOfTypeForSaveOperation(ctx context.Context, url stri
 }
 
 // CanAsynchronouslyWriteToURLOfTypeForSaveOperation calls the underlying CanAsynchronouslyWriteToURLOfTypeForSaveOperation.
-func (x *Document) CanAsynchronouslyWriteToURLOfTypeForSaveOperation(url string, typeName string, saveOperation raw.NSSaveOperationType) bool {
-	return x.inner.CanAsynchronouslyWriteToURLOfTypeForSaveOperation(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), saveOperation)
+func (x *Document) CanAsynchronouslyWriteToURLOfTypeForSaveOperation(url string, typeName string, saveOperation NSSaveOperationType) bool {
+	return x.inner.CanAsynchronouslyWriteToURLOfTypeForSaveOperation(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation))
 }
 
 // CheckAutosavingSafetyAndReturnError returns any validation error.
@@ -564,18 +564,18 @@ func (x *Document) PrepareSharingServicePicker(sharingServicePicker *raw.NSShari
 }
 
 // UpdateChangeCount calls the underlying UpdateChangeCount.
-func (x *Document) UpdateChangeCount(change raw.NSDocumentChangeType) {
-	x.inner.UpdateChangeCount(change)
+func (x *Document) UpdateChangeCount(change NSDocumentChangeType) {
+	x.inner.UpdateChangeCount(raw.NSDocumentChangeType(change))
 }
 
 // ChangeCountTokenForSaveOperation calls the underlying ChangeCountTokenForSaveOperation.
-func (x *Document) ChangeCountTokenForSaveOperation(saveOperation raw.NSSaveOperationType) objc.ID {
-	return x.inner.ChangeCountTokenForSaveOperation(saveOperation)
+func (x *Document) ChangeCountTokenForSaveOperation(saveOperation NSSaveOperationType) objc.ID {
+	return x.inner.ChangeCountTokenForSaveOperation(raw.NSSaveOperationType(saveOperation))
 }
 
 // UpdateChangeCountWithTokenForSaveOperation calls the underlying UpdateChangeCountWithTokenForSaveOperation.
-func (x *Document) UpdateChangeCountWithTokenForSaveOperation(changeCountToken objc.ID, saveOperation raw.NSSaveOperationType) {
-	x.inner.UpdateChangeCountWithTokenForSaveOperation(changeCountToken, saveOperation)
+func (x *Document) UpdateChangeCountWithTokenForSaveOperation(changeCountToken objc.ID, saveOperation NSSaveOperationType) {
+	x.inner.UpdateChangeCountWithTokenForSaveOperation(changeCountToken, raw.NSSaveOperationType(saveOperation))
 }
 
 // PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo calls the underlying PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo.
@@ -653,13 +653,13 @@ func (x *Document) DefaultDraftName() string {
 }
 
 // WritableTypesForSaveOperation calls the underlying WritableTypesForSaveOperation.
-func (x *Document) WritableTypesForSaveOperation(saveOperation raw.NSSaveOperationType) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.WritableTypesForSaveOperation(saveOperation)
+func (x *Document) WritableTypesForSaveOperation(saveOperation NSSaveOperationType) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.WritableTypesForSaveOperation(raw.NSSaveOperationType(saveOperation))
 }
 
 // FileNameExtensionForTypeSaveOperation calls the underlying FileNameExtensionForTypeSaveOperation.
-func (x *Document) FileNameExtensionForTypeSaveOperation(typeName string, saveOperation raw.NSSaveOperationType) string {
-	_r := x.inner.FileNameExtensionForTypeSaveOperation(foundation.NSStringStringWithUTF8String(typeName), saveOperation)
+func (x *Document) FileNameExtensionForTypeSaveOperation(typeName string, saveOperation NSSaveOperationType) string {
+	_r := x.inner.FileNameExtensionForTypeSaveOperation(foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation))
 	if _r == nil {
 		return ""
 	}
@@ -981,8 +981,8 @@ func (x *Document) ObservedPresentedItemUbiquityAttributes() *foundation.NSSet[*
 }
 
 // SaveToURLOfTypeForSaveOperationError calls the underlying SaveToURLOfTypeForSaveOperationError.
-func (x *Document) SaveToURLOfTypeForSaveOperationError(url string, typeName string, saveOperation raw.NSSaveOperationType) (bool, error) {
-	return x.inner.SaveToURLOfTypeForSaveOperationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), saveOperation)
+func (x *Document) SaveToURLOfTypeForSaveOperationError(url string, typeName string, saveOperation NSSaveOperationType) (bool, error) {
+	return x.inner.SaveToURLOfTypeForSaveOperationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation))
 }
 
 // DataRepresentationOfType calls the underlying DataRepresentationOfType.
@@ -991,8 +991,8 @@ func (x *Document) DataRepresentationOfType(type_ string) *foundation.NSData {
 }
 
 // FileAttributesToWriteToFileOfTypeSaveOperation calls the underlying FileAttributesToWriteToFileOfTypeSaveOperation.
-func (x *Document) FileAttributesToWriteToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType raw.NSSaveOperationType) *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.FileAttributesToWriteToFileOfTypeSaveOperation(foundation.NSStringStringWithUTF8String(fullDocumentPath), foundation.NSStringStringWithUTF8String(documentTypeName), saveOperationType)
+func (x *Document) FileAttributesToWriteToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType NSSaveOperationType) *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.FileAttributesToWriteToFileOfTypeSaveOperation(foundation.NSStringStringWithUTF8String(fullDocumentPath), foundation.NSStringStringWithUTF8String(documentTypeName), raw.NSSaveOperationType(saveOperationType))
 }
 
 // FileName calls the underlying FileName.
@@ -1050,8 +1050,8 @@ func (x *Document) RunModalPageLayoutWithPrintInfo(printInfo *raw.NSPrintInfo) i
 }
 
 // SaveToFileSaveOperationDelegateDidSaveSelectorContextInfo calls the underlying SaveToFileSaveOperationDelegateDidSaveSelectorContextInfo.
-func (x *Document) SaveToFileSaveOperationDelegateDidSaveSelectorContextInfo(fileName string, saveOperation raw.NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.SaveToFileSaveOperationDelegateDidSaveSelectorContextInfo(foundation.NSStringStringWithUTF8String(fileName), saveOperation, delegate, didSaveSelector, contextInfo)
+func (x *Document) SaveToFileSaveOperationDelegateDidSaveSelectorContextInfo(fileName string, saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.SaveToFileSaveOperationDelegateDidSaveSelectorContextInfo(foundation.NSStringStringWithUTF8String(fileName), raw.NSSaveOperationType(saveOperation), delegate, didSaveSelector, contextInfo)
 }
 
 // SetFileName calls the underlying SetFileName.
@@ -1065,8 +1065,8 @@ func (x *Document) WriteToFileOfType(fileName string, type_ string) bool {
 }
 
 // WriteToFileOfTypeOriginalFileSaveOperation calls the underlying WriteToFileOfTypeOriginalFileSaveOperation.
-func (x *Document) WriteToFileOfTypeOriginalFileSaveOperation(fullDocumentPath string, documentTypeName string, fullOriginalDocumentPath string, saveOperationType raw.NSSaveOperationType) bool {
-	return x.inner.WriteToFileOfTypeOriginalFileSaveOperation(foundation.NSStringStringWithUTF8String(fullDocumentPath), foundation.NSStringStringWithUTF8String(documentTypeName), foundation.NSStringStringWithUTF8String(fullOriginalDocumentPath), saveOperationType)
+func (x *Document) WriteToFileOfTypeOriginalFileSaveOperation(fullDocumentPath string, documentTypeName string, fullOriginalDocumentPath string, saveOperationType NSSaveOperationType) bool {
+	return x.inner.WriteToFileOfTypeOriginalFileSaveOperation(foundation.NSStringStringWithUTF8String(fullDocumentPath), foundation.NSStringStringWithUTF8String(documentTypeName), foundation.NSStringStringWithUTF8String(fullOriginalDocumentPath), raw.NSSaveOperationType(saveOperationType))
 }
 
 // WriteToURLOfType calls the underlying WriteToURLOfType.
@@ -1075,8 +1075,8 @@ func (x *Document) WriteToURLOfType(url string, type_ string) bool {
 }
 
 // WriteWithBackupToFileOfTypeSaveOperation calls the underlying WriteWithBackupToFileOfTypeSaveOperation.
-func (x *Document) WriteWithBackupToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType raw.NSSaveOperationType) bool {
-	return x.inner.WriteWithBackupToFileOfTypeSaveOperation(foundation.NSStringStringWithUTF8String(fullDocumentPath), foundation.NSStringStringWithUTF8String(documentTypeName), saveOperationType)
+func (x *Document) WriteWithBackupToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType NSSaveOperationType) bool {
+	return x.inner.WriteWithBackupToFileOfTypeSaveOperation(foundation.NSStringStringWithUTF8String(fullDocumentPath), foundation.NSStringStringWithUTF8String(documentTypeName), raw.NSSaveOperationType(saveOperationType))
 }
 
 // ShouldRunSavePanelWithAccessoryView calls the underlying ShouldRunSavePanelWithAccessoryView.
@@ -1204,18 +1204,18 @@ type Documentable interface {
 	FileWrapperOfTypeError(typeName string) (*foundation.NSFileWrapper, error)
 	DataOfTypeError(typeName string) (*foundation.NSData, error)
 	UnblockUserInteraction()
-	WriteSafelyToURLOfTypeForSaveOperationError(url string, typeName string, saveOperation raw.NSSaveOperationType) (bool, error)
-	WriteToURLOfTypeForSaveOperationOriginalContentsURLError(url string, typeName string, saveOperation raw.NSSaveOperationType, absoluteOriginalContentsURL string) (bool, error)
-	FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError(url string, typeName string, saveOperation raw.NSSaveOperationType, absoluteOriginalContentsURL string) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error)
+	WriteSafelyToURLOfTypeForSaveOperationError(url string, typeName string, saveOperation NSSaveOperationType) (bool, error)
+	WriteToURLOfTypeForSaveOperationOriginalContentsURLError(url string, typeName string, saveOperation NSSaveOperationType, absoluteOriginalContentsURL string) (bool, error)
+	FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError(url string, typeName string, saveOperation NSSaveOperationType, absoluteOriginalContentsURL string) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error)
 	SaveDocument(sender objc.ID)
 	SaveDocumentAs(sender objc.ID)
 	SaveDocumentTo(sender objc.ID)
 	SaveDocumentWithDelegateDidSaveSelectorContextInfo(delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer)
-	RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo(saveOperation raw.NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer)
+	RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo(saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer)
 	PrepareSavePanel(savePanel *raw.NSSavePanel) bool
-	SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo(url string, typeName string, saveOperation raw.NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer)
-	SaveToURLOfTypeForSaveOperation(ctx context.Context, url string, typeName string, saveOperation raw.NSSaveOperationType) error
-	CanAsynchronouslyWriteToURLOfTypeForSaveOperation(url string, typeName string, saveOperation raw.NSSaveOperationType) bool
+	SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo(url string, typeName string, saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer)
+	SaveToURLOfTypeForSaveOperation(ctx context.Context, url string, typeName string, saveOperation NSSaveOperationType) error
+	CanAsynchronouslyWriteToURLOfTypeForSaveOperation(url string, typeName string, saveOperation NSSaveOperationType) bool
 	CheckAutosavingSafetyAndReturnError() error
 	ScheduleAutosaving()
 	AutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo(delegate objc.ID, didAutosaveSelector objc.SEL, contextInfo unsafe.Pointer)
@@ -1249,9 +1249,9 @@ type Documentable interface {
 	SaveDocumentToPDF(sender objc.ID)
 	ShareDocumentWithSharingServiceCompletionHandler(sharingService *raw.NSSharingService, completionHandler func(bool))
 	PrepareSharingServicePicker(sharingServicePicker *raw.NSSharingServicePicker)
-	UpdateChangeCount(change raw.NSDocumentChangeType)
-	ChangeCountTokenForSaveOperation(saveOperation raw.NSSaveOperationType) objc.ID
-	UpdateChangeCountWithTokenForSaveOperation(changeCountToken objc.ID, saveOperation raw.NSSaveOperationType)
+	UpdateChangeCount(change NSDocumentChangeType)
+	ChangeCountTokenForSaveOperation(saveOperation NSSaveOperationType) objc.ID
+	UpdateChangeCountWithTokenForSaveOperation(changeCountToken objc.ID, saveOperation NSSaveOperationType)
 	PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_ unsafe.Pointer, window *raw.NSWindow, delegate objc.ID, didPresentSelector objc.SEL, contextInfo unsafe.Pointer)
 	PresentError(error_ unsafe.Pointer) bool
 	WillPresentError(error_ unsafe.Pointer) unsafe.Pointer
@@ -1266,8 +1266,8 @@ type Documentable interface {
 	ShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo(windowController *raw.NSWindowController, delegate objc.ID, shouldCloseSelector objc.SEL, contextInfo unsafe.Pointer)
 	SetDisplayName(displayNameOrNil string)
 	DefaultDraftName() string
-	WritableTypesForSaveOperation(saveOperation raw.NSSaveOperationType) *foundation.NSArray[*foundation.NSString]
-	FileNameExtensionForTypeSaveOperation(typeName string, saveOperation raw.NSSaveOperationType) string
+	WritableTypesForSaveOperation(saveOperation NSSaveOperationType) *foundation.NSArray[*foundation.NSString]
+	FileNameExtensionForTypeSaveOperation(typeName string, saveOperation NSSaveOperationType) string
 	ValidateUserInterfaceItem(item raw.NSValidatedUserInterfaceItem) bool
 	RelinquishPresentedItemToReader(reader func(objc.Block))
 	RelinquishPresentedItemToWriter(writer func(objc.Block))
@@ -1318,9 +1318,9 @@ type Documentable interface {
 	WindowForSheet() *Window
 	PresentedItemURL() *foundation.NSURL
 	ObservedPresentedItemUbiquityAttributes() *foundation.NSSet[*foundation.NSString]
-	SaveToURLOfTypeForSaveOperationError(url string, typeName string, saveOperation raw.NSSaveOperationType) (bool, error)
+	SaveToURLOfTypeForSaveOperationError(url string, typeName string, saveOperation NSSaveOperationType) (bool, error)
 	DataRepresentationOfType(type_ string) *foundation.NSData
-	FileAttributesToWriteToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType raw.NSSaveOperationType) *foundation.NSDictionary[objc.ID, objc.ID]
+	FileAttributesToWriteToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType NSSaveOperationType) *foundation.NSDictionary[objc.ID, objc.ID]
 	FileName() string
 	FileWrapperRepresentationOfType(type_ string) *foundation.NSFileWrapper
 	LoadDataRepresentationOfType(data *foundation.NSData, type_ string) bool
@@ -1331,12 +1331,12 @@ type Documentable interface {
 	RevertToSavedFromFileOfType(fileName string, type_ string) bool
 	RevertToSavedFromURLOfType(url string, type_ string) bool
 	RunModalPageLayoutWithPrintInfo(printInfo *raw.NSPrintInfo) int
-	SaveToFileSaveOperationDelegateDidSaveSelectorContextInfo(fileName string, saveOperation raw.NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer)
+	SaveToFileSaveOperationDelegateDidSaveSelectorContextInfo(fileName string, saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer)
 	SetFileName(fileName string)
 	WriteToFileOfType(fileName string, type_ string) bool
-	WriteToFileOfTypeOriginalFileSaveOperation(fullDocumentPath string, documentTypeName string, fullOriginalDocumentPath string, saveOperationType raw.NSSaveOperationType) bool
+	WriteToFileOfTypeOriginalFileSaveOperation(fullDocumentPath string, documentTypeName string, fullOriginalDocumentPath string, saveOperationType NSSaveOperationType) bool
 	WriteToURLOfType(url string, type_ string) bool
-	WriteWithBackupToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType raw.NSSaveOperationType) bool
+	WriteWithBackupToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType NSSaveOperationType) bool
 	ShouldRunSavePanelWithAccessoryView() bool
 	UpdateUserActivityState(activity *foundation.NSUserActivity)
 	UserActivity() *foundation.NSUserActivity

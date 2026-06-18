@@ -73,8 +73,8 @@ func (x *PersistentStoreRequest) SetAffectedStores(affectedStores *foundation.NS
 }
 
 // RequestType calls the underlying RequestType.
-func (x *PersistentStoreRequest) RequestType() raw.NSPersistentStoreRequestType {
-	return x.inner.RequestType()
+func (x *PersistentStoreRequest) RequestType() NSPersistentStoreRequestType {
+	return NSPersistentStoreRequestType(x.inner.RequestType())
 }
 
 func (x *PersistentStoreRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
@@ -87,7 +87,7 @@ type PersistentStoreRequestable interface {
 	WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest
 	AffectedStores() []*PersistentStore
 	SetAffectedStores(affectedStores *foundation.NSArray[*raw.NSPersistentStore])
-	RequestType() raw.NSPersistentStoreRequestType
+	RequestType() NSPersistentStoreRequestType
 }
 
 var _ PersistentStoreRequestable = (*PersistentStoreRequest)(nil)

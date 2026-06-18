@@ -67,8 +67,8 @@ func (x *ScannerBandData) IsBigEndian() bool {
 }
 
 // PixelDataType calls the underlying PixelDataType.
-func (x *ScannerBandData) PixelDataType() raw.ICScannerPixelDataType {
-	return x.inner.PixelDataType()
+func (x *ScannerBandData) PixelDataType() ICScannerPixelDataType {
+	return ICScannerPixelDataType(x.inner.PixelDataType())
 }
 
 // ColorSyncProfilePath calls the underlying ColorSyncProfilePath.
@@ -110,7 +110,7 @@ type ScannerBandDataable interface {
 	BitsPerComponent() uint
 	NumComponents() uint
 	IsBigEndian() bool
-	PixelDataType() raw.ICScannerPixelDataType
+	PixelDataType() ICScannerPixelDataType
 	ColorSyncProfilePath() unsafe.Pointer
 	BytesPerRow() uint
 	DataStartRow() uint

@@ -36,8 +36,8 @@ func NewArgumentDescriptor() *ArgumentDescriptor {
 }
 
 // WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *ArgumentDescriptor) WithDataType(dataType raw.MTLDataType) *ArgumentDescriptor {
-	x.inner.SetDataType(dataType)
+func (x *ArgumentDescriptor) WithDataType(dataType MTLDataType) *ArgumentDescriptor {
+	x.inner.SetDataType(raw.MTLDataType(dataType))
 	return x
 }
 
@@ -54,14 +54,14 @@ func (x *ArgumentDescriptor) WithArrayLength(arrayLength uint) *ArgumentDescript
 }
 
 // WithAccess sets the access property and returns the receiver for chaining.
-func (x *ArgumentDescriptor) WithAccess(access raw.MTLBindingAccess) *ArgumentDescriptor {
-	x.inner.SetAccess(access)
+func (x *ArgumentDescriptor) WithAccess(access MTLBindingAccess) *ArgumentDescriptor {
+	x.inner.SetAccess(raw.MTLBindingAccess(access))
 	return x
 }
 
 // WithTextureType sets the textureType property and returns the receiver for chaining.
-func (x *ArgumentDescriptor) WithTextureType(textureType raw.MTLTextureType) *ArgumentDescriptor {
-	x.inner.SetTextureType(textureType)
+func (x *ArgumentDescriptor) WithTextureType(textureType MTLTextureType) *ArgumentDescriptor {
+	x.inner.SetTextureType(raw.MTLTextureType(textureType))
 	return x
 }
 
@@ -72,13 +72,13 @@ func (x *ArgumentDescriptor) WithConstantBlockAlignment(constantBlockAlignment u
 }
 
 // DataType calls the underlying DataType.
-func (x *ArgumentDescriptor) DataType() raw.MTLDataType {
-	return x.inner.DataType()
+func (x *ArgumentDescriptor) DataType() MTLDataType {
+	return MTLDataType(x.inner.DataType())
 }
 
 // SetDataType calls the underlying SetDataType.
-func (x *ArgumentDescriptor) SetDataType(dataType raw.MTLDataType) {
-	x.inner.SetDataType(dataType)
+func (x *ArgumentDescriptor) SetDataType(dataType MTLDataType) {
+	x.inner.SetDataType(raw.MTLDataType(dataType))
 }
 
 // Index calls the underlying Index.
@@ -102,23 +102,23 @@ func (x *ArgumentDescriptor) SetArrayLength(arrayLength uint) {
 }
 
 // Access calls the underlying Access.
-func (x *ArgumentDescriptor) Access() raw.MTLBindingAccess {
-	return x.inner.Access()
+func (x *ArgumentDescriptor) Access() MTLBindingAccess {
+	return MTLBindingAccess(x.inner.Access())
 }
 
 // SetAccess calls the underlying SetAccess.
-func (x *ArgumentDescriptor) SetAccess(access raw.MTLBindingAccess) {
-	x.inner.SetAccess(access)
+func (x *ArgumentDescriptor) SetAccess(access MTLBindingAccess) {
+	x.inner.SetAccess(raw.MTLBindingAccess(access))
 }
 
 // TextureType calls the underlying TextureType.
-func (x *ArgumentDescriptor) TextureType() raw.MTLTextureType {
-	return x.inner.TextureType()
+func (x *ArgumentDescriptor) TextureType() MTLTextureType {
+	return MTLTextureType(x.inner.TextureType())
 }
 
 // SetTextureType calls the underlying SetTextureType.
-func (x *ArgumentDescriptor) SetTextureType(textureType raw.MTLTextureType) {
-	x.inner.SetTextureType(textureType)
+func (x *ArgumentDescriptor) SetTextureType(textureType MTLTextureType) {
+	x.inner.SetTextureType(raw.MTLTextureType(textureType))
 }
 
 // ConstantBlockAlignment calls the underlying ConstantBlockAlignment.
@@ -134,22 +134,22 @@ func (x *ArgumentDescriptor) SetConstantBlockAlignment(constantBlockAlignment ui
 // ArgumentDescriptorable is the interface implemented by [ArgumentDescriptor], for mocking and DI.
 type ArgumentDescriptorable interface {
 	Unwrap() *raw.MTLArgumentDescriptor
-	WithDataType(dataType raw.MTLDataType) *ArgumentDescriptor
+	WithDataType(dataType MTLDataType) *ArgumentDescriptor
 	WithIndex(index uint) *ArgumentDescriptor
 	WithArrayLength(arrayLength uint) *ArgumentDescriptor
-	WithAccess(access raw.MTLBindingAccess) *ArgumentDescriptor
-	WithTextureType(textureType raw.MTLTextureType) *ArgumentDescriptor
+	WithAccess(access MTLBindingAccess) *ArgumentDescriptor
+	WithTextureType(textureType MTLTextureType) *ArgumentDescriptor
 	WithConstantBlockAlignment(constantBlockAlignment uint) *ArgumentDescriptor
-	DataType() raw.MTLDataType
-	SetDataType(dataType raw.MTLDataType)
+	DataType() MTLDataType
+	SetDataType(dataType MTLDataType)
 	Index() uint
 	SetIndex(index uint)
 	ArrayLength() uint
 	SetArrayLength(arrayLength uint)
-	Access() raw.MTLBindingAccess
-	SetAccess(access raw.MTLBindingAccess)
-	TextureType() raw.MTLTextureType
-	SetTextureType(textureType raw.MTLTextureType)
+	Access() MTLBindingAccess
+	SetAccess(access MTLBindingAccess)
+	TextureType() MTLTextureType
+	SetTextureType(textureType MTLTextureType)
 	ConstantBlockAlignment() uint
 	SetConstantBlockAlignment(constantBlockAlignment uint)
 }

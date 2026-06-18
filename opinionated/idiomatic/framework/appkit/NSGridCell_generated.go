@@ -45,20 +45,20 @@ func (x *GridCell) WithContentView(contentView ViewProvider) *GridCell {
 }
 
 // WithXPlacement sets the xPlacement property and returns the receiver for chaining.
-func (x *GridCell) WithXPlacement(xPlacement raw.NSGridCellPlacement) *GridCell {
-	x.inner.SetXPlacement(xPlacement)
+func (x *GridCell) WithXPlacement(xPlacement NSGridCellPlacement) *GridCell {
+	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
 	return x
 }
 
 // WithYPlacement sets the yPlacement property and returns the receiver for chaining.
-func (x *GridCell) WithYPlacement(yPlacement raw.NSGridCellPlacement) *GridCell {
-	x.inner.SetYPlacement(yPlacement)
+func (x *GridCell) WithYPlacement(yPlacement NSGridCellPlacement) *GridCell {
+	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
 	return x
 }
 
 // WithRowAlignment sets the rowAlignment property and returns the receiver for chaining.
-func (x *GridCell) WithRowAlignment(rowAlignment raw.NSGridRowAlignment) *GridCell {
-	x.inner.SetRowAlignment(rowAlignment)
+func (x *GridCell) WithRowAlignment(rowAlignment NSGridRowAlignment) *GridCell {
+	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
 	return x
 }
 
@@ -113,33 +113,33 @@ func (x *GridCell) Column() *GridColumn {
 }
 
 // XPlacement calls the underlying XPlacement.
-func (x *GridCell) XPlacement() raw.NSGridCellPlacement {
-	return x.inner.XPlacement()
+func (x *GridCell) XPlacement() NSGridCellPlacement {
+	return NSGridCellPlacement(x.inner.XPlacement())
 }
 
 // SetXPlacement calls the underlying SetXPlacement.
-func (x *GridCell) SetXPlacement(xPlacement raw.NSGridCellPlacement) {
-	x.inner.SetXPlacement(xPlacement)
+func (x *GridCell) SetXPlacement(xPlacement NSGridCellPlacement) {
+	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
 }
 
 // YPlacement calls the underlying YPlacement.
-func (x *GridCell) YPlacement() raw.NSGridCellPlacement {
-	return x.inner.YPlacement()
+func (x *GridCell) YPlacement() NSGridCellPlacement {
+	return NSGridCellPlacement(x.inner.YPlacement())
 }
 
 // SetYPlacement calls the underlying SetYPlacement.
-func (x *GridCell) SetYPlacement(yPlacement raw.NSGridCellPlacement) {
-	x.inner.SetYPlacement(yPlacement)
+func (x *GridCell) SetYPlacement(yPlacement NSGridCellPlacement) {
+	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
 }
 
 // RowAlignment calls the underlying RowAlignment.
-func (x *GridCell) RowAlignment() raw.NSGridRowAlignment {
-	return x.inner.RowAlignment()
+func (x *GridCell) RowAlignment() NSGridRowAlignment {
+	return NSGridRowAlignment(x.inner.RowAlignment())
 }
 
 // SetRowAlignment calls the underlying SetRowAlignment.
-func (x *GridCell) SetRowAlignment(rowAlignment raw.NSGridRowAlignment) {
-	x.inner.SetRowAlignment(rowAlignment)
+func (x *GridCell) SetRowAlignment(rowAlignment NSGridRowAlignment) {
+	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
 }
 
 // CustomPlacementConstraints returns the collection as a Go slice.
@@ -162,20 +162,20 @@ func (x *GridCell) SetCustomPlacementConstraints(customPlacementConstraints *fou
 type GridCellable interface {
 	Unwrap() *raw.NSGridCell
 	WithContentView(contentView ViewProvider) *GridCell
-	WithXPlacement(xPlacement raw.NSGridCellPlacement) *GridCell
-	WithYPlacement(yPlacement raw.NSGridCellPlacement) *GridCell
-	WithRowAlignment(rowAlignment raw.NSGridRowAlignment) *GridCell
+	WithXPlacement(xPlacement NSGridCellPlacement) *GridCell
+	WithYPlacement(yPlacement NSGridCellPlacement) *GridCell
+	WithRowAlignment(rowAlignment NSGridRowAlignment) *GridCell
 	WithCustomPlacementConstraints(items ...*raw.NSLayoutConstraint) *GridCell
 	ContentView() *View
 	SetContentView(contentView *raw.NSView)
 	Row() *GridRow
 	Column() *GridColumn
-	XPlacement() raw.NSGridCellPlacement
-	SetXPlacement(xPlacement raw.NSGridCellPlacement)
-	YPlacement() raw.NSGridCellPlacement
-	SetYPlacement(yPlacement raw.NSGridCellPlacement)
-	RowAlignment() raw.NSGridRowAlignment
-	SetRowAlignment(rowAlignment raw.NSGridRowAlignment)
+	XPlacement() NSGridCellPlacement
+	SetXPlacement(xPlacement NSGridCellPlacement)
+	YPlacement() NSGridCellPlacement
+	SetYPlacement(yPlacement NSGridCellPlacement)
+	RowAlignment() NSGridRowAlignment
+	SetRowAlignment(rowAlignment NSGridRowAlignment)
 	CustomPlacementConstraints() []*LayoutConstraint
 	SetCustomPlacementConstraints(customPlacementConstraints *foundation.NSArray[*raw.NSLayoutConstraint])
 }

@@ -30,34 +30,34 @@ func AddressFilterFromID(id objc.ID) *AddressFilter {
 }
 
 // NewAddressFilterIncludingOptions creates a new [AddressFilter].
-func NewAddressFilterIncludingOptions(options raw.MKAddressFilterOption) *AddressFilter {
+func NewAddressFilterIncludingOptions(options MKAddressFilterOption) *AddressFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAddressFilter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIncludingOptions:"), options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIncludingOptions:"), raw.MKAddressFilterOption(options))
 	return &AddressFilter{inner: raw.MKAddressFilterFromID(_id)}
 }
 
 // NewAddressFilterExcludingOptions creates a new [AddressFilter].
-func NewAddressFilterExcludingOptions(options raw.MKAddressFilterOption) *AddressFilter {
+func NewAddressFilterExcludingOptions(options MKAddressFilterOption) *AddressFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAddressFilter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initExcludingOptions:"), options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initExcludingOptions:"), raw.MKAddressFilterOption(options))
 	return &AddressFilter{inner: raw.MKAddressFilterFromID(_id)}
 }
 
 // IncludesOptions calls the underlying IncludesOptions.
-func (x *AddressFilter) IncludesOptions(options raw.MKAddressFilterOption) bool {
-	return x.inner.IncludesOptions(options)
+func (x *AddressFilter) IncludesOptions(options MKAddressFilterOption) bool {
+	return x.inner.IncludesOptions(raw.MKAddressFilterOption(options))
 }
 
 // ExcludesOptions calls the underlying ExcludesOptions.
-func (x *AddressFilter) ExcludesOptions(options raw.MKAddressFilterOption) bool {
-	return x.inner.ExcludesOptions(options)
+func (x *AddressFilter) ExcludesOptions(options MKAddressFilterOption) bool {
+	return x.inner.ExcludesOptions(raw.MKAddressFilterOption(options))
 }
 
 // AddressFilterable is the interface implemented by [AddressFilter], for mocking and DI.
 type AddressFilterable interface {
 	Unwrap() *raw.MKAddressFilter
-	IncludesOptions(options raw.MKAddressFilterOption) bool
-	ExcludesOptions(options raw.MKAddressFilterOption) bool
+	IncludesOptions(options MKAddressFilterOption) bool
+	ExcludesOptions(options MKAddressFilterOption) bool
 }
 
 var _ AddressFilterable = (*AddressFilter)(nil)

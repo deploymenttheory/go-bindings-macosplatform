@@ -40,8 +40,10 @@ func NewCloudServiceController() *CloudServiceController {
 }
 
 // RequestCapabilitiesWithCompletionHandler calls the underlying RequestCapabilitiesWithCompletionHandler.
-func (x *CloudServiceController) RequestCapabilitiesWithCompletionHandler(completionHandler func(raw.SKCloudServiceCapability, unsafe.Pointer)) {
-	x.inner.RequestCapabilitiesWithCompletionHandler(completionHandler)
+func (x *CloudServiceController) RequestCapabilitiesWithCompletionHandler(completionHandler func(SKCloudServiceCapability, unsafe.Pointer)) {
+	x.inner.RequestCapabilitiesWithCompletionHandler(func(_a0 raw.SKCloudServiceCapability, _a1 unsafe.Pointer) {
+		completionHandler(SKCloudServiceCapability(_a0), _a1)
+	})
 }
 
 // RequestStorefrontCountryCode blocks until the operation completes or ctx is cancelled.
@@ -125,7 +127,7 @@ func (x *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.C
 // CloudServiceControllerable is the interface implemented by [CloudServiceController], for mocking and DI.
 type CloudServiceControllerable interface {
 	Unwrap() *raw.SKCloudServiceController
-	RequestCapabilitiesWithCompletionHandler(completionHandler func(raw.SKCloudServiceCapability, unsafe.Pointer))
+	RequestCapabilitiesWithCompletionHandler(completionHandler func(SKCloudServiceCapability, unsafe.Pointer))
 	RequestStorefrontCountryCode(ctx context.Context) (string, error)
 	RequestStorefrontIdentifier(ctx context.Context) (string, error)
 	RequestUserTokenForDeveloperToken(ctx context.Context, developerToken string) (string, error)

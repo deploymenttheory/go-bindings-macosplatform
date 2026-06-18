@@ -61,14 +61,14 @@ func (x *Leaderboard) WithCategory(category string) *Leaderboard {
 }
 
 // WithTimeScope sets the timeScope property and returns the receiver for chaining.
-func (x *Leaderboard) WithTimeScope(timeScope raw.GKLeaderboardTimeScope) *Leaderboard {
-	x.inner.SetTimeScope(timeScope)
+func (x *Leaderboard) WithTimeScope(timeScope GKLeaderboardTimeScope) *Leaderboard {
+	x.inner.SetTimeScope(raw.GKLeaderboardTimeScope(timeScope))
 	return x
 }
 
 // WithPlayerScope sets the playerScope property and returns the receiver for chaining.
-func (x *Leaderboard) WithPlayerScope(playerScope raw.GKLeaderboardPlayerScope) *Leaderboard {
-	x.inner.SetPlayerScope(playerScope)
+func (x *Leaderboard) WithPlayerScope(playerScope GKLeaderboardPlayerScope) *Leaderboard {
+	x.inner.SetPlayerScope(raw.GKLeaderboardPlayerScope(playerScope))
 	return x
 }
 
@@ -108,13 +108,13 @@ func (x *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, c
 }
 
 // LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler calls the underlying LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler.
-func (x *Leaderboard) LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(playerScope raw.GKLeaderboardPlayerScope, timeScope raw.GKLeaderboardTimeScope, range_ foundation.NSRange, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], int, unsafe.Pointer)) {
-	x.inner.LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(playerScope, timeScope, range_, completionHandler)
+func (x *Leaderboard) LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope, range_ foundation.NSRange, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], int, unsafe.Pointer)) {
+	x.inner.LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(raw.GKLeaderboardPlayerScope(playerScope), raw.GKLeaderboardTimeScope(timeScope), range_, completionHandler)
 }
 
 // LoadEntriesForPlayersTimeScopeCompletionHandler calls the underlying LoadEntriesForPlayersTimeScopeCompletionHandler.
-func (x *Leaderboard) LoadEntriesForPlayersTimeScopeCompletionHandler(players *foundation.NSArray[*raw.GKPlayer], timeScope raw.GKLeaderboardTimeScope, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], unsafe.Pointer)) {
-	x.inner.LoadEntriesForPlayersTimeScopeCompletionHandler(players, timeScope, completionHandler)
+func (x *Leaderboard) LoadEntriesForPlayersTimeScopeCompletionHandler(players *foundation.NSArray[*raw.GKPlayer], timeScope GKLeaderboardTimeScope, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], unsafe.Pointer)) {
+	x.inner.LoadEntriesForPlayersTimeScopeCompletionHandler(players, raw.GKLeaderboardTimeScope(timeScope), completionHandler)
 }
 
 // Title calls the underlying Title.
@@ -145,8 +145,8 @@ func (x *Leaderboard) BaseLeaderboardID() string {
 }
 
 // Type calls the underlying Type.
-func (x *Leaderboard) Type() raw.GKLeaderboardType {
-	return x.inner.Type()
+func (x *Leaderboard) Type() GKLeaderboardType {
+	return GKLeaderboardType(x.inner.Type())
 }
 
 // StartDate calls the underlying StartDate.
@@ -174,8 +174,8 @@ func (x *Leaderboard) LeaderboardDescription() string {
 }
 
 // ReleaseState calls the underlying ReleaseState.
-func (x *Leaderboard) ReleaseState() raw.GKReleaseState {
-	return x.inner.ReleaseState()
+func (x *Leaderboard) ReleaseState() GKReleaseState {
+	return GKReleaseState(x.inner.ReleaseState())
 }
 
 // ActivityIdentifier calls the underlying ActivityIdentifier.
@@ -236,23 +236,23 @@ func (x *Leaderboard) SetCategory(category string) {
 }
 
 // TimeScope calls the underlying TimeScope.
-func (x *Leaderboard) TimeScope() raw.GKLeaderboardTimeScope {
-	return x.inner.TimeScope()
+func (x *Leaderboard) TimeScope() GKLeaderboardTimeScope {
+	return GKLeaderboardTimeScope(x.inner.TimeScope())
 }
 
 // SetTimeScope calls the underlying SetTimeScope.
-func (x *Leaderboard) SetTimeScope(timeScope raw.GKLeaderboardTimeScope) {
-	x.inner.SetTimeScope(timeScope)
+func (x *Leaderboard) SetTimeScope(timeScope GKLeaderboardTimeScope) {
+	x.inner.SetTimeScope(raw.GKLeaderboardTimeScope(timeScope))
 }
 
 // PlayerScope calls the underlying PlayerScope.
-func (x *Leaderboard) PlayerScope() raw.GKLeaderboardPlayerScope {
-	return x.inner.PlayerScope()
+func (x *Leaderboard) PlayerScope() GKLeaderboardPlayerScope {
+	return GKLeaderboardPlayerScope(x.inner.PlayerScope())
 }
 
 // SetPlayerScope calls the underlying SetPlayerScope.
-func (x *Leaderboard) SetPlayerScope(playerScope raw.GKLeaderboardPlayerScope) {
-	x.inner.SetPlayerScope(playerScope)
+func (x *Leaderboard) SetPlayerScope(playerScope GKLeaderboardPlayerScope) {
+	x.inner.SetPlayerScope(raw.GKLeaderboardPlayerScope(playerScope))
 }
 
 // Identifier calls the underlying Identifier.
@@ -337,33 +337,33 @@ func (x *Leaderboard) LoadImage(ctx context.Context) (*appkit.NSImage, error) {
 type Leaderboardable interface {
 	Unwrap() *raw.GKLeaderboard
 	WithCategory(category string) *Leaderboard
-	WithTimeScope(timeScope raw.GKLeaderboardTimeScope) *Leaderboard
-	WithPlayerScope(playerScope raw.GKLeaderboardPlayerScope) *Leaderboard
+	WithTimeScope(timeScope GKLeaderboardTimeScope) *Leaderboard
+	WithPlayerScope(playerScope GKLeaderboardPlayerScope) *Leaderboard
 	WithIdentifier(identifier string) *Leaderboard
 	WithRange(range_ foundation.NSRange) *Leaderboard
 	LoadPreviousOccurrenceWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer))
 	SubmitScoreContextPlayer(ctx context.Context, score int, context_ uint, player *raw.GKPlayer) error
-	LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(playerScope raw.GKLeaderboardPlayerScope, timeScope raw.GKLeaderboardTimeScope, range_ foundation.NSRange, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], int, unsafe.Pointer))
-	LoadEntriesForPlayersTimeScopeCompletionHandler(players *foundation.NSArray[*raw.GKPlayer], timeScope raw.GKLeaderboardTimeScope, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], unsafe.Pointer))
+	LoadEntriesForPlayerScopeTimeScopeRangeCompletionHandler(playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope, range_ foundation.NSRange, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], int, unsafe.Pointer))
+	LoadEntriesForPlayersTimeScopeCompletionHandler(players *foundation.NSArray[*raw.GKPlayer], timeScope GKLeaderboardTimeScope, completionHandler func(unsafe.Pointer, *foundation.NSArray[*raw.GKLeaderboardEntry], unsafe.Pointer))
 	Title() string
 	GroupIdentifier() string
 	BaseLeaderboardID() string
-	Type() raw.GKLeaderboardType
+	Type() GKLeaderboardType
 	StartDate() *foundation.NSDate
 	NextStartDate() *foundation.NSDate
 	Duration() float64
 	LeaderboardDescription() string
-	ReleaseState() raw.GKReleaseState
+	ReleaseState() GKReleaseState
 	ActivityIdentifier() string
 	ActivityProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
 	IsHidden() bool
 	LoadScores(ctx context.Context) (*foundation.NSArray[*raw.GKScore], error)
 	Category() string
 	SetCategory(category string)
-	TimeScope() raw.GKLeaderboardTimeScope
-	SetTimeScope(timeScope raw.GKLeaderboardTimeScope)
-	PlayerScope() raw.GKLeaderboardPlayerScope
-	SetPlayerScope(playerScope raw.GKLeaderboardPlayerScope)
+	TimeScope() GKLeaderboardTimeScope
+	SetTimeScope(timeScope GKLeaderboardTimeScope)
+	PlayerScope() GKLeaderboardPlayerScope
+	SetPlayerScope(playerScope GKLeaderboardPlayerScope)
 	Identifier() string
 	SetIdentifier(identifier string)
 	Range() foundation.NSRange

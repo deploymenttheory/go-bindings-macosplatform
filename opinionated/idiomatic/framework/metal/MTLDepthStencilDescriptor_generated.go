@@ -38,8 +38,8 @@ func NewDepthStencilDescriptor() *DepthStencilDescriptor {
 }
 
 // WithDepthCompareFunction sets the depthCompareFunction property and returns the receiver for chaining.
-func (x *DepthStencilDescriptor) WithDepthCompareFunction(depthCompareFunction raw.MTLCompareFunction) *DepthStencilDescriptor {
-	x.inner.SetDepthCompareFunction(depthCompareFunction)
+func (x *DepthStencilDescriptor) WithDepthCompareFunction(depthCompareFunction MTLCompareFunction) *DepthStencilDescriptor {
+	x.inner.SetDepthCompareFunction(raw.MTLCompareFunction(depthCompareFunction))
 	return x
 }
 
@@ -68,13 +68,13 @@ func (x *DepthStencilDescriptor) WithLabel(label string) *DepthStencilDescriptor
 }
 
 // DepthCompareFunction calls the underlying DepthCompareFunction.
-func (x *DepthStencilDescriptor) DepthCompareFunction() raw.MTLCompareFunction {
-	return x.inner.DepthCompareFunction()
+func (x *DepthStencilDescriptor) DepthCompareFunction() MTLCompareFunction {
+	return MTLCompareFunction(x.inner.DepthCompareFunction())
 }
 
 // SetDepthCompareFunction calls the underlying SetDepthCompareFunction.
-func (x *DepthStencilDescriptor) SetDepthCompareFunction(depthCompareFunction raw.MTLCompareFunction) {
-	x.inner.SetDepthCompareFunction(depthCompareFunction)
+func (x *DepthStencilDescriptor) SetDepthCompareFunction(depthCompareFunction MTLCompareFunction) {
+	x.inner.SetDepthCompareFunction(raw.MTLCompareFunction(depthCompareFunction))
 }
 
 // IsDepthWriteEnabled calls the underlying IsDepthWriteEnabled.
@@ -132,13 +132,13 @@ func (x *DepthStencilDescriptor) SetLabel(label string) {
 // DepthStencilDescriptorable is the interface implemented by [DepthStencilDescriptor], for mocking and DI.
 type DepthStencilDescriptorable interface {
 	Unwrap() *raw.MTLDepthStencilDescriptor
-	WithDepthCompareFunction(depthCompareFunction raw.MTLCompareFunction) *DepthStencilDescriptor
+	WithDepthCompareFunction(depthCompareFunction MTLCompareFunction) *DepthStencilDescriptor
 	WithDepthWriteEnabled(depthWriteEnabled bool) *DepthStencilDescriptor
 	WithFrontFaceStencil(frontFaceStencil *StencilDescriptor) *DepthStencilDescriptor
 	WithBackFaceStencil(backFaceStencil *StencilDescriptor) *DepthStencilDescriptor
 	WithLabel(label string) *DepthStencilDescriptor
-	DepthCompareFunction() raw.MTLCompareFunction
-	SetDepthCompareFunction(depthCompareFunction raw.MTLCompareFunction)
+	DepthCompareFunction() MTLCompareFunction
+	SetDepthCompareFunction(depthCompareFunction MTLCompareFunction)
 	IsDepthWriteEnabled() bool
 	SetDepthWriteEnabled(depthWriteEnabled bool)
 	FrontFaceStencil() *StencilDescriptor

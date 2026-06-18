@@ -30,9 +30,9 @@ func MIDIControlChangeEventFromID(id objc.ID) *MIDIControlChangeEvent {
 }
 
 // NewMIDIControlChangeEventWithChannelMessageTypeValue creates a new [MIDIControlChangeEvent].
-func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel uint, messageType raw.AVMIDIControlChangeMessageType, value uint) *MIDIControlChangeEvent {
+func NewMIDIControlChangeEventWithChannelMessageTypeValue(channel uint, messageType AVMIDIControlChangeMessageType, value uint) *MIDIControlChangeEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIControlChangeEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:messageType:value:"), channel, messageType, value)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:messageType:value:"), channel, raw.AVMIDIControlChangeMessageType(messageType), value)
 	return &MIDIControlChangeEvent{inner: raw.AVMIDIControlChangeEventFromID(_id)}
 }
 
@@ -43,8 +43,8 @@ func (x *MIDIControlChangeEvent) WithChannel(channel uint) *MIDIControlChangeEve
 }
 
 // MessageType calls the underlying MessageType.
-func (x *MIDIControlChangeEvent) MessageType() raw.AVMIDIControlChangeMessageType {
-	return x.inner.MessageType()
+func (x *MIDIControlChangeEvent) MessageType() AVMIDIControlChangeMessageType {
+	return AVMIDIControlChangeMessageType(x.inner.MessageType())
 }
 
 // Value calls the underlying Value.
@@ -64,7 +64,7 @@ func (x *MIDIControlChangeEvent) asMusicEvent() *raw.AVMusicEvent {
 type MIDIControlChangeEventable interface {
 	Unwrap() *raw.AVMIDIControlChangeEvent
 	WithChannel(channel uint) *MIDIControlChangeEvent
-	MessageType() raw.AVMIDIControlChangeMessageType
+	MessageType() AVMIDIControlChangeMessageType
 	Value() uint
 }
 

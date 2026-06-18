@@ -86,13 +86,13 @@ func (x *Player) IsInvitable() bool {
 }
 
 // LoadPhotoForSize blocks until the operation completes or ctx is cancelled.
-func (x *Player) LoadPhotoForSize(ctx context.Context, size raw.GKPhotoSize) (*appkit.NSImage, error) {
+func (x *Player) LoadPhotoForSize(ctx context.Context, size GKPhotoSize) (*appkit.NSImage, error) {
 	type _result struct {
 		val *appkit.NSImage
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadPhotoForSizeWithCompletionHandler(size, func(_p0 *appkit.NSImage, _p1 unsafe.Pointer) {
+	x.inner.LoadPhotoForSizeWithCompletionHandler(raw.GKPhotoSize(size), func(_p0 *appkit.NSImage, _p1 unsafe.Pointer) {
 		var _o _result
 		if uintptr(_p1) != 0 {
 			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
@@ -127,7 +127,7 @@ type Playerable interface {
 	Alias() string
 	GuestIdentifier() string
 	IsInvitable() bool
-	LoadPhotoForSize(ctx context.Context, size raw.GKPhotoSize) (*appkit.NSImage, error)
+	LoadPhotoForSize(ctx context.Context, size GKPhotoSize) (*appkit.NSImage, error)
 	IsFriend() bool
 }
 

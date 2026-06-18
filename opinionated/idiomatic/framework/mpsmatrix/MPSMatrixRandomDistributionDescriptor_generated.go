@@ -38,8 +38,8 @@ func NewMatrixRandomDistributionDescriptor() *MatrixRandomDistributionDescriptor
 }
 
 // WithDistributionType sets the distributionType property and returns the receiver for chaining.
-func (x *MatrixRandomDistributionDescriptor) WithDistributionType(distributionType raw.MPSMatrixRandomDistribution) *MatrixRandomDistributionDescriptor {
-	x.inner.SetDistributionType(distributionType)
+func (x *MatrixRandomDistributionDescriptor) WithDistributionType(distributionType MPSMatrixRandomDistribution) *MatrixRandomDistributionDescriptor {
+	x.inner.SetDistributionType(raw.MPSMatrixRandomDistribution(distributionType))
 	return x
 }
 
@@ -68,13 +68,13 @@ func (x *MatrixRandomDistributionDescriptor) WithStandardDeviation(standardDevia
 }
 
 // DistributionType calls the underlying DistributionType.
-func (x *MatrixRandomDistributionDescriptor) DistributionType() raw.MPSMatrixRandomDistribution {
-	return x.inner.DistributionType()
+func (x *MatrixRandomDistributionDescriptor) DistributionType() MPSMatrixRandomDistribution {
+	return MPSMatrixRandomDistribution(x.inner.DistributionType())
 }
 
 // SetDistributionType calls the underlying SetDistributionType.
-func (x *MatrixRandomDistributionDescriptor) SetDistributionType(distributionType raw.MPSMatrixRandomDistribution) {
-	x.inner.SetDistributionType(distributionType)
+func (x *MatrixRandomDistributionDescriptor) SetDistributionType(distributionType MPSMatrixRandomDistribution) {
+	x.inner.SetDistributionType(raw.MPSMatrixRandomDistribution(distributionType))
 }
 
 // Minimum calls the underlying Minimum.
@@ -120,13 +120,13 @@ func (x *MatrixRandomDistributionDescriptor) SetStandardDeviation(standardDeviat
 // MatrixRandomDistributionDescriptorable is the interface implemented by [MatrixRandomDistributionDescriptor], for mocking and DI.
 type MatrixRandomDistributionDescriptorable interface {
 	Unwrap() *raw.MPSMatrixRandomDistributionDescriptor
-	WithDistributionType(distributionType raw.MPSMatrixRandomDistribution) *MatrixRandomDistributionDescriptor
+	WithDistributionType(distributionType MPSMatrixRandomDistribution) *MatrixRandomDistributionDescriptor
 	WithMinimum(minimum float32) *MatrixRandomDistributionDescriptor
 	WithMaximum(maximum float32) *MatrixRandomDistributionDescriptor
 	WithMean(mean float32) *MatrixRandomDistributionDescriptor
 	WithStandardDeviation(standardDeviation float32) *MatrixRandomDistributionDescriptor
-	DistributionType() raw.MPSMatrixRandomDistribution
-	SetDistributionType(distributionType raw.MPSMatrixRandomDistribution)
+	DistributionType() MPSMatrixRandomDistribution
+	SetDistributionType(distributionType MPSMatrixRandomDistribution)
 	Minimum() float32
 	SetMinimum(minimum float32)
 	Maximum() float32

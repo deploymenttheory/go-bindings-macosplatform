@@ -61,8 +61,8 @@ func (x *ImageDescriptor) WithNumberOfImages(numberOfImages uint) *ImageDescript
 }
 
 // WithChannelFormat sets the channelFormat property and returns the receiver for chaining.
-func (x *ImageDescriptor) WithChannelFormat(channelFormat raw.MPSImageFeatureChannelFormat) *ImageDescriptor {
-	x.inner.SetChannelFormat(channelFormat)
+func (x *ImageDescriptor) WithChannelFormat(channelFormat MPSImageFeatureChannelFormat) *ImageDescriptor {
+	x.inner.SetChannelFormat(raw.MPSImageFeatureChannelFormat(channelFormat))
 	return x
 }
 
@@ -130,13 +130,13 @@ func (x *ImageDescriptor) PixelFormat() metal.MTLPixelFormat {
 }
 
 // ChannelFormat calls the underlying ChannelFormat.
-func (x *ImageDescriptor) ChannelFormat() raw.MPSImageFeatureChannelFormat {
-	return x.inner.ChannelFormat()
+func (x *ImageDescriptor) ChannelFormat() MPSImageFeatureChannelFormat {
+	return MPSImageFeatureChannelFormat(x.inner.ChannelFormat())
 }
 
 // SetChannelFormat calls the underlying SetChannelFormat.
-func (x *ImageDescriptor) SetChannelFormat(channelFormat raw.MPSImageFeatureChannelFormat) {
-	x.inner.SetChannelFormat(channelFormat)
+func (x *ImageDescriptor) SetChannelFormat(channelFormat MPSImageFeatureChannelFormat) {
+	x.inner.SetChannelFormat(raw.MPSImageFeatureChannelFormat(channelFormat))
 }
 
 // CpuCacheMode calls the underlying CpuCacheMode.
@@ -176,7 +176,7 @@ type ImageDescriptorable interface {
 	WithHeight(height uint) *ImageDescriptor
 	WithFeatureChannels(featureChannels uint) *ImageDescriptor
 	WithNumberOfImages(numberOfImages uint) *ImageDescriptor
-	WithChannelFormat(channelFormat raw.MPSImageFeatureChannelFormat) *ImageDescriptor
+	WithChannelFormat(channelFormat MPSImageFeatureChannelFormat) *ImageDescriptor
 	WithCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode) *ImageDescriptor
 	WithStorageMode(storageMode metal.MTLStorageMode) *ImageDescriptor
 	WithUsage(usage metal.MTLTextureUsage) *ImageDescriptor
@@ -189,8 +189,8 @@ type ImageDescriptorable interface {
 	NumberOfImages() uint
 	SetNumberOfImages(numberOfImages uint)
 	PixelFormat() metal.MTLPixelFormat
-	ChannelFormat() raw.MPSImageFeatureChannelFormat
-	SetChannelFormat(channelFormat raw.MPSImageFeatureChannelFormat)
+	ChannelFormat() MPSImageFeatureChannelFormat
+	SetChannelFormat(channelFormat MPSImageFeatureChannelFormat)
 	CpuCacheMode() metal.MTLCPUCacheMode
 	SetCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode)
 	StorageMode() metal.MTLStorageMode

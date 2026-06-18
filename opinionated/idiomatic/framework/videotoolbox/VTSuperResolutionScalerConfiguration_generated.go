@@ -36,9 +36,9 @@ func SuperResolutionScalerConfigurationFromID(id objc.ID) *SuperResolutionScaler
 }
 
 // NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision creates a new [SuperResolutionScalerConfiguration].
-func NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, scaleFactor int, inputType raw.VTSuperResolutionScalerConfigurationInputType, usePrecomputedFlow bool, qualityPrioritization raw.VTSuperResolutionScalerConfigurationQualityPrioritization, revision raw.VTSuperResolutionScalerConfigurationRevision) *SuperResolutionScalerConfiguration {
+func NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, scaleFactor int, inputType VTSuperResolutionScalerConfigurationInputType, usePrecomputedFlow bool, qualityPrioritization VTSuperResolutionScalerConfigurationQualityPrioritization, revision VTSuperResolutionScalerConfigurationRevision) *SuperResolutionScalerConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTSuperResolutionScalerConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:scaleFactor:inputType:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, scaleFactor, inputType, usePrecomputedFlow, qualityPrioritization, revision)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:scaleFactor:inputType:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, scaleFactor, raw.VTSuperResolutionScalerConfigurationInputType(inputType), usePrecomputedFlow, raw.VTSuperResolutionScalerConfigurationQualityPrioritization(qualityPrioritization), raw.VTSuperResolutionScalerConfigurationRevision(revision))
 	return &SuperResolutionScalerConfiguration{inner: raw.VTSuperResolutionScalerConfigurationFromID(_id)}
 }
 
@@ -71,8 +71,8 @@ func (x *SuperResolutionScalerConfiguration) FrameHeight() int {
 }
 
 // InputType calls the underlying InputType.
-func (x *SuperResolutionScalerConfiguration) InputType() raw.VTSuperResolutionScalerConfigurationInputType {
-	return x.inner.InputType()
+func (x *SuperResolutionScalerConfiguration) InputType() VTSuperResolutionScalerConfigurationInputType {
+	return VTSuperResolutionScalerConfigurationInputType(x.inner.InputType())
 }
 
 // UsesPrecomputedFlow calls the underlying UsesPrecomputedFlow.
@@ -86,13 +86,13 @@ func (x *SuperResolutionScalerConfiguration) ScaleFactor() int {
 }
 
 // QualityPrioritization calls the underlying QualityPrioritization.
-func (x *SuperResolutionScalerConfiguration) QualityPrioritization() raw.VTSuperResolutionScalerConfigurationQualityPrioritization {
-	return x.inner.QualityPrioritization()
+func (x *SuperResolutionScalerConfiguration) QualityPrioritization() VTSuperResolutionScalerConfigurationQualityPrioritization {
+	return VTSuperResolutionScalerConfigurationQualityPrioritization(x.inner.QualityPrioritization())
 }
 
 // Revision calls the underlying Revision.
-func (x *SuperResolutionScalerConfiguration) Revision() raw.VTSuperResolutionScalerConfigurationRevision {
-	return x.inner.Revision()
+func (x *SuperResolutionScalerConfiguration) Revision() VTSuperResolutionScalerConfigurationRevision {
+	return VTSuperResolutionScalerConfigurationRevision(x.inner.Revision())
 }
 
 // FrameSupportedPixelFormats returns the collection as a Go slice.
@@ -117,8 +117,8 @@ func (x *SuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() 
 }
 
 // ConfigurationModelStatus calls the underlying ConfigurationModelStatus.
-func (x *SuperResolutionScalerConfiguration) ConfigurationModelStatus() raw.VTSuperResolutionScalerConfigurationModelStatus {
-	return x.inner.ConfigurationModelStatus()
+func (x *SuperResolutionScalerConfiguration) ConfigurationModelStatus() VTSuperResolutionScalerConfigurationModelStatus {
+	return VTSuperResolutionScalerConfigurationModelStatus(x.inner.ConfigurationModelStatus())
 }
 
 // ConfigurationModelPercentageAvailable calls the underlying ConfigurationModelPercentageAvailable.
@@ -132,15 +132,15 @@ type SuperResolutionScalerConfigurationable interface {
 	DownloadConfigurationModel(ctx context.Context) error
 	FrameWidth() int
 	FrameHeight() int
-	InputType() raw.VTSuperResolutionScalerConfigurationInputType
+	InputType() VTSuperResolutionScalerConfigurationInputType
 	UsesPrecomputedFlow() bool
 	ScaleFactor() int
-	QualityPrioritization() raw.VTSuperResolutionScalerConfigurationQualityPrioritization
-	Revision() raw.VTSuperResolutionScalerConfigurationRevision
+	QualityPrioritization() VTSuperResolutionScalerConfigurationQualityPrioritization
+	Revision() VTSuperResolutionScalerConfigurationRevision
 	FrameSupportedPixelFormats() []*foundation.NSNumber
 	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ConfigurationModelStatus() raw.VTSuperResolutionScalerConfigurationModelStatus
+	ConfigurationModelStatus() VTSuperResolutionScalerConfigurationModelStatus
 	ConfigurationModelPercentageAvailable() float32
 }
 

@@ -38,8 +38,8 @@ func NewNEVPNProtocolIPSec() *NEVPNProtocolIPSec {
 }
 
 // WithAuthenticationMethod sets the authenticationMethod property and returns the receiver for chaining.
-func (x *NEVPNProtocolIPSec) WithAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod) *NEVPNProtocolIPSec {
-	x.inner.SetAuthenticationMethod(authenticationMethod)
+func (x *NEVPNProtocolIPSec) WithAuthenticationMethod(authenticationMethod NEVPNIKEAuthenticationMethod) *NEVPNProtocolIPSec {
+	x.inner.SetAuthenticationMethod(raw.NEVPNIKEAuthenticationMethod(authenticationMethod))
 	return x
 }
 
@@ -152,13 +152,13 @@ func (x *NEVPNProtocolIPSec) WithEnforceRoutes(enforceRoutes bool) *NEVPNProtoco
 }
 
 // AuthenticationMethod calls the underlying AuthenticationMethod.
-func (x *NEVPNProtocolIPSec) AuthenticationMethod() raw.NEVPNIKEAuthenticationMethod {
-	return x.inner.AuthenticationMethod()
+func (x *NEVPNProtocolIPSec) AuthenticationMethod() NEVPNIKEAuthenticationMethod {
+	return NEVPNIKEAuthenticationMethod(x.inner.AuthenticationMethod())
 }
 
 // SetAuthenticationMethod calls the underlying SetAuthenticationMethod.
-func (x *NEVPNProtocolIPSec) SetAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod) {
-	x.inner.SetAuthenticationMethod(authenticationMethod)
+func (x *NEVPNProtocolIPSec) SetAuthenticationMethod(authenticationMethod NEVPNIKEAuthenticationMethod) {
+	x.inner.SetAuthenticationMethod(raw.NEVPNIKEAuthenticationMethod(authenticationMethod))
 }
 
 // UseExtendedAuthentication calls the underlying UseExtendedAuthentication.
@@ -216,7 +216,7 @@ func (x *NEVPNProtocolIPSec) asNEVPNProtocol() *raw.NEVPNProtocol { return &x.in
 // NEVPNProtocolIPSecable is the interface implemented by [NEVPNProtocolIPSec], for mocking and DI.
 type NEVPNProtocolIPSecable interface {
 	Unwrap() *raw.NEVPNProtocolIPSec
-	WithAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod) *NEVPNProtocolIPSec
+	WithAuthenticationMethod(authenticationMethod NEVPNIKEAuthenticationMethod) *NEVPNProtocolIPSec
 	WithUseExtendedAuthentication(useExtendedAuthentication bool) *NEVPNProtocolIPSec
 	WithSharedSecretReference(sharedSecretReference *foundation.NSData) *NEVPNProtocolIPSec
 	WithLocalIdentifier(localIdentifier string) *NEVPNProtocolIPSec
@@ -235,8 +235,8 @@ type NEVPNProtocolIPSecable interface {
 	WithExcludeAPNs(excludeAPNs bool) *NEVPNProtocolIPSec
 	WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEVPNProtocolIPSec
 	WithEnforceRoutes(enforceRoutes bool) *NEVPNProtocolIPSec
-	AuthenticationMethod() raw.NEVPNIKEAuthenticationMethod
-	SetAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod)
+	AuthenticationMethod() NEVPNIKEAuthenticationMethod
+	SetAuthenticationMethod(authenticationMethod NEVPNIKEAuthenticationMethod)
 	UseExtendedAuthentication() bool
 	SetUseExtendedAuthentication(useExtendedAuthentication bool)
 	SharedSecretReference() *foundation.NSData

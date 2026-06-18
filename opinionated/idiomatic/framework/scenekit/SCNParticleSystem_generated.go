@@ -94,14 +94,14 @@ func (x *ParticleSystem) WithEmitterShape(emitterShape GeometryProvider) *Partic
 }
 
 // WithBirthLocation sets the birthLocation property and returns the receiver for chaining.
-func (x *ParticleSystem) WithBirthLocation(birthLocation raw.SCNParticleBirthLocation) *ParticleSystem {
-	x.inner.SetBirthLocation(birthLocation)
+func (x *ParticleSystem) WithBirthLocation(birthLocation SCNParticleBirthLocation) *ParticleSystem {
+	x.inner.SetBirthLocation(raw.SCNParticleBirthLocation(birthLocation))
 	return x
 }
 
 // WithBirthDirection sets the birthDirection property and returns the receiver for chaining.
-func (x *ParticleSystem) WithBirthDirection(birthDirection raw.SCNParticleBirthDirection) *ParticleSystem {
-	x.inner.SetBirthDirection(birthDirection)
+func (x *ParticleSystem) WithBirthDirection(birthDirection SCNParticleBirthDirection) *ParticleSystem {
+	x.inner.SetBirthDirection(raw.SCNParticleBirthDirection(birthDirection))
 	return x
 }
 
@@ -244,8 +244,8 @@ func (x *ParticleSystem) WithImageSequenceFrameRateVariation(imageSequenceFrameR
 }
 
 // WithImageSequenceAnimationMode sets the imageSequenceAnimationMode property and returns the receiver for chaining.
-func (x *ParticleSystem) WithImageSequenceAnimationMode(imageSequenceAnimationMode raw.SCNParticleImageSequenceAnimationMode) *ParticleSystem {
-	x.inner.SetImageSequenceAnimationMode(imageSequenceAnimationMode)
+func (x *ParticleSystem) WithImageSequenceAnimationMode(imageSequenceAnimationMode SCNParticleImageSequenceAnimationMode) *ParticleSystem {
+	x.inner.SetImageSequenceAnimationMode(raw.SCNParticleImageSequenceAnimationMode(imageSequenceAnimationMode))
 	return x
 }
 
@@ -286,8 +286,8 @@ func (x *ParticleSystem) WithParticleIntensityVariation(particleIntensityVariati
 }
 
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *ParticleSystem) WithBlendMode(blendMode raw.SCNParticleBlendMode) *ParticleSystem {
-	x.inner.SetBlendMode(blendMode)
+func (x *ParticleSystem) WithBlendMode(blendMode SCNParticleBlendMode) *ParticleSystem {
+	x.inner.SetBlendMode(raw.SCNParticleBlendMode(blendMode))
 	return x
 }
 
@@ -298,14 +298,14 @@ func (x *ParticleSystem) WithBlackPassEnabled(blackPassEnabled bool) *ParticleSy
 }
 
 // WithOrientationMode sets the orientationMode property and returns the receiver for chaining.
-func (x *ParticleSystem) WithOrientationMode(orientationMode raw.SCNParticleOrientationMode) *ParticleSystem {
-	x.inner.SetOrientationMode(orientationMode)
+func (x *ParticleSystem) WithOrientationMode(orientationMode SCNParticleOrientationMode) *ParticleSystem {
+	x.inner.SetOrientationMode(raw.SCNParticleOrientationMode(orientationMode))
 	return x
 }
 
 // WithSortingMode sets the sortingMode property and returns the receiver for chaining.
-func (x *ParticleSystem) WithSortingMode(sortingMode raw.SCNParticleSortingMode) *ParticleSystem {
-	x.inner.SetSortingMode(sortingMode)
+func (x *ParticleSystem) WithSortingMode(sortingMode SCNParticleSortingMode) *ParticleSystem {
+	x.inner.SetSortingMode(raw.SCNParticleSortingMode(sortingMode))
 	return x
 }
 
@@ -441,18 +441,18 @@ func (x *ParticleSystem) Reset() {
 }
 
 // HandleEventForPropertiesWith calls the underlying HandleEventForPropertiesWith.
-func (x *ParticleSystem) HandleEventForPropertiesWith(event raw.SCNParticleEvent, properties *foundation.NSArray[*foundation.NSString], block func(unsafe.Pointer, *uint, *uint32, int)) {
-	x.inner.HandleEventForPropertiesWith(event, properties, block)
+func (x *ParticleSystem) HandleEventForPropertiesWith(event SCNParticleEvent, properties *foundation.NSArray[*foundation.NSString], block func(unsafe.Pointer, *uint, *uint32, int)) {
+	x.inner.HandleEventForPropertiesWith(raw.SCNParticleEvent(event), properties, block)
 }
 
 // AddModifierForPropertiesAtStageWith calls the underlying AddModifierForPropertiesAtStageWith.
-func (x *ParticleSystem) AddModifierForPropertiesAtStageWith(properties *foundation.NSArray[*foundation.NSString], stage raw.SCNParticleModifierStage, block func(unsafe.Pointer, *uint, int, int, float32)) {
-	x.inner.AddModifierForPropertiesAtStageWith(properties, stage, block)
+func (x *ParticleSystem) AddModifierForPropertiesAtStageWith(properties *foundation.NSArray[*foundation.NSString], stage SCNParticleModifierStage, block func(unsafe.Pointer, *uint, int, int, float32)) {
+	x.inner.AddModifierForPropertiesAtStageWith(properties, raw.SCNParticleModifierStage(stage), block)
 }
 
 // RemoveModifiersOfStage calls the underlying RemoveModifiersOfStage.
-func (x *ParticleSystem) RemoveModifiersOfStage(stage raw.SCNParticleModifierStage) {
-	x.inner.RemoveModifiersOfStage(stage)
+func (x *ParticleSystem) RemoveModifiersOfStage(stage SCNParticleModifierStage) {
+	x.inner.RemoveModifiersOfStage(raw.SCNParticleModifierStage(stage))
 }
 
 // RemoveAllModifiers calls the underlying RemoveAllModifiers.
@@ -555,23 +555,23 @@ func (x *ParticleSystem) SetEmitterShape(emitterShape *raw.SCNGeometry) {
 }
 
 // BirthLocation calls the underlying BirthLocation.
-func (x *ParticleSystem) BirthLocation() raw.SCNParticleBirthLocation {
-	return x.inner.BirthLocation()
+func (x *ParticleSystem) BirthLocation() SCNParticleBirthLocation {
+	return SCNParticleBirthLocation(x.inner.BirthLocation())
 }
 
 // SetBirthLocation calls the underlying SetBirthLocation.
-func (x *ParticleSystem) SetBirthLocation(birthLocation raw.SCNParticleBirthLocation) {
-	x.inner.SetBirthLocation(birthLocation)
+func (x *ParticleSystem) SetBirthLocation(birthLocation SCNParticleBirthLocation) {
+	x.inner.SetBirthLocation(raw.SCNParticleBirthLocation(birthLocation))
 }
 
 // BirthDirection calls the underlying BirthDirection.
-func (x *ParticleSystem) BirthDirection() raw.SCNParticleBirthDirection {
-	return x.inner.BirthDirection()
+func (x *ParticleSystem) BirthDirection() SCNParticleBirthDirection {
+	return SCNParticleBirthDirection(x.inner.BirthDirection())
 }
 
 // SetBirthDirection calls the underlying SetBirthDirection.
-func (x *ParticleSystem) SetBirthDirection(birthDirection raw.SCNParticleBirthDirection) {
-	x.inner.SetBirthDirection(birthDirection)
+func (x *ParticleSystem) SetBirthDirection(birthDirection SCNParticleBirthDirection) {
+	x.inner.SetBirthDirection(raw.SCNParticleBirthDirection(birthDirection))
 }
 
 // SpreadingAngle calls the underlying SpreadingAngle.
@@ -817,13 +817,13 @@ func (x *ParticleSystem) SetImageSequenceFrameRateVariation(imageSequenceFrameRa
 }
 
 // ImageSequenceAnimationMode calls the underlying ImageSequenceAnimationMode.
-func (x *ParticleSystem) ImageSequenceAnimationMode() raw.SCNParticleImageSequenceAnimationMode {
-	return x.inner.ImageSequenceAnimationMode()
+func (x *ParticleSystem) ImageSequenceAnimationMode() SCNParticleImageSequenceAnimationMode {
+	return SCNParticleImageSequenceAnimationMode(x.inner.ImageSequenceAnimationMode())
 }
 
 // SetImageSequenceAnimationMode calls the underlying SetImageSequenceAnimationMode.
-func (x *ParticleSystem) SetImageSequenceAnimationMode(imageSequenceAnimationMode raw.SCNParticleImageSequenceAnimationMode) {
-	x.inner.SetImageSequenceAnimationMode(imageSequenceAnimationMode)
+func (x *ParticleSystem) SetImageSequenceAnimationMode(imageSequenceAnimationMode SCNParticleImageSequenceAnimationMode) {
+	x.inner.SetImageSequenceAnimationMode(raw.SCNParticleImageSequenceAnimationMode(imageSequenceAnimationMode))
 }
 
 // ParticleColor calls the underlying ParticleColor.
@@ -887,13 +887,13 @@ func (x *ParticleSystem) SetParticleIntensityVariation(particleIntensityVariatio
 }
 
 // BlendMode calls the underlying BlendMode.
-func (x *ParticleSystem) BlendMode() raw.SCNParticleBlendMode {
-	return x.inner.BlendMode()
+func (x *ParticleSystem) BlendMode() SCNParticleBlendMode {
+	return SCNParticleBlendMode(x.inner.BlendMode())
 }
 
 // SetBlendMode calls the underlying SetBlendMode.
-func (x *ParticleSystem) SetBlendMode(blendMode raw.SCNParticleBlendMode) {
-	x.inner.SetBlendMode(blendMode)
+func (x *ParticleSystem) SetBlendMode(blendMode SCNParticleBlendMode) {
+	x.inner.SetBlendMode(raw.SCNParticleBlendMode(blendMode))
 }
 
 // IsBlackPassEnabled calls the underlying IsBlackPassEnabled.
@@ -907,23 +907,23 @@ func (x *ParticleSystem) SetBlackPassEnabled(blackPassEnabled bool) {
 }
 
 // OrientationMode calls the underlying OrientationMode.
-func (x *ParticleSystem) OrientationMode() raw.SCNParticleOrientationMode {
-	return x.inner.OrientationMode()
+func (x *ParticleSystem) OrientationMode() SCNParticleOrientationMode {
+	return SCNParticleOrientationMode(x.inner.OrientationMode())
 }
 
 // SetOrientationMode calls the underlying SetOrientationMode.
-func (x *ParticleSystem) SetOrientationMode(orientationMode raw.SCNParticleOrientationMode) {
-	x.inner.SetOrientationMode(orientationMode)
+func (x *ParticleSystem) SetOrientationMode(orientationMode SCNParticleOrientationMode) {
+	x.inner.SetOrientationMode(raw.SCNParticleOrientationMode(orientationMode))
 }
 
 // SortingMode calls the underlying SortingMode.
-func (x *ParticleSystem) SortingMode() raw.SCNParticleSortingMode {
-	return x.inner.SortingMode()
+func (x *ParticleSystem) SortingMode() SCNParticleSortingMode {
+	return SCNParticleSortingMode(x.inner.SortingMode())
 }
 
 // SetSortingMode calls the underlying SetSortingMode.
-func (x *ParticleSystem) SetSortingMode(sortingMode raw.SCNParticleSortingMode) {
-	x.inner.SetSortingMode(sortingMode)
+func (x *ParticleSystem) SetSortingMode(sortingMode SCNParticleSortingMode) {
+	x.inner.SetSortingMode(raw.SCNParticleSortingMode(sortingMode))
 }
 
 // IsLightingEnabled calls the underlying IsLightingEnabled.
@@ -1134,8 +1134,8 @@ type ParticleSystemable interface {
 	WithBirthRateVariation(birthRateVariation float64) *ParticleSystem
 	WithWarmupDuration(warmupDuration float64) *ParticleSystem
 	WithEmitterShape(emitterShape GeometryProvider) *ParticleSystem
-	WithBirthLocation(birthLocation raw.SCNParticleBirthLocation) *ParticleSystem
-	WithBirthDirection(birthDirection raw.SCNParticleBirthDirection) *ParticleSystem
+	WithBirthLocation(birthLocation SCNParticleBirthLocation) *ParticleSystem
+	WithBirthDirection(birthDirection SCNParticleBirthDirection) *ParticleSystem
 	WithSpreadingAngle(spreadingAngle float64) *ParticleSystem
 	WithEmittingDirection(emittingDirection raw.SCNVector3) *ParticleSystem
 	WithOrientationDirection(orientationDirection raw.SCNVector3) *ParticleSystem
@@ -1159,17 +1159,17 @@ type ParticleSystemable interface {
 	WithImageSequenceInitialFrameVariation(imageSequenceInitialFrameVariation float64) *ParticleSystem
 	WithImageSequenceFrameRate(imageSequenceFrameRate float64) *ParticleSystem
 	WithImageSequenceFrameRateVariation(imageSequenceFrameRateVariation float64) *ParticleSystem
-	WithImageSequenceAnimationMode(imageSequenceAnimationMode raw.SCNParticleImageSequenceAnimationMode) *ParticleSystem
+	WithImageSequenceAnimationMode(imageSequenceAnimationMode SCNParticleImageSequenceAnimationMode) *ParticleSystem
 	WithParticleColor(particleColor *appkit.NSColor) *ParticleSystem
 	WithParticleColorVariation(particleColorVariation raw.SCNVector4) *ParticleSystem
 	WithParticleSize(particleSize float64) *ParticleSystem
 	WithParticleSizeVariation(particleSizeVariation float64) *ParticleSystem
 	WithParticleIntensity(particleIntensity float64) *ParticleSystem
 	WithParticleIntensityVariation(particleIntensityVariation float64) *ParticleSystem
-	WithBlendMode(blendMode raw.SCNParticleBlendMode) *ParticleSystem
+	WithBlendMode(blendMode SCNParticleBlendMode) *ParticleSystem
 	WithBlackPassEnabled(blackPassEnabled bool) *ParticleSystem
-	WithOrientationMode(orientationMode raw.SCNParticleOrientationMode) *ParticleSystem
-	WithSortingMode(sortingMode raw.SCNParticleSortingMode) *ParticleSystem
+	WithOrientationMode(orientationMode SCNParticleOrientationMode) *ParticleSystem
+	WithSortingMode(sortingMode SCNParticleSortingMode) *ParticleSystem
 	WithLightingEnabled(lightingEnabled bool) *ParticleSystem
 	WithAffectedByGravity(affectedByGravity bool) *ParticleSystem
 	WithAffectedByPhysicsFields(affectedByPhysicsFields bool) *ParticleSystem
@@ -1190,9 +1190,9 @@ type ParticleSystemable interface {
 	WithWritesToDepthBuffer(writesToDepthBuffer bool) *ParticleSystem
 	WithPropertyControllers(propertyControllers *foundation.NSDictionary[*foundation.NSString, *raw.SCNParticlePropertyController]) *ParticleSystem
 	Reset()
-	HandleEventForPropertiesWith(event raw.SCNParticleEvent, properties *foundation.NSArray[*foundation.NSString], block func(unsafe.Pointer, *uint, *uint32, int))
-	AddModifierForPropertiesAtStageWith(properties *foundation.NSArray[*foundation.NSString], stage raw.SCNParticleModifierStage, block func(unsafe.Pointer, *uint, int, int, float32))
-	RemoveModifiersOfStage(stage raw.SCNParticleModifierStage)
+	HandleEventForPropertiesWith(event SCNParticleEvent, properties *foundation.NSArray[*foundation.NSString], block func(unsafe.Pointer, *uint, *uint32, int))
+	AddModifierForPropertiesAtStageWith(properties *foundation.NSArray[*foundation.NSString], stage SCNParticleModifierStage, block func(unsafe.Pointer, *uint, int, int, float32))
+	RemoveModifiersOfStage(stage SCNParticleModifierStage)
 	RemoveAllModifiers()
 	EmissionDuration() float64
 	SetEmissionDuration(emissionDuration float64)
@@ -1212,10 +1212,10 @@ type ParticleSystemable interface {
 	SetWarmupDuration(warmupDuration float64)
 	EmitterShape() *Geometry
 	SetEmitterShape(emitterShape *raw.SCNGeometry)
-	BirthLocation() raw.SCNParticleBirthLocation
-	SetBirthLocation(birthLocation raw.SCNParticleBirthLocation)
-	BirthDirection() raw.SCNParticleBirthDirection
-	SetBirthDirection(birthDirection raw.SCNParticleBirthDirection)
+	BirthLocation() SCNParticleBirthLocation
+	SetBirthLocation(birthLocation SCNParticleBirthLocation)
+	BirthDirection() SCNParticleBirthDirection
+	SetBirthDirection(birthDirection SCNParticleBirthDirection)
 	SpreadingAngle() float64
 	SetSpreadingAngle(spreadingAngle float64)
 	EmittingDirection() raw.SCNVector3
@@ -1262,8 +1262,8 @@ type ParticleSystemable interface {
 	SetImageSequenceFrameRate(imageSequenceFrameRate float64)
 	ImageSequenceFrameRateVariation() float64
 	SetImageSequenceFrameRateVariation(imageSequenceFrameRateVariation float64)
-	ImageSequenceAnimationMode() raw.SCNParticleImageSequenceAnimationMode
-	SetImageSequenceAnimationMode(imageSequenceAnimationMode raw.SCNParticleImageSequenceAnimationMode)
+	ImageSequenceAnimationMode() SCNParticleImageSequenceAnimationMode
+	SetImageSequenceAnimationMode(imageSequenceAnimationMode SCNParticleImageSequenceAnimationMode)
 	ParticleColor() *appkit.NSColor
 	SetParticleColor(particleColor *appkit.NSColor)
 	ParticleColorVariation() raw.SCNVector4
@@ -1276,14 +1276,14 @@ type ParticleSystemable interface {
 	SetParticleIntensity(particleIntensity float64)
 	ParticleIntensityVariation() float64
 	SetParticleIntensityVariation(particleIntensityVariation float64)
-	BlendMode() raw.SCNParticleBlendMode
-	SetBlendMode(blendMode raw.SCNParticleBlendMode)
+	BlendMode() SCNParticleBlendMode
+	SetBlendMode(blendMode SCNParticleBlendMode)
 	IsBlackPassEnabled() bool
 	SetBlackPassEnabled(blackPassEnabled bool)
-	OrientationMode() raw.SCNParticleOrientationMode
-	SetOrientationMode(orientationMode raw.SCNParticleOrientationMode)
-	SortingMode() raw.SCNParticleSortingMode
-	SetSortingMode(sortingMode raw.SCNParticleSortingMode)
+	OrientationMode() SCNParticleOrientationMode
+	SetOrientationMode(orientationMode SCNParticleOrientationMode)
+	SortingMode() SCNParticleSortingMode
+	SetSortingMode(sortingMode SCNParticleSortingMode)
 	IsLightingEnabled() bool
 	SetLightingEnabled(lightingEnabled bool)
 	AffectedByGravity() bool

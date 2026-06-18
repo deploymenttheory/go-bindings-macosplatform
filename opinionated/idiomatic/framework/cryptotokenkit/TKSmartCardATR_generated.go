@@ -55,8 +55,8 @@ func (x *SmartCardATR) InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGr
 }
 
 // InterfaceGroupForProtocol calls the underlying InterfaceGroupForProtocol.
-func (x *SmartCardATR) InterfaceGroupForProtocol(protocol raw.TKSmartCardProtocol) *SmartCardATRInterfaceGroup {
-	_r := x.inner.InterfaceGroupForProtocol(protocol)
+func (x *SmartCardATR) InterfaceGroupForProtocol(protocol TKSmartCardProtocol) *SmartCardATRInterfaceGroup {
+	_r := x.inner.InterfaceGroupForProtocol(raw.TKSmartCardProtocol(protocol))
 	if _r == nil {
 		return nil
 	}
@@ -99,7 +99,7 @@ func (x *SmartCardATR) HistoricalRecords() []*CompactTLVRecord {
 type SmartCardATRable interface {
 	Unwrap() *raw.TKSmartCardATR
 	InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGroup
-	InterfaceGroupForProtocol(protocol raw.TKSmartCardProtocol) *SmartCardATRInterfaceGroup
+	InterfaceGroupForProtocol(protocol TKSmartCardProtocol) *SmartCardATRInterfaceGroup
 	Bytes() *foundation.NSData
 	Protocols() []*foundation.NSNumber
 	HistoricalBytes() *foundation.NSData

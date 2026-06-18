@@ -37,14 +37,14 @@ func NewTextureViewDescriptor() *TextureViewDescriptor {
 }
 
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
-func (x *TextureViewDescriptor) WithPixelFormat(pixelFormat raw.MTLPixelFormat) *TextureViewDescriptor {
-	x.inner.SetPixelFormat(pixelFormat)
+func (x *TextureViewDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *TextureViewDescriptor {
+	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
 	return x
 }
 
 // WithTextureType sets the textureType property and returns the receiver for chaining.
-func (x *TextureViewDescriptor) WithTextureType(textureType raw.MTLTextureType) *TextureViewDescriptor {
-	x.inner.SetTextureType(textureType)
+func (x *TextureViewDescriptor) WithTextureType(textureType MTLTextureType) *TextureViewDescriptor {
+	x.inner.SetTextureType(raw.MTLTextureType(textureType))
 	return x
 }
 
@@ -67,23 +67,23 @@ func (x *TextureViewDescriptor) WithSwizzle(swizzle raw.MTLTextureSwizzleChannel
 }
 
 // PixelFormat calls the underlying PixelFormat.
-func (x *TextureViewDescriptor) PixelFormat() raw.MTLPixelFormat {
-	return x.inner.PixelFormat()
+func (x *TextureViewDescriptor) PixelFormat() MTLPixelFormat {
+	return MTLPixelFormat(x.inner.PixelFormat())
 }
 
 // SetPixelFormat calls the underlying SetPixelFormat.
-func (x *TextureViewDescriptor) SetPixelFormat(pixelFormat raw.MTLPixelFormat) {
-	x.inner.SetPixelFormat(pixelFormat)
+func (x *TextureViewDescriptor) SetPixelFormat(pixelFormat MTLPixelFormat) {
+	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
 }
 
 // TextureType calls the underlying TextureType.
-func (x *TextureViewDescriptor) TextureType() raw.MTLTextureType {
-	return x.inner.TextureType()
+func (x *TextureViewDescriptor) TextureType() MTLTextureType {
+	return MTLTextureType(x.inner.TextureType())
 }
 
 // SetTextureType calls the underlying SetTextureType.
-func (x *TextureViewDescriptor) SetTextureType(textureType raw.MTLTextureType) {
-	x.inner.SetTextureType(textureType)
+func (x *TextureViewDescriptor) SetTextureType(textureType MTLTextureType) {
+	x.inner.SetTextureType(raw.MTLTextureType(textureType))
 }
 
 // LevelRange calls the underlying LevelRange.
@@ -119,15 +119,15 @@ func (x *TextureViewDescriptor) SetSwizzle(swizzle raw.MTLTextureSwizzleChannels
 // TextureViewDescriptorable is the interface implemented by [TextureViewDescriptor], for mocking and DI.
 type TextureViewDescriptorable interface {
 	Unwrap() *raw.MTLTextureViewDescriptor
-	WithPixelFormat(pixelFormat raw.MTLPixelFormat) *TextureViewDescriptor
-	WithTextureType(textureType raw.MTLTextureType) *TextureViewDescriptor
+	WithPixelFormat(pixelFormat MTLPixelFormat) *TextureViewDescriptor
+	WithTextureType(textureType MTLTextureType) *TextureViewDescriptor
 	WithLevelRange(levelRange foundation.NSRange) *TextureViewDescriptor
 	WithSliceRange(sliceRange foundation.NSRange) *TextureViewDescriptor
 	WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *TextureViewDescriptor
-	PixelFormat() raw.MTLPixelFormat
-	SetPixelFormat(pixelFormat raw.MTLPixelFormat)
-	TextureType() raw.MTLTextureType
-	SetTextureType(textureType raw.MTLTextureType)
+	PixelFormat() MTLPixelFormat
+	SetPixelFormat(pixelFormat MTLPixelFormat)
+	TextureType() MTLTextureType
+	SetTextureType(textureType MTLTextureType)
 	LevelRange() foundation.NSRange
 	SetLevelRange(levelRange foundation.NSRange)
 	SliceRange() foundation.NSRange

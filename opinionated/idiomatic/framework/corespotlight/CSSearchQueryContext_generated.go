@@ -81,8 +81,8 @@ func (x *SearchQueryContext) WithKeyboardLanguage(keyboardLanguage string) *Sear
 }
 
 // WithSourceOptions sets the sourceOptions property and returns the receiver for chaining.
-func (x *SearchQueryContext) WithSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions) *SearchQueryContext {
-	x.inner.SetSourceOptions(sourceOptions)
+func (x *SearchQueryContext) WithSourceOptions(sourceOptions CSSearchQuerySourceOptions) *SearchQueryContext {
+	x.inner.SetSourceOptions(raw.CSSearchQuerySourceOptions(sourceOptions))
 	return x
 }
 
@@ -133,13 +133,13 @@ func (x *SearchQueryContext) SetKeyboardLanguage(keyboardLanguage string) {
 }
 
 // SourceOptions calls the underlying SourceOptions.
-func (x *SearchQueryContext) SourceOptions() raw.CSSearchQuerySourceOptions {
-	return x.inner.SourceOptions()
+func (x *SearchQueryContext) SourceOptions() CSSearchQuerySourceOptions {
+	return CSSearchQuerySourceOptions(x.inner.SourceOptions())
 }
 
 // SetSourceOptions calls the underlying SetSourceOptions.
-func (x *SearchQueryContext) SetSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions) {
-	x.inner.SetSourceOptions(sourceOptions)
+func (x *SearchQueryContext) SetSourceOptions(sourceOptions CSSearchQuerySourceOptions) {
+	x.inner.SetSourceOptions(raw.CSSearchQuerySourceOptions(sourceOptions))
 }
 
 func (x *SearchQueryContext) asSearchQueryContext() *raw.CSSearchQueryContext { return x.inner }
@@ -150,15 +150,15 @@ type SearchQueryContextable interface {
 	WithFetchAttributes(items ...*foundation.NSString) *SearchQueryContext
 	WithFilterQueries(items ...*foundation.NSString) *SearchQueryContext
 	WithKeyboardLanguage(keyboardLanguage string) *SearchQueryContext
-	WithSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions) *SearchQueryContext
+	WithSourceOptions(sourceOptions CSSearchQuerySourceOptions) *SearchQueryContext
 	FetchAttributes() []string
 	SetFetchAttributes(fetchAttributes *foundation.NSArray[*foundation.NSString])
 	FilterQueries() []string
 	SetFilterQueries(filterQueries *foundation.NSArray[*foundation.NSString])
 	KeyboardLanguage() string
 	SetKeyboardLanguage(keyboardLanguage string)
-	SourceOptions() raw.CSSearchQuerySourceOptions
-	SetSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions)
+	SourceOptions() CSSearchQuerySourceOptions
+	SetSourceOptions(sourceOptions CSSearchQuerySourceOptions)
 }
 
 var _ SearchQueryContextable = (*SearchQueryContext)(nil)

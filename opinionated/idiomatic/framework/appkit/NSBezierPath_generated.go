@@ -45,20 +45,20 @@ func (x *BezierPath) WithLineWidth(lineWidth float64) *BezierPath {
 }
 
 // WithLineCapStyle sets the lineCapStyle property and returns the receiver for chaining.
-func (x *BezierPath) WithLineCapStyle(lineCapStyle raw.NSLineCapStyle) *BezierPath {
-	x.inner.SetLineCapStyle(lineCapStyle)
+func (x *BezierPath) WithLineCapStyle(lineCapStyle NSLineCapStyle) *BezierPath {
+	x.inner.SetLineCapStyle(raw.NSLineCapStyle(lineCapStyle))
 	return x
 }
 
 // WithLineJoinStyle sets the lineJoinStyle property and returns the receiver for chaining.
-func (x *BezierPath) WithLineJoinStyle(lineJoinStyle raw.NSLineJoinStyle) *BezierPath {
-	x.inner.SetLineJoinStyle(lineJoinStyle)
+func (x *BezierPath) WithLineJoinStyle(lineJoinStyle NSLineJoinStyle) *BezierPath {
+	x.inner.SetLineJoinStyle(raw.NSLineJoinStyle(lineJoinStyle))
 	return x
 }
 
 // WithWindingRule sets the windingRule property and returns the receiver for chaining.
-func (x *BezierPath) WithWindingRule(windingRule raw.NSWindingRule) *BezierPath {
-	x.inner.SetWindingRule(windingRule)
+func (x *BezierPath) WithWindingRule(windingRule NSWindingRule) *BezierPath {
+	x.inner.SetWindingRule(raw.NSWindingRule(windingRule))
 	return x
 }
 
@@ -160,13 +160,13 @@ func (x *BezierPath) TransformUsingAffineTransform(transform *foundation.NSAffin
 }
 
 // ElementAtIndexAssociatedPoints calls the underlying ElementAtIndexAssociatedPoints.
-func (x *BezierPath) ElementAtIndexAssociatedPoints(index int, points *corefoundation.CGPoint) raw.NSBezierPathElement {
-	return x.inner.ElementAtIndexAssociatedPoints(index, points)
+func (x *BezierPath) ElementAtIndexAssociatedPoints(index int, points *corefoundation.CGPoint) NSBezierPathElement {
+	return NSBezierPathElement(x.inner.ElementAtIndexAssociatedPoints(index, points))
 }
 
 // ElementAtIndex calls the underlying ElementAtIndex.
-func (x *BezierPath) ElementAtIndex(index int) raw.NSBezierPathElement {
-	return x.inner.ElementAtIndex(index)
+func (x *BezierPath) ElementAtIndex(index int) NSBezierPathElement {
+	return NSBezierPathElement(x.inner.ElementAtIndex(index))
 }
 
 // SetAssociatedPointsAtIndex calls the underlying SetAssociatedPointsAtIndex.
@@ -250,33 +250,33 @@ func (x *BezierPath) SetLineWidth(lineWidth float64) {
 }
 
 // LineCapStyle calls the underlying LineCapStyle.
-func (x *BezierPath) LineCapStyle() raw.NSLineCapStyle {
-	return x.inner.LineCapStyle()
+func (x *BezierPath) LineCapStyle() NSLineCapStyle {
+	return NSLineCapStyle(x.inner.LineCapStyle())
 }
 
 // SetLineCapStyle calls the underlying SetLineCapStyle.
-func (x *BezierPath) SetLineCapStyle(lineCapStyle raw.NSLineCapStyle) {
-	x.inner.SetLineCapStyle(lineCapStyle)
+func (x *BezierPath) SetLineCapStyle(lineCapStyle NSLineCapStyle) {
+	x.inner.SetLineCapStyle(raw.NSLineCapStyle(lineCapStyle))
 }
 
 // LineJoinStyle calls the underlying LineJoinStyle.
-func (x *BezierPath) LineJoinStyle() raw.NSLineJoinStyle {
-	return x.inner.LineJoinStyle()
+func (x *BezierPath) LineJoinStyle() NSLineJoinStyle {
+	return NSLineJoinStyle(x.inner.LineJoinStyle())
 }
 
 // SetLineJoinStyle calls the underlying SetLineJoinStyle.
-func (x *BezierPath) SetLineJoinStyle(lineJoinStyle raw.NSLineJoinStyle) {
-	x.inner.SetLineJoinStyle(lineJoinStyle)
+func (x *BezierPath) SetLineJoinStyle(lineJoinStyle NSLineJoinStyle) {
+	x.inner.SetLineJoinStyle(raw.NSLineJoinStyle(lineJoinStyle))
 }
 
 // WindingRule calls the underlying WindingRule.
-func (x *BezierPath) WindingRule() raw.NSWindingRule {
-	return x.inner.WindingRule()
+func (x *BezierPath) WindingRule() NSWindingRule {
+	return NSWindingRule(x.inner.WindingRule())
 }
 
 // SetWindingRule calls the underlying SetWindingRule.
-func (x *BezierPath) SetWindingRule(windingRule raw.NSWindingRule) {
-	x.inner.SetWindingRule(windingRule)
+func (x *BezierPath) SetWindingRule(windingRule NSWindingRule) {
+	x.inner.SetWindingRule(raw.NSWindingRule(windingRule))
 }
 
 // MiterLimit calls the underlying MiterLimit.
@@ -371,9 +371,9 @@ func (x *BezierPath) AppendBezierPathWithPackedGlyphs(packedGlyphs string) {
 type BezierPathable interface {
 	Unwrap() *raw.NSBezierPath
 	WithLineWidth(lineWidth float64) *BezierPath
-	WithLineCapStyle(lineCapStyle raw.NSLineCapStyle) *BezierPath
-	WithLineJoinStyle(lineJoinStyle raw.NSLineJoinStyle) *BezierPath
-	WithWindingRule(windingRule raw.NSWindingRule) *BezierPath
+	WithLineCapStyle(lineCapStyle NSLineCapStyle) *BezierPath
+	WithLineJoinStyle(lineJoinStyle NSLineJoinStyle) *BezierPath
+	WithWindingRule(windingRule NSWindingRule) *BezierPath
 	WithMiterLimit(miterLimit float64) *BezierPath
 	WithFlatness(flatness float64) *BezierPath
 	MoveToPoint(point corefoundation.CGPoint)
@@ -393,8 +393,8 @@ type BezierPathable interface {
 	AddClip()
 	SetClip()
 	TransformUsingAffineTransform(transform *foundation.NSAffineTransform)
-	ElementAtIndexAssociatedPoints(index int, points *corefoundation.CGPoint) raw.NSBezierPathElement
-	ElementAtIndex(index int) raw.NSBezierPathElement
+	ElementAtIndexAssociatedPoints(index int, points *corefoundation.CGPoint) NSBezierPathElement
+	ElementAtIndex(index int) NSBezierPathElement
 	SetAssociatedPointsAtIndex(points *corefoundation.CGPoint, index int)
 	AppendBezierPath(path *raw.NSBezierPath)
 	AppendBezierPathWithRect(rect corefoundation.CGRect)
@@ -411,12 +411,12 @@ type BezierPathable interface {
 	SetCGPath(cGPath unsafe.Pointer)
 	LineWidth() float64
 	SetLineWidth(lineWidth float64)
-	LineCapStyle() raw.NSLineCapStyle
-	SetLineCapStyle(lineCapStyle raw.NSLineCapStyle)
-	LineJoinStyle() raw.NSLineJoinStyle
-	SetLineJoinStyle(lineJoinStyle raw.NSLineJoinStyle)
-	WindingRule() raw.NSWindingRule
-	SetWindingRule(windingRule raw.NSWindingRule)
+	LineCapStyle() NSLineCapStyle
+	SetLineCapStyle(lineCapStyle NSLineCapStyle)
+	LineJoinStyle() NSLineJoinStyle
+	SetLineJoinStyle(lineJoinStyle NSLineJoinStyle)
+	WindingRule() NSWindingRule
+	SetWindingRule(windingRule NSWindingRule)
 	MiterLimit() float64
 	SetMiterLimit(miterLimit float64)
 	Flatness() float64

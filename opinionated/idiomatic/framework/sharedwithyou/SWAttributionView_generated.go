@@ -45,20 +45,20 @@ func (x *AttributionView) WithHighlight(highlight HighlightProvider) *Attributio
 }
 
 // WithDisplayContext sets the displayContext property and returns the receiver for chaining.
-func (x *AttributionView) WithDisplayContext(displayContext raw.SWAttributionViewDisplayContext) *AttributionView {
-	x.inner.SetDisplayContext(displayContext)
+func (x *AttributionView) WithDisplayContext(displayContext SWAttributionViewDisplayContext) *AttributionView {
+	x.inner.SetDisplayContext(raw.SWAttributionViewDisplayContext(displayContext))
 	return x
 }
 
 // WithHorizontalAlignment sets the horizontalAlignment property and returns the receiver for chaining.
-func (x *AttributionView) WithHorizontalAlignment(horizontalAlignment raw.SWAttributionViewHorizontalAlignment) *AttributionView {
-	x.inner.SetHorizontalAlignment(horizontalAlignment)
+func (x *AttributionView) WithHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment) *AttributionView {
+	x.inner.SetHorizontalAlignment(raw.SWAttributionViewHorizontalAlignment(horizontalAlignment))
 	return x
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *AttributionView) WithBackgroundStyle(backgroundStyle raw.SWAttributionViewBackgroundStyle) *AttributionView {
-	x.inner.SetBackgroundStyle(backgroundStyle)
+func (x *AttributionView) WithBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle) *AttributionView {
+	x.inner.SetBackgroundStyle(raw.SWAttributionViewBackgroundStyle(backgroundStyle))
 	return x
 }
 
@@ -95,33 +95,33 @@ func (x *AttributionView) SetHighlight(highlight *raw.SWHighlight) {
 }
 
 // DisplayContext calls the underlying DisplayContext.
-func (x *AttributionView) DisplayContext() raw.SWAttributionViewDisplayContext {
-	return x.inner.DisplayContext()
+func (x *AttributionView) DisplayContext() SWAttributionViewDisplayContext {
+	return SWAttributionViewDisplayContext(x.inner.DisplayContext())
 }
 
 // SetDisplayContext calls the underlying SetDisplayContext.
-func (x *AttributionView) SetDisplayContext(displayContext raw.SWAttributionViewDisplayContext) {
-	x.inner.SetDisplayContext(displayContext)
+func (x *AttributionView) SetDisplayContext(displayContext SWAttributionViewDisplayContext) {
+	x.inner.SetDisplayContext(raw.SWAttributionViewDisplayContext(displayContext))
 }
 
 // HorizontalAlignment calls the underlying HorizontalAlignment.
-func (x *AttributionView) HorizontalAlignment() raw.SWAttributionViewHorizontalAlignment {
-	return x.inner.HorizontalAlignment()
+func (x *AttributionView) HorizontalAlignment() SWAttributionViewHorizontalAlignment {
+	return SWAttributionViewHorizontalAlignment(x.inner.HorizontalAlignment())
 }
 
 // SetHorizontalAlignment calls the underlying SetHorizontalAlignment.
-func (x *AttributionView) SetHorizontalAlignment(horizontalAlignment raw.SWAttributionViewHorizontalAlignment) {
-	x.inner.SetHorizontalAlignment(horizontalAlignment)
+func (x *AttributionView) SetHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment) {
+	x.inner.SetHorizontalAlignment(raw.SWAttributionViewHorizontalAlignment(horizontalAlignment))
 }
 
 // BackgroundStyle calls the underlying BackgroundStyle.
-func (x *AttributionView) BackgroundStyle() raw.SWAttributionViewBackgroundStyle {
-	return x.inner.BackgroundStyle()
+func (x *AttributionView) BackgroundStyle() SWAttributionViewBackgroundStyle {
+	return SWAttributionViewBackgroundStyle(x.inner.BackgroundStyle())
 }
 
 // SetBackgroundStyle calls the underlying SetBackgroundStyle.
-func (x *AttributionView) SetBackgroundStyle(backgroundStyle raw.SWAttributionViewBackgroundStyle) {
-	x.inner.SetBackgroundStyle(backgroundStyle)
+func (x *AttributionView) SetBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle) {
+	x.inner.SetBackgroundStyle(raw.SWAttributionViewBackgroundStyle(backgroundStyle))
 }
 
 // PreferredMaxLayoutWidth calls the underlying PreferredMaxLayoutWidth.
@@ -167,20 +167,20 @@ func (x *AttributionView) SetSupplementalMenu(supplementalMenu *appkit.NSMenuIte
 type AttributionViewable interface {
 	Unwrap() *raw.SWAttributionView
 	WithHighlight(highlight HighlightProvider) *AttributionView
-	WithDisplayContext(displayContext raw.SWAttributionViewDisplayContext) *AttributionView
-	WithHorizontalAlignment(horizontalAlignment raw.SWAttributionViewHorizontalAlignment) *AttributionView
-	WithBackgroundStyle(backgroundStyle raw.SWAttributionViewBackgroundStyle) *AttributionView
+	WithDisplayContext(displayContext SWAttributionViewDisplayContext) *AttributionView
+	WithHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment) *AttributionView
+	WithBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle) *AttributionView
 	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *AttributionView
 	WithMenuTitleForHideAction(menuTitleForHideAction string) *AttributionView
 	WithSupplementalMenu(supplementalMenu *appkit.NSMenuItem) *AttributionView
 	Highlight() *Highlight
 	SetHighlight(highlight *raw.SWHighlight)
-	DisplayContext() raw.SWAttributionViewDisplayContext
-	SetDisplayContext(displayContext raw.SWAttributionViewDisplayContext)
-	HorizontalAlignment() raw.SWAttributionViewHorizontalAlignment
-	SetHorizontalAlignment(horizontalAlignment raw.SWAttributionViewHorizontalAlignment)
-	BackgroundStyle() raw.SWAttributionViewBackgroundStyle
-	SetBackgroundStyle(backgroundStyle raw.SWAttributionViewBackgroundStyle)
+	DisplayContext() SWAttributionViewDisplayContext
+	SetDisplayContext(displayContext SWAttributionViewDisplayContext)
+	HorizontalAlignment() SWAttributionViewHorizontalAlignment
+	SetHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment)
+	BackgroundStyle() SWAttributionViewBackgroundStyle
+	SetBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle)
 	PreferredMaxLayoutWidth() float64
 	SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64)
 	HighlightMenu() *appkit.NSMenu

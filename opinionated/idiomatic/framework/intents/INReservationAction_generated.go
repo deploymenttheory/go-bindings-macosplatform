@@ -31,15 +31,15 @@ func ReservationActionFromID(id objc.ID) *ReservationAction {
 }
 
 // NewReservationActionWithTypeValidDurationUserActivity creates a new [ReservationAction].
-func NewReservationActionWithTypeValidDurationUserActivity(type_ raw.INReservationActionType, validDuration *raw.INDateComponentsRange, userActivity *foundation.NSUserActivity) *ReservationAction {
+func NewReservationActionWithTypeValidDurationUserActivity(type_ INReservationActionType, validDuration *raw.INDateComponentsRange, userActivity *foundation.NSUserActivity) *ReservationAction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INReservationAction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:validDuration:userActivity:"), type_, validDuration.Ptr(), userActivity.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:validDuration:userActivity:"), raw.INReservationActionType(type_), validDuration.Ptr(), userActivity.Ptr())
 	return &ReservationAction{inner: raw.INReservationActionFromID(_id)}
 }
 
 // Type calls the underlying Type.
-func (x *ReservationAction) Type() raw.INReservationActionType {
-	return x.inner.Type()
+func (x *ReservationAction) Type() INReservationActionType {
+	return INReservationActionType(x.inner.Type())
 }
 
 // ValidDuration calls the underlying ValidDuration.
@@ -59,7 +59,7 @@ func (x *ReservationAction) UserActivity() *foundation.NSUserActivity {
 // ReservationActionable is the interface implemented by [ReservationAction], for mocking and DI.
 type ReservationActionable interface {
 	Unwrap() *raw.INReservationAction
-	Type() raw.INReservationActionType
+	Type() INReservationActionType
 	ValidDuration() *DateComponentsRange
 	UserActivity() *foundation.NSUserActivity
 }

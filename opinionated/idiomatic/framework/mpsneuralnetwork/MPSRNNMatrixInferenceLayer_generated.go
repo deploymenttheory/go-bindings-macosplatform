@@ -66,8 +66,8 @@ func (x *RNNMatrixInferenceLayer) WithStoreAllIntermediateStates(storeAllInterme
 }
 
 // WithBidirectionalCombineMode sets the bidirectionalCombineMode property and returns the receiver for chaining.
-func (x *RNNMatrixInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) *RNNMatrixInferenceLayer {
-	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
+func (x *RNNMatrixInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombineMode MPSRNNBidirectionalCombineMode) *RNNMatrixInferenceLayer {
+	x.inner.SetBidirectionalCombineMode(raw.MPSRNNBidirectionalCombineMode(bidirectionalCombineMode))
 	return x
 }
 
@@ -122,13 +122,13 @@ func (x *RNNMatrixInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermed
 }
 
 // BidirectionalCombineMode calls the underlying BidirectionalCombineMode.
-func (x *RNNMatrixInferenceLayer) BidirectionalCombineMode() raw.MPSRNNBidirectionalCombineMode {
-	return x.inner.BidirectionalCombineMode()
+func (x *RNNMatrixInferenceLayer) BidirectionalCombineMode() MPSRNNBidirectionalCombineMode {
+	return MPSRNNBidirectionalCombineMode(x.inner.BidirectionalCombineMode())
 }
 
 // SetBidirectionalCombineMode calls the underlying SetBidirectionalCombineMode.
-func (x *RNNMatrixInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) {
-	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
+func (x *RNNMatrixInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode MPSRNNBidirectionalCombineMode) {
+	x.inner.SetBidirectionalCombineMode(raw.MPSRNNBidirectionalCombineMode(bidirectionalCombineMode))
 }
 
 // RNNMatrixInferenceLayerable is the interface implemented by [RNNMatrixInferenceLayer], for mocking and DI.
@@ -136,7 +136,7 @@ type RNNMatrixInferenceLayerable interface {
 	Unwrap() *raw.MPSRNNMatrixInferenceLayer
 	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer
 	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer
-	WithBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) *RNNMatrixInferenceLayer
+	WithBidirectionalCombineMode(bidirectionalCombineMode MPSRNNBidirectionalCombineMode) *RNNMatrixInferenceLayer
 	EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, recurrentInputState *raw.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentMatrixState])
 	EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], recurrentInputState *raw.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentMatrixState])
 	EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSMatrix], destinationForwardMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationBackwardMatrices *foundation.NSArray[*mpscore.MPSMatrix])
@@ -147,8 +147,8 @@ type RNNMatrixInferenceLayerable interface {
 	SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool)
 	StoreAllIntermediateStates() bool
 	SetStoreAllIntermediateStates(storeAllIntermediateStates bool)
-	BidirectionalCombineMode() raw.MPSRNNBidirectionalCombineMode
-	SetBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode)
+	BidirectionalCombineMode() MPSRNNBidirectionalCombineMode
+	SetBidirectionalCombineMode(bidirectionalCombineMode MPSRNNBidirectionalCombineMode)
 }
 
 var _ RNNMatrixInferenceLayerable = (*RNNMatrixInferenceLayer)(nil)

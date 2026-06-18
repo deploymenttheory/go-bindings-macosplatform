@@ -45,8 +45,8 @@ func NewInvocationOperationWithInvocation(inv *raw.NSInvocation) *InvocationOper
 }
 
 // WithQueuePriority sets the queuePriority property and returns the receiver for chaining.
-func (x *InvocationOperation) WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *InvocationOperation {
-	x.inner.NSOperation.SetQueuePriority(queuePriority)
+func (x *InvocationOperation) WithQueuePriority(queuePriority NSOperationQueuePriority) *InvocationOperation {
+	x.inner.NSOperation.SetQueuePriority(raw.NSOperationQueuePriority(queuePriority))
 	return x
 }
 
@@ -63,8 +63,8 @@ func (x *InvocationOperation) WithThreadPriority(threadPriority float64) *Invoca
 }
 
 // WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *InvocationOperation) WithQualityOfService(qualityOfService raw.NSQualityOfService) *InvocationOperation {
-	x.inner.NSOperation.SetQualityOfService(qualityOfService)
+func (x *InvocationOperation) WithQualityOfService(qualityOfService NSQualityOfService) *InvocationOperation {
+	x.inner.NSOperation.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 	return x
 }
 
@@ -101,10 +101,10 @@ func (x *InvocationOperation) asObject() *raw.NSObject { return &x.inner.NSOpera
 // InvocationOperationable is the interface implemented by [InvocationOperation], for mocking and DI.
 type InvocationOperationable interface {
 	Unwrap() *raw.NSInvocationOperation
-	WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *InvocationOperation
+	WithQueuePriority(queuePriority NSOperationQueuePriority) *InvocationOperation
 	WithCompletionBlock(completionBlock func()) *InvocationOperation
 	WithThreadPriority(threadPriority float64) *InvocationOperation
-	WithQualityOfService(qualityOfService raw.NSQualityOfService) *InvocationOperation
+	WithQualityOfService(qualityOfService NSQualityOfService) *InvocationOperation
 	WithName(name string) *InvocationOperation
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InvocationOperation
 	Invocation() *Invocation

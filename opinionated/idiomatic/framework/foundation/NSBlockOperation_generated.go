@@ -39,8 +39,8 @@ func NewBlockOperation() *BlockOperation {
 }
 
 // WithQueuePriority sets the queuePriority property and returns the receiver for chaining.
-func (x *BlockOperation) WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *BlockOperation {
-	x.inner.NSOperation.SetQueuePriority(queuePriority)
+func (x *BlockOperation) WithQueuePriority(queuePriority NSOperationQueuePriority) *BlockOperation {
+	x.inner.NSOperation.SetQueuePriority(raw.NSOperationQueuePriority(queuePriority))
 	return x
 }
 
@@ -57,8 +57,8 @@ func (x *BlockOperation) WithThreadPriority(threadPriority float64) *BlockOperat
 }
 
 // WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *BlockOperation) WithQualityOfService(qualityOfService raw.NSQualityOfService) *BlockOperation {
-	x.inner.NSOperation.SetQualityOfService(qualityOfService)
+func (x *BlockOperation) WithQualityOfService(qualityOfService NSQualityOfService) *BlockOperation {
+	x.inner.NSOperation.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 	return x
 }
 
@@ -100,10 +100,10 @@ func (x *BlockOperation) asObject() *raw.NSObject { return &x.inner.NSOperation.
 // BlockOperationable is the interface implemented by [BlockOperation], for mocking and DI.
 type BlockOperationable interface {
 	Unwrap() *raw.NSBlockOperation
-	WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *BlockOperation
+	WithQueuePriority(queuePriority NSOperationQueuePriority) *BlockOperation
 	WithCompletionBlock(completionBlock func()) *BlockOperation
 	WithThreadPriority(threadPriority float64) *BlockOperation
-	WithQualityOfService(qualityOfService raw.NSQualityOfService) *BlockOperation
+	WithQualityOfService(qualityOfService NSQualityOfService) *BlockOperation
 	WithName(name string) *BlockOperation
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *BlockOperation
 	AddExecutionBlock(ctx context.Context) error

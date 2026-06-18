@@ -39,8 +39,8 @@ func NewNDArrayDescriptor() *NDArrayDescriptor {
 }
 
 // WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *NDArrayDescriptor) WithDataType(dataType raw.MPSDataType) *NDArrayDescriptor {
-	x.inner.SetDataType(dataType)
+func (x *NDArrayDescriptor) WithDataType(dataType MPSDataType) *NDArrayDescriptor {
+	x.inner.SetDataType(raw.MPSDataType(dataType))
 	return x
 }
 
@@ -108,13 +108,13 @@ func (x *NDArrayDescriptor) ReshapeWithShape(shape *foundation.NSArray[*foundati
 }
 
 // DataType calls the underlying DataType.
-func (x *NDArrayDescriptor) DataType() raw.MPSDataType {
-	return x.inner.DataType()
+func (x *NDArrayDescriptor) DataType() MPSDataType {
+	return MPSDataType(x.inner.DataType())
 }
 
 // SetDataType calls the underlying SetDataType.
-func (x *NDArrayDescriptor) SetDataType(dataType raw.MPSDataType) {
-	x.inner.SetDataType(dataType)
+func (x *NDArrayDescriptor) SetDataType(dataType MPSDataType) {
+	x.inner.SetDataType(raw.MPSDataType(dataType))
 }
 
 // NumberOfDimensions calls the underlying NumberOfDimensions.
@@ -140,7 +140,7 @@ func (x *NDArrayDescriptor) SetPreferPackedRows(preferPackedRows bool) {
 // NDArrayDescriptorable is the interface implemented by [NDArrayDescriptor], for mocking and DI.
 type NDArrayDescriptorable interface {
 	Unwrap() *raw.MPSNDArrayDescriptor
-	WithDataType(dataType raw.MPSDataType) *NDArrayDescriptor
+	WithDataType(dataType MPSDataType) *NDArrayDescriptor
 	WithNumberOfDimensions(numberOfDimensions uint) *NDArrayDescriptor
 	WithPreferPackedRows(preferPackedRows bool) *NDArrayDescriptor
 	LengthOfDimension(dimensionIndex uint) uint
@@ -152,8 +152,8 @@ type NDArrayDescriptorable interface {
 	GetShape() []*foundation.NSNumber
 	ReshapeWithDimensionCountDimensionSizes(numberOfDimensions uint, dimensionSizes *uint)
 	ReshapeWithShape(shape *foundation.NSArray[*foundation.NSNumber])
-	DataType() raw.MPSDataType
-	SetDataType(dataType raw.MPSDataType)
+	DataType() MPSDataType
+	SetDataType(dataType MPSDataType)
 	NumberOfDimensions() uint
 	SetNumberOfDimensions(numberOfDimensions uint)
 	PreferPackedRows() bool

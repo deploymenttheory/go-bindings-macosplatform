@@ -37,8 +37,8 @@ func NewCollection() *Collection {
 }
 
 // CanPerformEditOperation calls the underlying CanPerformEditOperation.
-func (x *Collection) CanPerformEditOperation(anOperation raw.PHCollectionEditOperation) bool {
-	return x.inner.CanPerformEditOperation(anOperation)
+func (x *Collection) CanPerformEditOperation(anOperation PHCollectionEditOperation) bool {
+	return x.inner.CanPerformEditOperation(raw.PHCollectionEditOperation(anOperation))
 }
 
 // CanContainAssets calls the underlying CanContainAssets.
@@ -67,7 +67,7 @@ func (x *Collection) asObject() *raw.PHObject { return &x.inner.PHObject }
 // Collectionable is the interface implemented by [Collection], for mocking and DI.
 type Collectionable interface {
 	Unwrap() *raw.PHCollection
-	CanPerformEditOperation(anOperation raw.PHCollectionEditOperation) bool
+	CanPerformEditOperation(anOperation PHCollectionEditOperation) bool
 	CanContainAssets() bool
 	CanContainCollections() bool
 	LocalizedTitle() string

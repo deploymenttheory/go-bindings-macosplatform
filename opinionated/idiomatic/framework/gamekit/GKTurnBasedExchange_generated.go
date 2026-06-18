@@ -105,8 +105,8 @@ func (x *TurnBasedExchange) Recipients() []*TurnBasedParticipant {
 }
 
 // Status calls the underlying Status.
-func (x *TurnBasedExchange) Status() raw.GKTurnBasedExchangeStatus {
-	return x.inner.Status()
+func (x *TurnBasedExchange) Status() GKTurnBasedExchangeStatus {
+	return GKTurnBasedExchangeStatus(x.inner.Status())
 }
 
 // Message calls the underlying Message.
@@ -157,7 +157,7 @@ type TurnBasedExchangeable interface {
 	ExchangeID() string
 	Sender() *TurnBasedParticipant
 	Recipients() []*TurnBasedParticipant
-	Status() raw.GKTurnBasedExchangeStatus
+	Status() GKTurnBasedExchangeStatus
 	Message() string
 	Data() *foundation.NSData
 	SendDate() *foundation.NSDate

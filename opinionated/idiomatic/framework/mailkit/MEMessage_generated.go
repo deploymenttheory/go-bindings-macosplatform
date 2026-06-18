@@ -38,13 +38,13 @@ func NewMessage() *Message {
 }
 
 // State calls the underlying State.
-func (x *Message) State() raw.MEMessageState {
-	return x.inner.State()
+func (x *Message) State() MEMessageState {
+	return MEMessageState(x.inner.State())
 }
 
 // EncryptionState calls the underlying EncryptionState.
-func (x *Message) EncryptionState() raw.MEMessageEncryptionState {
-	return x.inner.EncryptionState()
+func (x *Message) EncryptionState() MEMessageEncryptionState {
+	return MEMessageEncryptionState(x.inner.EncryptionState())
 }
 
 // Subject calls the underlying Subject.
@@ -143,8 +143,8 @@ func (x *Message) RawData() *foundation.NSData {
 // Messageable is the interface implemented by [Message], for mocking and DI.
 type Messageable interface {
 	Unwrap() *raw.MEMessage
-	State() raw.MEMessageState
-	EncryptionState() raw.MEMessageEncryptionState
+	State() MEMessageState
+	EncryptionState() MEMessageEncryptionState
 	Subject() string
 	FromAddress() *EmailAddress
 	ToAddresses() []*EmailAddress

@@ -46,8 +46,8 @@ func (x *EmitterNode) WithParticleTexture(particleTexture TextureProvider) *Emit
 }
 
 // WithParticleBlendMode sets the particleBlendMode property and returns the receiver for chaining.
-func (x *EmitterNode) WithParticleBlendMode(particleBlendMode raw.SKBlendMode) *EmitterNode {
-	x.inner.SetParticleBlendMode(particleBlendMode)
+func (x *EmitterNode) WithParticleBlendMode(particleBlendMode SKBlendMode) *EmitterNode {
+	x.inner.SetParticleBlendMode(raw.SKBlendMode(particleBlendMode))
 	return x
 }
 
@@ -310,8 +310,8 @@ func (x *EmitterNode) WithParticleZPosition(particleZPosition float64) *EmitterN
 }
 
 // WithParticleRenderOrder sets the particleRenderOrder property and returns the receiver for chaining.
-func (x *EmitterNode) WithParticleRenderOrder(particleRenderOrder raw.SKParticleRenderOrder) *EmitterNode {
-	x.inner.SetParticleRenderOrder(particleRenderOrder)
+func (x *EmitterNode) WithParticleRenderOrder(particleRenderOrder SKParticleRenderOrder) *EmitterNode {
+	x.inner.SetParticleRenderOrder(raw.SKParticleRenderOrder(particleRenderOrder))
 	return x
 }
 
@@ -514,13 +514,13 @@ func (x *EmitterNode) SetParticleTexture(particleTexture *raw.SKTexture) {
 }
 
 // ParticleBlendMode calls the underlying ParticleBlendMode.
-func (x *EmitterNode) ParticleBlendMode() raw.SKBlendMode {
-	return x.inner.ParticleBlendMode()
+func (x *EmitterNode) ParticleBlendMode() SKBlendMode {
+	return SKBlendMode(x.inner.ParticleBlendMode())
 }
 
 // SetParticleBlendMode calls the underlying SetParticleBlendMode.
-func (x *EmitterNode) SetParticleBlendMode(particleBlendMode raw.SKBlendMode) {
-	x.inner.SetParticleBlendMode(particleBlendMode)
+func (x *EmitterNode) SetParticleBlendMode(particleBlendMode SKBlendMode) {
+	x.inner.SetParticleBlendMode(raw.SKBlendMode(particleBlendMode))
 }
 
 // ParticleColor calls the underlying ParticleColor.
@@ -982,13 +982,13 @@ func (x *EmitterNode) SetParticleZPosition(particleZPosition float64) {
 }
 
 // ParticleRenderOrder calls the underlying ParticleRenderOrder.
-func (x *EmitterNode) ParticleRenderOrder() raw.SKParticleRenderOrder {
-	return x.inner.ParticleRenderOrder()
+func (x *EmitterNode) ParticleRenderOrder() SKParticleRenderOrder {
+	return SKParticleRenderOrder(x.inner.ParticleRenderOrder())
 }
 
 // SetParticleRenderOrder calls the underlying SetParticleRenderOrder.
-func (x *EmitterNode) SetParticleRenderOrder(particleRenderOrder raw.SKParticleRenderOrder) {
-	x.inner.SetParticleRenderOrder(particleRenderOrder)
+func (x *EmitterNode) SetParticleRenderOrder(particleRenderOrder SKParticleRenderOrder) {
+	x.inner.SetParticleRenderOrder(raw.SKParticleRenderOrder(particleRenderOrder))
 }
 
 // ParticleZPositionRange calls the underlying ParticleZPositionRange.
@@ -1017,7 +1017,7 @@ func (x *EmitterNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 type EmitterNodeable interface {
 	Unwrap() *raw.SKEmitterNode
 	WithParticleTexture(particleTexture TextureProvider) *EmitterNode
-	WithParticleBlendMode(particleBlendMode raw.SKBlendMode) *EmitterNode
+	WithParticleBlendMode(particleBlendMode SKBlendMode) *EmitterNode
 	WithParticleColor(particleColor *appkit.NSColor) *EmitterNode
 	WithParticleColorRedRange(particleColorRedRange float64) *EmitterNode
 	WithParticleColorGreenRange(particleColorGreenRange float64) *EmitterNode
@@ -1061,7 +1061,7 @@ type EmitterNodeable interface {
 	WithTargetNode(targetNode NodeProvider) *EmitterNode
 	WithShader(shader *Shader) *EmitterNode
 	WithParticleZPosition(particleZPosition float64) *EmitterNode
-	WithParticleRenderOrder(particleRenderOrder raw.SKParticleRenderOrder) *EmitterNode
+	WithParticleRenderOrder(particleRenderOrder SKParticleRenderOrder) *EmitterNode
 	WithParticleZPositionRange(particleZPositionRange float64) *EmitterNode
 	WithParticleZPositionSpeed(particleZPositionSpeed float64) *EmitterNode
 	WithPosition(position corefoundation.CGPoint) *EmitterNode
@@ -1093,8 +1093,8 @@ type EmitterNodeable interface {
 	ResetSimulation()
 	ParticleTexture() *Texture
 	SetParticleTexture(particleTexture *raw.SKTexture)
-	ParticleBlendMode() raw.SKBlendMode
-	SetParticleBlendMode(particleBlendMode raw.SKBlendMode)
+	ParticleBlendMode() SKBlendMode
+	SetParticleBlendMode(particleBlendMode SKBlendMode)
 	ParticleColor() *appkit.NSColor
 	SetParticleColor(particleColor *appkit.NSColor)
 	ParticleColorRedRange() float64
@@ -1181,8 +1181,8 @@ type EmitterNodeable interface {
 	SetShader(shader *raw.SKShader)
 	ParticleZPosition() float64
 	SetParticleZPosition(particleZPosition float64)
-	ParticleRenderOrder() raw.SKParticleRenderOrder
-	SetParticleRenderOrder(particleRenderOrder raw.SKParticleRenderOrder)
+	ParticleRenderOrder() SKParticleRenderOrder
+	SetParticleRenderOrder(particleRenderOrder SKParticleRenderOrder)
 	ParticleZPositionRange() float64
 	SetParticleZPositionRange(particleZPositionRange float64)
 	ParticleZPositionSpeed() float64

@@ -43,8 +43,8 @@ func (x *CrashDetectionEvent) Date() *foundation.NSDate {
 }
 
 // Response calls the underlying Response.
-func (x *CrashDetectionEvent) Response() raw.SACrashDetectionEventResponse {
-	return x.inner.Response()
+func (x *CrashDetectionEvent) Response() SACrashDetectionEventResponse {
+	return SACrashDetectionEventResponse(x.inner.Response())
 }
 
 // Location calls the underlying Location.
@@ -56,7 +56,7 @@ func (x *CrashDetectionEvent) Location() unsafe.Pointer {
 type CrashDetectionEventable interface {
 	Unwrap() *raw.SACrashDetectionEvent
 	Date() *foundation.NSDate
-	Response() raw.SACrashDetectionEventResponse
+	Response() SACrashDetectionEventResponse
 	Location() unsafe.Pointer
 }
 

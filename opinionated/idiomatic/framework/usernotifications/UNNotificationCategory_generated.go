@@ -68,8 +68,8 @@ func (x *NotificationCategory) IntentIdentifiers() []string {
 }
 
 // Options calls the underlying Options.
-func (x *NotificationCategory) Options() raw.UNNotificationCategoryOptions {
-	return x.inner.Options()
+func (x *NotificationCategory) Options() UNNotificationCategoryOptions {
+	return UNNotificationCategoryOptions(x.inner.Options())
 }
 
 // HiddenPreviewsBodyPlaceholder calls the underlying HiddenPreviewsBodyPlaceholder.
@@ -96,7 +96,7 @@ type NotificationCategoryable interface {
 	Identifier() string
 	Actions() []*NotificationAction
 	IntentIdentifiers() []string
-	Options() raw.UNNotificationCategoryOptions
+	Options() UNNotificationCategoryOptions
 	HiddenPreviewsBodyPlaceholder() string
 	CategorySummaryFormat() string
 }

@@ -41,8 +41,8 @@ func NewScreen() *Screen {
 }
 
 // CanRepresentDisplayGamut calls the underlying CanRepresentDisplayGamut.
-func (x *Screen) CanRepresentDisplayGamut(displayGamut raw.NSDisplayGamut) bool {
-	return x.inner.CanRepresentDisplayGamut(displayGamut)
+func (x *Screen) CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool {
+	return x.inner.CanRepresentDisplayGamut(raw.NSDisplayGamut(displayGamut))
 }
 
 // ConvertRectToBacking calls the underlying ConvertRectToBacking.
@@ -61,8 +61,8 @@ func (x *Screen) BackingAlignedRectOptions(rect corefoundation.CGRect, options f
 }
 
 // Depth calls the underlying Depth.
-func (x *Screen) Depth() raw.NSWindowDepth {
-	return x.inner.Depth()
+func (x *Screen) Depth() NSWindowDepth {
+	return NSWindowDepth(x.inner.Depth())
 }
 
 // Frame calls the underlying Frame.
@@ -181,11 +181,11 @@ func (x *Screen) UserSpaceScaleFactor() float64 {
 // Screenable is the interface implemented by [Screen], for mocking and DI.
 type Screenable interface {
 	Unwrap() *raw.NSScreen
-	CanRepresentDisplayGamut(displayGamut raw.NSDisplayGamut) bool
+	CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool
 	ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect
 	ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect
 	BackingAlignedRectOptions(rect corefoundation.CGRect, options foundation.NSAlignmentOptions) corefoundation.CGRect
-	Depth() raw.NSWindowDepth
+	Depth() NSWindowDepth
 	Frame() corefoundation.CGRect
 	VisibleFrame() corefoundation.CGRect
 	DeviceDescription() *foundation.NSDictionary[*foundation.NSString, objc.ID]

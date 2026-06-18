@@ -82,8 +82,8 @@ func (x *FetchRequest) WithFetchLimit(fetchLimit uint) *FetchRequest {
 }
 
 // WithResultType sets the resultType property and returns the receiver for chaining.
-func (x *FetchRequest) WithResultType(resultType raw.NSFetchRequestResultType) *FetchRequest {
-	x.inner.SetResultType(resultType)
+func (x *FetchRequest) WithResultType(resultType NSFetchRequestResultType) *FetchRequest {
+	x.inner.SetResultType(raw.NSFetchRequestResultType(resultType))
 	return x
 }
 
@@ -242,13 +242,13 @@ func (x *FetchRequest) SetFetchLimit(fetchLimit uint) {
 }
 
 // ResultType calls the underlying ResultType.
-func (x *FetchRequest) ResultType() raw.NSFetchRequestResultType {
-	return x.inner.ResultType()
+func (x *FetchRequest) ResultType() NSFetchRequestResultType {
+	return NSFetchRequestResultType(x.inner.ResultType())
 }
 
 // SetResultType calls the underlying SetResultType.
-func (x *FetchRequest) SetResultType(resultType raw.NSFetchRequestResultType) {
-	x.inner.SetResultType(resultType)
+func (x *FetchRequest) SetResultType(resultType NSFetchRequestResultType) {
+	x.inner.SetResultType(raw.NSFetchRequestResultType(resultType))
 }
 
 // IncludesSubentities calls the underlying IncludesSubentities.
@@ -388,7 +388,7 @@ type FetchRequestable interface {
 	WithPredicate(predicate *foundation.NSPredicate) *FetchRequest
 	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchRequest
 	WithFetchLimit(fetchLimit uint) *FetchRequest
-	WithResultType(resultType raw.NSFetchRequestResultType) *FetchRequest
+	WithResultType(resultType NSFetchRequestResultType) *FetchRequest
 	WithIncludesSubentities(includesSubentities bool) *FetchRequest
 	WithIncludesPropertyValues(includesPropertyValues bool) *FetchRequest
 	WithReturnsObjectsAsFaults(returnsObjectsAsFaults bool) *FetchRequest
@@ -410,8 +410,8 @@ type FetchRequestable interface {
 	SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor])
 	FetchLimit() uint
 	SetFetchLimit(fetchLimit uint)
-	ResultType() raw.NSFetchRequestResultType
-	SetResultType(resultType raw.NSFetchRequestResultType)
+	ResultType() NSFetchRequestResultType
+	SetResultType(resultType NSFetchRequestResultType)
 	IncludesSubentities() bool
 	SetIncludesSubentities(includesSubentities bool)
 	IncludesPropertyValues() bool

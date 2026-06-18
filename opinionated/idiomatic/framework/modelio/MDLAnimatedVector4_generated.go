@@ -37,8 +37,8 @@ func NewAnimatedVector4() *AnimatedVector4 {
 }
 
 // WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedVector4) WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedVector4 {
-	x.inner.MDLAnimatedValue.SetInterpolation(interpolation)
+func (x *AnimatedVector4) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector4 {
+	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
 	return x
 }
 
@@ -87,7 +87,7 @@ func (x *AnimatedVector4) asAnimatedValue() *raw.MDLAnimatedValue { return &x.in
 // AnimatedVector4able is the interface implemented by [AnimatedVector4], for mocking and DI.
 type AnimatedVector4able interface {
 	Unwrap() *raw.MDLAnimatedVector4
-	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedVector4
+	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector4
 	SetFloat4AtTime(value unsafe.Pointer, time_ float64)
 	SetDouble4AtTime(value unsafe.Pointer, time_ float64)
 	Float4AtTime(time_ float64) unsafe.Pointer

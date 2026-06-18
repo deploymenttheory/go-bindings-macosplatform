@@ -12,8 +12,8 @@ import (
 )
 
 // VTCompressionSessionBeginPass calls [raw.VTCompressionSessionBeginPass] (C function VTCompressionSessionBeginPass).
-func VTCompressionSessionBeginPass(session unsafe.Pointer, beginPassFlags raw.VTCompressionSessionOptionFlags, reserved *uint32) int {
-	return raw.VTCompressionSessionBeginPass(session, beginPassFlags, reserved)
+func VTCompressionSessionBeginPass(session unsafe.Pointer, beginPassFlags VTCompressionSessionOptionFlags, reserved *uint32) int {
+	return raw.VTCompressionSessionBeginPass(session, raw.VTCompressionSessionOptionFlags(beginPassFlags), reserved)
 }
 
 // VTCompressionSessionCompleteFrames calls [raw.VTCompressionSessionCompleteFrames] (C function VTCompressionSessionCompleteFrames).
@@ -27,23 +27,47 @@ func VTCompressionSessionCreate(allocator unsafe.Pointer, width int32, height in
 }
 
 // VTCompressionSessionEncodeFrame calls [raw.VTCompressionSessionEncodeFrame] (C function VTCompressionSessionEncodeFrame).
-func VTCompressionSessionEncodeFrame(session unsafe.Pointer, imageBuffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, sourceFrameRefcon unsafe.Pointer, infoFlagsOut *raw.VTEncodeInfoFlags) int {
-	return raw.VTCompressionSessionEncodeFrame(session, imageBuffer, presentationTimeStamp, duration, frameProperties, sourceFrameRefcon, infoFlagsOut)
+func VTCompressionSessionEncodeFrame(session unsafe.Pointer, imageBuffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, sourceFrameRefcon unsafe.Pointer, infoFlagsOut *VTEncodeInfoFlags) int {
+	var _infoFlagsOut raw.VTEncodeInfoFlags
+	_ret := raw.VTCompressionSessionEncodeFrame(session, imageBuffer, presentationTimeStamp, duration, frameProperties, sourceFrameRefcon, &_infoFlagsOut)
+	if infoFlagsOut != nil {
+		*infoFlagsOut = VTEncodeInfoFlags(_infoFlagsOut)
+	}
+	return _ret
 }
 
 // VTCompressionSessionEncodeFrameWithOutputHandler calls [raw.VTCompressionSessionEncodeFrameWithOutputHandler] (C function VTCompressionSessionEncodeFrameWithOutputHandler).
-func VTCompressionSessionEncodeFrameWithOutputHandler(session unsafe.Pointer, imageBuffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, infoFlagsOut *raw.VTEncodeInfoFlags, outputHandler func(int, raw.VTEncodeInfoFlags, unsafe.Pointer)) int {
-	return raw.VTCompressionSessionEncodeFrameWithOutputHandler(session, imageBuffer, presentationTimeStamp, duration, frameProperties, infoFlagsOut, outputHandler)
+func VTCompressionSessionEncodeFrameWithOutputHandler(session unsafe.Pointer, imageBuffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, infoFlagsOut *VTEncodeInfoFlags, outputHandler func(int, VTEncodeInfoFlags, unsafe.Pointer)) int {
+	var _infoFlagsOut raw.VTEncodeInfoFlags
+	_ret := raw.VTCompressionSessionEncodeFrameWithOutputHandler(session, imageBuffer, presentationTimeStamp, duration, frameProperties, &_infoFlagsOut, func(_a0 int, _a1 raw.VTEncodeInfoFlags, _a2 unsafe.Pointer) {
+		outputHandler(_a0, VTEncodeInfoFlags(_a1), _a2)
+	})
+	if infoFlagsOut != nil {
+		*infoFlagsOut = VTEncodeInfoFlags(_infoFlagsOut)
+	}
+	return _ret
 }
 
 // VTCompressionSessionEncodeMultiImageFrame calls [raw.VTCompressionSessionEncodeMultiImageFrame] (C function VTCompressionSessionEncodeMultiImageFrame).
-func VTCompressionSessionEncodeMultiImageFrame(session unsafe.Pointer, taggedBufferGroup unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, sourceFrameRefcon unsafe.Pointer, infoFlagsOut *raw.VTEncodeInfoFlags) int {
-	return raw.VTCompressionSessionEncodeMultiImageFrame(session, taggedBufferGroup, presentationTimeStamp, duration, frameProperties, sourceFrameRefcon, infoFlagsOut)
+func VTCompressionSessionEncodeMultiImageFrame(session unsafe.Pointer, taggedBufferGroup unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, sourceFrameRefcon unsafe.Pointer, infoFlagsOut *VTEncodeInfoFlags) int {
+	var _infoFlagsOut raw.VTEncodeInfoFlags
+	_ret := raw.VTCompressionSessionEncodeMultiImageFrame(session, taggedBufferGroup, presentationTimeStamp, duration, frameProperties, sourceFrameRefcon, &_infoFlagsOut)
+	if infoFlagsOut != nil {
+		*infoFlagsOut = VTEncodeInfoFlags(_infoFlagsOut)
+	}
+	return _ret
 }
 
 // VTCompressionSessionEncodeMultiImageFrameWithOutputHandler calls [raw.VTCompressionSessionEncodeMultiImageFrameWithOutputHandler] (C function VTCompressionSessionEncodeMultiImageFrameWithOutputHandler).
-func VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(session unsafe.Pointer, taggedBufferGroup unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, infoFlagsOut *raw.VTEncodeInfoFlags, outputHandler func(int, raw.VTEncodeInfoFlags, unsafe.Pointer)) int {
-	return raw.VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(session, taggedBufferGroup, presentationTimeStamp, duration, frameProperties, infoFlagsOut, outputHandler)
+func VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(session unsafe.Pointer, taggedBufferGroup unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties unsafe.Pointer, infoFlagsOut *VTEncodeInfoFlags, outputHandler func(int, VTEncodeInfoFlags, unsafe.Pointer)) int {
+	var _infoFlagsOut raw.VTEncodeInfoFlags
+	_ret := raw.VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(session, taggedBufferGroup, presentationTimeStamp, duration, frameProperties, &_infoFlagsOut, func(_a0 int, _a1 raw.VTEncodeInfoFlags, _a2 unsafe.Pointer) {
+		outputHandler(_a0, VTEncodeInfoFlags(_a1), _a2)
+	})
+	if infoFlagsOut != nil {
+		*infoFlagsOut = VTEncodeInfoFlags(_infoFlagsOut)
+	}
+	return _ret
 }
 
 // VTCompressionSessionEndPass calls [raw.VTCompressionSessionEndPass] (C function VTCompressionSessionEndPass).
@@ -107,28 +131,53 @@ func VTDecompressionSessionCreate(allocator unsafe.Pointer, videoFormatDescripti
 }
 
 // VTDecompressionSessionDecodeFrame calls [raw.VTDecompressionSessionDecodeFrame] (C function VTDecompressionSessionDecodeFrame).
-func VTDecompressionSessionDecodeFrame(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags raw.VTDecodeFrameFlags, sourceFrameRefCon unsafe.Pointer, infoFlagsOut *raw.VTDecodeInfoFlags) int {
-	return raw.VTDecompressionSessionDecodeFrame(session, sampleBuffer, decodeFlags, sourceFrameRefCon, infoFlagsOut)
+func VTDecompressionSessionDecodeFrame(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags VTDecodeFrameFlags, sourceFrameRefCon unsafe.Pointer, infoFlagsOut *VTDecodeInfoFlags) int {
+	var _infoFlagsOut raw.VTDecodeInfoFlags
+	_ret := raw.VTDecompressionSessionDecodeFrame(session, sampleBuffer, raw.VTDecodeFrameFlags(decodeFlags), sourceFrameRefCon, &_infoFlagsOut)
+	if infoFlagsOut != nil {
+		*infoFlagsOut = VTDecodeInfoFlags(_infoFlagsOut)
+	}
+	return _ret
 }
 
 // VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler calls [raw.VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler] (C function VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler).
-func VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags raw.VTDecodeFrameFlags, infoFlagsOut *raw.VTDecodeInfoFlags, multiImageCapableOutputHandler objc.Block) int {
-	return raw.VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(session, sampleBuffer, decodeFlags, infoFlagsOut, multiImageCapableOutputHandler)
+func VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags VTDecodeFrameFlags, infoFlagsOut *VTDecodeInfoFlags, multiImageCapableOutputHandler objc.Block) int {
+	var _infoFlagsOut raw.VTDecodeInfoFlags
+	_ret := raw.VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(session, sampleBuffer, raw.VTDecodeFrameFlags(decodeFlags), &_infoFlagsOut, multiImageCapableOutputHandler)
+	if infoFlagsOut != nil {
+		*infoFlagsOut = VTDecodeInfoFlags(_infoFlagsOut)
+	}
+	return _ret
 }
 
 // VTDecompressionSessionDecodeFrameWithOptions calls [raw.VTDecompressionSessionDecodeFrameWithOptions] (C function VTDecompressionSessionDecodeFrameWithOptions).
-func VTDecompressionSessionDecodeFrameWithOptions(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags raw.VTDecodeFrameFlags, frameOptions unsafe.Pointer, sourceFrameRefCon unsafe.Pointer, infoFlagsOut *raw.VTDecodeInfoFlags) int {
-	return raw.VTDecompressionSessionDecodeFrameWithOptions(session, sampleBuffer, decodeFlags, frameOptions, sourceFrameRefCon, infoFlagsOut)
+func VTDecompressionSessionDecodeFrameWithOptions(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags VTDecodeFrameFlags, frameOptions unsafe.Pointer, sourceFrameRefCon unsafe.Pointer, infoFlagsOut *VTDecodeInfoFlags) int {
+	var _infoFlagsOut raw.VTDecodeInfoFlags
+	_ret := raw.VTDecompressionSessionDecodeFrameWithOptions(session, sampleBuffer, raw.VTDecodeFrameFlags(decodeFlags), frameOptions, sourceFrameRefCon, &_infoFlagsOut)
+	if infoFlagsOut != nil {
+		*infoFlagsOut = VTDecodeInfoFlags(_infoFlagsOut)
+	}
+	return _ret
 }
 
 // VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler calls [raw.VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler] (C function VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler).
-func VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags raw.VTDecodeFrameFlags, frameOptions unsafe.Pointer, infoFlagsOut *raw.VTDecodeInfoFlags, outputHandler objc.Block) int {
-	return raw.VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(session, sampleBuffer, decodeFlags, frameOptions, infoFlagsOut, outputHandler)
+func VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags VTDecodeFrameFlags, frameOptions unsafe.Pointer, infoFlagsOut *VTDecodeInfoFlags, outputHandler objc.Block) int {
+	var _infoFlagsOut raw.VTDecodeInfoFlags
+	_ret := raw.VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(session, sampleBuffer, raw.VTDecodeFrameFlags(decodeFlags), frameOptions, &_infoFlagsOut, outputHandler)
+	if infoFlagsOut != nil {
+		*infoFlagsOut = VTDecodeInfoFlags(_infoFlagsOut)
+	}
+	return _ret
 }
 
 // VTDecompressionSessionDecodeFrameWithOutputHandler calls [raw.VTDecompressionSessionDecodeFrameWithOutputHandler] (C function VTDecompressionSessionDecodeFrameWithOutputHandler).
-func VTDecompressionSessionDecodeFrameWithOutputHandler(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags raw.VTDecodeFrameFlags, infoFlagsOut *raw.VTDecodeInfoFlags, outputHandler objc.Block) int {
-	return raw.VTDecompressionSessionDecodeFrameWithOutputHandler(session, sampleBuffer, decodeFlags, infoFlagsOut, outputHandler)
+func VTDecompressionSessionDecodeFrameWithOutputHandler(session unsafe.Pointer, sampleBuffer unsafe.Pointer, decodeFlags VTDecodeFrameFlags, infoFlagsOut *VTDecodeInfoFlags, outputHandler objc.Block) int {
+	var _infoFlagsOut raw.VTDecodeInfoFlags
+	_ret := raw.VTDecompressionSessionDecodeFrameWithOutputHandler(session, sampleBuffer, raw.VTDecodeFrameFlags(decodeFlags), &_infoFlagsOut, outputHandler)
+	if infoFlagsOut != nil {
+		*infoFlagsOut = VTDecodeInfoFlags(_infoFlagsOut)
+	}
+	return _ret
 }
 
 // VTDecompressionSessionFinishDelayedFrames calls [raw.VTDecompressionSessionFinishDelayedFrames] (C function VTDecompressionSessionFinishDelayedFrames).
@@ -237,8 +286,10 @@ func VTMotionEstimationSessionCreate(allocator unsafe.Pointer, motionVectorProce
 }
 
 // VTMotionEstimationSessionEstimateMotionVectors calls [raw.VTMotionEstimationSessionEstimateMotionVectors] (C function VTMotionEstimationSessionEstimateMotionVectors).
-func VTMotionEstimationSessionEstimateMotionVectors(session unsafe.Pointer, referenceImage unsafe.Pointer, currentImage unsafe.Pointer, motionEstimationFrameFlags raw.VTMotionEstimationFrameFlags, additionalFrameOptions unsafe.Pointer, outputHandler func(int, raw.VTMotionEstimationInfoFlags, unsafe.Pointer, unsafe.Pointer)) int {
-	return raw.VTMotionEstimationSessionEstimateMotionVectors(session, referenceImage, currentImage, motionEstimationFrameFlags, additionalFrameOptions, outputHandler)
+func VTMotionEstimationSessionEstimateMotionVectors(session unsafe.Pointer, referenceImage unsafe.Pointer, currentImage unsafe.Pointer, motionEstimationFrameFlags VTMotionEstimationFrameFlags, additionalFrameOptions unsafe.Pointer, outputHandler func(int, VTMotionEstimationInfoFlags, unsafe.Pointer, unsafe.Pointer)) int {
+	return raw.VTMotionEstimationSessionEstimateMotionVectors(session, referenceImage, currentImage, raw.VTMotionEstimationFrameFlags(motionEstimationFrameFlags), additionalFrameOptions, func(_a0 int, _a1 raw.VTMotionEstimationInfoFlags, _a2 unsafe.Pointer, _a3 unsafe.Pointer) {
+		outputHandler(_a0, VTMotionEstimationInfoFlags(_a1), _a2, _a3)
+	})
 }
 
 // VTMotionEstimationSessionGetTypeID calls [raw.VTMotionEstimationSessionGetTypeID] (C function VTMotionEstimationSessionGetTypeID).

@@ -3718,27 +3718,6 @@ func (e NSURLHandleStatus) String() string {
 	}
 }
 
-type NSURLRelationship int64
-
-const (
-	NSURLRelationshipContains NSURLRelationship = 0
-	NSURLRelationshipSame     NSURLRelationship = 1
-	NSURLRelationshipOther    NSURLRelationship = 2
-)
-
-func (e NSURLRelationship) String() string {
-	switch e {
-	case NSURLRelationshipContains:
-		return "NSURLRelationshipContains"
-	case NSURLRelationshipSame:
-		return "NSURLRelationshipSame"
-	case NSURLRelationshipOther:
-		return "NSURLRelationshipOther"
-	default:
-		return fmt.Sprintf("NSURLRelationship(%d)", int64(e))
-	}
-}
-
 type NSURLRequestAttribution uint64
 
 const (

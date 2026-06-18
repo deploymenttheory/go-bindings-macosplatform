@@ -61,8 +61,8 @@ func (x *DetectionTrack) DetectionsInTimeRange(timeRange coremedia.CMTimeRange) 
 }
 
 // DetectionType calls the underlying DetectionType.
-func (x *DetectionTrack) DetectionType() raw.CNDetectionType {
-	return x.inner.DetectionType()
+func (x *DetectionTrack) DetectionType() CNDetectionType {
+	return CNDetectionType(x.inner.DetectionType())
 }
 
 // DetectionID calls the underlying DetectionID.
@@ -93,7 +93,7 @@ type DetectionTrackable interface {
 	DetectionAtOrBeforeTime(time_ coremedia.CMTime) *Detection
 	DetectionNearestTime(time_ coremedia.CMTime) *Detection
 	DetectionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDetection]
-	DetectionType() raw.CNDetectionType
+	DetectionType() CNDetectionType
 	DetectionID() int64
 	DetectionGroupID() int64
 	IsUserCreated() bool

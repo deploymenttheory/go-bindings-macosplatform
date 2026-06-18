@@ -55,8 +55,8 @@ func (x *DeferredPaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNumb
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *DeferredPaymentSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *DeferredPaymentSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetType(type_)
+func (x *DeferredPaymentSummaryItem) WithType(type_ PKPaymentSummaryItemType) *DeferredPaymentSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))
 	return x
 }
 
@@ -80,7 +80,7 @@ type DeferredPaymentSummaryItemable interface {
 	WithDeferredDate(deferredDate *foundation.NSDate) *DeferredPaymentSummaryItem
 	WithLabel(label string) *DeferredPaymentSummaryItem
 	WithAmount(amount *foundation.NSDecimalNumber) *DeferredPaymentSummaryItem
-	WithType(type_ raw.PKPaymentSummaryItemType) *DeferredPaymentSummaryItem
+	WithType(type_ PKPaymentSummaryItemType) *DeferredPaymentSummaryItem
 	DeferredDate() *foundation.NSDate
 	SetDeferredDate(deferredDate *foundation.NSDate)
 }

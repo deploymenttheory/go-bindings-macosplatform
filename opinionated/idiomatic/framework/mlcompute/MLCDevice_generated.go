@@ -38,13 +38,13 @@ func NewDevice() *Device {
 }
 
 // Type calls the underlying Type.
-func (x *Device) Type() raw.MLCDeviceType {
-	return x.inner.Type()
+func (x *Device) Type() MLCDeviceType {
+	return MLCDeviceType(x.inner.Type())
 }
 
 // ActualDeviceType calls the underlying ActualDeviceType.
-func (x *Device) ActualDeviceType() raw.MLCDeviceType {
-	return x.inner.ActualDeviceType()
+func (x *Device) ActualDeviceType() MLCDeviceType {
+	return MLCDeviceType(x.inner.ActualDeviceType())
 }
 
 // GpuDevices calls the underlying GpuDevices.
@@ -55,8 +55,8 @@ func (x *Device) GpuDevices() *foundation.NSArray[metal.MTLDevice] {
 // Deviceable is the interface implemented by [Device], for mocking and DI.
 type Deviceable interface {
 	Unwrap() *raw.MLCDevice
-	Type() raw.MLCDeviceType
-	ActualDeviceType() raw.MLCDeviceType
+	Type() MLCDeviceType
+	ActualDeviceType() MLCDeviceType
 	GpuDevices() *foundation.NSArray[metal.MTLDevice]
 }
 

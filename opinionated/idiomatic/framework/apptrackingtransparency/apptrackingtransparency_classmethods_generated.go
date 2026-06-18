@@ -9,11 +9,13 @@ import (
 )
 
 // RequestTrackingAuthorizationWithCompletionHandler calls the underlying ATTrackingManagerRequestTrackingAuthorizationWithCompletionHandler.
-func RequestTrackingAuthorizationWithCompletionHandler(completion func(raw.ATTrackingManagerAuthorizationStatus)) {
-	raw.ATTrackingManagerRequestTrackingAuthorizationWithCompletionHandler(completion)
+func RequestTrackingAuthorizationWithCompletionHandler(completion func(ATTrackingManagerAuthorizationStatus)) {
+	raw.ATTrackingManagerRequestTrackingAuthorizationWithCompletionHandler(func(_a0 raw.ATTrackingManagerAuthorizationStatus) {
+		completion(ATTrackingManagerAuthorizationStatus(_a0))
+	})
 }
 
 // TrackingAuthorizationStatus calls the underlying ATTrackingManagerTrackingAuthorizationStatus.
-func TrackingAuthorizationStatus() raw.ATTrackingManagerAuthorizationStatus {
-	return raw.ATTrackingManagerTrackingAuthorizationStatus()
+func TrackingAuthorizationStatus() ATTrackingManagerAuthorizationStatus {
+	return ATTrackingManagerAuthorizationStatus(raw.ATTrackingManagerTrackingAuthorizationStatus())
 }

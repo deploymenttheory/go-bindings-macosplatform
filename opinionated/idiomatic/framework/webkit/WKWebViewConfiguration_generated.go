@@ -99,8 +99,8 @@ func (x *WKWebViewConfiguration) WithUpgradeKnownHostsToHTTPS(upgradeKnownHostsT
 }
 
 // WithMediaTypesRequiringUserActionForPlayback sets the mediaTypesRequiringUserActionForPlayback property and returns the receiver for chaining.
-func (x *WKWebViewConfiguration) WithMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback raw.WKAudiovisualMediaTypes) *WKWebViewConfiguration {
-	x.inner.SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback)
+func (x *WKWebViewConfiguration) WithMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback WKAudiovisualMediaTypes) *WKWebViewConfiguration {
+	x.inner.SetMediaTypesRequiringUserActionForPlayback(raw.WKAudiovisualMediaTypes(mediaTypesRequiringUserActionForPlayback))
 	return x
 }
 
@@ -123,8 +123,8 @@ func (x *WKWebViewConfiguration) WithAllowsInlinePredictions(allowsInlinePredict
 }
 
 // WithUserInterfaceDirectionPolicy sets the userInterfaceDirectionPolicy property and returns the receiver for chaining.
-func (x *WKWebViewConfiguration) WithUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy raw.WKUserInterfaceDirectionPolicy) *WKWebViewConfiguration {
-	x.inner.SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy)
+func (x *WKWebViewConfiguration) WithUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy WKUserInterfaceDirectionPolicy) *WKWebViewConfiguration {
+	x.inner.SetUserInterfaceDirectionPolicy(raw.WKUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy))
 	return x
 }
 
@@ -275,13 +275,13 @@ func (x *WKWebViewConfiguration) SetUpgradeKnownHostsToHTTPS(upgradeKnownHostsTo
 }
 
 // MediaTypesRequiringUserActionForPlayback calls the underlying MediaTypesRequiringUserActionForPlayback.
-func (x *WKWebViewConfiguration) MediaTypesRequiringUserActionForPlayback() raw.WKAudiovisualMediaTypes {
-	return x.inner.MediaTypesRequiringUserActionForPlayback()
+func (x *WKWebViewConfiguration) MediaTypesRequiringUserActionForPlayback() WKAudiovisualMediaTypes {
+	return WKAudiovisualMediaTypes(x.inner.MediaTypesRequiringUserActionForPlayback())
 }
 
 // SetMediaTypesRequiringUserActionForPlayback calls the underlying SetMediaTypesRequiringUserActionForPlayback.
-func (x *WKWebViewConfiguration) SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback raw.WKAudiovisualMediaTypes) {
-	x.inner.SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback)
+func (x *WKWebViewConfiguration) SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback WKAudiovisualMediaTypes) {
+	x.inner.SetMediaTypesRequiringUserActionForPlayback(raw.WKAudiovisualMediaTypes(mediaTypesRequiringUserActionForPlayback))
 }
 
 // DefaultWebpagePreferences calls the underlying DefaultWebpagePreferences.
@@ -319,13 +319,13 @@ func (x *WKWebViewConfiguration) SetAllowsInlinePredictions(allowsInlinePredicti
 }
 
 // UserInterfaceDirectionPolicy calls the underlying UserInterfaceDirectionPolicy.
-func (x *WKWebViewConfiguration) UserInterfaceDirectionPolicy() raw.WKUserInterfaceDirectionPolicy {
-	return x.inner.UserInterfaceDirectionPolicy()
+func (x *WKWebViewConfiguration) UserInterfaceDirectionPolicy() WKUserInterfaceDirectionPolicy {
+	return WKUserInterfaceDirectionPolicy(x.inner.UserInterfaceDirectionPolicy())
 }
 
 // SetUserInterfaceDirectionPolicy calls the underlying SetUserInterfaceDirectionPolicy.
-func (x *WKWebViewConfiguration) SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy raw.WKUserInterfaceDirectionPolicy) {
-	x.inner.SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy)
+func (x *WKWebViewConfiguration) SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy WKUserInterfaceDirectionPolicy) {
+	x.inner.SetUserInterfaceDirectionPolicy(raw.WKUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy))
 }
 
 // SupportsAdaptiveImageGlyph calls the underlying SupportsAdaptiveImageGlyph.
@@ -361,11 +361,11 @@ type WKWebViewConfigurationable interface {
 	WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WKWebViewConfiguration
 	WithShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView bool) *WKWebViewConfiguration
 	WithUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool) *WKWebViewConfiguration
-	WithMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback raw.WKAudiovisualMediaTypes) *WKWebViewConfiguration
+	WithMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback WKAudiovisualMediaTypes) *WKWebViewConfiguration
 	WithDefaultWebpagePreferences(defaultWebpagePreferences *WKWebpagePreferences) *WKWebViewConfiguration
 	WithLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains bool) *WKWebViewConfiguration
 	WithAllowsInlinePredictions(allowsInlinePredictions bool) *WKWebViewConfiguration
-	WithUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy raw.WKUserInterfaceDirectionPolicy) *WKWebViewConfiguration
+	WithUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy WKUserInterfaceDirectionPolicy) *WKWebViewConfiguration
 	WithSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph bool) *WKWebViewConfiguration
 	WithWritingToolsBehavior(writingToolsBehavior appkit.NSWritingToolsBehavior) *WKWebViewConfiguration
 	SetURLSchemeHandlerForURLScheme(urlSchemeHandler raw.WKURLSchemeHandler, urlScheme string)
@@ -390,16 +390,16 @@ type WKWebViewConfigurationable interface {
 	SetShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView bool)
 	UpgradeKnownHostsToHTTPS() bool
 	SetUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool)
-	MediaTypesRequiringUserActionForPlayback() raw.WKAudiovisualMediaTypes
-	SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback raw.WKAudiovisualMediaTypes)
+	MediaTypesRequiringUserActionForPlayback() WKAudiovisualMediaTypes
+	SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback WKAudiovisualMediaTypes)
 	DefaultWebpagePreferences() *WKWebpagePreferences
 	SetDefaultWebpagePreferences(defaultWebpagePreferences *raw.WKWebpagePreferences)
 	LimitsNavigationsToAppBoundDomains() bool
 	SetLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains bool)
 	AllowsInlinePredictions() bool
 	SetAllowsInlinePredictions(allowsInlinePredictions bool)
-	UserInterfaceDirectionPolicy() raw.WKUserInterfaceDirectionPolicy
-	SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy raw.WKUserInterfaceDirectionPolicy)
+	UserInterfaceDirectionPolicy() WKUserInterfaceDirectionPolicy
+	SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy WKUserInterfaceDirectionPolicy)
 	SupportsAdaptiveImageGlyph() bool
 	SetSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph bool)
 	WritingToolsBehavior() appkit.NSWritingToolsBehavior

@@ -54,8 +54,8 @@ func (x *BarcodeEventConfigurationRequest) ConfigurationData() *foundation.NSDat
 }
 
 // ConfigurationDataType calls the underlying ConfigurationDataType.
-func (x *BarcodeEventConfigurationRequest) ConfigurationDataType() raw.PKBarcodeEventConfigurationDataType {
-	return x.inner.ConfigurationDataType()
+func (x *BarcodeEventConfigurationRequest) ConfigurationDataType() PKBarcodeEventConfigurationDataType {
+	return PKBarcodeEventConfigurationDataType(x.inner.ConfigurationDataType())
 }
 
 // BarcodeEventConfigurationRequestable is the interface implemented by [BarcodeEventConfigurationRequest], for mocking and DI.
@@ -63,7 +63,7 @@ type BarcodeEventConfigurationRequestable interface {
 	Unwrap() *raw.PKBarcodeEventConfigurationRequest
 	DeviceAccountIdentifier() string
 	ConfigurationData() *foundation.NSData
-	ConfigurationDataType() raw.PKBarcodeEventConfigurationDataType
+	ConfigurationDataType() PKBarcodeEventConfigurationDataType
 }
 
 var _ BarcodeEventConfigurationRequestable = (*BarcodeEventConfigurationRequest)(nil)

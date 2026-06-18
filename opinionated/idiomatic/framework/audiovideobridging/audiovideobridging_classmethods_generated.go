@@ -31,8 +31,8 @@ func ACMPInterfaceWithInterfaceNamed(anInterfaceName string) *AVB17221ACMPInterf
 }
 
 // ErrorForStatusCode calls the underlying AVB17221ACMPMessageErrorForStatusCode.
-func ErrorForStatusCode(statusCode raw.AVB17221ACMPStatusCode) unsafe.Pointer {
-	return raw.AVB17221ACMPMessageErrorForStatusCode(statusCode)
+func ErrorForStatusCode(statusCode AVB17221ACMPStatusCode) unsafe.Pointer {
+	return raw.AVB17221ACMPMessageErrorForStatusCode(raw.AVB17221ACMPStatusCode(statusCode))
 }
 
 // CommandMessage calls the underlying AVB17221AECPAEMMessageCommandMessage.
@@ -99,8 +99,8 @@ func AECPInterfaceWithInterfaceNamed(anInterfaceName string) *AVB17221AECPInterf
 }
 
 // AVB17221AECPMessageErrorForStatusCode calls the underlying AVB17221AECPMessageErrorForStatusCode.
-func AVB17221AECPMessageErrorForStatusCode(statusCode raw.AVB17221AECPStatusCode) unsafe.Pointer {
-	return raw.AVB17221AECPMessageErrorForStatusCode(statusCode)
+func AVB17221AECPMessageErrorForStatusCode(statusCode AVB17221AECPStatusCode) unsafe.Pointer {
+	return raw.AVB17221AECPMessageErrorForStatusCode(raw.AVB17221AECPStatusCode(statusCode))
 }
 
 // NextAvailableDynamicEntityID calls the underlying AVBCentralManagerNextAvailableDynamicEntityID.

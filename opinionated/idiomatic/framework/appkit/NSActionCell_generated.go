@@ -43,8 +43,8 @@ func (x *ActionCell) WithControlView(controlView ViewProvider) *ActionCell {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *ActionCell) WithType(type_ raw.NSCellType) *ActionCell {
-	x.inner.NSCell.SetType(type_)
+func (x *ActionCell) WithType(type_ NSCellType) *ActionCell {
+	x.inner.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -127,8 +127,8 @@ func (x *ActionCell) WithHighlighted(highlighted bool) *ActionCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ActionCell) WithAlignment(alignment raw.NSTextAlignment) *ActionCell {
-	x.inner.NSCell.SetAlignment(alignment)
+func (x *ActionCell) WithAlignment(alignment NSTextAlignment) *ActionCell {
+	x.inner.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -193,8 +193,8 @@ func (x *ActionCell) WithImage(image *Image) *ActionCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ActionCell) WithControlSize(controlSize raw.NSControlSize) *ActionCell {
-	x.inner.NSCell.SetControlSize(controlSize)
+func (x *ActionCell) WithControlSize(controlSize NSControlSize) *ActionCell {
+	x.inner.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -217,14 +217,14 @@ func (x *ActionCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ActionCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ActionCell {
-	x.inner.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *ActionCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ActionCell {
+	x.inner.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ActionCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ActionCell {
-	x.inner.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *ActionCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ActionCell {
+	x.inner.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -241,8 +241,8 @@ func (x *ActionCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool)
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ActionCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ActionCell {
-	x.inner.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ActionCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ActionCell {
+	x.inner.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -265,8 +265,8 @@ func (x *ActionCell) WithShowsFirstResponder(showsFirstResponder bool) *ActionCe
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ActionCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *ActionCell {
-	x.inner.NSCell.SetFocusRingType(focusRingType)
+func (x *ActionCell) WithFocusRingType(focusRingType NSFocusRingType) *ActionCell {
+	x.inner.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -295,14 +295,14 @@ func (x *ActionCell) WithAllowsMixedState(allowsMixedState bool) *ActionCell {
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *ActionCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ActionCell {
-	x.inner.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *ActionCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ActionCell {
+	x.inner.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *ActionCell) WithControlTint(controlTint raw.NSControlTint) *ActionCell {
-	x.inner.NSCell.SetControlTint(controlTint)
+func (x *ActionCell) WithControlTint(controlTint NSControlTint) *ActionCell {
+	x.inner.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -314,7 +314,7 @@ func (x *ActionCell) asCell() *raw.NSCell { return &x.inner.NSCell }
 type ActionCellable interface {
 	Unwrap() *raw.NSActionCell
 	WithControlView(controlView ViewProvider) *ActionCell
-	WithType(type_ raw.NSCellType) *ActionCell
+	WithType(type_ NSCellType) *ActionCell
 	WithState(state int) *ActionCell
 	WithTarget(target objc.ID) *ActionCell
 	WithAction(action objc.SEL) *ActionCell
@@ -328,7 +328,7 @@ type ActionCellable interface {
 	WithBezeled(bezeled bool) *ActionCell
 	WithScrollable(scrollable bool) *ActionCell
 	WithHighlighted(highlighted bool) *ActionCell
-	WithAlignment(alignment raw.NSTextAlignment) *ActionCell
+	WithAlignment(alignment NSTextAlignment) *ActionCell
 	WithWraps(wraps bool) *ActionCell
 	WithFont(font *Font) *ActionCell
 	WithFormatter(formatter *foundation.NSFormatter) *ActionCell
@@ -339,25 +339,25 @@ type ActionCellable interface {
 	WithDoubleValue(doubleValue float64) *ActionCell
 	WithIntegerValue(integerValue int) *ActionCell
 	WithImage(image *Image) *ActionCell
-	WithControlSize(controlSize raw.NSControlSize) *ActionCell
+	WithControlSize(controlSize NSControlSize) *ActionCell
 	WithRepresentedObject(representedObject objc.ID) *ActionCell
 	WithMenu(menu *Menu) *ActionCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ActionCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ActionCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ActionCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ActionCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ActionCell
 	WithAllowsUndo(allowsUndo bool) *ActionCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ActionCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ActionCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ActionCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ActionCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ActionCell
 	WithShowsFirstResponder(showsFirstResponder bool) *ActionCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ActionCell
+	WithFocusRingType(focusRingType NSFocusRingType) *ActionCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ActionCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ActionCell
 	WithImportsGraphics(importsGraphics bool) *ActionCell
 	WithAllowsMixedState(allowsMixedState bool) *ActionCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ActionCell
-	WithControlTint(controlTint raw.NSControlTint) *ActionCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ActionCell
+	WithControlTint(controlTint NSControlTint) *ActionCell
 }
 
 var _ ActionCellable = (*ActionCell)(nil)

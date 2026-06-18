@@ -42,8 +42,8 @@ func (x *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservationError(
 }
 
 // ElementType calls the underlying ElementType.
-func (x *FeaturePrintObservation) ElementType() raw.VNElementType {
-	return x.inner.ElementType()
+func (x *FeaturePrintObservation) ElementType() VNElementType {
+	return VNElementType(x.inner.ElementType())
 }
 
 // ElementCount calls the underlying ElementCount.
@@ -62,7 +62,7 @@ func (x *FeaturePrintObservation) asObservation() *raw.VNObservation { return &x
 type FeaturePrintObservationable interface {
 	Unwrap() *raw.VNFeaturePrintObservation
 	ComputeDistanceToFeaturePrintObservationError(outDistance *float32, featurePrint *raw.VNFeaturePrintObservation) (bool, error)
-	ElementType() raw.VNElementType
+	ElementType() VNElementType
 	ElementCount() uint
 	Data() *foundation.NSData
 }

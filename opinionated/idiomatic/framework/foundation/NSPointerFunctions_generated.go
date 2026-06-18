@@ -31,9 +31,9 @@ func PointerFunctionsFromID(id objc.ID) *PointerFunctions {
 }
 
 // NewPointerFunctionsWithOptions creates a new [PointerFunctions].
-func NewPointerFunctionsWithOptions(options raw.NSPointerFunctionsOptions) *PointerFunctions {
+func NewPointerFunctionsWithOptions(options NSPointerFunctionsOptions) *PointerFunctions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPointerFunctions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), raw.NSPointerFunctionsOptions(options))
 	return &PointerFunctions{inner: raw.NSPointerFunctionsFromID(_id)}
 }
 

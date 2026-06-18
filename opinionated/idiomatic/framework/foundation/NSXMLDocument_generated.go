@@ -39,10 +39,10 @@ func NewXMLDocument() *XMLDocument {
 }
 
 // NewXMLDocumentWithXMLStringOptionsError creates a new [XMLDocument].
-func NewXMLDocumentWithXMLStringOptionsError(string_ string, mask raw.NSXMLNodeOptions) (*XMLDocument, error) {
+func NewXMLDocumentWithXMLStringOptionsError(string_ string, mask NSXMLNodeOptions) (*XMLDocument, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXMLString:options:error:"), foundation.NSStringStringWithUTF8String(string_).Ptr(), mask, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXMLString:options:error:"), foundation.NSStringStringWithUTF8String(string_).Ptr(), raw.NSXMLNodeOptions(mask), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -50,10 +50,10 @@ func NewXMLDocumentWithXMLStringOptionsError(string_ string, mask raw.NSXMLNodeO
 }
 
 // NewXMLDocumentWithContentsOfURLOptionsError creates a new [XMLDocument].
-func NewXMLDocumentWithContentsOfURLOptionsError(url string, mask raw.NSXMLNodeOptions) (*XMLDocument, error) {
+func NewXMLDocumentWithContentsOfURLOptionsError(url string, mask NSXMLNodeOptions) (*XMLDocument, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), mask, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), raw.NSXMLNodeOptions(mask), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -61,10 +61,10 @@ func NewXMLDocumentWithContentsOfURLOptionsError(url string, mask raw.NSXMLNodeO
 }
 
 // NewXMLDocumentWithDataOptionsError creates a new [XMLDocument].
-func NewXMLDocumentWithDataOptionsError(data *raw.NSData, mask raw.NSXMLNodeOptions) (*XMLDocument, error) {
+func NewXMLDocumentWithDataOptionsError(data *raw.NSData, mask NSXMLNodeOptions) (*XMLDocument, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:error:"), data.Ptr(), mask, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:error:"), data.Ptr(), raw.NSXMLNodeOptions(mask), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -91,8 +91,8 @@ func (x *XMLDocument) WithStandalone(standalone bool) *XMLDocument {
 }
 
 // WithDocumentContentKind sets the documentContentKind property and returns the receiver for chaining.
-func (x *XMLDocument) WithDocumentContentKind(documentContentKind raw.NSXMLDocumentContentKind) *XMLDocument {
-	x.inner.SetDocumentContentKind(documentContentKind)
+func (x *XMLDocument) WithDocumentContentKind(documentContentKind NSXMLDocumentContentKind) *XMLDocument {
+	x.inner.SetDocumentContentKind(raw.NSXMLDocumentContentKind(documentContentKind))
 	return x
 }
 
@@ -183,8 +183,8 @@ func (x *XMLDocument) ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNod
 }
 
 // XMLDataWithOptions calls the underlying XMLDataWithOptions.
-func (x *XMLDocument) XMLDataWithOptions(options raw.NSXMLNodeOptions) *Data {
-	_r := x.inner.XMLDataWithOptions(options)
+func (x *XMLDocument) XMLDataWithOptions(options NSXMLNodeOptions) *Data {
+	_r := x.inner.XMLDataWithOptions(raw.NSXMLNodeOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -237,13 +237,13 @@ func (x *XMLDocument) SetStandalone(standalone bool) {
 }
 
 // DocumentContentKind calls the underlying DocumentContentKind.
-func (x *XMLDocument) DocumentContentKind() raw.NSXMLDocumentContentKind {
-	return x.inner.DocumentContentKind()
+func (x *XMLDocument) DocumentContentKind() NSXMLDocumentContentKind {
+	return NSXMLDocumentContentKind(x.inner.DocumentContentKind())
 }
 
 // SetDocumentContentKind calls the underlying SetDocumentContentKind.
-func (x *XMLDocument) SetDocumentContentKind(documentContentKind raw.NSXMLDocumentContentKind) {
-	x.inner.SetDocumentContentKind(documentContentKind)
+func (x *XMLDocument) SetDocumentContentKind(documentContentKind NSXMLDocumentContentKind) {
+	x.inner.SetDocumentContentKind(raw.NSXMLDocumentContentKind(documentContentKind))
 }
 
 // MIMEType calls the underlying MIMEType.
@@ -292,7 +292,7 @@ type XMLDocumentable interface {
 	Unwrap() *raw.NSXMLDocument
 	WithCharacterEncoding(characterEncoding string) *XMLDocument
 	WithStandalone(standalone bool) *XMLDocument
-	WithDocumentContentKind(documentContentKind raw.NSXMLDocumentContentKind) *XMLDocument
+	WithDocumentContentKind(documentContentKind NSXMLDocumentContentKind) *XMLDocument
 	WithMIMEType(mIMEType string) *XMLDocument
 	WithDTD(dTD *XMLDTD) *XMLDocument
 	WithName(name string) *XMLDocument
@@ -308,7 +308,7 @@ type XMLDocumentable interface {
 	SetChildren(children *raw.NSArray[*raw.NSXMLNode])
 	AddChild(child *raw.NSXMLNode)
 	ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode)
-	XMLDataWithOptions(options raw.NSXMLNodeOptions) *Data
+	XMLDataWithOptions(options NSXMLNodeOptions) *Data
 	ObjectByApplyingXSLTArgumentsError(xslt *raw.NSData, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error)
 	ObjectByApplyingXSLTStringArgumentsError(xslt string, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error)
 	ObjectByApplyingXSLTAtURLArgumentsError(xsltURL string, argument *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error)
@@ -317,8 +317,8 @@ type XMLDocumentable interface {
 	SetCharacterEncoding(characterEncoding string)
 	IsStandalone() bool
 	SetStandalone(standalone bool)
-	DocumentContentKind() raw.NSXMLDocumentContentKind
-	SetDocumentContentKind(documentContentKind raw.NSXMLDocumentContentKind)
+	DocumentContentKind() NSXMLDocumentContentKind
+	SetDocumentContentKind(documentContentKind NSXMLDocumentContentKind)
 	MIMEType() *String
 	SetMIMEType(mIMEType string)
 	DTD() *XMLDTD

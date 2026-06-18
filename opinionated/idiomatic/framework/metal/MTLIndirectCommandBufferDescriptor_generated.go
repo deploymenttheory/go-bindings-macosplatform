@@ -38,8 +38,8 @@ func NewIndirectCommandBufferDescriptor() *IndirectCommandBufferDescriptor {
 }
 
 // WithCommandTypes sets the commandTypes property and returns the receiver for chaining.
-func (x *IndirectCommandBufferDescriptor) WithCommandTypes(commandTypes raw.MTLIndirectCommandType) *IndirectCommandBufferDescriptor {
-	x.inner.SetCommandTypes(commandTypes)
+func (x *IndirectCommandBufferDescriptor) WithCommandTypes(commandTypes MTLIndirectCommandType) *IndirectCommandBufferDescriptor {
+	x.inner.SetCommandTypes(raw.MTLIndirectCommandType(commandTypes))
 	return x
 }
 
@@ -152,13 +152,13 @@ func (x *IndirectCommandBufferDescriptor) WithSupportColorAttachmentMapping(supp
 }
 
 // CommandTypes calls the underlying CommandTypes.
-func (x *IndirectCommandBufferDescriptor) CommandTypes() raw.MTLIndirectCommandType {
-	return x.inner.CommandTypes()
+func (x *IndirectCommandBufferDescriptor) CommandTypes() MTLIndirectCommandType {
+	return MTLIndirectCommandType(x.inner.CommandTypes())
 }
 
 // SetCommandTypes calls the underlying SetCommandTypes.
-func (x *IndirectCommandBufferDescriptor) SetCommandTypes(commandTypes raw.MTLIndirectCommandType) {
-	x.inner.SetCommandTypes(commandTypes)
+func (x *IndirectCommandBufferDescriptor) SetCommandTypes(commandTypes MTLIndirectCommandType) {
+	x.inner.SetCommandTypes(raw.MTLIndirectCommandType(commandTypes))
 }
 
 // InheritPipelineState calls the underlying InheritPipelineState.
@@ -344,7 +344,7 @@ func (x *IndirectCommandBufferDescriptor) SetSupportColorAttachmentMapping(suppo
 // IndirectCommandBufferDescriptorable is the interface implemented by [IndirectCommandBufferDescriptor], for mocking and DI.
 type IndirectCommandBufferDescriptorable interface {
 	Unwrap() *raw.MTLIndirectCommandBufferDescriptor
-	WithCommandTypes(commandTypes raw.MTLIndirectCommandType) *IndirectCommandBufferDescriptor
+	WithCommandTypes(commandTypes MTLIndirectCommandType) *IndirectCommandBufferDescriptor
 	WithInheritPipelineState(inheritPipelineState bool) *IndirectCommandBufferDescriptor
 	WithInheritBuffers(inheritBuffers bool) *IndirectCommandBufferDescriptor
 	WithInheritDepthStencilState(inheritDepthStencilState bool) *IndirectCommandBufferDescriptor
@@ -363,8 +363,8 @@ type IndirectCommandBufferDescriptorable interface {
 	WithSupportRayTracing(supportRayTracing bool) *IndirectCommandBufferDescriptor
 	WithSupportDynamicAttributeStride(supportDynamicAttributeStride bool) *IndirectCommandBufferDescriptor
 	WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *IndirectCommandBufferDescriptor
-	CommandTypes() raw.MTLIndirectCommandType
-	SetCommandTypes(commandTypes raw.MTLIndirectCommandType)
+	CommandTypes() MTLIndirectCommandType
+	SetCommandTypes(commandTypes MTLIndirectCommandType)
 	InheritPipelineState() bool
 	SetInheritPipelineState(inheritPipelineState bool)
 	InheritBuffers() bool

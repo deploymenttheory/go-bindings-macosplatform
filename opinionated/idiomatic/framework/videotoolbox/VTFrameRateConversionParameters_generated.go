@@ -32,9 +32,9 @@ func FrameRateConversionParametersFromID(id objc.ID) *FrameRateConversionParamet
 }
 
 // NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames creates a new [FrameRateConversionParameters].
-func NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames(sourceFrame *raw.VTFrameProcessorFrame, nextFrame *raw.VTFrameProcessorFrame, opticalFlow *raw.VTFrameProcessorOpticalFlow, interpolationPhase *foundation.NSArray[*foundation.NSNumber], submissionMode raw.VTFrameRateConversionParametersSubmissionMode, destinationFrame *foundation.NSArray[*raw.VTFrameProcessorFrame]) *FrameRateConversionParameters {
+func NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpolationPhaseSubmissionModeDestinationFrames(sourceFrame *raw.VTFrameProcessorFrame, nextFrame *raw.VTFrameProcessorFrame, opticalFlow *raw.VTFrameProcessorOpticalFlow, interpolationPhase *foundation.NSArray[*foundation.NSNumber], submissionMode VTFrameRateConversionParametersSubmissionMode, destinationFrame *foundation.NSArray[*raw.VTFrameProcessorFrame]) *FrameRateConversionParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTFrameRateConversionParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:opticalFlow:interpolationPhase:submissionMode:destinationFrames:"), sourceFrame.Ptr(), nextFrame.Ptr(), opticalFlow.Ptr(), interpolationPhase.Ptr(), submissionMode, destinationFrame.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:nextFrame:opticalFlow:interpolationPhase:submissionMode:destinationFrames:"), sourceFrame.Ptr(), nextFrame.Ptr(), opticalFlow.Ptr(), interpolationPhase.Ptr(), raw.VTFrameRateConversionParametersSubmissionMode(submissionMode), destinationFrame.Ptr())
 	return &FrameRateConversionParameters{inner: raw.VTFrameRateConversionParametersFromID(_id)}
 }
 
@@ -77,8 +77,8 @@ func (x *FrameRateConversionParameters) InterpolationPhase() []*foundation.NSNum
 }
 
 // SubmissionMode calls the underlying SubmissionMode.
-func (x *FrameRateConversionParameters) SubmissionMode() raw.VTFrameRateConversionParametersSubmissionMode {
-	return x.inner.SubmissionMode()
+func (x *FrameRateConversionParameters) SubmissionMode() VTFrameRateConversionParametersSubmissionMode {
+	return VTFrameRateConversionParametersSubmissionMode(x.inner.SubmissionMode())
 }
 
 // DestinationFrames returns the collection as a Go slice.
@@ -99,7 +99,7 @@ type FrameRateConversionParametersable interface {
 	NextFrame() *FrameProcessorFrame
 	OpticalFlow() *FrameProcessorOpticalFlow
 	InterpolationPhase() []*foundation.NSNumber
-	SubmissionMode() raw.VTFrameRateConversionParametersSubmissionMode
+	SubmissionMode() VTFrameRateConversionParametersSubmissionMode
 	DestinationFrames() []*FrameProcessorFrame
 }
 

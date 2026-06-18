@@ -42,18 +42,22 @@ func (x *PushStreamNode) ScheduleBuffer(buffer *avfaudio.AVAudioPCMBuffer) {
 }
 
 // ScheduleBufferCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferCompletionCallbackTypeCompletionHandler.
-func (x *PushStreamNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, completionCallbackType raw.PHASEPushStreamCompletionCallbackCondition, completionHandler func(raw.PHASEPushStreamCompletionCallbackCondition)) {
-	x.inner.ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer, completionCallbackType, completionHandler)
+func (x *PushStreamNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition)) {
+	x.inner.ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer, raw.PHASEPushStreamCompletionCallbackCondition(completionCallbackType), func(_a0 raw.PHASEPushStreamCompletionCallbackCondition) {
+		completionHandler(PHASEPushStreamCompletionCallbackCondition(_a0))
+	})
 }
 
 // ScheduleBufferAtTimeOptions calls the underlying ScheduleBufferAtTimeOptions.
-func (x *PushStreamNode) ScheduleBufferAtTimeOptions(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options raw.PHASEPushStreamBufferOptions) {
-	x.inner.ScheduleBufferAtTimeOptions(buffer, when, options)
+func (x *PushStreamNode) ScheduleBufferAtTimeOptions(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions) {
+	x.inner.ScheduleBufferAtTimeOptions(buffer, when, raw.PHASEPushStreamBufferOptions(options))
 }
 
 // ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler.
-func (x *PushStreamNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options raw.PHASEPushStreamBufferOptions, completionCallbackType raw.PHASEPushStreamCompletionCallbackCondition, completionHandler func(raw.PHASEPushStreamCompletionCallbackCondition)) {
-	x.inner.ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer, when, options, completionCallbackType, completionHandler)
+func (x *PushStreamNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition)) {
+	x.inner.ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer, when, raw.PHASEPushStreamBufferOptions(options), raw.PHASEPushStreamCompletionCallbackCondition(completionCallbackType), func(_a0 raw.PHASEPushStreamCompletionCallbackCondition) {
+		completionHandler(PHASEPushStreamCompletionCallbackCondition(_a0))
+	})
 }
 
 func (x *PushStreamNode) asStreamNode() *raw.PHASEStreamNode { return &x.inner.PHASEStreamNode }
@@ -62,9 +66,9 @@ func (x *PushStreamNode) asStreamNode() *raw.PHASEStreamNode { return &x.inner.P
 type PushStreamNodeable interface {
 	Unwrap() *raw.PHASEPushStreamNode
 	ScheduleBuffer(buffer *avfaudio.AVAudioPCMBuffer)
-	ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, completionCallbackType raw.PHASEPushStreamCompletionCallbackCondition, completionHandler func(raw.PHASEPushStreamCompletionCallbackCondition))
-	ScheduleBufferAtTimeOptions(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options raw.PHASEPushStreamBufferOptions)
-	ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options raw.PHASEPushStreamBufferOptions, completionCallbackType raw.PHASEPushStreamCompletionCallbackCondition, completionHandler func(raw.PHASEPushStreamCompletionCallbackCondition))
+	ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition))
+	ScheduleBufferAtTimeOptions(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions)
+	ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition))
 }
 
 var _ PushStreamNodeable = (*PushStreamNode)(nil)

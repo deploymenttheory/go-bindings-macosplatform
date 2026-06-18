@@ -46,8 +46,8 @@ func (x *AddressRepresentations) FullAddressIncludingRegionSingleLine(includingR
 }
 
 // CityWithContextUsingStyle calls the underlying CityWithContextUsingStyle.
-func (x *AddressRepresentations) CityWithContextUsingStyle(style raw.MKAddressRepresentationsContextStyle) string {
-	_r := x.inner.CityWithContextUsingStyle(style)
+func (x *AddressRepresentations) CityWithContextUsingStyle(style MKAddressRepresentationsContextStyle) string {
+	_r := x.inner.CityWithContextUsingStyle(raw.MKAddressRepresentationsContextStyle(style))
 	if _r == nil {
 		return ""
 	}
@@ -94,7 +94,7 @@ func (x *AddressRepresentations) RegionCode() string {
 type AddressRepresentationsable interface {
 	Unwrap() *raw.MKAddressRepresentations
 	FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) string
-	CityWithContextUsingStyle(style raw.MKAddressRepresentationsContextStyle) string
+	CityWithContextUsingStyle(style MKAddressRepresentationsContextStyle) string
 	CityName() string
 	CityWithContext() string
 	RegionName() string

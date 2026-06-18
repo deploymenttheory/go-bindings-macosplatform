@@ -55,8 +55,8 @@ func (x *ItemAttributes) WithMode(mode uint32) *ItemAttributes {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *ItemAttributes) WithType(type_ raw.FSItemType) *ItemAttributes {
-	x.inner.SetType(type_)
+func (x *ItemAttributes) WithType(type_ FSItemType) *ItemAttributes {
+	x.inner.SetType(raw.FSItemType(type_))
 	return x
 }
 
@@ -85,14 +85,14 @@ func (x *ItemAttributes) WithAllocSize(allocSize uint64) *ItemAttributes {
 }
 
 // WithFileID sets the fileID property and returns the receiver for chaining.
-func (x *ItemAttributes) WithFileID(fileID raw.FSItemID) *ItemAttributes {
-	x.inner.SetFileID(fileID)
+func (x *ItemAttributes) WithFileID(fileID FSItemID) *ItemAttributes {
+	x.inner.SetFileID(raw.FSItemID(fileID))
 	return x
 }
 
 // WithParentID sets the parentID property and returns the receiver for chaining.
-func (x *ItemAttributes) WithParentID(parentID raw.FSItemID) *ItemAttributes {
-	x.inner.SetParentID(parentID)
+func (x *ItemAttributes) WithParentID(parentID FSItemID) *ItemAttributes {
+	x.inner.SetParentID(raw.FSItemID(parentID))
 	return x
 }
 
@@ -114,8 +114,8 @@ func (x *ItemAttributes) InvalidateAllProperties() {
 }
 
 // IsValid calls the underlying IsValid.
-func (x *ItemAttributes) IsValid(attribute raw.FSItemAttribute) bool {
-	return x.inner.IsValid(attribute)
+func (x *ItemAttributes) IsValid(attribute FSItemAttribute) bool {
+	return x.inner.IsValid(raw.FSItemAttribute(attribute))
 }
 
 // Uid calls the underlying Uid.
@@ -149,13 +149,13 @@ func (x *ItemAttributes) SetMode(mode uint32) {
 }
 
 // Type calls the underlying Type.
-func (x *ItemAttributes) Type() raw.FSItemType {
-	return x.inner.Type()
+func (x *ItemAttributes) Type() FSItemType {
+	return FSItemType(x.inner.Type())
 }
 
 // SetType calls the underlying SetType.
-func (x *ItemAttributes) SetType(type_ raw.FSItemType) {
-	x.inner.SetType(type_)
+func (x *ItemAttributes) SetType(type_ FSItemType) {
+	x.inner.SetType(raw.FSItemType(type_))
 }
 
 // LinkCount calls the underlying LinkCount.
@@ -199,23 +199,23 @@ func (x *ItemAttributes) SetAllocSize(allocSize uint64) {
 }
 
 // FileID calls the underlying FileID.
-func (x *ItemAttributes) FileID() raw.FSItemID {
-	return x.inner.FileID()
+func (x *ItemAttributes) FileID() FSItemID {
+	return FSItemID(x.inner.FileID())
 }
 
 // SetFileID calls the underlying SetFileID.
-func (x *ItemAttributes) SetFileID(fileID raw.FSItemID) {
-	x.inner.SetFileID(fileID)
+func (x *ItemAttributes) SetFileID(fileID FSItemID) {
+	x.inner.SetFileID(raw.FSItemID(fileID))
 }
 
 // ParentID calls the underlying ParentID.
-func (x *ItemAttributes) ParentID() raw.FSItemID {
-	return x.inner.ParentID()
+func (x *ItemAttributes) ParentID() FSItemID {
+	return FSItemID(x.inner.ParentID())
 }
 
 // SetParentID calls the underlying SetParentID.
-func (x *ItemAttributes) SetParentID(parentID raw.FSItemID) {
-	x.inner.SetParentID(parentID)
+func (x *ItemAttributes) SetParentID(parentID FSItemID) {
+	x.inner.SetParentID(raw.FSItemID(parentID))
 }
 
 // SupportsLimitedXAttrs calls the underlying SupportsLimitedXAttrs.
@@ -306,25 +306,25 @@ type ItemAttributesable interface {
 	WithUid(uid uint32) *ItemAttributes
 	WithGid(gid uint32) *ItemAttributes
 	WithMode(mode uint32) *ItemAttributes
-	WithType(type_ raw.FSItemType) *ItemAttributes
+	WithType(type_ FSItemType) *ItemAttributes
 	WithLinkCount(linkCount uint32) *ItemAttributes
 	WithFlags(flags uint32) *ItemAttributes
 	WithSize(size uint64) *ItemAttributes
 	WithAllocSize(allocSize uint64) *ItemAttributes
-	WithFileID(fileID raw.FSItemID) *ItemAttributes
-	WithParentID(parentID raw.FSItemID) *ItemAttributes
+	WithFileID(fileID FSItemID) *ItemAttributes
+	WithParentID(parentID FSItemID) *ItemAttributes
 	WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemAttributes
 	WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemAttributes
 	InvalidateAllProperties()
-	IsValid(attribute raw.FSItemAttribute) bool
+	IsValid(attribute FSItemAttribute) bool
 	Uid() uint32
 	SetUid(uid uint32)
 	Gid() uint32
 	SetGid(gid uint32)
 	Mode() uint32
 	SetMode(mode uint32)
-	Type() raw.FSItemType
-	SetType(type_ raw.FSItemType)
+	Type() FSItemType
+	SetType(type_ FSItemType)
 	LinkCount() uint32
 	SetLinkCount(linkCount uint32)
 	Flags() uint32
@@ -333,10 +333,10 @@ type ItemAttributesable interface {
 	SetSize(size uint64)
 	AllocSize() uint64
 	SetAllocSize(allocSize uint64)
-	FileID() raw.FSItemID
-	SetFileID(fileID raw.FSItemID)
-	ParentID() raw.FSItemID
-	SetParentID(parentID raw.FSItemID)
+	FileID() FSItemID
+	SetFileID(fileID FSItemID)
+	ParentID() FSItemID
+	SetParentID(parentID FSItemID)
 	SupportsLimitedXAttrs() bool
 	SetSupportsLimitedXAttrs(supportsLimitedXAttrs bool)
 	InhibitKernelOffloadedIO() bool

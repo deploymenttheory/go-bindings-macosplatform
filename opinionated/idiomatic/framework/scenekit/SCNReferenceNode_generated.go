@@ -54,8 +54,8 @@ func (x *ReferenceNode) WithReferenceURL(referenceURL string) *ReferenceNode {
 }
 
 // WithLoadingPolicy sets the loadingPolicy property and returns the receiver for chaining.
-func (x *ReferenceNode) WithLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingPolicy) *ReferenceNode {
-	x.inner.SetLoadingPolicy(loadingPolicy)
+func (x *ReferenceNode) WithLoadingPolicy(loadingPolicy SCNReferenceLoadingPolicy) *ReferenceNode {
+	x.inner.SetLoadingPolicy(raw.SCNReferenceLoadingPolicy(loadingPolicy))
 	return x
 }
 
@@ -180,8 +180,8 @@ func (x *ReferenceNode) WithCastsShadow(castsShadow bool) *ReferenceNode {
 }
 
 // WithMovabilityHint sets the movabilityHint property and returns the receiver for chaining.
-func (x *ReferenceNode) WithMovabilityHint(movabilityHint raw.SCNMovabilityHint) *ReferenceNode {
-	x.inner.SCNNode.SetMovabilityHint(movabilityHint)
+func (x *ReferenceNode) WithMovabilityHint(movabilityHint SCNMovabilityHint) *ReferenceNode {
+	x.inner.SCNNode.SetMovabilityHint(raw.SCNMovabilityHint(movabilityHint))
 	return x
 }
 
@@ -252,8 +252,8 @@ func (x *ReferenceNode) WithCategoryBitMask(categoryBitMask uint) *ReferenceNode
 }
 
 // WithFocusBehavior sets the focusBehavior property and returns the receiver for chaining.
-func (x *ReferenceNode) WithFocusBehavior(focusBehavior raw.SCNNodeFocusBehavior) *ReferenceNode {
-	x.inner.SCNNode.SetFocusBehavior(focusBehavior)
+func (x *ReferenceNode) WithFocusBehavior(focusBehavior SCNNodeFocusBehavior) *ReferenceNode {
+	x.inner.SCNNode.SetFocusBehavior(raw.SCNNodeFocusBehavior(focusBehavior))
 	return x
 }
 
@@ -278,13 +278,13 @@ func (x *ReferenceNode) SetReferenceURL(referenceURL string) {
 }
 
 // LoadingPolicy calls the underlying LoadingPolicy.
-func (x *ReferenceNode) LoadingPolicy() raw.SCNReferenceLoadingPolicy {
-	return x.inner.LoadingPolicy()
+func (x *ReferenceNode) LoadingPolicy() SCNReferenceLoadingPolicy {
+	return SCNReferenceLoadingPolicy(x.inner.LoadingPolicy())
 }
 
 // SetLoadingPolicy calls the underlying SetLoadingPolicy.
-func (x *ReferenceNode) SetLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingPolicy) {
-	x.inner.SetLoadingPolicy(loadingPolicy)
+func (x *ReferenceNode) SetLoadingPolicy(loadingPolicy SCNReferenceLoadingPolicy) {
+	x.inner.SetLoadingPolicy(raw.SCNReferenceLoadingPolicy(loadingPolicy))
 }
 
 // IsLoaded calls the underlying IsLoaded.
@@ -298,7 +298,7 @@ func (x *ReferenceNode) asNode() *raw.SCNNode { return &x.inner.SCNNode }
 type ReferenceNodeable interface {
 	Unwrap() *raw.SCNReferenceNode
 	WithReferenceURL(referenceURL string) *ReferenceNode
-	WithLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingPolicy) *ReferenceNode
+	WithLoadingPolicy(loadingPolicy SCNReferenceLoadingPolicy) *ReferenceNode
 	WithName(name string) *ReferenceNode
 	WithLight(light *Light) *ReferenceNode
 	WithCamera(camera *Camera) *ReferenceNode
@@ -319,7 +319,7 @@ type ReferenceNodeable interface {
 	WithOpacity(opacity float64) *ReferenceNode
 	WithRenderingOrder(renderingOrder int) *ReferenceNode
 	WithCastsShadow(castsShadow bool) *ReferenceNode
-	WithMovabilityHint(movabilityHint raw.SCNMovabilityHint) *ReferenceNode
+	WithMovabilityHint(movabilityHint SCNMovabilityHint) *ReferenceNode
 	WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode
 	WithPhysicsField(physicsField *PhysicsField) *ReferenceNode
 	WithConstraints(items ...ConstraintProvider) *ReferenceNode
@@ -327,13 +327,13 @@ type ReferenceNodeable interface {
 	WithPaused(paused bool) *ReferenceNode
 	WithRendererDelegate(rendererDelegate raw.SCNNodeRendererDelegate) *ReferenceNode
 	WithCategoryBitMask(categoryBitMask uint) *ReferenceNode
-	WithFocusBehavior(focusBehavior raw.SCNNodeFocusBehavior) *ReferenceNode
+	WithFocusBehavior(focusBehavior SCNNodeFocusBehavior) *ReferenceNode
 	Load()
 	Unload()
 	ReferenceURL() *foundation.NSURL
 	SetReferenceURL(referenceURL string)
-	LoadingPolicy() raw.SCNReferenceLoadingPolicy
-	SetLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingPolicy)
+	LoadingPolicy() SCNReferenceLoadingPolicy
+	SetLoadingPolicy(loadingPolicy SCNReferenceLoadingPolicy)
 	IsLoaded() bool
 }
 

@@ -61,8 +61,8 @@ func (x *ControllerButtonInput) WithValue(value float32) *ControllerButtonInput 
 }
 
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerButtonInput {
-	x.inner.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+func (x *ControllerButtonInput) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerButtonInput {
+	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
@@ -155,7 +155,7 @@ type ControllerButtonInputable interface {
 	WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *ControllerButtonInput
 	WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *ControllerButtonInput
 	WithValue(value float32) *ControllerButtonInput
-	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerButtonInput
+	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerButtonInput
 	WithSfSymbolsName(sfSymbolsName string) *ControllerButtonInput
 	WithLocalizedName(localizedName string) *ControllerButtonInput
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerButtonInput

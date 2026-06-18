@@ -39,8 +39,8 @@ func NewSpeechRecognitionRequest() *SpeechRecognitionRequest {
 }
 
 // WithTaskHint sets the taskHint property and returns the receiver for chaining.
-func (x *SpeechRecognitionRequest) WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechRecognitionRequest {
-	x.inner.SetTaskHint(taskHint)
+func (x *SpeechRecognitionRequest) WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechRecognitionRequest {
+	x.inner.SetTaskHint(raw.SFSpeechRecognitionTaskHint(taskHint))
 	return x
 }
 
@@ -93,13 +93,13 @@ func (x *SpeechRecognitionRequest) WithCustomizedLanguageModel(customizedLanguag
 }
 
 // TaskHint calls the underlying TaskHint.
-func (x *SpeechRecognitionRequest) TaskHint() raw.SFSpeechRecognitionTaskHint {
-	return x.inner.TaskHint()
+func (x *SpeechRecognitionRequest) TaskHint() SFSpeechRecognitionTaskHint {
+	return SFSpeechRecognitionTaskHint(x.inner.TaskHint())
 }
 
 // SetTaskHint calls the underlying SetTaskHint.
-func (x *SpeechRecognitionRequest) SetTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) {
-	x.inner.SetTaskHint(taskHint)
+func (x *SpeechRecognitionRequest) SetTaskHint(taskHint SFSpeechRecognitionTaskHint) {
+	x.inner.SetTaskHint(raw.SFSpeechRecognitionTaskHint(taskHint))
 }
 
 // ShouldReportPartialResults calls the underlying ShouldReportPartialResults.
@@ -183,15 +183,15 @@ func (x *SpeechRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeechRec
 // SpeechRecognitionRequestable is the interface implemented by [SpeechRecognitionRequest], for mocking and DI.
 type SpeechRecognitionRequestable interface {
 	Unwrap() *raw.SFSpeechRecognitionRequest
-	WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechRecognitionRequest
+	WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechRecognitionRequest
 	WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechRecognitionRequest
 	WithContextualStrings(items ...*foundation.NSString) *SpeechRecognitionRequest
 	WithInteractionIdentifier(interactionIdentifier string) *SpeechRecognitionRequest
 	WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechRecognitionRequest
 	WithAddsPunctuation(addsPunctuation bool) *SpeechRecognitionRequest
 	WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechRecognitionRequest
-	TaskHint() raw.SFSpeechRecognitionTaskHint
-	SetTaskHint(taskHint raw.SFSpeechRecognitionTaskHint)
+	TaskHint() SFSpeechRecognitionTaskHint
+	SetTaskHint(taskHint SFSpeechRecognitionTaskHint)
 	ShouldReportPartialResults() bool
 	SetShouldReportPartialResults(shouldReportPartialResults bool)
 	ContextualStrings() []string

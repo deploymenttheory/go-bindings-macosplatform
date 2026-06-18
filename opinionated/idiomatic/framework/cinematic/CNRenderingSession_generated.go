@@ -33,9 +33,9 @@ func RenderingSessionFromID(id objc.ID) *RenderingSession {
 }
 
 // NewRenderingSessionWithCommandQueueSessionAttributesPreferredTransformQuality creates a new [RenderingSession].
-func NewRenderingSessionWithCommandQueueSessionAttributesPreferredTransformQuality(commandQueue metal.MTLCommandQueue, sessionAttributes *raw.CNRenderingSessionAttributes, preferredTransform corefoundation.CGAffineTransform, quality raw.CNRenderingQuality) *RenderingSession {
+func NewRenderingSessionWithCommandQueueSessionAttributesPreferredTransformQuality(commandQueue metal.MTLCommandQueue, sessionAttributes *raw.CNRenderingSessionAttributes, preferredTransform corefoundation.CGAffineTransform, quality CNRenderingQuality) *RenderingSession {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNRenderingSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommandQueue:sessionAttributes:preferredTransform:quality:"), commandQueue, sessionAttributes.Ptr(), preferredTransform, quality)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommandQueue:sessionAttributes:preferredTransform:quality:"), commandQueue, sessionAttributes.Ptr(), preferredTransform, raw.CNRenderingQuality(quality))
 	return &RenderingSession{inner: raw.CNRenderingSessionFromID(_id)}
 }
 
@@ -74,8 +74,8 @@ func (x *RenderingSession) PreferredTransform() corefoundation.CGAffineTransform
 }
 
 // Quality calls the underlying Quality.
-func (x *RenderingSession) Quality() raw.CNRenderingQuality {
-	return x.inner.Quality()
+func (x *RenderingSession) Quality() CNRenderingQuality {
+	return CNRenderingQuality(x.inner.Quality())
 }
 
 // RenderingSessionable is the interface implemented by [RenderingSession], for mocking and DI.
@@ -87,7 +87,7 @@ type RenderingSessionable interface {
 	CommandQueue() metal.MTLCommandQueue
 	SessionAttributes() *RenderingSessionAttributes
 	PreferredTransform() corefoundation.CGAffineTransform
-	Quality() raw.CNRenderingQuality
+	Quality() CNRenderingQuality
 }
 
 var _ RenderingSessionable = (*RenderingSession)(nil)

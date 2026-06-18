@@ -61,8 +61,8 @@ func (x *StereoscopicCamera) WithOverlap(overlap float32) *StereoscopicCamera {
 }
 
 // WithProjection sets the projection property and returns the receiver for chaining.
-func (x *StereoscopicCamera) WithProjection(projection raw.MDLCameraProjection) *StereoscopicCamera {
-	x.inner.MDLCamera.SetProjection(projection)
+func (x *StereoscopicCamera) WithProjection(projection MDLCameraProjection) *StereoscopicCamera {
+	x.inner.MDLCamera.SetProjection(raw.MDLCameraProjection(projection))
 	return x
 }
 
@@ -263,7 +263,7 @@ type StereoscopicCameraable interface {
 	WithLeftVergence(leftVergence float32) *StereoscopicCamera
 	WithRightVergence(rightVergence float32) *StereoscopicCamera
 	WithOverlap(overlap float32) *StereoscopicCamera
-	WithProjection(projection raw.MDLCameraProjection) *StereoscopicCamera
+	WithProjection(projection MDLCameraProjection) *StereoscopicCamera
 	WithNearVisibilityDistance(nearVisibilityDistance float32) *StereoscopicCamera
 	WithFarVisibilityDistance(farVisibilityDistance float32) *StereoscopicCamera
 	WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *StereoscopicCamera

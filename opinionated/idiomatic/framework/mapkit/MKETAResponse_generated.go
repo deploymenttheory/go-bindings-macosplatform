@@ -76,8 +76,8 @@ func (x *ETAResponse) ExpectedDepartureDate() *foundation.NSDate {
 }
 
 // TransportType calls the underlying TransportType.
-func (x *ETAResponse) TransportType() raw.MKDirectionsTransportType {
-	return x.inner.TransportType()
+func (x *ETAResponse) TransportType() MKDirectionsTransportType {
+	return MKDirectionsTransportType(x.inner.TransportType())
 }
 
 // ETAResponseable is the interface implemented by [ETAResponse], for mocking and DI.
@@ -89,7 +89,7 @@ type ETAResponseable interface {
 	Distance() unsafe.Pointer
 	ExpectedArrivalDate() *foundation.NSDate
 	ExpectedDepartureDate() *foundation.NSDate
-	TransportType() raw.MKDirectionsTransportType
+	TransportType() MKDirectionsTransportType
 }
 
 var _ ETAResponseable = (*ETAResponse)(nil)

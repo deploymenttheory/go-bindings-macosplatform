@@ -55,8 +55,8 @@ func NewKernelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevi
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *Kernel) WithOptions(options raw.MPSKernelOptions) *Kernel {
-	x.inner.SetOptions(options)
+func (x *Kernel) WithOptions(options MPSKernelOptions) *Kernel {
+	x.inner.SetOptions(raw.MPSKernelOptions(options))
 	return x
 }
 
@@ -76,13 +76,13 @@ func (x *Kernel) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice)
 }
 
 // Options calls the underlying Options.
-func (x *Kernel) Options() raw.MPSKernelOptions {
-	return x.inner.Options()
+func (x *Kernel) Options() MPSKernelOptions {
+	return MPSKernelOptions(x.inner.Options())
 }
 
 // SetOptions calls the underlying SetOptions.
-func (x *Kernel) SetOptions(options raw.MPSKernelOptions) {
-	x.inner.SetOptions(options)
+func (x *Kernel) SetOptions(options MPSKernelOptions) {
+	x.inner.SetOptions(raw.MPSKernelOptions(options))
 }
 
 // Device calls the underlying Device.
@@ -107,11 +107,11 @@ func (x *Kernel) SetLabel(label string) {
 // Kernelable is the interface implemented by [Kernel], for mocking and DI.
 type Kernelable interface {
 	Unwrap() *raw.MPSKernel
-	WithOptions(options raw.MPSKernelOptions) *Kernel
+	WithOptions(options MPSKernelOptions) *Kernel
 	WithLabel(label string) *Kernel
 	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *Kernel
-	Options() raw.MPSKernelOptions
-	SetOptions(options raw.MPSKernelOptions)
+	Options() MPSKernelOptions
+	SetOptions(options MPSKernelOptions)
 	Device() metal.MTLDevice
 	Label() string
 	SetLabel(label string)

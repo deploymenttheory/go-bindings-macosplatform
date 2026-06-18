@@ -74,20 +74,20 @@ func (x *Material) WithDoubleSided(doubleSided bool) *Material {
 }
 
 // WithFillMode sets the fillMode property and returns the receiver for chaining.
-func (x *Material) WithFillMode(fillMode raw.SCNFillMode) *Material {
-	x.inner.SetFillMode(fillMode)
+func (x *Material) WithFillMode(fillMode SCNFillMode) *Material {
+	x.inner.SetFillMode(raw.SCNFillMode(fillMode))
 	return x
 }
 
 // WithCullMode sets the cullMode property and returns the receiver for chaining.
-func (x *Material) WithCullMode(cullMode raw.SCNCullMode) *Material {
-	x.inner.SetCullMode(cullMode)
+func (x *Material) WithCullMode(cullMode SCNCullMode) *Material {
+	x.inner.SetCullMode(raw.SCNCullMode(cullMode))
 	return x
 }
 
 // WithTransparencyMode sets the transparencyMode property and returns the receiver for chaining.
-func (x *Material) WithTransparencyMode(transparencyMode raw.SCNTransparencyMode) *Material {
-	x.inner.SetTransparencyMode(transparencyMode)
+func (x *Material) WithTransparencyMode(transparencyMode SCNTransparencyMode) *Material {
+	x.inner.SetTransparencyMode(raw.SCNTransparencyMode(transparencyMode))
 	return x
 }
 
@@ -104,8 +104,8 @@ func (x *Material) WithWritesToDepthBuffer(writesToDepthBuffer bool) *Material {
 }
 
 // WithColorBufferWriteMask sets the colorBufferWriteMask property and returns the receiver for chaining.
-func (x *Material) WithColorBufferWriteMask(colorBufferWriteMask raw.SCNColorMask) *Material {
-	x.inner.SetColorBufferWriteMask(colorBufferWriteMask)
+func (x *Material) WithColorBufferWriteMask(colorBufferWriteMask SCNColorMask) *Material {
+	x.inner.SetColorBufferWriteMask(raw.SCNColorMask(colorBufferWriteMask))
 	return x
 }
 
@@ -122,8 +122,8 @@ func (x *Material) WithFresnelExponent(fresnelExponent float64) *Material {
 }
 
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *Material) WithBlendMode(blendMode raw.SCNBlendMode) *Material {
-	x.inner.SetBlendMode(blendMode)
+func (x *Material) WithBlendMode(blendMode SCNBlendMode) *Material {
+	x.inner.SetBlendMode(raw.SCNBlendMode(blendMode))
 	return x
 }
 
@@ -340,33 +340,33 @@ func (x *Material) SetDoubleSided(doubleSided bool) {
 }
 
 // FillMode calls the underlying FillMode.
-func (x *Material) FillMode() raw.SCNFillMode {
-	return x.inner.FillMode()
+func (x *Material) FillMode() SCNFillMode {
+	return SCNFillMode(x.inner.FillMode())
 }
 
 // SetFillMode calls the underlying SetFillMode.
-func (x *Material) SetFillMode(fillMode raw.SCNFillMode) {
-	x.inner.SetFillMode(fillMode)
+func (x *Material) SetFillMode(fillMode SCNFillMode) {
+	x.inner.SetFillMode(raw.SCNFillMode(fillMode))
 }
 
 // CullMode calls the underlying CullMode.
-func (x *Material) CullMode() raw.SCNCullMode {
-	return x.inner.CullMode()
+func (x *Material) CullMode() SCNCullMode {
+	return SCNCullMode(x.inner.CullMode())
 }
 
 // SetCullMode calls the underlying SetCullMode.
-func (x *Material) SetCullMode(cullMode raw.SCNCullMode) {
-	x.inner.SetCullMode(cullMode)
+func (x *Material) SetCullMode(cullMode SCNCullMode) {
+	x.inner.SetCullMode(raw.SCNCullMode(cullMode))
 }
 
 // TransparencyMode calls the underlying TransparencyMode.
-func (x *Material) TransparencyMode() raw.SCNTransparencyMode {
-	return x.inner.TransparencyMode()
+func (x *Material) TransparencyMode() SCNTransparencyMode {
+	return SCNTransparencyMode(x.inner.TransparencyMode())
 }
 
 // SetTransparencyMode calls the underlying SetTransparencyMode.
-func (x *Material) SetTransparencyMode(transparencyMode raw.SCNTransparencyMode) {
-	x.inner.SetTransparencyMode(transparencyMode)
+func (x *Material) SetTransparencyMode(transparencyMode SCNTransparencyMode) {
+	x.inner.SetTransparencyMode(raw.SCNTransparencyMode(transparencyMode))
 }
 
 // LocksAmbientWithDiffuse calls the underlying LocksAmbientWithDiffuse.
@@ -390,13 +390,13 @@ func (x *Material) SetWritesToDepthBuffer(writesToDepthBuffer bool) {
 }
 
 // ColorBufferWriteMask calls the underlying ColorBufferWriteMask.
-func (x *Material) ColorBufferWriteMask() raw.SCNColorMask {
-	return x.inner.ColorBufferWriteMask()
+func (x *Material) ColorBufferWriteMask() SCNColorMask {
+	return SCNColorMask(x.inner.ColorBufferWriteMask())
 }
 
 // SetColorBufferWriteMask calls the underlying SetColorBufferWriteMask.
-func (x *Material) SetColorBufferWriteMask(colorBufferWriteMask raw.SCNColorMask) {
-	x.inner.SetColorBufferWriteMask(colorBufferWriteMask)
+func (x *Material) SetColorBufferWriteMask(colorBufferWriteMask SCNColorMask) {
+	x.inner.SetColorBufferWriteMask(raw.SCNColorMask(colorBufferWriteMask))
 }
 
 // ReadsFromDepthBuffer calls the underlying ReadsFromDepthBuffer.
@@ -420,13 +420,13 @@ func (x *Material) SetFresnelExponent(fresnelExponent float64) {
 }
 
 // BlendMode calls the underlying BlendMode.
-func (x *Material) BlendMode() raw.SCNBlendMode {
-	return x.inner.BlendMode()
+func (x *Material) BlendMode() SCNBlendMode {
+	return SCNBlendMode(x.inner.BlendMode())
 }
 
 // SetBlendMode calls the underlying SetBlendMode.
-func (x *Material) SetBlendMode(blendMode raw.SCNBlendMode) {
-	x.inner.SetBlendMode(blendMode)
+func (x *Material) SetBlendMode(blendMode SCNBlendMode) {
+	x.inner.SetBlendMode(raw.SCNBlendMode(blendMode))
 }
 
 // Materialable is the interface implemented by [Material], for mocking and DI.
@@ -438,15 +438,15 @@ type Materialable interface {
 	WithLightingModelName(lightingModelName *foundation.NSString) *Material
 	WithLitPerPixel(litPerPixel bool) *Material
 	WithDoubleSided(doubleSided bool) *Material
-	WithFillMode(fillMode raw.SCNFillMode) *Material
-	WithCullMode(cullMode raw.SCNCullMode) *Material
-	WithTransparencyMode(transparencyMode raw.SCNTransparencyMode) *Material
+	WithFillMode(fillMode SCNFillMode) *Material
+	WithCullMode(cullMode SCNCullMode) *Material
+	WithTransparencyMode(transparencyMode SCNTransparencyMode) *Material
 	WithLocksAmbientWithDiffuse(locksAmbientWithDiffuse bool) *Material
 	WithWritesToDepthBuffer(writesToDepthBuffer bool) *Material
-	WithColorBufferWriteMask(colorBufferWriteMask raw.SCNColorMask) *Material
+	WithColorBufferWriteMask(colorBufferWriteMask SCNColorMask) *Material
 	WithReadsFromDepthBuffer(readsFromDepthBuffer bool) *Material
 	WithFresnelExponent(fresnelExponent float64) *Material
-	WithBlendMode(blendMode raw.SCNBlendMode) *Material
+	WithBlendMode(blendMode SCNBlendMode) *Material
 	Name() string
 	SetName(name string)
 	Diffuse() *MaterialProperty
@@ -475,24 +475,24 @@ type Materialable interface {
 	SetLitPerPixel(litPerPixel bool)
 	IsDoubleSided() bool
 	SetDoubleSided(doubleSided bool)
-	FillMode() raw.SCNFillMode
-	SetFillMode(fillMode raw.SCNFillMode)
-	CullMode() raw.SCNCullMode
-	SetCullMode(cullMode raw.SCNCullMode)
-	TransparencyMode() raw.SCNTransparencyMode
-	SetTransparencyMode(transparencyMode raw.SCNTransparencyMode)
+	FillMode() SCNFillMode
+	SetFillMode(fillMode SCNFillMode)
+	CullMode() SCNCullMode
+	SetCullMode(cullMode SCNCullMode)
+	TransparencyMode() SCNTransparencyMode
+	SetTransparencyMode(transparencyMode SCNTransparencyMode)
 	LocksAmbientWithDiffuse() bool
 	SetLocksAmbientWithDiffuse(locksAmbientWithDiffuse bool)
 	WritesToDepthBuffer() bool
 	SetWritesToDepthBuffer(writesToDepthBuffer bool)
-	ColorBufferWriteMask() raw.SCNColorMask
-	SetColorBufferWriteMask(colorBufferWriteMask raw.SCNColorMask)
+	ColorBufferWriteMask() SCNColorMask
+	SetColorBufferWriteMask(colorBufferWriteMask SCNColorMask)
 	ReadsFromDepthBuffer() bool
 	SetReadsFromDepthBuffer(readsFromDepthBuffer bool)
 	FresnelExponent() float64
 	SetFresnelExponent(fresnelExponent float64)
-	BlendMode() raw.SCNBlendMode
-	SetBlendMode(blendMode raw.SCNBlendMode)
+	BlendMode() SCNBlendMode
+	SetBlendMode(blendMode SCNBlendMode)
 }
 
 var _ Materialable = (*Material)(nil)

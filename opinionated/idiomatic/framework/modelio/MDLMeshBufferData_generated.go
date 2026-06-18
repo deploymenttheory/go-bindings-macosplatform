@@ -31,16 +31,16 @@ func MeshBufferDataFromID(id objc.ID) *MeshBufferData {
 }
 
 // NewMeshBufferDataWithTypeLength creates a new [MeshBufferData].
-func NewMeshBufferDataWithTypeLength(type_ raw.MDLMeshBufferType, length uint) *MeshBufferData {
+func NewMeshBufferDataWithTypeLength(type_ MDLMeshBufferType, length uint) *MeshBufferData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMeshBufferData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:length:"), type_, length)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:length:"), raw.MDLMeshBufferType(type_), length)
 	return &MeshBufferData{inner: raw.MDLMeshBufferDataFromID(_id)}
 }
 
 // NewMeshBufferDataWithTypeData creates a new [MeshBufferData].
-func NewMeshBufferDataWithTypeData(type_ raw.MDLMeshBufferType, data *foundation.NSData) *MeshBufferData {
+func NewMeshBufferDataWithTypeData(type_ MDLMeshBufferType, data *foundation.NSData) *MeshBufferData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMeshBufferData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, data.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), raw.MDLMeshBufferType(type_), data.Ptr())
 	return &MeshBufferData{inner: raw.MDLMeshBufferDataFromID(_id)}
 }
 

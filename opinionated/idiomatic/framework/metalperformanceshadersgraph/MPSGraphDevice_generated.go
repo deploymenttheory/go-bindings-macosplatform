@@ -37,8 +37,8 @@ func NewGraphDevice() *GraphDevice {
 }
 
 // Type calls the underlying Type.
-func (x *GraphDevice) Type() raw.MPSGraphDeviceType {
-	return x.inner.Type()
+func (x *GraphDevice) Type() MPSGraphDeviceType {
+	return MPSGraphDeviceType(x.inner.Type())
 }
 
 // MetalDevice calls the underlying MetalDevice.
@@ -51,7 +51,7 @@ func (x *GraphDevice) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSG
 // GraphDeviceable is the interface implemented by [GraphDevice], for mocking and DI.
 type GraphDeviceable interface {
 	Unwrap() *raw.MPSGraphDevice
-	Type() raw.MPSGraphDeviceType
+	Type() MPSGraphDeviceType
 	MetalDevice() metal.MTLDevice
 }
 

@@ -71,14 +71,14 @@ func (x *CaptureConnection) WithVideoRotationAngle(videoRotationAngle float64) *
 }
 
 // WithVideoOrientation sets the videoOrientation property and returns the receiver for chaining.
-func (x *CaptureConnection) WithVideoOrientation(videoOrientation raw.AVCaptureVideoOrientation) *CaptureConnection {
-	x.inner.SetVideoOrientation(videoOrientation)
+func (x *CaptureConnection) WithVideoOrientation(videoOrientation AVCaptureVideoOrientation) *CaptureConnection {
+	x.inner.SetVideoOrientation(raw.AVCaptureVideoOrientation(videoOrientation))
 	return x
 }
 
 // WithVideoFieldMode sets the videoFieldMode property and returns the receiver for chaining.
-func (x *CaptureConnection) WithVideoFieldMode(videoFieldMode raw.AVVideoFieldMode) *CaptureConnection {
-	x.inner.SetVideoFieldMode(videoFieldMode)
+func (x *CaptureConnection) WithVideoFieldMode(videoFieldMode AVVideoFieldMode) *CaptureConnection {
+	x.inner.SetVideoFieldMode(raw.AVVideoFieldMode(videoFieldMode))
 	return x
 }
 
@@ -195,13 +195,13 @@ func (x *CaptureConnection) IsVideoOrientationSupported() bool {
 }
 
 // VideoOrientation calls the underlying VideoOrientation.
-func (x *CaptureConnection) VideoOrientation() raw.AVCaptureVideoOrientation {
-	return x.inner.VideoOrientation()
+func (x *CaptureConnection) VideoOrientation() AVCaptureVideoOrientation {
+	return AVCaptureVideoOrientation(x.inner.VideoOrientation())
 }
 
 // SetVideoOrientation calls the underlying SetVideoOrientation.
-func (x *CaptureConnection) SetVideoOrientation(videoOrientation raw.AVCaptureVideoOrientation) {
-	x.inner.SetVideoOrientation(videoOrientation)
+func (x *CaptureConnection) SetVideoOrientation(videoOrientation AVCaptureVideoOrientation) {
+	x.inner.SetVideoOrientation(raw.AVCaptureVideoOrientation(videoOrientation))
 }
 
 // IsVideoFieldModeSupported calls the underlying IsVideoFieldModeSupported.
@@ -210,13 +210,13 @@ func (x *CaptureConnection) IsVideoFieldModeSupported() bool {
 }
 
 // VideoFieldMode calls the underlying VideoFieldMode.
-func (x *CaptureConnection) VideoFieldMode() raw.AVVideoFieldMode {
-	return x.inner.VideoFieldMode()
+func (x *CaptureConnection) VideoFieldMode() AVVideoFieldMode {
+	return AVVideoFieldMode(x.inner.VideoFieldMode())
 }
 
 // SetVideoFieldMode calls the underlying SetVideoFieldMode.
-func (x *CaptureConnection) SetVideoFieldMode(videoFieldMode raw.AVVideoFieldMode) {
-	x.inner.SetVideoFieldMode(videoFieldMode)
+func (x *CaptureConnection) SetVideoFieldMode(videoFieldMode AVVideoFieldMode) {
+	x.inner.SetVideoFieldMode(raw.AVVideoFieldMode(videoFieldMode))
 }
 
 // IsVideoMinFrameDurationSupported calls the underlying IsVideoMinFrameDurationSupported.
@@ -256,8 +256,8 @@ type CaptureConnectionable interface {
 	WithVideoMirrored(videoMirrored bool) *CaptureConnection
 	WithAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring bool) *CaptureConnection
 	WithVideoRotationAngle(videoRotationAngle float64) *CaptureConnection
-	WithVideoOrientation(videoOrientation raw.AVCaptureVideoOrientation) *CaptureConnection
-	WithVideoFieldMode(videoFieldMode raw.AVVideoFieldMode) *CaptureConnection
+	WithVideoOrientation(videoOrientation AVCaptureVideoOrientation) *CaptureConnection
+	WithVideoFieldMode(videoFieldMode AVVideoFieldMode) *CaptureConnection
 	WithVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime) *CaptureConnection
 	WithVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) *CaptureConnection
 	IsVideoRotationAngleSupported(videoRotationAngle float64) bool
@@ -276,11 +276,11 @@ type CaptureConnectionable interface {
 	VideoRotationAngle() float64
 	SetVideoRotationAngle(videoRotationAngle float64)
 	IsVideoOrientationSupported() bool
-	VideoOrientation() raw.AVCaptureVideoOrientation
-	SetVideoOrientation(videoOrientation raw.AVCaptureVideoOrientation)
+	VideoOrientation() AVCaptureVideoOrientation
+	SetVideoOrientation(videoOrientation AVCaptureVideoOrientation)
 	IsVideoFieldModeSupported() bool
-	VideoFieldMode() raw.AVVideoFieldMode
-	SetVideoFieldMode(videoFieldMode raw.AVVideoFieldMode)
+	VideoFieldMode() AVVideoFieldMode
+	SetVideoFieldMode(videoFieldMode AVVideoFieldMode)
 	IsVideoMinFrameDurationSupported() bool
 	VideoMinFrameDuration() coremedia.CMTime
 	SetVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime)

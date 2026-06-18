@@ -57,8 +57,8 @@ func (x *Alert) WithIcon(icon *Image) *Alert {
 }
 
 // WithAlertStyle sets the alertStyle property and returns the receiver for chaining.
-func (x *Alert) WithAlertStyle(alertStyle raw.NSAlertStyle) *Alert {
-	x.inner.SetAlertStyle(alertStyle)
+func (x *Alert) WithAlertStyle(alertStyle NSAlertStyle) *Alert {
+	x.inner.SetAlertStyle(raw.NSAlertStyle(alertStyle))
 	return x
 }
 
@@ -170,13 +170,13 @@ func (x *Alert) Buttons() []*Button {
 }
 
 // AlertStyle calls the underlying AlertStyle.
-func (x *Alert) AlertStyle() raw.NSAlertStyle {
-	return x.inner.AlertStyle()
+func (x *Alert) AlertStyle() NSAlertStyle {
+	return NSAlertStyle(x.inner.AlertStyle())
 }
 
 // SetAlertStyle calls the underlying SetAlertStyle.
-func (x *Alert) SetAlertStyle(alertStyle raw.NSAlertStyle) {
-	x.inner.SetAlertStyle(alertStyle)
+func (x *Alert) SetAlertStyle(alertStyle NSAlertStyle) {
+	x.inner.SetAlertStyle(raw.NSAlertStyle(alertStyle))
 }
 
 // ShowsHelp calls the underlying ShowsHelp.
@@ -266,7 +266,7 @@ type Alertable interface {
 	WithMessageText(messageText string) *Alert
 	WithInformativeText(informativeText string) *Alert
 	WithIcon(icon *Image) *Alert
-	WithAlertStyle(alertStyle raw.NSAlertStyle) *Alert
+	WithAlertStyle(alertStyle NSAlertStyle) *Alert
 	WithShowsHelp(showsHelp bool) *Alert
 	WithHelpAnchor(helpAnchor *foundation.NSString) *Alert
 	WithDelegate(delegate raw.NSAlertDelegate) *Alert
@@ -283,8 +283,8 @@ type Alertable interface {
 	Icon() *Image
 	SetIcon(icon *raw.NSImage)
 	Buttons() []*Button
-	AlertStyle() raw.NSAlertStyle
-	SetAlertStyle(alertStyle raw.NSAlertStyle)
+	AlertStyle() NSAlertStyle
+	SetAlertStyle(alertStyle NSAlertStyle)
 	ShowsHelp() bool
 	SetShowsHelp(showsHelp bool)
 	HelpAnchor() string

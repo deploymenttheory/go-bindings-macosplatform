@@ -39,8 +39,8 @@ func NewAppearanceCharacteristics() *AppearanceCharacteristics {
 }
 
 // WithControlType sets the controlType property and returns the receiver for chaining.
-func (x *AppearanceCharacteristics) WithControlType(controlType raw.PDFWidgetControlType) *AppearanceCharacteristics {
-	x.inner.SetControlType(controlType)
+func (x *AppearanceCharacteristics) WithControlType(controlType PDFWidgetControlType) *AppearanceCharacteristics {
+	x.inner.SetControlType(raw.PDFWidgetControlType(controlType))
 	return x
 }
 
@@ -81,13 +81,13 @@ func (x *AppearanceCharacteristics) WithDownCaption(downCaption string) *Appeara
 }
 
 // ControlType calls the underlying ControlType.
-func (x *AppearanceCharacteristics) ControlType() raw.PDFWidgetControlType {
-	return x.inner.ControlType()
+func (x *AppearanceCharacteristics) ControlType() PDFWidgetControlType {
+	return PDFWidgetControlType(x.inner.ControlType())
 }
 
 // SetControlType calls the underlying SetControlType.
-func (x *AppearanceCharacteristics) SetControlType(controlType raw.PDFWidgetControlType) {
-	x.inner.SetControlType(controlType)
+func (x *AppearanceCharacteristics) SetControlType(controlType PDFWidgetControlType) {
+	x.inner.SetControlType(raw.PDFWidgetControlType(controlType))
 }
 
 // BackgroundColor calls the underlying BackgroundColor.
@@ -170,15 +170,15 @@ func (x *AppearanceCharacteristics) AppearanceCharacteristicsKeyValues() *founda
 // AppearanceCharacteristicsable is the interface implemented by [AppearanceCharacteristics], for mocking and DI.
 type AppearanceCharacteristicsable interface {
 	Unwrap() *raw.PDFAppearanceCharacteristics
-	WithControlType(controlType raw.PDFWidgetControlType) *AppearanceCharacteristics
+	WithControlType(controlType PDFWidgetControlType) *AppearanceCharacteristics
 	WithBackgroundColor(backgroundColor *appkit.NSColor) *AppearanceCharacteristics
 	WithBorderColor(borderColor *appkit.NSColor) *AppearanceCharacteristics
 	WithRotation(rotation int) *AppearanceCharacteristics
 	WithCaption(caption string) *AppearanceCharacteristics
 	WithRolloverCaption(rolloverCaption string) *AppearanceCharacteristics
 	WithDownCaption(downCaption string) *AppearanceCharacteristics
-	ControlType() raw.PDFWidgetControlType
-	SetControlType(controlType raw.PDFWidgetControlType)
+	ControlType() PDFWidgetControlType
+	SetControlType(controlType PDFWidgetControlType)
 	BackgroundColor() *appkit.NSColor
 	SetBackgroundColor(backgroundColor *appkit.NSColor)
 	BorderColor() *appkit.NSColor

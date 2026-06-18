@@ -38,9 +38,9 @@ func NewAUGenericViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUGe
 }
 
 // NewAUGenericViewWithAudioUnitDisplayFlags creates a new [AUGenericView].
-func NewAUGenericViewWithAudioUnitDisplayFlags(inAudioUnit *carboncore.ComponentInstanceRecord, inFlags raw.AUGenericViewDisplayFlags) *AUGenericView {
+func NewAUGenericViewWithAudioUnitDisplayFlags(inAudioUnit *carboncore.ComponentInstanceRecord, inFlags AUGenericViewDisplayFlags) *AUGenericView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUGenericView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:displayFlags:"), inAudioUnit, inFlags)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:displayFlags:"), inAudioUnit, raw.AUGenericViewDisplayFlags(inFlags))
 	return &AUGenericView{inner: raw.AUGenericViewFromID(_id)}
 }
 

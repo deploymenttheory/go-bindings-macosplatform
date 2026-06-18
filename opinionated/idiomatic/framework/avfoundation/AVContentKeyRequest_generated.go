@@ -80,8 +80,8 @@ func (x *ContentKeyRequest) RespondByRequestingPersistableContentKeyRequestAndRe
 }
 
 // Status calls the underlying Status.
-func (x *ContentKeyRequest) Status() raw.AVContentKeyRequestStatus {
-	return x.inner.Status()
+func (x *ContentKeyRequest) Status() AVContentKeyRequestStatus {
+	return AVContentKeyRequestStatus(x.inner.Status())
 }
 
 // Error calls the underlying Error.
@@ -141,7 +141,7 @@ type ContentKeyRequestable interface {
 	ProcessContentKeyResponse(keyResponse *raw.AVContentKeyResponse)
 	ProcessContentKeyResponseError(error_ unsafe.Pointer)
 	RespondByRequestingPersistableContentKeyRequestAndReturnError() error
-	Status() raw.AVContentKeyRequestStatus
+	Status() AVContentKeyRequestStatus
 	Error() unsafe.Pointer
 	Identifier() objc.ID
 	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]

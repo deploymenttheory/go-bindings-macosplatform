@@ -64,18 +64,18 @@ func (x *ShareMetadata) HierarchicalRootRecordID() *RecordID {
 }
 
 // ParticipantRole calls the underlying ParticipantRole.
-func (x *ShareMetadata) ParticipantRole() raw.CKShareParticipantRole {
-	return x.inner.ParticipantRole()
+func (x *ShareMetadata) ParticipantRole() CKShareParticipantRole {
+	return CKShareParticipantRole(x.inner.ParticipantRole())
 }
 
 // ParticipantStatus calls the underlying ParticipantStatus.
-func (x *ShareMetadata) ParticipantStatus() raw.CKShareParticipantAcceptanceStatus {
-	return x.inner.ParticipantStatus()
+func (x *ShareMetadata) ParticipantStatus() CKShareParticipantAcceptanceStatus {
+	return CKShareParticipantAcceptanceStatus(x.inner.ParticipantStatus())
 }
 
 // ParticipantPermission calls the underlying ParticipantPermission.
-func (x *ShareMetadata) ParticipantPermission() raw.CKShareParticipantPermission {
-	return x.inner.ParticipantPermission()
+func (x *ShareMetadata) ParticipantPermission() CKShareParticipantPermission {
+	return CKShareParticipantPermission(x.inner.ParticipantPermission())
 }
 
 // OwnerIdentity calls the underlying OwnerIdentity.
@@ -111,9 +111,9 @@ type ShareMetadataable interface {
 	ContainerIdentifier() string
 	Share() *Share
 	HierarchicalRootRecordID() *RecordID
-	ParticipantRole() raw.CKShareParticipantRole
-	ParticipantStatus() raw.CKShareParticipantAcceptanceStatus
-	ParticipantPermission() raw.CKShareParticipantPermission
+	ParticipantRole() CKShareParticipantRole
+	ParticipantStatus() CKShareParticipantAcceptanceStatus
+	ParticipantPermission() CKShareParticipantPermission
 	OwnerIdentity() *UserIdentity
 	RootRecord() *Record
 	RootRecordID() *RecordID

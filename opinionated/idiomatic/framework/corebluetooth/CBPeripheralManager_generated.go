@@ -67,8 +67,8 @@ func (x *PeripheralManager) StopAdvertising() {
 }
 
 // SetDesiredConnectionLatencyForCentral calls the underlying SetDesiredConnectionLatencyForCentral.
-func (x *PeripheralManager) SetDesiredConnectionLatencyForCentral(latency raw.CBPeripheralManagerConnectionLatency, central *raw.CBCentral) {
-	x.inner.SetDesiredConnectionLatencyForCentral(latency, central)
+func (x *PeripheralManager) SetDesiredConnectionLatencyForCentral(latency CBPeripheralManagerConnectionLatency, central *raw.CBCentral) {
+	x.inner.SetDesiredConnectionLatencyForCentral(raw.CBPeripheralManagerConnectionLatency(latency), central)
 }
 
 // AddService calls the underlying AddService.
@@ -87,8 +87,8 @@ func (x *PeripheralManager) RemoveAllServices() {
 }
 
 // RespondToRequestWithResult calls the underlying RespondToRequestWithResult.
-func (x *PeripheralManager) RespondToRequestWithResult(request *raw.CBATTRequest, result raw.CBATTError) {
-	x.inner.RespondToRequestWithResult(request, result)
+func (x *PeripheralManager) RespondToRequestWithResult(request *raw.CBATTRequest, result CBATTError) {
+	x.inner.RespondToRequestWithResult(request, raw.CBATTError(result))
 }
 
 // UpdateValueForCharacteristicOnSubscribedCentrals calls the underlying UpdateValueForCharacteristicOnSubscribedCentrals.
@@ -129,11 +129,11 @@ type PeripheralManagerable interface {
 	WithDelegate(delegate raw.CBPeripheralManagerDelegate) *PeripheralManager
 	StartAdvertising(advertisementData *foundation.NSDictionary[*foundation.NSString, objc.ID])
 	StopAdvertising()
-	SetDesiredConnectionLatencyForCentral(latency raw.CBPeripheralManagerConnectionLatency, central *raw.CBCentral)
+	SetDesiredConnectionLatencyForCentral(latency CBPeripheralManagerConnectionLatency, central *raw.CBCentral)
 	AddService(service *raw.CBMutableService)
 	RemoveService(service *raw.CBMutableService)
 	RemoveAllServices()
-	RespondToRequestWithResult(request *raw.CBATTRequest, result raw.CBATTError)
+	RespondToRequestWithResult(request *raw.CBATTRequest, result CBATTError)
 	UpdateValueForCharacteristicOnSubscribedCentrals(value *foundation.NSData, characteristic *raw.CBMutableCharacteristic, centrals *foundation.NSArray[*raw.CBCentral]) bool
 	PublishL2CAPChannelWithEncryption(encryptionRequired bool)
 	UnpublishL2CAPChannel(pSM uint16)

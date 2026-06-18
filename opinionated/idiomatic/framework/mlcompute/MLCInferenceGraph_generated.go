@@ -53,13 +53,13 @@ func (x *InferenceGraph) AddOutputs(outputs *foundation.NSDictionary[*foundation
 }
 
 // CompileWithOptionsDevice calls the underlying CompileWithOptionsDevice.
-func (x *InferenceGraph) CompileWithOptionsDevice(options raw.MLCGraphCompilationOptions, device *raw.MLCDevice) bool {
-	return x.inner.CompileWithOptionsDevice(options, device)
+func (x *InferenceGraph) CompileWithOptionsDevice(options MLCGraphCompilationOptions, device *raw.MLCDevice) bool {
+	return x.inner.CompileWithOptionsDevice(raw.MLCGraphCompilationOptions(options), device)
 }
 
 // CompileWithOptionsDeviceInputTensorsInputTensorsData calls the underlying CompileWithOptionsDeviceInputTensorsInputTensorsData.
-func (x *InferenceGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options raw.MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool {
-	return x.inner.CompileWithOptionsDeviceInputTensorsInputTensorsData(options, device, inputTensors, inputTensorsData)
+func (x *InferenceGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool {
+	return x.inner.CompileWithOptionsDeviceInputTensorsInputTensorsData(raw.MLCGraphCompilationOptions(options), device, inputTensors, inputTensorsData)
 }
 
 // LinkWithGraphs calls the underlying LinkWithGraphs.
@@ -68,23 +68,23 @@ func (x *InferenceGraph) LinkWithGraphs(graphs *foundation.NSArray[*raw.MLCInfer
 }
 
 // ExecuteWithInputsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataBatchSizeOptionsCompletionHandler.
-func (x *InferenceGraph) ExecuteWithInputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteWithInputsDataBatchSizeOptionsCompletionHandler(inputsData, batchSize, options, completionHandler)
+func (x *InferenceGraph) ExecuteWithInputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteWithInputsDataBatchSizeOptionsCompletionHandler(inputsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
 // ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler.
-func (x *InferenceGraph) ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData, outputsData, batchSize, options, completionHandler)
+func (x *InferenceGraph) ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData, outputsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
 // ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler.
-func (x *InferenceGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, batchSize, options, completionHandler)
+func (x *InferenceGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
 // ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler.
-func (x *InferenceGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
-	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, outputsData, batchSize, options, completionHandler)
+func (x *InferenceGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
+	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, outputsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
 // DeviceMemorySize calls the underlying DeviceMemorySize.
@@ -100,13 +100,13 @@ type InferenceGraphable interface {
 	AddInputs(inputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool
 	AddInputsLossLabelsLossLabelWeights(inputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabels *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabelWeights *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool
 	AddOutputs(outputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool
-	CompileWithOptionsDevice(options raw.MLCGraphCompilationOptions, device *raw.MLCDevice) bool
-	CompileWithOptionsDeviceInputTensorsInputTensorsData(options raw.MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool
+	CompileWithOptionsDevice(options MLCGraphCompilationOptions, device *raw.MLCDevice) bool
+	CompileWithOptionsDeviceInputTensorsInputTensorsData(options MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool
 	LinkWithGraphs(graphs *foundation.NSArray[*raw.MLCInferenceGraph]) bool
-	ExecuteWithInputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
-	ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options raw.MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteWithInputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
+	ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool
 	DeviceMemorySize() uint
 }
 

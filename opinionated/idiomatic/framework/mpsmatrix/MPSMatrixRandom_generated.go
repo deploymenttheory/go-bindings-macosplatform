@@ -65,8 +65,8 @@ func (x *MatrixRandom) DestinationDataType() mpscore.MPSDataType {
 }
 
 // DistributionType calls the underlying DistributionType.
-func (x *MatrixRandom) DistributionType() raw.MPSMatrixRandomDistribution {
-	return x.inner.DistributionType()
+func (x *MatrixRandom) DistributionType() MPSMatrixRandomDistribution {
+	return MPSMatrixRandomDistribution(x.inner.DistributionType())
 }
 
 // BatchStart calls the underlying BatchStart.
@@ -99,7 +99,7 @@ type MatrixRandomable interface {
 	EncodeToCommandBufferDestinationVector(commandBuffer metal.MTLCommandBuffer, destinationVector *mpscore.MPSVector)
 	EncodeToCommandBufferDestinationMatrix(commandBuffer metal.MTLCommandBuffer, destinationMatrix *mpscore.MPSMatrix)
 	DestinationDataType() mpscore.MPSDataType
-	DistributionType() raw.MPSMatrixRandomDistribution
+	DistributionType() MPSMatrixRandomDistribution
 	BatchStart() uint
 	SetBatchStart(batchStart uint)
 	BatchSize() uint

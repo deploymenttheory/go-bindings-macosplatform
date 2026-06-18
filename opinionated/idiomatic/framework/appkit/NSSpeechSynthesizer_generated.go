@@ -78,13 +78,13 @@ func (x *SpeechSynthesizer) StopSpeaking() {
 }
 
 // StopSpeakingAtBoundary calls the underlying StopSpeakingAtBoundary.
-func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary raw.NSSpeechBoundary) {
-	x.inner.StopSpeakingAtBoundary(boundary)
+func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary NSSpeechBoundary) {
+	x.inner.StopSpeakingAtBoundary(raw.NSSpeechBoundary(boundary))
 }
 
 // PauseSpeakingAtBoundary calls the underlying PauseSpeakingAtBoundary.
-func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary raw.NSSpeechBoundary) {
-	x.inner.PauseSpeakingAtBoundary(boundary)
+func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary NSSpeechBoundary) {
+	x.inner.PauseSpeakingAtBoundary(raw.NSSpeechBoundary(boundary))
 }
 
 // ContinueSpeaking calls the underlying ContinueSpeaking.
@@ -185,8 +185,8 @@ type SpeechSynthesizerable interface {
 	StartSpeakingString(string_ string) bool
 	StartSpeakingStringToURL(string_ string, url string) bool
 	StopSpeaking()
-	StopSpeakingAtBoundary(boundary raw.NSSpeechBoundary)
-	PauseSpeakingAtBoundary(boundary raw.NSSpeechBoundary)
+	StopSpeakingAtBoundary(boundary NSSpeechBoundary)
+	PauseSpeakingAtBoundary(boundary NSSpeechBoundary)
 	ContinueSpeaking()
 	Voice() string
 	SetVoice(voice *foundation.NSString) bool

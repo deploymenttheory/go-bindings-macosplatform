@@ -45,8 +45,8 @@ func (x *RecordZoneNotification) RecordZoneID() *RecordZoneID {
 }
 
 // DatabaseScope calls the underlying DatabaseScope.
-func (x *RecordZoneNotification) DatabaseScope() raw.CKDatabaseScope {
-	return x.inner.DatabaseScope()
+func (x *RecordZoneNotification) DatabaseScope() CKDatabaseScope {
+	return CKDatabaseScope(x.inner.DatabaseScope())
 }
 
 func (x *RecordZoneNotification) asNotification() *raw.CKNotification { return &x.inner.CKNotification }
@@ -55,7 +55,7 @@ func (x *RecordZoneNotification) asNotification() *raw.CKNotification { return &
 type RecordZoneNotificationable interface {
 	Unwrap() *raw.CKRecordZoneNotification
 	RecordZoneID() *RecordZoneID
-	DatabaseScope() raw.CKDatabaseScope
+	DatabaseScope() CKDatabaseScope
 }
 
 var _ RecordZoneNotificationable = (*RecordZoneNotification)(nil)

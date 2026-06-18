@@ -14,8 +14,8 @@ import (
 )
 
 // ButtonWithTypeStyle calls the underlying ASAuthorizationAppleIDButtonButtonWithTypeStyle.
-func ButtonWithTypeStyle(type_ raw.ASAuthorizationAppleIDButtonType, style raw.ASAuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
-	_r := raw.ASAuthorizationAppleIDButtonButtonWithTypeStyle(type_, style)
+func ButtonWithTypeStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
+	_r := raw.ASAuthorizationAppleIDButtonButtonWithTypeStyle(raw.ASAuthorizationAppleIDButtonType(type_), raw.ASAuthorizationAppleIDButtonStyle(style))
 	if _r == nil {
 		return nil
 	}

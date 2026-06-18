@@ -63,8 +63,8 @@ func (x *BroadcastSampleHandler) BroadcastAnnotatedWithApplicationInfo(applicati
 }
 
 // ProcessSampleBufferWithType calls the underlying ProcessSampleBufferWithType.
-func (x *BroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer unsafe.Pointer, sampleBufferType raw.RPSampleBufferType) {
-	x.inner.ProcessSampleBufferWithType(sampleBuffer, sampleBufferType)
+func (x *BroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer unsafe.Pointer, sampleBufferType RPSampleBufferType) {
+	x.inner.ProcessSampleBufferWithType(sampleBuffer, raw.RPSampleBufferType(sampleBufferType))
 }
 
 // FinishBroadcastWithError calls the underlying FinishBroadcastWithError.
@@ -84,7 +84,7 @@ type BroadcastSampleHandlerable interface {
 	BroadcastResumed()
 	BroadcastFinished()
 	BroadcastAnnotatedWithApplicationInfo(applicationInfo *foundation.NSDictionary[objc.ID, objc.ID])
-	ProcessSampleBufferWithType(sampleBuffer unsafe.Pointer, sampleBufferType raw.RPSampleBufferType)
+	ProcessSampleBufferWithType(sampleBuffer unsafe.Pointer, sampleBufferType RPSampleBufferType)
 	FinishBroadcastWithError(error_ unsafe.Pointer)
 }
 

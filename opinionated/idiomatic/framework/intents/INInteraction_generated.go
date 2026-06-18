@@ -41,8 +41,8 @@ func NewInteractionWithIntentResponse(intent *raw.INIntent, response *raw.INInte
 }
 
 // WithDirection sets the direction property and returns the receiver for chaining.
-func (x *Interaction) WithDirection(direction raw.INInteractionDirection) *Interaction {
-	x.inner.SetDirection(direction)
+func (x *Interaction) WithDirection(direction INInteractionDirection) *Interaction {
+	x.inner.SetDirection(raw.INInteractionDirection(direction))
 	return x
 }
 
@@ -101,18 +101,18 @@ func (x *Interaction) IntentResponse() *IntentResponse {
 }
 
 // IntentHandlingStatus calls the underlying IntentHandlingStatus.
-func (x *Interaction) IntentHandlingStatus() raw.INIntentHandlingStatus {
-	return x.inner.IntentHandlingStatus()
+func (x *Interaction) IntentHandlingStatus() INIntentHandlingStatus {
+	return INIntentHandlingStatus(x.inner.IntentHandlingStatus())
 }
 
 // Direction calls the underlying Direction.
-func (x *Interaction) Direction() raw.INInteractionDirection {
-	return x.inner.Direction()
+func (x *Interaction) Direction() INInteractionDirection {
+	return INInteractionDirection(x.inner.Direction())
 }
 
 // SetDirection calls the underlying SetDirection.
-func (x *Interaction) SetDirection(direction raw.INInteractionDirection) {
-	x.inner.SetDirection(direction)
+func (x *Interaction) SetDirection(direction INInteractionDirection) {
+	x.inner.SetDirection(raw.INInteractionDirection(direction))
 }
 
 // DateInterval calls the underlying DateInterval.
@@ -156,16 +156,16 @@ func (x *Interaction) SetGroupIdentifier(groupIdentifier string) {
 // Interactionable is the interface implemented by [Interaction], for mocking and DI.
 type Interactionable interface {
 	Unwrap() *raw.INInteraction
-	WithDirection(direction raw.INInteractionDirection) *Interaction
+	WithDirection(direction INInteractionDirection) *Interaction
 	WithDateInterval(dateInterval *foundation.NSDateInterval) *Interaction
 	WithIdentifier(identifier string) *Interaction
 	WithGroupIdentifier(groupIdentifier string) *Interaction
 	DonateInteractionWithCompletion(ctx context.Context) error
 	Intent() *Intent
 	IntentResponse() *IntentResponse
-	IntentHandlingStatus() raw.INIntentHandlingStatus
-	Direction() raw.INInteractionDirection
-	SetDirection(direction raw.INInteractionDirection)
+	IntentHandlingStatus() INIntentHandlingStatus
+	Direction() INInteractionDirection
+	SetDirection(direction INInteractionDirection)
 	DateInterval() *foundation.NSDateInterval
 	SetDateInterval(dateInterval *foundation.NSDateInterval)
 	Identifier() string

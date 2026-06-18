@@ -66,8 +66,8 @@ func (x *Renderer) RenderWithViewportCommandBufferPassDescriptor(viewport corefo
 }
 
 // SnapshotAtTimeWithSizeAntialiasingMode calls the underlying SnapshotAtTimeWithSizeAntialiasingMode.
-func (x *Renderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode raw.SCNAntialiasingMode) *appkit.NSImage {
-	return x.inner.SnapshotAtTimeWithSizeAntialiasingMode(time_, size, antialiasingMode)
+func (x *Renderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode SCNAntialiasingMode) *appkit.NSImage {
+	return x.inner.SnapshotAtTimeWithSizeAntialiasingMode(time_, size, raw.SCNAntialiasingMode(antialiasingMode))
 }
 
 // UpdateProbesAtTime calls the underlying UpdateProbesAtTime.
@@ -107,7 +107,7 @@ type Rendererable interface {
 	RenderAtTime(time_ float64)
 	UpdateAtTime(time_ float64)
 	RenderWithViewportCommandBufferPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor)
-	SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode raw.SCNAntialiasingMode) *appkit.NSImage
+	SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode SCNAntialiasingMode) *appkit.NSImage
 	UpdateProbesAtTime(lightProbes *foundation.NSArray[*raw.SCNNode], time_ float64)
 	Scene() *Scene
 	SetScene(scene *raw.SCNScene)

@@ -40,8 +40,8 @@ func NewSmartCard() *SmartCard {
 }
 
 // WithAllowedProtocols sets the allowedProtocols property and returns the receiver for chaining.
-func (x *SmartCard) WithAllowedProtocols(allowedProtocols raw.TKSmartCardProtocol) *SmartCard {
-	x.inner.SetAllowedProtocols(allowedProtocols)
+func (x *SmartCard) WithAllowedProtocols(allowedProtocols TKSmartCardProtocol) *SmartCard {
+	x.inner.SetAllowedProtocols(raw.TKSmartCardProtocol(allowedProtocols))
 	return x
 }
 
@@ -142,18 +142,18 @@ func (x *SmartCard) Valid() bool {
 }
 
 // AllowedProtocols calls the underlying AllowedProtocols.
-func (x *SmartCard) AllowedProtocols() raw.TKSmartCardProtocol {
-	return x.inner.AllowedProtocols()
+func (x *SmartCard) AllowedProtocols() TKSmartCardProtocol {
+	return TKSmartCardProtocol(x.inner.AllowedProtocols())
 }
 
 // SetAllowedProtocols calls the underlying SetAllowedProtocols.
-func (x *SmartCard) SetAllowedProtocols(allowedProtocols raw.TKSmartCardProtocol) {
-	x.inner.SetAllowedProtocols(allowedProtocols)
+func (x *SmartCard) SetAllowedProtocols(allowedProtocols TKSmartCardProtocol) {
+	x.inner.SetAllowedProtocols(raw.TKSmartCardProtocol(allowedProtocols))
 }
 
 // CurrentProtocol calls the underlying CurrentProtocol.
-func (x *SmartCard) CurrentProtocol() raw.TKSmartCardProtocol {
-	return x.inner.CurrentProtocol()
+func (x *SmartCard) CurrentProtocol() TKSmartCardProtocol {
+	return TKSmartCardProtocol(x.inner.CurrentProtocol())
 }
 
 // Sensitive calls the underlying Sensitive.
@@ -224,7 +224,7 @@ func (x *SmartCard) SetUseCommandChaining(useCommandChaining bool) {
 // SmartCardable is the interface implemented by [SmartCard], for mocking and DI.
 type SmartCardable interface {
 	Unwrap() *raw.TKSmartCard
-	WithAllowedProtocols(allowedProtocols raw.TKSmartCardProtocol) *SmartCard
+	WithAllowedProtocols(allowedProtocols TKSmartCardProtocol) *SmartCard
 	WithSensitive(sensitive bool) *SmartCard
 	WithContext(context_ objc.ID) *SmartCard
 	WithCla(cla uint8) *SmartCard
@@ -237,9 +237,9 @@ type SmartCardable interface {
 	UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat *raw.TKSmartCardPINFormat, aPDU *foundation.NSData, currentPINByteOffset int, newPINByteOffset int) *SmartCardUserInteractionForSecurePINChange
 	Slot() *SmartCardSlot
 	Valid() bool
-	AllowedProtocols() raw.TKSmartCardProtocol
-	SetAllowedProtocols(allowedProtocols raw.TKSmartCardProtocol)
-	CurrentProtocol() raw.TKSmartCardProtocol
+	AllowedProtocols() TKSmartCardProtocol
+	SetAllowedProtocols(allowedProtocols TKSmartCardProtocol)
+	CurrentProtocol() TKSmartCardProtocol
 	Sensitive() bool
 	SetSensitive(sensitive bool)
 	Context() objc.ID

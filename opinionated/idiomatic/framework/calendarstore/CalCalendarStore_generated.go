@@ -89,13 +89,13 @@ func (x *CalCalendarStore) TaskWithUID(uid string) *CalTask {
 }
 
 // SaveEventSpanError calls the underlying SaveEventSpanError.
-func (x *CalCalendarStore) SaveEventSpanError(event *raw.CalEvent, span raw.CalSpan) (bool, error) {
-	return x.inner.SaveEventSpanError(event, span)
+func (x *CalCalendarStore) SaveEventSpanError(event *raw.CalEvent, span CalSpan) (bool, error) {
+	return x.inner.SaveEventSpanError(event, raw.CalSpan(span))
 }
 
 // RemoveEventSpanError calls the underlying RemoveEventSpanError.
-func (x *CalCalendarStore) RemoveEventSpanError(event *raw.CalEvent, span raw.CalSpan) (bool, error) {
-	return x.inner.RemoveEventSpanError(event, span)
+func (x *CalCalendarStore) RemoveEventSpanError(event *raw.CalEvent, span CalSpan) (bool, error) {
+	return x.inner.RemoveEventSpanError(event, raw.CalSpan(span))
 }
 
 // SaveTaskError calls the underlying SaveTaskError.
@@ -119,8 +119,8 @@ type CalCalendarStoreable interface {
 	EventWithUIDOccurrence(uid string, date *foundation.NSDate) *CalEvent
 	TasksWithPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[objc.ID]
 	TaskWithUID(uid string) *CalTask
-	SaveEventSpanError(event *raw.CalEvent, span raw.CalSpan) (bool, error)
-	RemoveEventSpanError(event *raw.CalEvent, span raw.CalSpan) (bool, error)
+	SaveEventSpanError(event *raw.CalEvent, span CalSpan) (bool, error)
+	RemoveEventSpanError(event *raw.CalEvent, span CalSpan) (bool, error)
 	SaveTaskError(task *raw.CalTask) (bool, error)
 	RemoveTaskError(task *raw.CalTask) (bool, error)
 }

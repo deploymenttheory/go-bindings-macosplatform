@@ -89,8 +89,8 @@ func (x *GlassEffectContainerView) WithAutoresizesSubviews(autoresizesSubviews b
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *GlassEffectContainerView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *GlassEffectContainerView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *GlassEffectContainerView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -149,14 +149,14 @@ func (x *GlassEffectContainerView) WithWantsRestingTouches(wantsRestingTouches b
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *GlassEffectContainerView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *GlassEffectContainerView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *GlassEffectContainerView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *GlassEffectContainerView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *GlassEffectContainerView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *GlassEffectContainerView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -263,8 +263,8 @@ func (x *GlassEffectContainerView) WithToolTip(toolTip string) *GlassEffectConta
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GlassEffectContainerView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *GlassEffectContainerView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GlassEffectContainerView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -281,8 +281,8 @@ func (x *GlassEffectContainerView) WithNextKeyView(nextKeyView ViewProvider) *Gl
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithFocusRingType(focusRingType raw.NSFocusRingType) *GlassEffectContainerView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *GlassEffectContainerView) WithFocusRingType(focusRingType NSFocusRingType) *GlassEffectContainerView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -305,8 +305,8 @@ func (x *GlassEffectContainerView) WithGestureRecognizers(items ...GestureRecogn
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *GlassEffectContainerView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GlassEffectContainerView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *GlassEffectContainerView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GlassEffectContainerView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -431,7 +431,7 @@ type GlassEffectContainerViewable interface {
 	WithHidden(hidden bool) *GlassEffectContainerView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GlassEffectContainerView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *GlassEffectContainerView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *GlassEffectContainerView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *GlassEffectContainerView
 	WithFrame(frame corefoundation.CGRect) *GlassEffectContainerView
 	WithFrameRotation(frameRotation float64) *GlassEffectContainerView
 	WithFrameCenterRotation(frameCenterRotation float64) *GlassEffectContainerView
@@ -441,8 +441,8 @@ type GlassEffectContainerViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *GlassEffectContainerView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *GlassEffectContainerView
 	WithWantsRestingTouches(wantsRestingTouches bool) *GlassEffectContainerView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *GlassEffectContainerView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *GlassEffectContainerView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *GlassEffectContainerView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *GlassEffectContainerView
 	WithWantsLayer(wantsLayer bool) *GlassEffectContainerView
 	WithLayer(layer *quartzcore.CALayer) *GlassEffectContainerView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GlassEffectContainerView
@@ -456,12 +456,12 @@ type GlassEffectContainerViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *GlassEffectContainerView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GlassEffectContainerView
 	WithToolTip(toolTip string) *GlassEffectContainerView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GlassEffectContainerView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GlassEffectContainerView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GlassEffectContainerView
 	WithNextKeyView(nextKeyView ViewProvider) *GlassEffectContainerView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *GlassEffectContainerView
+	WithFocusRingType(focusRingType NSFocusRingType) *GlassEffectContainerView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *GlassEffectContainerView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GlassEffectContainerView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GlassEffectContainerView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GlassEffectContainerView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectContainerView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectContainerView

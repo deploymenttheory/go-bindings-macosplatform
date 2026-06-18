@@ -30,8 +30,8 @@ func NodeWithSourceDataSource(source *raw.MPSNNImageNode, dataSource raw.MPSCNNB
 }
 
 // NodeWithSourceWeightsScaleValueTypeFlags calls the underlying MPSCNNBinaryConvolutionNodeNodeWithSourceWeightsScaleValueTypeFlags.
-func NodeWithSourceWeightsScaleValueTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ raw.MPSCNNBinaryConvolutionType, flags raw.MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolutionNode {
-	_r := raw.MPSCNNBinaryConvolutionNodeNodeWithSourceWeightsScaleValueTypeFlags(sourceNode, weights, scaleValue, type_, flags)
+func NodeWithSourceWeightsScaleValueTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolutionNode {
+	_r := raw.MPSCNNBinaryConvolutionNodeNodeWithSourceWeightsScaleValueTypeFlags(sourceNode, weights, scaleValue, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
 	if _r == nil {
 		return nil
 	}
@@ -39,8 +39,8 @@ func NodeWithSourceWeightsScaleValueTypeFlags(sourceNode *raw.MPSNNImageNode, we
 }
 
 // NodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags calls the underlying MPSCNNBinaryConvolutionNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags.
-func NodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ raw.MPSCNNBinaryConvolutionType, flags raw.MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolutionNode {
-	_r := raw.MPSCNNBinaryConvolutionNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode, weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, type_, flags)
+func NodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryConvolutionNode {
+	_r := raw.MPSCNNBinaryConvolutionNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode, weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
 	if _r == nil {
 		return nil
 	}
@@ -48,8 +48,8 @@ func NodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScal
 }
 
 // MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags calls the underlying MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags.
-func MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ raw.MPSCNNBinaryConvolutionType, flags raw.MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnectedNode {
-	_r := raw.MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags(sourceNode, weights, scaleValue, type_, flags)
+func MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnectedNode {
+	_r := raw.MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags(sourceNode, weights, scaleValue, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
 	if _r == nil {
 		return nil
 	}
@@ -57,8 +57,8 @@ func MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsScaleValueTypeFlags(sour
 }
 
 // MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags calls the underlying MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags.
-func MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ raw.MPSCNNBinaryConvolutionType, flags raw.MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnectedNode {
-	_r := raw.MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode, weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, type_, flags)
+func MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnectedNode {
+	_r := raw.MPSCNNBinaryFullyConnectedNodeNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode, weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
 	if _r == nil {
 		return nil
 	}
@@ -314,8 +314,8 @@ func CnnLossDataDescriptorWithDataLayoutSize(data *foundation.NSData, layout mps
 }
 
 // CnnLossDescriptorWithTypeReductionType calls the underlying MPSCNNLossDescriptorCnnLossDescriptorWithTypeReductionType.
-func CnnLossDescriptorWithTypeReductionType(lossType raw.MPSCNNLossType, reductionType raw.MPSCNNReductionType) *CNNLossDescriptor {
-	_r := raw.MPSCNNLossDescriptorCnnLossDescriptorWithTypeReductionType(lossType, reductionType)
+func CnnLossDescriptorWithTypeReductionType(lossType MPSCNNLossType, reductionType MPSCNNReductionType) *CNNLossDescriptor {
+	_r := raw.MPSCNNLossDescriptorCnnLossDescriptorWithTypeReductionType(raw.MPSCNNLossType(lossType), raw.MPSCNNReductionType(reductionType))
 	if _r == nil {
 		return nil
 	}
@@ -710,8 +710,8 @@ func MPSCNNUpsamplingNearestNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFac
 }
 
 // CnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes calls the underlying MPSCNNYOLOLossDescriptorCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes.
-func CnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes(xYLossType raw.MPSCNNLossType, wHLossType raw.MPSCNNLossType, confidenceLossType raw.MPSCNNLossType, classesLossType raw.MPSCNNLossType, reductionType raw.MPSCNNReductionType, anchorBoxes *foundation.NSData, numberOfAnchorBoxes uint) *CNNYOLOLossDescriptor {
-	_r := raw.MPSCNNYOLOLossDescriptorCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes(xYLossType, wHLossType, confidenceLossType, classesLossType, reductionType, anchorBoxes, numberOfAnchorBoxes)
+func CnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes(xYLossType MPSCNNLossType, wHLossType MPSCNNLossType, confidenceLossType MPSCNNLossType, classesLossType MPSCNNLossType, reductionType MPSCNNReductionType, anchorBoxes *foundation.NSData, numberOfAnchorBoxes uint) *CNNYOLOLossDescriptor {
+	_r := raw.MPSCNNYOLOLossDescriptorCnnLossDescriptorWithXYLossTypeWHLossTypeConfidenceLossTypeClassesLossTypeReductionTypeAnchorBoxesNumberOfAnchorBoxes(raw.MPSCNNLossType(xYLossType), raw.MPSCNNLossType(wHLossType), raw.MPSCNNLossType(confidenceLossType), raw.MPSCNNLossType(classesLossType), raw.MPSCNNReductionType(reductionType), anchorBoxes, numberOfAnchorBoxes)
 	if _r == nil {
 		return nil
 	}
@@ -791,8 +791,8 @@ func MPSNNConcatenationNodeNodeWithSources(sourceNodes *foundation.NSArray[*raw.
 }
 
 // PaddingWithMethod calls the underlying MPSNNDefaultPaddingPaddingWithMethod.
-func PaddingWithMethod(method raw.MPSNNPaddingMethod) *NNDefaultPadding {
-	_r := raw.MPSNNDefaultPaddingPaddingWithMethod(method)
+func PaddingWithMethod(method MPSNNPaddingMethod) *NNDefaultPadding {
+	_r := raw.MPSNNDefaultPaddingPaddingWithMethod(raw.MPSNNPaddingMethod(method))
 	if _r == nil {
 		return nil
 	}
@@ -962,8 +962,8 @@ func NodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNode
 }
 
 // CnnNeuronDescriptorWithType calls the underlying MPSNNNeuronDescriptorCnnNeuronDescriptorWithType.
-func CnnNeuronDescriptorWithType(neuronType raw.MPSCNNNeuronType) *NNNeuronDescriptor {
-	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithType(neuronType)
+func CnnNeuronDescriptorWithType(neuronType MPSCNNNeuronType) *NNNeuronDescriptor {
+	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithType(raw.MPSCNNNeuronType(neuronType))
 	if _r == nil {
 		return nil
 	}
@@ -971,8 +971,8 @@ func CnnNeuronDescriptorWithType(neuronType raw.MPSCNNNeuronType) *NNNeuronDescr
 }
 
 // CnnNeuronDescriptorWithTypeA calls the underlying MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeA.
-func CnnNeuronDescriptorWithTypeA(neuronType raw.MPSCNNNeuronType, a float32) *NNNeuronDescriptor {
-	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeA(neuronType, a)
+func CnnNeuronDescriptorWithTypeA(neuronType MPSCNNNeuronType, a float32) *NNNeuronDescriptor {
+	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeA(raw.MPSCNNNeuronType(neuronType), a)
 	if _r == nil {
 		return nil
 	}
@@ -980,8 +980,8 @@ func CnnNeuronDescriptorWithTypeA(neuronType raw.MPSCNNNeuronType, a float32) *N
 }
 
 // CnnNeuronDescriptorWithTypeAB calls the underlying MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeAB.
-func CnnNeuronDescriptorWithTypeAB(neuronType raw.MPSCNNNeuronType, a float32, b float32) *NNNeuronDescriptor {
-	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeAB(neuronType, a, b)
+func CnnNeuronDescriptorWithTypeAB(neuronType MPSCNNNeuronType, a float32, b float32) *NNNeuronDescriptor {
+	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeAB(raw.MPSCNNNeuronType(neuronType), a, b)
 	if _r == nil {
 		return nil
 	}
@@ -989,8 +989,8 @@ func CnnNeuronDescriptorWithTypeAB(neuronType raw.MPSCNNNeuronType, a float32, b
 }
 
 // CnnNeuronDescriptorWithTypeABC calls the underlying MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeABC.
-func CnnNeuronDescriptorWithTypeABC(neuronType raw.MPSCNNNeuronType, a float32, b float32, c float32) *NNNeuronDescriptor {
-	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeABC(neuronType, a, b, c)
+func CnnNeuronDescriptorWithTypeABC(neuronType MPSCNNNeuronType, a float32, b float32, c float32) *NNNeuronDescriptor {
+	_r := raw.MPSNNNeuronDescriptorCnnNeuronDescriptorWithTypeABC(raw.MPSCNNNeuronType(neuronType), a, b, c)
 	if _r == nil {
 		return nil
 	}
@@ -1007,8 +1007,8 @@ func CnnNeuronPReLUDescriptorWithDataNoCopy(data *foundation.NSData, noCopy bool
 }
 
 // OptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale calls the underlying MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale.
-func OptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType raw.MPSNNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
-	_r := raw.MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate, gradientRescale, regularizationType, regularizationScale)
+func OptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, regularizationType MPSNNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
+	_r := raw.MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegularizationScale(learningRate, gradientRescale, raw.MPSNNRegularizationType(regularizationType), regularizationScale)
 	if _r == nil {
 		return nil
 	}
@@ -1016,8 +1016,8 @@ func OptimizerDescriptorWithLearningRateGradientRescaleRegularizationTypeRegular
 }
 
 // OptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale calls the underlying MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale.
-func OptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, applyGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType raw.MPSNNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
-	_r := raw.MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate, gradientRescale, applyGradientClipping, gradientClipMax, gradientClipMin, regularizationType, regularizationScale)
+func OptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate float32, gradientRescale float32, applyGradientClipping bool, gradientClipMax float32, gradientClipMin float32, regularizationType MPSNNRegularizationType, regularizationScale float32) *NNOptimizerDescriptor {
+	_r := raw.MPSNNOptimizerDescriptorOptimizerDescriptorWithLearningRateGradientRescaleApplyGradientClippingGradientClipMaxGradientClipMinRegularizationTypeRegularizationScale(learningRate, gradientRescale, applyGradientClipping, gradientClipMax, gradientClipMin, raw.MPSNNRegularizationType(regularizationType), regularizationScale)
 	if _r == nil {
 		return nil
 	}

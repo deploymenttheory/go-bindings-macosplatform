@@ -61,13 +61,13 @@ func (x *TextureInfo) Depth() uint32 {
 }
 
 // AlphaState calls the underlying AlphaState.
-func (x *TextureInfo) AlphaState() raw.GLKTextureInfoAlphaState {
-	return x.inner.AlphaState()
+func (x *TextureInfo) AlphaState() GLKTextureInfoAlphaState {
+	return GLKTextureInfoAlphaState(x.inner.AlphaState())
 }
 
 // TextureOrigin calls the underlying TextureOrigin.
-func (x *TextureInfo) TextureOrigin() raw.GLKTextureInfoOrigin {
-	return x.inner.TextureOrigin()
+func (x *TextureInfo) TextureOrigin() GLKTextureInfoOrigin {
+	return GLKTextureInfoOrigin(x.inner.TextureOrigin())
 }
 
 // ContainsMipmaps calls the underlying ContainsMipmaps.
@@ -93,8 +93,8 @@ type TextureInfoable interface {
 	Width() uint32
 	Height() uint32
 	Depth() uint32
-	AlphaState() raw.GLKTextureInfoAlphaState
-	TextureOrigin() raw.GLKTextureInfoOrigin
+	AlphaState() GLKTextureInfoAlphaState
+	TextureOrigin() GLKTextureInfoOrigin
 	ContainsMipmaps() bool
 	MimapLevelCount() uint32
 	ArrayLength() uint32

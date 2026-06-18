@@ -52,9 +52,9 @@ func NewSortDescriptorWithCoder(coder *raw.NSCoder) *SortDescriptor {
 }
 
 // NewSortDescriptorWithKeyAscendingComparator creates a new [SortDescriptor].
-func NewSortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) *SortDescriptor {
+func NewSortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmptr func(objc.ID, objc.ID) NSComparisonResult) *SortDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSortDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:ascending:comparator:"), foundation.NSStringStringWithUTF8String(key).Ptr(), ascending, cmptr)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:ascending:comparator:"), foundation.NSStringStringWithUTF8String(key).Ptr(), ascending, func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 	return &SortDescriptor{inner: raw.NSSortDescriptorFromID(_id)}
 }
 
@@ -70,8 +70,8 @@ func (x *SortDescriptor) AllowEvaluation() {
 }
 
 // CompareObjectToObject calls the underlying CompareObjectToObject.
-func (x *SortDescriptor) CompareObjectToObject(object1 objc.ID, object2 objc.ID) raw.NSComparisonResult {
-	return x.inner.CompareObjectToObject(object1, object2)
+func (x *SortDescriptor) CompareObjectToObject(object1 objc.ID, object2 objc.ID) NSComparisonResult {
+	return NSComparisonResult(x.inner.CompareObjectToObject(object1, object2))
 }
 
 // Key calls the underlying Key.
@@ -110,7 +110,7 @@ type SortDescriptorable interface {
 	Unwrap() *raw.NSSortDescriptor
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SortDescriptor
 	AllowEvaluation()
-	CompareObjectToObject(object1 objc.ID, object2 objc.ID) raw.NSComparisonResult
+	CompareObjectToObject(object1 objc.ID, object2 objc.ID) NSComparisonResult
 	Key() *String
 	Ascending() bool
 	Selector() objc.SEL

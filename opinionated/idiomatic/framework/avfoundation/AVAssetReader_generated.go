@@ -79,8 +79,8 @@ func (x *AssetReader) Asset() *Asset {
 }
 
 // Status calls the underlying Status.
-func (x *AssetReader) Status() raw.AVAssetReaderStatus {
-	return x.inner.Status()
+func (x *AssetReader) Status() AVAssetReaderStatus {
+	return AVAssetReaderStatus(x.inner.Status())
 }
 
 // Error calls the underlying Error.
@@ -118,7 +118,7 @@ type AssetReaderable interface {
 	StartReading() bool
 	CancelReading()
 	Asset() *Asset
-	Status() raw.AVAssetReaderStatus
+	Status() AVAssetReaderStatus
 	Error() unsafe.Pointer
 	TimeRange() coremedia.CMTimeRange
 	SetTimeRange(timeRange coremedia.CMTimeRange)

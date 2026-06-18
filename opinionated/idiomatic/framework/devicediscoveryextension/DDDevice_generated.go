@@ -33,15 +33,15 @@ func DDDeviceFromID(id objc.ID) *DDDevice {
 }
 
 // NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier creates a new [DDDevice].
-func NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier(displayName string, category raw.DDDeviceCategory, protocolType *uniformtypeidentifiers.UTType, identifier string) *DDDevice {
+func NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier(displayName string, category DDDeviceCategory, protocolType *uniformtypeidentifiers.UTType, identifier string) *DDDevice {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DDDevice")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:category:protocolType:identifier:"), foundation.NSStringStringWithUTF8String(displayName).Ptr(), category, protocolType.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:category:protocolType:identifier:"), foundation.NSStringStringWithUTF8String(displayName).Ptr(), raw.DDDeviceCategory(category), protocolType.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
 	return &DDDevice{inner: raw.DDDeviceFromID(_id)}
 }
 
 // WithDeviceSupports sets the deviceSupports property and returns the receiver for chaining.
-func (x *DDDevice) WithDeviceSupports(deviceSupports raw.DDDeviceSupports) *DDDevice {
-	x.inner.SetDeviceSupports(deviceSupports)
+func (x *DDDevice) WithDeviceSupports(deviceSupports DDDeviceSupports) *DDDevice {
+	x.inner.SetDeviceSupports(raw.DDDeviceSupports(deviceSupports))
 	return x
 }
 
@@ -52,8 +52,8 @@ func (x *DDDevice) WithBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUI
 }
 
 // WithCategory sets the category property and returns the receiver for chaining.
-func (x *DDDevice) WithCategory(category raw.DDDeviceCategory) *DDDevice {
-	x.inner.SetCategory(category)
+func (x *DDDevice) WithCategory(category DDDeviceCategory) *DDDevice {
+	x.inner.SetCategory(raw.DDDeviceCategory(category))
 	return x
 }
 
@@ -76,8 +76,8 @@ func (x *DDDevice) WithIdentifier(identifier string) *DDDevice {
 }
 
 // WithMediaPlaybackState sets the mediaPlaybackState property and returns the receiver for chaining.
-func (x *DDDevice) WithMediaPlaybackState(mediaPlaybackState raw.DDDeviceMediaPlaybackState) *DDDevice {
-	x.inner.SetMediaPlaybackState(mediaPlaybackState)
+func (x *DDDevice) WithMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybackState) *DDDevice {
+	x.inner.SetMediaPlaybackState(raw.DDDeviceMediaPlaybackState(mediaPlaybackState))
 	return x
 }
 
@@ -100,8 +100,8 @@ func (x *DDDevice) WithNetworkEndpoint(networkEndpoint *foundation.NSObject) *DD
 }
 
 // WithProtocol sets the protocol property and returns the receiver for chaining.
-func (x *DDDevice) WithProtocol(protocol raw.DDDeviceProtocol) *DDDevice {
-	x.inner.SetProtocol(protocol)
+func (x *DDDevice) WithProtocol(protocol DDDeviceProtocol) *DDDevice {
+	x.inner.SetProtocol(raw.DDDeviceProtocol(protocol))
 	return x
 }
 
@@ -112,8 +112,8 @@ func (x *DDDevice) WithProtocolType(protocolType *uniformtypeidentifiers.UTType)
 }
 
 // WithState sets the state property and returns the receiver for chaining.
-func (x *DDDevice) WithState(state raw.DDDeviceState) *DDDevice {
-	x.inner.SetState(state)
+func (x *DDDevice) WithState(state DDDeviceState) *DDDevice {
+	x.inner.SetState(raw.DDDeviceState(state))
 	return x
 }
 
@@ -148,8 +148,8 @@ func (x *DDDevice) WithWifiAwareServiceName(wifiAwareServiceName string) *DDDevi
 }
 
 // WithWifiAwareServiceRole sets the wifiAwareServiceRole property and returns the receiver for chaining.
-func (x *DDDevice) WithWifiAwareServiceRole(wifiAwareServiceRole raw.DDDeviceWiFiAwareServiceRole) *DDDevice {
-	x.inner.SetWifiAwareServiceRole(wifiAwareServiceRole)
+func (x *DDDevice) WithWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwareServiceRole) *DDDevice {
+	x.inner.SetWifiAwareServiceRole(raw.DDDeviceWiFiAwareServiceRole(wifiAwareServiceRole))
 	return x
 }
 
@@ -166,13 +166,13 @@ func (x *DDDevice) WithWifiAwareVendorName(wifiAwareVendorName string) *DDDevice
 }
 
 // DeviceSupports calls the underlying DeviceSupports.
-func (x *DDDevice) DeviceSupports() raw.DDDeviceSupports {
-	return x.inner.DeviceSupports()
+func (x *DDDevice) DeviceSupports() DDDeviceSupports {
+	return DDDeviceSupports(x.inner.DeviceSupports())
 }
 
 // SetDeviceSupports calls the underlying SetDeviceSupports.
-func (x *DDDevice) SetDeviceSupports(deviceSupports raw.DDDeviceSupports) {
-	x.inner.SetDeviceSupports(deviceSupports)
+func (x *DDDevice) SetDeviceSupports(deviceSupports DDDeviceSupports) {
+	x.inner.SetDeviceSupports(raw.DDDeviceSupports(deviceSupports))
 }
 
 // BluetoothIdentifier calls the underlying BluetoothIdentifier.
@@ -186,13 +186,13 @@ func (x *DDDevice) SetBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUID
 }
 
 // Category calls the underlying Category.
-func (x *DDDevice) Category() raw.DDDeviceCategory {
-	return x.inner.Category()
+func (x *DDDevice) Category() DDDeviceCategory {
+	return DDDeviceCategory(x.inner.Category())
 }
 
 // SetCategory calls the underlying SetCategory.
-func (x *DDDevice) SetCategory(category raw.DDDeviceCategory) {
-	x.inner.SetCategory(category)
+func (x *DDDevice) SetCategory(category DDDeviceCategory) {
+	x.inner.SetCategory(raw.DDDeviceCategory(category))
 }
 
 // DisplayImageName calls the underlying DisplayImageName.
@@ -238,13 +238,13 @@ func (x *DDDevice) SetIdentifier(identifier string) {
 }
 
 // MediaPlaybackState calls the underlying MediaPlaybackState.
-func (x *DDDevice) MediaPlaybackState() raw.DDDeviceMediaPlaybackState {
-	return x.inner.MediaPlaybackState()
+func (x *DDDevice) MediaPlaybackState() DDDeviceMediaPlaybackState {
+	return DDDeviceMediaPlaybackState(x.inner.MediaPlaybackState())
 }
 
 // SetMediaPlaybackState calls the underlying SetMediaPlaybackState.
-func (x *DDDevice) SetMediaPlaybackState(mediaPlaybackState raw.DDDeviceMediaPlaybackState) {
-	x.inner.SetMediaPlaybackState(mediaPlaybackState)
+func (x *DDDevice) SetMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybackState) {
+	x.inner.SetMediaPlaybackState(raw.DDDeviceMediaPlaybackState(mediaPlaybackState))
 }
 
 // MediaContentTitle calls the underlying MediaContentTitle.
@@ -286,13 +286,13 @@ func (x *DDDevice) SetNetworkEndpoint(networkEndpoint *foundation.NSObject) {
 }
 
 // Protocol calls the underlying Protocol.
-func (x *DDDevice) Protocol() raw.DDDeviceProtocol {
-	return x.inner.Protocol()
+func (x *DDDevice) Protocol() DDDeviceProtocol {
+	return DDDeviceProtocol(x.inner.Protocol())
 }
 
 // SetProtocol calls the underlying SetProtocol.
-func (x *DDDevice) SetProtocol(protocol raw.DDDeviceProtocol) {
-	x.inner.SetProtocol(protocol)
+func (x *DDDevice) SetProtocol(protocol DDDeviceProtocol) {
+	x.inner.SetProtocol(raw.DDDeviceProtocol(protocol))
 }
 
 // ProtocolType calls the underlying ProtocolType.
@@ -306,13 +306,13 @@ func (x *DDDevice) SetProtocolType(protocolType *uniformtypeidentifiers.UTType) 
 }
 
 // State calls the underlying State.
-func (x *DDDevice) State() raw.DDDeviceState {
-	return x.inner.State()
+func (x *DDDevice) State() DDDeviceState {
+	return DDDeviceState(x.inner.State())
 }
 
 // SetState calls the underlying SetState.
-func (x *DDDevice) SetState(state raw.DDDeviceState) {
-	x.inner.SetState(state)
+func (x *DDDevice) SetState(state DDDeviceState) {
+	x.inner.SetState(raw.DDDeviceState(state))
 }
 
 // SSID calls the underlying SSID.
@@ -374,13 +374,13 @@ func (x *DDDevice) SetWifiAwareServiceName(wifiAwareServiceName string) {
 }
 
 // WifiAwareServiceRole calls the underlying WifiAwareServiceRole.
-func (x *DDDevice) WifiAwareServiceRole() raw.DDDeviceWiFiAwareServiceRole {
-	return x.inner.WifiAwareServiceRole()
+func (x *DDDevice) WifiAwareServiceRole() DDDeviceWiFiAwareServiceRole {
+	return DDDeviceWiFiAwareServiceRole(x.inner.WifiAwareServiceRole())
 }
 
 // SetWifiAwareServiceRole calls the underlying SetWifiAwareServiceRole.
-func (x *DDDevice) SetWifiAwareServiceRole(wifiAwareServiceRole raw.DDDeviceWiFiAwareServiceRole) {
-	x.inner.SetWifiAwareServiceRole(wifiAwareServiceRole)
+func (x *DDDevice) SetWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwareServiceRole) {
+	x.inner.SetWifiAwareServiceRole(raw.DDDeviceWiFiAwareServiceRole(wifiAwareServiceRole))
 }
 
 // WifiAwareModelName calls the underlying WifiAwareModelName.
@@ -414,53 +414,53 @@ func (x *DDDevice) SetWifiAwareVendorName(wifiAwareVendorName string) {
 // DDDeviceable is the interface implemented by [DDDevice], for mocking and DI.
 type DDDeviceable interface {
 	Unwrap() *raw.DDDevice
-	WithDeviceSupports(deviceSupports raw.DDDeviceSupports) *DDDevice
+	WithDeviceSupports(deviceSupports DDDeviceSupports) *DDDevice
 	WithBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUID) *DDDevice
-	WithCategory(category raw.DDDeviceCategory) *DDDevice
+	WithCategory(category DDDeviceCategory) *DDDevice
 	WithDisplayImageName(displayImageName string) *DDDevice
 	WithDisplayName(displayName string) *DDDevice
 	WithIdentifier(identifier string) *DDDevice
-	WithMediaPlaybackState(mediaPlaybackState raw.DDDeviceMediaPlaybackState) *DDDevice
+	WithMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybackState) *DDDevice
 	WithMediaContentTitle(mediaContentTitle string) *DDDevice
 	WithMediaContentSubtitle(mediaContentSubtitle string) *DDDevice
 	WithNetworkEndpoint(networkEndpoint *foundation.NSObject) *DDDevice
-	WithProtocol(protocol raw.DDDeviceProtocol) *DDDevice
+	WithProtocol(protocol DDDeviceProtocol) *DDDevice
 	WithProtocolType(protocolType *uniformtypeidentifiers.UTType) *DDDevice
-	WithState(state raw.DDDeviceState) *DDDevice
+	WithState(state DDDeviceState) *DDDevice
 	WithSSID(sSID string) *DDDevice
 	WithSupportsGrouping(supportsGrouping bool) *DDDevice
 	WithTxtRecordData(txtRecordData *foundation.NSData) *DDDevice
 	WithUrl(url string) *DDDevice
 	WithWifiAwareServiceName(wifiAwareServiceName string) *DDDevice
-	WithWifiAwareServiceRole(wifiAwareServiceRole raw.DDDeviceWiFiAwareServiceRole) *DDDevice
+	WithWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwareServiceRole) *DDDevice
 	WithWifiAwareModelName(wifiAwareModelName string) *DDDevice
 	WithWifiAwareVendorName(wifiAwareVendorName string) *DDDevice
-	DeviceSupports() raw.DDDeviceSupports
-	SetDeviceSupports(deviceSupports raw.DDDeviceSupports)
+	DeviceSupports() DDDeviceSupports
+	SetDeviceSupports(deviceSupports DDDeviceSupports)
 	BluetoothIdentifier() *foundation.NSUUID
 	SetBluetoothIdentifier(bluetoothIdentifier *foundation.NSUUID)
-	Category() raw.DDDeviceCategory
-	SetCategory(category raw.DDDeviceCategory)
+	Category() DDDeviceCategory
+	SetCategory(category DDDeviceCategory)
 	DisplayImageName() string
 	SetDisplayImageName(displayImageName string)
 	DisplayName() string
 	SetDisplayName(displayName string)
 	Identifier() string
 	SetIdentifier(identifier string)
-	MediaPlaybackState() raw.DDDeviceMediaPlaybackState
-	SetMediaPlaybackState(mediaPlaybackState raw.DDDeviceMediaPlaybackState)
+	MediaPlaybackState() DDDeviceMediaPlaybackState
+	SetMediaPlaybackState(mediaPlaybackState DDDeviceMediaPlaybackState)
 	MediaContentTitle() string
 	SetMediaContentTitle(mediaContentTitle string)
 	MediaContentSubtitle() string
 	SetMediaContentSubtitle(mediaContentSubtitle string)
 	NetworkEndpoint() *foundation.NSObject
 	SetNetworkEndpoint(networkEndpoint *foundation.NSObject)
-	Protocol() raw.DDDeviceProtocol
-	SetProtocol(protocol raw.DDDeviceProtocol)
+	Protocol() DDDeviceProtocol
+	SetProtocol(protocol DDDeviceProtocol)
 	ProtocolType() *uniformtypeidentifiers.UTType
 	SetProtocolType(protocolType *uniformtypeidentifiers.UTType)
-	State() raw.DDDeviceState
-	SetState(state raw.DDDeviceState)
+	State() DDDeviceState
+	SetState(state DDDeviceState)
 	SSID() string
 	SetSSID(sSID string)
 	SupportsGrouping() bool
@@ -471,8 +471,8 @@ type DDDeviceable interface {
 	SetUrl(url string)
 	WifiAwareServiceName() string
 	SetWifiAwareServiceName(wifiAwareServiceName string)
-	WifiAwareServiceRole() raw.DDDeviceWiFiAwareServiceRole
-	SetWifiAwareServiceRole(wifiAwareServiceRole raw.DDDeviceWiFiAwareServiceRole)
+	WifiAwareServiceRole() DDDeviceWiFiAwareServiceRole
+	SetWifiAwareServiceRole(wifiAwareServiceRole DDDeviceWiFiAwareServiceRole)
 	WifiAwareModelName() string
 	SetWifiAwareModelName(wifiAwareModelName string)
 	WifiAwareVendorName() string

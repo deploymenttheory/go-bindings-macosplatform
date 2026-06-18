@@ -78,13 +78,13 @@ func (x *LibPlaylist) Items() []*LibMediaItem {
 }
 
 // DistinguishedKind calls the underlying DistinguishedKind.
-func (x *LibPlaylist) DistinguishedKind() raw.ITLibDistinguishedPlaylistKind {
-	return x.inner.DistinguishedKind()
+func (x *LibPlaylist) DistinguishedKind() ITLibDistinguishedPlaylistKind {
+	return ITLibDistinguishedPlaylistKind(x.inner.DistinguishedKind())
 }
 
 // Kind calls the underlying Kind.
-func (x *LibPlaylist) Kind() raw.ITLibPlaylistKind {
-	return x.inner.Kind()
+func (x *LibPlaylist) Kind() ITLibPlaylistKind {
+	return ITLibPlaylistKind(x.inner.Kind())
 }
 
 // IsMaster calls the underlying IsMaster.
@@ -103,8 +103,8 @@ type LibPlaylistable interface {
 	IsVisible() bool
 	IsAllItemsPlaylist() bool
 	Items() []*LibMediaItem
-	DistinguishedKind() raw.ITLibDistinguishedPlaylistKind
-	Kind() raw.ITLibPlaylistKind
+	DistinguishedKind() ITLibDistinguishedPlaylistKind
+	Kind() ITLibPlaylistKind
 	IsMaster() bool
 }
 

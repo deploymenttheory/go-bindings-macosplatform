@@ -11,18 +11,18 @@ import (
 )
 
 // DefaultWidthForEraserType calls the underlying PKEraserToolDefaultWidthForEraserType.
-func DefaultWidthForEraserType(eraserType raw.PKEraserType) float64 {
-	return raw.PKEraserToolDefaultWidthForEraserType(eraserType)
+func DefaultWidthForEraserType(eraserType PKEraserType) float64 {
+	return raw.PKEraserToolDefaultWidthForEraserType(raw.PKEraserType(eraserType))
 }
 
 // MinimumWidthForEraserType calls the underlying PKEraserToolMinimumWidthForEraserType.
-func MinimumWidthForEraserType(eraserType raw.PKEraserType) float64 {
-	return raw.PKEraserToolMinimumWidthForEraserType(eraserType)
+func MinimumWidthForEraserType(eraserType PKEraserType) float64 {
+	return raw.PKEraserToolMinimumWidthForEraserType(raw.PKEraserType(eraserType))
 }
 
 // MaximumWidthForEraserType calls the underlying PKEraserToolMaximumWidthForEraserType.
-func MaximumWidthForEraserType(eraserType raw.PKEraserType) float64 {
-	return raw.PKEraserToolMaximumWidthForEraserType(eraserType)
+func MaximumWidthForEraserType(eraserType PKEraserType) float64 {
+	return raw.PKEraserToolMaximumWidthForEraserType(raw.PKEraserType(eraserType))
 }
 
 // DefaultWidthForInkType calls the underlying PKInkingToolDefaultWidthForInkType.

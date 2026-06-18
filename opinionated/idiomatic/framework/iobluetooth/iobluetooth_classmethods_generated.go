@@ -108,8 +108,8 @@ func RegisterForChannelOpenNotificationsSelector(object objc.ID, selector objc.S
 }
 
 // RegisterForChannelOpenNotificationsSelectorWithPSMDirection calls the underlying IOBluetoothL2CAPChannelRegisterForChannelOpenNotificationsSelectorWithPSMDirection.
-func RegisterForChannelOpenNotificationsSelectorWithPSMDirection(object objc.ID, selector objc.SEL, psm uint16, inDirection raw.IOBluetoothUserNotificationChannelDirection) *IOBluetoothUserNotification {
-	_r := raw.IOBluetoothL2CAPChannelRegisterForChannelOpenNotificationsSelectorWithPSMDirection(object, selector, psm, inDirection)
+func RegisterForChannelOpenNotificationsSelectorWithPSMDirection(object objc.ID, selector objc.SEL, psm uint16, inDirection IOBluetoothUserNotificationChannelDirection) *IOBluetoothUserNotification {
+	_r := raw.IOBluetoothL2CAPChannelRegisterForChannelOpenNotificationsSelectorWithPSMDirection(object, selector, psm, raw.IOBluetoothUserNotificationChannelDirection(inDirection))
 	if _r == nil {
 		return nil
 	}
@@ -162,8 +162,8 @@ func IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelector(object 
 }
 
 // RegisterForChannelOpenNotificationsSelectorWithChannelIDDirection calls the underlying IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelectorWithChannelIDDirection.
-func RegisterForChannelOpenNotificationsSelectorWithChannelIDDirection(object objc.ID, selector objc.SEL, channelID uint8, inDirection raw.IOBluetoothUserNotificationChannelDirection) *IOBluetoothUserNotification {
-	_r := raw.IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelectorWithChannelIDDirection(object, selector, channelID, inDirection)
+func RegisterForChannelOpenNotificationsSelectorWithChannelIDDirection(object objc.ID, selector objc.SEL, channelID uint8, inDirection IOBluetoothUserNotificationChannelDirection) *IOBluetoothUserNotification {
+	_r := raw.IOBluetoothRFCOMMChannelRegisterForChannelOpenNotificationsSelectorWithChannelIDDirection(object, selector, channelID, raw.IOBluetoothUserNotificationChannelDirection(inDirection))
 	if _r == nil {
 		return nil
 	}

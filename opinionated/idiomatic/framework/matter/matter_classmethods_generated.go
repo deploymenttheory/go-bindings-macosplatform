@@ -14,8 +14,8 @@ import (
 )
 
 // AccessGrantForNodeIDPrivilege calls the underlying MTRAccessGrantAccessGrantForNodeIDPrivilege.
-func AccessGrantForNodeIDPrivilege(nodeID *foundation.NSNumber, privilege raw.MTRAccessControlEntryPrivilege) *MTRAccessGrant {
-	_r := raw.MTRAccessGrantAccessGrantForNodeIDPrivilege(nodeID, privilege)
+func AccessGrantForNodeIDPrivilege(nodeID *foundation.NSNumber, privilege MTRAccessControlEntryPrivilege) *MTRAccessGrant {
+	_r := raw.MTRAccessGrantAccessGrantForNodeIDPrivilege(nodeID, raw.MTRAccessControlEntryPrivilege(privilege))
 	if _r == nil {
 		return nil
 	}
@@ -23,8 +23,8 @@ func AccessGrantForNodeIDPrivilege(nodeID *foundation.NSNumber, privilege raw.MT
 }
 
 // AccessGrantForCASEAuthenticatedTagPrivilege calls the underlying MTRAccessGrantAccessGrantForCASEAuthenticatedTagPrivilege.
-func AccessGrantForCASEAuthenticatedTagPrivilege(caseAuthenticatedTag *foundation.NSNumber, privilege raw.MTRAccessControlEntryPrivilege) *MTRAccessGrant {
-	_r := raw.MTRAccessGrantAccessGrantForCASEAuthenticatedTagPrivilege(caseAuthenticatedTag, privilege)
+func AccessGrantForCASEAuthenticatedTagPrivilege(caseAuthenticatedTag *foundation.NSNumber, privilege MTRAccessControlEntryPrivilege) *MTRAccessGrant {
+	_r := raw.MTRAccessGrantAccessGrantForCASEAuthenticatedTagPrivilege(caseAuthenticatedTag, raw.MTRAccessControlEntryPrivilege(privilege))
 	if _r == nil {
 		return nil
 	}
@@ -32,8 +32,8 @@ func AccessGrantForCASEAuthenticatedTagPrivilege(caseAuthenticatedTag *foundatio
 }
 
 // AccessGrantForGroupIDPrivilege calls the underlying MTRAccessGrantAccessGrantForGroupIDPrivilege.
-func AccessGrantForGroupIDPrivilege(groupID *foundation.NSNumber, privilege raw.MTRAccessControlEntryPrivilege) *MTRAccessGrant {
-	_r := raw.MTRAccessGrantAccessGrantForGroupIDPrivilege(groupID, privilege)
+func AccessGrantForGroupIDPrivilege(groupID *foundation.NSNumber, privilege MTRAccessControlEntryPrivilege) *MTRAccessGrant {
+	_r := raw.MTRAccessGrantAccessGrantForGroupIDPrivilege(groupID, raw.MTRAccessControlEntryPrivilege(privilege))
 	if _r == nil {
 		return nil
 	}
@@ -41,8 +41,8 @@ func AccessGrantForGroupIDPrivilege(groupID *foundation.NSNumber, privilege raw.
 }
 
 // AccessGrantForAllNodesWithPrivilege calls the underlying MTRAccessGrantAccessGrantForAllNodesWithPrivilege.
-func AccessGrantForAllNodesWithPrivilege(privilege raw.MTRAccessControlEntryPrivilege) *MTRAccessGrant {
-	_r := raw.MTRAccessGrantAccessGrantForAllNodesWithPrivilege(privilege)
+func AccessGrantForAllNodesWithPrivilege(privilege MTRAccessControlEntryPrivilege) *MTRAccessGrant {
+	_r := raw.MTRAccessGrantAccessGrantForAllNodesWithPrivilege(raw.MTRAccessControlEntryPrivilege(privilege))
 	if _r == nil {
 		return nil
 	}

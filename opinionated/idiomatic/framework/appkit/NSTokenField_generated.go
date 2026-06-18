@@ -41,8 +41,8 @@ func NewTokenField() *TokenField {
 }
 
 // WithTokenStyle sets the tokenStyle property and returns the receiver for chaining.
-func (x *TokenField) WithTokenStyle(tokenStyle raw.NSTokenStyle) *TokenField {
-	x.inner.SetTokenStyle(tokenStyle)
+func (x *TokenField) WithTokenStyle(tokenStyle NSTokenStyle) *TokenField {
+	x.inner.SetTokenStyle(raw.NSTokenStyle(tokenStyle))
 	return x
 }
 
@@ -119,8 +119,8 @@ func (x *TokenField) WithDelegate(delegate raw.NSTextFieldDelegate) *TokenField 
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *TokenField) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TokenField {
-	x.inner.NSTextField.SetBezelStyle(bezelStyle)
+func (x *TokenField) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TokenField {
+	x.inner.NSTextField.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -143,8 +143,8 @@ func (x *TokenField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTight
 }
 
 // WithLineBreakStrategy sets the lineBreakStrategy property and returns the receiver for chaining.
-func (x *TokenField) WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *TokenField {
-	x.inner.NSTextField.SetLineBreakStrategy(lineBreakStrategy)
+func (x *TokenField) WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *TokenField {
+	x.inner.NSTextField.SetLineBreakStrategy(raw.NSLineBreakStrategy(lineBreakStrategy))
 	return x
 }
 
@@ -275,8 +275,8 @@ func (x *TokenField) WithHighlighted(highlighted bool) *TokenField {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *TokenField) WithControlSize(controlSize raw.NSControlSize) *TokenField {
-	x.inner.NSTextField.NSControl.SetControlSize(controlSize)
+func (x *TokenField) WithControlSize(controlSize NSControlSize) *TokenField {
+	x.inner.NSTextField.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -341,20 +341,20 @@ func (x *TokenField) WithUsesSingleLineMode(usesSingleLineMode bool) *TokenField
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TokenField) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TokenField {
-	x.inner.NSTextField.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *TokenField) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TokenField {
+	x.inner.NSTextField.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *TokenField) WithAlignment(alignment raw.NSTextAlignment) *TokenField {
-	x.inner.NSTextField.NSControl.SetAlignment(alignment)
+func (x *TokenField) WithAlignment(alignment NSTextAlignment) *TokenField {
+	x.inner.NSTextField.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *TokenField) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TokenField {
-	x.inner.NSTextField.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *TokenField) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TokenField {
+	x.inner.NSTextField.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -407,8 +407,8 @@ func (x *TokenField) WithAutoresizesSubviews(autoresizesSubviews bool) *TokenFie
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TokenField) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *TokenField) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -467,14 +467,14 @@ func (x *TokenField) WithWantsRestingTouches(wantsRestingTouches bool) *TokenFie
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *TokenField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *TokenField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *TokenField) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *TokenField) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -581,8 +581,8 @@ func (x *TokenField) WithToolTip(toolTip string) *TokenField {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TokenField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TokenField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -599,8 +599,8 @@ func (x *TokenField) WithNextKeyView(nextKeyView ViewProvider) *TokenField {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TokenField) WithFocusRingType(focusRingType raw.NSFocusRingType) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *TokenField) WithFocusRingType(focusRingType NSFocusRingType) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -623,8 +623,8 @@ func (x *TokenField) WithGestureRecognizers(items ...GestureRecognizerProvider) 
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *TokenField) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TokenField {
-	x.inner.NSTextField.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *TokenField) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TokenField {
+	x.inner.NSTextField.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -713,13 +713,13 @@ func (x *TokenField) WithTouchBar(touchBar *TouchBar) *TokenField {
 }
 
 // TokenStyle calls the underlying TokenStyle.
-func (x *TokenField) TokenStyle() raw.NSTokenStyle {
-	return x.inner.TokenStyle()
+func (x *TokenField) TokenStyle() NSTokenStyle {
+	return NSTokenStyle(x.inner.TokenStyle())
 }
 
 // SetTokenStyle calls the underlying SetTokenStyle.
-func (x *TokenField) SetTokenStyle(tokenStyle raw.NSTokenStyle) {
-	x.inner.SetTokenStyle(tokenStyle)
+func (x *TokenField) SetTokenStyle(tokenStyle NSTokenStyle) {
+	x.inner.SetTokenStyle(raw.NSTokenStyle(tokenStyle))
 }
 
 // CompletionDelay calls the underlying CompletionDelay.
@@ -755,7 +755,7 @@ func (x *TokenField) asResponder() *raw.NSResponder {
 // TokenFieldable is the interface implemented by [TokenField], for mocking and DI.
 type TokenFieldable interface {
 	Unwrap() *raw.NSTokenField
-	WithTokenStyle(tokenStyle raw.NSTokenStyle) *TokenField
+	WithTokenStyle(tokenStyle NSTokenStyle) *TokenField
 	WithCompletionDelay(completionDelay float64) *TokenField
 	WithTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) *TokenField
 	WithPlaceholderString(placeholderString string) *TokenField
@@ -768,11 +768,11 @@ type TokenFieldable interface {
 	WithEditable(editable bool) *TokenField
 	WithSelectable(selectable bool) *TokenField
 	WithDelegate(delegate raw.NSTextFieldDelegate) *TokenField
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TokenField
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TokenField
 	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *TokenField
 	WithMaximumNumberOfLines(maximumNumberOfLines int) *TokenField
 	WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *TokenField
-	WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *TokenField
+	WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *TokenField
 	WithAllowsWritingTools(allowsWritingTools bool) *TokenField
 	WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *TokenField
 	WithPlaceholderStrings(items ...*foundation.NSString) *TokenField
@@ -790,7 +790,7 @@ type TokenFieldable interface {
 	WithEnabled(enabled bool) *TokenField
 	WithRefusesFirstResponder(refusesFirstResponder bool) *TokenField
 	WithHighlighted(highlighted bool) *TokenField
-	WithControlSize(controlSize raw.NSControlSize) *TokenField
+	WithControlSize(controlSize NSControlSize) *TokenField
 	WithFormatter(formatter *foundation.NSFormatter) *TokenField
 	WithObjectValue(objectValue objc.ID) *TokenField
 	WithStringValue(stringValue string) *TokenField
@@ -801,16 +801,16 @@ type TokenFieldable interface {
 	WithDoubleValue(doubleValue float64) *TokenField
 	WithFont(font *Font) *TokenField
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TokenField
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TokenField
-	WithAlignment(alignment raw.NSTextAlignment) *TokenField
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TokenField
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TokenField
+	WithAlignment(alignment NSTextAlignment) *TokenField
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TokenField
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TokenField
 	WithCell(cell CellProvider) *TokenField
 	WithSubviews(items ...ViewProvider) *TokenField
 	WithHidden(hidden bool) *TokenField
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TokenField
 	WithAutoresizesSubviews(autoresizesSubviews bool) *TokenField
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TokenField
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *TokenField
 	WithFrame(frame corefoundation.CGRect) *TokenField
 	WithFrameRotation(frameRotation float64) *TokenField
 	WithFrameCenterRotation(frameCenterRotation float64) *TokenField
@@ -820,8 +820,8 @@ type TokenFieldable interface {
 	WithNeedsDisplay(needsDisplay bool) *TokenField
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TokenField
 	WithWantsRestingTouches(wantsRestingTouches bool) *TokenField
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TokenField
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TokenField
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *TokenField
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *TokenField
 	WithWantsLayer(wantsLayer bool) *TokenField
 	WithLayer(layer *quartzcore.CALayer) *TokenField
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TokenField
@@ -835,12 +835,12 @@ type TokenFieldable interface {
 	WithClipsToBounds(clipsToBounds bool) *TokenField
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TokenField
 	WithToolTip(toolTip string) *TokenField
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TokenField
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TokenField
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TokenField
 	WithNextKeyView(nextKeyView ViewProvider) *TokenField
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TokenField
+	WithFocusRingType(focusRingType NSFocusRingType) *TokenField
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *TokenField
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TokenField
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *TokenField
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TokenField
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TokenField
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TokenField
@@ -855,8 +855,8 @@ type TokenFieldable interface {
 	WithMenu(menu *Menu) *TokenField
 	WithUserActivity(userActivity *foundation.NSUserActivity) *TokenField
 	WithTouchBar(touchBar *TouchBar) *TokenField
-	TokenStyle() raw.NSTokenStyle
-	SetTokenStyle(tokenStyle raw.NSTokenStyle)
+	TokenStyle() NSTokenStyle
+	SetTokenStyle(tokenStyle NSTokenStyle)
 	CompletionDelay() float64
 	SetCompletionDelay(completionDelay float64)
 	TokenizingCharacterSet() *foundation.NSCharacterSet

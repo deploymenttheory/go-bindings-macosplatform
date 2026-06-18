@@ -32,9 +32,9 @@ func DuckerFromID(id objc.ID) *Ducker {
 }
 
 // NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackCurveReleaseCurve creates a new [Ducker].
-func NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackCurveReleaseCurve(engine *raw.PHASEEngine, sourceGroups *foundation.NSSet[*raw.PHASEGroup], targetGroups *foundation.NSSet[*raw.PHASEGroup], gain float64, attackTime float64, releaseTime float64, attackCurve raw.PHASECurveType, releaseCurve raw.PHASECurveType) *Ducker {
+func NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackCurveReleaseCurve(engine *raw.PHASEEngine, sourceGroups *foundation.NSSet[*raw.PHASEGroup], targetGroups *foundation.NSSet[*raw.PHASEGroup], gain float64, attackTime float64, releaseTime float64, attackCurve PHASECurveType, releaseCurve PHASECurveType) *Ducker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEDucker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:sourceGroups:targetGroups:gain:attackTime:releaseTime:attackCurve:releaseCurve:"), engine.Ptr(), sourceGroups.Ptr(), targetGroups.Ptr(), gain, attackTime, releaseTime, attackCurve, releaseCurve)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:sourceGroups:targetGroups:gain:attackTime:releaseTime:attackCurve:releaseCurve:"), engine.Ptr(), sourceGroups.Ptr(), targetGroups.Ptr(), gain, attackTime, releaseTime, raw.PHASECurveType(attackCurve), raw.PHASECurveType(releaseCurve))
 	return &Ducker{inner: raw.PHASEDuckerFromID(_id)}
 }
 
@@ -79,13 +79,13 @@ func (x *Ducker) ReleaseTime() float64 {
 }
 
 // AttackCurve calls the underlying AttackCurve.
-func (x *Ducker) AttackCurve() raw.PHASECurveType {
-	return x.inner.AttackCurve()
+func (x *Ducker) AttackCurve() PHASECurveType {
+	return PHASECurveType(x.inner.AttackCurve())
 }
 
 // ReleaseCurve calls the underlying ReleaseCurve.
-func (x *Ducker) ReleaseCurve() raw.PHASECurveType {
-	return x.inner.ReleaseCurve()
+func (x *Ducker) ReleaseCurve() PHASECurveType {
+	return PHASECurveType(x.inner.ReleaseCurve())
 }
 
 // Identifier calls the underlying Identifier.
@@ -108,8 +108,8 @@ type Duckerable interface {
 	Gain() float64
 	AttackTime() float64
 	ReleaseTime() float64
-	AttackCurve() raw.PHASECurveType
-	ReleaseCurve() raw.PHASECurveType
+	AttackCurve() PHASECurveType
+	ReleaseCurve() PHASECurveType
 	Identifier() string
 }
 

@@ -131,8 +131,8 @@ func (x *LibMediaItem) Kind() string {
 }
 
 // MediaKind calls the underlying MediaKind.
-func (x *LibMediaItem) MediaKind() raw.ITLibMediaItemMediaKind {
-	return x.inner.MediaKind()
+func (x *LibMediaItem) MediaKind() ITLibMediaItemMediaKind {
+	return ITLibMediaItemMediaKind(x.inner.MediaKind())
 }
 
 // FileSize calls the underlying FileSize.
@@ -165,8 +165,8 @@ func (x *LibMediaItem) Category() string {
 }
 
 // LyricsContentRating calls the underlying LyricsContentRating.
-func (x *LibMediaItem) LyricsContentRating() raw.ITLibMediaItemLyricsContentRating {
-	return x.inner.LyricsContentRating()
+func (x *LibMediaItem) LyricsContentRating() ITLibMediaItemLyricsContentRating {
+	return ITLibMediaItemLyricsContentRating(x.inner.LyricsContentRating())
 }
 
 // ContentRating calls the underlying ContentRating.
@@ -214,8 +214,8 @@ func (x *LibMediaItem) LastPlayedDate() *foundation.NSDate {
 }
 
 // PlayStatus calls the underlying PlayStatus.
-func (x *LibMediaItem) PlayStatus() raw.ITLibMediaItemPlayStatus {
-	return x.inner.PlayStatus()
+func (x *LibMediaItem) PlayStatus() ITLibMediaItemPlayStatus {
+	return ITLibMediaItemPlayStatus(x.inner.PlayStatus())
 }
 
 // Location calls the underlying Location.
@@ -330,8 +330,8 @@ func (x *LibMediaItem) Grouping() string {
 }
 
 // LocationType calls the underlying LocationType.
-func (x *LibMediaItem) LocationType() raw.ITLibMediaItemLocationType {
-	return x.inner.LocationType()
+func (x *LibMediaItem) LocationType() ITLibMediaItemLocationType {
+	return ITLibMediaItemLocationType(x.inner.LocationType())
 }
 
 func (x *LibMediaItem) asLibMediaEntity() *raw.ITLibMediaEntity { return &x.inner.ITLibMediaEntity }
@@ -351,13 +351,13 @@ type LibMediaItemable interface {
 	Album() *LibAlbum
 	Genre() string
 	Kind() string
-	MediaKind() raw.ITLibMediaItemMediaKind
+	MediaKind() ITLibMediaItemMediaKind
 	FileSize() uint64
 	Size() uint
 	TotalTime() uint
 	TrackNumber() uint
 	Category() string
-	LyricsContentRating() raw.ITLibMediaItemLyricsContentRating
+	LyricsContentRating() ITLibMediaItemLyricsContentRating
 	ContentRating() string
 	ModifiedDate() *foundation.NSDate
 	AddedDate() *foundation.NSDate
@@ -366,7 +366,7 @@ type LibMediaItemable interface {
 	BeatsPerMinute() uint
 	PlayCount() uint
 	LastPlayedDate() *foundation.NSDate
-	PlayStatus() raw.ITLibMediaItemPlayStatus
+	PlayStatus() ITLibMediaItemPlayStatus
 	Location() *foundation.NSURL
 	HasArtworkAvailable() bool
 	Artwork() *LibArtwork
@@ -386,7 +386,7 @@ type LibMediaItemable interface {
 	VolumeNormalizationEnergy() uint
 	IsUserDisabled() bool
 	Grouping() string
-	LocationType() raw.ITLibMediaItemLocationType
+	LocationType() ITLibMediaItemLocationType
 }
 
 var _ LibMediaItemable = (*LibMediaItem)(nil)

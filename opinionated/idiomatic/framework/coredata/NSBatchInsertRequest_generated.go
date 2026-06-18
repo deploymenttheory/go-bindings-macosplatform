@@ -111,8 +111,8 @@ func (x *BatchInsertRequest) WithManagedObjectHandler(managedObjectHandler func(
 }
 
 // WithResultType sets the resultType property and returns the receiver for chaining.
-func (x *BatchInsertRequest) WithResultType(resultType raw.NSBatchInsertRequestResultType) *BatchInsertRequest {
-	x.inner.SetResultType(resultType)
+func (x *BatchInsertRequest) WithResultType(resultType NSBatchInsertRequestResultType) *BatchInsertRequest {
+	x.inner.SetResultType(raw.NSBatchInsertRequestResultType(resultType))
 	return x
 }
 
@@ -183,13 +183,13 @@ func (x *BatchInsertRequest) SetManagedObjectHandler(managedObjectHandler func(*
 }
 
 // ResultType calls the underlying ResultType.
-func (x *BatchInsertRequest) ResultType() raw.NSBatchInsertRequestResultType {
-	return x.inner.ResultType()
+func (x *BatchInsertRequest) ResultType() NSBatchInsertRequestResultType {
+	return NSBatchInsertRequestResultType(x.inner.ResultType())
 }
 
 // SetResultType calls the underlying SetResultType.
-func (x *BatchInsertRequest) SetResultType(resultType raw.NSBatchInsertRequestResultType) {
-	x.inner.SetResultType(resultType)
+func (x *BatchInsertRequest) SetResultType(resultType NSBatchInsertRequestResultType) {
+	x.inner.SetResultType(raw.NSBatchInsertRequestResultType(resultType))
 }
 
 func (x *BatchInsertRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
@@ -202,7 +202,7 @@ type BatchInsertRequestable interface {
 	WithObjectsToInsert(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *BatchInsertRequest
 	WithDictionaryHandler(dictionaryHandler objc.Block) *BatchInsertRequest
 	WithManagedObjectHandler(managedObjectHandler func(*raw.NSManagedObject) bool) *BatchInsertRequest
-	WithResultType(resultType raw.NSBatchInsertRequestResultType) *BatchInsertRequest
+	WithResultType(resultType NSBatchInsertRequestResultType) *BatchInsertRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *BatchInsertRequest
 	EntityName() string
 	Entity() *EntityDescription
@@ -212,8 +212,8 @@ type BatchInsertRequestable interface {
 	SetDictionaryHandler(dictionaryHandler objc.Block)
 	ManagedObjectHandler() objc.Block
 	SetManagedObjectHandler(managedObjectHandler func(*raw.NSManagedObject) bool)
-	ResultType() raw.NSBatchInsertRequestResultType
-	SetResultType(resultType raw.NSBatchInsertRequestResultType)
+	ResultType() NSBatchInsertRequestResultType
+	SetResultType(resultType NSBatchInsertRequestResultType)
 }
 
 var _ BatchInsertRequestable = (*BatchInsertRequest)(nil)

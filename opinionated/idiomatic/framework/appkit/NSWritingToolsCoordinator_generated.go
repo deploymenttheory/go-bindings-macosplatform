@@ -50,14 +50,14 @@ func (x *WritingToolsCoordinator) WithDecorationContainerView(decorationContaine
 }
 
 // WithPreferredBehavior sets the preferredBehavior property and returns the receiver for chaining.
-func (x *WritingToolsCoordinator) WithPreferredBehavior(preferredBehavior raw.NSWritingToolsBehavior) *WritingToolsCoordinator {
-	x.inner.SetPreferredBehavior(preferredBehavior)
+func (x *WritingToolsCoordinator) WithPreferredBehavior(preferredBehavior NSWritingToolsBehavior) *WritingToolsCoordinator {
+	x.inner.SetPreferredBehavior(raw.NSWritingToolsBehavior(preferredBehavior))
 	return x
 }
 
 // WithPreferredResultOptions sets the preferredResultOptions property and returns the receiver for chaining.
-func (x *WritingToolsCoordinator) WithPreferredResultOptions(preferredResultOptions raw.NSWritingToolsResultOptions) *WritingToolsCoordinator {
-	x.inner.SetPreferredResultOptions(preferredResultOptions)
+func (x *WritingToolsCoordinator) WithPreferredResultOptions(preferredResultOptions NSWritingToolsResultOptions) *WritingToolsCoordinator {
+	x.inner.SetPreferredResultOptions(raw.NSWritingToolsResultOptions(preferredResultOptions))
 	return x
 }
 
@@ -73,8 +73,8 @@ func (x *WritingToolsCoordinator) StopWritingTools() {
 }
 
 // UpdateRangeWithTextReasonForContextWithIdentifier calls the underlying UpdateRangeWithTextReasonForContextWithIdentifier.
-func (x *WritingToolsCoordinator) UpdateRangeWithTextReasonForContextWithIdentifier(range_ foundation.NSRange, replacementText *foundation.NSAttributedString, reason raw.NSWritingToolsCoordinatorTextUpdateReason, contextID *foundation.NSUUID) {
-	x.inner.UpdateRangeWithTextReasonForContextWithIdentifier(range_, replacementText, reason, contextID)
+func (x *WritingToolsCoordinator) UpdateRangeWithTextReasonForContextWithIdentifier(range_ foundation.NSRange, replacementText *foundation.NSAttributedString, reason NSWritingToolsCoordinatorTextUpdateReason, contextID *foundation.NSUUID) {
+	x.inner.UpdateRangeWithTextReasonForContextWithIdentifier(range_, replacementText, raw.NSWritingToolsCoordinatorTextUpdateReason(reason), contextID)
 }
 
 // UpdateForReflowedTextInContextWithIdentifier calls the underlying UpdateForReflowedTextInContextWithIdentifier.
@@ -125,38 +125,38 @@ func (x *WritingToolsCoordinator) SetDecorationContainerView(decorationContainer
 }
 
 // State calls the underlying State.
-func (x *WritingToolsCoordinator) State() raw.NSWritingToolsCoordinatorState {
-	return x.inner.State()
+func (x *WritingToolsCoordinator) State() NSWritingToolsCoordinatorState {
+	return NSWritingToolsCoordinatorState(x.inner.State())
 }
 
 // PreferredBehavior calls the underlying PreferredBehavior.
-func (x *WritingToolsCoordinator) PreferredBehavior() raw.NSWritingToolsBehavior {
-	return x.inner.PreferredBehavior()
+func (x *WritingToolsCoordinator) PreferredBehavior() NSWritingToolsBehavior {
+	return NSWritingToolsBehavior(x.inner.PreferredBehavior())
 }
 
 // SetPreferredBehavior calls the underlying SetPreferredBehavior.
-func (x *WritingToolsCoordinator) SetPreferredBehavior(preferredBehavior raw.NSWritingToolsBehavior) {
-	x.inner.SetPreferredBehavior(preferredBehavior)
+func (x *WritingToolsCoordinator) SetPreferredBehavior(preferredBehavior NSWritingToolsBehavior) {
+	x.inner.SetPreferredBehavior(raw.NSWritingToolsBehavior(preferredBehavior))
 }
 
 // Behavior calls the underlying Behavior.
-func (x *WritingToolsCoordinator) Behavior() raw.NSWritingToolsBehavior {
-	return x.inner.Behavior()
+func (x *WritingToolsCoordinator) Behavior() NSWritingToolsBehavior {
+	return NSWritingToolsBehavior(x.inner.Behavior())
 }
 
 // PreferredResultOptions calls the underlying PreferredResultOptions.
-func (x *WritingToolsCoordinator) PreferredResultOptions() raw.NSWritingToolsResultOptions {
-	return x.inner.PreferredResultOptions()
+func (x *WritingToolsCoordinator) PreferredResultOptions() NSWritingToolsResultOptions {
+	return NSWritingToolsResultOptions(x.inner.PreferredResultOptions())
 }
 
 // SetPreferredResultOptions calls the underlying SetPreferredResultOptions.
-func (x *WritingToolsCoordinator) SetPreferredResultOptions(preferredResultOptions raw.NSWritingToolsResultOptions) {
-	x.inner.SetPreferredResultOptions(preferredResultOptions)
+func (x *WritingToolsCoordinator) SetPreferredResultOptions(preferredResultOptions NSWritingToolsResultOptions) {
+	x.inner.SetPreferredResultOptions(raw.NSWritingToolsResultOptions(preferredResultOptions))
 }
 
 // ResultOptions calls the underlying ResultOptions.
-func (x *WritingToolsCoordinator) ResultOptions() raw.NSWritingToolsResultOptions {
-	return x.inner.ResultOptions()
+func (x *WritingToolsCoordinator) ResultOptions() NSWritingToolsResultOptions {
+	return NSWritingToolsResultOptions(x.inner.ResultOptions())
 }
 
 // IncludesTextListMarkers calls the underlying IncludesTextListMarkers.
@@ -174,11 +174,11 @@ type WritingToolsCoordinatorable interface {
 	Unwrap() *raw.NSWritingToolsCoordinator
 	WithEffectContainerView(effectContainerView ViewProvider) *WritingToolsCoordinator
 	WithDecorationContainerView(decorationContainerView ViewProvider) *WritingToolsCoordinator
-	WithPreferredBehavior(preferredBehavior raw.NSWritingToolsBehavior) *WritingToolsCoordinator
-	WithPreferredResultOptions(preferredResultOptions raw.NSWritingToolsResultOptions) *WritingToolsCoordinator
+	WithPreferredBehavior(preferredBehavior NSWritingToolsBehavior) *WritingToolsCoordinator
+	WithPreferredResultOptions(preferredResultOptions NSWritingToolsResultOptions) *WritingToolsCoordinator
 	WithIncludesTextListMarkers(includesTextListMarkers bool) *WritingToolsCoordinator
 	StopWritingTools()
-	UpdateRangeWithTextReasonForContextWithIdentifier(range_ foundation.NSRange, replacementText *foundation.NSAttributedString, reason raw.NSWritingToolsCoordinatorTextUpdateReason, contextID *foundation.NSUUID)
+	UpdateRangeWithTextReasonForContextWithIdentifier(range_ foundation.NSRange, replacementText *foundation.NSAttributedString, reason NSWritingToolsCoordinatorTextUpdateReason, contextID *foundation.NSUUID)
 	UpdateForReflowedTextInContextWithIdentifier(contextID *foundation.NSUUID)
 	Delegate() raw.NSWritingToolsCoordinatorDelegate
 	View() *View
@@ -186,13 +186,13 @@ type WritingToolsCoordinatorable interface {
 	SetEffectContainerView(effectContainerView *raw.NSView)
 	DecorationContainerView() *View
 	SetDecorationContainerView(decorationContainerView *raw.NSView)
-	State() raw.NSWritingToolsCoordinatorState
-	PreferredBehavior() raw.NSWritingToolsBehavior
-	SetPreferredBehavior(preferredBehavior raw.NSWritingToolsBehavior)
-	Behavior() raw.NSWritingToolsBehavior
-	PreferredResultOptions() raw.NSWritingToolsResultOptions
-	SetPreferredResultOptions(preferredResultOptions raw.NSWritingToolsResultOptions)
-	ResultOptions() raw.NSWritingToolsResultOptions
+	State() NSWritingToolsCoordinatorState
+	PreferredBehavior() NSWritingToolsBehavior
+	SetPreferredBehavior(preferredBehavior NSWritingToolsBehavior)
+	Behavior() NSWritingToolsBehavior
+	PreferredResultOptions() NSWritingToolsResultOptions
+	SetPreferredResultOptions(preferredResultOptions NSWritingToolsResultOptions)
+	ResultOptions() NSWritingToolsResultOptions
 	IncludesTextListMarkers() bool
 	SetIncludesTextListMarkers(includesTextListMarkers bool)
 }

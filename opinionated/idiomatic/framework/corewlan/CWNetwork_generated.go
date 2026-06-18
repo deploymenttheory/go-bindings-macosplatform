@@ -43,13 +43,13 @@ func (x *Network) IsEqualToNetwork(network *raw.CWNetwork) bool {
 }
 
 // SupportsSecurity calls the underlying SupportsSecurity.
-func (x *Network) SupportsSecurity(security raw.CWSecurity) bool {
-	return x.inner.SupportsSecurity(security)
+func (x *Network) SupportsSecurity(security CWSecurity) bool {
+	return x.inner.SupportsSecurity(raw.CWSecurity(security))
 }
 
 // SupportsPHYMode calls the underlying SupportsPHYMode.
-func (x *Network) SupportsPHYMode(phyMode raw.CWPHYMode) bool {
-	return x.inner.SupportsPHYMode(phyMode)
+func (x *Network) SupportsPHYMode(phyMode CWPHYMode) bool {
+	return x.inner.SupportsPHYMode(raw.CWPHYMode(phyMode))
 }
 
 // Ssid calls the underlying Ssid.
@@ -122,8 +122,8 @@ func (x *Network) Ibss() bool {
 type Networkable interface {
 	Unwrap() *raw.CWNetwork
 	IsEqualToNetwork(network *raw.CWNetwork) bool
-	SupportsSecurity(security raw.CWSecurity) bool
-	SupportsPHYMode(phyMode raw.CWPHYMode) bool
+	SupportsSecurity(security CWSecurity) bool
+	SupportsPHYMode(phyMode CWPHYMode) bool
 	Ssid() string
 	SsidData() *foundation.NSData
 	Bssid() string

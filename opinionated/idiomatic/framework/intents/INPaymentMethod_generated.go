@@ -32,15 +32,15 @@ func PaymentMethodFromID(id objc.ID) *PaymentMethod {
 }
 
 // NewPaymentMethodWithTypeNameIdentificationHintIcon creates a new [PaymentMethod].
-func NewPaymentMethodWithTypeNameIdentificationHintIcon(type_ raw.INPaymentMethodType, name string, identificationHint string, icon *raw.INImage) *PaymentMethod {
+func NewPaymentMethodWithTypeNameIdentificationHintIcon(type_ INPaymentMethodType, name string, identificationHint string, icon *raw.INImage) *PaymentMethod {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPaymentMethod")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:name:identificationHint:icon:"), type_, foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(identificationHint).Ptr(), icon.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:name:identificationHint:icon:"), raw.INPaymentMethodType(type_), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(identificationHint).Ptr(), icon.Ptr())
 	return &PaymentMethod{inner: raw.INPaymentMethodFromID(_id)}
 }
 
 // Type calls the underlying Type.
-func (x *PaymentMethod) Type() raw.INPaymentMethodType {
-	return x.inner.Type()
+func (x *PaymentMethod) Type() INPaymentMethodType {
+	return INPaymentMethodType(x.inner.Type())
 }
 
 // Name calls the underlying Name.
@@ -73,7 +73,7 @@ func (x *PaymentMethod) IdentificationHint() string {
 // PaymentMethodable is the interface implemented by [PaymentMethod], for mocking and DI.
 type PaymentMethodable interface {
 	Unwrap() *raw.INPaymentMethod
-	Type() raw.INPaymentMethodType
+	Type() INPaymentMethodType
 	Name() string
 	Icon() *Image
 	IdentificationHint() string

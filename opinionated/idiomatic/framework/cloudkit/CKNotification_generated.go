@@ -39,8 +39,8 @@ func NewNotification() *Notification {
 }
 
 // NotificationType calls the underlying NotificationType.
-func (x *Notification) NotificationType() raw.CKNotificationType {
-	return x.inner.NotificationType()
+func (x *Notification) NotificationType() CKNotificationType {
+	return CKNotificationType(x.inner.NotificationType())
 }
 
 // NotificationID calls the underlying NotificationID.
@@ -159,7 +159,7 @@ func (x *Notification) asNotification() *raw.CKNotification { return x.inner }
 // Notificationable is the interface implemented by [Notification], for mocking and DI.
 type Notificationable interface {
 	Unwrap() *raw.CKNotification
-	NotificationType() raw.CKNotificationType
+	NotificationType() CKNotificationType
 	NotificationID() *NotificationID
 	ContainerIdentifier() string
 	SubscriptionOwnerUserRecordID() *RecordID

@@ -38,8 +38,8 @@ func NewNEVPNProtocolIKEv2() *NEVPNProtocolIKEv2 {
 }
 
 // WithDeadPeerDetectionRate sets the deadPeerDetectionRate property and returns the receiver for chaining.
-func (x *NEVPNProtocolIKEv2) WithDeadPeerDetectionRate(deadPeerDetectionRate raw.NEVPNIKEv2DeadPeerDetectionRate) *NEVPNProtocolIKEv2 {
-	x.inner.SetDeadPeerDetectionRate(deadPeerDetectionRate)
+func (x *NEVPNProtocolIKEv2) WithDeadPeerDetectionRate(deadPeerDetectionRate NEVPNIKEv2DeadPeerDetectionRate) *NEVPNProtocolIKEv2 {
+	x.inner.SetDeadPeerDetectionRate(raw.NEVPNIKEv2DeadPeerDetectionRate(deadPeerDetectionRate))
 	return x
 }
 
@@ -56,8 +56,8 @@ func (x *NEVPNProtocolIKEv2) WithServerCertificateCommonName(serverCertificateCo
 }
 
 // WithCertificateType sets the certificateType property and returns the receiver for chaining.
-func (x *NEVPNProtocolIKEv2) WithCertificateType(certificateType raw.NEVPNIKEv2CertificateType) *NEVPNProtocolIKEv2 {
-	x.inner.SetCertificateType(certificateType)
+func (x *NEVPNProtocolIKEv2) WithCertificateType(certificateType NEVPNIKEv2CertificateType) *NEVPNProtocolIKEv2 {
+	x.inner.SetCertificateType(raw.NEVPNIKEv2CertificateType(certificateType))
 	return x
 }
 
@@ -104,14 +104,14 @@ func (x *NEVPNProtocolIKEv2) WithStrictRevocationCheck(strictRevocationCheck boo
 }
 
 // WithMinimumTLSVersion sets the minimumTLSVersion property and returns the receiver for chaining.
-func (x *NEVPNProtocolIKEv2) WithMinimumTLSVersion(minimumTLSVersion raw.NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2 {
-	x.inner.SetMinimumTLSVersion(minimumTLSVersion)
+func (x *NEVPNProtocolIKEv2) WithMinimumTLSVersion(minimumTLSVersion NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2 {
+	x.inner.SetMinimumTLSVersion(raw.NEVPNIKEv2TLSVersion(minimumTLSVersion))
 	return x
 }
 
 // WithMaximumTLSVersion sets the maximumTLSVersion property and returns the receiver for chaining.
-func (x *NEVPNProtocolIKEv2) WithMaximumTLSVersion(maximumTLSVersion raw.NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2 {
-	x.inner.SetMaximumTLSVersion(maximumTLSVersion)
+func (x *NEVPNProtocolIKEv2) WithMaximumTLSVersion(maximumTLSVersion NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2 {
+	x.inner.SetMaximumTLSVersion(raw.NEVPNIKEv2TLSVersion(maximumTLSVersion))
 	return x
 }
 
@@ -128,8 +128,8 @@ func (x *NEVPNProtocolIKEv2) WithPpkConfiguration(ppkConfiguration *NEVPNIKEv2PP
 }
 
 // WithAuthenticationMethod sets the authenticationMethod property and returns the receiver for chaining.
-func (x *NEVPNProtocolIKEv2) WithAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod) *NEVPNProtocolIKEv2 {
-	x.inner.NEVPNProtocolIPSec.SetAuthenticationMethod(authenticationMethod)
+func (x *NEVPNProtocolIKEv2) WithAuthenticationMethod(authenticationMethod NEVPNIKEAuthenticationMethod) *NEVPNProtocolIKEv2 {
+	x.inner.NEVPNProtocolIPSec.SetAuthenticationMethod(raw.NEVPNIKEAuthenticationMethod(authenticationMethod))
 	return x
 }
 
@@ -242,13 +242,13 @@ func (x *NEVPNProtocolIKEv2) WithEnforceRoutes(enforceRoutes bool) *NEVPNProtoco
 }
 
 // DeadPeerDetectionRate calls the underlying DeadPeerDetectionRate.
-func (x *NEVPNProtocolIKEv2) DeadPeerDetectionRate() raw.NEVPNIKEv2DeadPeerDetectionRate {
-	return x.inner.DeadPeerDetectionRate()
+func (x *NEVPNProtocolIKEv2) DeadPeerDetectionRate() NEVPNIKEv2DeadPeerDetectionRate {
+	return NEVPNIKEv2DeadPeerDetectionRate(x.inner.DeadPeerDetectionRate())
 }
 
 // SetDeadPeerDetectionRate calls the underlying SetDeadPeerDetectionRate.
-func (x *NEVPNProtocolIKEv2) SetDeadPeerDetectionRate(deadPeerDetectionRate raw.NEVPNIKEv2DeadPeerDetectionRate) {
-	x.inner.SetDeadPeerDetectionRate(deadPeerDetectionRate)
+func (x *NEVPNProtocolIKEv2) SetDeadPeerDetectionRate(deadPeerDetectionRate NEVPNIKEv2DeadPeerDetectionRate) {
+	x.inner.SetDeadPeerDetectionRate(raw.NEVPNIKEv2DeadPeerDetectionRate(deadPeerDetectionRate))
 }
 
 // ServerCertificateIssuerCommonName calls the underlying ServerCertificateIssuerCommonName.
@@ -280,13 +280,13 @@ func (x *NEVPNProtocolIKEv2) SetServerCertificateCommonName(serverCertificateCom
 }
 
 // CertificateType calls the underlying CertificateType.
-func (x *NEVPNProtocolIKEv2) CertificateType() raw.NEVPNIKEv2CertificateType {
-	return x.inner.CertificateType()
+func (x *NEVPNProtocolIKEv2) CertificateType() NEVPNIKEv2CertificateType {
+	return NEVPNIKEv2CertificateType(x.inner.CertificateType())
 }
 
 // SetCertificateType calls the underlying SetCertificateType.
-func (x *NEVPNProtocolIKEv2) SetCertificateType(certificateType raw.NEVPNIKEv2CertificateType) {
-	x.inner.SetCertificateType(certificateType)
+func (x *NEVPNProtocolIKEv2) SetCertificateType(certificateType NEVPNIKEv2CertificateType) {
+	x.inner.SetCertificateType(raw.NEVPNIKEv2CertificateType(certificateType))
 }
 
 // UseConfigurationAttributeInternalIPSubnet calls the underlying UseConfigurationAttributeInternalIPSubnet.
@@ -378,23 +378,23 @@ func (x *NEVPNProtocolIKEv2) SetStrictRevocationCheck(strictRevocationCheck bool
 }
 
 // MinimumTLSVersion calls the underlying MinimumTLSVersion.
-func (x *NEVPNProtocolIKEv2) MinimumTLSVersion() raw.NEVPNIKEv2TLSVersion {
-	return x.inner.MinimumTLSVersion()
+func (x *NEVPNProtocolIKEv2) MinimumTLSVersion() NEVPNIKEv2TLSVersion {
+	return NEVPNIKEv2TLSVersion(x.inner.MinimumTLSVersion())
 }
 
 // SetMinimumTLSVersion calls the underlying SetMinimumTLSVersion.
-func (x *NEVPNProtocolIKEv2) SetMinimumTLSVersion(minimumTLSVersion raw.NEVPNIKEv2TLSVersion) {
-	x.inner.SetMinimumTLSVersion(minimumTLSVersion)
+func (x *NEVPNProtocolIKEv2) SetMinimumTLSVersion(minimumTLSVersion NEVPNIKEv2TLSVersion) {
+	x.inner.SetMinimumTLSVersion(raw.NEVPNIKEv2TLSVersion(minimumTLSVersion))
 }
 
 // MaximumTLSVersion calls the underlying MaximumTLSVersion.
-func (x *NEVPNProtocolIKEv2) MaximumTLSVersion() raw.NEVPNIKEv2TLSVersion {
-	return x.inner.MaximumTLSVersion()
+func (x *NEVPNProtocolIKEv2) MaximumTLSVersion() NEVPNIKEv2TLSVersion {
+	return NEVPNIKEv2TLSVersion(x.inner.MaximumTLSVersion())
 }
 
 // SetMaximumTLSVersion calls the underlying SetMaximumTLSVersion.
-func (x *NEVPNProtocolIKEv2) SetMaximumTLSVersion(maximumTLSVersion raw.NEVPNIKEv2TLSVersion) {
-	x.inner.SetMaximumTLSVersion(maximumTLSVersion)
+func (x *NEVPNProtocolIKEv2) SetMaximumTLSVersion(maximumTLSVersion NEVPNIKEv2TLSVersion) {
+	x.inner.SetMaximumTLSVersion(raw.NEVPNIKEv2TLSVersion(maximumTLSVersion))
 }
 
 // Mtu calls the underlying Mtu.
@@ -432,10 +432,10 @@ func (x *NEVPNProtocolIKEv2) asNEVPNProtocol() *raw.NEVPNProtocol {
 // NEVPNProtocolIKEv2able is the interface implemented by [NEVPNProtocolIKEv2], for mocking and DI.
 type NEVPNProtocolIKEv2able interface {
 	Unwrap() *raw.NEVPNProtocolIKEv2
-	WithDeadPeerDetectionRate(deadPeerDetectionRate raw.NEVPNIKEv2DeadPeerDetectionRate) *NEVPNProtocolIKEv2
+	WithDeadPeerDetectionRate(deadPeerDetectionRate NEVPNIKEv2DeadPeerDetectionRate) *NEVPNProtocolIKEv2
 	WithServerCertificateIssuerCommonName(serverCertificateIssuerCommonName string) *NEVPNProtocolIKEv2
 	WithServerCertificateCommonName(serverCertificateCommonName string) *NEVPNProtocolIKEv2
-	WithCertificateType(certificateType raw.NEVPNIKEv2CertificateType) *NEVPNProtocolIKEv2
+	WithCertificateType(certificateType NEVPNIKEv2CertificateType) *NEVPNProtocolIKEv2
 	WithUseConfigurationAttributeInternalIPSubnet(useConfigurationAttributeInternalIPSubnet bool) *NEVPNProtocolIKEv2
 	WithDisableMOBIKE(disableMOBIKE bool) *NEVPNProtocolIKEv2
 	WithDisableRedirect(disableRedirect bool) *NEVPNProtocolIKEv2
@@ -443,11 +443,11 @@ type NEVPNProtocolIKEv2able interface {
 	WithAllowPostQuantumKeyExchangeFallback(allowPostQuantumKeyExchangeFallback bool) *NEVPNProtocolIKEv2
 	WithEnableRevocationCheck(enableRevocationCheck bool) *NEVPNProtocolIKEv2
 	WithStrictRevocationCheck(strictRevocationCheck bool) *NEVPNProtocolIKEv2
-	WithMinimumTLSVersion(minimumTLSVersion raw.NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2
-	WithMaximumTLSVersion(maximumTLSVersion raw.NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2
+	WithMinimumTLSVersion(minimumTLSVersion NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2
+	WithMaximumTLSVersion(maximumTLSVersion NEVPNIKEv2TLSVersion) *NEVPNProtocolIKEv2
 	WithMtu(mtu uint) *NEVPNProtocolIKEv2
 	WithPpkConfiguration(ppkConfiguration *NEVPNIKEv2PPKConfiguration) *NEVPNProtocolIKEv2
-	WithAuthenticationMethod(authenticationMethod raw.NEVPNIKEAuthenticationMethod) *NEVPNProtocolIKEv2
+	WithAuthenticationMethod(authenticationMethod NEVPNIKEAuthenticationMethod) *NEVPNProtocolIKEv2
 	WithUseExtendedAuthentication(useExtendedAuthentication bool) *NEVPNProtocolIKEv2
 	WithSharedSecretReference(sharedSecretReference *foundation.NSData) *NEVPNProtocolIKEv2
 	WithLocalIdentifier(localIdentifier string) *NEVPNProtocolIKEv2
@@ -466,14 +466,14 @@ type NEVPNProtocolIKEv2able interface {
 	WithExcludeAPNs(excludeAPNs bool) *NEVPNProtocolIKEv2
 	WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEVPNProtocolIKEv2
 	WithEnforceRoutes(enforceRoutes bool) *NEVPNProtocolIKEv2
-	DeadPeerDetectionRate() raw.NEVPNIKEv2DeadPeerDetectionRate
-	SetDeadPeerDetectionRate(deadPeerDetectionRate raw.NEVPNIKEv2DeadPeerDetectionRate)
+	DeadPeerDetectionRate() NEVPNIKEv2DeadPeerDetectionRate
+	SetDeadPeerDetectionRate(deadPeerDetectionRate NEVPNIKEv2DeadPeerDetectionRate)
 	ServerCertificateIssuerCommonName() string
 	SetServerCertificateIssuerCommonName(serverCertificateIssuerCommonName string)
 	ServerCertificateCommonName() string
 	SetServerCertificateCommonName(serverCertificateCommonName string)
-	CertificateType() raw.NEVPNIKEv2CertificateType
-	SetCertificateType(certificateType raw.NEVPNIKEv2CertificateType)
+	CertificateType() NEVPNIKEv2CertificateType
+	SetCertificateType(certificateType NEVPNIKEv2CertificateType)
 	UseConfigurationAttributeInternalIPSubnet() bool
 	SetUseConfigurationAttributeInternalIPSubnet(useConfigurationAttributeInternalIPSubnet bool)
 	IKESecurityAssociationParameters() *NEVPNIKEv2SecurityAssociationParameters
@@ -490,10 +490,10 @@ type NEVPNProtocolIKEv2able interface {
 	SetEnableRevocationCheck(enableRevocationCheck bool)
 	StrictRevocationCheck() bool
 	SetStrictRevocationCheck(strictRevocationCheck bool)
-	MinimumTLSVersion() raw.NEVPNIKEv2TLSVersion
-	SetMinimumTLSVersion(minimumTLSVersion raw.NEVPNIKEv2TLSVersion)
-	MaximumTLSVersion() raw.NEVPNIKEv2TLSVersion
-	SetMaximumTLSVersion(maximumTLSVersion raw.NEVPNIKEv2TLSVersion)
+	MinimumTLSVersion() NEVPNIKEv2TLSVersion
+	SetMinimumTLSVersion(minimumTLSVersion NEVPNIKEv2TLSVersion)
+	MaximumTLSVersion() NEVPNIKEv2TLSVersion
+	SetMaximumTLSVersion(maximumTLSVersion NEVPNIKEv2TLSVersion)
 	Mtu() uint
 	SetMtu(mtu uint)
 	PpkConfiguration() *NEVPNIKEv2PPKConfiguration

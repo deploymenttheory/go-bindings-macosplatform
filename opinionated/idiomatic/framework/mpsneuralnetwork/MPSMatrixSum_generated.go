@@ -53,13 +53,13 @@ func (x *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *
 }
 
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
-func (x *MatrixSum) SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+func (x *MatrixSum) SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	x.inner.SetNeuronTypeParameterAParameterBParameterC(raw.MPSCNNNeuronType(neuronType), parameterA, parameterB, parameterC)
 }
 
 // NeuronType calls the underlying NeuronType.
-func (x *MatrixSum) NeuronType() raw.MPSCNNNeuronType {
-	return x.inner.NeuronType()
+func (x *MatrixSum) NeuronType() MPSCNNNeuronType {
+	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
 // EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex calls the underlying EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex.
@@ -116,8 +116,8 @@ func (x *MatrixSum) NeuronParameterC() float32 {
 type MatrixSumable interface {
 	Unwrap() *raw.MPSMatrixSum
 	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum
-	SetNeuronTypeParameterAParameterBParameterC(neuronType raw.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() raw.MPSCNNNeuronType
+	SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() MPSCNNNeuronType
 	EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex(buffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], resultMatrix *mpscore.MPSMatrix, scaleVector *mpscore.MPSVector, offsetVector *mpscore.MPSVector, biasVector *mpscore.MPSVector, startIndex uint)
 	Rows() uint
 	Columns() uint

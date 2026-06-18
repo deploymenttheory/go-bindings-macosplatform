@@ -64,8 +64,8 @@ func (x *EffectNode) WithShouldRasterize(shouldRasterize bool) *EffectNode {
 }
 
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *EffectNode) WithBlendMode(blendMode raw.SKBlendMode) *EffectNode {
-	x.inner.SetBlendMode(blendMode)
+func (x *EffectNode) WithBlendMode(blendMode SKBlendMode) *EffectNode {
+	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 	return x
 }
 
@@ -278,13 +278,13 @@ func (x *EffectNode) SetShouldRasterize(shouldRasterize bool) {
 }
 
 // BlendMode calls the underlying BlendMode.
-func (x *EffectNode) BlendMode() raw.SKBlendMode {
-	return x.inner.BlendMode()
+func (x *EffectNode) BlendMode() SKBlendMode {
+	return SKBlendMode(x.inner.BlendMode())
 }
 
 // SetBlendMode calls the underlying SetBlendMode.
-func (x *EffectNode) SetBlendMode(blendMode raw.SKBlendMode) {
-	x.inner.SetBlendMode(blendMode)
+func (x *EffectNode) SetBlendMode(blendMode SKBlendMode) {
+	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 }
 
 // Shader calls the underlying Shader.
@@ -312,7 +312,7 @@ type EffectNodeable interface {
 	WithShouldCenterFilter(shouldCenterFilter bool) *EffectNode
 	WithShouldEnableEffects(shouldEnableEffects bool) *EffectNode
 	WithShouldRasterize(shouldRasterize bool) *EffectNode
-	WithBlendMode(blendMode raw.SKBlendMode) *EffectNode
+	WithBlendMode(blendMode SKBlendMode) *EffectNode
 	WithShader(shader *Shader) *EffectNode
 	WithPosition(position corefoundation.CGPoint) *EffectNode
 	WithZPosition(zPosition float64) *EffectNode
@@ -347,8 +347,8 @@ type EffectNodeable interface {
 	SetShouldEnableEffects(shouldEnableEffects bool)
 	ShouldRasterize() bool
 	SetShouldRasterize(shouldRasterize bool)
-	BlendMode() raw.SKBlendMode
-	SetBlendMode(blendMode raw.SKBlendMode)
+	BlendMode() SKBlendMode
+	SetBlendMode(blendMode SKBlendMode)
 	Shader() *Shader
 	SetShader(shader *raw.SKShader)
 }

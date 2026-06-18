@@ -112,8 +112,8 @@ func (x *GraphPooling4DOpDescriptor) WithPaddingValues(items ...*foundation.NSNu
 }
 
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
-func (x *GraphPooling4DOpDescriptor) WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor {
-	x.inner.SetPaddingStyle(paddingStyle)
+func (x *GraphPooling4DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor {
+	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	return x
 }
 
@@ -130,8 +130,8 @@ func (x *GraphPooling4DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadT
 }
 
 // WithReturnIndicesMode sets the returnIndicesMode property and returns the receiver for chaining.
-func (x *GraphPooling4DOpDescriptor) WithReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor {
-	x.inner.SetReturnIndicesMode(returnIndicesMode)
+func (x *GraphPooling4DOpDescriptor) WithReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor {
+	x.inner.SetReturnIndicesMode(raw.MPSGraphPoolingReturnIndicesMode(returnIndicesMode))
 	return x
 }
 
@@ -206,13 +206,13 @@ func (x *GraphPooling4DOpDescriptor) SetPaddingValues(paddingValues *foundation.
 }
 
 // PaddingStyle calls the underlying PaddingStyle.
-func (x *GraphPooling4DOpDescriptor) PaddingStyle() raw.MPSGraphPaddingStyle {
-	return x.inner.PaddingStyle()
+func (x *GraphPooling4DOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
+	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
 }
 
 // SetPaddingStyle calls the underlying SetPaddingStyle.
-func (x *GraphPooling4DOpDescriptor) SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) {
-	x.inner.SetPaddingStyle(paddingStyle)
+func (x *GraphPooling4DOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPaddingStyle) {
+	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 }
 
 // CeilMode calls the underlying CeilMode.
@@ -236,13 +236,13 @@ func (x *GraphPooling4DOpDescriptor) SetIncludeZeroPadToAverage(includeZeroPadTo
 }
 
 // ReturnIndicesMode calls the underlying ReturnIndicesMode.
-func (x *GraphPooling4DOpDescriptor) ReturnIndicesMode() raw.MPSGraphPoolingReturnIndicesMode {
-	return x.inner.ReturnIndicesMode()
+func (x *GraphPooling4DOpDescriptor) ReturnIndicesMode() MPSGraphPoolingReturnIndicesMode {
+	return MPSGraphPoolingReturnIndicesMode(x.inner.ReturnIndicesMode())
 }
 
 // SetReturnIndicesMode calls the underlying SetReturnIndicesMode.
-func (x *GraphPooling4DOpDescriptor) SetReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode) {
-	x.inner.SetReturnIndicesMode(returnIndicesMode)
+func (x *GraphPooling4DOpDescriptor) SetReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) {
+	x.inner.SetReturnIndicesMode(raw.MPSGraphPoolingReturnIndicesMode(returnIndicesMode))
 }
 
 // ReturnIndicesDataType calls the underlying ReturnIndicesDataType.
@@ -266,10 +266,10 @@ type GraphPooling4DOpDescriptorable interface {
 	WithStrides(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
 	WithDilationRates(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
 	WithPaddingValues(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
-	WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor
+	WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor
 	WithCeilMode(ceilMode bool) *GraphPooling4DOpDescriptor
 	WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling4DOpDescriptor
-	WithReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor
+	WithReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor
 	WithReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) *GraphPooling4DOpDescriptor
 	KernelSizes() []*foundation.NSNumber
 	SetKernelSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber])
@@ -279,14 +279,14 @@ type GraphPooling4DOpDescriptorable interface {
 	SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber])
 	PaddingValues() []*foundation.NSNumber
 	SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber])
-	PaddingStyle() raw.MPSGraphPaddingStyle
-	SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle)
+	PaddingStyle() MPSGraphPaddingStyle
+	SetPaddingStyle(paddingStyle MPSGraphPaddingStyle)
 	CeilMode() bool
 	SetCeilMode(ceilMode bool)
 	IncludeZeroPadToAverage() bool
 	SetIncludeZeroPadToAverage(includeZeroPadToAverage bool)
-	ReturnIndicesMode() raw.MPSGraphPoolingReturnIndicesMode
-	SetReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode)
+	ReturnIndicesMode() MPSGraphPoolingReturnIndicesMode
+	SetReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode)
 	ReturnIndicesDataType() mpscore.MPSDataType
 	SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType)
 }

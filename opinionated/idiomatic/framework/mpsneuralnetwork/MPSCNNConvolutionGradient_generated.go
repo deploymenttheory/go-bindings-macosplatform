@@ -47,8 +47,8 @@ func NewCNNConvolutionGradientWithCoderDevice(aDecoder *foundation.NSCoder, devi
 }
 
 // WithGradientOption sets the gradientOption property and returns the receiver for chaining.
-func (x *CNNConvolutionGradient) WithGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) *CNNConvolutionGradient {
-	x.inner.SetGradientOption(gradientOption)
+func (x *CNNConvolutionGradient) WithGradientOption(gradientOption MPSCNNConvolutionGradientOption) *CNNConvolutionGradient {
+	x.inner.SetGradientOption(raw.MPSCNNConvolutionGradientOption(gradientOption))
 	return x
 }
 
@@ -202,13 +202,13 @@ func (x *CNNConvolutionGradient) DataSource() raw.MPSCNNConvolutionDataSource {
 }
 
 // GradientOption calls the underlying GradientOption.
-func (x *CNNConvolutionGradient) GradientOption() raw.MPSCNNConvolutionGradientOption {
-	return x.inner.GradientOption()
+func (x *CNNConvolutionGradient) GradientOption() MPSCNNConvolutionGradientOption {
+	return MPSCNNConvolutionGradientOption(x.inner.GradientOption())
 }
 
 // SetGradientOption calls the underlying SetGradientOption.
-func (x *CNNConvolutionGradient) SetGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) {
-	x.inner.SetGradientOption(gradientOption)
+func (x *CNNConvolutionGradient) SetGradientOption(gradientOption MPSCNNConvolutionGradientOption) {
+	x.inner.SetGradientOption(raw.MPSCNNConvolutionGradientOption(gradientOption))
 }
 
 // SerializeWeightsAndBiases calls the underlying SerializeWeightsAndBiases.
@@ -236,7 +236,7 @@ func (x *CNNConvolutionGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
 // CNNConvolutionGradientable is the interface implemented by [CNNConvolutionGradient], for mocking and DI.
 type CNNConvolutionGradientable interface {
 	Unwrap() *raw.MPSCNNConvolutionGradient
-	WithGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) *CNNConvolutionGradient
+	WithGradientOption(gradientOption MPSCNNConvolutionGradientOption) *CNNConvolutionGradient
 	WithSerializeWeightsAndBiases(serializeWeightsAndBiases bool) *CNNConvolutionGradient
 	WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionGradient
 	WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionGradient
@@ -263,8 +263,8 @@ type CNNConvolutionGradientable interface {
 	Groups() uint
 	ChannelMultiplier() uint
 	DataSource() raw.MPSCNNConvolutionDataSource
-	GradientOption() raw.MPSCNNConvolutionGradientOption
-	SetGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption)
+	GradientOption() MPSCNNConvolutionGradientOption
+	SetGradientOption(gradientOption MPSCNNConvolutionGradientOption)
 	SerializeWeightsAndBiases() bool
 	SetSerializeWeightsAndBiases(serializeWeightsAndBiases bool)
 }

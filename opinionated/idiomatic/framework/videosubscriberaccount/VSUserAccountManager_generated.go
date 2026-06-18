@@ -58,13 +58,13 @@ func (x *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, 
 }
 
 // QueryUserAccountsWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx context.Context, options raw.VSUserAccountQueryOptions) (*foundation.NSArray[*raw.VSUserAccount], error) {
+func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx context.Context, options VSUserAccountQueryOptions) (*foundation.NSArray[*raw.VSUserAccount], error) {
 	type _result struct {
 		val *foundation.NSArray[*raw.VSUserAccount]
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.QueryUserAccountsWithOptionsCompletion(options, func(_p0 *foundation.NSArray[*raw.VSUserAccount], _p1 unsafe.Pointer) {
+	x.inner.QueryUserAccountsWithOptionsCompletion(raw.VSUserAccountQueryOptions(options), func(_p0 *foundation.NSArray[*raw.VSUserAccount], _p1 unsafe.Pointer) {
 		var _o _result
 		if uintptr(_p1) != 0 {
 			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
@@ -129,7 +129,7 @@ func (x *VSUserAccountManager) DeleteAutoSignInToken(ctx context.Context) error 
 type VSUserAccountManagerable interface {
 	Unwrap() *raw.VSUserAccountManager
 	UpdateUserAccountCompletion(ctx context.Context, account *raw.VSUserAccount) error
-	QueryUserAccountsWithOptionsCompletion(ctx context.Context, options raw.VSUserAccountQueryOptions) (*foundation.NSArray[*raw.VSUserAccount], error)
+	QueryUserAccountsWithOptionsCompletion(ctx context.Context, options VSUserAccountQueryOptions) (*foundation.NSArray[*raw.VSUserAccount], error)
 	QueryAutoSignInToken(ctx context.Context) (*VSAutoSignInToken, error)
 	DeleteAutoSignInToken(ctx context.Context) error
 }

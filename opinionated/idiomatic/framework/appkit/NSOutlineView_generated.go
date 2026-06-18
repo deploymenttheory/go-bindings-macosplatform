@@ -113,14 +113,14 @@ func (x *OutlineView) WithAllowsColumnResizing(allowsColumnResizing bool) *Outli
 }
 
 // WithColumnAutoresizingStyle sets the columnAutoresizingStyle property and returns the receiver for chaining.
-func (x *OutlineView) WithColumnAutoresizingStyle(columnAutoresizingStyle raw.NSTableViewColumnAutoresizingStyle) *OutlineView {
-	x.inner.NSTableView.SetColumnAutoresizingStyle(columnAutoresizingStyle)
+func (x *OutlineView) WithColumnAutoresizingStyle(columnAutoresizingStyle NSTableViewColumnAutoresizingStyle) *OutlineView {
+	x.inner.NSTableView.SetColumnAutoresizingStyle(raw.NSTableViewColumnAutoresizingStyle(columnAutoresizingStyle))
 	return x
 }
 
 // WithGridStyleMask sets the gridStyleMask property and returns the receiver for chaining.
-func (x *OutlineView) WithGridStyleMask(gridStyleMask raw.NSTableViewGridLineStyle) *OutlineView {
-	x.inner.NSTableView.SetGridStyleMask(gridStyleMask)
+func (x *OutlineView) WithGridStyleMask(gridStyleMask NSTableViewGridLineStyle) *OutlineView {
+	x.inner.NSTableView.SetGridStyleMask(raw.NSTableViewGridLineStyle(gridStyleMask))
 	return x
 }
 
@@ -149,8 +149,8 @@ func (x *OutlineView) WithGridColor(gridColor *Color) *OutlineView {
 }
 
 // WithRowSizeStyle sets the rowSizeStyle property and returns the receiver for chaining.
-func (x *OutlineView) WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *OutlineView {
-	x.inner.NSTableView.SetRowSizeStyle(rowSizeStyle)
+func (x *OutlineView) WithRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) *OutlineView {
+	x.inner.NSTableView.SetRowSizeStyle(raw.NSTableViewRowSizeStyle(rowSizeStyle))
 	return x
 }
 
@@ -221,20 +221,20 @@ func (x *OutlineView) WithAllowsTypeSelect(allowsTypeSelect bool) *OutlineView {
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *OutlineView) WithStyle(style raw.NSTableViewStyle) *OutlineView {
-	x.inner.NSTableView.SetStyle(style)
+func (x *OutlineView) WithStyle(style NSTableViewStyle) *OutlineView {
+	x.inner.NSTableView.SetStyle(raw.NSTableViewStyle(style))
 	return x
 }
 
 // WithSelectionHighlightStyle sets the selectionHighlightStyle property and returns the receiver for chaining.
-func (x *OutlineView) WithSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) *OutlineView {
-	x.inner.NSTableView.SetSelectionHighlightStyle(selectionHighlightStyle)
+func (x *OutlineView) WithSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) *OutlineView {
+	x.inner.NSTableView.SetSelectionHighlightStyle(raw.NSTableViewSelectionHighlightStyle(selectionHighlightStyle))
 	return x
 }
 
 // WithDraggingDestinationFeedbackStyle sets the draggingDestinationFeedbackStyle property and returns the receiver for chaining.
-func (x *OutlineView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) *OutlineView {
-	x.inner.NSTableView.SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle)
+func (x *OutlineView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) *OutlineView {
+	x.inner.NSTableView.SetDraggingDestinationFeedbackStyle(raw.NSTableViewDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle))
 	return x
 }
 
@@ -323,8 +323,8 @@ func (x *OutlineView) WithHighlighted(highlighted bool) *OutlineView {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *OutlineView) WithControlSize(controlSize raw.NSControlSize) *OutlineView {
-	x.inner.NSTableView.NSControl.SetControlSize(controlSize)
+func (x *OutlineView) WithControlSize(controlSize NSControlSize) *OutlineView {
+	x.inner.NSTableView.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -389,20 +389,20 @@ func (x *OutlineView) WithUsesSingleLineMode(usesSingleLineMode bool) *OutlineVi
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *OutlineView) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *OutlineView {
-	x.inner.NSTableView.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *OutlineView) WithLineBreakMode(lineBreakMode NSLineBreakMode) *OutlineView {
+	x.inner.NSTableView.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *OutlineView) WithAlignment(alignment raw.NSTextAlignment) *OutlineView {
-	x.inner.NSTableView.NSControl.SetAlignment(alignment)
+func (x *OutlineView) WithAlignment(alignment NSTextAlignment) *OutlineView {
+	x.inner.NSTableView.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *OutlineView) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *OutlineView {
-	x.inner.NSTableView.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *OutlineView) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *OutlineView {
+	x.inner.NSTableView.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -455,8 +455,8 @@ func (x *OutlineView) WithAutoresizesSubviews(autoresizesSubviews bool) *Outline
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *OutlineView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *OutlineView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -515,14 +515,14 @@ func (x *OutlineView) WithWantsRestingTouches(wantsRestingTouches bool) *Outline
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *OutlineView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *OutlineView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *OutlineView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *OutlineView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -629,8 +629,8 @@ func (x *OutlineView) WithToolTip(toolTip string) *OutlineView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *OutlineView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *OutlineView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -647,8 +647,8 @@ func (x *OutlineView) WithNextKeyView(nextKeyView ViewProvider) *OutlineView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *OutlineView) WithFocusRingType(focusRingType raw.NSFocusRingType) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *OutlineView) WithFocusRingType(focusRingType NSFocusRingType) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -671,8 +671,8 @@ func (x *OutlineView) WithGestureRecognizers(items ...GestureRecognizerProvider)
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *OutlineView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *OutlineView {
-	x.inner.NSTableView.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *OutlineView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -856,13 +856,13 @@ func (x *OutlineView) ShouldCollapseAutoExpandedItemsForDeposited(deposited bool
 }
 
 // InsertItemsAtIndexesInParentWithAnimation calls the underlying InsertItemsAtIndexesInParentWithAnimation.
-func (x *OutlineView) InsertItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions raw.NSTableViewAnimationOptions) {
-	x.inner.InsertItemsAtIndexesInParentWithAnimation(indexes, parent, animationOptions)
+func (x *OutlineView) InsertItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions NSTableViewAnimationOptions) {
+	x.inner.InsertItemsAtIndexesInParentWithAnimation(indexes, parent, raw.NSTableViewAnimationOptions(animationOptions))
 }
 
 // RemoveItemsAtIndexesInParentWithAnimation calls the underlying RemoveItemsAtIndexesInParentWithAnimation.
-func (x *OutlineView) RemoveItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions raw.NSTableViewAnimationOptions) {
-	x.inner.RemoveItemsAtIndexesInParentWithAnimation(indexes, parent, animationOptions)
+func (x *OutlineView) RemoveItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions NSTableViewAnimationOptions) {
+	x.inner.RemoveItemsAtIndexesInParentWithAnimation(indexes, parent, raw.NSTableViewAnimationOptions(animationOptions))
 }
 
 // MoveItemAtIndexInParentToIndexInParent calls the underlying MoveItemAtIndexInParentToIndexInParent.
@@ -959,13 +959,13 @@ type OutlineViewable interface {
 	WithCornerView(cornerView ViewProvider) *OutlineView
 	WithAllowsColumnReordering(allowsColumnReordering bool) *OutlineView
 	WithAllowsColumnResizing(allowsColumnResizing bool) *OutlineView
-	WithColumnAutoresizingStyle(columnAutoresizingStyle raw.NSTableViewColumnAutoresizingStyle) *OutlineView
-	WithGridStyleMask(gridStyleMask raw.NSTableViewGridLineStyle) *OutlineView
+	WithColumnAutoresizingStyle(columnAutoresizingStyle NSTableViewColumnAutoresizingStyle) *OutlineView
+	WithGridStyleMask(gridStyleMask NSTableViewGridLineStyle) *OutlineView
 	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *OutlineView
 	WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors bool) *OutlineView
 	WithBackgroundColor(backgroundColor *Color) *OutlineView
 	WithGridColor(gridColor *Color) *OutlineView
-	WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *OutlineView
+	WithRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) *OutlineView
 	WithRowHeight(rowHeight float64) *OutlineView
 	WithDoubleAction(doubleAction objc.SEL) *OutlineView
 	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *OutlineView
@@ -975,9 +975,9 @@ type OutlineViewable interface {
 	WithAllowsEmptySelection(allowsEmptySelection bool) *OutlineView
 	WithAllowsColumnSelection(allowsColumnSelection bool) *OutlineView
 	WithAllowsTypeSelect(allowsTypeSelect bool) *OutlineView
-	WithStyle(style raw.NSTableViewStyle) *OutlineView
-	WithSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) *OutlineView
-	WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) *OutlineView
+	WithStyle(style NSTableViewStyle) *OutlineView
+	WithSelectionHighlightStyle(selectionHighlightStyle NSTableViewSelectionHighlightStyle) *OutlineView
+	WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle NSTableViewDraggingDestinationFeedbackStyle) *OutlineView
 	WithAutosaveName(autosaveName *foundation.NSString) *OutlineView
 	WithAutosaveTableColumns(autosaveTableColumns bool) *OutlineView
 	WithFloatsGroupRows(floatsGroupRows bool) *OutlineView
@@ -992,7 +992,7 @@ type OutlineViewable interface {
 	WithEnabled(enabled bool) *OutlineView
 	WithRefusesFirstResponder(refusesFirstResponder bool) *OutlineView
 	WithHighlighted(highlighted bool) *OutlineView
-	WithControlSize(controlSize raw.NSControlSize) *OutlineView
+	WithControlSize(controlSize NSControlSize) *OutlineView
 	WithFormatter(formatter *foundation.NSFormatter) *OutlineView
 	WithObjectValue(objectValue objc.ID) *OutlineView
 	WithStringValue(stringValue string) *OutlineView
@@ -1003,16 +1003,16 @@ type OutlineViewable interface {
 	WithDoubleValue(doubleValue float64) *OutlineView
 	WithFont(font *Font) *OutlineView
 	WithUsesSingleLineMode(usesSingleLineMode bool) *OutlineView
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *OutlineView
-	WithAlignment(alignment raw.NSTextAlignment) *OutlineView
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *OutlineView
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *OutlineView
+	WithAlignment(alignment NSTextAlignment) *OutlineView
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *OutlineView
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *OutlineView
 	WithCell(cell CellProvider) *OutlineView
 	WithSubviews(items ...ViewProvider) *OutlineView
 	WithHidden(hidden bool) *OutlineView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OutlineView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *OutlineView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *OutlineView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *OutlineView
 	WithFrame(frame corefoundation.CGRect) *OutlineView
 	WithFrameRotation(frameRotation float64) *OutlineView
 	WithFrameCenterRotation(frameCenterRotation float64) *OutlineView
@@ -1022,8 +1022,8 @@ type OutlineViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *OutlineView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *OutlineView
 	WithWantsRestingTouches(wantsRestingTouches bool) *OutlineView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *OutlineView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *OutlineView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *OutlineView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *OutlineView
 	WithWantsLayer(wantsLayer bool) *OutlineView
 	WithLayer(layer *quartzcore.CALayer) *OutlineView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *OutlineView
@@ -1037,12 +1037,12 @@ type OutlineViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *OutlineView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OutlineView
 	WithToolTip(toolTip string) *OutlineView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *OutlineView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *OutlineView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *OutlineView
 	WithNextKeyView(nextKeyView ViewProvider) *OutlineView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *OutlineView
+	WithFocusRingType(focusRingType NSFocusRingType) *OutlineView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *OutlineView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *OutlineView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *OutlineView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OutlineView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OutlineView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OutlineView
@@ -1076,8 +1076,8 @@ type OutlineViewable interface {
 	FrameOfOutlineCellAtRow(row int) corefoundation.CGRect
 	SetDropItemDropChildIndex(item objc.ID, index int)
 	ShouldCollapseAutoExpandedItemsForDeposited(deposited bool) bool
-	InsertItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions raw.NSTableViewAnimationOptions)
-	RemoveItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions raw.NSTableViewAnimationOptions)
+	InsertItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions NSTableViewAnimationOptions)
+	RemoveItemsAtIndexesInParentWithAnimation(indexes *foundation.NSIndexSet, parent objc.ID, animationOptions NSTableViewAnimationOptions)
 	MoveItemAtIndexInParentToIndexInParent(fromIndex int, oldParent objc.ID, toIndex int, newParent objc.ID)
 	OutlineTableColumn() *TableColumn
 	SetOutlineTableColumn(outlineTableColumn *raw.NSTableColumn)

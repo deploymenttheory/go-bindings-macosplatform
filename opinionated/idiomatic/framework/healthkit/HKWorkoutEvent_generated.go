@@ -37,8 +37,8 @@ func NewWorkoutEvent() *WorkoutEvent {
 }
 
 // Type calls the underlying Type.
-func (x *WorkoutEvent) Type() raw.HKWorkoutEventType {
-	return x.inner.Type()
+func (x *WorkoutEvent) Type() HKWorkoutEventType {
+	return HKWorkoutEventType(x.inner.Type())
 }
 
 // Date calls the underlying Date.
@@ -59,7 +59,7 @@ func (x *WorkoutEvent) Metadata() *foundation.NSDictionary[*foundation.NSString,
 // WorkoutEventable is the interface implemented by [WorkoutEvent], for mocking and DI.
 type WorkoutEventable interface {
 	Unwrap() *raw.HKWorkoutEvent
-	Type() raw.HKWorkoutEventType
+	Type() HKWorkoutEventType
 	Date() *foundation.NSDate
 	DateInterval() *foundation.NSDateInterval
 	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]

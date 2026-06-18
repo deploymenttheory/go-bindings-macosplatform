@@ -44,8 +44,8 @@ func (x *ATSTypesetter) WithUsesFontLeading(usesFontLeading bool) *ATSTypesetter
 }
 
 // WithTypesetterBehavior sets the typesetterBehavior property and returns the receiver for chaining.
-func (x *ATSTypesetter) WithTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) *ATSTypesetter {
-	x.inner.NSTypesetter.SetTypesetterBehavior(typesetterBehavior)
+func (x *ATSTypesetter) WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *ATSTypesetter {
+	x.inner.NSTypesetter.SetTypesetterBehavior(raw.NSTypesetterBehavior(typesetterBehavior))
 	return x
 }
 
@@ -89,7 +89,7 @@ func (x *ATSTypesetter) asTypesetter() *raw.NSTypesetter { return &x.inner.NSTyp
 type ATSTypesetterable interface {
 	Unwrap() *raw.NSATSTypesetter
 	WithUsesFontLeading(usesFontLeading bool) *ATSTypesetter
-	WithTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) *ATSTypesetter
+	WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *ATSTypesetter
 	WithHyphenationFactor(hyphenationFactor float32) *ATSTypesetter
 	WithLineFragmentPadding(lineFragmentPadding float64) *ATSTypesetter
 	WithBidiProcessingEnabled(bidiProcessingEnabled bool) *ATSTypesetter

@@ -78,8 +78,8 @@ func DVDDoMenuCGMouseOver(inPt *corefoundation.CGPoint, outIndex *int) error {
 }
 
 // DVDDoUserNavigation wraps [raw.DVDDoUserNavigation], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDDoUserNavigation(inNavigation raw.DVDUserNavigation) error {
-	if _err := purego.NewOSStatus(raw.DVDDoUserNavigation(inNavigation)).Err(); _err != nil {
+func DVDDoUserNavigation(inNavigation DVDUserNavigation) error {
+	if _err := purego.NewOSStatus(raw.DVDDoUserNavigation(raw.DVDUserNavigation(inNavigation))).Err(); _err != nil {
 		return _err
 	}
 	return nil
@@ -440,8 +440,8 @@ func DVDGoBackOneLevel() error {
 }
 
 // DVDGoToMenu wraps [raw.DVDGoToMenu], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDGoToMenu(inMenu raw.DVDMenu) error {
-	if _err := purego.NewOSStatus(raw.DVDGoToMenu(inMenu)).Err(); _err != nil {
+func DVDGoToMenu(inMenu DVDMenu) error {
+	if _err := purego.NewOSStatus(raw.DVDGoToMenu(raw.DVDMenu(inMenu))).Err(); _err != nil {
 		return _err
 	}
 	return nil
@@ -456,8 +456,8 @@ func DVDHasMedia(outHasMedia *uint8) error {
 }
 
 // DVDHasMenu wraps [raw.DVDHasMenu], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDHasMenu(inMenu raw.DVDMenu, outHasMenu *uint8) error {
-	if _err := purego.NewOSStatus(raw.DVDHasMenu(inMenu, outHasMenu)).Err(); _err != nil {
+func DVDHasMenu(inMenu DVDMenu, outHasMenu *uint8) error {
+	if _err := purego.NewOSStatus(raw.DVDHasMenu(raw.DVDMenu(inMenu), outHasMenu)).Err(); _err != nil {
 		return _err
 	}
 	return nil
@@ -648,8 +648,8 @@ func DVDReturnToTitle() error {
 }
 
 // DVDScan wraps [raw.DVDScan], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDScan(inRate raw.DVDScanRate, inDirection raw.DVDScanDirection) error {
-	if _err := purego.NewOSStatus(raw.DVDScan(inRate, inDirection)).Err(); _err != nil {
+func DVDScan(inRate DVDScanRate, inDirection DVDScanDirection) error {
+	if _err := purego.NewOSStatus(raw.DVDScan(raw.DVDScanRate(inRate), raw.DVDScanDirection(inDirection))).Err(); _err != nil {
 		return _err
 	}
 	return nil
@@ -664,8 +664,8 @@ func DVDSetAngle(inAngleNum uint16) error {
 }
 
 // DVDSetAspectRatio wraps [raw.DVDSetAspectRatio], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDSetAspectRatio(inRatio raw.DVDAspectRatio) error {
-	if _err := purego.NewOSStatus(raw.DVDSetAspectRatio(inRatio)).Err(); _err != nil {
+func DVDSetAspectRatio(inRatio DVDAspectRatio) error {
+	if _err := purego.NewOSStatus(raw.DVDSetAspectRatio(raw.DVDAspectRatio(inRatio))).Err(); _err != nil {
 		return _err
 	}
 	return nil
@@ -800,8 +800,8 @@ func DVDSleep() error {
 }
 
 // DVDStepFrame wraps [raw.DVDStepFrame], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DVDStepFrame(inDirection raw.DVDScanDirection) error {
-	if _err := purego.NewOSStatus(raw.DVDStepFrame(inDirection)).Err(); _err != nil {
+func DVDStepFrame(inDirection DVDScanDirection) error {
+	if _err := purego.NewOSStatus(raw.DVDStepFrame(raw.DVDScanDirection(inDirection))).Err(); _err != nil {
 		return _err
 	}
 	return nil

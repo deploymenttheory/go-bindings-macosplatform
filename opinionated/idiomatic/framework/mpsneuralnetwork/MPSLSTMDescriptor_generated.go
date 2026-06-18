@@ -114,8 +114,8 @@ func (x *LSTMDescriptor) WithCellGateMemoryWeights(cellGateMemoryWeights raw.MPS
 }
 
 // WithCellToOutputNeuronType sets the cellToOutputNeuronType property and returns the receiver for chaining.
-func (x *LSTMDescriptor) WithCellToOutputNeuronType(cellToOutputNeuronType raw.MPSCNNNeuronType) *LSTMDescriptor {
-	x.inner.SetCellToOutputNeuronType(cellToOutputNeuronType)
+func (x *LSTMDescriptor) WithCellToOutputNeuronType(cellToOutputNeuronType MPSCNNNeuronType) *LSTMDescriptor {
+	x.inner.SetCellToOutputNeuronType(raw.MPSCNNNeuronType(cellToOutputNeuronType))
 	return x
 }
 
@@ -162,8 +162,8 @@ func (x *LSTMDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *LSTMDesc
 }
 
 // WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
-func (x *LSTMDescriptor) WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *LSTMDescriptor {
-	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(layerSequenceDirection)
+func (x *LSTMDescriptor) WithLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) *LSTMDescriptor {
+	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(raw.MPSRNNSequenceDirection(layerSequenceDirection))
 	return x
 }
 
@@ -298,13 +298,13 @@ func (x *LSTMDescriptor) SetCellGateMemoryWeights(cellGateMemoryWeights raw.MPSC
 }
 
 // CellToOutputNeuronType calls the underlying CellToOutputNeuronType.
-func (x *LSTMDescriptor) CellToOutputNeuronType() raw.MPSCNNNeuronType {
-	return x.inner.CellToOutputNeuronType()
+func (x *LSTMDescriptor) CellToOutputNeuronType() MPSCNNNeuronType {
+	return MPSCNNNeuronType(x.inner.CellToOutputNeuronType())
 }
 
 // SetCellToOutputNeuronType calls the underlying SetCellToOutputNeuronType.
-func (x *LSTMDescriptor) SetCellToOutputNeuronType(cellToOutputNeuronType raw.MPSCNNNeuronType) {
-	x.inner.SetCellToOutputNeuronType(cellToOutputNeuronType)
+func (x *LSTMDescriptor) SetCellToOutputNeuronType(cellToOutputNeuronType MPSCNNNeuronType) {
+	x.inner.SetCellToOutputNeuronType(raw.MPSCNNNeuronType(cellToOutputNeuronType))
 }
 
 // CellToOutputNeuronParamA calls the underlying CellToOutputNeuronParamA.
@@ -355,7 +355,7 @@ type LSTMDescriptorable interface {
 	WithCellGateInputWeights(cellGateInputWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
 	WithCellGateRecurrentWeights(cellGateRecurrentWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
 	WithCellGateMemoryWeights(cellGateMemoryWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
-	WithCellToOutputNeuronType(cellToOutputNeuronType raw.MPSCNNNeuronType) *LSTMDescriptor
+	WithCellToOutputNeuronType(cellToOutputNeuronType MPSCNNNeuronType) *LSTMDescriptor
 	WithCellToOutputNeuronParamA(cellToOutputNeuronParamA float32) *LSTMDescriptor
 	WithCellToOutputNeuronParamB(cellToOutputNeuronParamB float32) *LSTMDescriptor
 	WithCellToOutputNeuronParamC(cellToOutputNeuronParamC float32) *LSTMDescriptor
@@ -363,7 +363,7 @@ type LSTMDescriptorable interface {
 	WithOutputFeatureChannels(outputFeatureChannels uint) *LSTMDescriptor
 	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *LSTMDescriptor
 	WithUseFloat32Weights(useFloat32Weights bool) *LSTMDescriptor
-	WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *LSTMDescriptor
+	WithLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) *LSTMDescriptor
 	MemoryWeightsAreDiagonal() bool
 	SetMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool)
 	InputGateInputWeights() raw.MPSCNNConvolutionDataSource
@@ -390,8 +390,8 @@ type LSTMDescriptorable interface {
 	SetCellGateRecurrentWeights(cellGateRecurrentWeights raw.MPSCNNConvolutionDataSource)
 	CellGateMemoryWeights() raw.MPSCNNConvolutionDataSource
 	SetCellGateMemoryWeights(cellGateMemoryWeights raw.MPSCNNConvolutionDataSource)
-	CellToOutputNeuronType() raw.MPSCNNNeuronType
-	SetCellToOutputNeuronType(cellToOutputNeuronType raw.MPSCNNNeuronType)
+	CellToOutputNeuronType() MPSCNNNeuronType
+	SetCellToOutputNeuronType(cellToOutputNeuronType MPSCNNNeuronType)
 	CellToOutputNeuronParamA() float32
 	SetCellToOutputNeuronParamA(cellToOutputNeuronParamA float32)
 	CellToOutputNeuronParamB() float32

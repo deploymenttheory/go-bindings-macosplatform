@@ -99,8 +99,8 @@ func (x *Program) WithLibrary(library metal.MTLLibrary) *Program {
 }
 
 // HandleBindingOfBufferNamedFrequencyUsing calls the underlying HandleBindingOfBufferNamedFrequencyUsing.
-func (x *Program) HandleBindingOfBufferNamedFrequencyUsing(name string, frequency raw.SCNBufferFrequency, block func(objc.ID, *raw.SCNNode, objc.ID, *raw.SCNRenderer)) {
-	x.inner.HandleBindingOfBufferNamedFrequencyUsing(foundation.NSStringStringWithUTF8String(name), frequency, block)
+func (x *Program) HandleBindingOfBufferNamedFrequencyUsing(name string, frequency SCNBufferFrequency, block func(objc.ID, *raw.SCNNode, objc.ID, *raw.SCNRenderer)) {
+	x.inner.HandleBindingOfBufferNamedFrequencyUsing(foundation.NSStringStringWithUTF8String(name), raw.SCNBufferFrequency(frequency), block)
 }
 
 // SetSemanticForSymbolOptions calls the underlying SetSemanticForSymbolOptions.
@@ -258,7 +258,7 @@ type Programable interface {
 	WithOpaque(opaque bool) *Program
 	WithDelegate(delegate raw.SCNProgramDelegate) *Program
 	WithLibrary(library metal.MTLLibrary) *Program
-	HandleBindingOfBufferNamedFrequencyUsing(name string, frequency raw.SCNBufferFrequency, block func(objc.ID, *raw.SCNNode, objc.ID, *raw.SCNRenderer))
+	HandleBindingOfBufferNamedFrequencyUsing(name string, frequency SCNBufferFrequency, block func(objc.ID, *raw.SCNNode, objc.ID, *raw.SCNRenderer))
 	SetSemanticForSymbolOptions(semantic string, symbol string, options *foundation.NSDictionary[*foundation.NSString, objc.ID])
 	SemanticForSymbol(symbol string) string
 	VertexShader() string

@@ -47,8 +47,8 @@ func IsRangingAvailable() bool {
 }
 
 // AuthorizationStatus calls the underlying CLLocationManagerAuthorizationStatus.
-func AuthorizationStatus() raw.CLAuthorizationStatus {
-	return raw.CLLocationManagerAuthorizationStatus()
+func AuthorizationStatus() CLAuthorizationStatus {
+	return CLAuthorizationStatus(raw.CLLocationManagerAuthorizationStatus())
 }
 
 // DeferredLocationUpdatesAvailable calls the underlying CLLocationManagerDeferredLocationUpdatesAvailable.
@@ -66,8 +66,8 @@ func LiveUpdaterWithQueueHandler(queue *foundation.NSObject, handler func(*raw.C
 }
 
 // LiveUpdaterWithConfigurationQueueHandler calls the underlying CLLocationUpdaterLiveUpdaterWithConfigurationQueueHandler.
-func LiveUpdaterWithConfigurationQueueHandler(configuration raw.CLLiveUpdateConfiguration, queue *foundation.NSObject, handler func(*raw.CLUpdate)) *LocationUpdater {
-	_r := raw.CLLocationUpdaterLiveUpdaterWithConfigurationQueueHandler(configuration, queue, handler)
+func LiveUpdaterWithConfigurationQueueHandler(configuration CLLiveUpdateConfiguration, queue *foundation.NSObject, handler func(*raw.CLUpdate)) *LocationUpdater {
+	_r := raw.CLLocationUpdaterLiveUpdaterWithConfigurationQueueHandler(raw.CLLiveUpdateConfiguration(configuration), queue, handler)
 	if _r == nil {
 		return nil
 	}

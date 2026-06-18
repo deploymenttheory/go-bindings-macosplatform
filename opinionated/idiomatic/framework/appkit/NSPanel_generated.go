@@ -69,8 +69,8 @@ func (x *Panel) WithSubtitle(subtitle string) *Panel {
 }
 
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
-func (x *Panel) WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *Panel {
-	x.inner.NSWindow.SetTitleVisibility(titleVisibility)
+func (x *Panel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *Panel {
+	x.inner.NSWindow.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
 	return x
 }
 
@@ -81,8 +81,8 @@ func (x *Panel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) 
 }
 
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
-func (x *Panel) WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *Panel {
-	x.inner.NSWindow.SetToolbarStyle(toolbarStyle)
+func (x *Panel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Panel {
+	x.inner.NSWindow.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
 	return x
 }
 
@@ -135,8 +135,8 @@ func (x *Panel) WithDelegate(delegate raw.NSWindowDelegate) *Panel {
 }
 
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
-func (x *Panel) WithStyleMask(styleMask raw.NSWindowStyleMask) *Panel {
-	x.inner.NSWindow.SetStyleMask(styleMask)
+func (x *Panel) WithStyleMask(styleMask NSWindowStyleMask) *Panel {
+	x.inner.NSWindow.SetStyleMask(raw.NSWindowStyleMask(styleMask))
 	return x
 }
 
@@ -243,8 +243,8 @@ func (x *Panel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenAp
 }
 
 // WithBackingType sets the backingType property and returns the receiver for chaining.
-func (x *Panel) WithBackingType(backingType raw.NSBackingStoreType) *Panel {
-	x.inner.NSWindow.SetBackingType(backingType)
+func (x *Panel) WithBackingType(backingType NSBackingStoreType) *Panel {
+	x.inner.NSWindow.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
@@ -255,8 +255,8 @@ func (x *Panel) WithLevel(level int) *Panel {
 }
 
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
-func (x *Panel) WithDepthLimit(depthLimit raw.NSWindowDepth) *Panel {
-	x.inner.NSWindow.SetDepthLimit(depthLimit)
+func (x *Panel) WithDepthLimit(depthLimit NSWindowDepth) *Panel {
+	x.inner.NSWindow.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
@@ -279,8 +279,8 @@ func (x *Panel) WithOpaque(opaque bool) *Panel {
 }
 
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
-func (x *Panel) WithSharingType(sharingType raw.NSWindowSharingType) *Panel {
-	x.inner.NSWindow.SetSharingType(sharingType)
+func (x *Panel) WithSharingType(sharingType NSWindowSharingType) *Panel {
+	x.inner.NSWindow.SetSharingType(raw.NSWindowSharingType(sharingType))
 	return x
 }
 
@@ -303,14 +303,14 @@ func (x *Panel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bo
 }
 
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
-func (x *Panel) WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *Panel {
-	x.inner.NSWindow.SetCollectionBehavior(collectionBehavior)
+func (x *Panel) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *Panel {
+	x.inner.NSWindow.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
-func (x *Panel) WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *Panel {
-	x.inner.NSWindow.SetAnimationBehavior(animationBehavior)
+func (x *Panel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *Panel {
+	x.inner.NSWindow.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
 	return x
 }
 
@@ -381,8 +381,8 @@ func (x *Panel) WithColorSpace(colorSpace *ColorSpace) *Panel {
 }
 
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
-func (x *Panel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *Panel {
-	x.inner.NSWindow.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+func (x *Panel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *Panel {
+	x.inner.NSWindow.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 	return x
 }
 
@@ -423,8 +423,8 @@ func (x *Panel) WithShowsToolbarButton(showsToolbarButton bool) *Panel {
 }
 
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
-func (x *Panel) WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *Panel {
-	x.inner.NSWindow.SetTabbingMode(tabbingMode)
+func (x *Panel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *Panel {
+	x.inner.NSWindow.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
 	return x
 }
 
@@ -459,8 +459,8 @@ func (x *Panel) WithOneShot(oneShot bool) *Panel {
 }
 
 // WithPreferredBackingLocation sets the preferredBackingLocation property and returns the receiver for chaining.
-func (x *Panel) WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *Panel {
-	x.inner.NSWindow.SetPreferredBackingLocation(preferredBackingLocation)
+func (x *Panel) WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *Panel {
+	x.inner.NSWindow.SetPreferredBackingLocation(raw.NSWindowBackingLocation(preferredBackingLocation))
 	return x
 }
 
@@ -540,16 +540,16 @@ type Panelable interface {
 	WithWorksWhenModal(worksWhenModal bool) *Panel
 	WithTitle(title string) *Panel
 	WithSubtitle(subtitle string) *Panel
-	WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *Panel
+	WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *Panel
 	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *Panel
-	WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *Panel
+	WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Panel
 	WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *Panel
 	WithRepresentedURL(representedURL string) *Panel
 	WithRepresentedFilename(representedFilename string) *Panel
 	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *Panel
 	WithContentView(contentView ViewProvider) *Panel
 	WithDelegate(delegate raw.NSWindowDelegate) *Panel
-	WithStyleMask(styleMask raw.NSWindowStyleMask) *Panel
+	WithStyleMask(styleMask NSWindowStyleMask) *Panel
 	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *Panel
 	WithAspectRatio(aspectRatio corefoundation.CGSize) *Panel
 	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *Panel
@@ -567,18 +567,18 @@ type Panelable interface {
 	WithDocumentEdited(documentEdited bool) *Panel
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *Panel
 	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *Panel
-	WithBackingType(backingType raw.NSBackingStoreType) *Panel
+	WithBackingType(backingType NSBackingStoreType) *Panel
 	WithLevel(level int) *Panel
-	WithDepthLimit(depthLimit raw.NSWindowDepth) *Panel
+	WithDepthLimit(depthLimit NSWindowDepth) *Panel
 	WithHasShadow(hasShadow bool) *Panel
 	WithAlphaValue(alphaValue float64) *Panel
 	WithOpaque(opaque bool) *Panel
-	WithSharingType(sharingType raw.NSWindowSharingType) *Panel
+	WithSharingType(sharingType NSWindowSharingType) *Panel
 	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *Panel
 	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *Panel
 	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *Panel
-	WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *Panel
-	WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *Panel
+	WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *Panel
+	WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *Panel
 	WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *Panel
 	WithMinSize(minSize corefoundation.CGSize) *Panel
 	WithMaxSize(maxSize corefoundation.CGSize) *Panel
@@ -590,20 +590,20 @@ type Panelable interface {
 	WithParentWindow(parentWindow WindowProvider) *Panel
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *Panel
 	WithColorSpace(colorSpace *ColorSpace) *Panel
-	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *Panel
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *Panel
 	WithContentViewController(contentViewController ViewControllerProvider) *Panel
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *Panel
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *Panel
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *Panel
 	WithToolbar(toolbar *Toolbar) *Panel
 	WithShowsToolbarButton(showsToolbarButton bool) *Panel
-	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *Panel
+	WithTabbingMode(tabbingMode NSWindowTabbingMode) *Panel
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *Panel
 	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *Panel
 	WithIgnoresMouseEvents(ignoresMouseEvents bool) *Panel
 	WithAutodisplay(autodisplay bool) *Panel
 	WithOneShot(oneShot bool) *Panel
-	WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *Panel
+	WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *Panel
 	WithShowsResizeIndicator(showsResizeIndicator bool) *Panel
 	WithOrderedIndex(orderedIndex int) *Panel
 	WithRestorable(restorable bool) *Panel

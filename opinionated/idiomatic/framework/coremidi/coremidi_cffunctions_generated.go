@@ -76,8 +76,8 @@ func MIDIDeviceListDispose(devList uint) error {
 }
 
 // MIDIDeviceNewEntity wraps [raw.MIDIDeviceNewEntity], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIDeviceNewEntity(device uint, name objc.ID, protocol raw.MIDIProtocolID, embedded uint8, numSourceEndpoints uint, numDestinationEndpoints uint, newEntity *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIDeviceNewEntity(device, purego.CFRef(name), protocol, embedded, numSourceEndpoints, numDestinationEndpoints, newEntity)).Err(); _err != nil {
+func MIDIDeviceNewEntity(device uint, name objc.ID, protocol MIDIProtocolID, embedded uint8, numSourceEndpoints uint, numDestinationEndpoints uint, newEntity *uint) error {
+	if _err := purego.NewOSStatus(raw.MIDIDeviceNewEntity(device, purego.CFRef(name), raw.MIDIProtocolID(protocol), embedded, numSourceEndpoints, numDestinationEndpoints, newEntity)).Err(); _err != nil {
 		return _err
 	}
 	return nil
@@ -452,8 +452,8 @@ func MIDISourceCreate(client uint, name objc.ID, outSrc *uint) error {
 }
 
 // MIDISourceCreateWithProtocol wraps [raw.MIDISourceCreateWithProtocol], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISourceCreateWithProtocol(client uint, name objc.ID, protocol raw.MIDIProtocolID, outSrc *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISourceCreateWithProtocol(client, purego.CFRef(name), protocol, outSrc)).Err(); _err != nil {
+func MIDISourceCreateWithProtocol(client uint, name objc.ID, protocol MIDIProtocolID, outSrc *uint) error {
+	if _err := purego.NewOSStatus(raw.MIDISourceCreateWithProtocol(client, purego.CFRef(name), raw.MIDIProtocolID(protocol), outSrc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

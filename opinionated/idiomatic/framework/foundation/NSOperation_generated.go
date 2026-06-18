@@ -39,8 +39,8 @@ func NewOperation() *Operation {
 }
 
 // WithQueuePriority sets the queuePriority property and returns the receiver for chaining.
-func (x *Operation) WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *Operation {
-	x.inner.SetQueuePriority(queuePriority)
+func (x *Operation) WithQueuePriority(queuePriority NSOperationQueuePriority) *Operation {
+	x.inner.SetQueuePriority(raw.NSOperationQueuePriority(queuePriority))
 	return x
 }
 
@@ -57,8 +57,8 @@ func (x *Operation) WithThreadPriority(threadPriority float64) *Operation {
 }
 
 // WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *Operation) WithQualityOfService(qualityOfService raw.NSQualityOfService) *Operation {
-	x.inner.SetQualityOfService(qualityOfService)
+func (x *Operation) WithQualityOfService(qualityOfService NSQualityOfService) *Operation {
+	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 	return x
 }
 
@@ -146,13 +146,13 @@ func (x *Operation) Dependencies() []*Operation {
 }
 
 // QueuePriority calls the underlying QueuePriority.
-func (x *Operation) QueuePriority() raw.NSOperationQueuePriority {
-	return x.inner.QueuePriority()
+func (x *Operation) QueuePriority() NSOperationQueuePriority {
+	return NSOperationQueuePriority(x.inner.QueuePriority())
 }
 
 // SetQueuePriority calls the underlying SetQueuePriority.
-func (x *Operation) SetQueuePriority(queuePriority raw.NSOperationQueuePriority) {
-	x.inner.SetQueuePriority(queuePriority)
+func (x *Operation) SetQueuePriority(queuePriority NSOperationQueuePriority) {
+	x.inner.SetQueuePriority(raw.NSOperationQueuePriority(queuePriority))
 }
 
 // CompletionBlock calls the underlying CompletionBlock.
@@ -185,13 +185,13 @@ func (x *Operation) SetThreadPriority(threadPriority float64) {
 }
 
 // QualityOfService calls the underlying QualityOfService.
-func (x *Operation) QualityOfService() raw.NSQualityOfService {
-	return x.inner.QualityOfService()
+func (x *Operation) QualityOfService() NSQualityOfService {
+	return NSQualityOfService(x.inner.QualityOfService())
 }
 
 // SetQualityOfService calls the underlying SetQualityOfService.
-func (x *Operation) SetQualityOfService(qualityOfService raw.NSQualityOfService) {
-	x.inner.SetQualityOfService(qualityOfService)
+func (x *Operation) SetQualityOfService(qualityOfService NSQualityOfService) {
+	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 }
 
 // Name calls the underlying Name.
@@ -215,10 +215,10 @@ func (x *Operation) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Operationable is the interface implemented by [Operation], for mocking and DI.
 type Operationable interface {
 	Unwrap() *raw.NSOperation
-	WithQueuePriority(queuePriority raw.NSOperationQueuePriority) *Operation
+	WithQueuePriority(queuePriority NSOperationQueuePriority) *Operation
 	WithCompletionBlock(completionBlock func()) *Operation
 	WithThreadPriority(threadPriority float64) *Operation
-	WithQualityOfService(qualityOfService raw.NSQualityOfService) *Operation
+	WithQualityOfService(qualityOfService NSQualityOfService) *Operation
 	WithName(name string) *Operation
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Operation
 	Start()
@@ -234,14 +234,14 @@ type Operationable interface {
 	IsAsynchronous() bool
 	IsReady() bool
 	Dependencies() []*Operation
-	QueuePriority() raw.NSOperationQueuePriority
-	SetQueuePriority(queuePriority raw.NSOperationQueuePriority)
+	QueuePriority() NSOperationQueuePriority
+	SetQueuePriority(queuePriority NSOperationQueuePriority)
 	CompletionBlock() objc.Block
 	SetCompletionBlock(ctx context.Context) error
 	ThreadPriority() float64
 	SetThreadPriority(threadPriority float64)
-	QualityOfService() raw.NSQualityOfService
-	SetQualityOfService(qualityOfService raw.NSQualityOfService)
+	QualityOfService() NSQualityOfService
+	SetQualityOfService(qualityOfService NSQualityOfService)
 	Name() *String
 	SetName(name string)
 }

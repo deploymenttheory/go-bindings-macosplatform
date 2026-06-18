@@ -145,8 +145,8 @@ func (x *TextStorage) RemoveLayoutManager(aLayoutManager *raw.NSLayoutManager) {
 }
 
 // EditedRangeChangeInLength calls the underlying EditedRangeChangeInLength.
-func (x *TextStorage) EditedRangeChangeInLength(editedMask raw.NSTextStorageEditActions, editedRange foundation.NSRange, delta int) {
-	x.inner.EditedRangeChangeInLength(editedMask, editedRange, delta)
+func (x *TextStorage) EditedRangeChangeInLength(editedMask NSTextStorageEditActions, editedRange foundation.NSRange, delta int) {
+	x.inner.EditedRangeChangeInLength(raw.NSTextStorageEditActions(editedMask), editedRange, delta)
 }
 
 // ProcessEditing calls the underlying ProcessEditing.
@@ -176,8 +176,8 @@ func (x *TextStorage) LayoutManagers() []*LayoutManager {
 }
 
 // EditedMask calls the underlying EditedMask.
-func (x *TextStorage) EditedMask() raw.NSTextStorageEditActions {
-	return x.inner.EditedMask()
+func (x *TextStorage) EditedMask() NSTextStorageEditActions {
+	return NSTextStorageEditActions(x.inner.EditedMask())
 }
 
 // EditedRange calls the underlying EditedRange.
@@ -320,12 +320,12 @@ type TextStorageable interface {
 	WithForegroundColor(foregroundColor *Color) *TextStorage
 	AddLayoutManager(aLayoutManager *raw.NSLayoutManager)
 	RemoveLayoutManager(aLayoutManager *raw.NSLayoutManager)
-	EditedRangeChangeInLength(editedMask raw.NSTextStorageEditActions, editedRange foundation.NSRange, delta int)
+	EditedRangeChangeInLength(editedMask NSTextStorageEditActions, editedRange foundation.NSRange, delta int)
 	ProcessEditing()
 	InvalidateAttributesInRange(range_ foundation.NSRange)
 	EnsureAttributesAreFixedInRange(range_ foundation.NSRange)
 	LayoutManagers() []*LayoutManager
-	EditedMask() raw.NSTextStorageEditActions
+	EditedMask() NSTextStorageEditActions
 	EditedRange() foundation.NSRange
 	ChangeInLength() int
 	Delegate() raw.NSTextStorageDelegate

@@ -31,9 +31,9 @@ func BusReservationFromID(id objc.ID) *BusReservation {
 }
 
 // NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip creates a new [BusReservation].
-func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus raw.INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, busTrip *raw.INBusTrip) *BusReservation {
+func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, busTrip *raw.INBusTrip) *BusReservation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INBusReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:busTrip:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), reservationStatus, foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), reservedSeat.Ptr(), busTrip.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:busTrip:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), reservedSeat.Ptr(), busTrip.Ptr())
 	return &BusReservation{inner: raw.INBusReservationFromID(_id)}
 }
 

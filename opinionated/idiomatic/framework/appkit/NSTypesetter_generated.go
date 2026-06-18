@@ -45,8 +45,8 @@ func (x *Typesetter) WithUsesFontLeading(usesFontLeading bool) *Typesetter {
 }
 
 // WithTypesetterBehavior sets the typesetterBehavior property and returns the receiver for chaining.
-func (x *Typesetter) WithTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) *Typesetter {
-	x.inner.SetTypesetterBehavior(typesetterBehavior)
+func (x *Typesetter) WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *Typesetter {
+	x.inner.SetTypesetterBehavior(raw.NSTypesetterBehavior(typesetterBehavior))
 	return x
 }
 
@@ -84,8 +84,8 @@ func (x *Typesetter) SubstituteFontForFont(originalFont *raw.NSFont) *Font {
 }
 
 // TextTabForGlyphLocationWritingDirectionMaxLocation calls the underlying TextTabForGlyphLocationWritingDirectionMaxLocation.
-func (x *Typesetter) TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation float64, direction raw.NSWritingDirection, maxLocation float64) *TextTab {
-	_r := x.inner.TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation, direction, maxLocation)
+func (x *Typesetter) TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation float64, direction NSWritingDirection, maxLocation float64) *TextTab {
+	_r := x.inner.TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation, raw.NSWritingDirection(direction), maxLocation)
 	if _r == nil {
 		return nil
 	}
@@ -173,13 +173,13 @@ func (x *Typesetter) SetUsesFontLeading(usesFontLeading bool) {
 }
 
 // TypesetterBehavior calls the underlying TypesetterBehavior.
-func (x *Typesetter) TypesetterBehavior() raw.NSTypesetterBehavior {
-	return x.inner.TypesetterBehavior()
+func (x *Typesetter) TypesetterBehavior() NSTypesetterBehavior {
+	return NSTypesetterBehavior(x.inner.TypesetterBehavior())
 }
 
 // SetTypesetterBehavior calls the underlying SetTypesetterBehavior.
-func (x *Typesetter) SetTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) {
-	x.inner.SetTypesetterBehavior(typesetterBehavior)
+func (x *Typesetter) SetTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) {
+	x.inner.SetTypesetterBehavior(raw.NSTypesetterBehavior(typesetterBehavior))
 }
 
 // HyphenationFactor calls the underlying HyphenationFactor.
@@ -361,8 +361,8 @@ func (x *Typesetter) SetBidiLevelsForGlyphRange(levels *uint8, glyphRange founda
 }
 
 // ActionForControlCharacterAtIndex calls the underlying ActionForControlCharacterAtIndex.
-func (x *Typesetter) ActionForControlCharacterAtIndex(charIndex uint) raw.NSTypesetterControlCharacterAction {
-	return x.inner.ActionForControlCharacterAtIndex(charIndex)
+func (x *Typesetter) ActionForControlCharacterAtIndex(charIndex uint) NSTypesetterControlCharacterAction {
+	return NSTypesetterControlCharacterAction(x.inner.ActionForControlCharacterAtIndex(charIndex))
 }
 
 // GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels calls the underlying GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels.
@@ -391,13 +391,13 @@ func (x *Typesetter) asTypesetter() *raw.NSTypesetter { return x.inner }
 type Typesetterable interface {
 	Unwrap() *raw.NSTypesetter
 	WithUsesFontLeading(usesFontLeading bool) *Typesetter
-	WithTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior) *Typesetter
+	WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *Typesetter
 	WithHyphenationFactor(hyphenationFactor float32) *Typesetter
 	WithLineFragmentPadding(lineFragmentPadding float64) *Typesetter
 	WithBidiProcessingEnabled(bidiProcessingEnabled bool) *Typesetter
 	WithAttributedString(attributedString *foundation.NSAttributedString) *Typesetter
 	SubstituteFontForFont(originalFont *raw.NSFont) *Font
-	TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation float64, direction raw.NSWritingDirection, maxLocation float64) *TextTab
+	TextTabForGlyphLocationWritingDirectionMaxLocation(glyphLocation float64, direction NSWritingDirection, maxLocation float64) *TextTab
 	SetParagraphGlyphRangeSeparatorGlyphRange(paragraphRange foundation.NSRange, paragraphSeparatorRange foundation.NSRange)
 	LayoutParagraphAtPoint(lineFragmentOrigin *corefoundation.CGPoint) uint
 	BeginParagraph()
@@ -414,8 +414,8 @@ type Typesetterable interface {
 	BaselineOffsetInLayoutManagerGlyphIndex(layoutMgr *raw.NSLayoutManager, glyphIndex uint) float64
 	UsesFontLeading() bool
 	SetUsesFontLeading(usesFontLeading bool)
-	TypesetterBehavior() raw.NSTypesetterBehavior
-	SetTypesetterBehavior(typesetterBehavior raw.NSTypesetterBehavior)
+	TypesetterBehavior() NSTypesetterBehavior
+	SetTypesetterBehavior(typesetterBehavior NSTypesetterBehavior)
 	HyphenationFactor() float32
 	SetHyphenationFactor(hyphenationFactor float32)
 	LineFragmentPadding() float64
@@ -448,7 +448,7 @@ type Typesetterable interface {
 	SetLocationWithAdvancementsForStartOfGlyphRange(location corefoundation.CGPoint, advancements *float64, glyphRange foundation.NSRange)
 	SetAttachmentSizeForGlyphRange(attachmentSize corefoundation.CGSize, glyphRange foundation.NSRange)
 	SetBidiLevelsForGlyphRange(levels *uint8, glyphRange foundation.NSRange)
-	ActionForControlCharacterAtIndex(charIndex uint) raw.NSTypesetterControlCharacterAction
+	ActionForControlCharacterAtIndex(charIndex uint) NSTypesetterControlCharacterAction
 	GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBitsBidiLevels(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool, bidiLevelBuffer *uint8) uint
 	SubstituteGlyphsInRangeWithGlyphs(glyphRange foundation.NSRange, glyphs *uint)
 	InsertGlyphAtGlyphIndexCharacterIndex(glyph uint, glyphIndex uint, characterIndex uint)

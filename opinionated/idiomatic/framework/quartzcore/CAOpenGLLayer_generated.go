@@ -238,8 +238,8 @@ func (x *OpenGLLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *OpenGLL
 }
 
 // WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *OpenGLLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *OpenGLLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+func (x *OpenGLLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *OpenGLLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
 	return x
 }
 
@@ -256,8 +256,8 @@ func (x *OpenGLLayer) WithCornerRadius(cornerRadius float64) *OpenGLLayer {
 }
 
 // WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *OpenGLLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *OpenGLLayer {
-	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+func (x *OpenGLLayer) WithMaskedCorners(maskedCorners CACornerMask) *OpenGLLayer {
+	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
 	return x
 }
 
@@ -322,8 +322,8 @@ func (x *OpenGLLayer) WithShadowRadius(shadowRadius float64) *OpenGLLayer {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *OpenGLLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *OpenGLLayer {
-	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+func (x *OpenGLLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *OpenGLLayer {
+	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
 	return x
 }
 
@@ -461,10 +461,10 @@ type OpenGLLayerable interface {
 	WithOpaque(opaque bool) *OpenGLLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *OpenGLLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *OpenGLLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *OpenGLLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *OpenGLLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *OpenGLLayer
 	WithCornerRadius(cornerRadius float64) *OpenGLLayer
-	WithMaskedCorners(maskedCorners raw.CACornerMask) *OpenGLLayer
+	WithMaskedCorners(maskedCorners CACornerMask) *OpenGLLayer
 	WithCornerCurve(cornerCurve *foundation.NSString) *OpenGLLayer
 	WithBorderWidth(borderWidth float64) *OpenGLLayer
 	WithOpacity(opacity float32) *OpenGLLayer
@@ -475,7 +475,7 @@ type OpenGLLayerable interface {
 	WithShadowOpacity(shadowOpacity float32) *OpenGLLayer
 	WithShadowOffset(shadowOffset corefoundation.CGSize) *OpenGLLayer
 	WithShadowRadius(shadowRadius float64) *OpenGLLayer
-	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *OpenGLLayer
+	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *OpenGLLayer
 	WithLayoutManager(layoutManager raw.CALayoutManager) *OpenGLLayer
 	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *OpenGLLayer
 	WithName(name string) *OpenGLLayer

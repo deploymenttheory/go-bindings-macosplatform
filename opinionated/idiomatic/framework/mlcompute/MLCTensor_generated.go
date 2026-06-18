@@ -70,8 +70,8 @@ func (x *Tensor) BindOptimizerDataDeviceData(data *foundation.NSArray[*raw.MLCTe
 }
 
 // TensorByQuantizingToTypeScaleBias calls the underlying TensorByQuantizingToTypeScaleBias.
-func (x *Tensor) TensorByQuantizingToTypeScaleBias(type_ raw.MLCDataType, scale float32, bias int) *Tensor {
-	_r := x.inner.TensorByQuantizingToTypeScaleBias(type_, scale, bias)
+func (x *Tensor) TensorByQuantizingToTypeScaleBias(type_ MLCDataType, scale float32, bias int) *Tensor {
+	_r := x.inner.TensorByQuantizingToTypeScaleBias(raw.MLCDataType(type_), scale, bias)
 	if _r == nil {
 		return nil
 	}
@@ -79,8 +79,8 @@ func (x *Tensor) TensorByQuantizingToTypeScaleBias(type_ raw.MLCDataType, scale 
 }
 
 // TensorByQuantizingToTypeScaleBiasAxis calls the underlying TensorByQuantizingToTypeScaleBiasAxis.
-func (x *Tensor) TensorByQuantizingToTypeScaleBiasAxis(type_ raw.MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor {
-	_r := x.inner.TensorByQuantizingToTypeScaleBiasAxis(type_, scale, bias, axis)
+func (x *Tensor) TensorByQuantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor {
+	_r := x.inner.TensorByQuantizingToTypeScaleBiasAxis(raw.MLCDataType(type_), scale, bias, axis)
 	if _r == nil {
 		return nil
 	}
@@ -88,8 +88,8 @@ func (x *Tensor) TensorByQuantizingToTypeScaleBiasAxis(type_ raw.MLCDataType, sc
 }
 
 // TensorByDequantizingToTypeScaleBias calls the underlying TensorByDequantizingToTypeScaleBias.
-func (x *Tensor) TensorByDequantizingToTypeScaleBias(type_ raw.MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor) *Tensor {
-	_r := x.inner.TensorByDequantizingToTypeScaleBias(type_, scale, bias)
+func (x *Tensor) TensorByDequantizingToTypeScaleBias(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor) *Tensor {
+	_r := x.inner.TensorByDequantizingToTypeScaleBias(raw.MLCDataType(type_), scale, bias)
 	if _r == nil {
 		return nil
 	}
@@ -97,8 +97,8 @@ func (x *Tensor) TensorByDequantizingToTypeScaleBias(type_ raw.MLCDataType, scal
 }
 
 // TensorByDequantizingToTypeScaleBiasAxis calls the underlying TensorByDequantizingToTypeScaleBiasAxis.
-func (x *Tensor) TensorByDequantizingToTypeScaleBiasAxis(type_ raw.MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor {
-	_r := x.inner.TensorByDequantizingToTypeScaleBiasAxis(type_, scale, bias, axis)
+func (x *Tensor) TensorByDequantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor {
+	_r := x.inner.TensorByDequantizingToTypeScaleBiasAxis(raw.MLCDataType(type_), scale, bias, axis)
 	if _r == nil {
 		return nil
 	}
@@ -183,10 +183,10 @@ type Tensorable interface {
 	CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice(bytes_ unsafe.Pointer, length uint, synchronizeWithDevice bool) bool
 	BindAndWriteDataToDevice(data *raw.MLCTensorData, device *raw.MLCDevice) bool
 	BindOptimizerDataDeviceData(data *foundation.NSArray[*raw.MLCTensorData], deviceData *foundation.NSArray[*raw.MLCTensorOptimizerDeviceData]) bool
-	TensorByQuantizingToTypeScaleBias(type_ raw.MLCDataType, scale float32, bias int) *Tensor
-	TensorByQuantizingToTypeScaleBiasAxis(type_ raw.MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor
-	TensorByDequantizingToTypeScaleBias(type_ raw.MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor) *Tensor
-	TensorByDequantizingToTypeScaleBiasAxis(type_ raw.MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor
+	TensorByQuantizingToTypeScaleBias(type_ MLCDataType, scale float32, bias int) *Tensor
+	TensorByQuantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor
+	TensorByDequantizingToTypeScaleBias(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor) *Tensor
+	TensorByDequantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor
 	TensorID() uint
 	Descriptor() *TensorDescriptor
 	Data() *foundation.NSData

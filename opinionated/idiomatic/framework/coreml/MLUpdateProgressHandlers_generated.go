@@ -30,9 +30,9 @@ func UpdateProgressHandlersFromID(id objc.ID) *UpdateProgressHandlers {
 }
 
 // NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler creates a new [UpdateProgressHandlers].
-func NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler(interestedEvents raw.MLUpdateProgressEvent, progressHandler func(*raw.MLUpdateContext), completionHandler func(*raw.MLUpdateContext)) *UpdateProgressHandlers {
+func NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler(interestedEvents MLUpdateProgressEvent, progressHandler func(*raw.MLUpdateContext), completionHandler func(*raw.MLUpdateContext)) *UpdateProgressHandlers {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLUpdateProgressHandlers")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForEvents:progressHandler:completionHandler:"), interestedEvents, progressHandler, completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForEvents:progressHandler:completionHandler:"), raw.MLUpdateProgressEvent(interestedEvents), progressHandler, completionHandler)
 	return &UpdateProgressHandlers{inner: raw.MLUpdateProgressHandlersFromID(_id)}
 }
 

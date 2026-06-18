@@ -31,16 +31,16 @@ func TextTabFromID(id objc.ID) *TextTab {
 }
 
 // NewTextTabWithTextAlignmentLocationOptions creates a new [TextTab].
-func NewTextTabWithTextAlignmentLocationOptions(alignment raw.NSTextAlignment, loc float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextTab {
+func NewTextTabWithTextAlignmentLocationOptions(alignment NSTextAlignment, loc float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextTab {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextTab")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextAlignment:location:options:"), alignment, loc, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextAlignment:location:options:"), raw.NSTextAlignment(alignment), loc, options.Ptr())
 	return &TextTab{inner: raw.NSTextTabFromID(_id)}
 }
 
 // NewTextTabWithTypeLocation creates a new [TextTab].
-func NewTextTabWithTypeLocation(type_ raw.NSTextTabType, loc float64) *TextTab {
+func NewTextTabWithTypeLocation(type_ NSTextTabType, loc float64) *TextTab {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextTab")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:location:"), type_, loc)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:location:"), raw.NSTextTabType(type_), loc)
 	return &TextTab{inner: raw.NSTextTabFromID(_id)}
 }
 
@@ -55,13 +55,13 @@ func (x *TextTab) Options() *foundation.NSDictionary[*foundation.NSString, objc.
 }
 
 // Alignment calls the underlying Alignment.
-func (x *TextTab) Alignment() raw.NSTextAlignment {
-	return x.inner.Alignment()
+func (x *TextTab) Alignment() NSTextAlignment {
+	return NSTextAlignment(x.inner.Alignment())
 }
 
 // TabStopType calls the underlying TabStopType.
-func (x *TextTab) TabStopType() raw.NSTextTabType {
-	return x.inner.TabStopType()
+func (x *TextTab) TabStopType() NSTextTabType {
+	return NSTextTabType(x.inner.TabStopType())
 }
 
 // TextTabable is the interface implemented by [TextTab], for mocking and DI.
@@ -69,8 +69,8 @@ type TextTabable interface {
 	Unwrap() *raw.NSTextTab
 	Location() float64
 	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	Alignment() raw.NSTextAlignment
-	TabStopType() raw.NSTextTabType
+	Alignment() NSTextAlignment
+	TabStopType() NSTextTabType
 }
 
 var _ TextTabable = (*TextTab)(nil)

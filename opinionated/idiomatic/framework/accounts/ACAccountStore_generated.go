@@ -71,8 +71,10 @@ func (x *AccountStore) RequestAccessToAccountsWithTypeOptionsCompletion(accountT
 }
 
 // RenewCredentialsForAccountCompletion calls the underlying RenewCredentialsForAccountCompletion.
-func (x *AccountStore) RenewCredentialsForAccountCompletion(account *raw.ACAccount, completionHandler func(raw.ACAccountCredentialRenewResult, unsafe.Pointer)) {
-	x.inner.RenewCredentialsForAccountCompletion(account, completionHandler)
+func (x *AccountStore) RenewCredentialsForAccountCompletion(account *raw.ACAccount, completionHandler func(ACAccountCredentialRenewResult, unsafe.Pointer)) {
+	x.inner.RenewCredentialsForAccountCompletion(account, func(_a0 raw.ACAccountCredentialRenewResult, _a1 unsafe.Pointer) {
+		completionHandler(ACAccountCredentialRenewResult(_a0), _a1)
+	})
 }
 
 // RemoveAccountWithCompletionHandler calls the underlying RemoveAccountWithCompletionHandler.
@@ -93,7 +95,7 @@ type AccountStoreable interface {
 	AccountsWithAccountType(accountType *raw.ACAccountType) *foundation.NSArray[objc.ID]
 	SaveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer))
 	RequestAccessToAccountsWithTypeOptionsCompletion(accountType *raw.ACAccountType, options *foundation.NSDictionary[objc.ID, objc.ID], completion func(bool, unsafe.Pointer))
-	RenewCredentialsForAccountCompletion(account *raw.ACAccount, completionHandler func(raw.ACAccountCredentialRenewResult, unsafe.Pointer))
+	RenewCredentialsForAccountCompletion(account *raw.ACAccount, completionHandler func(ACAccountCredentialRenewResult, unsafe.Pointer))
 	RemoveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer))
 	Accounts() *foundation.NSArray[objc.ID]
 }

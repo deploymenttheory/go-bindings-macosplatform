@@ -36,33 +36,33 @@ func NewItemGetAttributesRequest() *ItemGetAttributesRequest {
 }
 
 // WithWantedAttributes sets the wantedAttributes property and returns the receiver for chaining.
-func (x *ItemGetAttributesRequest) WithWantedAttributes(wantedAttributes raw.FSItemAttribute) *ItemGetAttributesRequest {
-	x.inner.SetWantedAttributes(wantedAttributes)
+func (x *ItemGetAttributesRequest) WithWantedAttributes(wantedAttributes FSItemAttribute) *ItemGetAttributesRequest {
+	x.inner.SetWantedAttributes(raw.FSItemAttribute(wantedAttributes))
 	return x
 }
 
 // IsAttributeWanted calls the underlying IsAttributeWanted.
-func (x *ItemGetAttributesRequest) IsAttributeWanted(attribute raw.FSItemAttribute) bool {
-	return x.inner.IsAttributeWanted(attribute)
+func (x *ItemGetAttributesRequest) IsAttributeWanted(attribute FSItemAttribute) bool {
+	return x.inner.IsAttributeWanted(raw.FSItemAttribute(attribute))
 }
 
 // WantedAttributes calls the underlying WantedAttributes.
-func (x *ItemGetAttributesRequest) WantedAttributes() raw.FSItemAttribute {
-	return x.inner.WantedAttributes()
+func (x *ItemGetAttributesRequest) WantedAttributes() FSItemAttribute {
+	return FSItemAttribute(x.inner.WantedAttributes())
 }
 
 // SetWantedAttributes calls the underlying SetWantedAttributes.
-func (x *ItemGetAttributesRequest) SetWantedAttributes(wantedAttributes raw.FSItemAttribute) {
-	x.inner.SetWantedAttributes(wantedAttributes)
+func (x *ItemGetAttributesRequest) SetWantedAttributes(wantedAttributes FSItemAttribute) {
+	x.inner.SetWantedAttributes(raw.FSItemAttribute(wantedAttributes))
 }
 
 // ItemGetAttributesRequestable is the interface implemented by [ItemGetAttributesRequest], for mocking and DI.
 type ItemGetAttributesRequestable interface {
 	Unwrap() *raw.FSItemGetAttributesRequest
-	WithWantedAttributes(wantedAttributes raw.FSItemAttribute) *ItemGetAttributesRequest
-	IsAttributeWanted(attribute raw.FSItemAttribute) bool
-	WantedAttributes() raw.FSItemAttribute
-	SetWantedAttributes(wantedAttributes raw.FSItemAttribute)
+	WithWantedAttributes(wantedAttributes FSItemAttribute) *ItemGetAttributesRequest
+	IsAttributeWanted(attribute FSItemAttribute) bool
+	WantedAttributes() FSItemAttribute
+	SetWantedAttributes(wantedAttributes FSItemAttribute)
 }
 
 var _ ItemGetAttributesRequestable = (*ItemGetAttributesRequest)(nil)

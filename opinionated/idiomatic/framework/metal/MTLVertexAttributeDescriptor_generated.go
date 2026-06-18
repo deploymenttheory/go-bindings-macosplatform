@@ -36,8 +36,8 @@ func NewVertexAttributeDescriptor() *VertexAttributeDescriptor {
 }
 
 // WithFormat sets the format property and returns the receiver for chaining.
-func (x *VertexAttributeDescriptor) WithFormat(format raw.MTLVertexFormat) *VertexAttributeDescriptor {
-	x.inner.SetFormat(format)
+func (x *VertexAttributeDescriptor) WithFormat(format MTLVertexFormat) *VertexAttributeDescriptor {
+	x.inner.SetFormat(raw.MTLVertexFormat(format))
 	return x
 }
 
@@ -54,13 +54,13 @@ func (x *VertexAttributeDescriptor) WithBufferIndex(bufferIndex uint) *VertexAtt
 }
 
 // Format calls the underlying Format.
-func (x *VertexAttributeDescriptor) Format() raw.MTLVertexFormat {
-	return x.inner.Format()
+func (x *VertexAttributeDescriptor) Format() MTLVertexFormat {
+	return MTLVertexFormat(x.inner.Format())
 }
 
 // SetFormat calls the underlying SetFormat.
-func (x *VertexAttributeDescriptor) SetFormat(format raw.MTLVertexFormat) {
-	x.inner.SetFormat(format)
+func (x *VertexAttributeDescriptor) SetFormat(format MTLVertexFormat) {
+	x.inner.SetFormat(raw.MTLVertexFormat(format))
 }
 
 // Offset calls the underlying Offset.
@@ -86,11 +86,11 @@ func (x *VertexAttributeDescriptor) SetBufferIndex(bufferIndex uint) {
 // VertexAttributeDescriptorable is the interface implemented by [VertexAttributeDescriptor], for mocking and DI.
 type VertexAttributeDescriptorable interface {
 	Unwrap() *raw.MTLVertexAttributeDescriptor
-	WithFormat(format raw.MTLVertexFormat) *VertexAttributeDescriptor
+	WithFormat(format MTLVertexFormat) *VertexAttributeDescriptor
 	WithOffset(offset uint) *VertexAttributeDescriptor
 	WithBufferIndex(bufferIndex uint) *VertexAttributeDescriptor
-	Format() raw.MTLVertexFormat
-	SetFormat(format raw.MTLVertexFormat)
+	Format() MTLVertexFormat
+	SetFormat(format MTLVertexFormat)
 	Offset() uint
 	SetOffset(offset uint)
 	BufferIndex() uint

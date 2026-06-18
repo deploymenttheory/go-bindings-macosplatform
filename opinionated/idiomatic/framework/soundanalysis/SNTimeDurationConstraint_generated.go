@@ -47,8 +47,8 @@ func NewTimeDurationConstraintWithDurationRange(durationRange coremedia.CMTimeRa
 }
 
 // Type calls the underlying Type.
-func (x *TimeDurationConstraint) Type() raw.SNTimeDurationConstraintType {
-	return x.inner.Type()
+func (x *TimeDurationConstraint) Type() SNTimeDurationConstraintType {
+	return SNTimeDurationConstraintType(x.inner.Type())
 }
 
 // EnumeratedDurations returns the collection as a Go slice.
@@ -70,7 +70,7 @@ func (x *TimeDurationConstraint) DurationRange() coremedia.CMTimeRange {
 // TimeDurationConstraintable is the interface implemented by [TimeDurationConstraint], for mocking and DI.
 type TimeDurationConstraintable interface {
 	Unwrap() *raw.SNTimeDurationConstraint
-	Type() raw.SNTimeDurationConstraintType
+	Type() SNTimeDurationConstraintType
 	EnumeratedDurations() []*foundation.NSValue
 	DurationRange() coremedia.CMTimeRange
 }

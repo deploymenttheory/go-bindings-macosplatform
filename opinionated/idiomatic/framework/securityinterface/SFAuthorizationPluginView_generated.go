@@ -50,8 +50,8 @@ func (x *AuthorizationPluginView) Callbacks() unsafe.Pointer {
 }
 
 // ButtonPressed calls the underlying ButtonPressed.
-func (x *AuthorizationPluginView) ButtonPressed(inButtonType raw.SFButtonType) {
-	x.inner.ButtonPressed(inButtonType)
+func (x *AuthorizationPluginView) ButtonPressed(inButtonType SFButtonType) {
+	x.inner.ButtonPressed(raw.SFButtonType(inButtonType))
 }
 
 // LastError calls the underlying LastError.
@@ -95,8 +95,8 @@ func (x *AuthorizationPluginView) SetEnabled(inEnabled bool) {
 }
 
 // ViewForType calls the underlying ViewForType.
-func (x *AuthorizationPluginView) ViewForType(inType raw.SFViewType) *appkit.NSView {
-	return x.inner.ViewForType(inType)
+func (x *AuthorizationPluginView) ViewForType(inType SFViewType) *appkit.NSView {
+	return x.inner.ViewForType(raw.SFViewType(inType))
 }
 
 // DisplayView calls the underlying DisplayView.
@@ -105,8 +105,8 @@ func (x *AuthorizationPluginView) DisplayView() {
 }
 
 // SetButtonEnabled calls the underlying SetButtonEnabled.
-func (x *AuthorizationPluginView) SetButtonEnabled(inButtonType raw.SFButtonType, inEnabled bool) {
-	x.inner.SetButtonEnabled(inButtonType, inEnabled)
+func (x *AuthorizationPluginView) SetButtonEnabled(inButtonType SFButtonType, inEnabled bool) {
+	x.inner.SetButtonEnabled(raw.SFButtonType(inButtonType), inEnabled)
 }
 
 // UpdateView calls the underlying UpdateView.
@@ -119,7 +119,7 @@ type AuthorizationPluginViewable interface {
 	Unwrap() *raw.SFAuthorizationPluginView
 	EngineRef() unsafe.Pointer
 	Callbacks() unsafe.Pointer
-	ButtonPressed(inButtonType raw.SFButtonType)
+	ButtonPressed(inButtonType SFButtonType)
 	LastError() unsafe.Pointer
 	DidActivate()
 	WillActivateWithUser(inUserInformation *foundation.NSDictionary[objc.ID, objc.ID])
@@ -128,9 +128,9 @@ type AuthorizationPluginViewable interface {
 	FirstResponder() *appkit.NSResponder
 	LastKeyView() *appkit.NSView
 	SetEnabled(inEnabled bool)
-	ViewForType(inType raw.SFViewType) *appkit.NSView
+	ViewForType(inType SFViewType) *appkit.NSView
 	DisplayView()
-	SetButtonEnabled(inButtonType raw.SFButtonType, inEnabled bool)
+	SetButtonEnabled(inButtonType SFButtonType, inEnabled bool)
 	UpdateView()
 }
 

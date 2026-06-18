@@ -34,9 +34,9 @@ func WorkoutEffortRelationshipQueryFromID(id objc.ID) *WorkoutEffortRelationship
 }
 
 // NewWorkoutEffortRelationshipQueryWithPredicateAnchorOptionsResultsHandler creates a new [WorkoutEffortRelationshipQuery].
-func NewWorkoutEffortRelationshipQueryWithPredicateAnchorOptionsResultsHandler(predicate *foundation.NSPredicate, anchor *raw.HKQueryAnchor, options raw.HKWorkoutEffortRelationshipQueryOptions, resultsHandler func(*raw.HKWorkoutEffortRelationshipQuery, *foundation.NSArray[*raw.HKWorkoutEffortRelationship], *raw.HKQueryAnchor, unsafe.Pointer)) *WorkoutEffortRelationshipQuery {
+func NewWorkoutEffortRelationshipQueryWithPredicateAnchorOptionsResultsHandler(predicate *foundation.NSPredicate, anchor *raw.HKQueryAnchor, options HKWorkoutEffortRelationshipQueryOptions, resultsHandler func(*raw.HKWorkoutEffortRelationshipQuery, *foundation.NSArray[*raw.HKWorkoutEffortRelationship], *raw.HKQueryAnchor, unsafe.Pointer)) *WorkoutEffortRelationshipQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutEffortRelationshipQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:anchor:options:resultsHandler:"), predicate.Ptr(), anchor.Ptr(), options, resultsHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:anchor:options:resultsHandler:"), predicate.Ptr(), anchor.Ptr(), raw.HKWorkoutEffortRelationshipQueryOptions(options), resultsHandler)
 	return &WorkoutEffortRelationshipQuery{inner: raw.HKWorkoutEffortRelationshipQueryFromID(_id)}
 }
 

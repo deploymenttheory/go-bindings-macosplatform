@@ -10,8 +10,8 @@ import (
 )
 
 // MPSGetPreferredDevice calls [raw.MPSGetPreferredDevice] (C function MPSGetPreferredDevice).
-func MPSGetPreferredDevice(options raw.MPSDeviceOptions) metal.MTLDevice {
-	return raw.MPSGetPreferredDevice(options)
+func MPSGetPreferredDevice(options MPSDeviceOptions) metal.MTLDevice {
+	return raw.MPSGetPreferredDevice(raw.MPSDeviceOptions(options))
 }
 
 // MPSHintTemporaryMemoryHighWaterMark calls [raw.MPSHintTemporaryMemoryHighWaterMark] (C function MPSHintTemporaryMemoryHighWaterMark).

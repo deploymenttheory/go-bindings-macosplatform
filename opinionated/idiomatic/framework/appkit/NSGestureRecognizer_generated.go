@@ -59,8 +59,8 @@ func (x *GestureRecognizer) WithAction(action objc.SEL) *GestureRecognizer {
 }
 
 // WithState sets the state property and returns the receiver for chaining.
-func (x *GestureRecognizer) WithState(state raw.NSGestureRecognizerState) *GestureRecognizer {
-	x.inner.SetState(state)
+func (x *GestureRecognizer) WithState(state NSGestureRecognizerState) *GestureRecognizer {
+	x.inner.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
@@ -125,8 +125,8 @@ func (x *GestureRecognizer) WithName(name string) *GestureRecognizer {
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *GestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GestureRecognizer {
-	x.inner.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *GestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GestureRecognizer {
+	x.inner.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -156,8 +156,8 @@ func (x *GestureRecognizer) SetAction(action objc.SEL) {
 }
 
 // State calls the underlying State.
-func (x *GestureRecognizer) State() raw.NSGestureRecognizerState {
-	return x.inner.State()
+func (x *GestureRecognizer) State() NSGestureRecognizerState {
+	return NSGestureRecognizerState(x.inner.State())
 }
 
 // Delegate calls the underlying Delegate.
@@ -278,18 +278,18 @@ func (x *GestureRecognizer) SetName(name string) {
 }
 
 // ModifierFlags calls the underlying ModifierFlags.
-func (x *GestureRecognizer) ModifierFlags() raw.NSEventModifierFlags {
-	return x.inner.ModifierFlags()
+func (x *GestureRecognizer) ModifierFlags() NSEventModifierFlags {
+	return NSEventModifierFlags(x.inner.ModifierFlags())
 }
 
 // AllowedTouchTypes calls the underlying AllowedTouchTypes.
-func (x *GestureRecognizer) AllowedTouchTypes() raw.NSTouchTypeMask {
-	return x.inner.AllowedTouchTypes()
+func (x *GestureRecognizer) AllowedTouchTypes() NSTouchTypeMask {
+	return NSTouchTypeMask(x.inner.AllowedTouchTypes())
 }
 
 // SetAllowedTouchTypes calls the underlying SetAllowedTouchTypes.
-func (x *GestureRecognizer) SetAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) {
-	x.inner.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *GestureRecognizer) SetAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) {
+	x.inner.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 }
 
 // Reset calls the underlying Reset.
@@ -423,8 +423,8 @@ func (x *GestureRecognizer) TouchesCancelledWithEvent(event *raw.NSEvent) {
 }
 
 // SetState calls the underlying SetState.
-func (x *GestureRecognizer) SetState(state raw.NSGestureRecognizerState) {
-	x.inner.SetState(state)
+func (x *GestureRecognizer) SetState(state NSGestureRecognizerState) {
+	x.inner.SetState(raw.NSGestureRecognizerState(state))
 }
 
 func (x *GestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return x.inner }
@@ -434,7 +434,7 @@ type GestureRecognizerable interface {
 	Unwrap() *raw.NSGestureRecognizer
 	WithTarget(target objc.ID) *GestureRecognizer
 	WithAction(action objc.SEL) *GestureRecognizer
-	WithState(state raw.NSGestureRecognizerState) *GestureRecognizer
+	WithState(state NSGestureRecognizerState) *GestureRecognizer
 	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *GestureRecognizer
 	WithEnabled(enabled bool) *GestureRecognizer
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GestureRecognizer
@@ -445,13 +445,13 @@ type GestureRecognizerable interface {
 	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *GestureRecognizer
 	WithDelaysRotationEvents(delaysRotationEvents bool) *GestureRecognizer
 	WithName(name string) *GestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GestureRecognizer
 	LocationInView(view *raw.NSView) corefoundation.CGPoint
 	Target() objc.ID
 	SetTarget(target objc.ID)
 	Action() objc.SEL
 	SetAction(action objc.SEL)
-	State() raw.NSGestureRecognizerState
+	State() NSGestureRecognizerState
 	Delegate() raw.NSGestureRecognizerDelegate
 	SetDelegate(delegate raw.NSGestureRecognizerDelegate)
 	IsEnabled() bool
@@ -473,9 +473,9 @@ type GestureRecognizerable interface {
 	SetDelaysRotationEvents(delaysRotationEvents bool)
 	Name() string
 	SetName(name string)
-	ModifierFlags() raw.NSEventModifierFlags
-	AllowedTouchTypes() raw.NSTouchTypeMask
-	SetAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask)
+	ModifierFlags() NSEventModifierFlags
+	AllowedTouchTypes() NSTouchTypeMask
+	SetAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask)
 	Reset()
 	CanPreventGestureRecognizer(preventedGestureRecognizer *raw.NSGestureRecognizer) bool
 	CanBePreventedByGestureRecognizer(preventingGestureRecognizer *raw.NSGestureRecognizer) bool
@@ -502,7 +502,7 @@ type GestureRecognizerable interface {
 	TouchesMovedWithEvent(event *raw.NSEvent)
 	TouchesEndedWithEvent(event *raw.NSEvent)
 	TouchesCancelledWithEvent(event *raw.NSEvent)
-	SetState(state raw.NSGestureRecognizerState)
+	SetState(state NSGestureRecognizerState)
 }
 
 var _ GestureRecognizerable = (*GestureRecognizer)(nil)

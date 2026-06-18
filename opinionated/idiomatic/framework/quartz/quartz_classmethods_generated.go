@@ -117,13 +117,13 @@ func SortedPropertyPortKeys() *foundation.NSArray[objc.ID] {
 }
 
 // ExecutionModeClass calls the underlying QCPlugInExecutionModeClass.
-func ExecutionModeClass() raw.QCPlugInExecutionMode {
-	return raw.QCPlugInExecutionModeClass()
+func ExecutionModeClass() QCPlugInExecutionMode {
+	return QCPlugInExecutionMode(raw.QCPlugInExecutionModeClass())
 }
 
 // TimeModeClass calls the underlying QCPlugInTimeModeClass.
-func TimeModeClass() raw.QCPlugInTimeMode {
-	return raw.QCPlugInTimeModeClass()
+func TimeModeClass() QCPlugInTimeMode {
+	return QCPlugInTimeMode(raw.QCPlugInTimeModeClass())
 }
 
 // PlugInKeys calls the underlying QCPlugInPlugInKeys.

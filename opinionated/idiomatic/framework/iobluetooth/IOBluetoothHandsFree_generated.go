@@ -183,8 +183,8 @@ func (x *IOBluetoothHandsFree) DeviceCallHoldModes() uint32 {
 }
 
 // SMSMode calls the underlying SMSMode.
-func (x *IOBluetoothHandsFree) SMSMode() raw.IOBluetoothSMSMode {
-	return x.inner.SMSMode()
+func (x *IOBluetoothHandsFree) SMSMode() IOBluetoothSMSMode {
+	return IOBluetoothSMSMode(x.inner.SMSMode())
 }
 
 // IsSMSEnabled calls the underlying IsSMSEnabled.
@@ -239,7 +239,7 @@ type IOBluetoothHandsFreeable interface {
 	DeviceSupportedFeatures() uint32
 	DeviceSupportedSMSServices() uint32
 	DeviceCallHoldModes() uint32
-	SMSMode() raw.IOBluetoothSMSMode
+	SMSMode() IOBluetoothSMSMode
 	IsSMSEnabled() bool
 	Delegate() raw.IOBluetoothHandsFreeDelegate
 	SetDelegate(delegate raw.IOBluetoothHandsFreeDelegate)

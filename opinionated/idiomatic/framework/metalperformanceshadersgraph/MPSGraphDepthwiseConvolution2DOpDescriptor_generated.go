@@ -86,20 +86,20 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingBottom(paddingBotto
 }
 
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphDepthwiseConvolution2DOpDescriptor {
-	x.inner.SetPaddingStyle(paddingStyle)
+func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution2DOpDescriptor {
+	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	return x
 }
 
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
-	x.inner.SetDataLayout(dataLayout)
+func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
+	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 	return x
 }
 
 // WithWeightsLayout sets the weightsLayout property and returns the receiver for chaining.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) WithWeightsLayout(weightsLayout raw.MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
-	x.inner.SetWeightsLayout(weightsLayout)
+func (x *GraphDepthwiseConvolution2DOpDescriptor) WithWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
+	x.inner.SetWeightsLayout(raw.MPSGraphTensorNamedDataLayout(weightsLayout))
 	return x
 }
 
@@ -189,33 +189,33 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingBottom(paddingBottom
 }
 
 // PaddingStyle calls the underlying PaddingStyle.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingStyle() raw.MPSGraphPaddingStyle {
-	return x.inner.PaddingStyle()
+func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
+	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
 }
 
 // SetPaddingStyle calls the underlying SetPaddingStyle.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) {
-	x.inner.SetPaddingStyle(paddingStyle)
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPaddingStyle) {
+	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 }
 
 // DataLayout calls the underlying DataLayout.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) DataLayout() raw.MPSGraphTensorNamedDataLayout {
-	return x.inner.DataLayout()
+func (x *GraphDepthwiseConvolution2DOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout {
+	return MPSGraphTensorNamedDataLayout(x.inner.DataLayout())
 }
 
 // SetDataLayout calls the underlying SetDataLayout.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) {
-	x.inner.SetDataLayout(dataLayout)
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout) {
+	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 }
 
 // WeightsLayout calls the underlying WeightsLayout.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) WeightsLayout() raw.MPSGraphTensorNamedDataLayout {
-	return x.inner.WeightsLayout()
+func (x *GraphDepthwiseConvolution2DOpDescriptor) WeightsLayout() MPSGraphTensorNamedDataLayout {
+	return MPSGraphTensorNamedDataLayout(x.inner.WeightsLayout())
 }
 
 // SetWeightsLayout calls the underlying SetWeightsLayout.
-func (x *GraphDepthwiseConvolution2DOpDescriptor) SetWeightsLayout(weightsLayout raw.MPSGraphTensorNamedDataLayout) {
-	x.inner.SetWeightsLayout(weightsLayout)
+func (x *GraphDepthwiseConvolution2DOpDescriptor) SetWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) {
+	x.inner.SetWeightsLayout(raw.MPSGraphTensorNamedDataLayout(weightsLayout))
 }
 
 func (x *GraphDepthwiseConvolution2DOpDescriptor) asGraphObject() *raw.MPSGraphObject {
@@ -233,9 +233,9 @@ type GraphDepthwiseConvolution2DOpDescriptorable interface {
 	WithPaddingRight(paddingRight uint) *GraphDepthwiseConvolution2DOpDescriptor
 	WithPaddingTop(paddingTop uint) *GraphDepthwiseConvolution2DOpDescriptor
 	WithPaddingBottom(paddingBottom uint) *GraphDepthwiseConvolution2DOpDescriptor
-	WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphDepthwiseConvolution2DOpDescriptor
-	WithDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor
-	WithWeightsLayout(weightsLayout raw.MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor
+	WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution2DOpDescriptor
+	WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor
+	WithWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor
 	SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint)
 	StrideInX() uint
 	SetStrideInX(strideInX uint)
@@ -253,12 +253,12 @@ type GraphDepthwiseConvolution2DOpDescriptorable interface {
 	SetPaddingTop(paddingTop uint)
 	PaddingBottom() uint
 	SetPaddingBottom(paddingBottom uint)
-	PaddingStyle() raw.MPSGraphPaddingStyle
-	SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle)
-	DataLayout() raw.MPSGraphTensorNamedDataLayout
-	SetDataLayout(dataLayout raw.MPSGraphTensorNamedDataLayout)
-	WeightsLayout() raw.MPSGraphTensorNamedDataLayout
-	SetWeightsLayout(weightsLayout raw.MPSGraphTensorNamedDataLayout)
+	PaddingStyle() MPSGraphPaddingStyle
+	SetPaddingStyle(paddingStyle MPSGraphPaddingStyle)
+	DataLayout() MPSGraphTensorNamedDataLayout
+	SetDataLayout(dataLayout MPSGraphTensorNamedDataLayout)
+	WeightsLayout() MPSGraphTensorNamedDataLayout
+	SetWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout)
 }
 
 var _ GraphDepthwiseConvolution2DOpDescriptorable = (*GraphDepthwiseConvolution2DOpDescriptor)(nil)

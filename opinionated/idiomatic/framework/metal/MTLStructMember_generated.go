@@ -96,8 +96,8 @@ func (x *StructMember) Offset() uint {
 }
 
 // DataType calls the underlying DataType.
-func (x *StructMember) DataType() raw.MTLDataType {
-	return x.inner.DataType()
+func (x *StructMember) DataType() MTLDataType {
+	return MTLDataType(x.inner.DataType())
 }
 
 // ArgumentIndex calls the underlying ArgumentIndex.
@@ -115,7 +115,7 @@ type StructMemberable interface {
 	TensorReferenceType() *TensorReferenceType
 	Name() string
 	Offset() uint
-	DataType() raw.MTLDataType
+	DataType() MTLDataType
 	ArgumentIndex() uint
 }
 

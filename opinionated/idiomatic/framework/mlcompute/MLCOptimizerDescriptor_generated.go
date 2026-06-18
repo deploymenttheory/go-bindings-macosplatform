@@ -66,13 +66,13 @@ func (x *OptimizerDescriptor) RegularizationScale() float32 {
 }
 
 // RegularizationType calls the underlying RegularizationType.
-func (x *OptimizerDescriptor) RegularizationType() raw.MLCRegularizationType {
-	return x.inner.RegularizationType()
+func (x *OptimizerDescriptor) RegularizationType() MLCRegularizationType {
+	return MLCRegularizationType(x.inner.RegularizationType())
 }
 
 // GradientClippingType calls the underlying GradientClippingType.
-func (x *OptimizerDescriptor) GradientClippingType() raw.MLCGradientClippingType {
-	return x.inner.GradientClippingType()
+func (x *OptimizerDescriptor) GradientClippingType() MLCGradientClippingType {
+	return MLCGradientClippingType(x.inner.GradientClippingType())
 }
 
 // MaximumClippingNorm calls the underlying MaximumClippingNorm.
@@ -94,8 +94,8 @@ type OptimizerDescriptorable interface {
 	GradientClipMax() float32
 	GradientClipMin() float32
 	RegularizationScale() float32
-	RegularizationType() raw.MLCRegularizationType
-	GradientClippingType() raw.MLCGradientClippingType
+	RegularizationType() MLCRegularizationType
+	GradientClippingType() MLCGradientClippingType
 	MaximumClippingNorm() float32
 	CustomGlobalNorm() float32
 }

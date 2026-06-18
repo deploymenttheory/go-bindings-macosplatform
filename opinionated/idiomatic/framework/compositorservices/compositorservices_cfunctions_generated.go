@@ -37,8 +37,8 @@ func CpDrawableArrayGetDrawable(drawable_array unsafe.Pointer, index uint) unsaf
 }
 
 // CpDrawableComputeProjection calls [raw.CpDrawableComputeProjection] (C function cp_drawable_compute_projection).
-func CpDrawableComputeProjection(drawable unsafe.Pointer, normalized_device_coordinates_convension raw.Cp_axis_direction_convention, view_index uint) unsafe.Pointer {
-	return raw.CpDrawableComputeProjection(drawable, normalized_device_coordinates_convension, view_index)
+func CpDrawableComputeProjection(drawable unsafe.Pointer, normalized_device_coordinates_convension Cp_axis_direction_convention, view_index uint) unsafe.Pointer {
+	return raw.CpDrawableComputeProjection(drawable, raw.Cp_axis_direction_convention(normalized_device_coordinates_convension), view_index)
 }
 
 // CpDrawableEncodePresent calls [raw.CpDrawableEncodePresent] (C function cp_drawable_encode_present).
@@ -92,13 +92,13 @@ func CpDrawableGetRasterizationRateMapCount(drawable unsafe.Pointer) uint {
 }
 
 // CpDrawableGetState calls [raw.CpDrawableGetState] (C function cp_drawable_get_state).
-func CpDrawableGetState(drawable unsafe.Pointer) raw.Cp_drawable_state {
-	return raw.CpDrawableGetState(drawable)
+func CpDrawableGetState(drawable unsafe.Pointer) Cp_drawable_state {
+	return Cp_drawable_state(raw.CpDrawableGetState(drawable))
 }
 
 // CpDrawableGetTarget calls [raw.CpDrawableGetTarget] (C function cp_drawable_get_target).
-func CpDrawableGetTarget(drawable unsafe.Pointer) raw.Cp_drawable_target {
-	return raw.CpDrawableGetTarget(drawable)
+func CpDrawableGetTarget(drawable unsafe.Pointer) Cp_drawable_target {
+	return Cp_drawable_target(raw.CpDrawableGetTarget(drawable))
 }
 
 // CpDrawableGetTextureCount calls [raw.CpDrawableGetTextureCount] (C function cp_drawable_get_texture_count).
@@ -162,13 +162,13 @@ func CpDrawableSetDeviceAnchor(drawable unsafe.Pointer, device_anchor *foundatio
 }
 
 // CpFrameBinocularFrustumMatrix calls [raw.CpFrameBinocularFrustumMatrix] (C function cp_frame_binocular_frustum_matrix).
-func CpFrameBinocularFrustumMatrix(frame unsafe.Pointer, convention raw.Cp_axis_direction_convention, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
-	return raw.CpFrameBinocularFrustumMatrix(frame, convention, increase_tangents, depth_range)
+func CpFrameBinocularFrustumMatrix(frame unsafe.Pointer, convention Cp_axis_direction_convention, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
+	return raw.CpFrameBinocularFrustumMatrix(frame, raw.Cp_axis_direction_convention(convention), increase_tangents, depth_range)
 }
 
 // CpFrameBinocularFrustumMatrixForDrawableTarget calls [raw.CpFrameBinocularFrustumMatrixForDrawableTarget] (C function cp_frame_binocular_frustum_matrix_for_drawable_target).
-func CpFrameBinocularFrustumMatrixForDrawableTarget(frame unsafe.Pointer, drawable_target raw.Cp_drawable_target, convention raw.Cp_axis_direction_convention, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
-	return raw.CpFrameBinocularFrustumMatrixForDrawableTarget(frame, drawable_target, convention, increase_tangents, depth_range)
+func CpFrameBinocularFrustumMatrixForDrawableTarget(frame unsafe.Pointer, drawable_target Cp_drawable_target, convention Cp_axis_direction_convention, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
+	return raw.CpFrameBinocularFrustumMatrixForDrawableTarget(frame, raw.Cp_drawable_target(drawable_target), raw.Cp_axis_direction_convention(convention), increase_tangents, depth_range)
 }
 
 // CpFrameEndSubmission calls [raw.CpFrameEndSubmission] (C function cp_frame_end_submission).
@@ -182,8 +182,8 @@ func CpFrameEndUpdate(frame unsafe.Pointer) {
 }
 
 // CpFrameGetDrawableTargetViewCount calls [raw.CpFrameGetDrawableTargetViewCount] (C function cp_frame_get_drawable_target_view_count).
-func CpFrameGetDrawableTargetViewCount(frame unsafe.Pointer, drawable_target raw.Cp_drawable_target) uint {
-	return raw.CpFrameGetDrawableTargetViewCount(frame, drawable_target)
+func CpFrameGetDrawableTargetViewCount(frame unsafe.Pointer, drawable_target Cp_drawable_target) uint {
+	return raw.CpFrameGetDrawableTargetViewCount(frame, raw.Cp_drawable_target(drawable_target))
 }
 
 // CpFrameGetFrameIndex calls [raw.CpFrameGetFrameIndex] (C function cp_frame_get_frame_index).
@@ -192,13 +192,13 @@ func CpFrameGetFrameIndex(frame unsafe.Pointer) uint64 {
 }
 
 // CpFrameMonocularFrustumMatrix calls [raw.CpFrameMonocularFrustumMatrix] (C function cp_frame_monocular_frustum_matrix).
-func CpFrameMonocularFrustumMatrix(frame unsafe.Pointer, normalized_device_coordinates_convension raw.Cp_axis_direction_convention, view_index uint, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
-	return raw.CpFrameMonocularFrustumMatrix(frame, normalized_device_coordinates_convension, view_index, increase_tangents, depth_range)
+func CpFrameMonocularFrustumMatrix(frame unsafe.Pointer, normalized_device_coordinates_convension Cp_axis_direction_convention, view_index uint, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
+	return raw.CpFrameMonocularFrustumMatrix(frame, raw.Cp_axis_direction_convention(normalized_device_coordinates_convension), view_index, increase_tangents, depth_range)
 }
 
 // CpFrameMonocularFrustumMatrixForDrawableTarget calls [raw.CpFrameMonocularFrustumMatrixForDrawableTarget] (C function cp_frame_monocular_frustum_matrix_for_drawable_target).
-func CpFrameMonocularFrustumMatrixForDrawableTarget(frame unsafe.Pointer, drawable_target raw.Cp_drawable_target, normalized_device_coordinates_convension raw.Cp_axis_direction_convention, view_index uint, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
-	return raw.CpFrameMonocularFrustumMatrixForDrawableTarget(frame, drawable_target, normalized_device_coordinates_convension, view_index, increase_tangents, depth_range)
+func CpFrameMonocularFrustumMatrixForDrawableTarget(frame unsafe.Pointer, drawable_target Cp_drawable_target, normalized_device_coordinates_convension Cp_axis_direction_convention, view_index uint, increase_tangents unsafe.Pointer, depth_range unsafe.Pointer) unsafe.Pointer {
+	return raw.CpFrameMonocularFrustumMatrixForDrawableTarget(frame, raw.Cp_drawable_target(drawable_target), raw.Cp_axis_direction_convention(normalized_device_coordinates_convension), view_index, increase_tangents, depth_range)
 }
 
 // CpFramePredictTiming calls [raw.CpFramePredictTiming] (C function cp_frame_predict_timing).
@@ -257,13 +257,13 @@ func CpLayerRendererCapabilitiesGetDefaultRenderQuality(layer_capabilities *raw.
 }
 
 // CpLayerRendererCapabilitiesSupportedColorFormatWithOptions calls [raw.CpLayerRendererCapabilitiesSupportedColorFormatWithOptions] (C function cp_layer_renderer_capabilities_supported_color_format_with_options).
-func CpLayerRendererCapabilitiesSupportedColorFormatWithOptions(layer_capabilities *raw.CP_OBJECT_cp_layer_renderer_capabilities, options raw.Cp_supported_color_formats_options, index uint) metal.MTLPixelFormat {
-	return raw.CpLayerRendererCapabilitiesSupportedColorFormatWithOptions(layer_capabilities, options, index)
+func CpLayerRendererCapabilitiesSupportedColorFormatWithOptions(layer_capabilities *raw.CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_color_formats_options, index uint) metal.MTLPixelFormat {
+	return raw.CpLayerRendererCapabilitiesSupportedColorFormatWithOptions(layer_capabilities, raw.Cp_supported_color_formats_options(options), index)
 }
 
 // CpLayerRendererCapabilitiesSupportedColorFormatsCountWithOptions calls [raw.CpLayerRendererCapabilitiesSupportedColorFormatsCountWithOptions] (C function cp_layer_renderer_capabilities_supported_color_formats_count_with_options).
-func CpLayerRendererCapabilitiesSupportedColorFormatsCountWithOptions(layer_capabilities *raw.CP_OBJECT_cp_layer_renderer_capabilities, options raw.Cp_supported_color_formats_options) uint {
-	return raw.CpLayerRendererCapabilitiesSupportedColorFormatsCountWithOptions(layer_capabilities, options)
+func CpLayerRendererCapabilitiesSupportedColorFormatsCountWithOptions(layer_capabilities *raw.CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_color_formats_options) uint {
+	return raw.CpLayerRendererCapabilitiesSupportedColorFormatsCountWithOptions(layer_capabilities, raw.Cp_supported_color_formats_options(options))
 }
 
 // CpLayerRendererCapabilitiesSupportedDepthFormat calls [raw.CpLayerRendererCapabilitiesSupportedDepthFormat] (C function cp_layer_renderer_capabilities_supported_depth_format).
@@ -277,13 +277,13 @@ func CpLayerRendererCapabilitiesSupportedDepthFormatsCount(layer_capabilities *r
 }
 
 // CpLayerRendererCapabilitiesSupportedLayout calls [raw.CpLayerRendererCapabilitiesSupportedLayout] (C function cp_layer_renderer_capabilities_supported_layout).
-func CpLayerRendererCapabilitiesSupportedLayout(layer_capabilities *raw.CP_OBJECT_cp_layer_renderer_capabilities, options raw.Cp_supported_layouts_options, index uint) raw.Cp_layer_renderer_layout {
-	return raw.CpLayerRendererCapabilitiesSupportedLayout(layer_capabilities, options, index)
+func CpLayerRendererCapabilitiesSupportedLayout(layer_capabilities *raw.CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_layouts_options, index uint) Cp_layer_renderer_layout {
+	return Cp_layer_renderer_layout(raw.CpLayerRendererCapabilitiesSupportedLayout(layer_capabilities, raw.Cp_supported_layouts_options(options), index))
 }
 
 // CpLayerRendererCapabilitiesSupportedLayoutsCount calls [raw.CpLayerRendererCapabilitiesSupportedLayoutsCount] (C function cp_layer_renderer_capabilities_supported_layouts_count).
-func CpLayerRendererCapabilitiesSupportedLayoutsCount(layer_capabilities *raw.CP_OBJECT_cp_layer_renderer_capabilities, options raw.Cp_supported_layouts_options) uint {
-	return raw.CpLayerRendererCapabilitiesSupportedLayoutsCount(layer_capabilities, options)
+func CpLayerRendererCapabilitiesSupportedLayoutsCount(layer_capabilities *raw.CP_OBJECT_cp_layer_renderer_capabilities, options Cp_supported_layouts_options) uint {
+	return raw.CpLayerRendererCapabilitiesSupportedLayoutsCount(layer_capabilities, raw.Cp_supported_layouts_options(options))
 }
 
 // CpLayerRendererCapabilitiesSupportedMinimumNearPlaneDistance calls [raw.CpLayerRendererCapabilitiesSupportedMinimumNearPlaneDistance] (C function cp_layer_renderer_capabilities_supported_minimum_near_plane_distance).
@@ -352,8 +352,8 @@ func CpLayerRendererConfigurationGetGenerateFlippedRasterizationRateMaps(configu
 }
 
 // CpLayerRendererConfigurationGetLayout calls [raw.CpLayerRendererConfigurationGetLayout] (C function cp_layer_renderer_configuration_get_layout).
-func CpLayerRendererConfigurationGetLayout(configuration *raw.CP_OBJECT_cp_layer_renderer_configuration) raw.Cp_layer_renderer_layout {
-	return raw.CpLayerRendererConfigurationGetLayout(configuration)
+func CpLayerRendererConfigurationGetLayout(configuration *raw.CP_OBJECT_cp_layer_renderer_configuration) Cp_layer_renderer_layout {
+	return Cp_layer_renderer_layout(raw.CpLayerRendererConfigurationGetLayout(configuration))
 }
 
 // CpLayerRendererConfigurationGetMaxRenderQuality calls [raw.CpLayerRendererConfigurationGetMaxRenderQuality] (C function cp_layer_renderer_configuration_get_max_render_quality).
@@ -422,8 +422,8 @@ func CpLayerRendererConfigurationSetGenerateFlippedRasterizationRateMaps(configu
 }
 
 // CpLayerRendererConfigurationSetLayout calls [raw.CpLayerRendererConfigurationSetLayout] (C function cp_layer_renderer_configuration_set_layout).
-func CpLayerRendererConfigurationSetLayout(configuration *raw.CP_OBJECT_cp_layer_renderer_configuration, layout raw.Cp_layer_renderer_layout) {
-	raw.CpLayerRendererConfigurationSetLayout(configuration, layout)
+func CpLayerRendererConfigurationSetLayout(configuration *raw.CP_OBJECT_cp_layer_renderer_configuration, layout Cp_layer_renderer_layout) {
+	raw.CpLayerRendererConfigurationSetLayout(configuration, raw.Cp_layer_renderer_layout(layout))
 }
 
 // CpLayerRendererConfigurationSetMaxRenderQuality calls [raw.CpLayerRendererConfigurationSetMaxRenderQuality] (C function cp_layer_renderer_configuration_set_max_render_quality).
@@ -477,8 +477,8 @@ func CpLayerRendererGetRenderQuality(layer_renderer *raw.CP_OBJECT_cp_layer_rend
 }
 
 // CpLayerRendererGetState calls [raw.CpLayerRendererGetState] (C function cp_layer_renderer_get_state).
-func CpLayerRendererGetState(layer_renderer *raw.CP_OBJECT_cp_layer_renderer) raw.Cp_layer_renderer_state {
-	return raw.CpLayerRendererGetState(layer_renderer)
+func CpLayerRendererGetState(layer_renderer *raw.CP_OBJECT_cp_layer_renderer) Cp_layer_renderer_state {
+	return Cp_layer_renderer_state(raw.CpLayerRendererGetState(layer_renderer))
 }
 
 // CpLayerRendererPropertiesCreateUsingConfiguration calls [raw.CpLayerRendererPropertiesCreateUsingConfiguration] (C function cp_layer_renderer_properties_create_using_configuration).

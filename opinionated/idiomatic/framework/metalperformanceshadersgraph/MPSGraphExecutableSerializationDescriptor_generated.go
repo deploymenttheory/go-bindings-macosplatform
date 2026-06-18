@@ -46,8 +46,8 @@ func (x *GraphExecutableSerializationDescriptor) WithAppend(append_ bool) *Graph
 }
 
 // WithDeploymentPlatform sets the deploymentPlatform property and returns the receiver for chaining.
-func (x *GraphExecutableSerializationDescriptor) WithDeploymentPlatform(deploymentPlatform raw.MPSGraphDeploymentPlatform) *GraphExecutableSerializationDescriptor {
-	x.inner.SetDeploymentPlatform(deploymentPlatform)
+func (x *GraphExecutableSerializationDescriptor) WithDeploymentPlatform(deploymentPlatform MPSGraphDeploymentPlatform) *GraphExecutableSerializationDescriptor {
+	x.inner.SetDeploymentPlatform(raw.MPSGraphDeploymentPlatform(deploymentPlatform))
 	return x
 }
 
@@ -68,13 +68,13 @@ func (x *GraphExecutableSerializationDescriptor) SetAppend(append_ bool) {
 }
 
 // DeploymentPlatform calls the underlying DeploymentPlatform.
-func (x *GraphExecutableSerializationDescriptor) DeploymentPlatform() raw.MPSGraphDeploymentPlatform {
-	return x.inner.DeploymentPlatform()
+func (x *GraphExecutableSerializationDescriptor) DeploymentPlatform() MPSGraphDeploymentPlatform {
+	return MPSGraphDeploymentPlatform(x.inner.DeploymentPlatform())
 }
 
 // SetDeploymentPlatform calls the underlying SetDeploymentPlatform.
-func (x *GraphExecutableSerializationDescriptor) SetDeploymentPlatform(deploymentPlatform raw.MPSGraphDeploymentPlatform) {
-	x.inner.SetDeploymentPlatform(deploymentPlatform)
+func (x *GraphExecutableSerializationDescriptor) SetDeploymentPlatform(deploymentPlatform MPSGraphDeploymentPlatform) {
+	x.inner.SetDeploymentPlatform(raw.MPSGraphDeploymentPlatform(deploymentPlatform))
 }
 
 // MinimumDeploymentTarget calls the underlying MinimumDeploymentTarget.
@@ -99,12 +99,12 @@ func (x *GraphExecutableSerializationDescriptor) asGraphObject() *raw.MPSGraphOb
 type GraphExecutableSerializationDescriptorable interface {
 	Unwrap() *raw.MPSGraphExecutableSerializationDescriptor
 	WithAppend(append_ bool) *GraphExecutableSerializationDescriptor
-	WithDeploymentPlatform(deploymentPlatform raw.MPSGraphDeploymentPlatform) *GraphExecutableSerializationDescriptor
+	WithDeploymentPlatform(deploymentPlatform MPSGraphDeploymentPlatform) *GraphExecutableSerializationDescriptor
 	WithMinimumDeploymentTarget(minimumDeploymentTarget string) *GraphExecutableSerializationDescriptor
 	Append() bool
 	SetAppend(append_ bool)
-	DeploymentPlatform() raw.MPSGraphDeploymentPlatform
-	SetDeploymentPlatform(deploymentPlatform raw.MPSGraphDeploymentPlatform)
+	DeploymentPlatform() MPSGraphDeploymentPlatform
+	SetDeploymentPlatform(deploymentPlatform MPSGraphDeploymentPlatform)
 	MinimumDeploymentTarget() string
 	SetMinimumDeploymentTarget(minimumDeploymentTarget string)
 }

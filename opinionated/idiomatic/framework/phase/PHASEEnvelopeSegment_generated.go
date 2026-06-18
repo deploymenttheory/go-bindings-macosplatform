@@ -31,15 +31,15 @@ func EnvelopeSegmentFromID(id objc.ID) *EnvelopeSegment {
 }
 
 // NewEnvelopeSegmentWithEndPointCurveType creates a new [EnvelopeSegment].
-func NewEnvelopeSegmentWithEndPointCurveType(endPoint unsafe.Pointer, curveType raw.PHASECurveType) *EnvelopeSegment {
+func NewEnvelopeSegmentWithEndPointCurveType(endPoint unsafe.Pointer, curveType PHASECurveType) *EnvelopeSegment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEEnvelopeSegment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEndPoint:curveType:"), endPoint, curveType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEndPoint:curveType:"), endPoint, raw.PHASECurveType(curveType))
 	return &EnvelopeSegment{inner: raw.PHASEEnvelopeSegmentFromID(_id)}
 }
 
 // WithCurveType sets the curveType property and returns the receiver for chaining.
-func (x *EnvelopeSegment) WithCurveType(curveType raw.PHASECurveType) *EnvelopeSegment {
-	x.inner.SetCurveType(curveType)
+func (x *EnvelopeSegment) WithCurveType(curveType PHASECurveType) *EnvelopeSegment {
+	x.inner.SetCurveType(raw.PHASECurveType(curveType))
 	return x
 }
 
@@ -54,23 +54,23 @@ func (x *EnvelopeSegment) SetEndPoint(endPoint unsafe.Pointer) {
 }
 
 // CurveType calls the underlying CurveType.
-func (x *EnvelopeSegment) CurveType() raw.PHASECurveType {
-	return x.inner.CurveType()
+func (x *EnvelopeSegment) CurveType() PHASECurveType {
+	return PHASECurveType(x.inner.CurveType())
 }
 
 // SetCurveType calls the underlying SetCurveType.
-func (x *EnvelopeSegment) SetCurveType(curveType raw.PHASECurveType) {
-	x.inner.SetCurveType(curveType)
+func (x *EnvelopeSegment) SetCurveType(curveType PHASECurveType) {
+	x.inner.SetCurveType(raw.PHASECurveType(curveType))
 }
 
 // EnvelopeSegmentable is the interface implemented by [EnvelopeSegment], for mocking and DI.
 type EnvelopeSegmentable interface {
 	Unwrap() *raw.PHASEEnvelopeSegment
-	WithCurveType(curveType raw.PHASECurveType) *EnvelopeSegment
+	WithCurveType(curveType PHASECurveType) *EnvelopeSegment
 	EndPoint() unsafe.Pointer
 	SetEndPoint(endPoint unsafe.Pointer)
-	CurveType() raw.PHASECurveType
-	SetCurveType(curveType raw.PHASECurveType)
+	CurveType() PHASECurveType
+	SetCurveType(curveType PHASECurveType)
 }
 
 var _ EnvelopeSegmentable = (*EnvelopeSegment)(nil)

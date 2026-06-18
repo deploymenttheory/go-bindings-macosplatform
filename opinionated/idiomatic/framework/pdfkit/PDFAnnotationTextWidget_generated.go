@@ -113,20 +113,20 @@ func (x *AnnotationTextWidget) WithEndPoint(endPoint corefoundation.CGPoint) *An
 }
 
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationTextWidget) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationTextWidget {
-	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+func (x *AnnotationTextWidget) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationTextWidget {
+	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationTextWidget) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationTextWidget {
-	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+func (x *AnnotationTextWidget) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationTextWidget {
+	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
 // WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationTextWidget) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationTextWidget {
-	x.inner.PDFAnnotation.SetIconType(iconType)
+func (x *AnnotationTextWidget) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationTextWidget {
+	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
@@ -149,14 +149,14 @@ func (x *AnnotationTextWidget) WithQuadrilateralPoints(items ...*foundation.NSVa
 }
 
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationTextWidget) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationTextWidget {
-	x.inner.PDFAnnotation.SetMarkupType(markupType)
+func (x *AnnotationTextWidget) WithMarkupType(markupType PDFMarkupType) *AnnotationTextWidget {
+	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationTextWidget) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationTextWidget {
-	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+func (x *AnnotationTextWidget) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationTextWidget {
+	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
@@ -251,8 +251,8 @@ func (x *AnnotationTextWidget) WithValues(items ...*foundation.NSString) *Annota
 }
 
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationTextWidget) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationTextWidget {
-	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+func (x *AnnotationTextWidget) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationTextWidget {
+	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
@@ -360,12 +360,12 @@ type AnnotationTextWidgetable interface {
 	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationTextWidget
 	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationTextWidget
 	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationTextWidget
-	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationTextWidget
-	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationTextWidget
-	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationTextWidget
+	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationTextWidget
+	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationTextWidget
+	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationTextWidget
 	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationTextWidget
-	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationTextWidget
-	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationTextWidget
+	WithMarkupType(markupType PDFMarkupType) *AnnotationTextWidget
+	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationTextWidget
 	WithMultiline(multiline bool) *AnnotationTextWidget
 	WithComb(comb bool) *AnnotationTextWidget
 	WithMaximumLength(maximumLength int) *AnnotationTextWidget
@@ -377,7 +377,7 @@ type AnnotationTextWidgetable interface {
 	WithListChoice(listChoice bool) *AnnotationTextWidget
 	WithChoices(items ...*foundation.NSString) *AnnotationTextWidget
 	WithValues(items ...*foundation.NSString) *AnnotationTextWidget
-	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationTextWidget
+	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationTextWidget
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationTextWidget
 	WithOpen(open bool) *AnnotationTextWidget
 	WithDestination(destination *Destination) *AnnotationTextWidget

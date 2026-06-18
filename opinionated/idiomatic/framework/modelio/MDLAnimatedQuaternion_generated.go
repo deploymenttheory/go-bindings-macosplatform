@@ -37,8 +37,8 @@ func NewAnimatedQuaternion() *AnimatedQuaternion {
 }
 
 // WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedQuaternion) WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedQuaternion {
-	x.inner.MDLAnimatedValue.SetInterpolation(interpolation)
+func (x *AnimatedQuaternion) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedQuaternion {
+	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
 	return x
 }
 
@@ -89,7 +89,7 @@ func (x *AnimatedQuaternion) asAnimatedValue() *raw.MDLAnimatedValue {
 // AnimatedQuaternionable is the interface implemented by [AnimatedQuaternion], for mocking and DI.
 type AnimatedQuaternionable interface {
 	Unwrap() *raw.MDLAnimatedQuaternion
-	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedQuaternion
+	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedQuaternion
 	SetFloatQuaternionAtTime(value unsafe.Pointer, time_ float64)
 	SetDoubleQuaternionAtTime(value unsafe.Pointer, time_ float64)
 	FloatQuaternionAtTime(time_ float64) unsafe.Pointer

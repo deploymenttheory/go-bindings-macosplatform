@@ -61,16 +61,16 @@ func NewAudioFormatStandardFormatWithSampleRateChannelLayout(sampleRate float64,
 }
 
 // NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved creates a new [AudioFormat].
-func NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved(format raw.AVAudioCommonFormat, sampleRate float64, channels uint32, interleaved bool) *AudioFormat {
+func NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved(format AVAudioCommonFormat, sampleRate float64, channels uint32, interleaved bool) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommonFormat:sampleRate:channels:interleaved:"), format, sampleRate, channels, interleaved)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommonFormat:sampleRate:channels:interleaved:"), raw.AVAudioCommonFormat(format), sampleRate, channels, interleaved)
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
 // NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout creates a new [AudioFormat].
-func NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout(format raw.AVAudioCommonFormat, sampleRate float64, interleaved bool, layout *raw.AVAudioChannelLayout) *AudioFormat {
+func NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout(format AVAudioCommonFormat, sampleRate float64, interleaved bool, layout *raw.AVAudioChannelLayout) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommonFormat:sampleRate:interleaved:channelLayout:"), format, sampleRate, interleaved, layout.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommonFormat:sampleRate:interleaved:channelLayout:"), raw.AVAudioCommonFormat(format), sampleRate, interleaved, layout.Ptr())
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
@@ -105,8 +105,8 @@ func (x *AudioFormat) IsStandard() bool {
 }
 
 // CommonFormat calls the underlying CommonFormat.
-func (x *AudioFormat) CommonFormat() raw.AVAudioCommonFormat {
-	return x.inner.CommonFormat()
+func (x *AudioFormat) CommonFormat() AVAudioCommonFormat {
+	return AVAudioCommonFormat(x.inner.CommonFormat())
 }
 
 // ChannelCount calls the underlying ChannelCount.
@@ -164,7 +164,7 @@ type AudioFormatable interface {
 	WithMagicCookie(magicCookie *foundation.NSData) *AudioFormat
 	IsEqual(object objc.ID) bool
 	IsStandard() bool
-	CommonFormat() raw.AVAudioCommonFormat
+	CommonFormat() AVAudioCommonFormat
 	ChannelCount() uint32
 	SampleRate() float64
 	IsInterleaved() bool

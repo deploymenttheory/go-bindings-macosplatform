@@ -891,8 +891,8 @@ func CFCalendarGetIdentifier(calendar unsafe.Pointer) unsafe.Pointer {
 }
 
 // CFCalendarGetMaximumRangeOfUnit calls [raw.CFCalendarGetMaximumRangeOfUnit] (C function CFCalendarGetMaximumRangeOfUnit).
-func CFCalendarGetMaximumRangeOfUnit(calendar unsafe.Pointer, unit raw.CFCalendarUnit) raw.CFRange {
-	return raw.CFCalendarGetMaximumRangeOfUnit(calendar, unit)
+func CFCalendarGetMaximumRangeOfUnit(calendar unsafe.Pointer, unit CFCalendarUnit) raw.CFRange {
+	return raw.CFCalendarGetMaximumRangeOfUnit(calendar, raw.CFCalendarUnit(unit))
 }
 
 // CFCalendarGetMinimumDaysInFirstWeek calls [raw.CFCalendarGetMinimumDaysInFirstWeek] (C function CFCalendarGetMinimumDaysInFirstWeek).
@@ -901,23 +901,23 @@ func CFCalendarGetMinimumDaysInFirstWeek(calendar unsafe.Pointer) int {
 }
 
 // CFCalendarGetMinimumRangeOfUnit calls [raw.CFCalendarGetMinimumRangeOfUnit] (C function CFCalendarGetMinimumRangeOfUnit).
-func CFCalendarGetMinimumRangeOfUnit(calendar unsafe.Pointer, unit raw.CFCalendarUnit) raw.CFRange {
-	return raw.CFCalendarGetMinimumRangeOfUnit(calendar, unit)
+func CFCalendarGetMinimumRangeOfUnit(calendar unsafe.Pointer, unit CFCalendarUnit) raw.CFRange {
+	return raw.CFCalendarGetMinimumRangeOfUnit(calendar, raw.CFCalendarUnit(unit))
 }
 
 // CFCalendarGetOrdinalityOfUnit calls [raw.CFCalendarGetOrdinalityOfUnit] (C function CFCalendarGetOrdinalityOfUnit).
-func CFCalendarGetOrdinalityOfUnit(calendar unsafe.Pointer, smallerUnit raw.CFCalendarUnit, biggerUnit raw.CFCalendarUnit, at float64) int {
-	return raw.CFCalendarGetOrdinalityOfUnit(calendar, smallerUnit, biggerUnit, at)
+func CFCalendarGetOrdinalityOfUnit(calendar unsafe.Pointer, smallerUnit CFCalendarUnit, biggerUnit CFCalendarUnit, at float64) int {
+	return raw.CFCalendarGetOrdinalityOfUnit(calendar, raw.CFCalendarUnit(smallerUnit), raw.CFCalendarUnit(biggerUnit), at)
 }
 
 // CFCalendarGetRangeOfUnit calls [raw.CFCalendarGetRangeOfUnit] (C function CFCalendarGetRangeOfUnit).
-func CFCalendarGetRangeOfUnit(calendar unsafe.Pointer, smallerUnit raw.CFCalendarUnit, biggerUnit raw.CFCalendarUnit, at float64) raw.CFRange {
-	return raw.CFCalendarGetRangeOfUnit(calendar, smallerUnit, biggerUnit, at)
+func CFCalendarGetRangeOfUnit(calendar unsafe.Pointer, smallerUnit CFCalendarUnit, biggerUnit CFCalendarUnit, at float64) raw.CFRange {
+	return raw.CFCalendarGetRangeOfUnit(calendar, raw.CFCalendarUnit(smallerUnit), raw.CFCalendarUnit(biggerUnit), at)
 }
 
 // CFCalendarGetTimeRangeOfUnit calls [raw.CFCalendarGetTimeRangeOfUnit] (C function CFCalendarGetTimeRangeOfUnit).
-func CFCalendarGetTimeRangeOfUnit(calendar unsafe.Pointer, unit raw.CFCalendarUnit, at float64, startp *float64, tip *float64) uint8 {
-	return raw.CFCalendarGetTimeRangeOfUnit(calendar, unit, at, startp, tip)
+func CFCalendarGetTimeRangeOfUnit(calendar unsafe.Pointer, unit CFCalendarUnit, at float64, startp *float64, tip *float64) uint8 {
+	return raw.CFCalendarGetTimeRangeOfUnit(calendar, raw.CFCalendarUnit(unit), at, startp, tip)
 }
 
 // CFCalendarGetTypeID calls [raw.CFCalendarGetTypeID] (C function CFCalendarGetTypeID).
@@ -996,8 +996,8 @@ func CFCharacterSetCreateWithCharactersInString(alloc unsafe.Pointer, theString 
 }
 
 // CFCharacterSetGetPredefined calls [raw.CFCharacterSetGetPredefined] (C function CFCharacterSetGetPredefined).
-func CFCharacterSetGetPredefined(theSetIdentifier raw.CFCharacterSetPredefinedSet) unsafe.Pointer {
-	return raw.CFCharacterSetGetPredefined(theSetIdentifier)
+func CFCharacterSetGetPredefined(theSetIdentifier CFCharacterSetPredefinedSet) unsafe.Pointer {
+	return raw.CFCharacterSetGetPredefined(raw.CFCharacterSetPredefinedSet(theSetIdentifier))
 }
 
 // CFCharacterSetGetTypeID calls [raw.CFCharacterSetGetTypeID] (C function CFCharacterSetGetTypeID).
@@ -1136,8 +1136,8 @@ func CFDataDeleteBytes(theData unsafe.Pointer, range_ raw.CFRange) {
 }
 
 // CFDataFind calls [raw.CFDataFind] (C function CFDataFind).
-func CFDataFind(theData unsafe.Pointer, dataToFind unsafe.Pointer, searchRange raw.CFRange, compareOptions raw.CFDataSearchFlags) raw.CFRange {
-	return raw.CFDataFind(theData, dataToFind, searchRange, compareOptions)
+func CFDataFind(theData unsafe.Pointer, dataToFind unsafe.Pointer, searchRange raw.CFRange, compareOptions CFDataSearchFlags) raw.CFRange {
+	return raw.CFDataFind(theData, dataToFind, searchRange, raw.CFDataSearchFlags(compareOptions))
 }
 
 // CFDataGetBytePtr calls [raw.CFDataGetBytePtr] (C function CFDataGetBytePtr).
@@ -1181,8 +1181,8 @@ func CFDataSetLength(theData unsafe.Pointer, length int) {
 }
 
 // CFDateCompare calls [raw.CFDateCompare] (C function CFDateCompare).
-func CFDateCompare(theDate unsafe.Pointer, otherDate unsafe.Pointer, context_ unsafe.Pointer) raw.CFComparisonResult {
-	return raw.CFDateCompare(theDate, otherDate, context_)
+func CFDateCompare(theDate unsafe.Pointer, otherDate unsafe.Pointer, context_ unsafe.Pointer) CFComparisonResult {
+	return CFComparisonResult(raw.CFDateCompare(theDate, otherDate, context_))
 }
 
 // CFDateCreate calls [raw.CFDateCreate] (C function CFDateCreate).
@@ -1196,8 +1196,8 @@ func CFDateFormatterCopyProperty(formatter unsafe.Pointer, key unsafe.Pointer) u
 }
 
 // CFDateFormatterCreate calls [raw.CFDateFormatterCreate] (C function CFDateFormatterCreate).
-func CFDateFormatterCreate(allocator unsafe.Pointer, locale unsafe.Pointer, dateStyle raw.CFDateFormatterStyle, timeStyle raw.CFDateFormatterStyle) unsafe.Pointer {
-	return raw.CFDateFormatterCreate(allocator, locale, dateStyle, timeStyle)
+func CFDateFormatterCreate(allocator unsafe.Pointer, locale unsafe.Pointer, dateStyle CFDateFormatterStyle, timeStyle CFDateFormatterStyle) unsafe.Pointer {
+	return raw.CFDateFormatterCreate(allocator, locale, raw.CFDateFormatterStyle(dateStyle), raw.CFDateFormatterStyle(timeStyle))
 }
 
 // CFDateFormatterCreateDateFormatFromTemplate calls [raw.CFDateFormatterCreateDateFormatFromTemplate] (C function CFDateFormatterCreateDateFormatFromTemplate).
@@ -1211,8 +1211,8 @@ func CFDateFormatterCreateDateFromString(allocator unsafe.Pointer, formatter uns
 }
 
 // CFDateFormatterCreateISO8601Formatter calls [raw.CFDateFormatterCreateISO8601Formatter] (C function CFDateFormatterCreateISO8601Formatter).
-func CFDateFormatterCreateISO8601Formatter(allocator unsafe.Pointer, formatOptions raw.CFISO8601DateFormatOptions) unsafe.Pointer {
-	return raw.CFDateFormatterCreateISO8601Formatter(allocator, formatOptions)
+func CFDateFormatterCreateISO8601Formatter(allocator unsafe.Pointer, formatOptions CFISO8601DateFormatOptions) unsafe.Pointer {
+	return raw.CFDateFormatterCreateISO8601Formatter(allocator, raw.CFISO8601DateFormatOptions(formatOptions))
 }
 
 // CFDateFormatterCreateStringWithAbsoluteTime calls [raw.CFDateFormatterCreateStringWithAbsoluteTime] (C function CFDateFormatterCreateStringWithAbsoluteTime).
@@ -1231,8 +1231,8 @@ func CFDateFormatterGetAbsoluteTimeFromString(formatter unsafe.Pointer, string_ 
 }
 
 // CFDateFormatterGetDateStyle calls [raw.CFDateFormatterGetDateStyle] (C function CFDateFormatterGetDateStyle).
-func CFDateFormatterGetDateStyle(formatter unsafe.Pointer) raw.CFDateFormatterStyle {
-	return raw.CFDateFormatterGetDateStyle(formatter)
+func CFDateFormatterGetDateStyle(formatter unsafe.Pointer) CFDateFormatterStyle {
+	return CFDateFormatterStyle(raw.CFDateFormatterGetDateStyle(formatter))
 }
 
 // CFDateFormatterGetFormat calls [raw.CFDateFormatterGetFormat] (C function CFDateFormatterGetFormat).
@@ -1246,8 +1246,8 @@ func CFDateFormatterGetLocale(formatter unsafe.Pointer) unsafe.Pointer {
 }
 
 // CFDateFormatterGetTimeStyle calls [raw.CFDateFormatterGetTimeStyle] (C function CFDateFormatterGetTimeStyle).
-func CFDateFormatterGetTimeStyle(formatter unsafe.Pointer) raw.CFDateFormatterStyle {
-	return raw.CFDateFormatterGetTimeStyle(formatter)
+func CFDateFormatterGetTimeStyle(formatter unsafe.Pointer) CFDateFormatterStyle {
+	return CFDateFormatterStyle(raw.CFDateFormatterGetTimeStyle(formatter))
 }
 
 // CFDateFormatterGetTypeID calls [raw.CFDateFormatterGetTypeID] (C function CFDateFormatterGetTypeID).
@@ -1471,8 +1471,8 @@ func CFFileDescriptorIsValid(f unsafe.Pointer) uint8 {
 }
 
 // CFFileSecurityClearProperties calls [raw.CFFileSecurityClearProperties] (C function CFFileSecurityClearProperties).
-func CFFileSecurityClearProperties(fileSec unsafe.Pointer, clearPropertyMask raw.CFFileSecurityClearOptions) uint8 {
-	return raw.CFFileSecurityClearProperties(fileSec, clearPropertyMask)
+func CFFileSecurityClearProperties(fileSec unsafe.Pointer, clearPropertyMask CFFileSecurityClearOptions) uint8 {
+	return raw.CFFileSecurityClearProperties(fileSec, raw.CFFileSecurityClearOptions(clearPropertyMask))
 }
 
 // CFFileSecurityCopyAccessControlList calls [raw.CFFileSecurityCopyAccessControlList] (C function CFFileSecurityCopyAccessControlList).
@@ -1666,13 +1666,13 @@ func CFLocaleGetIdentifier(locale unsafe.Pointer) unsafe.Pointer {
 }
 
 // CFLocaleGetLanguageCharacterDirection calls [raw.CFLocaleGetLanguageCharacterDirection] (C function CFLocaleGetLanguageCharacterDirection).
-func CFLocaleGetLanguageCharacterDirection(isoLangCode unsafe.Pointer) raw.CFLocaleLanguageDirection {
-	return raw.CFLocaleGetLanguageCharacterDirection(isoLangCode)
+func CFLocaleGetLanguageCharacterDirection(isoLangCode unsafe.Pointer) CFLocaleLanguageDirection {
+	return CFLocaleLanguageDirection(raw.CFLocaleGetLanguageCharacterDirection(isoLangCode))
 }
 
 // CFLocaleGetLanguageLineDirection calls [raw.CFLocaleGetLanguageLineDirection] (C function CFLocaleGetLanguageLineDirection).
-func CFLocaleGetLanguageLineDirection(isoLangCode unsafe.Pointer) raw.CFLocaleLanguageDirection {
-	return raw.CFLocaleGetLanguageLineDirection(isoLangCode)
+func CFLocaleGetLanguageLineDirection(isoLangCode unsafe.Pointer) CFLocaleLanguageDirection {
+	return CFLocaleLanguageDirection(raw.CFLocaleGetLanguageLineDirection(isoLangCode))
 }
 
 // CFLocaleGetSystem calls [raw.CFLocaleGetSystem] (C function CFLocaleGetSystem).
@@ -1821,8 +1821,8 @@ func CFMessagePortSetName(ms unsafe.Pointer, newName unsafe.Pointer) uint8 {
 }
 
 // CFNotificationCenterAddObserver calls [raw.CFNotificationCenterAddObserver] (C function CFNotificationCenterAddObserver).
-func CFNotificationCenterAddObserver(center unsafe.Pointer, observer unsafe.Pointer, callBack unsafe.Pointer, name unsafe.Pointer, object unsafe.Pointer, suspensionBehavior raw.CFNotificationSuspensionBehavior) {
-	raw.CFNotificationCenterAddObserver(center, observer, callBack, name, object, suspensionBehavior)
+func CFNotificationCenterAddObserver(center unsafe.Pointer, observer unsafe.Pointer, callBack unsafe.Pointer, name unsafe.Pointer, object unsafe.Pointer, suspensionBehavior CFNotificationSuspensionBehavior) {
+	raw.CFNotificationCenterAddObserver(center, observer, callBack, name, object, raw.CFNotificationSuspensionBehavior(suspensionBehavior))
 }
 
 // CFNotificationCenterGetDarwinNotifyCenter calls [raw.CFNotificationCenterGetDarwinNotifyCenter] (C function CFNotificationCenterGetDarwinNotifyCenter).
@@ -1871,13 +1871,13 @@ func CFNullGetTypeID() uint {
 }
 
 // CFNumberCompare calls [raw.CFNumberCompare] (C function CFNumberCompare).
-func CFNumberCompare(number unsafe.Pointer, otherNumber unsafe.Pointer, context_ unsafe.Pointer) raw.CFComparisonResult {
-	return raw.CFNumberCompare(number, otherNumber, context_)
+func CFNumberCompare(number unsafe.Pointer, otherNumber unsafe.Pointer, context_ unsafe.Pointer) CFComparisonResult {
+	return CFComparisonResult(raw.CFNumberCompare(number, otherNumber, context_))
 }
 
 // CFNumberCreate calls [raw.CFNumberCreate] (C function CFNumberCreate).
-func CFNumberCreate(allocator unsafe.Pointer, theType raw.CFNumberType, valuePtr unsafe.Pointer) unsafe.Pointer {
-	return raw.CFNumberCreate(allocator, theType, valuePtr)
+func CFNumberCreate(allocator unsafe.Pointer, theType CFNumberType, valuePtr unsafe.Pointer) unsafe.Pointer {
+	return raw.CFNumberCreate(allocator, raw.CFNumberType(theType), valuePtr)
 }
 
 // CFNumberFormatterCopyProperty calls [raw.CFNumberFormatterCopyProperty] (C function CFNumberFormatterCopyProperty).
@@ -1886,8 +1886,8 @@ func CFNumberFormatterCopyProperty(formatter unsafe.Pointer, key unsafe.Pointer)
 }
 
 // CFNumberFormatterCreate calls [raw.CFNumberFormatterCreate] (C function CFNumberFormatterCreate).
-func CFNumberFormatterCreate(allocator unsafe.Pointer, locale unsafe.Pointer, style raw.CFNumberFormatterStyle) unsafe.Pointer {
-	return raw.CFNumberFormatterCreate(allocator, locale, style)
+func CFNumberFormatterCreate(allocator unsafe.Pointer, locale unsafe.Pointer, style CFNumberFormatterStyle) unsafe.Pointer {
+	return raw.CFNumberFormatterCreate(allocator, locale, raw.CFNumberFormatterStyle(style))
 }
 
 // CFNumberFormatterCreateNumberFromString calls [raw.CFNumberFormatterCreateNumberFromString] (C function CFNumberFormatterCreateNumberFromString).
@@ -1901,8 +1901,8 @@ func CFNumberFormatterCreateStringWithNumber(allocator unsafe.Pointer, formatter
 }
 
 // CFNumberFormatterCreateStringWithValue calls [raw.CFNumberFormatterCreateStringWithValue] (C function CFNumberFormatterCreateStringWithValue).
-func CFNumberFormatterCreateStringWithValue(allocator unsafe.Pointer, formatter unsafe.Pointer, numberType raw.CFNumberType, valuePtr unsafe.Pointer) unsafe.Pointer {
-	return raw.CFNumberFormatterCreateStringWithValue(allocator, formatter, numberType, valuePtr)
+func CFNumberFormatterCreateStringWithValue(allocator unsafe.Pointer, formatter unsafe.Pointer, numberType CFNumberType, valuePtr unsafe.Pointer) unsafe.Pointer {
+	return raw.CFNumberFormatterCreateStringWithValue(allocator, formatter, raw.CFNumberType(numberType), valuePtr)
 }
 
 // CFNumberFormatterGetDecimalInfoForCurrencyCode calls [raw.CFNumberFormatterGetDecimalInfoForCurrencyCode] (C function CFNumberFormatterGetDecimalInfoForCurrencyCode).
@@ -1921,8 +1921,8 @@ func CFNumberFormatterGetLocale(formatter unsafe.Pointer) unsafe.Pointer {
 }
 
 // CFNumberFormatterGetStyle calls [raw.CFNumberFormatterGetStyle] (C function CFNumberFormatterGetStyle).
-func CFNumberFormatterGetStyle(formatter unsafe.Pointer) raw.CFNumberFormatterStyle {
-	return raw.CFNumberFormatterGetStyle(formatter)
+func CFNumberFormatterGetStyle(formatter unsafe.Pointer) CFNumberFormatterStyle {
+	return CFNumberFormatterStyle(raw.CFNumberFormatterGetStyle(formatter))
 }
 
 // CFNumberFormatterGetTypeID calls [raw.CFNumberFormatterGetTypeID] (C function CFNumberFormatterGetTypeID).
@@ -1931,8 +1931,8 @@ func CFNumberFormatterGetTypeID() uint {
 }
 
 // CFNumberFormatterGetValueFromString calls [raw.CFNumberFormatterGetValueFromString] (C function CFNumberFormatterGetValueFromString).
-func CFNumberFormatterGetValueFromString(formatter unsafe.Pointer, string_ unsafe.Pointer, rangep *raw.CFRange, numberType raw.CFNumberType, valuePtr unsafe.Pointer) uint8 {
-	return raw.CFNumberFormatterGetValueFromString(formatter, string_, rangep, numberType, valuePtr)
+func CFNumberFormatterGetValueFromString(formatter unsafe.Pointer, string_ unsafe.Pointer, rangep *raw.CFRange, numberType CFNumberType, valuePtr unsafe.Pointer) uint8 {
+	return raw.CFNumberFormatterGetValueFromString(formatter, string_, rangep, raw.CFNumberType(numberType), valuePtr)
 }
 
 // CFNumberFormatterSetFormat calls [raw.CFNumberFormatterSetFormat] (C function CFNumberFormatterSetFormat).
@@ -1951,8 +1951,8 @@ func CFNumberGetByteSize(number unsafe.Pointer) int {
 }
 
 // CFNumberGetType calls [raw.CFNumberGetType] (C function CFNumberGetType).
-func CFNumberGetType(number unsafe.Pointer) raw.CFNumberType {
-	return raw.CFNumberGetType(number)
+func CFNumberGetType(number unsafe.Pointer) CFNumberType {
+	return CFNumberType(raw.CFNumberGetType(number))
 }
 
 // CFNumberGetTypeID calls [raw.CFNumberGetTypeID] (C function CFNumberGetTypeID).
@@ -1961,8 +1961,8 @@ func CFNumberGetTypeID() uint {
 }
 
 // CFNumberGetValue calls [raw.CFNumberGetValue] (C function CFNumberGetValue).
-func CFNumberGetValue(number unsafe.Pointer, theType raw.CFNumberType, valuePtr unsafe.Pointer) uint8 {
-	return raw.CFNumberGetValue(number, theType, valuePtr)
+func CFNumberGetValue(number unsafe.Pointer, theType CFNumberType, valuePtr unsafe.Pointer) uint8 {
+	return raw.CFNumberGetValue(number, raw.CFNumberType(theType), valuePtr)
 }
 
 // CFNumberIsFloatType calls [raw.CFNumberIsFloatType] (C function CFNumberIsFloatType).
@@ -2151,8 +2151,13 @@ func CFPropertyListCreateDeepCopy(allocator unsafe.Pointer, propertyList unsafe.
 }
 
 // CFPropertyListCreateFromStream calls [raw.CFPropertyListCreateFromStream] (C function CFPropertyListCreateFromStream).
-func CFPropertyListCreateFromStream(allocator unsafe.Pointer, stream unsafe.Pointer, streamLength int, mutabilityOption uint, format *raw.CFPropertyListFormat, errorString unsafe.Pointer) unsafe.Pointer {
-	return raw.CFPropertyListCreateFromStream(allocator, stream, streamLength, mutabilityOption, format, errorString)
+func CFPropertyListCreateFromStream(allocator unsafe.Pointer, stream unsafe.Pointer, streamLength int, mutabilityOption uint, format *CFPropertyListFormat, errorString unsafe.Pointer) unsafe.Pointer {
+	var _format raw.CFPropertyListFormat
+	_ret := raw.CFPropertyListCreateFromStream(allocator, stream, streamLength, mutabilityOption, &_format, errorString)
+	if format != nil {
+		*format = CFPropertyListFormat(_format)
+	}
+	return _ret
 }
 
 // CFPropertyListCreateFromXMLData calls [raw.CFPropertyListCreateFromXMLData] (C function CFPropertyListCreateFromXMLData).
@@ -2166,13 +2171,13 @@ func CFPropertyListCreateXMLData(allocator unsafe.Pointer, propertyList unsafe.P
 }
 
 // CFPropertyListIsValid calls [raw.CFPropertyListIsValid] (C function CFPropertyListIsValid).
-func CFPropertyListIsValid(plist unsafe.Pointer, format raw.CFPropertyListFormat) uint8 {
-	return raw.CFPropertyListIsValid(plist, format)
+func CFPropertyListIsValid(plist unsafe.Pointer, format CFPropertyListFormat) uint8 {
+	return raw.CFPropertyListIsValid(plist, raw.CFPropertyListFormat(format))
 }
 
 // CFPropertyListWriteToStream calls [raw.CFPropertyListWriteToStream] (C function CFPropertyListWriteToStream).
-func CFPropertyListWriteToStream(propertyList unsafe.Pointer, stream unsafe.Pointer, format raw.CFPropertyListFormat, errorString unsafe.Pointer) int {
-	return raw.CFPropertyListWriteToStream(propertyList, stream, format, errorString)
+func CFPropertyListWriteToStream(propertyList unsafe.Pointer, stream unsafe.Pointer, format CFPropertyListFormat, errorString unsafe.Pointer) int {
+	return raw.CFPropertyListWriteToStream(propertyList, stream, raw.CFPropertyListFormat(format), errorString)
 }
 
 // CFRangeMake calls [raw.CFRangeMake] (C function CFRangeMake).
@@ -2221,8 +2226,8 @@ func CFReadStreamGetError(stream unsafe.Pointer) raw.CFStreamError {
 }
 
 // CFReadStreamGetStatus calls [raw.CFReadStreamGetStatus] (C function CFReadStreamGetStatus).
-func CFReadStreamGetStatus(stream unsafe.Pointer) raw.CFStreamStatus {
-	return raw.CFReadStreamGetStatus(stream)
+func CFReadStreamGetStatus(stream unsafe.Pointer) CFStreamStatus {
+	return CFStreamStatus(raw.CFReadStreamGetStatus(stream))
 }
 
 // CFReadStreamGetTypeID calls [raw.CFReadStreamGetTypeID] (C function CFReadStreamGetTypeID).
@@ -2356,8 +2361,8 @@ func CFRunLoopObserverCreate(allocator unsafe.Pointer, activities uint, repeats 
 }
 
 // CFRunLoopObserverCreateWithHandler calls [raw.CFRunLoopObserverCreateWithHandler] (C function CFRunLoopObserverCreateWithHandler).
-func CFRunLoopObserverCreateWithHandler(allocator unsafe.Pointer, activities uint, repeats uint8, order int, block func(unsafe.Pointer, raw.CFRunLoopActivity)) unsafe.Pointer {
-	return raw.CFRunLoopObserverCreateWithHandler(allocator, activities, repeats, order, block)
+func CFRunLoopObserverCreateWithHandler(allocator unsafe.Pointer, activities uint, repeats uint8, order int, block func(unsafe.Pointer, CFRunLoopActivity)) unsafe.Pointer {
+	return raw.CFRunLoopObserverCreateWithHandler(allocator, activities, repeats, order, func(_a0 unsafe.Pointer, _a1 raw.CFRunLoopActivity) { block(_a0, CFRunLoopActivity(_a1)) })
 }
 
 // CFRunLoopObserverDoesRepeat calls [raw.CFRunLoopObserverDoesRepeat] (C function CFRunLoopObserverDoesRepeat).
@@ -2421,8 +2426,8 @@ func CFRunLoopRun() {
 }
 
 // CFRunLoopRunInMode calls [raw.CFRunLoopRunInMode] (C function CFRunLoopRunInMode).
-func CFRunLoopRunInMode(mode unsafe.Pointer, seconds float64, returnAfterSourceHandled uint8) raw.CFRunLoopRunResult {
-	return raw.CFRunLoopRunInMode(mode, seconds, returnAfterSourceHandled)
+func CFRunLoopRunInMode(mode unsafe.Pointer, seconds float64, returnAfterSourceHandled uint8) CFRunLoopRunResult {
+	return CFRunLoopRunResult(raw.CFRunLoopRunInMode(mode, seconds, returnAfterSourceHandled))
 }
 
 // CFRunLoopSourceCreate calls [raw.CFRunLoopSourceCreate] (C function CFRunLoopSourceCreate).
@@ -2631,8 +2636,8 @@ func CFShowStr(str unsafe.Pointer) {
 }
 
 // CFSocketConnectToAddress calls [raw.CFSocketConnectToAddress] (C function CFSocketConnectToAddress).
-func CFSocketConnectToAddress(s unsafe.Pointer, address unsafe.Pointer, timeout float64) raw.CFSocketError {
-	return raw.CFSocketConnectToAddress(s, address, timeout)
+func CFSocketConnectToAddress(s unsafe.Pointer, address unsafe.Pointer, timeout float64) CFSocketError {
+	return CFSocketError(raw.CFSocketConnectToAddress(s, address, timeout))
 }
 
 // CFSocketCopyAddress calls [raw.CFSocketCopyAddress] (C function CFSocketCopyAddress).
@@ -2646,13 +2651,13 @@ func CFSocketCopyPeerAddress(s unsafe.Pointer) unsafe.Pointer {
 }
 
 // CFSocketCopyRegisteredSocketSignature calls [raw.CFSocketCopyRegisteredSocketSignature] (C function CFSocketCopyRegisteredSocketSignature).
-func CFSocketCopyRegisteredSocketSignature(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, signature *raw.CFSocketSignature, nameServerAddress unsafe.Pointer) raw.CFSocketError {
-	return raw.CFSocketCopyRegisteredSocketSignature(nameServerSignature, timeout, name, signature, nameServerAddress)
+func CFSocketCopyRegisteredSocketSignature(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, signature *raw.CFSocketSignature, nameServerAddress unsafe.Pointer) CFSocketError {
+	return CFSocketError(raw.CFSocketCopyRegisteredSocketSignature(nameServerSignature, timeout, name, signature, nameServerAddress))
 }
 
 // CFSocketCopyRegisteredValue calls [raw.CFSocketCopyRegisteredValue] (C function CFSocketCopyRegisteredValue).
-func CFSocketCopyRegisteredValue(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, value unsafe.Pointer, nameServerAddress unsafe.Pointer) raw.CFSocketError {
-	return raw.CFSocketCopyRegisteredValue(nameServerSignature, timeout, name, value, nameServerAddress)
+func CFSocketCopyRegisteredValue(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, value unsafe.Pointer, nameServerAddress unsafe.Pointer) CFSocketError {
+	return CFSocketError(raw.CFSocketCopyRegisteredValue(nameServerSignature, timeout, name, value, nameServerAddress))
 }
 
 // CFSocketCreate calls [raw.CFSocketCreate] (C function CFSocketCreate).
@@ -2726,23 +2731,23 @@ func CFSocketIsValid(s unsafe.Pointer) uint8 {
 }
 
 // CFSocketRegisterSocketSignature calls [raw.CFSocketRegisterSocketSignature] (C function CFSocketRegisterSocketSignature).
-func CFSocketRegisterSocketSignature(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, signature *raw.CFSocketSignature) raw.CFSocketError {
-	return raw.CFSocketRegisterSocketSignature(nameServerSignature, timeout, name, signature)
+func CFSocketRegisterSocketSignature(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, signature *raw.CFSocketSignature) CFSocketError {
+	return CFSocketError(raw.CFSocketRegisterSocketSignature(nameServerSignature, timeout, name, signature))
 }
 
 // CFSocketRegisterValue calls [raw.CFSocketRegisterValue] (C function CFSocketRegisterValue).
-func CFSocketRegisterValue(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, value unsafe.Pointer) raw.CFSocketError {
-	return raw.CFSocketRegisterValue(nameServerSignature, timeout, name, value)
+func CFSocketRegisterValue(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer, value unsafe.Pointer) CFSocketError {
+	return CFSocketError(raw.CFSocketRegisterValue(nameServerSignature, timeout, name, value))
 }
 
 // CFSocketSendData calls [raw.CFSocketSendData] (C function CFSocketSendData).
-func CFSocketSendData(s unsafe.Pointer, address unsafe.Pointer, data unsafe.Pointer, timeout float64) raw.CFSocketError {
-	return raw.CFSocketSendData(s, address, data, timeout)
+func CFSocketSendData(s unsafe.Pointer, address unsafe.Pointer, data unsafe.Pointer, timeout float64) CFSocketError {
+	return CFSocketError(raw.CFSocketSendData(s, address, data, timeout))
 }
 
 // CFSocketSetAddress calls [raw.CFSocketSetAddress] (C function CFSocketSetAddress).
-func CFSocketSetAddress(s unsafe.Pointer, address unsafe.Pointer) raw.CFSocketError {
-	return raw.CFSocketSetAddress(s, address)
+func CFSocketSetAddress(s unsafe.Pointer, address unsafe.Pointer) CFSocketError {
+	return CFSocketError(raw.CFSocketSetAddress(s, address))
 }
 
 // CFSocketSetDefaultNameRegistryPortNumber calls [raw.CFSocketSetDefaultNameRegistryPortNumber] (C function CFSocketSetDefaultNameRegistryPortNumber).
@@ -2756,8 +2761,8 @@ func CFSocketSetSocketFlags(s unsafe.Pointer, flags uint) {
 }
 
 // CFSocketUnregister calls [raw.CFSocketUnregister] (C function CFSocketUnregister).
-func CFSocketUnregister(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer) raw.CFSocketError {
-	return raw.CFSocketUnregister(nameServerSignature, timeout, name)
+func CFSocketUnregister(nameServerSignature *raw.CFSocketSignature, timeout float64, name unsafe.Pointer) CFSocketError {
+	return CFSocketError(raw.CFSocketUnregister(nameServerSignature, timeout, name))
 }
 
 // CFStreamCreateBoundPair calls [raw.CFStreamCreateBoundPair] (C function CFStreamCreateBoundPair).
@@ -2816,18 +2821,18 @@ func CFStringCapitalize(theString unsafe.Pointer, locale unsafe.Pointer) {
 }
 
 // CFStringCompare calls [raw.CFStringCompare] (C function CFStringCompare).
-func CFStringCompare(theString1 unsafe.Pointer, theString2 unsafe.Pointer, compareOptions raw.CFStringCompareFlags) raw.CFComparisonResult {
-	return raw.CFStringCompare(theString1, theString2, compareOptions)
+func CFStringCompare(theString1 unsafe.Pointer, theString2 unsafe.Pointer, compareOptions CFStringCompareFlags) CFComparisonResult {
+	return CFComparisonResult(raw.CFStringCompare(theString1, theString2, raw.CFStringCompareFlags(compareOptions)))
 }
 
 // CFStringCompareWithOptions calls [raw.CFStringCompareWithOptions] (C function CFStringCompareWithOptions).
-func CFStringCompareWithOptions(theString1 unsafe.Pointer, theString2 unsafe.Pointer, rangeToCompare raw.CFRange, compareOptions raw.CFStringCompareFlags) raw.CFComparisonResult {
-	return raw.CFStringCompareWithOptions(theString1, theString2, rangeToCompare, compareOptions)
+func CFStringCompareWithOptions(theString1 unsafe.Pointer, theString2 unsafe.Pointer, rangeToCompare raw.CFRange, compareOptions CFStringCompareFlags) CFComparisonResult {
+	return CFComparisonResult(raw.CFStringCompareWithOptions(theString1, theString2, rangeToCompare, raw.CFStringCompareFlags(compareOptions)))
 }
 
 // CFStringCompareWithOptionsAndLocale calls [raw.CFStringCompareWithOptionsAndLocale] (C function CFStringCompareWithOptionsAndLocale).
-func CFStringCompareWithOptionsAndLocale(theString1 unsafe.Pointer, theString2 unsafe.Pointer, rangeToCompare raw.CFRange, compareOptions raw.CFStringCompareFlags, locale unsafe.Pointer) raw.CFComparisonResult {
-	return raw.CFStringCompareWithOptionsAndLocale(theString1, theString2, rangeToCompare, compareOptions, locale)
+func CFStringCompareWithOptionsAndLocale(theString1 unsafe.Pointer, theString2 unsafe.Pointer, rangeToCompare raw.CFRange, compareOptions CFStringCompareFlags, locale unsafe.Pointer) CFComparisonResult {
+	return CFComparisonResult(raw.CFStringCompareWithOptionsAndLocale(theString1, theString2, rangeToCompare, raw.CFStringCompareFlags(compareOptions), locale))
 }
 
 // CFStringConvertEncodingToIANACharSetName calls [raw.CFStringConvertEncodingToIANACharSetName] (C function CFStringConvertEncodingToIANACharSetName).
@@ -2866,8 +2871,8 @@ func CFStringCreateArrayBySeparatingStrings(alloc unsafe.Pointer, theString unsa
 }
 
 // CFStringCreateArrayWithFindResults calls [raw.CFStringCreateArrayWithFindResults] (C function CFStringCreateArrayWithFindResults).
-func CFStringCreateArrayWithFindResults(alloc unsafe.Pointer, theString unsafe.Pointer, stringToFind unsafe.Pointer, rangeToSearch raw.CFRange, compareOptions raw.CFStringCompareFlags) unsafe.Pointer {
-	return raw.CFStringCreateArrayWithFindResults(alloc, theString, stringToFind, rangeToSearch, compareOptions)
+func CFStringCreateArrayWithFindResults(alloc unsafe.Pointer, theString unsafe.Pointer, stringToFind unsafe.Pointer, rangeToSearch raw.CFRange, compareOptions CFStringCompareFlags) unsafe.Pointer {
+	return raw.CFStringCreateArrayWithFindResults(alloc, theString, stringToFind, rangeToSearch, raw.CFStringCompareFlags(compareOptions))
 }
 
 // CFStringCreateByCombiningStrings calls [raw.CFStringCreateByCombiningStrings] (C function CFStringCreateByCombiningStrings).
@@ -2971,33 +2976,33 @@ func CFStringDelete(theString unsafe.Pointer, range_ raw.CFRange) {
 }
 
 // CFStringFind calls [raw.CFStringFind] (C function CFStringFind).
-func CFStringFind(theString unsafe.Pointer, stringToFind unsafe.Pointer, compareOptions raw.CFStringCompareFlags) raw.CFRange {
-	return raw.CFStringFind(theString, stringToFind, compareOptions)
+func CFStringFind(theString unsafe.Pointer, stringToFind unsafe.Pointer, compareOptions CFStringCompareFlags) raw.CFRange {
+	return raw.CFStringFind(theString, stringToFind, raw.CFStringCompareFlags(compareOptions))
 }
 
 // CFStringFindAndReplace calls [raw.CFStringFindAndReplace] (C function CFStringFindAndReplace).
-func CFStringFindAndReplace(theString unsafe.Pointer, stringToFind unsafe.Pointer, replacementString unsafe.Pointer, rangeToSearch raw.CFRange, compareOptions raw.CFStringCompareFlags) int {
-	return raw.CFStringFindAndReplace(theString, stringToFind, replacementString, rangeToSearch, compareOptions)
+func CFStringFindAndReplace(theString unsafe.Pointer, stringToFind unsafe.Pointer, replacementString unsafe.Pointer, rangeToSearch raw.CFRange, compareOptions CFStringCompareFlags) int {
+	return raw.CFStringFindAndReplace(theString, stringToFind, replacementString, rangeToSearch, raw.CFStringCompareFlags(compareOptions))
 }
 
 // CFStringFindCharacterFromSet calls [raw.CFStringFindCharacterFromSet] (C function CFStringFindCharacterFromSet).
-func CFStringFindCharacterFromSet(theString unsafe.Pointer, theSet unsafe.Pointer, rangeToSearch raw.CFRange, searchOptions raw.CFStringCompareFlags, result *raw.CFRange) uint8 {
-	return raw.CFStringFindCharacterFromSet(theString, theSet, rangeToSearch, searchOptions, result)
+func CFStringFindCharacterFromSet(theString unsafe.Pointer, theSet unsafe.Pointer, rangeToSearch raw.CFRange, searchOptions CFStringCompareFlags, result *raw.CFRange) uint8 {
+	return raw.CFStringFindCharacterFromSet(theString, theSet, rangeToSearch, raw.CFStringCompareFlags(searchOptions), result)
 }
 
 // CFStringFindWithOptions calls [raw.CFStringFindWithOptions] (C function CFStringFindWithOptions).
-func CFStringFindWithOptions(theString unsafe.Pointer, stringToFind unsafe.Pointer, rangeToSearch raw.CFRange, searchOptions raw.CFStringCompareFlags, result *raw.CFRange) uint8 {
-	return raw.CFStringFindWithOptions(theString, stringToFind, rangeToSearch, searchOptions, result)
+func CFStringFindWithOptions(theString unsafe.Pointer, stringToFind unsafe.Pointer, rangeToSearch raw.CFRange, searchOptions CFStringCompareFlags, result *raw.CFRange) uint8 {
+	return raw.CFStringFindWithOptions(theString, stringToFind, rangeToSearch, raw.CFStringCompareFlags(searchOptions), result)
 }
 
 // CFStringFindWithOptionsAndLocale calls [raw.CFStringFindWithOptionsAndLocale] (C function CFStringFindWithOptionsAndLocale).
-func CFStringFindWithOptionsAndLocale(theString unsafe.Pointer, stringToFind unsafe.Pointer, rangeToSearch raw.CFRange, searchOptions raw.CFStringCompareFlags, locale unsafe.Pointer, result *raw.CFRange) uint8 {
-	return raw.CFStringFindWithOptionsAndLocale(theString, stringToFind, rangeToSearch, searchOptions, locale, result)
+func CFStringFindWithOptionsAndLocale(theString unsafe.Pointer, stringToFind unsafe.Pointer, rangeToSearch raw.CFRange, searchOptions CFStringCompareFlags, locale unsafe.Pointer, result *raw.CFRange) uint8 {
+	return raw.CFStringFindWithOptionsAndLocale(theString, stringToFind, rangeToSearch, raw.CFStringCompareFlags(searchOptions), locale, result)
 }
 
 // CFStringFold calls [raw.CFStringFold] (C function CFStringFold).
-func CFStringFold(theString unsafe.Pointer, theFlags raw.CFStringCompareFlags, theLocale unsafe.Pointer) {
-	raw.CFStringFold(theString, theFlags, theLocale)
+func CFStringFold(theString unsafe.Pointer, theFlags CFStringCompareFlags, theLocale unsafe.Pointer) {
+	raw.CFStringFold(theString, raw.CFStringCompareFlags(theFlags), theLocale)
 }
 
 // CFStringGetBytes calls [raw.CFStringGetBytes] (C function CFStringGetBytes).
@@ -3186,8 +3191,8 @@ func CFStringLowercase(theString unsafe.Pointer, locale unsafe.Pointer) {
 }
 
 // CFStringNormalize calls [raw.CFStringNormalize] (C function CFStringNormalize).
-func CFStringNormalize(theString unsafe.Pointer, theForm raw.CFStringNormalizationForm) {
-	raw.CFStringNormalize(theString, theForm)
+func CFStringNormalize(theString unsafe.Pointer, theForm CFStringNormalizationForm) {
+	raw.CFStringNormalize(theString, raw.CFStringNormalizationForm(theForm))
 }
 
 // CFStringPad calls [raw.CFStringPad] (C function CFStringPad).
@@ -3211,8 +3216,8 @@ func CFStringSetExternalCharactersNoCopy(theString unsafe.Pointer, chars *uint16
 }
 
 // CFStringTokenizerAdvanceToNextToken calls [raw.CFStringTokenizerAdvanceToNextToken] (C function CFStringTokenizerAdvanceToNextToken).
-func CFStringTokenizerAdvanceToNextToken(tokenizer unsafe.Pointer) raw.CFStringTokenizerTokenType {
-	return raw.CFStringTokenizerAdvanceToNextToken(tokenizer)
+func CFStringTokenizerAdvanceToNextToken(tokenizer unsafe.Pointer) CFStringTokenizerTokenType {
+	return CFStringTokenizerTokenType(raw.CFStringTokenizerAdvanceToNextToken(tokenizer))
 }
 
 // CFStringTokenizerCopyBestStringLanguage calls [raw.CFStringTokenizerCopyBestStringLanguage] (C function CFStringTokenizerCopyBestStringLanguage).
@@ -3246,8 +3251,8 @@ func CFStringTokenizerGetTypeID() uint {
 }
 
 // CFStringTokenizerGoToTokenAtIndex calls [raw.CFStringTokenizerGoToTokenAtIndex] (C function CFStringTokenizerGoToTokenAtIndex).
-func CFStringTokenizerGoToTokenAtIndex(tokenizer unsafe.Pointer, index int) raw.CFStringTokenizerTokenType {
-	return raw.CFStringTokenizerGoToTokenAtIndex(tokenizer, index)
+func CFStringTokenizerGoToTokenAtIndex(tokenizer unsafe.Pointer, index int) CFStringTokenizerTokenType {
+	return CFStringTokenizerTokenType(raw.CFStringTokenizerGoToTokenAtIndex(tokenizer, index))
 }
 
 // CFStringTokenizerSetString calls [raw.CFStringTokenizerSetString] (C function CFStringTokenizerSetString).
@@ -3371,8 +3376,8 @@ func CFTimeZoneCopyKnownNames() unsafe.Pointer {
 }
 
 // CFTimeZoneCopyLocalizedName calls [raw.CFTimeZoneCopyLocalizedName] (C function CFTimeZoneCopyLocalizedName).
-func CFTimeZoneCopyLocalizedName(tz unsafe.Pointer, style raw.CFTimeZoneNameStyle, locale unsafe.Pointer) unsafe.Pointer {
-	return raw.CFTimeZoneCopyLocalizedName(tz, style, locale)
+func CFTimeZoneCopyLocalizedName(tz unsafe.Pointer, style CFTimeZoneNameStyle, locale unsafe.Pointer) unsafe.Pointer {
+	return raw.CFTimeZoneCopyLocalizedName(tz, raw.CFTimeZoneNameStyle(style), locale)
 }
 
 // CFTimeZoneCopySystem calls [raw.CFTimeZoneCopySystem] (C function CFTimeZoneCopySystem).
@@ -3556,8 +3561,8 @@ func CFURLCopyAbsoluteURL(relativeURL unsafe.Pointer) unsafe.Pointer {
 }
 
 // CFURLCopyFileSystemPath calls [raw.CFURLCopyFileSystemPath] (C function CFURLCopyFileSystemPath).
-func CFURLCopyFileSystemPath(anURL unsafe.Pointer, pathStyle raw.CFURLPathStyle) unsafe.Pointer {
-	return raw.CFURLCopyFileSystemPath(anURL, pathStyle)
+func CFURLCopyFileSystemPath(anURL unsafe.Pointer, pathStyle CFURLPathStyle) unsafe.Pointer {
+	return raw.CFURLCopyFileSystemPath(anURL, raw.CFURLPathStyle(pathStyle))
 }
 
 // CFURLCopyFragment calls [raw.CFURLCopyFragment] (C function CFURLCopyFragment).
@@ -3716,13 +3721,13 @@ func CFURLCreateWithBytes(allocator unsafe.Pointer, uRLBytes *uint8, length int,
 }
 
 // CFURLCreateWithFileSystemPath calls [raw.CFURLCreateWithFileSystemPath] (C function CFURLCreateWithFileSystemPath).
-func CFURLCreateWithFileSystemPath(allocator unsafe.Pointer, filePath unsafe.Pointer, pathStyle raw.CFURLPathStyle, isDirectory uint8) unsafe.Pointer {
-	return raw.CFURLCreateWithFileSystemPath(allocator, filePath, pathStyle, isDirectory)
+func CFURLCreateWithFileSystemPath(allocator unsafe.Pointer, filePath unsafe.Pointer, pathStyle CFURLPathStyle, isDirectory uint8) unsafe.Pointer {
+	return raw.CFURLCreateWithFileSystemPath(allocator, filePath, raw.CFURLPathStyle(pathStyle), isDirectory)
 }
 
 // CFURLCreateWithFileSystemPathRelativeToBase calls [raw.CFURLCreateWithFileSystemPathRelativeToBase] (C function CFURLCreateWithFileSystemPathRelativeToBase).
-func CFURLCreateWithFileSystemPathRelativeToBase(allocator unsafe.Pointer, filePath unsafe.Pointer, pathStyle raw.CFURLPathStyle, isDirectory uint8, baseURL unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLCreateWithFileSystemPathRelativeToBase(allocator, filePath, pathStyle, isDirectory, baseURL)
+func CFURLCreateWithFileSystemPathRelativeToBase(allocator unsafe.Pointer, filePath unsafe.Pointer, pathStyle CFURLPathStyle, isDirectory uint8, baseURL unsafe.Pointer) unsafe.Pointer {
+	return raw.CFURLCreateWithFileSystemPathRelativeToBase(allocator, filePath, raw.CFURLPathStyle(pathStyle), isDirectory, baseURL)
 }
 
 // CFURLCreateWithString calls [raw.CFURLCreateWithString] (C function CFURLCreateWithString).
@@ -3736,13 +3741,13 @@ func CFURLDestroyResource(url unsafe.Pointer, errorCode *int) uint8 {
 }
 
 // CFURLEnumeratorCreateForDirectoryURL calls [raw.CFURLEnumeratorCreateForDirectoryURL] (C function CFURLEnumeratorCreateForDirectoryURL).
-func CFURLEnumeratorCreateForDirectoryURL(alloc unsafe.Pointer, directoryURL unsafe.Pointer, option raw.CFURLEnumeratorOptions, propertyKeys unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLEnumeratorCreateForDirectoryURL(alloc, directoryURL, option, propertyKeys)
+func CFURLEnumeratorCreateForDirectoryURL(alloc unsafe.Pointer, directoryURL unsafe.Pointer, option CFURLEnumeratorOptions, propertyKeys unsafe.Pointer) unsafe.Pointer {
+	return raw.CFURLEnumeratorCreateForDirectoryURL(alloc, directoryURL, raw.CFURLEnumeratorOptions(option), propertyKeys)
 }
 
 // CFURLEnumeratorCreateForMountedVolumes calls [raw.CFURLEnumeratorCreateForMountedVolumes] (C function CFURLEnumeratorCreateForMountedVolumes).
-func CFURLEnumeratorCreateForMountedVolumes(alloc unsafe.Pointer, option raw.CFURLEnumeratorOptions, propertyKeys unsafe.Pointer) unsafe.Pointer {
-	return raw.CFURLEnumeratorCreateForMountedVolumes(alloc, option, propertyKeys)
+func CFURLEnumeratorCreateForMountedVolumes(alloc unsafe.Pointer, option CFURLEnumeratorOptions, propertyKeys unsafe.Pointer) unsafe.Pointer {
+	return raw.CFURLEnumeratorCreateForMountedVolumes(alloc, raw.CFURLEnumeratorOptions(option), propertyKeys)
 }
 
 // CFURLEnumeratorGetDescendentLevel calls [raw.CFURLEnumeratorGetDescendentLevel] (C function CFURLEnumeratorGetDescendentLevel).
@@ -3771,8 +3776,8 @@ func CFURLGetBaseURL(anURL unsafe.Pointer) unsafe.Pointer {
 }
 
 // CFURLGetByteRangeForComponent calls [raw.CFURLGetByteRangeForComponent] (C function CFURLGetByteRangeForComponent).
-func CFURLGetByteRangeForComponent(url unsafe.Pointer, component raw.CFURLComponentType, rangeIncludingSeparators *raw.CFRange) raw.CFRange {
-	return raw.CFURLGetByteRangeForComponent(url, component, rangeIncludingSeparators)
+func CFURLGetByteRangeForComponent(url unsafe.Pointer, component CFURLComponentType, rangeIncludingSeparators *raw.CFRange) raw.CFRange {
+	return raw.CFURLGetByteRangeForComponent(url, raw.CFURLComponentType(component), rangeIncludingSeparators)
 }
 
 // CFURLGetBytes calls [raw.CFURLGetBytes] (C function CFURLGetBytes).
@@ -3986,8 +3991,8 @@ func CFWriteStreamGetError(stream unsafe.Pointer) raw.CFStreamError {
 }
 
 // CFWriteStreamGetStatus calls [raw.CFWriteStreamGetStatus] (C function CFWriteStreamGetStatus).
-func CFWriteStreamGetStatus(stream unsafe.Pointer) raw.CFStreamStatus {
-	return raw.CFWriteStreamGetStatus(stream)
+func CFWriteStreamGetStatus(stream unsafe.Pointer) CFStreamStatus {
+	return CFStreamStatus(raw.CFWriteStreamGetStatus(stream))
 }
 
 // CFWriteStreamGetTypeID calls [raw.CFWriteStreamGetTypeID] (C function CFWriteStreamGetTypeID).
@@ -4041,8 +4046,8 @@ func CFXMLCreateStringByUnescapingEntities(allocator unsafe.Pointer, string_ uns
 }
 
 // CFXMLNodeCreate calls [raw.CFXMLNodeCreate] (C function CFXMLNodeCreate).
-func CFXMLNodeCreate(alloc unsafe.Pointer, xmlType raw.CFXMLNodeTypeCode, dataString unsafe.Pointer, additionalInfoPtr unsafe.Pointer, version int) unsafe.Pointer {
-	return raw.CFXMLNodeCreate(alloc, xmlType, dataString, additionalInfoPtr, version)
+func CFXMLNodeCreate(alloc unsafe.Pointer, xmlType CFXMLNodeTypeCode, dataString unsafe.Pointer, additionalInfoPtr unsafe.Pointer, version int) unsafe.Pointer {
+	return raw.CFXMLNodeCreate(alloc, raw.CFXMLNodeTypeCode(xmlType), dataString, additionalInfoPtr, version)
 }
 
 // CFXMLNodeCreateCopy calls [raw.CFXMLNodeCreateCopy] (C function CFXMLNodeCreateCopy).
@@ -4061,8 +4066,8 @@ func CFXMLNodeGetString(node unsafe.Pointer) unsafe.Pointer {
 }
 
 // CFXMLNodeGetTypeCode calls [raw.CFXMLNodeGetTypeCode] (C function CFXMLNodeGetTypeCode).
-func CFXMLNodeGetTypeCode(node unsafe.Pointer) raw.CFXMLNodeTypeCode {
-	return raw.CFXMLNodeGetTypeCode(node)
+func CFXMLNodeGetTypeCode(node unsafe.Pointer) CFXMLNodeTypeCode {
+	return CFXMLNodeTypeCode(raw.CFXMLNodeGetTypeCode(node))
 }
 
 // CFXMLNodeGetTypeID calls [raw.CFXMLNodeGetTypeID] (C function CFXMLNodeGetTypeID).
@@ -4076,8 +4081,8 @@ func CFXMLNodeGetVersion(node unsafe.Pointer) int {
 }
 
 // CFXMLParserAbort calls [raw.CFXMLParserAbort] (C function CFXMLParserAbort).
-func CFXMLParserAbort(parser unsafe.Pointer, errorCode raw.CFXMLParserStatusCode, errorDescription unsafe.Pointer) {
-	raw.CFXMLParserAbort(parser, errorCode, errorDescription)
+func CFXMLParserAbort(parser unsafe.Pointer, errorCode CFXMLParserStatusCode, errorDescription unsafe.Pointer) {
+	raw.CFXMLParserAbort(parser, raw.CFXMLParserStatusCode(errorCode), errorDescription)
 }
 
 // CFXMLParserCopyErrorDescription calls [raw.CFXMLParserCopyErrorDescription] (C function CFXMLParserCopyErrorDescription).
@@ -4126,8 +4131,8 @@ func CFXMLParserGetSourceURL(parser unsafe.Pointer) unsafe.Pointer {
 }
 
 // CFXMLParserGetStatusCode calls [raw.CFXMLParserGetStatusCode] (C function CFXMLParserGetStatusCode).
-func CFXMLParserGetStatusCode(parser unsafe.Pointer) raw.CFXMLParserStatusCode {
-	return raw.CFXMLParserGetStatusCode(parser)
+func CFXMLParserGetStatusCode(parser unsafe.Pointer) CFXMLParserStatusCode {
+	return CFXMLParserStatusCode(raw.CFXMLParserGetStatusCode(parser))
 }
 
 // CFXMLParserGetTypeID calls [raw.CFXMLParserGetTypeID] (C function CFXMLParserGetTypeID).

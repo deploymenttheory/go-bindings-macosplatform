@@ -56,28 +56,28 @@ func NewSoundEventWithEngineAssetIdentifierError(engine *raw.PHASEEngine, assetI
 }
 
 // PrepareWithCompletion calls the underlying PrepareWithCompletion.
-func (x *SoundEvent) PrepareWithCompletion(handler func(raw.PHASESoundEventPrepareHandlerReason)) {
-	x.inner.PrepareWithCompletion(handler)
+func (x *SoundEvent) PrepareWithCompletion(handler func(PHASESoundEventPrepareHandlerReason)) {
+	x.inner.PrepareWithCompletion(func(_a0 raw.PHASESoundEventPrepareHandlerReason) { handler(PHASESoundEventPrepareHandlerReason(_a0)) })
 }
 
 // StartWithCompletion calls the underlying StartWithCompletion.
-func (x *SoundEvent) StartWithCompletion(handler func(raw.PHASESoundEventStartHandlerReason)) {
-	x.inner.StartWithCompletion(handler)
+func (x *SoundEvent) StartWithCompletion(handler func(PHASESoundEventStartHandlerReason)) {
+	x.inner.StartWithCompletion(func(_a0 raw.PHASESoundEventStartHandlerReason) { handler(PHASESoundEventStartHandlerReason(_a0)) })
 }
 
 // StartAtTimeCompletion calls the underlying StartAtTimeCompletion.
-func (x *SoundEvent) StartAtTimeCompletion(when *avfaudio.AVAudioTime, handler func(raw.PHASESoundEventStartHandlerReason)) {
-	x.inner.StartAtTimeCompletion(when, handler)
+func (x *SoundEvent) StartAtTimeCompletion(when *avfaudio.AVAudioTime, handler func(PHASESoundEventStartHandlerReason)) {
+	x.inner.StartAtTimeCompletion(when, func(_a0 raw.PHASESoundEventStartHandlerReason) { handler(PHASESoundEventStartHandlerReason(_a0)) })
 }
 
 // SeekToTimeCompletion calls the underlying SeekToTimeCompletion.
-func (x *SoundEvent) SeekToTimeCompletion(time_ float64, handler func(raw.PHASESoundEventSeekHandlerReason)) {
-	x.inner.SeekToTimeCompletion(time_, handler)
+func (x *SoundEvent) SeekToTimeCompletion(time_ float64, handler func(PHASESoundEventSeekHandlerReason)) {
+	x.inner.SeekToTimeCompletion(time_, func(_a0 raw.PHASESoundEventSeekHandlerReason) { handler(PHASESoundEventSeekHandlerReason(_a0)) })
 }
 
 // SeekToTimeResumeAtEngineTimeCompletion calls the underlying SeekToTimeResumeAtEngineTimeCompletion.
-func (x *SoundEvent) SeekToTimeResumeAtEngineTimeCompletion(time_ float64, engineTime *avfaudio.AVAudioTime, handler func(raw.PHASESoundEventSeekHandlerReason)) {
-	x.inner.SeekToTimeResumeAtEngineTimeCompletion(time_, engineTime, handler)
+func (x *SoundEvent) SeekToTimeResumeAtEngineTimeCompletion(time_ float64, engineTime *avfaudio.AVAudioTime, handler func(PHASESoundEventSeekHandlerReason)) {
+	x.inner.SeekToTimeResumeAtEngineTimeCompletion(time_, engineTime, func(_a0 raw.PHASESoundEventSeekHandlerReason) { handler(PHASESoundEventSeekHandlerReason(_a0)) })
 }
 
 // Pause calls the underlying Pause.
@@ -101,13 +101,13 @@ func (x *SoundEvent) StopAndInvalidate() {
 }
 
 // RenderingState calls the underlying RenderingState.
-func (x *SoundEvent) RenderingState() raw.PHASERenderingState {
-	return x.inner.RenderingState()
+func (x *SoundEvent) RenderingState() PHASERenderingState {
+	return PHASERenderingState(x.inner.RenderingState())
 }
 
 // PrepareState calls the underlying PrepareState.
-func (x *SoundEvent) PrepareState() raw.PHASESoundEventPrepareState {
-	return x.inner.PrepareState()
+func (x *SoundEvent) PrepareState() PHASESoundEventPrepareState {
+	return PHASESoundEventPrepareState(x.inner.PrepareState())
 }
 
 // MetaParameters calls the underlying MetaParameters.
@@ -138,17 +138,17 @@ func (x *SoundEvent) IsIndefinite() bool {
 // SoundEventable is the interface implemented by [SoundEvent], for mocking and DI.
 type SoundEventable interface {
 	Unwrap() *raw.PHASESoundEvent
-	PrepareWithCompletion(handler func(raw.PHASESoundEventPrepareHandlerReason))
-	StartWithCompletion(handler func(raw.PHASESoundEventStartHandlerReason))
-	StartAtTimeCompletion(when *avfaudio.AVAudioTime, handler func(raw.PHASESoundEventStartHandlerReason))
-	SeekToTimeCompletion(time_ float64, handler func(raw.PHASESoundEventSeekHandlerReason))
-	SeekToTimeResumeAtEngineTimeCompletion(time_ float64, engineTime *avfaudio.AVAudioTime, handler func(raw.PHASESoundEventSeekHandlerReason))
+	PrepareWithCompletion(handler func(PHASESoundEventPrepareHandlerReason))
+	StartWithCompletion(handler func(PHASESoundEventStartHandlerReason))
+	StartAtTimeCompletion(when *avfaudio.AVAudioTime, handler func(PHASESoundEventStartHandlerReason))
+	SeekToTimeCompletion(time_ float64, handler func(PHASESoundEventSeekHandlerReason))
+	SeekToTimeResumeAtEngineTimeCompletion(time_ float64, engineTime *avfaudio.AVAudioTime, handler func(PHASESoundEventSeekHandlerReason))
 	Pause()
 	Resume()
 	ResumeAtTime(time_ *avfaudio.AVAudioTime)
 	StopAndInvalidate()
-	RenderingState() raw.PHASERenderingState
-	PrepareState() raw.PHASESoundEventPrepareState
+	RenderingState() PHASERenderingState
+	PrepareState() PHASESoundEventPrepareState
 	MetaParameters() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEMetaParameter]
 	Mixers() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEMixer]
 	PushStreamNodes() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEPushStreamNode]

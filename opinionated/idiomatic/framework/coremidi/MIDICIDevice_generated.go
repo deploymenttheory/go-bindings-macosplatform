@@ -81,8 +81,8 @@ func (x *CIDevice) MaxPropertyExchangeRequests() uint {
 }
 
 // DeviceType calls the underlying DeviceType.
-func (x *CIDevice) DeviceType() raw.MIDICIDeviceType {
-	return x.inner.DeviceType()
+func (x *CIDevice) DeviceType() MIDICIDeviceType {
+	return MIDICIDeviceType(x.inner.DeviceType())
 }
 
 // Profiles returns the collection as a Go slice.
@@ -107,7 +107,7 @@ type CIDeviceable interface {
 	SupportsProcessInquiry() bool
 	MaxSysExSize() uint
 	MaxPropertyExchangeRequests() uint
-	DeviceType() raw.MIDICIDeviceType
+	DeviceType() MIDICIDeviceType
 	Profiles() []*UMPCIProfile
 }
 

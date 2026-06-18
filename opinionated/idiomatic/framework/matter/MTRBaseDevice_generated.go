@@ -100,13 +100,13 @@ func (x *MTRBaseDevice) SubscribeToEventsWithEndpointIDClusterIDEventIDParamsQue
 }
 
 // DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ raw.MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error) {
+func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error) {
 	type _result struct {
 		val *foundation.NSURL
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.DownloadLogOfTypeTimeoutQueueCompletion(type_, timeout, queue, func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
+	x.inner.DownloadLogOfTypeTimeoutQueueCompletion(raw.MTRDiagnosticLogType(type_), timeout, queue, func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
 		var _o _result
 		if uintptr(_p1) != 0 {
 			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
@@ -124,8 +124,8 @@ func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Cont
 }
 
 // SessionTransportType calls the underlying SessionTransportType.
-func (x *MTRBaseDevice) SessionTransportType() raw.MTRTransportType {
-	return x.inner.SessionTransportType()
+func (x *MTRBaseDevice) SessionTransportType() MTRTransportType {
+	return MTRTransportType(x.inner.SessionTransportType())
 }
 
 // SubscribeWithQueueMinIntervalMaxIntervalParamsCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled calls the underlying SubscribeWithQueueMinIntervalMaxIntervalParamsCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled.
@@ -173,8 +173,8 @@ type MTRBaseDeviceable interface {
 	OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer))
 	ReadEventsWithEndpointIDClusterIDEventIDParamsQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, eventID *foundation.NSNumber, params *raw.MTRReadParams, queue *foundation.NSObject, completion objc.Block)
 	SubscribeToEventsWithEndpointIDClusterIDEventIDParamsQueueReportHandlerSubscriptionEstablished(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, eventID *foundation.NSNumber, params *raw.MTRSubscribeParams, queue *foundation.NSObject, reportHandler objc.Block, subscriptionEstablished func())
-	DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ raw.MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error)
-	SessionTransportType() raw.MTRTransportType
+	DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error)
+	SessionTransportType() MTRTransportType
 	SubscribeWithQueueMinIntervalMaxIntervalParamsCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled(queue *foundation.NSObject, minInterval uint16, maxInterval uint16, params *raw.MTRSubscribeParams, attributeCacheContainer *raw.MTRAttributeCacheContainer, attributeReportHandler objc.Block, eventReportHandler objc.Block, errorHandler func(unsafe.Pointer), subscriptionEstablishedHandler func(), resubscriptionScheduledHandler func(unsafe.Pointer, *foundation.NSNumber))
 	ReadAttributeWithEndpointIdClusterIdAttributeIdParamsClientQueueCompletion(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, attributeId *foundation.NSNumber, params *raw.MTRReadParams, clientQueue *foundation.NSObject, completion objc.Block)
 	WriteAttributeWithEndpointIdClusterIdAttributeIdValueTimedWriteTimeoutClientQueueCompletion(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, attributeId *foundation.NSNumber, value objc.ID, timeoutMs *foundation.NSNumber, clientQueue *foundation.NSObject, completion objc.Block)

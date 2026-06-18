@@ -73,8 +73,8 @@ func (x *MTL4ComputePipelineDescriptor) WithStaticLinkingDescriptor(staticLinkin
 }
 
 // WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
-func (x *MTL4ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor {
-	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+func (x *MTL4ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor {
+	x.inner.SetSupportIndirectCommandBuffers(raw.MTL4IndirectCommandBufferSupportState(supportIndirectCommandBuffers))
 	return x
 }
 
@@ -164,13 +164,13 @@ func (x *MTL4ComputePipelineDescriptor) SetStaticLinkingDescriptor(staticLinking
 }
 
 // SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
-func (x *MTL4ComputePipelineDescriptor) SupportIndirectCommandBuffers() raw.MTL4IndirectCommandBufferSupportState {
-	return x.inner.SupportIndirectCommandBuffers()
+func (x *MTL4ComputePipelineDescriptor) SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState {
+	return MTL4IndirectCommandBufferSupportState(x.inner.SupportIndirectCommandBuffers())
 }
 
 // SetSupportIndirectCommandBuffers calls the underlying SetSupportIndirectCommandBuffers.
-func (x *MTL4ComputePipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) {
-	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+func (x *MTL4ComputePipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) {
+	x.inner.SetSupportIndirectCommandBuffers(raw.MTL4IndirectCommandBufferSupportState(supportIndirectCommandBuffers))
 }
 
 func (x *MTL4ComputePipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor {
@@ -186,7 +186,7 @@ type MTL4ComputePipelineDescriptorable interface {
 	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *MTL4ComputePipelineDescriptor
 	WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4ComputePipelineDescriptor
 	WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor
-	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor
+	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor
 	WithLabel(label string) *MTL4ComputePipelineDescriptor
 	WithOptions(options *MTL4PipelineOptions) *MTL4ComputePipelineDescriptor
 	Reset()
@@ -202,8 +202,8 @@ type MTL4ComputePipelineDescriptorable interface {
 	SetSupportBinaryLinking(supportBinaryLinking bool)
 	StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor
 	SetStaticLinkingDescriptor(staticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor)
-	SupportIndirectCommandBuffers() raw.MTL4IndirectCommandBufferSupportState
-	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState)
+	SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState
+	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState)
 }
 
 var _ MTL4ComputePipelineDescriptorable = (*MTL4ComputePipelineDescriptor)(nil)

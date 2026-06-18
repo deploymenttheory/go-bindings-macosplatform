@@ -57,8 +57,8 @@ func (x *TableHeaderCell) WithTextColor(textColor *Color) *TableHeaderCell {
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TableHeaderCell {
-	x.inner.NSTextFieldCell.SetBezelStyle(bezelStyle)
+func (x *TableHeaderCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TableHeaderCell {
+	x.inner.NSTextFieldCell.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -99,8 +99,8 @@ func (x *TableHeaderCell) WithControlView(controlView ViewProvider) *TableHeader
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithType(type_ raw.NSCellType) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(type_)
+func (x *TableHeaderCell) WithType(type_ NSCellType) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -183,8 +183,8 @@ func (x *TableHeaderCell) WithHighlighted(highlighted bool) *TableHeaderCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithAlignment(alignment raw.NSTextAlignment) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *TableHeaderCell) WithAlignment(alignment NSTextAlignment) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -249,8 +249,8 @@ func (x *TableHeaderCell) WithImage(image *Image) *TableHeaderCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithControlSize(controlSize raw.NSControlSize) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *TableHeaderCell) WithControlSize(controlSize NSControlSize) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -273,14 +273,14 @@ func (x *TableHeaderCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bo
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *TableHeaderCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *TableHeaderCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -297,8 +297,8 @@ func (x *TableHeaderCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine 
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *TableHeaderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -321,8 +321,8 @@ func (x *TableHeaderCell) WithShowsFirstResponder(showsFirstResponder bool) *Tab
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *TableHeaderCell) WithFocusRingType(focusRingType NSFocusRingType) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -351,14 +351,14 @@ func (x *TableHeaderCell) WithAllowsMixedState(allowsMixedState bool) *TableHead
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *TableHeaderCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *TableHeaderCell) WithControlTint(controlTint raw.NSControlTint) *TableHeaderCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *TableHeaderCell) WithControlTint(controlTint NSControlTint) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -386,12 +386,12 @@ type TableHeaderCellable interface {
 	WithBackgroundColor(backgroundColor *Color) *TableHeaderCell
 	WithDrawsBackground(drawsBackground bool) *TableHeaderCell
 	WithTextColor(textColor *Color) *TableHeaderCell
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TableHeaderCell
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TableHeaderCell
 	WithPlaceholderString(placeholderString string) *TableHeaderCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TableHeaderCell
 	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TableHeaderCell
 	WithControlView(controlView ViewProvider) *TableHeaderCell
-	WithType(type_ raw.NSCellType) *TableHeaderCell
+	WithType(type_ NSCellType) *TableHeaderCell
 	WithState(state int) *TableHeaderCell
 	WithTarget(target objc.ID) *TableHeaderCell
 	WithAction(action objc.SEL) *TableHeaderCell
@@ -405,7 +405,7 @@ type TableHeaderCellable interface {
 	WithBezeled(bezeled bool) *TableHeaderCell
 	WithScrollable(scrollable bool) *TableHeaderCell
 	WithHighlighted(highlighted bool) *TableHeaderCell
-	WithAlignment(alignment raw.NSTextAlignment) *TableHeaderCell
+	WithAlignment(alignment NSTextAlignment) *TableHeaderCell
 	WithWraps(wraps bool) *TableHeaderCell
 	WithFont(font *Font) *TableHeaderCell
 	WithFormatter(formatter *foundation.NSFormatter) *TableHeaderCell
@@ -416,25 +416,25 @@ type TableHeaderCellable interface {
 	WithDoubleValue(doubleValue float64) *TableHeaderCell
 	WithIntegerValue(integerValue int) *TableHeaderCell
 	WithImage(image *Image) *TableHeaderCell
-	WithControlSize(controlSize raw.NSControlSize) *TableHeaderCell
+	WithControlSize(controlSize NSControlSize) *TableHeaderCell
 	WithRepresentedObject(representedObject objc.ID) *TableHeaderCell
 	WithMenu(menu *Menu) *TableHeaderCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TableHeaderCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TableHeaderCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TableHeaderCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TableHeaderCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TableHeaderCell
 	WithAllowsUndo(allowsUndo bool) *TableHeaderCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TableHeaderCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableHeaderCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TableHeaderCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TableHeaderCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *TableHeaderCell
 	WithShowsFirstResponder(showsFirstResponder bool) *TableHeaderCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *TableHeaderCell
+	WithFocusRingType(focusRingType NSFocusRingType) *TableHeaderCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TableHeaderCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TableHeaderCell
 	WithImportsGraphics(importsGraphics bool) *TableHeaderCell
 	WithAllowsMixedState(allowsMixedState bool) *TableHeaderCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TableHeaderCell
-	WithControlTint(controlTint raw.NSControlTint) *TableHeaderCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TableHeaderCell
+	WithControlTint(controlTint NSControlTint) *TableHeaderCell
 	DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *raw.NSView, ascending bool, priority int)
 	SortIndicatorRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
 }

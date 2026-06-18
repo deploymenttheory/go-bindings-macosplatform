@@ -52,8 +52,8 @@ func (x *AccessPoint) WithShowHighlights(showHighlights bool) *AccessPoint {
 }
 
 // WithLocation sets the location property and returns the receiver for chaining.
-func (x *AccessPoint) WithLocation(location raw.GKAccessPointLocation) *AccessPoint {
-	x.inner.SetLocation(location)
+func (x *AccessPoint) WithLocation(location GKAccessPointLocation) *AccessPoint {
+	x.inner.SetLocation(raw.GKAccessPointLocation(location))
 	return x
 }
 
@@ -78,9 +78,9 @@ func (x *AccessPoint) TriggerAccessPointWithHandler(ctx context.Context) error {
 }
 
 // TriggerAccessPointWithStateHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithStateHandler(ctx context.Context, state raw.GKGameCenterViewControllerState) error {
+func (x *AccessPoint) TriggerAccessPointWithStateHandler(ctx context.Context, state GKGameCenterViewControllerState) error {
 	_ch := make(chan error, 1)
-	x.inner.TriggerAccessPointWithStateHandler(state, func() {
+	x.inner.TriggerAccessPointWithStateHandler(raw.GKGameCenterViewControllerState(state), func() {
 		_ch <- nil
 	})
 	select {
@@ -120,9 +120,9 @@ func (x *AccessPoint) TriggerAccessPointWithLeaderboardSetIDHandler(ctx context.
 }
 
 // TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(ctx context.Context, leaderboardID string, playerScope raw.GKLeaderboardPlayerScope, timeScope raw.GKLeaderboardTimeScope) error {
+func (x *AccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(ctx context.Context, leaderboardID string, playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope) error {
 	_ch := make(chan error, 1)
-	x.inner.TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(foundation.NSStringStringWithUTF8String(leaderboardID), playerScope, timeScope, func() {
+	x.inner.TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(foundation.NSStringStringWithUTF8String(leaderboardID), raw.GKLeaderboardPlayerScope(playerScope), raw.GKLeaderboardTimeScope(timeScope), func() {
 		_ch <- nil
 	})
 	select {
@@ -266,13 +266,13 @@ func (x *AccessPoint) SetShowHighlights(showHighlights bool) {
 }
 
 // Location calls the underlying Location.
-func (x *AccessPoint) Location() raw.GKAccessPointLocation {
-	return x.inner.Location()
+func (x *AccessPoint) Location() GKAccessPointLocation {
+	return GKAccessPointLocation(x.inner.Location())
 }
 
 // SetLocation calls the underlying SetLocation.
-func (x *AccessPoint) SetLocation(location raw.GKAccessPointLocation) {
-	x.inner.SetLocation(location)
+func (x *AccessPoint) SetLocation(location GKAccessPointLocation) {
+	x.inner.SetLocation(raw.GKAccessPointLocation(location))
 }
 
 // FrameInScreenCoordinates calls the underlying FrameInScreenCoordinates.
@@ -295,13 +295,13 @@ type AccessPointable interface {
 	Unwrap() *raw.GKAccessPoint
 	WithActive(active bool) *AccessPoint
 	WithShowHighlights(showHighlights bool) *AccessPoint
-	WithLocation(location raw.GKAccessPointLocation) *AccessPoint
+	WithLocation(location GKAccessPointLocation) *AccessPoint
 	WithParentWindow(parentWindow *appkit.NSWindow) *AccessPoint
 	TriggerAccessPointWithHandler(ctx context.Context) error
-	TriggerAccessPointWithStateHandler(ctx context.Context, state raw.GKGameCenterViewControllerState) error
+	TriggerAccessPointWithStateHandler(ctx context.Context, state GKGameCenterViewControllerState) error
 	TriggerAccessPointWithAchievementIDHandler(ctx context.Context, achievementID string) error
 	TriggerAccessPointWithLeaderboardSetIDHandler(ctx context.Context, leaderboardSetID string) error
-	TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(ctx context.Context, leaderboardID string, playerScope raw.GKLeaderboardPlayerScope, timeScope raw.GKLeaderboardTimeScope) error
+	TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(ctx context.Context, leaderboardID string, playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope) error
 	TriggerAccessPointWithPlayerHandler(ctx context.Context, player *raw.GKPlayer) error
 	TriggerAccessPointForPlayTogetherWithHandler(ctx context.Context) error
 	TriggerAccessPointForChallengesWithHandler(ctx context.Context) error
@@ -314,8 +314,8 @@ type AccessPointable interface {
 	SetActive(active bool)
 	ShowHighlights() bool
 	SetShowHighlights(showHighlights bool)
-	Location() raw.GKAccessPointLocation
-	SetLocation(location raw.GKAccessPointLocation)
+	Location() GKAccessPointLocation
+	SetLocation(location GKAccessPointLocation)
 	FrameInScreenCoordinates() corefoundation.CGRect
 	ParentWindow() *appkit.NSWindow
 	SetParentWindow(parentWindow *appkit.NSWindow)

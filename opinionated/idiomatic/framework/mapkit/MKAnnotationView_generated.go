@@ -138,8 +138,8 @@ func (x *AnnotationView) WithDraggable(draggable bool) *AnnotationView {
 }
 
 // WithDragState sets the dragState property and returns the receiver for chaining.
-func (x *AnnotationView) WithDragState(dragState raw.MKAnnotationViewDragState) *AnnotationView {
-	x.inner.SetDragState(dragState)
+func (x *AnnotationView) WithDragState(dragState MKAnnotationViewDragState) *AnnotationView {
+	x.inner.SetDragState(raw.MKAnnotationViewDragState(dragState))
 	return x
 }
 
@@ -168,8 +168,8 @@ func (x *AnnotationView) WithSelectedZPriority(selectedZPriority float32) *Annot
 }
 
 // WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
-func (x *AnnotationView) WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *AnnotationView {
-	x.inner.SetCollisionMode(collisionMode)
+func (x *AnnotationView) WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *AnnotationView {
+	x.inner.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))
 	return x
 }
 
@@ -184,8 +184,8 @@ func (x *AnnotationView) SetSelectedAnimated(selected bool, animated bool) {
 }
 
 // SetDragStateAnimated calls the underlying SetDragStateAnimated.
-func (x *AnnotationView) SetDragStateAnimated(newDragState raw.MKAnnotationViewDragState, animated bool) {
-	x.inner.SetDragStateAnimated(newDragState, animated)
+func (x *AnnotationView) SetDragStateAnimated(newDragState MKAnnotationViewDragState, animated bool) {
+	x.inner.SetDragStateAnimated(raw.MKAnnotationViewDragState(newDragState), animated)
 }
 
 // ReuseIdentifier calls the underlying ReuseIdentifier.
@@ -348,13 +348,13 @@ func (x *AnnotationView) SetDraggable(draggable bool) {
 }
 
 // DragState calls the underlying DragState.
-func (x *AnnotationView) DragState() raw.MKAnnotationViewDragState {
-	return x.inner.DragState()
+func (x *AnnotationView) DragState() MKAnnotationViewDragState {
+	return MKAnnotationViewDragState(x.inner.DragState())
 }
 
 // SetDragState calls the underlying SetDragState.
-func (x *AnnotationView) SetDragState(dragState raw.MKAnnotationViewDragState) {
-	x.inner.SetDragState(dragState)
+func (x *AnnotationView) SetDragState(dragState MKAnnotationViewDragState) {
+	x.inner.SetDragState(raw.MKAnnotationViewDragState(dragState))
 }
 
 // ClusteringIdentifier calls the underlying ClusteringIdentifier.
@@ -411,13 +411,13 @@ func (x *AnnotationView) SetSelectedZPriority(selectedZPriority float32) {
 }
 
 // CollisionMode calls the underlying CollisionMode.
-func (x *AnnotationView) CollisionMode() raw.MKAnnotationViewCollisionMode {
-	return x.inner.CollisionMode()
+func (x *AnnotationView) CollisionMode() MKAnnotationViewCollisionMode {
+	return MKAnnotationViewCollisionMode(x.inner.CollisionMode())
 }
 
 // SetCollisionMode calls the underlying SetCollisionMode.
-func (x *AnnotationView) SetCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) {
-	x.inner.SetCollisionMode(collisionMode)
+func (x *AnnotationView) SetCollisionMode(collisionMode MKAnnotationViewCollisionMode) {
+	x.inner.SetCollisionMode(raw.MKAnnotationViewCollisionMode(collisionMode))
 }
 
 func (x *AnnotationView) asAnnotationView() *raw.MKAnnotationView { return x.inner }
@@ -440,15 +440,15 @@ type AnnotationViewable interface {
 	WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *AnnotationView
 	WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *AnnotationView
 	WithDraggable(draggable bool) *AnnotationView
-	WithDragState(dragState raw.MKAnnotationViewDragState) *AnnotationView
+	WithDragState(dragState MKAnnotationViewDragState) *AnnotationView
 	WithClusteringIdentifier(clusteringIdentifier string) *AnnotationView
 	WithDisplayPriority(displayPriority float32) *AnnotationView
 	WithZPriority(zPriority float32) *AnnotationView
 	WithSelectedZPriority(selectedZPriority float32) *AnnotationView
-	WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *AnnotationView
+	WithCollisionMode(collisionMode MKAnnotationViewCollisionMode) *AnnotationView
 	PrepareForDisplay()
 	SetSelectedAnimated(selected bool, animated bool)
-	SetDragStateAnimated(newDragState raw.MKAnnotationViewDragState, animated bool)
+	SetDragStateAnimated(newDragState MKAnnotationViewDragState, animated bool)
 	ReuseIdentifier() string
 	Annotation() raw.MKAnnotation
 	SetAnnotation(annotation raw.MKAnnotation)
@@ -480,8 +480,8 @@ type AnnotationViewable interface {
 	SetDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView)
 	IsDraggable() bool
 	SetDraggable(draggable bool)
-	DragState() raw.MKAnnotationViewDragState
-	SetDragState(dragState raw.MKAnnotationViewDragState)
+	DragState() MKAnnotationViewDragState
+	SetDragState(dragState MKAnnotationViewDragState)
 	ClusteringIdentifier() string
 	SetClusteringIdentifier(clusteringIdentifier string)
 	ClusterAnnotationView() *AnnotationView
@@ -491,8 +491,8 @@ type AnnotationViewable interface {
 	SetZPriority(zPriority float32)
 	SelectedZPriority() float32
 	SetSelectedZPriority(selectedZPriority float32)
-	CollisionMode() raw.MKAnnotationViewCollisionMode
-	SetCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode)
+	CollisionMode() MKAnnotationViewCollisionMode
+	SetCollisionMode(collisionMode MKAnnotationViewCollisionMode)
 }
 
 var _ AnnotationViewable = (*AnnotationView)(nil)

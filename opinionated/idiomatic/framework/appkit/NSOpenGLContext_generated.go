@@ -97,13 +97,13 @@ func (x *OpenGLContext) CopyAttributesFromContextWithMask(context_ *raw.NSOpenGL
 }
 
 // SetValuesForParameter calls the underlying SetValuesForParameter.
-func (x *OpenGLContext) SetValuesForParameter(vals *int32, param raw.NSOpenGLContextParameter) {
-	x.inner.SetValuesForParameter(vals, param)
+func (x *OpenGLContext) SetValuesForParameter(vals *int32, param NSOpenGLContextParameter) {
+	x.inner.SetValuesForParameter(vals, raw.NSOpenGLContextParameter(param))
 }
 
 // GetValuesForParameter calls the underlying GetValuesForParameter.
-func (x *OpenGLContext) GetValuesForParameter(vals *int32, param raw.NSOpenGLContextParameter) {
-	x.inner.GetValuesForParameter(vals, param)
+func (x *OpenGLContext) GetValuesForParameter(vals *int32, param NSOpenGLContextParameter) {
+	x.inner.GetValuesForParameter(vals, raw.NSOpenGLContextParameter(param))
 }
 
 // CreateTextureFromViewInternalFormat calls the underlying CreateTextureFromViewInternalFormat.
@@ -186,8 +186,8 @@ type OpenGLContextable interface {
 	FlushBuffer()
 	MakeCurrentContext()
 	CopyAttributesFromContextWithMask(context_ *raw.NSOpenGLContext, mask uint32)
-	SetValuesForParameter(vals *int32, param raw.NSOpenGLContextParameter)
-	GetValuesForParameter(vals *int32, param raw.NSOpenGLContextParameter)
+	SetValuesForParameter(vals *int32, param NSOpenGLContextParameter)
+	GetValuesForParameter(vals *int32, param NSOpenGLContextParameter)
 	CreateTextureFromViewInternalFormat(target uint32, view *raw.NSView, format uint32)
 	PixelFormat() *OpenGLPixelFormat
 	View() *View

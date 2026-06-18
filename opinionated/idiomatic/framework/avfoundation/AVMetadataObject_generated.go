@@ -73,8 +73,8 @@ func (x *MetadataObject) ObjectID() int {
 }
 
 // CinematicVideoFocusMode calls the underlying CinematicVideoFocusMode.
-func (x *MetadataObject) CinematicVideoFocusMode() raw.AVCaptureCinematicVideoFocusMode {
-	return x.inner.CinematicVideoFocusMode()
+func (x *MetadataObject) CinematicVideoFocusMode() AVCaptureCinematicVideoFocusMode {
+	return AVCaptureCinematicVideoFocusMode(x.inner.CinematicVideoFocusMode())
 }
 
 // IsFixedFocus calls the underlying IsFixedFocus.
@@ -93,7 +93,7 @@ type MetadataObjectable interface {
 	Type() string
 	GroupID() int
 	ObjectID() int
-	CinematicVideoFocusMode() raw.AVCaptureCinematicVideoFocusMode
+	CinematicVideoFocusMode() AVCaptureCinematicVideoFocusMode
 	IsFixedFocus() bool
 }
 

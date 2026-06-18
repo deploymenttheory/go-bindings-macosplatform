@@ -32,9 +32,9 @@ func TokenizerFromID(id objc.ID) *Tokenizer {
 }
 
 // NewTokenizerWithUnit creates a new [Tokenizer].
-func NewTokenizerWithUnit(unit raw.NLTokenUnit) *Tokenizer {
+func NewTokenizerWithUnit(unit NLTokenUnit) *Tokenizer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLTokenizer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUnit:"), unit)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUnit:"), raw.NLTokenUnit(unit))
 	return &Tokenizer{inner: raw.NLTokenizerFromID(_id)}
 }
 
@@ -70,8 +70,8 @@ func (x *Tokenizer) EnumerateTokensInRangeUsing(range_ foundation.NSRange, block
 }
 
 // Unit calls the underlying Unit.
-func (x *Tokenizer) Unit() raw.NLTokenUnit {
-	return x.inner.Unit()
+func (x *Tokenizer) Unit() NLTokenUnit {
+	return NLTokenUnit(x.inner.Unit())
 }
 
 // String calls the underlying String.
@@ -97,7 +97,7 @@ type Tokenizerable interface {
 	TokenRangeForRange(range_ foundation.NSRange) foundation.NSRange
 	TokensForRange(range_ foundation.NSRange) *foundation.NSArray[*foundation.NSValue]
 	EnumerateTokensInRangeUsing(range_ foundation.NSRange, block objc.Block)
-	Unit() raw.NLTokenUnit
+	Unit() NLTokenUnit
 	String() string
 	SetString(string_ string)
 }

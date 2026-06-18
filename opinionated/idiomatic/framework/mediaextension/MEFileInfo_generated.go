@@ -45,8 +45,8 @@ func (x *FileInfo) WithDuration(duration coremedia.CMTime) *FileInfo {
 }
 
 // WithFragmentsStatus sets the fragmentsStatus property and returns the receiver for chaining.
-func (x *FileInfo) WithFragmentsStatus(fragmentsStatus raw.MEFileInfoFragmentsStatus) *FileInfo {
-	x.inner.SetFragmentsStatus(fragmentsStatus)
+func (x *FileInfo) WithFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus) *FileInfo {
+	x.inner.SetFragmentsStatus(raw.MEFileInfoFragmentsStatus(fragmentsStatus))
 	return x
 }
 
@@ -67,13 +67,13 @@ func (x *FileInfo) SetDuration(duration coremedia.CMTime) {
 }
 
 // FragmentsStatus calls the underlying FragmentsStatus.
-func (x *FileInfo) FragmentsStatus() raw.MEFileInfoFragmentsStatus {
-	return x.inner.FragmentsStatus()
+func (x *FileInfo) FragmentsStatus() MEFileInfoFragmentsStatus {
+	return MEFileInfoFragmentsStatus(x.inner.FragmentsStatus())
 }
 
 // SetFragmentsStatus calls the underlying SetFragmentsStatus.
-func (x *FileInfo) SetFragmentsStatus(fragmentsStatus raw.MEFileInfoFragmentsStatus) {
-	x.inner.SetFragmentsStatus(fragmentsStatus)
+func (x *FileInfo) SetFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus) {
+	x.inner.SetFragmentsStatus(raw.MEFileInfoFragmentsStatus(fragmentsStatus))
 }
 
 // SidecarFileName calls the underlying SidecarFileName.
@@ -94,12 +94,12 @@ func (x *FileInfo) SetSidecarFileName(sidecarFileName string) {
 type FileInfoable interface {
 	Unwrap() *raw.MEFileInfo
 	WithDuration(duration coremedia.CMTime) *FileInfo
-	WithFragmentsStatus(fragmentsStatus raw.MEFileInfoFragmentsStatus) *FileInfo
+	WithFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus) *FileInfo
 	WithSidecarFileName(sidecarFileName string) *FileInfo
 	Duration() coremedia.CMTime
 	SetDuration(duration coremedia.CMTime)
-	FragmentsStatus() raw.MEFileInfoFragmentsStatus
-	SetFragmentsStatus(fragmentsStatus raw.MEFileInfoFragmentsStatus)
+	FragmentsStatus() MEFileInfoFragmentsStatus
+	SetFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus)
 	SidecarFileName() string
 	SetSidecarFileName(sidecarFileName string)
 }

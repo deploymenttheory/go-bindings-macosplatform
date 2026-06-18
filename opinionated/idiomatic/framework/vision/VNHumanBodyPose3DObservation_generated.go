@@ -82,8 +82,8 @@ func (x *HumanBodyPose3DObservation) GetCameraRelativePositionForJointNameError(
 }
 
 // HeightEstimation calls the underlying HeightEstimation.
-func (x *HumanBodyPose3DObservation) HeightEstimation() raw.VNHumanBodyPose3DObservationHeightEstimation {
-	return x.inner.HeightEstimation()
+func (x *HumanBodyPose3DObservation) HeightEstimation() VNHumanBodyPose3DObservationHeightEstimation {
+	return VNHumanBodyPose3DObservationHeightEstimation(x.inner.HeightEstimation())
 }
 
 // CameraOriginMatrix calls the underlying CameraOriginMatrix.
@@ -134,7 +134,7 @@ type HumanBodyPose3DObservationable interface {
 	PointInImageForJointNameError(jointName *foundation.NSString) (*Point, error)
 	ParentJointNameForJointName(jointName *foundation.NSString) string
 	GetCameraRelativePositionForJointNameError(modelPositionOut unsafe.Pointer, jointName *foundation.NSString) (bool, error)
-	HeightEstimation() raw.VNHumanBodyPose3DObservationHeightEstimation
+	HeightEstimation() VNHumanBodyPose3DObservationHeightEstimation
 	CameraOriginMatrix() unsafe.Pointer
 	AvailableJointsGroupNames() []*foundation.NSString
 	AvailableJointNames() []*foundation.NSString

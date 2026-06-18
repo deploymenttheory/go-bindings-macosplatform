@@ -36,46 +36,46 @@ func NewOptimizationHints() *OptimizationHints {
 }
 
 // WithReshapeFrequency sets the reshapeFrequency property and returns the receiver for chaining.
-func (x *OptimizationHints) WithReshapeFrequency(reshapeFrequency raw.MLReshapeFrequencyHint) *OptimizationHints {
-	x.inner.SetReshapeFrequency(reshapeFrequency)
+func (x *OptimizationHints) WithReshapeFrequency(reshapeFrequency MLReshapeFrequencyHint) *OptimizationHints {
+	x.inner.SetReshapeFrequency(raw.MLReshapeFrequencyHint(reshapeFrequency))
 	return x
 }
 
 // WithSpecializationStrategy sets the specializationStrategy property and returns the receiver for chaining.
-func (x *OptimizationHints) WithSpecializationStrategy(specializationStrategy raw.MLSpecializationStrategy) *OptimizationHints {
-	x.inner.SetSpecializationStrategy(specializationStrategy)
+func (x *OptimizationHints) WithSpecializationStrategy(specializationStrategy MLSpecializationStrategy) *OptimizationHints {
+	x.inner.SetSpecializationStrategy(raw.MLSpecializationStrategy(specializationStrategy))
 	return x
 }
 
 // ReshapeFrequency calls the underlying ReshapeFrequency.
-func (x *OptimizationHints) ReshapeFrequency() raw.MLReshapeFrequencyHint {
-	return x.inner.ReshapeFrequency()
+func (x *OptimizationHints) ReshapeFrequency() MLReshapeFrequencyHint {
+	return MLReshapeFrequencyHint(x.inner.ReshapeFrequency())
 }
 
 // SetReshapeFrequency calls the underlying SetReshapeFrequency.
-func (x *OptimizationHints) SetReshapeFrequency(reshapeFrequency raw.MLReshapeFrequencyHint) {
-	x.inner.SetReshapeFrequency(reshapeFrequency)
+func (x *OptimizationHints) SetReshapeFrequency(reshapeFrequency MLReshapeFrequencyHint) {
+	x.inner.SetReshapeFrequency(raw.MLReshapeFrequencyHint(reshapeFrequency))
 }
 
 // SpecializationStrategy calls the underlying SpecializationStrategy.
-func (x *OptimizationHints) SpecializationStrategy() raw.MLSpecializationStrategy {
-	return x.inner.SpecializationStrategy()
+func (x *OptimizationHints) SpecializationStrategy() MLSpecializationStrategy {
+	return MLSpecializationStrategy(x.inner.SpecializationStrategy())
 }
 
 // SetSpecializationStrategy calls the underlying SetSpecializationStrategy.
-func (x *OptimizationHints) SetSpecializationStrategy(specializationStrategy raw.MLSpecializationStrategy) {
-	x.inner.SetSpecializationStrategy(specializationStrategy)
+func (x *OptimizationHints) SetSpecializationStrategy(specializationStrategy MLSpecializationStrategy) {
+	x.inner.SetSpecializationStrategy(raw.MLSpecializationStrategy(specializationStrategy))
 }
 
 // OptimizationHintsable is the interface implemented by [OptimizationHints], for mocking and DI.
 type OptimizationHintsable interface {
 	Unwrap() *raw.MLOptimizationHints
-	WithReshapeFrequency(reshapeFrequency raw.MLReshapeFrequencyHint) *OptimizationHints
-	WithSpecializationStrategy(specializationStrategy raw.MLSpecializationStrategy) *OptimizationHints
-	ReshapeFrequency() raw.MLReshapeFrequencyHint
-	SetReshapeFrequency(reshapeFrequency raw.MLReshapeFrequencyHint)
-	SpecializationStrategy() raw.MLSpecializationStrategy
-	SetSpecializationStrategy(specializationStrategy raw.MLSpecializationStrategy)
+	WithReshapeFrequency(reshapeFrequency MLReshapeFrequencyHint) *OptimizationHints
+	WithSpecializationStrategy(specializationStrategy MLSpecializationStrategy) *OptimizationHints
+	ReshapeFrequency() MLReshapeFrequencyHint
+	SetReshapeFrequency(reshapeFrequency MLReshapeFrequencyHint)
+	SpecializationStrategy() MLSpecializationStrategy
+	SetSpecializationStrategy(specializationStrategy MLSpecializationStrategy)
 }
 
 var _ OptimizationHintsable = (*OptimizationHints)(nil)

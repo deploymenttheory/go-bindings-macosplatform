@@ -51,8 +51,8 @@ func (x *QueuePlayer) WithDefaultRate(defaultRate float32) *QueuePlayer {
 }
 
 // WithActionAtItemEnd sets the actionAtItemEnd property and returns the receiver for chaining.
-func (x *QueuePlayer) WithActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd) *QueuePlayer {
-	x.inner.AVPlayer.SetActionAtItemEnd(actionAtItemEnd)
+func (x *QueuePlayer) WithActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd) *QueuePlayer {
+	x.inner.AVPlayer.SetActionAtItemEnd(raw.AVPlayerActionAtItemEnd(actionAtItemEnd))
 	return x
 }
 
@@ -105,8 +105,8 @@ func (x *QueuePlayer) WithPreventsDisplaySleepDuringVideoPlayback(preventsDispla
 }
 
 // WithAudiovisualBackgroundPlaybackPolicy sets the audiovisualBackgroundPlaybackPolicy property and returns the receiver for chaining.
-func (x *QueuePlayer) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer {
-	x.inner.AVPlayer.SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy)
+func (x *QueuePlayer) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy AVPlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer {
+	x.inner.AVPlayer.SetAudiovisualBackgroundPlaybackPolicy(raw.AVPlayerAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy))
 	return x
 }
 
@@ -117,8 +117,8 @@ func (x *QueuePlayer) WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePlay
 }
 
 // WithNetworkResourcePriority sets the networkResourcePriority property and returns the receiver for chaining.
-func (x *QueuePlayer) WithNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) *QueuePlayer {
-	x.inner.AVPlayer.SetNetworkResourcePriority(networkResourcePriority)
+func (x *QueuePlayer) WithNetworkResourcePriority(networkResourcePriority AVPlayerNetworkResourcePriority) *QueuePlayer {
+	x.inner.AVPlayer.SetNetworkResourcePriority(raw.AVPlayerNetworkResourcePriority(networkResourcePriority))
 	return x
 }
 
@@ -177,7 +177,7 @@ type QueuePlayerable interface {
 	Unwrap() *raw.AVQueuePlayer
 	WithRate(rate float32) *QueuePlayer
 	WithDefaultRate(defaultRate float32) *QueuePlayer
-	WithActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd) *QueuePlayer
+	WithActionAtItemEnd(actionAtItemEnd AVPlayerActionAtItemEnd) *QueuePlayer
 	WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *QueuePlayer
 	WithVolume(volume float32) *QueuePlayer
 	WithMuted(muted bool) *QueuePlayer
@@ -186,9 +186,9 @@ type QueuePlayerable interface {
 	WithAllowsExternalPlayback(allowsExternalPlayback bool) *QueuePlayer
 	WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *QueuePlayer
 	WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *QueuePlayer
-	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer
+	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy AVPlayerAudiovisualBackgroundPlaybackPolicy) *QueuePlayer
 	WithVideoOutput(videoOutput *PlayerVideoOutput) *QueuePlayer
-	WithNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) *QueuePlayer
+	WithNetworkResourcePriority(networkResourcePriority AVPlayerNetworkResourcePriority) *QueuePlayer
 	WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *QueuePlayer
 	WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *QueuePlayer
 	Items() []*PlayerItem

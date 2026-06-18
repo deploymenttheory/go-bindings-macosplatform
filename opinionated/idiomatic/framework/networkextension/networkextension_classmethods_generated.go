@@ -242,8 +242,8 @@ func ForPerAppVPN() *NETunnelProviderManager {
 }
 
 // VerdictForURLCompletionHandler calls the underlying NEURLFilterVerdictForURLCompletionHandler.
-func VerdictForURLCompletionHandler(url string, completionHandler func(raw.NEURLFilterVerdict)) {
-	raw.NEURLFilterVerdictForURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), completionHandler)
+func VerdictForURLCompletionHandler(url string, completionHandler func(NEURLFilterVerdict)) {
+	raw.NEURLFilterVerdictForURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_a0 raw.NEURLFilterVerdict) { completionHandler(NEURLFilterVerdict(_a0)) })
 }
 
 // NEVPNManagerSharedManager calls the underlying NEVPNManagerSharedManager.

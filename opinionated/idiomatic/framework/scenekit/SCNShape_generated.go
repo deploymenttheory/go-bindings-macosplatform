@@ -51,8 +51,8 @@ func (x *Shape) WithExtrusionDepth(extrusionDepth float64) *Shape {
 }
 
 // WithChamferMode sets the chamferMode property and returns the receiver for chaining.
-func (x *Shape) WithChamferMode(chamferMode raw.SCNChamferMode) *Shape {
-	x.inner.SetChamferMode(chamferMode)
+func (x *Shape) WithChamferMode(chamferMode SCNChamferMode) *Shape {
+	x.inner.SetChamferMode(raw.SCNChamferMode(chamferMode))
 	return x
 }
 
@@ -167,13 +167,13 @@ func (x *Shape) SetExtrusionDepth(extrusionDepth float64) {
 }
 
 // ChamferMode calls the underlying ChamferMode.
-func (x *Shape) ChamferMode() raw.SCNChamferMode {
-	return x.inner.ChamferMode()
+func (x *Shape) ChamferMode() SCNChamferMode {
+	return SCNChamferMode(x.inner.ChamferMode())
 }
 
 // SetChamferMode calls the underlying SetChamferMode.
-func (x *Shape) SetChamferMode(chamferMode raw.SCNChamferMode) {
-	x.inner.SetChamferMode(chamferMode)
+func (x *Shape) SetChamferMode(chamferMode SCNChamferMode) {
+	x.inner.SetChamferMode(raw.SCNChamferMode(chamferMode))
 }
 
 // ChamferRadius calls the underlying ChamferRadius.
@@ -203,7 +203,7 @@ type Shapeable interface {
 	Unwrap() *raw.SCNShape
 	WithPath(path *appkit.NSBezierPath) *Shape
 	WithExtrusionDepth(extrusionDepth float64) *Shape
-	WithChamferMode(chamferMode raw.SCNChamferMode) *Shape
+	WithChamferMode(chamferMode SCNChamferMode) *Shape
 	WithChamferRadius(chamferRadius float64) *Shape
 	WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Shape
 	WithName(name string) *Shape
@@ -219,8 +219,8 @@ type Shapeable interface {
 	SetPath(path *appkit.NSBezierPath)
 	ExtrusionDepth() float64
 	SetExtrusionDepth(extrusionDepth float64)
-	ChamferMode() raw.SCNChamferMode
-	SetChamferMode(chamferMode raw.SCNChamferMode)
+	ChamferMode() SCNChamferMode
+	SetChamferMode(chamferMode SCNChamferMode)
 	ChamferRadius() float64
 	SetChamferRadius(chamferRadius float64)
 	ChamferProfile() *appkit.NSBezierPath

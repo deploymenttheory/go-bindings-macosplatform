@@ -92,20 +92,20 @@ func (x *RenderPassColorAttachmentDescriptor) WithResolveDepthPlane(resolveDepth
 }
 
 // WithLoadAction sets the loadAction property and returns the receiver for chaining.
-func (x *RenderPassColorAttachmentDescriptor) WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassColorAttachmentDescriptor {
-	x.inner.MTLRenderPassAttachmentDescriptor.SetLoadAction(loadAction)
+func (x *RenderPassColorAttachmentDescriptor) WithLoadAction(loadAction MTLLoadAction) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetLoadAction(raw.MTLLoadAction(loadAction))
 	return x
 }
 
 // WithStoreAction sets the storeAction property and returns the receiver for chaining.
-func (x *RenderPassColorAttachmentDescriptor) WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassColorAttachmentDescriptor {
-	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreAction(storeAction)
+func (x *RenderPassColorAttachmentDescriptor) WithStoreAction(storeAction MTLStoreAction) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreAction(raw.MTLStoreAction(storeAction))
 	return x
 }
 
 // WithStoreActionOptions sets the storeActionOptions property and returns the receiver for chaining.
-func (x *RenderPassColorAttachmentDescriptor) WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassColorAttachmentDescriptor {
-	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreActionOptions(storeActionOptions)
+func (x *RenderPassColorAttachmentDescriptor) WithStoreActionOptions(storeActionOptions MTLStoreActionOptions) *RenderPassColorAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreActionOptions(raw.MTLStoreActionOptions(storeActionOptions))
 	return x
 }
 
@@ -135,9 +135,9 @@ type RenderPassColorAttachmentDescriptorable interface {
 	WithResolveLevel(resolveLevel uint) *RenderPassColorAttachmentDescriptor
 	WithResolveSlice(resolveSlice uint) *RenderPassColorAttachmentDescriptor
 	WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassColorAttachmentDescriptor
-	WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassColorAttachmentDescriptor
-	WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassColorAttachmentDescriptor
-	WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassColorAttachmentDescriptor
+	WithLoadAction(loadAction MTLLoadAction) *RenderPassColorAttachmentDescriptor
+	WithStoreAction(storeAction MTLStoreAction) *RenderPassColorAttachmentDescriptor
+	WithStoreActionOptions(storeActionOptions MTLStoreActionOptions) *RenderPassColorAttachmentDescriptor
 	ClearColor() raw.MTLClearColor
 	SetClearColor(clearColor raw.MTLClearColor)
 }

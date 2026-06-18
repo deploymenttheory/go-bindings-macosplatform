@@ -33,16 +33,16 @@ func CNNBinaryFullyConnectedFromID(id objc.ID) *CNNBinaryFullyConnected {
 }
 
 // NewCNNBinaryFullyConnectedWithDeviceConvolutionDataScaleValueTypeFlags creates a new [CNNBinaryFullyConnected].
-func NewCNNBinaryFullyConnectedWithDeviceConvolutionDataScaleValueTypeFlags(device metal.MTLDevice, convolutionData raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ raw.MPSCNNBinaryConvolutionType, flags raw.MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnected {
+func NewCNNBinaryFullyConnectedWithDeviceConvolutionDataScaleValueTypeFlags(device metal.MTLDevice, convolutionData raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnected {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryFullyConnected")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionData:scaleValue:type:flags:"), device, convolutionData, scaleValue, type_, flags)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionData:scaleValue:type:flags:"), device, convolutionData, scaleValue, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
 	return &CNNBinaryFullyConnected{inner: raw.MPSCNNBinaryFullyConnectedFromID(_id)}
 }
 
 // NewCNNBinaryFullyConnectedWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags creates a new [CNNBinaryFullyConnected].
-func NewCNNBinaryFullyConnectedWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(device metal.MTLDevice, convolutionData raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ raw.MPSCNNBinaryConvolutionType, flags raw.MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnected {
+func NewCNNBinaryFullyConnectedWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(device metal.MTLDevice, convolutionData raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnected {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryFullyConnected")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionData:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:"), device, convolutionData, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, type_, flags)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:convolutionData:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:"), device, convolutionData, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
 	return &CNNBinaryFullyConnected{inner: raw.MPSCNNBinaryFullyConnectedFromID(_id)}
 }
 

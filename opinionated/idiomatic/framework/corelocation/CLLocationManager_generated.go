@@ -52,8 +52,8 @@ func (x *LocationManager) WithPurpose(purpose string) *LocationManager {
 }
 
 // WithActivityType sets the activityType property and returns the receiver for chaining.
-func (x *LocationManager) WithActivityType(activityType raw.CLActivityType) *LocationManager {
-	x.inner.SetActivityType(activityType)
+func (x *LocationManager) WithActivityType(activityType CLActivityType) *LocationManager {
+	x.inner.SetActivityType(raw.CLActivityType(activityType))
 	return x
 }
 
@@ -70,8 +70,8 @@ func (x *LocationManager) WithAllowsBackgroundLocationUpdates(allowsBackgroundLo
 }
 
 // WithHeadingOrientation sets the headingOrientation property and returns the receiver for chaining.
-func (x *LocationManager) WithHeadingOrientation(headingOrientation raw.CLDeviceOrientation) *LocationManager {
-	x.inner.SetHeadingOrientation(headingOrientation)
+func (x *LocationManager) WithHeadingOrientation(headingOrientation CLDeviceOrientation) *LocationManager {
+	x.inner.SetHeadingOrientation(raw.CLDeviceOrientation(headingOrientation))
 	return x
 }
 
@@ -194,13 +194,13 @@ func (x *LocationManager) DisallowDeferredLocationUpdates() {
 }
 
 // AuthorizationStatus calls the underlying AuthorizationStatus.
-func (x *LocationManager) AuthorizationStatus() raw.CLAuthorizationStatus {
-	return x.inner.AuthorizationStatus()
+func (x *LocationManager) AuthorizationStatus() CLAuthorizationStatus {
+	return CLAuthorizationStatus(x.inner.AuthorizationStatus())
 }
 
 // AccuracyAuthorization calls the underlying AccuracyAuthorization.
-func (x *LocationManager) AccuracyAuthorization() raw.CLAccuracyAuthorization {
-	return x.inner.AccuracyAuthorization()
+func (x *LocationManager) AccuracyAuthorization() CLAccuracyAuthorization {
+	return CLAccuracyAuthorization(x.inner.AccuracyAuthorization())
 }
 
 // IsAuthorizedForWidgetUpdates calls the underlying IsAuthorizedForWidgetUpdates.
@@ -238,13 +238,13 @@ func (x *LocationManager) SetPurpose(purpose string) {
 }
 
 // ActivityType calls the underlying ActivityType.
-func (x *LocationManager) ActivityType() raw.CLActivityType {
-	return x.inner.ActivityType()
+func (x *LocationManager) ActivityType() CLActivityType {
+	return CLActivityType(x.inner.ActivityType())
 }
 
 // SetActivityType calls the underlying SetActivityType.
-func (x *LocationManager) SetActivityType(activityType raw.CLActivityType) {
-	x.inner.SetActivityType(activityType)
+func (x *LocationManager) SetActivityType(activityType CLActivityType) {
+	x.inner.SetActivityType(raw.CLActivityType(activityType))
 }
 
 // DistanceFilter calls the underlying DistanceFilter.
@@ -308,13 +308,13 @@ func (x *LocationManager) SetHeadingFilter(headingFilter unsafe.Pointer) {
 }
 
 // HeadingOrientation calls the underlying HeadingOrientation.
-func (x *LocationManager) HeadingOrientation() raw.CLDeviceOrientation {
-	return x.inner.HeadingOrientation()
+func (x *LocationManager) HeadingOrientation() CLDeviceOrientation {
+	return CLDeviceOrientation(x.inner.HeadingOrientation())
 }
 
 // SetHeadingOrientation calls the underlying SetHeadingOrientation.
-func (x *LocationManager) SetHeadingOrientation(headingOrientation raw.CLDeviceOrientation) {
-	x.inner.SetHeadingOrientation(headingOrientation)
+func (x *LocationManager) SetHeadingOrientation(headingOrientation CLDeviceOrientation) {
+	x.inner.SetHeadingOrientation(raw.CLDeviceOrientation(headingOrientation))
 }
 
 // Heading calls the underlying Heading.
@@ -361,10 +361,10 @@ type LocationManagerable interface {
 	Unwrap() *raw.CLLocationManager
 	WithDelegate(delegate raw.CLLocationManagerDelegate) *LocationManager
 	WithPurpose(purpose string) *LocationManager
-	WithActivityType(activityType raw.CLActivityType) *LocationManager
+	WithActivityType(activityType CLActivityType) *LocationManager
 	WithPausesLocationUpdatesAutomatically(pausesLocationUpdatesAutomatically bool) *LocationManager
 	WithAllowsBackgroundLocationUpdates(allowsBackgroundLocationUpdates bool) *LocationManager
-	WithHeadingOrientation(headingOrientation raw.CLDeviceOrientation) *LocationManager
+	WithHeadingOrientation(headingOrientation CLDeviceOrientation) *LocationManager
 	RequestWhenInUseAuthorization()
 	RequestAlwaysAuthorization()
 	RequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion(ctx context.Context, purposeKey string) error
@@ -386,16 +386,16 @@ type LocationManagerable interface {
 	StopRangingBeaconsSatisfyingConstraint(constraint *raw.CLBeaconIdentityConstraint)
 	AllowDeferredLocationUpdatesUntilTraveledTimeout(distance unsafe.Pointer, timeout float64)
 	DisallowDeferredLocationUpdates()
-	AuthorizationStatus() raw.CLAuthorizationStatus
-	AccuracyAuthorization() raw.CLAccuracyAuthorization
+	AuthorizationStatus() CLAuthorizationStatus
+	AccuracyAuthorization() CLAccuracyAuthorization
 	IsAuthorizedForWidgetUpdates() bool
 	Delegate() raw.CLLocationManagerDelegate
 	SetDelegate(delegate raw.CLLocationManagerDelegate)
 	LocationServicesEnabled() bool
 	Purpose() string
 	SetPurpose(purpose string)
-	ActivityType() raw.CLActivityType
-	SetActivityType(activityType raw.CLActivityType)
+	ActivityType() CLActivityType
+	SetActivityType(activityType CLActivityType)
 	DistanceFilter() unsafe.Pointer
 	SetDistanceFilter(distanceFilter unsafe.Pointer)
 	DesiredAccuracy() unsafe.Pointer
@@ -408,8 +408,8 @@ type LocationManagerable interface {
 	HeadingAvailable() bool
 	HeadingFilter() unsafe.Pointer
 	SetHeadingFilter(headingFilter unsafe.Pointer)
-	HeadingOrientation() raw.CLDeviceOrientation
-	SetHeadingOrientation(headingOrientation raw.CLDeviceOrientation)
+	HeadingOrientation() CLDeviceOrientation
+	SetHeadingOrientation(headingOrientation CLDeviceOrientation)
 	Heading() *Heading
 	MaximumRegionMonitoringDistance() unsafe.Pointer
 	MonitoredRegions() *foundation.NSSet[*raw.CLRegion]

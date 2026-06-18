@@ -51,8 +51,8 @@ func (x *AudioApplication) IsInputMuted() bool {
 }
 
 // RecordPermission calls the underlying RecordPermission.
-func (x *AudioApplication) RecordPermission() raw.AVAudioApplicationRecordPermission {
-	return x.inner.RecordPermission()
+func (x *AudioApplication) RecordPermission() AVAudioApplicationRecordPermission {
+	return AVAudioApplicationRecordPermission(x.inner.RecordPermission())
 }
 
 // AudioApplicationable is the interface implemented by [AudioApplication], for mocking and DI.
@@ -61,7 +61,7 @@ type AudioApplicationable interface {
 	SetInputMutedError(muted bool) (bool, error)
 	SetInputMuteStateChangeHandlerError(inputMuteHandler func(bool) bool) (bool, error)
 	IsInputMuted() bool
-	RecordPermission() raw.AVAudioApplicationRecordPermission
+	RecordPermission() AVAudioApplicationRecordPermission
 }
 
 var _ AudioApplicationable = (*AudioApplication)(nil)

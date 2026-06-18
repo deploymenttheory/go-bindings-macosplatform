@@ -32,16 +32,16 @@ func RecurrenceRuleFromID(id objc.ID) *RecurrenceRule {
 }
 
 // NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd creates a new [RecurrenceRule].
-func NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd(type_ raw.EKRecurrenceFrequency, interval int, end *raw.EKRecurrenceEnd) *RecurrenceRule {
+func NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd(type_ EKRecurrenceFrequency, interval int, end *raw.EKRecurrenceEnd) *RecurrenceRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKRecurrenceRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRecurrenceWithFrequency:interval:end:"), type_, interval, end.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRecurrenceWithFrequency:interval:end:"), raw.EKRecurrenceFrequency(type_), interval, end.Ptr())
 	return &RecurrenceRule{inner: raw.EKRecurrenceRuleFromID(_id)}
 }
 
 // NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd creates a new [RecurrenceRule].
-func NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd(type_ raw.EKRecurrenceFrequency, interval int, days *foundation.NSArray[*raw.EKRecurrenceDayOfWeek], monthDays *foundation.NSArray[*foundation.NSNumber], months *foundation.NSArray[*foundation.NSNumber], weeksOfTheYear *foundation.NSArray[*foundation.NSNumber], daysOfTheYear *foundation.NSArray[*foundation.NSNumber], setPositions *foundation.NSArray[*foundation.NSNumber], end *raw.EKRecurrenceEnd) *RecurrenceRule {
+func NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd(type_ EKRecurrenceFrequency, interval int, days *foundation.NSArray[*raw.EKRecurrenceDayOfWeek], monthDays *foundation.NSArray[*foundation.NSNumber], months *foundation.NSArray[*foundation.NSNumber], weeksOfTheYear *foundation.NSArray[*foundation.NSNumber], daysOfTheYear *foundation.NSArray[*foundation.NSNumber], setPositions *foundation.NSArray[*foundation.NSNumber], end *raw.EKRecurrenceEnd) *RecurrenceRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKRecurrenceRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end:"), type_, interval, days.Ptr(), monthDays.Ptr(), months.Ptr(), weeksOfTheYear.Ptr(), daysOfTheYear.Ptr(), setPositions.Ptr(), end.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end:"), raw.EKRecurrenceFrequency(type_), interval, days.Ptr(), monthDays.Ptr(), months.Ptr(), weeksOfTheYear.Ptr(), daysOfTheYear.Ptr(), setPositions.Ptr(), end.Ptr())
 	return &RecurrenceRule{inner: raw.EKRecurrenceRuleFromID(_id)}
 }
 
@@ -75,8 +75,8 @@ func (x *RecurrenceRule) SetRecurrenceEnd(recurrenceEnd *raw.EKRecurrenceEnd) {
 }
 
 // Frequency calls the underlying Frequency.
-func (x *RecurrenceRule) Frequency() raw.EKRecurrenceFrequency {
-	return x.inner.Frequency()
+func (x *RecurrenceRule) Frequency() EKRecurrenceFrequency {
+	return EKRecurrenceFrequency(x.inner.Frequency())
 }
 
 // Interval calls the underlying Interval.
@@ -164,7 +164,7 @@ type RecurrenceRuleable interface {
 	CalendarIdentifier() string
 	RecurrenceEnd() *RecurrenceEnd
 	SetRecurrenceEnd(recurrenceEnd *raw.EKRecurrenceEnd)
-	Frequency() raw.EKRecurrenceFrequency
+	Frequency() EKRecurrenceFrequency
 	Interval() int
 	FirstDayOfTheWeek() int
 	DaysOfTheWeek() []*RecurrenceDayOfWeek

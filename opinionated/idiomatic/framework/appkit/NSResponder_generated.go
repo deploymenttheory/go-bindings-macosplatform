@@ -294,13 +294,13 @@ func (x *Responder) ShouldBeTreatedAsInkEvent(event *raw.NSEvent) bool {
 }
 
 // WantsScrollEventsForSwipeTrackingOnAxis calls the underlying WantsScrollEventsForSwipeTrackingOnAxis.
-func (x *Responder) WantsScrollEventsForSwipeTrackingOnAxis(axis raw.NSEventGestureAxis) bool {
-	return x.inner.WantsScrollEventsForSwipeTrackingOnAxis(axis)
+func (x *Responder) WantsScrollEventsForSwipeTrackingOnAxis(axis NSEventGestureAxis) bool {
+	return x.inner.WantsScrollEventsForSwipeTrackingOnAxis(raw.NSEventGestureAxis(axis))
 }
 
 // WantsForwardedScrollEventsForAxis calls the underlying WantsForwardedScrollEventsForAxis.
-func (x *Responder) WantsForwardedScrollEventsForAxis(axis raw.NSEventGestureAxis) bool {
-	return x.inner.WantsForwardedScrollEventsForAxis(axis)
+func (x *Responder) WantsForwardedScrollEventsForAxis(axis NSEventGestureAxis) bool {
+	return x.inner.WantsForwardedScrollEventsForAxis(raw.NSEventGestureAxis(axis))
 }
 
 // SupplementalTargetForActionSender calls the underlying SupplementalTargetForActionSender.
@@ -508,8 +508,8 @@ type Responderable interface {
 	ShowContextHelp(sender objc.ID)
 	HelpRequested(eventPtr *raw.NSEvent)
 	ShouldBeTreatedAsInkEvent(event *raw.NSEvent) bool
-	WantsScrollEventsForSwipeTrackingOnAxis(axis raw.NSEventGestureAxis) bool
-	WantsForwardedScrollEventsForAxis(axis raw.NSEventGestureAxis) bool
+	WantsScrollEventsForSwipeTrackingOnAxis(axis NSEventGestureAxis) bool
+	WantsForwardedScrollEventsForAxis(axis NSEventGestureAxis) bool
 	SupplementalTargetForActionSender(action objc.SEL, sender objc.ID) objc.ID
 	NextResponder() *Responder
 	SetNextResponder(nextResponder *raw.NSResponder)

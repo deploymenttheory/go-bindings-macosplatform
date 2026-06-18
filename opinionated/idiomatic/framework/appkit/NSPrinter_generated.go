@@ -72,8 +72,8 @@ func (x *Printer) DeviceDescription() *foundation.NSDictionary[*foundation.NSStr
 }
 
 // StatusForTable calls the underlying StatusForTable.
-func (x *Printer) StatusForTable(tableName string) raw.NSPrinterTableStatus {
-	return x.inner.StatusForTable(foundation.NSStringStringWithUTF8String(tableName))
+func (x *Printer) StatusForTable(tableName string) NSPrinterTableStatus {
+	return NSPrinterTableStatus(x.inner.StatusForTable(foundation.NSStringStringWithUTF8String(tableName)))
 }
 
 // IsKeyInTable calls the underlying IsKeyInTable.
@@ -180,7 +180,7 @@ type Printerable interface {
 	Type() string
 	LanguageLevel() int
 	DeviceDescription() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	StatusForTable(tableName string) raw.NSPrinterTableStatus
+	StatusForTable(tableName string) NSPrinterTableStatus
 	IsKeyInTable(key string, table string) bool
 	BooleanForKeyInTable(key string, table string) bool
 	FloatForKeyInTable(key string, table string) float32

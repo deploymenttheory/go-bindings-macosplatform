@@ -30,9 +30,9 @@ func DDDeviceEventFromID(id objc.ID) *DDDeviceEvent {
 }
 
 // NewDDDeviceEventWithEventTypeDevice creates a new [DDDeviceEvent].
-func NewDDDeviceEventWithEventTypeDevice(type_ raw.DDEventType, device *raw.DDDevice) *DDDeviceEvent {
+func NewDDDeviceEventWithEventTypeDevice(type_ DDEventType, device *raw.DDDevice) *DDDeviceEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DDDeviceEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventType:device:"), type_, device.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventType:device:"), raw.DDEventType(type_), device.Ptr())
 	return &DDDeviceEvent{inner: raw.DDDeviceEventFromID(_id)}
 }
 
@@ -46,15 +46,15 @@ func (x *DDDeviceEvent) Device() *DDDevice {
 }
 
 // EventType calls the underlying EventType.
-func (x *DDDeviceEvent) EventType() raw.DDEventType {
-	return x.inner.EventType()
+func (x *DDDeviceEvent) EventType() DDEventType {
+	return DDEventType(x.inner.EventType())
 }
 
 // DDDeviceEventable is the interface implemented by [DDDeviceEvent], for mocking and DI.
 type DDDeviceEventable interface {
 	Unwrap() *raw.DDDeviceEvent
 	Device() *DDDevice
-	EventType() raw.DDEventType
+	EventType() DDEventType
 }
 
 var _ DDDeviceEventable = (*DDDeviceEvent)(nil)

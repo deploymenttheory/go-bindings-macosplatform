@@ -50,8 +50,8 @@ func NewHapticEngineWithAudioSessionError(audioSession objc.ID) (*HapticEngine, 
 }
 
 // WithStoppedHandler sets the stoppedHandler property and returns the receiver for chaining.
-func (x *HapticEngine) WithStoppedHandler(stoppedHandler func(raw.CHHapticEngineStoppedReason)) *HapticEngine {
-	x.inner.SetStoppedHandler(stoppedHandler)
+func (x *HapticEngine) WithStoppedHandler(stoppedHandler func(CHHapticEngineStoppedReason)) *HapticEngine {
+	x.inner.SetStoppedHandler(func(_a0 raw.CHHapticEngineStoppedReason) { stoppedHandler(CHHapticEngineStoppedReason(_a0)) })
 	return x
 }
 
@@ -108,8 +108,10 @@ func (x *HapticEngine) StopWithCompletionHandler(completionHandler func(unsafe.P
 }
 
 // NotifyWhenPlayersFinished calls the underlying NotifyWhenPlayersFinished.
-func (x *HapticEngine) NotifyWhenPlayersFinished(finishedHandler func(unsafe.Pointer) raw.CHHapticEngineFinishedAction) {
-	x.inner.NotifyWhenPlayersFinished(finishedHandler)
+func (x *HapticEngine) NotifyWhenPlayersFinished(finishedHandler func(unsafe.Pointer) CHHapticEngineFinishedAction) {
+	x.inner.NotifyWhenPlayersFinished(func(_a0 unsafe.Pointer) raw.CHHapticEngineFinishedAction {
+		return raw.CHHapticEngineFinishedAction(finishedHandler(_a0))
+	})
 }
 
 // CreatePlayerWithPatternError calls the underlying CreatePlayerWithPatternError.
@@ -153,8 +155,8 @@ func (x *HapticEngine) StoppedHandler() objc.Block {
 }
 
 // SetStoppedHandler calls the underlying SetStoppedHandler.
-func (x *HapticEngine) SetStoppedHandler(stoppedHandler func(raw.CHHapticEngineStoppedReason)) {
-	x.inner.SetStoppedHandler(stoppedHandler)
+func (x *HapticEngine) SetStoppedHandler(stoppedHandler func(CHHapticEngineStoppedReason)) {
+	x.inner.SetStoppedHandler(func(_a0 raw.CHHapticEngineStoppedReason) { stoppedHandler(CHHapticEngineStoppedReason(_a0)) })
 }
 
 // ResetHandler calls the underlying ResetHandler.
@@ -220,7 +222,7 @@ func (x *HapticEngine) SetAutoShutdownEnabled(autoShutdownEnabled bool) {
 // HapticEngineable is the interface implemented by [HapticEngine], for mocking and DI.
 type HapticEngineable interface {
 	Unwrap() *raw.CHHapticEngine
-	WithStoppedHandler(stoppedHandler func(raw.CHHapticEngineStoppedReason)) *HapticEngine
+	WithStoppedHandler(stoppedHandler func(CHHapticEngineStoppedReason)) *HapticEngine
 	WithResetHandler(resetHandler func()) *HapticEngine
 	WithPlaysHapticsOnly(playsHapticsOnly bool) *HapticEngine
 	WithPlaysAudioOnly(playsAudioOnly bool) *HapticEngine
@@ -230,7 +232,7 @@ type HapticEngineable interface {
 	StartWithCompletionHandler(completionHandler func(unsafe.Pointer))
 	StartAndReturnError() error
 	StopWithCompletionHandler(completionHandler func(unsafe.Pointer))
-	NotifyWhenPlayersFinished(finishedHandler func(unsafe.Pointer) raw.CHHapticEngineFinishedAction)
+	NotifyWhenPlayersFinished(finishedHandler func(unsafe.Pointer) CHHapticEngineFinishedAction)
 	CreatePlayerWithPatternError(pattern *raw.CHHapticPattern) (raw.CHHapticPatternPlayer, error)
 	CreateAdvancedPlayerWithPatternError(pattern *raw.CHHapticPattern) (raw.CHHapticAdvancedPatternPlayer, error)
 	RegisterAudioResourceOptionsError(resourceURL string, options *foundation.NSDictionary[objc.ID, objc.ID]) (uint, error)
@@ -239,7 +241,7 @@ type HapticEngineable interface {
 	PlayPatternFromDataError(data *foundation.NSData) (bool, error)
 	CurrentTime() float64
 	StoppedHandler() objc.Block
-	SetStoppedHandler(stoppedHandler func(raw.CHHapticEngineStoppedReason))
+	SetStoppedHandler(stoppedHandler func(CHHapticEngineStoppedReason))
 	ResetHandler() objc.Block
 	SetResetHandler(resetHandler func())
 	PlaysHapticsOnly() bool

@@ -164,8 +164,8 @@ func (x *Set) EnumerateObjectsUsing(block objc.Block) {
 }
 
 // EnumerateObjectsWithOptionsUsing calls the underlying EnumerateObjectsWithOptionsUsing.
-func (x *Set) EnumerateObjectsWithOptionsUsing(opts raw.NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateObjectsWithOptionsUsing(opts, block)
+func (x *Set) EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateObjectsWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
 // ObjectsPassingTest calls the underlying ObjectsPassingTest.
@@ -174,8 +174,8 @@ func (x *Set) ObjectsPassingTest(predicate objc.Block) *raw.NSSet[objc.ID] {
 }
 
 // ObjectsWithOptionsPassingTest calls the underlying ObjectsWithOptionsPassingTest.
-func (x *Set) ObjectsWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID] {
-	return x.inner.ObjectsWithOptionsPassingTest(opts, predicate)
+func (x *Set) ObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID] {
+	return x.inner.ObjectsWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
 }
 
 // AllObjects calls the underlying AllObjects.
@@ -216,9 +216,9 @@ type Setable interface {
 	SetByAddingObjectsFromSet(other *raw.NSSet[objc.ID]) *raw.NSSet[objc.ID]
 	SetByAddingObjectsFromArray(other *raw.NSArray[objc.ID]) *raw.NSSet[objc.ID]
 	EnumerateObjectsUsing(block objc.Block)
-	EnumerateObjectsWithOptionsUsing(opts raw.NSEnumerationOptions, block objc.Block)
+	EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block)
 	ObjectsPassingTest(predicate objc.Block) *raw.NSSet[objc.ID]
-	ObjectsWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID]
+	ObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID]
 	AllObjects() *raw.NSArray[objc.ID]
 	SortedArrayUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[objc.ID]
 	FilteredSetUsingPredicate(predicate *raw.NSPredicate) *raw.NSSet[objc.ID]

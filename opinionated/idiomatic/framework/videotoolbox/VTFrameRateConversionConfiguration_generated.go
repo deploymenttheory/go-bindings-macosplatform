@@ -34,9 +34,9 @@ func FrameRateConversionConfigurationFromID(id objc.ID) *FrameRateConversionConf
 }
 
 // NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision creates a new [FrameRateConversionConfiguration].
-func NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization raw.VTFrameRateConversionConfigurationQualityPrioritization, revision raw.VTFrameRateConversionConfigurationRevision) *FrameRateConversionConfiguration {
+func NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTFrameRateConversionConfigurationQualityPrioritization, revision VTFrameRateConversionConfigurationRevision) *FrameRateConversionConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTFrameRateConversionConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, usePrecomputedFlow, qualityPrioritization, revision)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:usePrecomputedFlow:qualityPrioritization:revision:"), frameWidth, frameHeight, usePrecomputedFlow, raw.VTFrameRateConversionConfigurationQualityPrioritization(qualityPrioritization), raw.VTFrameRateConversionConfigurationRevision(revision))
 	return &FrameRateConversionConfiguration{inner: raw.VTFrameRateConversionConfigurationFromID(_id)}
 }
 
@@ -56,13 +56,13 @@ func (x *FrameRateConversionConfiguration) UsePrecomputedFlow() bool {
 }
 
 // QualityPrioritization calls the underlying QualityPrioritization.
-func (x *FrameRateConversionConfiguration) QualityPrioritization() raw.VTFrameRateConversionConfigurationQualityPrioritization {
-	return x.inner.QualityPrioritization()
+func (x *FrameRateConversionConfiguration) QualityPrioritization() VTFrameRateConversionConfigurationQualityPrioritization {
+	return VTFrameRateConversionConfigurationQualityPrioritization(x.inner.QualityPrioritization())
 }
 
 // Revision calls the underlying Revision.
-func (x *FrameRateConversionConfiguration) Revision() raw.VTFrameRateConversionConfigurationRevision {
-	return x.inner.Revision()
+func (x *FrameRateConversionConfiguration) Revision() VTFrameRateConversionConfigurationRevision {
+	return VTFrameRateConversionConfigurationRevision(x.inner.Revision())
 }
 
 // FrameSupportedPixelFormats returns the collection as a Go slice.
@@ -92,8 +92,8 @@ type FrameRateConversionConfigurationable interface {
 	FrameWidth() int
 	FrameHeight() int
 	UsePrecomputedFlow() bool
-	QualityPrioritization() raw.VTFrameRateConversionConfigurationQualityPrioritization
-	Revision() raw.VTFrameRateConversionConfigurationRevision
+	QualityPrioritization() VTFrameRateConversionConfigurationQualityPrioritization
+	Revision() VTFrameRateConversionConfigurationRevision
 	FrameSupportedPixelFormats() []*foundation.NSNumber
 	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]

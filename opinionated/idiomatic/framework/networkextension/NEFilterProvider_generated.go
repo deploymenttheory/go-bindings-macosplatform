@@ -57,9 +57,9 @@ func (x *NEFilterProvider) StartFilter(ctx context.Context) error {
 }
 
 // StopFilterWithReason blocks until the operation completes or ctx is cancelled.
-func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason raw.NEProviderStopReason) error {
+func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEProviderStopReason) error {
 	_ch := make(chan error, 1)
-	x.inner.StopFilterWithReasonCompletionHandler(reason, func() {
+	x.inner.StopFilterWithReasonCompletionHandler(raw.NEProviderStopReason(reason), func() {
 		_ch <- nil
 	})
 	select {
@@ -92,7 +92,7 @@ func (x *NEFilterProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEPr
 type NEFilterProviderable interface {
 	Unwrap() *raw.NEFilterProvider
 	StartFilter(ctx context.Context) error
-	StopFilterWithReason(ctx context.Context, reason raw.NEProviderStopReason) error
+	StopFilterWithReason(ctx context.Context, reason NEProviderStopReason) error
 	HandleReport(report *raw.NEFilterReport)
 	FilterConfiguration() *NEFilterProviderConfiguration
 }

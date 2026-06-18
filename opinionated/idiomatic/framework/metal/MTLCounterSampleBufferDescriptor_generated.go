@@ -52,8 +52,8 @@ func (x *CounterSampleBufferDescriptor) WithLabel(label string) *CounterSampleBu
 }
 
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
-func (x *CounterSampleBufferDescriptor) WithStorageMode(storageMode raw.MTLStorageMode) *CounterSampleBufferDescriptor {
-	x.inner.SetStorageMode(storageMode)
+func (x *CounterSampleBufferDescriptor) WithStorageMode(storageMode MTLStorageMode) *CounterSampleBufferDescriptor {
+	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 	return x
 }
 
@@ -88,13 +88,13 @@ func (x *CounterSampleBufferDescriptor) SetLabel(label string) {
 }
 
 // StorageMode calls the underlying StorageMode.
-func (x *CounterSampleBufferDescriptor) StorageMode() raw.MTLStorageMode {
-	return x.inner.StorageMode()
+func (x *CounterSampleBufferDescriptor) StorageMode() MTLStorageMode {
+	return MTLStorageMode(x.inner.StorageMode())
 }
 
 // SetStorageMode calls the underlying SetStorageMode.
-func (x *CounterSampleBufferDescriptor) SetStorageMode(storageMode raw.MTLStorageMode) {
-	x.inner.SetStorageMode(storageMode)
+func (x *CounterSampleBufferDescriptor) SetStorageMode(storageMode MTLStorageMode) {
+	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 }
 
 // SampleCount calls the underlying SampleCount.
@@ -112,14 +112,14 @@ type CounterSampleBufferDescriptorable interface {
 	Unwrap() *raw.MTLCounterSampleBufferDescriptor
 	WithCounterSet(counterSet raw.MTLCounterSet) *CounterSampleBufferDescriptor
 	WithLabel(label string) *CounterSampleBufferDescriptor
-	WithStorageMode(storageMode raw.MTLStorageMode) *CounterSampleBufferDescriptor
+	WithStorageMode(storageMode MTLStorageMode) *CounterSampleBufferDescriptor
 	WithSampleCount(sampleCount uint) *CounterSampleBufferDescriptor
 	CounterSet() raw.MTLCounterSet
 	SetCounterSet(counterSet raw.MTLCounterSet)
 	Label() string
 	SetLabel(label string)
-	StorageMode() raw.MTLStorageMode
-	SetStorageMode(storageMode raw.MTLStorageMode)
+	StorageMode() MTLStorageMode
+	SetStorageMode(storageMode MTLStorageMode)
 	SampleCount() uint
 	SetSampleCount(sampleCount uint)
 }

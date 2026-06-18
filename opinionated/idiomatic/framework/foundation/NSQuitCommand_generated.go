@@ -85,8 +85,8 @@ func (x *QuitCommand) WithScriptingProperties(scriptingProperties *raw.NSDiction
 }
 
 // SaveOptions calls the underlying SaveOptions.
-func (x *QuitCommand) SaveOptions() raw.NSSaveOptions {
-	return x.inner.SaveOptions()
+func (x *QuitCommand) SaveOptions() NSSaveOptions {
+	return NSSaveOptions(x.inner.SaveOptions())
 }
 
 func (x *QuitCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
@@ -104,7 +104,7 @@ type QuitCommandable interface {
 	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *QuitCommand
 	WithScriptErrorString(scriptErrorString string) *QuitCommand
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *QuitCommand
-	SaveOptions() raw.NSSaveOptions
+	SaveOptions() NSSaveOptions
 }
 
 var _ QuitCommandable = (*QuitCommand)(nil)

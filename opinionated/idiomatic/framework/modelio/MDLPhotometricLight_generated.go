@@ -68,8 +68,8 @@ func (x *PhotometricLight) WithAttenuationEndDistance(attenuationEndDistance flo
 }
 
 // WithLightType sets the lightType property and returns the receiver for chaining.
-func (x *PhotometricLight) WithLightType(lightType raw.MDLLightType) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetLightType(lightType)
+func (x *PhotometricLight) WithLightType(lightType MDLLightType) *PhotometricLight {
+	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetLightType(raw.MDLLightType(lightType))
 	return x
 }
 
@@ -167,7 +167,7 @@ type PhotometricLightable interface {
 	WithOuterConeAngle(outerConeAngle float32) *PhotometricLight
 	WithAttenuationStartDistance(attenuationStartDistance float32) *PhotometricLight
 	WithAttenuationEndDistance(attenuationEndDistance float32) *PhotometricLight
-	WithLightType(lightType raw.MDLLightType) *PhotometricLight
+	WithLightType(lightType MDLLightType) *PhotometricLight
 	WithColorSpace(colorSpace string) *PhotometricLight
 	WithParent(parent ObjectProvider) *PhotometricLight
 	WithInstance(instance ObjectProvider) *PhotometricLight

@@ -106,8 +106,8 @@ func (x *AchievementDescription) RarityPercent() *foundation.NSNumber {
 }
 
 // ReleaseState calls the underlying ReleaseState.
-func (x *AchievementDescription) ReleaseState() raw.GKReleaseState {
-	return x.inner.ReleaseState()
+func (x *AchievementDescription) ReleaseState() GKReleaseState {
+	return GKReleaseState(x.inner.ReleaseState())
 }
 
 // ActivityIdentifier calls the underlying ActivityIdentifier.
@@ -165,7 +165,7 @@ type AchievementDescriptionable interface {
 	IsHidden() bool
 	IsReplayable() bool
 	RarityPercent() *foundation.NSNumber
-	ReleaseState() raw.GKReleaseState
+	ReleaseState() GKReleaseState
 	ActivityIdentifier() string
 	ActivityProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
 	LoadImage(ctx context.Context) (*appkit.NSImage, error)

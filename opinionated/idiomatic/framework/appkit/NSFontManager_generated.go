@@ -90,8 +90,8 @@ func (x *FontManager) FontPanel(create bool) *FontPanel {
 }
 
 // FontWithFamilyTraitsWeightSize calls the underlying FontWithFamilyTraitsWeightSize.
-func (x *FontManager) FontWithFamilyTraitsWeightSize(family string, traits raw.NSFontTraitMask, weight int, size float64) *Font {
-	_r := x.inner.FontWithFamilyTraitsWeightSize(foundation.NSStringStringWithUTF8String(family), traits, weight, size)
+func (x *FontManager) FontWithFamilyTraitsWeightSize(family string, traits NSFontTraitMask, weight int, size float64) *Font {
+	_r := x.inner.FontWithFamilyTraitsWeightSize(foundation.NSStringStringWithUTF8String(family), raw.NSFontTraitMask(traits), weight, size)
 	if _r == nil {
 		return nil
 	}
@@ -99,8 +99,8 @@ func (x *FontManager) FontWithFamilyTraitsWeightSize(family string, traits raw.N
 }
 
 // TraitsOfFont calls the underlying TraitsOfFont.
-func (x *FontManager) TraitsOfFont(fontObj *raw.NSFont) raw.NSFontTraitMask {
-	return x.inner.TraitsOfFont(fontObj)
+func (x *FontManager) TraitsOfFont(fontObj *raw.NSFont) NSFontTraitMask {
+	return NSFontTraitMask(x.inner.TraitsOfFont(fontObj))
 }
 
 // WeightOfFont calls the underlying WeightOfFont.
@@ -150,8 +150,8 @@ func (x *FontManager) ConvertFontToFamily(fontObj *raw.NSFont, family string) *F
 }
 
 // ConvertFontToHaveTrait calls the underlying ConvertFontToHaveTrait.
-func (x *FontManager) ConvertFontToHaveTrait(fontObj *raw.NSFont, trait raw.NSFontTraitMask) *Font {
-	_r := x.inner.ConvertFontToHaveTrait(fontObj, trait)
+func (x *FontManager) ConvertFontToHaveTrait(fontObj *raw.NSFont, trait NSFontTraitMask) *Font {
+	_r := x.inner.ConvertFontToHaveTrait(fontObj, raw.NSFontTraitMask(trait))
 	if _r == nil {
 		return nil
 	}
@@ -159,8 +159,8 @@ func (x *FontManager) ConvertFontToHaveTrait(fontObj *raw.NSFont, trait raw.NSFo
 }
 
 // ConvertFontToNotHaveTrait calls the underlying ConvertFontToNotHaveTrait.
-func (x *FontManager) ConvertFontToNotHaveTrait(fontObj *raw.NSFont, trait raw.NSFontTraitMask) *Font {
-	_r := x.inner.ConvertFontToNotHaveTrait(fontObj, trait)
+func (x *FontManager) ConvertFontToNotHaveTrait(fontObj *raw.NSFont, trait NSFontTraitMask) *Font {
+	_r := x.inner.ConvertFontToNotHaveTrait(fontObj, raw.NSFontTraitMask(trait))
 	if _r == nil {
 		return nil
 	}
@@ -211,8 +211,8 @@ func (x *FontManager) FontDescriptorsInCollection(collectionNames string) *found
 }
 
 // AddCollectionOptions calls the underlying AddCollectionOptions.
-func (x *FontManager) AddCollectionOptions(collectionName string, collectionOptions raw.NSFontCollectionOptions) bool {
-	return x.inner.AddCollectionOptions(foundation.NSStringStringWithUTF8String(collectionName), collectionOptions)
+func (x *FontManager) AddCollectionOptions(collectionName string, collectionOptions NSFontCollectionOptions) bool {
+	return x.inner.AddCollectionOptions(foundation.NSStringStringWithUTF8String(collectionName), raw.NSFontCollectionOptions(collectionOptions))
 }
 
 // RemoveCollection calls the underlying RemoveCollection.
@@ -231,8 +231,8 @@ func (x *FontManager) RemoveFontDescriptorFromCollection(descriptor *raw.NSFontD
 }
 
 // ConvertFontTraits calls the underlying ConvertFontTraits.
-func (x *FontManager) ConvertFontTraits(traits raw.NSFontTraitMask) raw.NSFontTraitMask {
-	return x.inner.ConvertFontTraits(traits)
+func (x *FontManager) ConvertFontTraits(traits NSFontTraitMask) NSFontTraitMask {
+	return NSFontTraitMask(x.inner.ConvertFontTraits(raw.NSFontTraitMask(traits)))
 }
 
 // IsMultiple calls the underlying IsMultiple.
@@ -307,8 +307,8 @@ func (x *FontManager) CollectionNames() *foundation.NSArray[objc.ID] {
 }
 
 // CurrentFontAction calls the underlying CurrentFontAction.
-func (x *FontManager) CurrentFontAction() raw.NSFontAction {
-	return x.inner.CurrentFontAction()
+func (x *FontManager) CurrentFontAction() NSFontAction {
+	return NSFontAction(x.inner.CurrentFontAction())
 }
 
 // Target calls the underlying Target.
@@ -322,13 +322,13 @@ func (x *FontManager) SetTarget(target objc.ID) {
 }
 
 // FontNamedHasTraits calls the underlying FontNamedHasTraits.
-func (x *FontManager) FontNamedHasTraits(fName string, someTraits raw.NSFontTraitMask) bool {
-	return x.inner.FontNamedHasTraits(foundation.NSStringStringWithUTF8String(fName), someTraits)
+func (x *FontManager) FontNamedHasTraits(fName string, someTraits NSFontTraitMask) bool {
+	return x.inner.FontNamedHasTraits(foundation.NSStringStringWithUTF8String(fName), raw.NSFontTraitMask(someTraits))
 }
 
 // AvailableFontNamesWithTraits calls the underlying AvailableFontNamesWithTraits.
-func (x *FontManager) AvailableFontNamesWithTraits(someTraits raw.NSFontTraitMask) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.AvailableFontNamesWithTraits(someTraits)
+func (x *FontManager) AvailableFontNamesWithTraits(someTraits NSFontTraitMask) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.AvailableFontNamesWithTraits(raw.NSFontTraitMask(someTraits))
 }
 
 // AddFontTrait calls the underlying AddFontTrait.
@@ -372,16 +372,16 @@ type FontManagerable interface {
 	SetFontMenu(newMenu *raw.NSMenu)
 	FontMenu(create bool) *Menu
 	FontPanel(create bool) *FontPanel
-	FontWithFamilyTraitsWeightSize(family string, traits raw.NSFontTraitMask, weight int, size float64) *Font
-	TraitsOfFont(fontObj *raw.NSFont) raw.NSFontTraitMask
+	FontWithFamilyTraitsWeightSize(family string, traits NSFontTraitMask, weight int, size float64) *Font
+	TraitsOfFont(fontObj *raw.NSFont) NSFontTraitMask
 	WeightOfFont(fontObj *raw.NSFont) int
 	AvailableMembersOfFontFamily(fam string) *foundation.NSArray[objc.ID]
 	ConvertFont(fontObj *raw.NSFont) *Font
 	ConvertFontToSize(fontObj *raw.NSFont, size float64) *Font
 	ConvertFontToFace(fontObj *raw.NSFont, typeface string) *Font
 	ConvertFontToFamily(fontObj *raw.NSFont, family string) *Font
-	ConvertFontToHaveTrait(fontObj *raw.NSFont, trait raw.NSFontTraitMask) *Font
-	ConvertFontToNotHaveTrait(fontObj *raw.NSFont, trait raw.NSFontTraitMask) *Font
+	ConvertFontToHaveTrait(fontObj *raw.NSFont, trait NSFontTraitMask) *Font
+	ConvertFontToNotHaveTrait(fontObj *raw.NSFont, trait NSFontTraitMask) *Font
 	ConvertWeightOfFont(upFlag bool, fontObj *raw.NSFont) *Font
 	SendAction() bool
 	LocalizedNameForFamilyFace(family string, faceKey string) string
@@ -389,11 +389,11 @@ type FontManagerable interface {
 	ConvertAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	AvailableFontNamesMatchingFontDescriptor(descriptor *raw.NSFontDescriptor) *foundation.NSArray[objc.ID]
 	FontDescriptorsInCollection(collectionNames string) *foundation.NSArray[objc.ID]
-	AddCollectionOptions(collectionName string, collectionOptions raw.NSFontCollectionOptions) bool
+	AddCollectionOptions(collectionName string, collectionOptions NSFontCollectionOptions) bool
 	RemoveCollection(collectionName string) bool
 	AddFontDescriptorsToCollection(descriptors *foundation.NSArray[objc.ID], collectionName string)
 	RemoveFontDescriptorFromCollection(descriptor *raw.NSFontDescriptor, collection string)
-	ConvertFontTraits(traits raw.NSFontTraitMask) raw.NSFontTraitMask
+	ConvertFontTraits(traits NSFontTraitMask) NSFontTraitMask
 	IsMultiple() bool
 	SelectedFont() *Font
 	AvailableFonts() []string
@@ -405,11 +405,11 @@ type FontManagerable interface {
 	Delegate() objc.ID
 	SetDelegate(delegate objc.ID)
 	CollectionNames() *foundation.NSArray[objc.ID]
-	CurrentFontAction() raw.NSFontAction
+	CurrentFontAction() NSFontAction
 	Target() objc.ID
 	SetTarget(target objc.ID)
-	FontNamedHasTraits(fName string, someTraits raw.NSFontTraitMask) bool
-	AvailableFontNamesWithTraits(someTraits raw.NSFontTraitMask) *foundation.NSArray[*foundation.NSString]
+	FontNamedHasTraits(fName string, someTraits NSFontTraitMask) bool
+	AvailableFontNamesWithTraits(someTraits NSFontTraitMask) *foundation.NSArray[*foundation.NSString]
 	AddFontTrait(sender objc.ID)
 	RemoveFontTrait(sender objc.ID)
 	ModifyFontViaPanel(sender objc.ID)

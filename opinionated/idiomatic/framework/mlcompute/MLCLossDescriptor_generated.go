@@ -36,13 +36,13 @@ func NewLossDescriptor() *LossDescriptor {
 }
 
 // LossType calls the underlying LossType.
-func (x *LossDescriptor) LossType() raw.MLCLossType {
-	return x.inner.LossType()
+func (x *LossDescriptor) LossType() MLCLossType {
+	return MLCLossType(x.inner.LossType())
 }
 
 // ReductionType calls the underlying ReductionType.
-func (x *LossDescriptor) ReductionType() raw.MLCReductionType {
-	return x.inner.ReductionType()
+func (x *LossDescriptor) ReductionType() MLCReductionType {
+	return MLCReductionType(x.inner.ReductionType())
 }
 
 // Weight calls the underlying Weight.
@@ -73,8 +73,8 @@ func (x *LossDescriptor) Delta() float32 {
 // LossDescriptorable is the interface implemented by [LossDescriptor], for mocking and DI.
 type LossDescriptorable interface {
 	Unwrap() *raw.MLCLossDescriptor
-	LossType() raw.MLCLossType
-	ReductionType() raw.MLCReductionType
+	LossType() MLCLossType
+	ReductionType() MLCReductionType
 	Weight() float32
 	LabelSmoothing() float32
 	ClassCount() uint

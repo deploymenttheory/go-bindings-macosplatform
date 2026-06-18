@@ -66,8 +66,10 @@ func (x *AudioInputNode) SetManualRenderingInputPCMFormatInputBlock(format *raw.
 }
 
 // SetMutedSpeechActivityEventListener calls the underlying SetMutedSpeechActivityEventListener.
-func (x *AudioInputNode) SetMutedSpeechActivityEventListener(listenerBlock func(raw.AVAudioVoiceProcessingSpeechActivityEvent)) bool {
-	return x.inner.SetMutedSpeechActivityEventListener(listenerBlock)
+func (x *AudioInputNode) SetMutedSpeechActivityEventListener(listenerBlock func(AVAudioVoiceProcessingSpeechActivityEvent)) bool {
+	return x.inner.SetMutedSpeechActivityEventListener(func(_a0 raw.AVAudioVoiceProcessingSpeechActivityEvent) {
+		listenerBlock(AVAudioVoiceProcessingSpeechActivityEvent(_a0))
+	})
 }
 
 // IsVoiceProcessingBypassed calls the underlying IsVoiceProcessingBypassed.
@@ -122,7 +124,7 @@ type AudioInputNodeable interface {
 	WithVoiceProcessingInputMuted(voiceProcessingInputMuted bool) *AudioInputNode
 	WithVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration) *AudioInputNode
 	SetManualRenderingInputPCMFormatInputBlock(format *raw.AVAudioFormat, block func(uint32) *coreaudiotypes.AudioBufferList) bool
-	SetMutedSpeechActivityEventListener(listenerBlock func(raw.AVAudioVoiceProcessingSpeechActivityEvent)) bool
+	SetMutedSpeechActivityEventListener(listenerBlock func(AVAudioVoiceProcessingSpeechActivityEvent)) bool
 	IsVoiceProcessingBypassed() bool
 	SetVoiceProcessingBypassed(voiceProcessingBypassed bool)
 	IsVoiceProcessingAGCEnabled() bool

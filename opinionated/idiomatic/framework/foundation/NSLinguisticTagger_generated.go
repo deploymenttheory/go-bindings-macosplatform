@@ -70,8 +70,8 @@ func (x *LinguisticTagger) StringEditedInRangeChangeInLength(newRange raw.NSRang
 }
 
 // TokenRangeAtIndexUnit calls the underlying TokenRangeAtIndexUnit.
-func (x *LinguisticTagger) TokenRangeAtIndexUnit(charIndex uint, unit raw.NSLinguisticTaggerUnit) raw.NSRange {
-	return x.inner.TokenRangeAtIndexUnit(charIndex, unit)
+func (x *LinguisticTagger) TokenRangeAtIndexUnit(charIndex uint, unit NSLinguisticTaggerUnit) raw.NSRange {
+	return x.inner.TokenRangeAtIndexUnit(charIndex, raw.NSLinguisticTaggerUnit(unit))
 }
 
 // SentenceRangeForRange calls the underlying SentenceRangeForRange.
@@ -80,13 +80,13 @@ func (x *LinguisticTagger) SentenceRangeForRange(range_ raw.NSRange) raw.NSRange
 }
 
 // EnumerateTagsInRangeUnitSchemeOptionsUsing calls the underlying EnumerateTagsInRangeUnitSchemeOptionsUsing.
-func (x *LinguisticTagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ raw.NSRange, unit raw.NSLinguisticTaggerUnit, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, block objc.Block) {
-	x.inner.EnumerateTagsInRangeUnitSchemeOptionsUsing(range_, unit, scheme, options, block)
+func (x *LinguisticTagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, block objc.Block) {
+	x.inner.EnumerateTagsInRangeUnitSchemeOptionsUsing(range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), block)
 }
 
 // TagAtIndexUnitSchemeTokenRange calls the underlying TagAtIndexUnitSchemeTokenRange.
-func (x *LinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex uint, unit raw.NSLinguisticTaggerUnit, scheme *raw.NSString, tokenRange *raw.NSRange) *String {
-	_r := x.inner.TagAtIndexUnitSchemeTokenRange(charIndex, unit, scheme, tokenRange)
+func (x *LinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex uint, unit NSLinguisticTaggerUnit, scheme *raw.NSString, tokenRange *raw.NSRange) *String {
+	_r := x.inner.TagAtIndexUnitSchemeTokenRange(charIndex, raw.NSLinguisticTaggerUnit(unit), scheme, tokenRange)
 	if _r == nil {
 		return nil
 	}
@@ -94,13 +94,13 @@ func (x *LinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex uint, unit r
 }
 
 // TagsInRangeUnitSchemeOptionsTokenRanges calls the underlying TagsInRangeUnitSchemeOptionsTokenRanges.
-func (x *LinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit raw.NSLinguisticTaggerUnit, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
-	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, unit, scheme, options, tokenRanges)
+func (x *LinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
+	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), tokenRanges)
 }
 
 // EnumerateTagsInRangeSchemeOptionsUsing calls the underlying EnumerateTagsInRangeSchemeOptionsUsing.
-func (x *LinguisticTagger) EnumerateTagsInRangeSchemeOptionsUsing(range_ raw.NSRange, tagScheme *raw.NSString, opts raw.NSLinguisticTaggerOptions, block objc.Block) {
-	x.inner.EnumerateTagsInRangeSchemeOptionsUsing(range_, tagScheme, opts, block)
+func (x *LinguisticTagger) EnumerateTagsInRangeSchemeOptionsUsing(range_ raw.NSRange, tagScheme *raw.NSString, opts NSLinguisticTaggerOptions, block objc.Block) {
+	x.inner.EnumerateTagsInRangeSchemeOptionsUsing(range_, tagScheme, raw.NSLinguisticTaggerOptions(opts), block)
 }
 
 // TagAtIndexSchemeTokenRangeSentenceRange calls the underlying TagAtIndexSchemeTokenRangeSentenceRange.
@@ -113,8 +113,8 @@ func (x *LinguisticTagger) TagAtIndexSchemeTokenRangeSentenceRange(charIndex uin
 }
 
 // TagsInRangeSchemeOptionsTokenRanges calls the underlying TagsInRangeSchemeOptionsTokenRanges.
-func (x *LinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts raw.NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
-	return x.inner.TagsInRangeSchemeOptionsTokenRanges(range_, foundation.NSStringStringWithUTF8String(tagScheme), opts, tokenRanges)
+func (x *LinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
+	return x.inner.TagsInRangeSchemeOptionsTokenRanges(range_, foundation.NSStringStringWithUTF8String(tagScheme), raw.NSLinguisticTaggerOptions(opts), tokenRanges)
 }
 
 // PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores calls the underlying PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores.
@@ -166,14 +166,14 @@ type LinguisticTaggerable interface {
 	SetOrthographyRange(orthography *raw.NSOrthography, range_ raw.NSRange)
 	OrthographyAtIndexEffectiveRange(charIndex uint, effectiveRange *raw.NSRange) *Orthography
 	StringEditedInRangeChangeInLength(newRange raw.NSRange, delta int)
-	TokenRangeAtIndexUnit(charIndex uint, unit raw.NSLinguisticTaggerUnit) raw.NSRange
+	TokenRangeAtIndexUnit(charIndex uint, unit NSLinguisticTaggerUnit) raw.NSRange
 	SentenceRangeForRange(range_ raw.NSRange) raw.NSRange
-	EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ raw.NSRange, unit raw.NSLinguisticTaggerUnit, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, block objc.Block)
-	TagAtIndexUnitSchemeTokenRange(charIndex uint, unit raw.NSLinguisticTaggerUnit, scheme *raw.NSString, tokenRange *raw.NSRange) *String
-	TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit raw.NSLinguisticTaggerUnit, scheme *raw.NSString, options raw.NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
-	EnumerateTagsInRangeSchemeOptionsUsing(range_ raw.NSRange, tagScheme *raw.NSString, opts raw.NSLinguisticTaggerOptions, block objc.Block)
+	EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, block objc.Block)
+	TagAtIndexUnitSchemeTokenRange(charIndex uint, unit NSLinguisticTaggerUnit, scheme *raw.NSString, tokenRange *raw.NSRange) *String
+	TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
+	EnumerateTagsInRangeSchemeOptionsUsing(range_ raw.NSRange, tagScheme *raw.NSString, opts NSLinguisticTaggerOptions, block objc.Block)
 	TagAtIndexSchemeTokenRangeSentenceRange(charIndex uint, scheme *raw.NSString, tokenRange *raw.NSRange, sentenceRange *raw.NSRange) *String
-	TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts raw.NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
+	TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts NSLinguisticTaggerOptions, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
 	PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme string, tokenRange *raw.NSRange, sentenceRange *raw.NSRange, scores *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
 	TagSchemes() []*String
 	String() *String

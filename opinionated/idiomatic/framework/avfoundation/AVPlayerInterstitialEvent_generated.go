@@ -82,8 +82,8 @@ func (x *PlayerInterstitialEvent) WithTemplateItems(items ...*raw.AVPlayerItem) 
 }
 
 // WithRestrictions sets the restrictions property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithRestrictions(restrictions raw.AVPlayerInterstitialEventRestrictions) *PlayerInterstitialEvent {
-	x.inner.SetRestrictions(restrictions)
+func (x *PlayerInterstitialEvent) WithRestrictions(restrictions AVPlayerInterstitialEventRestrictions) *PlayerInterstitialEvent {
+	x.inner.SetRestrictions(raw.AVPlayerInterstitialEventRestrictions(restrictions))
 	return x
 }
 
@@ -130,8 +130,8 @@ func (x *PlayerInterstitialEvent) WithUserDefinedAttributes(userDefinedAttribute
 }
 
 // WithTimelineOccupancy sets the timelineOccupancy property and returns the receiver for chaining.
-func (x *PlayerInterstitialEvent) WithTimelineOccupancy(timelineOccupancy raw.AVPlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent {
-	x.inner.SetTimelineOccupancy(timelineOccupancy)
+func (x *PlayerInterstitialEvent) WithTimelineOccupancy(timelineOccupancy AVPlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent {
+	x.inner.SetTimelineOccupancy(raw.AVPlayerInterstitialEventTimelineOccupancy(timelineOccupancy))
 	return x
 }
 
@@ -205,8 +205,8 @@ func (x *PlayerInterstitialEvent) TemplateItems() []*PlayerItem {
 }
 
 // Restrictions calls the underlying Restrictions.
-func (x *PlayerInterstitialEvent) Restrictions() raw.AVPlayerInterstitialEventRestrictions {
-	return x.inner.Restrictions()
+func (x *PlayerInterstitialEvent) Restrictions() AVPlayerInterstitialEventRestrictions {
+	return AVPlayerInterstitialEventRestrictions(x.inner.Restrictions())
 }
 
 // ResumptionOffset calls the underlying ResumptionOffset.
@@ -263,8 +263,8 @@ func (x *PlayerInterstitialEvent) ScheduleIdentifier() string {
 }
 
 // TimelineOccupancy calls the underlying TimelineOccupancy.
-func (x *PlayerInterstitialEvent) TimelineOccupancy() raw.AVPlayerInterstitialEventTimelineOccupancy {
-	return x.inner.TimelineOccupancy()
+func (x *PlayerInterstitialEvent) TimelineOccupancy() AVPlayerInterstitialEventTimelineOccupancy {
+	return AVPlayerInterstitialEventTimelineOccupancy(x.inner.TimelineOccupancy())
 }
 
 // SupplementsPrimaryContent calls the underlying SupplementsPrimaryContent.
@@ -317,8 +317,8 @@ func (x *PlayerInterstitialEvent) SetTemplateItems(templateItems *foundation.NSA
 }
 
 // SetRestrictions calls the underlying SetRestrictions.
-func (x *PlayerInterstitialEvent) SetRestrictions(restrictions raw.AVPlayerInterstitialEventRestrictions) {
-	x.inner.SetRestrictions(restrictions)
+func (x *PlayerInterstitialEvent) SetRestrictions(restrictions AVPlayerInterstitialEventRestrictions) {
+	x.inner.SetRestrictions(raw.AVPlayerInterstitialEventRestrictions(restrictions))
 }
 
 // SetResumptionOffset calls the underlying SetResumptionOffset.
@@ -357,8 +357,8 @@ func (x *PlayerInterstitialEvent) SetUserDefinedAttributes(userDefinedAttributes
 }
 
 // SetTimelineOccupancy calls the underlying SetTimelineOccupancy.
-func (x *PlayerInterstitialEvent) SetTimelineOccupancy(timelineOccupancy raw.AVPlayerInterstitialEventTimelineOccupancy) {
-	x.inner.SetTimelineOccupancy(timelineOccupancy)
+func (x *PlayerInterstitialEvent) SetTimelineOccupancy(timelineOccupancy AVPlayerInterstitialEventTimelineOccupancy) {
+	x.inner.SetTimelineOccupancy(raw.AVPlayerInterstitialEventTimelineOccupancy(timelineOccupancy))
 }
 
 // SetSupplementsPrimaryContent calls the underlying SetSupplementsPrimaryContent.
@@ -399,7 +399,7 @@ type PlayerInterstitialEventable interface {
 	WithTime(time_ coremedia.CMTime) *PlayerInterstitialEvent
 	WithDate(date *foundation.NSDate) *PlayerInterstitialEvent
 	WithTemplateItems(items ...*raw.AVPlayerItem) *PlayerInterstitialEvent
-	WithRestrictions(restrictions raw.AVPlayerInterstitialEventRestrictions) *PlayerInterstitialEvent
+	WithRestrictions(restrictions AVPlayerInterstitialEventRestrictions) *PlayerInterstitialEvent
 	WithResumptionOffset(resumptionOffset coremedia.CMTime) *PlayerInterstitialEvent
 	WithPlayoutLimit(playoutLimit coremedia.CMTime) *PlayerInterstitialEvent
 	WithAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool) *PlayerInterstitialEvent
@@ -407,7 +407,7 @@ type PlayerInterstitialEventable interface {
 	WithCue(cue *foundation.NSString) *PlayerInterstitialEvent
 	WithWillPlayOnce(willPlayOnce bool) *PlayerInterstitialEvent
 	WithUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *PlayerInterstitialEvent
-	WithTimelineOccupancy(timelineOccupancy raw.AVPlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent
+	WithTimelineOccupancy(timelineOccupancy AVPlayerInterstitialEventTimelineOccupancy) *PlayerInterstitialEvent
 	WithSupplementsPrimaryContent(supplementsPrimaryContent bool) *PlayerInterstitialEvent
 	WithContentMayVary(contentMayVary bool) *PlayerInterstitialEvent
 	WithSkipControlTimeRange(skipControlTimeRange coremedia.CMTimeRange) *PlayerInterstitialEvent
@@ -418,7 +418,7 @@ type PlayerInterstitialEventable interface {
 	Time() coremedia.CMTime
 	Date() *foundation.NSDate
 	TemplateItems() []*PlayerItem
-	Restrictions() raw.AVPlayerInterstitialEventRestrictions
+	Restrictions() AVPlayerInterstitialEventRestrictions
 	ResumptionOffset() coremedia.CMTime
 	PlayoutLimit() coremedia.CMTime
 	AlignsStartWithPrimarySegmentBoundary() bool
@@ -428,7 +428,7 @@ type PlayerInterstitialEventable interface {
 	UserDefinedAttributes() *foundation.NSDictionary[objc.ID, objc.ID]
 	AssetListResponse() *foundation.NSDictionary[objc.ID, objc.ID]
 	ScheduleIdentifier() string
-	TimelineOccupancy() raw.AVPlayerInterstitialEventTimelineOccupancy
+	TimelineOccupancy() AVPlayerInterstitialEventTimelineOccupancy
 	SupplementsPrimaryContent() bool
 	ContentMayVary() bool
 	SkipControlTimeRange() coremedia.CMTimeRange
@@ -438,7 +438,7 @@ type PlayerInterstitialEventable interface {
 	SetTime(time_ coremedia.CMTime)
 	SetDate(date *foundation.NSDate)
 	SetTemplateItems(templateItems *foundation.NSArray[*raw.AVPlayerItem])
-	SetRestrictions(restrictions raw.AVPlayerInterstitialEventRestrictions)
+	SetRestrictions(restrictions AVPlayerInterstitialEventRestrictions)
 	SetResumptionOffset(resumptionOffset coremedia.CMTime)
 	SetPlayoutLimit(playoutLimit coremedia.CMTime)
 	SetAlignsStartWithPrimarySegmentBoundary(alignsStartWithPrimarySegmentBoundary bool)
@@ -446,7 +446,7 @@ type PlayerInterstitialEventable interface {
 	SetCue(cue *foundation.NSString)
 	SetWillPlayOnce(willPlayOnce bool)
 	SetUserDefinedAttributes(userDefinedAttributes *foundation.NSDictionary[objc.ID, objc.ID])
-	SetTimelineOccupancy(timelineOccupancy raw.AVPlayerInterstitialEventTimelineOccupancy)
+	SetTimelineOccupancy(timelineOccupancy AVPlayerInterstitialEventTimelineOccupancy)
 	SetSupplementsPrimaryContent(supplementsPrimaryContent bool)
 	SetContentMayVary(contentMayVary bool)
 	PlannedDuration() coremedia.CMTime

@@ -9,13 +9,13 @@ import (
 )
 
 // AuthorizationStatus calls the underlying CMHeadphoneActivityManagerAuthorizationStatus.
-func AuthorizationStatus() raw.CMAuthorizationStatus {
-	return raw.CMHeadphoneActivityManagerAuthorizationStatus()
+func AuthorizationStatus() CMAuthorizationStatus {
+	return CMAuthorizationStatus(raw.CMHeadphoneActivityManagerAuthorizationStatus())
 }
 
 // CMHeadphoneMotionManagerAuthorizationStatus calls the underlying CMHeadphoneMotionManagerAuthorizationStatus.
-func CMHeadphoneMotionManagerAuthorizationStatus() raw.CMAuthorizationStatus {
-	return raw.CMHeadphoneMotionManagerAuthorizationStatus()
+func CMHeadphoneMotionManagerAuthorizationStatus() CMAuthorizationStatus {
+	return CMAuthorizationStatus(raw.CMHeadphoneMotionManagerAuthorizationStatus())
 }
 
 // IsStepCountingAvailable calls the underlying CMPedometerIsStepCountingAvailable.

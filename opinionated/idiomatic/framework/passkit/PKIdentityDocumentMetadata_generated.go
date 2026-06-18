@@ -103,8 +103,8 @@ func (x *IdentityDocumentMetadata) IssuingCountryCode() string {
 }
 
 // DocumentType calls the underlying DocumentType.
-func (x *IdentityDocumentMetadata) DocumentType() raw.PKAddIdentityDocumentType {
-	return x.inner.DocumentType()
+func (x *IdentityDocumentMetadata) DocumentType() PKAddIdentityDocumentType {
+	return PKAddIdentityDocumentType(x.inner.DocumentType())
 }
 
 func (x *IdentityDocumentMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata {
@@ -122,7 +122,7 @@ type IdentityDocumentMetadataable interface {
 	ServerEnvironmentIdentifier() string
 	SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string)
 	IssuingCountryCode() string
-	DocumentType() raw.PKAddIdentityDocumentType
+	DocumentType() PKAddIdentityDocumentType
 }
 
 var _ IdentityDocumentMetadataable = (*IdentityDocumentMetadata)(nil)

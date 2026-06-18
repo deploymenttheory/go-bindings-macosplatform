@@ -41,15 +41,15 @@ func (x *DeveloperTool) RequestDeveloperToolAccessWithCompletionHandler(handler 
 }
 
 // AuthorizationStatus calls the underlying AuthorizationStatus.
-func (x *DeveloperTool) AuthorizationStatus() raw.EPDeveloperToolStatus {
-	return x.inner.AuthorizationStatus()
+func (x *DeveloperTool) AuthorizationStatus() EPDeveloperToolStatus {
+	return EPDeveloperToolStatus(x.inner.AuthorizationStatus())
 }
 
 // DeveloperToolable is the interface implemented by [DeveloperTool], for mocking and DI.
 type DeveloperToolable interface {
 	Unwrap() *raw.EPDeveloperTool
 	RequestDeveloperToolAccessWithCompletionHandler(handler func(bool))
-	AuthorizationStatus() raw.EPDeveloperToolStatus
+	AuthorizationStatus() EPDeveloperToolStatus
 }
 
 var _ DeveloperToolable = (*DeveloperTool)(nil)

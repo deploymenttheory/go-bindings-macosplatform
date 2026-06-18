@@ -150,8 +150,8 @@ func (x *VolumeSupportedCapabilities) WithSupportsVolumeGroups(supportsVolumeGro
 }
 
 // WithCaseFormat sets the caseFormat property and returns the receiver for chaining.
-func (x *VolumeSupportedCapabilities) WithCaseFormat(caseFormat raw.FSVolumeCaseFormat) *VolumeSupportedCapabilities {
-	x.inner.SetCaseFormat(caseFormat)
+func (x *VolumeSupportedCapabilities) WithCaseFormat(caseFormat FSVolumeCaseFormat) *VolumeSupportedCapabilities {
+	x.inner.SetCaseFormat(raw.FSVolumeCaseFormat(caseFormat))
 	return x
 }
 
@@ -346,13 +346,13 @@ func (x *VolumeSupportedCapabilities) SetSupportsVolumeGroups(supportsVolumeGrou
 }
 
 // CaseFormat calls the underlying CaseFormat.
-func (x *VolumeSupportedCapabilities) CaseFormat() raw.FSVolumeCaseFormat {
-	return x.inner.CaseFormat()
+func (x *VolumeSupportedCapabilities) CaseFormat() FSVolumeCaseFormat {
+	return FSVolumeCaseFormat(x.inner.CaseFormat())
 }
 
 // SetCaseFormat calls the underlying SetCaseFormat.
-func (x *VolumeSupportedCapabilities) SetCaseFormat(caseFormat raw.FSVolumeCaseFormat) {
-	x.inner.SetCaseFormat(caseFormat)
+func (x *VolumeSupportedCapabilities) SetCaseFormat(caseFormat FSVolumeCaseFormat) {
+	x.inner.SetCaseFormat(raw.FSVolumeCaseFormat(caseFormat))
 }
 
 // VolumeSupportedCapabilitiesable is the interface implemented by [VolumeSupportedCapabilities], for mocking and DI.
@@ -377,7 +377,7 @@ type VolumeSupportedCapabilitiesable interface {
 	WithDoesNotSupportSettingFilePermissions(doesNotSupportSettingFilePermissions bool) *VolumeSupportedCapabilities
 	WithSupportsSharedSpace(supportsSharedSpace bool) *VolumeSupportedCapabilities
 	WithSupportsVolumeGroups(supportsVolumeGroups bool) *VolumeSupportedCapabilities
-	WithCaseFormat(caseFormat raw.FSVolumeCaseFormat) *VolumeSupportedCapabilities
+	WithCaseFormat(caseFormat FSVolumeCaseFormat) *VolumeSupportedCapabilities
 	SupportsPersistentObjectIDs() bool
 	SetSupportsPersistentObjectIDs(supportsPersistentObjectIDs bool)
 	SupportsSymbolicLinks() bool
@@ -416,8 +416,8 @@ type VolumeSupportedCapabilitiesable interface {
 	SetSupportsSharedSpace(supportsSharedSpace bool)
 	SupportsVolumeGroups() bool
 	SetSupportsVolumeGroups(supportsVolumeGroups bool)
-	CaseFormat() raw.FSVolumeCaseFormat
-	SetCaseFormat(caseFormat raw.FSVolumeCaseFormat)
+	CaseFormat() FSVolumeCaseFormat
+	SetCaseFormat(caseFormat FSVolumeCaseFormat)
 }
 
 var _ VolumeSupportedCapabilitiesable = (*VolumeSupportedCapabilities)(nil)

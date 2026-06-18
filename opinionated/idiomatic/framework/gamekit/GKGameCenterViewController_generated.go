@@ -32,23 +32,23 @@ func GameCenterViewControllerFromID(id objc.ID) *GameCenterViewController {
 }
 
 // NewGameCenterViewControllerWithState creates a new [GameCenterViewController].
-func NewGameCenterViewControllerWithState(state raw.GKGameCenterViewControllerState) *GameCenterViewController {
+func NewGameCenterViewControllerWithState(state GKGameCenterViewControllerState) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithState:"), state)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithState:"), raw.GKGameCenterViewControllerState(state))
 	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
 }
 
 // NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope creates a new [GameCenterViewController].
-func NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope(leaderboardID string, playerScope raw.GKLeaderboardPlayerScope, timeScope raw.GKLeaderboardTimeScope) *GameCenterViewController {
+func NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope(leaderboardID string, playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardID:playerScope:timeScope:"), foundation.NSStringStringWithUTF8String(leaderboardID).Ptr(), playerScope, timeScope)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardID:playerScope:timeScope:"), foundation.NSStringStringWithUTF8String(leaderboardID).Ptr(), raw.GKLeaderboardPlayerScope(playerScope), raw.GKLeaderboardTimeScope(timeScope))
 	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
 }
 
 // NewGameCenterViewControllerWithLeaderboardPlayerScope creates a new [GameCenterViewController].
-func NewGameCenterViewControllerWithLeaderboardPlayerScope(leaderboard *raw.GKLeaderboard, playerScope raw.GKLeaderboardPlayerScope) *GameCenterViewController {
+func NewGameCenterViewControllerWithLeaderboardPlayerScope(leaderboard *raw.GKLeaderboard, playerScope GKLeaderboardPlayerScope) *GameCenterViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboard:playerScope:"), leaderboard.Ptr(), playerScope)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboard:playerScope:"), leaderboard.Ptr(), raw.GKLeaderboardPlayerScope(playerScope))
 	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
 }
 
@@ -80,14 +80,14 @@ func (x *GameCenterViewController) WithGameCenterDelegate(gameCenterDelegate raw
 }
 
 // WithViewState sets the viewState property and returns the receiver for chaining.
-func (x *GameCenterViewController) WithViewState(viewState raw.GKGameCenterViewControllerState) *GameCenterViewController {
-	x.inner.SetViewState(viewState)
+func (x *GameCenterViewController) WithViewState(viewState GKGameCenterViewControllerState) *GameCenterViewController {
+	x.inner.SetViewState(raw.GKGameCenterViewControllerState(viewState))
 	return x
 }
 
 // WithLeaderboardTimeScope sets the leaderboardTimeScope property and returns the receiver for chaining.
-func (x *GameCenterViewController) WithLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) *GameCenterViewController {
-	x.inner.SetLeaderboardTimeScope(leaderboardTimeScope)
+func (x *GameCenterViewController) WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *GameCenterViewController {
+	x.inner.SetLeaderboardTimeScope(raw.GKLeaderboardTimeScope(leaderboardTimeScope))
 	return x
 }
 
@@ -114,23 +114,23 @@ func (x *GameCenterViewController) SetGameCenterDelegate(gameCenterDelegate raw.
 }
 
 // ViewState calls the underlying ViewState.
-func (x *GameCenterViewController) ViewState() raw.GKGameCenterViewControllerState {
-	return x.inner.ViewState()
+func (x *GameCenterViewController) ViewState() GKGameCenterViewControllerState {
+	return GKGameCenterViewControllerState(x.inner.ViewState())
 }
 
 // SetViewState calls the underlying SetViewState.
-func (x *GameCenterViewController) SetViewState(viewState raw.GKGameCenterViewControllerState) {
-	x.inner.SetViewState(viewState)
+func (x *GameCenterViewController) SetViewState(viewState GKGameCenterViewControllerState) {
+	x.inner.SetViewState(raw.GKGameCenterViewControllerState(viewState))
 }
 
 // LeaderboardTimeScope calls the underlying LeaderboardTimeScope.
-func (x *GameCenterViewController) LeaderboardTimeScope() raw.GKLeaderboardTimeScope {
-	return x.inner.LeaderboardTimeScope()
+func (x *GameCenterViewController) LeaderboardTimeScope() GKLeaderboardTimeScope {
+	return GKLeaderboardTimeScope(x.inner.LeaderboardTimeScope())
 }
 
 // SetLeaderboardTimeScope calls the underlying SetLeaderboardTimeScope.
-func (x *GameCenterViewController) SetLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) {
-	x.inner.SetLeaderboardTimeScope(leaderboardTimeScope)
+func (x *GameCenterViewController) SetLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) {
+	x.inner.SetLeaderboardTimeScope(raw.GKLeaderboardTimeScope(leaderboardTimeScope))
 }
 
 // LeaderboardIdentifier calls the underlying LeaderboardIdentifier.
@@ -169,16 +169,16 @@ func (x *GameCenterViewController) asGameCenterViewController() *raw.GKGameCente
 type GameCenterViewControllerable interface {
 	Unwrap() *raw.GKGameCenterViewController
 	WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *GameCenterViewController
-	WithViewState(viewState raw.GKGameCenterViewControllerState) *GameCenterViewController
-	WithLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) *GameCenterViewController
+	WithViewState(viewState GKGameCenterViewControllerState) *GameCenterViewController
+	WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *GameCenterViewController
 	WithLeaderboardIdentifier(leaderboardIdentifier string) *GameCenterViewController
 	WithLeaderboardCategory(leaderboardCategory string) *GameCenterViewController
 	GameCenterDelegate() raw.GKGameCenterControllerDelegate
 	SetGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate)
-	ViewState() raw.GKGameCenterViewControllerState
-	SetViewState(viewState raw.GKGameCenterViewControllerState)
-	LeaderboardTimeScope() raw.GKLeaderboardTimeScope
-	SetLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope)
+	ViewState() GKGameCenterViewControllerState
+	SetViewState(viewState GKGameCenterViewControllerState)
+	LeaderboardTimeScope() GKLeaderboardTimeScope
+	SetLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope)
 	LeaderboardIdentifier() string
 	SetLeaderboardIdentifier(leaderboardIdentifier string)
 	LeaderboardCategory() string

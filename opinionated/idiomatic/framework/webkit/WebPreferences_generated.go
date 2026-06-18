@@ -189,8 +189,8 @@ func (x *WebPreferences) WithUsesPageCache(usesPageCache bool) *WebPreferences {
 }
 
 // WithCacheModel sets the cacheModel property and returns the receiver for chaining.
-func (x *WebPreferences) WithCacheModel(cacheModel raw.WebCacheModel) *WebPreferences {
-	x.inner.SetCacheModel(cacheModel)
+func (x *WebPreferences) WithCacheModel(cacheModel WebCacheModel) *WebPreferences {
+	x.inner.SetCacheModel(raw.WebCacheModel(cacheModel))
 	return x
 }
 
@@ -494,13 +494,13 @@ func (x *WebPreferences) SetUsesPageCache(usesPageCache bool) {
 }
 
 // CacheModel calls the underlying CacheModel.
-func (x *WebPreferences) CacheModel() raw.WebCacheModel {
-	return x.inner.CacheModel()
+func (x *WebPreferences) CacheModel() WebCacheModel {
+	return WebCacheModel(x.inner.CacheModel())
 }
 
 // SetCacheModel calls the underlying SetCacheModel.
-func (x *WebPreferences) SetCacheModel(cacheModel raw.WebCacheModel) {
-	x.inner.SetCacheModel(cacheModel)
+func (x *WebPreferences) SetCacheModel(cacheModel WebCacheModel) {
+	x.inner.SetCacheModel(raw.WebCacheModel(cacheModel))
 }
 
 // SuppressesIncrementalRendering calls the underlying SuppressesIncrementalRendering.
@@ -551,7 +551,7 @@ type WebPreferencesable interface {
 	WithPrivateBrowsingEnabled(privateBrowsingEnabled bool) *WebPreferences
 	WithTabsToLinks(tabsToLinks bool) *WebPreferences
 	WithUsesPageCache(usesPageCache bool) *WebPreferences
-	WithCacheModel(cacheModel raw.WebCacheModel) *WebPreferences
+	WithCacheModel(cacheModel WebCacheModel) *WebPreferences
 	WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WebPreferences
 	WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WebPreferences
 	Identifier() string
@@ -605,8 +605,8 @@ type WebPreferencesable interface {
 	SetTabsToLinks(tabsToLinks bool)
 	UsesPageCache() bool
 	SetUsesPageCache(usesPageCache bool)
-	CacheModel() raw.WebCacheModel
-	SetCacheModel(cacheModel raw.WebCacheModel)
+	CacheModel() WebCacheModel
+	SetCacheModel(cacheModel WebCacheModel)
 	SuppressesIncrementalRendering() bool
 	SetSuppressesIncrementalRendering(suppressesIncrementalRendering bool)
 	AllowsAirPlayForMediaPlayback() bool

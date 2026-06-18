@@ -43,8 +43,8 @@ func (x *DeviceCursor) WithValueChangedHandler(valueChangedHandler func(*raw.GCC
 }
 
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *DeviceCursor {
-	x.inner.GCControllerDirectionPad.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+func (x *DeviceCursor) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *DeviceCursor {
+	x.inner.GCControllerDirectionPad.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
@@ -84,7 +84,7 @@ func (x *DeviceCursor) asControllerElement() *raw.GCControllerElement {
 type DeviceCursorable interface {
 	Unwrap() *raw.GCDeviceCursor
 	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *DeviceCursor
-	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *DeviceCursor
+	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *DeviceCursor
 	WithSfSymbolsName(sfSymbolsName string) *DeviceCursor
 	WithLocalizedName(localizedName string) *DeviceCursor
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DeviceCursor

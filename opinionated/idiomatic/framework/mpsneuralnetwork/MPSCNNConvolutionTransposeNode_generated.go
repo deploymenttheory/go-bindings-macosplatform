@@ -38,14 +38,14 @@ func NewCNNConvolutionTransposeNodeWithSourceConvolutionGradientStateWeights(sou
 }
 
 // WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
-func (x *CNNConvolutionTransposeNode) WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNConvolutionTransposeNode {
-	x.inner.MPSCNNConvolutionNode.SetTrainingStyle(trainingStyle)
+func (x *CNNConvolutionTransposeNode) WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNConvolutionTransposeNode {
+	x.inner.MPSCNNConvolutionNode.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
 	return x
 }
 
 // WithAccumulatorPrecision sets the accumulatorPrecision property and returns the receiver for chaining.
-func (x *CNNConvolutionTransposeNode) WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTransposeNode {
-	x.inner.MPSCNNConvolutionNode.SetAccumulatorPrecision(accumulatorPrecision)
+func (x *CNNConvolutionTransposeNode) WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTransposeNode {
+	x.inner.MPSCNNConvolutionNode.SetAccumulatorPrecision(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecision))
 	return x
 }
 
@@ -72,8 +72,8 @@ func (x *CNNConvolutionTransposeNode) asNNFilterNode() *raw.MPSNNFilterNode {
 // CNNConvolutionTransposeNodeable is the interface implemented by [CNNConvolutionTransposeNode], for mocking and DI.
 type CNNConvolutionTransposeNodeable interface {
 	Unwrap() *raw.MPSCNNConvolutionTransposeNode
-	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNConvolutionTransposeNode
-	WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTransposeNode
+	WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNConvolutionTransposeNode
+	WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTransposeNode
 	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNConvolutionTransposeNode
 	WithLabel(label string) *CNNConvolutionTransposeNode
 }

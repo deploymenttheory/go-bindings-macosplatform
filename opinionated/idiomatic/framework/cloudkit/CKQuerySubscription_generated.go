@@ -32,16 +32,16 @@ func QuerySubscriptionFromID(id objc.ID) *QuerySubscription {
 }
 
 // NewQuerySubscriptionWithRecordTypePredicateOptions creates a new [QuerySubscription].
-func NewQuerySubscriptionWithRecordTypePredicateOptions(recordType *foundation.NSString, predicate *foundation.NSPredicate, querySubscriptionOptions raw.CKQuerySubscriptionOptions) *QuerySubscription {
+func NewQuerySubscriptionWithRecordTypePredicateOptions(recordType *foundation.NSString, predicate *foundation.NSPredicate, querySubscriptionOptions CKQuerySubscriptionOptions) *QuerySubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKQuerySubscription")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:predicate:options:"), recordType.Ptr(), predicate.Ptr(), querySubscriptionOptions)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:predicate:options:"), recordType.Ptr(), predicate.Ptr(), raw.CKQuerySubscriptionOptions(querySubscriptionOptions))
 	return &QuerySubscription{inner: raw.CKQuerySubscriptionFromID(_id)}
 }
 
 // NewQuerySubscriptionWithRecordTypePredicateSubscriptionIDOptions creates a new [QuerySubscription].
-func NewQuerySubscriptionWithRecordTypePredicateSubscriptionIDOptions(recordType *foundation.NSString, predicate *foundation.NSPredicate, subscriptionID *foundation.NSString, querySubscriptionOptions raw.CKQuerySubscriptionOptions) *QuerySubscription {
+func NewQuerySubscriptionWithRecordTypePredicateSubscriptionIDOptions(recordType *foundation.NSString, predicate *foundation.NSPredicate, subscriptionID *foundation.NSString, querySubscriptionOptions CKQuerySubscriptionOptions) *QuerySubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKQuerySubscription")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:predicate:subscriptionID:options:"), recordType.Ptr(), predicate.Ptr(), subscriptionID.Ptr(), querySubscriptionOptions)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:predicate:subscriptionID:options:"), recordType.Ptr(), predicate.Ptr(), subscriptionID.Ptr(), raw.CKQuerySubscriptionOptions(querySubscriptionOptions))
 	return &QuerySubscription{inner: raw.CKQuerySubscriptionFromID(_id)}
 }
 
@@ -93,8 +93,8 @@ func (x *QuerySubscription) SetZoneID(zoneID *raw.CKRecordZoneID) {
 }
 
 // QuerySubscriptionOptions calls the underlying QuerySubscriptionOptions.
-func (x *QuerySubscription) QuerySubscriptionOptions() raw.CKQuerySubscriptionOptions {
-	return x.inner.QuerySubscriptionOptions()
+func (x *QuerySubscription) QuerySubscriptionOptions() CKQuerySubscriptionOptions {
+	return CKQuerySubscriptionOptions(x.inner.QuerySubscriptionOptions())
 }
 
 func (x *QuerySubscription) asSubscription() *raw.CKSubscription { return &x.inner.CKSubscription }
@@ -108,7 +108,7 @@ type QuerySubscriptionable interface {
 	Predicate() *foundation.NSPredicate
 	ZoneID() *RecordZoneID
 	SetZoneID(zoneID *raw.CKRecordZoneID)
-	QuerySubscriptionOptions() raw.CKQuerySubscriptionOptions
+	QuerySubscriptionOptions() CKQuerySubscriptionOptions
 }
 
 var _ QuerySubscriptionable = (*QuerySubscription)(nil)

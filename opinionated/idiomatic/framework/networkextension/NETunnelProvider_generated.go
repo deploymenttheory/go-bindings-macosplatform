@@ -105,8 +105,8 @@ func (x *NETunnelProvider) AppRules() []*NEAppRule {
 }
 
 // RoutingMethod calls the underlying RoutingMethod.
-func (x *NETunnelProvider) RoutingMethod() raw.NETunnelProviderRoutingMethod {
-	return x.inner.RoutingMethod()
+func (x *NETunnelProvider) RoutingMethod() NETunnelProviderRoutingMethod {
+	return NETunnelProviderRoutingMethod(x.inner.RoutingMethod())
 }
 
 // Reasserting calls the underlying Reasserting.
@@ -131,7 +131,7 @@ type NETunnelProviderable interface {
 	SetTunnelNetworkSettings(ctx context.Context, tunnelNetworkSettings *raw.NETunnelNetworkSettings) error
 	ProtocolConfiguration() *NEVPNProtocol
 	AppRules() []*NEAppRule
-	RoutingMethod() raw.NETunnelProviderRoutingMethod
+	RoutingMethod() NETunnelProviderRoutingMethod
 	Reasserting() bool
 	SetReasserting(reasserting bool)
 }

@@ -91,8 +91,8 @@ func (x *TileMapNode) WithColor(color *appkit.NSColor) *TileMapNode {
 }
 
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *TileMapNode) WithBlendMode(blendMode raw.SKBlendMode) *TileMapNode {
-	x.inner.SetBlendMode(blendMode)
+func (x *TileMapNode) WithBlendMode(blendMode SKBlendMode) *TileMapNode {
+	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 	return x
 }
 
@@ -400,13 +400,13 @@ func (x *TileMapNode) SetColor(color *appkit.NSColor) {
 }
 
 // BlendMode calls the underlying BlendMode.
-func (x *TileMapNode) BlendMode() raw.SKBlendMode {
-	return x.inner.BlendMode()
+func (x *TileMapNode) BlendMode() SKBlendMode {
+	return SKBlendMode(x.inner.BlendMode())
 }
 
 // SetBlendMode calls the underlying SetBlendMode.
-func (x *TileMapNode) SetBlendMode(blendMode raw.SKBlendMode) {
-	x.inner.SetBlendMode(blendMode)
+func (x *TileMapNode) SetBlendMode(blendMode SKBlendMode) {
+	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 }
 
 // AnchorPoint calls the underlying AnchorPoint.
@@ -464,7 +464,7 @@ type TileMapNodeable interface {
 	WithTileSet(tileSet *TileSet) *TileMapNode
 	WithColorBlendFactor(colorBlendFactor float64) *TileMapNode
 	WithColor(color *appkit.NSColor) *TileMapNode
-	WithBlendMode(blendMode raw.SKBlendMode) *TileMapNode
+	WithBlendMode(blendMode SKBlendMode) *TileMapNode
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TileMapNode
 	WithShader(shader *Shader) *TileMapNode
 	WithLightingBitMask(lightingBitMask uint32) *TileMapNode
@@ -515,8 +515,8 @@ type TileMapNodeable interface {
 	SetColorBlendFactor(colorBlendFactor float64)
 	Color() *appkit.NSColor
 	SetColor(color *appkit.NSColor)
-	BlendMode() raw.SKBlendMode
-	SetBlendMode(blendMode raw.SKBlendMode)
+	BlendMode() SKBlendMode
+	SetBlendMode(blendMode SKBlendMode)
 	AnchorPoint() corefoundation.CGPoint
 	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
 	Shader() *Shader

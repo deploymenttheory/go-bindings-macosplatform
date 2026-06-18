@@ -252,13 +252,13 @@ func (x *Array) EnumerateObjectsUsing(block objc.Block) {
 }
 
 // EnumerateObjectsWithOptionsUsing calls the underlying EnumerateObjectsWithOptionsUsing.
-func (x *Array) EnumerateObjectsWithOptionsUsing(opts raw.NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateObjectsWithOptionsUsing(opts, block)
+func (x *Array) EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateObjectsWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
 // EnumerateObjectsAtIndexesOptionsUsing calls the underlying EnumerateObjectsAtIndexesOptionsUsing.
-func (x *Array) EnumerateObjectsAtIndexesOptionsUsing(s *raw.NSIndexSet, opts raw.NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateObjectsAtIndexesOptionsUsing(s, opts, block)
+func (x *Array) EnumerateObjectsAtIndexesOptionsUsing(s *raw.NSIndexSet, opts NSEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateObjectsAtIndexesOptionsUsing(s, raw.NSEnumerationOptions(opts), block)
 }
 
 // IndexOfObjectPassingTest calls the underlying IndexOfObjectPassingTest.
@@ -267,13 +267,13 @@ func (x *Array) IndexOfObjectPassingTest(predicate objc.Block) uint {
 }
 
 // IndexOfObjectWithOptionsPassingTest calls the underlying IndexOfObjectWithOptionsPassingTest.
-func (x *Array) IndexOfObjectWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate objc.Block) uint {
-	return x.inner.IndexOfObjectWithOptionsPassingTest(opts, predicate)
+func (x *Array) IndexOfObjectWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) uint {
+	return x.inner.IndexOfObjectWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
 }
 
 // IndexOfObjectAtIndexesOptionsPassingTest calls the underlying IndexOfObjectAtIndexesOptionsPassingTest.
-func (x *Array) IndexOfObjectAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts raw.NSEnumerationOptions, predicate objc.Block) uint {
-	return x.inner.IndexOfObjectAtIndexesOptionsPassingTest(s, opts, predicate)
+func (x *Array) IndexOfObjectAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) uint {
+	return x.inner.IndexOfObjectAtIndexesOptionsPassingTest(s, raw.NSEnumerationOptions(opts), predicate)
 }
 
 // IndexesOfObjectsPassingTest calls the underlying IndexesOfObjectsPassingTest.
@@ -286,8 +286,8 @@ func (x *Array) IndexesOfObjectsPassingTest(predicate objc.Block) *IndexSet {
 }
 
 // IndexesOfObjectsWithOptionsPassingTest calls the underlying IndexesOfObjectsWithOptionsPassingTest.
-func (x *Array) IndexesOfObjectsWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate objc.Block) *IndexSet {
-	_r := x.inner.IndexesOfObjectsWithOptionsPassingTest(opts, predicate)
+func (x *Array) IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *IndexSet {
+	_r := x.inner.IndexesOfObjectsWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
 	if _r == nil {
 		return nil
 	}
@@ -295,8 +295,8 @@ func (x *Array) IndexesOfObjectsWithOptionsPassingTest(opts raw.NSEnumerationOpt
 }
 
 // IndexesOfObjectsAtIndexesOptionsPassingTest calls the underlying IndexesOfObjectsAtIndexesOptionsPassingTest.
-func (x *Array) IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts raw.NSEnumerationOptions, predicate objc.Block) *IndexSet {
-	_r := x.inner.IndexesOfObjectsAtIndexesOptionsPassingTest(s, opts, predicate)
+func (x *Array) IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *IndexSet {
+	_r := x.inner.IndexesOfObjectsAtIndexesOptionsPassingTest(s, raw.NSEnumerationOptions(opts), predicate)
 	if _r == nil {
 		return nil
 	}
@@ -304,18 +304,18 @@ func (x *Array) IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexSet, o
 }
 
 // SortedArrayUsingComparator calls the underlying SortedArrayUsingComparator.
-func (x *Array) SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayUsingComparator(cmptr)
+func (x *Array) SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
+	return x.inner.SortedArrayUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
 // SortedArrayWithOptionsUsingComparator calls the underlying SortedArrayWithOptionsUsingComparator.
-func (x *Array) SortedArrayWithOptionsUsingComparator(opts raw.NSSortOptions, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) *raw.NSArray[objc.ID] {
-	return x.inner.SortedArrayWithOptionsUsingComparator(opts, cmptr)
+func (x *Array) SortedArrayWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
+	return x.inner.SortedArrayWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
 // IndexOfObjectInSortedRangeOptionsUsingComparator calls the underlying IndexOfObjectInSortedRangeOptionsUsingComparator.
-func (x *Array) IndexOfObjectInSortedRangeOptionsUsingComparator(obj objc.ID, r raw.NSRange, opts raw.NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) raw.NSComparisonResult) uint {
-	return x.inner.IndexOfObjectInSortedRangeOptionsUsingComparator(obj, r, opts, cmp)
+func (x *Array) IndexOfObjectInSortedRangeOptionsUsingComparator(obj objc.ID, r raw.NSRange, opts NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) NSComparisonResult) uint {
+	return x.inner.IndexOfObjectInSortedRangeOptionsUsingComparator(obj, r, raw.NSBinarySearchingOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmp(_a0, _a1)) })
 }
 
 // FirstObject calls the underlying FirstObject.
@@ -338,13 +338,13 @@ func (x *Array) SortedArrayHint() *Data {
 }
 
 // DifferenceFromArrayWithOptionsUsingEquivalenceTest calls the underlying DifferenceFromArrayWithOptionsUsingEquivalenceTest.
-func (x *Array) DifferenceFromArrayWithOptionsUsingEquivalenceTest(other *raw.NSArray[objc.ID], options raw.NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner.DifferenceFromArrayWithOptionsUsingEquivalenceTest(other, options, block)
+func (x *Array) DifferenceFromArrayWithOptionsUsingEquivalenceTest(other *raw.NSArray[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID] {
+	return x.inner.DifferenceFromArrayWithOptionsUsingEquivalenceTest(other, raw.NSOrderedCollectionDifferenceCalculationOptions(options), block)
 }
 
 // DifferenceFromArrayWithOptions calls the underlying DifferenceFromArrayWithOptions.
-func (x *Array) DifferenceFromArrayWithOptions(other *raw.NSArray[objc.ID], options raw.NSOrderedCollectionDifferenceCalculationOptions) *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner.DifferenceFromArrayWithOptions(other, options)
+func (x *Array) DifferenceFromArrayWithOptions(other *raw.NSArray[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions) *raw.NSOrderedCollectionDifference[objc.ID] {
+	return x.inner.DifferenceFromArrayWithOptions(other, raw.NSOrderedCollectionDifferenceCalculationOptions(options))
 }
 
 // DifferenceFromArray calls the underlying DifferenceFromArray.
@@ -378,8 +378,8 @@ func (x *Array) PathsMatchingExtensions(filterTypes *raw.NSArray[*raw.NSString])
 }
 
 // AddObserverToObjectsAtIndexesForKeyPathOptionsContext calls the underlying AddObserverToObjectsAtIndexesForKeyPathOptionsContext.
-func (x *Array) AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, options raw.NSKeyValueObservingOptions, context_ unsafe.Pointer) {
-	x.inner.AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer, indexes, foundation.NSStringStringWithUTF8String(keyPath), options, context_)
+func (x *Array) AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, options NSKeyValueObservingOptions, context_ unsafe.Pointer) {
+	x.inner.AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer, indexes, foundation.NSStringStringWithUTF8String(keyPath), raw.NSKeyValueObservingOptions(options), context_)
 }
 
 // RemoveObserverFromObjectsAtIndexesForKeyPathContext calls the underlying RemoveObserverFromObjectsAtIndexesForKeyPathContext.
@@ -437,29 +437,29 @@ type Arrayable interface {
 	ObjectsAtIndexes(indexes *raw.NSIndexSet) *raw.NSArray[objc.ID]
 	ObjectAtIndexedSubscript(idx uint) objc.ID
 	EnumerateObjectsUsing(block objc.Block)
-	EnumerateObjectsWithOptionsUsing(opts raw.NSEnumerationOptions, block objc.Block)
-	EnumerateObjectsAtIndexesOptionsUsing(s *raw.NSIndexSet, opts raw.NSEnumerationOptions, block objc.Block)
+	EnumerateObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block)
+	EnumerateObjectsAtIndexesOptionsUsing(s *raw.NSIndexSet, opts NSEnumerationOptions, block objc.Block)
 	IndexOfObjectPassingTest(predicate objc.Block) uint
-	IndexOfObjectWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate objc.Block) uint
-	IndexOfObjectAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts raw.NSEnumerationOptions, predicate objc.Block) uint
+	IndexOfObjectWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) uint
+	IndexOfObjectAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) uint
 	IndexesOfObjectsPassingTest(predicate objc.Block) *IndexSet
-	IndexesOfObjectsWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate objc.Block) *IndexSet
-	IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts raw.NSEnumerationOptions, predicate objc.Block) *IndexSet
-	SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) *raw.NSArray[objc.ID]
-	SortedArrayWithOptionsUsingComparator(opts raw.NSSortOptions, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) *raw.NSArray[objc.ID]
-	IndexOfObjectInSortedRangeOptionsUsingComparator(obj objc.ID, r raw.NSRange, opts raw.NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) raw.NSComparisonResult) uint
+	IndexesOfObjectsWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *IndexSet
+	IndexesOfObjectsAtIndexesOptionsPassingTest(s *raw.NSIndexSet, opts NSEnumerationOptions, predicate objc.Block) *IndexSet
+	SortedArrayUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID]
+	SortedArrayWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID]
+	IndexOfObjectInSortedRangeOptionsUsingComparator(obj objc.ID, r raw.NSRange, opts NSBinarySearchingOptions, cmp func(objc.ID, objc.ID) NSComparisonResult) uint
 	FirstObject() objc.ID
 	LastObject() objc.ID
 	SortedArrayHint() *Data
-	DifferenceFromArrayWithOptionsUsingEquivalenceTest(other *raw.NSArray[objc.ID], options raw.NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID]
-	DifferenceFromArrayWithOptions(other *raw.NSArray[objc.ID], options raw.NSOrderedCollectionDifferenceCalculationOptions) *raw.NSOrderedCollectionDifference[objc.ID]
+	DifferenceFromArrayWithOptionsUsingEquivalenceTest(other *raw.NSArray[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions, block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID]
+	DifferenceFromArrayWithOptions(other *raw.NSArray[objc.ID], options NSOrderedCollectionDifferenceCalculationOptions) *raw.NSOrderedCollectionDifference[objc.ID]
 	DifferenceFromArray(other *raw.NSArray[objc.ID]) *raw.NSOrderedCollectionDifference[objc.ID]
 	ArrayByApplyingDifference(difference *raw.NSOrderedCollectionDifference[objc.ID]) *raw.NSArray[objc.ID]
 	GetObjects(objects unsafe.Pointer)
 	WriteToFileAtomically(path string, useAuxiliaryFile bool) bool
 	WriteToURLAtomically(url string, atomically bool) bool
 	PathsMatchingExtensions(filterTypes *raw.NSArray[*raw.NSString]) *raw.NSArray[*raw.NSString]
-	AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, options raw.NSKeyValueObservingOptions, context_ unsafe.Pointer)
+	AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, options NSKeyValueObservingOptions, context_ unsafe.Pointer)
 	RemoveObserverFromObjectsAtIndexesForKeyPathContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, context_ unsafe.Pointer)
 	RemoveObserverFromObjectsAtIndexesForKeyPath(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string)
 	SortedArrayUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[objc.ID]

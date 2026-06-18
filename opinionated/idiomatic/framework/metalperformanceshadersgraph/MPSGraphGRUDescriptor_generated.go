@@ -72,20 +72,20 @@ func (x *GraphGRUDescriptor) WithFlipZ(flipZ bool) *GraphGRUDescriptor {
 }
 
 // WithUpdateGateActivation sets the updateGateActivation property and returns the receiver for chaining.
-func (x *GraphGRUDescriptor) WithUpdateGateActivation(updateGateActivation raw.MPSGraphRNNActivation) *GraphGRUDescriptor {
-	x.inner.SetUpdateGateActivation(updateGateActivation)
+func (x *GraphGRUDescriptor) WithUpdateGateActivation(updateGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
+	x.inner.SetUpdateGateActivation(raw.MPSGraphRNNActivation(updateGateActivation))
 	return x
 }
 
 // WithResetGateActivation sets the resetGateActivation property and returns the receiver for chaining.
-func (x *GraphGRUDescriptor) WithResetGateActivation(resetGateActivation raw.MPSGraphRNNActivation) *GraphGRUDescriptor {
-	x.inner.SetResetGateActivation(resetGateActivation)
+func (x *GraphGRUDescriptor) WithResetGateActivation(resetGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
+	x.inner.SetResetGateActivation(raw.MPSGraphRNNActivation(resetGateActivation))
 	return x
 }
 
 // WithOutputGateActivation sets the outputGateActivation property and returns the receiver for chaining.
-func (x *GraphGRUDescriptor) WithOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation) *GraphGRUDescriptor {
-	x.inner.SetOutputGateActivation(outputGateActivation)
+func (x *GraphGRUDescriptor) WithOutputGateActivation(outputGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
+	x.inner.SetOutputGateActivation(raw.MPSGraphRNNActivation(outputGateActivation))
 	return x
 }
 
@@ -150,33 +150,33 @@ func (x *GraphGRUDescriptor) SetFlipZ(flipZ bool) {
 }
 
 // UpdateGateActivation calls the underlying UpdateGateActivation.
-func (x *GraphGRUDescriptor) UpdateGateActivation() raw.MPSGraphRNNActivation {
-	return x.inner.UpdateGateActivation()
+func (x *GraphGRUDescriptor) UpdateGateActivation() MPSGraphRNNActivation {
+	return MPSGraphRNNActivation(x.inner.UpdateGateActivation())
 }
 
 // SetUpdateGateActivation calls the underlying SetUpdateGateActivation.
-func (x *GraphGRUDescriptor) SetUpdateGateActivation(updateGateActivation raw.MPSGraphRNNActivation) {
-	x.inner.SetUpdateGateActivation(updateGateActivation)
+func (x *GraphGRUDescriptor) SetUpdateGateActivation(updateGateActivation MPSGraphRNNActivation) {
+	x.inner.SetUpdateGateActivation(raw.MPSGraphRNNActivation(updateGateActivation))
 }
 
 // ResetGateActivation calls the underlying ResetGateActivation.
-func (x *GraphGRUDescriptor) ResetGateActivation() raw.MPSGraphRNNActivation {
-	return x.inner.ResetGateActivation()
+func (x *GraphGRUDescriptor) ResetGateActivation() MPSGraphRNNActivation {
+	return MPSGraphRNNActivation(x.inner.ResetGateActivation())
 }
 
 // SetResetGateActivation calls the underlying SetResetGateActivation.
-func (x *GraphGRUDescriptor) SetResetGateActivation(resetGateActivation raw.MPSGraphRNNActivation) {
-	x.inner.SetResetGateActivation(resetGateActivation)
+func (x *GraphGRUDescriptor) SetResetGateActivation(resetGateActivation MPSGraphRNNActivation) {
+	x.inner.SetResetGateActivation(raw.MPSGraphRNNActivation(resetGateActivation))
 }
 
 // OutputGateActivation calls the underlying OutputGateActivation.
-func (x *GraphGRUDescriptor) OutputGateActivation() raw.MPSGraphRNNActivation {
-	return x.inner.OutputGateActivation()
+func (x *GraphGRUDescriptor) OutputGateActivation() MPSGraphRNNActivation {
+	return MPSGraphRNNActivation(x.inner.OutputGateActivation())
 }
 
 // SetOutputGateActivation calls the underlying SetOutputGateActivation.
-func (x *GraphGRUDescriptor) SetOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation) {
-	x.inner.SetOutputGateActivation(outputGateActivation)
+func (x *GraphGRUDescriptor) SetOutputGateActivation(outputGateActivation MPSGraphRNNActivation) {
+	x.inner.SetOutputGateActivation(raw.MPSGraphRNNActivation(outputGateActivation))
 }
 
 func (x *GraphGRUDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
@@ -190,9 +190,9 @@ type GraphGRUDescriptorable interface {
 	WithResetGateFirst(resetGateFirst bool) *GraphGRUDescriptor
 	WithResetAfter(resetAfter bool) *GraphGRUDescriptor
 	WithFlipZ(flipZ bool) *GraphGRUDescriptor
-	WithUpdateGateActivation(updateGateActivation raw.MPSGraphRNNActivation) *GraphGRUDescriptor
-	WithResetGateActivation(resetGateActivation raw.MPSGraphRNNActivation) *GraphGRUDescriptor
-	WithOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation) *GraphGRUDescriptor
+	WithUpdateGateActivation(updateGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor
+	WithResetGateActivation(resetGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor
+	WithOutputGateActivation(outputGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor
 	Reverse() bool
 	SetReverse(reverse bool)
 	Bidirectional() bool
@@ -205,12 +205,12 @@ type GraphGRUDescriptorable interface {
 	SetResetAfter(resetAfter bool)
 	FlipZ() bool
 	SetFlipZ(flipZ bool)
-	UpdateGateActivation() raw.MPSGraphRNNActivation
-	SetUpdateGateActivation(updateGateActivation raw.MPSGraphRNNActivation)
-	ResetGateActivation() raw.MPSGraphRNNActivation
-	SetResetGateActivation(resetGateActivation raw.MPSGraphRNNActivation)
-	OutputGateActivation() raw.MPSGraphRNNActivation
-	SetOutputGateActivation(outputGateActivation raw.MPSGraphRNNActivation)
+	UpdateGateActivation() MPSGraphRNNActivation
+	SetUpdateGateActivation(updateGateActivation MPSGraphRNNActivation)
+	ResetGateActivation() MPSGraphRNNActivation
+	SetResetGateActivation(resetGateActivation MPSGraphRNNActivation)
+	OutputGateActivation() MPSGraphRNNActivation
+	SetOutputGateActivation(outputGateActivation MPSGraphRNNActivation)
 }
 
 var _ GraphGRUDescriptorable = (*GraphGRUDescriptor)(nil)

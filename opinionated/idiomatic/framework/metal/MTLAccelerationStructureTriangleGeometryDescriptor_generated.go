@@ -51,8 +51,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexBufferOffset
 }
 
 // WithVertexFormat sets the vertexFormat property and returns the receiver for chaining.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat raw.MTLAttributeFormat) *AccelerationStructureTriangleGeometryDescriptor {
-	x.inner.SetVertexFormat(vertexFormat)
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat MTLAttributeFormat) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.SetVertexFormat(raw.MTLAttributeFormat(vertexFormat))
 	return x
 }
 
@@ -75,8 +75,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexBufferOffset(
 }
 
 // WithIndexType sets the indexType property and returns the receiver for chaining.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType raw.MTLIndexType) *AccelerationStructureTriangleGeometryDescriptor {
-	x.inner.SetIndexType(indexType)
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType MTLIndexType) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 	return x
 }
 
@@ -99,8 +99,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatr
 }
 
 // WithTransformationMatrixLayout sets the transformationMatrixLayout property and returns the receiver for chaining.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout) *AccelerationStructureTriangleGeometryDescriptor {
-	x.inner.SetTransformationMatrixLayout(transformationMatrixLayout)
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout MTLMatrixLayout) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.SetTransformationMatrixLayout(raw.MTLMatrixLayout(transformationMatrixLayout))
 	return x
 }
 
@@ -173,13 +173,13 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetVertexBufferOffset(
 }
 
 // VertexFormat calls the underlying VertexFormat.
-func (x *AccelerationStructureTriangleGeometryDescriptor) VertexFormat() raw.MTLAttributeFormat {
-	return x.inner.VertexFormat()
+func (x *AccelerationStructureTriangleGeometryDescriptor) VertexFormat() MTLAttributeFormat {
+	return MTLAttributeFormat(x.inner.VertexFormat())
 }
 
 // SetVertexFormat calls the underlying SetVertexFormat.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetVertexFormat(vertexFormat raw.MTLAttributeFormat) {
-	x.inner.SetVertexFormat(vertexFormat)
+func (x *AccelerationStructureTriangleGeometryDescriptor) SetVertexFormat(vertexFormat MTLAttributeFormat) {
+	x.inner.SetVertexFormat(raw.MTLAttributeFormat(vertexFormat))
 }
 
 // VertexStride calls the underlying VertexStride.
@@ -213,13 +213,13 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetIndexBufferOffset(i
 }
 
 // IndexType calls the underlying IndexType.
-func (x *AccelerationStructureTriangleGeometryDescriptor) IndexType() raw.MTLIndexType {
-	return x.inner.IndexType()
+func (x *AccelerationStructureTriangleGeometryDescriptor) IndexType() MTLIndexType {
+	return MTLIndexType(x.inner.IndexType())
 }
 
 // SetIndexType calls the underlying SetIndexType.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetIndexType(indexType raw.MTLIndexType) {
-	x.inner.SetIndexType(indexType)
+func (x *AccelerationStructureTriangleGeometryDescriptor) SetIndexType(indexType MTLIndexType) {
+	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 }
 
 // TriangleCount calls the underlying TriangleCount.
@@ -253,13 +253,13 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetTransformationMatri
 }
 
 // TransformationMatrixLayout calls the underlying TransformationMatrixLayout.
-func (x *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixLayout() raw.MTLMatrixLayout {
-	return x.inner.TransformationMatrixLayout()
+func (x *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixLayout() MTLMatrixLayout {
+	return MTLMatrixLayout(x.inner.TransformationMatrixLayout())
 }
 
 // SetTransformationMatrixLayout calls the underlying SetTransformationMatrixLayout.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout) {
-	x.inner.SetTransformationMatrixLayout(transformationMatrixLayout)
+func (x *AccelerationStructureTriangleGeometryDescriptor) SetTransformationMatrixLayout(transformationMatrixLayout MTLMatrixLayout) {
+	x.inner.SetTransformationMatrixLayout(raw.MTLMatrixLayout(transformationMatrixLayout))
 }
 
 func (x *AccelerationStructureTriangleGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor {
@@ -271,15 +271,15 @@ type AccelerationStructureTriangleGeometryDescriptorable interface {
 	Unwrap() *raw.MTLAccelerationStructureTriangleGeometryDescriptor
 	WithVertexBuffer(vertexBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor
 	WithVertexBufferOffset(vertexBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor
-	WithVertexFormat(vertexFormat raw.MTLAttributeFormat) *AccelerationStructureTriangleGeometryDescriptor
+	WithVertexFormat(vertexFormat MTLAttributeFormat) *AccelerationStructureTriangleGeometryDescriptor
 	WithVertexStride(vertexStride uint) *AccelerationStructureTriangleGeometryDescriptor
 	WithIndexBuffer(indexBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor
 	WithIndexBufferOffset(indexBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor
-	WithIndexType(indexType raw.MTLIndexType) *AccelerationStructureTriangleGeometryDescriptor
+	WithIndexType(indexType MTLIndexType) *AccelerationStructureTriangleGeometryDescriptor
 	WithTriangleCount(triangleCount uint) *AccelerationStructureTriangleGeometryDescriptor
 	WithTransformationMatrixBuffer(transformationMatrixBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor
 	WithTransformationMatrixBufferOffset(transformationMatrixBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor
-	WithTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout) *AccelerationStructureTriangleGeometryDescriptor
+	WithTransformationMatrixLayout(transformationMatrixLayout MTLMatrixLayout) *AccelerationStructureTriangleGeometryDescriptor
 	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureTriangleGeometryDescriptor
 	WithOpaque(opaque bool) *AccelerationStructureTriangleGeometryDescriptor
 	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureTriangleGeometryDescriptor
@@ -292,24 +292,24 @@ type AccelerationStructureTriangleGeometryDescriptorable interface {
 	SetVertexBuffer(vertexBuffer raw.MTLBuffer)
 	VertexBufferOffset() uint
 	SetVertexBufferOffset(vertexBufferOffset uint)
-	VertexFormat() raw.MTLAttributeFormat
-	SetVertexFormat(vertexFormat raw.MTLAttributeFormat)
+	VertexFormat() MTLAttributeFormat
+	SetVertexFormat(vertexFormat MTLAttributeFormat)
 	VertexStride() uint
 	SetVertexStride(vertexStride uint)
 	IndexBuffer() raw.MTLBuffer
 	SetIndexBuffer(indexBuffer raw.MTLBuffer)
 	IndexBufferOffset() uint
 	SetIndexBufferOffset(indexBufferOffset uint)
-	IndexType() raw.MTLIndexType
-	SetIndexType(indexType raw.MTLIndexType)
+	IndexType() MTLIndexType
+	SetIndexType(indexType MTLIndexType)
 	TriangleCount() uint
 	SetTriangleCount(triangleCount uint)
 	TransformationMatrixBuffer() raw.MTLBuffer
 	SetTransformationMatrixBuffer(transformationMatrixBuffer raw.MTLBuffer)
 	TransformationMatrixBufferOffset() uint
 	SetTransformationMatrixBufferOffset(transformationMatrixBufferOffset uint)
-	TransformationMatrixLayout() raw.MTLMatrixLayout
-	SetTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout)
+	TransformationMatrixLayout() MTLMatrixLayout
+	SetTransformationMatrixLayout(transformationMatrixLayout MTLMatrixLayout)
 }
 
 var _ AccelerationStructureTriangleGeometryDescriptorable = (*AccelerationStructureTriangleGeometryDescriptor)(nil)

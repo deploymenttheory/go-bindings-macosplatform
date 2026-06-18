@@ -36,8 +36,8 @@ func NewBillboardConstraint() *BillboardConstraint {
 }
 
 // WithFreeAxes sets the freeAxes property and returns the receiver for chaining.
-func (x *BillboardConstraint) WithFreeAxes(freeAxes raw.SCNBillboardAxis) *BillboardConstraint {
-	x.inner.SetFreeAxes(freeAxes)
+func (x *BillboardConstraint) WithFreeAxes(freeAxes SCNBillboardAxis) *BillboardConstraint {
+	x.inner.SetFreeAxes(raw.SCNBillboardAxis(freeAxes))
 	return x
 }
 
@@ -60,13 +60,13 @@ func (x *BillboardConstraint) WithIncremental(incremental bool) *BillboardConstr
 }
 
 // FreeAxes calls the underlying FreeAxes.
-func (x *BillboardConstraint) FreeAxes() raw.SCNBillboardAxis {
-	return x.inner.FreeAxes()
+func (x *BillboardConstraint) FreeAxes() SCNBillboardAxis {
+	return SCNBillboardAxis(x.inner.FreeAxes())
 }
 
 // SetFreeAxes calls the underlying SetFreeAxes.
-func (x *BillboardConstraint) SetFreeAxes(freeAxes raw.SCNBillboardAxis) {
-	x.inner.SetFreeAxes(freeAxes)
+func (x *BillboardConstraint) SetFreeAxes(freeAxes SCNBillboardAxis) {
+	x.inner.SetFreeAxes(raw.SCNBillboardAxis(freeAxes))
 }
 
 func (x *BillboardConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
@@ -74,12 +74,12 @@ func (x *BillboardConstraint) asConstraint() *raw.SCNConstraint { return &x.inne
 // BillboardConstraintable is the interface implemented by [BillboardConstraint], for mocking and DI.
 type BillboardConstraintable interface {
 	Unwrap() *raw.SCNBillboardConstraint
-	WithFreeAxes(freeAxes raw.SCNBillboardAxis) *BillboardConstraint
+	WithFreeAxes(freeAxes SCNBillboardAxis) *BillboardConstraint
 	WithEnabled(enabled bool) *BillboardConstraint
 	WithInfluenceFactor(influenceFactor float64) *BillboardConstraint
 	WithIncremental(incremental bool) *BillboardConstraint
-	FreeAxes() raw.SCNBillboardAxis
-	SetFreeAxes(freeAxes raw.SCNBillboardAxis)
+	FreeAxes() SCNBillboardAxis
+	SetFreeAxes(freeAxes SCNBillboardAxis)
 }
 
 var _ BillboardConstraintable = (*BillboardConstraint)(nil)

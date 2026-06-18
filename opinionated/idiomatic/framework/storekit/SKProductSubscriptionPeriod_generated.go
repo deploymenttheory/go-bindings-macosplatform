@@ -41,15 +41,15 @@ func (x *ProductSubscriptionPeriod) NumberOfUnits() uint {
 }
 
 // Unit calls the underlying Unit.
-func (x *ProductSubscriptionPeriod) Unit() raw.SKProductPeriodUnit {
-	return x.inner.Unit()
+func (x *ProductSubscriptionPeriod) Unit() SKProductPeriodUnit {
+	return SKProductPeriodUnit(x.inner.Unit())
 }
 
 // ProductSubscriptionPeriodable is the interface implemented by [ProductSubscriptionPeriod], for mocking and DI.
 type ProductSubscriptionPeriodable interface {
 	Unwrap() *raw.SKProductSubscriptionPeriod
 	NumberOfUnits() uint
-	Unit() raw.SKProductPeriodUnit
+	Unit() SKProductPeriodUnit
 }
 
 var _ ProductSubscriptionPeriodable = (*ProductSubscriptionPeriod)(nil)

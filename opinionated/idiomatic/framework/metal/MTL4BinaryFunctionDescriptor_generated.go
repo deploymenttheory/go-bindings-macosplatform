@@ -50,8 +50,8 @@ func (x *MTL4BinaryFunctionDescriptor) WithFunctionDescriptor(functionDescriptor
 }
 
 // WithOptions sets the options property and returns the receiver for chaining.
-func (x *MTL4BinaryFunctionDescriptor) WithOptions(options raw.MTL4BinaryFunctionOptions) *MTL4BinaryFunctionDescriptor {
-	x.inner.SetOptions(options)
+func (x *MTL4BinaryFunctionDescriptor) WithOptions(options MTL4BinaryFunctionOptions) *MTL4BinaryFunctionDescriptor {
+	x.inner.SetOptions(raw.MTL4BinaryFunctionOptions(options))
 	return x
 }
 
@@ -84,13 +84,13 @@ func (x *MTL4BinaryFunctionDescriptor) SetFunctionDescriptor(functionDescriptor 
 }
 
 // Options calls the underlying Options.
-func (x *MTL4BinaryFunctionDescriptor) Options() raw.MTL4BinaryFunctionOptions {
-	return x.inner.Options()
+func (x *MTL4BinaryFunctionDescriptor) Options() MTL4BinaryFunctionOptions {
+	return MTL4BinaryFunctionOptions(x.inner.Options())
 }
 
 // SetOptions calls the underlying SetOptions.
-func (x *MTL4BinaryFunctionDescriptor) SetOptions(options raw.MTL4BinaryFunctionOptions) {
-	x.inner.SetOptions(options)
+func (x *MTL4BinaryFunctionDescriptor) SetOptions(options MTL4BinaryFunctionOptions) {
+	x.inner.SetOptions(raw.MTL4BinaryFunctionOptions(options))
 }
 
 // MTL4BinaryFunctionDescriptorable is the interface implemented by [MTL4BinaryFunctionDescriptor], for mocking and DI.
@@ -98,13 +98,13 @@ type MTL4BinaryFunctionDescriptorable interface {
 	Unwrap() *raw.MTL4BinaryFunctionDescriptor
 	WithName(name string) *MTL4BinaryFunctionDescriptor
 	WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4BinaryFunctionDescriptor
-	WithOptions(options raw.MTL4BinaryFunctionOptions) *MTL4BinaryFunctionDescriptor
+	WithOptions(options MTL4BinaryFunctionOptions) *MTL4BinaryFunctionDescriptor
 	Name() string
 	SetName(name string)
 	FunctionDescriptor() *MTL4FunctionDescriptor
 	SetFunctionDescriptor(functionDescriptor *raw.MTL4FunctionDescriptor)
-	Options() raw.MTL4BinaryFunctionOptions
-	SetOptions(options raw.MTL4BinaryFunctionOptions)
+	Options() MTL4BinaryFunctionOptions
+	SetOptions(options MTL4BinaryFunctionOptions)
 }
 
 var _ MTL4BinaryFunctionDescriptorable = (*MTL4BinaryFunctionDescriptor)(nil)

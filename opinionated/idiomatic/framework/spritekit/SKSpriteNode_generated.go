@@ -117,8 +117,8 @@ func (x *SpriteNode) WithColor(color *appkit.NSColor) *SpriteNode {
 }
 
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *SpriteNode) WithBlendMode(blendMode raw.SKBlendMode) *SpriteNode {
-	x.inner.SetBlendMode(blendMode)
+func (x *SpriteNode) WithBlendMode(blendMode SKBlendMode) *SpriteNode {
+	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 	return x
 }
 
@@ -396,13 +396,13 @@ func (x *SpriteNode) SetColor(color *appkit.NSColor) {
 }
 
 // BlendMode calls the underlying BlendMode.
-func (x *SpriteNode) BlendMode() raw.SKBlendMode {
-	return x.inner.BlendMode()
+func (x *SpriteNode) BlendMode() SKBlendMode {
+	return SKBlendMode(x.inner.BlendMode())
 }
 
 // SetBlendMode calls the underlying SetBlendMode.
-func (x *SpriteNode) SetBlendMode(blendMode raw.SKBlendMode) {
-	x.inner.SetBlendMode(blendMode)
+func (x *SpriteNode) SetBlendMode(blendMode SKBlendMode) {
+	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 }
 
 // AnchorPoint calls the underlying AnchorPoint.
@@ -452,7 +452,7 @@ type SpriteNodeable interface {
 	WithCenterRect(centerRect corefoundation.CGRect) *SpriteNode
 	WithColorBlendFactor(colorBlendFactor float64) *SpriteNode
 	WithColor(color *appkit.NSColor) *SpriteNode
-	WithBlendMode(blendMode raw.SKBlendMode) *SpriteNode
+	WithBlendMode(blendMode SKBlendMode) *SpriteNode
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *SpriteNode
 	WithSize(size corefoundation.CGSize) *SpriteNode
 	WithShader(shader *Shader) *SpriteNode
@@ -498,8 +498,8 @@ type SpriteNodeable interface {
 	SetColorBlendFactor(colorBlendFactor float64)
 	Color() *appkit.NSColor
 	SetColor(color *appkit.NSColor)
-	BlendMode() raw.SKBlendMode
-	SetBlendMode(blendMode raw.SKBlendMode)
+	BlendMode() SKBlendMode
+	SetBlendMode(blendMode SKBlendMode)
 	AnchorPoint() corefoundation.CGPoint
 	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
 	Size() corefoundation.CGSize

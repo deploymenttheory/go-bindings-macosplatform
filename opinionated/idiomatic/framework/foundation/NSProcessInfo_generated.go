@@ -193,8 +193,8 @@ func (x *ProcessInfo) SetAutomaticTerminationSupportEnabled(automaticTermination
 }
 
 // BeginActivityWithOptionsReason calls the underlying BeginActivityWithOptionsReason.
-func (x *ProcessInfo) BeginActivityWithOptionsReason(options raw.NSActivityOptions, reason string) raw.NSObjectProtocol {
-	return x.inner.BeginActivityWithOptionsReason(options, foundation.NSStringStringWithUTF8String(reason))
+func (x *ProcessInfo) BeginActivityWithOptionsReason(options NSActivityOptions, reason string) raw.NSObjectProtocol {
+	return x.inner.BeginActivityWithOptionsReason(raw.NSActivityOptions(options), foundation.NSStringStringWithUTF8String(reason))
 }
 
 // EndActivity calls the underlying EndActivity.
@@ -203,9 +203,9 @@ func (x *ProcessInfo) EndActivity(activity raw.NSObjectProtocol) {
 }
 
 // PerformActivityWithOptionsReasonUsing blocks until the operation completes or ctx is cancelled.
-func (x *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context, options raw.NSActivityOptions, reason string) error {
+func (x *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context, options NSActivityOptions, reason string) error {
 	_ch := make(chan error, 1)
-	x.inner.PerformActivityWithOptionsReasonUsing(options, foundation.NSStringStringWithUTF8String(reason), func() {
+	x.inner.PerformActivityWithOptionsReasonUsing(raw.NSActivityOptions(options), foundation.NSStringStringWithUTF8String(reason), func() {
 		_ch <- nil
 	})
 	select {
@@ -235,8 +235,8 @@ func (x *ProcessInfo) FullUserName() *String {
 }
 
 // ThermalState calls the underlying ThermalState.
-func (x *ProcessInfo) ThermalState() raw.NSProcessInfoThermalState {
-	return x.inner.ThermalState()
+func (x *ProcessInfo) ThermalState() NSProcessInfoThermalState {
+	return NSProcessInfoThermalState(x.inner.ThermalState())
 }
 
 // IsLowPowerModeEnabled calls the underlying IsLowPowerModeEnabled.
@@ -289,12 +289,12 @@ type ProcessInfoable interface {
 	SystemUptime() float64
 	AutomaticTerminationSupportEnabled() bool
 	SetAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool)
-	BeginActivityWithOptionsReason(options raw.NSActivityOptions, reason string) raw.NSObjectProtocol
+	BeginActivityWithOptionsReason(options NSActivityOptions, reason string) raw.NSObjectProtocol
 	EndActivity(activity raw.NSObjectProtocol)
-	PerformActivityWithOptionsReasonUsing(ctx context.Context, options raw.NSActivityOptions, reason string) error
+	PerformActivityWithOptionsReasonUsing(ctx context.Context, options NSActivityOptions, reason string) error
 	UserName() *String
 	FullUserName() *String
-	ThermalState() raw.NSProcessInfoThermalState
+	ThermalState() NSProcessInfoThermalState
 	IsLowPowerModeEnabled() bool
 	IsMacCatalystApp() bool
 	IsiOSAppOnMac() bool

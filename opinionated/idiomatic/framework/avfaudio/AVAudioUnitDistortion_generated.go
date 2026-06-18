@@ -54,8 +54,8 @@ func (x *AudioUnitDistortion) WithBypass(bypass bool) *AudioUnitDistortion {
 }
 
 // LoadFactoryPreset calls the underlying LoadFactoryPreset.
-func (x *AudioUnitDistortion) LoadFactoryPreset(preset raw.AVAudioUnitDistortionPreset) {
-	x.inner.LoadFactoryPreset(preset)
+func (x *AudioUnitDistortion) LoadFactoryPreset(preset AVAudioUnitDistortionPreset) {
+	x.inner.LoadFactoryPreset(raw.AVAudioUnitDistortionPreset(preset))
 }
 
 // PreGain calls the underlying PreGain.
@@ -96,7 +96,7 @@ type AudioUnitDistortionable interface {
 	WithPreGain(preGain float32) *AudioUnitDistortion
 	WithWetDryMix(wetDryMix float32) *AudioUnitDistortion
 	WithBypass(bypass bool) *AudioUnitDistortion
-	LoadFactoryPreset(preset raw.AVAudioUnitDistortionPreset)
+	LoadFactoryPreset(preset AVAudioUnitDistortionPreset)
 	PreGain() float32
 	SetPreGain(preGain float32)
 	WetDryMix() float32

@@ -32,9 +32,9 @@ func SendMessageIntentFromID(id objc.ID) *SendMessageIntent {
 }
 
 // NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments creates a new [SendMessageIntent].
-func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments(recipients *foundation.NSArray[*raw.INPerson], outgoingMessageType raw.INOutgoingMessageType, content string, speakableGroupName *raw.INSpeakableString, conversationIdentifier string, serviceName string, sender *raw.INPerson, attachments *foundation.NSArray[*raw.INSendMessageAttachment]) *SendMessageIntent {
+func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments(recipients *foundation.NSArray[*raw.INPerson], outgoingMessageType INOutgoingMessageType, content string, speakableGroupName *raw.INSpeakableString, conversationIdentifier string, serviceName string, sender *raw.INPerson, attachments *foundation.NSArray[*raw.INSendMessageAttachment]) *SendMessageIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageIntent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:outgoingMessageType:content:speakableGroupName:conversationIdentifier:serviceName:sender:attachments:"), recipients.Ptr(), outgoingMessageType, foundation.NSStringStringWithUTF8String(content).Ptr(), speakableGroupName.Ptr(), foundation.NSStringStringWithUTF8String(conversationIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(serviceName).Ptr(), sender.Ptr(), attachments.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:outgoingMessageType:content:speakableGroupName:conversationIdentifier:serviceName:sender:attachments:"), recipients.Ptr(), raw.INOutgoingMessageType(outgoingMessageType), foundation.NSStringStringWithUTF8String(content).Ptr(), speakableGroupName.Ptr(), foundation.NSStringStringWithUTF8String(conversationIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(serviceName).Ptr(), sender.Ptr(), attachments.Ptr())
 	return &SendMessageIntent{inner: raw.INSendMessageIntentFromID(_id)}
 }
 
@@ -53,9 +53,9 @@ func NewSendMessageIntentWithRecipientsContentSpeakableGroupNameConversationIden
 }
 
 // NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender creates a new [SendMessageIntent].
-func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender(recipients *foundation.NSArray[*raw.INPerson], outgoingMessageType raw.INOutgoingMessageType, content string, speakableGroupName *raw.INSpeakableString, conversationIdentifier string, serviceName string, sender *raw.INPerson) *SendMessageIntent {
+func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender(recipients *foundation.NSArray[*raw.INPerson], outgoingMessageType INOutgoingMessageType, content string, speakableGroupName *raw.INSpeakableString, conversationIdentifier string, serviceName string, sender *raw.INPerson) *SendMessageIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageIntent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:outgoingMessageType:content:speakableGroupName:conversationIdentifier:serviceName:sender:"), recipients.Ptr(), outgoingMessageType, foundation.NSStringStringWithUTF8String(content).Ptr(), speakableGroupName.Ptr(), foundation.NSStringStringWithUTF8String(conversationIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(serviceName).Ptr(), sender.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:outgoingMessageType:content:speakableGroupName:conversationIdentifier:serviceName:sender:"), recipients.Ptr(), raw.INOutgoingMessageType(outgoingMessageType), foundation.NSStringStringWithUTF8String(content).Ptr(), speakableGroupName.Ptr(), foundation.NSStringStringWithUTF8String(conversationIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(serviceName).Ptr(), sender.Ptr())
 	return &SendMessageIntent{inner: raw.INSendMessageIntentFromID(_id)}
 }
 
@@ -83,8 +83,8 @@ func (x *SendMessageIntent) Recipients() []*Person {
 }
 
 // OutgoingMessageType calls the underlying OutgoingMessageType.
-func (x *SendMessageIntent) OutgoingMessageType() raw.INOutgoingMessageType {
-	return x.inner.OutgoingMessageType()
+func (x *SendMessageIntent) OutgoingMessageType() INOutgoingMessageType {
+	return INOutgoingMessageType(x.inner.OutgoingMessageType())
 }
 
 // Content calls the underlying Content.
@@ -160,7 +160,7 @@ type SendMessageIntentable interface {
 	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *SendMessageIntent
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *SendMessageIntent
 	Recipients() []*Person
-	OutgoingMessageType() raw.INOutgoingMessageType
+	OutgoingMessageType() INOutgoingMessageType
 	Content() string
 	SpeakableGroupName() *SpeakableString
 	ConversationIdentifier() string

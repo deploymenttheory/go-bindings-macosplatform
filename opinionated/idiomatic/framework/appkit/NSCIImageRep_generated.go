@@ -82,8 +82,8 @@ func (x *CIImageRep) WithPixelsHigh(pixelsHigh int) *CIImageRep {
 }
 
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *CIImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CIImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+func (x *CIImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CIImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
@@ -104,7 +104,7 @@ type CIImageRepable interface {
 	WithBitsPerSample(bitsPerSample int) *CIImageRep
 	WithPixelsWide(pixelsWide int) *CIImageRep
 	WithPixelsHigh(pixelsHigh int) *CIImageRep
-	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CIImageRep
+	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CIImageRep
 	CIImage() *coreimage.CIImage
 }
 

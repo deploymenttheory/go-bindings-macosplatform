@@ -52,8 +52,8 @@ func (x *ProjectTextElement) AttributedText() *foundation.NSAttributedString {
 }
 
 // TextElementType calls the underlying TextElementType.
-func (x *ProjectTextElement) TextElementType() raw.PHProjectTextElementType {
-	return x.inner.TextElementType()
+func (x *ProjectTextElement) TextElementType() PHProjectTextElementType {
+	return PHProjectTextElementType(x.inner.TextElementType())
 }
 
 func (x *ProjectTextElement) asProjectElement() *raw.PHProjectElement {
@@ -65,7 +65,7 @@ type ProjectTextElementable interface {
 	Unwrap() *raw.PHProjectTextElement
 	Text() string
 	AttributedText() *foundation.NSAttributedString
-	TextElementType() raw.PHProjectTextElementType
+	TextElementType() PHProjectTextElementType
 }
 
 var _ ProjectTextElementable = (*ProjectTextElement)(nil)

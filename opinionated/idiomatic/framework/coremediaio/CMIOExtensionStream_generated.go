@@ -33,16 +33,16 @@ func ExtensionStreamFromID(id objc.ID) *ExtensionStream {
 }
 
 // NewExtensionStreamWithLocalizedNameStreamIDDirectionClockTypeSource creates a new [ExtensionStream].
-func NewExtensionStreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName string, streamID *foundation.NSUUID, direction raw.CMIOExtensionStreamDirection, clockType raw.CMIOExtensionStreamClockType, source raw.CMIOExtensionStreamSource) *ExtensionStream {
+func NewExtensionStreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, clockType CMIOExtensionStreamClockType, source raw.CMIOExtensionStreamSource) *ExtensionStream {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedName:streamID:direction:clockType:source:"), foundation.NSStringStringWithUTF8String(localizedName).Ptr(), streamID.Ptr(), direction, clockType, source)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedName:streamID:direction:clockType:source:"), foundation.NSStringStringWithUTF8String(localizedName).Ptr(), streamID.Ptr(), raw.CMIOExtensionStreamDirection(direction), raw.CMIOExtensionStreamClockType(clockType), source)
 	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(_id)}
 }
 
 // NewExtensionStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource creates a new [ExtensionStream].
-func NewExtensionStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName string, streamID *foundation.NSUUID, direction raw.CMIOExtensionStreamDirection, customClockConfiguration *raw.CMIOExtensionStreamCustomClockConfiguration, source raw.CMIOExtensionStreamSource) *ExtensionStream {
+func NewExtensionStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, customClockConfiguration *raw.CMIOExtensionStreamCustomClockConfiguration, source raw.CMIOExtensionStreamSource) *ExtensionStream {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedName:streamID:direction:customClockConfiguration:source:"), foundation.NSStringStringWithUTF8String(localizedName).Ptr(), streamID.Ptr(), direction, customClockConfiguration.Ptr(), source)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedName:streamID:direction:customClockConfiguration:source:"), foundation.NSStringStringWithUTF8String(localizedName).Ptr(), streamID.Ptr(), raw.CMIOExtensionStreamDirection(direction), customClockConfiguration.Ptr(), source)
 	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(_id)}
 }
 
@@ -52,13 +52,15 @@ func (x *ExtensionStream) NotifyPropertiesChanged(propertyStates *foundation.NSD
 }
 
 // SendSampleBufferDiscontinuityHostTimeInNanoseconds calls the underlying SendSampleBufferDiscontinuityHostTimeInNanoseconds.
-func (x *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity raw.CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
-	x.inner.SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer, discontinuity, hostTimeInNanoseconds)
+func (x *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
+	x.inner.SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer, raw.CMIOExtensionStreamDiscontinuityFlags(discontinuity), hostTimeInNanoseconds)
 }
 
 // ConsumeSampleBufferFromClientCompletionHandler calls the underlying ConsumeSampleBufferFromClientCompletionHandler.
-func (x *ExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(client *raw.CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, raw.CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer)) {
-	x.inner.ConsumeSampleBufferFromClientCompletionHandler(client, completionHandler)
+func (x *ExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(client *raw.CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer)) {
+	x.inner.ConsumeSampleBufferFromClientCompletionHandler(client, func(_a0 unsafe.Pointer, _a1 uint64, _a2 raw.CMIOExtensionStreamDiscontinuityFlags, _a3 bool, _a4 unsafe.Pointer) {
+		completionHandler(_a0, _a1, CMIOExtensionStreamDiscontinuityFlags(_a2), _a3, _a4)
+	})
 }
 
 // NotifyScheduledOutputChanged calls the underlying NotifyScheduledOutputChanged.
@@ -81,13 +83,13 @@ func (x *ExtensionStream) StreamID() *foundation.NSUUID {
 }
 
 // Direction calls the underlying Direction.
-func (x *ExtensionStream) Direction() raw.CMIOExtensionStreamDirection {
-	return x.inner.Direction()
+func (x *ExtensionStream) Direction() CMIOExtensionStreamDirection {
+	return CMIOExtensionStreamDirection(x.inner.Direction())
 }
 
 // ClockType calls the underlying ClockType.
-func (x *ExtensionStream) ClockType() raw.CMIOExtensionStreamClockType {
-	return x.inner.ClockType()
+func (x *ExtensionStream) ClockType() CMIOExtensionStreamClockType {
+	return CMIOExtensionStreamClockType(x.inner.ClockType())
 }
 
 // CustomClockConfiguration calls the underlying CustomClockConfiguration.
@@ -119,13 +121,13 @@ func (x *ExtensionStream) StreamingClients() []*ExtensionClient {
 type ExtensionStreamable interface {
 	Unwrap() *raw.CMIOExtensionStream
 	NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity raw.CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64)
-	ConsumeSampleBufferFromClientCompletionHandler(client *raw.CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, raw.CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer))
+	SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64)
+	ConsumeSampleBufferFromClientCompletionHandler(client *raw.CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer))
 	NotifyScheduledOutputChanged(scheduledOutput *raw.CMIOExtensionScheduledOutput)
 	LocalizedName() string
 	StreamID() *foundation.NSUUID
-	Direction() raw.CMIOExtensionStreamDirection
-	ClockType() raw.CMIOExtensionStreamClockType
+	Direction() CMIOExtensionStreamDirection
+	ClockType() CMIOExtensionStreamClockType
 	CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration
 	Source() raw.CMIOExtensionStreamSource
 	StreamingClients() []*ExtensionClient

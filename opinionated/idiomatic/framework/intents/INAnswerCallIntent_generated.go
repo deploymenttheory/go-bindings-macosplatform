@@ -32,9 +32,9 @@ func AnswerCallIntentFromID(id objc.ID) *AnswerCallIntent {
 }
 
 // NewAnswerCallIntentWithAudioRouteCallIdentifier creates a new [AnswerCallIntent].
-func NewAnswerCallIntentWithAudioRouteCallIdentifier(audioRoute raw.INCallAudioRoute, callIdentifier string) *AnswerCallIntent {
+func NewAnswerCallIntentWithAudioRouteCallIdentifier(audioRoute INCallAudioRoute, callIdentifier string) *AnswerCallIntent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INAnswerCallIntent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioRoute:callIdentifier:"), audioRoute, foundation.NSStringStringWithUTF8String(callIdentifier).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioRoute:callIdentifier:"), raw.INCallAudioRoute(audioRoute), foundation.NSStringStringWithUTF8String(callIdentifier).Ptr())
 	return &AnswerCallIntent{inner: raw.INAnswerCallIntentFromID(_id)}
 }
 
@@ -51,8 +51,8 @@ func (x *AnswerCallIntent) WithDonationMetadata(donationMetadata IntentDonationM
 }
 
 // AudioRoute calls the underlying AudioRoute.
-func (x *AnswerCallIntent) AudioRoute() raw.INCallAudioRoute {
-	return x.inner.AudioRoute()
+func (x *AnswerCallIntent) AudioRoute() INCallAudioRoute {
+	return INCallAudioRoute(x.inner.AudioRoute())
 }
 
 // CallIdentifier calls the underlying CallIdentifier.
@@ -71,7 +71,7 @@ type AnswerCallIntentable interface {
 	Unwrap() *raw.INAnswerCallIntent
 	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *AnswerCallIntent
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *AnswerCallIntent
-	AudioRoute() raw.INCallAudioRoute
+	AudioRoute() INCallAudioRoute
 	CallIdentifier() string
 }
 

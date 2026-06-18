@@ -56,8 +56,8 @@ func (x *CNNConvolutionGradientState) Convolution() *CNNConvolution {
 }
 
 // GradientForWeightsLayout calls the underlying GradientForWeightsLayout.
-func (x *CNNConvolutionGradientState) GradientForWeightsLayout() raw.MPSCNNConvolutionWeightsLayout {
-	return x.inner.GradientForWeightsLayout()
+func (x *CNNConvolutionGradientState) GradientForWeightsLayout() MPSCNNConvolutionWeightsLayout {
+	return MPSCNNConvolutionWeightsLayout(x.inner.GradientForWeightsLayout())
 }
 
 func (x *CNNConvolutionGradientState) asCNNConvolutionGradientState() *raw.MPSCNNConvolutionGradientState {
@@ -74,7 +74,7 @@ type CNNConvolutionGradientStateable interface {
 	GradientForWeights() metal.MTLBuffer
 	GradientForBiases() metal.MTLBuffer
 	Convolution() *CNNConvolution
-	GradientForWeightsLayout() raw.MPSCNNConvolutionWeightsLayout
+	GradientForWeightsLayout() MPSCNNConvolutionWeightsLayout
 }
 
 var _ CNNConvolutionGradientStateable = (*CNNConvolutionGradientState)(nil)

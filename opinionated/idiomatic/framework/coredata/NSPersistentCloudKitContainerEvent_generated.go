@@ -55,8 +55,8 @@ func (x *PersistentCloudKitContainerEvent) StoreIdentifier() string {
 }
 
 // Type calls the underlying Type.
-func (x *PersistentCloudKitContainerEvent) Type() raw.NSPersistentCloudKitContainerEventType {
-	return x.inner.Type()
+func (x *PersistentCloudKitContainerEvent) Type() NSPersistentCloudKitContainerEventType {
+	return NSPersistentCloudKitContainerEventType(x.inner.Type())
 }
 
 // StartDate calls the underlying StartDate.
@@ -84,7 +84,7 @@ type PersistentCloudKitContainerEventable interface {
 	Unwrap() *raw.NSPersistentCloudKitContainerEvent
 	Identifier() *foundation.NSUUID
 	StoreIdentifier() string
-	Type() raw.NSPersistentCloudKitContainerEventType
+	Type() NSPersistentCloudKitContainerEventType
 	StartDate() *foundation.NSDate
 	EndDate() *foundation.NSDate
 	Succeeded() bool

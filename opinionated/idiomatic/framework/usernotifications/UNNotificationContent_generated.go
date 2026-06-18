@@ -139,8 +139,8 @@ func (x *NotificationContent) TargetContentIdentifier() string {
 }
 
 // InterruptionLevel calls the underlying InterruptionLevel.
-func (x *NotificationContent) InterruptionLevel() raw.UNNotificationInterruptionLevel {
-	return x.inner.InterruptionLevel()
+func (x *NotificationContent) InterruptionLevel() UNNotificationInterruptionLevel {
+	return UNNotificationInterruptionLevel(x.inner.InterruptionLevel())
 }
 
 // RelevanceScore calls the underlying RelevanceScore.
@@ -174,7 +174,7 @@ type NotificationContentable interface {
 	SummaryArgument() string
 	SummaryArgumentCount() uint
 	TargetContentIdentifier() string
-	InterruptionLevel() raw.UNNotificationInterruptionLevel
+	InterruptionLevel() UNNotificationInterruptionLevel
 	RelevanceScore() float64
 	FilterCriteria() string
 }

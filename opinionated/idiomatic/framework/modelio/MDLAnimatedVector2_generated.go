@@ -37,8 +37,8 @@ func NewAnimatedVector2() *AnimatedVector2 {
 }
 
 // WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedVector2) WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedVector2 {
-	x.inner.MDLAnimatedValue.SetInterpolation(interpolation)
+func (x *AnimatedVector2) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector2 {
+	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
 	return x
 }
 
@@ -87,7 +87,7 @@ func (x *AnimatedVector2) asAnimatedValue() *raw.MDLAnimatedValue { return &x.in
 // AnimatedVector2able is the interface implemented by [AnimatedVector2], for mocking and DI.
 type AnimatedVector2able interface {
 	Unwrap() *raw.MDLAnimatedVector2
-	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedVector2
+	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector2
 	SetFloat2AtTime(value unsafe.Pointer, time_ float64)
 	SetDouble2AtTime(value unsafe.Pointer, time_ float64)
 	Float2AtTime(time_ float64) unsafe.Pointer

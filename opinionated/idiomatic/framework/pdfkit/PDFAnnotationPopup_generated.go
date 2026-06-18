@@ -112,20 +112,20 @@ func (x *AnnotationPopup) WithEndPoint(endPoint corefoundation.CGPoint) *Annotat
 }
 
 // WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+func (x *AnnotationPopup) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationPopup {
+	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
 	return x
 }
 
 // WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+func (x *AnnotationPopup) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationPopup {
+	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
 	return x
 }
 
 // WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetIconType(iconType)
+func (x *AnnotationPopup) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationPopup {
+	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
 	return x
 }
 
@@ -148,14 +148,14 @@ func (x *AnnotationPopup) WithQuadrilateralPoints(items ...*foundation.NSValue) 
 }
 
 // WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetMarkupType(markupType)
+func (x *AnnotationPopup) WithMarkupType(markupType PDFMarkupType) *AnnotationPopup {
+	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
 	return x
 }
 
 // WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+func (x *AnnotationPopup) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationPopup {
+	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
 	return x
 }
 
@@ -250,8 +250,8 @@ func (x *AnnotationPopup) WithValues(items ...*foundation.NSString) *AnnotationP
 }
 
 // WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+func (x *AnnotationPopup) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationPopup {
+	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
 	return x
 }
 
@@ -325,12 +325,12 @@ type AnnotationPopupable interface {
 	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationPopup
 	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationPopup
 	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationPopup
-	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationPopup
-	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationPopup
-	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationPopup
+	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationPopup
+	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationPopup
+	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationPopup
 	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationPopup
-	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationPopup
-	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationPopup
+	WithMarkupType(markupType PDFMarkupType) *AnnotationPopup
+	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationPopup
 	WithMultiline(multiline bool) *AnnotationPopup
 	WithComb(comb bool) *AnnotationPopup
 	WithMaximumLength(maximumLength int) *AnnotationPopup
@@ -342,7 +342,7 @@ type AnnotationPopupable interface {
 	WithListChoice(listChoice bool) *AnnotationPopup
 	WithChoices(items ...*foundation.NSString) *AnnotationPopup
 	WithValues(items ...*foundation.NSString) *AnnotationPopup
-	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationPopup
+	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationPopup
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationPopup
 	WithOpen(open bool) *AnnotationPopup
 	WithDestination(destination *Destination) *AnnotationPopup

@@ -42,44 +42,44 @@ func (x *HeapDescriptor) WithSize(size uint) *HeapDescriptor {
 }
 
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithStorageMode(storageMode raw.MTLStorageMode) *HeapDescriptor {
-	x.inner.SetStorageMode(storageMode)
+func (x *HeapDescriptor) WithStorageMode(storageMode MTLStorageMode) *HeapDescriptor {
+	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 	return x
 }
 
 // WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode) *HeapDescriptor {
-	x.inner.SetCpuCacheMode(cpuCacheMode)
+func (x *HeapDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *HeapDescriptor {
+	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
 	return x
 }
 
 // WithSparsePageSize sets the sparsePageSize property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithSparsePageSize(sparsePageSize raw.MTLSparsePageSize) *HeapDescriptor {
-	x.inner.SetSparsePageSize(sparsePageSize)
+func (x *HeapDescriptor) WithSparsePageSize(sparsePageSize MTLSparsePageSize) *HeapDescriptor {
+	x.inner.SetSparsePageSize(raw.MTLSparsePageSize(sparsePageSize))
 	return x
 }
 
 // WithHazardTrackingMode sets the hazardTrackingMode property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode) *HeapDescriptor {
-	x.inner.SetHazardTrackingMode(hazardTrackingMode)
+func (x *HeapDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *HeapDescriptor {
+	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
 	return x
 }
 
 // WithResourceOptions sets the resourceOptions property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithResourceOptions(resourceOptions raw.MTLResourceOptions) *HeapDescriptor {
-	x.inner.SetResourceOptions(resourceOptions)
+func (x *HeapDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions) *HeapDescriptor {
+	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
 	return x
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithType(type_ raw.MTLHeapType) *HeapDescriptor {
-	x.inner.SetType(type_)
+func (x *HeapDescriptor) WithType(type_ MTLHeapType) *HeapDescriptor {
+	x.inner.SetType(raw.MTLHeapType(type_))
 	return x
 }
 
 // WithMaxCompatiblePlacementSparsePageSize sets the maxCompatiblePlacementSparsePageSize property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize raw.MTLSparsePageSize) *HeapDescriptor {
-	x.inner.SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize)
+func (x *HeapDescriptor) WithMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize) *HeapDescriptor {
+	x.inner.SetMaxCompatiblePlacementSparsePageSize(raw.MTLSparsePageSize(maxCompatiblePlacementSparsePageSize))
 	return x
 }
 
@@ -94,102 +94,102 @@ func (x *HeapDescriptor) SetSize(size uint) {
 }
 
 // StorageMode calls the underlying StorageMode.
-func (x *HeapDescriptor) StorageMode() raw.MTLStorageMode {
-	return x.inner.StorageMode()
+func (x *HeapDescriptor) StorageMode() MTLStorageMode {
+	return MTLStorageMode(x.inner.StorageMode())
 }
 
 // SetStorageMode calls the underlying SetStorageMode.
-func (x *HeapDescriptor) SetStorageMode(storageMode raw.MTLStorageMode) {
-	x.inner.SetStorageMode(storageMode)
+func (x *HeapDescriptor) SetStorageMode(storageMode MTLStorageMode) {
+	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 }
 
 // CpuCacheMode calls the underlying CpuCacheMode.
-func (x *HeapDescriptor) CpuCacheMode() raw.MTLCPUCacheMode {
-	return x.inner.CpuCacheMode()
+func (x *HeapDescriptor) CpuCacheMode() MTLCPUCacheMode {
+	return MTLCPUCacheMode(x.inner.CpuCacheMode())
 }
 
 // SetCpuCacheMode calls the underlying SetCpuCacheMode.
-func (x *HeapDescriptor) SetCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode) {
-	x.inner.SetCpuCacheMode(cpuCacheMode)
+func (x *HeapDescriptor) SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode) {
+	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
 }
 
 // SparsePageSize calls the underlying SparsePageSize.
-func (x *HeapDescriptor) SparsePageSize() raw.MTLSparsePageSize {
-	return x.inner.SparsePageSize()
+func (x *HeapDescriptor) SparsePageSize() MTLSparsePageSize {
+	return MTLSparsePageSize(x.inner.SparsePageSize())
 }
 
 // SetSparsePageSize calls the underlying SetSparsePageSize.
-func (x *HeapDescriptor) SetSparsePageSize(sparsePageSize raw.MTLSparsePageSize) {
-	x.inner.SetSparsePageSize(sparsePageSize)
+func (x *HeapDescriptor) SetSparsePageSize(sparsePageSize MTLSparsePageSize) {
+	x.inner.SetSparsePageSize(raw.MTLSparsePageSize(sparsePageSize))
 }
 
 // HazardTrackingMode calls the underlying HazardTrackingMode.
-func (x *HeapDescriptor) HazardTrackingMode() raw.MTLHazardTrackingMode {
-	return x.inner.HazardTrackingMode()
+func (x *HeapDescriptor) HazardTrackingMode() MTLHazardTrackingMode {
+	return MTLHazardTrackingMode(x.inner.HazardTrackingMode())
 }
 
 // SetHazardTrackingMode calls the underlying SetHazardTrackingMode.
-func (x *HeapDescriptor) SetHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode) {
-	x.inner.SetHazardTrackingMode(hazardTrackingMode)
+func (x *HeapDescriptor) SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) {
+	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
 }
 
 // ResourceOptions calls the underlying ResourceOptions.
-func (x *HeapDescriptor) ResourceOptions() raw.MTLResourceOptions {
-	return x.inner.ResourceOptions()
+func (x *HeapDescriptor) ResourceOptions() MTLResourceOptions {
+	return MTLResourceOptions(x.inner.ResourceOptions())
 }
 
 // SetResourceOptions calls the underlying SetResourceOptions.
-func (x *HeapDescriptor) SetResourceOptions(resourceOptions raw.MTLResourceOptions) {
-	x.inner.SetResourceOptions(resourceOptions)
+func (x *HeapDescriptor) SetResourceOptions(resourceOptions MTLResourceOptions) {
+	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
 }
 
 // Type calls the underlying Type.
-func (x *HeapDescriptor) Type() raw.MTLHeapType {
-	return x.inner.Type()
+func (x *HeapDescriptor) Type() MTLHeapType {
+	return MTLHeapType(x.inner.Type())
 }
 
 // SetType calls the underlying SetType.
-func (x *HeapDescriptor) SetType(type_ raw.MTLHeapType) {
-	x.inner.SetType(type_)
+func (x *HeapDescriptor) SetType(type_ MTLHeapType) {
+	x.inner.SetType(raw.MTLHeapType(type_))
 }
 
 // MaxCompatiblePlacementSparsePageSize calls the underlying MaxCompatiblePlacementSparsePageSize.
-func (x *HeapDescriptor) MaxCompatiblePlacementSparsePageSize() raw.MTLSparsePageSize {
-	return x.inner.MaxCompatiblePlacementSparsePageSize()
+func (x *HeapDescriptor) MaxCompatiblePlacementSparsePageSize() MTLSparsePageSize {
+	return MTLSparsePageSize(x.inner.MaxCompatiblePlacementSparsePageSize())
 }
 
 // SetMaxCompatiblePlacementSparsePageSize calls the underlying SetMaxCompatiblePlacementSparsePageSize.
-func (x *HeapDescriptor) SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize raw.MTLSparsePageSize) {
-	x.inner.SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize)
+func (x *HeapDescriptor) SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize) {
+	x.inner.SetMaxCompatiblePlacementSparsePageSize(raw.MTLSparsePageSize(maxCompatiblePlacementSparsePageSize))
 }
 
 // HeapDescriptorable is the interface implemented by [HeapDescriptor], for mocking and DI.
 type HeapDescriptorable interface {
 	Unwrap() *raw.MTLHeapDescriptor
 	WithSize(size uint) *HeapDescriptor
-	WithStorageMode(storageMode raw.MTLStorageMode) *HeapDescriptor
-	WithCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode) *HeapDescriptor
-	WithSparsePageSize(sparsePageSize raw.MTLSparsePageSize) *HeapDescriptor
-	WithHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode) *HeapDescriptor
-	WithResourceOptions(resourceOptions raw.MTLResourceOptions) *HeapDescriptor
-	WithType(type_ raw.MTLHeapType) *HeapDescriptor
-	WithMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize raw.MTLSparsePageSize) *HeapDescriptor
+	WithStorageMode(storageMode MTLStorageMode) *HeapDescriptor
+	WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *HeapDescriptor
+	WithSparsePageSize(sparsePageSize MTLSparsePageSize) *HeapDescriptor
+	WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *HeapDescriptor
+	WithResourceOptions(resourceOptions MTLResourceOptions) *HeapDescriptor
+	WithType(type_ MTLHeapType) *HeapDescriptor
+	WithMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize) *HeapDescriptor
 	Size() uint
 	SetSize(size uint)
-	StorageMode() raw.MTLStorageMode
-	SetStorageMode(storageMode raw.MTLStorageMode)
-	CpuCacheMode() raw.MTLCPUCacheMode
-	SetCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode)
-	SparsePageSize() raw.MTLSparsePageSize
-	SetSparsePageSize(sparsePageSize raw.MTLSparsePageSize)
-	HazardTrackingMode() raw.MTLHazardTrackingMode
-	SetHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode)
-	ResourceOptions() raw.MTLResourceOptions
-	SetResourceOptions(resourceOptions raw.MTLResourceOptions)
-	Type() raw.MTLHeapType
-	SetType(type_ raw.MTLHeapType)
-	MaxCompatiblePlacementSparsePageSize() raw.MTLSparsePageSize
-	SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize raw.MTLSparsePageSize)
+	StorageMode() MTLStorageMode
+	SetStorageMode(storageMode MTLStorageMode)
+	CpuCacheMode() MTLCPUCacheMode
+	SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode)
+	SparsePageSize() MTLSparsePageSize
+	SetSparsePageSize(sparsePageSize MTLSparsePageSize)
+	HazardTrackingMode() MTLHazardTrackingMode
+	SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode)
+	ResourceOptions() MTLResourceOptions
+	SetResourceOptions(resourceOptions MTLResourceOptions)
+	Type() MTLHeapType
+	SetType(type_ MTLHeapType)
+	MaxCompatiblePlacementSparsePageSize() MTLSparsePageSize
+	SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize)
 }
 
 var _ HeapDescriptorable = (*HeapDescriptor)(nil)

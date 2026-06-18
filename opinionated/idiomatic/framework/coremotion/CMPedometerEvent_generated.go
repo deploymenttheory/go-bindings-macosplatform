@@ -42,15 +42,15 @@ func (x *PedometerEvent) Date() *foundation.NSDate {
 }
 
 // Type calls the underlying Type.
-func (x *PedometerEvent) Type() raw.CMPedometerEventType {
-	return x.inner.Type()
+func (x *PedometerEvent) Type() CMPedometerEventType {
+	return CMPedometerEventType(x.inner.Type())
 }
 
 // PedometerEventable is the interface implemented by [PedometerEvent], for mocking and DI.
 type PedometerEventable interface {
 	Unwrap() *raw.CMPedometerEvent
 	Date() *foundation.NSDate
-	Type() raw.CMPedometerEventType
+	Type() CMPedometerEventType
 }
 
 var _ PedometerEventable = (*PedometerEvent)(nil)

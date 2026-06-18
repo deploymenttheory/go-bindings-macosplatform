@@ -49,14 +49,14 @@ func (x *AchievementViewController) WithGameCenterDelegate(gameCenterDelegate ra
 }
 
 // WithViewState sets the viewState property and returns the receiver for chaining.
-func (x *AchievementViewController) WithViewState(viewState raw.GKGameCenterViewControllerState) *AchievementViewController {
-	x.inner.GKGameCenterViewController.SetViewState(viewState)
+func (x *AchievementViewController) WithViewState(viewState GKGameCenterViewControllerState) *AchievementViewController {
+	x.inner.GKGameCenterViewController.SetViewState(raw.GKGameCenterViewControllerState(viewState))
 	return x
 }
 
 // WithLeaderboardTimeScope sets the leaderboardTimeScope property and returns the receiver for chaining.
-func (x *AchievementViewController) WithLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) *AchievementViewController {
-	x.inner.GKGameCenterViewController.SetLeaderboardTimeScope(leaderboardTimeScope)
+func (x *AchievementViewController) WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *AchievementViewController {
+	x.inner.GKGameCenterViewController.SetLeaderboardTimeScope(raw.GKLeaderboardTimeScope(leaderboardTimeScope))
 	return x
 }
 
@@ -91,8 +91,8 @@ type AchievementViewControllerable interface {
 	Unwrap() *raw.GKAchievementViewController
 	WithAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate) *AchievementViewController
 	WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *AchievementViewController
-	WithViewState(viewState raw.GKGameCenterViewControllerState) *AchievementViewController
-	WithLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) *AchievementViewController
+	WithViewState(viewState GKGameCenterViewControllerState) *AchievementViewController
+	WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *AchievementViewController
 	WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController
 	WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController
 	AchievementDelegate() raw.GKAchievementViewControllerDelegate

@@ -40,8 +40,8 @@ func NewTexture() *Texture {
 }
 
 // WithFilteringMode sets the filteringMode property and returns the receiver for chaining.
-func (x *Texture) WithFilteringMode(filteringMode raw.SKTextureFilteringMode) *Texture {
-	x.inner.SetFilteringMode(filteringMode)
+func (x *Texture) WithFilteringMode(filteringMode SKTextureFilteringMode) *Texture {
+	x.inner.SetFilteringMode(raw.SKTextureFilteringMode(filteringMode))
 	return x
 }
 
@@ -108,13 +108,13 @@ func (x *Texture) Preload(ctx context.Context) error {
 }
 
 // FilteringMode calls the underlying FilteringMode.
-func (x *Texture) FilteringMode() raw.SKTextureFilteringMode {
-	return x.inner.FilteringMode()
+func (x *Texture) FilteringMode() SKTextureFilteringMode {
+	return SKTextureFilteringMode(x.inner.FilteringMode())
 }
 
 // SetFilteringMode calls the underlying SetFilteringMode.
-func (x *Texture) SetFilteringMode(filteringMode raw.SKTextureFilteringMode) {
-	x.inner.SetFilteringMode(filteringMode)
+func (x *Texture) SetFilteringMode(filteringMode SKTextureFilteringMode) {
+	x.inner.SetFilteringMode(raw.SKTextureFilteringMode(filteringMode))
 }
 
 // UsesMipmaps calls the underlying UsesMipmaps.
@@ -132,7 +132,7 @@ func (x *Texture) asTexture() *raw.SKTexture { return x.inner }
 // Textureable is the interface implemented by [Texture], for mocking and DI.
 type Textureable interface {
 	Unwrap() *raw.SKTexture
-	WithFilteringMode(filteringMode raw.SKTextureFilteringMode) *Texture
+	WithFilteringMode(filteringMode SKTextureFilteringMode) *Texture
 	WithUsesMipmaps(usesMipmaps bool) *Texture
 	TextureByApplyingCIFilter(filter *coreimage.CIFilter) *Texture
 	TextureByGeneratingNormalMap() *Texture
@@ -141,8 +141,8 @@ type Textureable interface {
 	Size() corefoundation.CGSize
 	CGImage() unsafe.Pointer
 	Preload(ctx context.Context) error
-	FilteringMode() raw.SKTextureFilteringMode
-	SetFilteringMode(filteringMode raw.SKTextureFilteringMode)
+	FilteringMode() SKTextureFilteringMode
+	SetFilteringMode(filteringMode SKTextureFilteringMode)
 	UsesMipmaps() bool
 	SetUsesMipmaps(usesMipmaps bool)
 }

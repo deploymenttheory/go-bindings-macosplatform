@@ -56,20 +56,20 @@ func (x *MutableCaptionRegion) WithSize(size raw.AVCaptionSize) *MutableCaptionR
 }
 
 // WithScroll sets the scroll property and returns the receiver for chaining.
-func (x *MutableCaptionRegion) WithScroll(scroll raw.AVCaptionRegionScroll) *MutableCaptionRegion {
-	x.inner.SetScroll(scroll)
+func (x *MutableCaptionRegion) WithScroll(scroll AVCaptionRegionScroll) *MutableCaptionRegion {
+	x.inner.SetScroll(raw.AVCaptionRegionScroll(scroll))
 	return x
 }
 
 // WithDisplayAlignment sets the displayAlignment property and returns the receiver for chaining.
-func (x *MutableCaptionRegion) WithDisplayAlignment(displayAlignment raw.AVCaptionRegionDisplayAlignment) *MutableCaptionRegion {
-	x.inner.SetDisplayAlignment(displayAlignment)
+func (x *MutableCaptionRegion) WithDisplayAlignment(displayAlignment AVCaptionRegionDisplayAlignment) *MutableCaptionRegion {
+	x.inner.SetDisplayAlignment(raw.AVCaptionRegionDisplayAlignment(displayAlignment))
 	return x
 }
 
 // WithWritingMode sets the writingMode property and returns the receiver for chaining.
-func (x *MutableCaptionRegion) WithWritingMode(writingMode raw.AVCaptionRegionWritingMode) *MutableCaptionRegion {
-	x.inner.SetWritingMode(writingMode)
+func (x *MutableCaptionRegion) WithWritingMode(writingMode AVCaptionRegionWritingMode) *MutableCaptionRegion {
+	x.inner.SetWritingMode(raw.AVCaptionRegionWritingMode(writingMode))
 	return x
 }
 
@@ -84,18 +84,18 @@ func (x *MutableCaptionRegion) SetSize(size raw.AVCaptionSize) {
 }
 
 // SetScroll calls the underlying SetScroll.
-func (x *MutableCaptionRegion) SetScroll(scroll raw.AVCaptionRegionScroll) {
-	x.inner.SetScroll(scroll)
+func (x *MutableCaptionRegion) SetScroll(scroll AVCaptionRegionScroll) {
+	x.inner.SetScroll(raw.AVCaptionRegionScroll(scroll))
 }
 
 // SetDisplayAlignment calls the underlying SetDisplayAlignment.
-func (x *MutableCaptionRegion) SetDisplayAlignment(displayAlignment raw.AVCaptionRegionDisplayAlignment) {
-	x.inner.SetDisplayAlignment(displayAlignment)
+func (x *MutableCaptionRegion) SetDisplayAlignment(displayAlignment AVCaptionRegionDisplayAlignment) {
+	x.inner.SetDisplayAlignment(raw.AVCaptionRegionDisplayAlignment(displayAlignment))
 }
 
 // SetWritingMode calls the underlying SetWritingMode.
-func (x *MutableCaptionRegion) SetWritingMode(writingMode raw.AVCaptionRegionWritingMode) {
-	x.inner.SetWritingMode(writingMode)
+func (x *MutableCaptionRegion) SetWritingMode(writingMode AVCaptionRegionWritingMode) {
+	x.inner.SetWritingMode(raw.AVCaptionRegionWritingMode(writingMode))
 }
 
 func (x *MutableCaptionRegion) asCaptionRegion() *raw.AVCaptionRegion {
@@ -107,14 +107,14 @@ type MutableCaptionRegionable interface {
 	Unwrap() *raw.AVMutableCaptionRegion
 	WithOrigin(origin raw.AVCaptionPoint) *MutableCaptionRegion
 	WithSize(size raw.AVCaptionSize) *MutableCaptionRegion
-	WithScroll(scroll raw.AVCaptionRegionScroll) *MutableCaptionRegion
-	WithDisplayAlignment(displayAlignment raw.AVCaptionRegionDisplayAlignment) *MutableCaptionRegion
-	WithWritingMode(writingMode raw.AVCaptionRegionWritingMode) *MutableCaptionRegion
+	WithScroll(scroll AVCaptionRegionScroll) *MutableCaptionRegion
+	WithDisplayAlignment(displayAlignment AVCaptionRegionDisplayAlignment) *MutableCaptionRegion
+	WithWritingMode(writingMode AVCaptionRegionWritingMode) *MutableCaptionRegion
 	SetOrigin(origin raw.AVCaptionPoint)
 	SetSize(size raw.AVCaptionSize)
-	SetScroll(scroll raw.AVCaptionRegionScroll)
-	SetDisplayAlignment(displayAlignment raw.AVCaptionRegionDisplayAlignment)
-	SetWritingMode(writingMode raw.AVCaptionRegionWritingMode)
+	SetScroll(scroll AVCaptionRegionScroll)
+	SetDisplayAlignment(displayAlignment AVCaptionRegionDisplayAlignment)
+	SetWritingMode(writingMode AVCaptionRegionWritingMode)
 }
 
 var _ MutableCaptionRegionable = (*MutableCaptionRegion)(nil)

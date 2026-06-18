@@ -39,8 +39,8 @@ func NewGraphCreateSparseOpDescriptor() *GraphCreateSparseOpDescriptor {
 }
 
 // WithSparseStorageType sets the sparseStorageType property and returns the receiver for chaining.
-func (x *GraphCreateSparseOpDescriptor) WithSparseStorageType(sparseStorageType raw.MPSGraphSparseStorageType) *GraphCreateSparseOpDescriptor {
-	x.inner.SetSparseStorageType(sparseStorageType)
+func (x *GraphCreateSparseOpDescriptor) WithSparseStorageType(sparseStorageType MPSGraphSparseStorageType) *GraphCreateSparseOpDescriptor {
+	x.inner.SetSparseStorageType(raw.MPSGraphSparseStorageType(sparseStorageType))
 	return x
 }
 
@@ -51,13 +51,13 @@ func (x *GraphCreateSparseOpDescriptor) WithDataType(dataType mpscore.MPSDataTyp
 }
 
 // SparseStorageType calls the underlying SparseStorageType.
-func (x *GraphCreateSparseOpDescriptor) SparseStorageType() raw.MPSGraphSparseStorageType {
-	return x.inner.SparseStorageType()
+func (x *GraphCreateSparseOpDescriptor) SparseStorageType() MPSGraphSparseStorageType {
+	return MPSGraphSparseStorageType(x.inner.SparseStorageType())
 }
 
 // SetSparseStorageType calls the underlying SetSparseStorageType.
-func (x *GraphCreateSparseOpDescriptor) SetSparseStorageType(sparseStorageType raw.MPSGraphSparseStorageType) {
-	x.inner.SetSparseStorageType(sparseStorageType)
+func (x *GraphCreateSparseOpDescriptor) SetSparseStorageType(sparseStorageType MPSGraphSparseStorageType) {
+	x.inner.SetSparseStorageType(raw.MPSGraphSparseStorageType(sparseStorageType))
 }
 
 // DataType calls the underlying DataType.
@@ -77,10 +77,10 @@ func (x *GraphCreateSparseOpDescriptor) asGraphObject() *raw.MPSGraphObject {
 // GraphCreateSparseOpDescriptorable is the interface implemented by [GraphCreateSparseOpDescriptor], for mocking and DI.
 type GraphCreateSparseOpDescriptorable interface {
 	Unwrap() *raw.MPSGraphCreateSparseOpDescriptor
-	WithSparseStorageType(sparseStorageType raw.MPSGraphSparseStorageType) *GraphCreateSparseOpDescriptor
+	WithSparseStorageType(sparseStorageType MPSGraphSparseStorageType) *GraphCreateSparseOpDescriptor
 	WithDataType(dataType mpscore.MPSDataType) *GraphCreateSparseOpDescriptor
-	SparseStorageType() raw.MPSGraphSparseStorageType
-	SetSparseStorageType(sparseStorageType raw.MPSGraphSparseStorageType)
+	SparseStorageType() MPSGraphSparseStorageType
+	SetSparseStorageType(sparseStorageType MPSGraphSparseStorageType)
 	DataType() mpscore.MPSDataType
 	SetDataType(dataType mpscore.MPSDataType)
 }

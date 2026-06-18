@@ -38,8 +38,8 @@ func NewPostalAddressFormatter() *PostalAddressFormatter {
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *PostalAddressFormatter) WithStyle(style raw.CNPostalAddressFormatterStyle) *PostalAddressFormatter {
-	x.inner.SetStyle(style)
+func (x *PostalAddressFormatter) WithStyle(style CNPostalAddressFormatterStyle) *PostalAddressFormatter {
+	x.inner.SetStyle(raw.CNPostalAddressFormatterStyle(style))
 	return x
 }
 
@@ -58,23 +58,23 @@ func (x *PostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAtt
 }
 
 // Style calls the underlying Style.
-func (x *PostalAddressFormatter) Style() raw.CNPostalAddressFormatterStyle {
-	return x.inner.Style()
+func (x *PostalAddressFormatter) Style() CNPostalAddressFormatterStyle {
+	return CNPostalAddressFormatterStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *PostalAddressFormatter) SetStyle(style raw.CNPostalAddressFormatterStyle) {
-	x.inner.SetStyle(style)
+func (x *PostalAddressFormatter) SetStyle(style CNPostalAddressFormatterStyle) {
+	x.inner.SetStyle(raw.CNPostalAddressFormatterStyle(style))
 }
 
 // PostalAddressFormatterable is the interface implemented by [PostalAddressFormatter], for mocking and DI.
 type PostalAddressFormatterable interface {
 	Unwrap() *raw.CNPostalAddressFormatter
-	WithStyle(style raw.CNPostalAddressFormatterStyle) *PostalAddressFormatter
+	WithStyle(style CNPostalAddressFormatterStyle) *PostalAddressFormatter
 	StringFromPostalAddress(postalAddress *raw.CNPostalAddress) string
 	AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *raw.CNPostalAddress, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString
-	Style() raw.CNPostalAddressFormatterStyle
-	SetStyle(style raw.CNPostalAddressFormatterStyle)
+	Style() CNPostalAddressFormatterStyle
+	SetStyle(style CNPostalAddressFormatterStyle)
 }
 
 var _ PostalAddressFormatterable = (*PostalAddressFormatter)(nil)

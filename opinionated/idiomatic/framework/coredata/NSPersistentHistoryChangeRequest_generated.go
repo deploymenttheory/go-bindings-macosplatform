@@ -40,8 +40,8 @@ func NewPersistentHistoryChangeRequest() *PersistentHistoryChangeRequest {
 }
 
 // WithResultType sets the resultType property and returns the receiver for chaining.
-func (x *PersistentHistoryChangeRequest) WithResultType(resultType raw.NSPersistentHistoryResultType) *PersistentHistoryChangeRequest {
-	x.inner.SetResultType(resultType)
+func (x *PersistentHistoryChangeRequest) WithResultType(resultType NSPersistentHistoryResultType) *PersistentHistoryChangeRequest {
+	x.inner.SetResultType(raw.NSPersistentHistoryResultType(resultType))
 	return x
 }
 
@@ -70,13 +70,13 @@ func (x *PersistentHistoryChangeRequest) WithAffectedStores(items ...PersistentS
 }
 
 // ResultType calls the underlying ResultType.
-func (x *PersistentHistoryChangeRequest) ResultType() raw.NSPersistentHistoryResultType {
-	return x.inner.ResultType()
+func (x *PersistentHistoryChangeRequest) ResultType() NSPersistentHistoryResultType {
+	return NSPersistentHistoryResultType(x.inner.ResultType())
 }
 
 // SetResultType calls the underlying SetResultType.
-func (x *PersistentHistoryChangeRequest) SetResultType(resultType raw.NSPersistentHistoryResultType) {
-	x.inner.SetResultType(resultType)
+func (x *PersistentHistoryChangeRequest) SetResultType(resultType NSPersistentHistoryResultType) {
+	x.inner.SetResultType(raw.NSPersistentHistoryResultType(resultType))
 }
 
 // Token calls the underlying Token.
@@ -105,11 +105,11 @@ func (x *PersistentHistoryChangeRequest) asPersistentStoreRequest() *raw.NSPersi
 // PersistentHistoryChangeRequestable is the interface implemented by [PersistentHistoryChangeRequest], for mocking and DI.
 type PersistentHistoryChangeRequestable interface {
 	Unwrap() *raw.NSPersistentHistoryChangeRequest
-	WithResultType(resultType raw.NSPersistentHistoryResultType) *PersistentHistoryChangeRequest
+	WithResultType(resultType NSPersistentHistoryResultType) *PersistentHistoryChangeRequest
 	WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *PersistentHistoryChangeRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest
-	ResultType() raw.NSPersistentHistoryResultType
-	SetResultType(resultType raw.NSPersistentHistoryResultType)
+	ResultType() NSPersistentHistoryResultType
+	SetResultType(resultType NSPersistentHistoryResultType)
 	Token() *PersistentHistoryToken
 	FetchRequest() *raw.NSFetchRequest[objc.ID]
 	SetFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID])

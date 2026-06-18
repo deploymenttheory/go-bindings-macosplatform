@@ -190,18 +190,18 @@ func (x *Dictionary) EnumerateKeysAndObjectsUsing(block objc.Block) {
 }
 
 // EnumerateKeysAndObjectsWithOptionsUsing calls the underlying EnumerateKeysAndObjectsWithOptionsUsing.
-func (x *Dictionary) EnumerateKeysAndObjectsWithOptionsUsing(opts raw.NSEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateKeysAndObjectsWithOptionsUsing(opts, block)
+func (x *Dictionary) EnumerateKeysAndObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateKeysAndObjectsWithOptionsUsing(raw.NSEnumerationOptions(opts), block)
 }
 
 // KeysSortedByValueUsingComparator calls the underlying KeysSortedByValueUsingComparator.
-func (x *Dictionary) KeysSortedByValueUsingComparator(cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) *raw.NSArray[objc.ID] {
-	return x.inner.KeysSortedByValueUsingComparator(cmptr)
+func (x *Dictionary) KeysSortedByValueUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
+	return x.inner.KeysSortedByValueUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
 // KeysSortedByValueWithOptionsUsingComparator calls the underlying KeysSortedByValueWithOptionsUsingComparator.
-func (x *Dictionary) KeysSortedByValueWithOptionsUsingComparator(opts raw.NSSortOptions, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) *raw.NSArray[objc.ID] {
-	return x.inner.KeysSortedByValueWithOptionsUsingComparator(opts, cmptr)
+func (x *Dictionary) KeysSortedByValueWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID] {
+	return x.inner.KeysSortedByValueWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
 }
 
 // KeysOfEntriesPassingTest calls the underlying KeysOfEntriesPassingTest.
@@ -210,8 +210,8 @@ func (x *Dictionary) KeysOfEntriesPassingTest(predicate objc.Block) *raw.NSSet[o
 }
 
 // KeysOfEntriesWithOptionsPassingTest calls the underlying KeysOfEntriesWithOptionsPassingTest.
-func (x *Dictionary) KeysOfEntriesWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID] {
-	return x.inner.KeysOfEntriesWithOptionsPassingTest(opts, predicate)
+func (x *Dictionary) KeysOfEntriesWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID] {
+	return x.inner.KeysOfEntriesWithOptionsPassingTest(raw.NSEnumerationOptions(opts), predicate)
 }
 
 // AllKeys calls the underlying AllKeys.
@@ -383,11 +383,11 @@ type Dictionaryable interface {
 	GetObjectsAndKeysCount(objects unsafe.Pointer, keys unsafe.Pointer, count uint)
 	ObjectForKeyedSubscript(key objc.ID) objc.ID
 	EnumerateKeysAndObjectsUsing(block objc.Block)
-	EnumerateKeysAndObjectsWithOptionsUsing(opts raw.NSEnumerationOptions, block objc.Block)
-	KeysSortedByValueUsingComparator(cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) *raw.NSArray[objc.ID]
-	KeysSortedByValueWithOptionsUsingComparator(opts raw.NSSortOptions, cmptr func(objc.ID, objc.ID) raw.NSComparisonResult) *raw.NSArray[objc.ID]
+	EnumerateKeysAndObjectsWithOptionsUsing(opts NSEnumerationOptions, block objc.Block)
+	KeysSortedByValueUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID]
+	KeysSortedByValueWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) *raw.NSArray[objc.ID]
 	KeysOfEntriesPassingTest(predicate objc.Block) *raw.NSSet[objc.ID]
-	KeysOfEntriesWithOptionsPassingTest(opts raw.NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID]
+	KeysOfEntriesWithOptionsPassingTest(opts NSEnumerationOptions, predicate objc.Block) *raw.NSSet[objc.ID]
 	AllKeys() *raw.NSArray[objc.ID]
 	AllValues() *raw.NSArray[objc.ID]
 	DescriptionInStringsFileFormat() *String

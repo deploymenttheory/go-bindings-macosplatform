@@ -38,8 +38,8 @@ func NewTurnBasedParticipant() *TurnBasedParticipant {
 }
 
 // WithMatchOutcome sets the matchOutcome property and returns the receiver for chaining.
-func (x *TurnBasedParticipant) WithMatchOutcome(matchOutcome raw.GKTurnBasedMatchOutcome) *TurnBasedParticipant {
-	x.inner.SetMatchOutcome(matchOutcome)
+func (x *TurnBasedParticipant) WithMatchOutcome(matchOutcome GKTurnBasedMatchOutcome) *TurnBasedParticipant {
+	x.inner.SetMatchOutcome(raw.GKTurnBasedMatchOutcome(matchOutcome))
 	return x
 }
 
@@ -58,18 +58,18 @@ func (x *TurnBasedParticipant) LastTurnDate() *foundation.NSDate {
 }
 
 // Status calls the underlying Status.
-func (x *TurnBasedParticipant) Status() raw.GKTurnBasedParticipantStatus {
-	return x.inner.Status()
+func (x *TurnBasedParticipant) Status() GKTurnBasedParticipantStatus {
+	return GKTurnBasedParticipantStatus(x.inner.Status())
 }
 
 // MatchOutcome calls the underlying MatchOutcome.
-func (x *TurnBasedParticipant) MatchOutcome() raw.GKTurnBasedMatchOutcome {
-	return x.inner.MatchOutcome()
+func (x *TurnBasedParticipant) MatchOutcome() GKTurnBasedMatchOutcome {
+	return GKTurnBasedMatchOutcome(x.inner.MatchOutcome())
 }
 
 // SetMatchOutcome calls the underlying SetMatchOutcome.
-func (x *TurnBasedParticipant) SetMatchOutcome(matchOutcome raw.GKTurnBasedMatchOutcome) {
-	x.inner.SetMatchOutcome(matchOutcome)
+func (x *TurnBasedParticipant) SetMatchOutcome(matchOutcome GKTurnBasedMatchOutcome) {
+	x.inner.SetMatchOutcome(raw.GKTurnBasedMatchOutcome(matchOutcome))
 }
 
 // TimeoutDate calls the underlying TimeoutDate.
@@ -89,12 +89,12 @@ func (x *TurnBasedParticipant) PlayerID() string {
 // TurnBasedParticipantable is the interface implemented by [TurnBasedParticipant], for mocking and DI.
 type TurnBasedParticipantable interface {
 	Unwrap() *raw.GKTurnBasedParticipant
-	WithMatchOutcome(matchOutcome raw.GKTurnBasedMatchOutcome) *TurnBasedParticipant
+	WithMatchOutcome(matchOutcome GKTurnBasedMatchOutcome) *TurnBasedParticipant
 	Player() *Player
 	LastTurnDate() *foundation.NSDate
-	Status() raw.GKTurnBasedParticipantStatus
-	MatchOutcome() raw.GKTurnBasedMatchOutcome
-	SetMatchOutcome(matchOutcome raw.GKTurnBasedMatchOutcome)
+	Status() GKTurnBasedParticipantStatus
+	MatchOutcome() GKTurnBasedMatchOutcome
+	SetMatchOutcome(matchOutcome GKTurnBasedMatchOutcome)
 	TimeoutDate() *foundation.NSDate
 	PlayerID() string
 }

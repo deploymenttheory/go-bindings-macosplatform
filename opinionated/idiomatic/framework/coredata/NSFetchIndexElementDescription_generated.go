@@ -31,15 +31,15 @@ func FetchIndexElementDescriptionFromID(id objc.ID) *FetchIndexElementDescriptio
 }
 
 // NewFetchIndexElementDescriptionWithPropertyCollationType creates a new [FetchIndexElementDescription].
-func NewFetchIndexElementDescriptionWithPropertyCollationType(property *raw.NSPropertyDescription, collationType raw.NSFetchIndexElementType) *FetchIndexElementDescription {
+func NewFetchIndexElementDescriptionWithPropertyCollationType(property *raw.NSPropertyDescription, collationType NSFetchIndexElementType) *FetchIndexElementDescription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchIndexElementDescription")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperty:collationType:"), property.Ptr(), collationType)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperty:collationType:"), property.Ptr(), raw.NSFetchIndexElementType(collationType))
 	return &FetchIndexElementDescription{inner: raw.NSFetchIndexElementDescriptionFromID(_id)}
 }
 
 // WithCollationType sets the collationType property and returns the receiver for chaining.
-func (x *FetchIndexElementDescription) WithCollationType(collationType raw.NSFetchIndexElementType) *FetchIndexElementDescription {
-	x.inner.SetCollationType(collationType)
+func (x *FetchIndexElementDescription) WithCollationType(collationType NSFetchIndexElementType) *FetchIndexElementDescription {
+	x.inner.SetCollationType(raw.NSFetchIndexElementType(collationType))
 	return x
 }
 
@@ -68,13 +68,13 @@ func (x *FetchIndexElementDescription) PropertyName() string {
 }
 
 // CollationType calls the underlying CollationType.
-func (x *FetchIndexElementDescription) CollationType() raw.NSFetchIndexElementType {
-	return x.inner.CollationType()
+func (x *FetchIndexElementDescription) CollationType() NSFetchIndexElementType {
+	return NSFetchIndexElementType(x.inner.CollationType())
 }
 
 // SetCollationType calls the underlying SetCollationType.
-func (x *FetchIndexElementDescription) SetCollationType(collationType raw.NSFetchIndexElementType) {
-	x.inner.SetCollationType(collationType)
+func (x *FetchIndexElementDescription) SetCollationType(collationType NSFetchIndexElementType) {
+	x.inner.SetCollationType(raw.NSFetchIndexElementType(collationType))
 }
 
 // IsAscending calls the underlying IsAscending.
@@ -99,12 +99,12 @@ func (x *FetchIndexElementDescription) IndexDescription() *FetchIndexDescription
 // FetchIndexElementDescriptionable is the interface implemented by [FetchIndexElementDescription], for mocking and DI.
 type FetchIndexElementDescriptionable interface {
 	Unwrap() *raw.NSFetchIndexElementDescription
-	WithCollationType(collationType raw.NSFetchIndexElementType) *FetchIndexElementDescription
+	WithCollationType(collationType NSFetchIndexElementType) *FetchIndexElementDescription
 	WithAscending(ascending bool) *FetchIndexElementDescription
 	Property() *PropertyDescription
 	PropertyName() string
-	CollationType() raw.NSFetchIndexElementType
-	SetCollationType(collationType raw.NSFetchIndexElementType)
+	CollationType() NSFetchIndexElementType
+	SetCollationType(collationType NSFetchIndexElementType)
 	IsAscending() bool
 	SetAscending(ascending bool)
 	IndexDescription() *FetchIndexDescription

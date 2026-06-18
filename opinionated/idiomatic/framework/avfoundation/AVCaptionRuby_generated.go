@@ -39,9 +39,9 @@ func NewCaptionRubyWithText(text string) *CaptionRuby {
 }
 
 // NewCaptionRubyWithTextPositionAlignment creates a new [CaptionRuby].
-func NewCaptionRubyWithTextPositionAlignment(text string, position raw.AVCaptionRubyPosition, alignment raw.AVCaptionRubyAlignment) *CaptionRuby {
+func NewCaptionRubyWithTextPositionAlignment(text string, position AVCaptionRubyPosition, alignment AVCaptionRubyAlignment) *CaptionRuby {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionRuby")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithText:position:alignment:"), foundation.NSStringStringWithUTF8String(text).Ptr(), position, alignment)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithText:position:alignment:"), foundation.NSStringStringWithUTF8String(text).Ptr(), raw.AVCaptionRubyPosition(position), raw.AVCaptionRubyAlignment(alignment))
 	return &CaptionRuby{inner: raw.AVCaptionRubyFromID(_id)}
 }
 
@@ -55,21 +55,21 @@ func (x *CaptionRuby) Text() string {
 }
 
 // Position calls the underlying Position.
-func (x *CaptionRuby) Position() raw.AVCaptionRubyPosition {
-	return x.inner.Position()
+func (x *CaptionRuby) Position() AVCaptionRubyPosition {
+	return AVCaptionRubyPosition(x.inner.Position())
 }
 
 // Alignment calls the underlying Alignment.
-func (x *CaptionRuby) Alignment() raw.AVCaptionRubyAlignment {
-	return x.inner.Alignment()
+func (x *CaptionRuby) Alignment() AVCaptionRubyAlignment {
+	return AVCaptionRubyAlignment(x.inner.Alignment())
 }
 
 // CaptionRubyable is the interface implemented by [CaptionRuby], for mocking and DI.
 type CaptionRubyable interface {
 	Unwrap() *raw.AVCaptionRuby
 	Text() string
-	Position() raw.AVCaptionRubyPosition
-	Alignment() raw.AVCaptionRubyAlignment
+	Position() AVCaptionRubyPosition
+	Alignment() AVCaptionRubyAlignment
 }
 
 var _ CaptionRubyable = (*CaptionRuby)(nil)

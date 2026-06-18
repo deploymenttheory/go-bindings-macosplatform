@@ -37,14 +37,14 @@ func NewAVB17221ACMPMessage() *AVB17221ACMPMessage {
 }
 
 // WithMessageType sets the messageType property and returns the receiver for chaining.
-func (x *AVB17221ACMPMessage) WithMessageType(messageType raw.AVB17221ACMPMessageType) *AVB17221ACMPMessage {
-	x.inner.SetMessageType(messageType)
+func (x *AVB17221ACMPMessage) WithMessageType(messageType AVB17221ACMPMessageType) *AVB17221ACMPMessage {
+	x.inner.SetMessageType(raw.AVB17221ACMPMessageType(messageType))
 	return x
 }
 
 // WithStatus sets the status property and returns the receiver for chaining.
-func (x *AVB17221ACMPMessage) WithStatus(status raw.AVB17221ACMPStatusCode) *AVB17221ACMPMessage {
-	x.inner.SetStatus(status)
+func (x *AVB17221ACMPMessage) WithStatus(status AVB17221ACMPStatusCode) *AVB17221ACMPMessage {
+	x.inner.SetStatus(raw.AVB17221ACMPStatusCode(status))
 	return x
 }
 
@@ -103,8 +103,8 @@ func (x *AVB17221ACMPMessage) WithSequenceID(sequenceID uint16) *AVB17221ACMPMes
 }
 
 // WithFlags sets the flags property and returns the receiver for chaining.
-func (x *AVB17221ACMPMessage) WithFlags(flags raw.AVB17221ACMPFlags) *AVB17221ACMPMessage {
-	x.inner.SetFlags(flags)
+func (x *AVB17221ACMPMessage) WithFlags(flags AVB17221ACMPFlags) *AVB17221ACMPMessage {
+	x.inner.SetFlags(raw.AVB17221ACMPFlags(flags))
 	return x
 }
 
@@ -127,8 +127,8 @@ func (x *AVB17221ACMPMessage) WithConnectedListenersEntriesValid(connectedListen
 }
 
 // WithIpFlags sets the ipFlags property and returns the receiver for chaining.
-func (x *AVB17221ACMPMessage) WithIpFlags(ipFlags raw.AVB17221ACMPIPFlag) *AVB17221ACMPMessage {
-	x.inner.SetIpFlags(ipFlags)
+func (x *AVB17221ACMPMessage) WithIpFlags(ipFlags AVB17221ACMPIPFlag) *AVB17221ACMPMessage {
+	x.inner.SetIpFlags(raw.AVB17221ACMPIPFlag(ipFlags))
 	return x
 }
 
@@ -168,23 +168,23 @@ func (x *AVB17221ACMPMessage) ErrorForStatusCode() unsafe.Pointer {
 }
 
 // MessageType calls the underlying MessageType.
-func (x *AVB17221ACMPMessage) MessageType() raw.AVB17221ACMPMessageType {
-	return x.inner.MessageType()
+func (x *AVB17221ACMPMessage) MessageType() AVB17221ACMPMessageType {
+	return AVB17221ACMPMessageType(x.inner.MessageType())
 }
 
 // SetMessageType calls the underlying SetMessageType.
-func (x *AVB17221ACMPMessage) SetMessageType(messageType raw.AVB17221ACMPMessageType) {
-	x.inner.SetMessageType(messageType)
+func (x *AVB17221ACMPMessage) SetMessageType(messageType AVB17221ACMPMessageType) {
+	x.inner.SetMessageType(raw.AVB17221ACMPMessageType(messageType))
 }
 
 // Status calls the underlying Status.
-func (x *AVB17221ACMPMessage) Status() raw.AVB17221ACMPStatusCode {
-	return x.inner.Status()
+func (x *AVB17221ACMPMessage) Status() AVB17221ACMPStatusCode {
+	return AVB17221ACMPStatusCode(x.inner.Status())
 }
 
 // SetStatus calls the underlying SetStatus.
-func (x *AVB17221ACMPMessage) SetStatus(status raw.AVB17221ACMPStatusCode) {
-	x.inner.SetStatus(status)
+func (x *AVB17221ACMPMessage) SetStatus(status AVB17221ACMPStatusCode) {
+	x.inner.SetStatus(raw.AVB17221ACMPStatusCode(status))
 }
 
 // StreamID calls the underlying StreamID.
@@ -282,13 +282,13 @@ func (x *AVB17221ACMPMessage) SetSequenceID(sequenceID uint16) {
 }
 
 // Flags calls the underlying Flags.
-func (x *AVB17221ACMPMessage) Flags() raw.AVB17221ACMPFlags {
-	return x.inner.Flags()
+func (x *AVB17221ACMPMessage) Flags() AVB17221ACMPFlags {
+	return AVB17221ACMPFlags(x.inner.Flags())
 }
 
 // SetFlags calls the underlying SetFlags.
-func (x *AVB17221ACMPMessage) SetFlags(flags raw.AVB17221ACMPFlags) {
-	x.inner.SetFlags(flags)
+func (x *AVB17221ACMPMessage) SetFlags(flags AVB17221ACMPFlags) {
+	x.inner.SetFlags(raw.AVB17221ACMPFlags(flags))
 }
 
 // VlanID calls the underlying VlanID.
@@ -322,13 +322,13 @@ func (x *AVB17221ACMPMessage) SetConnectedListenersEntriesValid(connectedListene
 }
 
 // IpFlags calls the underlying IpFlags.
-func (x *AVB17221ACMPMessage) IpFlags() raw.AVB17221ACMPIPFlag {
-	return x.inner.IpFlags()
+func (x *AVB17221ACMPMessage) IpFlags() AVB17221ACMPIPFlag {
+	return AVB17221ACMPIPFlag(x.inner.IpFlags())
 }
 
 // SetIpFlags calls the underlying SetIpFlags.
-func (x *AVB17221ACMPMessage) SetIpFlags(ipFlags raw.AVB17221ACMPIPFlag) {
-	x.inner.SetIpFlags(ipFlags)
+func (x *AVB17221ACMPMessage) SetIpFlags(ipFlags AVB17221ACMPIPFlag) {
+	x.inner.SetIpFlags(raw.AVB17221ACMPIPFlag(ipFlags))
 }
 
 // SourcePort calls the underlying SourcePort.
@@ -396,8 +396,8 @@ func (x *AVB17221ACMPMessage) SetSourceMAC(sourceMAC *raw.AVBMACAddress) {
 // AVB17221ACMPMessageable is the interface implemented by [AVB17221ACMPMessage], for mocking and DI.
 type AVB17221ACMPMessageable interface {
 	Unwrap() *raw.AVB17221ACMPMessage
-	WithMessageType(messageType raw.AVB17221ACMPMessageType) *AVB17221ACMPMessage
-	WithStatus(status raw.AVB17221ACMPStatusCode) *AVB17221ACMPMessage
+	WithMessageType(messageType AVB17221ACMPMessageType) *AVB17221ACMPMessage
+	WithStatus(status AVB17221ACMPStatusCode) *AVB17221ACMPMessage
 	WithStreamID(streamID uint64) *AVB17221ACMPMessage
 	WithControllerEntityID(controllerEntityID uint64) *AVB17221ACMPMessage
 	WithTalkerEntityID(talkerEntityID uint64) *AVB17221ACMPMessage
@@ -407,21 +407,21 @@ type AVB17221ACMPMessageable interface {
 	WithDestinationMAC(destinationMAC *MACAddress) *AVB17221ACMPMessage
 	WithConnectionCount(connectionCount uint16) *AVB17221ACMPMessage
 	WithSequenceID(sequenceID uint16) *AVB17221ACMPMessage
-	WithFlags(flags raw.AVB17221ACMPFlags) *AVB17221ACMPMessage
+	WithFlags(flags AVB17221ACMPFlags) *AVB17221ACMPMessage
 	WithVlanID(vlanID uint16) *AVB17221ACMPMessage
 	WithConnectedListenersEntries(connectedListenersEntries uint16) *AVB17221ACMPMessage
 	WithConnectedListenersEntriesValid(connectedListenersEntriesValid bool) *AVB17221ACMPMessage
-	WithIpFlags(ipFlags raw.AVB17221ACMPIPFlag) *AVB17221ACMPMessage
+	WithIpFlags(ipFlags AVB17221ACMPIPFlag) *AVB17221ACMPMessage
 	WithSourcePort(sourcePort uint16) *AVB17221ACMPMessage
 	WithDestinationPort(destinationPort uint16) *AVB17221ACMPMessage
 	WithSourceIPAddress(sourceIPAddress *IPAddress) *AVB17221ACMPMessage
 	WithDestinationIPAddress(destinationIPAddress *IPAddress) *AVB17221ACMPMessage
 	WithSourceMAC(sourceMAC *MACAddress) *AVB17221ACMPMessage
 	ErrorForStatusCode() unsafe.Pointer
-	MessageType() raw.AVB17221ACMPMessageType
-	SetMessageType(messageType raw.AVB17221ACMPMessageType)
-	Status() raw.AVB17221ACMPStatusCode
-	SetStatus(status raw.AVB17221ACMPStatusCode)
+	MessageType() AVB17221ACMPMessageType
+	SetMessageType(messageType AVB17221ACMPMessageType)
+	Status() AVB17221ACMPStatusCode
+	SetStatus(status AVB17221ACMPStatusCode)
 	StreamID() uint64
 	SetStreamID(streamID uint64)
 	ControllerEntityID() uint64
@@ -440,16 +440,16 @@ type AVB17221ACMPMessageable interface {
 	SetConnectionCount(connectionCount uint16)
 	SequenceID() uint16
 	SetSequenceID(sequenceID uint16)
-	Flags() raw.AVB17221ACMPFlags
-	SetFlags(flags raw.AVB17221ACMPFlags)
+	Flags() AVB17221ACMPFlags
+	SetFlags(flags AVB17221ACMPFlags)
 	VlanID() uint16
 	SetVlanID(vlanID uint16)
 	ConnectedListenersEntries() uint16
 	SetConnectedListenersEntries(connectedListenersEntries uint16)
 	ConnectedListenersEntriesValid() bool
 	SetConnectedListenersEntriesValid(connectedListenersEntriesValid bool)
-	IpFlags() raw.AVB17221ACMPIPFlag
-	SetIpFlags(ipFlags raw.AVB17221ACMPIPFlag)
+	IpFlags() AVB17221ACMPIPFlag
+	SetIpFlags(ipFlags AVB17221ACMPIPFlag)
 	SourcePort() uint16
 	SetSourcePort(sourcePort uint16)
 	DestinationPort() uint16

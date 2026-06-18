@@ -57,8 +57,8 @@ func (x *Thread) WithThreadPriority(threadPriority float64) *Thread {
 }
 
 // WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *Thread) WithQualityOfService(qualityOfService raw.NSQualityOfService) *Thread {
-	x.inner.SetQualityOfService(qualityOfService)
+func (x *Thread) WithQualityOfService(qualityOfService NSQualityOfService) *Thread {
+	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 	return x
 }
 
@@ -111,13 +111,13 @@ func (x *Thread) SetThreadPriority(threadPriority float64) {
 }
 
 // QualityOfService calls the underlying QualityOfService.
-func (x *Thread) QualityOfService() raw.NSQualityOfService {
-	return x.inner.QualityOfService()
+func (x *Thread) QualityOfService() NSQualityOfService {
+	return NSQualityOfService(x.inner.QualityOfService())
 }
 
 // SetQualityOfService calls the underlying SetQualityOfService.
-func (x *Thread) SetQualityOfService(qualityOfService raw.NSQualityOfService) {
-	x.inner.SetQualityOfService(qualityOfService)
+func (x *Thread) SetQualityOfService(qualityOfService NSQualityOfService) {
+	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
 }
 
 // Name calls the underlying Name.
@@ -170,7 +170,7 @@ func (x *Thread) asObject() *raw.NSObject { return &x.inner.NSObject }
 type Threadable interface {
 	Unwrap() *raw.NSThread
 	WithThreadPriority(threadPriority float64) *Thread
-	WithQualityOfService(qualityOfService raw.NSQualityOfService) *Thread
+	WithQualityOfService(qualityOfService NSQualityOfService) *Thread
 	WithName(name string) *Thread
 	WithStackSize(stackSize uint) *Thread
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Thread
@@ -180,8 +180,8 @@ type Threadable interface {
 	ThreadDictionary() *raw.NSMutableDictionary[objc.ID, objc.ID]
 	ThreadPriority() float64
 	SetThreadPriority(threadPriority float64)
-	QualityOfService() raw.NSQualityOfService
-	SetQualityOfService(qualityOfService raw.NSQualityOfService)
+	QualityOfService() NSQualityOfService
+	SetQualityOfService(qualityOfService NSQualityOfService)
 	Name() *String
 	SetName(name string)
 	StackSize() uint

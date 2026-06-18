@@ -44,8 +44,8 @@ func (x *TextCheckingResult) WithScriptingProperties(scriptingProperties *raw.NS
 }
 
 // ResultType calls the underlying ResultType.
-func (x *TextCheckingResult) ResultType() raw.NSTextCheckingType {
-	return x.inner.ResultType()
+func (x *TextCheckingResult) ResultType() NSTextCheckingType {
+	return NSTextCheckingType(x.inner.ResultType())
 }
 
 // Range calls the underlying Range.
@@ -177,7 +177,7 @@ func (x *TextCheckingResult) asObject() *raw.NSObject { return &x.inner.NSObject
 type TextCheckingResultable interface {
 	Unwrap() *raw.NSTextCheckingResult
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TextCheckingResult
-	ResultType() raw.NSTextCheckingType
+	ResultType() NSTextCheckingType
 	Range() raw.NSRange
 	RangeAtIndex(idx uint) raw.NSRange
 	RangeWithName(name string) raw.NSRange

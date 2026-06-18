@@ -31,15 +31,15 @@ func AddVoiceShortcutButtonFromID(id objc.ID) *AddVoiceShortcutButton {
 }
 
 // NewAddVoiceShortcutButtonWithStyle creates a new [AddVoiceShortcutButton].
-func NewAddVoiceShortcutButtonWithStyle(style raw.INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
+func NewAddVoiceShortcutButtonWithStyle(style INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INUIAddVoiceShortcutButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), style)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), raw.INUIAddVoiceShortcutButtonStyle(style))
 	return &AddVoiceShortcutButton{inner: raw.INUIAddVoiceShortcutButtonFromID(_id)}
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *AddVoiceShortcutButton) WithStyle(style raw.INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
-	x.inner.SetStyle(style)
+func (x *AddVoiceShortcutButton) WithStyle(style INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton {
+	x.inner.SetStyle(raw.INUIAddVoiceShortcutButtonStyle(style))
 	return x
 }
 
@@ -62,13 +62,13 @@ func (x *AddVoiceShortcutButton) WithCornerRadius(cornerRadius float64) *AddVoic
 }
 
 // Style calls the underlying Style.
-func (x *AddVoiceShortcutButton) Style() raw.INUIAddVoiceShortcutButtonStyle {
-	return x.inner.Style()
+func (x *AddVoiceShortcutButton) Style() INUIAddVoiceShortcutButtonStyle {
+	return INUIAddVoiceShortcutButtonStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *AddVoiceShortcutButton) SetStyle(style raw.INUIAddVoiceShortcutButtonStyle) {
-	x.inner.SetStyle(style)
+func (x *AddVoiceShortcutButton) SetStyle(style INUIAddVoiceShortcutButtonStyle) {
+	x.inner.SetStyle(raw.INUIAddVoiceShortcutButtonStyle(style))
 }
 
 // Delegate calls the underlying Delegate.
@@ -104,12 +104,12 @@ func (x *AddVoiceShortcutButton) SetCornerRadius(cornerRadius float64) {
 // AddVoiceShortcutButtonable is the interface implemented by [AddVoiceShortcutButton], for mocking and DI.
 type AddVoiceShortcutButtonable interface {
 	Unwrap() *raw.INUIAddVoiceShortcutButton
-	WithStyle(style raw.INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton
+	WithStyle(style INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton
 	WithDelegate(delegate raw.INUIAddVoiceShortcutButtonDelegate) *AddVoiceShortcutButton
 	WithShortcut(shortcut *intents.INShortcut) *AddVoiceShortcutButton
 	WithCornerRadius(cornerRadius float64) *AddVoiceShortcutButton
-	Style() raw.INUIAddVoiceShortcutButtonStyle
-	SetStyle(style raw.INUIAddVoiceShortcutButtonStyle)
+	Style() INUIAddVoiceShortcutButtonStyle
+	SetStyle(style INUIAddVoiceShortcutButtonStyle)
 	Delegate() raw.INUIAddVoiceShortcutButtonDelegate
 	SetDelegate(delegate raw.INUIAddVoiceShortcutButtonDelegate)
 	Shortcut() *intents.INShortcut

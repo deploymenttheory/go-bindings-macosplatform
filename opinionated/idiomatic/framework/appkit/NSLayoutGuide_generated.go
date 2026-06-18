@@ -51,8 +51,8 @@ func (x *LayoutGuide) WithIdentifier(identifier *foundation.NSString) *LayoutGui
 }
 
 // ConstraintsAffectingLayoutForOrientation calls the underlying ConstraintsAffectingLayoutForOrientation.
-func (x *LayoutGuide) ConstraintsAffectingLayoutForOrientation(orientation raw.NSLayoutConstraintOrientation) *foundation.NSArray[*raw.NSLayoutConstraint] {
-	return x.inner.ConstraintsAffectingLayoutForOrientation(orientation)
+func (x *LayoutGuide) ConstraintsAffectingLayoutForOrientation(orientation NSLayoutConstraintOrientation) *foundation.NSArray[*raw.NSLayoutConstraint] {
+	return x.inner.ConstraintsAffectingLayoutForOrientation(raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // Frame calls the underlying Frame.
@@ -188,7 +188,7 @@ type LayoutGuideable interface {
 	Unwrap() *raw.NSLayoutGuide
 	WithOwningView(owningView ViewProvider) *LayoutGuide
 	WithIdentifier(identifier *foundation.NSString) *LayoutGuide
-	ConstraintsAffectingLayoutForOrientation(orientation raw.NSLayoutConstraintOrientation) *foundation.NSArray[*raw.NSLayoutConstraint]
+	ConstraintsAffectingLayoutForOrientation(orientation NSLayoutConstraintOrientation) *foundation.NSArray[*raw.NSLayoutConstraint]
 	Frame() corefoundation.CGRect
 	OwningView() *View
 	SetOwningView(owningView *raw.NSView)

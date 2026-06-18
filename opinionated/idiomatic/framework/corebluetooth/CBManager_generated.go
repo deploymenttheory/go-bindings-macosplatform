@@ -36,13 +36,13 @@ func NewManager() *Manager {
 }
 
 // State calls the underlying State.
-func (x *Manager) State() raw.CBManagerState {
-	return x.inner.State()
+func (x *Manager) State() CBManagerState {
+	return CBManagerState(x.inner.State())
 }
 
 // Authorization calls the underlying Authorization.
-func (x *Manager) Authorization() raw.CBManagerAuthorization {
-	return x.inner.Authorization()
+func (x *Manager) Authorization() CBManagerAuthorization {
+	return CBManagerAuthorization(x.inner.Authorization())
 }
 
 func (x *Manager) asManager() *raw.CBManager { return x.inner }
@@ -50,8 +50,8 @@ func (x *Manager) asManager() *raw.CBManager { return x.inner }
 // Managerable is the interface implemented by [Manager], for mocking and DI.
 type Managerable interface {
 	Unwrap() *raw.CBManager
-	State() raw.CBManagerState
-	Authorization() raw.CBManagerAuthorization
+	State() CBManagerState
+	Authorization() CBManagerAuthorization
 }
 
 var _ Managerable = (*Manager)(nil)

@@ -68,28 +68,28 @@ func (x *Calendar) WithScriptingProperties(scriptingProperties *raw.NSDictionary
 }
 
 // MinimumRangeOfUnit calls the underlying MinimumRangeOfUnit.
-func (x *Calendar) MinimumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange {
-	return x.inner.MinimumRangeOfUnit(unit)
+func (x *Calendar) MinimumRangeOfUnit(unit NSCalendarUnit) raw.NSRange {
+	return x.inner.MinimumRangeOfUnit(raw.NSCalendarUnit(unit))
 }
 
 // MaximumRangeOfUnit calls the underlying MaximumRangeOfUnit.
-func (x *Calendar) MaximumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange {
-	return x.inner.MaximumRangeOfUnit(unit)
+func (x *Calendar) MaximumRangeOfUnit(unit NSCalendarUnit) raw.NSRange {
+	return x.inner.MaximumRangeOfUnit(raw.NSCalendarUnit(unit))
 }
 
 // RangeOfUnitInUnitForDate calls the underlying RangeOfUnitInUnitForDate.
-func (x *Calendar) RangeOfUnitInUnitForDate(smaller raw.NSCalendarUnit, larger raw.NSCalendarUnit, date *raw.NSDate) raw.NSRange {
-	return x.inner.RangeOfUnitInUnitForDate(smaller, larger, date)
+func (x *Calendar) RangeOfUnitInUnitForDate(smaller NSCalendarUnit, larger NSCalendarUnit, date *raw.NSDate) raw.NSRange {
+	return x.inner.RangeOfUnitInUnitForDate(raw.NSCalendarUnit(smaller), raw.NSCalendarUnit(larger), date)
 }
 
 // OrdinalityOfUnitInUnitForDate calls the underlying OrdinalityOfUnitInUnitForDate.
-func (x *Calendar) OrdinalityOfUnitInUnitForDate(smaller raw.NSCalendarUnit, larger raw.NSCalendarUnit, date *raw.NSDate) uint {
-	return x.inner.OrdinalityOfUnitInUnitForDate(smaller, larger, date)
+func (x *Calendar) OrdinalityOfUnitInUnitForDate(smaller NSCalendarUnit, larger NSCalendarUnit, date *raw.NSDate) uint {
+	return x.inner.OrdinalityOfUnitInUnitForDate(raw.NSCalendarUnit(smaller), raw.NSCalendarUnit(larger), date)
 }
 
 // RangeOfUnitStartDateIntervalForDate calls the underlying RangeOfUnitStartDateIntervalForDate.
-func (x *Calendar) RangeOfUnitStartDateIntervalForDate(unit raw.NSCalendarUnit, datep *raw.NSDate, tip *float64, date *raw.NSDate) bool {
-	return x.inner.RangeOfUnitStartDateIntervalForDate(unit, datep, tip, date)
+func (x *Calendar) RangeOfUnitStartDateIntervalForDate(unit NSCalendarUnit, datep *raw.NSDate, tip *float64, date *raw.NSDate) bool {
+	return x.inner.RangeOfUnitStartDateIntervalForDate(raw.NSCalendarUnit(unit), datep, tip, date)
 }
 
 // DateFromComponents calls the underlying DateFromComponents.
@@ -102,8 +102,8 @@ func (x *Calendar) DateFromComponents(comps *raw.NSDateComponents) *Date {
 }
 
 // ComponentsFromDate calls the underlying ComponentsFromDate.
-func (x *Calendar) ComponentsFromDate(unitFlags raw.NSCalendarUnit, date *raw.NSDate) *DateComponents {
-	_r := x.inner.ComponentsFromDate(unitFlags, date)
+func (x *Calendar) ComponentsFromDate(unitFlags NSCalendarUnit, date *raw.NSDate) *DateComponents {
+	_r := x.inner.ComponentsFromDate(raw.NSCalendarUnit(unitFlags), date)
 	if _r == nil {
 		return nil
 	}
@@ -111,8 +111,8 @@ func (x *Calendar) ComponentsFromDate(unitFlags raw.NSCalendarUnit, date *raw.NS
 }
 
 // DateByAddingComponentsToDateOptions calls the underlying DateByAddingComponentsToDateOptions.
-func (x *Calendar) DateByAddingComponentsToDateOptions(comps *raw.NSDateComponents, date *raw.NSDate, opts raw.NSCalendarOptions) *Date {
-	_r := x.inner.DateByAddingComponentsToDateOptions(comps, date, opts)
+func (x *Calendar) DateByAddingComponentsToDateOptions(comps *raw.NSDateComponents, date *raw.NSDate, opts NSCalendarOptions) *Date {
+	_r := x.inner.DateByAddingComponentsToDateOptions(comps, date, raw.NSCalendarOptions(opts))
 	if _r == nil {
 		return nil
 	}
@@ -120,8 +120,8 @@ func (x *Calendar) DateByAddingComponentsToDateOptions(comps *raw.NSDateComponen
 }
 
 // ComponentsFromDateToDateOptions calls the underlying ComponentsFromDateToDateOptions.
-func (x *Calendar) ComponentsFromDateToDateOptions(unitFlags raw.NSCalendarUnit, startingDate *raw.NSDate, resultDate *raw.NSDate, opts raw.NSCalendarOptions) *DateComponents {
-	_r := x.inner.ComponentsFromDateToDateOptions(unitFlags, startingDate, resultDate, opts)
+func (x *Calendar) ComponentsFromDateToDateOptions(unitFlags NSCalendarUnit, startingDate *raw.NSDate, resultDate *raw.NSDate, opts NSCalendarOptions) *DateComponents {
+	_r := x.inner.ComponentsFromDateToDateOptions(raw.NSCalendarUnit(unitFlags), startingDate, resultDate, raw.NSCalendarOptions(opts))
 	if _r == nil {
 		return nil
 	}
@@ -144,8 +144,8 @@ func (x *Calendar) GetHourMinuteSecondNanosecondFromDate(hourValuePointer *int64
 }
 
 // ComponentFromDate calls the underlying ComponentFromDate.
-func (x *Calendar) ComponentFromDate(unit raw.NSCalendarUnit, date *raw.NSDate) int {
-	return x.inner.ComponentFromDate(unit, date)
+func (x *Calendar) ComponentFromDate(unit NSCalendarUnit, date *raw.NSDate) int {
+	return x.inner.ComponentFromDate(raw.NSCalendarUnit(unit), date)
 }
 
 // DateWithEraYearMonthDayHourMinuteSecondNanosecond calls the underlying DateWithEraYearMonthDayHourMinuteSecondNanosecond.
@@ -185,13 +185,13 @@ func (x *Calendar) ComponentsInTimeZoneFromDate(timezone *raw.NSTimeZone, date *
 }
 
 // CompareDateToDateToUnitGranularity calls the underlying CompareDateToDateToUnitGranularity.
-func (x *Calendar) CompareDateToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit raw.NSCalendarUnit) raw.NSComparisonResult {
-	return x.inner.CompareDateToDateToUnitGranularity(date1, date2, unit)
+func (x *Calendar) CompareDateToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit NSCalendarUnit) NSComparisonResult {
+	return NSComparisonResult(x.inner.CompareDateToDateToUnitGranularity(date1, date2, raw.NSCalendarUnit(unit)))
 }
 
 // IsDateEqualToDateToUnitGranularity calls the underlying IsDateEqualToDateToUnitGranularity.
-func (x *Calendar) IsDateEqualToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit raw.NSCalendarUnit) bool {
-	return x.inner.IsDateEqualToDateToUnitGranularity(date1, date2, unit)
+func (x *Calendar) IsDateEqualToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit NSCalendarUnit) bool {
+	return x.inner.IsDateEqualToDateToUnitGranularity(date1, date2, raw.NSCalendarUnit(unit))
 }
 
 // IsDateInSameDayAsDate calls the underlying IsDateInSameDayAsDate.
@@ -225,13 +225,13 @@ func (x *Calendar) RangeOfWeekendStartDateIntervalContainingDate(datep *raw.NSDa
 }
 
 // NextWeekendStartDateIntervalOptionsAfterDate calls the underlying NextWeekendStartDateIntervalOptionsAfterDate.
-func (x *Calendar) NextWeekendStartDateIntervalOptionsAfterDate(datep *raw.NSDate, tip *float64, options raw.NSCalendarOptions, date *raw.NSDate) bool {
-	return x.inner.NextWeekendStartDateIntervalOptionsAfterDate(datep, tip, options, date)
+func (x *Calendar) NextWeekendStartDateIntervalOptionsAfterDate(datep *raw.NSDate, tip *float64, options NSCalendarOptions, date *raw.NSDate) bool {
+	return x.inner.NextWeekendStartDateIntervalOptionsAfterDate(datep, tip, raw.NSCalendarOptions(options), date)
 }
 
 // ComponentsFromDateComponentsToDateComponentsOptions calls the underlying ComponentsFromDateComponentsToDateComponentsOptions.
-func (x *Calendar) ComponentsFromDateComponentsToDateComponentsOptions(unitFlags raw.NSCalendarUnit, startingDateComp *raw.NSDateComponents, resultDateComp *raw.NSDateComponents, options raw.NSCalendarOptions) *DateComponents {
-	_r := x.inner.ComponentsFromDateComponentsToDateComponentsOptions(unitFlags, startingDateComp, resultDateComp, options)
+func (x *Calendar) ComponentsFromDateComponentsToDateComponentsOptions(unitFlags NSCalendarUnit, startingDateComp *raw.NSDateComponents, resultDateComp *raw.NSDateComponents, options NSCalendarOptions) *DateComponents {
+	_r := x.inner.ComponentsFromDateComponentsToDateComponentsOptions(raw.NSCalendarUnit(unitFlags), startingDateComp, resultDateComp, raw.NSCalendarOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -239,8 +239,8 @@ func (x *Calendar) ComponentsFromDateComponentsToDateComponentsOptions(unitFlags
 }
 
 // DateByAddingUnitValueToDateOptions calls the underlying DateByAddingUnitValueToDateOptions.
-func (x *Calendar) DateByAddingUnitValueToDateOptions(unit raw.NSCalendarUnit, value int, date *raw.NSDate, options raw.NSCalendarOptions) *Date {
-	_r := x.inner.DateByAddingUnitValueToDateOptions(unit, value, date, options)
+func (x *Calendar) DateByAddingUnitValueToDateOptions(unit NSCalendarUnit, value int, date *raw.NSDate, options NSCalendarOptions) *Date {
+	_r := x.inner.DateByAddingUnitValueToDateOptions(raw.NSCalendarUnit(unit), value, date, raw.NSCalendarOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -248,13 +248,13 @@ func (x *Calendar) DateByAddingUnitValueToDateOptions(unit raw.NSCalendarUnit, v
 }
 
 // EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing calls the underlying EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing.
-func (x *Calendar) EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start *raw.NSDate, comps *raw.NSDateComponents, opts raw.NSCalendarOptions, block func(*raw.NSDate, bool, *bool)) {
-	x.inner.EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start, comps, opts, block)
+func (x *Calendar) EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start *raw.NSDate, comps *raw.NSDateComponents, opts NSCalendarOptions, block func(*raw.NSDate, bool, *bool)) {
+	x.inner.EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start, comps, raw.NSCalendarOptions(opts), block)
 }
 
 // NextDateAfterDateMatchingComponentsOptions calls the underlying NextDateAfterDateMatchingComponentsOptions.
-func (x *Calendar) NextDateAfterDateMatchingComponentsOptions(date *raw.NSDate, comps *raw.NSDateComponents, options raw.NSCalendarOptions) *Date {
-	_r := x.inner.NextDateAfterDateMatchingComponentsOptions(date, comps, options)
+func (x *Calendar) NextDateAfterDateMatchingComponentsOptions(date *raw.NSDate, comps *raw.NSDateComponents, options NSCalendarOptions) *Date {
+	_r := x.inner.NextDateAfterDateMatchingComponentsOptions(date, comps, raw.NSCalendarOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -262,8 +262,8 @@ func (x *Calendar) NextDateAfterDateMatchingComponentsOptions(date *raw.NSDate, 
 }
 
 // NextDateAfterDateMatchingUnitValueOptions calls the underlying NextDateAfterDateMatchingUnitValueOptions.
-func (x *Calendar) NextDateAfterDateMatchingUnitValueOptions(date *raw.NSDate, unit raw.NSCalendarUnit, value int, options raw.NSCalendarOptions) *Date {
-	_r := x.inner.NextDateAfterDateMatchingUnitValueOptions(date, unit, value, options)
+func (x *Calendar) NextDateAfterDateMatchingUnitValueOptions(date *raw.NSDate, unit NSCalendarUnit, value int, options NSCalendarOptions) *Date {
+	_r := x.inner.NextDateAfterDateMatchingUnitValueOptions(date, raw.NSCalendarUnit(unit), value, raw.NSCalendarOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -271,8 +271,8 @@ func (x *Calendar) NextDateAfterDateMatchingUnitValueOptions(date *raw.NSDate, u
 }
 
 // NextDateAfterDateMatchingHourMinuteSecondOptions calls the underlying NextDateAfterDateMatchingHourMinuteSecondOptions.
-func (x *Calendar) NextDateAfterDateMatchingHourMinuteSecondOptions(date *raw.NSDate, hourValue int, minuteValue int, secondValue int, options raw.NSCalendarOptions) *Date {
-	_r := x.inner.NextDateAfterDateMatchingHourMinuteSecondOptions(date, hourValue, minuteValue, secondValue, options)
+func (x *Calendar) NextDateAfterDateMatchingHourMinuteSecondOptions(date *raw.NSDate, hourValue int, minuteValue int, secondValue int, options NSCalendarOptions) *Date {
+	_r := x.inner.NextDateAfterDateMatchingHourMinuteSecondOptions(date, hourValue, minuteValue, secondValue, raw.NSCalendarOptions(options))
 	if _r == nil {
 		return nil
 	}
@@ -280,8 +280,8 @@ func (x *Calendar) NextDateAfterDateMatchingHourMinuteSecondOptions(date *raw.NS
 }
 
 // DateBySettingUnitValueOfDateOptions calls the underlying DateBySettingUnitValueOfDateOptions.
-func (x *Calendar) DateBySettingUnitValueOfDateOptions(unit raw.NSCalendarUnit, v int, date *raw.NSDate, opts raw.NSCalendarOptions) *Date {
-	_r := x.inner.DateBySettingUnitValueOfDateOptions(unit, v, date, opts)
+func (x *Calendar) DateBySettingUnitValueOfDateOptions(unit NSCalendarUnit, v int, date *raw.NSDate, opts NSCalendarOptions) *Date {
+	_r := x.inner.DateBySettingUnitValueOfDateOptions(raw.NSCalendarUnit(unit), v, date, raw.NSCalendarOptions(opts))
 	if _r == nil {
 		return nil
 	}
@@ -289,8 +289,8 @@ func (x *Calendar) DateBySettingUnitValueOfDateOptions(unit raw.NSCalendarUnit, 
 }
 
 // DateBySettingHourMinuteSecondOfDateOptions calls the underlying DateBySettingHourMinuteSecondOfDateOptions.
-func (x *Calendar) DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s int, date *raw.NSDate, opts raw.NSCalendarOptions) *Date {
-	_r := x.inner.DateBySettingHourMinuteSecondOfDateOptions(h, m, s, date, opts)
+func (x *Calendar) DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s int, date *raw.NSDate, opts NSCalendarOptions) *Date {
+	_r := x.inner.DateBySettingHourMinuteSecondOfDateOptions(h, m, s, date, raw.NSCalendarOptions(opts))
 	if _r == nil {
 		return nil
 	}
@@ -585,40 +585,40 @@ type Calendarable interface {
 	WithFirstWeekday(firstWeekday uint) *Calendar
 	WithMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint) *Calendar
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Calendar
-	MinimumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange
-	MaximumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange
-	RangeOfUnitInUnitForDate(smaller raw.NSCalendarUnit, larger raw.NSCalendarUnit, date *raw.NSDate) raw.NSRange
-	OrdinalityOfUnitInUnitForDate(smaller raw.NSCalendarUnit, larger raw.NSCalendarUnit, date *raw.NSDate) uint
-	RangeOfUnitStartDateIntervalForDate(unit raw.NSCalendarUnit, datep *raw.NSDate, tip *float64, date *raw.NSDate) bool
+	MinimumRangeOfUnit(unit NSCalendarUnit) raw.NSRange
+	MaximumRangeOfUnit(unit NSCalendarUnit) raw.NSRange
+	RangeOfUnitInUnitForDate(smaller NSCalendarUnit, larger NSCalendarUnit, date *raw.NSDate) raw.NSRange
+	OrdinalityOfUnitInUnitForDate(smaller NSCalendarUnit, larger NSCalendarUnit, date *raw.NSDate) uint
+	RangeOfUnitStartDateIntervalForDate(unit NSCalendarUnit, datep *raw.NSDate, tip *float64, date *raw.NSDate) bool
 	DateFromComponents(comps *raw.NSDateComponents) *Date
-	ComponentsFromDate(unitFlags raw.NSCalendarUnit, date *raw.NSDate) *DateComponents
-	DateByAddingComponentsToDateOptions(comps *raw.NSDateComponents, date *raw.NSDate, opts raw.NSCalendarOptions) *Date
-	ComponentsFromDateToDateOptions(unitFlags raw.NSCalendarUnit, startingDate *raw.NSDate, resultDate *raw.NSDate, opts raw.NSCalendarOptions) *DateComponents
+	ComponentsFromDate(unitFlags NSCalendarUnit, date *raw.NSDate) *DateComponents
+	DateByAddingComponentsToDateOptions(comps *raw.NSDateComponents, date *raw.NSDate, opts NSCalendarOptions) *Date
+	ComponentsFromDateToDateOptions(unitFlags NSCalendarUnit, startingDate *raw.NSDate, resultDate *raw.NSDate, opts NSCalendarOptions) *DateComponents
 	GetEraYearMonthDayFromDate(eraValuePointer *int64, yearValuePointer *int64, monthValuePointer *int64, dayValuePointer *int64, date *raw.NSDate)
 	GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate(eraValuePointer *int64, yearValuePointer *int64, weekValuePointer *int64, weekdayValuePointer *int64, date *raw.NSDate)
 	GetHourMinuteSecondNanosecondFromDate(hourValuePointer *int64, minuteValuePointer *int64, secondValuePointer *int64, nanosecondValuePointer *int64, date *raw.NSDate)
-	ComponentFromDate(unit raw.NSCalendarUnit, date *raw.NSDate) int
+	ComponentFromDate(unit NSCalendarUnit, date *raw.NSDate) int
 	DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue int, yearValue int, monthValue int, dayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *Date
 	DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond(eraValue int, yearValue int, weekValue int, weekdayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *Date
 	StartOfDayForDate(date *raw.NSDate) *Date
 	ComponentsInTimeZoneFromDate(timezone *raw.NSTimeZone, date *raw.NSDate) *DateComponents
-	CompareDateToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit raw.NSCalendarUnit) raw.NSComparisonResult
-	IsDateEqualToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit raw.NSCalendarUnit) bool
+	CompareDateToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit NSCalendarUnit) NSComparisonResult
+	IsDateEqualToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit NSCalendarUnit) bool
 	IsDateInSameDayAsDate(date1 *raw.NSDate, date2 *raw.NSDate) bool
 	IsDateInToday(date *raw.NSDate) bool
 	IsDateInYesterday(date *raw.NSDate) bool
 	IsDateInTomorrow(date *raw.NSDate) bool
 	IsDateInWeekend(date *raw.NSDate) bool
 	RangeOfWeekendStartDateIntervalContainingDate(datep *raw.NSDate, tip *float64, date *raw.NSDate) bool
-	NextWeekendStartDateIntervalOptionsAfterDate(datep *raw.NSDate, tip *float64, options raw.NSCalendarOptions, date *raw.NSDate) bool
-	ComponentsFromDateComponentsToDateComponentsOptions(unitFlags raw.NSCalendarUnit, startingDateComp *raw.NSDateComponents, resultDateComp *raw.NSDateComponents, options raw.NSCalendarOptions) *DateComponents
-	DateByAddingUnitValueToDateOptions(unit raw.NSCalendarUnit, value int, date *raw.NSDate, options raw.NSCalendarOptions) *Date
-	EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start *raw.NSDate, comps *raw.NSDateComponents, opts raw.NSCalendarOptions, block func(*raw.NSDate, bool, *bool))
-	NextDateAfterDateMatchingComponentsOptions(date *raw.NSDate, comps *raw.NSDateComponents, options raw.NSCalendarOptions) *Date
-	NextDateAfterDateMatchingUnitValueOptions(date *raw.NSDate, unit raw.NSCalendarUnit, value int, options raw.NSCalendarOptions) *Date
-	NextDateAfterDateMatchingHourMinuteSecondOptions(date *raw.NSDate, hourValue int, minuteValue int, secondValue int, options raw.NSCalendarOptions) *Date
-	DateBySettingUnitValueOfDateOptions(unit raw.NSCalendarUnit, v int, date *raw.NSDate, opts raw.NSCalendarOptions) *Date
-	DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s int, date *raw.NSDate, opts raw.NSCalendarOptions) *Date
+	NextWeekendStartDateIntervalOptionsAfterDate(datep *raw.NSDate, tip *float64, options NSCalendarOptions, date *raw.NSDate) bool
+	ComponentsFromDateComponentsToDateComponentsOptions(unitFlags NSCalendarUnit, startingDateComp *raw.NSDateComponents, resultDateComp *raw.NSDateComponents, options NSCalendarOptions) *DateComponents
+	DateByAddingUnitValueToDateOptions(unit NSCalendarUnit, value int, date *raw.NSDate, options NSCalendarOptions) *Date
+	EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start *raw.NSDate, comps *raw.NSDateComponents, opts NSCalendarOptions, block func(*raw.NSDate, bool, *bool))
+	NextDateAfterDateMatchingComponentsOptions(date *raw.NSDate, comps *raw.NSDateComponents, options NSCalendarOptions) *Date
+	NextDateAfterDateMatchingUnitValueOptions(date *raw.NSDate, unit NSCalendarUnit, value int, options NSCalendarOptions) *Date
+	NextDateAfterDateMatchingHourMinuteSecondOptions(date *raw.NSDate, hourValue int, minuteValue int, secondValue int, options NSCalendarOptions) *Date
+	DateBySettingUnitValueOfDateOptions(unit NSCalendarUnit, v int, date *raw.NSDate, opts NSCalendarOptions) *Date
+	DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s int, date *raw.NSDate, opts NSCalendarOptions) *Date
 	DateMatchesComponents(date *raw.NSDate, components *raw.NSDateComponents) bool
 	CalendarIdentifier() *String
 	Locale() *Locale

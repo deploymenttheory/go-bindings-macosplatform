@@ -56,8 +56,8 @@ func (x *ContactFetchRequest) WithUnifyResults(unifyResults bool) *ContactFetchR
 }
 
 // WithSortOrder sets the sortOrder property and returns the receiver for chaining.
-func (x *ContactFetchRequest) WithSortOrder(sortOrder raw.CNContactSortOrder) *ContactFetchRequest {
-	x.inner.SetSortOrder(sortOrder)
+func (x *ContactFetchRequest) WithSortOrder(sortOrder CNContactSortOrder) *ContactFetchRequest {
+	x.inner.SetSortOrder(raw.CNContactSortOrder(sortOrder))
 	return x
 }
 
@@ -102,13 +102,13 @@ func (x *ContactFetchRequest) SetUnifyResults(unifyResults bool) {
 }
 
 // SortOrder calls the underlying SortOrder.
-func (x *ContactFetchRequest) SortOrder() raw.CNContactSortOrder {
-	return x.inner.SortOrder()
+func (x *ContactFetchRequest) SortOrder() CNContactSortOrder {
+	return CNContactSortOrder(x.inner.SortOrder())
 }
 
 // SetSortOrder calls the underlying SetSortOrder.
-func (x *ContactFetchRequest) SetSortOrder(sortOrder raw.CNContactSortOrder) {
-	x.inner.SetSortOrder(sortOrder)
+func (x *ContactFetchRequest) SetSortOrder(sortOrder CNContactSortOrder) {
+	x.inner.SetSortOrder(raw.CNContactSortOrder(sortOrder))
 }
 
 func (x *ContactFetchRequest) asFetchRequest() *raw.CNFetchRequest { return &x.inner.CNFetchRequest }
@@ -119,7 +119,7 @@ type ContactFetchRequestable interface {
 	WithPredicate(predicate *foundation.NSPredicate) *ContactFetchRequest
 	WithMutableObjects(mutableObjects bool) *ContactFetchRequest
 	WithUnifyResults(unifyResults bool) *ContactFetchRequest
-	WithSortOrder(sortOrder raw.CNContactSortOrder) *ContactFetchRequest
+	WithSortOrder(sortOrder CNContactSortOrder) *ContactFetchRequest
 	Predicate() *foundation.NSPredicate
 	SetPredicate(predicate *foundation.NSPredicate)
 	KeysToFetch() *foundation.NSArray[raw.CNKeyDescriptor]
@@ -128,8 +128,8 @@ type ContactFetchRequestable interface {
 	SetMutableObjects(mutableObjects bool)
 	UnifyResults() bool
 	SetUnifyResults(unifyResults bool)
-	SortOrder() raw.CNContactSortOrder
-	SetSortOrder(sortOrder raw.CNContactSortOrder)
+	SortOrder() CNContactSortOrder
+	SetSortOrder(sortOrder CNContactSortOrder)
 }
 
 var _ ContactFetchRequestable = (*ContactFetchRequest)(nil)

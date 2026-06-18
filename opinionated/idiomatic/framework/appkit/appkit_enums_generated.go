@@ -2781,39 +2781,6 @@ func (e NSGlassEffectViewStyle) String() string {
 	}
 }
 
-// Deprecated: Use NSGlyphProperty instead
-type NSGlyphInscription uint64
-
-const (
-	// Deprecated: since macOS 10.11.
-	NSGlyphInscribeBase NSGlyphInscription = 0
-	// Deprecated: since macOS 10.11.
-	NSGlyphInscribeBelow NSGlyphInscription = 1
-	// Deprecated: since macOS 10.11.
-	NSGlyphInscribeAbove NSGlyphInscription = 2
-	// Deprecated: since macOS 10.11.
-	NSGlyphInscribeOverstrike NSGlyphInscription = 3
-	// Deprecated: since macOS 10.11.
-	NSGlyphInscribeOverBelow NSGlyphInscription = 4
-)
-
-func (e NSGlyphInscription) String() string {
-	switch e {
-	case NSGlyphInscribeBase:
-		return "NSGlyphInscribeBase"
-	case NSGlyphInscribeBelow:
-		return "NSGlyphInscribeBelow"
-	case NSGlyphInscribeAbove:
-		return "NSGlyphInscribeAbove"
-	case NSGlyphInscribeOverstrike:
-		return "NSGlyphInscribeOverstrike"
-	case NSGlyphInscribeOverBelow:
-		return "NSGlyphInscribeOverBelow"
-	default:
-		return fmt.Sprintf("NSGlyphInscription(%d)", int64(e))
-	}
-}
-
 // Bitmask — values may be combined with |.
 type NSGlyphProperty int64
 

@@ -484,8 +484,8 @@ func PredicateForWorkoutEffortSamplesRelatedToWorkoutActivity(workout *raw.HKWor
 }
 
 // PredicateForSamplesWithStartDateEndDateOptions calls the underlying HKQueryPredicateForSamplesWithStartDateEndDateOptions.
-func PredicateForSamplesWithStartDateEndDateOptions(startDate *foundation.NSDate, endDate *foundation.NSDate, options raw.HKQueryOptions) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForSamplesWithStartDateEndDateOptions(startDate, endDate, options)
+func PredicateForSamplesWithStartDateEndDateOptions(startDate *foundation.NSDate, endDate *foundation.NSDate, options HKQueryOptions) *foundation.NSPredicate {
+	return raw.HKQueryPredicateForSamplesWithStartDateEndDateOptions(startDate, endDate, raw.HKQueryOptions(options))
 }
 
 // PredicateForQuantitySamplesWithOperatorTypeQuantity calls the underlying HKQueryPredicateForQuantitySamplesWithOperatorTypeQuantity.
@@ -504,8 +504,8 @@ func PredicateForCategorySamplesEqualToValues(values *foundation.NSSet[*foundati
 }
 
 // PredicateForWorkoutsWithWorkoutActivityType calls the underlying HKQueryPredicateForWorkoutsWithWorkoutActivityType.
-func PredicateForWorkoutsWithWorkoutActivityType(workoutActivityType raw.HKWorkoutActivityType) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutsWithWorkoutActivityType(workoutActivityType)
+func PredicateForWorkoutsWithWorkoutActivityType(workoutActivityType HKWorkoutActivityType) *foundation.NSPredicate {
+	return raw.HKQueryPredicateForWorkoutsWithWorkoutActivityType(raw.HKWorkoutActivityType(workoutActivityType))
 }
 
 // PredicateForWorkoutsWithOperatorTypeDuration calls the underlying HKQueryPredicateForWorkoutsWithOperatorTypeDuration.
@@ -554,8 +554,8 @@ func PredicateForWorkoutsWithOperatorTypeQuantityTypeAverageQuantity(operatorTyp
 }
 
 // PredicateForWorkoutActivitiesWithWorkoutActivityType calls the underlying HKQueryPredicateForWorkoutActivitiesWithWorkoutActivityType.
-func PredicateForWorkoutActivitiesWithWorkoutActivityType(workoutActivityType raw.HKWorkoutActivityType) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutActivitiesWithWorkoutActivityType(workoutActivityType)
+func PredicateForWorkoutActivitiesWithWorkoutActivityType(workoutActivityType HKWorkoutActivityType) *foundation.NSPredicate {
+	return raw.HKQueryPredicateForWorkoutActivitiesWithWorkoutActivityType(raw.HKWorkoutActivityType(workoutActivityType))
 }
 
 // PredicateForWorkoutActivitiesWithOperatorTypeDuration calls the underlying HKQueryPredicateForWorkoutActivitiesWithOperatorTypeDuration.
@@ -564,8 +564,8 @@ func PredicateForWorkoutActivitiesWithOperatorTypeDuration(operatorType foundati
 }
 
 // PredicateForWorkoutActivitiesWithStartDateEndDateOptions calls the underlying HKQueryPredicateForWorkoutActivitiesWithStartDateEndDateOptions.
-func PredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate *foundation.NSDate, endDate *foundation.NSDate, options raw.HKQueryOptions) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate, endDate, options)
+func PredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate *foundation.NSDate, endDate *foundation.NSDate, options HKQueryOptions) *foundation.NSPredicate {
+	return raw.HKQueryPredicateForWorkoutActivitiesWithStartDateEndDateOptions(startDate, endDate, raw.HKQueryOptions(options))
 }
 
 // PredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeSumQuantity calls the underlying HKQueryPredicateForWorkoutActivitiesWithOperatorTypeQuantityTypeSumQuantity.
@@ -614,13 +614,13 @@ func PredicateForClinicalRecordsFromSourceFHIRResourceTypeIdentifier(source *raw
 }
 
 // PredicateForElectrocardiogramsWithClassification calls the underlying HKQueryPredicateForElectrocardiogramsWithClassification.
-func PredicateForElectrocardiogramsWithClassification(classification raw.HKElectrocardiogramClassification) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForElectrocardiogramsWithClassification(classification)
+func PredicateForElectrocardiogramsWithClassification(classification HKElectrocardiogramClassification) *foundation.NSPredicate {
+	return raw.HKQueryPredicateForElectrocardiogramsWithClassification(raw.HKElectrocardiogramClassification(classification))
 }
 
 // PredicateForElectrocardiogramsWithSymptomsStatus calls the underlying HKQueryPredicateForElectrocardiogramsWithSymptomsStatus.
-func PredicateForElectrocardiogramsWithSymptomsStatus(symptomsStatus raw.HKElectrocardiogramSymptomsStatus) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForElectrocardiogramsWithSymptomsStatus(symptomsStatus)
+func PredicateForElectrocardiogramsWithSymptomsStatus(symptomsStatus HKElectrocardiogramSymptomsStatus) *foundation.NSPredicate {
+	return raw.HKQueryPredicateForElectrocardiogramsWithSymptomsStatus(raw.HKElectrocardiogramSymptomsStatus(symptomsStatus))
 }
 
 // PredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval calls the underlying HKQueryPredicateForVerifiableClinicalRecordsWithRelevantDateWithinDateInterval.
@@ -634,23 +634,23 @@ func PredicateForStatesOfMindWithValenceOperatorType(valence float64, operatorTy
 }
 
 // PredicateForStatesOfMindWithKind calls the underlying HKQueryPredicateForStatesOfMindWithKind.
-func PredicateForStatesOfMindWithKind(kind raw.HKStateOfMindKind) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForStatesOfMindWithKind(kind)
+func PredicateForStatesOfMindWithKind(kind HKStateOfMindKind) *foundation.NSPredicate {
+	return raw.HKQueryPredicateForStatesOfMindWithKind(raw.HKStateOfMindKind(kind))
 }
 
 // PredicateForStatesOfMindWithLabel calls the underlying HKQueryPredicateForStatesOfMindWithLabel.
-func PredicateForStatesOfMindWithLabel(label raw.HKStateOfMindLabel) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForStatesOfMindWithLabel(label)
+func PredicateForStatesOfMindWithLabel(label HKStateOfMindLabel) *foundation.NSPredicate {
+	return raw.HKQueryPredicateForStatesOfMindWithLabel(raw.HKStateOfMindLabel(label))
 }
 
 // PredicateForStatesOfMindWithAssociation calls the underlying HKQueryPredicateForStatesOfMindWithAssociation.
-func PredicateForStatesOfMindWithAssociation(association raw.HKStateOfMindAssociation) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForStatesOfMindWithAssociation(association)
+func PredicateForStatesOfMindWithAssociation(association HKStateOfMindAssociation) *foundation.NSPredicate {
+	return raw.HKQueryPredicateForStatesOfMindWithAssociation(raw.HKStateOfMindAssociation(association))
 }
 
 // PredicateForMedicationDoseEventWithStatus calls the underlying HKQueryPredicateForMedicationDoseEventWithStatus.
-func PredicateForMedicationDoseEventWithStatus(status raw.HKMedicationDoseEventLogStatus) *foundation.NSPredicate {
-	return raw.HKQueryPredicateForMedicationDoseEventWithStatus(status)
+func PredicateForMedicationDoseEventWithStatus(status HKMedicationDoseEventLogStatus) *foundation.NSPredicate {
+	return raw.HKQueryPredicateForMedicationDoseEventWithStatus(raw.HKMedicationDoseEventLogStatus(status))
 }
 
 // PredicateForMedicationDoseEventWithStatuses calls the underlying HKQueryPredicateForMedicationDoseEventWithStatuses.
@@ -730,8 +730,8 @@ func DefaultSource() *Source {
 }
 
 // StateOfMindWithDateKindValenceLabelsAssociations calls the underlying HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociations.
-func StateOfMindWithDateKindValenceLabelsAssociations(date *foundation.NSDate, kind raw.HKStateOfMindKind, valence float64, labels *foundation.NSArray[*foundation.NSNumber], associations *foundation.NSArray[*foundation.NSNumber]) *StateOfMind {
-	_r := raw.HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociations(date, kind, valence, labels, associations)
+func StateOfMindWithDateKindValenceLabelsAssociations(date *foundation.NSDate, kind HKStateOfMindKind, valence float64, labels *foundation.NSArray[*foundation.NSNumber], associations *foundation.NSArray[*foundation.NSNumber]) *StateOfMind {
+	_r := raw.HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociations(date, raw.HKStateOfMindKind(kind), valence, labels, associations)
 	if _r == nil {
 		return nil
 	}
@@ -739,8 +739,8 @@ func StateOfMindWithDateKindValenceLabelsAssociations(date *foundation.NSDate, k
 }
 
 // StateOfMindWithDateKindValenceLabelsAssociationsMetadata calls the underlying HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociationsMetadata.
-func StateOfMindWithDateKindValenceLabelsAssociationsMetadata(date *foundation.NSDate, kind raw.HKStateOfMindKind, valence float64, labels *foundation.NSArray[*foundation.NSNumber], associations *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *StateOfMind {
-	_r := raw.HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociationsMetadata(date, kind, valence, labels, associations, metadata)
+func StateOfMindWithDateKindValenceLabelsAssociationsMetadata(date *foundation.NSDate, kind HKStateOfMindKind, valence float64, labels *foundation.NSArray[*foundation.NSNumber], associations *foundation.NSArray[*foundation.NSNumber], metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *StateOfMind {
+	_r := raw.HKStateOfMindStateOfMindWithDateKindValenceLabelsAssociationsMetadata(date, raw.HKStateOfMindKind(kind), valence, labels, associations, metadata)
 	if _r == nil {
 		return nil
 	}
@@ -799,8 +799,8 @@ func EnergyFormatterUnitFromUnit(unit *raw.HKUnit) foundation.NSEnergyFormatterU
 }
 
 // GramUnitWithMetricPrefix calls the underlying HKUnitGramUnitWithMetricPrefix.
-func GramUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitGramUnitWithMetricPrefix(prefix)
+func GramUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitGramUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -844,8 +844,8 @@ func StoneUnit() *Unit {
 }
 
 // MoleUnitWithMetricPrefixMolarMass calls the underlying HKUnitMoleUnitWithMetricPrefixMolarMass.
-func MoleUnitWithMetricPrefixMolarMass(prefix raw.HKMetricPrefix, gramsPerMole float64) *Unit {
-	_r := raw.HKUnitMoleUnitWithMetricPrefixMolarMass(prefix, gramsPerMole)
+func MoleUnitWithMetricPrefixMolarMass(prefix HKMetricPrefix, gramsPerMole float64) *Unit {
+	_r := raw.HKUnitMoleUnitWithMetricPrefixMolarMass(raw.HKMetricPrefix(prefix), gramsPerMole)
 	if _r == nil {
 		return nil
 	}
@@ -862,8 +862,8 @@ func MoleUnitWithMolarMass(gramsPerMole float64) *Unit {
 }
 
 // MeterUnitWithMetricPrefix calls the underlying HKUnitMeterUnitWithMetricPrefix.
-func MeterUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitMeterUnitWithMetricPrefix(prefix)
+func MeterUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitMeterUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -916,8 +916,8 @@ func MileUnit() *Unit {
 }
 
 // LiterUnitWithMetricPrefix calls the underlying HKUnitLiterUnitWithMetricPrefix.
-func LiterUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitLiterUnitWithMetricPrefix(prefix)
+func LiterUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitLiterUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -988,8 +988,8 @@ func CupImperialUnit() *Unit {
 }
 
 // PascalUnitWithMetricPrefix calls the underlying HKUnitPascalUnitWithMetricPrefix.
-func PascalUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitPascalUnitWithMetricPrefix(prefix)
+func PascalUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitPascalUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -1051,8 +1051,8 @@ func InchesOfMercuryUnit() *Unit {
 }
 
 // SecondUnitWithMetricPrefix calls the underlying HKUnitSecondUnitWithMetricPrefix.
-func SecondUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitSecondUnitWithMetricPrefix(prefix)
+func SecondUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitSecondUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -1096,8 +1096,8 @@ func DayUnit() *Unit {
 }
 
 // JouleUnitWithMetricPrefix calls the underlying HKUnitJouleUnitWithMetricPrefix.
-func JouleUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitJouleUnitWithMetricPrefix(prefix)
+func JouleUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitJouleUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -1177,8 +1177,8 @@ func KelvinUnit() *Unit {
 }
 
 // SiemenUnitWithMetricPrefix calls the underlying HKUnitSiemenUnitWithMetricPrefix.
-func SiemenUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitSiemenUnitWithMetricPrefix(prefix)
+func SiemenUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitSiemenUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -1231,8 +1231,8 @@ func DecibelHearingLevelUnit() *Unit {
 }
 
 // HertzUnitWithMetricPrefix calls the underlying HKUnitHertzUnitWithMetricPrefix.
-func HertzUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitHertzUnitWithMetricPrefix(prefix)
+func HertzUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitHertzUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -1249,8 +1249,8 @@ func HertzUnit() *Unit {
 }
 
 // VoltUnitWithMetricPrefix calls the underlying HKUnitVoltUnitWithMetricPrefix.
-func VoltUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitVoltUnitWithMetricPrefix(prefix)
+func VoltUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitVoltUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -1267,8 +1267,8 @@ func VoltUnit() *Unit {
 }
 
 // WattUnitWithMetricPrefix calls the underlying HKUnitWattUnitWithMetricPrefix.
-func WattUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitWattUnitWithMetricPrefix(prefix)
+func WattUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitWattUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -1303,8 +1303,8 @@ func PrismDiopterUnit() *Unit {
 }
 
 // RadianAngleUnitWithMetricPrefix calls the underlying HKUnitRadianAngleUnitWithMetricPrefix.
-func RadianAngleUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitRadianAngleUnitWithMetricPrefix(prefix)
+func RadianAngleUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitRadianAngleUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -1330,8 +1330,8 @@ func DegreeAngleUnit() *Unit {
 }
 
 // LuxUnitWithMetricPrefix calls the underlying HKUnitLuxUnitWithMetricPrefix.
-func LuxUnitWithMetricPrefix(prefix raw.HKMetricPrefix) *Unit {
-	_r := raw.HKUnitLuxUnitWithMetricPrefix(prefix)
+func LuxUnitWithMetricPrefix(prefix HKMetricPrefix) *Unit {
+	_r := raw.HKUnitLuxUnitWithMetricPrefix(raw.HKMetricPrefix(prefix))
 	if _r == nil {
 		return nil
 	}
@@ -1357,8 +1357,8 @@ func AppleEffortScoreUnit() *Unit {
 }
 
 // PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata calls the underlying HKVisionPrescriptionPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata.
-func PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_ raw.HKVisionPrescriptionType, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VisionPrescription {
-	_r := raw.HKVisionPrescriptionPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_, dateIssued, expirationDate, device, metadata)
+func PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_ HKVisionPrescriptionType, dateIssued *foundation.NSDate, expirationDate *foundation.NSDate, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VisionPrescription {
+	_r := raw.HKVisionPrescriptionPrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(raw.HKVisionPrescriptionType(type_), dateIssued, expirationDate, device, metadata)
 	if _r == nil {
 		return nil
 	}
@@ -1366,8 +1366,8 @@ func PrescriptionWithTypeDateIssuedExpirationDateDeviceMetadata(type_ raw.HKVisi
 }
 
 // WorkoutWithActivityTypeStartDateEndDate calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDate.
-func WorkoutWithActivityTypeStartDateEndDate(workoutActivityType raw.HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDate(workoutActivityType, startDate, endDate)
+func WorkoutWithActivityTypeStartDateEndDate(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate) *Workout {
+	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDate(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate)
 	if _r == nil {
 		return nil
 	}
@@ -1375,8 +1375,8 @@ func WorkoutWithActivityTypeStartDateEndDate(workoutActivityType raw.HKWorkoutAc
 }
 
 // WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType raw.HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType, startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, metadata)
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
+	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, metadata)
 	if _r == nil {
 		return nil
 	}
@@ -1384,8 +1384,8 @@ func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalD
 }
 
 // WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType raw.HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType, startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, device, metadata)
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
+	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceDeviceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, device, metadata)
 	if _r == nil {
 		return nil
 	}
@@ -1393,8 +1393,8 @@ func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalD
 }
 
 // WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType raw.HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, duration float64, totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType, startDate, endDate, duration, totalEnergyBurned, totalDistance, metadata)
+func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, duration float64, totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
+	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, duration, totalEnergyBurned, totalDistance, metadata)
 	if _r == nil {
 		return nil
 	}
@@ -1402,8 +1402,8 @@ func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistan
 }
 
 // WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType raw.HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, duration float64, totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType, startDate, endDate, duration, totalEnergyBurned, totalDistance, device, metadata)
+func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, duration float64, totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
+	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistanceDeviceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, duration, totalEnergyBurned, totalDistance, device, metadata)
 	if _r == nil {
 		return nil
 	}
@@ -1411,8 +1411,8 @@ func WorkoutWithActivityTypeStartDateEndDateDurationTotalEnergyBurnedTotalDistan
 }
 
 // WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(workoutActivityType raw.HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, totalSwimmingStrokeCount *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(workoutActivityType, startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, totalSwimmingStrokeCount, device, metadata)
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, totalSwimmingStrokeCount *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
+	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalSwimmingStrokeCountDeviceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, totalSwimmingStrokeCount, device, metadata)
 	if _r == nil {
 		return nil
 	}
@@ -1420,8 +1420,8 @@ func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalD
 }
 
 // WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata calls the underlying HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata.
-func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(workoutActivityType raw.HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, totalFlightsClimbed *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
-	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(workoutActivityType, startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, totalFlightsClimbed, device, metadata)
+func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(workoutActivityType HKWorkoutActivityType, startDate *foundation.NSDate, endDate *foundation.NSDate, workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], totalEnergyBurned *raw.HKQuantity, totalDistance *raw.HKQuantity, totalFlightsClimbed *raw.HKQuantity, device *raw.HKDevice, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Workout {
+	_r := raw.HKWorkoutWorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalDistanceTotalFlightsClimbedDeviceMetadata(raw.HKWorkoutActivityType(workoutActivityType), startDate, endDate, workoutEvents, totalEnergyBurned, totalDistance, totalFlightsClimbed, device, metadata)
 	if _r == nil {
 		return nil
 	}
@@ -1429,8 +1429,8 @@ func WorkoutWithActivityTypeStartDateEndDateWorkoutEventsTotalEnergyBurnedTotalD
 }
 
 // WorkoutEventWithTypeDate calls the underlying HKWorkoutEventWorkoutEventWithTypeDate.
-func WorkoutEventWithTypeDate(type_ raw.HKWorkoutEventType, date *foundation.NSDate) *WorkoutEvent {
-	_r := raw.HKWorkoutEventWorkoutEventWithTypeDate(type_, date)
+func WorkoutEventWithTypeDate(type_ HKWorkoutEventType, date *foundation.NSDate) *WorkoutEvent {
+	_r := raw.HKWorkoutEventWorkoutEventWithTypeDate(raw.HKWorkoutEventType(type_), date)
 	if _r == nil {
 		return nil
 	}
@@ -1438,8 +1438,8 @@ func WorkoutEventWithTypeDate(type_ raw.HKWorkoutEventType, date *foundation.NSD
 }
 
 // WorkoutEventWithTypeDateMetadata calls the underlying HKWorkoutEventWorkoutEventWithTypeDateMetadata.
-func WorkoutEventWithTypeDateMetadata(type_ raw.HKWorkoutEventType, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *WorkoutEvent {
-	_r := raw.HKWorkoutEventWorkoutEventWithTypeDateMetadata(type_, date, metadata)
+func WorkoutEventWithTypeDateMetadata(type_ HKWorkoutEventType, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *WorkoutEvent {
+	_r := raw.HKWorkoutEventWorkoutEventWithTypeDateMetadata(raw.HKWorkoutEventType(type_), date, metadata)
 	if _r == nil {
 		return nil
 	}
@@ -1447,8 +1447,8 @@ func WorkoutEventWithTypeDateMetadata(type_ raw.HKWorkoutEventType, date *founda
 }
 
 // WorkoutEventWithTypeDateIntervalMetadata calls the underlying HKWorkoutEventWorkoutEventWithTypeDateIntervalMetadata.
-func WorkoutEventWithTypeDateIntervalMetadata(type_ raw.HKWorkoutEventType, dateInterval *foundation.NSDateInterval, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *WorkoutEvent {
-	_r := raw.HKWorkoutEventWorkoutEventWithTypeDateIntervalMetadata(type_, dateInterval, metadata)
+func WorkoutEventWithTypeDateIntervalMetadata(type_ HKWorkoutEventType, dateInterval *foundation.NSDateInterval, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *WorkoutEvent {
+	_r := raw.HKWorkoutEventWorkoutEventWithTypeDateIntervalMetadata(raw.HKWorkoutEventType(type_), dateInterval, metadata)
 	if _r == nil {
 		return nil
 	}

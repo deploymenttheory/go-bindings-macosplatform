@@ -85,8 +85,8 @@ func (x *CloseCommand) WithScriptingProperties(scriptingProperties *raw.NSDictio
 }
 
 // SaveOptions calls the underlying SaveOptions.
-func (x *CloseCommand) SaveOptions() raw.NSSaveOptions {
-	return x.inner.SaveOptions()
+func (x *CloseCommand) SaveOptions() NSSaveOptions {
+	return NSSaveOptions(x.inner.SaveOptions())
 }
 
 func (x *CloseCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
@@ -104,7 +104,7 @@ type CloseCommandable interface {
 	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CloseCommand
 	WithScriptErrorString(scriptErrorString string) *CloseCommand
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CloseCommand
-	SaveOptions() raw.NSSaveOptions
+	SaveOptions() NSSaveOptions
 }
 
 var _ CloseCommandable = (*CloseCommand)(nil)

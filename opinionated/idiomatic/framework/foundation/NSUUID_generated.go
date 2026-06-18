@@ -62,8 +62,8 @@ func (x *UUID) GetUUIDBytes(uuid *uint8) {
 }
 
 // Compare calls the underlying Compare.
-func (x *UUID) Compare(otherUUID *raw.NSUUID) raw.NSComparisonResult {
-	return x.inner.Compare(otherUUID)
+func (x *UUID) Compare(otherUUID *raw.NSUUID) NSComparisonResult {
+	return NSComparisonResult(x.inner.Compare(otherUUID))
 }
 
 // UUIDString calls the underlying UUIDString.
@@ -82,7 +82,7 @@ type UUIDable interface {
 	Unwrap() *raw.NSUUID
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UUID
 	GetUUIDBytes(uuid *uint8)
-	Compare(otherUUID *raw.NSUUID) raw.NSComparisonResult
+	Compare(otherUUID *raw.NSUUID) NSComparisonResult
 	UUIDString() *String
 }
 

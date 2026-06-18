@@ -36,27 +36,27 @@ func NewPipelineBufferDescriptor() *PipelineBufferDescriptor {
 }
 
 // WithMutability sets the mutability property and returns the receiver for chaining.
-func (x *PipelineBufferDescriptor) WithMutability(mutability raw.MTLMutability) *PipelineBufferDescriptor {
-	x.inner.SetMutability(mutability)
+func (x *PipelineBufferDescriptor) WithMutability(mutability MTLMutability) *PipelineBufferDescriptor {
+	x.inner.SetMutability(raw.MTLMutability(mutability))
 	return x
 }
 
 // Mutability calls the underlying Mutability.
-func (x *PipelineBufferDescriptor) Mutability() raw.MTLMutability {
-	return x.inner.Mutability()
+func (x *PipelineBufferDescriptor) Mutability() MTLMutability {
+	return MTLMutability(x.inner.Mutability())
 }
 
 // SetMutability calls the underlying SetMutability.
-func (x *PipelineBufferDescriptor) SetMutability(mutability raw.MTLMutability) {
-	x.inner.SetMutability(mutability)
+func (x *PipelineBufferDescriptor) SetMutability(mutability MTLMutability) {
+	x.inner.SetMutability(raw.MTLMutability(mutability))
 }
 
 // PipelineBufferDescriptorable is the interface implemented by [PipelineBufferDescriptor], for mocking and DI.
 type PipelineBufferDescriptorable interface {
 	Unwrap() *raw.MTLPipelineBufferDescriptor
-	WithMutability(mutability raw.MTLMutability) *PipelineBufferDescriptor
-	Mutability() raw.MTLMutability
-	SetMutability(mutability raw.MTLMutability)
+	WithMutability(mutability MTLMutability) *PipelineBufferDescriptor
+	Mutability() MTLMutability
+	SetMutability(mutability MTLMutability)
 }
 
 var _ PipelineBufferDescriptorable = (*PipelineBufferDescriptor)(nil)

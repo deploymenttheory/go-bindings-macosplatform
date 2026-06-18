@@ -45,8 +45,8 @@ func (x *ParticlePropertyController) WithAnimation(animation *quartzcore.CAAnima
 }
 
 // WithInputMode sets the inputMode property and returns the receiver for chaining.
-func (x *ParticlePropertyController) WithInputMode(inputMode raw.SCNParticleInputMode) *ParticlePropertyController {
-	x.inner.SetInputMode(inputMode)
+func (x *ParticlePropertyController) WithInputMode(inputMode SCNParticleInputMode) *ParticlePropertyController {
+	x.inner.SetInputMode(raw.SCNParticleInputMode(inputMode))
 	return x
 }
 
@@ -85,13 +85,13 @@ func (x *ParticlePropertyController) SetAnimation(animation *quartzcore.CAAnimat
 }
 
 // InputMode calls the underlying InputMode.
-func (x *ParticlePropertyController) InputMode() raw.SCNParticleInputMode {
-	return x.inner.InputMode()
+func (x *ParticlePropertyController) InputMode() SCNParticleInputMode {
+	return SCNParticleInputMode(x.inner.InputMode())
 }
 
 // SetInputMode calls the underlying SetInputMode.
-func (x *ParticlePropertyController) SetInputMode(inputMode raw.SCNParticleInputMode) {
-	x.inner.SetInputMode(inputMode)
+func (x *ParticlePropertyController) SetInputMode(inputMode SCNParticleInputMode) {
+	x.inner.SetInputMode(raw.SCNParticleInputMode(inputMode))
 }
 
 // InputScale calls the underlying InputScale.
@@ -146,15 +146,15 @@ func (x *ParticlePropertyController) SetInputProperty(inputProperty *foundation.
 type ParticlePropertyControllerable interface {
 	Unwrap() *raw.SCNParticlePropertyController
 	WithAnimation(animation *quartzcore.CAAnimation) *ParticlePropertyController
-	WithInputMode(inputMode raw.SCNParticleInputMode) *ParticlePropertyController
+	WithInputMode(inputMode SCNParticleInputMode) *ParticlePropertyController
 	WithInputScale(inputScale float64) *ParticlePropertyController
 	WithInputBias(inputBias float64) *ParticlePropertyController
 	WithInputOrigin(inputOrigin NodeProvider) *ParticlePropertyController
 	WithInputProperty(inputProperty *foundation.NSString) *ParticlePropertyController
 	Animation() *quartzcore.CAAnimation
 	SetAnimation(animation *quartzcore.CAAnimation)
-	InputMode() raw.SCNParticleInputMode
-	SetInputMode(inputMode raw.SCNParticleInputMode)
+	InputMode() SCNParticleInputMode
+	SetInputMode(inputMode SCNParticleInputMode)
 	InputScale() float64
 	SetInputScale(inputScale float64)
 	InputBias() float64

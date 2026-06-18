@@ -58,8 +58,8 @@ func (x *MatchmakerViewController) WithHosted(hosted bool) *MatchmakerViewContro
 }
 
 // WithMatchmakingMode sets the matchmakingMode property and returns the receiver for chaining.
-func (x *MatchmakerViewController) WithMatchmakingMode(matchmakingMode raw.GKMatchmakingMode) *MatchmakerViewController {
-	x.inner.SetMatchmakingMode(matchmakingMode)
+func (x *MatchmakerViewController) WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *MatchmakerViewController {
+	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))
 	return x
 }
 
@@ -115,13 +115,13 @@ func (x *MatchmakerViewController) SetHosted(hosted bool) {
 }
 
 // MatchmakingMode calls the underlying MatchmakingMode.
-func (x *MatchmakerViewController) MatchmakingMode() raw.GKMatchmakingMode {
-	return x.inner.MatchmakingMode()
+func (x *MatchmakerViewController) MatchmakingMode() GKMatchmakingMode {
+	return GKMatchmakingMode(x.inner.MatchmakingMode())
 }
 
 // SetMatchmakingMode calls the underlying SetMatchmakingMode.
-func (x *MatchmakerViewController) SetMatchmakingMode(matchmakingMode raw.GKMatchmakingMode) {
-	x.inner.SetMatchmakingMode(matchmakingMode)
+func (x *MatchmakerViewController) SetMatchmakingMode(matchmakingMode GKMatchmakingMode) {
+	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))
 }
 
 // CanStartWithMinimumPlayers calls the underlying CanStartWithMinimumPlayers.
@@ -158,7 +158,7 @@ type MatchmakerViewControllerable interface {
 	Unwrap() *raw.GKMatchmakerViewController
 	WithMatchmakerDelegate(matchmakerDelegate raw.GKMatchmakerViewControllerDelegate) *MatchmakerViewController
 	WithHosted(hosted bool) *MatchmakerViewController
-	WithMatchmakingMode(matchmakingMode raw.GKMatchmakingMode) *MatchmakerViewController
+	WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *MatchmakerViewController
 	WithCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) *MatchmakerViewController
 	WithDefaultInvitationMessage(defaultInvitationMessage string) *MatchmakerViewController
 	AddPlayersToMatch(match *raw.GKMatch)
@@ -168,8 +168,8 @@ type MatchmakerViewControllerable interface {
 	MatchRequest() *MatchRequest
 	IsHosted() bool
 	SetHosted(hosted bool)
-	MatchmakingMode() raw.GKMatchmakingMode
-	SetMatchmakingMode(matchmakingMode raw.GKMatchmakingMode)
+	MatchmakingMode() GKMatchmakingMode
+	SetMatchmakingMode(matchmakingMode GKMatchmakingMode)
 	CanStartWithMinimumPlayers() bool
 	SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool)
 	DefaultInvitationMessage() string

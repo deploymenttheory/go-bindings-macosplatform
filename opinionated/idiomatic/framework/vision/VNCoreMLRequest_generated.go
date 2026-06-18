@@ -46,8 +46,8 @@ func NewCoreMLRequestWithModelCompletionHandler(model *raw.VNCoreMLModel, comple
 }
 
 // WithImageCropAndScaleOption sets the imageCropAndScaleOption property and returns the receiver for chaining.
-func (x *CoreMLRequest) WithImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) *CoreMLRequest {
-	x.inner.SetImageCropAndScaleOption(imageCropAndScaleOption)
+func (x *CoreMLRequest) WithImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) *CoreMLRequest {
+	x.inner.SetImageCropAndScaleOption(raw.VNImageCropAndScaleOption(imageCropAndScaleOption))
 	return x
 }
 
@@ -85,13 +85,13 @@ func (x *CoreMLRequest) Model() *CoreMLModel {
 }
 
 // ImageCropAndScaleOption calls the underlying ImageCropAndScaleOption.
-func (x *CoreMLRequest) ImageCropAndScaleOption() raw.VNImageCropAndScaleOption {
-	return x.inner.ImageCropAndScaleOption()
+func (x *CoreMLRequest) ImageCropAndScaleOption() VNImageCropAndScaleOption {
+	return VNImageCropAndScaleOption(x.inner.ImageCropAndScaleOption())
 }
 
 // SetImageCropAndScaleOption calls the underlying SetImageCropAndScaleOption.
-func (x *CoreMLRequest) SetImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) {
-	x.inner.SetImageCropAndScaleOption(imageCropAndScaleOption)
+func (x *CoreMLRequest) SetImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) {
+	x.inner.SetImageCropAndScaleOption(raw.VNImageCropAndScaleOption(imageCropAndScaleOption))
 }
 
 func (x *CoreMLRequest) asImageBasedRequest() *raw.VNImageBasedRequest {
@@ -103,14 +103,14 @@ func (x *CoreMLRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBase
 // CoreMLRequestable is the interface implemented by [CoreMLRequest], for mocking and DI.
 type CoreMLRequestable interface {
 	Unwrap() *raw.VNCoreMLRequest
-	WithImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) *CoreMLRequest
+	WithImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption) *CoreMLRequest
 	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest
 	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest
 	WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest
 	WithRevision(revision uint) *CoreMLRequest
 	Model() *CoreMLModel
-	ImageCropAndScaleOption() raw.VNImageCropAndScaleOption
-	SetImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption)
+	ImageCropAndScaleOption() VNImageCropAndScaleOption
+	SetImageCropAndScaleOption(imageCropAndScaleOption VNImageCropAndScaleOption)
 }
 
 var _ CoreMLRequestable = (*CoreMLRequest)(nil)

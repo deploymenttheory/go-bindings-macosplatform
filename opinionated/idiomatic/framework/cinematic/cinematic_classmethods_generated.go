@@ -93,8 +93,8 @@ func IsValidDetectionGroupID(detectionGroupID int64) bool {
 }
 
 // AccessibilityLabelForDetectionType calls the underlying CNDetectionAccessibilityLabelForDetectionType.
-func AccessibilityLabelForDetectionType(detectionType raw.CNDetectionType) string {
-	_r := raw.CNDetectionAccessibilityLabelForDetectionType(detectionType)
+func AccessibilityLabelForDetectionType(detectionType CNDetectionType) string {
+	_r := raw.CNDetectionAccessibilityLabelForDetectionType(raw.CNDetectionType(detectionType))
 	if _r == nil {
 		return ""
 	}
@@ -102,8 +102,8 @@ func AccessibilityLabelForDetectionType(detectionType raw.CNDetectionType) strin
 }
 
 // DisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity calls the underlying CNDetectionDisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity.
-func DisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity(normalizedRect corefoundation.CGRect, sourceDisparity unsafe.Pointer, detectionType raw.CNDetectionType, priorDisparity float32) float32 {
-	return raw.CNDetectionDisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity(normalizedRect, sourceDisparity, detectionType, priorDisparity)
+func DisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity(normalizedRect corefoundation.CGRect, sourceDisparity unsafe.Pointer, detectionType CNDetectionType, priorDisparity float32) float32 {
+	return raw.CNDetectionDisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity(normalizedRect, sourceDisparity, raw.CNDetectionType(detectionType), priorDisparity)
 }
 
 // CNObjectTrackerIsSupported calls the underlying CNObjectTrackerIsSupported.

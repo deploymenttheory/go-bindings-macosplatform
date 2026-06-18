@@ -156,8 +156,8 @@ func (x *SearchField) WithDelegate(delegate raw.NSTextFieldDelegate) *SearchFiel
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *SearchField) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SearchField {
-	x.inner.NSTextField.SetBezelStyle(bezelStyle)
+func (x *SearchField) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *SearchField {
+	x.inner.NSTextField.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -180,8 +180,8 @@ func (x *SearchField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTigh
 }
 
 // WithLineBreakStrategy sets the lineBreakStrategy property and returns the receiver for chaining.
-func (x *SearchField) WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *SearchField {
-	x.inner.NSTextField.SetLineBreakStrategy(lineBreakStrategy)
+func (x *SearchField) WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *SearchField {
+	x.inner.NSTextField.SetLineBreakStrategy(raw.NSLineBreakStrategy(lineBreakStrategy))
 	return x
 }
 
@@ -312,8 +312,8 @@ func (x *SearchField) WithHighlighted(highlighted bool) *SearchField {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *SearchField) WithControlSize(controlSize raw.NSControlSize) *SearchField {
-	x.inner.NSTextField.NSControl.SetControlSize(controlSize)
+func (x *SearchField) WithControlSize(controlSize NSControlSize) *SearchField {
+	x.inner.NSTextField.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -378,20 +378,20 @@ func (x *SearchField) WithUsesSingleLineMode(usesSingleLineMode bool) *SearchFie
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *SearchField) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SearchField {
-	x.inner.NSTextField.NSControl.SetLineBreakMode(lineBreakMode)
+func (x *SearchField) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SearchField {
+	x.inner.NSTextField.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *SearchField) WithAlignment(alignment raw.NSTextAlignment) *SearchField {
-	x.inner.NSTextField.NSControl.SetAlignment(alignment)
+func (x *SearchField) WithAlignment(alignment NSTextAlignment) *SearchField {
+	x.inner.NSTextField.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *SearchField) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SearchField {
-	x.inner.NSTextField.NSControl.SetBaseWritingDirection(baseWritingDirection)
+func (x *SearchField) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SearchField {
+	x.inner.NSTextField.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -444,8 +444,8 @@ func (x *SearchField) WithAutoresizesSubviews(autoresizesSubviews bool) *SearchF
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *SearchField) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *SearchField) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -504,14 +504,14 @@ func (x *SearchField) WithWantsRestingTouches(wantsRestingTouches bool) *SearchF
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *SearchField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *SearchField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *SearchField) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *SearchField) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -618,8 +618,8 @@ func (x *SearchField) WithToolTip(toolTip string) *SearchField {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SearchField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *SearchField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -636,8 +636,8 @@ func (x *SearchField) WithNextKeyView(nextKeyView ViewProvider) *SearchField {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SearchField) WithFocusRingType(focusRingType raw.NSFocusRingType) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetFocusRingType(focusRingType)
+func (x *SearchField) WithFocusRingType(focusRingType NSFocusRingType) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -660,8 +660,8 @@ func (x *SearchField) WithGestureRecognizers(items ...GestureRecognizerProvider)
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *SearchField) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *SearchField) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SearchField {
+	x.inner.NSTextField.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -893,11 +893,11 @@ type SearchFieldable interface {
 	WithEditable(editable bool) *SearchField
 	WithSelectable(selectable bool) *SearchField
 	WithDelegate(delegate raw.NSTextFieldDelegate) *SearchField
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SearchField
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *SearchField
 	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *SearchField
 	WithMaximumNumberOfLines(maximumNumberOfLines int) *SearchField
 	WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *SearchField
-	WithLineBreakStrategy(lineBreakStrategy raw.NSLineBreakStrategy) *SearchField
+	WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *SearchField
 	WithAllowsWritingTools(allowsWritingTools bool) *SearchField
 	WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *SearchField
 	WithPlaceholderStrings(items ...*foundation.NSString) *SearchField
@@ -915,7 +915,7 @@ type SearchFieldable interface {
 	WithEnabled(enabled bool) *SearchField
 	WithRefusesFirstResponder(refusesFirstResponder bool) *SearchField
 	WithHighlighted(highlighted bool) *SearchField
-	WithControlSize(controlSize raw.NSControlSize) *SearchField
+	WithControlSize(controlSize NSControlSize) *SearchField
 	WithFormatter(formatter *foundation.NSFormatter) *SearchField
 	WithObjectValue(objectValue objc.ID) *SearchField
 	WithStringValue(stringValue string) *SearchField
@@ -926,16 +926,16 @@ type SearchFieldable interface {
 	WithDoubleValue(doubleValue float64) *SearchField
 	WithFont(font *Font) *SearchField
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SearchField
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SearchField
-	WithAlignment(alignment raw.NSTextAlignment) *SearchField
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SearchField
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *SearchField
+	WithAlignment(alignment NSTextAlignment) *SearchField
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SearchField
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SearchField
 	WithCell(cell CellProvider) *SearchField
 	WithSubviews(items ...ViewProvider) *SearchField
 	WithHidden(hidden bool) *SearchField
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SearchField
 	WithAutoresizesSubviews(autoresizesSubviews bool) *SearchField
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *SearchField
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SearchField
 	WithFrame(frame corefoundation.CGRect) *SearchField
 	WithFrameRotation(frameRotation float64) *SearchField
 	WithFrameCenterRotation(frameCenterRotation float64) *SearchField
@@ -945,8 +945,8 @@ type SearchFieldable interface {
 	WithNeedsDisplay(needsDisplay bool) *SearchField
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *SearchField
 	WithWantsRestingTouches(wantsRestingTouches bool) *SearchField
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *SearchField
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *SearchField
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SearchField
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SearchField
 	WithWantsLayer(wantsLayer bool) *SearchField
 	WithLayer(layer *quartzcore.CALayer) *SearchField
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SearchField
@@ -960,12 +960,12 @@ type SearchFieldable interface {
 	WithClipsToBounds(clipsToBounds bool) *SearchField
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SearchField
 	WithToolTip(toolTip string) *SearchField
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SearchField
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SearchField
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SearchField
 	WithNextKeyView(nextKeyView ViewProvider) *SearchField
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *SearchField
+	WithFocusRingType(focusRingType NSFocusRingType) *SearchField
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *SearchField
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *SearchField
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SearchField
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SearchField
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SearchField
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SearchField

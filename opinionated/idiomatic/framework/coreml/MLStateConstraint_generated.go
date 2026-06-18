@@ -49,15 +49,15 @@ func (x *StateConstraint) BufferShape() []*foundation.NSNumber {
 }
 
 // DataType calls the underlying DataType.
-func (x *StateConstraint) DataType() raw.MLMultiArrayDataType {
-	return x.inner.DataType()
+func (x *StateConstraint) DataType() MLMultiArrayDataType {
+	return MLMultiArrayDataType(x.inner.DataType())
 }
 
 // StateConstraintable is the interface implemented by [StateConstraint], for mocking and DI.
 type StateConstraintable interface {
 	Unwrap() *raw.MLStateConstraint
 	BufferShape() []*foundation.NSNumber
-	DataType() raw.MLMultiArrayDataType
+	DataType() MLMultiArrayDataType
 }
 
 var _ StateConstraintable = (*StateConstraint)(nil)

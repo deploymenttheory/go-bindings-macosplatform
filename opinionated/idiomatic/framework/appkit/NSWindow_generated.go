@@ -42,16 +42,16 @@ func NewWindow() *Window {
 }
 
 // NewWindowWithContentRectStyleMaskBackingDefer creates a new [Window].
-func NewWindowWithContentRectStyleMaskBackingDefer(contentRect corefoundation.CGRect, style raw.NSWindowStyleMask, backingStoreType raw.NSBackingStoreType, flag bool) *Window {
+func NewWindowWithContentRectStyleMaskBackingDefer(contentRect corefoundation.CGRect, style NSWindowStyleMask, backingStoreType NSBackingStoreType, flag bool) *Window {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindow")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentRect:styleMask:backing:defer:"), contentRect, style, backingStoreType, flag)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentRect:styleMask:backing:defer:"), contentRect, raw.NSWindowStyleMask(style), raw.NSBackingStoreType(backingStoreType), flag)
 	return &Window{inner: raw.NSWindowFromID(_id)}
 }
 
 // NewWindowWithContentRectStyleMaskBackingDeferScreen creates a new [Window].
-func NewWindowWithContentRectStyleMaskBackingDeferScreen(contentRect corefoundation.CGRect, style raw.NSWindowStyleMask, backingStoreType raw.NSBackingStoreType, flag bool, screen *raw.NSScreen) *Window {
+func NewWindowWithContentRectStyleMaskBackingDeferScreen(contentRect corefoundation.CGRect, style NSWindowStyleMask, backingStoreType NSBackingStoreType, flag bool, screen *raw.NSScreen) *Window {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindow")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentRect:styleMask:backing:defer:screen:"), contentRect, style, backingStoreType, flag, screen.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentRect:styleMask:backing:defer:screen:"), contentRect, raw.NSWindowStyleMask(style), raw.NSBackingStoreType(backingStoreType), flag, screen.Ptr())
 	return &Window{inner: raw.NSWindowFromID(_id)}
 }
 
@@ -75,8 +75,8 @@ func (x *Window) WithSubtitle(subtitle string) *Window {
 }
 
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
-func (x *Window) WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *Window {
-	x.inner.SetTitleVisibility(titleVisibility)
+func (x *Window) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *Window {
+	x.inner.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
 	return x
 }
 
@@ -87,8 +87,8 @@ func (x *Window) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool)
 }
 
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
-func (x *Window) WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *Window {
-	x.inner.SetToolbarStyle(toolbarStyle)
+func (x *Window) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Window {
+	x.inner.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
 	return x
 }
 
@@ -141,8 +141,8 @@ func (x *Window) WithDelegate(delegate raw.NSWindowDelegate) *Window {
 }
 
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
-func (x *Window) WithStyleMask(styleMask raw.NSWindowStyleMask) *Window {
-	x.inner.SetStyleMask(styleMask)
+func (x *Window) WithStyleMask(styleMask NSWindowStyleMask) *Window {
+	x.inner.SetStyleMask(raw.NSWindowStyleMask(styleMask))
 	return x
 }
 
@@ -249,8 +249,8 @@ func (x *Window) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenA
 }
 
 // WithBackingType sets the backingType property and returns the receiver for chaining.
-func (x *Window) WithBackingType(backingType raw.NSBackingStoreType) *Window {
-	x.inner.SetBackingType(backingType)
+func (x *Window) WithBackingType(backingType NSBackingStoreType) *Window {
+	x.inner.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
@@ -261,8 +261,8 @@ func (x *Window) WithLevel(level int) *Window {
 }
 
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
-func (x *Window) WithDepthLimit(depthLimit raw.NSWindowDepth) *Window {
-	x.inner.SetDepthLimit(depthLimit)
+func (x *Window) WithDepthLimit(depthLimit NSWindowDepth) *Window {
+	x.inner.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
@@ -285,8 +285,8 @@ func (x *Window) WithOpaque(opaque bool) *Window {
 }
 
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
-func (x *Window) WithSharingType(sharingType raw.NSWindowSharingType) *Window {
-	x.inner.SetSharingType(sharingType)
+func (x *Window) WithSharingType(sharingType NSWindowSharingType) *Window {
+	x.inner.SetSharingType(raw.NSWindowSharingType(sharingType))
 	return x
 }
 
@@ -309,14 +309,14 @@ func (x *Window) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin b
 }
 
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
-func (x *Window) WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *Window {
-	x.inner.SetCollectionBehavior(collectionBehavior)
+func (x *Window) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *Window {
+	x.inner.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
-func (x *Window) WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *Window {
-	x.inner.SetAnimationBehavior(animationBehavior)
+func (x *Window) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *Window {
+	x.inner.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
 	return x
 }
 
@@ -387,8 +387,8 @@ func (x *Window) WithColorSpace(colorSpace *ColorSpace) *Window {
 }
 
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
-func (x *Window) WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *Window {
-	x.inner.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+func (x *Window) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *Window {
+	x.inner.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 	return x
 }
 
@@ -429,8 +429,8 @@ func (x *Window) WithShowsToolbarButton(showsToolbarButton bool) *Window {
 }
 
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
-func (x *Window) WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *Window {
-	x.inner.SetTabbingMode(tabbingMode)
+func (x *Window) WithTabbingMode(tabbingMode NSWindowTabbingMode) *Window {
+	x.inner.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
 	return x
 }
 
@@ -465,8 +465,8 @@ func (x *Window) WithOneShot(oneShot bool) *Window {
 }
 
 // WithPreferredBackingLocation sets the preferredBackingLocation property and returns the receiver for chaining.
-func (x *Window) WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *Window {
-	x.inner.SetPreferredBackingLocation(preferredBackingLocation)
+func (x *Window) WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *Window {
+	x.inner.SetPreferredBackingLocation(raw.NSWindowBackingLocation(preferredBackingLocation))
 	return x
 }
 
@@ -682,8 +682,8 @@ func (x *Window) OrderOut(sender objc.ID) {
 }
 
 // OrderWindowRelativeTo calls the underlying OrderWindowRelativeTo.
-func (x *Window) OrderWindowRelativeTo(place raw.NSWindowOrderingMode, otherWin int) {
-	x.inner.OrderWindowRelativeTo(place, otherWin)
+func (x *Window) OrderWindowRelativeTo(place NSWindowOrderingMode, otherWin int) {
+	x.inner.OrderWindowRelativeTo(raw.NSWindowOrderingMode(place), otherWin)
 }
 
 // OrderFrontRegardless calls the underlying OrderFrontRegardless.
@@ -857,8 +857,8 @@ func (x *Window) EndSheetReturnCode(sheetWindow *raw.NSWindow, returnCode int) {
 }
 
 // StandardWindowButton calls the underlying StandardWindowButton.
-func (x *Window) StandardWindowButton(b raw.NSWindowButton) *Button {
-	_r := x.inner.StandardWindowButton(b)
+func (x *Window) StandardWindowButton(b NSWindowButton) *Button {
+	_r := x.inner.StandardWindowButton(raw.NSWindowButton(b))
 	if _r == nil {
 		return nil
 	}
@@ -866,8 +866,8 @@ func (x *Window) StandardWindowButton(b raw.NSWindowButton) *Button {
 }
 
 // AddChildWindowOrdered calls the underlying AddChildWindowOrdered.
-func (x *Window) AddChildWindowOrdered(childWin *raw.NSWindow, place raw.NSWindowOrderingMode) {
-	x.inner.AddChildWindowOrdered(childWin, place)
+func (x *Window) AddChildWindowOrdered(childWin *raw.NSWindow, place NSWindowOrderingMode) {
+	x.inner.AddChildWindowOrdered(childWin, raw.NSWindowOrderingMode(place))
 }
 
 // RemoveChildWindow calls the underlying RemoveChildWindow.
@@ -876,8 +876,8 @@ func (x *Window) RemoveChildWindow(childWin *raw.NSWindow) {
 }
 
 // CanRepresentDisplayGamut calls the underlying CanRepresentDisplayGamut.
-func (x *Window) CanRepresentDisplayGamut(displayGamut raw.NSDisplayGamut) bool {
-	return x.inner.CanRepresentDisplayGamut(displayGamut)
+func (x *Window) CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool {
+	return x.inner.CanRepresentDisplayGamut(raw.NSDisplayGamut(displayGamut))
 }
 
 // PerformWindowDragWithEvent calls the underlying PerformWindowDragWithEvent.
@@ -961,8 +961,8 @@ func (x *Window) ToggleTabOverview(sender objc.ID) {
 }
 
 // AddTabbedWindowOrdered calls the underlying AddTabbedWindowOrdered.
-func (x *Window) AddTabbedWindowOrdered(window *raw.NSWindow, ordered raw.NSWindowOrderingMode) {
-	x.inner.AddTabbedWindowOrdered(window, ordered)
+func (x *Window) AddTabbedWindowOrdered(window *raw.NSWindow, ordered NSWindowOrderingMode) {
+	x.inner.AddTabbedWindowOrdered(window, raw.NSWindowOrderingMode(ordered))
 }
 
 // TransferWindowSharingToWindow blocks until the operation completes or ctx is cancelled.
@@ -1048,13 +1048,13 @@ func (x *Window) SetSubtitle(subtitle string) {
 }
 
 // TitleVisibility calls the underlying TitleVisibility.
-func (x *Window) TitleVisibility() raw.NSWindowTitleVisibility {
-	return x.inner.TitleVisibility()
+func (x *Window) TitleVisibility() NSWindowTitleVisibility {
+	return NSWindowTitleVisibility(x.inner.TitleVisibility())
 }
 
 // SetTitleVisibility calls the underlying SetTitleVisibility.
-func (x *Window) SetTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) {
-	x.inner.SetTitleVisibility(titleVisibility)
+func (x *Window) SetTitleVisibility(titleVisibility NSWindowTitleVisibility) {
+	x.inner.SetTitleVisibility(raw.NSWindowTitleVisibility(titleVisibility))
 }
 
 // TitlebarAppearsTransparent calls the underlying TitlebarAppearsTransparent.
@@ -1068,13 +1068,13 @@ func (x *Window) SetTitlebarAppearsTransparent(titlebarAppearsTransparent bool) 
 }
 
 // ToolbarStyle calls the underlying ToolbarStyle.
-func (x *Window) ToolbarStyle() raw.NSWindowToolbarStyle {
-	return x.inner.ToolbarStyle()
+func (x *Window) ToolbarStyle() NSWindowToolbarStyle {
+	return NSWindowToolbarStyle(x.inner.ToolbarStyle())
 }
 
 // SetToolbarStyle calls the underlying SetToolbarStyle.
-func (x *Window) SetToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) {
-	x.inner.SetToolbarStyle(toolbarStyle)
+func (x *Window) SetToolbarStyle(toolbarStyle NSWindowToolbarStyle) {
+	x.inner.SetToolbarStyle(raw.NSWindowToolbarStyle(toolbarStyle))
 }
 
 // ContentLayoutRect calls the underlying ContentLayoutRect.
@@ -1167,13 +1167,13 @@ func (x *Window) WindowNumber() int {
 }
 
 // StyleMask calls the underlying StyleMask.
-func (x *Window) StyleMask() raw.NSWindowStyleMask {
-	return x.inner.StyleMask()
+func (x *Window) StyleMask() NSWindowStyleMask {
+	return NSWindowStyleMask(x.inner.StyleMask())
 }
 
 // SetStyleMask calls the underlying SetStyleMask.
-func (x *Window) SetStyleMask(styleMask raw.NSWindowStyleMask) {
-	x.inner.SetStyleMask(styleMask)
+func (x *Window) SetStyleMask(styleMask NSWindowStyleMask) {
+	x.inner.SetStyleMask(raw.NSWindowStyleMask(styleMask))
 }
 
 // CascadingReferenceFrame calls the underlying CascadingReferenceFrame.
@@ -1261,8 +1261,8 @@ func (x *Window) FirstResponder() *Responder {
 }
 
 // ResizeFlags calls the underlying ResizeFlags.
-func (x *Window) ResizeFlags() raw.NSEventModifierFlags {
-	return x.inner.ResizeFlags()
+func (x *Window) ResizeFlags() NSEventModifierFlags {
+	return NSEventModifierFlags(x.inner.ResizeFlags())
 }
 
 // IsReleasedWhenClosed calls the underlying IsReleasedWhenClosed.
@@ -1442,13 +1442,13 @@ func (x *Window) SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenAp
 }
 
 // BackingType calls the underlying BackingType.
-func (x *Window) BackingType() raw.NSBackingStoreType {
-	return x.inner.BackingType()
+func (x *Window) BackingType() NSBackingStoreType {
+	return NSBackingStoreType(x.inner.BackingType())
 }
 
 // SetBackingType calls the underlying SetBackingType.
-func (x *Window) SetBackingType(backingType raw.NSBackingStoreType) {
-	x.inner.SetBackingType(backingType)
+func (x *Window) SetBackingType(backingType NSBackingStoreType) {
+	x.inner.SetBackingType(raw.NSBackingStoreType(backingType))
 }
 
 // Level calls the underlying Level.
@@ -1462,13 +1462,13 @@ func (x *Window) SetLevel(level int) {
 }
 
 // DepthLimit calls the underlying DepthLimit.
-func (x *Window) DepthLimit() raw.NSWindowDepth {
-	return x.inner.DepthLimit()
+func (x *Window) DepthLimit() NSWindowDepth {
+	return NSWindowDepth(x.inner.DepthLimit())
 }
 
 // SetDepthLimit calls the underlying SetDepthLimit.
-func (x *Window) SetDepthLimit(depthLimit raw.NSWindowDepth) {
-	x.inner.SetDepthLimit(depthLimit)
+func (x *Window) SetDepthLimit(depthLimit NSWindowDepth) {
+	x.inner.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 }
 
 // HasDynamicDepthLimit calls the underlying HasDynamicDepthLimit.
@@ -1525,13 +1525,13 @@ func (x *Window) SetOpaque(opaque bool) {
 }
 
 // SharingType calls the underlying SharingType.
-func (x *Window) SharingType() raw.NSWindowSharingType {
-	return x.inner.SharingType()
+func (x *Window) SharingType() NSWindowSharingType {
+	return NSWindowSharingType(x.inner.SharingType())
 }
 
 // SetSharingType calls the underlying SetSharingType.
-func (x *Window) SetSharingType(sharingType raw.NSWindowSharingType) {
-	x.inner.SetSharingType(sharingType)
+func (x *Window) SetSharingType(sharingType NSWindowSharingType) {
+	x.inner.SetSharingType(raw.NSWindowSharingType(sharingType))
 }
 
 // AllowsConcurrentViewDrawing calls the underlying AllowsConcurrentViewDrawing.
@@ -1565,23 +1565,23 @@ func (x *Window) SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bo
 }
 
 // CollectionBehavior calls the underlying CollectionBehavior.
-func (x *Window) CollectionBehavior() raw.NSWindowCollectionBehavior {
-	return x.inner.CollectionBehavior()
+func (x *Window) CollectionBehavior() NSWindowCollectionBehavior {
+	return NSWindowCollectionBehavior(x.inner.CollectionBehavior())
 }
 
 // SetCollectionBehavior calls the underlying SetCollectionBehavior.
-func (x *Window) SetCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) {
-	x.inner.SetCollectionBehavior(collectionBehavior)
+func (x *Window) SetCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) {
+	x.inner.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 }
 
 // AnimationBehavior calls the underlying AnimationBehavior.
-func (x *Window) AnimationBehavior() raw.NSWindowAnimationBehavior {
-	return x.inner.AnimationBehavior()
+func (x *Window) AnimationBehavior() NSWindowAnimationBehavior {
+	return NSWindowAnimationBehavior(x.inner.AnimationBehavior())
 }
 
 // SetAnimationBehavior calls the underlying SetAnimationBehavior.
-func (x *Window) SetAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) {
-	x.inner.SetAnimationBehavior(animationBehavior)
+func (x *Window) SetAnimationBehavior(animationBehavior NSWindowAnimationBehavior) {
+	x.inner.SetAnimationBehavior(raw.NSWindowAnimationBehavior(animationBehavior))
 }
 
 // IsOnActiveSpace calls the underlying IsOnActiveSpace.
@@ -1770,18 +1770,18 @@ func (x *Window) SetColorSpace(colorSpace *raw.NSColorSpace) {
 }
 
 // OcclusionState calls the underlying OcclusionState.
-func (x *Window) OcclusionState() raw.NSWindowOcclusionState {
-	return x.inner.OcclusionState()
+func (x *Window) OcclusionState() NSWindowOcclusionState {
+	return NSWindowOcclusionState(x.inner.OcclusionState())
 }
 
 // TitlebarSeparatorStyle calls the underlying TitlebarSeparatorStyle.
-func (x *Window) TitlebarSeparatorStyle() raw.NSTitlebarSeparatorStyle {
-	return x.inner.TitlebarSeparatorStyle()
+func (x *Window) TitlebarSeparatorStyle() NSTitlebarSeparatorStyle {
+	return NSTitlebarSeparatorStyle(x.inner.TitlebarSeparatorStyle())
 }
 
 // SetTitlebarSeparatorStyle calls the underlying SetTitlebarSeparatorStyle.
-func (x *Window) SetTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) {
-	x.inner.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+func (x *Window) SetTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) {
+	x.inner.SetTitlebarSeparatorStyle(raw.NSTitlebarSeparatorStyle(titlebarSeparatorStyle))
 }
 
 // ContentViewController calls the underlying ContentViewController.
@@ -1804,8 +1804,8 @@ func (x *Window) SetInitialFirstResponder(initialFirstResponder *raw.NSView) {
 }
 
 // KeyViewSelectionDirection calls the underlying KeyViewSelectionDirection.
-func (x *Window) KeyViewSelectionDirection() raw.NSSelectionDirection {
-	return x.inner.KeyViewSelectionDirection()
+func (x *Window) KeyViewSelectionDirection() NSSelectionDirection {
+	return NSSelectionDirection(x.inner.KeyViewSelectionDirection())
 }
 
 // DefaultButtonCell calls the underlying DefaultButtonCell.
@@ -1857,13 +1857,13 @@ func (x *Window) SetShowsToolbarButton(showsToolbarButton bool) {
 }
 
 // TabbingMode calls the underlying TabbingMode.
-func (x *Window) TabbingMode() raw.NSWindowTabbingMode {
-	return x.inner.TabbingMode()
+func (x *Window) TabbingMode() NSWindowTabbingMode {
+	return NSWindowTabbingMode(x.inner.TabbingMode())
 }
 
 // SetTabbingMode calls the underlying SetTabbingMode.
-func (x *Window) SetTabbingMode(tabbingMode raw.NSWindowTabbingMode) {
-	x.inner.SetTabbingMode(tabbingMode)
+func (x *Window) SetTabbingMode(tabbingMode NSWindowTabbingMode) {
+	x.inner.SetTabbingMode(raw.NSWindowTabbingMode(tabbingMode))
 }
 
 // TabbingIdentifier calls the underlying TabbingIdentifier.
@@ -1915,18 +1915,18 @@ func (x *Window) HasActiveWindowSharingSession() bool {
 }
 
 // WindowTitlebarLayoutDirection calls the underlying WindowTitlebarLayoutDirection.
-func (x *Window) WindowTitlebarLayoutDirection() raw.NSUserInterfaceLayoutDirection {
-	return x.inner.WindowTitlebarLayoutDirection()
+func (x *Window) WindowTitlebarLayoutDirection() NSUserInterfaceLayoutDirection {
+	return NSUserInterfaceLayoutDirection(x.inner.WindowTitlebarLayoutDirection())
 }
 
 // TrackEventsMatchingMaskTimeoutModeHandler calls the underlying TrackEventsMatchingMaskTimeoutModeHandler.
-func (x *Window) TrackEventsMatchingMaskTimeoutModeHandler(mask raw.NSEventMask, timeout float64, mode *foundation.NSString, trackingHandler func(*raw.NSEvent, *bool)) {
-	x.inner.TrackEventsMatchingMaskTimeoutModeHandler(mask, timeout, mode, trackingHandler)
+func (x *Window) TrackEventsMatchingMaskTimeoutModeHandler(mask NSEventMask, timeout float64, mode *foundation.NSString, trackingHandler func(*raw.NSEvent, *bool)) {
+	x.inner.TrackEventsMatchingMaskTimeoutModeHandler(raw.NSEventMask(mask), timeout, mode, trackingHandler)
 }
 
 // NextEventMatchingMask calls the underlying NextEventMatchingMask.
-func (x *Window) NextEventMatchingMask(mask raw.NSEventMask) *Event {
-	_r := x.inner.NextEventMatchingMask(mask)
+func (x *Window) NextEventMatchingMask(mask NSEventMask) *Event {
+	_r := x.inner.NextEventMatchingMask(raw.NSEventMask(mask))
 	if _r == nil {
 		return nil
 	}
@@ -1934,8 +1934,8 @@ func (x *Window) NextEventMatchingMask(mask raw.NSEventMask) *Event {
 }
 
 // NextEventMatchingMaskUntilDateInModeDequeue calls the underlying NextEventMatchingMaskUntilDateInModeDequeue.
-func (x *Window) NextEventMatchingMaskUntilDateInModeDequeue(mask raw.NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event {
-	_r := x.inner.NextEventMatchingMaskUntilDateInModeDequeue(mask, expiration, mode, deqFlag)
+func (x *Window) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event {
+	_r := x.inner.NextEventMatchingMaskUntilDateInModeDequeue(raw.NSEventMask(mask), expiration, mode, deqFlag)
 	if _r == nil {
 		return nil
 	}
@@ -1943,8 +1943,8 @@ func (x *Window) NextEventMatchingMaskUntilDateInModeDequeue(mask raw.NSEventMas
 }
 
 // DiscardEventsMatchingMaskBeforeEvent calls the underlying DiscardEventsMatchingMaskBeforeEvent.
-func (x *Window) DiscardEventsMatchingMaskBeforeEvent(mask raw.NSEventMask, lastEvent *raw.NSEvent) {
-	x.inner.DiscardEventsMatchingMaskBeforeEvent(mask, lastEvent)
+func (x *Window) DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *raw.NSEvent) {
+	x.inner.DiscardEventsMatchingMaskBeforeEvent(raw.NSEventMask(mask), lastEvent)
 }
 
 // PostEventAtStart calls the underlying PostEventAtStart.
@@ -2155,18 +2155,18 @@ func (x *Window) SetOneShot(oneShot bool) {
 }
 
 // PreferredBackingLocation calls the underlying PreferredBackingLocation.
-func (x *Window) PreferredBackingLocation() raw.NSWindowBackingLocation {
-	return x.inner.PreferredBackingLocation()
+func (x *Window) PreferredBackingLocation() NSWindowBackingLocation {
+	return NSWindowBackingLocation(x.inner.PreferredBackingLocation())
 }
 
 // SetPreferredBackingLocation calls the underlying SetPreferredBackingLocation.
-func (x *Window) SetPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) {
-	x.inner.SetPreferredBackingLocation(preferredBackingLocation)
+func (x *Window) SetPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) {
+	x.inner.SetPreferredBackingLocation(raw.NSWindowBackingLocation(preferredBackingLocation))
 }
 
 // BackingLocation calls the underlying BackingLocation.
-func (x *Window) BackingLocation() raw.NSWindowBackingLocation {
-	return x.inner.BackingLocation()
+func (x *Window) BackingLocation() NSWindowBackingLocation {
+	return NSWindowBackingLocation(x.inner.BackingLocation())
 }
 
 // ShowsResizeIndicator calls the underlying ShowsResizeIndicator.
@@ -2195,13 +2195,13 @@ func (x *Window) LayoutIfNeeded() {
 }
 
 // AnchorAttributeForOrientation calls the underlying AnchorAttributeForOrientation.
-func (x *Window) AnchorAttributeForOrientation(orientation raw.NSLayoutConstraintOrientation) raw.NSLayoutAttribute {
-	return x.inner.AnchorAttributeForOrientation(orientation)
+func (x *Window) AnchorAttributeForOrientation(orientation NSLayoutConstraintOrientation) NSLayoutAttribute {
+	return NSLayoutAttribute(x.inner.AnchorAttributeForOrientation(raw.NSLayoutConstraintOrientation(orientation)))
 }
 
 // SetAnchorAttributeForOrientation calls the underlying SetAnchorAttributeForOrientation.
-func (x *Window) SetAnchorAttributeForOrientation(attr raw.NSLayoutAttribute, orientation raw.NSLayoutConstraintOrientation) {
-	x.inner.SetAnchorAttributeForOrientation(attr, orientation)
+func (x *Window) SetAnchorAttributeForOrientation(attr NSLayoutAttribute, orientation NSLayoutConstraintOrientation) {
+	x.inner.SetAnchorAttributeForOrientation(raw.NSLayoutAttribute(attr), raw.NSLayoutConstraintOrientation(orientation))
 }
 
 // VisualizeConstraints calls the underlying VisualizeConstraints.
@@ -2334,16 +2334,16 @@ type Windowable interface {
 	Unwrap() *raw.NSWindow
 	WithTitle(title string) *Window
 	WithSubtitle(subtitle string) *Window
-	WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *Window
+	WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *Window
 	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *Window
-	WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *Window
+	WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Window
 	WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *Window
 	WithRepresentedURL(representedURL string) *Window
 	WithRepresentedFilename(representedFilename string) *Window
 	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *Window
 	WithContentView(contentView ViewProvider) *Window
 	WithDelegate(delegate raw.NSWindowDelegate) *Window
-	WithStyleMask(styleMask raw.NSWindowStyleMask) *Window
+	WithStyleMask(styleMask NSWindowStyleMask) *Window
 	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *Window
 	WithAspectRatio(aspectRatio corefoundation.CGSize) *Window
 	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *Window
@@ -2361,18 +2361,18 @@ type Windowable interface {
 	WithDocumentEdited(documentEdited bool) *Window
 	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *Window
 	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *Window
-	WithBackingType(backingType raw.NSBackingStoreType) *Window
+	WithBackingType(backingType NSBackingStoreType) *Window
 	WithLevel(level int) *Window
-	WithDepthLimit(depthLimit raw.NSWindowDepth) *Window
+	WithDepthLimit(depthLimit NSWindowDepth) *Window
 	WithHasShadow(hasShadow bool) *Window
 	WithAlphaValue(alphaValue float64) *Window
 	WithOpaque(opaque bool) *Window
-	WithSharingType(sharingType raw.NSWindowSharingType) *Window
+	WithSharingType(sharingType NSWindowSharingType) *Window
 	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *Window
 	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *Window
 	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *Window
-	WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *Window
-	WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *Window
+	WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *Window
+	WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *Window
 	WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *Window
 	WithMinSize(minSize corefoundation.CGSize) *Window
 	WithMaxSize(maxSize corefoundation.CGSize) *Window
@@ -2384,20 +2384,20 @@ type Windowable interface {
 	WithParentWindow(parentWindow WindowProvider) *Window
 	WithAppearanceSource(appearanceSource *foundation.NSObject) *Window
 	WithColorSpace(colorSpace *ColorSpace) *Window
-	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *Window
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *Window
 	WithContentViewController(contentViewController ViewControllerProvider) *Window
 	WithInitialFirstResponder(initialFirstResponder ViewProvider) *Window
 	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *Window
 	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *Window
 	WithToolbar(toolbar *Toolbar) *Window
 	WithShowsToolbarButton(showsToolbarButton bool) *Window
-	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *Window
+	WithTabbingMode(tabbingMode NSWindowTabbingMode) *Window
 	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *Window
 	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *Window
 	WithIgnoresMouseEvents(ignoresMouseEvents bool) *Window
 	WithAutodisplay(autodisplay bool) *Window
 	WithOneShot(oneShot bool) *Window
-	WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *Window
+	WithPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation) *Window
 	WithShowsResizeIndicator(showsResizeIndicator bool) *Window
 	WithOrderedIndex(orderedIndex int) *Window
 	WithRestorable(restorable bool) *Window
@@ -2438,7 +2438,7 @@ type Windowable interface {
 	OrderFront(sender objc.ID)
 	OrderBack(sender objc.ID)
 	OrderOut(sender objc.ID)
-	OrderWindowRelativeTo(place raw.NSWindowOrderingMode, otherWin int)
+	OrderWindowRelativeTo(place NSWindowOrderingMode, otherWin int)
 	OrderFrontRegardless()
 	MakeKeyWindow()
 	MakeMainWindow()
@@ -2473,10 +2473,10 @@ type Windowable interface {
 	BeginCriticalSheetCompletionHandler(sheetWindow *raw.NSWindow, handler func(int))
 	EndSheet(sheetWindow *raw.NSWindow)
 	EndSheetReturnCode(sheetWindow *raw.NSWindow, returnCode int)
-	StandardWindowButton(b raw.NSWindowButton) *Button
-	AddChildWindowOrdered(childWin *raw.NSWindow, place raw.NSWindowOrderingMode)
+	StandardWindowButton(b NSWindowButton) *Button
+	AddChildWindowOrdered(childWin *raw.NSWindow, place NSWindowOrderingMode)
 	RemoveChildWindow(childWin *raw.NSWindow)
-	CanRepresentDisplayGamut(displayGamut raw.NSDisplayGamut) bool
+	CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool
 	PerformWindowDragWithEvent(event *raw.NSEvent)
 	SelectNextKeyView(sender objc.ID)
 	SelectPreviousKeyView(sender objc.ID)
@@ -2493,7 +2493,7 @@ type Windowable interface {
 	MergeAllWindows(sender objc.ID)
 	ToggleTabBar(sender objc.ID)
 	ToggleTabOverview(sender objc.ID)
-	AddTabbedWindowOrdered(window *raw.NSWindow, ordered raw.NSWindowOrderingMode)
+	AddTabbedWindowOrdered(window *raw.NSWindow, ordered NSWindowOrderingMode)
 	TransferWindowSharingToWindow(ctx context.Context, window *raw.NSWindow) error
 	RequestSharingOfWindow(ctx context.Context, window *raw.NSWindow) error
 	RequestSharingOfWindowUsingPreviewTitle(ctx context.Context, image *raw.NSImage, title string) error
@@ -2501,12 +2501,12 @@ type Windowable interface {
 	SetTitle(title string)
 	Subtitle() string
 	SetSubtitle(subtitle string)
-	TitleVisibility() raw.NSWindowTitleVisibility
-	SetTitleVisibility(titleVisibility raw.NSWindowTitleVisibility)
+	TitleVisibility() NSWindowTitleVisibility
+	SetTitleVisibility(titleVisibility NSWindowTitleVisibility)
 	TitlebarAppearsTransparent() bool
 	SetTitlebarAppearsTransparent(titlebarAppearsTransparent bool)
-	ToolbarStyle() raw.NSWindowToolbarStyle
-	SetToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle)
+	ToolbarStyle() NSWindowToolbarStyle
+	SetToolbarStyle(toolbarStyle NSWindowToolbarStyle)
 	ContentLayoutRect() corefoundation.CGRect
 	ContentLayoutGuide() objc.ID
 	TitlebarAccessoryViewControllers() []*TitlebarAccessoryViewController
@@ -2522,8 +2522,8 @@ type Windowable interface {
 	Delegate() raw.NSWindowDelegate
 	SetDelegate(delegate raw.NSWindowDelegate)
 	WindowNumber() int
-	StyleMask() raw.NSWindowStyleMask
-	SetStyleMask(styleMask raw.NSWindowStyleMask)
+	StyleMask() NSWindowStyleMask
+	SetStyleMask(styleMask NSWindowStyleMask)
 	CascadingReferenceFrame() corefoundation.CGRect
 	Frame() corefoundation.CGRect
 	InLiveResize() bool
@@ -2540,7 +2540,7 @@ type Windowable interface {
 	PreservesContentDuringLiveResize() bool
 	SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool)
 	FirstResponder() *Responder
-	ResizeFlags() raw.NSEventModifierFlags
+	ResizeFlags() NSEventModifierFlags
 	IsReleasedWhenClosed() bool
 	SetReleasedWhenClosed(releasedWhenClosed bool)
 	IsZoomed() bool
@@ -2573,12 +2573,12 @@ type Windowable interface {
 	BackingScaleFactor() float64
 	AllowsToolTipsWhenApplicationIsInactive() bool
 	SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool)
-	BackingType() raw.NSBackingStoreType
-	SetBackingType(backingType raw.NSBackingStoreType)
+	BackingType() NSBackingStoreType
+	SetBackingType(backingType NSBackingStoreType)
 	Level() int
 	SetLevel(level int)
-	DepthLimit() raw.NSWindowDepth
-	SetDepthLimit(depthLimit raw.NSWindowDepth)
+	DepthLimit() NSWindowDepth
+	SetDepthLimit(depthLimit NSWindowDepth)
 	HasDynamicDepthLimit() bool
 	Screen() *Screen
 	DeepestScreen() *Screen
@@ -2588,18 +2588,18 @@ type Windowable interface {
 	SetAlphaValue(alphaValue float64)
 	IsOpaque() bool
 	SetOpaque(opaque bool)
-	SharingType() raw.NSWindowSharingType
-	SetSharingType(sharingType raw.NSWindowSharingType)
+	SharingType() NSWindowSharingType
+	SetSharingType(sharingType NSWindowSharingType)
 	AllowsConcurrentViewDrawing() bool
 	SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool)
 	DisplaysWhenScreenProfileChanges() bool
 	SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool)
 	CanBecomeVisibleWithoutLogin() bool
 	SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool)
-	CollectionBehavior() raw.NSWindowCollectionBehavior
-	SetCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior)
-	AnimationBehavior() raw.NSWindowAnimationBehavior
-	SetAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior)
+	CollectionBehavior() NSWindowCollectionBehavior
+	SetCollectionBehavior(collectionBehavior NSWindowCollectionBehavior)
+	AnimationBehavior() NSWindowAnimationBehavior
+	SetAnimationBehavior(animationBehavior NSWindowAnimationBehavior)
 	IsOnActiveSpace() bool
 	StringWithSavedFrame() string
 	FrameAutosaveName() string
@@ -2629,13 +2629,13 @@ type Windowable interface {
 	SetAppearanceSource(appearanceSource *foundation.NSObject)
 	ColorSpace() *ColorSpace
 	SetColorSpace(colorSpace *raw.NSColorSpace)
-	OcclusionState() raw.NSWindowOcclusionState
-	TitlebarSeparatorStyle() raw.NSTitlebarSeparatorStyle
-	SetTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle)
+	OcclusionState() NSWindowOcclusionState
+	TitlebarSeparatorStyle() NSTitlebarSeparatorStyle
+	SetTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle)
 	ContentViewController() *ViewController
 	SetContentViewController(contentViewController *raw.NSViewController)
 	SetInitialFirstResponder(initialFirstResponder *raw.NSView)
-	KeyViewSelectionDirection() raw.NSSelectionDirection
+	KeyViewSelectionDirection() NSSelectionDirection
 	DefaultButtonCell() *ButtonCell
 	SetDefaultButtonCell(defaultButtonCell *raw.NSButtonCell)
 	AutorecalculatesKeyViewLoop() bool
@@ -2644,19 +2644,19 @@ type Windowable interface {
 	SetToolbar(toolbar *raw.NSToolbar)
 	ShowsToolbarButton() bool
 	SetShowsToolbarButton(showsToolbarButton bool)
-	TabbingMode() raw.NSWindowTabbingMode
-	SetTabbingMode(tabbingMode raw.NSWindowTabbingMode)
+	TabbingMode() NSWindowTabbingMode
+	SetTabbingMode(tabbingMode NSWindowTabbingMode)
 	TabbingIdentifier() string
 	SetTabbingIdentifier(tabbingIdentifier *foundation.NSString)
 	TabbedWindows() []*Window
 	Tab() *WindowTab
 	TabGroup() *WindowTabGroup
 	HasActiveWindowSharingSession() bool
-	WindowTitlebarLayoutDirection() raw.NSUserInterfaceLayoutDirection
-	TrackEventsMatchingMaskTimeoutModeHandler(mask raw.NSEventMask, timeout float64, mode *foundation.NSString, trackingHandler func(*raw.NSEvent, *bool))
-	NextEventMatchingMask(mask raw.NSEventMask) *Event
-	NextEventMatchingMaskUntilDateInModeDequeue(mask raw.NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event
-	DiscardEventsMatchingMaskBeforeEvent(mask raw.NSEventMask, lastEvent *raw.NSEvent)
+	WindowTitlebarLayoutDirection() NSUserInterfaceLayoutDirection
+	TrackEventsMatchingMaskTimeoutModeHandler(mask NSEventMask, timeout float64, mode *foundation.NSString, trackingHandler func(*raw.NSEvent, *bool))
+	NextEventMatchingMask(mask NSEventMask) *Event
+	NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event
+	DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *raw.NSEvent)
 	PostEventAtStart(event *raw.NSEvent, flag bool)
 	SendEvent(event *raw.NSEvent)
 	CurrentEvent() *Event
@@ -2696,16 +2696,16 @@ type Windowable interface {
 	GraphicsContext() *GraphicsContext
 	IsOneShot() bool
 	SetOneShot(oneShot bool)
-	PreferredBackingLocation() raw.NSWindowBackingLocation
-	SetPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation)
-	BackingLocation() raw.NSWindowBackingLocation
+	PreferredBackingLocation() NSWindowBackingLocation
+	SetPreferredBackingLocation(preferredBackingLocation NSWindowBackingLocation)
+	BackingLocation() NSWindowBackingLocation
 	ShowsResizeIndicator() bool
 	SetShowsResizeIndicator(showsResizeIndicator bool)
 	WindowRef() unsafe.Pointer
 	UpdateConstraintsIfNeeded()
 	LayoutIfNeeded()
-	AnchorAttributeForOrientation(orientation raw.NSLayoutConstraintOrientation) raw.NSLayoutAttribute
-	SetAnchorAttributeForOrientation(attr raw.NSLayoutAttribute, orientation raw.NSLayoutConstraintOrientation)
+	AnchorAttributeForOrientation(orientation NSLayoutConstraintOrientation) NSLayoutAttribute
+	SetAnchorAttributeForOrientation(attr NSLayoutAttribute, orientation NSLayoutConstraintOrientation)
 	VisualizeConstraints(constraints *foundation.NSArray[*raw.NSLayoutConstraint])
 	Drawers() []*Drawer
 	SetIsMiniaturized(flag bool)

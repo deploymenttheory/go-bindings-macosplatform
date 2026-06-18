@@ -38,14 +38,14 @@ func NewShareParticipant() *ShareParticipant {
 }
 
 // WithRole sets the role property and returns the receiver for chaining.
-func (x *ShareParticipant) WithRole(role raw.CKShareParticipantRole) *ShareParticipant {
-	x.inner.SetRole(role)
+func (x *ShareParticipant) WithRole(role CKShareParticipantRole) *ShareParticipant {
+	x.inner.SetRole(raw.CKShareParticipantRole(role))
 	return x
 }
 
 // WithPermission sets the permission property and returns the receiver for chaining.
-func (x *ShareParticipant) WithPermission(permission raw.CKShareParticipantPermission) *ShareParticipant {
-	x.inner.SetPermission(permission)
+func (x *ShareParticipant) WithPermission(permission CKShareParticipantPermission) *ShareParticipant {
+	x.inner.SetPermission(raw.CKShareParticipantPermission(permission))
 	return x
 }
 
@@ -59,28 +59,28 @@ func (x *ShareParticipant) UserIdentity() *UserIdentity {
 }
 
 // Role calls the underlying Role.
-func (x *ShareParticipant) Role() raw.CKShareParticipantRole {
-	return x.inner.Role()
+func (x *ShareParticipant) Role() CKShareParticipantRole {
+	return CKShareParticipantRole(x.inner.Role())
 }
 
 // SetRole calls the underlying SetRole.
-func (x *ShareParticipant) SetRole(role raw.CKShareParticipantRole) {
-	x.inner.SetRole(role)
+func (x *ShareParticipant) SetRole(role CKShareParticipantRole) {
+	x.inner.SetRole(raw.CKShareParticipantRole(role))
 }
 
 // AcceptanceStatus calls the underlying AcceptanceStatus.
-func (x *ShareParticipant) AcceptanceStatus() raw.CKShareParticipantAcceptanceStatus {
-	return x.inner.AcceptanceStatus()
+func (x *ShareParticipant) AcceptanceStatus() CKShareParticipantAcceptanceStatus {
+	return CKShareParticipantAcceptanceStatus(x.inner.AcceptanceStatus())
 }
 
 // Permission calls the underlying Permission.
-func (x *ShareParticipant) Permission() raw.CKShareParticipantPermission {
-	return x.inner.Permission()
+func (x *ShareParticipant) Permission() CKShareParticipantPermission {
+	return CKShareParticipantPermission(x.inner.Permission())
 }
 
 // SetPermission calls the underlying SetPermission.
-func (x *ShareParticipant) SetPermission(permission raw.CKShareParticipantPermission) {
-	x.inner.SetPermission(permission)
+func (x *ShareParticipant) SetPermission(permission CKShareParticipantPermission) {
+	x.inner.SetPermission(raw.CKShareParticipantPermission(permission))
 }
 
 // ParticipantID calls the underlying ParticipantID.
@@ -105,14 +105,14 @@ func (x *ShareParticipant) DateAddedToShare() *foundation.NSDate {
 // ShareParticipantable is the interface implemented by [ShareParticipant], for mocking and DI.
 type ShareParticipantable interface {
 	Unwrap() *raw.CKShareParticipant
-	WithRole(role raw.CKShareParticipantRole) *ShareParticipant
-	WithPermission(permission raw.CKShareParticipantPermission) *ShareParticipant
+	WithRole(role CKShareParticipantRole) *ShareParticipant
+	WithPermission(permission CKShareParticipantPermission) *ShareParticipant
 	UserIdentity() *UserIdentity
-	Role() raw.CKShareParticipantRole
-	SetRole(role raw.CKShareParticipantRole)
-	AcceptanceStatus() raw.CKShareParticipantAcceptanceStatus
-	Permission() raw.CKShareParticipantPermission
-	SetPermission(permission raw.CKShareParticipantPermission)
+	Role() CKShareParticipantRole
+	SetRole(role CKShareParticipantRole)
+	AcceptanceStatus() CKShareParticipantAcceptanceStatus
+	Permission() CKShareParticipantPermission
+	SetPermission(permission CKShareParticipantPermission)
 	ParticipantID() string
 	IsApprovedRequester() bool
 	DateAddedToShare() *foundation.NSDate

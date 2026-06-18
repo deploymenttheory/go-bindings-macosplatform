@@ -131,8 +131,8 @@ func IOSurfaceGetID(buffer unsafe.Pointer) uint32 {
 }
 
 // IOSurfaceGetNameOfComponentOfPlane calls [raw.IOSurfaceGetNameOfComponentOfPlane] (C function IOSurfaceGetNameOfComponentOfPlane).
-func IOSurfaceGetNameOfComponentOfPlane(buffer unsafe.Pointer, planeIndex uint, componentIndex uint) raw.IOSurfaceComponentName {
-	return raw.IOSurfaceGetNameOfComponentOfPlane(buffer, planeIndex, componentIndex)
+func IOSurfaceGetNameOfComponentOfPlane(buffer unsafe.Pointer, planeIndex uint, componentIndex uint) IOSurfaceComponentName {
+	return IOSurfaceComponentName(raw.IOSurfaceGetNameOfComponentOfPlane(buffer, planeIndex, componentIndex))
 }
 
 // IOSurfaceGetNumberOfComponentsOfPlane calls [raw.IOSurfaceGetNumberOfComponentsOfPlane] (C function IOSurfaceGetNumberOfComponentsOfPlane).
@@ -161,8 +161,8 @@ func IOSurfaceGetPropertyMaximum(property unsafe.Pointer) uint {
 }
 
 // IOSurfaceGetRangeOfComponentOfPlane calls [raw.IOSurfaceGetRangeOfComponentOfPlane] (C function IOSurfaceGetRangeOfComponentOfPlane).
-func IOSurfaceGetRangeOfComponentOfPlane(buffer unsafe.Pointer, planeIndex uint, componentIndex uint) raw.IOSurfaceComponentRange {
-	return raw.IOSurfaceGetRangeOfComponentOfPlane(buffer, planeIndex, componentIndex)
+func IOSurfaceGetRangeOfComponentOfPlane(buffer unsafe.Pointer, planeIndex uint, componentIndex uint) IOSurfaceComponentRange {
+	return IOSurfaceComponentRange(raw.IOSurfaceGetRangeOfComponentOfPlane(buffer, planeIndex, componentIndex))
 }
 
 // IOSurfaceGetSeed calls [raw.IOSurfaceGetSeed] (C function IOSurfaceGetSeed).
@@ -171,8 +171,8 @@ func IOSurfaceGetSeed(buffer unsafe.Pointer) uint32 {
 }
 
 // IOSurfaceGetSubsampling calls [raw.IOSurfaceGetSubsampling] (C function IOSurfaceGetSubsampling).
-func IOSurfaceGetSubsampling(buffer unsafe.Pointer) raw.IOSurfaceSubsampling {
-	return raw.IOSurfaceGetSubsampling(buffer)
+func IOSurfaceGetSubsampling(buffer unsafe.Pointer) IOSurfaceSubsampling {
+	return IOSurfaceSubsampling(raw.IOSurfaceGetSubsampling(buffer))
 }
 
 // IOSurfaceGetTypeID calls [raw.IOSurfaceGetTypeID] (C function IOSurfaceGetTypeID).
@@ -181,8 +181,8 @@ func IOSurfaceGetTypeID() uint {
 }
 
 // IOSurfaceGetTypeOfComponentOfPlane calls [raw.IOSurfaceGetTypeOfComponentOfPlane] (C function IOSurfaceGetTypeOfComponentOfPlane).
-func IOSurfaceGetTypeOfComponentOfPlane(buffer unsafe.Pointer, planeIndex uint, componentIndex uint) raw.IOSurfaceComponentType {
-	return raw.IOSurfaceGetTypeOfComponentOfPlane(buffer, planeIndex, componentIndex)
+func IOSurfaceGetTypeOfComponentOfPlane(buffer unsafe.Pointer, planeIndex uint, componentIndex uint) IOSurfaceComponentType {
+	return IOSurfaceComponentType(raw.IOSurfaceGetTypeOfComponentOfPlane(buffer, planeIndex, componentIndex))
 }
 
 // IOSurfaceGetUseCount calls [raw.IOSurfaceGetUseCount] (C function IOSurfaceGetUseCount).
@@ -211,8 +211,8 @@ func IOSurfaceIsInUse(buffer unsafe.Pointer) uint8 {
 }
 
 // IOSurfaceLock calls [raw.IOSurfaceLock] (C function IOSurfaceLock).
-func IOSurfaceLock(buffer unsafe.Pointer, options raw.IOSurfaceLockOptions, seed *uint32) int {
-	return raw.IOSurfaceLock(buffer, options, seed)
+func IOSurfaceLock(buffer unsafe.Pointer, options IOSurfaceLockOptions, seed *uint32) int {
+	return raw.IOSurfaceLock(buffer, raw.IOSurfaceLockOptions(options), seed)
 }
 
 // IOSurfaceLookup calls [raw.IOSurfaceLookup] (C function IOSurfaceLookup).
@@ -261,6 +261,6 @@ func IOSurfaceSetValues(buffer unsafe.Pointer, keysAndValues unsafe.Pointer) {
 }
 
 // IOSurfaceUnlock calls [raw.IOSurfaceUnlock] (C function IOSurfaceUnlock).
-func IOSurfaceUnlock(buffer unsafe.Pointer, options raw.IOSurfaceLockOptions, seed *uint32) int {
-	return raw.IOSurfaceUnlock(buffer, options, seed)
+func IOSurfaceUnlock(buffer unsafe.Pointer, options IOSurfaceLockOptions, seed *uint32) int {
+	return raw.IOSurfaceUnlock(buffer, raw.IOSurfaceLockOptions(options), seed)
 }

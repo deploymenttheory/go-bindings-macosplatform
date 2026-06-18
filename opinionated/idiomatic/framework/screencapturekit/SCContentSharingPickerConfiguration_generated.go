@@ -41,8 +41,8 @@ func NewContentSharingPickerConfiguration() *ContentSharingPickerConfiguration {
 }
 
 // WithAllowedPickerModes sets the allowedPickerModes property and returns the receiver for chaining.
-func (x *ContentSharingPickerConfiguration) WithAllowedPickerModes(allowedPickerModes raw.SCContentSharingPickerMode) *ContentSharingPickerConfiguration {
-	x.inner.SetAllowedPickerModes(allowedPickerModes)
+func (x *ContentSharingPickerConfiguration) WithAllowedPickerModes(allowedPickerModes SCContentSharingPickerMode) *ContentSharingPickerConfiguration {
+	x.inner.SetAllowedPickerModes(raw.SCContentSharingPickerMode(allowedPickerModes))
 	return x
 }
 
@@ -89,13 +89,13 @@ func (x *ContentSharingPickerConfiguration) WithAllowsChangingSelectedContent(al
 }
 
 // AllowedPickerModes calls the underlying AllowedPickerModes.
-func (x *ContentSharingPickerConfiguration) AllowedPickerModes() raw.SCContentSharingPickerMode {
-	return x.inner.AllowedPickerModes()
+func (x *ContentSharingPickerConfiguration) AllowedPickerModes() SCContentSharingPickerMode {
+	return SCContentSharingPickerMode(x.inner.AllowedPickerModes())
 }
 
 // SetAllowedPickerModes calls the underlying SetAllowedPickerModes.
-func (x *ContentSharingPickerConfiguration) SetAllowedPickerModes(allowedPickerModes raw.SCContentSharingPickerMode) {
-	x.inner.SetAllowedPickerModes(allowedPickerModes)
+func (x *ContentSharingPickerConfiguration) SetAllowedPickerModes(allowedPickerModes SCContentSharingPickerMode) {
+	x.inner.SetAllowedPickerModes(raw.SCContentSharingPickerMode(allowedPickerModes))
 }
 
 // ExcludedWindowIDs returns the collection as a Go slice.
@@ -143,12 +143,12 @@ func (x *ContentSharingPickerConfiguration) SetAllowsChangingSelectedContent(all
 // ContentSharingPickerConfigurationable is the interface implemented by [ContentSharingPickerConfiguration], for mocking and DI.
 type ContentSharingPickerConfigurationable interface {
 	Unwrap() *raw.SCContentSharingPickerConfiguration[objc.ID]
-	WithAllowedPickerModes(allowedPickerModes raw.SCContentSharingPickerMode) *ContentSharingPickerConfiguration
+	WithAllowedPickerModes(allowedPickerModes SCContentSharingPickerMode) *ContentSharingPickerConfiguration
 	WithExcludedWindowIDs(items ...*foundation.NSNumber) *ContentSharingPickerConfiguration
 	WithExcludedBundleIDs(items ...*foundation.NSString) *ContentSharingPickerConfiguration
 	WithAllowsChangingSelectedContent(allowsChangingSelectedContent bool) *ContentSharingPickerConfiguration
-	AllowedPickerModes() raw.SCContentSharingPickerMode
-	SetAllowedPickerModes(allowedPickerModes raw.SCContentSharingPickerMode)
+	AllowedPickerModes() SCContentSharingPickerMode
+	SetAllowedPickerModes(allowedPickerModes SCContentSharingPickerMode)
 	ExcludedWindowIDs() []*foundation.NSNumber
 	SetExcludedWindowIDs(excludedWindowIDs *foundation.NSArray[*foundation.NSNumber])
 	ExcludedBundleIDs() []string

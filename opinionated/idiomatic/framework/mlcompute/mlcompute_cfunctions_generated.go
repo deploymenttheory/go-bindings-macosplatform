@@ -10,66 +10,66 @@ import (
 )
 
 // MLCActivationTypeDebugDescription calls [raw.MLCActivationTypeDebugDescription] (C function MLCActivationTypeDebugDescription).
-func MLCActivationTypeDebugDescription(activationType raw.MLCActivationType) *foundation.NSString {
-	return raw.MLCActivationTypeDebugDescription(activationType)
+func MLCActivationTypeDebugDescription(activationType MLCActivationType) *foundation.NSString {
+	return raw.MLCActivationTypeDebugDescription(raw.MLCActivationType(activationType))
 }
 
 // MLCArithmeticOperationDebugDescription calls [raw.MLCArithmeticOperationDebugDescription] (C function MLCArithmeticOperationDebugDescription).
-func MLCArithmeticOperationDebugDescription(operation raw.MLCArithmeticOperation) *foundation.NSString {
-	return raw.MLCArithmeticOperationDebugDescription(operation)
+func MLCArithmeticOperationDebugDescription(operation MLCArithmeticOperation) *foundation.NSString {
+	return raw.MLCArithmeticOperationDebugDescription(raw.MLCArithmeticOperation(operation))
 }
 
 // MLCComparisonOperationDebugDescription calls [raw.MLCComparisonOperationDebugDescription] (C function MLCComparisonOperationDebugDescription).
-func MLCComparisonOperationDebugDescription(operation raw.MLCComparisonOperation) *foundation.NSString {
-	return raw.MLCComparisonOperationDebugDescription(operation)
+func MLCComparisonOperationDebugDescription(operation MLCComparisonOperation) *foundation.NSString {
+	return raw.MLCComparisonOperationDebugDescription(raw.MLCComparisonOperation(operation))
 }
 
 // MLCConvolutionTypeDebugDescription calls [raw.MLCConvolutionTypeDebugDescription] (C function MLCConvolutionTypeDebugDescription).
-func MLCConvolutionTypeDebugDescription(convolutionType raw.MLCConvolutionType) *foundation.NSString {
-	return raw.MLCConvolutionTypeDebugDescription(convolutionType)
+func MLCConvolutionTypeDebugDescription(convolutionType MLCConvolutionType) *foundation.NSString {
+	return raw.MLCConvolutionTypeDebugDescription(raw.MLCConvolutionType(convolutionType))
 }
 
 // MLCGradientClippingTypeDebugDescription calls [raw.MLCGradientClippingTypeDebugDescription] (C function MLCGradientClippingTypeDebugDescription).
-func MLCGradientClippingTypeDebugDescription(gradientClippingType raw.MLCGradientClippingType) *foundation.NSString {
-	return raw.MLCGradientClippingTypeDebugDescription(gradientClippingType)
+func MLCGradientClippingTypeDebugDescription(gradientClippingType MLCGradientClippingType) *foundation.NSString {
+	return raw.MLCGradientClippingTypeDebugDescription(raw.MLCGradientClippingType(gradientClippingType))
 }
 
 // MLCLSTMResultModeDebugDescription calls [raw.MLCLSTMResultModeDebugDescription] (C function MLCLSTMResultModeDebugDescription).
-func MLCLSTMResultModeDebugDescription(mode raw.MLCLSTMResultMode) *foundation.NSString {
-	return raw.MLCLSTMResultModeDebugDescription(mode)
+func MLCLSTMResultModeDebugDescription(mode MLCLSTMResultMode) *foundation.NSString {
+	return raw.MLCLSTMResultModeDebugDescription(raw.MLCLSTMResultMode(mode))
 }
 
 // MLCLossTypeDebugDescription calls [raw.MLCLossTypeDebugDescription] (C function MLCLossTypeDebugDescription).
-func MLCLossTypeDebugDescription(lossType raw.MLCLossType) *foundation.NSString {
-	return raw.MLCLossTypeDebugDescription(lossType)
+func MLCLossTypeDebugDescription(lossType MLCLossType) *foundation.NSString {
+	return raw.MLCLossTypeDebugDescription(raw.MLCLossType(lossType))
 }
 
 // MLCPaddingPolicyDebugDescription calls [raw.MLCPaddingPolicyDebugDescription] (C function MLCPaddingPolicyDebugDescription).
-func MLCPaddingPolicyDebugDescription(paddingPolicy raw.MLCPaddingPolicy) *foundation.NSString {
-	return raw.MLCPaddingPolicyDebugDescription(paddingPolicy)
+func MLCPaddingPolicyDebugDescription(paddingPolicy MLCPaddingPolicy) *foundation.NSString {
+	return raw.MLCPaddingPolicyDebugDescription(raw.MLCPaddingPolicy(paddingPolicy))
 }
 
 // MLCPaddingTypeDebugDescription calls [raw.MLCPaddingTypeDebugDescription] (C function MLCPaddingTypeDebugDescription).
-func MLCPaddingTypeDebugDescription(paddingType raw.MLCPaddingType) *foundation.NSString {
-	return raw.MLCPaddingTypeDebugDescription(paddingType)
+func MLCPaddingTypeDebugDescription(paddingType MLCPaddingType) *foundation.NSString {
+	return raw.MLCPaddingTypeDebugDescription(raw.MLCPaddingType(paddingType))
 }
 
 // MLCPoolingTypeDebugDescription calls [raw.MLCPoolingTypeDebugDescription] (C function MLCPoolingTypeDebugDescription).
-func MLCPoolingTypeDebugDescription(poolingType raw.MLCPoolingType) *foundation.NSString {
-	return raw.MLCPoolingTypeDebugDescription(poolingType)
+func MLCPoolingTypeDebugDescription(poolingType MLCPoolingType) *foundation.NSString {
+	return raw.MLCPoolingTypeDebugDescription(raw.MLCPoolingType(poolingType))
 }
 
 // MLCReductionTypeDebugDescription calls [raw.MLCReductionTypeDebugDescription] (C function MLCReductionTypeDebugDescription).
-func MLCReductionTypeDebugDescription(reductionType raw.MLCReductionType) *foundation.NSString {
-	return raw.MLCReductionTypeDebugDescription(reductionType)
+func MLCReductionTypeDebugDescription(reductionType MLCReductionType) *foundation.NSString {
+	return raw.MLCReductionTypeDebugDescription(raw.MLCReductionType(reductionType))
 }
 
 // MLCSampleModeDebugDescription calls [raw.MLCSampleModeDebugDescription] (C function MLCSampleModeDebugDescription).
-func MLCSampleModeDebugDescription(mode raw.MLCSampleMode) *foundation.NSString {
-	return raw.MLCSampleModeDebugDescription(mode)
+func MLCSampleModeDebugDescription(mode MLCSampleMode) *foundation.NSString {
+	return raw.MLCSampleModeDebugDescription(raw.MLCSampleMode(mode))
 }
 
 // MLCSoftmaxOperationDebugDescription calls [raw.MLCSoftmaxOperationDebugDescription] (C function MLCSoftmaxOperationDebugDescription).
-func MLCSoftmaxOperationDebugDescription(operation raw.MLCSoftmaxOperation) *foundation.NSString {
-	return raw.MLCSoftmaxOperationDebugDescription(operation)
+func MLCSoftmaxOperationDebugDescription(operation MLCSoftmaxOperation) *foundation.NSString {
+	return raw.MLCSoftmaxOperationDebugDescription(raw.MLCSoftmaxOperation(operation))
 }

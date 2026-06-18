@@ -111,14 +111,14 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCou
 }
 
 // WithAlphaToCoverageState sets the alphaToCoverageState property and returns the receiver for chaining.
-func (x *MTL4MeshRenderPipelineDescriptor) WithAlphaToCoverageState(alphaToCoverageState raw.MTL4AlphaToCoverageState) *MTL4MeshRenderPipelineDescriptor {
-	x.inner.SetAlphaToCoverageState(alphaToCoverageState)
+func (x *MTL4MeshRenderPipelineDescriptor) WithAlphaToCoverageState(alphaToCoverageState MTL4AlphaToCoverageState) *MTL4MeshRenderPipelineDescriptor {
+	x.inner.SetAlphaToCoverageState(raw.MTL4AlphaToCoverageState(alphaToCoverageState))
 	return x
 }
 
 // WithAlphaToOneState sets the alphaToOneState property and returns the receiver for chaining.
-func (x *MTL4MeshRenderPipelineDescriptor) WithAlphaToOneState(alphaToOneState raw.MTL4AlphaToOneState) *MTL4MeshRenderPipelineDescriptor {
-	x.inner.SetAlphaToOneState(alphaToOneState)
+func (x *MTL4MeshRenderPipelineDescriptor) WithAlphaToOneState(alphaToOneState MTL4AlphaToOneState) *MTL4MeshRenderPipelineDescriptor {
+	x.inner.SetAlphaToOneState(raw.MTL4AlphaToOneState(alphaToOneState))
 	return x
 }
 
@@ -171,14 +171,14 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithSupportFragmentBinaryLinking(supp
 }
 
 // WithColorAttachmentMappingState sets the colorAttachmentMappingState property and returns the receiver for chaining.
-func (x *MTL4MeshRenderPipelineDescriptor) WithColorAttachmentMappingState(colorAttachmentMappingState raw.MTL4LogicalToPhysicalColorAttachmentMappingState) *MTL4MeshRenderPipelineDescriptor {
-	x.inner.SetColorAttachmentMappingState(colorAttachmentMappingState)
+func (x *MTL4MeshRenderPipelineDescriptor) WithColorAttachmentMappingState(colorAttachmentMappingState MTL4LogicalToPhysicalColorAttachmentMappingState) *MTL4MeshRenderPipelineDescriptor {
+	x.inner.SetColorAttachmentMappingState(raw.MTL4LogicalToPhysicalColorAttachmentMappingState(colorAttachmentMappingState))
 	return x
 }
 
 // WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
-func (x *MTL4MeshRenderPipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4MeshRenderPipelineDescriptor {
-	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+func (x *MTL4MeshRenderPipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) *MTL4MeshRenderPipelineDescriptor {
+	x.inner.SetSupportIndirectCommandBuffers(raw.MTL4IndirectCommandBufferSupportState(supportIndirectCommandBuffers))
 	return x
 }
 
@@ -332,23 +332,23 @@ func (x *MTL4MeshRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCoun
 }
 
 // AlphaToCoverageState calls the underlying AlphaToCoverageState.
-func (x *MTL4MeshRenderPipelineDescriptor) AlphaToCoverageState() raw.MTL4AlphaToCoverageState {
-	return x.inner.AlphaToCoverageState()
+func (x *MTL4MeshRenderPipelineDescriptor) AlphaToCoverageState() MTL4AlphaToCoverageState {
+	return MTL4AlphaToCoverageState(x.inner.AlphaToCoverageState())
 }
 
 // SetAlphaToCoverageState calls the underlying SetAlphaToCoverageState.
-func (x *MTL4MeshRenderPipelineDescriptor) SetAlphaToCoverageState(alphaToCoverageState raw.MTL4AlphaToCoverageState) {
-	x.inner.SetAlphaToCoverageState(alphaToCoverageState)
+func (x *MTL4MeshRenderPipelineDescriptor) SetAlphaToCoverageState(alphaToCoverageState MTL4AlphaToCoverageState) {
+	x.inner.SetAlphaToCoverageState(raw.MTL4AlphaToCoverageState(alphaToCoverageState))
 }
 
 // AlphaToOneState calls the underlying AlphaToOneState.
-func (x *MTL4MeshRenderPipelineDescriptor) AlphaToOneState() raw.MTL4AlphaToOneState {
-	return x.inner.AlphaToOneState()
+func (x *MTL4MeshRenderPipelineDescriptor) AlphaToOneState() MTL4AlphaToOneState {
+	return MTL4AlphaToOneState(x.inner.AlphaToOneState())
 }
 
 // SetAlphaToOneState calls the underlying SetAlphaToOneState.
-func (x *MTL4MeshRenderPipelineDescriptor) SetAlphaToOneState(alphaToOneState raw.MTL4AlphaToOneState) {
-	x.inner.SetAlphaToOneState(alphaToOneState)
+func (x *MTL4MeshRenderPipelineDescriptor) SetAlphaToOneState(alphaToOneState MTL4AlphaToOneState) {
+	x.inner.SetAlphaToOneState(raw.MTL4AlphaToOneState(alphaToOneState))
 }
 
 // IsRasterizationEnabled calls the underlying IsRasterizationEnabled.
@@ -453,23 +453,23 @@ func (x *MTL4MeshRenderPipelineDescriptor) SetSupportFragmentBinaryLinking(suppo
 }
 
 // ColorAttachmentMappingState calls the underlying ColorAttachmentMappingState.
-func (x *MTL4MeshRenderPipelineDescriptor) ColorAttachmentMappingState() raw.MTL4LogicalToPhysicalColorAttachmentMappingState {
-	return x.inner.ColorAttachmentMappingState()
+func (x *MTL4MeshRenderPipelineDescriptor) ColorAttachmentMappingState() MTL4LogicalToPhysicalColorAttachmentMappingState {
+	return MTL4LogicalToPhysicalColorAttachmentMappingState(x.inner.ColorAttachmentMappingState())
 }
 
 // SetColorAttachmentMappingState calls the underlying SetColorAttachmentMappingState.
-func (x *MTL4MeshRenderPipelineDescriptor) SetColorAttachmentMappingState(colorAttachmentMappingState raw.MTL4LogicalToPhysicalColorAttachmentMappingState) {
-	x.inner.SetColorAttachmentMappingState(colorAttachmentMappingState)
+func (x *MTL4MeshRenderPipelineDescriptor) SetColorAttachmentMappingState(colorAttachmentMappingState MTL4LogicalToPhysicalColorAttachmentMappingState) {
+	x.inner.SetColorAttachmentMappingState(raw.MTL4LogicalToPhysicalColorAttachmentMappingState(colorAttachmentMappingState))
 }
 
 // SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
-func (x *MTL4MeshRenderPipelineDescriptor) SupportIndirectCommandBuffers() raw.MTL4IndirectCommandBufferSupportState {
-	return x.inner.SupportIndirectCommandBuffers()
+func (x *MTL4MeshRenderPipelineDescriptor) SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState {
+	return MTL4IndirectCommandBufferSupportState(x.inner.SupportIndirectCommandBuffers())
 }
 
 // SetSupportIndirectCommandBuffers calls the underlying SetSupportIndirectCommandBuffers.
-func (x *MTL4MeshRenderPipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) {
-	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+func (x *MTL4MeshRenderPipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) {
+	x.inner.SetSupportIndirectCommandBuffers(raw.MTL4IndirectCommandBufferSupportState(supportIndirectCommandBuffers))
 }
 
 func (x *MTL4MeshRenderPipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor {
@@ -491,8 +491,8 @@ type MTL4MeshRenderPipelineDescriptorable interface {
 	WithPayloadMemoryLength(payloadMemoryLength uint) *MTL4MeshRenderPipelineDescriptor
 	WithMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid uint) *MTL4MeshRenderPipelineDescriptor
 	WithRasterSampleCount(rasterSampleCount uint) *MTL4MeshRenderPipelineDescriptor
-	WithAlphaToCoverageState(alphaToCoverageState raw.MTL4AlphaToCoverageState) *MTL4MeshRenderPipelineDescriptor
-	WithAlphaToOneState(alphaToOneState raw.MTL4AlphaToOneState) *MTL4MeshRenderPipelineDescriptor
+	WithAlphaToCoverageState(alphaToCoverageState MTL4AlphaToCoverageState) *MTL4MeshRenderPipelineDescriptor
+	WithAlphaToOneState(alphaToOneState MTL4AlphaToOneState) *MTL4MeshRenderPipelineDescriptor
 	WithRasterizationEnabled(rasterizationEnabled bool) *MTL4MeshRenderPipelineDescriptor
 	WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *MTL4MeshRenderPipelineDescriptor
 	WithObjectStaticLinkingDescriptor(objectStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4MeshRenderPipelineDescriptor
@@ -501,8 +501,8 @@ type MTL4MeshRenderPipelineDescriptorable interface {
 	WithSupportObjectBinaryLinking(supportObjectBinaryLinking bool) *MTL4MeshRenderPipelineDescriptor
 	WithSupportMeshBinaryLinking(supportMeshBinaryLinking bool) *MTL4MeshRenderPipelineDescriptor
 	WithSupportFragmentBinaryLinking(supportFragmentBinaryLinking bool) *MTL4MeshRenderPipelineDescriptor
-	WithColorAttachmentMappingState(colorAttachmentMappingState raw.MTL4LogicalToPhysicalColorAttachmentMappingState) *MTL4MeshRenderPipelineDescriptor
-	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4MeshRenderPipelineDescriptor
+	WithColorAttachmentMappingState(colorAttachmentMappingState MTL4LogicalToPhysicalColorAttachmentMappingState) *MTL4MeshRenderPipelineDescriptor
+	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) *MTL4MeshRenderPipelineDescriptor
 	WithLabel(label string) *MTL4MeshRenderPipelineDescriptor
 	WithOptions(options *MTL4PipelineOptions) *MTL4MeshRenderPipelineDescriptor
 	Reset()
@@ -530,10 +530,10 @@ type MTL4MeshRenderPipelineDescriptorable interface {
 	SetMaxTotalThreadgroupsPerMeshGrid(maxTotalThreadgroupsPerMeshGrid uint)
 	RasterSampleCount() uint
 	SetRasterSampleCount(rasterSampleCount uint)
-	AlphaToCoverageState() raw.MTL4AlphaToCoverageState
-	SetAlphaToCoverageState(alphaToCoverageState raw.MTL4AlphaToCoverageState)
-	AlphaToOneState() raw.MTL4AlphaToOneState
-	SetAlphaToOneState(alphaToOneState raw.MTL4AlphaToOneState)
+	AlphaToCoverageState() MTL4AlphaToCoverageState
+	SetAlphaToCoverageState(alphaToCoverageState MTL4AlphaToCoverageState)
+	AlphaToOneState() MTL4AlphaToOneState
+	SetAlphaToOneState(alphaToOneState MTL4AlphaToOneState)
 	IsRasterizationEnabled() bool
 	SetRasterizationEnabled(rasterizationEnabled bool)
 	MaxVertexAmplificationCount() uint
@@ -551,10 +551,10 @@ type MTL4MeshRenderPipelineDescriptorable interface {
 	SetSupportMeshBinaryLinking(supportMeshBinaryLinking bool)
 	SupportFragmentBinaryLinking() bool
 	SetSupportFragmentBinaryLinking(supportFragmentBinaryLinking bool)
-	ColorAttachmentMappingState() raw.MTL4LogicalToPhysicalColorAttachmentMappingState
-	SetColorAttachmentMappingState(colorAttachmentMappingState raw.MTL4LogicalToPhysicalColorAttachmentMappingState)
-	SupportIndirectCommandBuffers() raw.MTL4IndirectCommandBufferSupportState
-	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState)
+	ColorAttachmentMappingState() MTL4LogicalToPhysicalColorAttachmentMappingState
+	SetColorAttachmentMappingState(colorAttachmentMappingState MTL4LogicalToPhysicalColorAttachmentMappingState)
+	SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState
+	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState)
 }
 
 var _ MTL4MeshRenderPipelineDescriptorable = (*MTL4MeshRenderPipelineDescriptor)(nil)

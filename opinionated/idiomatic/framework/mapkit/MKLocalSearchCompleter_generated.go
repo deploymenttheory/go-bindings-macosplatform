@@ -50,20 +50,20 @@ func (x *LocalSearchCompleter) WithRegion(region raw.MKCoordinateRegion) *LocalS
 }
 
 // WithRegionPriority sets the regionPriority property and returns the receiver for chaining.
-func (x *LocalSearchCompleter) WithRegionPriority(regionPriority raw.MKLocalSearchRegionPriority) *LocalSearchCompleter {
-	x.inner.SetRegionPriority(regionPriority)
+func (x *LocalSearchCompleter) WithRegionPriority(regionPriority MKLocalSearchRegionPriority) *LocalSearchCompleter {
+	x.inner.SetRegionPriority(raw.MKLocalSearchRegionPriority(regionPriority))
 	return x
 }
 
 // WithFilterType sets the filterType property and returns the receiver for chaining.
-func (x *LocalSearchCompleter) WithFilterType(filterType raw.MKSearchCompletionFilterType) *LocalSearchCompleter {
-	x.inner.SetFilterType(filterType)
+func (x *LocalSearchCompleter) WithFilterType(filterType MKSearchCompletionFilterType) *LocalSearchCompleter {
+	x.inner.SetFilterType(raw.MKSearchCompletionFilterType(filterType))
 	return x
 }
 
 // WithResultTypes sets the resultTypes property and returns the receiver for chaining.
-func (x *LocalSearchCompleter) WithResultTypes(resultTypes raw.MKLocalSearchCompleterResultType) *LocalSearchCompleter {
-	x.inner.SetResultTypes(resultTypes)
+func (x *LocalSearchCompleter) WithResultTypes(resultTypes MKLocalSearchCompleterResultType) *LocalSearchCompleter {
+	x.inner.SetResultTypes(raw.MKLocalSearchCompleterResultType(resultTypes))
 	return x
 }
 
@@ -115,33 +115,33 @@ func (x *LocalSearchCompleter) SetRegion(region raw.MKCoordinateRegion) {
 }
 
 // RegionPriority calls the underlying RegionPriority.
-func (x *LocalSearchCompleter) RegionPriority() raw.MKLocalSearchRegionPriority {
-	return x.inner.RegionPriority()
+func (x *LocalSearchCompleter) RegionPriority() MKLocalSearchRegionPriority {
+	return MKLocalSearchRegionPriority(x.inner.RegionPriority())
 }
 
 // SetRegionPriority calls the underlying SetRegionPriority.
-func (x *LocalSearchCompleter) SetRegionPriority(regionPriority raw.MKLocalSearchRegionPriority) {
-	x.inner.SetRegionPriority(regionPriority)
+func (x *LocalSearchCompleter) SetRegionPriority(regionPriority MKLocalSearchRegionPriority) {
+	x.inner.SetRegionPriority(raw.MKLocalSearchRegionPriority(regionPriority))
 }
 
 // FilterType calls the underlying FilterType.
-func (x *LocalSearchCompleter) FilterType() raw.MKSearchCompletionFilterType {
-	return x.inner.FilterType()
+func (x *LocalSearchCompleter) FilterType() MKSearchCompletionFilterType {
+	return MKSearchCompletionFilterType(x.inner.FilterType())
 }
 
 // SetFilterType calls the underlying SetFilterType.
-func (x *LocalSearchCompleter) SetFilterType(filterType raw.MKSearchCompletionFilterType) {
-	x.inner.SetFilterType(filterType)
+func (x *LocalSearchCompleter) SetFilterType(filterType MKSearchCompletionFilterType) {
+	x.inner.SetFilterType(raw.MKSearchCompletionFilterType(filterType))
 }
 
 // ResultTypes calls the underlying ResultTypes.
-func (x *LocalSearchCompleter) ResultTypes() raw.MKLocalSearchCompleterResultType {
-	return x.inner.ResultTypes()
+func (x *LocalSearchCompleter) ResultTypes() MKLocalSearchCompleterResultType {
+	return MKLocalSearchCompleterResultType(x.inner.ResultTypes())
 }
 
 // SetResultTypes calls the underlying SetResultTypes.
-func (x *LocalSearchCompleter) SetResultTypes(resultTypes raw.MKLocalSearchCompleterResultType) {
-	x.inner.SetResultTypes(resultTypes)
+func (x *LocalSearchCompleter) SetResultTypes(resultTypes MKLocalSearchCompleterResultType) {
+	x.inner.SetResultTypes(raw.MKLocalSearchCompleterResultType(resultTypes))
 }
 
 // PointOfInterestFilter calls the underlying PointOfInterestFilter.
@@ -203,9 +203,9 @@ type LocalSearchCompleterable interface {
 	Unwrap() *raw.MKLocalSearchCompleter
 	WithQueryFragment(queryFragment string) *LocalSearchCompleter
 	WithRegion(region raw.MKCoordinateRegion) *LocalSearchCompleter
-	WithRegionPriority(regionPriority raw.MKLocalSearchRegionPriority) *LocalSearchCompleter
-	WithFilterType(filterType raw.MKSearchCompletionFilterType) *LocalSearchCompleter
-	WithResultTypes(resultTypes raw.MKLocalSearchCompleterResultType) *LocalSearchCompleter
+	WithRegionPriority(regionPriority MKLocalSearchRegionPriority) *LocalSearchCompleter
+	WithFilterType(filterType MKSearchCompletionFilterType) *LocalSearchCompleter
+	WithResultTypes(resultTypes MKLocalSearchCompleterResultType) *LocalSearchCompleter
 	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchCompleter
 	WithAddressFilter(addressFilter *AddressFilter) *LocalSearchCompleter
 	WithDelegate(delegate raw.MKLocalSearchCompleterDelegate) *LocalSearchCompleter
@@ -214,12 +214,12 @@ type LocalSearchCompleterable interface {
 	SetQueryFragment(queryFragment string)
 	Region() raw.MKCoordinateRegion
 	SetRegion(region raw.MKCoordinateRegion)
-	RegionPriority() raw.MKLocalSearchRegionPriority
-	SetRegionPriority(regionPriority raw.MKLocalSearchRegionPriority)
-	FilterType() raw.MKSearchCompletionFilterType
-	SetFilterType(filterType raw.MKSearchCompletionFilterType)
-	ResultTypes() raw.MKLocalSearchCompleterResultType
-	SetResultTypes(resultTypes raw.MKLocalSearchCompleterResultType)
+	RegionPriority() MKLocalSearchRegionPriority
+	SetRegionPriority(regionPriority MKLocalSearchRegionPriority)
+	FilterType() MKSearchCompletionFilterType
+	SetFilterType(filterType MKSearchCompletionFilterType)
+	ResultTypes() MKLocalSearchCompleterResultType
+	SetResultTypes(resultTypes MKLocalSearchCompleterResultType)
 	PointOfInterestFilter() *PointOfInterestFilter
 	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
 	AddressFilter() *AddressFilter

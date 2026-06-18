@@ -52,13 +52,13 @@ func MTLIOCompressionContextDefaultChunkSize() uint {
 }
 
 // MTLIOCreateCompressionContext calls [raw.MTLIOCreateCompressionContext] (C function MTLIOCreateCompressionContext).
-func MTLIOCreateCompressionContext(path string, type_ raw.MTLIOCompressionMethod, chunkSize uint) unsafe.Pointer {
-	return raw.MTLIOCreateCompressionContext(path, type_, chunkSize)
+func MTLIOCreateCompressionContext(path string, type_ MTLIOCompressionMethod, chunkSize uint) unsafe.Pointer {
+	return raw.MTLIOCreateCompressionContext(path, raw.MTLIOCompressionMethod(type_), chunkSize)
 }
 
 // MTLIOFlushAndDestroyCompressionContext calls [raw.MTLIOFlushAndDestroyCompressionContext] (C function MTLIOFlushAndDestroyCompressionContext).
-func MTLIOFlushAndDestroyCompressionContext(context_ unsafe.Pointer) raw.MTLIOCompressionStatus {
-	return raw.MTLIOFlushAndDestroyCompressionContext(context_)
+func MTLIOFlushAndDestroyCompressionContext(context_ unsafe.Pointer) MTLIOCompressionStatus {
+	return MTLIOCompressionStatus(raw.MTLIOFlushAndDestroyCompressionContext(context_))
 }
 
 // MTLIndirectCommandBufferExecutionRangeMake calls [raw.MTLIndirectCommandBufferExecutionRangeMake] (C function MTLIndirectCommandBufferExecutionRangeMake).
@@ -112,6 +112,6 @@ func MTLSizeMake(width uint, height uint, depth uint) raw.MTLSize {
 }
 
 // MTLTextureSwizzleChannelsMake calls [raw.MTLTextureSwizzleChannelsMake] (C function MTLTextureSwizzleChannelsMake).
-func MTLTextureSwizzleChannelsMake(r raw.MTLTextureSwizzle, g raw.MTLTextureSwizzle, b raw.MTLTextureSwizzle, a raw.MTLTextureSwizzle) raw.MTLTextureSwizzleChannels {
-	return raw.MTLTextureSwizzleChannelsMake(r, g, b, a)
+func MTLTextureSwizzleChannelsMake(r MTLTextureSwizzle, g MTLTextureSwizzle, b MTLTextureSwizzle, a MTLTextureSwizzle) raw.MTLTextureSwizzleChannels {
+	return raw.MTLTextureSwizzleChannelsMake(raw.MTLTextureSwizzle(r), raw.MTLTextureSwizzle(g), raw.MTLTextureSwizzle(b), raw.MTLTextureSwizzle(a))
 }

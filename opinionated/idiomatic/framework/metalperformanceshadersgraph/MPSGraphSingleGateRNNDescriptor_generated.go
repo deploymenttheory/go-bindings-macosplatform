@@ -54,8 +54,8 @@ func (x *GraphSingleGateRNNDescriptor) WithTraining(training bool) *GraphSingleG
 }
 
 // WithActivation sets the activation property and returns the receiver for chaining.
-func (x *GraphSingleGateRNNDescriptor) WithActivation(activation raw.MPSGraphRNNActivation) *GraphSingleGateRNNDescriptor {
-	x.inner.SetActivation(activation)
+func (x *GraphSingleGateRNNDescriptor) WithActivation(activation MPSGraphRNNActivation) *GraphSingleGateRNNDescriptor {
+	x.inner.SetActivation(raw.MPSGraphRNNActivation(activation))
 	return x
 }
 
@@ -90,13 +90,13 @@ func (x *GraphSingleGateRNNDescriptor) SetTraining(training bool) {
 }
 
 // Activation calls the underlying Activation.
-func (x *GraphSingleGateRNNDescriptor) Activation() raw.MPSGraphRNNActivation {
-	return x.inner.Activation()
+func (x *GraphSingleGateRNNDescriptor) Activation() MPSGraphRNNActivation {
+	return MPSGraphRNNActivation(x.inner.Activation())
 }
 
 // SetActivation calls the underlying SetActivation.
-func (x *GraphSingleGateRNNDescriptor) SetActivation(activation raw.MPSGraphRNNActivation) {
-	x.inner.SetActivation(activation)
+func (x *GraphSingleGateRNNDescriptor) SetActivation(activation MPSGraphRNNActivation) {
+	x.inner.SetActivation(raw.MPSGraphRNNActivation(activation))
 }
 
 func (x *GraphSingleGateRNNDescriptor) asGraphObject() *raw.MPSGraphObject {
@@ -109,15 +109,15 @@ type GraphSingleGateRNNDescriptorable interface {
 	WithReverse(reverse bool) *GraphSingleGateRNNDescriptor
 	WithBidirectional(bidirectional bool) *GraphSingleGateRNNDescriptor
 	WithTraining(training bool) *GraphSingleGateRNNDescriptor
-	WithActivation(activation raw.MPSGraphRNNActivation) *GraphSingleGateRNNDescriptor
+	WithActivation(activation MPSGraphRNNActivation) *GraphSingleGateRNNDescriptor
 	Reverse() bool
 	SetReverse(reverse bool)
 	Bidirectional() bool
 	SetBidirectional(bidirectional bool)
 	Training() bool
 	SetTraining(training bool)
-	Activation() raw.MPSGraphRNNActivation
-	SetActivation(activation raw.MPSGraphRNNActivation)
+	Activation() MPSGraphRNNActivation
+	SetActivation(activation MPSGraphRNNActivation)
 }
 
 var _ GraphSingleGateRNNDescriptorable = (*GraphSingleGateRNNDescriptor)(nil)

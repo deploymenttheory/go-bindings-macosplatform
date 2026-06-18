@@ -62,8 +62,8 @@ func (x *SecureTextFieldCell) WithTextColor(textColor *Color) *SecureTextFieldCe
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.SetBezelStyle(bezelStyle)
+func (x *SecureTextFieldCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -104,8 +104,8 @@ func (x *SecureTextFieldCell) WithControlView(controlView ViewProvider) *SecureT
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithType(type_ raw.NSCellType) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(type_)
+func (x *SecureTextFieldCell) WithType(type_ NSCellType) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -188,8 +188,8 @@ func (x *SecureTextFieldCell) WithHighlighted(highlighted bool) *SecureTextField
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithAlignment(alignment raw.NSTextAlignment) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *SecureTextFieldCell) WithAlignment(alignment NSTextAlignment) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -254,8 +254,8 @@ func (x *SecureTextFieldCell) WithImage(image *Image) *SecureTextFieldCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithControlSize(controlSize raw.NSControlSize) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *SecureTextFieldCell) WithControlSize(controlSize NSControlSize) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -278,14 +278,14 @@ func (x *SecureTextFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditin
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *SecureTextFieldCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *SecureTextFieldCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -302,8 +302,8 @@ func (x *SecureTextFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleL
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *SecureTextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -326,8 +326,8 @@ func (x *SecureTextFieldCell) WithShowsFirstResponder(showsFirstResponder bool) 
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *SecureTextFieldCell) WithFocusRingType(focusRingType NSFocusRingType) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -356,14 +356,14 @@ func (x *SecureTextFieldCell) WithAllowsMixedState(allowsMixedState bool) *Secur
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *SecureTextFieldCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *SecureTextFieldCell) WithControlTint(controlTint raw.NSControlTint) *SecureTextFieldCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *SecureTextFieldCell) WithControlTint(controlTint NSControlTint) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -394,12 +394,12 @@ type SecureTextFieldCellable interface {
 	WithBackgroundColor(backgroundColor *Color) *SecureTextFieldCell
 	WithDrawsBackground(drawsBackground bool) *SecureTextFieldCell
 	WithTextColor(textColor *Color) *SecureTextFieldCell
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SecureTextFieldCell
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *SecureTextFieldCell
 	WithPlaceholderString(placeholderString string) *SecureTextFieldCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SecureTextFieldCell
 	WithAllowedInputSourceLocales(items ...*foundation.NSString) *SecureTextFieldCell
 	WithControlView(controlView ViewProvider) *SecureTextFieldCell
-	WithType(type_ raw.NSCellType) *SecureTextFieldCell
+	WithType(type_ NSCellType) *SecureTextFieldCell
 	WithState(state int) *SecureTextFieldCell
 	WithTarget(target objc.ID) *SecureTextFieldCell
 	WithAction(action objc.SEL) *SecureTextFieldCell
@@ -413,7 +413,7 @@ type SecureTextFieldCellable interface {
 	WithBezeled(bezeled bool) *SecureTextFieldCell
 	WithScrollable(scrollable bool) *SecureTextFieldCell
 	WithHighlighted(highlighted bool) *SecureTextFieldCell
-	WithAlignment(alignment raw.NSTextAlignment) *SecureTextFieldCell
+	WithAlignment(alignment NSTextAlignment) *SecureTextFieldCell
 	WithWraps(wraps bool) *SecureTextFieldCell
 	WithFont(font *Font) *SecureTextFieldCell
 	WithFormatter(formatter *foundation.NSFormatter) *SecureTextFieldCell
@@ -424,25 +424,25 @@ type SecureTextFieldCellable interface {
 	WithDoubleValue(doubleValue float64) *SecureTextFieldCell
 	WithIntegerValue(integerValue int) *SecureTextFieldCell
 	WithImage(image *Image) *SecureTextFieldCell
-	WithControlSize(controlSize raw.NSControlSize) *SecureTextFieldCell
+	WithControlSize(controlSize NSControlSize) *SecureTextFieldCell
 	WithRepresentedObject(representedObject objc.ID) *SecureTextFieldCell
 	WithMenu(menu *Menu) *SecureTextFieldCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SecureTextFieldCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SecureTextFieldCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SecureTextFieldCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SecureTextFieldCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *SecureTextFieldCell
 	WithAllowsUndo(allowsUndo bool) *SecureTextFieldCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SecureTextFieldCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SecureTextFieldCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SecureTextFieldCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SecureTextFieldCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *SecureTextFieldCell
 	WithShowsFirstResponder(showsFirstResponder bool) *SecureTextFieldCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *SecureTextFieldCell
+	WithFocusRingType(focusRingType NSFocusRingType) *SecureTextFieldCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SecureTextFieldCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SecureTextFieldCell
 	WithImportsGraphics(importsGraphics bool) *SecureTextFieldCell
 	WithAllowsMixedState(allowsMixedState bool) *SecureTextFieldCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SecureTextFieldCell
-	WithControlTint(controlTint raw.NSControlTint) *SecureTextFieldCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SecureTextFieldCell
+	WithControlTint(controlTint NSControlTint) *SecureTextFieldCell
 	EchosBullets() bool
 	SetEchosBullets(echosBullets bool)
 }

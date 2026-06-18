@@ -119,8 +119,8 @@ func (x *ClipView) WithAutoresizesSubviews(autoresizesSubviews bool) *ClipView {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ClipView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ClipView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *ClipView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ClipView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -179,14 +179,14 @@ func (x *ClipView) WithWantsRestingTouches(wantsRestingTouches bool) *ClipView {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *ClipView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ClipView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *ClipView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ClipView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *ClipView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ClipView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *ClipView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ClipView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -293,8 +293,8 @@ func (x *ClipView) WithToolTip(toolTip string) *ClipView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ClipView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ClipView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ClipView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ClipView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -311,8 +311,8 @@ func (x *ClipView) WithNextKeyView(nextKeyView ViewProvider) *ClipView {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ClipView) WithFocusRingType(focusRingType raw.NSFocusRingType) *ClipView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *ClipView) WithFocusRingType(focusRingType NSFocusRingType) *ClipView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -335,8 +335,8 @@ func (x *ClipView) WithGestureRecognizers(items ...GestureRecognizerProvider) *C
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *ClipView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ClipView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *ClipView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ClipView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -559,7 +559,7 @@ type ClipViewable interface {
 	WithHidden(hidden bool) *ClipView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ClipView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *ClipView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ClipView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *ClipView
 	WithFrame(frame corefoundation.CGRect) *ClipView
 	WithFrameRotation(frameRotation float64) *ClipView
 	WithFrameCenterRotation(frameCenterRotation float64) *ClipView
@@ -569,8 +569,8 @@ type ClipViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *ClipView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ClipView
 	WithWantsRestingTouches(wantsRestingTouches bool) *ClipView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ClipView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ClipView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *ClipView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *ClipView
 	WithWantsLayer(wantsLayer bool) *ClipView
 	WithLayer(layer *quartzcore.CALayer) *ClipView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ClipView
@@ -584,12 +584,12 @@ type ClipViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *ClipView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ClipView
 	WithToolTip(toolTip string) *ClipView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ClipView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ClipView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ClipView
 	WithNextKeyView(nextKeyView ViewProvider) *ClipView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ClipView
+	WithFocusRingType(focusRingType NSFocusRingType) *ClipView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *ClipView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ClipView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *ClipView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ClipView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ClipView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ClipView

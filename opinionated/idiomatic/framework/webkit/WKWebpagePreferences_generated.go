@@ -36,8 +36,8 @@ func NewWKWebpagePreferences() *WKWebpagePreferences {
 }
 
 // WithPreferredContentMode sets the preferredContentMode property and returns the receiver for chaining.
-func (x *WKWebpagePreferences) WithPreferredContentMode(preferredContentMode raw.WKContentMode) *WKWebpagePreferences {
-	x.inner.SetPreferredContentMode(preferredContentMode)
+func (x *WKWebpagePreferences) WithPreferredContentMode(preferredContentMode WKContentMode) *WKWebpagePreferences {
+	x.inner.SetPreferredContentMode(raw.WKContentMode(preferredContentMode))
 	return x
 }
 
@@ -54,25 +54,25 @@ func (x *WKWebpagePreferences) WithLockdownModeEnabled(lockdownModeEnabled bool)
 }
 
 // WithPreferredHTTPSNavigationPolicy sets the preferredHTTPSNavigationPolicy property and returns the receiver for chaining.
-func (x *WKWebpagePreferences) WithPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy raw.WKWebpagePreferencesUpgradeToHTTPSPolicy) *WKWebpagePreferences {
-	x.inner.SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy)
+func (x *WKWebpagePreferences) WithPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy WKWebpagePreferencesUpgradeToHTTPSPolicy) *WKWebpagePreferences {
+	x.inner.SetPreferredHTTPSNavigationPolicy(raw.WKWebpagePreferencesUpgradeToHTTPSPolicy(preferredHTTPSNavigationPolicy))
 	return x
 }
 
 // WithSecurityRestrictionMode sets the securityRestrictionMode property and returns the receiver for chaining.
-func (x *WKWebpagePreferences) WithSecurityRestrictionMode(securityRestrictionMode raw.WKSecurityRestrictionMode) *WKWebpagePreferences {
-	x.inner.SetSecurityRestrictionMode(securityRestrictionMode)
+func (x *WKWebpagePreferences) WithSecurityRestrictionMode(securityRestrictionMode WKSecurityRestrictionMode) *WKWebpagePreferences {
+	x.inner.SetSecurityRestrictionMode(raw.WKSecurityRestrictionMode(securityRestrictionMode))
 	return x
 }
 
 // PreferredContentMode calls the underlying PreferredContentMode.
-func (x *WKWebpagePreferences) PreferredContentMode() raw.WKContentMode {
-	return x.inner.PreferredContentMode()
+func (x *WKWebpagePreferences) PreferredContentMode() WKContentMode {
+	return WKContentMode(x.inner.PreferredContentMode())
 }
 
 // SetPreferredContentMode calls the underlying SetPreferredContentMode.
-func (x *WKWebpagePreferences) SetPreferredContentMode(preferredContentMode raw.WKContentMode) {
-	x.inner.SetPreferredContentMode(preferredContentMode)
+func (x *WKWebpagePreferences) SetPreferredContentMode(preferredContentMode WKContentMode) {
+	x.inner.SetPreferredContentMode(raw.WKContentMode(preferredContentMode))
 }
 
 // AllowsContentJavaScript calls the underlying AllowsContentJavaScript.
@@ -96,43 +96,43 @@ func (x *WKWebpagePreferences) SetLockdownModeEnabled(lockdownModeEnabled bool) 
 }
 
 // PreferredHTTPSNavigationPolicy calls the underlying PreferredHTTPSNavigationPolicy.
-func (x *WKWebpagePreferences) PreferredHTTPSNavigationPolicy() raw.WKWebpagePreferencesUpgradeToHTTPSPolicy {
-	return x.inner.PreferredHTTPSNavigationPolicy()
+func (x *WKWebpagePreferences) PreferredHTTPSNavigationPolicy() WKWebpagePreferencesUpgradeToHTTPSPolicy {
+	return WKWebpagePreferencesUpgradeToHTTPSPolicy(x.inner.PreferredHTTPSNavigationPolicy())
 }
 
 // SetPreferredHTTPSNavigationPolicy calls the underlying SetPreferredHTTPSNavigationPolicy.
-func (x *WKWebpagePreferences) SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy raw.WKWebpagePreferencesUpgradeToHTTPSPolicy) {
-	x.inner.SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy)
+func (x *WKWebpagePreferences) SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy WKWebpagePreferencesUpgradeToHTTPSPolicy) {
+	x.inner.SetPreferredHTTPSNavigationPolicy(raw.WKWebpagePreferencesUpgradeToHTTPSPolicy(preferredHTTPSNavigationPolicy))
 }
 
 // SecurityRestrictionMode calls the underlying SecurityRestrictionMode.
-func (x *WKWebpagePreferences) SecurityRestrictionMode() raw.WKSecurityRestrictionMode {
-	return x.inner.SecurityRestrictionMode()
+func (x *WKWebpagePreferences) SecurityRestrictionMode() WKSecurityRestrictionMode {
+	return WKSecurityRestrictionMode(x.inner.SecurityRestrictionMode())
 }
 
 // SetSecurityRestrictionMode calls the underlying SetSecurityRestrictionMode.
-func (x *WKWebpagePreferences) SetSecurityRestrictionMode(securityRestrictionMode raw.WKSecurityRestrictionMode) {
-	x.inner.SetSecurityRestrictionMode(securityRestrictionMode)
+func (x *WKWebpagePreferences) SetSecurityRestrictionMode(securityRestrictionMode WKSecurityRestrictionMode) {
+	x.inner.SetSecurityRestrictionMode(raw.WKSecurityRestrictionMode(securityRestrictionMode))
 }
 
 // WKWebpagePreferencesable is the interface implemented by [WKWebpagePreferences], for mocking and DI.
 type WKWebpagePreferencesable interface {
 	Unwrap() *raw.WKWebpagePreferences
-	WithPreferredContentMode(preferredContentMode raw.WKContentMode) *WKWebpagePreferences
+	WithPreferredContentMode(preferredContentMode WKContentMode) *WKWebpagePreferences
 	WithAllowsContentJavaScript(allowsContentJavaScript bool) *WKWebpagePreferences
 	WithLockdownModeEnabled(lockdownModeEnabled bool) *WKWebpagePreferences
-	WithPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy raw.WKWebpagePreferencesUpgradeToHTTPSPolicy) *WKWebpagePreferences
-	WithSecurityRestrictionMode(securityRestrictionMode raw.WKSecurityRestrictionMode) *WKWebpagePreferences
-	PreferredContentMode() raw.WKContentMode
-	SetPreferredContentMode(preferredContentMode raw.WKContentMode)
+	WithPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy WKWebpagePreferencesUpgradeToHTTPSPolicy) *WKWebpagePreferences
+	WithSecurityRestrictionMode(securityRestrictionMode WKSecurityRestrictionMode) *WKWebpagePreferences
+	PreferredContentMode() WKContentMode
+	SetPreferredContentMode(preferredContentMode WKContentMode)
 	AllowsContentJavaScript() bool
 	SetAllowsContentJavaScript(allowsContentJavaScript bool)
 	IsLockdownModeEnabled() bool
 	SetLockdownModeEnabled(lockdownModeEnabled bool)
-	PreferredHTTPSNavigationPolicy() raw.WKWebpagePreferencesUpgradeToHTTPSPolicy
-	SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy raw.WKWebpagePreferencesUpgradeToHTTPSPolicy)
-	SecurityRestrictionMode() raw.WKSecurityRestrictionMode
-	SetSecurityRestrictionMode(securityRestrictionMode raw.WKSecurityRestrictionMode)
+	PreferredHTTPSNavigationPolicy() WKWebpagePreferencesUpgradeToHTTPSPolicy
+	SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy WKWebpagePreferencesUpgradeToHTTPSPolicy)
+	SecurityRestrictionMode() WKSecurityRestrictionMode
+	SetSecurityRestrictionMode(securityRestrictionMode WKSecurityRestrictionMode)
 }
 
 var _ WKWebpagePreferencesable = (*WKWebpagePreferences)(nil)

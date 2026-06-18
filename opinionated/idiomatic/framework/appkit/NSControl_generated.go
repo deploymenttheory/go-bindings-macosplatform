@@ -98,8 +98,8 @@ func (x *Control) WithHighlighted(highlighted bool) *Control {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Control) WithControlSize(controlSize raw.NSControlSize) *Control {
-	x.inner.SetControlSize(controlSize)
+func (x *Control) WithControlSize(controlSize NSControlSize) *Control {
+	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -164,20 +164,20 @@ func (x *Control) WithUsesSingleLineMode(usesSingleLineMode bool) *Control {
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Control) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Control {
-	x.inner.SetLineBreakMode(lineBreakMode)
+func (x *Control) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Control {
+	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Control) WithAlignment(alignment raw.NSTextAlignment) *Control {
-	x.inner.SetAlignment(alignment)
+func (x *Control) WithAlignment(alignment NSTextAlignment) *Control {
+	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Control) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Control {
-	x.inner.SetBaseWritingDirection(baseWritingDirection)
+func (x *Control) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Control {
+	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
@@ -230,8 +230,8 @@ func (x *Control) WithAutoresizesSubviews(autoresizesSubviews bool) *Control {
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Control) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Control {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *Control) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Control {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -290,14 +290,14 @@ func (x *Control) WithWantsRestingTouches(wantsRestingTouches bool) *Control {
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Control) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Control {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *Control) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Control {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Control) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Control {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *Control) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Control {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -404,8 +404,8 @@ func (x *Control) WithToolTip(toolTip string) *Control {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Control) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Control {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *Control) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Control {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -422,8 +422,8 @@ func (x *Control) WithNextKeyView(nextKeyView ViewProvider) *Control {
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Control) WithFocusRingType(focusRingType raw.NSFocusRingType) *Control {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *Control) WithFocusRingType(focusRingType NSFocusRingType) *Control {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -446,8 +446,8 @@ func (x *Control) WithGestureRecognizers(items ...GestureRecognizerProvider) *Co
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Control) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Control {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *Control) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Control {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -546,8 +546,8 @@ func (x *Control) SizeToFit() {
 }
 
 // SendActionOn calls the underlying SendActionOn.
-func (x *Control) SendActionOn(mask raw.NSEventMask) int {
-	return x.inner.SendActionOn(mask)
+func (x *Control) SendActionOn(mask NSEventMask) int {
+	return x.inner.SendActionOn(raw.NSEventMask(mask))
 }
 
 // SendActionTo calls the underlying SendActionTo.
@@ -676,13 +676,13 @@ func (x *Control) SetHighlighted(highlighted bool) {
 }
 
 // ControlSize calls the underlying ControlSize.
-func (x *Control) ControlSize() raw.NSControlSize {
-	return x.inner.ControlSize()
+func (x *Control) ControlSize() NSControlSize {
+	return NSControlSize(x.inner.ControlSize())
 }
 
 // SetControlSize calls the underlying SetControlSize.
-func (x *Control) SetControlSize(controlSize raw.NSControlSize) {
-	x.inner.SetControlSize(controlSize)
+func (x *Control) SetControlSize(controlSize NSControlSize) {
+	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 }
 
 // Formatter calls the underlying Formatter.
@@ -794,33 +794,33 @@ func (x *Control) SetUsesSingleLineMode(usesSingleLineMode bool) {
 }
 
 // LineBreakMode calls the underlying LineBreakMode.
-func (x *Control) LineBreakMode() raw.NSLineBreakMode {
-	return x.inner.LineBreakMode()
+func (x *Control) LineBreakMode() NSLineBreakMode {
+	return NSLineBreakMode(x.inner.LineBreakMode())
 }
 
 // SetLineBreakMode calls the underlying SetLineBreakMode.
-func (x *Control) SetLineBreakMode(lineBreakMode raw.NSLineBreakMode) {
-	x.inner.SetLineBreakMode(lineBreakMode)
+func (x *Control) SetLineBreakMode(lineBreakMode NSLineBreakMode) {
+	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 }
 
 // Alignment calls the underlying Alignment.
-func (x *Control) Alignment() raw.NSTextAlignment {
-	return x.inner.Alignment()
+func (x *Control) Alignment() NSTextAlignment {
+	return NSTextAlignment(x.inner.Alignment())
 }
 
 // SetAlignment calls the underlying SetAlignment.
-func (x *Control) SetAlignment(alignment raw.NSTextAlignment) {
-	x.inner.SetAlignment(alignment)
+func (x *Control) SetAlignment(alignment NSTextAlignment) {
+	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
 }
 
 // BaseWritingDirection calls the underlying BaseWritingDirection.
-func (x *Control) BaseWritingDirection() raw.NSWritingDirection {
-	return x.inner.BaseWritingDirection()
+func (x *Control) BaseWritingDirection() NSWritingDirection {
+	return NSWritingDirection(x.inner.BaseWritingDirection())
 }
 
 // SetBaseWritingDirection calls the underlying SetBaseWritingDirection.
-func (x *Control) SetBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) {
-	x.inner.SetBaseWritingDirection(baseWritingDirection)
+func (x *Control) SetBaseWritingDirection(baseWritingDirection NSWritingDirection) {
+	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 }
 
 // AllowsExpansionToolTips calls the underlying AllowsExpansionToolTips.
@@ -957,7 +957,7 @@ type Controlable interface {
 	WithEnabled(enabled bool) *Control
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Control
 	WithHighlighted(highlighted bool) *Control
-	WithControlSize(controlSize raw.NSControlSize) *Control
+	WithControlSize(controlSize NSControlSize) *Control
 	WithFormatter(formatter *foundation.NSFormatter) *Control
 	WithObjectValue(objectValue objc.ID) *Control
 	WithStringValue(stringValue string) *Control
@@ -968,16 +968,16 @@ type Controlable interface {
 	WithDoubleValue(doubleValue float64) *Control
 	WithFont(font *Font) *Control
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Control
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Control
-	WithAlignment(alignment raw.NSTextAlignment) *Control
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Control
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Control
+	WithAlignment(alignment NSTextAlignment) *Control
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Control
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Control
 	WithCell(cell CellProvider) *Control
 	WithSubviews(items ...ViewProvider) *Control
 	WithHidden(hidden bool) *Control
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Control
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Control
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Control
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Control
 	WithFrame(frame corefoundation.CGRect) *Control
 	WithFrameRotation(frameRotation float64) *Control
 	WithFrameCenterRotation(frameCenterRotation float64) *Control
@@ -987,8 +987,8 @@ type Controlable interface {
 	WithNeedsDisplay(needsDisplay bool) *Control
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Control
 	WithWantsRestingTouches(wantsRestingTouches bool) *Control
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Control
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Control
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Control
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Control
 	WithWantsLayer(wantsLayer bool) *Control
 	WithLayer(layer *quartzcore.CALayer) *Control
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Control
@@ -1002,12 +1002,12 @@ type Controlable interface {
 	WithClipsToBounds(clipsToBounds bool) *Control
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Control
 	WithToolTip(toolTip string) *Control
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Control
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Control
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Control
 	WithNextKeyView(nextKeyView ViewProvider) *Control
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *Control
+	WithFocusRingType(focusRingType NSFocusRingType) *Control
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Control
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Control
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Control
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Control
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Control
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Control
@@ -1024,7 +1024,7 @@ type Controlable interface {
 	WithTouchBar(touchBar *TouchBar) *Control
 	SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize
 	SizeToFit()
-	SendActionOn(mask raw.NSEventMask) int
+	SendActionOn(mask NSEventMask) int
 	SendActionTo(action objc.SEL, target objc.ID) bool
 	TakeIntValueFrom(sender objc.ID)
 	TakeFloatValueFrom(sender objc.ID)
@@ -1050,8 +1050,8 @@ type Controlable interface {
 	SetRefusesFirstResponder(refusesFirstResponder bool)
 	IsHighlighted() bool
 	SetHighlighted(highlighted bool)
-	ControlSize() raw.NSControlSize
-	SetControlSize(controlSize raw.NSControlSize)
+	ControlSize() NSControlSize
+	SetControlSize(controlSize NSControlSize)
 	Formatter() *foundation.NSFormatter
 	SetFormatter(formatter *foundation.NSFormatter)
 	ObjectValue() objc.ID
@@ -1072,12 +1072,12 @@ type Controlable interface {
 	SetFont(font *raw.NSFont)
 	UsesSingleLineMode() bool
 	SetUsesSingleLineMode(usesSingleLineMode bool)
-	LineBreakMode() raw.NSLineBreakMode
-	SetLineBreakMode(lineBreakMode raw.NSLineBreakMode)
-	Alignment() raw.NSTextAlignment
-	SetAlignment(alignment raw.NSTextAlignment)
-	BaseWritingDirection() raw.NSWritingDirection
-	SetBaseWritingDirection(baseWritingDirection raw.NSWritingDirection)
+	LineBreakMode() NSLineBreakMode
+	SetLineBreakMode(lineBreakMode NSLineBreakMode)
+	Alignment() NSTextAlignment
+	SetAlignment(alignment NSTextAlignment)
+	BaseWritingDirection() NSWritingDirection
+	SetBaseWritingDirection(baseWritingDirection NSWritingDirection)
 	AllowsExpansionToolTips() bool
 	SetAllowsExpansionToolTips(allowsExpansionToolTips bool)
 	CurrentEditor() *Text

@@ -73,8 +73,8 @@ func (x *SpatialScalerDescriptor) WithOutputHeight(outputHeight uint) *SpatialSc
 }
 
 // WithColorProcessingMode sets the colorProcessingMode property and returns the receiver for chaining.
-func (x *SpatialScalerDescriptor) WithColorProcessingMode(colorProcessingMode raw.MTLFXSpatialScalerColorProcessingMode) *SpatialScalerDescriptor {
-	x.inner.SetColorProcessingMode(colorProcessingMode)
+func (x *SpatialScalerDescriptor) WithColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode) *SpatialScalerDescriptor {
+	x.inner.SetColorProcessingMode(raw.MTLFXSpatialScalerColorProcessingMode(colorProcessingMode))
 	return x
 }
 
@@ -149,13 +149,13 @@ func (x *SpatialScalerDescriptor) SetOutputHeight(outputHeight uint) {
 }
 
 // ColorProcessingMode calls the underlying ColorProcessingMode.
-func (x *SpatialScalerDescriptor) ColorProcessingMode() raw.MTLFXSpatialScalerColorProcessingMode {
-	return x.inner.ColorProcessingMode()
+func (x *SpatialScalerDescriptor) ColorProcessingMode() MTLFXSpatialScalerColorProcessingMode {
+	return MTLFXSpatialScalerColorProcessingMode(x.inner.ColorProcessingMode())
 }
 
 // SetColorProcessingMode calls the underlying SetColorProcessingMode.
-func (x *SpatialScalerDescriptor) SetColorProcessingMode(colorProcessingMode raw.MTLFXSpatialScalerColorProcessingMode) {
-	x.inner.SetColorProcessingMode(colorProcessingMode)
+func (x *SpatialScalerDescriptor) SetColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode) {
+	x.inner.SetColorProcessingMode(raw.MTLFXSpatialScalerColorProcessingMode(colorProcessingMode))
 }
 
 // SpatialScalerDescriptorable is the interface implemented by [SpatialScalerDescriptor], for mocking and DI.
@@ -167,7 +167,7 @@ type SpatialScalerDescriptorable interface {
 	WithInputHeight(inputHeight uint) *SpatialScalerDescriptor
 	WithOutputWidth(outputWidth uint) *SpatialScalerDescriptor
 	WithOutputHeight(outputHeight uint) *SpatialScalerDescriptor
-	WithColorProcessingMode(colorProcessingMode raw.MTLFXSpatialScalerColorProcessingMode) *SpatialScalerDescriptor
+	WithColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode) *SpatialScalerDescriptor
 	NewSpatialScalerWithDevice(device metal.MTLDevice) raw.MTLFXSpatialScaler
 	NewSpatialScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXSpatialScaler
 	ColorTextureFormat() metal.MTLPixelFormat
@@ -182,8 +182,8 @@ type SpatialScalerDescriptorable interface {
 	SetOutputWidth(outputWidth uint)
 	OutputHeight() uint
 	SetOutputHeight(outputHeight uint)
-	ColorProcessingMode() raw.MTLFXSpatialScalerColorProcessingMode
-	SetColorProcessingMode(colorProcessingMode raw.MTLFXSpatialScalerColorProcessingMode)
+	ColorProcessingMode() MTLFXSpatialScalerColorProcessingMode
+	SetColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode)
 }
 
 var _ SpatialScalerDescriptorable = (*SpatialScalerDescriptor)(nil)

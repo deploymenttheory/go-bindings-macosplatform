@@ -36,15 +36,15 @@ func NewImageryMapConfiguration() *ImageryMapConfiguration {
 }
 
 // NewImageryMapConfigurationWithElevationStyle creates a new [ImageryMapConfiguration].
-func NewImageryMapConfigurationWithElevationStyle(elevationStyle raw.MKMapElevationStyle) *ImageryMapConfiguration {
+func NewImageryMapConfigurationWithElevationStyle(elevationStyle MKMapElevationStyle) *ImageryMapConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKImageryMapConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), elevationStyle)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), raw.MKMapElevationStyle(elevationStyle))
 	return &ImageryMapConfiguration{inner: raw.MKImageryMapConfigurationFromID(_id)}
 }
 
 // WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
-func (x *ImageryMapConfiguration) WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *ImageryMapConfiguration {
-	x.inner.MKMapConfiguration.SetElevationStyle(elevationStyle)
+func (x *ImageryMapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *ImageryMapConfiguration {
+	x.inner.MKMapConfiguration.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))
 	return x
 }
 
@@ -55,7 +55,7 @@ func (x *ImageryMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration {
 // ImageryMapConfigurationable is the interface implemented by [ImageryMapConfiguration], for mocking and DI.
 type ImageryMapConfigurationable interface {
 	Unwrap() *raw.MKImageryMapConfiguration
-	WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *ImageryMapConfiguration
+	WithElevationStyle(elevationStyle MKMapElevationStyle) *ImageryMapConfiguration
 }
 
 var _ ImageryMapConfigurationable = (*ImageryMapConfiguration)(nil)

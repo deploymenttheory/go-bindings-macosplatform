@@ -62,13 +62,13 @@ func (x *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(
 }
 
 // GetCredentialIdentitiesForServiceCredentialIdentityTypes blocks until the operation completes or ctx is cancelled.
-func (x *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *raw.ASCredentialServiceIdentifier, credentialIdentityTypes raw.ASCredentialIdentityTypes) (*foundation.NSArray[raw.ASCredentialIdentity], error) {
+func (x *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *raw.ASCredentialServiceIdentifier, credentialIdentityTypes ASCredentialIdentityTypes) (*foundation.NSArray[raw.ASCredentialIdentity], error) {
 	type _result struct {
 		val *foundation.NSArray[raw.ASCredentialIdentity]
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetCredentialIdentitiesForServiceCredentialIdentityTypesCompletionHandler(serviceIdentifier, credentialIdentityTypes, func(_p0 *foundation.NSArray[raw.ASCredentialIdentity]) {
+	x.inner.GetCredentialIdentitiesForServiceCredentialIdentityTypesCompletionHandler(serviceIdentifier, raw.ASCredentialIdentityTypes(credentialIdentityTypes), func(_p0 *foundation.NSArray[raw.ASCredentialIdentity]) {
 		var _o _result
 		_o.val = _p0
 		_ch <- _o
@@ -121,7 +121,7 @@ func (x *CredentialIdentityStore) ReplaceCredentialIdentityEntriesCompletion(new
 type CredentialIdentityStoreable interface {
 	Unwrap() *raw.ASCredentialIdentityStore
 	GetCredentialIdentityStoreStateWithCompletion(ctx context.Context) (*CredentialIdentityStoreState, error)
-	GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *raw.ASCredentialServiceIdentifier, credentialIdentityTypes raw.ASCredentialIdentityTypes) (*foundation.NSArray[raw.ASCredentialIdentity], error)
+	GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *raw.ASCredentialServiceIdentifier, credentialIdentityTypes ASCredentialIdentityTypes) (*foundation.NSArray[raw.ASCredentialIdentity], error)
 	SaveCredentialIdentitiesCompletion(credentialIdentities *foundation.NSArray[*raw.ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer))
 	SaveCredentialIdentityEntriesCompletion(credentialIdentities *foundation.NSArray[raw.ASCredentialIdentity], completion func(bool, unsafe.Pointer))
 	RemoveCredentialIdentitiesCompletion(credentialIdentities *foundation.NSArray[*raw.ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer))

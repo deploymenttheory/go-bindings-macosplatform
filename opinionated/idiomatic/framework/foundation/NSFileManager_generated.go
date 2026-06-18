@@ -52,14 +52,14 @@ func (x *FileManager) WithScriptingProperties(scriptingProperties *raw.NSDiction
 }
 
 // MountedVolumeURLsIncludingResourceValuesForKeysOptions calls the underlying MountedVolumeURLsIncludingResourceValuesForKeysOptions.
-func (x *FileManager) MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys *raw.NSArray[*raw.NSString], options raw.NSVolumeEnumerationOptions) *raw.NSArray[*raw.NSURL] {
-	return x.inner.MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys, options)
+func (x *FileManager) MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys *raw.NSArray[*raw.NSString], options NSVolumeEnumerationOptions) *raw.NSArray[*raw.NSURL] {
+	return x.inner.MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys, raw.NSVolumeEnumerationOptions(options))
 }
 
 // UnmountVolumeAtURLOptions blocks until the operation completes or ctx is cancelled.
-func (x *FileManager) UnmountVolumeAtURLOptions(ctx context.Context, url string, mask raw.NSFileManagerUnmountOptions) error {
+func (x *FileManager) UnmountVolumeAtURLOptions(ctx context.Context, url string, mask NSFileManagerUnmountOptions) error {
 	_ch := make(chan error, 1)
-	x.inner.UnmountVolumeAtURLOptionsCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), mask, func(_p0 unsafe.Pointer) {
+	x.inner.UnmountVolumeAtURLOptionsCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileManagerUnmountOptions(mask), func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -75,18 +75,18 @@ func (x *FileManager) UnmountVolumeAtURLOptions(ctx context.Context, url string,
 }
 
 // ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError calls the underlying ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError.
-func (x *FileManager) ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url string, keys *raw.NSArray[*raw.NSString], mask raw.NSDirectoryEnumerationOptions) (*raw.NSArray[*raw.NSURL], error) {
-	return x.inner.ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), keys, mask)
+func (x *FileManager) ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url string, keys *raw.NSArray[*raw.NSString], mask NSDirectoryEnumerationOptions) (*raw.NSArray[*raw.NSURL], error) {
+	return x.inner.ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), keys, raw.NSDirectoryEnumerationOptions(mask))
 }
 
 // URLsForDirectoryInDomains calls the underlying URLsForDirectoryInDomains.
-func (x *FileManager) URLsForDirectoryInDomains(directory raw.NSSearchPathDirectory, domainMask raw.NSSearchPathDomainMask) *raw.NSArray[*raw.NSURL] {
-	return x.inner.URLsForDirectoryInDomains(directory, domainMask)
+func (x *FileManager) URLsForDirectoryInDomains(directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask) *raw.NSArray[*raw.NSURL] {
+	return x.inner.URLsForDirectoryInDomains(raw.NSSearchPathDirectory(directory), raw.NSSearchPathDomainMask(domainMask))
 }
 
 // URLForDirectoryInDomainAppropriateForURLCreateError calls the underlying URLForDirectoryInDomainAppropriateForURLCreateError.
-func (x *FileManager) URLForDirectoryInDomainAppropriateForURLCreateError(directory raw.NSSearchPathDirectory, domain raw.NSSearchPathDomainMask, url string, shouldCreate bool) (*URL, error) {
-	_r, _err := x.inner.URLForDirectoryInDomainAppropriateForURLCreateError(directory, domain, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), shouldCreate)
+func (x *FileManager) URLForDirectoryInDomainAppropriateForURLCreateError(directory NSSearchPathDirectory, domain NSSearchPathDomainMask, url string, shouldCreate bool) (*URL, error) {
+	_r, _err := x.inner.URLForDirectoryInDomainAppropriateForURLCreateError(raw.NSSearchPathDirectory(directory), raw.NSSearchPathDomainMask(domain), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), shouldCreate)
 	if _err != nil {
 		return nil, _err
 	}
@@ -102,8 +102,8 @@ func (x *FileManager) GetRelationshipOfDirectoryAtURLToItemAtURLError(outRelatio
 }
 
 // GetRelationshipOfDirectoryInDomainToItemAtURLError calls the underlying GetRelationshipOfDirectoryInDomainToItemAtURLError.
-func (x *FileManager) GetRelationshipOfDirectoryInDomainToItemAtURLError(outRelationship *raw.NSURLRelationship, directory raw.NSSearchPathDirectory, domainMask raw.NSSearchPathDomainMask, url string) (bool, error) {
-	return x.inner.GetRelationshipOfDirectoryInDomainToItemAtURLError(outRelationship, directory, domainMask, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+func (x *FileManager) GetRelationshipOfDirectoryInDomainToItemAtURLError(outRelationship *raw.NSURLRelationship, directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask, url string) (bool, error) {
+	return x.inner.GetRelationshipOfDirectoryInDomainToItemAtURLError(outRelationship, raw.NSSearchPathDirectory(directory), raw.NSSearchPathDomainMask(domainMask), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
 // CreateDirectoryAtURLWithIntermediateDirectoriesAttributesError calls the underlying CreateDirectoryAtURLWithIntermediateDirectoriesAttributesError.
@@ -327,8 +327,8 @@ func (x *FileManager) EnumeratorAtPath(path string) *raw.NSDirectoryEnumerator[*
 }
 
 // EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler calls the underlying EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler.
-func (x *FileManager) EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(url string, keys *raw.NSArray[*raw.NSString], mask raw.NSDirectoryEnumerationOptions, handler func(*raw.NSURL, unsafe.Pointer) bool) *raw.NSDirectoryEnumerator[*raw.NSURL] {
-	return x.inner.EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), keys, mask, handler)
+func (x *FileManager) EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(url string, keys *raw.NSArray[*raw.NSString], mask NSDirectoryEnumerationOptions, handler func(*raw.NSURL, unsafe.Pointer) bool) *raw.NSDirectoryEnumerator[*raw.NSURL] {
+	return x.inner.EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), keys, raw.NSDirectoryEnumerationOptions(mask), handler)
 }
 
 // SubpathsAtPath calls the underlying SubpathsAtPath.
@@ -365,8 +365,8 @@ func (x *FileManager) StringWithFileSystemRepresentationLength(str string, len_ 
 }
 
 // ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError calls the underlying ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError.
-func (x *FileManager) ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError(originalItemURL string, newItemURL string, backupItemName string, options raw.NSFileManagerItemReplacementOptions, resultingURL string) (bool, error) {
-	return x.inner.ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(originalItemURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(newItemURL)), foundation.NSStringStringWithUTF8String(backupItemName), options, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(resultingURL)))
+func (x *FileManager) ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError(originalItemURL string, newItemURL string, backupItemName string, options NSFileManagerItemReplacementOptions, resultingURL string) (bool, error) {
+	return x.inner.ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(originalItemURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(newItemURL)), foundation.NSStringStringWithUTF8String(backupItemName), raw.NSFileManagerItemReplacementOptions(options), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(resultingURL)))
 }
 
 // SetUbiquitousItemAtURLDestinationURLError calls the underlying SetUbiquitousItemAtURLDestinationURLError.
@@ -429,9 +429,9 @@ func (x *FileManager) PauseSyncForUbiquitousItemAtURL(ctx context.Context, url s
 }
 
 // ResumeSyncForUbiquitousItemAtURLWithBehavior blocks until the operation completes or ctx is cancelled.
-func (x *FileManager) ResumeSyncForUbiquitousItemAtURLWithBehavior(ctx context.Context, url string, behavior raw.NSFileManagerResumeSyncBehavior) error {
+func (x *FileManager) ResumeSyncForUbiquitousItemAtURLWithBehavior(ctx context.Context, url string, behavior NSFileManagerResumeSyncBehavior) error {
 	_ch := make(chan error, 1)
-	x.inner.ResumeSyncForUbiquitousItemAtURLWithBehaviorCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), behavior, func(_p0 unsafe.Pointer) {
+	x.inner.ResumeSyncForUbiquitousItemAtURLWithBehaviorCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileManagerResumeSyncBehavior(behavior), func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -473,13 +473,13 @@ func (x *FileManager) FetchLatestRemoteVersionOfItemAtURL(ctx context.Context, u
 }
 
 // UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicy blocks until the operation completes or ctx is cancelled.
-func (x *FileManager) UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicy(ctx context.Context, url string, conflictResolutionPolicy raw.NSFileManagerUploadLocalVersionConflictPolicy) (*FileVersion, error) {
+func (x *FileManager) UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicy(ctx context.Context, url string, conflictResolutionPolicy NSFileManagerUploadLocalVersionConflictPolicy) (*FileVersion, error) {
 	type _result struct {
 		val *FileVersion
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicyCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), conflictResolutionPolicy, func(_p0 *raw.NSFileVersion, _p1 unsafe.Pointer) {
+	x.inner.UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicyCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileManagerUploadLocalVersionConflictPolicy(conflictResolutionPolicy), func(_p0 *raw.NSFileVersion, _p1 unsafe.Pointer) {
 		var _o _result
 		if uintptr(_p1) != 0 {
 			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
@@ -570,13 +570,13 @@ type FileManagerable interface {
 	Unwrap() *raw.NSFileManager
 	WithDelegate(delegate raw.NSFileManagerDelegate) *FileManager
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileManager
-	MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys *raw.NSArray[*raw.NSString], options raw.NSVolumeEnumerationOptions) *raw.NSArray[*raw.NSURL]
-	UnmountVolumeAtURLOptions(ctx context.Context, url string, mask raw.NSFileManagerUnmountOptions) error
-	ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url string, keys *raw.NSArray[*raw.NSString], mask raw.NSDirectoryEnumerationOptions) (*raw.NSArray[*raw.NSURL], error)
-	URLsForDirectoryInDomains(directory raw.NSSearchPathDirectory, domainMask raw.NSSearchPathDomainMask) *raw.NSArray[*raw.NSURL]
-	URLForDirectoryInDomainAppropriateForURLCreateError(directory raw.NSSearchPathDirectory, domain raw.NSSearchPathDomainMask, url string, shouldCreate bool) (*URL, error)
+	MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys *raw.NSArray[*raw.NSString], options NSVolumeEnumerationOptions) *raw.NSArray[*raw.NSURL]
+	UnmountVolumeAtURLOptions(ctx context.Context, url string, mask NSFileManagerUnmountOptions) error
+	ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url string, keys *raw.NSArray[*raw.NSString], mask NSDirectoryEnumerationOptions) (*raw.NSArray[*raw.NSURL], error)
+	URLsForDirectoryInDomains(directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask) *raw.NSArray[*raw.NSURL]
+	URLForDirectoryInDomainAppropriateForURLCreateError(directory NSSearchPathDirectory, domain NSSearchPathDomainMask, url string, shouldCreate bool) (*URL, error)
 	GetRelationshipOfDirectoryAtURLToItemAtURLError(outRelationship *raw.NSURLRelationship, directoryURL string, otherURL string) (bool, error)
-	GetRelationshipOfDirectoryInDomainToItemAtURLError(outRelationship *raw.NSURLRelationship, directory raw.NSSearchPathDirectory, domainMask raw.NSSearchPathDomainMask, url string) (bool, error)
+	GetRelationshipOfDirectoryInDomainToItemAtURLError(outRelationship *raw.NSURLRelationship, directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask, url string) (bool, error)
 	CreateDirectoryAtURLWithIntermediateDirectoriesAttributesError(url string, createIntermediates bool, attributes *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error)
 	CreateSymbolicLinkAtURLWithDestinationURLError(url string, destURL string) (bool, error)
 	SetAttributesOfItemAtPathError(attributes *raw.NSDictionary[*raw.NSString, objc.ID], path string) (bool, error)
@@ -618,13 +618,13 @@ type FileManagerable interface {
 	DisplayNameAtPath(path string) *String
 	ComponentsToDisplayForPath(path string) *raw.NSArray[*raw.NSString]
 	EnumeratorAtPath(path string) *raw.NSDirectoryEnumerator[*raw.NSString]
-	EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(url string, keys *raw.NSArray[*raw.NSString], mask raw.NSDirectoryEnumerationOptions, handler func(*raw.NSURL, unsafe.Pointer) bool) *raw.NSDirectoryEnumerator[*raw.NSURL]
+	EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(url string, keys *raw.NSArray[*raw.NSString], mask NSDirectoryEnumerationOptions, handler func(*raw.NSURL, unsafe.Pointer) bool) *raw.NSDirectoryEnumerator[*raw.NSURL]
 	SubpathsAtPath(path string) *raw.NSArray[*raw.NSString]
 	ContentsAtPath(path string) *Data
 	CreateFileAtPathContentsAttributes(path string, data *raw.NSData, attr *raw.NSDictionary[*raw.NSString, objc.ID]) bool
 	FileSystemRepresentationWithPath(path string) string
 	StringWithFileSystemRepresentationLength(str string, len_ uint) *String
-	ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError(originalItemURL string, newItemURL string, backupItemName string, options raw.NSFileManagerItemReplacementOptions, resultingURL string) (bool, error)
+	ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError(originalItemURL string, newItemURL string, backupItemName string, options NSFileManagerItemReplacementOptions, resultingURL string) (bool, error)
 	SetUbiquitousItemAtURLDestinationURLError(flag bool, url string, destinationURL string) (bool, error)
 	IsUbiquitousItemAtURL(url string) bool
 	StartDownloadingUbiquitousItemAtURLError(url string) (bool, error)
@@ -632,9 +632,9 @@ type FileManagerable interface {
 	URLForUbiquityContainerIdentifier(containerIdentifier string) *URL
 	URLForPublishingUbiquitousItemAtURLExpirationDateError(url string, outDate *raw.NSDate) (*URL, error)
 	PauseSyncForUbiquitousItemAtURL(ctx context.Context, url string) error
-	ResumeSyncForUbiquitousItemAtURLWithBehavior(ctx context.Context, url string, behavior raw.NSFileManagerResumeSyncBehavior) error
+	ResumeSyncForUbiquitousItemAtURLWithBehavior(ctx context.Context, url string, behavior NSFileManagerResumeSyncBehavior) error
 	FetchLatestRemoteVersionOfItemAtURL(ctx context.Context, url string) (*FileVersion, error)
-	UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicy(ctx context.Context, url string, conflictResolutionPolicy raw.NSFileManagerUploadLocalVersionConflictPolicy) (*FileVersion, error)
+	UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicy(ctx context.Context, url string, conflictResolutionPolicy NSFileManagerUploadLocalVersionConflictPolicy) (*FileVersion, error)
 	GetFileProviderServicesForItemAtURLCompletionHandler(url string, completionHandler func(*raw.NSDictionary[*raw.NSString, *raw.NSFileProviderService], unsafe.Pointer))
 	ContainerURLForSecurityApplicationGroupIdentifier(groupIdentifier string) *URL
 	Delegate() raw.NSFileManagerDelegate

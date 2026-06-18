@@ -64,8 +64,8 @@ func (x *GraphExecutableExecutionDescriptor) WaitForEventValue(event metal.MTLSh
 }
 
 // SignalEventAtExecutionEventValue calls the underlying SignalEventAtExecutionEventValue.
-func (x *GraphExecutableExecutionDescriptor) SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage raw.MPSGraphExecutionStage, value uint64) {
-	x.inner.SignalEventAtExecutionEventValue(event, executionStage, value)
+func (x *GraphExecutableExecutionDescriptor) SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage MPSGraphExecutionStage, value uint64) {
+	x.inner.SignalEventAtExecutionEventValue(event, raw.MPSGraphExecutionStage(executionStage), value)
 }
 
 // ScheduledHandler calls the underlying ScheduledHandler.
@@ -109,7 +109,7 @@ type GraphExecutableExecutionDescriptorable interface {
 	WithCompletionHandler(completionHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor
 	WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutableExecutionDescriptor
 	WaitForEventValue(event metal.MTLSharedEvent, value uint64)
-	SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage raw.MPSGraphExecutionStage, value uint64)
+	SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage MPSGraphExecutionStage, value uint64)
 	ScheduledHandler() objc.Block
 	SetScheduledHandler(scheduledHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer))
 	CompletionHandler() objc.Block

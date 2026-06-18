@@ -42,8 +42,8 @@ func (x *Action) WithDuration(duration float64) *Action {
 }
 
 // WithTimingMode sets the timingMode property and returns the receiver for chaining.
-func (x *Action) WithTimingMode(timingMode raw.SKActionTimingMode) *Action {
-	x.inner.SetTimingMode(timingMode)
+func (x *Action) WithTimingMode(timingMode SKActionTimingMode) *Action {
+	x.inner.SetTimingMode(raw.SKActionTimingMode(timingMode))
 	return x
 }
 
@@ -79,13 +79,13 @@ func (x *Action) SetDuration(duration float64) {
 }
 
 // TimingMode calls the underlying TimingMode.
-func (x *Action) TimingMode() raw.SKActionTimingMode {
-	return x.inner.TimingMode()
+func (x *Action) TimingMode() SKActionTimingMode {
+	return SKActionTimingMode(x.inner.TimingMode())
 }
 
 // SetTimingMode calls the underlying SetTimingMode.
-func (x *Action) SetTimingMode(timingMode raw.SKActionTimingMode) {
-	x.inner.SetTimingMode(timingMode)
+func (x *Action) SetTimingMode(timingMode SKActionTimingMode) {
+	x.inner.SetTimingMode(raw.SKActionTimingMode(timingMode))
 }
 
 // TimingFunction calls the underlying TimingFunction.
@@ -112,14 +112,14 @@ func (x *Action) SetSpeed(speed float64) {
 type Actionable interface {
 	Unwrap() *raw.SKAction
 	WithDuration(duration float64) *Action
-	WithTimingMode(timingMode raw.SKActionTimingMode) *Action
+	WithTimingMode(timingMode SKActionTimingMode) *Action
 	WithTimingFunction(timingFunction objc.Block) *Action
 	WithSpeed(speed float64) *Action
 	ReversedAction() *Action
 	Duration() float64
 	SetDuration(duration float64)
-	TimingMode() raw.SKActionTimingMode
-	SetTimingMode(timingMode raw.SKActionTimingMode)
+	TimingMode() SKActionTimingMode
+	SetTimingMode(timingMode SKActionTimingMode)
 	TimingFunction() objc.Block
 	SetTimingFunction(timingFunction objc.Block)
 	Speed() float64

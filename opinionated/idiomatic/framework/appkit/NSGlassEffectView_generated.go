@@ -59,8 +59,8 @@ func (x *GlassEffectView) WithTintColor(tintColor *Color) *GlassEffectView {
 }
 
 // WithStyle sets the style property and returns the receiver for chaining.
-func (x *GlassEffectView) WithStyle(style raw.NSGlassEffectViewStyle) *GlassEffectView {
-	x.inner.SetStyle(style)
+func (x *GlassEffectView) WithStyle(style NSGlassEffectViewStyle) *GlassEffectView {
+	x.inner.SetStyle(raw.NSGlassEffectViewStyle(style))
 	return x
 }
 
@@ -101,8 +101,8 @@ func (x *GlassEffectView) WithAutoresizesSubviews(autoresizesSubviews bool) *Gla
 }
 
 // WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *GlassEffectView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *GlassEffectView {
-	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+func (x *GlassEffectView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *GlassEffectView {
+	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
 	return x
 }
 
@@ -161,14 +161,14 @@ func (x *GlassEffectView) WithWantsRestingTouches(wantsRestingTouches bool) *Gla
 }
 
 // WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *GlassEffectView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *GlassEffectView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+func (x *GlassEffectView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *GlassEffectView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
 	return x
 }
 
 // WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *GlassEffectView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *GlassEffectView {
-	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+func (x *GlassEffectView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *GlassEffectView {
+	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
 	return x
 }
 
@@ -275,8 +275,8 @@ func (x *GlassEffectView) WithToolTip(toolTip string) *GlassEffectView {
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *GlassEffectView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GlassEffectView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *GlassEffectView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GlassEffectView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -293,8 +293,8 @@ func (x *GlassEffectView) WithNextKeyView(nextKeyView ViewProvider) *GlassEffect
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *GlassEffectView) WithFocusRingType(focusRingType raw.NSFocusRingType) *GlassEffectView {
-	x.inner.NSView.SetFocusRingType(focusRingType)
+func (x *GlassEffectView) WithFocusRingType(focusRingType NSFocusRingType) *GlassEffectView {
+	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -317,8 +317,8 @@ func (x *GlassEffectView) WithGestureRecognizers(items ...GestureRecognizerProvi
 }
 
 // WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *GlassEffectView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GlassEffectView {
-	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+func (x *GlassEffectView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GlassEffectView {
+	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 	return x
 }
 
@@ -445,13 +445,13 @@ func (x *GlassEffectView) SetTintColor(tintColor *raw.NSColor) {
 }
 
 // Style calls the underlying Style.
-func (x *GlassEffectView) Style() raw.NSGlassEffectViewStyle {
-	return x.inner.Style()
+func (x *GlassEffectView) Style() NSGlassEffectViewStyle {
+	return NSGlassEffectViewStyle(x.inner.Style())
 }
 
 // SetStyle calls the underlying SetStyle.
-func (x *GlassEffectView) SetStyle(style raw.NSGlassEffectViewStyle) {
-	x.inner.SetStyle(style)
+func (x *GlassEffectView) SetStyle(style NSGlassEffectViewStyle) {
+	x.inner.SetStyle(raw.NSGlassEffectViewStyle(style))
 }
 
 func (x *GlassEffectView) asView() *raw.NSView { return &x.inner.NSView }
@@ -464,12 +464,12 @@ type GlassEffectViewable interface {
 	WithContentView(contentView ViewProvider) *GlassEffectView
 	WithCornerRadius(cornerRadius float64) *GlassEffectView
 	WithTintColor(tintColor *Color) *GlassEffectView
-	WithStyle(style raw.NSGlassEffectViewStyle) *GlassEffectView
+	WithStyle(style NSGlassEffectViewStyle) *GlassEffectView
 	WithSubviews(items ...ViewProvider) *GlassEffectView
 	WithHidden(hidden bool) *GlassEffectView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GlassEffectView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *GlassEffectView
-	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *GlassEffectView
+	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *GlassEffectView
 	WithFrame(frame corefoundation.CGRect) *GlassEffectView
 	WithFrameRotation(frameRotation float64) *GlassEffectView
 	WithFrameCenterRotation(frameCenterRotation float64) *GlassEffectView
@@ -479,8 +479,8 @@ type GlassEffectViewable interface {
 	WithNeedsDisplay(needsDisplay bool) *GlassEffectView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *GlassEffectView
 	WithWantsRestingTouches(wantsRestingTouches bool) *GlassEffectView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *GlassEffectView
-	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *GlassEffectView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *GlassEffectView
+	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *GlassEffectView
 	WithWantsLayer(wantsLayer bool) *GlassEffectView
 	WithLayer(layer *quartzcore.CALayer) *GlassEffectView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GlassEffectView
@@ -494,12 +494,12 @@ type GlassEffectViewable interface {
 	WithClipsToBounds(clipsToBounds bool) *GlassEffectView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GlassEffectView
 	WithToolTip(toolTip string) *GlassEffectView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GlassEffectView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GlassEffectView
 	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GlassEffectView
 	WithNextKeyView(nextKeyView ViewProvider) *GlassEffectView
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *GlassEffectView
+	WithFocusRingType(focusRingType NSFocusRingType) *GlassEffectView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *GlassEffectView
-	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GlassEffectView
+	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GlassEffectView
 	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GlassEffectView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectView
@@ -520,8 +520,8 @@ type GlassEffectViewable interface {
 	SetCornerRadius(cornerRadius float64)
 	TintColor() *Color
 	SetTintColor(tintColor *raw.NSColor)
-	Style() raw.NSGlassEffectViewStyle
-	SetStyle(style raw.NSGlassEffectViewStyle)
+	Style() NSGlassEffectViewStyle
+	SetStyle(style NSGlassEffectViewStyle)
 }
 
 var _ GlassEffectViewable = (*GlassEffectView)(nil)

@@ -184,8 +184,8 @@ func (x *TabViewItem) SetViewController(viewController *raw.NSViewController) {
 }
 
 // TabState calls the underlying TabState.
-func (x *TabViewItem) TabState() raw.NSTabState {
-	return x.inner.TabState()
+func (x *TabViewItem) TabState() NSTabState {
+	return NSTabState(x.inner.TabState())
 }
 
 // TabView calls the underlying TabView.
@@ -241,7 +241,7 @@ type TabViewItemable interface {
 	SetView(view *raw.NSView)
 	ViewController() *ViewController
 	SetViewController(viewController *raw.NSViewController)
-	TabState() raw.NSTabState
+	TabState() NSTabState
 	TabView() *TabView
 	SetInitialFirstResponder(initialFirstResponder *raw.NSView)
 	ToolTip() string

@@ -62,8 +62,10 @@ func (x *ContextualEmbedding) EmbeddingResultForStringLanguageError(string_ stri
 }
 
 // RequestEmbeddingAssetsWithCompletionHandler calls the underlying RequestEmbeddingAssetsWithCompletionHandler.
-func (x *ContextualEmbedding) RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(raw.NLContextualEmbeddingAssetsResult, unsafe.Pointer)) {
-	x.inner.RequestEmbeddingAssetsWithCompletionHandler(completionHandler)
+func (x *ContextualEmbedding) RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(NLContextualEmbeddingAssetsResult, unsafe.Pointer)) {
+	x.inner.RequestEmbeddingAssetsWithCompletionHandler(func(_a0 raw.NLContextualEmbeddingAssetsResult, _a1 unsafe.Pointer) {
+		completionHandler(NLContextualEmbeddingAssetsResult(_a0), _a1)
+	})
 }
 
 // ModelIdentifier calls the underlying ModelIdentifier.
@@ -123,7 +125,7 @@ type ContextualEmbeddingable interface {
 	Load() error
 	Unload()
 	EmbeddingResultForStringLanguageError(string_ string, language *foundation.NSString) (*ContextualEmbeddingResult, error)
-	RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(raw.NLContextualEmbeddingAssetsResult, unsafe.Pointer))
+	RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(NLContextualEmbeddingAssetsResult, unsafe.Pointer))
 	ModelIdentifier() string
 	Languages() []*foundation.NSString
 	Scripts() []*foundation.NSString

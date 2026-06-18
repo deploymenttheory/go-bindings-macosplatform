@@ -37,8 +37,8 @@ func NewLogStore() *LogStore {
 }
 
 // EntriesEnumeratorWithOptionsPositionPredicateError calls the underlying EntriesEnumeratorWithOptionsPositionPredicateError.
-func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options raw.OSLogEnumeratorOptions, position *raw.OSLogPosition, predicate *foundation.NSPredicate) (*LogEnumerator, error) {
-	_r, _err := x.inner.EntriesEnumeratorWithOptionsPositionPredicateError(options, position, predicate)
+func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options OSLogEnumeratorOptions, position *raw.OSLogPosition, predicate *foundation.NSPredicate) (*LogEnumerator, error) {
+	_r, _err := x.inner.EntriesEnumeratorWithOptionsPositionPredicateError(raw.OSLogEnumeratorOptions(options), position, predicate)
 	if _err != nil {
 		return nil, _err
 	}
@@ -90,7 +90,7 @@ func (x *LogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *Log
 // LogStoreable is the interface implemented by [LogStore], for mocking and DI.
 type LogStoreable interface {
 	Unwrap() *raw.OSLogStore
-	EntriesEnumeratorWithOptionsPositionPredicateError(options raw.OSLogEnumeratorOptions, position *raw.OSLogPosition, predicate *foundation.NSPredicate) (*LogEnumerator, error)
+	EntriesEnumeratorWithOptionsPositionPredicateError(options OSLogEnumeratorOptions, position *raw.OSLogPosition, predicate *foundation.NSPredicate) (*LogEnumerator, error)
 	EntriesEnumeratorAndReturnError() (*LogEnumerator, error)
 	PositionWithDate(date *foundation.NSDate) *LogPosition
 	PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition

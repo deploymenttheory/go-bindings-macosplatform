@@ -52,14 +52,14 @@ func NewKeyframeSequenceWithCoder(aDecoder *foundation.NSCoder) *KeyframeSequenc
 }
 
 // WithInterpolationMode sets the interpolationMode property and returns the receiver for chaining.
-func (x *KeyframeSequence) WithInterpolationMode(interpolationMode raw.SKInterpolationMode) *KeyframeSequence {
-	x.inner.SetInterpolationMode(interpolationMode)
+func (x *KeyframeSequence) WithInterpolationMode(interpolationMode SKInterpolationMode) *KeyframeSequence {
+	x.inner.SetInterpolationMode(raw.SKInterpolationMode(interpolationMode))
 	return x
 }
 
 // WithRepeatMode sets the repeatMode property and returns the receiver for chaining.
-func (x *KeyframeSequence) WithRepeatMode(repeatMode raw.SKRepeatMode) *KeyframeSequence {
-	x.inner.SetRepeatMode(repeatMode)
+func (x *KeyframeSequence) WithRepeatMode(repeatMode SKRepeatMode) *KeyframeSequence {
+	x.inner.SetRepeatMode(raw.SKRepeatMode(repeatMode))
 	return x
 }
 
@@ -114,30 +114,30 @@ func (x *KeyframeSequence) SampleAtTime(time_ float64) objc.ID {
 }
 
 // InterpolationMode calls the underlying InterpolationMode.
-func (x *KeyframeSequence) InterpolationMode() raw.SKInterpolationMode {
-	return x.inner.InterpolationMode()
+func (x *KeyframeSequence) InterpolationMode() SKInterpolationMode {
+	return SKInterpolationMode(x.inner.InterpolationMode())
 }
 
 // SetInterpolationMode calls the underlying SetInterpolationMode.
-func (x *KeyframeSequence) SetInterpolationMode(interpolationMode raw.SKInterpolationMode) {
-	x.inner.SetInterpolationMode(interpolationMode)
+func (x *KeyframeSequence) SetInterpolationMode(interpolationMode SKInterpolationMode) {
+	x.inner.SetInterpolationMode(raw.SKInterpolationMode(interpolationMode))
 }
 
 // RepeatMode calls the underlying RepeatMode.
-func (x *KeyframeSequence) RepeatMode() raw.SKRepeatMode {
-	return x.inner.RepeatMode()
+func (x *KeyframeSequence) RepeatMode() SKRepeatMode {
+	return SKRepeatMode(x.inner.RepeatMode())
 }
 
 // SetRepeatMode calls the underlying SetRepeatMode.
-func (x *KeyframeSequence) SetRepeatMode(repeatMode raw.SKRepeatMode) {
-	x.inner.SetRepeatMode(repeatMode)
+func (x *KeyframeSequence) SetRepeatMode(repeatMode SKRepeatMode) {
+	x.inner.SetRepeatMode(raw.SKRepeatMode(repeatMode))
 }
 
 // KeyframeSequenceable is the interface implemented by [KeyframeSequence], for mocking and DI.
 type KeyframeSequenceable interface {
 	Unwrap() *raw.SKKeyframeSequence
-	WithInterpolationMode(interpolationMode raw.SKInterpolationMode) *KeyframeSequence
-	WithRepeatMode(repeatMode raw.SKRepeatMode) *KeyframeSequence
+	WithInterpolationMode(interpolationMode SKInterpolationMode) *KeyframeSequence
+	WithRepeatMode(repeatMode SKRepeatMode) *KeyframeSequence
 	Count() uint
 	AddKeyframeValueTime(value objc.ID, time_ float64)
 	RemoveLastKeyframe()
@@ -148,10 +148,10 @@ type KeyframeSequenceable interface {
 	GetKeyframeValueForIndex(index uint) objc.ID
 	GetKeyframeTimeForIndex(index uint) float64
 	SampleAtTime(time_ float64) objc.ID
-	InterpolationMode() raw.SKInterpolationMode
-	SetInterpolationMode(interpolationMode raw.SKInterpolationMode)
-	RepeatMode() raw.SKRepeatMode
-	SetRepeatMode(repeatMode raw.SKRepeatMode)
+	InterpolationMode() SKInterpolationMode
+	SetInterpolationMode(interpolationMode SKInterpolationMode)
+	RepeatMode() SKRepeatMode
+	SetRepeatMode(repeatMode SKRepeatMode)
 }
 
 var _ KeyframeSequenceable = (*KeyframeSequence)(nil)

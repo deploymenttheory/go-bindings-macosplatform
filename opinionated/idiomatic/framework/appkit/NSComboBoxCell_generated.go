@@ -106,8 +106,8 @@ func (x *ComboBoxCell) WithTextColor(textColor *Color) *ComboBoxCell {
 }
 
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *ComboBoxCell {
-	x.inner.NSTextFieldCell.SetBezelStyle(bezelStyle)
+func (x *ComboBoxCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *ComboBoxCell {
+	x.inner.NSTextFieldCell.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
@@ -148,8 +148,8 @@ func (x *ComboBoxCell) WithControlView(controlView ViewProvider) *ComboBoxCell {
 }
 
 // WithType sets the type_ property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithType(type_ raw.NSCellType) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(type_)
+func (x *ComboBoxCell) WithType(type_ NSCellType) *ComboBoxCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
@@ -232,8 +232,8 @@ func (x *ComboBoxCell) WithHighlighted(highlighted bool) *ComboBoxCell {
 }
 
 // WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithAlignment(alignment raw.NSTextAlignment) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(alignment)
+func (x *ComboBoxCell) WithAlignment(alignment NSTextAlignment) *ComboBoxCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
@@ -298,8 +298,8 @@ func (x *ComboBoxCell) WithImage(image *Image) *ComboBoxCell {
 }
 
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithControlSize(controlSize raw.NSControlSize) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(controlSize)
+func (x *ComboBoxCell) WithControlSize(controlSize NSControlSize) *ComboBoxCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
@@ -322,14 +322,14 @@ func (x *ComboBoxCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool)
 }
 
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+func (x *ComboBoxCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboBoxCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+func (x *ComboBoxCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboBoxCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
@@ -346,8 +346,8 @@ func (x *ComboBoxCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine boo
 }
 
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+func (x *ComboBoxCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ComboBoxCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
@@ -370,8 +370,8 @@ func (x *ComboBoxCell) WithShowsFirstResponder(showsFirstResponder bool) *ComboB
 }
 
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+func (x *ComboBoxCell) WithFocusRingType(focusRingType NSFocusRingType) *ComboBoxCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
@@ -400,14 +400,14 @@ func (x *ComboBoxCell) WithAllowsMixedState(allowsMixedState bool) *ComboBoxCell
 }
 
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+func (x *ComboBoxCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ComboBoxCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *ComboBoxCell) WithControlTint(controlTint raw.NSControlTint) *ComboBoxCell {
-	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(controlTint)
+func (x *ComboBoxCell) WithControlTint(controlTint NSControlTint) *ComboBoxCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
@@ -615,12 +615,12 @@ type ComboBoxCellable interface {
 	WithBackgroundColor(backgroundColor *Color) *ComboBoxCell
 	WithDrawsBackground(drawsBackground bool) *ComboBoxCell
 	WithTextColor(textColor *Color) *ComboBoxCell
-	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *ComboBoxCell
+	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *ComboBoxCell
 	WithPlaceholderString(placeholderString string) *ComboBoxCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *ComboBoxCell
 	WithAllowedInputSourceLocales(items ...*foundation.NSString) *ComboBoxCell
 	WithControlView(controlView ViewProvider) *ComboBoxCell
-	WithType(type_ raw.NSCellType) *ComboBoxCell
+	WithType(type_ NSCellType) *ComboBoxCell
 	WithState(state int) *ComboBoxCell
 	WithTarget(target objc.ID) *ComboBoxCell
 	WithAction(action objc.SEL) *ComboBoxCell
@@ -634,7 +634,7 @@ type ComboBoxCellable interface {
 	WithBezeled(bezeled bool) *ComboBoxCell
 	WithScrollable(scrollable bool) *ComboBoxCell
 	WithHighlighted(highlighted bool) *ComboBoxCell
-	WithAlignment(alignment raw.NSTextAlignment) *ComboBoxCell
+	WithAlignment(alignment NSTextAlignment) *ComboBoxCell
 	WithWraps(wraps bool) *ComboBoxCell
 	WithFont(font *Font) *ComboBoxCell
 	WithFormatter(formatter *foundation.NSFormatter) *ComboBoxCell
@@ -645,25 +645,25 @@ type ComboBoxCellable interface {
 	WithDoubleValue(doubleValue float64) *ComboBoxCell
 	WithIntegerValue(integerValue int) *ComboBoxCell
 	WithImage(image *Image) *ComboBoxCell
-	WithControlSize(controlSize raw.NSControlSize) *ComboBoxCell
+	WithControlSize(controlSize NSControlSize) *ComboBoxCell
 	WithRepresentedObject(representedObject objc.ID) *ComboBoxCell
 	WithMenu(menu *Menu) *ComboBoxCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ComboBoxCell
-	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ComboBoxCell
-	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ComboBoxCell
+	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboBoxCell
+	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboBoxCell
 	WithAllowsUndo(allowsUndo bool) *ComboBoxCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ComboBoxCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ComboBoxCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ComboBoxCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ComboBoxCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ComboBoxCell
 	WithShowsFirstResponder(showsFirstResponder bool) *ComboBoxCell
-	WithFocusRingType(focusRingType raw.NSFocusRingType) *ComboBoxCell
+	WithFocusRingType(focusRingType NSFocusRingType) *ComboBoxCell
 	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ComboBoxCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ComboBoxCell
 	WithImportsGraphics(importsGraphics bool) *ComboBoxCell
 	WithAllowsMixedState(allowsMixedState bool) *ComboBoxCell
-	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ComboBoxCell
-	WithControlTint(controlTint raw.NSControlTint) *ComboBoxCell
+	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ComboBoxCell
+	WithControlTint(controlTint NSControlTint) *ComboBoxCell
 	ReloadData()
 	NoteNumberOfItemsChanged()
 	ScrollItemAtIndexToTop(index int)

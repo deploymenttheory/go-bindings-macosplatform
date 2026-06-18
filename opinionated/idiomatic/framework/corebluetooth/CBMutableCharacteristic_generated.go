@@ -33,21 +33,21 @@ func MutableCharacteristicFromID(id objc.ID) *MutableCharacteristic {
 }
 
 // NewMutableCharacteristicWithTypePropertiesValuePermissions creates a new [MutableCharacteristic].
-func NewMutableCharacteristicWithTypePropertiesValuePermissions(uUID *raw.CBUUID, properties raw.CBCharacteristicProperties, value *foundation.NSData, permissions raw.CBAttributePermissions) *MutableCharacteristic {
+func NewMutableCharacteristicWithTypePropertiesValuePermissions(uUID *raw.CBUUID, properties CBCharacteristicProperties, value *foundation.NSData, permissions CBAttributePermissions) *MutableCharacteristic {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBMutableCharacteristic")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:properties:value:permissions:"), uUID.Ptr(), properties, value.Ptr(), permissions)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:properties:value:permissions:"), uUID.Ptr(), raw.CBCharacteristicProperties(properties), value.Ptr(), raw.CBAttributePermissions(permissions))
 	return &MutableCharacteristic{inner: raw.CBMutableCharacteristicFromID(_id)}
 }
 
 // WithPermissions sets the permissions property and returns the receiver for chaining.
-func (x *MutableCharacteristic) WithPermissions(permissions raw.CBAttributePermissions) *MutableCharacteristic {
-	x.inner.SetPermissions(permissions)
+func (x *MutableCharacteristic) WithPermissions(permissions CBAttributePermissions) *MutableCharacteristic {
+	x.inner.SetPermissions(raw.CBAttributePermissions(permissions))
 	return x
 }
 
 // WithProperties sets the properties property and returns the receiver for chaining.
-func (x *MutableCharacteristic) WithProperties(properties raw.CBCharacteristicProperties) *MutableCharacteristic {
-	x.inner.SetProperties(properties)
+func (x *MutableCharacteristic) WithProperties(properties CBCharacteristicProperties) *MutableCharacteristic {
+	x.inner.SetProperties(raw.CBCharacteristicProperties(properties))
 	return x
 }
 
@@ -76,13 +76,13 @@ func (x *MutableCharacteristic) WithDescriptors(items ...DescriptorProvider) *Mu
 }
 
 // Permissions calls the underlying Permissions.
-func (x *MutableCharacteristic) Permissions() raw.CBAttributePermissions {
-	return x.inner.Permissions()
+func (x *MutableCharacteristic) Permissions() CBAttributePermissions {
+	return CBAttributePermissions(x.inner.Permissions())
 }
 
 // SetPermissions calls the underlying SetPermissions.
-func (x *MutableCharacteristic) SetPermissions(permissions raw.CBAttributePermissions) {
-	x.inner.SetPermissions(permissions)
+func (x *MutableCharacteristic) SetPermissions(permissions CBAttributePermissions) {
+	x.inner.SetPermissions(raw.CBAttributePermissions(permissions))
 }
 
 // SubscribedCentrals returns the collection as a Go slice.
@@ -97,8 +97,8 @@ func (x *MutableCharacteristic) SubscribedCentrals() []*Central {
 }
 
 // SetProperties calls the underlying SetProperties.
-func (x *MutableCharacteristic) SetProperties(properties raw.CBCharacteristicProperties) {
-	x.inner.SetProperties(properties)
+func (x *MutableCharacteristic) SetProperties(properties CBCharacteristicProperties) {
+	x.inner.SetProperties(raw.CBCharacteristicProperties(properties))
 }
 
 // SetValue calls the underlying SetValue.
@@ -122,14 +122,14 @@ func (x *MutableCharacteristic) asAttribute() *raw.CBAttribute {
 // MutableCharacteristicable is the interface implemented by [MutableCharacteristic], for mocking and DI.
 type MutableCharacteristicable interface {
 	Unwrap() *raw.CBMutableCharacteristic
-	WithPermissions(permissions raw.CBAttributePermissions) *MutableCharacteristic
-	WithProperties(properties raw.CBCharacteristicProperties) *MutableCharacteristic
+	WithPermissions(permissions CBAttributePermissions) *MutableCharacteristic
+	WithProperties(properties CBCharacteristicProperties) *MutableCharacteristic
 	WithValue(value *foundation.NSData) *MutableCharacteristic
 	WithDescriptors(items ...DescriptorProvider) *MutableCharacteristic
-	Permissions() raw.CBAttributePermissions
-	SetPermissions(permissions raw.CBAttributePermissions)
+	Permissions() CBAttributePermissions
+	SetPermissions(permissions CBAttributePermissions)
 	SubscribedCentrals() []*Central
-	SetProperties(properties raw.CBCharacteristicProperties)
+	SetProperties(properties CBCharacteristicProperties)
 	SetValue(value *foundation.NSData)
 	SetDescriptors(descriptors *foundation.NSArray[*raw.CBDescriptor])
 }

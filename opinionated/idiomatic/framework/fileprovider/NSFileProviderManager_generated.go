@@ -210,9 +210,9 @@ func (x *FileProviderManager) WaitForStabilization(ctx context.Context) error {
 }
 
 // DisconnectWithReasonOptions blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options raw.NSFileProviderManagerDisconnectionOptions) error {
+func (x *FileProviderManager) DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options NSFileProviderManagerDisconnectionOptions) error {
 	_ch := make(chan error, 1)
-	x.inner.DisconnectWithReasonOptionsCompletionHandler(foundation.NSStringStringWithUTF8String(localizedReason), options, func(_p0 unsafe.Pointer) {
+	x.inner.DisconnectWithReasonOptionsCompletionHandler(foundation.NSStringStringWithUTF8String(localizedReason), raw.NSFileProviderManagerDisconnectionOptions(options), func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -320,9 +320,9 @@ func (x *FileProviderManager) ClaimKnownFoldersLocalizedReason(ctx context.Conte
 }
 
 // ReleaseKnownFoldersLocalizedReason blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders raw.NSFileProviderKnownFolders, localizedReason string) error {
+func (x *FileProviderManager) ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders NSFileProviderKnownFolders, localizedReason string) error {
 	_ch := make(chan error, 1)
-	x.inner.ReleaseKnownFoldersLocalizedReasonCompletionHandler(knownFolders, foundation.NSStringStringWithUTF8String(localizedReason), func(_p0 unsafe.Pointer) {
+	x.inner.ReleaseKnownFoldersLocalizedReasonCompletionHandler(raw.NSFileProviderKnownFolders(knownFolders), foundation.NSStringStringWithUTF8String(localizedReason), func(_p0 unsafe.Pointer) {
 		var _err error
 		if uintptr(_p0) != 0 {
 			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
@@ -352,7 +352,7 @@ type FileProviderManagerable interface {
 	EvictItemWithIdentifier(ctx context.Context, itemIdentifier *foundation.NSString) error
 	WaitForChangesOnItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier *foundation.NSString) error
 	WaitForStabilization(ctx context.Context) error
-	DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options raw.NSFileProviderManagerDisconnectionOptions) error
+	DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options NSFileProviderManagerDisconnectionOptions) error
 	Reconnect(ctx context.Context) error
 	RequestDownloadForItemWithIdentifierRequestedRange(ctx context.Context, itemIdentifier *foundation.NSString, rangeToMaterialize foundation.NSRange) error
 	StateDirectoryURLWithError() (*foundation.NSURL, error)
@@ -361,7 +361,7 @@ type FileProviderManagerable interface {
 	ListAvailableTestingOperationsWithError() (*foundation.NSArray[raw.NSFileProviderTestingOperation], error)
 	RunTestingOperationsError(operations *foundation.NSArray[raw.NSFileProviderTestingOperation]) (*foundation.NSDictionary[raw.NSFileProviderTestingOperation, objc.ID], error)
 	ClaimKnownFoldersLocalizedReason(ctx context.Context, knownFolders *raw.NSFileProviderKnownFolderLocations, localizedReason string) error
-	ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders raw.NSFileProviderKnownFolders, localizedReason string) error
+	ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders NSFileProviderKnownFolders, localizedReason string) error
 }
 
 var _ FileProviderManagerable = (*FileProviderManager)(nil)
